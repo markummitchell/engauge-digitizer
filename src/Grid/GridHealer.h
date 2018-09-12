@@ -13,8 +13,8 @@
 class DocumentModelGridRemoval;
 class QImage;
 
-/// Saved adjacent pairs
-typedef QList<QPoint> AdjacentPairHalves;
+/// Save one half of a mutual pair
+typedef QList<QPoint> MutualPairHalves;
 
 /// (X,Y) pairs for horizontal lines, and (Y,X) pairs for vertical lines
 typedef QMap<int, int> IndependentToDependent;
@@ -38,18 +38,20 @@ class GridHealer
   GridHealer(GridLineOrientation gridLineOrientation,
              const DocumentModelGridRemoval &modelGridRemoval);
 
-  /// Add two points on either side of a gap, if they are black
-  void addAdjacentPoints (const QImage &image,
-                          int x0,
-                          int y0,
-                          int x1,
-                          int y1);
+  /// Add two points on either side of a gap. Later, after removal, the black points will be processed
+  void addMutualPair (int x0,
+                      int y0,
+                      int x1,
+                      int y1);
 
   /// Return healed image
   QImage healed (const QImage &imageAfterGridRemoval);
 
  private:
   GridHealer();
+
+  /// Apply mutual pair points after all grid removal is done
+  void applyMutualPairs (const QImage &image);
 
   /// Determine if the specified black pixel is connected enough other black pixels to be
   /// considered big enough to be a real thing worth connecting to. In images with a large number
@@ -111,6 +113,11 @@ class GridHealer
   IndependentToDependent m_blackPixelsAbove; // Black pixels in +x or +y direction
   int m_gapSeparation; // Pixel distance between vertical point pairs
 
+  // Store opposing mutual pair points as each grid line is removed, then after all removals are
+  // done (when complex vertical/horizontal interactions have finished) we heal
+  // across these mutual pairs
+  MutualPairHalves m_mutualPairHalvesBelow;
+  MutualPairHalves m_mutualPairHalvesAbove;
 };
 
 #endif // GRID_HEALER_H

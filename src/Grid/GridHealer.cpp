@@ -24,34 +24,48 @@ GridHealer::GridHealer(GridLineOrientation gridLineOrientation,
   m_modelGridRemoval (modelGridRemoval),
   m_gapSeparation (0)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GridHealer::GridHealer";
 }
 
-void GridHealer::addAdjacentPoints (const QImage &image,
-                                    int x0,
-                                    int y0,
-                                    int x1,
-                                    int y1)
+void GridHealer::addMutualPair (int x0,
+                                int y0,
+                                int x1,
+                                int y1)
+{
+  m_mutualPairHalvesBelow.push_back (QPoint (x0, y0));
+  m_mutualPairHalvesAbove.push_back (QPoint (x1, y1));
+}
+
+void GridHealer::applyMutualPairs (const QImage &image)
 {
   Pixels pixels (image);
 
-  // Convert (x,y) pairs to (independent,dependent) pairs
-  int i0 = x0, d0 = y0, i1 = x1, d1 = y1;
-  if (m_gridLineOrientation == GridHealer::Vertical) {
-    i0 = y0;
-    d0 = x0;
-    i1 = y1;
-    d1 = x1;
-  }
+  MutualPairHalves::iterator itrBelow = m_mutualPairHalvesBelow.begin();
+  MutualPairHalves::iterator itrAbove = m_mutualPairHalvesAbove.begin();
 
-  // Save (independent,dependent) pairs
-  if (pixels.pixelIsBlack (image, x0, y0)) {
-    m_blackPixelsBelow [i0] = d0;
+  while (itrBelow != m_mutualPairHalvesBelow.end() &&
+         itrAbove != m_mutualPairHalvesAbove.end()) {
+
+    QPoint xy0 = *(itrBelow++);
+    QPoint xy1 = *(itrAbove++);
+
+    // Convert (x,y) pairs to (independent,dependent) pairs
+    QPoint id0 (xy0), id1 (xy1);
+    if (m_gridLineOrientation == GridHealer::Vertical) {
+      id0 = QPoint (xy0.y(), xy0.x());
+      id1 = QPoint (xy1.y(), xy1.x());
+    }
+
+    // Save (independent,dependent) pairs
+    if (pixels.pixelIsBlack (image, xy0.x(), xy0.y())) {
+      m_blackPixelsBelow [id0.x()] = id0.y();
+    }
+
+    if (pixels.pixelIsBlack (image, xy1.x(), xy1.y())) {
+      m_blackPixelsAbove [id1.x()] = id1.y();
+    }
+
+    m_gapSeparation = qAbs (id1.y() - id0.y());
   }
-  if (pixels.pixelIsBlack (image, x1, y1)) {
-    m_blackPixelsAbove [i1] = d1;
-  }
-  m_gapSeparation = qAbs (d1 - d0);
 }
 
 bool GridHealer::blackPixelRegionIsBigEnough (const QImage &image,
@@ -313,7 +327,7 @@ void GridHealer::fillTrapezoid (QImage &image,
 
 QImage GridHealer::healed (const QImage &imageAfterGridRemoval)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GridHealer::healed";
+  applyMutualPairs (imageAfterGridRemoval);
 
   QImage image (imageAfterGridRemoval);
 

@@ -159,7 +159,6 @@ void GridRemoval::removeLine (const QPointF &posMin,
                                                modelGridRemoval);
       gridHealers.push_back (gridHealer);
 
-
       int xMin = qMin (pos1.x(), pos2.x());
       int xMax = qMax (pos1.x(), pos2.x());
       int yAtXMin = (pos1.x() < pos2.x() ? pos1.y() : pos2.y());
@@ -171,7 +170,7 @@ void GridRemoval::removeLine (const QPointF &posMin,
           int y = (int) (0.5 + yLine + yOffset);
           image.setPixel (x, y, QColor(Qt::white).rgb());
         }
-        gridHealer->addAdjacentPoints (image, x, yLine - 2, x, yLine + 2);
+        gridHealer->addMutualPair (x, yLine - 2, x, yLine + 2);
       }
 
     } else {
@@ -192,7 +191,7 @@ void GridRemoval::removeLine (const QPointF &posMin,
           int x = (int) (0.5 + xLine + xOffset);
           image.setPixel (x, y, QColor(Qt::white).rgb());
         }
-        gridHealer->addAdjacentPoints (image, xLine - 2, y, xLine + 2, y);
+        gridHealer->addMutualPair (xLine - 2, y, xLine + 2, y);
       }
 
     }
