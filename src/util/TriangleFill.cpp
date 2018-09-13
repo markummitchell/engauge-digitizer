@@ -30,6 +30,24 @@ TriangleFill::TriangleFill ()
 {
 }
 
+void TriangleFill::drawLine (QImage &image,
+                             int x0,
+                             int x1,
+                             int y)
+{
+  if (x0 > x1) {
+    int xTemp = x0;
+    x0 = x1;
+    x1 = xTemp;
+
+  }
+
+  for (int x = x0; x <= x1; x++) {
+    image.setPixel (QPoint (x, y),
+                    Qt::black);
+  }
+}
+
 void TriangleFill::fill (QImage &image,
                          const QPoint &p0In,
                          const QPoint &p1In,
@@ -66,29 +84,13 @@ void TriangleFill::fill (QImage &image,
   }
 }
 
-void TriangleFill::drawLine (QImage &image,
-                             int x0,
-                             int x1,
-                             int y)
-{
-  if (x0 > x1) {
-    int xTemp = x0;
-    x0 = x1;
-    x1 = xTemp;
-
-  }
-
-  for (int x = x0; x <= x1; x++) {
-    image.setPixel (QPoint (x, y),
-                    Qt::black);
-  }
-}
-
 void TriangleFill::flatBottom (QImage &image,
                                const QPoint &p0,
                                const QPoint &p1,
                                const QPoint &p2)
 {
+  const double EXTRA = 0.5; // Slight adjustment to ensure adjacent triangles have no gaps between
+
   // Either neither or both denominators are zero, since p1.y()=p2.y()
   double denom0 = p1.y() - p0.y();
   double denom1 = p2.y() - p0.y();
@@ -101,13 +103,21 @@ void TriangleFill::flatBottom (QImage &image,
     double slopeInverse0 = (p1.x() - p0.x()) / denom0;
     double slopeInverse1 = (p2.x() - p0.x()) / denom1;
 
+    // For rounding lower point down and upper point up, thus ensuring thorough coverage
+    // (=no gaps between triangles), we order the inverse slopes
+    if (slopeInverse0 > slopeInverse1) {
+      double temp = slopeInverse0;
+      slopeInverse0 = slopeInverse1;
+      slopeInverse1 = temp;
+    }
+
     double x0 = p0.x();
     double x1 = p0.x();
 
     for (int scanLineY = p0.y(); scanLineY <= p1.y(); scanLineY++) {
       drawLine (image,
-                (int) x0,
-                (int) x1,
+                (int) (x0 - EXTRA),
+                (int) (x1 + EXTRA),
                 scanLineY);
       x0 += slopeInverse0;
       x1 += slopeInverse1;
@@ -120,6 +130,8 @@ void TriangleFill::flatTop (QImage &image,
                             const QPoint &p1,
                             const QPoint &p2)
 {
+  const double EXTRA = 0.5; // Slight adjustment to ensure adjacent triangles have no gaps between
+
   // Either neither or both denominators are zero, since p0.y()=p1.y()
   double denom0 = p2.y() - p0.y();
   double denom1 = p2.y() - p1.y();
@@ -132,13 +144,21 @@ void TriangleFill::flatTop (QImage &image,
     double slopeInverse0 = (p2.x() - p0.x()) / denom0;
     double slopeInverse1 = (p2.x() - p1.x()) / denom1;
 
+    // For rounding lower point down and upper point up, thus ensuring thorough coverage
+    // (=no gaps between triangles), we order the inverse slopes
+    if (slopeInverse1 > slopeInverse0) {
+      double temp = slopeInverse0;
+      slopeInverse0 = slopeInverse1;
+      slopeInverse1 = temp;
+    }
+
     double x0 = p2.x();
     double x1 = p2.x();
 
     for (int scanLineY = p2.y(); scanLineY > p0.y(); scanLineY--) {
       drawLine (image,
-                (int) x0,
-                (int) x1,
+                (int) (x0 - EXTRA),
+                (int) (x1 + EXTRA),
                 scanLineY);
       x0 -= slopeInverse0;
       x1 -= slopeInverse1;

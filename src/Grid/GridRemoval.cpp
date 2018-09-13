@@ -165,9 +165,9 @@ void GridRemoval::removeLine (const QPointF &posMin,
       int yAtXMax = (pos1.x() < pos2.x() ? pos2.y() : pos1.y());
       for (int x = xMin; x <= xMax; x++) {
         double s = (double) (x - xMin) / (double) (xMax - xMin);
-        double yLine = (1.0 - s) * yAtXMin + s * yAtXMax;
+        int yLine = (int) (0.5 + (1.0 - s) * yAtXMin + s * yAtXMax);
         for (int yOffset = -1; yOffset <= 1; yOffset++) {
-          int y = (int) (0.5 + yLine + yOffset);
+          int y = yLine + yOffset;
           image.setPixel (x, y, QColor(Qt::white).rgb());
         }
         gridHealer->addMutualPair (x, yLine - 2, x, yLine + 2);
@@ -186,9 +186,9 @@ void GridRemoval::removeLine (const QPointF &posMin,
       int xAtYMax = (pos1.y() < pos2.y() ? pos2.x() : pos1.x());
       for (int y = yMin; y <= yMax; y++) {
         double s = (double) (y - yMin) / (double) (yMax - yMin);
-        double xLine = (1.0 - s) * xAtYMin + s * xAtYMax;
+        int xLine = (int) (0.5  + (1.0 - s) * xAtYMin + s * xAtYMax);
         for (int xOffset = -1; xOffset <= 1; xOffset++) {
-          int x = (int) (0.5 + xLine + xOffset);
+          int x = xLine + xOffset;
           image.setPixel (x, y, QColor(Qt::white).rgb());
         }
         gridHealer->addMutualPair (xLine - 2, y, xLine + 2, y);
