@@ -7,6 +7,7 @@
 #include "DocumentModelGridRemoval.h"
 #include "EngaugeAssert.h"
 #include "GridHealer.h"
+#include "GridLineOrientation.h"
 #include "GridLog.h"
 #include "GridTriangleFill.h"
 #include "Logger.h"
