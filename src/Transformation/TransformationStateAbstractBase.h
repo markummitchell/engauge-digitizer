@@ -30,7 +30,8 @@ public:
   virtual ~TransformationStateAbstractBase();
 
   /// Method that is called at the exact moment a state is entered. Typically called just after end for the previous state
-  virtual void begin(CmdMediator &cmdMediator,
+  virtual void begin(bool isGnuplot,
+                     CmdMediator &cmdMediator,
                      const Transformation &transformation,
                      const QString &selectedGraphCurve) = 0;
 

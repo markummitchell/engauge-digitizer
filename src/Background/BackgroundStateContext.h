@@ -52,20 +52,23 @@ class BackgroundStateContext
 
   /// Update the selected curve. Although this probably affects only the BACKGROUND_STATE_CURVE state, we will forward it
   /// to all states (consistent with setPixmap)
-  void setCurveSelected (const Transformation &transformation,
+  void setCurveSelected (bool isGnuplot,
+                         const Transformation &transformation,
                          const DocumentModelGridRemoval &modelGridRemoval,
                          const DocumentModelColorFilter &modelColorFilter,
                          const QString &curveSelected);
 
   /// Update the images of all states, rather than just the current state
-  void setPixmap (const Transformation &transformation,
+  void setPixmap (bool isGnuplot,
+                  const Transformation &transformation,
                   const DocumentModelGridRemoval &modelGridRemoval,
                   const DocumentModelColorFilter &modelColorFilter,
                   const QPixmap &pixmapOriginal,
                   const QString &curveSelected);
 
   /// Apply color filter settings
-  void updateColorFilter (const Transformation &transformation,
+  void updateColorFilter (bool isGnuplot,
+                          const Transformation &transformation,
                           const DocumentModelGridRemoval &modelGridRemoval,
                           const DocumentModelColorFilter &colorFilter,
                           const QString &curveSelected);

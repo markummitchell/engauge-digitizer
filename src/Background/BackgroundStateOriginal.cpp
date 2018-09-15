@@ -42,7 +42,8 @@ void BackgroundStateOriginal::fitInView (GraphicsView &view)
   view.fitInView (imageItem ().boundingRect());
 }
 
-void BackgroundStateOriginal::setCurveSelected (const Transformation & /* transformation */,
+void BackgroundStateOriginal::setCurveSelected (bool /* isGnuplot */,
+                                                const Transformation & /* transformation */,
                                                 const DocumentModelGridRemoval & /* modelGridRemoval */,
                                                 const DocumentModelColorFilter & /* modelColorFilter */,
                                                 const QString & /* curveSelected */)
@@ -50,7 +51,8 @@ void BackgroundStateOriginal::setCurveSelected (const Transformation & /* transf
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateOriginal::setCurveSelected";
 }
 
-void BackgroundStateOriginal::setPixmap (const Transformation & /* transformation */,
+void BackgroundStateOriginal::setPixmap (bool /* isGnuplot */,
+                                         const Transformation & /* transformation */,
                                          const DocumentModelGridRemoval & /* modelGridRemoval */,
                                          const DocumentModelColorFilter & /* modelColorFilter */,
                                          const QPixmap &pixmapOriginal,
@@ -67,7 +69,8 @@ QString BackgroundStateOriginal::state () const
   return "BackgroundStateOriginal";
 }
 
-void BackgroundStateOriginal::updateColorFilter (const Transformation & /* transformation */,
+void BackgroundStateOriginal::updateColorFilter (bool /* isGnuplot */,
+                                                 const Transformation & /* transformation */,
                                                  const DocumentModelGridRemoval & /* modelGridRemoval */,
                                                  const DocumentModelColorFilter & /* modelColorFilter */,
                                                  const QString & /* curveSelected */)

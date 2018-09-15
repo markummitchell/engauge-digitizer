@@ -2728,7 +2728,8 @@ void MainWindow::setPixmap (const QString &curveSelected,
 
   // We cannot reliably use m_cmbCurve->currentText below for the selected curve since that control
   // can be pointing to a curve that no longer exists so this method requires curveSelected as an argument
-  m_backgroundStateContext->setPixmap (m_transformation,
+  m_backgroundStateContext->setPixmap (m_isGnuplot,
+                                       m_transformation,
                                        m_cmdMediator->document().modelGridRemoval(),
                                        m_cmdMediator->document().modelColorFilter(),
                                        pixmap,
@@ -2962,7 +2963,8 @@ bool MainWindow::setupAfterLoadNewDocument (const QString &fileName,
   // At this point the code assumes CmdMediator for the NEW Document is already stored in m_cmdMediator
 
   m_digitizeStateContext->resetOnLoad (m_cmdMediator); // Before setPixmap
-  m_backgroundStateContext->setCurveSelected (m_transformation,
+  m_backgroundStateContext->setCurveSelected (m_isGnuplot,
+                                              m_transformation,
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
                                               EMPTY_CURVE_NAME_TO_SKIP_BACKGROUND_PROCESSING); // Before setPixmap
@@ -3009,7 +3011,8 @@ bool MainWindow::setupAfterLoadNewDocument (const QString &fileName,
   // the transformation is undefined (unless the code is changed) so grid removal will not work
   // but updateTransformationAndItsDependencies will call this again to fix that issue. Note that the selected
   // curve name was set (by setCurveSelected) earlier before the call to setPixmap
-  m_backgroundStateContext->setCurveSelected (m_transformation,
+  m_backgroundStateContext->setCurveSelected (m_isGnuplot,
+                                              m_transformation,
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
@@ -3187,7 +3190,8 @@ void MainWindow::slotCmbCurve(int /* index */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCmbCurve";
 
-  m_backgroundStateContext->setCurveSelected (m_transformation,
+  m_backgroundStateContext->setCurveSelected (m_isGnuplot,
+                                              m_transformation,
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
@@ -3450,7 +3454,8 @@ void MainWindow::slotFileClose()
 
     // Transition from defined to undefined. This must be after the clearing of the screen
     // since the axes checker screen item (and maybe others) must still exist
-    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
+    m_transformationStateContext->triggerStateTransition(m_isGnuplot,
+                                                         TRANSFORMATION_STATE_UNDEFINED,
                                                          *m_cmdMediator,
                                                          m_transformation,
                                                          selectedGraphCurve());
@@ -4413,7 +4418,8 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   if (!m_transformationBefore.transformIsDefined() && m_transformation.transformIsDefined()) {
 
     // Transition from undefined to defined
-    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_DEFINED,
+    m_transformationStateContext->triggerStateTransition(m_isGnuplot,
+                                                         TRANSFORMATION_STATE_DEFINED,
                                                          *m_cmdMediator,
                                                          m_transformation,
                                                          selectedGraphCurve());
@@ -4421,7 +4427,8 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   } else if (m_transformationBefore.transformIsDefined() && !m_transformation.transformIsDefined()) {
 
     // Transition from defined to undefined
-    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
+    m_transformationStateContext->triggerStateTransition(m_isGnuplot,
+                                                         TRANSFORMATION_STATE_UNDEFINED,
                                                          *m_cmdMediator,
                                                          m_transformation,
                                                          selectedGraphCurve());
@@ -4710,12 +4717,14 @@ void MainWindow::updateSettingsAxesChecker(const DocumentModelAxesChecker &model
 
   m_cmdMediator->document().setModelAxesChecker(modelAxesChecker);
   if (m_transformation.transformIsDefined()) {
-    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_DEFINED,
+    m_transformationStateContext->triggerStateTransition(m_isGnuplot,
+                                                         TRANSFORMATION_STATE_DEFINED,
                                                          *m_cmdMediator,
                                                          m_transformation,
                                                          m_cmbCurve->currentText());
   } else {
-    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
+    m_transformationStateContext->triggerStateTransition(m_isGnuplot,
+                                                         TRANSFORMATION_STATE_UNDEFINED,
                                                          *m_cmdMediator,
                                                          m_transformation,
                                                          m_cmbCurve->currentText());
@@ -4727,7 +4736,8 @@ void MainWindow::updateSettingsColorFilter(const DocumentModelColorFilter &model
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsColorFilter";
 
   m_cmdMediator->document().setModelColorFilter(modelColorFilter);
-  m_backgroundStateContext->updateColorFilter (m_transformation,
+  m_backgroundStateContext->updateColorFilter (m_isGnuplot,
+                                               m_transformation,
                                                m_cmdMediator->document().modelGridRemoval(),
                                                modelColorFilter,
                                                m_cmbCurve->currentText());
@@ -4876,7 +4886,8 @@ void MainWindow::updateTransformationAndItsDependencies()
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     // Grid removal is affected by new transformation above
-    m_backgroundStateContext->setCurveSelected (m_transformation,
+    m_backgroundStateContext->setCurveSelected (m_isGnuplot,
+                                                m_transformation,
                                                 m_cmdMediator->document().modelGridRemoval(),
                                                 m_cmdMediator->document().modelColorFilter(),
                                                 m_cmbCurve->currentText ());

@@ -63,13 +63,15 @@ class BackgroundStateAbstractBase
   const GraphicsScene &scene() const;
 
   /// Update the currently selected curve name
-  virtual void setCurveSelected (const Transformation &transformation,
+  virtual void setCurveSelected (bool isGnuplot,
+                                 const Transformation &transformation,
                                  const DocumentModelGridRemoval &modelGridRemoval,
                                  const DocumentModelColorFilter &colorFilter,
                                  const QString &curveSelected) = 0;
 
   /// Update the image for this state, after the leaf class processes it appropriately
-  virtual void setPixmap (const Transformation &transformation,
+  virtual void setPixmap (bool isGnuplot,
+                          const Transformation &transformation,
                           const DocumentModelGridRemoval &modelGridRemoval,
                           const DocumentModelColorFilter &modelColorFilter,
                           const QPixmap &pixmap,
@@ -79,7 +81,8 @@ class BackgroundStateAbstractBase
   virtual QString state() const = 0;
 
   /// Apply color filter settings
-  virtual void updateColorFilter (const Transformation &transformation,
+  virtual void updateColorFilter (bool isGnuplot,
+                                  const Transformation &transformation,
                                   const DocumentModelGridRemoval &modelGridRemoval,
                                   const DocumentModelColorFilter &modelColorFilter,
                                   const QString &curveSelected) = 0;

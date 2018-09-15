@@ -7,6 +7,7 @@
 #include "DocumentModelGridRemoval.h"
 #include "EngaugeAssert.h"
 #include "GridHealer.h"
+#include "GridLog.h"
 #include "GridTriangleFill.h"
 #include "Logger.h"
 #include "Pixels.h"
@@ -28,12 +29,13 @@ const int DETAILED_X_MAX = DETAILED_CENTER_X + DETAILED_RADIUS;
 const int DETAILED_Y_MIN = DETAILED_CENTER_Y - DETAILED_RADIUS;
 const int DETAILED_Y_MAX = DETAILED_CENTER_Y + DETAILED_RADIUS;
 
-GridHealer::GridHealer(GridLineOrientation gridLineOrientation,
+GridHealer::GridHealer(GridLog &gridLog,
+                       GridLineOrientation gridLineOrientation,
                        const DocumentModelGridRemoval &modelGridRemoval) :
   m_gridLineOrientation (gridLineOrientation),
   m_modelGridRemoval (modelGridRemoval),
   m_gapSeparation (0),
-  m_gridLog (gridLineOrientation)
+  m_gridLog (gridLog)
 {
 }
 
@@ -99,7 +101,8 @@ bool GridHealer::blackPixelRegionIsBigEnough (const QImage &image,
 void GridHealer::doHealingAcrossGaps (QImage &image)
 {
   // LOG4CPP_INFO_S is replaced by GridLog
-  m_gridLog.showInputPixels(m_blackPixelsBelow,
+  m_gridLog.showInputPixels(m_gridLineOrientation,
+                            m_blackPixelsBelow,
                             m_blackPixelsAbove);
 
   // Algorithm requires at least one point in each of the lists

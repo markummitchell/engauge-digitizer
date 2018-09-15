@@ -592,7 +592,7 @@ void DlgSettingsGridRemoval::updateDisplayedVariableY ()
 
 void DlgSettingsGridRemoval::updatePreview ()
 {
-  GridRemoval gridRemoval;
+  GridRemoval gridRemoval (mainWindow().isGnuplot());
 
   QPixmap pixmap = gridRemoval.remove (mainWindow ().transformation(),
                                        *m_modelGridRemovalAfter,

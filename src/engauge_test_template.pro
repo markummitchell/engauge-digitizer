@@ -251,6 +251,7 @@ HEADERS  += \
     Ghosts/GhostPath.h \
     Ghosts/GhostPolygon.h \
     Ghosts/Ghosts.h \
+    util/gnuplot.h \
     Graphics/GraphicsArcItem.h \
     Graphics/GraphicsItemsExtractor.h \
     Graphics/GraphicsItemType.h \
@@ -582,6 +583,7 @@ SOURCES += \
     Ghosts/GhostPath.cpp \
     Ghosts/GhostPolygon.cpp \
     Ghosts/Ghosts.cpp \
+    util/gnuplot.cpp \
     Graphics/GraphicsArcItem.cpp \
     Graphics/GraphicsItemsExtractor.cpp \
     Graphics/GraphicsLinesForCurve.cpp \

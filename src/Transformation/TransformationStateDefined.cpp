@@ -31,7 +31,8 @@ TransformationStateDefined::TransformationStateDefined(TransformationStateContex
   connect (m_timer, SIGNAL (timeout()), this, SLOT (slotTimeout()));
 }
 
-void TransformationStateDefined::begin(CmdMediator &cmdMediator,
+void TransformationStateDefined::begin(bool isGnuplot,
+                                       CmdMediator &cmdMediator,
                                        const Transformation &transformation,
                                        const QString &selectedGraphCurve)
 {
@@ -48,7 +49,8 @@ void TransformationStateDefined::begin(CmdMediator &cmdMediator,
   if (!cmdMediator.document().modelGridRemoval().stable()) {
 
     // Initialize or update the grid removal settings since they are not stable yet
-    initializeModelGridRemoval (cmdMediator,
+    initializeModelGridRemoval (isGnuplot,
+                                cmdMediator,
                                 transformation,
                                 selectedGraphCurve);
 
@@ -72,7 +74,8 @@ void TransformationStateDefined::initializeModelGridDisplay (CmdMediator &cmdMed
   cmdMediator.document().initializeGridDisplay (transformation);
 }
 
-void TransformationStateDefined::initializeModelGridRemoval (CmdMediator &cmdMediator,
+void TransformationStateDefined::initializeModelGridRemoval (bool isGnuplot,
+                                                             CmdMediator &cmdMediator,
                                                              const Transformation &transformation,
                                                              const QString &selectedGraphCurve)
 {
@@ -80,7 +83,8 @@ void TransformationStateDefined::initializeModelGridRemoval (CmdMediator &cmdMed
 
   // Generate filtered image
   FilterImage filterImage;
-  QPixmap pixmapFiltered = filterImage.filter (cmdMediator.document().pixmap().toImage(),
+  QPixmap pixmapFiltered = filterImage.filter (isGnuplot,
+                                               cmdMediator.document().pixmap().toImage(),
                                                transformation,
                                                selectedGraphCurve,
                                                cmdMediator.document().modelColorFilter(),

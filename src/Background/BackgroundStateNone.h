@@ -20,17 +20,20 @@ class BackgroundStateNone : public BackgroundStateAbstractBase
   virtual void begin();
   virtual void end();
   virtual void fitInView (GraphicsView &view);
-  virtual void setCurveSelected (const Transformation &transformation,
+  virtual void setCurveSelected (bool isGnuplot,
+                                 const Transformation &transformation,
                                  const DocumentModelGridRemoval &modelGridRemoval,
                                  const DocumentModelColorFilter &colorFilter,
                                  const QString &curveSelected);
-  virtual void setPixmap (const Transformation &transformation,
+  virtual void setPixmap (bool isGnuplot,
+                          const Transformation &transformation,
                           const DocumentModelGridRemoval &modelGridRemoval,
                           const DocumentModelColorFilter &modelColorFilter,
                           const QPixmap &pixmap,
                           const QString &curveSelected);
   virtual QString state () const;
-  virtual void updateColorFilter (const Transformation &transformation,
+  virtual void updateColorFilter (bool isGnuplot,
+                                  const Transformation &transformation,
                                   const DocumentModelGridRemoval &modelGridRemoval,
                                   const DocumentModelColorFilter &colorFilter,
                                   const QString &curveSelected);

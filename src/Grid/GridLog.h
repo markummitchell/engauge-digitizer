@@ -19,11 +19,12 @@ class GridLog
  public:
 
   /// Single constructor
-  GridLog(GridLineOrientation m_gridLineOrientation);
+  GridLog(bool isGnuplot);
   virtual ~GridLog();
 
   /// Show pixels that are inputs to GridHealer
-  void showInputPixels (const GridIndependentToDependent &blackPixelsBelow,
+  void showInputPixels (GridLineOrientation gridLineOrientation,
+                        const GridIndependentToDependent &blackPixelsBelow,
                         const GridIndependentToDependent &blackPixelsAbove);
 
   /// Show scan line pixel that is the output of GridHealer
@@ -45,9 +46,10 @@ private:
   GridLog();
 
   bool inBounds (int x, int y) const;
-  void showInputPixelsSingle (const GridIndependentToDependent &blackPixels);
+  void showInputPixelsSingle (GridLineOrientation gridLineOrientation,
+                              const GridIndependentToDependent &blackPixels);
 
-  const GridLineOrientation m_gridLineOrientation;
+  bool m_isGnuplot;
   QString m_log;
   QTextStream m_logStr;
 };

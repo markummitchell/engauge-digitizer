@@ -9,10 +9,10 @@
 
 #include "GridIndependentToDependent.h"
 #include "GridLineOrientation.h"
-#include "GridLog.h"
 #include <QImage>
 
 class DocumentModelGridRemoval;
+class GridLog;
 class QImage;
 class QTextStream;
 
@@ -29,7 +29,8 @@ class GridHealer
  public:
 
   /// Single constructor
-  GridHealer(GridLineOrientation gridLineOrientation,
+  GridHealer(GridLog &gridLog,
+             GridLineOrientation gridLineOrientation,
              const DocumentModelGridRemoval &modelGridRemoval);
 
   /// Add two points on either side of a gap. Later, after removal, the black points will be processed
@@ -110,8 +111,7 @@ class GridHealer
   MutualPairHalves m_mutualPairHalvesBelow;
   MutualPairHalves m_mutualPairHalvesAbove;
 
-  // Logging of algorithm to check accuracy
-  GridLog m_gridLog;
+  GridLog &m_gridLog;
 };
 
 #endif // GRID_HEALER_H

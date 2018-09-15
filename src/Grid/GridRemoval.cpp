@@ -16,7 +16,8 @@
 
 const double EPSILON = 0.000001;
 
-GridRemoval::GridRemoval()
+GridRemoval::GridRemoval (bool isGnuplot) :
+  m_gridLog (isGnuplot)
 {
 }
 
@@ -157,7 +158,8 @@ void GridRemoval::removeLine (const QPointF &posMin,
     if (deltaX > deltaY) {
 
       // More horizontal
-      GridHealer *gridHealer = new GridHealer (GridLineOrientation::Horizontal,
+      GridHealer *gridHealer = new GridHealer (m_gridLog,
+                                               GridLineOrientation::Horizontal,
                                                modelGridRemoval);
       gridHealers.push_back (gridHealer);
 
@@ -178,7 +180,8 @@ void GridRemoval::removeLine (const QPointF &posMin,
     } else {
 
       // More vertical
-      GridHealer *gridHealer = new GridHealer (GridLineOrientation::Vertical,
+      GridHealer *gridHealer = new GridHealer (m_gridLog,
+                                               GridLineOrientation::Vertical,
                                                modelGridRemoval);
       gridHealers.push_back (gridHealer);
 

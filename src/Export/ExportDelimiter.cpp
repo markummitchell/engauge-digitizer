@@ -28,11 +28,11 @@ QString exportDelimiterToString (ExportDelimiter exportDelimiter)
 }
 
 QString exportDelimiterToText (ExportDelimiter exportDelimiter,
-                               bool isGnuplot)
+                               bool isGnuplotDelimiter)
 {
   switch (exportDelimiter) {
     case EXPORT_DELIMITER_COMMA:
-      if (isGnuplot) {
+      if (isGnuplotDelimiter) {
         return ", "; // Gnuplot needs a space
       } else {
         return ",";
