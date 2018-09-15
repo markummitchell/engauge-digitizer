@@ -460,15 +460,19 @@ void Transformation::transformScreenToRawGraph (const QPointF &coordScreen,
                                            coordGraph);
 }
 
-void Transformation::update (bool fileIsLoaded,
+bool Transformation::update (bool fileIsLoaded,
                              const CmdMediator &cmdMediator,
                              const MainWindowModel &modelMainWindow)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "Transformation::update";
 
+  bool changed = false;
+
   if (!fileIsLoaded) {
 
+    bool before = m_transformIsDefined;
     m_transformIsDefined = false;
+    changed = (before != m_transformIsDefined);
 
   } else {
 
@@ -485,14 +489,21 @@ void Transformation::update (bool fileIsLoaded,
 
     if (ftor.transformIsDefined ()) {
 
+      QTransform before = m_transform;
       updateTransformFromMatrices (ftor.matrixScreen(),
                                    ftor.matrixGraph());
+      changed = (before != m_transform);
+
     } else {
 
+      bool before = m_transformIsDefined;
       m_transformIsDefined = false;
+      changed = (before != m_transformIsDefined);
 
     }
   }
+
+  return changed;
 }
 
 void Transformation::updateTransformFromMatrices (const QTransform &matrixScreen,

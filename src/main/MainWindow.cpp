@@ -4868,19 +4868,25 @@ void MainWindow::updateSmallDialogs ()
 
 void MainWindow::updateTransformationAndItsDependencies()
 {
-  m_transformation.update (!m_currentFile.isEmpty (),
-                           *m_cmdMediator,
-                           m_modelMainWindow);
+  if (m_transformation.update (!m_currentFile.isEmpty (),
+                               *m_cmdMediator,
+                               m_modelMainWindow)) {
 
-  // Grid removal is affected by new transformation above
-  m_backgroundStateContext->setCurveSelected (m_transformation,
-                                              m_cmdMediator->document().modelGridRemoval(),
-                                              m_cmdMediator->document().modelColorFilter(),
-                                              m_cmbCurve->currentText ());
+    // This processing can take a while for big images
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
-  // Grid display is also affected by new transformation above, if there was a transition into defined state
-  // in which case that transition triggered the initialization of the grid display parameters
-  updateGridLines();
+    // Grid removal is affected by new transformation above
+    m_backgroundStateContext->setCurveSelected (m_transformation,
+                                                m_cmdMediator->document().modelGridRemoval(),
+                                                m_cmdMediator->document().modelColorFilter(),
+                                                m_cmbCurve->currentText ());
+
+    // Grid display is also affected by new transformation above, if there was a transition into defined state
+    // in which case that transition triggered the initialization of the grid display parameters
+    updateGridLines();
+
+    QApplication::restoreOverrideCursor();
+  }
 }
 
 void MainWindow::updateViewedCurves ()
