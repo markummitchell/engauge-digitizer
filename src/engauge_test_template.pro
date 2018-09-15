@@ -266,13 +266,17 @@ HEADERS  += \
     Grid/GridClassifier.h \
     Grid/GridCoordDisable.h \
     Grid/GridHealer.h \
+    Grid/GridIndependentToDependent.h \
     Grid/GridInitializer.h \
     Grid/GridLine.h \
     Grid/GridLineFactory.h \
     Grid/GridLineLimiter.h \
+    Grid/GridLineOrientation.h \
     Grid/GridLines.h \
     Grid/GridLineStyle.h \
+    Grid/GridLog.h \
     Grid/GridRemoval.h \
+    Grid/GridTriangleFill.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Import/ImportCropping.h \
@@ -331,7 +335,6 @@ HEADERS  += \
     Transformation/TransformationStateDefined.h \
     Transformation/TransformationStateUndefined.h \
     Translator/TranslatorContainer.h \
-    util/TriangleFill.h \
     Tutorial/TutorialButton.h \
     Tutorial/TutorialButtonRect.h \
     Tutorial/TutorialButtonText.h \
@@ -598,7 +601,9 @@ SOURCES += \
     Grid/GridLineFactory.cpp \
     Grid/GridLineLimiter.cpp \
     Grid/GridLines.cpp \
+    Grid/GridLog.cpp \
     Grid/GridRemoval.cpp \
+    Grid/GridTriangleFill.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Import/ImportCroppingUtilBase.cpp \
@@ -651,7 +656,6 @@ SOURCES += \
     Transformation/TransformationStateDefined.cpp \
     Transformation/TransformationStateUndefined.cpp \
     Translator/TranslatorContainer.cpp \
-    util/TriangleFill.cpp \    
     Tutorial/TutorialButton.cpp \
     Tutorial/TutorialButtonRect.cpp \
     Tutorial/TutorialButtonText.cpp \

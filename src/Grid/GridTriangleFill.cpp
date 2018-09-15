@@ -5,12 +5,11 @@
  ******************************************************************************************************/
 
 #include <algorithm>
+#include "GridLog.h"
+#include "GridTriangleFill.h"
 #include <QImage>
 #include <QList>
 #include <QPoint>
-#include "TriangleFill.h"
-
-#define TRIANGLE_FILL_H
 
 // Non-member comparison function
 static bool compareByY (const QPoint &first,
@@ -26,15 +25,18 @@ static bool compareByY (const QPoint &first,
   }
 }
 
-TriangleFill::TriangleFill ()
+GridTriangleFill::GridTriangleFill ()
 {
 }
 
-void TriangleFill::drawLine (QImage &image,
-                             int x0,
-                             int x1,
-                             int y)
+void GridTriangleFill::drawLine (GridLog &gridLog,
+                                 QImage &image,
+                                 int x0,
+                                 int x1,
+                                 int y)
 {
+  const double RADIUS = 0.1;
+
   if (x0 > x1) {
     int xTemp = x0;
     x0 = x1;
@@ -43,15 +45,19 @@ void TriangleFill::drawLine (QImage &image,
   }
 
   for (int x = x0; x <= x1; x++) {
+
+    gridLog.showOutputScanLinePixel (x, y, RADIUS);
+
     image.setPixel (QPoint (x, y),
                     Qt::black);
   }
 }
 
-void TriangleFill::fill (QImage &image,
-                         const QPoint &p0In,
-                         const QPoint &p1In,
-                         const QPoint &p2In)
+void GridTriangleFill::fill (GridLog &gridLog,
+                             QImage &image,
+                             const QPoint &p0In,
+                             const QPoint &p1In,
+                             const QPoint &p2In)
 {
   if (p0In.x() > 0 && p0In.y() > 0 &&
       p1In.x() > 0 && p1In.y() > 0 &&
@@ -64,12 +70,12 @@ void TriangleFill::fill (QImage &image,
     if (p1.y() == p2.y()) {
 
       // Triangle with flat bottom
-      flatBottom (image, p0, p1, p2);
+      flatBottom (gridLog, image, p0, p1, p2);
 
     } else if (p0.y() == p1.y()) {
 
       // Triangle with flat top
-      flatTop (image, p0, p1, p2);
+      flatTop (gridLog, image, p0, p1, p2);
 
     } else {
 
@@ -78,24 +84,24 @@ void TriangleFill::fill (QImage &image,
       double s = (double) (p1.y() - p0.y())/ (double) (p2.y() - p0.y());
       QPoint p3 ((int) (p0.x() + s * (p2.x() - p0.x())),
                  p1.y());
-      flatBottom (image, p0, p1, p3);
-      flatTop (image, p1, p3, p2);
+      flatBottom (gridLog, image, p0, p1, p3);
+      flatTop (gridLog, image, p1, p3, p2);
     }
   }
 }
 
-void TriangleFill::flatBottom (QImage &image,
-                               const QPoint &p0,
-                               const QPoint &p1,
-                               const QPoint &p2)
+void GridTriangleFill::flatBottom (GridLog &gridLog,
+                                   QImage &image,
+                                   const QPoint &p0,
+                                   const QPoint &p1,
+                                   const QPoint &p2)
 {
-  const double EXTRA = 0.5; // Slight adjustment to ensure adjacent triangles have no gaps between
-
   // Either neither or both denominators are zero, since p1.y()=p2.y()
   double denom0 = p1.y() - p0.y();
   double denom1 = p2.y() - p0.y();
   if (denom0 == 0 || denom1 == 0) {
-    drawLine (image,
+    drawLine (gridLog,
+              image,
               p0.x(),
               p2.x(),
               p0.y());
@@ -115,9 +121,10 @@ void TriangleFill::flatBottom (QImage &image,
     double x1 = p0.x();
 
     for (int scanLineY = p0.y(); scanLineY <= p1.y(); scanLineY++) {
-      drawLine (image,
-                (int) (x0 - EXTRA),
-                (int) (x1 + EXTRA),
+      drawLine (gridLog,
+                image,
+                (int) x0,
+                (int) x1,
                 scanLineY);
       x0 += slopeInverse0;
       x1 += slopeInverse1;
@@ -125,18 +132,18 @@ void TriangleFill::flatBottom (QImage &image,
   }
 }
 
-void TriangleFill::flatTop (QImage &image,
-                            const QPoint &p0,
-                            const QPoint &p1,
-                            const QPoint &p2)
+void GridTriangleFill::flatTop (GridLog &gridLog,
+                                QImage &image,
+                                const QPoint &p0,
+                                const QPoint &p1,
+                                const QPoint &p2)
 {
-  const double EXTRA = 0.5; // Slight adjustment to ensure adjacent triangles have no gaps between
-
   // Either neither or both denominators are zero, since p0.y()=p1.y()
   double denom0 = p2.y() - p0.y();
   double denom1 = p2.y() - p1.y();
   if (denom0 == 0 || denom1 == 0) {
-    drawLine (image,
+    drawLine (gridLog,
+              image,
               p0.x(),
               p2.x(),
               p0.y());
@@ -156,9 +163,10 @@ void TriangleFill::flatTop (QImage &image,
     double x1 = p2.x();
 
     for (int scanLineY = p2.y(); scanLineY > p0.y(); scanLineY--) {
-      drawLine (image,
-                (int) (x0 - EXTRA),
-                (int) (x1 + EXTRA),
+      drawLine (gridLog,
+                image,
+                (int) x0,
+                (int) x1,
                 scanLineY);
       x0 -= slopeInverse0;
       x1 -= slopeInverse1;
@@ -166,12 +174,12 @@ void TriangleFill::flatTop (QImage &image,
   }
 }
 
-void TriangleFill::sortByAscendingY (QPoint p0In,
-                                     QPoint p1In,
-                                     QPoint p2In,
-                                     QPoint &p0,
-                                     QPoint &p1,
-                                     QPoint &p2) const
+void GridTriangleFill::sortByAscendingY (QPoint p0In,
+                                         QPoint p1In,
+                                         QPoint p2In,
+                                         QPoint &p0,
+                                         QPoint &p1,
+                                         QPoint &p2) const
 {
   // Sort by ascending y value
   QList<QPoint> list;

@@ -9,7 +9,7 @@
 #include "GridHealer.h"
 #include "GridRemoval.h"
 #include "Logger.h"
-#include <qdebug.h>
+#include "Pixels.h"
 #include <QImage>
 #include <qmath.h>
 #include "Transformation.h"
@@ -111,7 +111,7 @@ QPixmap GridRemoval::remove (const Transformation &transformation,
     GridHealers::iterator itr;
     for (itr = gridHealers.begin(); itr != gridHealers.end(); itr++) {
       GridHealer *gridHealer = *itr;
-      image = gridHealer->healed (image);
+      gridHealer->healed (image);
       delete gridHealer;
     }
   }
@@ -125,6 +125,8 @@ void GridRemoval::removeLine (const QPointF &posMin,
                               const DocumentModelGridRemoval &modelGridRemoval,
                               GridHealers &gridHealers)
 {
+  const int HALF_WIDTH = 1;
+
   double w = image.width() - 1; // Inclusive width = exclusive width - 1
   double h = image.height() - 1; // Inclusive height = exclusive height - 1
 
@@ -155,7 +157,7 @@ void GridRemoval::removeLine (const QPointF &posMin,
     if (deltaX > deltaY) {
 
       // More horizontal
-      GridHealer *gridHealer = new GridHealer (GridHealer::Horizontal,
+      GridHealer *gridHealer = new GridHealer (GridLineOrientation::Horizontal,
                                                modelGridRemoval);
       gridHealers.push_back (gridHealer);
 
@@ -166,17 +168,17 @@ void GridRemoval::removeLine (const QPointF &posMin,
       for (int x = xMin; x <= xMax; x++) {
         double s = (double) (x - xMin) / (double) (xMax - xMin);
         int yLine = (int) (0.5 + (1.0 - s) * yAtXMin + s * yAtXMax);
-        for (int yOffset = -1; yOffset <= 1; yOffset++) {
+        for (int yOffset = -HALF_WIDTH; yOffset <= HALF_WIDTH; yOffset++) {
           int y = yLine + yOffset;
           image.setPixel (x, y, QColor(Qt::white).rgb());
         }
-        gridHealer->addMutualPair (x, yLine - 2, x, yLine + 2);
+        gridHealer->addMutualPair (x, yLine - HALF_WIDTH - 1, x, yLine + HALF_WIDTH + 1);
       }
 
     } else {
 
       // More vertical
-      GridHealer *gridHealer = new GridHealer (GridHealer::Vertical,
+      GridHealer *gridHealer = new GridHealer (GridLineOrientation::Vertical,
                                                modelGridRemoval);
       gridHealers.push_back (gridHealer);
 
@@ -187,11 +189,11 @@ void GridRemoval::removeLine (const QPointF &posMin,
       for (int y = yMin; y <= yMax; y++) {
         double s = (double) (y - yMin) / (double) (yMax - yMin);
         int xLine = (int) (0.5  + (1.0 - s) * xAtYMin + s * xAtYMax);
-        for (int xOffset = -1; xOffset <= 1; xOffset++) {
+        for (int xOffset = -HALF_WIDTH; xOffset <= HALF_WIDTH; xOffset++) {
           int x = xLine + xOffset;
           image.setPixel (x, y, QColor(Qt::white).rgb());
         }
-        gridHealer->addMutualPair (xLine - 2, y, xLine + 2, y);
+        gridHealer->addMutualPair (xLine - HALF_WIDTH - 1, y, xLine + HALF_WIDTH + 1, y);
       }
 
     }

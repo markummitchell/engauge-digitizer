@@ -303,13 +303,17 @@ HEADERS  += \
     src/Grid/GridClassifier.h \
     src/Grid/GridCoordDisable.h \
     src/Grid/GridHealer.h \
+    src/Grid/GridIndependentToDependent.h \
     src/Grid/GridInitializer.h \
     src/Grid/GridLine.h \
     src/Grid/GridLineFactory.h \
     src/Grid/GridLineLimiter.h \
+    src/Grid/GridLineOrientation.h \
     src/Grid/GridLines.h \
     src/Grid/GridLineStyle.h \
+    src/Grid/GridLog.h \
     src/Grid/GridRemoval.h \
+    src/Grid/GridTriangleFill.h \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
@@ -363,7 +367,6 @@ HEADERS  += \
     src/Transformation/TransformationStateDefined.h \
     src/Transformation/TransformationStateUndefined.h \
     src/Translator/TranslatorContainer.h \
-    src/util/TriangleFill.h \
     src/Tutorial/TutorialButton.h \
     src/Tutorial/TutorialButtonRect.h \
     src/Tutorial/TutorialButtonText.h \
@@ -630,7 +633,9 @@ SOURCES += \
     src/Grid/GridLineFactory.cpp \
     src/Grid/GridLineLimiter.cpp \
     src/Grid/GridLines.cpp \
+    src/Grid/GridLog.cpp \
     src/Grid/GridRemoval.cpp \
+    src/Grid/GridTriangleFill.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/Import/ImportImageExtensions.cpp \
@@ -679,7 +684,6 @@ SOURCES += \
     src/Transformation/TransformationStateDefined.cpp \
     src/Transformation/TransformationStateUndefined.cpp \
     src/Translator/TranslatorContainer.cpp \
-    src/util/TriangleFill.cpp \
     src/Tutorial/TutorialButton.cpp \
     src/Tutorial/TutorialButtonRect.cpp \
     src/Tutorial/TutorialButtonText.cpp \

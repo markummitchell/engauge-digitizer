@@ -4,37 +4,43 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef TRIANGLE_FILL_H
-#define TRIANGLE_FILL_H
+#ifndef GRID_TRIANGLE_FILL_H
+#define GRID_TRIANGLE_FILL_H
 
 #include <QPoint>
 
+class GridLog;
 class QImage;
 
-/// Class that does raster-line fill of a triangle. Inspired by
+/// Class that does raster-line fill of a triangle, with logging customizations for GridHealer (and therefore
+/// not a generic class in util subdirectory). Inspired by
 /// http://www.sunshine2k.de/coding/java/TriangleRasterization/TriangleRasterization.html
-class TriangleFill
+class GridTriangleFill
 {
 public:
-  TriangleFill();
+  GridTriangleFill();
 
   /// Fill triangle between these three points
-  void fill (QImage &image,
+  void fill (GridLog &gridLog,
+             QImage &image,
              const QPoint &p0,
              const QPoint &p1,
              const QPoint &p2);             
 
 private:
 
-  void drawLine (QImage &image,
+  void drawLine (GridLog &gridLog,
+                 QImage &image,
                  int x0,
                  int x1,
                  int y);
-  void flatBottom (QImage &image,
+  void flatBottom (GridLog &gridLog,
+                   QImage &image,
                    const QPoint &p0,
                    const QPoint &p1,
                    const QPoint &p2); // Assumes p1 and p2 are at bottom at same y level
-  void flatTop (QImage &image,
+  void flatTop (GridLog &gridLog,
+                QImage &image,
                 const QPoint &p0,
                 const QPoint &p1,
                 const QPoint &p2); // Assumes p0 and p1 are at top at same y level
@@ -50,4 +56,4 @@ private:
   QPoint m_p2;
 };
 
-#endif // TRIANGLE_FILL_H
+#endif // GRID_TRIANGLE_FILL_H
