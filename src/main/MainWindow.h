@@ -93,22 +93,23 @@ class MainWindow : public QMainWindow
   Q_OBJECT
 
   /// For simplifying this class by moving initialization to other classes
-  friend class MainCreateActions;
-  friend class MainCreateCentralWidget;
-  friend class MainCreateCommandStackShadow;  
-  friend class MainCreateDockableWidgets;
-  friend class MainCreateHelpWindow;
-  friend class MainCreateIcons;
-  friend class MainCreateLoadImage;  
-  friend class MainCreateMenus;
-  friend class MainCreateNetwork;
-  friend class MainCreateScene;  
-  friend class MainCreateSettingsDialogs;
-  friend class MainCreateStateContexts;
-  friend class MainCreateStatusBar;
-  friend class MainCreateToolBars;
-  friend class MainCreateTutorial;
-  friend class MainCreateZoomMaps;  
+  friend class CreateActions;
+  friend class CreateCentralWidget;
+  friend class CreateCommandStackShadow;
+  friend class CreateDockableWidgets;
+  friend class CreateFacade;
+  friend class CreateHelpWindow;
+  friend class CreateIcons;
+  friend class CreateLoadImage;
+  friend class CreateMenus;
+  friend class CreateNetwork;
+  friend class CreateScene;
+  friend class CreateSettingsDialogs;
+  friend class CreateStateContexts;
+  friend class CreateStatusBar;
+  friend class CreateToolBars;
+  friend class CreateTutorial;
+  friend class CreateZoomMaps;
 
   /// For unit testing
   friend class TestExport;

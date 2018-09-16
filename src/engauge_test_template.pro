@@ -123,6 +123,23 @@ HEADERS  += \
     Coord/CoordUnitsPolarTheta.h \
     Coord/CoordUnitsTime.h \
     Correlation/Correlation.h \
+    Create/CreateActions.h \
+    Create/CreateCentralWidget.h \
+    Create/CreateCommandStackShadow.h \
+    Create/CreateDockableWidgets.h \
+    Create/CreateFacade.h \
+    Create/CreateHelpWindow.h \
+    Create/CreateIcons.h \
+    Create/CreateLoadImage.h \
+    Create/CreateMenus.h \
+    Create/CreateNetwork.h \
+    Create/CreateScene.h \
+    Create/CreateSettingsDialogs.h \
+    Create/CreateStateContexts.h \
+    Create/CreateStatusBar.h \
+    Create/CreateToolBars.h \
+    Create/CreateTutorial.h \
+    Create/CreateZoomMaps.h \
     Cursor/CursorFactory.h \
     Cursor/CursorSize.h \
     Curve/Curve.h \
@@ -291,22 +308,6 @@ HEADERS  += \
     Load/LoadImageFromUrl.h \
     Logger/Logger.h \
     Logger/LoggerUpload.h \
-    main/MainCreateActions.h \
-    main/MainCreateCentralWidget.h \
-    main/MainCreateCommandStackShadow.h \
-    main/MainCreateDockableWidgets.h \
-    main/MainCreateHelpWindow.h \
-    main/MainCreateIcons.h \
-    main/MainCreateLoadImage.h \
-    main/MainCreateMenus.h \
-    main/MainCreateNetwork.h \
-    main/MainCreateScene.h \
-    main/MainCreateSettingsDialogs.h \
-    main/MainCreateStateContexts.h \
-    main/MainCreateStatusBar.h \
-    main/MainCreateToolBars.h \
-    main/MainCreateTutorial.h \
-    main/MainCreateZoomMaps.h \
     main/MainDirectoryPersist.h \
     main/MainTitleBarFormat.h \
     main/MainWindow.h \
@@ -481,6 +482,23 @@ SOURCES += \
     Coord/CoordUnitsPolarTheta.cpp \
     Coord/CoordUnitsTime.cpp \
     Correlation/Correlation.cpp \
+    Create/CreateActions.cpp \
+    Create/CreateCentralWidget.cpp \
+    Create/CreateCommandStackShadow.cpp \
+    Create/CreateDockableWidgets.cpp \
+    Create/CreateFacade.cpp \
+    Create/CreateHelpWindow.cpp \
+    Create/CreateIcons.cpp \
+    Create/CreateLoadImage.cpp \
+    Create/CreateMenus.cpp \
+    Create/CreateNetwork.cpp \
+    Create/CreateScene.cpp \
+    Create/CreateSettingsDialogs.cpp \
+    Create/CreateStateContexts.cpp \
+    Create/CreateStatusBar.cpp \
+    Create/CreateToolBars.cpp \
+    Create/CreateTutorial.cpp \
+    Create/CreateZoomMaps.cpp \
     Cursor/CursorFactory.cpp \
     Cursor/CursorSize.cpp \
     Curve/Curve.cpp \
@@ -637,22 +655,6 @@ SOURCES += \
     Logger/Logger.cpp \
     Logger/LoggerUpload.cpp \
     Matrix/Matrix.cpp \
-    main/MainCreateActions.cpp \
-    main/MainCreateCentralWidget.cpp \
-    main/MainCreateCommandStackShadow.cpp \
-    main/MainCreateDockableWidgets.cpp \
-    main/MainCreateHelpWindow.cpp \
-    main/MainCreateIcons.cpp \
-    main/MainCreateLoadImage.cpp \
-    main/MainCreateMenus.cpp \
-    main/MainCreateNetwork.cpp \
-    main/MainCreateScene.cpp \
-    main/MainCreateSettingsDialogs.cpp \
-    main/MainCreateStateContexts.cpp \
-    main/MainCreateStatusBar.cpp \
-    main/MainCreateToolBars.cpp \
-    main/MainCreateTutorial.cpp \
-    main/MainCreateZoomMaps.cpp \
     main/MainDirectoryPersist.cpp \
     main/MainWindow.cpp \
     main/MainWindowModel.cpp \
@@ -745,6 +747,7 @@ INCLUDEPATH += Background \
                Coord \
                CoordSystem \
                Correlation \
+               Create \
                Cursor \
                Curve \
                DigitizeState \

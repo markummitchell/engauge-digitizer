@@ -16,6 +16,7 @@
 #include "CmdSelectCoordSystem.h"
 #include "CmdStackShadow.h"
 #include "ColorFilter.h"
+#include "CreateFacade.h"
 #include "Curve.h"
 #include "DataKey.h"
 #include "DigitizeStateContext.h"
@@ -65,22 +66,6 @@
 #include "LoadImageFromUrl.h"
 #endif
 #include "Logger.h"
-#include "MainCreateActions.h"
-#include "MainCreateCentralWidget.h"
-#include "MainCreateCommandStackShadow.h"
-#include "MainCreateDockableWidgets.h"
-#include "MainCreateHelpWindow.h"
-#include "MainCreateIcons.h"
-#include "MainCreateLoadImage.h"
-#include "MainCreateMenus.h"
-#include "MainCreateNetwork.h"
-#include "MainCreateScene.h"
-#include "MainCreateSettingsDialogs.h"
-#include "MainCreateStateContexts.h"
-#include "MainCreateStatusBar.h"
-#include "MainCreateToolBars.h"
-#include "MainCreateTutorial.h"
-#include "MainCreateZoomMaps.h"
 #include "MainDirectoryPersist.h"
 #include "MainTitleBarFormat.h"
 #include "MainWindow.h"
@@ -104,14 +89,10 @@
 #include <QDomDocument>
 #include <QFileDialog>
 #include <QFileInfo>
-#include <QGraphicsLineItem>
 #include <QImageReader>
 #include <QKeyEvent>
 #include <QKeySequence>
-#include <QLabel>
 #include <qmath.h>
-#include <QMenu>
-#include <QMenuBar>
 #include <QMessageBox>
 #include <QMouseEvent>
 #include <QPrintDialog>
@@ -193,50 +174,16 @@ MainWindow::MainWindow(const QString &errorReportFile,
   qApp->setApplicationName ("Engauge Digitizer");
   qApp->setOrganizationDomain ("Mark Mitchell");
 #endif
-
-  MainCreateActions mainCreateActions;
-  MainCreateCentralWidget mainCreateCentralWidget;
-  MainCreateCommandStackShadow mainCreateCommandStackShadow;
-  MainCreateDockableWidgets mainCreateDockableWidgets;
-  MainCreateHelpWindow mainCreateHelpWindow;
-  MainCreateIcons mainCreateIcons;
-  MainCreateLoadImage mainCreateLoadImage;
-  MainCreateMenus mainCreateMenus;
-  MainCreateNetwork mainCreateNetwork;
-  MainCreateScene mainCreateScene;
-  MainCreateSettingsDialogs mainCreateSettingsDialogs;
-  MainCreateStateContexts mainCreateStateContexts;
-  MainCreateStatusBar mainCreateStatusBar;
-  MainCreateToolBars mainCreateToolBars;
-  MainCreateTutorial mainCreateTutorial;
-  MainCreateZoomMaps mainCreateZoomMaps;
-
+ 
   LoggerUpload::bindToMainWindow(this);
 
   m_startupDirectory = QDir::currentPath();
 
   setCurrentFile ("");
-  mainCreateIcons.create (*this);
-#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
-  setWindowFlags (Qt::WindowContextHelpButtonHint | windowFlags ()); // Add help to default buttons
-#endif
-  setWindowTitle (engaugeWindowTitle ());
 
-  mainCreateCentralWidget.create (*this);
-  mainCreateActions.create (*this);
-  mainCreateStatusBar.create (*this);
-  mainCreateMenus.create (*this);
-  mainCreateToolBars.create (*this);
-  mainCreateDockableWidgets.create (*this);
-  mainCreateHelpWindow.create (*this);
-  mainCreateTutorial.create (*this);
-  mainCreateScene.create (*this);
-  mainCreateNetwork.create (*this);
-  mainCreateLoadImage.create (*this);
-  mainCreateStateContexts.create (*this);
-  mainCreateSettingsDialogs.create (*this);
-  mainCreateCommandStackShadow.create (*this);
-  mainCreateZoomMaps.create (*this);
+  CreateFacade createFacade;
+  createFacade.create (*this);
+
   updateControls ();
 
   settingsRead (isReset); // This changes the current directory when not regression testing

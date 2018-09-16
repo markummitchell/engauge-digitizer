@@ -160,6 +160,23 @@ HEADERS  += \
     src/Coord/CoordUnitsPolarTheta.h \
     src/Coord/CoordUnitsTime.h \
     src/Correlation/Correlation.h \
+    src/Create/CreateActions.h \
+    src/Create/CreateCentralWidget.h \
+    src/Create/CreateCommandStackShadow.h \
+    src/Create/CreateDockableWidgets.h \
+    src/Create/CreateFacade.h \
+    src/Create/CreateHelpWindow.h \
+    src/Create/CreateIcons.h \
+    src/Create/CreateLoadImage.h \
+    src/Create/CreateMenus.h \
+    src/Create/CreateNetwork.h \
+    src/Create/CreateScene.h \
+    src/Create/CreateSettingsDialogs.h \
+    src/Create/CreateStateContexts.h \
+    src/Create/CreateStatusBar.h \
+    src/Create/CreateTutorial.h \
+    src/Create/CreateToolBars.h \
+    src/Create/CreateZoomMaps.h \
     src/Cursor/CursorFactory.h \
     src/Cursor/CursorSize.h \
     src/Curve/Curve.h \
@@ -326,22 +343,6 @@ HEADERS  += \
     src/Logger/Logger.h \
     src/Logger/LoggerUpload.h \
     src/Matrix/Matrix.h \
-    src/main/MainCreateActions.h \
-    src/main/MainCreateCentralWidget.h \
-    src/main/MainCreateCommandStackShadow.h \
-    src/main/MainCreateDockableWidgets.h \
-    src/main/MainCreateHelpWindow.h \
-    src/main/MainCreateIcons.h \
-    src/main/MainCreateLoadImage.h \
-    src/main/MainCreateMenus.h \
-    src/main/MainCreateNetwork.h \
-    src/main/MainCreateScene.h \
-    src/main/MainCreateSettingsDialogs.h \
-    src/main/MainCreateStateContexts.h \
-    src/main/MainCreateStatusBar.h \
-    src/main/MainCreateTutorial.h \
-    src/main/MainCreateToolBars.h \
-    src/main/MainCreateZoomMaps.h \
     src/main/MainDirectoryPersist.h \
     src/main/MainTitleBarFormat.h \
     src/main/MainWindow.h \
@@ -515,6 +516,23 @@ SOURCES += \
     src/Correlation/Correlation.cpp \
     src/Cursor/CursorFactory.cpp \
     src/Cursor/CursorSize.cpp \
+    src/Create/CreateActions.cpp \
+    src/Create/CreateCentralWidget.cpp \
+    src/Create/CreateCommandStackShadow.cpp \
+    src/Create/CreateDockableWidgets.cpp \
+    src/Create/CreateFacade.cpp \
+    src/Create/CreateHelpWindow.cpp \
+    src/Create/CreateIcons.cpp \
+    src/Create/CreateLoadImage.cpp \
+    src/Create/CreateMenus.cpp \
+    src/Create/CreateNetwork.cpp \
+    src/Create/CreateScene.cpp \
+    src/Create/CreateSettingsDialogs.cpp \
+    src/Create/CreateStateContexts.cpp \
+    src/Create/CreateStatusBar.cpp \
+    src/Create/CreateToolBars.cpp \
+    src/Create/CreateTutorial.cpp \
+    src/Create/CreateZoomMaps.cpp \
     src/Curve/Curve.cpp \
     src/Curve/CurveConnectAs.cpp \
     src/Curve/CurveNameList.cpp \
@@ -667,22 +685,6 @@ SOURCES += \
     src/Logger/LoggerUpload.cpp \
     src/Matrix/Matrix.cpp \
     src/main/main.cpp \
-    src/main/MainCreateActions.cpp \
-    src/main/MainCreateCentralWidget.cpp \
-    src/main/MainCreateCommandStackShadow.cpp \
-    src/main/MainCreateDockableWidgets.cpp \
-    src/main/MainCreateHelpWindow.cpp \
-    src/main/MainCreateIcons.cpp \
-    src/main/MainCreateLoadImage.cpp \
-    src/main/MainCreateMenus.cpp \
-    src/main/MainCreateNetwork.cpp \
-    src/main/MainCreateScene.cpp \
-    src/main/MainCreateSettingsDialogs.cpp \
-    src/main/MainCreateStateContexts.cpp \
-    src/main/MainCreateStatusBar.cpp \
-    src/main/MainCreateToolBars.cpp \
-    src/main/MainCreateTutorial.cpp \
-    src/main/MainCreateZoomMaps.cpp \
     src/main/MainDirectoryPersist.cpp \
     src/main/MainWindow.cpp \
     src/main/MainWindowModel.cpp \
@@ -845,6 +847,7 @@ INCLUDEPATH += src \
                src/Coord \
                src/CoordSystem \
                src/Correlation \
+               src/Create \
                src/Cursor \
                src/Curve \
                src/DigitizeState \
