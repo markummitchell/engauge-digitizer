@@ -303,13 +303,14 @@ HEADERS  += \
     src/Graphics/GraphicsView.h \
     src/Grid/GridClassifier.h \
     src/Grid/GridCoordDisable.h \
-    src/Grid/GridHealer.h \
+    src/Grid/GridHealerAbstractBase.h \
+    src/Grid/GridHealerHorizontal.h \
+    src/Grid/GridHealerVertical.h \
     src/Grid/GridIndependentToDependent.h \
     src/Grid/GridInitializer.h \
     src/Grid/GridLine.h \
     src/Grid/GridLineFactory.h \
     src/Grid/GridLineLimiter.h \
-    src/Grid/GridLineOrientation.h \
     src/Grid/GridLines.h \
     src/Grid/GridLineStyle.h \
     src/Grid/GridLog.h \
@@ -629,7 +630,9 @@ SOURCES += \
     src/Graphics/GraphicsView.cpp \
     src/Grid/GridClassifier.cpp \
     src/Grid/GridCoordDisable.cpp \
-    src/Grid/GridHealer.cpp \
+    src/Grid/GridHealerAbstractBase.cpp \
+    src/Grid/GridHealerHorizontal.cpp \
+    src/Grid/GridHealerVertical.cpp \
     src/Grid/GridInitializer.cpp \
     src/Grid/GridLine.cpp \
     src/Grid/GridLineFactory.cpp \

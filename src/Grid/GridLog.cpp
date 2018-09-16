@@ -9,6 +9,7 @@
 #include "GridLog.h"
 #include <iostream>
 #include <QFile>
+#include <QPoint>
 #include <QTextStream>
 
 // Whole image is too much information so only stuff near this center point is included
@@ -58,47 +59,29 @@ GridLog::~GridLog()
 bool GridLog::inBounds (int x, int y) const
 {
   return
-      DETAILED_X_MIN <= x &&
+      DETAILED_X_MIN < x &&
+      DETAILED_Y_MIN < y &&
+      x < DETAILED_X_MAX &&
+      y < DETAILED_Y_MAX;
+}
+
+void GridLog::showInputPixel (const QPoint &p,
+                              double halfWidth)
+{
+  int x = p.x();
+  int y = p.y();
+
+  if (DETAILED_X_MIN <= x &&
       DETAILED_Y_MIN <= y &&
       x <= DETAILED_X_MAX &&
-      y <= DETAILED_Y_MAX;
-}
+      y <= DETAILED_Y_MAX) {
 
-void GridLog::showInputPixels (GridLineOrientation gridLineOrientation,
-                               const GridIndependentToDependent &blackPixelsBelow,
-                               const GridIndependentToDependent &blackPixelsAbove)
-{
-  showInputPixelsSingle (gridLineOrientation, blackPixelsBelow);
-  showInputPixelsSingle (gridLineOrientation, blackPixelsAbove);
-}
-
-void GridLog::showInputPixelsSingle (GridLineOrientation gridLineOrientation,
-                                     const GridIndependentToDependent &blackPixels)
-{
-  // Trick to discriminate horizontal and vertical pixels is to use different sizes
-  double halfWidth = (gridLineOrientation == GridLineOrientation::Vertical) ? 0.46 : 0.54;
-
-  GridIndependentToDependent::const_iterator itr;
-  for (itr = blackPixels.begin (); itr != blackPixels.end (); itr++) {
-    int x = itr.value();
-    int y = itr.key();
-    if (gridLineOrientation == GridLineOrientation::Horizontal) {
-      x = itr.key();
-      y = itr.value();
-    }
-
-    if (DETAILED_X_MIN <= x &&
-        DETAILED_Y_MIN <= y &&
-        x <= DETAILED_X_MAX &&
-        y <= DETAILED_Y_MAX) {
-
-      m_logStr << x - halfWidth << " " << - (y - halfWidth) << "\n";
-      m_logStr << x + halfWidth << " " << - (y - halfWidth) << "\n";
-      m_logStr << x + halfWidth << " " << - (y + halfWidth) << "\n";
-      m_logStr << x - halfWidth << " " << - (y + halfWidth) << "\n";
-      m_logStr << x - halfWidth << " " << - (y - halfWidth) << "\n";
-      m_logStr << "\n";
-    }
+    m_logStr << x - halfWidth << " " << - (y - halfWidth) << "\n";
+    m_logStr << x + halfWidth << " " << - (y - halfWidth) << "\n";
+    m_logStr << x + halfWidth << " " << - (y + halfWidth) << "\n";
+    m_logStr << x - halfWidth << " " << - (y + halfWidth) << "\n";
+    m_logStr << x - halfWidth << " " << - (y - halfWidth) << "\n";
+    m_logStr << "\n";
   }
 }
 
@@ -118,25 +101,24 @@ void GridLog::showOutputScanLinePixel (int x,
   }
 }
 
-void GridLog::showOutputTrapezoids (int x0,
-                                    int x1,
-                                    int x2,
-                                    int x3,
-                                    int y0,
-                                    int y1,
-                                    int y2,
-                                    int y3)
+void GridLog::showOutputTrapezoid (const QPoint &p0,
+                                   const QPoint &p1,
+                                   const QPoint &p2,
+                                   const QPoint &p3)
 {
   if (m_isGnuplot) {
 
     // Log if any pixel is in the region of interest
-    if (inBounds (x0, y0) || inBounds (x1, y1) || inBounds (x2, y2) || inBounds (x3, y3)) {
+    if (inBounds (p0.x(), p0.y()) ||
+        inBounds (p1.x(), p1.y()) ||
+        inBounds (p2.x(), p2.y()) ||
+        inBounds (p3.x(), p3.y())) {
 
-      m_logStr << x0 << " " << - y0 << "\n";
-      m_logStr << x1 << " " << - y1 << "\n";
-      m_logStr << x2 << " " << - y2 << "\n";
-      m_logStr << x3 << " " << - y3 << "\n";
-      m_logStr << x0 << " " << - y0 << "\n";
+      m_logStr << p0.x() << " " << - p0.y() << "\n";
+      m_logStr << p1.x() << " " << - p1.y() << "\n";
+      m_logStr << p2.x() << " " << - p2.y() << "\n";
+      m_logStr << p3.x() << " " << - p3.y() << "\n";
+      m_logStr << p0.x() << " " << - p0.y() << "\n";
       m_logStr << "\n";
     }
   }

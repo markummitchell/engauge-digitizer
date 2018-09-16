@@ -4,17 +4,20 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GRID_HEALER_H
-#define GRID_HEALER_H
+#ifndef GRID_HEALER_ABSTRACT_BASE_H
+#define GRID_HEALER_ABSTRACT_BASE_H
 
+#include "DocumentModelGridRemoval.h"
 #include "GridIndependentToDependent.h"
-#include "GridLineOrientation.h"
 #include <QImage>
 
-class DocumentModelGridRemoval;
 class GridLog;
 class QImage;
 class QTextStream;
+
+// Trick to discriminate horizontal and vertical pixels is to use different sizes
+const double HALFWIDTH_HORIZONTAL = 0.46;
+const double HALFWIDTH_VERTICAL = 0.54;
 
 /// Save one half of a mutual pair
 typedef QList<QPoint> MutualPairHalves;
@@ -24,14 +27,14 @@ typedef QList<QPoint> MutualPairHalves;
 /// gap is across from a black pixel on the other side of the pixel
 ///
 /// A range is defined as a continous set of pixels on the same side of the gap
-class GridHealer
+class GridHealerAbstractBase
 {
  public:
 
   /// Single constructor
-  GridHealer(GridLog &gridLog,
-             GridLineOrientation gridLineOrientation,
-             const DocumentModelGridRemoval &modelGridRemoval);
+  GridHealerAbstractBase(GridLog &gridLog,
+                         const DocumentModelGridRemoval &modelGridRemoval);
+  virtual ~GridHealerAbstractBase();
 
   /// Add two points on either side of a gap. Later, after removal, the black points will be processed
   void addMutualPair (int x0,
@@ -45,11 +48,51 @@ class GridHealer
   /// Return healed image after grid removal
   void healed (QImage &image);
 
- private:
-  GridHealer();
+ protected:
 
   /// Apply mutual pair points after all grid removal is done
-  void applyMutualPairs (const QImage &image);
+  virtual void applyMutualPairs (const QImage &image) = 0;
+
+  /// Guts of the algorithm in which sequences of black pixels across the gap from each other
+  /// are filled in. Specifically, trapezoids with endpoints separated by no more than the
+  /// closest distance are filled in. A greedy algorithm is used which makes each trapezoid as
+  /// big as possible
+  virtual void doHealingAcrossGaps (QImage &image) = 0;
+
+  /// Fill trapezoid with bottom left, bottom right, top right, and top left points
+  void fillTrapezoid (QImage &image,
+                      int xBL, int yBL,
+                      int xBR, int yBR,
+                      int xTR, int yTR,
+                      int xTL, int yTL);
+
+  /// Logging get method
+  GridLog &gridLog ();
+
+  /// Max point separation get method
+  double maxPointSeparation () const;
+
+  /// DocumentModelGridRemoval get method
+  DocumentModelGridRemoval &modelGridRemoval();
+
+  /// Mutual pair halves for below grid line
+  const MutualPairHalves &mutualPairHalvesAbove () const;
+
+  /// Mutual pair halves for above grid line
+  const MutualPairHalves &mutualPairHalvesBelow () const;
+
+  /// Apply blackPixelRegionIsBigEnough to regions around each of two points
+  bool pointsAreGood (const QImage &image,
+                      int x0,
+                      int y0,
+                      int x1,
+                      int y1) const;
+
+  /// Gap separation set method
+  void saveGapSeparation (double gapSeparation);
+
+ private:
+  GridHealerAbstractBase();
 
   /// Determine if the specified black pixel is connected enough other black pixels to be
   /// considered big enough to be a real thing worth connecting to. In images with a large number
@@ -61,12 +104,6 @@ class GridHealer
   bool blackPixelRegionIsBigEnough (const QImage &image,
                                     int x,
                                     int y) const;
-
-  /// Guts of the algorithm in which sequences of black pixels across the gap from each other
-  /// are filled in. Specifically, trapezoids with endpoints separated by no more than the
-  /// closest distance are filled in. A greedy algorithm is used which makes each trapezoid as
-  /// big as possible
-  void doHealingAcrossGaps (QImage &image);
 
   /// Healing for four points defined by below range endpoints and above range endpoints
   void doHealingOnBelowAndAboveRangePair (QImage &image,
@@ -81,29 +118,9 @@ class GridHealer
                               int xBelowEnd,
                               int maxHorSep);
 
-  /// Fill trapezoid with bottom left, bottom right, top right, and top left points
-  void fillTrapezoid (QImage &image,
-                      int xBL, int yBL,
-                      int xBR, int yBR,
-                      int xTR, int yTR,
-                      int xTL, int yTL);
-
-  /// Apply blackPixelRegionIsBigEnough to regions around each of two points
-  bool pointsAreGood (const QImage &image,
-                      int i0,
-                      int d0,
-                      int i3,
-                      int d3) const;
-
-  /// Horizontal or vertical?
-  GridLineOrientation m_gridLineOrientation;
-  
   DocumentModelGridRemoval m_modelGridRemoval;
 
-  /// Pixels on either side of the gap
-  GridIndependentToDependent m_blackPixelsBelow; // Black pixels in -x or -y direction
-  GridIndependentToDependent m_blackPixelsAbove; // Black pixels in +x or +y direction
-  int m_gapSeparation; // Pixel distance between vertical point pairs
+  int m_maxPointSeparation; // Pixel distance between two connected points
 
   // Store opposing mutual pair points as each grid line is removed, then after all removals are
   // done (when complex vertical/horizontal interactions have finished) we heal
@@ -114,4 +131,4 @@ class GridHealer
   GridLog &m_gridLog;
 };
 
-#endif // GRID_HEALER_H
+#endif // GRID_HEALER_ABSTRACT_BASE_H

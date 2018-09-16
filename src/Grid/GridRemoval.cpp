@@ -6,7 +6,8 @@
 
 #include "DocumentModelGridRemoval.h"
 #include "EngaugeAssert.h"
-#include "GridHealer.h"
+#include "GridHealerHorizontal.h"
+#include "GridHealerVertical.h"
 #include "GridRemoval.h"
 #include "Logger.h"
 #include "Pixels.h"
@@ -111,7 +112,7 @@ QPixmap GridRemoval::remove (const Transformation &transformation,
     // Heal the broken lines now that all grid lines have been removed and the image has stabilized
     GridHealers::iterator itr;
     for (itr = gridHealers.begin(); itr != gridHealers.end(); itr++) {
-      GridHealer *gridHealer = *itr;
+      GridHealerAbstractBase *gridHealer = *itr;
       gridHealer->healed (image);
       delete gridHealer;
     }
@@ -158,9 +159,8 @@ void GridRemoval::removeLine (const QPointF &posMin,
     if (deltaX > deltaY) {
 
       // More horizontal
-      GridHealer *gridHealer = new GridHealer (m_gridLog,
-                                               GridLineOrientation::Horizontal,
-                                               modelGridRemoval);
+      GridHealerAbstractBase *gridHealer = new GridHealerHorizontal (m_gridLog,
+                                                         modelGridRemoval);
       gridHealers.push_back (gridHealer);
 
       int xMin = qMin (pos1.x(), pos2.x());
@@ -180,9 +180,8 @@ void GridRemoval::removeLine (const QPointF &posMin,
     } else {
 
       // More vertical
-      GridHealer *gridHealer = new GridHealer (m_gridLog,
-                                               GridLineOrientation::Vertical,
-                                               modelGridRemoval);
+      GridHealerAbstractBase *gridHealer = new GridHealerVertical (m_gridLog,
+                                                                   modelGridRemoval);
       gridHealers.push_back (gridHealer);
 
       int yMin = qMin (pos1.y(), pos2.y());

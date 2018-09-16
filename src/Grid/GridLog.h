@@ -8,7 +8,6 @@
 #define GRID_LOG_H
 
 #include "GridIndependentToDependent.h"
-#include "GridLineOrientation.h"
 #include <QString>
 #include <QTextStream>
 
@@ -23,9 +22,8 @@ class GridLog
   virtual ~GridLog();
 
   /// Show pixels that are inputs to GridHealer
-  void showInputPixels (GridLineOrientation gridLineOrientation,
-                        const GridIndependentToDependent &blackPixelsBelow,
-                        const GridIndependentToDependent &blackPixelsAbove);
+  void showInputPixel (const QPoint &p,
+                       double halfWidth);
 
   /// Show scan line pixel that is the output of GridHealer
   void showOutputScanLinePixel (int x,
@@ -33,21 +31,15 @@ class GridLog
                                 double radius);
 
   /// Show trapezoids that are intermediate results in GridHealer
-  void showOutputTrapezoids (int x0,
-                             int x1,
-                             int x2,
-                             int x3,
-                             int y0,
-                             int y1,
-                             int y2,
-                             int y3);
+  void showOutputTrapezoid (const QPoint &p0,
+                            const QPoint &p1,
+                            const QPoint &p2,
+                            const QPoint &p3);
 
 private:
   GridLog();
 
   bool inBounds (int x, int y) const;
-  void showInputPixelsSingle (GridLineOrientation gridLineOrientation,
-                              const GridIndependentToDependent &blackPixels);
 
   bool m_isGnuplot;
   QString m_log;

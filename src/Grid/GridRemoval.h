@@ -13,12 +13,12 @@
 #include <QPointF>
 
 class DocumentModelGridRemoval;
-class GridHealer;
+class GridHealerAbstractBase;
 class QImage;
 class Transformation;
 
 /// Storage of GridHealer instances
-typedef QList<GridHealer*> GridHealers;
+typedef QList<GridHealerAbstractBase*> GridHealers;
 
 /// Strategy class for grid removal
 class GridRemoval

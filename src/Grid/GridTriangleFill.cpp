@@ -162,7 +162,7 @@ void GridTriangleFill::flatTop (GridLog &gridLog,
     double x0 = p2.x();
     double x1 = p2.x();
 
-    for (int scanLineY = p2.y(); scanLineY > p0.y(); scanLineY--) {
+    for (int scanLineY = p2.y(); scanLineY >= p0.y(); scanLineY--) {
       drawLine (gridLog,
                 image,
                 (int) x0,
