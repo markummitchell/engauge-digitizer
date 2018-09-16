@@ -85,10 +85,30 @@ class TutorialDlg;
 class ViewPointStyle;
 class ViewSegmentFilter;
 
+extern const unsigned int MAX_RECENT_FILE_LIST_SIZE;
+
 /// Main window consisting of menu, graphics scene, status bar and optional toolbars as a Single Document Interface
 class MainWindow : public QMainWindow
 {
   Q_OBJECT
+
+  /// For simplifying this class by moving initialization to other classes
+  friend class MainCreateActions;
+  friend class MainCreateCentralWidget;
+  friend class MainCreateCommandStackShadow;  
+  friend class MainCreateDockableWidgets;
+  friend class MainCreateHelpWindow;
+  friend class MainCreateIcons;
+  friend class MainCreateLoadImage;  
+  friend class MainCreateMenus;
+  friend class MainCreateNetwork;
+  friend class MainCreateScene;  
+  friend class MainCreateSettingsDialogs;
+  friend class MainCreateStateContexts;
+  friend class MainCreateStatusBar;
+  friend class MainCreateToolBars;
+  friend class MainCreateTutorial;
+  friend class MainCreateZoomMaps;  
 
   /// For unit testing
   friend class TestExport;
@@ -354,30 +374,6 @@ private:
                       Qt::DockWidgetArea dockWidgetArea);
   void applyZoomFactorAfterLoad();
   virtual void closeEvent(QCloseEvent *event);
-  void createActions();
-  void createActionsDigitize ();
-  void createActionsEdit ();
-  void createActionsFile ();
-  void createActionsHelp ();
-  void createActionsSettings ();
-  void createActionsView ();
-  void createCentralWidget ();
-  void createCommandStackShadow ();
-  void createDockableWidgets ();
-  void createHelpWindow ();
-  void createIcons();
-  void createLoadImageFromUrl ();
-  void createMenus();
-  void createNetwork();
-  void createScene ();
-  void createSettingsDialogs ();
-  void createStateContextBackground();
-  void createStateContextDigitize();
-  void createStateContextTransformation();
-  void createStatusBar();
-  void createToolBars();
-  void createTutorial();
-  void createZoomMaps ();
   ZoomFactor currentZoomFactor () const;
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   void exportAllCoordinateSystemsAfterRegressionTests();

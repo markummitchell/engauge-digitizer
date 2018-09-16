@@ -326,6 +326,22 @@ HEADERS  += \
     src/Logger/Logger.h \
     src/Logger/LoggerUpload.h \
     src/Matrix/Matrix.h \
+    src/main/MainCreateActions.h \
+    src/main/MainCreateCentralWidget.h \
+    src/main/MainCreateCommandStackShadow.h \
+    src/main/MainCreateDockableWidgets.h \
+    src/main/MainCreateHelpWindow.h \
+    src/main/MainCreateIcons.h \
+    src/main/MainCreateLoadImage.h \
+    src/main/MainCreateMenus.h \
+    src/main/MainCreateNetwork.h \
+    src/main/MainCreateScene.h \
+    src/main/MainCreateSettingsDialogs.h \
+    src/main/MainCreateStateContexts.h \
+    src/main/MainCreateStatusBar.h \
+    src/main/MainCreateTutorial.h \
+    src/main/MainCreateToolBars.h \
+    src/main/MainCreateZoomMaps.h \
     src/main/MainDirectoryPersist.h \
     src/main/MainTitleBarFormat.h \
     src/main/MainWindow.h \
@@ -651,6 +667,22 @@ SOURCES += \
     src/Logger/LoggerUpload.cpp \
     src/Matrix/Matrix.cpp \
     src/main/main.cpp \
+    src/main/MainCreateActions.cpp \
+    src/main/MainCreateCentralWidget.cpp \
+    src/main/MainCreateCommandStackShadow.cpp \
+    src/main/MainCreateDockableWidgets.cpp \
+    src/main/MainCreateHelpWindow.cpp \
+    src/main/MainCreateIcons.cpp \
+    src/main/MainCreateLoadImage.cpp \
+    src/main/MainCreateMenus.cpp \
+    src/main/MainCreateNetwork.cpp \
+    src/main/MainCreateScene.cpp \
+    src/main/MainCreateSettingsDialogs.cpp \
+    src/main/MainCreateStateContexts.cpp \
+    src/main/MainCreateStatusBar.cpp \
+    src/main/MainCreateToolBars.cpp \
+    src/main/MainCreateTutorial.cpp \
+    src/main/MainCreateZoomMaps.cpp \
     src/main/MainDirectoryPersist.cpp \
     src/main/MainWindow.cpp \
     src/main/MainWindowModel.cpp \
