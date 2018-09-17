@@ -11,10 +11,12 @@
 
 class MainWindow;
 
-/// Class to create toolbars for MainWindow class. This is derived from QObject 
-/// so the tr function can be accessed more easily
+/// Class to create toolbars for MainWindow class. We derive from QObject and
+/// use Q_OBJECT so translations work
 class CreateToolBars : public QObject
 {
+  Q_OBJECT
+
 public:
   /// Single constructor.
   CreateToolBars();

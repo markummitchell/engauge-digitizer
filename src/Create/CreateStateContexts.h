@@ -12,9 +12,12 @@
 class MainWindow;
 
 /// Class to create state contexts, which wrap state machine design patterns, for MainWindow class.
-/// This is derived from QObject so the tr function can be accessed more easily
+/// We derive from QObject and
+/// use Q_OBJECT so translations work
 class CreateStateContexts : public QObject
 {
+  Q_OBJECT
+
 public:
   /// Single constructor.
   CreateStateContexts();

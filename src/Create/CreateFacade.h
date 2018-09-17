@@ -11,10 +11,12 @@
 
 class MainWindow;
 
-/// Facade class that wraps around all of the create classes for MainWindow. This is derived from QObject 
-/// so the tr function can be accessed more easily
+/// Facade class that wraps around all of the create classes for MainWindow. We derive from QObject and
+/// use Q_OBJECT so translations work
 class CreateFacade : public QObject
 {
+  Q_OBJECT
+
 public:
   /// Single constructor.
   CreateFacade();

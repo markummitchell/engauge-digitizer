@@ -131,8 +131,8 @@ public:
   void transformScreenToRawGraph (const QPointF &coordScreen,
                                   QPointF &coordGraph) const;
 
-  /// Update transform by iterating through the axis points. Returns true if there was any change
-  bool update (bool fileIsLoaded,
+  /// Update transform by iterating through the axis points
+  void update (bool fileIsLoaded,
                const CmdMediator &cmdMediator,
                const MainWindowModel &modelMainWindow);
 
