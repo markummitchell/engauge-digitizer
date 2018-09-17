@@ -80,13 +80,13 @@ private:
                    int cols);
   Matrix inverseCramersRule (MatrixConsistent &matrixConsistent,
                              double epsilonThreshold) const;
-  Matrix inverseGaussianElimination (MatrixConsistent &matrixConsistent,
-                                     double epsilonThreshold) const;
+  Matrix inverseGaussianElimination (int significantDigits,
+                                     MatrixConsistent &matrixConsistent) const;
   unsigned int leadingZeros (int row) const; // Number of leading zeros in the specified zero
   void normalizeRow (int rowToNormalize,
                      int colToNormalize,
-                     MatrixConsistent &matrixConsistent,
-                     double epsilonThreshold);
+                     int significantDigits,
+                     MatrixConsistent &matrixConsistent);
   void switchRows (int row1,
                    int row2);
 
