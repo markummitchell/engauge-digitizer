@@ -29,15 +29,11 @@ LoadImageFromUrl::~LoadImageFromUrl ()
 
 void LoadImageFromUrl::deallocate ()
 {
-  if (m_reply != 0) {
-    delete m_reply;
-    m_reply = 0;
-  }
-
-  if (m_buffer != 0) {
-    delete m_buffer;
-    m_buffer = 0;
-  }
+  delete m_reply;
+  delete m_buffer;
+  
+  m_reply = 0;
+  m_buffer = 0;
 }
 
 void LoadImageFromUrl::slotFinished ()

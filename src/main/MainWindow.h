@@ -85,10 +85,31 @@ class TutorialDlg;
 class ViewPointStyle;
 class ViewSegmentFilter;
 
+extern const unsigned int MAX_RECENT_FILE_LIST_SIZE;
+
 /// Main window consisting of menu, graphics scene, status bar and optional toolbars as a Single Document Interface
 class MainWindow : public QMainWindow
 {
   Q_OBJECT
+
+  /// For simplifying this class by moving initialization to other classes
+  friend class CreateActions;
+  friend class CreateCentralWidget;
+  friend class CreateCommandStackShadow;
+  friend class CreateDockableWidgets;
+  friend class CreateFacade;
+  friend class CreateHelpWindow;
+  friend class CreateIcons;
+  friend class CreateLoadImage;
+  friend class CreateMenus;
+  friend class CreateNetwork;
+  friend class CreateScene;
+  friend class CreateSettingsDialogs;
+  friend class CreateStateContexts;
+  friend class CreateStatusBar;
+  friend class CreateToolBars;
+  friend class CreateTutorial;
+  friend class CreateZoomMaps;
 
   /// For unit testing
   friend class TestExport;
@@ -101,7 +122,10 @@ public:
   /// \param isGnuplot True if diagnostic gnuplot files are generated for math-intense sections of the code. Used for development and debugging
   /// \param isReset True to reset all settings that would otherwise be restored from the previous execution of Engauge
   /// \param isExportOnly True to export the loaded startup file and then exit
+  /// \param isExtractImageOnly True to extract the image from the loaded startup file and then exit
+  /// \param extractImageOnlyExtension File extension for extracted image for isExtractImageOnly
   /// \param loadStartupFiles Zero or more Engauge document files to load at startup. A separate instance of Engauge is created for each file
+  /// \param commandLineWithoutLoadStartupFiles Command line arguments without load startup files. Used for spawning additional processes
   /// \param parent Optional parent widget for this widget
   MainWindow(const QString &errorReportFile,
              const QString &fileCmdScriptFile,
@@ -109,7 +133,10 @@ public:
              bool isGnuplot,
              bool isReset,
              bool isExportOnly,
+             bool isExtractImageOnly,
+             const QString &extractImageOnlyExtension,
              const QStringList &loadStartupFiles,
+             const QStringList &commandLineWithoutLoadStartupFiles,
              QWidget *parent = 0);
   ~MainWindow();
 
@@ -348,30 +375,6 @@ private:
                       Qt::DockWidgetArea dockWidgetArea);
   void applyZoomFactorAfterLoad();
   virtual void closeEvent(QCloseEvent *event);
-  void createActions();
-  void createActionsDigitize ();
-  void createActionsEdit ();
-  void createActionsFile ();
-  void createActionsHelp ();
-  void createActionsSettings ();
-  void createActionsView ();
-  void createCentralWidget ();
-  void createCommandStackShadow ();
-  void createDockableWidgets ();
-  void createHelpWindow ();
-  void createIcons();
-  void createLoadImageFromUrl ();
-  void createMenus();
-  void createNetwork();
-  void createScene ();
-  void createSettingsDialogs ();
-  void createStateContextBackground();
-  void createStateContextDigitize();
-  void createStateContextTransformation();
-  void createStatusBar();
-  void createToolBars();
-  void createTutorial();
-  void createZoomMaps ();
   ZoomFactor currentZoomFactor () const;
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
   void exportAllCoordinateSystemsAfterRegressionTests();
@@ -379,13 +382,16 @@ private:
   QString exportRegressionFilenameFromInputFilename (const QString &fileName) const;
   void fileExport(const QString &fileName,
                   ExportToFile exportStrategy);
+  void fileExtractImage (const QString &fileName);
   void fileImport (const QString &fileName,
                    ImportType ImportType); /// Same steps as filePaste but with import from file
   void fileImportWithPrompts (ImportType ImportType); /// Wrapper around fileImport that adds user prompt(s)
   QString fileNameForExportOnly () const; /// File name for export-only batch mode
+  QString fileNameForExtractImageOnly () const; /// File name for extract-image-only batch mode
   void filePaste (ImportType importType); /// Same steps as fileImport but with import from clipboard
   void ghostsCreate (); /// Create the ghosts for seeing all coordinate systems at once
   void ghostsDestroy (); /// Destroy the ghosts for seeing all coordinate systems at once
+  void handlerFileExtractImage (); /// Analog to slotFileExport but for image extract. Maybe converted to slot in future
   void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
@@ -636,6 +642,9 @@ private:
   QTimer *m_timerLoadStartupFiles;
   QStringList m_loadStartupFiles;
 
+  // Command line arguments with load startup files omitted
+  QStringList m_commandLineWithoutLoadStartupFiles;
+
   // Ghosts that are created for seeing all coordinate systems at once, when there are multiple coordinate systems
   Ghosts *m_ghosts;
 
@@ -663,6 +672,10 @@ private:
 
   // Export the single dig file that was loaded in the command line, as enforced by parseCmdLine
   bool m_isExportOnly;
+
+  // Extract the image from the single dig file that was loaded in the command line, as enforced by parseCmdLine
+  bool m_isExtractImageOnly;
+  QString m_extractImageOnlyExtension;
 };
 
 #endif // MAIN_WINDOW_H

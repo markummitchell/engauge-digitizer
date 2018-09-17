@@ -29,7 +29,7 @@
 const int MINIMUM_HEIGHT = 500;
 
 DlgSettingsCurveAddRemove::DlgSettingsCurveAddRemove(MainWindow &mainWindow) :
-  DlgSettingsAbstractBase (tr ("Curve Add/Remove"),
+  DlgSettingsAbstractBase (tr ("Curve List"),
                            "DlgSettingsCurveAddRemove",
                            mainWindow),
   m_curveNameList (0)
@@ -86,7 +86,7 @@ void DlgSettingsCurveAddRemove::createListCurves (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveAddRemove::createListCurves";
 
-  QLabel *label = new QLabel (tr ("Curve Names:"));
+  QLabel *label = new QLabel (QString ("%1:").arg (tr ("Curve Names")));
   layout->addWidget (label, row++, 1);
 
   // There is no Qt::ItemIsEditable flag for QListView, so instead we set that flag for the QListViewItems

@@ -1,4 +1,5 @@
 engauge-digitizer.cygport
+engauge-digitizer-*.i686
 engauge-digitizer-*.x86_64
 v*.tar.gz
 *.tmp

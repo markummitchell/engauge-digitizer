@@ -62,7 +62,7 @@ void DlgSettingsGridDisplay::createDisplayCommon (QGridLayout *layout, int &row)
   m_labelLimitWarning->setStyleSheet ("QLabel { color: red; }");
   layoutCommon->addWidget (m_labelLimitWarning, rowCommon++, 0, 1, 4, Qt::AlignCenter);
 
-  QLabel *labelColor = new QLabel (tr ("Color:"));
+  QLabel *labelColor = new QLabel (QString ("%1:").arg (tr ("Color")));
   layoutCommon->addWidget (labelColor, rowCommon, 1);
 
   m_cmbColor = new QComboBox;
@@ -88,7 +88,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesX (QGridLayout *layout, int &
   QGridLayout *layoutGroup = new QGridLayout;
   m_groupX->setLayout (layoutGroup);
 
-  QLabel *labelDisable = new QLabel (tr ("Disable:"));
+  QLabel *labelDisable = new QLabel (QString ("%1:").arg (tr ("Disable")));
   layoutGroup->addWidget (labelDisable, 0, 0);
 
   m_cmbDisableX = new QComboBox;
@@ -107,7 +107,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesX (QGridLayout *layout, int &
   connect (m_cmbDisableX, SIGNAL (activated (const QString &)), this, SLOT (slotDisableX (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbDisableX, 0, 1);
 
-  QLabel *labelCount = new QLabel (tr ("Count:"));
+  QLabel *labelCount = new QLabel (QString ("%1:").arg (tr ("Count")));
   layoutGroup->addWidget (labelCount, 1, 0);
 
   m_editCountX = new QLineEdit;
@@ -120,7 +120,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesX (QGridLayout *layout, int &
   connect (m_editCountX, SIGNAL (textEdited (const QString &)), this, SLOT  (slotCountX (const QString &)));
   layoutGroup->addWidget (m_editCountX, 1, 1);
 
-  QLabel *labelStart = new QLabel (tr ("Start:"));
+  QLabel *labelStart = new QLabel (QString ("%1:").arg (tr ("Start")));
   layoutGroup->addWidget (labelStart, 2, 0);
 
   m_editStartX = new QLineEdit;
@@ -131,7 +131,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesX (QGridLayout *layout, int &
   connect (m_editStartX, SIGNAL (textEdited (const QString &)), this, SLOT  (slotStartX (const QString &)));
   layoutGroup->addWidget (m_editStartX, 2, 1);
 
-  QLabel *labelStep = new QLabel (tr ("Step:"));
+  QLabel *labelStep = new QLabel (QString ("%1:").arg (tr ("Step")));
   layoutGroup->addWidget (labelStep, 3, 0);
 
   m_editStepX = new QLineEdit;
@@ -142,7 +142,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesX (QGridLayout *layout, int &
   connect (m_editStepX, SIGNAL (textEdited (const QString &)), this, SLOT  (slotStepX (const QString &)));
   layoutGroup->addWidget (m_editStepX, 3, 1);
 
-  QLabel *labelStop = new QLabel (tr ("Stop:"));
+  QLabel *labelStop = new QLabel (QString ("%1:").arg (tr ("Stop")));
   layoutGroup->addWidget (labelStop, 4, 0);
 
   m_editStopX = new QLineEdit;
@@ -164,7 +164,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesY (QGridLayout *layout, int &
   QGridLayout *layoutGroup = new QGridLayout;
   m_groupY->setLayout (layoutGroup);
 
-  QLabel *labelDisable = new QLabel (tr ("Disable:"));
+  QLabel *labelDisable = new QLabel (QString ("%1:").arg (tr ("Disable")));
   layoutGroup->addWidget (labelDisable, 0, 0);
 
   m_cmbDisableY = new QComboBox;
@@ -183,7 +183,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesY (QGridLayout *layout, int &
   connect (m_cmbDisableY, SIGNAL (activated (const QString &)), this, SLOT (slotDisableY (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbDisableY, 0, 1);
 
-  QLabel *labelCount = new QLabel (tr ("Count:"));
+  QLabel *labelCount = new QLabel (QString ("%1:").arg (tr ("Count")));
   layoutGroup->addWidget (labelCount, 1, 0);
 
   m_editCountY = new QLineEdit;
@@ -196,7 +196,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesY (QGridLayout *layout, int &
   connect (m_editCountY, SIGNAL (textEdited (const QString &)), this, SLOT  (slotCountY (const QString &)));
   layoutGroup->addWidget (m_editCountY, 1, 1);
 
-  QLabel *labelStart = new QLabel (tr ("Start:"));
+  QLabel *labelStart = new QLabel (QString ("%1:").arg (tr ("Start")));
   layoutGroup->addWidget (labelStart, 2, 0);
 
   m_editStartY = new QLineEdit;
@@ -207,7 +207,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesY (QGridLayout *layout, int &
   connect (m_editStartY, SIGNAL (textEdited (const QString &)), this, SLOT  (slotStartY (const QString &)));
   layoutGroup->addWidget (m_editStartY, 2, 1);
 
-  QLabel *labelStep = new QLabel (tr ("Step:"));
+  QLabel *labelStep = new QLabel (QString ("%1:").arg (tr ("Step")));
   layoutGroup->addWidget (labelStep, 3, 0);
 
   m_editStepY = new QLineEdit;
@@ -218,7 +218,7 @@ void DlgSettingsGridDisplay::createDisplayGridLinesY (QGridLayout *layout, int &
   connect (m_editStepY, SIGNAL (textEdited (const QString &)), this, SLOT  (slotStepY (const QString &)));
   layoutGroup->addWidget (m_editStepY, 3, 1);
 
-  QLabel *labelStop = new QLabel (tr ("Stop:"));
+  QLabel *labelStop = new QLabel (QString ("%1:").arg (tr ("Stop")));
   layoutGroup->addWidget (labelStop, 4, 0);
 
   m_editStopY = new QLineEdit;
@@ -298,12 +298,8 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelGridDisplayBefore != 0) {
-    delete m_modelGridDisplayBefore;
-  }
-  if (m_modelGridDisplayAfter != 0) {
-    delete m_modelGridDisplayAfter;
-  }
+  delete m_modelGridDisplayBefore;
+  delete m_modelGridDisplayAfter;
 
   // Display cartesian or polar headers as appropriate
   QString titleX = tr ("X Grid Lines");

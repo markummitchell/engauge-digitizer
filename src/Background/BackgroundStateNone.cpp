@@ -41,7 +41,8 @@ void BackgroundStateNone::fitInView (GraphicsView &view)
   view.fitInView (imageItem ().boundingRect());
 }
 
-void BackgroundStateNone::setCurveSelected (const Transformation & /* transformation */,
+void BackgroundStateNone::setCurveSelected (bool /* isGnuplot */,
+                                            const Transformation & /* transformation */,
                                             const DocumentModelGridRemoval & /* modelGridRemoval */,
                                             const DocumentModelColorFilter & /* modelColorFilter */,
                                             const QString & /* curveSelected */)
@@ -49,7 +50,8 @@ void BackgroundStateNone::setCurveSelected (const Transformation & /* transforma
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateNone::setCurveSelected";
 }
 
-void BackgroundStateNone::setPixmap (const Transformation & /* transformation */,
+void BackgroundStateNone::setPixmap (bool /* isGnuplot */,
+                                     const Transformation & /* transformation */,
                                      const DocumentModelGridRemoval & /* modelGridRemoval */,
                                      const DocumentModelColorFilter & /* modelColorFilter */,
                                      const QPixmap &pixmapOriginal,
@@ -69,7 +71,8 @@ QString BackgroundStateNone::state () const
   return "BackgroundStateNone";
 }
 
-void BackgroundStateNone::updateColorFilter (const Transformation & /* transformation */,
+void BackgroundStateNone::updateColorFilter (bool /* isGnuplot */,
+                                             const Transformation & /* transformation */,
                                              const DocumentModelGridRemoval & /* modelGridRemoval */,
                                              const DocumentModelColorFilter & /* modelColorFilter */,
                                              const QString & /* curveSelected */)

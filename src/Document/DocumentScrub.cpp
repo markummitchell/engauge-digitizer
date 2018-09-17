@@ -38,7 +38,7 @@ void DocumentScrub::check (MainWindow &mainWindow,
                            engaugeWindowTitle (),
                            QString ("%1: %2")
                            .arg (QObject::tr ("Point identifier error encountered. Please notify the Engauge "
-                                              "developers along with any comments about the country and langauge locale. "
+                                              "developers along with any comments about the country and language locale. "
                                               "The invalid point name was"))
                            .arg (ftor.badPointName ().replace (POINT_IDENTIFIER_DELIMITER_SAFE, "<tab>")));
     exit (-1);

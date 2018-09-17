@@ -7,20 +7,35 @@
 #  git push origin vX.Y"
 
 show_usage_and_quit() {
-    echo "Usage: build_version <versiontag>"
+    echo "Usage: build_version <versiontag> <32|64>"
     echo "where versiontag has the format #.# or #.#.#"
     exit
 }
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 2 ]; then
     show_usage_and_quit
 fi
 
 # Version number format is documented in show_usage_and_quit
 VERSION=$1
+BITS=$2
+BITSARG=--$BITS
+
+if [[ ! $VERSION =~ ^[0-9]+\.[0-9]+$ ]]; then
+    show_usage_and_quit
+fi
+if [[ ! $BITSARG =~ ^(--32|--64)$ ]]; then
+    show_usage_and_quit
+fi
 
 echo "Cleaning old build directory"
-rm -rf 'engauge-digitizer-'"$VERSION"'-1.x86_64' 2>/dev/null
+if [ $BITS == "32" ]; then
+    TARGETDIR='engauge-digitizer-'"$VERSION"'-1.i686'
+else
+    TARGETDIR='engauge-digitizer-'"$VERSION"'-1.x86_64'
+fi
+rm -rf $TARGETDIR 2>/dev/null
+
 echo
 
 # Cygport file must have the format <package name>.cygport
@@ -33,14 +48,20 @@ echo
 
 #DEBUG=--debug
 
-cygport $DEBUG $CYGFILE download 2>&1 | tee build_version.log
-cygport $DEBUG $CYGFILE prep     2>&1 | tee -a build_version.log
-cygport $DEBUG $CYGFILE compile  2>&1 | tee -a build_version.log
-cygport $DEBUG $CYGFILE install  2>&1 | tee -a build_version.log
-cygport $DEBUG $CYGFILE package  2>&1 | tee -a build_version.log
+cygport $DEBUG $BITSARG $CYGFILE download 2>&1 | tee build_version.log
+cygport $DEBUG $BITSARG $CYGFILE prep     2>&1 | tee -a build_version.log
+cygport $DEBUG $BITSARG $CYGFILE compile  2>&1 | tee -a build_version.log
+cygport $DEBUG $BITSARG $CYGFILE install  2>&1 | tee -a build_version.log
+cygport $DEBUG $BITSARG $CYGFILE package  2>&1 | tee -a build_version.log
 
 echo "Output was logged to build_version.log"
 
-echo "After testing, then upload according to https://cygwin.com/package-upload.html#uploading-files"
+# Upload steps are documented at https://cygwin.com/package-upload.html#uploading-files
+echo "For convenience, the upload is done by this script before testing"
+cygport $BITSARG engauge-digitizer.cygport up
 
-echo "After uploading, release according to https://cygwin.com/packaging-contributors-guide.html#acceptance"
+echo "Test using the following steps:"
+echo "  cd $TARGETDIR/inst/usr/bin/"
+echo "  ./engauge-digitizer.exe"
+
+echo "After uploading and testing both 32 and 64 bit releases, release according to https://cygwin.com/packaging-contributors-guide.html#acceptance"

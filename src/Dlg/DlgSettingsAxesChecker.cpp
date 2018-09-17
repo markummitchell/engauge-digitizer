@@ -92,7 +92,7 @@ void DlgSettingsAxesChecker::createControls (QGridLayout *layout,
   m_groupMode->addButton (m_btnForever);
   connect (m_groupMode, SIGNAL (buttonReleased (QAbstractButton*)), this, SLOT (slotGroupMode (QAbstractButton*)));
 
-  QLabel *labelLineColor = new QLabel (tr ("Line color:"));
+  QLabel *labelLineColor = new QLabel (QString ("%1:").arg (tr ("Line color")));
   layout->addWidget (labelLineColor, row, 1);
 
   m_cmbLineColor = new QComboBox;
@@ -207,15 +207,9 @@ void DlgSettingsAxesChecker::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelAxesCheckerBefore != 0) {
-    delete m_modelAxesCheckerBefore;
-  }
-  if (m_modelAxesCheckerAfter != 0) {
-    delete m_modelAxesCheckerAfter;
-  }
-  if (m_modelCoords != 0) {
-    delete m_modelCoords;
-  }
+  delete m_modelAxesCheckerBefore;
+  delete m_modelAxesCheckerAfter;
+  delete m_modelCoords;
 
   // Save new data
   m_modelAxesCheckerBefore = new DocumentModelAxesChecker (cmdMediator.document());

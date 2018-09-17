@@ -24,7 +24,8 @@ public:
   TransformationStateDefined(TransformationStateContext &context,
                              QGraphicsScene &scene);
 
-  virtual void begin(CmdMediator &cmdMediator,
+  virtual void begin(bool isGnuplot,
+                     CmdMediator &cmdMediator,
                      const Transformation &transformation,
                      const QString &selectedGraphCurve);
   virtual void end(CmdMediator &cmdMediator,
@@ -40,7 +41,8 @@ private:
 
   void initializeModelGridDisplay (CmdMediator &cmdMediator,
                                    const Transformation &transformation);
-  void initializeModelGridRemoval (CmdMediator &cmdMediator,
+  void initializeModelGridRemoval (bool isGnuplot,
+                                   CmdMediator &cmdMediator,
                                    const Transformation &transformation,
                                    const QString &selectedGraphCurve);
   void startTimer (const DocumentModelAxesChecker &modelAxesChecker);

@@ -60,9 +60,6 @@ mkdir -p $IMAGEDIR
 mkdir -p $PLATFORMSDIR
 mkdir -p $SQLDIR
 
-echo "***Copying executable"
-cp $FROMEXE $STAGINGDIR
-
 echo "***Copying help input files"
 cp $FROMQCH $STAGINGDIR/documentation
 cp $FROMQHC $STAGINGDIR/documentation
@@ -75,45 +72,48 @@ lrelease ../../engauge.pro
 mv ../../translations/*.qm $TRANSLATIONSDIR
 
 echo "***Copying libraries"
-cp /lib/ld-linux.so.2                                                $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqgif.so       $IMAGEDIR
-cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqico.so       $IMAGEDIR
-cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqjpeg.so      $IMAGEDIR
-cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqmng.so       $IMAGEDIR
-cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqsvg.so       $IMAGEDIR
-cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqtga.so       $IMAGEDIR
-cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqtiff.so      $IMAGEDIR
-cp /usr/lib/i386-linux-gnu/qt5/plugins/imageformats/libqwbmp.so      $IMAGEDIR
-cp /usr/lib/i386-linux-gnu/libxcb-image.so.0                         $PLATFORMSDIR
-cp /usr/lib/i386-linux-gnu/libxcb-icccm.so.4                         $PLATFORMSDIR
-cp /usr/lib/i386-linux-gnu/libxcb-render-util.so.0                   $PLATFORMSDIR
-cp /usr/lib/i386-linux-gnu/libxcb-sync.so.1                          $PLATFORMSDIR
-cp /usr/lib/i386-linux-gnu/libxcb-xkb.so.1                           $PLATFORMSDIR
-cp /usr/lib/i386-linux-gnu/libxkbcommon-x11.so.0                     $PLATFORMSDIR
-cp /usr/lib/i386-linux-gnu/libxkbcommon.so.0                         $PLATFORMSDIR
-cp /usr/lib/i386-linux-gnu/qt5/plugins/platforms/libqxcb.so          $PLATFORMSDIR
-cp /usr/lib/i386-linux-gnu/libfftw3.so.3           $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libicudata.so.52        $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libicui18n.so.52        $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libicuuc.so.52          $STAGINGDIR
+cp /lib/ld-linux.so.2                                           $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/plugins/imageformats/libqgif.so       $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc/plugins/imageformats/libqicns.so      $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc/plugins/imageformats/libqico.so       $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc/plugins/imageformats/libqjp2.so       $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc/plugins/imageformats/libqjpeg.so      $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc/plugins/imageformats/libqsvg.so       $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc/plugins/imageformats/libqtga.so       $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc/plugins/imageformats/libqtiff.so      $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc/plugins/imageformats/libqwbmp.so      $IMAGEDIR
+cp $HOME/Qt5.8/5.8/gcc/plugins/imageformats/libqwebp.so      $IMAGEDIR
+cp /usr/lib/i386-linux-gnu/libxcb-image.so.0                  $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/libxcb-icccm.so.4                  $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/libxcb-render-util.so.0            $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/libxcb-sync.so.1                   $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/libxcb-xkb.so.1                    $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/libxkbcommon-x11.so.0              $PLATFORMSDIR
+cp /usr/lib/i386-linux-gnu/libxkbcommon.so.0                  $PLATFORMSDIR
+cp $HOME/Qt5.8/5.8/gcc/plugins/platforms/libqxcb.so          $PLATFORMSDIR
+cp $FFTW_HOME/lib/libfftw3.so.3                       $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libicudata.so.54        $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libicui18n.so.54        $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libicuuc.so.54          $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libQt5XcbQpa.so.5       $STAGINGDIR
+cp /usr/lib/i386-linux-gnu/libGL.so.1              $STAGINGDIR
 cp $POPPLER_LIB/libpoppler.so                      $STAGINGDIR
-cp $POPPLER_LIB/libpoppler.so.61                   $STAGINGDIR
+cp $POPPLER_LIB/libpoppler.so.66                   $STAGINGDIR
 cp $POPPLER_LIB/libpoppler-cpp.so                  $STAGINGDIR
-cp $POPPLER_LIB/libpoppler-cpp.so.0                $STAGINGDIR
 cp $POPPLER_LIB/libpoppler-qt5.so                  $STAGINGDIR
 cp $POPPLER_LIB/libpoppler-qt5.so.1                $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libQt5CLucene.so.5      $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libQt5Core.so.5         $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libQt5DBus.so.5         $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libQt5Gui.so.5          $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libQt5Help.so.5         $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libQt5Network.so.5      $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libQt5PrintSupport.so.5 $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libQt5Sql.so.5          $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libQt5Svg.so.5          $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libQt5Widgets.so.5      $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/libQt5Xml.so.5          $STAGINGDIR
-cp /usr/lib/i386-linux-gnu/qt5/plugins/sqldrivers/libqsqlite.so $SQLDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libQt5CLucene.so.5      $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libQt5Core.so.5         $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libQt5DBus.so.5         $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libQt5Gui.so.5          $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libQt5Help.so.5         $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libQt5Network.so.5      $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libQt5PrintSupport.so.5 $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libQt5Sql.so.5          $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libQt5Svg.so.5          $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libQt5Widgets.so.5      $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/lib/libQt5Xml.so.5          $STAGINGDIR
+cp $HOME/Qt5.8/5.8/gcc/plugins/sqldrivers/libqsqlite.so $SQLDIR
 
 echo "***Rebuilding release executable" &&
 export ENGAUGE_RELEASE=1 &&
@@ -122,6 +122,9 @@ qmake engauge.pro CONFIG+=pdf CONFIG+=log4cpp_null &&
 make clean &&
 make &&
 cd dev/linux
+
+echo "***Copying executable"
+cp $FROMEXE $STAGINGDIR
 
 echo "***Compiling installer"
 cp startup_script.run $STAGINGDIR

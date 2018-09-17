@@ -22,7 +22,8 @@ class FilterImage
   FilterImage();
 
   /// Filter original unfiltered image into filtered pixmap
-  QPixmap filter (const QImage &imageUnfiltered,
+  QPixmap filter (bool isGnuplot,
+                  const QImage &imageUnfiltered,
                   const Transformation &transformation,
                   const QString &curveSelected,
                   const DocumentModelColorFilter &modelColorFilter,

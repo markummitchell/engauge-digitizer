@@ -125,7 +125,7 @@ void FittingWindow::createWidgets (MainWindow *mainWindow)
   int row = 0;
 
   // Order row
-  QLabel *labelOrder = new QLabel (tr ("Order:"));
+  QLabel *labelOrder = new QLabel (QString ("%1:").arg (tr ("Order")));
   layout->addWidget (labelOrder, row, 0, 1, 1);
 
   m_cmbOrder = new QComboBox;
@@ -150,7 +150,7 @@ void FittingWindow::createWidgets (MainWindow *mainWindow)
   layout->addWidget (m_view, row++, 0, 1, 2);
 
   // Statistics rows
-  QLabel *lblMeanSquareError = new QLabel (tr ("Mean square error:"));
+  QLabel *lblMeanSquareError = new QLabel (QString ("%1:").arg (tr ("Mean square error")));
   layout->addWidget (lblMeanSquareError, row, 0, 1, 1);
 
   m_lblMeanSquareError = new QLineEdit;
@@ -158,7 +158,7 @@ void FittingWindow::createWidgets (MainWindow *mainWindow)
   m_lblMeanSquareError->setWhatsThis (tr ("Calculated mean square error statistic"));
   layout->addWidget (m_lblMeanSquareError, row++, 1, 1, 1);
 
-  QLabel *lblRootMeanSquare = new QLabel (tr ("Root mean square:"));
+  QLabel *lblRootMeanSquare = new QLabel (QString ("%1:").arg (tr ("Root mean square")));
   layout->addWidget (lblRootMeanSquare, row, 0, 1, 1);
 
   m_lblRootMeanSquare = new QLineEdit;
@@ -166,7 +166,7 @@ void FittingWindow::createWidgets (MainWindow *mainWindow)
   m_lblRootMeanSquare->setWhatsThis (tr ("Calculated root mean square statistic. This is calculated as the square root of the mean square error"));
   layout->addWidget (m_lblRootMeanSquare, row++, 1, 1, 1);
 
-  QLabel *lblRSquared = new QLabel (tr ("R squared:"));
+  QLabel *lblRSquared = new QLabel (QString ("%1:").arg (tr ("R squared")));
   layout->addWidget (lblRSquared, row, 0, 1, 1);
 
   m_lblRSquared = new QLineEdit;

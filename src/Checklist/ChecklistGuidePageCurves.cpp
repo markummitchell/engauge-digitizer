@@ -22,7 +22,8 @@ ChecklistGuidePageCurves::ChecklistGuidePageCurves(const QString &title) :
   const QString WHATS_THIS_LINES (tr ("Draw lines between points in each curve."));
   const QString WHATS_THIS_POINTS (tr ("Draw points in each curve, without lines between the points."));
 
-  addHtml (tr ("<p>What are the names of the curves that are to be digitized? At least one entry is required.</p>"));
+  addHtml (QString ("<p>%1</p>")
+           .arg (tr ("What are the names of the curves that are to be digitized? At least one entry is required.")));
 
   m_edit = new ChecklistLineEdit* [NUM_CURVE_NAMES()];
 
@@ -41,7 +42,8 @@ ChecklistGuidePageCurves::ChecklistGuidePageCurves(const QString &title) :
 
   addHtml ("<p>&nbsp;</p>");
 
-  addHtml (tr ("<p>How are those curves drawn?</p>"));
+  addHtml (QString ("<p>%1</p>")
+           .arg (tr ("How are those curves drawn?")));
 
   m_btnLines = addLabelAndRadioButton (tr ("With lines (with or without points)"),
                                        WHATS_THIS_LINES);

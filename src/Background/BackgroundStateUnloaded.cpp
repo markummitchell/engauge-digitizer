@@ -35,7 +35,8 @@ void BackgroundStateUnloaded::fitInView (GraphicsView & /* view */)
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::fitInView";
 }
 
-void BackgroundStateUnloaded::setCurveSelected (const Transformation & /* transformation */,
+void BackgroundStateUnloaded::setCurveSelected (bool /* isGnuplot */,
+                                                const Transformation & /* transformation */,
                                                 const DocumentModelGridRemoval & /* modelGridRemoval */,
                                                 const DocumentModelColorFilter & /* modelColorFilter */,
                                                 const QString & /* curveSelected */)
@@ -43,7 +44,8 @@ void BackgroundStateUnloaded::setCurveSelected (const Transformation & /* transf
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateUnloaded::setCurveSelected";
 }
 
-void BackgroundStateUnloaded::setPixmap (const Transformation & /* transformation */,
+void BackgroundStateUnloaded::setPixmap (bool /* isGnuplot */,
+                                         const Transformation & /* transformation */,
                                          const DocumentModelGridRemoval & /* modelGridRemoval */,
                                          const DocumentModelColorFilter & /* modelColorFilter */,
                                          const QPixmap & /* pixmap */,
@@ -59,7 +61,8 @@ QString BackgroundStateUnloaded::state () const
   return "BackgroundStateUnloaded";
 }
 
-void BackgroundStateUnloaded::updateColorFilter (const Transformation & /* transformation */,
+void BackgroundStateUnloaded::updateColorFilter (bool /* isGnuplot */,
+                                                 const Transformation & /* transformation */,
                                                  const DocumentModelGridRemoval & /* modelGridRemoval */,
                                                  const DocumentModelColorFilter & /* modelColorFilter */,
                                                  const QString & /* curveSelected */)

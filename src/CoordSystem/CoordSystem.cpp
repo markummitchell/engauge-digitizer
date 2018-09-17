@@ -885,10 +885,7 @@ void CoordSystem::setCurveAxes (const Curve &curveAxes)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystem::setCurveAxes";
 
-  if (m_curveAxes != 0) {
-    delete m_curveAxes;
-    m_curveAxes = 0;
-  }
+  delete m_curveAxes;
 
   m_curveAxes = new Curve (curveAxes);
 }

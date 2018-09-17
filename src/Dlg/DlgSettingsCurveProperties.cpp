@@ -85,7 +85,7 @@ void DlgSettingsCurveProperties::createCurveName (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::createCurveName";
 
-  QLabel *labelCurveName = new QLabel (tr ("Curve Name:"));
+  QLabel *labelCurveName = new QLabel (QString ("%1:").arg (tr ("Curve Name")));
   layout->addWidget (labelCurveName, row, 1);
 
   m_cmbCurveName = new QComboBox ();
@@ -105,7 +105,7 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
   QGridLayout *layoutGroup = new QGridLayout;
   m_groupLine->setLayout (layoutGroup);
 
-  QLabel *labelLineWidth = new QLabel (tr ("Width:"));
+  QLabel *labelLineWidth = new QLabel (QString ("%1:").arg (tr ("Width")));
   layoutGroup->addWidget (labelLineWidth, 0, 0);
 
   m_spinLineWidth = new QSpinBox (m_groupLine);
@@ -115,7 +115,7 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
   connect (m_spinLineWidth, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidth (int)));
   layoutGroup->addWidget (m_spinLineWidth, 0, 1);
 
-  QLabel *labelLineColor = new QLabel (tr ("Color:"));
+  QLabel *labelLineColor = new QLabel (QString ("%1:").arg (tr ("Color")));
   layoutGroup->addWidget (labelLineColor, 1, 0);
 
   m_cmbLineColor = new QComboBox (m_groupLine);
@@ -125,7 +125,7 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
   connect (m_cmbLineColor, SIGNAL (activated (const QString &)), this, SLOT (slotLineColor (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbLineColor, 1, 1);
 
-  QLabel *labelLineType = new QLabel (tr ("Connect as:"));
+  QLabel *labelLineType = new QLabel (QString ("%1:").arg (tr ("Connect as")));
   layoutGroup->addWidget (labelLineType, 2, 0);
 
   m_cmbLineType = new QComboBox (m_groupLine);
@@ -159,7 +159,7 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
   QGridLayout *layoutGroup = new QGridLayout;
   m_groupPoint->setLayout (layoutGroup);
 
-  QLabel *labelPointShape = new QLabel(tr ("Shape:"));
+  QLabel *labelPointShape = new QLabel(QString ("%1:").arg (tr ("Shape")));
   layoutGroup->addWidget (labelPointShape, 0, 0);
 
   m_cmbPointShape = new QComboBox (m_groupPoint);
@@ -179,7 +179,7 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
   connect (m_cmbPointShape, SIGNAL (activated (const QString &)), this, SLOT (slotPointShape (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbPointShape, 0, 1);
 
-  QLabel *labelPointRadius = new QLabel (tr ("Radius:"));
+  QLabel *labelPointRadius = new QLabel (QString ("%1:").arg (tr ("Radius")));
   layoutGroup->addWidget (labelPointRadius, 1, 0);
 
   m_spinPointRadius = new QSpinBox (m_groupPoint);
@@ -188,7 +188,7 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
   connect (m_spinPointRadius, SIGNAL (valueChanged (int)), this, SLOT (slotPointRadius (int)));
   layoutGroup->addWidget (m_spinPointRadius, 1, 1);
 
-  QLabel *labelPointLineWidth = new QLabel (tr ("Line width:"));
+  QLabel *labelPointLineWidth = new QLabel (QString ("%1:").arg (tr ("Line width")));
   layoutGroup->addWidget (labelPointLineWidth, 2, 0);
 
   m_spinPointLineWidth = new QSpinBox (m_groupPoint);
@@ -200,7 +200,7 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
   connect (m_spinPointLineWidth, SIGNAL (valueChanged (int)), this, SLOT (slotPointLineWidth (int)));
   layoutGroup->addWidget (m_spinPointLineWidth, 2, 1);
 
-  QLabel *labelPointColor = new QLabel (tr ("Color:"));
+  QLabel *labelPointColor = new QLabel (QString ("%1:").arg (tr ("Color")));
   layoutGroup->addWidget (labelPointColor, 3, 0);
 
   m_cmbPointColor = new QComboBox (m_groupPoint);
@@ -381,12 +381,8 @@ void DlgSettingsCurveProperties::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelCurveStylesBefore != 0) {
-    delete m_modelCurveStylesBefore;
-  }
-  if (m_modelCurveStylesAfter != 0) {
-    delete m_modelCurveStylesAfter;
-  }
+  delete m_modelCurveStylesBefore;
+  delete m_modelCurveStylesAfter;
 
   // Save new data
   m_modelCurveStylesBefore = new CurveStyles (cmdMediator.coordSystem());

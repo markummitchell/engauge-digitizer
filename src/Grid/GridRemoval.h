@@ -7,20 +7,25 @@
 #ifndef GRID_REMOVAL_H
 #define GRID_REMOVAL_H
 
+#include "GridLog.h"
+#include <QList>
 #include <QPixmap>
 #include <QPointF>
 
 class DocumentModelGridRemoval;
-class GridHealer;
+class GridHealerAbstractBase;
 class QImage;
 class Transformation;
+
+/// Storage of GridHealer instances
+typedef QList<GridHealerAbstractBase*> GridHealers;
 
 /// Strategy class for grid removal
 class GridRemoval
 {
  public:
   /// Single constructor
-  GridRemoval();
+  GridRemoval(bool isGnuplot);
 
   /// Process QImage into QPixmap, removing the grid lines
   QPixmap remove (const Transformation &transformation,
@@ -28,6 +33,7 @@ class GridRemoval
                   const QImage &imageBefore);
 
 private:
+  GridRemoval();
 
   /// Clip line by projecting posUnprojected point onto x=xBoundary boundary. Line must pass over the boundary
   QPointF clipX (const QPointF &posUnprojected,
@@ -42,7 +48,10 @@ private:
   void removeLine (const QPointF &pos1,
                    const QPointF &pos2,
                    QImage &image,
-                   GridHealer &gridHealer);
+                   const DocumentModelGridRemoval &modelGridRemoval,
+                   GridHealers &gridHealers);
+
+  GridLog m_gridLog;
 };
 
 #endif // GRID_REMOVAL_H

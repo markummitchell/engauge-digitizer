@@ -211,7 +211,7 @@ void DlgSettingsCoords::createDateTime (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createDateTime";
 
-  QLabel *label = new QLabel(tr ("Date/Time:"));
+  QLabel *label = new QLabel(QString ("%1:").arg (tr ("Date/Time")));
   layout->addWidget (label, row, 1);
 
   QWidget *widgetCombos = new QWidget;
@@ -273,7 +273,7 @@ void DlgSettingsCoords::createGroupXTheta (QGridLayout *layout,
   m_boxXTheta->setLayout (layoutXTheta);
   int rowGroup = 0;
 
-  QLabel *labelScale = new QLabel (tr ("Scale:"));
+  QLabel *labelScale = new QLabel (QString ("%1:").arg (tr ("Scale")));
   layoutXTheta->addWidget (labelScale, rowGroup++, COLUMN_0);
 
   m_xThetaLinear = new QRadioButton (tr ("Linear"), m_boxXTheta);
@@ -288,7 +288,7 @@ void DlgSettingsCoords::createGroupXTheta (QGridLayout *layout,
   connect (m_xThetaLog, SIGNAL (released ()), this, SLOT (slotXThetaLog()));
   layoutXTheta->addWidget (m_xThetaLog, rowGroup++, COLUMN_0);
 
-  QLabel *labelThetaUnits = new QLabel(tr ("Units:"));
+  QLabel *labelThetaUnits = new QLabel(QString ("%1:").arg (tr ("Units")));
   layoutXTheta->addWidget (labelThetaUnits, rowGroup++, COLUMN_0);
 
   m_cmbXThetaUnits = new QComboBox;
@@ -308,7 +308,7 @@ void DlgSettingsCoords::createGroupYRadius (QGridLayout *layout,
   m_boxYRadius->setLayout (layoutYRadius);
   int rowGroup = 0;
 
-  QLabel *labelScale = new QLabel (tr ("Scale:"));
+  QLabel *labelScale = new QLabel (QString ("%1:").arg (tr ("Scale")));
   layoutYRadius->addWidget (labelScale, rowGroup++, COLUMN_0);
 
   m_yRadiusLinear = new QRadioButton (tr ("Linear"), m_boxYRadius);
@@ -316,7 +316,7 @@ void DlgSettingsCoords::createGroupYRadius (QGridLayout *layout,
   connect (m_yRadiusLinear, SIGNAL(released()), this, SLOT (slotYRadiusLinear()));
   layoutYRadius->addWidget (m_yRadiusLinear, rowGroup, COLUMN_0);
 
-  QLabel *labelOriginRadius = new QLabel(tr ("Origin radius value:"));
+  QLabel *labelOriginRadius = new QLabel(QString ("%1:").arg (tr ("Origin radius value")));
   layoutYRadius->addWidget (labelOriginRadius, rowGroup++, COLUMN_1);
 
   m_yRadiusLog = new QRadioButton (tr ("Log"), m_boxYRadius);
@@ -333,7 +333,7 @@ void DlgSettingsCoords::createGroupYRadius (QGridLayout *layout,
   connect (m_editOriginRadius, SIGNAL (textChanged (const QString &)), this, SLOT (slotPolarOriginRadius(const QString &)));
   layoutYRadius->addWidget (m_editOriginRadius, rowGroup++, COLUMN_1);
 
-  QLabel *labelUnits = new QLabel(tr ("Units:"));
+  QLabel *labelUnits = new QLabel(QString ("%1:").arg (tr ("Units")));
   layoutYRadius->addWidget (labelUnits, rowGroup++, COLUMN_0);
   
   m_cmbYRadiusUnits = new QComboBox;
@@ -567,12 +567,8 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
   m_yRadiusLog->setEnabled (!yRGoesNegative);
 
   // Flush old data
-  if (m_modelCoordsBefore != 0) {
-    delete m_modelCoordsBefore;
-  }
-  if (m_modelCoordsAfter != 0) {
-    delete m_modelCoordsAfter;
-  }
+  delete m_modelCoordsBefore;
+  delete m_modelCoordsAfter;
 
   // Save new data
   m_modelCoordsBefore = new DocumentModelCoords (cmdMediator.document().modelCoords());

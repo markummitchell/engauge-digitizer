@@ -10,7 +10,8 @@ QTEST_MAIN (TestFitting)
 
 using namespace std;
 
-const int SIGNIFICANT_DIGITS = 7;
+const int NOMINAL_ORDER = 6;
+const int NOMINAL_SIGNIFICANT_DIGITS = 7;
 
 TestFitting::TestFitting(QObject *parent) :
   QObject(parent)
@@ -56,7 +57,7 @@ bool TestFitting::generalFunctionTest (int order,
                                           mse,
                                           rms,
                                           rSquared,
-                                          SIGNIFICANT_DIGITS);
+                                          NOMINAL_SIGNIFICANT_DIGITS);
 
   bool success = true;
 
@@ -129,7 +130,7 @@ bool TestFitting::generalNonFunctionTest () const
                                           mse,
                                           rms,
                                           rSquared,
-                                          SIGNIFICANT_DIGITS);
+                                          NOMINAL_SIGNIFICANT_DIGITS);
 
   bool success = true;
 
@@ -157,8 +158,11 @@ void TestFitting::initTestCase ()
   const bool NO_REGRESSION_IMPORT = false;
   const bool NO_RESET = false;
   const bool NO_EXPORT_ONLY = false;
+  const bool NO_EXTRACT_IMAGE_ONLY = false;
+  const QString NO_EXTRACT_IMAGE_EXTENSION;
   const bool DEBUG_FLAG = false;
   const QStringList NO_LOAD_STARTUP_FILES;
+  const QStringList NO_COMMAND_LINE;
 
   initializeLogging ("engauge_test",
                      "engauge_test.log",
@@ -170,8 +174,41 @@ void TestFitting::initTestCase ()
                 NO_GNUPLOT_LOG_FILES,
                 NO_RESET,
                 NO_EXPORT_ONLY,
-                NO_LOAD_STARTUP_FILES);
+                NO_EXTRACT_IMAGE_ONLY,
+                NO_EXTRACT_IMAGE_EXTENSION,                
+                NO_LOAD_STARTUP_FILES,
+                NO_COMMAND_LINE);
   w.show ();
+}
+
+int TestFitting::orderReducedVersusOrderAndSignificantDigits (int order,
+                                                              int significantDigits) const
+{
+  FittingPointsConvenient points;
+  FittingCurveCoefficients coefficients (MAX_POLYNOMIAL_ORDER + 1);
+
+  // Hyperbola points
+  FittingStatistics fittingStatistics;    
+  for (double x = 1; x <= 10; x += 1) {
+    double y = 100.0 / x;
+    points.append (QPointF (x, y));
+  }
+  
+  fittingStatistics.calculateCurveFit (order,
+                                       points,
+                                       coefficients,
+                                       significantDigits);
+
+  // Find first nonzero coefficient. Two cases for 0th order are y<>0 (not all coefficients are zero)
+  // and y=0 (all coefficients are zero). In all other cases the order is the highest nonzero coefficient
+  int orderReduced;
+  for (orderReduced = MAX_POLYNOMIAL_ORDER; orderReduced > 0; orderReduced--) {
+    if (coefficients [orderReduced] != 0) {
+      return orderReduced;
+    }
+  }
+  
+  return orderReduced;
 }
 
 void TestFitting::testFunctionExactFit01 ()
@@ -237,4 +274,44 @@ void TestFitting::testFunctionUnderfit35 ()
 void TestFitting::testNonFunction ()
 {
   QVERIFY (generalNonFunctionTest ());
+}
+
+void TestFitting::testOrderReduced3 ()
+{
+  QVERIFY (orderReducedVersusOrderAndSignificantDigits (3, NOMINAL_SIGNIFICANT_DIGITS) == 3);
+}
+
+void TestFitting::testOrderReduced4 ()
+{
+  QVERIFY (orderReducedVersusOrderAndSignificantDigits (4, NOMINAL_SIGNIFICANT_DIGITS) == 4);
+}
+
+void TestFitting::testOrderReduced5 ()
+{
+  QVERIFY (orderReducedVersusOrderAndSignificantDigits (5, NOMINAL_SIGNIFICANT_DIGITS) == 5);
+}
+
+void TestFitting::testOrderReduced6 ()
+{
+  QVERIFY (orderReducedVersusOrderAndSignificantDigits (6, NOMINAL_SIGNIFICANT_DIGITS) == 6);
+}
+
+void TestFitting::testSignificantDigits3 ()
+{
+  QVERIFY (orderReducedVersusOrderAndSignificantDigits (NOMINAL_ORDER, 3) == NOMINAL_ORDER);
+}
+
+void TestFitting::testSignificantDigits4 ()
+{
+  QVERIFY (orderReducedVersusOrderAndSignificantDigits (NOMINAL_ORDER, 4) == NOMINAL_ORDER);
+}
+
+void TestFitting::testSignificantDigits5 ()
+{
+  QVERIFY (orderReducedVersusOrderAndSignificantDigits (NOMINAL_ORDER, 5) == NOMINAL_ORDER);
+}
+
+void TestFitting::testSignificantDigits6 ()
+{
+  QVERIFY (orderReducedVersusOrderAndSignificantDigits (NOMINAL_ORDER, 6) == NOMINAL_ORDER);
 }

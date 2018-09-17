@@ -80,7 +80,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::createControls";
 
-  QLabel *labelPointSize = new QLabel (tr ("Maximum point size (pixels):"));
+  QLabel *labelPointSize = new QLabel (QString ("%1:").arg (tr ("Maximum point size (pixels)")));
   layout->addWidget (labelPointSize, row, 1);
 
   m_spinPointSize = new QSpinBox;
@@ -95,7 +95,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
   connect (m_spinPointSize, SIGNAL (valueChanged (int)), this, SLOT (slotMaxPointSize (int)));
   layout->addWidget (m_spinPointSize, row++, 2);
 
-  QLabel *labelAcceptedPointColor = new QLabel (tr ("Accepted point color:"));
+  QLabel *labelAcceptedPointColor = new QLabel (QString ("%1:").arg (tr ("Accepted point color")));
   layout->addWidget (labelAcceptedPointColor, row, 1);
 
   m_cmbAcceptedPointColor = new QComboBox;
@@ -104,7 +104,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
   connect (m_cmbAcceptedPointColor, SIGNAL (activated (const QString &)), this, SLOT (slotAcceptedPointColor (const QString &))); // activated() ignores code changes
   layout->addWidget (m_cmbAcceptedPointColor, row++, 2);
 
-  QLabel *labelRejectedPointColor = new QLabel (tr ("Rejected point color:"));
+  QLabel *labelRejectedPointColor = new QLabel (QString ("%1:").arg (tr ("Rejected point color")));
   layout->addWidget (labelRejectedPointColor, row, 1);
 
   m_cmbRejectedPointColor = new QComboBox;
@@ -113,7 +113,7 @@ void DlgSettingsPointMatch::createControls (QGridLayout *layout,
   connect (m_cmbRejectedPointColor, SIGNAL (activated (const QString &)), this, SLOT (slotRejectedPointColor (const QString &))); // activated() ignores code changes
   layout->addWidget (m_cmbRejectedPointColor, row++, 2);
 
-  QLabel *labelCandidatePointColor = new QLabel (tr ("Candidate point color:"));
+  QLabel *labelCandidatePointColor = new QLabel (QString ("%1:").arg (tr ("Candidate point color")));
   layout->addWidget (labelCandidatePointColor, row, 1);
 
   m_cmbCandidatePointColor = new QComboBox;
@@ -211,12 +211,8 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelPointMatchBefore != 0) {
-    delete m_modelPointMatchBefore;
-  }
-  if (m_modelPointMatchAfter != 0) {
-    delete m_modelPointMatchAfter;
-  }
+  delete m_modelPointMatchBefore;
+  delete m_modelPointMatchAfter;
 
   // Save new data
   m_modelPointMatchBefore = new DocumentModelPointMatch (cmdMediator.document());

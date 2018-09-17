@@ -61,7 +61,8 @@ do
 		# is so small that roundoff error will give a false positive error result
 		cp $EXPECTED .expected
 		cp $actual   .actual
-		LINES=`sed -n '\|XXX|=' .expected`
+		# Transition from ubuntu 16.04 to 18.04 required addition of tr in next line to get all line numbers
+		LINES=`sed -n '\|XXX|=' .expected | tr '\n' ' '`
 		read -r -a LINEARR <<< $LINES
 		# Iterate backwards through line numbers so deletions are applied to the right lines
 		for ((idx=${#LINEARR[@]}-1; idx>=0; idx--))

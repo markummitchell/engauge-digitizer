@@ -14,30 +14,35 @@ DlgAbout::DlgAbout (MainWindow &mainWindow) :
 {
   setWindowTitle (tr ("About Engauge"));
   setTextFormat (Qt::RichText);
-  setText (QString ("%1 %2 %3 %4")
-           .arg (tr ("<p>Engauge Digitizer</p>"))
+
+  // Do not embed single quotes in the strings below since that will interfere with the translations
+  setText (QString ("<p>%1 %2 %3</p> <p>&copy; Mark Mitchell</p><p>%4</p><p>%5</p><p>%6</p><p>%7</p><p>%8:</p>"
+                    "<ul>"
+                     "<li><a href=\"https://github.com/markummitchell/engauge-digitizer\">%9</a></li>"
+                     "<li><a href=\"https://gitter.im/markummitchell/engauge-digitizer\">%10</a></li>"
+                     "</ul>"
+                     "<p>FFTW 3.X.X:</p>"
+                     "<ul>"
+                     "<li><a href=\"http://www.fftw.org\">%11</a></li>"
+                     "</ul>"
+                     "<p>OpenJPEG 2.X:</p>"
+                     "<ul>"
+                     "<li><a href=\"http://www.openjpeg.org\">%12</a></li>"
+                    "</ul>")
+           .arg (tr ("Engauge Digitizer"))
            .arg (tr ("Version"))
            .arg (VERSION_NUMBER)
-           .arg (tr ("</p><p>&copy; 2014 Mark Mitchell</p>"
-                     "<p>Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from "
-                     "images of graphs. The process may be considered as \"inverse graphing\". When you \"engauge\" a document, "
-                     "you are converting pixels into numbers.</p>"
-                     "<p>This is free software, and you are welcome to redistribute it under "
+           .arg (tr ("Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from "
+                     "images of graphs. The process may be considered as inverse graphing. When you engauge a document, "
+                     "you are converting pixels into numbers."))
+           .arg (tr ("This is free software, and you are welcome to redistribute it under "
                      "certain conditions according to the GNU General Public License Version 2,"
-                     "or (at your option) any later version.</p>"
-                     "<p>Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.</p>"
-                     "<p>Read the included LICENSE file for details.</p>"
-                     "<p>Engauge Digitizer Links<p>"
-                     "<ul>"
-                     "<li><a href='https://github.com/markummitchell/engauge-digitizer'>Project Home Page</a></li>"
-                     "<li><a href='https://gitter.im/markummitchell/engauge-digitizer'>Gitter Forum</a></li>"
-                     "</ul>"
-                     "<p>FFTW 3.X.X Links</p>"
-                     "<ul>"
-                     "<li><a href='http://www.fftw.org'>Project page</a></li>"
-                     "</ul>"
-                     "<p>OpenJPEG 2.X Links</p>"
-                     "<ul>"
-                     "<li><a href='http://www.openjpeg.org'>Project page</a></li>"
-                     "</ul>")));
+                     "or (at your option) any later version."))
+           .arg (tr ("Engauge Digitizer comes with ABSOLUTELY NO WARRANTY."))
+           .arg (tr ("Read the included LICENSE file for details."))
+           .arg (tr ("Engauge Digitizer"))
+           .arg (tr ("Project Home Page"))
+           .arg (tr ("Gitter Forum"))
+           .arg (tr ("Project Page"))
+           .arg (tr ("Project Page")));
 }

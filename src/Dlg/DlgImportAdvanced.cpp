@@ -46,7 +46,7 @@ QWidget *DlgImportAdvanced::createSubPanel ()
   int row = 0;
 
   // Coordinate system count
-  QLabel *labelCoordCount = new QLabel (tr ("Coordinate System Count:"));
+  QLabel *labelCoordCount = new QLabel (QString ("%1:").arg (tr ("Coordinate System Count")));
   layout->addWidget (labelCoordCount, row, 1);
 
   m_spinCoordSystemCount = new QSpinBox;
@@ -60,7 +60,7 @@ QWidget *DlgImportAdvanced::createSubPanel ()
   layout->addWidget (m_spinCoordSystemCount, row++, 2);
 
   // Axes point count
-  QLabel *labelPointCount = new QLabel (tr ("Graph Coordinates Definition:"));
+  QLabel *labelPointCount = new QLabel (QString ("%1:").arg (tr ("Graph Coordinates Definition")));
   layout->addWidget (labelPointCount, row, 1);
 
   m_btnAxesPointCount2 = new QRadioButton (tr ("1 scale bar - Used for maps with a scale bar defining the map scale"));

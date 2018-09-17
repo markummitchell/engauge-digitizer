@@ -6,11 +6,6 @@
 
 #include "BackgroundImage.h"
 #include "BackgroundStateContext.h"
-#include "img/bannerapp_16.xpm"
-#include "img/bannerapp_32.xpm"
-#include "img/bannerapp_64.xpm"
-#include "img/bannerapp_128.xpm"
-#include "img/bannerapp_256.xpm"
 #include "ChecklistGuide.h"
 #include "ChecklistGuideWizard.h"
 #include "CmdAddPointsGraph.h"
@@ -21,16 +16,10 @@
 #include "CmdSelectCoordSystem.h"
 #include "CmdStackShadow.h"
 #include "ColorFilter.h"
+#include "CreateFacade.h"
 #include "Curve.h"
 #include "DataKey.h"
 #include "DigitizeStateContext.h"
-#include "DigitAxis.xpm"
-#include "DigitColorPicker.xpm"
-#include "DigitCurve.xpm"
-#include "DigitPointMatch.xpm"
-#include "DigitScale.xpm"
-#include "DigitSegment.xpm"
-#include "DigitSelect.xpm"
 #include "DlgAbout.h"
 #include "DlgErrorReportLocal.h"
 #include "DlgImportAdvanced.h"
@@ -68,6 +57,7 @@
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 #include "HelpWindow.h"
 #endif
+#include "ImportImageExtensions.h"
 #ifdef ENGAUGE_JPEG2000
 #include "Jpeg2000.h"
 #endif // ENGAUGE_JPEG2000
@@ -99,14 +89,10 @@
 #include <QDomDocument>
 #include <QFileDialog>
 #include <QFileInfo>
-#include <QGraphicsLineItem>
 #include <QImageReader>
 #include <QKeyEvent>
 #include <QKeySequence>
-#include <QLabel>
 #include <qmath.h>
-#include <QMenu>
-#include <QMenuBar>
 #include <QMessageBox>
 #include <QMouseEvent>
 #include <QPrintDialog>
@@ -151,7 +137,10 @@ MainWindow::MainWindow(const QString &errorReportFile,
                        bool isGnuplot,
                        bool isReset,
                        bool isExportOnly,
+                       bool isExtractImageOnly,
+                       const QString &extractImageOnlyExtension,
                        const QStringList &loadStartupFiles,
+                       const QStringList &commandLineWithoutLoadStartupFiles,
                        QWidget *parent) :
   QMainWindow(parent),
   m_isDocumentExported (false),
@@ -167,13 +156,16 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_backgroundStateContext (0),
   m_networkClient (0),
   m_isGnuplot (isGnuplot),
+  m_commandLineWithoutLoadStartupFiles (commandLineWithoutLoadStartupFiles),
   m_ghosts (0),
   m_timerRegressionErrorReport(0),
   m_fileCmdScript (0),
   m_isErrorReportRegressionTest (isRegressionTest),
   m_timerRegressionFileCmdScript(0),
   m_fittingCurve (0),
-  m_isExportOnly (isExportOnly)
+  m_isExportOnly (isExportOnly),
+  m_isExtractImageOnly (isExtractImageOnly),
+  m_extractImageOnlyExtension (extractImageOnlyExtension)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::MainWindow"
                               << " curDir=" << QDir::currentPath().toLatin1().data();
@@ -182,35 +174,16 @@ MainWindow::MainWindow(const QString &errorReportFile,
   qApp->setApplicationName ("Engauge Digitizer");
   qApp->setOrganizationDomain ("Mark Mitchell");
 #endif
-
+ 
   LoggerUpload::bindToMainWindow(this);
 
   m_startupDirectory = QDir::currentPath();
 
   setCurrentFile ("");
-  createIcons();
-#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
-  setWindowFlags (Qt::WindowContextHelpButtonHint | windowFlags ()); // Add help to default buttons
-#endif
-  setWindowTitle (engaugeWindowTitle ());
 
-  createCentralWidget();
-  createActions ();
-  createStatusBar ();
-  createMenus ();
-  createToolBars ();
-  createDockableWidgets ();
-  createHelpWindow ();
-  createTutorial ();
-  createScene ();
-  createNetwork ();
-  createLoadImageFromUrl ();
-  createStateContextBackground ();
-  createStateContextDigitize ();
-  createStateContextTransformation ();
-  createSettingsDialogs ();
-  createCommandStackShadow ();
-  createZoomMaps ();
+  CreateFacade createFacade;
+  createFacade.create (*this);
+
   updateControls ();
 
   settingsRead (isReset); // This changes the current directory when not regression testing
@@ -224,14 +197,18 @@ MainWindow::MainWindow(const QString &errorReportFile,
   QString originalPath = QDir::currentPath();
   QDir::setCurrent (m_startupDirectory);
   if (isExportOnly) {
-    ENGAUGE_ASSERT (loadStartupFiles.size() == 1); // Enforced in parseCmdLine
     m_loadStartupFiles = loadStartupFiles;
     m_regressionFile = exportRegressionFilenameFromInputFilename (loadStartupFiles.first ()); // For regression test
     slotLoadStartupFiles ();
-    slotFileExport ();
+    slotFileExport (); // Export one file. QProcess::startDetached will be called for each remaining file
     exit (0);
-  }
-  else if (!errorReportFile.isEmpty()) {
+  } else if (isExtractImageOnly) {
+    m_loadStartupFiles = loadStartupFiles;
+    m_regressionFile = exportRegressionFilenameFromInputFilename (loadStartupFiles.first ()); // For regression test
+    slotLoadStartupFiles ();
+    handlerFileExtractImage ();  // Extract one file. QProcess::startDetached will be called for each remaining file
+    exit (0);
+  } else if (!errorReportFile.isEmpty()) {
     loadErrorReportFile(errorReportFile);
     if (m_isErrorReportRegressionTest) {
       startRegressionTestErrorReport(errorReportFile);
@@ -349,1214 +326,6 @@ CmdMediator *MainWindow::cmdMediator ()
   return m_cmdMediator;
 }
 
-void MainWindow::createActions()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActions";
-
-  createActionsFile ();
-  createActionsEdit ();
-  createActionsDigitize ();
-  createActionsView ();
-  createActionsSettings ();
-  createActionsHelp ();
-}
-
-void MainWindow::createActionsDigitize ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsDigitize";
-
-  QPixmap pixmapAxis (DigitAxis_xpm);
-  QPixmap pixmapCurve (DigitCurve_xpm);
-  QPixmap pixmapColorPicker (DigitColorPicker_xpm);
-  QPixmap pixmapPointMatch (DigitPointMatch_xpm);
-  QPixmap pixmapScale (DigitScale_xpm);
-  QPixmap pixmapSegment (DigitSegment_xpm);
-  QPixmap pixmapSelect (DigitSelect_xpm);
-
-  QIcon iconAxis (pixmapAxis);
-  QIcon iconCurve (pixmapCurve);
-  QIcon iconColorPicker (pixmapColorPicker);
-  QIcon iconPointMatch (pixmapPointMatch);
-  QIcon iconScale (pixmapScale);
-  QIcon iconSegment (pixmapSegment);
-  QIcon iconSelect (pixmapSelect);
-
-  m_actionDigitizeSelect = new QAction (iconSelect, tr ("Select Tool"), this);
-  m_actionDigitizeSelect->setShortcut (QKeySequence (tr ("Shift+F2")));
-  m_actionDigitizeSelect->setCheckable (true);
-  m_actionDigitizeSelect->setStatusTip (tr ("Select points on screen."));
-  m_actionDigitizeSelect->setWhatsThis (tr ("Select\n\n"
-                                            "Select points on the screen."));
-  connect (m_actionDigitizeSelect, SIGNAL (triggered ()), this, SLOT (slotDigitizeSelect ()));
-
-  m_actionDigitizeAxis = new QAction (iconAxis, tr ("Axis Point Tool"), this);
-  m_actionDigitizeAxis->setShortcut (QKeySequence (tr ("Shift+F3")));
-  m_actionDigitizeAxis->setCheckable (true);
-  m_actionDigitizeAxis->setStatusTip (tr ("Digitize axis points for a graph."));
-  m_actionDigitizeAxis->setWhatsThis (tr ("Digitize Axis Point\n\n"
-                                          "Digitizes an axis point for a graph by placing a new point at the cursor "
-                                          "after a mouse click. The coordinates of the axis point are then "
-                                          "entered. In a graph, three axis points are required to define "
-                                          "the graph coordinates."));
-  connect (m_actionDigitizeAxis, SIGNAL (triggered ()), this, SLOT (slotDigitizeAxis ()));
-
-  m_actionDigitizeScale = new QAction (iconScale, tr ("Scale Bar Tool"), this);
-  m_actionDigitizeScale->setShortcut (QKeySequence (tr ("Shift+F8")));
-  m_actionDigitizeScale->setCheckable (true);
-  m_actionDigitizeScale->setStatusTip (tr ("Digitize scale bar for a map."));
-  m_actionDigitizeScale->setWhatsThis (tr ("Digitize Scale Bar\n\n"
-                                           "Digitize a scale bar for a map by clicking and dragging. The length of the "
-                                           "scale bar is then entered. In a map, the two endpoints of the scale "
-                                           "bar define the distances in graph coordinates.\n\n"
-                                           "Maps must be imported using Import (Advanced)."));
-  connect (m_actionDigitizeScale, SIGNAL (triggered ()), this, SLOT (slotDigitizeScale ()));
-
-  m_actionDigitizeCurve = new QAction (iconCurve, tr ("Curve Point Tool"), this);
-  m_actionDigitizeCurve->setShortcut (QKeySequence (tr ("Shift+F4")));
-  m_actionDigitizeCurve->setCheckable (true);
-  m_actionDigitizeCurve->setStatusTip (tr ("Digitize curve points."));
-  m_actionDigitizeCurve->setWhatsThis (tr ("Digitize Curve Point\n\n"
-                                           "Digitizes a curve point by placing a new point at the cursor "
-                                           "after a mouse click. Use this mode to digitize points along curves "
-                                           "one by one.\n\n"
-                                           "New points will be assigned to the currently selected curve."));
-  connect (m_actionDigitizeCurve, SIGNAL (triggered ()), this, SLOT (slotDigitizeCurve ()));
-
-  m_actionDigitizePointMatch = new QAction (iconPointMatch, tr ("Point Match Tool"), this);
-  m_actionDigitizePointMatch->setShortcut (QKeySequence (tr ("Shift+F5")));
-  m_actionDigitizePointMatch->setCheckable (true);
-  m_actionDigitizePointMatch->setStatusTip (tr ("Digitize curve points in a point plot by matching a point."));
-  m_actionDigitizePointMatch->setWhatsThis (tr ("Digitize Curve Points by Point Matching\n\n"
-                                                "Digitizes curve points in a point plot by finding points that match a sample point. The process "
-                                                "starts by selecting a representative sample point.\n\n"
-                                                "New points will be assigned to the currently selected curve."));
-  connect (m_actionDigitizePointMatch, SIGNAL (triggered ()), this, SLOT (slotDigitizePointMatch ()));
-
-  m_actionDigitizeColorPicker = new QAction (iconColorPicker, tr ("Color Picker Tool"), this);
-  m_actionDigitizeColorPicker->setShortcut (QKeySequence (tr ("Shift+F6")));
-  m_actionDigitizeColorPicker->setCheckable (true);
-  m_actionDigitizeColorPicker->setStatusTip (tr ("Select color settings for filtering in Segment Fill mode."));
-  m_actionDigitizeColorPicker->setWhatsThis (tr ("Select color settings for Segment Fill filtering\n\n"
-                                                 "Select a pixel along the currently selected curve. That pixel and its neighbors will "
-                                                 "define the filter settings (color, brightness, and so on) of the currently selected curve "
-                                                 "while in Segment Fill mode."));
-  connect (m_actionDigitizeColorPicker, SIGNAL (triggered ()), this, SLOT (slotDigitizeColorPicker ()));
-
-  m_actionDigitizeSegment = new QAction (iconSegment, tr ("Segment Fill Tool"), this);
-  m_actionDigitizeSegment->setShortcut (QKeySequence (tr ("Shift+F7")));
-  m_actionDigitizeSegment->setCheckable (true);
-  m_actionDigitizeSegment->setStatusTip (tr ("Digitize curve points along a segment of a curve."));
-  m_actionDigitizeSegment->setWhatsThis (tr ("Digitize Curve Points With Segment Fill\n\n"
-                                             "Digitizes curve points by placing new points along the highlighted "
-                                             "segment under the cursor. Use this mode to quickly digitize multiple points along a "
-                                             "curve with a single click.\n\n"
-                                             "New points will be assigned to the currently selected curve."));
-  connect (m_actionDigitizeSegment, SIGNAL (triggered ()), this, SLOT (slotDigitizeSegment ()));
-
-  m_groupDigitize = new QActionGroup (this);
-  m_groupDigitize->addAction (m_actionDigitizeSelect);
-  m_groupDigitize->addAction (m_actionDigitizeAxis);
-  m_groupDigitize->addAction (m_actionDigitizeScale);
-  m_groupDigitize->addAction (m_actionDigitizeCurve);
-  m_groupDigitize->addAction (m_actionDigitizePointMatch);
-  m_groupDigitize->addAction (m_actionDigitizeColorPicker);
-  m_groupDigitize->addAction (m_actionDigitizeSegment);
-}
-
-void MainWindow::createActionsEdit ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsEdit";
-
-  m_actionEditUndo = new QAction(tr ("&Undo"), this);
-  m_actionEditUndo->setShortcut (QKeySequence::Undo);
-  m_actionEditUndo->setStatusTip (tr ("Undo the last operation."));
-  m_actionEditUndo->setWhatsThis (tr ("Undo\n\n"
-                                      "Undo the last operation."));
-  // connect is applied when CmdMediator appears
-
-  m_actionEditRedo = new QAction(tr ("&Redo"), this);
-  m_actionEditRedo->setShortcut (QKeySequence::Redo);
-  m_actionEditRedo->setStatusTip (tr ("Redo the last operation."));
-  m_actionEditRedo->setWhatsThis (tr ("Redo\n\n"
-                                      "Redo the last operation."));
-  // connect is applied when CmdMediator appears
-
-  m_actionEditCut = new QAction (tr ("Cut"), this);
-  m_actionEditCut->setShortcut (QKeySequence::Cut);
-  m_actionEditCut->setStatusTip (tr ("Cuts the selected points and copies them to the clipboard."));
-  m_actionEditCut->setWhatsThis (tr ("Cut\n\n"
-                                     "Cuts the selected points and copies them to the clipboard."));
-  connect (m_actionEditCut, SIGNAL (triggered ()), this, SLOT (slotEditCut ()));
-
-  m_actionEditCopy = new QAction (tr ("Copy"), this);
-  m_actionEditCopy->setShortcut (QKeySequence::Copy);
-  m_actionEditCopy->setStatusTip (tr ("Copies the selected points to the clipboard."));
-  m_actionEditCopy->setWhatsThis (tr ("Copy\n\n"
-                                     "Copies the selected points to the clipboard."));
-  connect (m_actionEditCopy, SIGNAL (triggered ()), this, SLOT (slotEditCopy ()));
-
-  m_actionEditPaste = new QAction (tr ("Paste"), this);
-  m_actionEditPaste->setShortcut (QKeySequence::Paste);
-  m_actionEditPaste->setStatusTip (tr ("Pastes the selected points from the clipboard."));
-  m_actionEditPaste->setWhatsThis (tr ("Paste\n\n"
-                                       "Pastes the selected points from the clipboard. They will be assigned to the current curve."));
-  connect (m_actionEditPaste, SIGNAL (triggered ()), this, SLOT (slotEditPaste ()));
-
-  m_actionEditDelete = new QAction (tr ("Delete"), this);
-  m_actionEditDelete->setShortcut (QKeySequence::Delete);
-  m_actionEditDelete->setStatusTip (tr ("Deletes the selected points, after copying them to the clipboard."));
-  m_actionEditDelete->setWhatsThis (tr ("Delete\n\n"
-                                        "Deletes the selected points, after copying them to the clipboard."));
-  connect (m_actionEditDelete, SIGNAL (triggered ()), this, SLOT (slotEditDelete ()));
-
-  m_actionEditPasteAsNew = new QAction (tr ("Paste As New"), this);
-  m_actionEditPasteAsNew->setStatusTip (tr ("Pastes an image from the clipboard."));
-  m_actionEditPasteAsNew->setWhatsThis (tr ("Paste as New\n\n"
-                                            "Creates a new document by pasting an image from the clipboard."));
-  connect (m_actionEditPasteAsNew, SIGNAL (triggered ()), this, SLOT (slotEditPasteAsNew ()));
-
-  m_actionEditPasteAsNewAdvanced = new QAction (tr ("Paste As New (Advanced)..."), this);
-  m_actionEditPasteAsNewAdvanced->setStatusTip (tr ("Pastes an image from the clipboard, in advanced mode."));
-  m_actionEditPasteAsNewAdvanced->setWhatsThis (tr ("Paste as New (Advanced)\n\n"
-                                                    "Creates a new document by pasting an image from the clipboard, in advanced mode."));
-  connect (m_actionEditPasteAsNewAdvanced, SIGNAL (triggered ()), this, SLOT (slotEditPasteAsNewAdvanced ()));
-}
-
-void MainWindow::createActionsFile ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsFile";
-
-  m_actionImport = new QAction(tr ("&Import..."), this);
-  m_actionImport->setShortcut (tr ("Ctrl+I"));
-  m_actionImport->setStatusTip (tr ("Creates a new document by importing an simple image."));
-  m_actionImport->setWhatsThis (tr ("Import Image\n\n"
-                                    "Creates a new document by importing an image with a single coordinate system, "
-                                    "and axes both coordinates known.\n\n"
-                                    "For more complicated images with multiple coordinate systems, "
-                                    "and/or floating axes, Import (Advanced) is used instead."));
-  connect (m_actionImport, SIGNAL (triggered ()), this, SLOT (slotFileImport ()));
-
-  m_actionImportAdvanced = new QAction(tr ("Import (Advanced)..."), this);
-  m_actionImportAdvanced->setStatusTip (tr ("Creates a new document by importing an image with support for advanced feaures."));
-  m_actionImportAdvanced->setWhatsThis (tr ("Import (Advanced)\n\n"
-                                            "Creates a new document by importing an image with support for advanced feaures. In "
-                                            "advanced mode, there can be multiple coordinate systems and/or floating axes."));
-  connect (m_actionImportAdvanced, SIGNAL (triggered ()), this, SLOT (slotFileImportAdvanced ()));
-
-  m_actionImportImageReplace = new QAction (tr ("Import (Image Replace)..."), this);
-  m_actionImportImageReplace->setStatusTip (tr ("Imports a new image into the current document, replacing the existing image."));
-  m_actionImportImageReplace->setWhatsThis (tr ("Import (Image Replace)\n\n"
-                                                "Imports a new image into the current document. The existing image is replaced, "
-                                                "and all curves in the document are preserved. This operation is useful for applying "
-                                                "the axis points and other settings from an existing document to a different image."));
-  connect (m_actionImportImageReplace, SIGNAL (triggered ()), this, SLOT (slotFileImportImageReplace ()));
-
-  m_actionOpen = new QAction(tr ("&Open..."), this);
-  m_actionOpen->setShortcut (QKeySequence::Open);
-  m_actionOpen->setStatusTip (tr ("Opens an existing document."));
-  m_actionOpen->setWhatsThis (tr ("Open Document\n\n"
-                                  "Opens an existing document."));
-  connect (m_actionOpen, SIGNAL (triggered ()), this, SLOT (slotFileOpen ()));
-
-#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
-  for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
-    QAction *recentFileAction = new QAction (this);
-    recentFileAction->setVisible (true);
-    connect (recentFileAction, SIGNAL (triggered ()), this, SLOT (slotRecentFileAction ()));
-    m_actionRecentFiles.append (recentFileAction);
-  }
-#endif 
-
-  m_actionClose = new QAction(tr ("&Close"), this);
-  m_actionClose->setShortcut (QKeySequence::Close);
-  m_actionClose->setStatusTip (tr ("Closes the open document."));
-  m_actionClose->setWhatsThis (tr ("Close Document\n\n"
-                                   "Closes the open document."));
-  connect (m_actionClose, SIGNAL (triggered ()), this, SLOT (slotFileClose ()));
-
-  m_actionSave = new QAction(tr ("&Save"), this);
-  m_actionSave->setShortcut (QKeySequence::Save);
-  m_actionSave->setStatusTip (tr ("Saves the current document."));
-  m_actionSave->setWhatsThis (tr ("Save Document\n\n"
-                                  "Saves the current document."));
-  connect (m_actionSave, SIGNAL (triggered ()), this, SLOT (slotFileSave ()));
-
-  m_actionSaveAs = new QAction(tr ("Save As..."), this);
-  m_actionSaveAs->setShortcut (QKeySequence::SaveAs);
-  m_actionSaveAs->setStatusTip (tr ("Saves the current document under a new filename."));
-  m_actionSaveAs->setWhatsThis (tr ("Save Document As\n\n"
-                                    "Saves the current document under a new filename."));
-  connect (m_actionSaveAs, SIGNAL (triggered ()), this, SLOT (slotFileSaveAs ()));
-
-  m_actionExport = new QAction (tr ("Export..."), this);
-  m_actionExport->setShortcut (tr ("Ctrl+E"));
-  m_actionExport->setStatusTip (tr ("Exports the current document into a text file."));
-  m_actionExport->setWhatsThis (tr ("Export Document\n\n"
-                                    "Exports the current document into a text file."));
-  connect (m_actionExport, SIGNAL (triggered ()), this, SLOT (slotFileExport ()));
-
-  m_actionPrint = new QAction (tr ("&Print..."), this);
-  m_actionPrint->setShortcut (QKeySequence::Print);
-  m_actionPrint->setStatusTip (tr ("Print the current document."));
-  m_actionPrint->setWhatsThis (tr ("Print Document\n\n"
-                                   "Print the current document to a printer or file."));
-  connect (m_actionPrint, SIGNAL (triggered ()), this, SLOT (slotFilePrint ()));
-
-  m_actionExit = new QAction(tr ("&Exit"), this);
-  m_actionExit->setShortcut (QKeySequence::Quit);
-  m_actionExit->setStatusTip (tr ("Quits the application."));
-  m_actionExit->setWhatsThis (tr ("Exit\n\n"
-                                  "Quits the application."));
-  connect (m_actionExit, SIGNAL (triggered ()), this, SLOT (close ()));
-}
-
-void MainWindow::createActionsHelp ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsHelp";
-
-  m_actionHelpChecklistGuideWizard = new QAction (tr ("Checklist Guide Wizard"), this);
-  m_actionHelpChecklistGuideWizard->setCheckable (true);
-  m_actionHelpChecklistGuideWizard->setStatusTip (tr ("Open Checklist Guide Wizard during import to define digitizing steps"));
-  m_actionHelpChecklistGuideWizard->setWhatsThis (tr ("Checklist Guide Wizard\n\n"
-                                                      "Use Checklist Guide Wizard during import to generate a checklist of steps "
-                                                      "for the imported document"));
-
-  m_actionHelpWhatsThis = QWhatsThis::createAction(this);
-  m_actionHelpWhatsThis->setShortcut (QKeySequence::WhatsThis);
-
-  m_actionHelpTutorial = new QAction (tr ("Tutorial"), this);
-  m_actionHelpTutorial->setStatusTip (tr ("Play tutorial showing steps for digitizing curves"));
-  m_actionHelpTutorial->setWhatsThis (tr ("Tutorial\n\n"
-                                          "Play tutorial showing steps for digitizing points from curves drawn with lines "
-                                          "and/or point"));
-  connect (m_actionHelpTutorial, SIGNAL (triggered ()), this, SLOT (slotHelpTutorial()));
-
-#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
-  m_actionHelpHelp = new QAction (tr ("Help"), this);
-  m_actionHelpHelp->setShortcut (QKeySequence::HelpContents);
-  m_actionHelpHelp->setStatusTip (tr ("Help documentation"));
-  m_actionHelpHelp->setWhatsThis (tr ("Help Documentation\n\n"
-                                      "Searchable help documentation"));
-  // This action gets connected directly to the QDockWidget when that is created
-#endif
-
-  m_actionHelpAbout = new QAction(tr ("About Engauge"), this);
-  m_actionHelpAbout->setStatusTip (tr ("About the application."));
-  m_actionHelpAbout->setWhatsThis (tr ("About Engauge\n\nAbout the application."));
-  connect (m_actionHelpAbout, SIGNAL (triggered ()), this, SLOT (slotHelpAbout ()));
-}
-
-void MainWindow::createActionsSettings ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsSettings";
-
-  m_actionSettingsCoords = new QAction (tr ("Coordinates..."), this);
-  m_actionSettingsCoords->setStatusTip (tr ("Edit Coordinate settings."));
-  m_actionSettingsCoords->setWhatsThis (tr ("Coordinate Settings\n\n"
-                                            "Coordinate settings determine how the graph coordinates are mapped to the pixels in the image"));
-  connect (m_actionSettingsCoords, SIGNAL (triggered ()), this, SLOT (slotSettingsCoords ()));
-
-  m_actionSettingsCurveAddRemove = new QAction (tr ("Add/Remove Curve..."), this);
-  m_actionSettingsCurveAddRemove->setStatusTip (tr ("Add or Remove Curves."));
-  m_actionSettingsCurveAddRemove->setWhatsThis (tr ("Add/Remove Curve\n\n"
-                                                    "Add/Remove Curve settings control which curves are included in the current document"));
-  connect (m_actionSettingsCurveAddRemove, SIGNAL (triggered ()), this, SLOT (slotSettingsCurveAddRemove ()));
-
-  m_actionSettingsCurveProperties = new QAction (tr ("Curve Properties..."), this);
-  m_actionSettingsCurveProperties->setStatusTip (tr ("Edit Curve Properties settings."));
-  m_actionSettingsCurveProperties->setWhatsThis (tr ("Curve Properties Settings\n\n"
-                                                     "Curves properties settings determine how each curve appears"));
-  connect (m_actionSettingsCurveProperties, SIGNAL (triggered ()), this, SLOT (slotSettingsCurveProperties ()));
-
-  m_actionSettingsDigitizeCurve = new QAction (tr ("Digitize Curve..."), this);
-  m_actionSettingsDigitizeCurve->setStatusTip (tr ("Edit Digitize Axis and Graph Curve settings."));
-  m_actionSettingsDigitizeCurve->setWhatsThis (tr ("Digitize Axis and Graph Curve Settings\n\n"
-                                                   "Digitize Curve settings determine how points are digitized in Digitize Axis Point and "
-                                                   "Digitize Graph Point modes"));
-  connect (m_actionSettingsDigitizeCurve, SIGNAL (triggered ()), this, SLOT (slotSettingsDigitizeCurve ()));
-
-  m_actionSettingsExport = new QAction (tr ("Export Format..."), this);
-  m_actionSettingsExport->setStatusTip (tr ("Edit Export Format settings."));
-  m_actionSettingsExport->setWhatsThis (tr ("Export Format Settings\n\n"
-                                            "Export format settings affect how exported files are formatted"));
-  connect (m_actionSettingsExport, SIGNAL (triggered ()), this, SLOT (slotSettingsExportFormat ()));
-
-  m_actionSettingsColorFilter = new QAction (tr ("Color Filter..."), this);
-  m_actionSettingsColorFilter->setStatusTip (tr ("Edit Color Filter settings."));
-  m_actionSettingsColorFilter->setWhatsThis (tr ("Color Filter Settings\n\n"
-                                                 "Color filtering simplifies the graphs for easier Point Matching and Segment Filling"));
-  connect (m_actionSettingsColorFilter, SIGNAL (triggered ()), this, SLOT (slotSettingsColorFilter ()));
-
-  m_actionSettingsAxesChecker = new QAction (tr ("Axes Checker..."), this);
-  m_actionSettingsAxesChecker->setStatusTip (tr ("Edit Axes Checker settings."));
-  m_actionSettingsAxesChecker->setWhatsThis (tr ("Axes Checker Settings\n\n"
-                                                 "Axes checker can reveal any axis point mistakes, which are otherwise hard to find."));
-  connect (m_actionSettingsAxesChecker, SIGNAL (triggered ()), this, SLOT (slotSettingsAxesChecker ()));
-
-  m_actionSettingsGridDisplay = new QAction (tr ("Grid Line Display..."), this);
-  m_actionSettingsGridDisplay->setStatusTip (tr ("Edit Grid Line Display settings."));
-  m_actionSettingsGridDisplay->setWhatsThis (tr ("Grid Line Display Settings\n\n"
-                                                 "Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. "
-                                                 "In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions."));
-  connect (m_actionSettingsGridDisplay, SIGNAL (triggered ()), this, SLOT (slotSettingsGridDisplay ()));
-
-  m_actionSettingsGridRemoval = new QAction (tr ("Grid Line Removal..."), this);
-  m_actionSettingsGridRemoval->setStatusTip (tr ("Edit Grid Line Removal settings."));
-  m_actionSettingsGridRemoval->setWhatsThis (tr ("Grid Line Removal Settings\n\n"
-                                                 "Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when "
-                                                 "Color Filtering is not able to separate grid lines from curve lines."));
-  connect (m_actionSettingsGridRemoval, SIGNAL (triggered ()), this, SLOT (slotSettingsGridRemoval ()));
-
-  m_actionSettingsPointMatch = new QAction (tr ("Point Match..."), this);
-  m_actionSettingsPointMatch->setStatusTip (tr ("Edit Point Match settings."));
-  m_actionSettingsPointMatch->setWhatsThis (tr ("Point Match Settings\n\n"
-                                                "Point match settings determine how points are matched while in Point Match mode"));
-  connect (m_actionSettingsPointMatch, SIGNAL (triggered ()), this, SLOT (slotSettingsPointMatch ()));
-
-  m_actionSettingsSegments = new QAction (tr ("Segment Fill..."), this);
-  m_actionSettingsSegments->setStatusTip (tr ("Edit Segment Fill settings."));
-  m_actionSettingsSegments->setWhatsThis (tr ("Segment Fill Settings\n\n"
-                                              "Segment fill settings determine how points are generated in the Segment Fill mode"));
-  connect (m_actionSettingsSegments, SIGNAL (triggered ()), this, SLOT (slotSettingsSegments ()));
-
-  m_actionSettingsGeneral = new QAction (tr ("General..."), this);
-  m_actionSettingsGeneral->setStatusTip (tr ("Edit General settings."));
-  m_actionSettingsGeneral->setWhatsThis (tr ("General Settings\n\n"
-                                             "General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects "
-                                             "both Color Picker and Point Match modes"));
-  connect (m_actionSettingsGeneral, SIGNAL (triggered ()), this, SLOT (slotSettingsGeneral ()));
-
-  m_actionSettingsMainWindow = new QAction (tr ("Main Window..."), this);
-  m_actionSettingsMainWindow->setEnabled (true);
-  m_actionSettingsMainWindow->setStatusTip (tr ("Edit Main Window settings."));
-  m_actionSettingsMainWindow->setWhatsThis (tr ("Main Window Settings\n\n"
-                                                "Main window settings affect the user interface and are not specific to any document"));
-  connect (m_actionSettingsMainWindow, SIGNAL (triggered ()), this, SLOT (slotSettingsMainWindow ()));
-}
-
-void MainWindow::createActionsView ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createActionsView";
-
-  m_actionViewBackground = new QAction (tr ("Background Toolbar"), this);
-  m_actionViewBackground->setCheckable (true);
-  m_actionViewBackground->setChecked (true);
-  m_actionViewBackground->setStatusTip (tr ("Show or hide the background toolbar."));
-  m_actionViewBackground->setWhatsThis (tr ("View Background ToolBar\n\n"
-                                            "Show or hide the background toolbar"));
-  connect (m_actionViewBackground, SIGNAL (triggered ()), this, SLOT (slotViewToolBarBackground ()));
-
-  m_actionViewChecklistGuide = new QAction (tr ("Checklist Guide Toolbar"), this);
-  m_actionViewChecklistGuide->setCheckable (true);
-  m_actionViewChecklistGuide->setChecked (false);
-  m_actionViewChecklistGuide->setStatusTip (tr ("Show or hide the checklist guide."));
-  m_actionViewChecklistGuide->setWhatsThis (tr ("View Checklist Guide\n\n"
-                                                "Show or hide the checklist guide"));
-  connect (m_actionViewChecklistGuide, SIGNAL (changed ()), this, SLOT (slotViewToolBarChecklistGuide()));
-
-  m_actionViewFittingWindow = new QAction (tr ("Curve Fitting Window"), this);
-  m_actionViewFittingWindow->setCheckable (true);
-  m_actionViewFittingWindow->setChecked (false);
-  m_actionViewFittingWindow->setStatusTip (tr ("Show or hide the curve fitting window."));
-  m_actionViewFittingWindow->setWhatsThis (tr ("View Curve Fitting Window\n\n"
-                                               "Show or hide the curve fitting window"));
-  connect (m_actionViewFittingWindow, SIGNAL (changed ()), this, SLOT (slotViewToolBarFittingWindow()));
-
-  m_actionViewGeometryWindow = new QAction (tr ("Geometry Window"), this);
-  m_actionViewGeometryWindow->setCheckable (true);
-  m_actionViewGeometryWindow->setChecked (false);
-  m_actionViewGeometryWindow->setStatusTip (tr ("Show or hide the geometry window."));
-  m_actionViewGeometryWindow->setWhatsThis (tr ("View Geometry Window\n\n"
-                                                "Show or hide the geometry window"));
-  connect (m_actionViewGeometryWindow, SIGNAL (changed ()), this, SLOT (slotViewToolBarGeometryWindow()));
-
-  m_actionViewDigitize = new QAction (tr ("Digitizing Tools Toolbar"), this);
-  m_actionViewDigitize->setCheckable (true);
-  m_actionViewDigitize->setChecked (true);
-  m_actionViewDigitize->setStatusTip (tr ("Show or hide the digitizing tools toolbar."));
-  m_actionViewDigitize->setWhatsThis (tr ("View Digitizing Tools ToolBar\n\n"
-                                          "Show or hide the digitizing tools toolbar"));
-  connect (m_actionViewDigitize, SIGNAL (triggered ()), this, SLOT (slotViewToolBarDigitize()));
-
-  m_actionViewSettingsViews = new QAction (tr ("Settings Views Toolbar"), this);
-  m_actionViewSettingsViews->setCheckable (true);
-  m_actionViewSettingsViews->setChecked (true);
-  m_actionViewSettingsViews->setStatusTip (tr ("Show or hide the settings views toolbar."));
-  m_actionViewSettingsViews->setWhatsThis (tr ("View Settings Views ToolBar\n\n"
-                                               "Show or hide the settings views toolbar. These views graphically show the "
-                                               "most important settings."));
-  connect (m_actionViewSettingsViews, SIGNAL (triggered ()), this, SLOT (slotViewToolBarSettingsViews()));
-
-  m_actionViewCoordSystem = new QAction (tr ("Coordinate System Toolbar"), this);
-  m_actionViewCoordSystem->setCheckable (true);
-  m_actionViewCoordSystem->setChecked (false);
-  m_actionViewCoordSystem->setStatusTip (tr ("Show or hide the coordinate system toolbar."));
-  m_actionViewCoordSystem->setWhatsThis (tr ("View Coordinate Systems ToolBar\n\n"
-                                             "Show or hide the coordinate system selection toolbar. This toolbar is used "
-                                             "to select the current coordinate system when the document has multiple "
-                                             "coordinate systems. This toolbar is also used to view and print all coordinate "
-                                             "systems.\n\n"
-                                             "This toolbar is disabled when there is only one coordinate system."));
-  connect (m_actionViewCoordSystem, SIGNAL (triggered ()), this, SLOT (slotViewToolBarCoordSystem()));
-
-  m_actionViewToolTips = new QAction (tr ("Tool Tips"), this);
-  m_actionViewToolTips->setCheckable (true);
-  m_actionViewToolTips->setChecked (true);
-  m_actionViewToolTips->setStatusTip (tr ("Show or hide the tool tips."));
-  m_actionViewToolTips->setWhatsThis (tr ("View Tool Tips\n\n"
-                                          "Show or hide the tool tips"));
-  connect (m_actionViewToolTips, SIGNAL (triggered ()), this, SLOT (slotViewToolTips()));
-
-  m_actionViewGridLines = new QAction (tr ("Grid Lines"), this);
-  m_actionViewGridLines->setCheckable (true);
-  m_actionViewGridLines->setChecked (false);
-  m_actionViewGridLines->setStatusTip (tr ("Show or hide grid lines."));
-  m_actionViewGridLines->setWhatsThis (tr ("View Grid Lines\n\n"
-                                           "Show or hide grid lines that are added for accurate adjustments of the axes points, "
-                                           "which can improve accuracy in distorted graphs"));
-  connect (m_actionViewGridLines, SIGNAL (triggered ()), this, SLOT (slotViewGridLines()));
-
-  m_actionViewBackgroundNone = new QAction (tr ("No Background"), this);
-  m_actionViewBackgroundNone->setCheckable (true);
-  m_actionViewBackgroundNone->setStatusTip (tr ("Do not show the image underneath the points."));
-  m_actionViewBackgroundNone->setWhatsThis (tr ("No Background\n\n"
-                                                "No image is shown so points are easier to see"));
-
-  m_actionViewBackgroundOriginal = new QAction (tr ("Show Original Image"), this);
-  m_actionViewBackgroundOriginal->setCheckable (true);
-  m_actionViewBackgroundOriginal->setStatusTip (tr ("Show the original image underneath the points."));
-  m_actionViewBackgroundOriginal->setWhatsThis (tr ("Show Original Image\n\n"
-                                                    "Show the original image underneath the points"));
-
-  m_actionViewBackgroundFiltered = new QAction (tr ("Show Filtered Image"), this);
-  m_actionViewBackgroundFiltered->setCheckable (true);
-  m_actionViewBackgroundFiltered->setChecked (true);
-  m_actionViewBackgroundFiltered->setStatusTip (tr ("Show the filtered image underneath the points."));
-  m_actionViewBackgroundFiltered->setWhatsThis (tr ("Show Filtered Image\n\n"
-                                                    "Show the filtered image underneath the points.\n\n"
-                                                    "The filtered image is created from the original image according to the "
-                                                    "Filter preferences so unimportant information is hidden and important "
-                                                    "information is emphasized"));
-
-  m_actionViewCurvesNone = new QAction (tr ("Hide All Curves"), this);
-  m_actionViewCurvesNone->setCheckable (true);
-  m_actionViewCurvesNone->setStatusTip (tr ("Hide all digitized curves."));
-  m_actionViewCurvesNone->setWhatsThis (tr ("Hide All Curves\n\n"
-                                            "No axis points or digitized graph curves are shown so the image is easier to see."));
-
-  m_actionViewCurvesSelected = new QAction (tr ("Show Selected Curve"), this);
-  m_actionViewCurvesSelected->setCheckable (true);
-  m_actionViewCurvesSelected->setStatusTip (tr ("Show only the currently selected curve."));
-  m_actionViewCurvesSelected->setWhatsThis (tr ("Show Selected Curve\n\n"
-                                                "Show only the digitized points and line that belong to the currently selected curve."));
-
-  m_actionViewCurvesAll = new QAction (tr ("Show All Curves"), this);
-  m_actionViewCurvesAll->setCheckable (true);
-  m_actionViewCurvesAll->setChecked (true);
-  m_actionViewCurvesAll->setStatusTip (tr ("Show all curves."));
-  m_actionViewCurvesAll->setWhatsThis (tr ("Show All Curves\n\n"
-                                           "Show all digitized axis points and graph curves"));
-
-  m_groupBackground = new QActionGroup(this);
-  m_groupBackground->addAction (m_actionViewBackgroundNone);
-  m_groupBackground->addAction (m_actionViewBackgroundOriginal);
-  m_groupBackground->addAction (m_actionViewBackgroundFiltered);
-  connect (m_groupBackground, SIGNAL(triggered (QAction*)), this, SLOT (slotViewGroupBackground(QAction*)));
-
-  m_groupCurves = new QActionGroup(this);
-  m_groupCurves->addAction (m_actionViewCurvesNone);
-  m_groupCurves->addAction (m_actionViewCurvesSelected);
-  m_groupCurves->addAction (m_actionViewCurvesAll);
-  connect (m_groupCurves, SIGNAL(triggered (QAction*)), this, SLOT (slotViewGroupCurves(QAction*)));
-
-  m_actionStatusNever = new QAction (tr ("Hide Always"), this);
-  m_actionStatusNever->setCheckable(true);
-  m_actionStatusNever->setStatusTip (tr ("Always hide the status bar."));
-  m_actionStatusNever->setWhatsThis (tr ("Hide the status bar. No temporary status or feedback messages will appear."));
-
-  m_actionStatusTemporary = new QAction (tr ("Show Temporary Messages"), this);
-  m_actionStatusTemporary->setCheckable(true);
-  m_actionStatusTemporary->setStatusTip (tr ("Hide the status bar except when display temporary messages."));
-  m_actionStatusTemporary->setWhatsThis (tr ("Hide the status bar, except when displaying temporary status and feedback messages."));
-
-  m_actionStatusAlways = new QAction (tr ("Show Always"), this);
-  m_actionStatusAlways->setCheckable(true);
-  m_actionStatusAlways->setStatusTip (tr ("Always show the status bar."));
-  m_actionStatusAlways->setWhatsThis (tr ("Show the status bar. Besides displaying temporary status and feedback messages, "
-                                          "the status bar also displays information about the cursor position."));
-
-  m_groupStatus = new QActionGroup(this);
-  m_groupStatus->addAction (m_actionStatusNever);
-  m_groupStatus->addAction (m_actionStatusTemporary);
-  m_groupStatus->addAction (m_actionStatusAlways);
-  connect (m_groupStatus, SIGNAL (triggered (QAction*)), this, SLOT (slotViewGroupStatus(QAction*)));
-
-  m_actionZoomOut = new QAction (tr ("Zoom Out"), this);
-  m_actionZoomOut->setStatusTip (tr ("Zoom out"));
-  // setShortCut is called by updateSettingsMainWindow
-  connect (m_actionZoomOut, SIGNAL (triggered ()), this, SLOT (slotViewZoomOut ()));
-
-  m_actionZoomIn = new QAction (tr ("Zoom In"), this);
-  m_actionZoomIn->setStatusTip (tr ("Zoom in"));
-  // setShortCut is called by updateSettingsMainWindow
-  connect (m_actionZoomIn, SIGNAL (triggered ()), this, SLOT (slotViewZoomIn ()));
-
-  m_mapperZoomFactor = new QSignalMapper (this);
-  connect (m_mapperZoomFactor, SIGNAL (mapped (int)), this, SLOT (slotViewZoomFactorInt (int)));
-
-  m_actionZoom16To1 = new QAction (tr ("16:1 (1600%)"), this);
-  m_actionZoom16To1->setCheckable (true);
-  m_actionZoom16To1->setStatusTip (tr ("Zoom 16:1"));
-  connect (m_actionZoom16To1, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom16To1, ZOOM_16_TO_1);
-
-  m_actionZoom16To1Farther = new QAction (tr ("16:1 farther (1270%)"), this);
-  m_actionZoom16To1Farther->setCheckable (true);
-  m_actionZoom16To1Farther->setStatusTip (tr ("Zoom 12.7:1"));
-  connect (m_actionZoom16To1Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom16To1Farther, ZOOM_16_TO_1_FARTHER);
-
-  m_actionZoom8To1Closer = new QAction (tr ("8:1 closer (1008%)"), this);
-  m_actionZoom8To1Closer->setCheckable (true);
-  m_actionZoom8To1Closer->setStatusTip (tr ("Zoom 10.08:1"));
-  connect (m_actionZoom8To1Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom8To1Closer, ZOOM_8_TO_1_CLOSER);
-
-  m_actionZoom8To1 = new QAction (tr ("8:1 (800%)"), this);
-  m_actionZoom8To1->setCheckable (true);
-  m_actionZoom8To1->setStatusTip (tr ("Zoom 8:1"));
-  connect (m_actionZoom8To1, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom8To1, ZOOM_8_TO_1);
-
-  m_actionZoom8To1Farther = new QAction (tr ("8:1 farther (635%)"), this);
-  m_actionZoom8To1Farther->setCheckable (true);
-  m_actionZoom8To1Farther->setStatusTip (tr ("Zoom 6.35:1"));
-  connect (m_actionZoom8To1Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom8To1Farther, ZOOM_8_TO_1_FARTHER);
-
-  m_actionZoom4To1Closer = new QAction (tr ("4:1 closer (504%)"), this);
-  m_actionZoom4To1Closer->setCheckable (true);
-  m_actionZoom4To1Closer->setStatusTip (tr ("Zoom 5.04:1"));
-  connect (m_actionZoom4To1Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom4To1Closer, ZOOM_4_TO_1_CLOSER);
-
-  m_actionZoom4To1 = new QAction (tr ("4:1 (400%)"), this);
-  m_actionZoom4To1->setCheckable (true);
-  m_actionZoom4To1->setStatusTip (tr ("Zoom 4:1"));
-  connect (m_actionZoom4To1, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom4To1, ZOOM_4_TO_1);
-
-  m_actionZoom4To1Farther = new QAction (tr ("4:1 farther (317%)"), this);
-  m_actionZoom4To1Farther->setCheckable (true);
-  m_actionZoom4To1Farther->setStatusTip (tr ("Zoom 3.17:1"));
-  connect (m_actionZoom4To1Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom4To1Farther, ZOOM_4_TO_1_FARTHER);
-
-  m_actionZoom2To1Closer = new QAction (tr ("2:1 closer (252%)"), this);
-  m_actionZoom2To1Closer->setCheckable (true);
-  m_actionZoom2To1Closer->setStatusTip (tr ("Zoom 2.52:1"));
-  connect (m_actionZoom2To1Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom2To1Closer, ZOOM_2_TO_1_CLOSER);
-
-  m_actionZoom2To1 = new QAction (tr ("2:1 (200%)"), this);
-  m_actionZoom2To1->setCheckable (true);
-  m_actionZoom2To1->setStatusTip (tr ("Zoom 2:1"));
-  connect (m_actionZoom2To1, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom2To1, ZOOM_2_TO_1);
-
-  m_actionZoom2To1Farther = new QAction (tr ("2:1 farther (159%)"), this);
-  m_actionZoom2To1Farther->setCheckable (true);
-  m_actionZoom2To1Farther->setStatusTip (tr ("Zoom 1.59:1"));
-  connect (m_actionZoom2To1Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom2To1Farther, ZOOM_2_TO_1_FARTHER);
-
-  m_actionZoom1To1Closer = new QAction (tr ("1:1 closer (126%)"), this);
-  m_actionZoom1To1Closer->setCheckable (true);
-  m_actionZoom1To1Closer->setChecked (true);
-  m_actionZoom1To1Closer->setStatusTip (tr ("Zoom 1.3:1"));
-  connect (m_actionZoom1To1Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To1Closer, ZOOM_1_TO_1_CLOSER);
-
-  m_actionZoom1To1 = new QAction (tr ("1:1 (100%)"), this);
-  m_actionZoom1To1->setCheckable (true);
-  m_actionZoom1To1->setChecked (true);
-  m_actionZoom1To1->setStatusTip (tr ("Zoom 1:1"));
-  connect (m_actionZoom1To1, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To1, ZOOM_1_TO_1);
-
-  m_actionZoom1To1Farther = new QAction (tr ("1:1 farther (79%)"), this);
-  m_actionZoom1To1Farther->setCheckable (true);
-  m_actionZoom1To1Farther->setChecked (true);
-  m_actionZoom1To1Farther->setStatusTip (tr ("Zoom 0.8:1"));
-  connect (m_actionZoom1To1Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To1Farther, ZOOM_1_TO_1_FARTHER);
-
-  m_actionZoom1To2Closer = new QAction (tr ("1:2 closer (63%)"), this);
-  m_actionZoom1To2Closer->setCheckable (true);
-  m_actionZoom1To2Closer->setStatusTip (tr ("Zoom 1.3:2"));
-  connect (m_actionZoom1To2Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To2Closer, ZOOM_1_TO_2_CLOSER);
-
-  m_actionZoom1To2 = new QAction (tr ("1:2 (50%)"), this);
-  m_actionZoom1To2->setCheckable (true);
-  m_actionZoom1To2->setStatusTip (tr ("Zoom 1:2"));
-  connect (m_actionZoom1To2, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To2, ZOOM_1_TO_2);
-
-  m_actionZoom1To2Farther = new QAction (tr ("1:2 farther (40%)"), this);
-  m_actionZoom1To2Farther->setCheckable (true);
-  m_actionZoom1To2Farther->setStatusTip (tr ("Zoom 0.8:2"));
-  connect (m_actionZoom1To2Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To2Farther, ZOOM_1_TO_2_FARTHER);
-
-  m_actionZoom1To4Closer = new QAction (tr ("1:4 closer (31%)"), this);
-  m_actionZoom1To4Closer->setCheckable (true);
-  m_actionZoom1To4Closer->setStatusTip (tr ("Zoom 1.3:4"));
-  connect (m_actionZoom1To4Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To4Closer, ZOOM_1_TO_4_CLOSER);
-
-  m_actionZoom1To4 = new QAction (tr ("1:4 (25%)"), this);
-  m_actionZoom1To4->setCheckable (true);
-  m_actionZoom1To4->setStatusTip (tr ("Zoom 1:4"));
-  connect (m_actionZoom1To4, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To4, ZOOM_1_TO_4);
-
-  m_actionZoom1To4Farther = new QAction (tr ("1:4 farther (20%)"), this);
-  m_actionZoom1To4Farther->setCheckable (true);
-  m_actionZoom1To4Farther->setStatusTip (tr ("Zoom 0.8:4"));
-  connect (m_actionZoom1To4Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To4Farther, ZOOM_1_TO_4_FARTHER);
-
-  m_actionZoom1To8Closer = new QAction (tr ("1:8 closer (12.5%)"), this);
-  m_actionZoom1To8Closer->setCheckable (true);
-  m_actionZoom1To8Closer->setStatusTip (tr ("Zoom 1:8"));
-  connect (m_actionZoom1To8Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To8Closer, ZOOM_1_TO_8_CLOSER);
-
-  m_actionZoom1To8 = new QAction (tr ("1:8 (12.5%)"), this);
-  m_actionZoom1To8->setCheckable (true);
-  m_actionZoom1To8->setStatusTip (tr ("Zoom 1:8"));
-  connect (m_actionZoom1To8, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To8, ZOOM_1_TO_8);
-
-  m_actionZoom1To8Farther = new QAction (tr ("1:8 farther (10%)"), this);
-  m_actionZoom1To8Farther->setCheckable (true);
-  m_actionZoom1To8Farther->setStatusTip (tr ("Zoom 0.8:8"));
-  connect (m_actionZoom1To8Farther, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To8Farther, ZOOM_1_TO_8_FARTHER);
-
-  m_actionZoom1To16Closer = new QAction (tr ("1:16 closer (8%)"), this);
-  m_actionZoom1To16Closer->setCheckable (true);
-  m_actionZoom1To16Closer->setStatusTip (tr ("Zoom 1.3:16"));
-  connect (m_actionZoom1To16Closer, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To16Closer, ZOOM_1_TO_16_CLOSER);
-
-  m_actionZoom1To16 = new QAction (tr ("1:16 (6.25%)"), this);
-  m_actionZoom1To16->setCheckable (true);
-  m_actionZoom1To16->setStatusTip (tr ("Zoom 1:16"));
-  connect (m_actionZoom1To16, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoom1To16, ZOOM_1_TO_16);
-
-  m_actionZoomFill = new QAction (tr ("Fill"), this);
-  m_actionZoomFill->setCheckable (true);
-  m_actionZoomFill->setStatusTip (tr ("Zoom with stretching to fill window"));
-  connect (m_actionZoomFill, SIGNAL (triggered ()), m_mapperZoomFactor, SLOT (map ()));
-  m_mapperZoomFactor->setMapping (m_actionZoomFill, ZOOM_FILL);
-
-  m_groupZoom = new QActionGroup (this);
-  m_groupZoom->addAction (m_actionZoom16To1);
-  m_groupZoom->addAction (m_actionZoom16To1Farther);
-  m_groupZoom->addAction (m_actionZoom8To1Closer);
-  m_groupZoom->addAction (m_actionZoom8To1);
-  m_groupZoom->addAction (m_actionZoom8To1Farther);
-  m_groupZoom->addAction (m_actionZoom4To1Closer);
-  m_groupZoom->addAction (m_actionZoom4To1);
-  m_groupZoom->addAction (m_actionZoom4To1Farther);
-  m_groupZoom->addAction (m_actionZoom2To1Closer);
-  m_groupZoom->addAction (m_actionZoom2To1);
-  m_groupZoom->addAction (m_actionZoom2To1Farther);
-  m_groupZoom->addAction (m_actionZoom1To1Closer);
-  m_groupZoom->addAction (m_actionZoom1To1);
-  m_groupZoom->addAction (m_actionZoom1To1Farther);
-  m_groupZoom->addAction (m_actionZoom1To2Closer);
-  m_groupZoom->addAction (m_actionZoom1To2);
-  m_groupZoom->addAction (m_actionZoom1To2Farther);
-  m_groupZoom->addAction (m_actionZoom1To4Closer);
-  m_groupZoom->addAction (m_actionZoom1To4);
-  m_groupZoom->addAction (m_actionZoom1To4Farther);
-  m_groupZoom->addAction (m_actionZoom1To8Closer);
-  m_groupZoom->addAction (m_actionZoom1To8);
-  m_groupZoom->addAction (m_actionZoom1To8Farther);
-  m_groupZoom->addAction (m_actionZoom1To16Closer);
-  m_groupZoom->addAction (m_actionZoom1To16);
-  m_groupZoom->addAction (m_actionZoomFill);
-}
-
-void MainWindow::createCentralWidget ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createCentralWidget";
-
-  QWidget *widget = new QWidget;
-  setCentralWidget (widget);
-  m_layout = new QVBoxLayout;
-  widget->setLayout (m_layout);
-}
-
-void MainWindow::createCommandStackShadow ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createCommandStackShadow";
-
-  m_cmdStackShadow = new CmdStackShadow;
-}
-
-void MainWindow::createDockableWidgets ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createDockableWidgets";
-
-  // Checklist guide starts out hidden. It will be positioned in settingsRead
-  m_dockChecklistGuide = new ChecklistGuide (this);
-  connect (m_dockChecklistGuide, SIGNAL (signalChecklistClosed()), this, SLOT (slotChecklistClosed()));
-
-  // Fitting window starts out hidden since there is nothing to show initially. It will be positioned in settingsRead
-  m_dockFittingWindow = new FittingWindow (this);
-  connect (m_dockFittingWindow, SIGNAL (signalFittingWindowClosed()),
-           this, SLOT (slotFittingWindowClosed()));
-  connect (m_dockFittingWindow, SIGNAL (signalCurveFit(FittingCurveCoefficients, double, double, bool, bool)),
-           this, SLOT (slotFittingWindowCurveFit(FittingCurveCoefficients, double, double, bool, bool)));
-
-  // Geometry window starts out hidden since there is nothing to show initially. It will be positioned in settingsRead
-  m_dockGeometryWindow = new GeometryWindow (this);
-  connect (m_dockGeometryWindow, SIGNAL (signalGeometryWindowClosed()),
-           this, SLOT (slotGeometryWindowClosed()));
-
-}
-
-void MainWindow::createHelpWindow ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createHelpWindow";
-
-#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
-  m_helpWindow = new HelpWindow (this);
-  m_helpWindow->hide ();
-  addDockWidget (Qt::RightDockWidgetArea,
-                 m_helpWindow); // Dock area is required by addDockWidget but immediately overridden in next line
-  m_helpWindow->setFloating (true);
-
-  connect (m_actionHelpHelp, SIGNAL (triggered ()), m_helpWindow, SLOT (show ()));
-#endif
-}
-
-void MainWindow::createIcons()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createIcons";
-
-  QIcon icon;
-  QPixmap icon16 (bannerapp_16);
-  QPixmap icon32 (bannerapp_32);
-  QPixmap icon64 (bannerapp_64);
-  QPixmap icon128 (bannerapp_128);
-  QPixmap icon256 (bannerapp_256);
-
-  icon.addPixmap (icon16);
-  icon.addPixmap (icon32);
-  icon.addPixmap (icon64);
-  icon.addPixmap (icon128);
-  icon.addPixmap (icon256);
-
-  setWindowIcon (icon);
-}
-
-void MainWindow::createLoadImageFromUrl ()
-{
-#ifdef NETWORKING
-  m_loadImageFromUrl = new LoadImageFromUrl (*this);
-#endif
-}
-
-void MainWindow::createMenus()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createMenus";
-
-  m_menuFile = menuBar()->addMenu(tr("&File"));
-  m_menuFile->addAction (m_actionImport);
-  m_menuFile->addAction (m_actionImportAdvanced);
-  m_menuFile->addAction (m_actionImportImageReplace);
-  m_menuFile->addAction (m_actionOpen);
-#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
-  m_menuFileOpenRecent = new QMenu (tr ("Open &Recent"));
-  for (unsigned int i = 0; i < MAX_RECENT_FILE_LIST_SIZE; i++) {
-    m_menuFileOpenRecent->addAction (m_actionRecentFiles.at (i));
-  }
-  m_menuFile->addMenu (m_menuFileOpenRecent);
-#endif
-  m_menuFile->addAction (m_actionClose);
-  m_menuFile->insertSeparator (m_actionSave);
-  m_menuFile->addAction (m_actionSave);
-  m_menuFile->addAction (m_actionSaveAs);
-  m_menuFile->addAction (m_actionExport);
-  m_menuFile->insertSeparator (m_actionPrint);
-  m_menuFile->addAction (m_actionPrint);
-  m_menuFile->insertSeparator (m_actionExit);
-  m_menuFile->addAction (m_actionExit);
-
-  m_menuEdit = menuBar()->addMenu(tr("&Edit"));
-  connect (m_menuEdit, SIGNAL (aboutToShow ()), this, SLOT (slotEditMenu ()));
-  m_menuEdit->addAction (m_actionEditUndo);
-  m_menuEdit->addAction (m_actionEditRedo);
-  m_menuEdit->insertSeparator (m_actionEditCut);
-  m_menuEdit->addAction (m_actionEditCut);
-  m_menuEdit->addAction (m_actionEditCopy);
-  m_menuEdit->addAction (m_actionEditPaste);
-  m_menuEdit->addAction (m_actionEditDelete);
-  m_menuEdit->insertSeparator (m_actionEditPasteAsNew);
-  m_menuEdit->addAction (m_actionEditPasteAsNew);
-  m_menuEdit->addAction (m_actionEditPasteAsNewAdvanced);
-
-  m_menuDigitize = menuBar()->addMenu(tr("Digitize"));
-  m_menuDigitize->addAction (m_actionDigitizeSelect);
-  m_menuDigitize->addAction (m_actionDigitizeAxis);
-  m_menuDigitize->addAction (m_actionDigitizeScale);
-  m_menuDigitize->addAction (m_actionDigitizeCurve);
-  m_menuDigitize->addAction (m_actionDigitizePointMatch);
-  m_menuDigitize->addAction (m_actionDigitizeColorPicker);
-  m_menuDigitize->addAction (m_actionDigitizeSegment);
-
-  m_menuView = menuBar()->addMenu(tr("View"));
-  m_menuView->addAction (m_actionViewBackground);
-  m_menuView->addAction (m_actionViewDigitize);
-  m_menuView->addAction (m_actionViewChecklistGuide);
-  m_menuView->addAction (m_actionViewFittingWindow);
-  m_menuView->addAction (m_actionViewGeometryWindow);
-  m_menuView->addAction (m_actionViewSettingsViews);
-  m_menuView->addAction (m_actionViewCoordSystem);
-  m_menuView->insertSeparator (m_actionViewToolTips);
-  m_menuView->addAction (m_actionViewToolTips);
-  m_menuView->addAction (m_actionViewGridLines);
-  m_menuView->insertSeparator (m_actionViewBackgroundNone);
-  m_menuViewBackground = new QMenu (tr ("Background"));
-  m_menuViewBackground->addAction (m_actionViewBackgroundNone);
-  m_menuViewBackground->addAction (m_actionViewBackgroundOriginal);
-  m_menuViewBackground->addAction (m_actionViewBackgroundFiltered);
-  m_menuView->addMenu (m_menuViewBackground);
-  m_menuViewCurves = new QMenu (tr ("Curves"));
-  m_menuViewCurves->addAction (m_actionViewCurvesNone);
-  m_menuViewCurves->addAction (m_actionViewCurvesSelected);
-  m_menuViewCurves->addAction (m_actionViewCurvesAll);
-  m_menuView->addMenu (m_menuViewCurves);
-  m_menuViewStatus = new QMenu (tr ("Status Bar"));
-  m_menuViewStatus->addAction (m_actionStatusNever);
-  m_menuViewStatus->addAction (m_actionStatusTemporary);
-  m_menuViewStatus->addAction (m_actionStatusAlways);
-  m_menuView->addMenu (m_menuViewStatus);
-  m_menuViewZoom = new QMenu (tr ("Zoom"));
-  m_menuViewZoom->addAction (m_actionZoomOut);
-  m_menuViewZoom->addAction (m_actionZoomIn);
-  m_menuViewZoom->insertSeparator (m_actionZoom16To1);
-  m_menuViewZoom->addAction (m_actionZoom16To1);
-  m_menuViewZoom->addAction (m_actionZoom16To1Farther);
-  m_menuViewZoom->addAction (m_actionZoom8To1Closer);
-  m_menuViewZoom->addAction (m_actionZoom8To1);
-  m_menuViewZoom->addAction (m_actionZoom8To1Farther);
-  m_menuViewZoom->addAction (m_actionZoom4To1Closer);
-  m_menuViewZoom->addAction (m_actionZoom4To1);
-  m_menuViewZoom->addAction (m_actionZoom4To1Farther);
-  m_menuViewZoom->addAction (m_actionZoom2To1Closer);
-  m_menuViewZoom->addAction (m_actionZoom2To1);
-  m_menuViewZoom->addAction (m_actionZoom2To1Farther);
-  m_menuViewZoom->addAction (m_actionZoom1To1Closer);
-  m_menuViewZoom->addAction (m_actionZoom1To1);
-  m_menuViewZoom->addAction (m_actionZoom1To1Farther);
-  m_menuViewZoom->addAction (m_actionZoom1To2Closer);
-  m_menuViewZoom->addAction (m_actionZoom1To2);
-  m_menuViewZoom->addAction (m_actionZoom1To2Farther);
-  m_menuViewZoom->addAction (m_actionZoom1To4Closer);
-  m_menuViewZoom->addAction (m_actionZoom1To4);
-  m_menuViewZoom->addAction (m_actionZoom1To4Farther);
-  m_menuViewZoom->addAction (m_actionZoom1To8Closer);
-  m_menuViewZoom->addAction (m_actionZoom1To8);
-  m_menuViewZoom->addAction (m_actionZoom1To8Farther);
-  m_menuViewZoom->addAction (m_actionZoom1To16Closer);
-  m_menuViewZoom->addAction (m_actionZoom1To16);
-  m_menuViewZoom->addAction (m_actionZoomFill);
-  m_menuView->addMenu (m_menuViewZoom);
-
-  m_menuSettings = menuBar()->addMenu(tr ("Settings"));
-  m_menuSettings->addAction (m_actionSettingsCoords);
-  m_menuSettings->addAction (m_actionSettingsCurveAddRemove);
-  m_menuSettings->addAction (m_actionSettingsCurveProperties);
-  m_menuSettings->addAction (m_actionSettingsDigitizeCurve);
-  m_menuSettings->addAction (m_actionSettingsExport);
-  m_menuSettings->addAction (m_actionSettingsColorFilter);
-  m_menuSettings->addAction (m_actionSettingsAxesChecker);
-  m_menuSettings->addAction (m_actionSettingsGridDisplay);
-  m_menuSettings->addAction (m_actionSettingsGridRemoval);
-  m_menuSettings->addAction (m_actionSettingsPointMatch);
-  m_menuSettings->addAction (m_actionSettingsSegments);
-  m_menuSettings->insertSeparator (m_actionSettingsGeneral);
-  m_menuSettings->addAction (m_actionSettingsGeneral);
-  m_menuSettings->addAction (m_actionSettingsMainWindow);
-
-  m_menuHelp = menuBar()->addMenu(tr("&Help"));
-  m_menuHelp->addAction (m_actionHelpChecklistGuideWizard);
-  m_menuHelp->insertSeparator(m_actionHelpWhatsThis);
-  m_menuHelp->addAction (m_actionHelpWhatsThis);
-  m_menuHelp->addAction (m_actionHelpTutorial);
-#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
-  m_menuHelp->addAction (m_actionHelpHelp);
-#endif
-  m_menuHelp->addAction (m_actionHelpAbout);
-
-  updateRecentFileList();
-}
-
-void MainWindow::createNetwork ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createNetwork";
-
-#ifdef NETWORKING
-  m_networkClient = new NetworkClient (this);
-#endif
-}
-
-void MainWindow::createSettingsDialogs ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createSettingsDialogs";
-
-  m_dlgSettingsCoords = new DlgSettingsCoords (*this);
-  m_dlgSettingsCurveAddRemove = new DlgSettingsCurveAddRemove (*this);
-  m_dlgSettingsCurveProperties = new DlgSettingsCurveProperties (*this);
-  m_dlgSettingsDigitizeCurve = new DlgSettingsDigitizeCurve (*this);
-  m_dlgSettingsExportFormat = new DlgSettingsExportFormat (*this);
-  m_dlgSettingsColorFilter = new DlgSettingsColorFilter (*this);
-  m_dlgSettingsAxesChecker = new DlgSettingsAxesChecker (*this);
-  m_dlgSettingsGridDisplay = new DlgSettingsGridDisplay (*this);
-  m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (*this);
-  m_dlgSettingsPointMatch = new DlgSettingsPointMatch (*this);
-  m_dlgSettingsSegments = new DlgSettingsSegments (*this);
-  m_dlgSettingsGeneral = new DlgSettingsGeneral (*this);
-  m_dlgSettingsMainWindow = new DlgSettingsMainWindow (*this);
-
-  m_dlgSettingsCoords->setVisible (false);
-  m_dlgSettingsCurveAddRemove->setVisible (false);
-  m_dlgSettingsCurveProperties->setVisible (false);
-  m_dlgSettingsDigitizeCurve->setVisible (false);
-  m_dlgSettingsExportFormat->setVisible (false);
-  m_dlgSettingsColorFilter->setVisible (false);
-  m_dlgSettingsAxesChecker->setVisible (false);
-  m_dlgSettingsGridDisplay->setVisible (false);
-  m_dlgSettingsGridRemoval->setVisible (false);
-  m_dlgSettingsPointMatch->setVisible (false);
-  m_dlgSettingsSegments->setVisible (false);
-  m_dlgSettingsGeneral->setVisible (false);
-  m_dlgSettingsMainWindow->setVisible (false);
-}
-
-void MainWindow::createScene ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createScene";
-
-  m_scene = new GraphicsScene (this);
-  m_view = new GraphicsView (m_scene, *this);
-  m_layout->addWidget (m_view);
-}
-
-void MainWindow::createStateContextBackground ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createStateContextBackground";
-
-  m_backgroundStateContext = new BackgroundStateContext (*this);
-}
-
-void MainWindow::createStateContextDigitize ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createStateContextDigitize";
-
-  m_digitizeStateContext = new DigitizeStateContext (*this,
-                                                     *m_view,
-                                                     m_isGnuplot);
-}
-
-void MainWindow::createStateContextTransformation ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createStateContextTransformation";
-
-  ENGAUGE_CHECK_PTR (m_scene);
-
-  m_transformationStateContext = new TransformationStateContext (*m_scene,
-                                                                 m_isGnuplot);
-}
-
-void MainWindow::createStatusBar ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createStatusBar";
-
-  m_statusBar = new StatusBar (*statusBar ());
-  connect (this, SIGNAL (signalZoom(int)), m_statusBar, SLOT (slotZoom(int)));
-  connect (m_statusBar, SIGNAL (signalZoom (int)), this, SLOT (slotViewZoom (int)));
-}
-
-void MainWindow::createToolBars ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createToolBars";
-
-  const int VIEW_SIZE = 22;
-
-  // Background toolbar widgets
-  m_cmbBackground = new QComboBox ();
-  m_cmbBackground->setEnabled (false);
-  m_cmbBackground->setStatusTip (tr ("Select background image"));
-  m_cmbBackground->setWhatsThis (tr ("Selected Background\n\n"
-                                     "Select background image:\n"
-                                     "1) No background which highlights points\n"
-                                     "2) Original image which shows everything\n"
-                                     "3) Filtered image which highlights important details"));
-  m_cmbBackground->addItem (tr ("No background"), QVariant (BACKGROUND_IMAGE_NONE));
-  m_cmbBackground->addItem (tr ("Original image"), QVariant (BACKGROUND_IMAGE_ORIGINAL));
-  m_cmbBackground->addItem (tr ("Filtered image"), QVariant (BACKGROUND_IMAGE_FILTERED));
-  // selectBackgroundOriginal needs currentIndexChanged
-  connect (m_cmbBackground, SIGNAL (currentIndexChanged (int)), this, SLOT (slotCmbBackground (int)));
-
-  // Background toolbar
-  m_toolBackground = new QToolBar (tr ("Background"), this);
-  m_toolBackground->addWidget (m_cmbBackground);
-  addToolBar (m_toolBackground);
-
-  // Digitize toolbar widgets that are not created elsewhere
-  m_cmbCurve = new QComboBox ();
-  m_cmbCurve->setEnabled (false);
-  m_cmbCurve->setMinimumWidth (180);
-  m_cmbCurve->setStatusTip (tr ("Select curve for new points."));
-  m_cmbCurve->setWhatsThis (tr ("Selected Curve Name\n\n"
-                                "Select curve for any new points. Every point belongs to one curve.\n\n"
-                                "This can be changed while in Curve Point, Point Match, Color Picker or Segment Fill mode."));
-  connect (m_cmbCurve, SIGNAL (activated (int)), this, SLOT (slotCmbCurve (int))); // activated() ignores code changes
-
-  // Digitize toolbar
-  m_toolDigitize = new QToolBar (tr ("Drawing"), this);
-  m_toolDigitize->addAction (m_actionDigitizeSelect);
-  m_toolDigitize->insertSeparator (m_actionDigitizeAxis);
-  m_toolDigitize->addAction (m_actionDigitizeAxis);
-  m_toolDigitize->addAction (m_actionDigitizeScale);
-  m_toolDigitize->insertSeparator (m_actionDigitizeCurve);
-  m_toolDigitize->addAction (m_actionDigitizeCurve);
-  m_toolDigitize->addAction (m_actionDigitizePointMatch);
-  m_toolDigitize->addAction (m_actionDigitizeColorPicker);
-  m_toolDigitize->addAction (m_actionDigitizeSegment);
-  m_toolDigitize->addWidget (m_cmbCurve);
-  addToolBar (m_toolDigitize);
-
-  // Views toolbar widgets
-  m_viewPointStyle = new ViewPointStyle();
-  m_viewPointStyle->setMinimumSize(VIEW_SIZE, VIEW_SIZE);
-  m_viewPointStyle->setMaximumSize(VIEW_SIZE, VIEW_SIZE);
-  m_viewPointStyle->setStatusTip (tr ("Points style for the currently selected curve"));
-  m_viewPointStyle->setWhatsThis (tr ("Points Style\n\n"
-                                      "Points style for the currently selected curve. The points style is only "
-                                      "displayed in this toolbar. To change the points style, "
-                                      "use the Curve Properties dialog."));
-
-  m_viewSegmentFilter = new ViewSegmentFilter();
-  m_viewSegmentFilter->setMinimumSize(VIEW_SIZE, VIEW_SIZE);
-  m_viewSegmentFilter->setMaximumSize(VIEW_SIZE, VIEW_SIZE);
-  m_viewSegmentFilter->setStatusTip (tr ("View of filter for current curve in Segment Fill mode"));
-  m_viewSegmentFilter->setWhatsThis (tr ("Segment Fill Filter\n\n"
-                                         "View of filter for the current curve in Segment Fill mode. The filter settings are only "
-                                         "displayed in this toolbar. To changed the filter settings, "
-                                         "use the Color Picker mode or the Filter Settings dialog."));
-
-  // Settings views toolbar
-  m_toolSettingsViews = new QToolBar (tr ("Views"), this);
-  m_toolSettingsViews->addWidget (m_viewPointStyle);
-  m_toolSettingsViews->addWidget (new QLabel (" ")); // A hack, but this works to put some space between the adjacent widgets
-  m_toolSettingsViews->addWidget (m_viewSegmentFilter);
-  addToolBar (m_toolSettingsViews);
-
-  // Coordinate system toolbar
-  m_cmbCoordSystem = new QComboBox;
-  m_cmbCoordSystem->setEnabled (false);
-  m_cmbCoordSystem->setStatusTip (tr ("Currently selected coordinate system"));
-  m_cmbCoordSystem->setWhatsThis (tr ("Selected Coordinate System\n\n"
-                                      "Currently selected coordinate system. This is used to switch between coordinate systems "
-                                      "in documents with multiple coordinate systems"));
-  connect (m_cmbCoordSystem, SIGNAL (activated (int)), this, SLOT (slotCmbCoordSystem (int)));
-
-  m_btnShowAll = new QPushButton(QIcon(":/engauge/img/icon_show_all.png"), "");
-  m_btnShowAll->setEnabled (false);
-  m_btnShowAll->setAcceptDrops(false);
-  m_btnShowAll->setStatusTip (tr ("Show all coordinate systems"));
-  m_btnShowAll->setWhatsThis (tr ("Show All Coordinate Systems\n\n"
-                                  "When pressed and held, this button shows all digitized points and lines for all coordinate systems."));
-  connect (m_btnShowAll, SIGNAL (pressed ()), this, SLOT (slotBtnShowAllPressed ()));
-  connect (m_btnShowAll, SIGNAL (released ()), this, SLOT (slotBtnShowAllReleased ()));
-
-  m_btnPrintAll = new QPushButton(QIcon(":/engauge/img/icon_print_all.png"), "");
-  m_btnPrintAll->setEnabled (false);
-  m_btnPrintAll->setAcceptDrops(false);
-  m_btnPrintAll->setStatusTip (tr ("Print all coordinate systems"));
-  m_btnPrintAll->setWhatsThis (tr ("Print All Coordinate Systems\n\n"
-                                  "When pressed, this button Prints all digitized points and lines for all coordinate systems."));
-  connect (m_btnPrintAll, SIGNAL (pressed ()), this, SLOT (slotBtnPrintAll ()));
-
-  m_toolCoordSystem = new QToolBar (tr ("Coordinate System"), this);
-  m_toolCoordSystem->addWidget (m_cmbCoordSystem);
-  m_toolCoordSystem->addWidget (m_btnShowAll);
-  m_toolCoordSystem->addWidget (m_btnPrintAll);
-  addToolBar (m_toolCoordSystem);
-}
-
-void MainWindow::createTutorial ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createTutorial";
-
-  m_tutorialDlg = new TutorialDlg (this);
-  m_tutorialDlg->setModal (true);
-  m_tutorialDlg->setMinimumSize (500, 400);
-  m_tutorialDlg->hide();
-}
-
-void MainWindow::createZoomMaps ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::createZoomMaps";
-
-  m_zoomMapFromInitial [ZOOM_INITIAL_16_TO_1] = ZOOM_16_TO_1;
-  m_zoomMapFromInitial [ZOOM_INITIAL_8_TO_1] = ZOOM_8_TO_1;
-  m_zoomMapFromInitial [ZOOM_INITIAL_4_TO_1] = ZOOM_4_TO_1;
-  m_zoomMapFromInitial [ZOOM_INITIAL_2_TO_1] = ZOOM_2_TO_1;
-  m_zoomMapFromInitial [ZOOM_INITIAL_1_TO_1] = ZOOM_1_TO_1;
-  m_zoomMapFromInitial [ZOOM_INITIAL_1_TO_2] = ZOOM_1_TO_2;
-  m_zoomMapFromInitial [ZOOM_INITIAL_1_TO_4] = ZOOM_1_TO_4;
-  m_zoomMapFromInitial [ZOOM_INITIAL_1_TO_8] = ZOOM_1_TO_8;
-  m_zoomMapFromInitial [ZOOM_INITIAL_1_TO_16] = ZOOM_1_TO_16;
-  m_zoomMapFromInitial [ZOOM_INITIAL_FILL] = ZOOM_FILL;
-
-  m_zoomMapToAction [ZOOM_16_TO_1] = m_actionZoom16To1;
-  m_zoomMapToAction [ZOOM_16_TO_1_FARTHER] = m_actionZoom16To1Farther;
-  m_zoomMapToAction [ZOOM_8_TO_1_CLOSER] = m_actionZoom8To1Closer;
-  m_zoomMapToAction [ZOOM_8_TO_1] = m_actionZoom8To1;
-  m_zoomMapToAction [ZOOM_8_TO_1_FARTHER] = m_actionZoom8To1Farther;
-  m_zoomMapToAction [ZOOM_4_TO_1_CLOSER] = m_actionZoom4To1Closer;
-  m_zoomMapToAction [ZOOM_4_TO_1] = m_actionZoom4To1;
-  m_zoomMapToAction [ZOOM_4_TO_1_FARTHER] = m_actionZoom4To1Farther;
-  m_zoomMapToAction [ZOOM_2_TO_1_CLOSER] = m_actionZoom2To1Closer;
-  m_zoomMapToAction [ZOOM_2_TO_1] = m_actionZoom2To1;
-  m_zoomMapToAction [ZOOM_2_TO_1_FARTHER] = m_actionZoom2To1Farther;
-  m_zoomMapToAction [ZOOM_1_TO_1_CLOSER] = m_actionZoom1To1Closer;
-  m_zoomMapToAction [ZOOM_1_TO_1] = m_actionZoom1To1;
-  m_zoomMapToAction [ZOOM_1_TO_1_FARTHER] = m_actionZoom1To1Farther;
-  m_zoomMapToAction [ZOOM_1_TO_2_CLOSER] = m_actionZoom1To2Closer;
-  m_zoomMapToAction [ZOOM_1_TO_2] = m_actionZoom1To2;
-  m_zoomMapToAction [ZOOM_1_TO_2_FARTHER] = m_actionZoom1To2Farther;
-  m_zoomMapToAction [ZOOM_1_TO_4_CLOSER] = m_actionZoom1To4Closer;
-  m_zoomMapToAction [ZOOM_1_TO_4] = m_actionZoom1To4;
-  m_zoomMapToAction [ZOOM_1_TO_4_FARTHER] = m_actionZoom1To4Farther;
-  m_zoomMapToAction [ZOOM_1_TO_8_CLOSER] = m_actionZoom1To8Closer;
-  m_zoomMapToAction [ZOOM_1_TO_8] = m_actionZoom1To8;
-  m_zoomMapToAction [ZOOM_1_TO_8_FARTHER] = m_actionZoom1To8Farther;
-  m_zoomMapToAction [ZOOM_1_TO_16_CLOSER] = m_actionZoom1To16Closer;
-  m_zoomMapToAction [ZOOM_1_TO_16] = m_actionZoom1To16;
-  m_zoomMapToAction [ZOOM_FILL] = m_actionZoomFill;
-}
-
 ZoomFactor MainWindow::currentZoomFactor () const
 {
   // Find the zoom control that is checked
@@ -1658,6 +427,8 @@ void MainWindow::fileExport(const QString &fileName,
                                  transformation (),
                                  str);
 
+    m_isDocumentExported = true; // Remember that export was performed
+
     updateChecklistGuide ();
     m_statusBar->showTemporaryMessage("File saved");
 
@@ -1668,7 +439,41 @@ void MainWindow::fileExport(const QString &fileName,
                                  << " curDir=" << QDir::currentPath().toLatin1().data();
     QMessageBox::critical (0,
                            engaugeWindowTitle(),
-                           tr ("Unable to export to file ") + fileName);
+                           tr ("Unable to export to file") + " " + fileName);
+  }
+}
+
+void MainWindow::fileExtractImage (const QString &fileName)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::fileExtractImage"
+                              << " curDir=" << QDir::currentPath().toLatin1().data()
+                              << " fileName=" << fileName.toLatin1().data();
+
+  QFile file (fileName);
+  if (file.open(QIODevice::WriteOnly)) {
+
+    QPixmap pixmap = m_cmdMediator->pixmap();
+    pixmap.save (&file);
+
+    // Generate a checksum file if performing a regression test
+    if (m_isErrorReportRegressionTest) {
+      QString csvFile = QString ("%1_1")
+          .arg (exportRegressionFilenameFromInputFilename (m_regressionFile));
+
+      // Generate csv file with only checksum. Since QProcess cannot handle pipes, we let shell execute it
+      QProcess process;
+      process.start ("bash -c \"cksum " + fileName + " | awk '{print $1}' > " + csvFile + "\"");
+      process.waitForFinished (-1);
+    }
+
+  } else {
+
+    LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::fileExtractImage"
+                                 << " file=" << fileName.toLatin1().data()
+                                 << " curDir=" << QDir::currentPath().toLatin1().data();
+    QMessageBox::critical (0,
+                           engaugeWindowTitle(),
+                           tr ("Unable to extract image to file") + " " + fileName);
   }
 }
 
@@ -1808,25 +613,8 @@ void MainWindow::fileImportWithPrompts (ImportType importType)
     QString filter;
     QTextStream str (&filter);
 
-    // Compile a list of supported formats into a filter
-    QList<QByteArray>::const_iterator itr;
-    QList<QByteArray> supportedImageFormats = QImageReader::supportedImageFormats();
-    QStringList supportedImageFormatStrings;
-    for (itr = supportedImageFormats.begin (); itr != supportedImageFormats.end (); itr++) {
-      QByteArray arr = *itr;
-      QString extensionAsWildcard = QString ("*.%1").arg (QString (arr));
-      supportedImageFormatStrings << extensionAsWildcard;
-    }
-#ifdef ENGAUGE_JPEG2000
-    Jpeg2000 jpeg2000;
-    supportedImageFormatStrings << jpeg2000.supportedImageWildcards();
-#endif // ENGAUGE_JPEG2000
-
-#ifdef ENGAUGE_PDF
-    supportedImageFormatStrings << "*.pdf";
-#endif // ENGAUGE_PDF
-
-    supportedImageFormatStrings.sort();
+    ImportImageExtensions importImageExtensions;
+    QStringList supportedImageFormatStrings = importImageExtensions.fileExtensionsWithAsterisks ();
 
     str << "Image Files (" << supportedImageFormatStrings.join (" ") << ")";
 
@@ -1870,6 +658,18 @@ QString MainWindow::fileNameForExportOnly () const
       .arg (m_currentFile)
       .arg (exportStrategy.fileExtensionCsv ());
   }
+
+  return fileName;
+}
+
+QString MainWindow::fileNameForExtractImageOnly () const
+{
+  // User requested export-only mode so just change file extension
+  QString dir = QFileInfo (m_currentFileWithPathAndFileExtension).absolutePath();
+  QString fileName = QString ("%1/%2.%3")
+    .arg (dir)
+    .arg (m_currentFile)
+    .arg (m_extractImageOnlyExtension);
 
   return fileName;
 }
@@ -1981,6 +781,20 @@ void MainWindow::ghostsDestroy ()
   m_ghosts = 0;
 }
 
+void MainWindow::handlerFileExtractImage ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::handlerFileExtractImage";
+
+  if (m_isExtractImageOnly) {
+    QString fileName = fileNameForExtractImageOnly ();
+
+    MainDirectoryPersist directoryPersist;
+
+    directoryPersist.setDirectoryExportSaveFromFilename(fileName);
+    fileExtractImage(fileName);
+  }
+}
+
 QImage MainWindow::imageFiltered () const
 {
   return m_backgroundStateContext->imageForCurveState();
@@ -2046,10 +860,7 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     rebuildRecentFileListForCurrentFile(fileName);
     m_currentFile = fileName; // This enables the FileSaveAs menu option
 
-    if (m_cmdMediator != 0) {
-      delete m_cmdMediator;
-      m_cmdMediator = 0;
-    }
+    delete m_cmdMediator;
 
     m_cmdMediator = cmdMediator;
     setupAfterLoadNewDocument (fileName,
@@ -2098,7 +909,7 @@ void MainWindow::loadErrorReportFile(const QString &errorReportFile)
 
     QMessageBox::critical (this,
                            engaugeWindowTitle(),
-                           tr ("File not found:") + " " + fileInfo.absoluteFilePath());
+                           tr ("File not found") + ": " + fileInfo.absoluteFilePath());
     exit (-1);
   }
 
@@ -2166,10 +977,7 @@ bool MainWindow::loadImageNewDocument (const QString &fileName,
   // We do not call rebuildRecentFileListForCurrentFile for an image file, so only proper Engauge document files appear in the recent file list
   m_engaugeFile = EMPTY_FILENAME; // Forces first Save to be treated as Save As
 
-  if (m_cmdMediator != 0) {
-    delete m_cmdMediator;
-    m_cmdMediator = 0;
-  }
+  delete m_cmdMediator;
 
   m_cmdMediator = cmdMediator;
   bool accepted = setupAfterLoadNewDocument (fileName,
@@ -2678,7 +1486,8 @@ void MainWindow::setPixmap (const QString &curveSelected,
 
   // We cannot reliably use m_cmbCurve->currentText below for the selected curve since that control
   // can be pointing to a curve that no longer exists so this method requires curveSelected as an argument
-  m_backgroundStateContext->setPixmap (m_transformation,
+  m_backgroundStateContext->setPixmap (m_isGnuplot,
+                                       m_transformation,
                                        m_cmdMediator->document().modelGridRemoval(),
                                        m_cmdMediator->document().modelColorFilter(),
                                        pixmap,
@@ -2912,7 +1721,8 @@ bool MainWindow::setupAfterLoadNewDocument (const QString &fileName,
   // At this point the code assumes CmdMediator for the NEW Document is already stored in m_cmdMediator
 
   m_digitizeStateContext->resetOnLoad (m_cmdMediator); // Before setPixmap
-  m_backgroundStateContext->setCurveSelected (m_transformation,
+  m_backgroundStateContext->setCurveSelected (m_isGnuplot,
+                                              m_transformation,
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
                                               EMPTY_CURVE_NAME_TO_SKIP_BACKGROUND_PROCESSING); // Before setPixmap
@@ -2959,7 +1769,8 @@ bool MainWindow::setupAfterLoadNewDocument (const QString &fileName,
   // the transformation is undefined (unless the code is changed) so grid removal will not work
   // but updateTransformationAndItsDependencies will call this again to fix that issue. Note that the selected
   // curve name was set (by setCurveSelected) earlier before the call to setPixmap
-  m_backgroundStateContext->setCurveSelected (m_transformation,
+  m_backgroundStateContext->setCurveSelected (m_isGnuplot,
+                                              m_transformation,
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
@@ -3137,7 +1948,8 @@ void MainWindow::slotCmbCurve(int /* index */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotCmbCurve";
 
-  m_backgroundStateContext->setCurveSelected (m_transformation,
+  m_backgroundStateContext->setCurveSelected (m_isGnuplot,
+                                              m_transformation,
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
@@ -3400,7 +2212,8 @@ void MainWindow::slotFileClose()
 
     // Transition from defined to undefined. This must be after the clearing of the screen
     // since the axes checker screen item (and maybe others) must still exist
-    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
+    m_transformationStateContext->triggerStateTransition(m_isGnuplot,
+                                                         TRANSFORMATION_STATE_UNDEFINED,
                                                          *m_cmdMediator,
                                                          m_transformation,
                                                          selectedGraphCurve());
@@ -3665,7 +2478,6 @@ void MainWindow::slotFittingWindowCurveFit(FittingCurveCoefficients fittingCurve
   if (m_fittingCurve != 0) {
     m_scene->removeItem (m_fittingCurve);
     delete m_fittingCurve;
-    m_fittingCurve = 0;
   }
 
   m_fittingCurve = new FittingCurve (fittingCurveCoef,
@@ -3740,7 +2552,7 @@ void MainWindow::slotLoadStartupFiles ()
     // Fork off another instance of this application to handle the remaining files recursively. New process
     // is detached so killing/terminating this process does not automatically kill the child process(es) also
     QProcess::startDetached (QCoreApplication::applicationFilePath(),
-                             m_loadStartupFiles);
+                             m_commandLineWithoutLoadStartupFiles + m_loadStartupFiles);
   }
 }
 
@@ -4364,7 +3176,8 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   if (!m_transformationBefore.transformIsDefined() && m_transformation.transformIsDefined()) {
 
     // Transition from undefined to defined
-    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_DEFINED,
+    m_transformationStateContext->triggerStateTransition(m_isGnuplot,
+                                                         TRANSFORMATION_STATE_DEFINED,
                                                          *m_cmdMediator,
                                                          m_transformation,
                                                          selectedGraphCurve());
@@ -4372,7 +3185,8 @@ void MainWindow::updateAfterCommandStatusBarCoords ()
   } else if (m_transformationBefore.transformIsDefined() && !m_transformation.transformIsDefined()) {
 
     // Transition from defined to undefined
-    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
+    m_transformationStateContext->triggerStateTransition(m_isGnuplot,
+                                                         TRANSFORMATION_STATE_UNDEFINED,
                                                          *m_cmdMediator,
                                                          m_transformation,
                                                          selectedGraphCurve());
@@ -4403,7 +3217,6 @@ void MainWindow::updateChecklistGuide ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateChecklistGuide";
 
-  m_isDocumentExported = true; // Set for next line and for all checklist guide updates after this
   m_dockChecklistGuide->update (*m_cmdMediator,
                                 m_isDocumentExported);
 }
@@ -4662,12 +3475,14 @@ void MainWindow::updateSettingsAxesChecker(const DocumentModelAxesChecker &model
 
   m_cmdMediator->document().setModelAxesChecker(modelAxesChecker);
   if (m_transformation.transformIsDefined()) {
-    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_DEFINED,
+    m_transformationStateContext->triggerStateTransition(m_isGnuplot,
+                                                         TRANSFORMATION_STATE_DEFINED,
                                                          *m_cmdMediator,
                                                          m_transformation,
                                                          m_cmbCurve->currentText());
   } else {
-    m_transformationStateContext->triggerStateTransition(TRANSFORMATION_STATE_UNDEFINED,
+    m_transformationStateContext->triggerStateTransition(m_isGnuplot,
+                                                         TRANSFORMATION_STATE_UNDEFINED,
                                                          *m_cmdMediator,
                                                          m_transformation,
                                                          m_cmbCurve->currentText());
@@ -4679,7 +3494,8 @@ void MainWindow::updateSettingsColorFilter(const DocumentModelColorFilter &model
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsColorFilter";
 
   m_cmdMediator->document().setModelColorFilter(modelColorFilter);
-  m_backgroundStateContext->updateColorFilter (m_transformation,
+  m_backgroundStateContext->updateColorFilter (m_isGnuplot,
+                                               m_transformation,
                                                m_cmdMediator->document().modelGridRemoval(),
                                                modelColorFilter,
                                                m_cmbCurve->currentText());
@@ -4825,11 +3641,12 @@ void MainWindow::updateTransformationAndItsDependencies()
                            m_modelMainWindow);
 
   // Grid removal is affected by new transformation above
-  m_backgroundStateContext->setCurveSelected (m_transformation,
+  m_backgroundStateContext->setCurveSelected (m_isGnuplot,
+                                              m_transformation,
                                               m_cmdMediator->document().modelGridRemoval(),
                                               m_cmdMediator->document().modelColorFilter(),
                                               m_cmbCurve->currentText ());
-
+  
   // Grid display is also affected by new transformation above, if there was a transition into defined state
   // in which case that transition triggered the initialization of the grid display parameters
   updateGridLines();
@@ -4891,8 +3708,9 @@ void MainWindow::updateWindowTitle ()
 
   const QString PLACEHOLDER ("[*]");
 
-  QString title = QString (tr ("Engauge Digitizer %1")
-                           .arg (VERSION_NUMBER));
+  QString title = QString ("%1 %2")
+                           .arg (tr ("Engauge Digitizer"))
+                           .arg (VERSION_NUMBER);
 
   QString fileNameMaybeStripped;
   if (!m_currentFileWithPathAndFileExtension.isEmpty()) {

@@ -8,6 +8,8 @@
 #include "CmdSettingsGridRemoval.h"
 #include "DlgSettingsGridRemoval.h"
 #include "EngaugeAssert.h"
+#include "GridInitializer.h"
+#include "GridRemoval.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QCheckBox>
@@ -19,6 +21,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPixmap>
 #include "ViewPreview.h"
 
 const double CLOSE_DISTANCE_MAX = 64;
@@ -81,7 +84,7 @@ void DlgSettingsGridRemoval::createRemoveGridLines (QGridLayout *layout, int &ro
   connect (m_chkRemoveGridLines, SIGNAL (stateChanged (int)), this, SLOT (slotRemoveGridLines (int)));
   layout->addWidget (m_chkRemoveGridLines, row++, 1, 1, 3);
 
-  QLabel *labelCloseDistance = new QLabel (tr ("Close distance (pixels):"));
+  QLabel *labelCloseDistance = new QLabel (QString ("%1:").arg (tr ("Close distance (pixels)")));
   layout->addWidget (labelCloseDistance, row, 2);
 
   m_editCloseDistance = new QLineEdit;
@@ -112,7 +115,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   QGridLayout *layoutGroup = new QGridLayout;
   groupX->setLayout (layoutGroup);
 
-  QLabel *labelDisable = new QLabel (tr ("Disable:"));
+  QLabel *labelDisable = new QLabel (QString ("%1:").arg (tr ("Disable")));
   layoutGroup->addWidget (labelDisable, 0, 0);
 
   m_cmbDisableX = new QComboBox;
@@ -131,7 +134,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   connect (m_cmbDisableX, SIGNAL (activated (const QString &)), this, SLOT (slotDisableX (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbDisableX, 0, 1);
 
-  QLabel *labelCount = new QLabel (tr ("Count:"));
+  QLabel *labelCount = new QLabel (QString ("%1:").arg (tr ("Count")));
   layoutGroup->addWidget (labelCount, 1, 0);
 
   m_editCountX = new QLineEdit;
@@ -142,7 +145,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   connect (m_editCountX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotCountX (const QString &)));
   layoutGroup->addWidget (m_editCountX, 1, 1);
 
-  QLabel *labelStart = new QLabel (tr ("Start:"));
+  QLabel *labelStart = new QLabel (QString ("%1:").arg (tr ("Start")));
   layoutGroup->addWidget (labelStart, 2, 0);
 
   m_editStartX = new QLineEdit;
@@ -153,7 +156,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   connect (m_editStartX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStartX (const QString &)));
   layoutGroup->addWidget (m_editStartX, 2, 1);
 
-  QLabel *labelStep = new QLabel (tr ("Step:"));
+  QLabel *labelStep = new QLabel (QString ("%1:").arg (tr ("Step")));
   layoutGroup->addWidget (labelStep, 3, 0);
 
   m_editStepX = new QLineEdit;
@@ -164,7 +167,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
   connect (m_editStepX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepX (const QString &)));
   layoutGroup->addWidget (m_editStepX, 3, 1);
 
-  QLabel *labelStop = new QLabel (tr ("Stop:"));
+  QLabel *labelStop = new QLabel (QString ("%1:").arg (tr ("Stop")));
   layoutGroup->addWidget (labelStop, 4, 0);
 
   m_editStopX = new QLineEdit;
@@ -190,7 +193,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   QGridLayout *layoutGroup = new QGridLayout;
   groupY->setLayout (layoutGroup);
 
-  QLabel *labelDisable = new QLabel (tr ("Disable:"));
+  QLabel *labelDisable = new QLabel (QString ("%1:").arg (tr ("Disable")));
   layoutGroup->addWidget (labelDisable, 0, 0);
 
   m_cmbDisableY = new QComboBox;
@@ -209,7 +212,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   connect (m_cmbDisableY, SIGNAL (activated (const QString &)), this, SLOT (slotDisableY (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbDisableY, 0, 1);
 
-  QLabel *labelCount = new QLabel (tr ("Count:"));
+  QLabel *labelCount = new QLabel (QString ("%1:").arg (tr ("Count")));
   layoutGroup->addWidget (labelCount, 1, 0);
 
   m_editCountY = new QLineEdit;
@@ -220,7 +223,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   connect (m_editCountY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotCountY (const QString &)));
   layoutGroup->addWidget (m_editCountY, 1, 1);
 
-  QLabel *labelStart = new QLabel (tr ("Start:"));
+  QLabel *labelStart = new QLabel (QString ("%1:").arg (tr ("Start")));
   layoutGroup->addWidget (labelStart, 2, 0);
 
   m_editStartY = new QLineEdit;
@@ -231,7 +234,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   connect (m_editStartY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStartY (const QString &)));
   layoutGroup->addWidget (m_editStartY, 2, 1);
 
-  QLabel *labelStep = new QLabel (tr ("Step:"));
+  QLabel *labelStep = new QLabel (QString ("%1:").arg (tr ("Step")));
   layoutGroup->addWidget (labelStep, 3, 0);
 
   m_editStepY = new QLineEdit;
@@ -242,7 +245,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
   connect (m_editStepY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepY (const QString &)));
   layoutGroup->addWidget (m_editStepY, 3, 1);
 
-  QLabel *labelStop = new QLabel (tr ("Stop:"));
+  QLabel *labelStop = new QLabel (QString ("%1:").arg (tr ("Stop")));
   layoutGroup->addWidget (labelStop, 4, 0);
 
   m_editStopY = new QLineEdit;
@@ -298,12 +301,8 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelGridRemovalBefore != 0) {
-    delete m_modelGridRemovalBefore;
-  }
-  if (m_modelGridRemovalAfter != 0) {
-    delete m_modelGridRemovalAfter;
-  }
+  delete m_modelGridRemovalBefore;
+  delete m_modelGridRemovalAfter;
 
   // Save new data
   m_modelGridRemovalBefore = new DocumentModelGridRemoval (cmdMediator.document());
@@ -334,9 +333,6 @@ void DlgSettingsGridRemoval::load (CmdMediator &cmdMediator)
   m_editStepY->setText(QString::number(m_modelGridRemovalAfter->stepY()));
   m_editStopY->setText(QString::number(m_modelGridRemovalAfter->stopY()));
 
-  m_scenePreview->clear();
-  m_scenePreview->addPixmap (cmdMediator.document().pixmap());
-
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
   updatePreview();
@@ -363,6 +359,7 @@ void DlgSettingsGridRemoval::slotCountX(const QString &count)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCountX";
 
   m_modelGridRemovalAfter->setCountX(count.toInt());
+  updateDisplayedVariableX ();
   updateControls ();
   updatePreview();
 }
@@ -372,6 +369,7 @@ void DlgSettingsGridRemoval::slotCountY(const QString &count)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotCountY";
 
   m_modelGridRemovalAfter->setCountY(count.toInt());
+  updateDisplayedVariableY ();
   updateControls ();
   updatePreview();
 }
@@ -382,6 +380,7 @@ void DlgSettingsGridRemoval::slotDisableX(const QString &)
 
   GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableX->currentData().toInt();
   m_modelGridRemovalAfter->setGridCoordDisableX(gridCoordDisable);
+  updateDisplayedVariableX ();
   updateControls();
   updatePreview();
 }
@@ -392,6 +391,7 @@ void DlgSettingsGridRemoval::slotDisableY(const QString &)
 
   GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableY->currentData().toInt();
   m_modelGridRemovalAfter->setGridCoordDisableY(gridCoordDisable);
+  updateDisplayedVariableY ();
   updateControls();
   updatePreview();
 }
@@ -410,6 +410,7 @@ void DlgSettingsGridRemoval::slotStartX(const QString &startX)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStartX";
 
   m_modelGridRemovalAfter->setStartX(startX.toDouble());
+  updateDisplayedVariableX ();
   updateControls();
   updatePreview();
 }
@@ -419,6 +420,7 @@ void DlgSettingsGridRemoval::slotStartY(const QString &startY)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStartY";
 
   m_modelGridRemovalAfter->setStartY(startY.toDouble());
+  updateDisplayedVariableY ();
   updateControls();
   updatePreview();
 }
@@ -428,6 +430,7 @@ void DlgSettingsGridRemoval::slotStepX(const QString &stepX)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStepX";
 
   m_modelGridRemovalAfter->setStepX(stepX.toDouble());
+  updateDisplayedVariableX ();
   updateControls();
   updatePreview();
 }
@@ -437,6 +440,7 @@ void DlgSettingsGridRemoval::slotStepY(const QString &stepY)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStepY";
 
   m_modelGridRemovalAfter->setStepY(stepY.toDouble());
+  updateDisplayedVariableY ();
   updateControls();
   updatePreview();
 }
@@ -446,6 +450,7 @@ void DlgSettingsGridRemoval::slotStopX(const QString &stopX)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStopX";
 
   m_modelGridRemovalAfter->setStopX(stopX.toDouble());
+  updateDisplayedVariableX ();
   updateControls();
   updatePreview();
 }
@@ -455,6 +460,7 @@ void DlgSettingsGridRemoval::slotStopY(const QString &stopY)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotStopY";
 
   m_modelGridRemovalAfter->setStopY(stopY.toDouble());
+  updateDisplayedVariableY ();
   updateControls();
   updatePreview();
 }
@@ -502,7 +508,96 @@ void DlgSettingsGridRemoval::updateControls ()
   enableOk (isOk);
 }
 
+void DlgSettingsGridRemoval::updateDisplayedVariableX ()
+{
+  GridInitializer initializer;
+
+  bool linearAxis = (cmdMediator ().document ().modelCoords ().coordScaleXTheta() == COORD_SCALE_LINEAR);
+
+  switch (m_modelGridRemovalAfter->gridCoordDisableX()) {
+    case GRID_COORD_DISABLE_COUNT:
+      m_editCountX->setText (QString::number (initializer.computeCount (linearAxis,
+                                                                        m_modelGridRemovalAfter->startX (),
+                                                                        m_modelGridRemovalAfter->stopX (),
+                                                                        m_modelGridRemovalAfter->stepX ())));
+      break;
+
+    case GRID_COORD_DISABLE_START:
+      m_editStartX->setText (QString::number (initializer.computeStart (linearAxis,
+                                                                        m_modelGridRemovalAfter->stopX (),
+                                                                        m_modelGridRemovalAfter->stepX (),
+                                                                        m_modelGridRemovalAfter->countX ())));
+      break;
+
+    case GRID_COORD_DISABLE_STEP:
+      m_editStepX->setText (QString::number (initializer.computeStep (linearAxis,
+                                                                      m_modelGridRemovalAfter->startX (),
+                                                                      m_modelGridRemovalAfter->stopX (),
+                                                                      m_modelGridRemovalAfter->countX ())));
+      break;
+
+    case GRID_COORD_DISABLE_STOP:
+      m_editStopX->setText (QString::number (initializer.computeStop (linearAxis,
+                                                                      m_modelGridRemovalAfter->startX (),
+                                                                      m_modelGridRemovalAfter->stepX (),
+                                                                      m_modelGridRemovalAfter->countX ())));
+      break;
+
+    default:
+      LOG4CPP_ERROR_S ((*mainCat)) << "DlgSettingsGridRemoval::updateDisplayedVariableX";
+      break;
+  }
+}
+
+void DlgSettingsGridRemoval::updateDisplayedVariableY ()
+{
+  GridInitializer initializer;
+
+  bool linearAxis = (cmdMediator ().document ().modelCoords ().coordScaleYRadius () == COORD_SCALE_LINEAR);
+
+  switch (m_modelGridRemovalAfter->gridCoordDisableY()) {
+    case GRID_COORD_DISABLE_COUNT:
+      m_editCountY->setText (QString::number (initializer.computeCount (linearAxis,
+                                                                        m_modelGridRemovalAfter->startY (),
+                                                                        m_modelGridRemovalAfter->stopY (),
+                                                                        m_modelGridRemovalAfter->stepY ())));
+      break;
+
+    case GRID_COORD_DISABLE_START:
+      m_editStartY->setText (QString::number (initializer.computeStart (linearAxis,
+                                                                        m_modelGridRemovalAfter->stopY (),
+                                                                        m_modelGridRemovalAfter->stepY (),
+                                                                        m_modelGridRemovalAfter->countY ())));
+      break;
+
+    case GRID_COORD_DISABLE_STEP:
+      m_editStepY->setText (QString::number (initializer.computeStep (linearAxis,
+                                                                      m_modelGridRemovalAfter->startY (),
+                                                                      m_modelGridRemovalAfter->stopY (),
+                                                                      m_modelGridRemovalAfter->countY ())));
+      break;
+
+    case GRID_COORD_DISABLE_STOP:
+      m_editStopY->setText (QString::number (initializer.computeStop (linearAxis,
+                                                                      m_modelGridRemovalAfter->startY (),
+                                                                      m_modelGridRemovalAfter->stepY (),
+                                                                      m_modelGridRemovalAfter->countY ())));
+      break;
+
+    default:
+      LOG4CPP_ERROR_S ((*mainCat)) << "DlgSettingsGridRemoval::updateDisplayedVariableY";
+      break;
+  }
+}
+
 void DlgSettingsGridRemoval::updatePreview ()
 {
+  GridRemoval gridRemoval (mainWindow().isGnuplot());
 
+  QPixmap pixmap = gridRemoval.remove (mainWindow ().transformation(),
+                                       *m_modelGridRemovalAfter,
+                                       cmdMediator ().document().pixmap().toImage());
+
+  m_scenePreview->clear();
+  m_scenePreview->addPixmap (pixmap);
 }

@@ -60,9 +60,6 @@ mkdir -p $IMAGEDIR
 mkdir -p $PLATFORMSDIR
 mkdir -p $SQLDIR
 
-echo "***Copying executable"
-cp $FROMEXE $STAGINGDIR
-
 echo "***Copying help input files"
 cp $FROMQCH $STAGINGDIR/documentation
 cp $FROMQHC $STAGINGDIR/documentation
@@ -125,6 +122,9 @@ qmake engauge.pro CONFIG+=pdf CONFIG+=log4cpp_null &&
 make clean &&
 make &&
 cd dev/linux
+
+echo "***Copying executable"
+cp $FROMEXE $STAGINGDIR
 
 echo "***Compiling installer"
 cp startup_script.run $STAGINGDIR

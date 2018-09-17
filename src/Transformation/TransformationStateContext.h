@@ -33,7 +33,8 @@ public:
   void resetOnLoad();
 
   /// Trigger a state transition to be performed immediately.
-  void triggerStateTransition (TransformationState transformationState,
+  void triggerStateTransition (bool isGnuplot,
+                               TransformationState transformationState,
                                CmdMediator &cmdMediator,
                                const Transformation &transformation,
                                const QString &selectedGraphCurve);

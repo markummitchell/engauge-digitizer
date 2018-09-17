@@ -70,7 +70,7 @@ void DlgSettingsDigitizeCurve::createControls (QGridLayout *layout,
   m_boxCursor->setLayout (layoutCursor);
   int rowCursor = 0;
 
-  QLabel *labelCursorType = new QLabel(tr ("Type:"));
+  QLabel *labelCursorType = new QLabel(QString ("%1:").arg (tr ("Type")));
   layoutCursor->addWidget (labelCursorType, rowCursor, 0);
 
   m_btnStandard = new QRadioButton (tr ("Standard cross"));
@@ -83,7 +83,7 @@ void DlgSettingsDigitizeCurve::createControls (QGridLayout *layout,
   layoutCursor->addWidget (m_btnCustom, rowCursor++, 1);
   connect (m_btnCustom, SIGNAL (toggled (bool)), this, SLOT (slotCursorCustom(bool)));
 
-  QLabel *labelSize = new QLabel(tr ("Size (pixels):"));
+  QLabel *labelSize = new QLabel(QString ("%1:").arg (tr ("Size (pixels)")));
   layoutCursor->addWidget (labelSize, rowCursor, 0);
 
   m_cmbSize = new QComboBox;
@@ -96,7 +96,7 @@ void DlgSettingsDigitizeCurve::createControls (QGridLayout *layout,
   layoutCursor->addWidget (m_cmbSize, rowCursor++, 1);
   connect (m_cmbSize, SIGNAL (currentIndexChanged (const QString &)), this, SLOT (slotCursorSize (const QString &)));
 
-  QLabel *labelInnerRadius = new QLabel(tr ("Inner radius (pixels):"));
+  QLabel *labelInnerRadius = new QLabel(QString ("%1:").arg (tr ("Inner radius (pixels)")));
   layoutCursor->addWidget (labelInnerRadius, rowCursor, 0);
 
   m_spinInnerRadius = new QSpinBox;
@@ -105,7 +105,7 @@ void DlgSettingsDigitizeCurve::createControls (QGridLayout *layout,
   layoutCursor->addWidget (m_spinInnerRadius, rowCursor++, 1);
   connect (m_spinInnerRadius, SIGNAL (valueChanged(const QString &)), this, SLOT (slotCursorInnerRadius (const QString &)));
 
-  QLabel *labelLineWidth = new QLabel(tr ("Line width (pixels):"));
+  QLabel *labelLineWidth = new QLabel(QString ("%1:").arg (tr ("Line width (pixels)")));
   layoutCursor->addWidget (labelLineWidth, rowCursor, 0);
 
   m_spinLineWidth = new QSpinBox;
@@ -185,12 +185,8 @@ void DlgSettingsDigitizeCurve::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelDigitizeCurveBefore != 0) {
-    delete m_modelDigitizeCurveBefore;
-  }
-  if (m_modelDigitizeCurveAfter != 0) {
-    delete m_modelDigitizeCurveAfter;
-  }
+  delete m_modelDigitizeCurveBefore;
+  delete m_modelDigitizeCurveAfter;
 
   // Save new data
   m_modelDigitizeCurveBefore = new DocumentModelDigitizeCurve (cmdMediator.document());

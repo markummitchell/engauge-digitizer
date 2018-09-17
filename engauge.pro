@@ -160,6 +160,23 @@ HEADERS  += \
     src/Coord/CoordUnitsPolarTheta.h \
     src/Coord/CoordUnitsTime.h \
     src/Correlation/Correlation.h \
+    src/Create/CreateActions.h \
+    src/Create/CreateCentralWidget.h \
+    src/Create/CreateCommandStackShadow.h \
+    src/Create/CreateDockableWidgets.h \
+    src/Create/CreateFacade.h \
+    src/Create/CreateHelpWindow.h \
+    src/Create/CreateIcons.h \
+    src/Create/CreateLoadImage.h \
+    src/Create/CreateMenus.h \
+    src/Create/CreateNetwork.h \
+    src/Create/CreateScene.h \
+    src/Create/CreateSettingsDialogs.h \
+    src/Create/CreateStateContexts.h \
+    src/Create/CreateStatusBar.h \
+    src/Create/CreateTutorial.h \
+    src/Create/CreateToolBars.h \
+    src/Create/CreateZoomMaps.h \
     src/Cursor/CursorFactory.h \
     src/Cursor/CursorSize.h \
     src/Curve/Curve.h \
@@ -288,6 +305,7 @@ HEADERS  += \
     src/Ghosts/GhostPath.h \
     src/Ghosts/GhostPolygon.h \
     src/Ghosts/Ghosts.h \
+    src/util/gnuplot.h \
     src/Graphics/GraphicsArcItem.h \
     src/Graphics/GraphicsItemsExtractor.h \
     src/Graphics/GraphicsItemType.h \
@@ -302,17 +320,23 @@ HEADERS  += \
     src/Graphics/GraphicsView.h \
     src/Grid/GridClassifier.h \
     src/Grid/GridCoordDisable.h \
-    src/Grid/GridHealer.h \
+    src/Grid/GridHealerAbstractBase.h \
+    src/Grid/GridHealerHorizontal.h \
+    src/Grid/GridHealerVertical.h \
+    src/Grid/GridIndependentToDependent.h \
     src/Grid/GridInitializer.h \
     src/Grid/GridLine.h \
     src/Grid/GridLineFactory.h \
     src/Grid/GridLineLimiter.h \
     src/Grid/GridLines.h \
     src/Grid/GridLineStyle.h \
+    src/Grid/GridLog.h \
     src/Grid/GridRemoval.h \
+    src/Grid/GridTriangleFill.h \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
+    src/Import/ImportImageExtensions.h \
     src/util/LinearToLog.h \
     src/Line/LineStyle.h \
     src/Load/LoadFileInfo.h \
@@ -334,6 +358,7 @@ HEADERS  += \
     src/Ordinal/OrdinalGenerator.h \
     src/Ordinal/OrdinalToGraphicsPoint.h \
     src/Pdf/PdfResolution.h \
+    src/util/Pixels.h \
     src/Point/Point.h \
     src/Point/PointComparator.h \
     src/Point/PointIdentifiers.h \
@@ -491,6 +516,23 @@ SOURCES += \
     src/Correlation/Correlation.cpp \
     src/Cursor/CursorFactory.cpp \
     src/Cursor/CursorSize.cpp \
+    src/Create/CreateActions.cpp \
+    src/Create/CreateCentralWidget.cpp \
+    src/Create/CreateCommandStackShadow.cpp \
+    src/Create/CreateDockableWidgets.cpp \
+    src/Create/CreateFacade.cpp \
+    src/Create/CreateHelpWindow.cpp \
+    src/Create/CreateIcons.cpp \
+    src/Create/CreateLoadImage.cpp \
+    src/Create/CreateMenus.cpp \
+    src/Create/CreateNetwork.cpp \
+    src/Create/CreateScene.cpp \
+    src/Create/CreateSettingsDialogs.cpp \
+    src/Create/CreateStateContexts.cpp \
+    src/Create/CreateStatusBar.cpp \
+    src/Create/CreateToolBars.cpp \
+    src/Create/CreateTutorial.cpp \
+    src/Create/CreateZoomMaps.cpp \
     src/Curve/Curve.cpp \
     src/Curve/CurveConnectAs.cpp \
     src/Curve/CurveNameList.cpp \
@@ -608,6 +650,7 @@ SOURCES += \
     src/Ghosts/GhostPath.cpp \
     src/Ghosts/GhostPolygon.cpp \
     src/Ghosts/Ghosts.cpp \
+    src/util/gnuplot.cpp \
     src/Graphics/GraphicsArcItem.cpp \
     src/Graphics/GraphicsItemsExtractor.cpp \
     src/Graphics/GraphicsLinesForCurve.cpp \
@@ -621,16 +664,21 @@ SOURCES += \
     src/Graphics/GraphicsView.cpp \
     src/Grid/GridClassifier.cpp \
     src/Grid/GridCoordDisable.cpp \
-    src/Grid/GridHealer.cpp \
+    src/Grid/GridHealerAbstractBase.cpp \
+    src/Grid/GridHealerHorizontal.cpp \
+    src/Grid/GridHealerVertical.cpp \
     src/Grid/GridInitializer.cpp \
     src/Grid/GridLine.cpp \
     src/Grid/GridLineFactory.cpp \
     src/Grid/GridLineLimiter.cpp \
     src/Grid/GridLines.cpp \
+    src/Grid/GridLog.cpp \
     src/Grid/GridRemoval.cpp \
+    src/Grid/GridTriangleFill.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
-    src/util/LinearToLog.cpp \    
+    src/Import/ImportImageExtensions.cpp \
+    src/util/LinearToLog.cpp \
     src/Line/LineStyle.cpp \
     src/Load/LoadFileInfo.cpp \
     src/Logger/Logger.cpp \
@@ -650,6 +698,7 @@ SOURCES += \
     src/NonPdf/NonPdfFrameHandle.cpp \
     src/Ordinal/OrdinalGenerator.cpp \
     src/Pdf/PdfResolution.cpp \
+    src/util/Pixels.cpp \
     src/Point/Point.cpp \
     src/Point/PointIdentifiers.cpp \
     src/Point/PointMatchAlgorithm.cpp \
@@ -798,6 +847,7 @@ INCLUDEPATH += src \
                src/Coord \
                src/CoordSystem \
                src/Correlation \
+               src/Create \
                src/Cursor \
                src/Curve \
                src/DigitizeState \

@@ -487,6 +487,7 @@ void Transformation::update (bool fileIsLoaded,
 
       updateTransformFromMatrices (ftor.matrixScreen(),
                                    ftor.matrixGraph());
+
     } else {
 
       m_transformIsDefined = false;

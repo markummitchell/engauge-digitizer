@@ -18,7 +18,8 @@ TransformationStateUndefined::TransformationStateUndefined(TransformationStateCo
 {
 }
 
-void TransformationStateUndefined::begin(CmdMediator & /* cmdMediator */,
+void TransformationStateUndefined::begin(bool /* isGnuplot */,
+                                         CmdMediator & /* cmdMediator */,
                                          const Transformation & /* transformation */,
                                          const QString & /* selectedGraphCurve */)
 {

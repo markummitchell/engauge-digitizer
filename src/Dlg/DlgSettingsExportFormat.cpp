@@ -98,13 +98,13 @@ void DlgSettingsExportFormat::createCurveSelection (QGridLayout *layout, int &ro
   layout->addWidget (m_listExcluded, row++, 2, 4, 1);
   connect (m_listExcluded, SIGNAL (itemSelectionChanged ()), this, SLOT (slotListExcluded()));
 
-  m_btnInclude = new QPushButton (tr ("<<Include"));
+  m_btnInclude = new QPushButton (QString ("<<%1").arg (tr ("Include")));
   m_btnInclude->setEnabled (false);
   m_btnInclude->setWhatsThis (tr ("Move the currently selected curve(s) from the excluded list"));
   layout->addWidget (m_btnInclude, row++, 1);
   connect (m_btnInclude, SIGNAL (released ()), this, SLOT (slotInclude()));
 
-  m_btnExclude = new QPushButton (tr ("Exclude>>"));
+  m_btnExclude = new QPushButton (QString ("%1>>").arg (tr ("Exclude")));
   m_btnExclude->setEnabled (false);
   m_btnExclude->setWhatsThis (tr ("Move the currently selected curve(s) from the included list"));
   layout->addWidget (m_btnExclude, row++, 1);
@@ -210,7 +210,7 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
   layoutPointsSelections->addWidget (m_btnFunctionsPointsEvenlySpaced, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotFunctionsPointsEvenlySpaced()));
 
-  QLabel *labelInterval = new QLabel (tr ("Interval:"));
+  QLabel *labelInterval = new QLabel (QString ("%1:").arg (tr ("Interval")));
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editFunctionsPointsEvenlySpacing = new QLineEdit;
@@ -347,7 +347,7 @@ void DlgSettingsExportFormat::createRelationsPointsSelection (QHBoxLayout *layou
   layoutPointsSelections->addWidget (m_btnRelationsPointsEvenlySpaced, row++, 0, 1, 4);
   connect (m_btnRelationsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotRelationsPointsEvenlySpaced()));
 
-  QLabel *labelInterval = new QLabel (tr ("Interval:"));
+  QLabel *labelInterval = new QLabel (QString ("%1:").arg (tr ("Interval")));
   layoutPointsSelections->addWidget (labelInterval, row, 1, 1, 1, Qt::AlignRight);
 
   m_editRelationsPointsEvenlySpacing = new QLineEdit;
@@ -448,9 +448,9 @@ void DlgSettingsExportFormat::createXLabel (QGridLayout *layoutHeader,
 
   QLabel *title;
   if (true) {
-    title = new QLabel (tr ("X Label:"));
+    title = new QLabel (QString ("%1:").arg (tr ("X Label")));
   } else {
-    title = new QLabel (tr ("Theta Label:"));
+    title = new QLabel (QString ("%1:").arg (tr ("Theta Label")));
   }
   layoutHeader->addWidget (title, row++, colLabel, 1, 1);
 
@@ -562,12 +562,8 @@ void DlgSettingsExportFormat::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelExportBefore != 0) {
-    delete m_modelExportBefore;
-  }
-  if (m_modelExportAfter != 0) {
-    delete m_modelExportAfter;
-  }
+  delete m_modelExportBefore;
+  delete m_modelExportAfter;
 
   // Save new data
   m_modelExportBefore = new DocumentModelExportFormat (cmdMediator.document());

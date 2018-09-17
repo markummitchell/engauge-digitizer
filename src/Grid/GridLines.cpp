@@ -20,9 +20,7 @@ void GridLines::clear ()
 {
   for (int i = 0; i < m_gridLinesContainer.count(); i++) {
     GridLine *gridLine = m_gridLinesContainer [i];
-    if (gridLine != 0) {
-      delete gridLine;
-    }
+    delete gridLine;
   }
 
   m_gridLinesContainer.clear();

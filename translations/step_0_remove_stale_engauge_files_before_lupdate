@@ -1,3 +1,4 @@
 rm engauge_*.ts
 rm for_*
 
+echo "Now run 'lupdate engauge.pro to generate *.ts files"

@@ -62,7 +62,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
 
   const int COLUMN0 = 0;
 
-  QLabel *labelZoomFactor = new QLabel (tr ("Initial zoom:"));
+  QLabel *labelZoomFactor = new QLabel (QString ("%1:").arg (tr ("Initial zoom")));
   layout->addWidget (labelZoomFactor, row, 1);
 
   m_cmbZoomFactor = new QComboBox;
@@ -83,7 +83,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_cmbZoomFactor, SIGNAL (currentTextChanged (const QString)), this, SLOT (slotZoomFactor(const QString)));
   layout->addWidget (m_cmbZoomFactor, row++, 2);
 
-  QLabel *labelZoomControl = new QLabel (tr ("Zoom control:"));
+  QLabel *labelZoomControl = new QLabel (QString ("%1:").arg (tr ("Zoom control")));
   layout->addWidget (labelZoomControl, row, 1);
 
   m_cmbZoomControl = new QComboBox;
@@ -96,7 +96,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_cmbZoomControl, SIGNAL (currentTextChanged (const QString)), this, SLOT (slotZoomControl(const QString)));
   layout->addWidget (m_cmbZoomControl, row++, 2);
 
-  QLabel *labelLocale = new QLabel (tr ("Locale:"));
+  QLabel *labelLocale = new QLabel (QString ("%1:").arg (tr ("Locale")));
   layout->addWidget (labelLocale, row, 1);
 
   // Initialization of combobox is liberated from Qt Calendar example
@@ -121,7 +121,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_cmbLocale, SIGNAL (currentIndexChanged (int)), this, SLOT (slotLocale (int)));
   layout->addWidget (m_cmbLocale, row++, 2);
 
-  QLabel *labelImportCropping = new QLabel (tr ("Import cropping:"));
+  QLabel *labelImportCropping = new QLabel (QString ("%1:").arg (tr ("Import cropping")));
   layout->addWidget (labelImportCropping, row, 1);
 
   m_cmbImportCropping = new QComboBox;
@@ -138,7 +138,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   layout->addWidget (m_cmbImportCropping, row++, 2);
 
 #ifdef ENGAUGE_PDF
-  QLabel *labelPdfResolution = new QLabel (tr ("Import PDF resolution (dots per inch):"));
+  QLabel *labelPdfResolution = new QLabel (QString ("%1:").arg (tr ("Import PDF resolution (dots per inch)")));
   layout->addWidget (labelPdfResolution, row, 1);
 
   m_cmbPdfResolution = new QComboBox;
@@ -157,7 +157,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   layout->addWidget (m_cmbPdfResolution, row++, 2);
 #endif
 
-  QLabel *labelMaximumGridLines = new QLabel (tr ("Maximum grid lines:"));
+  QLabel *labelMaximumGridLines = new QLabel (QString ("%1:").arg (tr ("Maximum grid lines")));
   layout->addWidget (labelMaximumGridLines, row, 1);
 
   m_spinMaximumGridLines = new QSpinBox;
@@ -169,7 +169,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_spinMaximumGridLines, SIGNAL (valueChanged (int)), this, (SLOT (slotMaximumGridLines (int))));
   layout->addWidget (m_spinMaximumGridLines, row++, 2);
 
-  QLabel *labelHighlightOpacity = new QLabel (tr ("Highlight opacity:"));
+  QLabel *labelHighlightOpacity = new QLabel (QString ("%1:").arg (tr ("Highlight opacity")));
   layout->addWidget (labelHighlightOpacity, row, 1);
 
   m_spinHighlightOpacity = new QDoubleSpinBox;
@@ -181,7 +181,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_spinHighlightOpacity, SIGNAL (valueChanged (double)), this, SLOT (slotHighlightOpacity(double)));
   layout->addWidget (m_spinHighlightOpacity, row++, 2);
 
-  QLabel *labelRecent = new QLabel (tr ("Recent file list:"));
+  QLabel *labelRecent = new QLabel (QString ("%1:").arg (tr ("Recent file list")));
   layout->addWidget (labelRecent, row, 1);
 
   m_btnRecentClear = new QPushButton (tr ("Clear"));
@@ -192,7 +192,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_btnRecentClear, SIGNAL (pressed ()), this, SLOT (slotRecentFileClear()));
   layout->addWidget (m_btnRecentClear, row++, 2);
 
-  QLabel *labelTitleBarFormat = new QLabel (tr ("Include title bar path:"));
+  QLabel *labelTitleBarFormat = new QLabel (QString ("%1:").arg (tr ("Include title bar path")));
   layout->addWidget (labelTitleBarFormat, row, 1);
 
   m_chkTitleBarFormat = new QCheckBox;
@@ -202,7 +202,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_chkTitleBarFormat, SIGNAL (toggled (bool)), this, SLOT (slotTitleBarFormat(bool)));
   layout->addWidget (m_chkTitleBarFormat, row++, 2);
 
-  QLabel *labelSmallDialogs = new QLabel (tr ("Allow small dialogs:"));
+  QLabel *labelSmallDialogs = new QLabel (QString ("%1:").arg (tr ("Allow small dialogs")));
   layout->addWidget (labelSmallDialogs, row, 1);
 
   m_chkSmallDialogs = new QCheckBox;
@@ -212,7 +212,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_chkSmallDialogs, SIGNAL (toggled (bool)), this, SLOT (slotSmallDialogs (bool)));
   layout->addWidget (m_chkSmallDialogs, row++, 2);
 
-  QLabel *labelDragDropExport = new QLabel (tr ("Allow drag and drop export:"));
+  QLabel *labelDragDropExport = new QLabel (QString ("%1:").arg (tr ("Allow drag and drop export")));
   layout->addWidget (labelDragDropExport, row, 1);
 
   m_chkDragDropExport = new QCheckBox;
@@ -225,7 +225,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_chkDragDropExport, SIGNAL (toggled (bool)), this, SLOT (slotDragDropExport (bool)));
   layout->addWidget (m_chkDragDropExport, row++, 2);
 
-  QLabel *labelSignificantDigits = new QLabel (tr ("Significant digits:"));
+  QLabel *labelSignificantDigits = new QLabel (QString ("%1:").arg (tr ("Significant digits")));
   layout->addWidget (labelSignificantDigits, row, 1);
 
   m_spinSignificantDigits = new QSpinBox;
@@ -287,12 +287,8 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelMainWindowBefore != 0) {
-    delete m_modelMainWindowBefore;
-  }
-  if (m_modelMainWindowAfter != 0) {
-    delete m_modelMainWindowAfter;
-  }
+  delete m_modelMainWindowBefore;
+  delete m_modelMainWindowAfter;
 
   // Save new data
   m_modelMainWindowBefore = new MainWindowModel (modelMainWindow);

@@ -126,7 +126,8 @@ void BackgroundStateContext::setBackgroundImage (BackgroundImage backgroundImage
   completeRequestedStateTransitionIfExists ();
 }
 
-void BackgroundStateContext::setCurveSelected (const Transformation &transformation,
+void BackgroundStateContext::setCurveSelected (bool isGnuplot,
+                                               const Transformation &transformation,
                                                const DocumentModelGridRemoval &modelGridRemoval,
                                                const DocumentModelColorFilter &modelColorFilter,
                                                const QString &curveSelected)
@@ -136,14 +137,16 @@ void BackgroundStateContext::setCurveSelected (const Transformation &transformat
 
   for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
 
-    m_states [backgroundState]->setCurveSelected (transformation,
+    m_states [backgroundState]->setCurveSelected (isGnuplot,
+                                                  transformation,
                                                   modelGridRemoval,
                                                   modelColorFilter,
                                                   curveSelected);
   }
 }
 
-void BackgroundStateContext::setPixmap (const Transformation &transformation,
+void BackgroundStateContext::setPixmap (bool isGnuplot,
+                                        const Transformation &transformation,
                                         const DocumentModelGridRemoval &modelGridRemoval,
                                         const DocumentModelColorFilter &modelColorFilter,
                                         const QPixmap &pixmapOriginal,
@@ -155,7 +158,8 @@ void BackgroundStateContext::setPixmap (const Transformation &transformation,
 
   for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
 
-    m_states [backgroundState]->setPixmap (transformation,
+    m_states [backgroundState]->setPixmap (isGnuplot,
+                                           transformation,
                                            modelGridRemoval,
                                            modelColorFilter,
                                            pixmapOriginal,
@@ -163,7 +167,8 @@ void BackgroundStateContext::setPixmap (const Transformation &transformation,
   }
 }
 
-void BackgroundStateContext::updateColorFilter (const Transformation &transformation,
+void BackgroundStateContext::updateColorFilter (bool isGnuplot,
+                                                const Transformation &transformation,
                                                 const DocumentModelGridRemoval &modelGridRemoval,
                                                 const DocumentModelColorFilter &modelColorFilter,
                                                 const QString &curveSelected)
@@ -172,7 +177,8 @@ void BackgroundStateContext::updateColorFilter (const Transformation &transforma
 
   for (int backgroundState = 0; backgroundState < NUM_BACKGROUND_STATES; backgroundState++) {
 
-    m_states [backgroundState]->updateColorFilter (transformation,
+    m_states [backgroundState]->updateColorFilter (isGnuplot,
+                                                   transformation,
                                                    modelGridRemoval,
                                                    modelColorFilter,
                                                    curveSelected);

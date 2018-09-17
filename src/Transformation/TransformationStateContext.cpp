@@ -41,7 +41,8 @@ void TransformationStateContext::resetOnLoad ()
   m_currentState = NUM_TRANSFORMATION_STATES;
 }
 
-void TransformationStateContext::triggerStateTransition (TransformationState transformationState,
+void TransformationStateContext::triggerStateTransition (bool isGnuplot,
+                                                         TransformationState transformationState,
                                                          CmdMediator &cmdMediator,
                                                          const Transformation &transformation,
                                                          const QString &selectedGraphCurve)
@@ -60,7 +61,8 @@ void TransformationStateContext::triggerStateTransition (TransformationState tra
   m_currentState = transformationState;
 
   // Start the requested state
-  m_states[m_currentState]->begin(cmdMediator,
+  m_states[m_currentState]->begin(isGnuplot,
+                                  cmdMediator,
                                   transformation,
                                   selectedGraphCurve);
 }

@@ -97,7 +97,8 @@ int Matrix::fold2dIndexes (int row, int col) const
 
 double Matrix::get (int row, int col) const
 {
-  return m_vector [fold2dIndexes (row, col)];
+  int foldedIndex = fold2dIndexes (row, col);
+  return m_vector [foldedIndex];
 }
 
 void Matrix::initialize (int rows,
@@ -133,12 +134,10 @@ Matrix Matrix::inverse (int significantDigits,
     }
   }
 
-  double epsilonThreshold = maxValue / qPow (10.0, significantDigits);
-
   // Available algorithms are inverseCramersRule and inverseGaussianElimination
   matrixConsistent = MATRIX_CONSISTENT;
-  return inverseGaussianElimination (matrixConsistent,
-                                     epsilonThreshold);
+  return inverseGaussianElimination (significantDigits,
+                                     matrixConsistent);
 }
 
 Matrix Matrix::inverseCramersRule (MatrixConsistent & matrixConsistent,
@@ -194,8 +193,8 @@ Matrix Matrix::inverseCramersRule (MatrixConsistent & matrixConsistent,
   return inv;
 }
 
-Matrix Matrix::inverseGaussianElimination (MatrixConsistent &matrixConsistent,
-                                           double epsilonThreshold) const
+Matrix Matrix::inverseGaussianElimination (int significantDigits,
+                                           MatrixConsistent &matrixConsistent) const
 {
   // From https://en.wikipedia.org/wiki/Gaussian_elimination
 
@@ -254,7 +253,7 @@ Matrix Matrix::inverseGaussianElimination (MatrixConsistent &matrixConsistent,
     }
 
     // Normalize the 'from' row with first nonzero term set to 1
-    working.normalizeRow (rowFrom, colFirstWithNonZero, matrixConsistent, epsilonThreshold);
+    working.normalizeRow (rowFrom, colFirstWithNonZero, significantDigits, matrixConsistent);
     if (matrixConsistent == MATRIX_INCONSISTENT) {
       return inv;
     }
@@ -266,10 +265,6 @@ Matrix Matrix::inverseGaussianElimination (MatrixConsistent &matrixConsistent,
 
         // We need to merge rowFrom and rowTo into rowTo
         double denominator = working.get (rowFrom, colFirstWithNonZero);
-        if (valueFailsEpsilonTest (denominator, epsilonThreshold)) {
-          matrixConsistent = MATRIX_INCONSISTENT;
-          return inv;
-        }
         double factor = -1.0 * working.get (rowTo, colFirstWithNonZero) / denominator;
         working.addRowToAnotherWithScaling (rowFrom, rowTo, factor);
       }
@@ -282,7 +277,7 @@ Matrix Matrix::inverseGaussianElimination (MatrixConsistent &matrixConsistent,
 
     // Normalize the 'from' row with diagonal term set to 1. The first term should be like 0.9999 or 1.0001 but we want exactly one
     MatrixConsistent matrixConsistent;
-    working.normalizeRow (rowFrom, colFirstWithNonZero, matrixConsistent, epsilonThreshold);
+    working.normalizeRow (rowFrom, colFirstWithNonZero, significantDigits, matrixConsistent);
     if (matrixConsistent == MATRIX_INCONSISTENT) {
       return inv;
     }
@@ -294,10 +289,6 @@ Matrix Matrix::inverseGaussianElimination (MatrixConsistent &matrixConsistent,
 
         // We need to merge rowFro and rowTo into rowTo
         double denominator = working.get (rowFrom, colFirstWithNonZero);
-        if (valueFailsEpsilonTest (denominator, epsilonThreshold)) {
-          matrixConsistent = MATRIX_INCONSISTENT;
-          return inv;
-        }
         double factor = -1.0 * working.get (rowTo, colFirstWithNonZero) / denominator;
         working.addRowToAnotherWithScaling (rowFrom, rowTo, factor);
       }
@@ -360,10 +351,20 @@ Matrix Matrix::minorReduced (int rowOmit, int colOmit) const
 
 void Matrix::normalizeRow (int rowToNormalize,
                            int colToNormalize,
-                           MatrixConsistent &matrixConsistent,
-                           double epsilonThreshold)
+                           int significantDigits,
+                           MatrixConsistent &matrixConsistent)
 {
   double denominator = get (rowToNormalize, colToNormalize);
+
+  // Epsilon is computed from smallest value in row
+  double smallestAbsValue = 0;
+  for (int col = 0; col < cols (); col++) {
+    double absValue = qAbs (get (rowToNormalize, 0));
+    if (col == 0 || absValue < smallestAbsValue) {
+      smallestAbsValue = absValue;
+    }
+  }
+  double epsilonThreshold = smallestAbsValue / qPow (10.0, significantDigits);
 
   if (valueFailsEpsilonTest (denominator,
                              epsilonThreshold)) {
@@ -481,5 +482,5 @@ Matrix Matrix::transpose () const
 bool Matrix::valueFailsEpsilonTest (double value,
                                     double epsilonThreshold) const
 {
-  return (qAbs (value) < qAbs (epsilonThreshold));
+  return qAbs (value) < qAbs (epsilonThreshold);
 }

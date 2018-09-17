@@ -44,7 +44,7 @@ void DlgSettingsGeneral::createControls (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGeneral::createControls";
 
-  QLabel *labelCursorSize = new QLabel (tr ("Effective cursor size (pixels):"));
+  QLabel *labelCursorSize = new QLabel (QString ("%1:").arg (tr ("Effective cursor size (pixels)")));
   layout->addWidget (labelCursorSize, row, 1);
 
   m_spinCursorSize = new QSpinBox;
@@ -56,7 +56,7 @@ void DlgSettingsGeneral::createControls (QGridLayout *layout,
   connect (m_spinCursorSize, SIGNAL (valueChanged (int)), this, SLOT (slotCursorSize (int)));
   layout->addWidget (m_spinCursorSize, row++, 2);
 
-  QLabel *labelExtraPrecision = new QLabel (tr ("Extra precision (digits):"));
+  QLabel *labelExtraPrecision = new QLabel (QString ("%1:").arg (tr ("Extra precision (digits)")));
   layout->addWidget (labelExtraPrecision, row, 1);
 
   m_spinExtraPrecision = new QSpinBox;
@@ -121,12 +121,8 @@ void DlgSettingsGeneral::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelGeneralBefore != 0) {
-    delete m_modelGeneralBefore;
-  }
-  if (m_modelGeneralAfter != 0) {
-    delete m_modelGeneralAfter;
-  }
+  delete m_modelGeneralBefore;
+  delete m_modelGeneralAfter;
 
   // Save new data
   m_modelGeneralBefore = new DocumentModelGeneral (cmdMediator.document());

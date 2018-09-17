@@ -123,6 +123,23 @@ HEADERS  += \
     Coord/CoordUnitsPolarTheta.h \
     Coord/CoordUnitsTime.h \
     Correlation/Correlation.h \
+    Create/CreateActions.h \
+    Create/CreateCentralWidget.h \
+    Create/CreateCommandStackShadow.h \
+    Create/CreateDockableWidgets.h \
+    Create/CreateFacade.h \
+    Create/CreateHelpWindow.h \
+    Create/CreateIcons.h \
+    Create/CreateLoadImage.h \
+    Create/CreateMenus.h \
+    Create/CreateNetwork.h \
+    Create/CreateScene.h \
+    Create/CreateSettingsDialogs.h \
+    Create/CreateStateContexts.h \
+    Create/CreateStatusBar.h \
+    Create/CreateToolBars.h \
+    Create/CreateTutorial.h \
+    Create/CreateZoomMaps.h \
     Cursor/CursorFactory.h \
     Cursor/CursorSize.h \
     Curve/Curve.h \
@@ -251,6 +268,7 @@ HEADERS  += \
     Ghosts/GhostPath.h \
     Ghosts/GhostPolygon.h \
     Ghosts/Ghosts.h \
+    util/gnuplot.h \
     Graphics/GraphicsArcItem.h \
     Graphics/GraphicsItemsExtractor.h \
     Graphics/GraphicsItemType.h \
@@ -265,19 +283,25 @@ HEADERS  += \
     Graphics/GraphicsView.h \
     Grid/GridClassifier.h \
     Grid/GridCoordDisable.h \
-    Grid/GridHealer.h \
+    Grid/GridHealerAbstractBase.h \
+    Grid/GridHealerHorizontal.h \
+    Grid/GridHealerVertical.h \
+    Grid/GridIndependentToDependent.h \
     Grid/GridInitializer.h \
     Grid/GridLine.h \
     Grid/GridLineFactory.h \
     Grid/GridLineLimiter.h \
     Grid/GridLines.h \
     Grid/GridLineStyle.h \
+    Grid/GridLog.h \
     Grid/GridRemoval.h \
+    Grid/GridTriangleFill.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Import/ImportCropping.h \
     Import/ImportCroppingUtilBase.h \
     Import/ImportCroppingUtilNonPdf.h \
+    Import/ImportImageExtensions.h \
     util/LinearToLog.h \
     Line/LineStyle.h \
     Load/LoadFileInfo.h \
@@ -301,6 +325,7 @@ HEADERS  += \
     Ordinal/OrdinalGenerator.h \
     Ordinal/OrdinalToGraphicsPoint.h \
     Pdf/PdfResolution.h \
+    util/Pixels.h \
     Point/Point.h \
     Point/PointComparator.h \
     Point/PointIdentifiers.h \
@@ -457,6 +482,23 @@ SOURCES += \
     Coord/CoordUnitsPolarTheta.cpp \
     Coord/CoordUnitsTime.cpp \
     Correlation/Correlation.cpp \
+    Create/CreateActions.cpp \
+    Create/CreateCentralWidget.cpp \
+    Create/CreateCommandStackShadow.cpp \
+    Create/CreateDockableWidgets.cpp \
+    Create/CreateFacade.cpp \
+    Create/CreateHelpWindow.cpp \
+    Create/CreateIcons.cpp \
+    Create/CreateLoadImage.cpp \
+    Create/CreateMenus.cpp \
+    Create/CreateNetwork.cpp \
+    Create/CreateScene.cpp \
+    Create/CreateSettingsDialogs.cpp \
+    Create/CreateStateContexts.cpp \
+    Create/CreateStatusBar.cpp \
+    Create/CreateToolBars.cpp \
+    Create/CreateTutorial.cpp \
+    Create/CreateZoomMaps.cpp \
     Cursor/CursorFactory.cpp \
     Cursor/CursorSize.cpp \
     Curve/Curve.cpp \
@@ -576,6 +618,7 @@ SOURCES += \
     Ghosts/GhostPath.cpp \
     Ghosts/GhostPolygon.cpp \
     Ghosts/Ghosts.cpp \
+    util/gnuplot.cpp \
     Graphics/GraphicsArcItem.cpp \
     Graphics/GraphicsItemsExtractor.cpp \
     Graphics/GraphicsLinesForCurve.cpp \
@@ -589,18 +632,23 @@ SOURCES += \
     Graphics/GraphicsView.cpp \
     Grid/GridClassifier.cpp \
     Grid/GridCoordDisable.cpp \
-    Grid/GridHealer.cpp \
+    Grid/GridHealerAbstractBase.cpp \
+    Grid/GridHealerHorizontal.cpp \
+    Grid/GridHealerVertical.cpp \
     Grid/GridInitializer.cpp \
     Grid/GridLine.cpp \
     Grid/GridLineFactory.cpp \
     Grid/GridLineLimiter.cpp \
     Grid/GridLines.cpp \
+    Grid/GridLog.cpp \
     Grid/GridRemoval.cpp \
+    Grid/GridTriangleFill.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Import/ImportCroppingUtilBase.cpp \
     Import/ImportCroppingUtilNonPdf.cpp \
-    util/LinearToLog.cpp \    
+    Import/ImportImageExtensions.cpp \
+    util/LinearToLog.cpp \
     Line/LineStyle.cpp \
     Load/LoadFileInfo.cpp \
     Load/LoadImageFromUrl.cpp \
@@ -621,6 +669,7 @@ SOURCES += \
     NonPdf/NonPdfFrameHandle.cpp \
     Ordinal/OrdinalGenerator.cpp \
     Pdf/PdfResolution.cpp \
+    util/Pixels.cpp \
     Point/Point.cpp \
     Point/PointIdentifiers.cpp \
     Point/PointMatchAlgorithm.cpp \
@@ -698,6 +747,7 @@ INCLUDEPATH += Background \
                Coord \
                CoordSystem \
                Correlation \
+               Create \
                Cursor \
                Curve \
                DigitizeState \

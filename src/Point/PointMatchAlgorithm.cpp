@@ -7,6 +7,7 @@
 #include "ColorFilter.h"
 #include "DocumentModelPointMatch.h"
 #include "EngaugeAssert.h"
+#include "gnuplot.h"
 #include <iostream>
 #include "Logger.h"
 #include "PointMatchAlgorithm.h"
@@ -188,7 +189,7 @@ void PointMatchAlgorithm::dumpToGnuplot (double* convolution,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "PointMatchAlgorithm::dumpToGnuplot";
 
-  cout << "Writing gnuplot file: " << filename.toLatin1().data() << "\n";
+  cout << GNUPLOT_FILE_MESSAGE.toLatin1().data() << filename.toLatin1().data() << "\n";
 
   QFile file (filename);
   if (file.open (QIODevice::WriteOnly | QIODevice::Text)) {

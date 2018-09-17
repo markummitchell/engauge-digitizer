@@ -17,7 +17,8 @@ public:
   TransformationStateUndefined(TransformationStateContext &context,
                                QGraphicsScene &scene);
 
-  virtual void begin(CmdMediator &cmdMediator,
+  virtual void begin(bool isGnuplot,
+                     CmdMediator &cmdMediator,
                      const Transformation &transformation,
                      const QString &selectedGraphCurve);
   virtual void end(CmdMediator &cmdMediator,

@@ -13,7 +13,10 @@ Option 2) Windows release WITHOUT INSTALLER (digit-exe-windows-32-bit-without-in
           runs Engauge Digitizer. Installing from this zip file is the only option when working in a user account without
           administrative rights (since the MSI installer cannot be used).
 
-Option 3) Engauge can be built from source code. This requires a lot of effort and is not recommended.
+Option 3) Cygwin release for Windows using the cygwin installer:
+          Install cygwin from https://cygwin.com/install.html, with the engauge-digitizer package selected.
+	  
+Option 4) Engauge can be built from source code. This requires a lot of effort and is not recommended.
 
 
 Windows Issues

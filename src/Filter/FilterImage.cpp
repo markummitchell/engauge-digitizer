@@ -18,7 +18,8 @@ FilterImage::FilterImage ()
 {
 }
 
-QPixmap FilterImage::filter (const QImage &imageUnfiltered,
+QPixmap FilterImage::filter (bool isGnuplot,
+                             const QImage &imageUnfiltered,
                              const Transformation &transformation,
                              const QString &curveSelected,
                              const DocumentModelColorFilter &modelColorFilter,
@@ -37,7 +38,7 @@ QPixmap FilterImage::filter (const QImage &imageUnfiltered,
                       modelColorFilter.high(curveSelected),
                       rgbBackground);
   
-  GridRemoval gridRemoval;
+  GridRemoval gridRemoval (isGnuplot);
   QPixmap pixmapFiltered = gridRemoval.remove (transformation,
                                                modelGridRemoval,
                                                imageFiltered);

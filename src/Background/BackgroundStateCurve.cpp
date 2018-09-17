@@ -43,7 +43,8 @@ void BackgroundStateCurve::fitInView (GraphicsView &view)
   view.fitInView (imageItem ().boundingRect());
 }
 
-void BackgroundStateCurve::processImageFromSavedInputs (const Transformation &transformation,
+void BackgroundStateCurve::processImageFromSavedInputs (bool isGnuplot,
+                                                        const Transformation &transformation,
                                                         const DocumentModelGridRemoval &modelGridRemoval,
                                                         const DocumentModelColorFilter &modelColorFilter,
                                                         const QString &curveSelected)
@@ -55,7 +56,8 @@ void BackgroundStateCurve::processImageFromSavedInputs (const Transformation &tr
 
     // Generate filtered image
     FilterImage filterImage;
-    QPixmap pixmapFiltered = filterImage.filter (m_pixmapOriginal.toImage(),
+    QPixmap pixmapFiltered = filterImage.filter (isGnuplot,
+                                                 m_pixmapOriginal.toImage(),
                                                  transformation,
                                                  curveSelected,
                                                  modelColorFilter,
@@ -71,7 +73,8 @@ void BackgroundStateCurve::processImageFromSavedInputs (const Transformation &tr
   }
 }
 
-void BackgroundStateCurve::setCurveSelected (const Transformation &transformation,
+void BackgroundStateCurve::setCurveSelected (bool isGnuplot,
+                                             const Transformation &transformation,
                                              const DocumentModelGridRemoval &modelGridRemoval,
                                              const DocumentModelColorFilter &modelColorFilter,
                                              const QString &curveSelected)
@@ -81,13 +84,15 @@ void BackgroundStateCurve::setCurveSelected (const Transformation &transformatio
 
   // Even if m_curveSelected equals curveSelected we update the image, since the transformation
   // may have changed
-  processImageFromSavedInputs (transformation,
+  processImageFromSavedInputs (isGnuplot,
+                               transformation,
                                modelGridRemoval,
                                modelColorFilter,
                                curveSelected);
 }
 
-void BackgroundStateCurve::setPixmap (const Transformation &transformation,
+void BackgroundStateCurve::setPixmap (bool isGnuplot,
+                                      const Transformation &transformation,
                                       const DocumentModelGridRemoval &modelGridRemoval,
                                       const DocumentModelColorFilter &modelColorFilter,
                                       const QPixmap &pixmapOriginal,
@@ -96,7 +101,8 @@ void BackgroundStateCurve::setPixmap (const Transformation &transformation,
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::setPixmap";
 
   m_pixmapOriginal = pixmapOriginal;
-  processImageFromSavedInputs (transformation,
+  processImageFromSavedInputs (isGnuplot,
+                               transformation,
                                modelGridRemoval,
                                modelColorFilter,
                                curveSelected);
@@ -107,14 +113,16 @@ QString BackgroundStateCurve::state () const
   return "BackgroundStateCurve";
 }
 
-void BackgroundStateCurve::updateColorFilter (const Transformation &transformation,
+void BackgroundStateCurve::updateColorFilter (bool isGnuplot,
+                                              const Transformation &transformation,
                                               const DocumentModelGridRemoval &modelGridRemoval,
                                               const DocumentModelColorFilter &modelColorFilter,
                                               const QString &curveSelected)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateCurve::updateColorFilter";
 
-  processImageFromSavedInputs (transformation,
+  processImageFromSavedInputs (isGnuplot,
+                               transformation,
                                modelGridRemoval,
                                modelColorFilter,
                                curveSelected);

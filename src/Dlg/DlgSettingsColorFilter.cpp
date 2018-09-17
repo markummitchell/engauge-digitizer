@@ -59,7 +59,7 @@ void DlgSettingsColorFilter::createControls (QGridLayout *layout, int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsColorFilter::createControls";
 
-  QLabel *labelCurve = new QLabel (tr ("Curve Name:"));
+  QLabel *labelCurve = new QLabel (QString ("%1:").arg (tr ("Curve Name")));
   layout->addWidget (labelCurve, row++, 1);
 
   m_cmbCurveName = new QComboBox ();
@@ -67,7 +67,7 @@ void DlgSettingsColorFilter::createControls (QGridLayout *layout, int &row)
   connect (m_cmbCurveName, SIGNAL (activated (const QString &)), this, SLOT (slotCurveName (const QString &))); // activated() ignores code changes
   layout->addWidget (m_cmbCurveName, row++, 1);
 
-  QLabel *labelProfile = new QLabel (tr ("Filter mode:"));
+  QLabel *labelProfile = new QLabel (QString ("%1:").arg (tr ("Filter mode")));
   layout->addWidget (labelProfile, row++, 1);
 
   m_btnIntensity = new QRadioButton (colorFilterModeToString (COLOR_FILTER_MODE_INTENSITY));
@@ -232,12 +232,8 @@ void DlgSettingsColorFilter::load (CmdMediator &cmdMediator)
   setCmdMediator (cmdMediator);
 
   // Flush old data
-  if (m_modelColorFilterBefore != 0) {
-    delete m_modelColorFilterBefore;
-  }
-  if (m_modelColorFilterAfter != 0) {
-    delete m_modelColorFilterAfter;
-  }
+  delete m_modelColorFilterBefore;
+  delete m_modelColorFilterAfter;
 
   // Save new data
   m_modelColorFilterBefore = new DocumentModelColorFilter (cmdMediator.document().modelColorFilter());

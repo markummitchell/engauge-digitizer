@@ -18,6 +18,9 @@ class Matrix;
 /// This class does the math to compute statistics for FittingWindow
 class FittingStatistics
 {
+  // For unit testing
+  friend class TestFitting;
+  
 public:
   /// Single constructor
   FittingStatistics ();

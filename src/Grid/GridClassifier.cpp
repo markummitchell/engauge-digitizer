@@ -8,6 +8,7 @@
 #include "Correlation.h"
 #include "DocumentModelCoords.h"
 #include "EngaugeAssert.h"
+#include "gnuplot.h"
 #include "GridClassifier.h"
 #include <iostream>
 #include "Logger.h"
@@ -185,7 +186,7 @@ void GridClassifier::dumpGnuplotCoordinate (const QString &coordinateLabel,
                             .arg (binStart)
                             .arg (binStep);
 
-  cout << "Writing gnuplot file: " << filename.toLatin1().data() << "\n";
+  cout << GNUPLOT_FILE_MESSAGE.toLatin1().data() << filename.toLatin1().data() << "\n";
 
   QFile fileDump (filename);
   fileDump.open (QIODevice::WriteOnly | QIODevice::Text);
@@ -244,7 +245,7 @@ void GridClassifier::dumpGnuplotCorrelations (const QString &coordinateLabel,
   QString filename = QString ("gridclassifier_%1_correlations.gnuplot")
                             .arg (coordinateLabel);
 
-  cout << "Writing gnuplot file: " << filename.toLatin1().data() << "\n";
+  cout << GNUPLOT_FILE_MESSAGE.toLatin1().data() << filename.toLatin1().data() << "\n";
 
   QFile fileDump (filename);
   fileDump.open (QIODevice::WriteOnly | QIODevice::Text);

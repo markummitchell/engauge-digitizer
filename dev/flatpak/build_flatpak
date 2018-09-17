@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Run this on mark-HP-Notebook in Kubuntu 16.04 (64 bit)
+#
 # Assumes prerequisites are already installed:
 # 1) flatpak install flathub org.kde.Platform//5.11
 # 2) flatpak install flathub org.kde.Sdk//5.11
@@ -44,5 +46,7 @@ flatpak remote-add --if-not-exists engauge-digitizer repo --no-gpg-verify
 flatpak install engauge-digitizer io.github.markummitchell.Engauge_Digitizer
 flatpak run io.github.markummitchell.Engauge_Digitizer
 
-echo "If testing was successful then commit the changes in $HOME/io.github.markummitchell.Engauge_Digitizer"
+echo "If testing was successful then commit the changes in $HOME/io.github.markummitchell.Engauge_Digitizer."
+echo "After approximately one hour the new version should appear at "
+echo "https://flathub.org/apps/details/io.github.markummitchell.Engauge_Digitizer"
 

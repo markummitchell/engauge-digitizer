@@ -17,10 +17,6 @@
 #include "ZoomFactor.h"
 #include "ZoomLabels.h"
 
-const QString LABEL_COORDS_SCREEN (QObject::tr ("Coordinates (pixels):"));
-const QString LABEL_COORDS_GRAPH (QObject::tr ("Coordinates (graph):"));
-const QString LABEL_RESOLUTION_GRAPH (QObject::tr ("Resolution (graph):"));
-
 const int TEMPORARY_MESSAGE_LIFETIME = 5000; // Milliseconds. Two seconds is too fast even when the text is anticipated
 
 const int MIN_WIDTH_ZOOM = 110;
@@ -45,20 +41,17 @@ StatusBar::StatusBar(QStatusBar &statusBar) :
 
 StatusBar::~StatusBar ()
 {
-  if (m_timer != 0) {
-    delete m_timer;
-    m_timer = 0;
-  }
+  delete m_timer;
 }
 
 void StatusBar::createGroupUnits ()
 {
   m_cmbUnits = new QComboBox;
   m_cmbUnits->setEnabled (false); // Disabled until file is opened
-  m_cmbUnits->addItem (LABEL_COORDS_SCREEN, QVariant (STATUS_BAR_UNITS_COORDS_SCREEN));
-  m_cmbUnits->addItem (LABEL_COORDS_GRAPH, QVariant (STATUS_BAR_UNITS_COORDS_GRAPH));
-  m_cmbUnits->addItem (LABEL_RESOLUTION_GRAPH, QVariant (STATUS_BAR_UNITS_RESOLUTION_GRAPH));
-  m_cmbUnits->setCurrentText (LABEL_COORDS_GRAPH);
+  m_cmbUnits->addItem (labelCoordsScreen (), QVariant (STATUS_BAR_UNITS_COORDS_SCREEN));
+  m_cmbUnits->addItem (labelCoordsGraph (), QVariant (STATUS_BAR_UNITS_COORDS_GRAPH));
+  m_cmbUnits->addItem (labelResolutionGraph (), QVariant (STATUS_BAR_UNITS_RESOLUTION_GRAPH));
+  m_cmbUnits->setCurrentText (labelCoordsGraph ());
   m_cmbUnits->setMinimumWidth (MIN_WIDTH_COMBO_UNITS);
   m_cmbUnits->setToolTip (tr ("Select cursor coordinate values to display."));
   m_cmbUnits->setWhatsThis (tr("Select Cursor Coordinate Values\n\n"
@@ -195,6 +188,21 @@ void StatusBar::createZoomMaps ()
   m_zoomMapFromLabel [LABEL_ZOOM_FILL] = ZOOM_FILL;
 }
 
+QString StatusBar::labelCoordsGraph () const
+{
+  return QString ("%1:").arg (QObject::tr ("Coordinates (graph)"));
+}
+
+QString StatusBar::labelCoordsScreen () const
+{
+  return QString ("%1:").arg (QObject::tr ("Coordinates (pixels)"));
+}
+
+QString StatusBar::labelResolutionGraph () const
+{
+  return QString ("%1:").arg (QObject::tr ("Resolution (graph)"));
+}
+
 void StatusBar::setCoordinates (const QString &coordsScreen,
                                 const QString &coordsGraph,
                                 const QString &resolutionGraph)
@@ -288,9 +296,9 @@ void StatusBar::slotZoom(int zoom)
 
 void StatusBar::updateCoordsText()
 {
-  if (m_cmbUnits->currentText() == LABEL_COORDS_SCREEN) {
+  if (m_cmbUnits->currentText() == labelCoordsScreen ()) {
     m_editCoords->setText (m_coordsScreen);
-  } else if (m_cmbUnits->currentText()  == LABEL_COORDS_GRAPH) {
+  } else if (m_cmbUnits->currentText()  == labelCoordsGraph ()) {
     m_editCoords->setText (m_coordsGraph);
   } else {
     m_editCoords->setText (m_resolutionGraph);

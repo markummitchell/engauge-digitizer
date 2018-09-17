@@ -42,15 +42,8 @@ void CmdPointChangeBase::saveDocumentState (const Document &document)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdPointChangeBase::saveDocumentState";
 
-  if (m_curveAxes != 0) {
-    delete m_curveAxes;
-    m_curveAxes = 0;
-  }
-
-  if (m_curvesGraphs != 0) {
-    delete m_curvesGraphs;
-    m_curvesGraphs = 0;
-  }
+  delete m_curveAxes;
+  delete m_curvesGraphs;
 
   m_curveAxes = new Curve (document.curveAxes());
   m_curvesGraphs = new CurvesGraphs (document.curvesGraphs());
