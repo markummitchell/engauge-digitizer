@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Run this on mark-HP-Notebook in Kubuntu 16.04 (64 bit)
+# Run this on mark-HP-Notebook in Kubuntu 18.04 (64 bit)
 #
 # Assumes prerequisites are already installed:
 # 1) flatpak install flathub org.kde.Platform//5.11
@@ -13,6 +13,9 @@ fi
 TARBALLDOWNLOAD="v$1.tar.gz"
 TARBALLLOCAL=/tmp/$TARBALLDOWNLOAD
 echo "Downloading $TARBALLDOWNLOAD"
+
+echo "Update the version changes in dev/gnome/engauge-digitizer.appdata.xml"
+read -n 1 -s -r -p "Press any key to continue"
 
 wget "https://github.com/markummitchell/engauge-digitizer/archive/$TARBALLDOWNLOAD" --output-document="$TARBALLLOCAL"
 CKSUM=`sha256sum $TARBALLLOCAL | awk '{print $1}'`
