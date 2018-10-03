@@ -7,15 +7,17 @@
 # where: jpeg2000 = run jpeg2000 test(s). Requires CONFIG+=jpeg2000 in qmake build
 #        pdf      = run pdf test(s). Requires CONFIG+=pdf in qmake build
 
+DEBUG=0
+
 FILTERJPEG2000="skip"
 FILTERPDF="skip"
 while test $# -gt 0
 do
     case "$1" in
 	jpeg2000) FILTERJPEG2000=""
-	    ;;
+	    ;; 
         pdf) FILTERPDF=""
-            ;;
+	    ;;
     esac
     shift
 done
@@ -34,8 +36,12 @@ do
 
 	# Run regression test. Standard error is redirected to standard out so we can strip out unimportant
 	# 'QXcbXSettings::QXcbXSettings(QXcbScreen*) Failed to get selection owner for XSETTINGS_S atom' errors
-	commandLine=`cat $script`
-	../bin/engauge $commandLine 2>&1 | grep -v 'Failed to get selection owner'
+	commandLineArgs=`cat $script`
+	if [ $DEBUG == 1 ]; then
+	    echo " "
+	    echo "engauge $commandLineArgs"
+	fi
+	../bin/engauge $commandLineArgs 2>&1 | grep -v 'Failed to get selection owner'
 
 	# Compare actual and desired output files. There is one pair for each coordinate system
 	scriptfile=`basename $script`
@@ -50,8 +56,7 @@ do
 	for EXPECTED in $EXPECTED_FILES
 	do
 	    actual=${EXPECTED/expected/actual}
-	    if [[ COUNT -gt 1 ]]; 
-	    then
+	    if [[ COUNT -gt 1 ]]; then
 		COUNTERSTRING="[$COUNTER/$COUNT]";
 	    else
 		COUNTERSTRING="";
