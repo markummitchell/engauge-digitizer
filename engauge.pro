@@ -991,6 +991,12 @@ log4cpp_null {
     message("log4cpp_null build: no")
 }
 
+contains(DEFINES, NETWORKING) {
+    message("networking build:   yes")
+} else {
+    message("networking build:   no")
+}
+
 # People interested in translating a language can contact the developers for help. 
 # 
 # Translation file names are 'engauge_XX_YY' or 'engauge_XX' where:
