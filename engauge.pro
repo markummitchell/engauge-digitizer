@@ -784,6 +784,7 @@ macx-* {
 }
 
 linux-* {
+  QMAKE_CXXFLAGS += -Wunused-parameter
   QT += network
   DEFINES += "NETWORKING"
   HEADERS += src/Load/LoadImageFromUrl.h \
