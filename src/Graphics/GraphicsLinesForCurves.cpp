@@ -80,7 +80,8 @@ void GraphicsLinesForCurves::addRemoveCurves (GraphicsScene &scene,
   }
 }
 
-void GraphicsLinesForCurves::lineMembershipPurge(const CurveStyles &curveStyles)
+void GraphicsLinesForCurves::lineMembershipPurge(const CurveStyles &curveStyles,
+                                                 SplineDrawer &splineDrawer)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::lineMembershipPurge";
 
@@ -90,7 +91,8 @@ void GraphicsLinesForCurves::lineMembershipPurge(const CurveStyles &curveStyles)
     const QString curveName = itr.key ();
     GraphicsLinesForCurve *graphicsLines = itr.value();
 
-    graphicsLines->lineMembershipPurge (curveStyles.lineStyle (curveName));
+    graphicsLines->lineMembershipPurge (curveStyles.lineStyle (curveName),
+                                        splineDrawer);
   }
 }
 
@@ -199,7 +201,8 @@ void GraphicsLinesForCurves::updateCurveStyles (const CurveStyles &modelCurveSty
   }
 }
 
-void GraphicsLinesForCurves::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles)
+void GraphicsLinesForCurves::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles,
+                                                                       SplineDrawer &splineDrawer)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateGraphicsLinesToMatchGraphicsPoints";
 
@@ -211,7 +214,8 @@ void GraphicsLinesForCurves::updateGraphicsLinesToMatchGraphicsPoints (const Cur
     // This is where we add lines for non-axes curves
     if (curveName != AXIS_CURVE_NAME) {
 
-      m_graphicsLinesForCurve [curveName]->updateGraphicsLinesToMatchGraphicsPoints(curveStyles.lineStyle (curveName));
+      m_graphicsLinesForCurve [curveName]->updateGraphicsLinesToMatchGraphicsPoints(curveStyles.lineStyle (curveName),
+                                                                                    splineDrawer);
     }
   }
 }

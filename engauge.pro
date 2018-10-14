@@ -377,6 +377,7 @@ HEADERS  += \
     src/Settings/SettingsForGraph.h \
     src/Spline/Spline.h \
     src/Spline/SplineCoeff.h \
+    src/Spline/SplineDrawer.h \
     src/Spline/SplinePair.h \
     src/StatusBar/StatusBar.h \
     src/StatusBar/StatusBarMode.h \
@@ -715,6 +716,7 @@ SOURCES += \
     src/Settings/SettingsForGraph.cpp \
     src/Spline/Spline.cpp \
     src/Spline/SplineCoeff.cpp \
+    src/Spline/SplineDrawer.cpp \
     src/Spline/SplinePair.cpp \
     src/StatusBar/StatusBar.cpp \
     src/Transformation/Transformation.cpp \

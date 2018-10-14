@@ -344,6 +344,7 @@ HEADERS  += \
     Settings/SettingsForGraph.h \
     Spline/Spline.h \
     Spline/SplineCoeff.h \
+    Spline/SplineDrawer.h \
     Spline/SplinePair.h \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
@@ -686,6 +687,7 @@ SOURCES += \
     Settings/SettingsForGraph.cpp \
     Spline/Spline.cpp \
     Spline/SplineCoeff.cpp \
+    Spline/SplineDrawer.cpp \
     Spline/SplinePair.cpp \
     StatusBar/StatusBar.cpp \
     Test/TEST.cpp \

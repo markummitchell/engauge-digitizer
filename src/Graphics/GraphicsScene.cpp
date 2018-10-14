@@ -23,6 +23,7 @@
 #include <QApplication>
 #include <QGraphicsItem>
 #include "QtToString.h"
+#include "SplineDrawer.h"
 #include "Transformation.h"
 
 GraphicsScene::GraphicsScene(MainWindow *mainWindow) :
@@ -269,7 +270,8 @@ void GraphicsScene::showCurves (bool show,
 
 void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
                                         double highlightOpacity,
-                                        GeometryWindow *geometryWindow)
+                                        GeometryWindow *geometryWindow,
+                                        const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateAfterCommand";
 
@@ -279,7 +281,8 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
 
   // Update the points
   updatePointMembership (cmdMediator,
-                         geometryWindow);
+                         geometryWindow,
+                         transformation);
 }
 
 void GraphicsScene::updateCurves (CmdMediator &cmdMediator)
@@ -314,12 +317,15 @@ void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles 
                                                            transformation);
 
     // Recompute the lines one time for efficiency
-    m_graphicsLinesForCurves.updateGraphicsLinesToMatchGraphicsPoints (curveStyles);
+    SplineDrawer splineDrawer (transformation);
+    m_graphicsLinesForCurves.updateGraphicsLinesToMatchGraphicsPoints (curveStyles,
+                                                                       splineDrawer);
   }
 }
 
 void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator,
-                                           GeometryWindow *geometryWindow)
+                                           GeometryWindow *geometryWindow,
+                                           const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updatePointMembership";
 
@@ -342,5 +348,7 @@ void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator,
 
   // Next pass:
   // 1) Remove points that were just removed from the Document
-  m_graphicsLinesForCurves.lineMembershipPurge (cmdMediator.document().modelCurveStyles());
+  SplineDrawer splineDrawer (transformation);
+  m_graphicsLinesForCurves.lineMembershipPurge (cmdMediator.document().modelCurveStyles(),
+                                                splineDrawer);
 }

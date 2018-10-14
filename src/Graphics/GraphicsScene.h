@@ -88,7 +88,8 @@ public:
   /// updating would be done on out of date information (since that would be brought up to date by the NEXT command)
   void updateAfterCommand (CmdMediator &cmdMediator,
                            double highlightOpacity,
-                           GeometryWindow *geometryWindow);
+                           GeometryWindow *geometryWindow,
+                           const Transformation &transformation);
 
   /// Update curve styles after settings changed.
   void updateCurveStyles(const CurveStyles &modelCurveStyles);
@@ -110,7 +111,8 @@ private:
 
   /// Update Points using a multi-pass algorithm.
   void updatePointMembership (CmdMediator &cmdMediator,
-                              GeometryWindow *geometryWindow);
+                              GeometryWindow *geometryWindow,
+                              const Transformation &transformation);
 
   /// Curve name to GraphicsLinesForCurve
   GraphicsLinesForCurves m_graphicsLinesForCurves;

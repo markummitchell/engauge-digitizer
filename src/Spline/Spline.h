@@ -4,6 +4,9 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#ifndef SPLINE_H
+#define SPLINE_H
+
 #include "SplineCoeff.h"
 #include "SplinePair.h"
 #include <vector>
@@ -73,3 +76,5 @@ private:
   std::vector<SplinePair> m_p1;
   std::vector<SplinePair> m_p2;
 };
+
+#endif // SPLINE_H

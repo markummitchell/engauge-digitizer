@@ -18,6 +18,7 @@ class Point;
 class QGraphicsItem;
 class QPointF;
 class QTextStream;
+class SplineDrawer;
 class Transformation;
 
 typedef QHash<QString, GraphicsLinesForCurve*> GraphicsLinesContainer;
@@ -41,7 +42,8 @@ public:
                         const QStringList &curveNames);
 
   /// Mark the end of addPoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
-  void lineMembershipPurge (const CurveStyles &curveStyles);
+  void lineMembershipPurge (const CurveStyles &curveStyles,
+                            SplineDrawer &splineDrawer);
 
   /// Mark points as unwanted. Afterwards, lineMembershipPurge gets called
   void lineMembershipReset ();
@@ -74,7 +76,8 @@ public:
   void updateCurveStyles (const CurveStyles &modelCurveStyles);
 
   /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
-  void updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles);
+  void updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles,
+                                                 SplineDrawer &splineDrawer);
 
   /// Update the highlight opacity value. This may or may not affect the current display immediately depending on the state
   void updateHighlightOpacity (double highlightOpacity);

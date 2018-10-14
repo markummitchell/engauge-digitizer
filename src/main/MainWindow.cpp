@@ -3435,7 +3435,8 @@ void MainWindow::updateHighlightOpacity ()
     // by updateAfterCommandStatusBarCoords
     m_scene->updateAfterCommand (*m_cmdMediator,
                                  m_modelMainWindow.highlightOpacity(),
-                                 m_dockGeometryWindow);
+                                 m_dockGeometryWindow,
+                                 m_transformation);
   }
 }
 
