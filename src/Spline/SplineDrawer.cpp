@@ -18,7 +18,9 @@ void SplineDrawer::bindToSpline (int numSegments,
 {
   m_segmentOperations.resize (numSegments);
 
-  // Loop through segments to get move/draw choice
+  // Loop through segments to get move/draw choice. We do not need to worry about
+  // applying a move (versus a draw) for the first segment since that first point
+  // is handled by external code
   for (int segment = 0; segment < numSegments; segment++) {
 
     if (segmentIsMultiValued (spline,
@@ -26,21 +28,12 @@ void SplineDrawer::bindToSpline (int numSegments,
                               segment)) {
 
       // Invisible
-      m_segmentOperations [segment] = SPLINE_DRAWER_ENUM_INVISIBLE;
+      m_segmentOperations [segment] = SPLINE_DRAWER_ENUM_INVISIBLE_MOVE;
 
     } else {
 
       // Visible
-      bool isVisibleBefore = (segment > 0);
-      if (isVisibleBefore) {
-        isVisibleBefore = (m_segmentOperations [segment - 1] != SPLINE_DRAWER_ENUM_INVISIBLE);
-      }
-
-      if (isVisibleBefore) {
-        m_segmentOperations [segment] = SPLINE_DRAWER_ENUM_VISIBLE_DRAW;
-      } else {
-        m_segmentOperations [segment] = SPLINE_DRAWER_ENUM_VISIBLE_MOVE;
-      }
+      m_segmentOperations [segment] = SPLINE_DRAWER_ENUM_VISIBLE_DRAW;
     }
   }
 }
@@ -69,9 +62,9 @@ bool SplineDrawer::segmentIsMultiValued (const Spline &spline,
     double tIDelta = 1.0 / numSteps;
     for (int itI = 1; itI < numSteps - 1; itI++) {
 
-      double tIm1 = (segment + itI - 1) * tIDelta;
-      double tI   = (segment + itI    ) * tIDelta;
-      double tIp1 = (segment + itI + 1) * tIDelta;
+      double tIm1 = segment + (itI - 1) * tIDelta;
+      double tI   = segment + (itI    ) * tIDelta;
+      double tIp1 = segment + (itI + 1) * tIDelta;
 
       SplinePair spBefore = spline.interpolateCoeff (tIm1);
       SplinePair spCurrent = spline.interpolateCoeff (tI);
@@ -111,6 +104,6 @@ SplineDrawerOperation SplineDrawer::segmentOperation (int segment) const
   if (segment < m_segmentOperations.count()) {
     return m_segmentOperations.at (segment);
   } else {
-    return SPLINE_DRAWER_ENUM_INVISIBLE;
+    return SPLINE_DRAWER_ENUM_INVISIBLE_MOVE;
   }
 }

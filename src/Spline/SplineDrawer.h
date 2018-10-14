@@ -14,9 +14,8 @@
 class Spline;
 
 enum SplineDrawerOperation {
-  SPLINE_DRAWER_ENUM_INVISIBLE,
-  SPLINE_DRAWER_ENUM_VISIBLE_MOVE,
-  SPLINE_DRAWER_ENUM_VISIBLE_DRAW
+  SPLINE_DRAWER_ENUM_INVISIBLE_MOVE, // Move to final point in segment
+  SPLINE_DRAWER_ENUM_VISIBLE_DRAW // Draw to final point in segment
 };
 
 typedef QVector<SplineDrawerOperation> SegmentOperations;

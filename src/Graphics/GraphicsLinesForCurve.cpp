@@ -95,22 +95,24 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth (SplineDrawer &splineDrawer)
     splineDrawer.bindToSpline (m_graphicsPoints.count(),
                                spline);
 
-    // Create QPainterPath through the points
-    int numSegments = m_graphicsPoints.count() - 1; // Last point has no segment
-    int segment;
-    OrdinalToGraphicsPoint::const_iterator itr;
-    for (segment = 0, itr = m_graphicsPoints.begin();
-         segment < numSegments;
-         itr++, segment++) {
+    // Create QPainterPath through the points. Loop has one segment per stop point,
+    // with first point handled outside first
+    int segment; // Only incremented after a draw, corresponding to finishing a segment
+    OrdinalToGraphicsPoint::const_iterator itr = m_graphicsPoints.begin();
+
+    const GraphicsPoint *point = itr.value();
+    path.moveTo (point->pos ());
+    ++itr;
+
+    for (segment = 0;
+         itr != m_graphicsPoints.end();
+         segment++, itr++) {
 
       const GraphicsPoint *point = itr.value();
 
-      switch (splineDrawer.segmentOperation (segment)) {
-      case SPLINE_DRAWER_ENUM_INVISIBLE:
+      SplineDrawerOperation operation = splineDrawer.segmentOperation (segment);
 
-        // Hide this segment
-        break;
-
+      switch (operation) {
       case SPLINE_DRAWER_ENUM_VISIBLE_DRAW:
         {
           // Show this segment
@@ -125,7 +127,7 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth (SplineDrawer &splineDrawer)
         }
         break;
 
-      case SPLINE_DRAWER_ENUM_VISIBLE_MOVE:
+      case SPLINE_DRAWER_ENUM_INVISIBLE_MOVE:
         path.moveTo (point->pos ());
         break;
 
