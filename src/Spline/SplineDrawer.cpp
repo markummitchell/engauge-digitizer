@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "EngaugeAssert.h"
 #include <qmath.h>
 #include "Spline.h"
 #include "SplineDrawer.h"
@@ -23,17 +24,20 @@ void SplineDrawer::bindToSpline (int numSegments,
   // is handled by external code
   for (int segment = 0; segment < numSegments; segment++) {
 
-    if (segmentIsMultiValued (spline,
-                              numSegments,
-                              segment)) {
+    bool itsAKeeper = true;
+    if (m_transformation.transformIsDefined()) {
 
-      // Invisible
-      m_segmentOperations [segment] = SPLINE_DRAWER_ENUM_INVISIBLE_MOVE;
+      // We have the graph<->screen transformation so let's use it
+      if (segmentIsMultiValued (spline,
+                                numSegments,
+                                segment)) {
+        itsAKeeper = false;
+      }
 
-    } else {
-
-      // Visible
-      m_segmentOperations [segment] = SPLINE_DRAWER_ENUM_VISIBLE_DRAW;
+      // Invisible or visible?
+      m_segmentOperations [segment] = (itsAKeeper ?
+                                         SPLINE_DRAWER_ENUM_VISIBLE_DRAW :
+                                         SPLINE_DRAWER_ENUM_INVISIBLE_MOVE);
     }
   }
 }
@@ -42,6 +46,8 @@ bool SplineDrawer::segmentIsMultiValued (const Spline &spline,
                                          int numSegments,
                                          int segment) const
 {
+  ENGAUGE_ASSERT (m_transformation.transformIsDefined());
+
   if ((0 < segment) &&
       (segment < numSegments - 1)) {
 
