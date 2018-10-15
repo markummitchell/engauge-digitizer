@@ -515,8 +515,6 @@ SOURCES += \
     src/Coord/CoordUnitsPolarTheta.cpp \
     src/Coord/CoordUnitsTime.cpp \
     src/Correlation/Correlation.cpp \
-    src/Cursor/CursorFactory.cpp \
-    src/Cursor/CursorSize.cpp \
     src/Create/CreateActions.cpp \
     src/Create/CreateCentralWidget.cpp \
     src/Create/CreateCommandStackShadow.cpp \
@@ -534,6 +532,8 @@ SOURCES += \
     src/Create/CreateToolBars.cpp \
     src/Create/CreateTutorial.cpp \
     src/Create/CreateZoomMaps.cpp \
+    src/Cursor/CursorFactory.cpp \
+    src/Cursor/CursorSize.cpp \
     src/Curve/Curve.cpp \
     src/Curve/CurveConnectAs.cpp \
     src/Curve/CurveNameList.cpp \

@@ -10,6 +10,7 @@
 #include "CmdMediator.h"
 #include "GraphicsLinesForCurves.h"
 #include <QGraphicsScene>
+#include <QObject>
 #include <QStringList>
 
 class CmdMediator;
@@ -34,9 +35,15 @@ class Transformation;
 /// the points and lines are accessible for updates (like when dragging points around and we need to update the attached lines).
 class GraphicsScene : public QGraphicsScene
 {
+  // We use Q_OBJECT so translations work
+  Q_OBJECT;
+  
 public:
   /// Single constructor.
   GraphicsScene(MainWindow *mainWindow);
+
+  /// Virtual destructor needed since using Q_OBJECT
+  virtual ~GraphicsScene();
 
   /// Add one temporary point to m_graphicsLinesForCurves. Non-temporary points are handled by the updateLineMembership functions
   void addTemporaryPoint (const QString &identifier,

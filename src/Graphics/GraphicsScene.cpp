@@ -32,6 +32,10 @@ GraphicsScene::GraphicsScene(MainWindow *mainWindow) :
 {
 }
 
+GraphicsScene::~GraphicsScene()
+{
+}
+
 void GraphicsScene::addTemporaryPoint (const QString &identifier,
                                        GraphicsPoint *point)
 {
