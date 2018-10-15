@@ -27,7 +27,8 @@
 #include "Transformation.h"
 
 GraphicsScene::GraphicsScene(MainWindow *mainWindow) :
-  QGraphicsScene(mainWindow)
+  QGraphicsScene(mainWindow),
+  m_pathItemMultiValued (0)
 {
 }
 
@@ -318,9 +319,32 @@ void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles 
 
     // Recompute the lines one time for efficiency
     SplineDrawer splineDrawer (transformation);
+    QPainterPath pathMultiValued;
+    LineStyle lineMultiValued;
     m_graphicsLinesForCurves.updateGraphicsLinesToMatchGraphicsPoints (curveStyles,
-                                                                       splineDrawer);
+                                                                       splineDrawer,
+                                                                       pathMultiValued,
+                                                                       lineMultiValued);
+
+    updatePathItemMultiValued (pathMultiValued,
+                               lineMultiValued);
   }
+}
+
+void GraphicsScene::updatePathItemMultiValued (const QPainterPath &pathMultiValued,
+                                               const LineStyle &lineMultiValued)
+{
+  // It looks much better to use a consistent line width
+  int lineWidth = lineMultiValued.width();
+
+  // Draw m_curveMultiValued. If empty then nothing will appear
+  delete m_pathItemMultiValued;
+  m_pathItemMultiValued = this->addPath (pathMultiValued);
+  m_pathItemMultiValued->setPen (QPen (QBrush (QColor (Qt::red)),
+                                       lineWidth,
+                                       Qt::DotLine));
+  m_pathItemMultiValued->setAcceptHoverEvents (true);
+  m_pathItemMultiValued->setToolTip (tr ("Function currently has multiple Y values for one X value. Please adjust nearby points"));
 }
 
 void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator,
@@ -349,6 +373,12 @@ void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator,
   // Next pass:
   // 1) Remove points that were just removed from the Document
   SplineDrawer splineDrawer (transformation);
+  QPainterPath pathMultiValued;
+  LineStyle lineMultiValued;
   m_graphicsLinesForCurves.lineMembershipPurge (cmdMediator.document().modelCurveStyles(),
-                                                splineDrawer);
+                                                splineDrawer,
+                                                pathMultiValued,
+                                                lineMultiValued);
+  updatePathItemMultiValued (pathMultiValued,
+                             lineMultiValued);
 }

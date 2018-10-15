@@ -18,6 +18,7 @@
 #include "PointStyle.h"
 #include <QGraphicsItem>
 #include <QMap>
+#include <QPainterPath>
 #include <QPen>
 #include <QTextStream>
 #include "QtToString.h"
@@ -65,7 +66,10 @@ void GraphicsLinesForCurve::addPoint (const QString &pointIdentifier,
   m_graphicsPoints [ordinal] = &graphicsPoint;
 }
 
-QPainterPath GraphicsLinesForCurve::drawLinesSmooth (SplineDrawer &splineDrawer)
+QPainterPath GraphicsLinesForCurve::drawLinesSmooth (const LineStyle &lineStyle,
+                                                     SplineDrawer &splineDrawer,
+                                                     QPainterPath &pathMultiValued,
+                                                     LineStyle &lineMultiValued)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::drawLinesSmooth"
                               << " curve=" << m_curveName.toLatin1().data();
@@ -102,6 +106,7 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth (SplineDrawer &splineDrawer)
 
     const GraphicsPoint *point = itr.value();
     path.moveTo (point->pos ());
+    pathMultiValued.moveTo (point->pos ());
     ++itr;
 
     for (segment = 0;
@@ -112,15 +117,15 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth (SplineDrawer &splineDrawer)
 
       SplineDrawerOperation operation = splineDrawer.segmentOperation (segment);
 
+      QPointF p1 (spline.p1 (segment).x(),
+                  spline.p1 (segment).y());
+      QPointF p2 (spline.p2 (segment).x(),
+                  spline.p2 (segment).y());
+
       switch (operation) {
       case SPLINE_DRAWER_ENUM_VISIBLE_DRAW:
         {
           // Show this segment
-          QPointF p1 (spline.p1 (segment).x(),
-                      spline.p1 (segment).y());
-          QPointF p2 (spline.p2 (segment).x(),
-                      spline.p2 (segment).y());
-
           path.cubicTo (p1,
                         p2,
                         point->pos ());
@@ -128,17 +133,31 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth (SplineDrawer &splineDrawer)
         break;
 
       case SPLINE_DRAWER_ENUM_INVISIBLE_MOVE:
+
+        // Hide this segment as a regular curve, and show it as the error curve
         path.moveTo (point->pos ());
+
+        // Show curveMultiValued instead in what would have been the original curve's path
+        OrdinalToGraphicsPoint::const_iterator itrBefore = itr - 1;
+        const GraphicsPoint *pointBefore = itrBefore.value();
+        pathMultiValued.moveTo (pointBefore->pos ());
+        pathMultiValued.cubicTo (p1,
+                                 p2,
+                                 point->pos ());
+        lineMultiValued = lineStyle; // Remember to not use the same line style
         break;
 
       }
+
+      // Always move to next point for curveMultiValued
+      pathMultiValued.moveTo (point->pos ());
     }
   }
 
   return path;
 }
 
-QPainterPath GraphicsLinesForCurve::drawLinesStraight ()
+QPainterPath GraphicsLinesForCurve::drawLinesStraight (QPainterPath  & /* pathMultiValued */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::drawLinesStraight"
                               << " curve=" << m_curveName.toLatin1().data();
@@ -184,7 +203,9 @@ double GraphicsLinesForCurve::identifierToOrdinal (const QString &identifier) co
 }
 
 void GraphicsLinesForCurve::lineMembershipPurge (const LineStyle &lineStyle,
-                                                 SplineDrawer &splineDrawer)
+                                                 SplineDrawer &splineDrawer,
+                                                 QPainterPath &pathMultiValued,
+                                                 LineStyle &lineMultiValued)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::lineMembershipPurge"
                               << " curve=" << m_curveName.toLatin1().data();
@@ -222,7 +243,9 @@ void GraphicsLinesForCurve::lineMembershipPurge (const LineStyle &lineStyle,
   setPen (pen);
 
   updateGraphicsLinesToMatchGraphicsPoints (lineStyle,
-                                            splineDrawer);
+                                            splineDrawer,
+                                            pathMultiValued,
+                                            lineMultiValued);
 }
 
 void GraphicsLinesForCurve::lineMembershipReset ()
@@ -401,7 +424,9 @@ void GraphicsLinesForCurve::updateHighlightOpacity (double highlightOpacity)
 }
 
 void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle,
-                                                                      SplineDrawer &splineDrawer)
+                                                                      SplineDrawer &splineDrawer,
+                                                                      QPainterPath &pathMultiValued,
+                                                                      LineStyle &lineMultiValued)
 {
   // LOG4CPP_INFO_S is below
 
@@ -425,9 +450,12 @@ void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const Line
         lineStyle.curveConnectAs() == CONNECT_AS_RELATION_STRAIGHT ||
         m_graphicsPoints.count () < 3) {
 
-      path = drawLinesStraight ();
+      path = drawLinesStraight (pathMultiValued);
     } else {
-      path = drawLinesSmooth (splineDrawer);
+      path = drawLinesSmooth (lineStyle,
+                              splineDrawer,
+                              pathMultiValued,
+                              lineMultiValued);
     }
 
    setPath (path);

@@ -14,8 +14,10 @@ class GeometryWindow;
 class GraphicsLinesForCurve;
 class GraphicsPoint;
 class GraphicsScene;
+class LineStyle;
 class Point;
 class QGraphicsItem;
+class QPainterPath;
 class QPointF;
 class QTextStream;
 class SplineDrawer;
@@ -43,7 +45,9 @@ public:
 
   /// Mark the end of addPoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
   void lineMembershipPurge (const CurveStyles &curveStyles,
-                            SplineDrawer &splineDrawer);
+                            SplineDrawer &splineDrawer,
+                            QPainterPath &pathMultiValued,
+                            LineStyle &lineMultiValued);
 
   /// Mark points as unwanted. Afterwards, lineMembershipPurge gets called
   void lineMembershipReset ();
@@ -77,7 +81,9 @@ public:
 
   /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
   void updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles,
-                                                 SplineDrawer &splineDrawer);
+                                                 SplineDrawer &splineDrawer,
+                                                 QPainterPath &pathMultiValued,
+                                                 LineStyle &lineMultiValued);
 
   /// Update the highlight opacity value. This may or may not affect the current display immediately depending on the state
   void updateHighlightOpacity (double highlightOpacity);

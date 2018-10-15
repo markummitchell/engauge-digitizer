@@ -83,7 +83,7 @@ bool SplineDrawer::segmentIsMultiValued (const Spline &spline,
                                                   posGraphAfter);
 
       // In between the start and end points we look for deltaXBefore>0 and deltaXAfter<0,
-      // or deltaXBefore<0 and deltaXAfter>0, either of those two cases indicated multi-valued
+      // or deltaXBefore<0 and deltaXAfter>0, either of those two cases indicates multi-valued
       double deltaXBefore = posGraphCurrent.x() - posGraphBefore.x();
       double deltaXAfter = posGraphAfter.x() - posGraphCurrent.x();
 

@@ -18,8 +18,10 @@ class CurvesGraphs;
 class CurveStyles;
 class GeometryWindow;
 class GraphicsPoint;
+class LineStyle;
 class MainWindow;
 class PointStyle;
+class QGraphicsPathItem;
 class QTextStream;
 class ScaleBar;
 class Transformation;
@@ -109,6 +111,10 @@ private:
   /// Remove expired curves and add new curves
   void updateCurves (CmdMediator &cmdMediator);
 
+  /// Update path item showing where multi-valued issues are occuring. Nothing appears if there are no problems
+  void updatePathItemMultiValued (const QPainterPath &pathMultiValued,
+                                  const LineStyle &lineMultiValued);
+
   /// Update Points using a multi-pass algorithm.
   void updatePointMembership (CmdMediator &cmdMediator,
                               GeometryWindow *geometryWindow,
@@ -116,6 +122,12 @@ private:
 
   /// Curve name to GraphicsLinesForCurve
   GraphicsLinesForCurves m_graphicsLinesForCurves;
+
+  /// Special path item that in happy times is never seen. It appears in place of bad line segments on the
+  /// other curves. Bad=segment is multi-valued for a function since functions should always be single-valued.
+  /// This special curve lives here rather than in m_graphicsLinesForCurves so it is decoupled from
+  /// that member (especially since that gets serialized)
+  QGraphicsPathItem *m_pathItemMultiValued;
 };
 
 #endif // GRAPHICS_SCENE_H
