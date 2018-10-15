@@ -13,11 +13,7 @@ CreateLoadImage::CreateLoadImage()
 {
 }
 
-void CreateLoadImage::create(MainWindow &
-#ifdef NETWORKING
-                             mw
-#endif
-                             )
+void CreateLoadImage::create(MainWindow &mw)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CreateLoadImage::create";
   

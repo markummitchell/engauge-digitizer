@@ -865,3 +865,9 @@ pdf {
 } else {
     message("PDF support:      no")
 }
+
+contains (DEFINES, NETWORKING) {
+    message("networking build: yes")
+} else {
+    message("networking build: no")
+}

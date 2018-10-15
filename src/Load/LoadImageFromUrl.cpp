@@ -10,7 +10,6 @@
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QtNetwork/QNetworkReply>
-#include <QTextStream>
 #include <QUrl>
 #include "Version.h"
 

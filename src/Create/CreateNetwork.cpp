@@ -15,11 +15,7 @@ CreateNetwork::CreateNetwork()
 {
 }
 
-void CreateNetwork::create(MainWindow &
-#ifdef NETWORKING
-                           mw
-#endif
-                           )
+void CreateNetwork::create(MainWindow &mw)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CreateNetwork::create";
   
