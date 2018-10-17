@@ -342,10 +342,12 @@ HEADERS  += \
     Segment/SegmentLine.h \
     Settings/Settings.h \
     Settings/SettingsForGraph.h \
-    Spline/Spline.h \
+    Spline/SplineAbstract.h \
     Spline/SplineCoeff.h \
     Spline/SplineDrawer.h \
+    Spline/SplineMultiValued.h \
     Spline/SplinePair.h \
+    Spline/SplineSingleValued.h \
     StatusBar/StatusBar.h \
     StatusBar/StatusBarMode.h \
     Test/TEST.h \
@@ -685,10 +687,12 @@ SOURCES += \
     Segment/SegmentLine.cpp \
     Settings/Settings.cpp \
     Settings/SettingsForGraph.cpp \
-    Spline/Spline.cpp \
+    Spline/SplineAbstract.cpp \
     Spline/SplineCoeff.cpp \
     Spline/SplineDrawer.cpp \
+    Spline/SplineMultiValued.cpp \
     Spline/SplinePair.cpp \
+    Spline/SplineSingleValued.cpp \
     StatusBar/StatusBar.cpp \
     Test/TEST.cpp \
     Transformation/Transformation.cpp \

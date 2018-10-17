@@ -3,8 +3,6 @@
 #include "mmsubs.h"
 #include <qmath.h>
 #include <QtTest/QtTest>
-#include "Spline.h"
-#include "SplinePair.h"
 #include "Test/TestProjectedPoint.h"
 
 QTEST_MAIN (TestProjectedPoint)

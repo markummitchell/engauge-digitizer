@@ -10,7 +10,7 @@
 #include <qdebug.h>
 #include <qmath.h>
 #include <QPointF>
-#include "Spline.h"
+#include "SplineMultiValued.h"
 #include "Transformation.h"
 
 using namespace std;
@@ -76,8 +76,8 @@ ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector
   if (xy.size() > 0) {
 
     // Fit a spline
-    Spline spline (t,
-                   xy);
+    SplineMultiValued spline (t,
+                              xy);
 
     // Integrate the distances for the subintervals
     double integratedSeparation = 0;

@@ -33,6 +33,16 @@ SplinePair::SplinePair(const SplinePair&other) :
 {
 }
 
+double SplinePair::arg1() const
+{
+  return m_x;
+}
+
+double SplinePair::arg2() const
+{
+  return m_y;
+}
+
 SplinePair SplinePair::operator+(const SplinePair &other) const
 {
   SplinePair result (m_x + other.x(),

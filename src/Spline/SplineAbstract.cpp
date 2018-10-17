@@ -5,30 +5,19 @@
 #include "EngaugeAssert.h"
 #include <iostream>
 #include "Logger.h"
-#include "Spline.h"
+#include "SplineAbstract.h"
 
 using namespace std;
 
-Spline::Spline(const std::vector<double> &t,
-               const std::vector<SplinePair> &xy,
-               SplineTCheck splineTCheck)
-{
-  ENGAUGE_ASSERT (t.size() == xy.size());
-  ENGAUGE_ASSERT (xy.size() > 0); // Need at least one point for this class to not fail with a crash
-
-  if (splineTCheck == SPLINE_ENABLE_T_CHECK) {
-    // In normal production this check should be performed
-    checkTIncrements (t);
-  }
-  computeCoefficientsForIntervals (t, xy);
-  computeControlPointsForIntervals ();
-}
-
-Spline::~Spline()
+SplineAbstract::SplineAbstract()
 {
 }
 
-void Spline::checkTIncrements (const std::vector<double> &t) const
+SplineAbstract::~SplineAbstract()
+{
+}
+
+void SplineAbstract::checkTIncrements (const vector<double> &t) const
 {
   for (unsigned int i = 1; i < t.size(); i++) {
     double tStep = t[i] - t[i-1];
@@ -39,63 +28,7 @@ void Spline::checkTIncrements (const std::vector<double> &t) const
   }
 }
 
-void Spline::computeCoefficientsForIntervals (const std::vector<double> &t,
-                                              const std::vector<SplinePair> &xy)
-{
-  if (xy.size() > 1) {
-
-    // There are enough points to compute the coefficients
-    int i, j;
-    int n = (int) xy.size() - 1;
-
-    m_t = t;
-    m_xy = xy;
-
-    vector<SplinePair> b(n), d(n), a(n), c(n+1), l(n+1), u(n+1), z(n+1);
-    vector<SplinePair> h(n+1);
-
-    l[0] = SplinePair (1.0);
-    u[0] = SplinePair (0.0);
-    z[0] = SplinePair (0.0);
-    h[0] = t[1] - t[0];
-
-    for (i = 1; i < n; i++) {
-      h[i] = t[i+1] - t[i];
-      l[i] = SplinePair (2.0) * (t[i+1] - t[i-1]) - h[i-1] * u[i-1];
-      u[i] = h[i] / l[i];
-      a[i] = (SplinePair (3.0) / h[i]) * (xy[i+1] - xy[i]) - (SplinePair (3.0) / h[i-1]) * (xy[i] - xy[i-1]);
-      z[i] = (a[i] - h[i-1] * z[i-1]) / l[i];
-    }
-
-    l[n] = SplinePair (1.0);
-    z[n] = SplinePair (0.0);
-    c[n] = SplinePair (0.0);
-
-    for (j = n - 1; j >= 0; j--) {
-      c[j] = z[j] - u[j] * c[j+1];
-      b[j] = (xy[j+1] - xy[j]) / (h[j]) - (h[j] * (c[j+1] + SplinePair (2.0) * c[j])) / SplinePair (3.0);
-      d[j] = (c[j+1] - c[j]) / (SplinePair (3.0) * h[j]);
-    }
-
-    for (i = 0; i < n; i++) {
-      m_elements.push_back(SplineCoeff(t[i],
-                                       xy[i],
-                                       b[i],
-                                       c[i],
-                                       d[i]));
-    }
-  } else {
-
-    // There is only one point so we have to hack a coefficient entry
-    m_elements.push_back(SplineCoeff(t[0],
-                                     xy[0],
-                                     0.0,
-                                     0.0,
-                                     0.0));
-  }
-}
-
-void Spline::computeControlPointsForIntervals ()
+void SplineAbstract::computeControlPointsForIntervals ()
 {
   int i, n = (int) m_xy.size() - 1;
 
@@ -134,15 +67,15 @@ void Spline::computeControlPointsForIntervals ()
                 << " xy=" << m_xy [i];
 }
 
-void Spline::computeUntranslatedCoefficients (double aTranslated,
-                                              double bTranslated,
-                                              double cTranslated,
-                                              double dTranslated,
-                                              double tI,
-                                              double &aUntranslated,
-                                              double &bUntranslated,
-                                              double &cUntranslated,
-                                              double &dUntranslated) const
+void SplineAbstract::computeUntranslatedCoefficients (double aTranslated,
+                                                      double bTranslated,
+                                                      double cTranslated,
+                                                      double dTranslated,
+                                                      double tI,
+                                                      double &aUntranslated,
+                                                      double &bUntranslated,
+                                                      double &cUntranslated,
+                                                      double &dUntranslated) const
 {
   // Expanding the equation using t translated as (t-ti) we get the equation using untranslated (t) as follows
   //   xy=d*t^3+
@@ -161,8 +94,8 @@ void Spline::computeUntranslatedCoefficients (double aTranslated,
   dUntranslated = dTranslated;
 }
 
-SplinePair Spline::findSplinePairForFunctionX (double x,
-                                               int numIterations) const
+SplinePair SplineAbstract::findSplinePairForFunctionX (double x,
+                                                       int numIterations) const
 {
   SplinePair spCurrent;
 
@@ -211,7 +144,22 @@ SplinePair Spline::findSplinePairForFunctionX (double x,
   return spCurrent;
 }
 
-SplinePair Spline::interpolateCoeff (double t) const
+void SplineAbstract::initialize(const vector<double> &t,
+                                const vector<SplinePair> &xy,
+                                SplineTCheck splineTCheck)
+{
+  ENGAUGE_ASSERT (t.size() == xy.size());
+  ENGAUGE_ASSERT (xy.size() > 0); // Need at least one point for this class to not fail with a crash
+
+  if (splineTCheck == SPLINE_ENABLE_T_CHECK) {
+    // In normal production this check should be performed
+    checkTIncrements (t);
+  }
+  computeCoefficientsForIntervals (t, xy);
+  computeControlPointsForIntervals ();
+}
+
+SplinePair SplineAbstract::interpolateCoeff (double t) const
 {
   ENGAUGE_ASSERT (m_elements.size() != 0);
   
@@ -224,7 +172,7 @@ SplinePair Spline::interpolateCoeff (double t) const
   return itr->eval(t);
 }
 
-SplinePair Spline::interpolateControlPoints (double t) const
+SplinePair SplineAbstract::interpolateControlPoints (double t) const
 {
   ENGAUGE_ASSERT (m_xy.size() != 0);
 
@@ -247,16 +195,31 @@ SplinePair Spline::interpolateControlPoints (double t) const
   return m_t[0];
 }
 
-SplinePair Spline::p1 (unsigned int i) const
+SplinePair SplineAbstract::p1 (unsigned int i) const
 {
   ENGAUGE_ASSERT (i < (unsigned int) m_p1.size ());
 
   return m_p1 [i];
 }
 
-SplinePair Spline::p2 (unsigned int i) const
+SplinePair SplineAbstract::p2 (unsigned int i) const
 {
   ENGAUGE_ASSERT (i < (unsigned int) m_p2.size ());
 
   return m_p2 [i];
+}
+
+void SplineAbstract::saveElement (const SplineCoeff &coef)
+{
+  m_elements.push_back (coef);
+}
+
+void SplineAbstract::saveT (const vector<double> &t)
+{
+  m_t = t;
+}
+
+void SplineAbstract::saveXy (const vector<SplinePair> &xy)
+{
+  m_xy = xy;
 }

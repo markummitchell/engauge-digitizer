@@ -6,7 +6,7 @@
 
 #include "EngaugeAssert.h"
 #include <qmath.h>
-#include "Spline.h"
+#include "SplineAbstract.h"
 #include "SplineDrawer.h"
 
 SplineDrawer::SplineDrawer(const Transformation &transformation) :
@@ -15,7 +15,7 @@ SplineDrawer::SplineDrawer(const Transformation &transformation) :
 }
 
 void SplineDrawer::bindToSpline (int numSegments,
-                                 const Spline &spline)
+                                 const SplineAbstract &spline)
 {
   m_segmentOperations.resize (numSegments);
 
@@ -42,7 +42,7 @@ void SplineDrawer::bindToSpline (int numSegments,
   }
 }
 
-bool SplineDrawer::segmentIsMultiValued (const Spline &spline,
+bool SplineDrawer::segmentIsMultiValued (const SplineAbstract &spline,
                                          int numSegments,
                                          int segment) const
 {

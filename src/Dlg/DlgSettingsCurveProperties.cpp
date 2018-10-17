@@ -34,7 +34,7 @@
 #include <QTransform>
 #include "Settings.h"
 #include "SettingsForGraph.h"
-#include "Spline.h"
+#include "SplineMultiValued.h"
 #include "SplinePair.h"
 #include <vector>
 #include "ViewPreview.h"
@@ -302,7 +302,7 @@ void DlgSettingsCurveProperties::drawLine (bool isRelation,
     xy.push_back (SplinePair (p0.x(), p0.y()));
     xy.push_back (SplinePair (p1.x(), p1.y()));
     xy.push_back (SplinePair (p2.x(), p2.y()));
-    Spline spline (t, xy);
+    SplineMultiValued spline (t, xy);
     path.moveTo (p0);
     path.cubicTo (QPointF (spline.p1(0).x(),
                            spline.p1(0).y()),

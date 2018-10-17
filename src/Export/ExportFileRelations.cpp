@@ -18,7 +18,7 @@
 #include <qmath.h>
 #include <QTextStream>
 #include <QVector>
-#include "Spline.h"
+#include "SplineMultiValued.h"
 #include "SplinePair.h"
 #include "Transformation.h"
 #include <vector>
@@ -440,8 +440,8 @@ void ExportFileRelations::loadXThetaYRadiusValuesForCurveInterpolatedSmooth (con
   if (xy.size() > 0) {
 
     // Fit a spline
-    Spline spline (t,
-                   xy);
+    SplineMultiValued spline (t,
+                              xy);
 
     FormatCoordsUnits format;
 

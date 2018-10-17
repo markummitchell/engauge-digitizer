@@ -22,8 +22,8 @@
 #include <QPen>
 #include <QTextStream>
 #include "QtToString.h"
-#include "Spline.h"
 #include "SplineDrawer.h"
+#include "SplineMultiValued.h"
 #include "Transformation.h"
 #include "ZValues.h"
 
@@ -94,8 +94,8 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth (const LineStyle &lineStyle,
   if (xy.size() > 0) {
 
     // Spline through points
-    Spline spline (t, xy);
-
+    SplineMultiValued spline (t, xy);
+    
     splineDrawer.bindToSpline (m_graphicsPoints.count(),
                                spline);
 

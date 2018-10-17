@@ -264,8 +264,10 @@ void GridLineFactory::createTransformAlign (const Transformation &transformation
                                                                                 posXRadiusY0AlignedScreen,
                                                                                 posX0YRadiusAlignedScreen);
 
+  // Prevent gratuitous compiler warning about null pointers by using "\n" rather than endl below
   LOG4CPP_INFO_S ((*mainCat)) << "GridLineFactory::createTransformAlign"
-                              << " transformation=" << QTransformToString (transformation.transformMatrix()).toLatin1().data() << endl
+                              << " transformation=" << QTransformToString (transformation.transformMatrix()).toLatin1().data()
+                              << "\n"
                               << " radiusLinearCartesian=" << radiusLinearCartesian
                               << " posXRadiusY0Screen=" << QPointFToString (posXRadiusY0Screen).toLatin1().data()
                               << " posX0YRadiusScreen=" << QPointFToString (posX0YRadiusScreen).toLatin1().data()

@@ -10,8 +10,6 @@
 #include <QtTest/QtTest>
 #include "Segment.h"
 #include "SegmentFactory.h"
-#include "Spline.h"
-#include "SplinePair.h"
 #include "Test/TestSegmentFill.h"
 
 QTEST_MAIN (TestSegmentFill)

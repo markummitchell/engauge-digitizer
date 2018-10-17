@@ -6,7 +6,7 @@
 #include "SplinePair.h"
 #include <vector>
 
-class Spline;
+class SplineAbstract;
 
 /// Unit test of spline library
 class TestSpline : public QObject
@@ -29,10 +29,10 @@ private slots:
 private:
   bool coefCheckX (const std::vector<double> &t,
                    const std::vector<SplinePair> &xy,
-                   const Spline &s) const;
+                   const SplineAbstract &s) const;
   bool coefCheckY (const std::vector<double> &t,
                    const std::vector<SplinePair> &xy,
-                   const Spline &s) const;
+                   const SplineAbstract &s) const;
   void coefShow (const QString &leftHandSide,
                  const QString &independentVariable,
                  double tLow,

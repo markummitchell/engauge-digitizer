@@ -375,10 +375,12 @@ HEADERS  += \
     src/Segment/SegmentLine.h \
     src/Settings/Settings.h \
     src/Settings/SettingsForGraph.h \
-    src/Spline/Spline.h \
+    src/Spline/SplineAbstract.h \
     src/Spline/SplineCoeff.h \
     src/Spline/SplineDrawer.h \
+    src/Spline/SplineMultiValued.h \
     src/Spline/SplinePair.h \
+    src/Spline/SplineSingleValued.h \
     src/StatusBar/StatusBar.h \
     src/StatusBar/StatusBarMode.h \
     src/Transformation/Transformation.h \
@@ -714,10 +716,12 @@ SOURCES += \
     src/Segment/SegmentLine.cpp \
     src/Settings/Settings.cpp \
     src/Settings/SettingsForGraph.cpp \
-    src/Spline/Spline.cpp \
+    src/Spline/SplineAbstract.cpp \
     src/Spline/SplineCoeff.cpp \
     src/Spline/SplineDrawer.cpp \
+    src/Spline/SplineMultiValued.cpp \
     src/Spline/SplinePair.cpp \
+    src/Spline/SplineSingleValued.cpp \    
     src/StatusBar/StatusBar.cpp \
     src/Transformation/Transformation.cpp \
     src/Transformation/TransformationStateAbstractBase.cpp \

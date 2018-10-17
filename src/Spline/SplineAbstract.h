@@ -4,8 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef SPLINE_H
-#define SPLINE_H
+#ifndef SPLINE_ABSTRACT_H
+#define SPLINE_ABSTRACT_H
 
 #include "SplineCoeff.h"
 #include "SplinePair.h"
@@ -16,9 +16,6 @@ enum SplineTCheck {
   SPLINE_DISABLE_T_CHECK
 };
 
-/// Cubic interpolation given independent and dependent value vectors. X is handled as a dependent variable
-/// based on the unitless independent parameter t so curves are not restricted to x(i)!=x(i+1).
-///
 /// This class has two modes that can be run side by side:
 /// -# Coefficient mode, where each interval has coefficients a,b,c,d in xy=ai+bi*(t-ti)+ci*(t-ti)^2+di*(t-ti)^3
 /// -# Bezier mode, where each interval has 2 endpoints and 2 control points in 
@@ -26,20 +23,17 @@ enum SplineTCheck {
 ///    this interpolation was just to verify consistent operation between the two modes. The real purpose of this
 ///    mode is to produce reliable control points, p1 and p2, for each interval. The control points can be used by
 ///    external code that relies on control points to perform its own interpolation 
-class Spline 
+class SplineAbstract
 {
   /// For unit testing
   friend class TestSpline;
-
+  
  public:
   /// Initialize spline with independent (t) and dependent (x and y) value vectors. Besides initializing
   /// the a,b,c,d coefficients for each interval, this constructor initializes bezier points (P1 and P2)
   /// for each interval, where P0 and P3 are the start and end points for each interval.
-  Spline(const std::vector<double> &t,
-         const std::vector<SplinePair> &xy,
-         SplineTCheck splineTCheck = SPLINE_ENABLE_T_CHECK);
-
-  virtual ~Spline();
+  SplineAbstract();
+  virtual ~SplineAbstract();
 
   /// From coefficients in
   ///   xy=d*(t-ti)^3+c*(t-ti)^2+b*(t-ti)+a
@@ -74,18 +68,35 @@ class Spline
   /// Bezier p2 control point for specified interval. P0 is m_xy[i] and P3 is m_xy[i+1]
   SplinePair p2 (unsigned int i) const;
 
+protected:
+
+  /// Compute coefficients for converting t to x and y
+  virtual void computeCoefficientsForIntervals (const std::vector<double> &t,
+                                                const std::vector<SplinePair> &xy) = 0;
+
+  /// Initialization is done after base and derived class virtual methods have all been constructed
+  void initialize(const std::vector<double> &t,
+                  const std::vector<SplinePair> &xy,
+                  SplineTCheck splineTCheck = SPLINE_ENABLE_T_CHECK);
+
+  /// Save method for coefficient element
+  void saveElement (const SplineCoeff &coef);
+  
+  /// Save method for t vector
+  void saveT (const std::vector<double> &t);
+
+  /// Save method for xy vector
+  void saveXy (const std::vector<SplinePair> &xy);
+  
 private:
-  Spline();
 
   // Although coefficient interpolation works for successive t values not 1.0 apart, the control point interpolation
   // does not so we check the increments. Note that the starting value is arbitrary. Removing this restriction will
   // mean upgrading the code to allow arbitrary t increments
   void checkTIncrements (const std::vector<double> &t) const;
 
-  void computeCoefficientsForIntervals (const std::vector<double> &t,
-                                        const std::vector<SplinePair> &xy);
   void computeControlPointsForIntervals ();
-
+  
   // Coefficients a,b,c,d
   std::vector<SplineCoeff> m_elements;
 
@@ -98,6 +109,7 @@ private:
   // Control points for each interval
   std::vector<SplinePair> m_p1;
   std::vector<SplinePair> m_p2;
+
 };
 
-#endif // SPLINE_H
+#endif // SPLINE_ABSTRACT_H

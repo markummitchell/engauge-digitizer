@@ -26,6 +26,12 @@ class SplinePair
   /// Assigment constructor
   SplinePair(const SplinePair&other);
 
+  /// Get method for x coordinate value that is less confusing when t values are actually stored in x coordinate
+  double arg1() const;
+
+  /// Get method for y coordinate value that is less confusing when x values are actually stored in y coordinate
+  double arg2() const;
+
   /// Addition operator
   SplinePair operator+(const SplinePair &other) const;
 
@@ -38,10 +44,10 @@ class SplinePair
   /// Division operator
   SplinePair operator/(const SplinePair &other) const;
 
-  /// Get method for x
+  /// Get method for x coordinate
   double x() const;
 
-  /// Get method for y
+  /// Get method for y coordinate
   double y() const;
 
  private:

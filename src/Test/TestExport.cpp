@@ -12,8 +12,6 @@
 #include <QImage>
 #include <qmath.h>
 #include <QtTest/QtTest>
-#include "Spline.h"
-#include "SplinePair.h"
 #include "Test/TestExport.h"
 #include "Transformation.h"
 

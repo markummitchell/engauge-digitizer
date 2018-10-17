@@ -3,8 +3,9 @@
 #include <map>
 #include <qmath.h>
 #include <QtTest/QtTest>
-#include "Spline.h"
+#include "SplineMultiValued.h"
 #include "SplinePair.h"
+#include "SplineSingleValued.h"
 #include <sstream>
 #include "Test/TestSpline.h"
 
@@ -36,7 +37,7 @@ bool TestSpline::coefCheckX (const vector<double> &t,
 #else
                              const vector<SplinePair> & /* xy */,
 #endif
-                             const Spline &s) const
+                             const SplineAbstract &s) const
 {
   unsigned int i;
   double aUntranslated = 0, bUntranslated = 0, cUntranslated = 0, dUntranslated = 0;
@@ -104,7 +105,7 @@ bool TestSpline::coefCheckY (const vector<double> &t,
 #else
                              const vector<SplinePair> & /* xy */,
 #endif
-                             const Spline &s) const
+                             const SplineAbstract &s) const
 {
   unsigned int i;
   double aUntranslated = 0, bUntranslated = 0, cUntranslated = 0, dUntranslated = 0;
@@ -236,7 +237,7 @@ void TestSpline::testCoefficientsFromOrdinals ()
   }
 
   // Generate the spline
-  Spline s (t, xy);
+  SplineMultiValued s (t, xy);
 
   success &= coefCheckX (t,
                          xy,
@@ -289,7 +290,7 @@ void TestSpline::testSharpTransition ()
   }
 
   // Generate the spline
-  Spline s (t, xyBefore, SPLINE_DISABLE_T_CHECK);
+  SplineMultiValued s (t, xyBefore, SPLINE_DISABLE_T_CHECK);
 
   // Plot the points after generating the spline
   vector<SplinePair> xyAfter;
@@ -380,7 +381,7 @@ void TestSpline::testSplinesAsControlPoints ()
   xy.push_back (SplinePair (5.8, 0.09));
   xy.push_back (SplinePair (7, 0.11));
 
-  Spline s (t, xy);
+  SplineMultiValued s (t, xy);
 
   for (int i = 0; i <= NUM_T; i++) {
     double t = T_START + (double) i * (T_STOP - T_START) / (double) NUM_T;

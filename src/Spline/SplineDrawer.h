@@ -11,7 +11,7 @@
 #include "Transformation.h"
 #include <QVector>
 
-class Spline;
+class SplineAbstract;
 
 enum SplineDrawerOperation {
   SPLINE_DRAWER_ENUM_INVISIBLE_MOVE, // Move to final point in segment
@@ -39,7 +39,7 @@ class SplineDrawer
 
   /// Analyze each segment in the Spline
   void bindToSpline (int numSegments,
-                     const Spline &spline);
+                     const SplineAbstract &spline);
 
   /// Indicate if, and how, segment is to be drawn
   SplineDrawerOperation segmentOperation (int segment) const;
@@ -47,7 +47,7 @@ class SplineDrawer
 private:
   SplineDrawer();
 
-  bool segmentIsMultiValued (const Spline &spline,
+  bool segmentIsMultiValued (const SplineAbstract &spline,
                              int numSegments,
                              int segment) const;
 

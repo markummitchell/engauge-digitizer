@@ -9,7 +9,7 @@
 #include "GeometryStrategyAbstractBase.h"
 #include <qmath.h>
 #include <QPointF>
-#include "Spline.h"
+#include "SplineMultiValued.h"
 #include "SplinePair.h"
 #include "Transformation.h"
 #include <vector>
@@ -79,8 +79,8 @@ void GeometryStrategyAbstractBase::insertSubintervalsAndLoadDistances (int subin
                                 positionsGraph [i].y()));
     }
 
-    Spline spline (t,
-                   xy);
+    SplineMultiValued spline (t,
+                              xy);
 
     // Loop over the original points, with one original point per original interval
     QVector<double> distanceGraphDouble;

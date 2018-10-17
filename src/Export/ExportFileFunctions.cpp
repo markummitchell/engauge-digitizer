@@ -19,7 +19,7 @@
 #include <qmath.h>
 #include <QTextStream>
 #include <QVector>
-#include "Spline.h"
+#include "SplineMultiValued.h"
 #include "SplinePair.h"
 #include "Transformation.h"
 #include <vector>
@@ -424,8 +424,8 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
     if (xy.size() > 0) {
 
       // Fit a spline
-      Spline spline (t,
-                     xy);
+      SplineMultiValued spline (t,
+                                xy);
 
       // Get value at desired points
       for (int row = 0; row < xThetaValues.count(); row++) {
