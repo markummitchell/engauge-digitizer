@@ -25,7 +25,7 @@ private slots:
   void testMultiCoefficientsFromOrdinals ();
   void testMultiSharpTransition ();
   void testMultiSplinesAsControlPoints ();
-  void testSingleCoefficientsFromOrdinals ();
+  //  void testSingleCoefficientsFromOrdinals ();
   void testSingleSharpTransition ();
   void testSingleSplinesAsControlPoints ();
 

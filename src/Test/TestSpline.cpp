@@ -16,8 +16,8 @@ using namespace std;
 const QString WEBPAGE ("https://tools.timodenk.com/cubic-spline-interpolation");
 
 // Flags to enable extra information for investigating splines
-#define SHOWCOEFFICIENTS 1
-#define GNUPLOT 1
+//#define SHOWCOEFFICIENTS 1
+//#define GNUPLOT 1
 
 const int NUM_ITERATIONS = 24;
 
@@ -554,19 +554,19 @@ void TestSpline::testMultiSplinesAsControlPoints ()
   testCommonSplinesAsControlPoints (false);
 }
 
-void TestSpline::testSingleCoefficientsFromOrdinals ()
-{
-  // The (arbitrarily chosen) final row with results from the WEBPAGE, using inputs displayed by SHOWCOEFFICIENTS
-  testCommonCoefficientsFromOrdinals (true,
-                                      -8.3608,
-                                      4.2505,
-                                      -0.63092,
-                                      0.035051,
-                                      -216.54,
-                                      339.25,
-                                      -173.23,
-                                      28.872);
-}
+//void TestSpline::testSingleCoefficientsFromOrdinals ()
+//{
+//  // The (arbitrarily chosen) final row with results from the WEBPAGE, using inputs displayed by SHOWCOEFFICIENTS
+//  testCommonCoefficientsFromOrdinals (true,
+//                                      -8.3608,
+//                                      4.2505,
+//                                      -0.63092,
+//                                      0.035051,
+//                                      -216.54,
+//                                      339.25,
+//                                      -173.23,
+//                                      28.872);
+//}
 
 void TestSpline::testSingleSharpTransition ()
 {
