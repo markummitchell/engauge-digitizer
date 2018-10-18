@@ -22,17 +22,34 @@ private slots:
   void cleanupTestCase ();
   void initTestCase ();
 
-  void testCoefficientsFromOrdinals (); /// Compare with third party calculations on a web page
-  void testSharpTransition (); /// Uses x values in t array to get single-valued function across sharp transition
-  void testSplinesAsControlPoints ();
+  void testMultiCoefficientsFromOrdinals ();
+  void testMultiSharpTransition ();
+  void testMultiSplinesAsControlPoints ();
+  void testSingleCoefficientsFromOrdinals ();
+  void testSingleSharpTransition ();
+  void testSingleSplinesAsControlPoints ();
 
 private:
-  bool coefCheckX (const std::vector<double> &t,
-                   const std::vector<SplinePair> &xy,
-                   const SplineAbstract &s) const;
-  bool coefCheckY (const std::vector<double> &t,
-                   const std::vector<SplinePair> &xy,
-                   const SplineAbstract &s) const;
+  bool coefCheckXVersusT (const std::vector<double> &t,
+                          const std::vector<SplinePair> &xy,
+                          const SplineAbstract &s,
+                          double aFinalX,
+                          double bFinalX,
+                          double cFinalX,
+                          double dFinalX) const;
+  bool coefCheckYVersusT (const std::vector<double> &t,
+                          const std::vector<SplinePair> &xy,
+                          const SplineAbstract &s,
+                          double aFinalY,
+                          double bFinalY,
+                          double cFinalY,
+                          double dFinalY) const;
+  bool coefCheckYVersusX (const std::vector<SplinePair> &xy,
+                          const SplineAbstract &s,
+                          double aFinalY,
+                          double bFinalY,
+                          double cFinalY,
+                          double dFinalY) const;
   void coefShow (const QString &leftHandSide,
                  const QString &independentVariable,
                  double tLow,
@@ -41,6 +58,17 @@ private:
                  double b,
                  double c,
                  double d) const;
+  void testCommonCoefficientsFromOrdinals (bool isSingle,
+                                           double aFinalX,
+                                           double bFinalX,
+                                           double cFinalX,
+                                           double dFinalX,
+                                           double aFinalY,
+                                           double bFinalY,
+                                           double cFinalY,
+                                           double dFinalY); /// Compare with third party calculations on a web page
+  void testCommonSharpTransition (bool isSingle); /// Uses x values in t array to get single-valued function across sharp transition
+  void testCommonSplinesAsControlPoints (bool isSingle);
 };
 
 #endif // TEST_SPLINE_H

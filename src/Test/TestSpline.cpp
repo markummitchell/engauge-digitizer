@@ -16,8 +16,8 @@ using namespace std;
 const QString WEBPAGE ("https://tools.timodenk.com/cubic-spline-interpolation");
 
 // Flags to enable extra information for investigating splines
-//#define SHOWCOEFFICIENTS 1
-//#define GNUPLOT 1
+#define SHOWCOEFFICIENTS 1
+#define GNUPLOT 1
 
 const int NUM_ITERATIONS = 24;
 
@@ -28,16 +28,19 @@ TestSpline::TestSpline(QObject *parent) :
 
 void TestSpline::cleanupTestCase ()
 {
-
 }
 
-bool TestSpline::coefCheckX (const vector<double> &t,
+bool TestSpline::coefCheckXVersusT (const vector<double> &t,
 #ifdef SHOWCOEFFICIENTS
-                             const vector<SplinePair> &xy,
+                                    const vector<SplinePair> &xy,
 #else
-                             const vector<SplinePair> & /* xy */,
+                                    const vector<SplinePair> & /* xy */,
 #endif
-                             const SplineAbstract &s) const
+                                    const SplineAbstract &s,
+                                    double aFinalX,
+                                    double bFinalX,
+                                    double cFinalX,
+                                    double dFinalX) const
 {
   unsigned int i;
   double aUntranslated = 0, bUntranslated = 0, cUntranslated = 0, dUntranslated = 0;
@@ -89,23 +92,27 @@ bool TestSpline::coefCheckX (const vector<double> &t,
 #endif
   }
 
-  // Spot check the (arbitrarily chosen) final row with results from the WEBPAGE
+  // Spot check
   bool success = true;
-  success &= (qAbs (aUntranslated - -8.3608) < 8.3608 / 10000.0);
-  success &= (qAbs (bUntranslated - 4.2505) < 4.2505 / 10000.0);
-  success &= (qAbs (cUntranslated - -0.63092) < 0.63092 / 10000.0);
-  success &= (qAbs (dUntranslated - 0.035051) < 0.035051 / 10000.0);
+  success &= (qAbs (aUntranslated - aFinalX) < qAbs (aFinalX) / 10000.0);
+  success &= (qAbs (bUntranslated - bFinalX) < qAbs (bFinalX) / 10000.0);
+  success &= (qAbs (cUntranslated - cFinalX) < qAbs (cFinalX) / 10000.0);
+  success &= (qAbs (dUntranslated - dFinalX) < qAbs (dFinalX) / 10000.0);
 
   return success;
 }
 
-bool TestSpline::coefCheckY (const vector<double> &t,
+bool TestSpline::coefCheckYVersusT (const vector<double> &t,
 #ifdef SHOWCOEFFICIENTS
-                             const vector<SplinePair> &xy,
+                                    const vector<SplinePair> &xy,
 #else
-                             const vector<SplinePair> & /* xy */,
+                                    const vector<SplinePair> & /* xy */,
 #endif
-                             const SplineAbstract &s) const
+                                    const SplineAbstract &s,
+                                    double aFinalY,
+                                    double bFinalY,
+                                    double cFinalY,
+                                    double dFinalY) const
 {
   unsigned int i;
   double aUntranslated = 0, bUntranslated = 0, cUntranslated = 0, dUntranslated = 0;
@@ -157,12 +164,79 @@ bool TestSpline::coefCheckY (const vector<double> &t,
 #endif
   }
 
-  // Spot check the (arbitrarily chosen) final row with results from the WEBPAGE
+  // Spot check
   bool success = true;
-  success &= (qAbs (aUntranslated - -7.0) < 7.0 / 10000.0);
-  success &= (qAbs (bUntranslated - 3.5667) < 3.5667 / 10000.0);
-  success &= (qAbs (cUntranslated - -0.6) < 0.6 / 10000.0);
-  success &= (qAbs (dUntranslated - 0.033333) < 0.033333 / 10000.0);
+  success &= (qAbs (aUntranslated - aFinalY) < qAbs (aFinalY) / 10000.0);
+  success &= (qAbs (bUntranslated - bFinalY) < qAbs (bFinalY) / 10000.0);
+  success &= (qAbs (cUntranslated - cFinalY) < qAbs (cFinalY) / 10000.0);
+  success &= (qAbs (dUntranslated - dFinalY) < qAbs (dFinalY) / 10000.0);
+
+  return success;
+}
+
+bool TestSpline::coefCheckYVersusX (const vector<SplinePair> &xy,
+                                    const SplineAbstract &s,
+                                    double aFinalY,
+                                    double bFinalY,
+                                    double cFinalY,
+                                    double dFinalY) const
+{
+  unsigned int i;
+  double aUntranslated = 0, bUntranslated = 0, cUntranslated = 0, dUntranslated = 0;
+
+  // Y coordinate fit
+#ifdef SHOWCOEFFICIENTS
+  cout << endl
+       << "(x,y) inputs to be copied to " << WEBPAGE.toLatin1().data()
+       << endl;
+  for (i = 0; i < xy.size(); i++) {
+    cout << xy[i].x() << "   " << xy[i].y() << endl;
+  }
+  cout << endl
+       << "y=d*(x-xi)^3+c*(x-xi)^2+b*(x-xi)+a natural cubic spline results to be used in this code"
+       << endl;
+  for (i = 0; i < xy.size() - 1; i++) {
+    coefShow ("y =",
+              "(x-xi)",
+              xy[i].x(),
+              xy[i+1].x(),
+              s.m_elements[i].a().y(),
+              s.m_elements[i].b().y(),
+              s.m_elements[i].c().y(),
+              s.m_elements[i].d().y());
+  }
+  cout << endl
+       << "y=d*x^3+c*x^2+b*x+a outputs to be compared to results from " << WEBPAGE.toLatin1().data()
+       << endl;
+#endif
+  for (i = 0; i < xy.size() - 1; i++) {
+    s.computeUntranslatedCoefficients (s.m_elements[i].a().y(),
+                                       s.m_elements[i].b().y(),
+                                       s.m_elements[i].c().y(),
+                                       s.m_elements[i].d().y(),
+                                       xy[i].x(),
+                                       aUntranslated,
+                                       bUntranslated,
+                                       cUntranslated,
+                                       dUntranslated);
+#ifdef SHOWCOEFFICIENTS
+    coefShow ("y =",
+              "x",
+              xy[i].x(),
+              xy[i+1].x(),
+              aUntranslated,
+              bUntranslated,
+              cUntranslated,
+              dUntranslated);
+#endif
+  }
+
+  // Spot check
+  bool success = true;
+  success &= (qAbs (aUntranslated - aFinalY) < qAbs (aFinalY) / 10000.0);
+  success &= (qAbs (bUntranslated - bFinalY) < qAbs (bFinalY) / 10000.0);
+  success &= (qAbs (cUntranslated - cFinalY) < qAbs (cFinalY) / 10000.0);
+  success &= (qAbs (dUntranslated - dFinalY) < qAbs (dFinalY) / 10000.0);
 
   return success;
 }
@@ -215,7 +289,15 @@ void TestSpline::initTestCase ()
   w.show ();
 }
 
-void TestSpline::testCoefficientsFromOrdinals ()
+void TestSpline::testCommonCoefficientsFromOrdinals (bool isSingle,
+                                                     double aFinalX,
+                                                     double bFinalX,
+                                                     double cFinalX,
+                                                     double dFinalX,
+                                                     double aFinalY,
+                                                     double bFinalY,
+                                                     double cFinalY,
+                                                     double dFinalY)
 {
   bool success = true;
   vector<double> t;
@@ -237,19 +319,48 @@ void TestSpline::testCoefficientsFromOrdinals ()
   }
 
   // Generate the spline
-  SplineMultiValued s (t, xy);
+  SplineAbstract *s;
+  if (isSingle) {
+    s = new SplineSingleValued (t, xy);
 
-  success &= coefCheckX (t,
-                         xy,
-                         s);
-  success &= coefCheckY (t,
-                         xy,
-                         s);
+    success &= coefCheckXVersusT (t,
+                                  xy,
+                                  *s,
+                                  aFinalX,
+                                  bFinalX,
+                                  cFinalX,
+                                  dFinalX);
+    success &= coefCheckYVersusX (xy,
+                                  *s,
+                                  aFinalY,
+                                  bFinalY,
+                                  cFinalY,
+                                  dFinalY);
+  } else {
+    s = new SplineMultiValued (t, xy);
+
+    success &= coefCheckXVersusT (t,
+                                  xy,
+                                  *s,
+                                  aFinalX,
+                                  bFinalX,
+                                  cFinalX,
+                                  dFinalX);
+    success &= coefCheckYVersusT (t,
+                                  xy,
+                                  *s,
+                                  aFinalY,
+                                  bFinalY,
+                                  cFinalY,
+                                  dFinalY);
+  }
+
+  delete s;
 
   QVERIFY(success);
 }
 
-void TestSpline::testSharpTransition ()
+void TestSpline::testCommonSharpTransition (bool isSingle)
 {
   const int NUM_T = 60;
   const double SPLINE_EPSILON = 0.01;
@@ -290,14 +401,19 @@ void TestSpline::testSharpTransition ()
   }
 
   // Generate the spline
-  SplineMultiValued s (t, xyBefore, SPLINE_DISABLE_T_CHECK);
+  SplineAbstract *s;
+  if (isSingle) {
+    s = new SplineSingleValued (t, xyBefore, SPLINE_DISABLE_T_CHECK);
+  } else {
+    s = new SplineMultiValued (t, xyBefore, SPLINE_DISABLE_T_CHECK);
+  }
 
   // Plot the points after generating the spline
   vector<SplinePair> xyAfter;
   map<double, bool>::const_iterator itrX;
   for (itrX = xMerged.begin(); itrX != xMerged.end(); itrX++) {
     double x = itrX->first;
-    SplinePair pair = s.interpolateCoeff (x);
+    SplinePair pair = s->interpolateCoeff (x);
     xyAfter.push_back (pair);
   }
 
@@ -349,10 +465,12 @@ void TestSpline::testSharpTransition ()
 #endif
   }
 
+  delete s;
+
   QVERIFY (success);
 }
 
-void TestSpline::testSplinesAsControlPoints ()
+void TestSpline::testCommonSplinesAsControlPoints (bool isSingle)
 {
   const int T_START = 1, T_STOP = 7;
   const double SPLINE_EPSILON = 0.01;
@@ -381,12 +499,17 @@ void TestSpline::testSplinesAsControlPoints ()
   xy.push_back (SplinePair (5.8, 0.09));
   xy.push_back (SplinePair (7, 0.11));
 
-  SplineMultiValued s (t, xy);
+  SplineAbstract *s;
+  if (isSingle) {
+    s = new SplineSingleValued (t, xy);
+  } else {
+    s = new SplineMultiValued (t, xy);
+  }
 
   for (int i = 0; i <= NUM_T; i++) {
     double t = T_START + (double) i * (T_STOP - T_START) / (double) NUM_T;
-    SplinePair spCoeff = s.interpolateCoeff (t);
-    SplinePair spBezier = s.interpolateControlPoints (t);
+    SplinePair spCoeff = s->interpolateCoeff (t);
+    SplinePair spBezier = s->interpolateControlPoints (t);
 
     double xCoeff = spCoeff.x();
     double yCoeff = spCoeff.y();
@@ -402,5 +525,55 @@ void TestSpline::testSplinesAsControlPoints ()
     }
   }
 
+  delete s;
+
   QVERIFY (success);
+}
+
+void TestSpline::testMultiCoefficientsFromOrdinals ()
+{
+  // The (arbitrarily chosen) final row with results from the WEBPAGE, using inputs displayed by SHOWCOEFFICIENTS
+  testCommonCoefficientsFromOrdinals (false,
+                                      -8.3608,
+                                      4.2505,
+                                      -0.63092,
+                                      0.035051,
+                                      -7.0,
+                                      3.566667,
+                                      -0.6,
+                                      0.033333);
+}
+
+void TestSpline::testMultiSharpTransition ()
+{
+  testCommonSharpTransition (false);
+}
+
+void TestSpline::testMultiSplinesAsControlPoints ()
+{
+  testCommonSplinesAsControlPoints (false);
+}
+
+void TestSpline::testSingleCoefficientsFromOrdinals ()
+{
+  // The (arbitrarily chosen) final row with results from the WEBPAGE, using inputs displayed by SHOWCOEFFICIENTS
+  testCommonCoefficientsFromOrdinals (true,
+                                      -8.3608,
+                                      4.2505,
+                                      -0.63092,
+                                      0.035051,
+                                      -216.54,
+                                      339.25,
+                                      -173.23,
+                                      28.872);
+}
+
+void TestSpline::testSingleSharpTransition ()
+{
+  testCommonSharpTransition (true);
+}
+
+void TestSpline::testSingleSplinesAsControlPoints ()
+{
+  testCommonSplinesAsControlPoints (true);
 }
