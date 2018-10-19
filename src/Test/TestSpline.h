@@ -25,39 +25,57 @@ private slots:
   void testMultiCoefficientsFromOrdinals ();
   void testMultiSharpTransition ();
   void testMultiSplinesAsControlPoints ();
-  //  void testSingleCoefficientsFromOrdinals ();
+  void testSingleCoefficientsFromOrdinals ();
   void testSingleSharpTransition ();
   void testSingleSplinesAsControlPoints ();
 
 private:
-  bool coefCheckXVersusT (const std::vector<double> &t,
-                          const std::vector<SplinePair> &xy,
-                          const SplineAbstract &s,
-                          double aFinalX,
-                          double bFinalX,
-                          double cFinalX,
-                          double dFinalX) const;
-  bool coefCheckYVersusT (const std::vector<double> &t,
-                          const std::vector<SplinePair> &xy,
-                          const SplineAbstract &s,
-                          double aFinalY,
-                          double bFinalY,
-                          double cFinalY,
-                          double dFinalY) const;
-  bool coefCheckYVersusX (const std::vector<SplinePair> &xy,
-                          const SplineAbstract &s,
-                          double aFinalY,
-                          double bFinalY,
-                          double cFinalY,
-                          double dFinalY) const;
-  void coefShow (const QString &leftHandSide,
-                 const QString &independentVariable,
-                 double tLow,
-                 double tHigh,
-                 double a,
-                 double b,
-                 double c,
-                 double d) const;
+  bool coefCheckMultiXVersusT (const std::vector<double> &t,
+                               const std::vector<SplinePair> &xy,
+                               const SplineAbstract &s,
+                               double aFinalX,
+                               double bFinalX,
+                               double cFinalX,
+                               double dFinalX) const;
+  bool coefCheckMultiYVersusT (const std::vector<double> &t,
+                               const std::vector<SplinePair> &xy,
+                               const SplineAbstract &s,
+                               double aFinalY,
+                               double bFinalY,
+                               double cFinalY,
+                               double dFinalY) const;
+  bool coefCheckSingleXVersusT (const std::vector<double> &t,
+                                const std::vector<SplinePair> &xy,
+                                const SplineAbstract &s,
+                                double aFinalY,
+                                double bFinalY,
+                                double cFinalY,
+                                double dFinalY) const;
+  bool coefCheckSingleYVersusT (const std::vector<double> &t,
+                                const std::vector<SplinePair> &xy,
+                                const SplineAbstract &s,
+                                double aFinalY,
+                                double bFinalY,
+                                double cFinalY,
+                                double dFinalY) const;
+  void coefLoad(std::vector<double> &t,
+                std::vector<SplinePair> &xy) const;
+  void coefShowInputXVersusT (const SplineAbstract &s,
+                              const std::vector<double> &t,
+                              const std::vector<SplinePair> &xy) const;
+  void coefShowInputYVersusT (const SplineAbstract &s,
+                              const std::vector<double> &t,
+                              const std::vector<SplinePair> &xy) const;
+  void coefShowInputYVersusX (const SplineAbstract &s,
+                              const std::vector<SplinePair> &xy) const;
+  void coefShowOutput (const QString &leftHandSide,
+                       const QString &independentVariable,
+                       double tLow,
+                       double tHigh,
+                       double a,
+                       double b,
+                       double c,
+                       double d) const;
   void testCommonCoefficientsFromOrdinals (bool isSingle,
                                            double aFinalX,
                                            double bFinalX,
