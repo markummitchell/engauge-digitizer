@@ -7,6 +7,7 @@
 #ifndef EXPORT_FILE_RELATIONS_H
 #define EXPORT_FILE_RELATIONS_H
 
+#include "CurveConnectAs.h"
 #include "ExportFileAbstractBase.h"
 #include "ExportPointsIntervalUnits.h"
 #include "ExportValuesOrdinal.h"
@@ -134,12 +135,14 @@ private:
                                            bool isLogXTheta,
                                            bool isLogYRadius,
                                            const Points &points) const;
-  ExportValuesOrdinal ordinalsAtIntervalsSmoothGraph (double pointsIntervalRelations,
+  ExportValuesOrdinal ordinalsAtIntervalsSmoothGraph (CurveConnectAs curveConnectAs,
+                                                      double pointsIntervalRelations,
                                                       const Transformation &transformation,
                                                       bool isLogXTheta,
                                                       bool isLogYRadius,
                                                       const Points &points) const;
-  ExportValuesOrdinal ordinalsAtIntervalsSmoothScreen (double pointsIntervalRelations,
+  ExportValuesOrdinal ordinalsAtIntervalsSmoothScreen (CurveConnectAs curveConnectAs,
+                                                       double pointsIntervalRelations,
                                                        const Points &points) const;
   ExportValuesOrdinal ordinalsAtIntervalsStraightGraph (double pointsIntervalRelations,
                                                         const Transformation &transformation,

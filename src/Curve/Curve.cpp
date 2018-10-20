@@ -576,6 +576,7 @@ void Curve::updatePointOrdinals (const Transformation &transformation)
   // Make sure ordinals are properly ordered. Sorting is done afterward
 
   if (curveConnectAs == CONNECT_AS_FUNCTION_SMOOTH ||
+      curveConnectAs == CONNECT_AS_FUNCTION_SMOOTH_LEGACY ||
       curveConnectAs == CONNECT_AS_FUNCTION_STRAIGHT) {
 
     updatePointOrdinalsFunctions (transformation);

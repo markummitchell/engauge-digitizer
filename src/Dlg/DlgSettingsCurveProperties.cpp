@@ -34,14 +34,17 @@
 #include <QTransform>
 #include "Settings.h"
 #include "SettingsForGraph.h"
+#include "SplineFactory.h"
 #include "SplineMultiValued.h"
 #include "SplinePair.h"
+#include "SplineSingleValued.h"
 #include <vector>
 #include "ViewPreview.h"
 
 using namespace std;
 
 const QString CONNECT_AS_FUNCTION_SMOOTH_STR ("Function - Smooth");
+const QString CONNECT_AS_FUNCTION_SMOOTH_LEGACY_STR ("Function - Smooth (Legacy)");
 const QString CONNECT_AS_FUNCTION_STRAIGHT_STR ("Function - Straight");
 const QString CONNECT_AS_RELATION_SMOOTH_STR ("Relation - Smooth");
 const QString CONNECT_AS_RELATION_STRAIGHT_STR ("Relation - Straight");
@@ -131,11 +134,14 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
   m_cmbLineType = new QComboBox (m_groupLine);
   m_cmbLineType->addItem (CONNECT_AS_FUNCTION_STRAIGHT_STR, QVariant (CONNECT_AS_FUNCTION_STRAIGHT));
   m_cmbLineType->addItem (CONNECT_AS_FUNCTION_SMOOTH_STR, QVariant (CONNECT_AS_FUNCTION_SMOOTH));
+  m_cmbLineType->addItem (CONNECT_AS_FUNCTION_SMOOTH_LEGACY_STR, QVariant (CONNECT_AS_FUNCTION_SMOOTH_LEGACY));  
   m_cmbLineType->addItem (CONNECT_AS_RELATION_STRAIGHT_STR, QVariant (CONNECT_AS_RELATION_STRAIGHT));
   m_cmbLineType->addItem (CONNECT_AS_RELATION_SMOOTH_STR, QVariant (CONNECT_AS_RELATION_SMOOTH));
   m_cmbLineType->setWhatsThis (tr ("Select rule for connecting points with lines.\n\n"
                                    "If the curve is connected as a single-valued function then the points are ordered by "
-                                   "increasing value of the independent variable.\n\n"
+                                   "increasing value of the independent variable. Note that legacy mode may have uncertain "
+                                   "values in narrow regions of extremely large slope - such regions are "
+                                   "identified by highlighting.\n\n"
                                    "If the curve is connected as a closed contour, then the points are ordered by age, except for "
                                    "points placed along an existing line. Any point placed on top of any existing line is inserted "
                                    "between the two endpoints of that line - as if its age was between the ages of the two "
@@ -292,6 +298,7 @@ void DlgSettingsCurveProperties::drawLine (bool isRelation,
 
   // Draw straight or smooth
   if (lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH ||
+      lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH_LEGACY ||
       lineStyle.curveConnectAs() == CONNECT_AS_RELATION_SMOOTH) {
 
     vector<double> t;
@@ -302,18 +309,26 @@ void DlgSettingsCurveProperties::drawLine (bool isRelation,
     xy.push_back (SplinePair (p0.x(), p0.y()));
     xy.push_back (SplinePair (p1.x(), p1.y()));
     xy.push_back (SplinePair (p2.x(), p2.y()));
-    SplineMultiValued spline (t, xy);
+
+    SplineFactory splineFactory;
+    SplineAbstract *spline = splineFactory.create (lineStyle.curveConnectAs(),
+                                                   t,
+                                                   xy);
+
     path.moveTo (p0);
-    path.cubicTo (QPointF (spline.p1(0).x(),
-                           spline.p1(0).y()),
-                  QPointF (spline.p2(0).x(),
-                           spline.p2(0).y()),
+    path.cubicTo (QPointF (spline->p1(0).x(),
+                           spline->p1(0).y()),
+                  QPointF (spline->p2(0).x(),
+                           spline->p2(0).y()),
                   p1);
-    path.cubicTo (QPointF (spline.p1(1).x(),
-                           spline.p1(1).y()),
-                  QPointF (spline.p2(1).x(),
-                           spline.p2(1).y()),
+    path.cubicTo (QPointF (spline->p1(1).x(),
+                           spline->p1(1).y()),
+                  QPointF (spline->p2(1).x(),
+                           spline->p2(1).y()),
                   p2);
+
+    delete spline;
+
   } else {
     path.moveTo (p0);
     path.lineTo (p1);

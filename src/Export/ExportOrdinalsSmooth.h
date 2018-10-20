@@ -7,6 +7,7 @@
 #ifndef EXPORT_ORDINALS_SMOOTH_H
 #define EXPORT_ORDINALS_SMOOTH_H
 
+#include "CurveConnectAs.h"
 #include "ExportValuesOrdinal.h"
 #include "Point.h"
 #include "Points.h"
@@ -37,7 +38,8 @@ class ExportOrdinalsSmooth
                                           std::vector<SplinePair> &xy) const;
 
   /// Perform the interpolation on the arrays loaded by the other methods
-  ExportValuesOrdinal ordinalsAtIntervalsGraph (const std::vector<double> &t,
+  ExportValuesOrdinal ordinalsAtIntervalsGraph (CurveConnectAs curveConnectAs,
+                                                const std::vector<double> &t,
                                                 const std::vector<SplinePair> &xy,
                                                 double pointsInterval) const;
 };

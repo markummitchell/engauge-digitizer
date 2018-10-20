@@ -14,6 +14,9 @@ QString curveConnectAsToString (CurveConnectAs curveConnectAs)
     case CONNECT_AS_FUNCTION_SMOOTH:
       return QObject::tr ("FunctionSmooth");
 
+    case CONNECT_AS_FUNCTION_SMOOTH_LEGACY:
+      return QObject::tr ("FunctionSmoothLegacy");
+
     case CONNECT_AS_FUNCTION_STRAIGHT:
       return QObject::tr ("FunctionStraight");
 

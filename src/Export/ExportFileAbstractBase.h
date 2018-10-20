@@ -35,7 +35,8 @@ protected:
                                const Document &document,
                                const QStringList &curvesGraphsNames,
                                CurveConnectAs curveConnectAs1,
-                               CurveConnectAs curveConnectAs2) const;
+                               CurveConnectAs curveConnectAs2,
+                               CurveConnectAs curveConnectAs3) const;
 
   /// Deallocate memory for array
   void destroy2DArray (QVector<QVector<QString*> > &array) const;

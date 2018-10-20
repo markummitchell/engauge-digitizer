@@ -26,7 +26,8 @@ QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExportFo
                                                      const Document &document,
                                                      const QStringList &curvesGraphsNames,
                                                      CurveConnectAs curveConnectAs1,
-                                                     CurveConnectAs curveConnectAs2) const
+                                                     CurveConnectAs curveConnectAs2,
+                                                     CurveConnectAs curveConnectAs3) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileAbstractBase::curvesToInclude";
 
@@ -46,7 +47,8 @@ QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExportFo
 
       // Not excluded which means it gets included, but only if it is a function
       if (curve->curveStyle().lineStyle().curveConnectAs() == curveConnectAs1 ||
-          curve->curveStyle().lineStyle().curveConnectAs() == curveConnectAs2) {
+          curve->curveStyle().lineStyle().curveConnectAs() == curveConnectAs2 ||
+          curve->curveStyle().lineStyle().curveConnectAs() == curveConnectAs3) {
 
         curvesToInclude.push_back (curvesGraphName);
       }

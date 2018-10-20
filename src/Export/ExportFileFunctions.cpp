@@ -143,6 +143,7 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
                                                 document,
                                                 document.curvesGraphsNames(),
                                                 CONNECT_AS_FUNCTION_SMOOTH,
+                                                CONNECT_AS_FUNCTION_SMOOTH_LEGACY,
                                                 CONNECT_AS_FUNCTION_STRAIGHT);
 
   // Delimiter

@@ -238,6 +238,7 @@ void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelEx
                                                 document,
                                                 document.curvesGraphsNames(),
                                                 CONNECT_AS_RELATION_SMOOTH,
+                                                CONNECT_AS_RELATION_SMOOTH,                                                
                                                 CONNECT_AS_RELATION_STRAIGHT);
 
   // Delimiter
@@ -592,7 +593,8 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsInter
   if (pointsIntervalUnits == EXPORT_POINTS_INTERVAL_UNITS_GRAPH) {
     if (curveConnectAs == CONNECT_AS_RELATION_SMOOTH) {
 
-      return ordinalsAtIntervalsSmoothGraph (pointsIntervalRelations,
+      return ordinalsAtIntervalsSmoothGraph (curveConnectAs,
+                                             pointsIntervalRelations,
                                              transformation,
                                              isLogXTheta,
                                              isLogYRadius,
@@ -609,7 +611,8 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsInter
 
     if (curveConnectAs == CONNECT_AS_RELATION_SMOOTH) {
 
-      return ordinalsAtIntervalsSmoothScreen (pointsIntervalRelations,
+      return ordinalsAtIntervalsSmoothScreen (curveConnectAs,
+                                              pointsIntervalRelations,
                                               points);
 
     } else {
@@ -621,7 +624,8 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervals (double pointsInter
   }
 }
 
-ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsSmoothGraph (double pointsIntervalRelations,
+ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsSmoothGraph (CurveConnectAs curveConnectAs,
+                                                                         double pointsIntervalRelations,
                                                                          const Transformation &transformation,
                                                                          bool isLogXTheta,
                                                                          bool isLogYRadius,
@@ -646,7 +650,8 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsSmoothGraph (double 
                                                       t,
                                                       xy);
 
-    ordinals = ordinalsSmooth.ordinalsAtIntervalsGraph (t,
+    ordinals = ordinalsSmooth.ordinalsAtIntervalsGraph (curveConnectAs,
+                                                        t,
                                                         xy,
                                                         pointsIntervalRelations);
   }
@@ -654,7 +659,8 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsSmoothGraph (double 
   return ordinals;
 }
 
-ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsSmoothScreen (double pointsIntervalRelations,
+ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsSmoothScreen (CurveConnectAs curveConnectAs,
+                                                                          double pointsIntervalRelations,
                                                                           const Points &points) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::ordinalsAtIntervalsSmoothScreen"
@@ -675,7 +681,8 @@ ExportValuesOrdinal ExportFileRelations::ordinalsAtIntervalsSmoothScreen (double
                                                          t,
                                                          xy);
 
-    ordinals = ordinalsSmooth.ordinalsAtIntervalsGraph (t,
+    ordinals = ordinalsSmooth.ordinalsAtIntervalsGraph (curveConnectAs,
+                                                        t,
                                                         xy,
                                                         pointsIntervalRelations);
   }

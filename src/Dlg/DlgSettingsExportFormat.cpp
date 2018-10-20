@@ -1003,7 +1003,9 @@ void DlgSettingsExportFormat::updateControlsUponLoad ()
     QString curveName = *itr;
     CurveStyle curveStyle = curveStyles.curveStyle (curveName);
     CurveConnectAs curveConnectAs = curveStyle.lineStyle().curveConnectAs();
-    if (curveConnectAs == CONNECT_AS_FUNCTION_SMOOTH || curveConnectAs == CONNECT_AS_FUNCTION_STRAIGHT) {
+    if (curveConnectAs == CONNECT_AS_FUNCTION_SMOOTH ||
+        curveConnectAs == CONNECT_AS_FUNCTION_SMOOTH_LEGACY ||
+        curveConnectAs == CONNECT_AS_FUNCTION_STRAIGHT) {
       m_haveFunction = true;
     } else if (curveConnectAs == CONNECT_AS_RELATION_SMOOTH || curveConnectAs == CONNECT_AS_RELATION_STRAIGHT) {
       m_haveRelation = true;

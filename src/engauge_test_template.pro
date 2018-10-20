@@ -260,7 +260,9 @@ HEADERS  += \
     Geometry/GeometryStrategyAbstractBase.h \
     Geometry/GeometryStrategyContext.h \
     Geometry/GeometryStrategyFunctionSmooth.h \
+    Geometry/GeometryStrategyFunctionSmoothLegacy.h \
     Geometry/GeometryStrategyFunctionStraight.h \
+    Geometry/GeometryStrategyNull.h \
     Geometry/GeometryStrategyRelationSmooth.h \
     Geometry/GeometryStrategyRelationStraight.h \
     Geometry/GeometryWindow.h \
@@ -345,6 +347,7 @@ HEADERS  += \
     Spline/SplineAbstract.h \
     Spline/SplineCoeff.h \
     Spline/SplineDrawer.h \
+    Spline/SplineFactory.h \
     Spline/SplineMultiValued.h \
     Spline/SplinePair.h \
     Spline/SplineSingleValued.h \
@@ -613,7 +616,9 @@ SOURCES += \
     Geometry/GeometryStrategyAbstractBase.cpp \
     Geometry/GeometryStrategyContext.cpp \
     Geometry/GeometryStrategyFunctionSmooth.cpp \
+    Geometry/GeometryStrategyFunctionSmoothLegacy.cpp \
     Geometry/GeometryStrategyFunctionStraight.cpp \
+    Geometry/GeometryStrategyNull.cpp \
     Geometry/GeometryStrategyRelationSmooth.cpp \
     Geometry/GeometryStrategyRelationStraight.cpp \
     Geometry/GeometryWindow.cpp \
@@ -690,6 +695,7 @@ SOURCES += \
     Spline/SplineAbstract.cpp \
     Spline/SplineCoeff.cpp \
     Spline/SplineDrawer.cpp \
+    Spline/SplineFactory.cpp \
     Spline/SplineMultiValued.cpp \
     Spline/SplinePair.cpp \
     Spline/SplineSingleValued.cpp \

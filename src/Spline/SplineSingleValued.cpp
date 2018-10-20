@@ -5,12 +5,13 @@
 #include "EngaugeAssert.h"
 #include <iostream>
 #include "Logger.h"
+#include "SplinePair.h"
 #include "SplineSingleValued.h"
 
 using namespace std;
 
-SplineSingleValued::SplineSingleValued(const vector<double> &t,
-                                       const vector<SplinePair> &xy,
+SplineSingleValued::SplineSingleValued(const std::vector<double> &t,
+                                       const std::vector<SplinePair> &xy,
                                        SplineTCheck splineTCheck) :
   SplineAbstract ()
 {

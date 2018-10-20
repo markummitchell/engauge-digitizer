@@ -7,17 +7,21 @@
 #include "CurveConnectAs.h"
 #include "GeometryStrategyContext.h"
 #include "GeometryStrategyFunctionSmooth.h"
+#include "GeometryStrategyFunctionSmoothLegacy.h"
 #include "GeometryStrategyFunctionStraight.h"
+#include "GeometryStrategyNull.h"
 #include "GeometryStrategyRelationSmooth.h"
 #include "GeometryStrategyRelationStraight.h"
 #include "Transformation.h"
 
 GeometryStrategyContext::GeometryStrategyContext()
 {
-  m_strategies.insert (CONNECT_AS_FUNCTION_SMOOTH  , new GeometryStrategyFunctionSmooth   ());
-  m_strategies.insert (CONNECT_AS_FUNCTION_STRAIGHT, new GeometryStrategyFunctionStraight ());
-  m_strategies.insert (CONNECT_AS_RELATION_SMOOTH  , new GeometryStrategyRelationSmooth   ());
-  m_strategies.insert (CONNECT_AS_RELATION_STRAIGHT, new GeometryStrategyRelationStraight ());
+  m_strategies.insert (CONNECT_AS_FUNCTION_SMOOTH_LEGACY, new GeometryStrategyFunctionSmoothLegacy ());  
+  m_strategies.insert (CONNECT_AS_FUNCTION_STRAIGHT     , new GeometryStrategyFunctionStraight     ());
+  m_strategies.insert (CONNECT_AS_RELATION_SMOOTH       , new GeometryStrategyRelationSmooth       ());
+  m_strategies.insert (CONNECT_AS_RELATION_STRAIGHT     , new GeometryStrategyRelationStraight     ());
+  m_strategies.insert (CONNECT_SKIP_FOR_AXIS_CURVE      , new GeometryStrategyNull                 ());
+  m_strategies.insert (CONNECT_AS_FUNCTION_SMOOTH       , new GeometryStrategyFunctionSmooth       ());
 }
 
 GeometryStrategyContext::~GeometryStrategyContext()

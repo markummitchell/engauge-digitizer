@@ -6,11 +6,12 @@
 #include <iostream>
 #include "Logger.h"
 #include "SplineMultiValued.h"
+#include "SplinePair.h"
 
 using namespace std;
 
-SplineMultiValued::SplineMultiValued(const vector<double> &t,
-                                     const vector<SplinePair> &xy,
+SplineMultiValued::SplineMultiValued(const std::vector<double> &t,
+                                     const std::vector<SplinePair> &xy,
                                      SplineTCheck splineTCheck) :
   SplineAbstract ()
 {

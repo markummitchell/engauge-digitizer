@@ -10,7 +10,9 @@
 #include <qdebug.h>
 #include <qmath.h>
 #include <QPointF>
+#include "SplineFactory.h"
 #include "SplineMultiValued.h"
+#include "SplineSingleValued.h"
 #include "Transformation.h"
 
 using namespace std;
@@ -61,7 +63,8 @@ void ExportOrdinalsSmooth::loadSplinePairsWithTransformation (const Points &poin
   }
 }
 
-ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector<double> &t,
+ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (CurveConnectAs curveConnectAs,
+                                                                    const vector<double> &t,
                                                                     const vector<SplinePair> &xy,
                                                                     double pointsInterval) const
 {
@@ -76,8 +79,10 @@ ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector
   if (xy.size() > 0) {
 
     // Fit a spline
-    SplineMultiValued spline (t,
-                              xy);
+    SplineFactory splineFactory;
+    SplineAbstract * spline = splineFactory.create (curveConnectAs,
+                                                    t,
+                                                    xy);
 
     // Integrate the distances for the subintervals
     double integratedSeparation = 0;
@@ -96,7 +101,7 @@ ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector
 
       double t = tMin + ((tMax - tMin) * iT) / (NUM_SMALLER_INTERVALS - 1.0);
 
-      SplinePair pairNew = spline.interpolateCoeff(t);
+      SplinePair pairNew = spline->interpolateCoeff(t);
 
       QPointF posNew = QPointF (pairNew.x(),
                                 pairNew.y());
@@ -134,6 +139,8 @@ ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector
       ordinals.push_back (tMax);
 
     }
+
+    delete spline;
   }
 
   return ordinals;

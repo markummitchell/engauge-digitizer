@@ -23,7 +23,9 @@
 #include <QTextStream>
 #include "QtToString.h"
 #include "SplineDrawer.h"
+#include "SplineFactory.h"
 #include "SplineMultiValued.h"
+#include "SplineSingleValued.h"
 #include "Transformation.h"
 #include "ZValues.h"
 
@@ -94,10 +96,13 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth (const LineStyle &lineStyle,
   if (xy.size() > 0) {
 
     // Spline through points
-    SplineMultiValued spline (t, xy);
-    
+    SplineFactory splineFactory;
+    SplineAbstract *spline = splineFactory.create (lineStyle.curveConnectAs(),
+                                                   t,
+                                                   xy);
+
     splineDrawer.bindToSpline (m_graphicsPoints.count(),
-                               spline);
+                               *spline);
 
     // Create QPainterPath through the points. Loop has one segment per stop point,
     // with first point handled outside first
@@ -117,10 +122,10 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth (const LineStyle &lineStyle,
 
       SplineDrawerOperation operation = splineDrawer.segmentOperation (segment);
 
-      QPointF p1 (spline.p1 (segment).x(),
-                  spline.p1 (segment).y());
-      QPointF p2 (spline.p2 (segment).x(),
-                  spline.p2 (segment).y());
+      QPointF p1 (spline->p1 (segment).x(),
+                  spline->p1 (segment).y());
+      QPointF p2 (spline->p2 (segment).x(),
+                  spline->p2 (segment).y());
 
       switch (operation) {
       case SPLINE_DRAWER_ENUM_VISIBLE_DRAW:
@@ -152,6 +157,8 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth (const LineStyle &lineStyle,
       // Always move to next point for curveMultiValued
       pathMultiValued.moveTo (point->pos ());
     }
+
+    delete spline;
   }
 
   return path;
@@ -472,6 +479,7 @@ void GraphicsLinesForCurve::updatePointOrdinalsAfterDrag (const LineStyle &lineS
                                << " curveConnectAs=" << curveConnectAsToString(curveConnectAs).toLatin1().data();
 
   if (curveConnectAs == CONNECT_AS_FUNCTION_SMOOTH ||
+      curveConnectAs == CONNECT_AS_FUNCTION_SMOOTH_LEGACY ||
       curveConnectAs == CONNECT_AS_FUNCTION_STRAIGHT) {
 
     // Make sure ordinals are properly ordered

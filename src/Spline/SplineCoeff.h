@@ -4,8 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef SPLINE_COEFF
-#define SPLINE_COEFF
+#ifndef SPLINE_COEFF_H
+#define SPLINE_COEFF_H
 
 #include "SplinePair.h"
 
@@ -58,4 +58,4 @@ private:
   SplinePair m_d;
 };
 
-#endif // SPLINE_COEFF
+#endif // SPLINE_COEFF_H
