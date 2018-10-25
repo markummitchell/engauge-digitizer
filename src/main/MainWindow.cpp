@@ -27,7 +27,7 @@
 #include "DlgSettingsAxesChecker.h"
 #include "DlgSettingsColorFilter.h"
 #include "DlgSettingsCoords.h"
-#include "DlgSettingsCurveAddRemove.h"
+#include "DlgSettingsCurveList.h"
 #include "DlgSettingsCurveProperties.h"
 #include "DlgSettingsDigitizeCurve.h"
 #include "DlgSettingsExportFormat.h"
@@ -2672,12 +2672,12 @@ void MainWindow::slotSettingsCoords ()
   m_dlgSettingsCoords->show ();
 }
 
-void MainWindow::slotSettingsCurveAddRemove ()
+void MainWindow::slotSettingsCurveList ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCurveAddRemove";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsCurveList";
 
-  m_dlgSettingsCurveAddRemove->load (*m_cmdMediator);
-  m_dlgSettingsCurveAddRemove->show ();
+  m_dlgSettingsCurveList->load (*m_cmdMediator);
+  m_dlgSettingsCurveList->show ();
 }
 
 void MainWindow::slotSettingsCurveProperties ()
@@ -3282,7 +3282,7 @@ void MainWindow::updateControls ()
   m_actionViewSettingsViews->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionSettingsCoords->setEnabled (!m_currentFile.isEmpty ());
-  m_actionSettingsCurveAddRemove->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsCurveList->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsCurveProperties->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsDigitizeCurve->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsExport->setEnabled (!m_currentFile.isEmpty ());
@@ -3511,9 +3511,9 @@ void MainWindow::updateSettingsCoords(const DocumentModelCoords &modelCoords)
   m_cmdMediator->document().setModelCoords(modelCoords);
 }
 
-void MainWindow::updateSettingsCurveAddRemove (const CurvesGraphs &curvesGraphs)
+void MainWindow::updateSettingsCurveList (const CurvesGraphs &curvesGraphs)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurveAddRemove";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurveList";
 
   m_cmdMediator->document().setCurvesGraphs (curvesGraphs);
   loadCurveListFromCmdMediator();
@@ -3623,7 +3623,7 @@ void MainWindow::updateSmallDialogs ()
   m_dlgSettingsAxesChecker->setSmallDialogs (m_modelMainWindow.smallDialogs ());
   m_dlgSettingsColorFilter->setSmallDialogs (m_modelMainWindow.smallDialogs ());
   m_dlgSettingsCoords->setSmallDialogs (m_modelMainWindow.smallDialogs ());
-  m_dlgSettingsCurveAddRemove->setSmallDialogs (m_modelMainWindow.smallDialogs ());
+  m_dlgSettingsCurveList->setSmallDialogs (m_modelMainWindow.smallDialogs ());
   m_dlgSettingsCurveProperties->setSmallDialogs (m_modelMainWindow.smallDialogs ());
   m_dlgSettingsDigitizeCurve->setSmallDialogs (m_modelMainWindow.smallDialogs ());
   m_dlgSettingsExportFormat->setSmallDialogs (m_modelMainWindow.smallDialogs ());

@@ -118,7 +118,7 @@ HEADERS  += \
     src/Cmd/CmdSettingsAxesChecker.h \
     src/Cmd/CmdSettingsColorFilter.h \
     src/Cmd/CmdSettingsCoords.h \
-    src/Cmd/CmdSettingsCurveAddRemove.h \
+    src/Cmd/CmdSettingsCurveList.h \
     src/Cmd/CmdSettingsCurveProperties.h \
     src/Cmd/CmdSettingsDigitizeCurve.h \
     src/Cmd/CmdSettingsExportFormat.h \
@@ -214,7 +214,7 @@ HEADERS  += \
     src/Dlg/DlgSettingsAxesChecker.h \
     src/Dlg/DlgSettingsColorFilter.h \
     src/Dlg/DlgSettingsCoords.h \
-    src/Dlg/DlgSettingsCurveAddRemove.h \
+    src/Dlg/DlgSettingsCurveList.h \
     src/Dlg/DlgSettingsCurveProperties.h \
     src/Dlg/DlgSettingsDigitizeCurve.h \
     src/Dlg/DlgSettingsExportFormat.h \
@@ -476,7 +476,7 @@ SOURCES += \
     src/Cmd/CmdSettingsAxesChecker.cpp \
     src/Cmd/CmdSettingsColorFilter.cpp \
     src/Cmd/CmdSettingsCoords.cpp \
-    src/Cmd/CmdSettingsCurveAddRemove.cpp \
+    src/Cmd/CmdSettingsCurveList.cpp \
     src/Cmd/CmdSettingsCurveProperties.cpp \
     src/Cmd/CmdSettingsDigitizeCurve.cpp \
     src/Cmd/CmdSettingsExportFormat.cpp \
@@ -569,7 +569,7 @@ SOURCES += \
     src/Dlg/DlgSettingsAxesChecker.cpp \
     src/Dlg/DlgSettingsColorFilter.cpp \
     src/Dlg/DlgSettingsCoords.cpp \
-    src/Dlg/DlgSettingsCurveAddRemove.cpp \
+    src/Dlg/DlgSettingsCurveList.cpp \
     src/Dlg/DlgSettingsCurveProperties.cpp \
     src/Dlg/DlgSettingsDigitizeCurve.cpp \
     src/Dlg/DlgSettingsExportFormat.cpp \

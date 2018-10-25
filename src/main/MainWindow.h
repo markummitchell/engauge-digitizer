@@ -32,7 +32,7 @@ class DigitizeStateContext;
 class DlgSettingsAxesChecker;
 class DlgSettingsColorFilter;
 class DlgSettingsCoords;
-class DlgSettingsCurveAddRemove;
+class DlgSettingsCurveList;
 class DlgSettingsCurveProperties;
 class DlgSettingsDigitizeCurve;
 class DlgSettingsExportFormat;
@@ -227,7 +227,7 @@ public:
   void updateSettingsCoords(const DocumentModelCoords &modelCoords);
 
   /// Update with new curves.
-  void updateSettingsCurveAddRemove (const CurvesGraphs &curvesGraphs);
+  void updateSettingsCurveList (const CurvesGraphs &curvesGraphs);
 
   /// Update with new curve styles.
   void updateSettingsCurveStyles(const CurveStyles &modelCurveStyles);
@@ -321,7 +321,7 @@ private slots:
   void slotSettingsAxesChecker ();
   void slotSettingsColorFilter ();
   void slotSettingsCoords ();
-  void slotSettingsCurveAddRemove ();
+  void slotSettingsCurveList ();
   void slotSettingsCurveProperties ();
   void slotSettingsDigitizeCurve ();
   void slotSettingsExportFormat ();
@@ -555,7 +555,7 @@ private:
   QAction *m_actionSettingsAxesChecker;
   QAction *m_actionSettingsColorFilter;
   QAction *m_actionSettingsCoords;
-  QAction *m_actionSettingsCurveAddRemove;
+  QAction *m_actionSettingsCurveList;
   QAction *m_actionSettingsCurveProperties;
   QAction *m_actionSettingsDigitizeCurve;
   QAction *m_actionSettingsExport;
@@ -619,7 +619,7 @@ private:
   DlgSettingsAxesChecker *m_dlgSettingsAxesChecker;
   DlgSettingsColorFilter *m_dlgSettingsColorFilter;
   DlgSettingsCoords *m_dlgSettingsCoords;
-  DlgSettingsCurveAddRemove *m_dlgSettingsCurveAddRemove;
+  DlgSettingsCurveList *m_dlgSettingsCurveList;
   DlgSettingsCurveProperties *m_dlgSettingsCurveProperties;
   DlgSettingsDigitizeCurve * m_dlgSettingsDigitizeCurve;
   DlgSettingsExportFormat *m_dlgSettingsExportFormat;

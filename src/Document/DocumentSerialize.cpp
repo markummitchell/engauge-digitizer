@@ -33,7 +33,7 @@ const QString DOCUMENT_SERIALIZE_CMD_SELECT_COORD_SYSTEM ("CmdSelectCoordSystem"
 const QString DOCUMENT_SERIALIZE_CMD_SETTINGS_AXES_CHECKER ("CmdSettingsAxesChecker");
 const QString DOCUMENT_SERIALIZE_CMD_SETTINGS_COLOR_FILTER ("CmdSettingsColorFilter");
 const QString DOCUMENT_SERIALIZE_CMD_SETTINGS_COORDS ("CmdSettingsCoords");
-const QString DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_ADD_REMOVE ("CmdSettingsCurveAddRemove");
+const QString DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_LIST ("CmdSettingsCurveAddRemove"); // AddRemove versus List for old dig files
 const QString DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_PROPERTIES ("CmdSettingsCurveProperties");
 const QString DOCUMENT_SERIALIZE_CMD_SETTINGS_DIGITIZE_CURVE ("CmdSettingsDigitizeCurve");
 const QString DOCUMENT_SERIALIZE_CMD_SETTINGS_EXPORT ("CmdSettingsExport");

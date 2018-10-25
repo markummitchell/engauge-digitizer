@@ -22,7 +22,7 @@ enum CurveNameListColumns {
   NUMBER_CURVE_NAME_LIST_COLUMNS
 };
 
-/// Model for DlgSettingsCurveAddRemove and CmdSettingsCurveAddRemove. This is displayed as a QListView, with visible first column
+/// Model for DlgSettingsCurveList and CmdSettingsCurveList. This is displayed as a QListView, with visible first column
 /// showing current curve name. Second column is hidden with curve name at the start of editing, or empty if none.
 class CurveNameList : public QStandardItemModel
 {

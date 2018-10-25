@@ -20,7 +20,7 @@
 #include "CmdSettingsAxesChecker.h"
 #include "CmdSettingsColorFilter.h"
 #include "CmdSettingsCoords.h"
-#include "CmdSettingsCurveAddRemove.h"
+#include "CmdSettingsCurveList.h"
 #include "CmdSettingsCurveProperties.h"
 #include "CmdSettingsDigitizeCurve.h"
 #include "CmdSettingsExportFormat.h"
@@ -128,11 +128,11 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                  document,
                                  cmdDescription,
                                  reader);
-  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_ADD_REMOVE) {
-    cmd = new CmdSettingsCurveAddRemove (mainWindow,
-                                         document,
-                                         cmdDescription,
-                                         reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_LIST) {
+    cmd = new CmdSettingsCurveList (mainWindow,
+                                    document,
+                                    cmdDescription,
+                                    reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_PROPERTIES) {
     cmd = new CmdSettingsCurveProperties (mainWindow,
                                           document,

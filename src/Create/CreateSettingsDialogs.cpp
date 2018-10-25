@@ -8,7 +8,7 @@
 #include "DlgSettingsAxesChecker.h"
 #include "DlgSettingsColorFilter.h"
 #include "DlgSettingsCoords.h"
-#include "DlgSettingsCurveAddRemove.h"
+#include "DlgSettingsCurveList.h"
 #include "DlgSettingsCurveProperties.h"
 #include "DlgSettingsDigitizeCurve.h"
 #include "DlgSettingsExportFormat.h"
@@ -30,7 +30,7 @@ void CreateSettingsDialogs::create (MainWindow & mw)
   LOG4CPP_INFO_S ((*mainCat)) << "CreateSettingsDialogs::create";
 
   mw.m_dlgSettingsCoords = new DlgSettingsCoords (mw);
-  mw.m_dlgSettingsCurveAddRemove = new DlgSettingsCurveAddRemove (mw);
+  mw.m_dlgSettingsCurveList = new DlgSettingsCurveList (mw);
   mw.m_dlgSettingsCurveProperties = new DlgSettingsCurveProperties (mw);
   mw.m_dlgSettingsDigitizeCurve = new DlgSettingsDigitizeCurve (mw);
   mw.m_dlgSettingsExportFormat = new DlgSettingsExportFormat (mw);
@@ -44,7 +44,7 @@ void CreateSettingsDialogs::create (MainWindow & mw)
   mw.m_dlgSettingsMainWindow = new DlgSettingsMainWindow (mw);
 
   mw.m_dlgSettingsCoords->setVisible (false);
-  mw.m_dlgSettingsCurveAddRemove->setVisible (false);
+  mw.m_dlgSettingsCurveList->setVisible (false);
   mw.m_dlgSettingsCurveProperties->setVisible (false);
   mw.m_dlgSettingsDigitizeCurve->setVisible (false);
   mw.m_dlgSettingsExportFormat->setVisible (false);
