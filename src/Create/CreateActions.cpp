@@ -331,11 +331,11 @@ void CreateActions::createSettings (MainWindow &mw)
                                                "Coordinate settings determine how the graph coordinates are mapped to the pixels in the image"));
   connect (mw.m_actionSettingsCoords, SIGNAL (triggered ()), &mw, SLOT (slotSettingsCoords ()));
 
-  mw.m_actionSettingsCurveAddRemove = new QAction (tr ("Curve List..."), &mw);
-  mw.m_actionSettingsCurveAddRemove->setStatusTip (tr ("Edit Curve List settings."));
-  mw.m_actionSettingsCurveAddRemove->setWhatsThis (tr ("Curve List\n\n"
-                                                       "Curve list settings add, rename and/or remove curves in the current document"));
-  connect (mw.m_actionSettingsCurveAddRemove, SIGNAL (triggered ()), &mw, SLOT (slotSettingsCurveAddRemove ()));
+  mw.m_actionSettingsCurveList = new QAction (tr ("Curve List..."), &mw);
+  mw.m_actionSettingsCurveList->setStatusTip (tr ("Edit Curve List settings."));
+  mw.m_actionSettingsCurveList->setWhatsThis (tr ("Curve List\n\n"
+                                                  "Curve list settings add, rename and/or remove curves in the current document"));
+  connect (mw.m_actionSettingsCurveList, SIGNAL (triggered ()), &mw, SLOT (slotSettingsCurveList ()));
 
   mw.m_actionSettingsCurveProperties = new QAction (tr ("Curve Properties..."), &mw);
   mw.m_actionSettingsCurveProperties->setStatusTip (tr ("Edit Curve Properties settings."));

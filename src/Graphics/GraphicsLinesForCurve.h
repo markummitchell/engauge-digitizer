@@ -17,7 +17,9 @@ class GraphicsPoint;
 class GraphicsScene;
 class LineStyle;
 class PointStyle;
+class QPainterPath;
 class QTestStream;
+class SplineDrawer;
 class Transformation;
 
 /// This class stores the GraphicsLine objects for one Curve. The container is a QMap since that container
@@ -41,7 +43,10 @@ public:
   double identifierToOrdinal (const QString &identifier) const;
 
   /// Mark the end of addPoint calls. Remove stale lines, insert missing lines, and draw the graphics lines
-  void lineMembershipPurge (const LineStyle &lineStyle);
+  void lineMembershipPurge (const LineStyle &lineStyle,
+                            SplineDrawer &splineDrawer,
+                            QPainterPath &pathMultiValued,
+                            LineStyle &lineMultiValued);
 
   /// Mark points as unwanted. Afterwards, lineMembershipPurge gets called
   void lineMembershipReset ();
@@ -67,7 +72,10 @@ public:
   void updateCurveStyle (const CurveStyle &curveStyle);
 
   /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
-  void updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle);
+  void updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle,
+                                                 SplineDrawer &splineDrawer,
+                                                 QPainterPath &pathMultiValued,
+                                                 LineStyle &lineMultiValued);
 
   /// Update the highlight opacity value. This may or may not affect the current display immediately depending on the state
   void updateHighlightOpacity (double highlightOpacity);
@@ -78,8 +86,11 @@ public:
 
 private:
 
-  QPainterPath drawLinesSmooth ();
-  QPainterPath drawLinesStraight ();
+  QPainterPath drawLinesSmooth (const LineStyle &lineStyle,
+                                SplineDrawer &splineDrawer,
+                                QPainterPath &pathMultiValued,
+                                LineStyle &lineMultiValued);
+  QPainterPath drawLinesStraight (QPainterPath &pathMultiValued);
   bool needOrdinalRenumbering () const; // True if m_graphicsPoints ordinal keys need renumbering
   void renumberOrdinals(); // Renumbers m_graphicsPoints ordinal keys
 

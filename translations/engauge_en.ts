@@ -2692,7 +2692,7 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="118"/>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="203"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="204"/>
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2718,55 +2718,55 @@ If the curve is connected as a closed contour, then the points are ordered by ag
 
 Lines are drawn between successively ordered points.
 
-Straight curves are drawn with straight lines between successive points. Smooth curves are drawn with smooth lines between successive points.
+Straight curves are drawn with straight lines between successive points. Smooth curves are drawn with smooth lines between successive points, using natural cubic splines of (x,y) pairs versus scalar ordinal (t) values.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="156"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="157"/>
         <source>Point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="162"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="163"/>
         <source>Shape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="166"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="167"/>
         <source>Select a shape for the points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="182"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="183"/>
         <source>Radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="186"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="187"/>
         <source>Select a radius, in pixels, for the points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="191"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="192"/>
         <source>Line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="195"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="196"/>
         <source>Select a line width, in pixels, for the points.
 
 A larger width results in a thicker line, with the exception of a value of zero which always results in a line that is one pixel wide (which is easy to see even when zoomed far out)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="207"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="208"/>
         <source>Select a color for the line used to draw the point shapes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="218"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="219"/>
         <source>Save the visible curve settings for use as future defaults, according to the curve name selection.
 
 If the visible settings are for the axes curve, then they will be used for future axes curves, until new settings are saved as the defaults.
@@ -2775,12 +2775,12 @@ If the visible settings are for the Nth graph curve in the curve list, then they
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="232"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="233"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="239"/>
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="240"/>
         <source>Preview window that shows how current settings affect the points and line of the selected curve.
 
 The X coordinate is in the horizontal direction, and the Y coordinate is in the vertical direction. A function can have only one Y value, at most, for any X value, but a relation can have multiple Y values for one X value.</source>
@@ -3962,6 +3962,14 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
     </message>
 </context>
 <context>
+    <name>GraphicsScene</name>
+    <message>
+        <location filename="../src/Graphics/GraphicsScene.cpp" line="347"/>
+        <source>Function currently has multiple Y values for one X value. Please adjust nearby points</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GraphicsView</name>
     <message>
         <location filename="../src/Graphics/GraphicsView.cpp" line="55"/>
@@ -4105,17 +4113,17 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3581"/>
+        <location filename="../src/main/MainWindow.cpp" line="3582"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3582"/>
+        <location filename="../src/main/MainWindow.cpp" line="3583"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3712"/>
+        <location filename="../src/main/MainWindow.cpp" line="3713"/>
         <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>

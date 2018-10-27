@@ -185,10 +185,13 @@ void DlgSettingsCoords::annotateRadiusAtOrigin(const QFont &defaultFont) {
                       YCENTER);
 }
 
-QRectF DlgSettingsCoords::boundingRectGraph (CmdMediator &cmdMediator,
-                                             bool &isEmpty) const
+void DlgSettingsCoords::boundingRectGraph (CmdMediator &cmdMediator,
+                                           bool &isEmpty,
+                                           QPointF &boundingRectGraphMin,
+                                           QPointF &boundingRectGraphMax) const
 {
-  CallbackBoundingRects ftor (mainWindow().transformation());
+  CallbackBoundingRects ftor (cmdMediator.document().documentAxesPointsRequired(),
+                              mainWindow().transformation());
 
   Functor2wRet<const QString &, const Point&, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
                                                                                                     &CallbackBoundingRects::callback);
@@ -203,7 +206,8 @@ QRectF DlgSettingsCoords::boundingRectGraph (CmdMediator &cmdMediator,
     cmdMediator.iterateThroughCurvesPointsGraphs (ftorWithCallback);
   }
 
-  return ftor.boundingRectGraph(isEmpty);
+  boundingRectGraphMin = ftor.boundingRectGraphMin (isEmpty);
+  boundingRectGraphMax = ftor.boundingRectGraphMax (isEmpty);
 }
 
 void DlgSettingsCoords::createDateTime (QGridLayout *layout,
@@ -557,10 +561,13 @@ void DlgSettingsCoords::load (CmdMediator &cmdMediator)
 
   // Remove if coordinates are log so later constraints can be applied
   bool isEmpty;
-  QRectF rectGraph = boundingRectGraph (cmdMediator,
-                                        isEmpty);
-  bool xThetaGoesNegative = !isEmpty && (rectGraph.x() <= 0);
-  bool yRGoesNegative = !isEmpty && (rectGraph.y() <= 0);
+  QPointF boundingRectGraphMin, boundingRectGraphMax;
+  boundingRectGraph (cmdMediator,
+                     isEmpty,
+                     boundingRectGraphMin,
+                     boundingRectGraphMax);
+  bool xThetaGoesNegative = !isEmpty && (boundingRectGraphMin.x() <= 0);
+  bool yRGoesNegative = !isEmpty && (boundingRectGraphMin.y() <= 0);
   m_xThetaLinear->setEnabled (!xThetaGoesNegative);
   m_xThetaLog->setEnabled (!xThetaGoesNegative);
   m_yRadiusLinear->setEnabled (!yRGoesNegative);

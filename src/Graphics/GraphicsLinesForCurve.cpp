@@ -18,10 +18,12 @@
 #include "PointStyle.h"
 #include <QGraphicsItem>
 #include <QMap>
+#include <QPainterPath>
 #include <QPen>
 #include <QTextStream>
 #include "QtToString.h"
 #include "Spline.h"
+#include "SplineDrawer.h"
 #include "Transformation.h"
 #include "ZValues.h"
 
@@ -64,7 +66,10 @@ void GraphicsLinesForCurve::addPoint (const QString &pointIdentifier,
   m_graphicsPoints [ordinal] = &graphicsPoint;
 }
 
-QPainterPath GraphicsLinesForCurve::drawLinesSmooth ()
+QPainterPath GraphicsLinesForCurve::drawLinesSmooth (const LineStyle &lineStyle,
+                                                     SplineDrawer &splineDrawer,
+                                                     QPainterPath &pathMultiValued,
+                                                     LineStyle &lineMultiValued)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::drawLinesSmooth"
                               << " curve=" << m_curveName.toLatin1().data();
@@ -91,38 +96,68 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth ()
     // Spline through points
     Spline spline (t, xy);
 
-    // Drawing from point i-1 to this point i uses the control points from point i-1
-    int segmentEndingAtPointI = 0;
+    splineDrawer.bindToSpline (m_graphicsPoints.count(),
+                               spline);
 
-    // Create QPainterPath through the points
-    bool isFirst = true;
-    for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
+    // Create QPainterPath through the points. Loop has one segment per stop point,
+    // with first point handled outside first
+    int segment; // Only incremented after a draw, corresponding to finishing a segment
+    OrdinalToGraphicsPoint::const_iterator itr = m_graphicsPoints.begin();
+
+    const GraphicsPoint *point = itr.value();
+    path.moveTo (point->pos ());
+    pathMultiValued.moveTo (point->pos ());
+    ++itr;
+
+    for (segment = 0;
+         itr != m_graphicsPoints.end();
+         segment++, itr++) {
 
       const GraphicsPoint *point = itr.value();
 
-      if (isFirst) {
-        isFirst = false;
-        path.moveTo (point->pos());
-      } else {
+      SplineDrawerOperation operation = splineDrawer.segmentOperation (segment);
 
-        QPointF p1 (spline.p1 (segmentEndingAtPointI).x(),
-                    spline.p1 (segmentEndingAtPointI).y());
-        QPointF p2 (spline.p2 (segmentEndingAtPointI).x(),
-                    spline.p2 (segmentEndingAtPointI).y());
+      QPointF p1 (spline.p1 (segment).x(),
+                  spline.p1 (segment).y());
+      QPointF p2 (spline.p2 (segment).x(),
+                  spline.p2 (segment).y());
 
-        path.cubicTo (p1,
-                      p2,
-                      point->pos ());
+      switch (operation) {
+      case SPLINE_DRAWER_ENUM_VISIBLE_DRAW:
+        {
+          // Show this segment
+          path.cubicTo (p1,
+                        p2,
+                        point->pos ());
+        }
+        break;
 
-        ++segmentEndingAtPointI;
+      case SPLINE_DRAWER_ENUM_INVISIBLE_MOVE:
+
+        // Hide this segment as a regular curve, and show it as the error curve
+        path.moveTo (point->pos ());
+
+        // Show curveMultiValued instead in what would have been the original curve's path
+        OrdinalToGraphicsPoint::const_iterator itrBefore = itr - 1;
+        const GraphicsPoint *pointBefore = itrBefore.value();
+        pathMultiValued.moveTo (pointBefore->pos ());
+        pathMultiValued.cubicTo (p1,
+                                 p2,
+                                 point->pos ());
+        lineMultiValued = lineStyle; // Remember to not use the same line style
+        break;
+
       }
+
+      // Always move to next point for curveMultiValued
+      pathMultiValued.moveTo (point->pos ());
     }
   }
 
   return path;
 }
 
-QPainterPath GraphicsLinesForCurve::drawLinesStraight ()
+QPainterPath GraphicsLinesForCurve::drawLinesStraight (QPainterPath  & /* pathMultiValued */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::drawLinesStraight"
                               << " curve=" << m_curveName.toLatin1().data();
@@ -167,7 +202,10 @@ double GraphicsLinesForCurve::identifierToOrdinal (const QString &identifier) co
   return 0;
 }
 
-void GraphicsLinesForCurve::lineMembershipPurge (const LineStyle &lineStyle)
+void GraphicsLinesForCurve::lineMembershipPurge (const LineStyle &lineStyle,
+                                                 SplineDrawer &splineDrawer,
+                                                 QPainterPath &pathMultiValued,
+                                                 LineStyle &lineMultiValued)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::lineMembershipPurge"
                               << " curve=" << m_curveName.toLatin1().data();
@@ -204,7 +242,10 @@ void GraphicsLinesForCurve::lineMembershipPurge (const LineStyle &lineStyle)
 
   setPen (pen);
 
-  updateGraphicsLinesToMatchGraphicsPoints (lineStyle);
+  updateGraphicsLinesToMatchGraphicsPoints (lineStyle,
+                                            splineDrawer,
+                                            pathMultiValued,
+                                            lineMultiValued);
 }
 
 void GraphicsLinesForCurve::lineMembershipReset ()
@@ -382,7 +423,10 @@ void GraphicsLinesForCurve::updateHighlightOpacity (double highlightOpacity)
   }
 }
 
-void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle)
+void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle,
+                                                                      SplineDrawer &splineDrawer,
+                                                                      QPainterPath &pathMultiValued,
+                                                                      LineStyle &lineMultiValued)
 {
   // LOG4CPP_INFO_S is below
 
@@ -406,9 +450,12 @@ void GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints (const Line
         lineStyle.curveConnectAs() == CONNECT_AS_RELATION_STRAIGHT ||
         m_graphicsPoints.count () < 3) {
 
-      path = drawLinesStraight ();
+      path = drawLinesStraight (pathMultiValued);
     } else {
-      path = drawLinesSmooth ();
+      path = drawLinesSmooth (lineStyle,
+                              splineDrawer,
+                              pathMultiValued,
+                              lineMultiValued);
     }
 
    setPath (path);
@@ -420,7 +467,7 @@ void GraphicsLinesForCurve::updatePointOrdinalsAfterDrag (const LineStyle &lineS
 {
   CurveConnectAs curveConnectAs = lineStyle.curveConnectAs();
 
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsLinesForCurve::updateGraphicsLinesToMatchGraphicsPoints"
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsLinesForCurve::updatePointOrdinalsAfterDrag"
                                << " curve=" << m_curveName.toLatin1().data()
                                << " curveConnectAs=" << curveConnectAsToString(curveConnectAs).toLatin1().data();
 

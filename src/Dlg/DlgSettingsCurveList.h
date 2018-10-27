@@ -4,8 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef DLG_SETTINGS_CURVE_ADD_REMOVE_H
-#define DLG_SETTINGS_CURVE_ADD_REMOVE_H
+#ifndef DLG_SETTINGS_CURVE_LIST_H
+#define DLG_SETTINGS_CURVE_LIST_H
 
 #include "DlgSettingsAbstractBase.h"
 #include <QItemSelection>
@@ -21,14 +21,14 @@ class QTableView;
 class QTextStream;
 
 /// Dialog for editing curve names settings.
-class DlgSettingsCurveAddRemove : public DlgSettingsAbstractBase
+class DlgSettingsCurveList : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  DlgSettingsCurveAddRemove(MainWindow &mainWindow);
-  virtual ~DlgSettingsCurveAddRemove();
+  DlgSettingsCurveList(MainWindow &mainWindow);
+  virtual ~DlgSettingsCurveList();
 
   virtual void createOptionalSaveDefault (QHBoxLayout *layout);
   virtual QWidget *createSubPanel ();
@@ -85,4 +85,4 @@ private:
 
 };
 
-#endif // DLG_SETTINGS_CURVE_ADD_REMOVE_H
+#endif // DLG_SETTINGS_CURVE_LIST_H

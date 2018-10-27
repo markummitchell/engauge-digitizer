@@ -10,6 +10,7 @@
 #include "CmdMediator.h"
 #include "GraphicsLinesForCurves.h"
 #include <QGraphicsScene>
+#include <QObject>
 #include <QStringList>
 
 class CmdMediator;
@@ -18,8 +19,10 @@ class CurvesGraphs;
 class CurveStyles;
 class GeometryWindow;
 class GraphicsPoint;
+class LineStyle;
 class MainWindow;
 class PointStyle;
+class QGraphicsPathItem;
 class QTextStream;
 class ScaleBar;
 class Transformation;
@@ -32,9 +35,15 @@ class Transformation;
 /// the points and lines are accessible for updates (like when dragging points around and we need to update the attached lines).
 class GraphicsScene : public QGraphicsScene
 {
+  // We use Q_OBJECT so translations work
+  Q_OBJECT;
+  
 public:
   /// Single constructor.
   GraphicsScene(MainWindow *mainWindow);
+
+  /// Virtual destructor needed since using Q_OBJECT
+  virtual ~GraphicsScene();
 
   /// Add one temporary point to m_graphicsLinesForCurves. Non-temporary points are handled by the updateLineMembership functions
   void addTemporaryPoint (const QString &identifier,
@@ -88,7 +97,8 @@ public:
   /// updating would be done on out of date information (since that would be brought up to date by the NEXT command)
   void updateAfterCommand (CmdMediator &cmdMediator,
                            double highlightOpacity,
-                           GeometryWindow *geometryWindow);
+                           GeometryWindow *geometryWindow,
+                           const Transformation &transformation);
 
   /// Update curve styles after settings changed.
   void updateCurveStyles(const CurveStyles &modelCurveStyles);
@@ -108,12 +118,23 @@ private:
   /// Remove expired curves and add new curves
   void updateCurves (CmdMediator &cmdMediator);
 
+  /// Update path item showing where multi-valued issues are occuring. Nothing appears if there are no problems
+  void updatePathItemMultiValued (const QPainterPath &pathMultiValued,
+                                  const LineStyle &lineMultiValued);
+
   /// Update Points using a multi-pass algorithm.
   void updatePointMembership (CmdMediator &cmdMediator,
-                              GeometryWindow *geometryWindow);
+                              GeometryWindow *geometryWindow,
+                              const Transformation &transformation);
 
   /// Curve name to GraphicsLinesForCurve
   GraphicsLinesForCurves m_graphicsLinesForCurves;
+
+  /// Special path item that in happy times is never seen. It appears in place of bad line segments on the
+  /// other curves. Bad=segment is multi-valued for a function since functions should always be single-valued.
+  /// This special curve lives here rather than in m_graphicsLinesForCurves so it is decoupled from
+  /// that member (especially since that gets serialized)
+  QGraphicsPathItem *m_pathItemMultiValued;
 };
 
 #endif // GRAPHICS_SCENE_H

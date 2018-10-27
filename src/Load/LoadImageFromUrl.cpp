@@ -9,6 +9,7 @@
 #include "MainWindow.h"
 #include <QFileInfo>
 #include <QMessageBox>
+#include <QTextStream>
 #include <QtNetwork/QNetworkReply>
 #include <QUrl>
 #include "Version.h"

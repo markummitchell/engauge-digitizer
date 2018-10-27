@@ -539,7 +539,8 @@ void DlgSettingsExportFormat::initializeIntervalConstraints ()
   const int MAX_POINTS_ACROSS_RANGE = 5000;
 
   // Get min and max of graph and screen coordinates
-  CallbackBoundingRects ftor (mainWindow().transformation());
+  CallbackBoundingRects ftor (cmdMediator().document().documentAxesPointsRequired(),
+                              mainWindow().transformation());
 
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
                                                                                                      &CallbackBoundingRects::callback);
@@ -547,8 +548,10 @@ void DlgSettingsExportFormat::initializeIntervalConstraints ()
 
   // If there are no points, then interval will be zero. That special case must be handled downstream to prevent infinite loops
   bool isEmpty;
-  double maxSizeGraph = qMax (ftor.boundingRectGraph(isEmpty).width(),
-                              ftor.boundingRectGraph(isEmpty).height());
+  QPointF boundingRectGraphMin = ftor.boundingRectGraphMin (isEmpty);
+  QPointF boundingRectGraphMax = ftor.boundingRectGraphMax (isEmpty);
+  double maxSizeGraph = qMax (qAbs (boundingRectGraphMax.x() - boundingRectGraphMin.x()),
+                              qAbs (boundingRectGraphMax.y() - boundingRectGraphMin.y()));
   double maxSizeScreen = qMax (ftor.boundingRectScreen(isEmpty).width(),
                                ftor.boundingRectScreen(isEmpty).height());
   m_minIntervalGraph = maxSizeGraph / MAX_POINTS_ACROSS_RANGE;

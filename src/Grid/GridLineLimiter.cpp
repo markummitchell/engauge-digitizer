@@ -20,11 +20,14 @@ GridLineLimiter::GridLineLimiter ()
 {
 }
 
-QRectF GridLineLimiter::documentBounds (const Document &document,
-                                        const Transformation &transformation) const
+void GridLineLimiter::documentBounds (const Document &document,
+                                      const Transformation &transformation,
+                                      QPointF &boundingRectMin,
+                                      QPointF &boundingRectMax) const
 {
   // Get graph coordinate bounds
-  CallbackBoundingRects ftor (transformation);
+  CallbackBoundingRects ftor (document.documentAxesPointsRequired(),
+                              transformation);
 
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
                                                                                                      &CallbackBoundingRects::callback);
@@ -32,9 +35,8 @@ QRectF GridLineLimiter::documentBounds (const Document &document,
   document.iterateThroughCurvesPointsGraphs (ftorWithCallback);
 
   bool isEmpty;
-  QRectF boundingRectGraph = ftor.boundingRectGraph(isEmpty);
-
-  return boundingRectGraph;
+  boundingRectMin = ftor.boundingRectGraphMin (isEmpty);
+  boundingRectMax = ftor.boundingRectGraphMax (isEmpty);
 }
 
 void GridLineLimiter::limitForXTheta (const Document &document,
@@ -76,11 +78,14 @@ void GridLineLimiter::limitForXTheta (const Document &document,
     if (startX <= 0) {
 
       // Start value is invalid so override both start and step
-      QRectF boundingRectGraph = documentBounds (document,
-                                                 transformation);
+      QPointF boundingRectGraphMin, boundingRectGraphMax;
+      documentBounds (document,
+                      transformation,
+                      boundingRectGraphMin,
+                      boundingRectGraphMax);
 
       // Override lower bound
-      startX = boundingRectGraph.left ();
+      startX = boundingRectGraphMin.x ();
     }
 
     if (!needReduction) {
@@ -138,11 +143,14 @@ void GridLineLimiter::limitForYRadius (const Document &document,
     if (startY <= 0) {
 
       // Start value is invalid so override both start and step
-      QRectF boundingRectGraph = documentBounds (document,
-                                                 transformation);
+      QPointF boundingRectGraphMin, boundingRectGraphMax;
+      documentBounds (document,
+                      transformation,
+                      boundingRectGraphMin,
+                      boundingRectGraphMax);
 
       // Override lower bound
-      startY = boundingRectGraph.top ();
+      startY = boundingRectGraphMin.y ();
     }
 
     if (!needReduction) {

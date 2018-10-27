@@ -8,6 +8,7 @@
 #define CALLBACK_BOUNDING_RECTS_H
 
 #include "CallbackSearchReturn.h"
+#include "DocumentAxesPointsRequired.h"
 #include <QPointF>
 #include <QRectF>
 #include <QString>
@@ -20,10 +21,18 @@ class CallbackBoundingRects
 {
 public:
   /// Single constructor
-  CallbackBoundingRects(const Transformation &transformation);
+  CallbackBoundingRects(DocumentAxesPointsRequired documentAxesPointsRequired,
+                        const Transformation &transformation);
 
-  /// Graph coordinate bounding rectangle
-  QRectF boundingRectGraph (bool &isEmpty) const;
+  /// Graph coordinate bounding rectangle's (xmin,ymin) corner. QRectF is not returned since it rounds
+  /// off the smaller coordinates to zero when large dynamic ranges appear, and those zeros
+  /// break the log scale algorithm
+  QPointF boundingRectGraphMin (bool &isEmpty) const;
+
+  /// Graph coordinate bounding rectangle's (xmax,ymax) corner. QRectF is not returned since it rounds
+  /// off the smaller coordinates to zero when large dynamic ranges appear, and those zeros
+  /// break the log scale algorithm
+  QPointF boundingRectGraphMax (bool &isEmpty) const;
 
   /// Screen coordinate bounding rectangle
   QRectF boundingRectScreen (bool &isEmpty) const;
@@ -35,13 +44,25 @@ public:
 private:
   CallbackBoundingRects();
 
-  void mergeCoordinates (const QPointF &pos,
-                         QRectF &boundingRect);
+  void mergeCoordinateX (const QPointF &pos,
+                         QPointF &boundingRectMin,
+                         QPointF &boundingRectMax,
+                         bool &isEmpty);
+  void mergeCoordinateY (const QPointF &pos,
+                         QPointF &boundingRectMin,
+                         QPointF &boundingRectMax,
+                         bool &isEmpty);
 
-  bool m_isEmpty;
+  DocumentAxesPointsRequired m_documentAxesPointsRequired;
+  bool m_isEmptyGraphX; // Have x graph bounds been initialized
+  bool m_isEmptyGraphY; // Have y graph bounds been initialized
+  bool m_isEmptyScreenX; // Have x screen bounds been initialized
+  bool m_isEmptyScreenY; // Have y screen bounds been initialized
   const Transformation m_transformation;
-  QRectF m_boundingRectGraph;
-  QRectF m_boundingRectScreen;
+  QPointF m_boundingRectGraphMin; // Not a QRectF for reasons explained by boundingRectGraphMin
+  QPointF m_boundingRectGraphMax; // Not a QRectF for reasons explained by boundingRectGraphMax
+  QPointF m_boundingRectScreenMin; // Consistent with m_boundingRectGraphMin
+  QPointF m_boundingRectScreenMax; // Consistent with m_boundingRectGraphMax
 };
 
 #endif // CALLBACK_BOUNDING_RECTS_H

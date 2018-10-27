@@ -4,9 +4,17 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#ifndef SPLINE_H
+#define SPLINE_H
+
 #include "SplineCoeff.h"
 #include "SplinePair.h"
 #include <vector>
+
+enum SplineTCheck {
+  SPLINE_ENABLE_T_CHECK,
+  SPLINE_DISABLE_T_CHECK
+};
 
 /// Cubic interpolation given independent and dependent value vectors. X is handled as a dependent variable
 /// based on the unitless independent parameter t so curves are not restricted to x(i)!=x(i+1).
@@ -20,14 +28,32 @@
 ///    external code that relies on control points to perform its own interpolation 
 class Spline 
 {
+  /// For unit testing
+  friend class TestSpline;
+
  public:
   /// Initialize spline with independent (t) and dependent (x and y) value vectors. Besides initializing
   /// the a,b,c,d coefficients for each interval, this constructor initializes bezier points (P1 and P2)
   /// for each interval, where P0 and P3 are the start and end points for each interval.
   Spline(const std::vector<double> &t,
-         const std::vector<SplinePair> &xy);
+         const std::vector<SplinePair> &xy,
+         SplineTCheck splineTCheck = SPLINE_ENABLE_T_CHECK);
 
   virtual ~Spline();
+
+  /// From coefficients in
+  ///   xy=d*(t-ti)^3+c*(t-ti)^2+b*(t-ti)+a
+  /// we compute and return the coefficients in
+  ///   xy=d* t    ^3+c* t    ^2+b* t    +a
+  void computeUntranslatedCoefficients (double aTranslated,
+                                        double bTranslated,
+                                        double cTranslated,
+                                        double dTranslated,
+                                        double tI,
+                                        double &aUntranslated,
+                                        double &bUntranslated,
+                                        double &cUntranslated,
+                                        double &dUntranslated) const;
 
   /// Use bisection algorithm to iteratively find the SplinePair interpolated to best match the specified x value.
   /// This assumes the curve is a function since otherwise there is the potential for multiple solutions
@@ -73,3 +99,5 @@ private:
   std::vector<SplinePair> m_p1;
   std::vector<SplinePair> m_p2;
 };
+
+#endif // SPLINE_H

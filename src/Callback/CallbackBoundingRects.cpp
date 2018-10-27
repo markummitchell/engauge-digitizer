@@ -12,77 +12,128 @@
 #include "QtToString.h"
 #include "Transformation.h"
 
-CallbackBoundingRects::CallbackBoundingRects(const Transformation &transformation) :
-  m_isEmpty (true),
+CallbackBoundingRects::CallbackBoundingRects(DocumentAxesPointsRequired documentAxesPointsRequired,
+                                             const Transformation &transformation) :
+  m_documentAxesPointsRequired (documentAxesPointsRequired),
+  m_isEmptyGraphX (true),
+  m_isEmptyGraphY (true),
+  m_isEmptyScreenX (true),
+  m_isEmptyScreenY (true),
   m_transformation (transformation)
 {
 }
 
-QRectF CallbackBoundingRects::boundingRectGraph (bool &isEmpty) const
+QPointF CallbackBoundingRects::boundingRectGraphMax (bool &isEmpty) const
 {
-  isEmpty = m_isEmpty;
+  // Need both X and Y before results are useful
+  isEmpty = m_isEmptyGraphX || m_isEmptyGraphY;
 
-  return m_boundingRectGraph;
+  return m_boundingRectGraphMax;
+}
+
+QPointF CallbackBoundingRects::boundingRectGraphMin (bool &isEmpty) const
+{
+  // Need both X and Y before results are useful
+  isEmpty = m_isEmptyGraphX || m_isEmptyGraphY;
+
+  return m_boundingRectGraphMin;
 }
 
 QRectF CallbackBoundingRects::boundingRectScreen (bool &isEmpty) const
 {
-  isEmpty = m_isEmpty;
+  // Need both X and Y before results are useful
+  isEmpty = m_isEmptyScreenX || m_isEmptyScreenY;
 
-  return m_boundingRectScreen;
+  return QRectF (m_boundingRectScreenMin,
+                 m_boundingRectScreenMax).normalized();
 }
 
 CallbackSearchReturn CallbackBoundingRects::callback (const QString &curveName,
                                                       const Point &point)
 {
   QPointF posGraph;
+  bool haveGraphX = true,  haveGraphY = true;
   if (curveName == AXIS_CURVE_NAME) {
     posGraph = point.posGraph(); // Axis point has graph coordinates
+
+    haveGraphX = (m_documentAxesPointsRequired != DOCUMENT_AXES_POINTS_REQUIRED_4) || point.isXOnly();
+    haveGraphY = (m_documentAxesPointsRequired != DOCUMENT_AXES_POINTS_REQUIRED_4) || !point.isXOnly();
+
   } else {
     m_transformation.transformScreenToRawGraph (point.posScreen(),
                                                 posGraph); // Curve point has undefined graph coordinates, but they can be calculated
   }
-  mergeCoordinates (posGraph,
-                    m_boundingRectGraph);
-  mergeCoordinates (point.posScreen(),
-                    m_boundingRectScreen);
 
-  m_isEmpty = false; // Set this after the calls to mergeCoordinates which uses it
+  if (haveGraphX) {
+    mergeCoordinateX (posGraph,
+                      m_boundingRectGraphMin,
+                      m_boundingRectGraphMax,
+                      m_isEmptyGraphX);
+  }
+  if (haveGraphY) {
+    mergeCoordinateY (posGraph,
+                      m_boundingRectGraphMin,
+                      m_boundingRectGraphMax,
+                      m_isEmptyGraphY);
+  }
+  mergeCoordinateX (point.posScreen(),
+                    m_boundingRectScreenMin,
+                    m_boundingRectScreenMax,
+                    m_isEmptyScreenX);
+  mergeCoordinateY (point.posScreen(),
+                    m_boundingRectScreenMin,
+                    m_boundingRectScreenMax,
+                    m_isEmptyScreenY);
 
   return CALLBACK_SEARCH_RETURN_CONTINUE;
 }
 
-void CallbackBoundingRects::mergeCoordinates (const QPointF &pos,
-                                              QRectF &boundingRect)
+void CallbackBoundingRects::mergeCoordinateX (const QPointF &pos,
+                                              QPointF &boundingRectMin,
+                                              QPointF &boundingRectMax,
+                                              bool &isEmpty)
 {
-  bool newGraphLeft   = m_isEmpty;
-  bool newGraphTop    = m_isEmpty;
-  bool newGraphRight  = m_isEmpty;
-  bool newGraphBottom = m_isEmpty;
+  bool newGraphMin = isEmpty;
+  bool newGraphMax = isEmpty;
 
-  if (!newGraphLeft) {
-    newGraphLeft   = (pos.x() < boundingRect.left());
+  if (!newGraphMin) {
+    newGraphMin = (pos.x() < boundingRectMin.x());
   }
-  if (!newGraphTop) {
-    newGraphTop    = (pos.y() < boundingRect.top());
-  }
-  if (!newGraphRight) {
-    newGraphRight  = (boundingRect.right() < pos.x());
-  }
-  if (!newGraphBottom) {
-    newGraphBottom = (boundingRect.bottom() < pos.y());
+  if (!newGraphMax) {
+    newGraphMax = (boundingRectMax.x() < pos.x());
   }
 
-  if (newGraphLeft) {
-    boundingRect.setLeft (pos.x());
+  if (newGraphMin) {
+    boundingRectMin.setX (pos.x());
   }
-  if (newGraphTop) {
-    boundingRect.setTop (pos.y());
+  if (newGraphMax) {
+    boundingRectMax.setX (pos.x());
   }
-  if (newGraphRight) {
-    boundingRect.setRight (pos.x());
+
+  isEmpty = false;
+}
+
+void CallbackBoundingRects::mergeCoordinateY (const QPointF &pos,
+                                              QPointF &boundingRectMin,
+                                              QPointF &boundingRectMax,
+                                              bool &isEmpty)
+{
+  bool newGraphMin = isEmpty;
+  bool newGraphMax = isEmpty;
+
+  if (!newGraphMin) {
+    newGraphMin = (pos.y() < boundingRectMin.y());
   }
-  if (newGraphBottom) {
-    boundingRect.setBottom (pos.y());
+  if (!newGraphMax) {
+    newGraphMax = (boundingRectMax.y() < pos.y());
   }
+
+  if (newGraphMin) {
+    boundingRectMin.setY (pos.y());
+  }
+  if (newGraphMax) {
+    boundingRectMax.setY (pos.y());
+  }
+
+  isEmpty = false;
 }

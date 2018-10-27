@@ -4,17 +4,22 @@
 
 #include "EngaugeAssert.h"
 #include <iostream>
+#include "Logger.h"
 #include "Spline.h"
 
 using namespace std;
 
 Spline::Spline(const std::vector<double> &t,
-               const std::vector<SplinePair> &xy)
+               const std::vector<SplinePair> &xy,
+               SplineTCheck splineTCheck)
 {
   ENGAUGE_ASSERT (t.size() == xy.size());
   ENGAUGE_ASSERT (xy.size() > 0); // Need at least one point for this class to not fail with a crash
 
-  checkTIncrements (t);
+  if (splineTCheck == SPLINE_ENABLE_T_CHECK) {
+    // In normal production this check should be performed
+    checkTIncrements (t);
+  }
   computeCoefficientsForIntervals (t, xy);
   computeControlPointsForIntervals ();
 }
@@ -92,9 +97,9 @@ void Spline::computeCoefficientsForIntervals (const std::vector<double> &t,
 
 void Spline::computeControlPointsForIntervals ()
 {
-  int n = (int) m_xy.size() - 1;
+  int i, n = (int) m_xy.size() - 1;
 
-  for (int i = 0; i < n; i++) {
+  for (i = 0; i < n; i++) {
     const SplineCoeff &element = m_elements[i];
 
     // Derivative at P0 from (1-s)^3*P0+(1-s)^2*s*P1+(1-s)*s^2*P2+s^3*P3 with s=0 evaluates to 3(P1-P0). That
@@ -111,6 +116,49 @@ void Spline::computeControlPointsForIntervals ()
     m_p1.push_back (p1);
     m_p2.push_back (p2);
   }
+
+  // Debug logging
+  for (i = 0; i < (int) m_xy.size () - 1; i++) {
+    LOG4CPP_DEBUG_S ((*mainCat)) << "Spline::computeControlPointsForIntervals" << " i=" << i
+             << " xy=" << m_xy [i]
+             << " elementt=" << m_elements[i].t()
+             << " elementa=" << m_elements[i].a()
+             << " elementb=" << m_elements[i].b()
+             << " elementc=" << m_elements[i].c()
+             << " elementd=" << m_elements[i].d()
+             << " p1=" << m_p1[i]
+             << " p2=" << m_p2[i];
+  }
+  i = m_xy.size() - 1;
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Spline::computeControlPointsForIntervals" << " i=" << i
+                << " xy=" << m_xy [i];
+}
+
+void Spline::computeUntranslatedCoefficients (double aTranslated,
+                                              double bTranslated,
+                                              double cTranslated,
+                                              double dTranslated,
+                                              double tI,
+                                              double &aUntranslated,
+                                              double &bUntranslated,
+                                              double &cUntranslated,
+                                              double &dUntranslated) const
+{
+  // Expanding the equation using t translated as (t-ti) we get the equation using untranslated (t) as follows
+  //   xy=d*t^3+
+  //      (c-3*d*ti)*t^2+
+  //      (b-2*c*ti+3*d*ti^2)*t+
+  //      (a-b*ti+c*ti^2-d*ti^3)
+  // which matches up with
+  //   xy=d*t^3+
+  //      c*t^2+
+  //      b*t+
+  //      a
+  // Both equations are given in the header file documentation for this method
+  aUntranslated = aTranslated - bTranslated * tI + cTranslated * tI * tI - dTranslated * tI * tI * tI;
+  bUntranslated = bTranslated - 2.0 * cTranslated * tI + 3.0 * dTranslated * tI * tI;
+  cUntranslated = cTranslated - 3.0 * dTranslated * tI;
+  dUntranslated = dTranslated;
 }
 
 SplinePair Spline::findSplinePairForFunctionX (double x,

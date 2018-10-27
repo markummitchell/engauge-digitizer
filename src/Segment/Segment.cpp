@@ -27,15 +27,10 @@ Segment::Segment(QGraphicsScene &scene,
   m_length (0),
   m_isGnuplot (isGnuplot)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Segment::Segment"
-                              << " address=0x" << hex << (quintptr) this;
 }
 
 Segment::~Segment()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Segment::~Segment"
-                              << " address=0x" << hex << (quintptr) this;
-
   QList<SegmentLine*>::iterator itr;
   for (itr = m_lines.begin(); itr != m_lines.end(); itr++) {
 

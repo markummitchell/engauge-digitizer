@@ -8,7 +8,7 @@
 #include "DlgSettingsAxesChecker.h"
 #include "DlgSettingsColorFilter.h"
 #include "DlgSettingsCoords.h"
-#include "DlgSettingsCurveAddRemove.h"
+#include "DlgSettingsCurveList.h"
 #include "DlgSettingsCurveProperties.h"
 #include "DlgSettingsDigitizeCurve.h"
 #include "DlgSettingsExportFormat.h"

@@ -176,7 +176,8 @@ double GridInitializer::computeStop (bool linearAxis,
   return stop;
 }
 
-DocumentModelGridDisplay GridInitializer::initializeWithNarrowCoverage (const QRectF &boundingRectGraph,
+DocumentModelGridDisplay GridInitializer::initializeWithNarrowCoverage (const QPointF &boundingRectGraphMin,
+                                                                        const QPointF &boundingRectGraphMax,
                                                                         const DocumentModelCoords &modelCoords) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GridInitializer::initializeWithNarrowCoverage";
@@ -187,8 +188,8 @@ DocumentModelGridDisplay GridInitializer::initializeWithNarrowCoverage (const QR
   double start, stop, step;
 
   // X/theta coordinate
-  axisScale (boundingRectGraph.x(),
-             boundingRectGraph.x() + boundingRectGraph.width(),
+  axisScale (boundingRectGraphMin.x(),
+             boundingRectGraphMax.x(),
              (modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR),
              start,
              stop,
@@ -202,8 +203,8 @@ DocumentModelGridDisplay GridInitializer::initializeWithNarrowCoverage (const QR
   modelGridDisplay.setStopX (stop);
 
   // Y/radius coordinate
-  axisScale (boundingRectGraph.y(),
-             boundingRectGraph.y() + boundingRectGraph.height(),
+  axisScale (boundingRectGraphMin.y(),
+             boundingRectGraphMax.y(),
              (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR),
              start,
              stop,
@@ -221,14 +222,16 @@ DocumentModelGridDisplay GridInitializer::initializeWithNarrowCoverage (const QR
   return modelGridDisplay;
 }
 
-DocumentModelGridDisplay GridInitializer::initializeWithWidePolarCoverage (const QRectF &boundingRectGraph,
+DocumentModelGridDisplay GridInitializer::initializeWithWidePolarCoverage (const QPointF &boundingRectGraphMin,
+                                                                           const QPointF &boundingRectGraphMax,
                                                                            const DocumentModelCoords &modelCoords,
                                                                            const Transformation &transformation,
                                                                            const QSize &imageSize) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GridInitializer::initializeWithWidePolarCoverage";
 
-  DocumentModelGridDisplay modelGridDisplay = initializeWithNarrowCoverage (boundingRectGraph,
+  DocumentModelGridDisplay modelGridDisplay = initializeWithNarrowCoverage (boundingRectGraphMin,
+                                                                            boundingRectGraphMax,
                                                                             modelCoords);
 
   if (modelCoords.coordsType() == COORDS_TYPE_POLAR) {

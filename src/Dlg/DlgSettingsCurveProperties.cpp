@@ -142,7 +142,8 @@ void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
                                    "endpoints.\n\n"
                                    "Lines are drawn between successively ordered points.\n\n"
                                    "Straight curves are drawn with straight lines between successive points. Smooth curves are drawn "
-                                   "with smooth lines between successive points.\n\n"
+                                   "with smooth lines between successive points, using natural cubic splines of (x,y) pairs versus "
+                                   "scalar ordinal (t) values.\n\n"
                                     "This applies only to graph curves. No lines are ever drawn between axis points."));
   connect (m_cmbLineType, SIGNAL (activated (const QString &)), this, SLOT (slotLineType (const QString &))); // activated() ignores code changes
   layoutGroup->addWidget (m_cmbLineType, 2, 1);

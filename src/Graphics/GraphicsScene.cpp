@@ -23,10 +23,16 @@
 #include <QApplication>
 #include <QGraphicsItem>
 #include "QtToString.h"
+#include "SplineDrawer.h"
 #include "Transformation.h"
 
 GraphicsScene::GraphicsScene(MainWindow *mainWindow) :
-  QGraphicsScene(mainWindow)
+  QGraphicsScene(mainWindow),
+  m_pathItemMultiValued (0)
+{
+}
+
+GraphicsScene::~GraphicsScene()
 {
 }
 
@@ -269,7 +275,8 @@ void GraphicsScene::showCurves (bool show,
 
 void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
                                         double highlightOpacity,
-                                        GeometryWindow *geometryWindow)
+                                        GeometryWindow *geometryWindow,
+                                        const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateAfterCommand";
 
@@ -279,7 +286,8 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
 
   // Update the points
   updatePointMembership (cmdMediator,
-                         geometryWindow);
+                         geometryWindow,
+                         transformation);
 }
 
 void GraphicsScene::updateCurves (CmdMediator &cmdMediator)
@@ -314,12 +322,38 @@ void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles 
                                                            transformation);
 
     // Recompute the lines one time for efficiency
-    m_graphicsLinesForCurves.updateGraphicsLinesToMatchGraphicsPoints (curveStyles);
+    SplineDrawer splineDrawer (transformation);
+    QPainterPath pathMultiValued;
+    LineStyle lineMultiValued;
+    m_graphicsLinesForCurves.updateGraphicsLinesToMatchGraphicsPoints (curveStyles,
+                                                                       splineDrawer,
+                                                                       pathMultiValued,
+                                                                       lineMultiValued);
+
+    updatePathItemMultiValued (pathMultiValued,
+                               lineMultiValued);
   }
 }
 
+void GraphicsScene::updatePathItemMultiValued (const QPainterPath &pathMultiValued,
+                                               const LineStyle &lineMultiValued)
+{
+  // It looks much better to use a consistent line width
+  int lineWidth = lineMultiValued.width();
+
+  // Draw m_curveMultiValued. If empty then nothing will appear
+  delete m_pathItemMultiValued;
+  m_pathItemMultiValued = this->addPath (pathMultiValued);
+  m_pathItemMultiValued->setPen (QPen (QBrush (QColor (Qt::red)),
+                                       lineWidth,
+                                       Qt::DotLine));
+  m_pathItemMultiValued->setAcceptHoverEvents (true);
+  m_pathItemMultiValued->setToolTip (tr ("Function currently has multiple Y values for one X value. Please adjust nearby points"));
+}
+
 void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator,
-                                           GeometryWindow *geometryWindow)
+                                           GeometryWindow *geometryWindow,
+                                           const Transformation &transformation)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updatePointMembership";
 
@@ -342,5 +376,13 @@ void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator,
 
   // Next pass:
   // 1) Remove points that were just removed from the Document
-  m_graphicsLinesForCurves.lineMembershipPurge (cmdMediator.document().modelCurveStyles());
+  SplineDrawer splineDrawer (transformation);
+  QPainterPath pathMultiValued;
+  LineStyle lineMultiValued;
+  m_graphicsLinesForCurves.lineMembershipPurge (cmdMediator.document().modelCurveStyles(),
+                                                splineDrawer,
+                                                pathMultiValued,
+                                                lineMultiValued);
+  updatePathItemMultiValued (pathMultiValued,
+                             lineMultiValued);
 }

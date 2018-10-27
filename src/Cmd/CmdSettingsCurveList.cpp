@@ -4,7 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "CmdSettingsCurveAddRemove.h"
+#include "CmdSettingsCurveList.h"
 #include "CurveNameList.h"
 #include "Document.h"
 #include "DocumentSerialize.h"
@@ -13,16 +13,16 @@
 #include <QXmlStreamReader>
 #include "Xml.h"
 
-const QString CMD_DESCRIPTION ("Curve add/remove");
+const QString CMD_DESCRIPTION ("Curve list");
 
-CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove(MainWindow &mainWindow,
-                                                     Document &document,
-                                                     const CurveNameList &modelCurves) :
+CmdSettingsCurveList::CmdSettingsCurveList(MainWindow &mainWindow,
+                                           Document &document,
+                                           const CurveNameList &modelCurves) :
   CmdAbstract(mainWindow,
               document,
               CMD_DESCRIPTION)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveList::CmdSettingsCurveList";
 
   m_curvesGraphsBefore = document.curvesGraphs ();
 
@@ -55,15 +55,15 @@ CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove(MainWindow &mainWindow,
   }
 }
 
-CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove (MainWindow &mainWindow,
-                                                      Document &document,
-                                                      const QString &cmdDescription,
-                                                      QXmlStreamReader &reader) :
+CmdSettingsCurveList::CmdSettingsCurveList (MainWindow &mainWindow,
+                                            Document &document,
+                                            const QString &cmdDescription,
+                                            QXmlStreamReader &reader) :
   CmdAbstract (mainWindow,
                document,
                cmdDescription)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveList::CmdSettingsCurveList";
 
   bool success = true;
 
@@ -102,34 +102,34 @@ CmdSettingsCurveAddRemove::CmdSettingsCurveAddRemove (MainWindow &mainWindow,
   }
 }
 
-CmdSettingsCurveAddRemove::~CmdSettingsCurveAddRemove ()
+CmdSettingsCurveList::~CmdSettingsCurveList ()
 {
 }
 
-void CmdSettingsCurveAddRemove::cmdRedo ()
+void CmdSettingsCurveList::cmdRedo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveAddRemove::cmdRedo";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveList::cmdRedo";
 
   saveOrCheckPreCommandDocumentStateHash (document ());
-  mainWindow().updateSettingsCurveAddRemove(m_curvesGraphsAfter);
+  mainWindow().updateSettingsCurveList(m_curvesGraphsAfter);
   mainWindow().updateAfterCommand();
   saveOrCheckPostCommandDocumentStateHash (document ());
 }
 
-void CmdSettingsCurveAddRemove::cmdUndo ()
+void CmdSettingsCurveList::cmdUndo ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveAddRemove::cmdUndo";
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveList::cmdUndo";
 
   saveOrCheckPostCommandDocumentStateHash (document ());
-  mainWindow().updateSettingsCurveAddRemove(m_curvesGraphsBefore);
+  mainWindow().updateSettingsCurveList(m_curvesGraphsBefore);
   mainWindow().updateAfterCommand();
   saveOrCheckPreCommandDocumentStateHash (document ());
 }
 
-void CmdSettingsCurveAddRemove::saveXml (QXmlStreamWriter &writer) const
+void CmdSettingsCurveList::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_ADD_REMOVE);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_LIST);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   m_curvesGraphsBefore.saveXml(writer);
   m_curvesGraphsAfter.saveXml(writer);

@@ -118,7 +118,7 @@ HEADERS  += \
     src/Cmd/CmdSettingsAxesChecker.h \
     src/Cmd/CmdSettingsColorFilter.h \
     src/Cmd/CmdSettingsCoords.h \
-    src/Cmd/CmdSettingsCurveAddRemove.h \
+    src/Cmd/CmdSettingsCurveList.h \
     src/Cmd/CmdSettingsCurveProperties.h \
     src/Cmd/CmdSettingsDigitizeCurve.h \
     src/Cmd/CmdSettingsExportFormat.h \
@@ -214,7 +214,7 @@ HEADERS  += \
     src/Dlg/DlgSettingsAxesChecker.h \
     src/Dlg/DlgSettingsColorFilter.h \
     src/Dlg/DlgSettingsCoords.h \
-    src/Dlg/DlgSettingsCurveAddRemove.h \
+    src/Dlg/DlgSettingsCurveList.h \
     src/Dlg/DlgSettingsCurveProperties.h \
     src/Dlg/DlgSettingsDigitizeCurve.h \
     src/Dlg/DlgSettingsExportFormat.h \
@@ -377,6 +377,7 @@ HEADERS  += \
     src/Settings/SettingsForGraph.h \
     src/Spline/Spline.h \
     src/Spline/SplineCoeff.h \
+    src/Spline/SplineDrawer.h \
     src/Spline/SplinePair.h \
     src/StatusBar/StatusBar.h \
     src/StatusBar/StatusBarMode.h \
@@ -475,7 +476,7 @@ SOURCES += \
     src/Cmd/CmdSettingsAxesChecker.cpp \
     src/Cmd/CmdSettingsColorFilter.cpp \
     src/Cmd/CmdSettingsCoords.cpp \
-    src/Cmd/CmdSettingsCurveAddRemove.cpp \
+    src/Cmd/CmdSettingsCurveList.cpp \
     src/Cmd/CmdSettingsCurveProperties.cpp \
     src/Cmd/CmdSettingsDigitizeCurve.cpp \
     src/Cmd/CmdSettingsExportFormat.cpp \
@@ -514,8 +515,6 @@ SOURCES += \
     src/Coord/CoordUnitsPolarTheta.cpp \
     src/Coord/CoordUnitsTime.cpp \
     src/Correlation/Correlation.cpp \
-    src/Cursor/CursorFactory.cpp \
-    src/Cursor/CursorSize.cpp \
     src/Create/CreateActions.cpp \
     src/Create/CreateCentralWidget.cpp \
     src/Create/CreateCommandStackShadow.cpp \
@@ -533,6 +532,8 @@ SOURCES += \
     src/Create/CreateToolBars.cpp \
     src/Create/CreateTutorial.cpp \
     src/Create/CreateZoomMaps.cpp \
+    src/Cursor/CursorFactory.cpp \
+    src/Cursor/CursorSize.cpp \
     src/Curve/Curve.cpp \
     src/Curve/CurveConnectAs.cpp \
     src/Curve/CurveNameList.cpp \
@@ -568,7 +569,7 @@ SOURCES += \
     src/Dlg/DlgSettingsAxesChecker.cpp \
     src/Dlg/DlgSettingsColorFilter.cpp \
     src/Dlg/DlgSettingsCoords.cpp \
-    src/Dlg/DlgSettingsCurveAddRemove.cpp \
+    src/Dlg/DlgSettingsCurveList.cpp \
     src/Dlg/DlgSettingsCurveProperties.cpp \
     src/Dlg/DlgSettingsDigitizeCurve.cpp \
     src/Dlg/DlgSettingsExportFormat.cpp \
@@ -715,6 +716,7 @@ SOURCES += \
     src/Settings/SettingsForGraph.cpp \
     src/Spline/Spline.cpp \
     src/Spline/SplineCoeff.cpp \
+    src/Spline/SplineDrawer.cpp \
     src/Spline/SplinePair.cpp \
     src/StatusBar/StatusBar.cpp \
     src/Transformation/Transformation.cpp \
@@ -784,6 +786,7 @@ macx-* {
 }
 
 linux-* {
+  QMAKE_CXXFLAGS += -Wunused-parameter
   QT += network
   DEFINES += "NETWORKING"
   HEADERS += src/Load/LoadImageFromUrl.h \
@@ -988,6 +991,12 @@ log4cpp_null {
                src/log4cpp_null/src/RollingFileAppender.cpp
 } else {
     message("log4cpp_null build: no")
+}
+
+contains(DEFINES, NETWORKING) {
+    message("networking build:   yes")
+} else {
+    message("networking build:   no")
 }
 
 # People interested in translating a language can contact the developers for help. 

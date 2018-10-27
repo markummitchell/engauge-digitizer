@@ -123,7 +123,7 @@ void CreateMenus::create(MainWindow &mw)
 
   mw.m_menuSettings = mw.menuBar()->addMenu(tr ("Settings"));
   mw.m_menuSettings->addAction (mw.m_actionSettingsCoords);
-  mw.m_menuSettings->addAction (mw.m_actionSettingsCurveAddRemove);
+  mw.m_menuSettings->addAction (mw.m_actionSettingsCurveList);
   mw.m_menuSettings->addAction (mw.m_actionSettingsCurveProperties);
   mw.m_menuSettings->addAction (mw.m_actionSettingsDigitizeCurve);
   mw.m_menuSettings->addAction (mw.m_actionSettingsExport);
