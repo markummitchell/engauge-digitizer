@@ -1,0 +1,1 @@
+-errorreport ../test/four_axis_point_log_y.xml -regression -reset
