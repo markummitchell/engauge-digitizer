@@ -7,7 +7,7 @@
 #ifndef GRID_LINE_LIMITER_H
 #define GRID_LINE_LIMITER_H
 
-#include <QRectF>
+#include <QPointF>
 
 class Document;
 class DocumentModelCoords;
@@ -48,8 +48,10 @@ public:
 
 private:
 
-  QRectF documentBounds (const Document &document,
-                         const Transformation &transformation) const;
+  void documentBounds (const Document &document,
+                       const Transformation &transformation,
+                       QPointF &boundingRectMin,
+                       QPointF &boundingRectMax) const;
 
 };
 

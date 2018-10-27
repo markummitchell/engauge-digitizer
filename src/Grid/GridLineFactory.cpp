@@ -264,8 +264,9 @@ void GridLineFactory::createTransformAlign (const Transformation &transformation
                                                                                 posXRadiusY0AlignedScreen,
                                                                                 posX0YRadiusAlignedScreen);
 
+  // Use \n rather than endl to prevent compiler warning "nonnull argument t compared to null"
   LOG4CPP_INFO_S ((*mainCat)) << "GridLineFactory::createTransformAlign"
-                              << " transformation=" << QTransformToString (transformation.transformMatrix()).toLatin1().data() << endl
+                              << " transformation=" << QTransformToString (transformation.transformMatrix()).toLatin1().data() << "\n"
                               << " radiusLinearCartesian=" << radiusLinearCartesian
                               << " posXRadiusY0Screen=" << QPointFToString (posXRadiusY0Screen).toLatin1().data()
                               << " posX0YRadiusScreen=" << QPointFToString (posX0YRadiusScreen).toLatin1().data()

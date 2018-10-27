@@ -57,8 +57,10 @@ private:
 
   void annotateAngles(const QFont &defaultFont);
   void annotateRadiusAtOrigin(const QFont &defaultFont);
-  QRectF boundingRectGraph (CmdMediator &cmdMediator,
-                            bool &isEmpty) const;
+  void boundingRectGraph (CmdMediator &cmdMediator,
+                          bool &isEmpty,
+                          QPointF &boundingRectGraphMin,
+                          QPointF &boundingRectGraphMax) const;
   void createDateTime(QGridLayout *layout,
                       int &row);
   void createGroupCoordsType(QGridLayout *layout,

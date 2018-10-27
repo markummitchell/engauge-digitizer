@@ -40,15 +40,21 @@ class GridInitializer
                       double step,
                       int count) const;
 
-  /// Initialize given the boundaries of the graph coordinates. The output is useful for the Checker class
-  DocumentModelGridDisplay initializeWithNarrowCoverage (const QRectF &boundingRectGraph,
+  /// Initialize given the boundaries of the graph coordinates. The output is useful for the Checker class.
+  /// The bounding rectangle is handled as two QPointFs rather one QRectF since QRectF rounds off the
+  /// lower coordinate to zero when there is a large dynamic range (1e-3 to 1e+9) and zeros break log calculations
+  DocumentModelGridDisplay initializeWithNarrowCoverage (const QPointF &boundingRectGraphMin,
+                                                         const QPointF &boundingRectGraphMax,
                                                          const DocumentModelCoords &modelCoords) const;
 
   /// Initialize given the boundaries of the graph coordinates, and then extra processing for polar coordinates:
   /// -# radial range expanded to cover the center (to remove hole at center) to the image corners
   ///    (to guarantee coverage at corners of graph)
   /// -# angular range is expanded to cover the entire circle (so coverage is total for all directions)
-  DocumentModelGridDisplay initializeWithWidePolarCoverage (const QRectF &boundingRectGraph,
+  /// The bounding rectangle is handled as two QPointFs rather one QRectF since QRectF rounds off the
+  /// lower coordinate to zero when there is a large dynamic range (1e-3 to 1e+9) and zeros break log calculations
+  DocumentModelGridDisplay initializeWithWidePolarCoverage (const QPointF &boundingRectGraphMin,
+                                                            const QPointF &boundingRectGraphMax,
                                                             const DocumentModelCoords &modelCoords,
                                                             const Transformation &transformation,
                                                             const QSize &imageSize) const;

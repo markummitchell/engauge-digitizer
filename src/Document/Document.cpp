@@ -411,7 +411,8 @@ void Document::initializeGridDisplay (const Transformation &transformation)
   ENGAUGE_ASSERT (!m_coordSystemContext.modelGridDisplay().stable());
 
   // Get graph coordinate bounds
-  CallbackBoundingRects ftor (transformation);
+  CallbackBoundingRects ftor (m_documentAxesPointsRequired,
+                              transformation);
 
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
                                                                                                      &CallbackBoundingRects::callback);
@@ -420,12 +421,14 @@ void Document::initializeGridDisplay (const Transformation &transformation)
 
   // Initialize. Note that if there are no graph points then these next steps have no effect
   bool isEmpty;
-  QRectF boundingRectGraph =  ftor.boundingRectGraph(isEmpty);
+  QPointF boundingRectGraphMin = ftor.boundingRectGraphMin (isEmpty);
+  QPointF boundingRectGraphMax = ftor.boundingRectGraphMax (isEmpty);
   if (!isEmpty) {
 
     GridInitializer gridInitializer;
 
-    DocumentModelGridDisplay modelGridDisplay = gridInitializer.initializeWithWidePolarCoverage (boundingRectGraph,
+    DocumentModelGridDisplay modelGridDisplay = gridInitializer.initializeWithWidePolarCoverage (boundingRectGraphMin,
+                                                                                                 boundingRectGraphMax,
                                                                                                  modelCoords(),
                                                                                                  transformation,
                                                                                                  m_pixmap.size ());
