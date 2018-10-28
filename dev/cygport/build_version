@@ -65,3 +65,4 @@ echo "  cd $TARGETDIR/inst/usr/bin/"
 echo "  ./engauge-digitizer.exe"
 
 echo "After uploading and testing both 32 and 64 bit releases, release according to https://cygwin.com/packaging-contributors-guide.html#acceptance"
+echo "Remember to send email as text and not text/html so it will not be rejected. In gmail, click on 3 dots at bottom then Plain Text Mode"
