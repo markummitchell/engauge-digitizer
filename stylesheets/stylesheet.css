@@ -379,3 +379,10 @@ footer a:hover {
     top: 0;
     left: 5px;
 }
+
+.child_div {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    float: right;
+}
