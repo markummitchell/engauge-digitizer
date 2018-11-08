@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import os
-from pprint import pprint
+#from pprint import pprint
 import sys
 import xml.etree.ElementTree as etree
 

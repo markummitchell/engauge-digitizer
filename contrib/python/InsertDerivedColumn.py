@@ -12,6 +12,7 @@ from datetime import datetime, timedelta
 import fileinput
 import math
 import numpy as np
+import unicodedata
 
 def is_number(s):
     try:
@@ -21,7 +22,6 @@ def is_number(s):
         return False
  
     try:
-        import unicodedata
         unicodedata.numeric(s)
         return True
     except (TypeError, ValueError):
