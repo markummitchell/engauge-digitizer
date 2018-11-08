@@ -1,8 +1,11 @@
 extraction:
-	cpp:
-		prepare:
-			packages:
-			- libfftw3-dev
-			- libjpeg-dev
-			- liblog4cpp5-dev
-			- libpng12-dev
+  cpp:
+    prepare:
+      packages:
+        - libfftw3-dev
+	- libjpeg-dev
+	- liblog4cpp5-dev
+	- libpng12-dev
+    configure:
+      command:
+      - qmake engauge.pro
