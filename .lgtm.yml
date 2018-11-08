@@ -1,9 +1,5 @@
 extraction:
   cpp:
-    prepare:
-      packages:
-        - qt5-qmake
     configure:
       command:
       - qmake engauge.pro
-	
