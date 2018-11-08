@@ -2,6 +2,8 @@ extraction:
   cpp:
     prepare:
       packages:
+        - qt5-qmake
+        - qtbase5-dev-tools
         - libfftw3-dev
 	- libjpeg-dev
 	- liblog4cpp5-dev
@@ -12,3 +14,4 @@ extraction:
     index:
       build_command:
         - make
+	
