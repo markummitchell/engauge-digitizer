@@ -9,3 +9,6 @@ extraction:
     configure:
       command:
       - qmake engauge.pro
+    index:
+      build_command:
+        - make
