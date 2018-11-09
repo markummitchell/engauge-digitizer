@@ -44,6 +44,7 @@ class CoordSystem : public CoordSystemInterface
 public:
   /// Single constructor
   CoordSystem ();
+  ~CoordSystem ();
 
   /// Constructor for opened Graphs, and error report files. The specified file is opened and read
   CoordSystem (const QString &fileName);

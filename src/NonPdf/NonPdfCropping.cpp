@@ -18,9 +18,21 @@ const int Z_HANDLE = 100; // Over box and background image
 
 NonPdfCropping::NonPdfCropping (QGraphicsScene &scene,
                                 ViewPreview &view) :
-  m_view (view)
+  m_view (view),
+  m_handleTL (0),
+  m_handleTR (0),
+  m_handleBR (0),
+  m_handleBL (0)
 {
   createWidgets (scene);
+}
+
+NonPdfCropping::~NonPdfCropping ()
+{
+  delete m_handleTL;
+  delete m_handleTR;
+  delete m_handleBR;
+  delete m_handleBL;
 }
 
 void NonPdfCropping::createWidgets(QGraphicsScene &scene)

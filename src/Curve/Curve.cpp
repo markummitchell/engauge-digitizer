@@ -130,7 +130,7 @@ Curve &Curve::operator=(const Curve &curve)
   return *this;
 }
 
-void Curve::addPoint (Point point)
+void Curve::addPoint (const Point &point)
 {
   m_points.push_back (point);
 }

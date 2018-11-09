@@ -27,7 +27,15 @@ SplinePair::SplinePair(double x,
 {
 }
 
-SplinePair::SplinePair(const SplinePair&other) :
+SplinePair &SplinePair::operator=(const SplinePair &other)
+{
+  m_x = other.x();
+  m_y = other.y();
+
+  return *this;
+}
+
+SplinePair::SplinePair(const SplinePair &other) :
   m_x (other.x()),
   m_y (other.y())
 {

@@ -53,6 +53,8 @@ DlgSettingsColorFilter::DlgSettingsColorFilter(MainWindow &mainWindow) :
 DlgSettingsColorFilter::~DlgSettingsColorFilter()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsColorFilter::~DlgSettingsColorFilter";
+
+  delete m_filterThread;
 }
 
 void DlgSettingsColorFilter::createControls (QGridLayout *layout, int &row)

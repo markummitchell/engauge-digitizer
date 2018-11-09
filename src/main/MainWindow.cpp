@@ -227,6 +227,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
 
 MainWindow::~MainWindow()
 {
+  delete m_fileCmdScript;
 }
 
 void MainWindow::addDockWindow (QDockWidget *dockWidget,

@@ -21,7 +21,7 @@ CurvesGraphs::CurvesGraphs()
 {
 }
 
-void CurvesGraphs::addGraphCurveAtEnd (Curve curve)
+void CurvesGraphs::addGraphCurveAtEnd (const Curve &curve)
 {
   m_curvesGraphs.push_back (curve);
 }
