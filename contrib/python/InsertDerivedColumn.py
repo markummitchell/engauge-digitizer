@@ -20,7 +20,8 @@ def is_number(s):
         return True
     except ValueError:
         return False
- 
+
+def is_number_unicode(s):    
     try:
         unicodedata.numeric(s)
         return True

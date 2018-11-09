@@ -53,6 +53,8 @@ DlgSettingsAxesChecker::DlgSettingsAxesChecker(MainWindow &mainWindow) :
 DlgSettingsAxesChecker::~DlgSettingsAxesChecker()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::~DlgSettingsAxesChecker";
+
+  delete m_checker;
 }
 
 void DlgSettingsAxesChecker::createControls (QGridLayout *layout,

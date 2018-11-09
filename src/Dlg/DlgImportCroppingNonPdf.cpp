@@ -27,7 +27,8 @@ int DlgImportCroppingNonPdf::MINIMUM_PREVIEW_HEIGHT = 200;
 
 DlgImportCroppingNonPdf::DlgImportCroppingNonPdf(const QString &fileName) :
   m_fileName (fileName),
-  m_pixmap (0)
+  m_pixmap (0),
+  m_nonPdfCropping (0)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingNonPdf::DlgImportCroppingNonPdf";
 
@@ -54,6 +55,8 @@ DlgImportCroppingNonPdf::DlgImportCroppingNonPdf(const QString &fileName) :
 DlgImportCroppingNonPdf::~DlgImportCroppingNonPdf()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingNonPdf::~DlgImportCroppingNonPdf";
+
+  delete m_nonPdfCropping;
 }
 
 void DlgImportCroppingNonPdf::createNonPdfCropping ()

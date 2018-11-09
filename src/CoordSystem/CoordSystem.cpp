@@ -59,6 +59,11 @@ CoordSystem::CoordSystem () :
   }
 }
 
+CoordSystem::~CoordSystem()
+{
+  delete m_curveAxes;
+}
+
 void CoordSystem::addGraphCurveAtEnd (const QString &curveName)
 {
   m_curvesGraphs.addGraphCurveAtEnd  (Curve (curveName,

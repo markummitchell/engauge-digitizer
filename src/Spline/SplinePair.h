@@ -23,8 +23,11 @@ class SplinePair
   SplinePair(double x,
              double y);
 
-  /// Assigment constructor
-  SplinePair(const SplinePair&other);
+  /// Assignment constructor
+  SplinePair &operator=(const SplinePair &other);
+
+  /// Copy constructor
+  SplinePair(const SplinePair &other);
 
   /// Addition operator
   SplinePair operator+(const SplinePair &other) const;

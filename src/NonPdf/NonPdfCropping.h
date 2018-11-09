@@ -25,6 +25,7 @@ public:
   /// Single constructor
   NonPdfCropping(QGraphicsScene &scene,
                  ViewPreview &view);
+  ~NonPdfCropping();
 
   /// Frame rectangle selected by user
   QRectF frameRect () const;

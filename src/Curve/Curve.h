@@ -51,7 +51,7 @@ public:
   Curve &operator=(const Curve &curve);
 
   /// Add Point to this Curve.
-  void addPoint (Point point);
+  void addPoint (const Point &point);
 
   /// Return the color filter.
   ColorFilterSettings colorFilterSettings () const;
