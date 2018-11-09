@@ -27,7 +27,7 @@ class ExportFileAbstractBase
 public:
   /// Single constructor.
   ExportFileAbstractBase();
-  virtual ExportFileAbstractBase ();
+  virtual ~ExportFileAbstractBase ();
   
 protected:
 
