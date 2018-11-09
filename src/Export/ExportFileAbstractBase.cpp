@@ -22,6 +22,10 @@ ExportFileAbstractBase::ExportFileAbstractBase()
 {
 }
 
+ExportFileAbstractBase::~ExportFileAbstractBase()
+{
+}
+
 QStringList ExportFileAbstractBase::curvesToInclude (const DocumentModelExportFormat &modelExportOverride,
                                                      const Document &document,
                                                      const QStringList &curvesGraphsNames,

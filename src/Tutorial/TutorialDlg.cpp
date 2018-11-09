@@ -19,7 +19,9 @@ const int SCENE_HEIGHT = 450;
 
 TutorialDlg::TutorialDlg (MainWindow *mainWindow) :
   QDialog (mainWindow),
-  m_context (0)
+  m_context (0),
+  m_scene (0),
+  m_view (0)
 {
   setWindowTitle ("Engauge Digitizer Tutorial");
 
@@ -34,6 +36,8 @@ TutorialDlg::TutorialDlg (MainWindow *mainWindow) :
 
 TutorialDlg::~TutorialDlg ()
 {
+  delete m_view;
+  delete m_scene;
   delete m_context;
 }
 

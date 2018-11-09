@@ -27,7 +27,8 @@ class ExportFileAbstractBase
 public:
   /// Single constructor.
   ExportFileAbstractBase();
-
+  virtual ExportFileAbstractBase ();
+  
 protected:
 
   /// Identify curves to include in export. The specified DocumentModelExportFormat overrides same data in Document for previewing window
