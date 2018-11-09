@@ -501,7 +501,7 @@ void DlgSettingsColorFilter::updateHistogram()
 
   }
 
-  free (histogramBins);
+  delete[] histogramBins;
 }
 
 void DlgSettingsColorFilter::updatePreview ()
