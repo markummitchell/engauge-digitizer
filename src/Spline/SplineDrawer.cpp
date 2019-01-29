@@ -48,10 +48,9 @@ bool SplineDrawer::segmentIsMultiValued (const Spline &spline,
 {
   ENGAUGE_ASSERT (m_transformation.transformIsDefined());
 
-  if ((0 < segment) &&
-      (segment < numSegments - 1)) {
+  if (segment < numSegments - 1) {
 
-    // Not at very start or very end
+    // Not at very end
     double tI = (double) segment;
     double tIp1 = (double) (segment + 1);
 

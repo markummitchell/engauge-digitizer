@@ -33,6 +33,9 @@ typedef QVector<SplineDrawerOperation> SegmentOperations;
 /// and working in graph coordinates.
 class SplineDrawer
 {
+  // For unit testing
+  friend class TestSplineDrawer;
+  
  public:
   /// Single constructor
   SplineDrawer(const Transformation &transformation);

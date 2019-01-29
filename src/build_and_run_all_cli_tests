@@ -21,6 +21,7 @@ testsAvailable=( \
     TestProjectedPoint \
     TestSegmentFill \
     TestSpline \
+    TestSplineDrawer \
     TestTransformation \
     TestValidators \
     TestZoomTransition)
