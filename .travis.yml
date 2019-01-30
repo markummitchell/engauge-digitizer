@@ -28,8 +28,10 @@ before_install:
    elif [ `uname` = "Darwin" ]; then
      brew update;
      brew info qt;
-     brew install fftw log4cpp qt;
+     brew install fftw log4cpp qt5;
      export QT5BREWHOME="/usr/local/opt/qt";
+     find /usr -name qmake;
+     find /usr -name qcollectiongenerator;
    fi
 
 script:
