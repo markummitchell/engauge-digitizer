@@ -27,11 +27,10 @@ before_install:
      sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb;
    elif [ `uname` = "Darwin" ]; then
      brew update;
-     brew info qt;
+     brew info qt5;
      brew install fftw log4cpp qt5;
      export QT5BREWHOME="/usr/local/opt/qt";
-     find /usr -name qmake;
-     find /usr -name qcollectiongenerator;
+     brew search qcollectiongenerator;
    fi
 
 script:
