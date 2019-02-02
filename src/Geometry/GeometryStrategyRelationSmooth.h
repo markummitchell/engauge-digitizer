@@ -30,7 +30,7 @@ public:
                                   QString &polyArea,
                                   QVector<QString> &x,
                                   QVector<QString> &y,
-                                  QVector<bool> &isSmoothFunctionAmbiguity,
+                                  QVector<bool> &isPotentialExportAmbiguity,
                                   QVector<QString> &distanceGraphForward,
                                   QVector<QString> &distancePercentForward,
                                   QVector<QString> &distanceGraphBackward,

@@ -24,7 +24,7 @@ void GeometryStrategyRelationSmooth::calculateGeometry (const Points &points,
                                                         QString &polyArea,
                                                         QVector<QString> &x,
                                                         QVector<QString> &y,
-                                                        QVector<bool> &isSmoothFunctionAmbiguity,
+                                                        QVector<bool> &isPotentialExportAmbiguity,
                                                         QVector<QString> &distanceGraphForward,
                                                         QVector<QString> &distancePercentForward,
                                                         QVector<QString> &distanceGraphBackward,
@@ -54,10 +54,10 @@ void GeometryStrategyRelationSmooth::calculateGeometry (const Points &points,
           x,
           y);
 
-  loadSmoothAmbiguityVector (x,
+  loadPotentialExportVector (x,
                              y,
                              transformation,
-                             isSmoothFunctionAmbiguity);
+                             isPotentialExportAmbiguity);
 
   // Set header values
   funcArea = "";

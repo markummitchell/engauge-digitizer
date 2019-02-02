@@ -38,7 +38,7 @@ public:
                                   QString &polyArea,
                                   QVector<QString> &x,
                                   QVector<QString> &y,
-                                  QVector<bool> &isSmoothFunctionAmbiguity,
+                                  QVector<bool> &isPotentialExportAmbiguity,
                                   QVector<QString> &distanceGraphForward,
                                   QVector<QString> &distancePercentForward,
                                   QVector<QString> &distanceGraphBackward,
@@ -65,11 +65,11 @@ protected:
                                            QVector<QString> &distanceGraphBackward,
                                            QVector<QString> &distancePercentBackward) const;
 
-  /// Load isSmoothFunctionAmbiguity vector. Default in base class is to load false values since there are no ambiguities
-  virtual void loadSmoothAmbiguityVector (QVector<QString> &x,
+  /// Load isPotentialExportAmbiguity vector. Default in base class is to load false values since there are no ambiguities
+  virtual void loadPotentialExportVector (QVector<QString> &x,
                                           QVector<QString> &y,
                                           const Transformation &transformation,
-                                          QVector<bool> &isSmoothFunctionAmbiguity) const;
+                                          QVector<bool> &isPotentialExportAmbiguity) const;
 
   /// Load x and y coordinate vectors
   void loadXY (const QVector<QPointF> &positionsGraph,

@@ -115,12 +115,12 @@ void GeometryModel::setCurrentPointIdentifier (const QString &pointIdentifier)
                     roles);
 }
 
-void GeometryModel::setSmoothFunctionAmbiguity (const QVector<bool> &isSmoothFunctionAmbiguity)
+void GeometryModel::setPotentialExportAmbiguity (const QVector<bool> &isPotentialExportAmbiguity)
 {
   // Save row numbers with ambiguities
   m_ambiguousRows.clear ();
-  for (int i = 0; i < isSmoothFunctionAmbiguity.size (); i++) {
-    if (isSmoothFunctionAmbiguity.at (i)) {
+  for (int i = 0; i < isPotentialExportAmbiguity.size (); i++) {
+    if (isPotentialExportAmbiguity.at (i)) {
       m_ambiguousRows [i] = true;
     }
   }

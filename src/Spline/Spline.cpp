@@ -169,7 +169,18 @@ SplinePair Spline::findSplinePairForFunctionX (double x,
   double tLow = m_t[0];
   double tHigh = m_t[m_xy.size() - 1];
 
-  // This method implicitly assumes that the x values are monotonically increasing
+  // This method implicitly assumes that the x values are monotonically increasing - except for the
+  // "export raw points" exception right here
+
+  // Subtle stuff here - we first look for exact matches in m_elements. If a match is found, we exit
+  // immediately. This strategy works for "export raw points" option with functions having overlaps,
+  // in which case users expect interpolation to be used (issue #303)
+  for (unsigned int i = 0; i < m_xy.size(); i++) {
+    const SplinePair &sp = m_xy.at (i);
+    if (sp.x() == x) {
+      return sp;
+    }
+  }
 
   // Extrapolation that is performed if x is out of bounds. As a starting point, we assume that the t
   // values and x values behave the same, which is linearly. This assumption works best when user

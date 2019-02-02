@@ -133,13 +133,13 @@ void GeometryStrategyAbstractBase::insertSubintervalsAndLoadDistances (int subin
   }
 }
 
-void GeometryStrategyAbstractBase::loadSmoothAmbiguityVector (QVector<QString> &x,
+void GeometryStrategyAbstractBase::loadPotentialExportVector (QVector<QString> &x,
                                                               QVector<QString> & /* y */,
                                                               const Transformation & /* transformation */,
-                                                              QVector<bool> &isSmoothFunctionAmbiguity) const
+                                                              QVector<bool> &isPotentialExportAmbiguity) const
 {
-  for (unsigned int i = 0; i < x.size(); i++) {
-    isSmoothFunctionAmbiguity.append (false);
+  for (int i = 0; i < x.size(); i++) {
+    isPotentialExportAmbiguity.append (false);
   }
 }
 

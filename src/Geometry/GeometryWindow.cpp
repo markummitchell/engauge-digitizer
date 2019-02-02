@@ -212,7 +212,7 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
 
   QString funcArea, polyArea;
   QVector<QString> x, y, distanceGraphForward, distancePercentForward, distanceGraphBackward, distancePercentBackward;
-  QVector<bool> isSmoothFunctionAmbiguity;
+  QVector<bool> isPotentialExportAmbiguity;
 
   CurveStyle curveStyle = cmdMediator.document().modelCurveStyles().curveStyle (curveSelected);
   m_geometryStrategyContext.calculateGeometry (points,
@@ -225,14 +225,14 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
                                                polyArea,
                                                x,
                                                y,
-                                               isSmoothFunctionAmbiguity,
+                                               isPotentialExportAmbiguity,
                                                distanceGraphForward,
                                                distancePercentForward,
                                                distanceGraphBackward,
                                                distancePercentBackward);
 
-  // Was there an ambiguity
-  bool wasAmbiguity = isSmoothFunctionAmbiguity.contains (true);
+  // Was there a potential export ambiguity
+  bool wasAmbiguity = isPotentialExportAmbiguity.contains (true);
 
   // Output to table
   resizeTable (NUM_HEADER_ROWS + points.count() + (wasAmbiguity ? NUM_LEGEND_ROWS_UNSPANNED : 0));
@@ -243,7 +243,7 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
 
   if (transformation.transformIsDefined()) {
 
-    m_model->setSmoothFunctionAmbiguity (isSmoothFunctionAmbiguity);
+    m_model->setPotentialExportAmbiguity (isPotentialExportAmbiguity);
 
     int row = NUM_HEADER_ROWS;
     int index = 0;

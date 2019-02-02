@@ -27,7 +27,7 @@ public:
   void setCurrentPointIdentifier (const QString  &pointIdentifier);
 
   /// Remember which rows could have ambiguities during export - these will be highlighted
-  void setSmoothFunctionAmbiguity (const QVector<bool> &isSmoothFunctionAmbiguity);
+  void setPotentialExportAmbiguity (const QVector<bool> &isPotentialExportAmbiguity);
 
 private:
 

@@ -29,7 +29,7 @@ void GeometryStrategyFunctionSmooth::calculateGeometry (const Points &points,
                                                         QString &polyArea,
                                                         QVector<QString> &x,
                                                         QVector<QString> &y,
-                                                        QVector<bool> &isSmoothFunctionAmbiguity,
+                                                        QVector<bool> &isPotentialExportAmbiguity,
                                                         QVector<QString> &distanceGraphForward,
                                                         QVector<QString> &distancePercentForward,
                                                         QVector<QString> &distanceGraphBackward,
@@ -62,7 +62,7 @@ void GeometryStrategyFunctionSmooth::calculateGeometry (const Points &points,
   loadSmoothAmbiguityVector (x,
                              y,
                              transformation,
-                             isSmoothFunctionAmbiguity);
+                             isPotentialExportAmbiguity);
 
   // Set header values
   funcArea = QString::number (fArea);
@@ -72,7 +72,7 @@ void GeometryStrategyFunctionSmooth::calculateGeometry (const Points &points,
 void GeometryStrategyFunctionSmooth::loadSmoothAmbiguityVector (QVector<QString> &x,
                                                                 QVector<QString> &y,
                                                                 const Transformation &transformation,
-                                                                QVector<bool> &isSmoothFunctionAmbiguity) const
+                                                                QVector<bool> &isPotentialExportAmbiguity) const
 {
   // There are N-1 segments for N points
   int numSegments = x.size () - 1;
@@ -97,14 +97,15 @@ void GeometryStrategyFunctionSmooth::loadSmoothAmbiguityVector (QVector<QString>
     SplineDrawer sd (transformation);
 
     for (int segment = 0; segment < numSegments; segment++) {
-      isSmoothFunctionAmbiguity.push_back (sd.segmentIsMultiValued (s,
-                                                                    x.size (),
-                                                                    segment));
+      bool isMultiValued = sd.segmentIsMultiValued (s,
+                                                    x.size (),
+                                                    segment);
+      isPotentialExportAmbiguity.push_back (isMultiValued);
     }
   } else {
 
     for (int segment = 0; segment < numSegments; segment++) {
-      isSmoothFunctionAmbiguity.push_back (false);
+      isPotentialExportAmbiguity.push_back (false);
     }
   }
 }
