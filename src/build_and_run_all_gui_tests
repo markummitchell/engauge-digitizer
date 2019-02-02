@@ -81,9 +81,9 @@ do
 		done
 		if cmp --silent .expected .actual
 		then
-		    echo "PASS   : $root $COUNTERSTRING"
+		    echo -e "$(tput setaf 2)PASS$(tput sgr0)   : $root $COUNTERSTRING"
 		else
-		    echo "FAIL   : $root $COUNTERSTRING"
+		    echo -e "$(tput setaf 1)FAIL$(tput sgr0)   : $root $COUNTERSTRING"
 		    diff -C2 .expected .actual
 		fi
 	    else

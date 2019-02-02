@@ -96,7 +96,8 @@ else
 	    echo "         Testing will be stopped"
 	    exit 1
         }
-	../bin/$t
+	# sed is used to add color to PASS and FAIL. 'Using QtTest' lines are dropped
+	../bin/$t | sed "s/PASS   :/$(tput setaf 2)PASS$(tput sgr0)   :/" | sed "s/FAIL   :/$(tput setaf 1)FAIL$(tput sgr0)   :/" | grep -v 'Using QtTest'
 	if [ $selectedCount -ne 1 ]
 	then
             rm engauge_test.pro
