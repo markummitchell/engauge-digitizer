@@ -30,11 +30,16 @@ public:
                                   QString &polyArea,
                                   QVector<QString> &x,
                                   QVector<QString> &y,
+                                  QVector<bool> &isSmoothFunctionAmbiguity,
                                   QVector<QString> &distanceGraphForward,
                                   QVector<QString> &distancePercentForward,
                                   QVector<QString> &distanceGraphBackward,
                                   QVector<QString> &distancePercentBackward) const;
 
+  virtual void loadSmoothAmbiguityVector (QVector<QString> &x,
+                                          QVector<QString> &y,
+                                          const Transformation &transformation,
+                                          QVector<bool> &isSmoothFunctionAmbiguity) const;
 };
 
 #endif // GEOMETRY_STRATEGY_FUNCTION_SMOOTH_H

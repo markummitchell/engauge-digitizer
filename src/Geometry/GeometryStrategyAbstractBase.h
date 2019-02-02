@@ -9,6 +9,7 @@
 
 #include "Points.h"
 #include <QPolygonF>
+#include <QString>
 #include <QVector>
 
 class DocumentModelCoords;
@@ -37,6 +38,7 @@ public:
                                   QString &polyArea,
                                   QVector<QString> &x,
                                   QVector<QString> &y,
+                                  QVector<bool> &isSmoothFunctionAmbiguity,
                                   QVector<QString> &distanceGraphForward,
                                   QVector<QString> &distancePercentForward,
                                   QVector<QString> &distanceGraphBackward,
@@ -62,6 +64,12 @@ protected:
                                            QVector<QString> &distancePercentForward,
                                            QVector<QString> &distanceGraphBackward,
                                            QVector<QString> &distancePercentBackward) const;
+
+  /// Load isSmoothFunctionAmbiguity vector. Default in base class is to load false values since there are no ambiguities
+  virtual void loadSmoothAmbiguityVector (QVector<QString> &x,
+                                          QVector<QString> &y,
+                                          const Transformation &transformation,
+                                          QVector<bool> &isSmoothFunctionAmbiguity) const;
 
   /// Load x and y coordinate vectors
   void loadXY (const QVector<QPointF> &positionsGraph,

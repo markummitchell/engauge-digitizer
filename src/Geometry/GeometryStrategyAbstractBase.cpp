@@ -133,6 +133,16 @@ void GeometryStrategyAbstractBase::insertSubintervalsAndLoadDistances (int subin
   }
 }
 
+void GeometryStrategyAbstractBase::loadSmoothAmbiguityVector (QVector<QString> &x,
+                                                              QVector<QString> & /* y */,
+                                                              const Transformation & /* transformation */,
+                                                              QVector<bool> &isSmoothFunctionAmbiguity) const
+{
+  for (unsigned int i = 0; i < x.size(); i++) {
+    isSmoothFunctionAmbiguity.append (false);
+  }
+}
+
 void GeometryStrategyAbstractBase::loadXY (const QVector<QPointF> &positionsGraph,
                                            const DocumentModelCoords &modelCoords,
                                            const DocumentModelGeneral &modelGeneral,

@@ -11,6 +11,7 @@
 #include "Transformation.h"
 #include <QVector>
 
+class LineStyle;
 class Spline;
 
 enum SplineDrawerOperation {
@@ -41,18 +42,20 @@ class SplineDrawer
   SplineDrawer(const Transformation &transformation);
 
   /// Analyze each segment in the Spline
-  void bindToSpline (int numSegments,
+  void bindToSpline (const LineStyle &lineStyle,
+                     int numSegments,
                      const Spline &spline);
+
+  /// Return true if specified segment is multi-valued, else false
+  bool segmentIsMultiValued (const Spline &spline,
+                             int numSegments,
+                             int segment) const;
 
   /// Indicate if, and how, segment is to be drawn
   SplineDrawerOperation segmentOperation (int segment) const;
 
 private:
   SplineDrawer();
-
-  bool segmentIsMultiValued (const Spline &spline,
-                             int numSegments,
-                             int segment) const;
 
   const Transformation m_transformation;
 

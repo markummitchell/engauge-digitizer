@@ -348,7 +348,8 @@ void GraphicsScene::updatePathItemMultiValued (const QPainterPath &pathMultiValu
                                        lineWidth,
                                        Qt::DotLine));
   m_pathItemMultiValued->setAcceptHoverEvents (true);
-  m_pathItemMultiValued->setToolTip (tr ("Function currently has multiple Y values for one X value. Please adjust nearby points"));
+  m_pathItemMultiValued->setToolTip (tr ("Function currently has multiple Y values for one X value. Please adjust nearby points, "
+                                         "or change the curve type in Curve Properties"));
 }
 
 void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator,

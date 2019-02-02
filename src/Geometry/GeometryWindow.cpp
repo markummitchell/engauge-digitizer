@@ -196,6 +196,8 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GeometryWindow::update";
 
+  const int NUM_LEGEND_ROWS_UNSPANNED = 2; // Match with GeometryModel::NUM_LEGEND_ROWS_UNSPANNED
+
   // Save inputs
   m_modelExport = cmdMediator.document().modelExport();
   m_model->setDelimiter (m_modelExport.delimiter());
@@ -210,6 +212,7 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
 
   QString funcArea, polyArea;
   QVector<QString> x, y, distanceGraphForward, distancePercentForward, distanceGraphBackward, distancePercentBackward;
+  QVector<bool> isSmoothFunctionAmbiguity;
 
   CurveStyle curveStyle = cmdMediator.document().modelCurveStyles().curveStyle (curveSelected);
   m_geometryStrategyContext.calculateGeometry (points,
@@ -222,19 +225,25 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
                                                polyArea,
                                                x,
                                                y,
+                                               isSmoothFunctionAmbiguity,
                                                distanceGraphForward,
                                                distancePercentForward,
                                                distanceGraphBackward,
                                                distancePercentBackward);
 
+  // Was there an ambiguity
+  bool wasAmbiguity = isSmoothFunctionAmbiguity.contains (true);
+
   // Output to table
-  resizeTable (NUM_HEADER_ROWS + points.count());
+  resizeTable (NUM_HEADER_ROWS + points.count() + (wasAmbiguity ? NUM_LEGEND_ROWS_UNSPANNED : 0));
 
   m_model->setItem (HEADER_ROW_NAME, COLUMN_HEADER_VALUE, new QStandardItem (curveSelected));
   m_model->setItem (HEADER_ROW_FUNC_AREA, COLUMN_HEADER_VALUE, new QStandardItem (funcArea));
   m_model->setItem (HEADER_ROW_POLY_AREA, COLUMN_HEADER_VALUE, new QStandardItem (polyArea));
 
   if (transformation.transformIsDefined()) {
+
+    m_model->setSmoothFunctionAmbiguity (isSmoothFunctionAmbiguity);
 
     int row = NUM_HEADER_ROWS;
     int index = 0;
@@ -254,6 +263,14 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
       m_model->setItem (row, COLUMN_BODY_DISTANCE_GRAPH_BACKWARD, new QStandardItem (distanceGraphBackward [index]));
       m_model->setItem (row, COLUMN_BODY_DISTANCE_PERCENT_BACKWARD, new QStandardItem (distancePercentBackward [index]));
       m_model->setItem (row, COLUMN_BODY_POINT_IDENTIFIERS, new QStandardItem (point.identifier()));
+    }
+
+    if (wasAmbiguity) {
+      m_view->setSpan (row, 0, NUM_LEGEND_ROWS_UNSPANNED, NUM_BODY_COLUMNS);
+      m_model->setItem (row, COLUMN_BODY_X,
+                        new QStandardItem (tr ("Highlighted segments may have unexpected values when exported due to overlaps. "
+                                               "Adjust points or change Settings / Curve Properties / Connect As.")));
+      row++;
     }
   }
 
