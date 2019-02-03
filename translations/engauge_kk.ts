@@ -1910,65 +1910,80 @@ When pressed, this button Prints all digitized points and lines for all coordina
 <context>
     <name>DlgEditPointAxis</name>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="64" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="65" />
         <source>Edit Axis Point</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="107" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="109" />
         <source>Graph Coordinates</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="116" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="118" />
         <source>as</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="126" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="128" />
         <source>(</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="134" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="136" />
         <source>Enter the first graph coordinate of the axis point.
 
-For cartesian plots this is X. For polar plots this is the radius R.
+For cartesian plots this is X. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="143" />
         <source>, </source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="151" />
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For polar plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="158" />
         <source>)</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="173" />
-        <source>Number format</source>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="180" />
+        <source>Number of coordinates per axis point:</source>
+        <translation>Әр нүкте бойынша координаттар саны:</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="183" />
+        <source>Three axis points with two coordinates each are normally used. If each axis point has only one known coordinate, then start over with File / Import (Advanced) / 4 Axis Points.</source>
+        <translation>Әдетте екі координаты бар үш осьтік нүкте қолданылады. Егер әрбір ось нүктесінде тек белгілі бір координат болса, онда файл / импорт (жетілдірілген) / 4 ось нүктесімен басталады.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="194" />
+        <source>Number format:</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="187" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="197" />
+        <source>Locale which determines the allowed number formats. This is set by Settings / Main Window.</source>
+        <translation>Рұқсат етілетін сандық пішімдерді анықтайтын жергілікті. Бұл параметрлер / негізгі терезе арқылы орнатылады.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="213" />
         <source>Ok</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="191" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="217" />
         <source>Cancel</source>
         <translation type="unfinished" />
     </message>
@@ -2004,7 +2019,7 @@ Leave this field empty if no value is to be applied to the graph points.
 For cartesian plots this is the X coordinate. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished" />
+        <translation>Графикалық нүктелерге қолданылатын бірінші графикалық координат мәнін енгізіңіз. Егер сызба нүктелеріне ешқандай мән қолданылмаса, осы өрісті бос қалдырыңыз. • Картечный схемалар үшін бұл X координаты. Полярлық учаскелер үшін бұл R. радиусы. Координациялық мәннің күтілетін форматы жергілікті параметр бойынша анықталады. Егер енгізілген мәндер күтілгендей танылмаса, Параметрлер / Негізгі терезеде жергілікті параметрді тексеріңіз ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="123" />
@@ -2020,7 +2035,7 @@ Leave this field empty if no value is to be applied to the graph points.
 For cartesian plots this is the Y coordinate. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished" />
+        <translation>Графикалық нүктелерге қолданылатын екінші графикалық координат мәнін енгізіңіз. Егер сызба нүктелеріне ешқандай мән қолданылмаса, осы өрісті бос қалдырыңыз.Жас карталар үшін бұл Y координаты. Полярлық учаскелер үшін бұл - Theta бұрышы. Координациялық мәннің күтілетін форматы жергілікті параметр бойынша анықталады. Егер енгізілген мәндер күтілгендей танылмаса, Параметрлер / Негізгі терезеде жергілікті параметрді тексеріңіз ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="139" />
@@ -2030,7 +2045,7 @@ The expected format of the coordinate value is determined by the locale setting.
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="156" />
         <source>Number format</source>
-        <translation type="unfinished" />
+        <translation>Сан пішімі</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="170" />
@@ -2053,7 +2068,7 @@ The expected format of the coordinate value is determined by the locale setting.
     <message>
         <location filename="../src/Dlg/DlgEditScale.cpp" line="80" />
         <source>Number format</source>
-        <translation type="unfinished" />
+        <translation>Сан пішімі</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditScale.cpp" line="94" />
@@ -2575,18 +2590,11 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     </message>
 </context>
 <context>
-    <name>DlgSettingsCurveAddRemove</name>
-    <message>
-        <source>Curve List</source>
-        <translation type="vanished">Қисық тізім</translation>
-    </message>
-</context>
-<context>
     <name>DlgSettingsCurveList</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="32" />
         <source>Curve List</source>
-        <translation>Қисық тізім</translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="69" />
@@ -3980,10 +3988,6 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
 </context>
 <context>
     <name>GraphicsScene</name>
-    <message>
-        <source>Function currently has multiple Y values for one X value. Please adjust nearby points</source>
-        <translation type="vanished">Функцияда бір X мәніне бірнеше Y мәндері бар. Жақын маңдағы нүктелерді реттеңіз</translation>
-    </message>
     <message>
         <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>

@@ -2053,73 +2053,82 @@ When pressed, this button Prints all digitized points and lines for all coordina
 <context>
     <name>DlgEditPointAxis</name>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="64" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="65" />
         <source>Edit Axis Point</source>
         <translation>تحرير نقطة المحور</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="107" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="109" />
         <source>Graph Coordinates</source>
         <translation>إحداثيات الرسم البياني</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="116" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="118" />
         <source>as</source>
         <translation>مثل</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="126" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="128" />
         <source>(</source>
         <translation>(</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="134" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="136" />
         <source>Enter the first graph coordinate of the axis point.
 
-For cartesian plots this is X. For polar plots this is the radius R.
+For cartesian plots this is X. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>أدخل إحداثيات الرسم البياني الأولى لنقطة المحور.
+        <translation>أدخل إحداثيات الرسم البياني الأولى لنقطة المحور. بالنسبة للقطعات الديكارتية ، هذا هو X. بالنسبة للقطاعات القطبية ، هذه هي الزاوية theta. يتم تحديد التنسيق المتوقع لقيمة الإحداثيات بواسطة إعداد الإعدادات المحلية. إذا لم يتم التعرف على القيم المكتوبة كما هو متوقع ، فتحقق من إعداد الإعدادات المحلية في الإعدادات / النافذة الرئيسية ...
 
-للقطعات الديكارتية هذا هو X. بالنسبة للقطعتين القطبيتين هذا هو نصف القطر R.
-
-يتم تحديد التنسيق المتوقع لقيمة الإحداثيات بواسطة إعداد الإعدادات المحلية. إذا لم يتم التعرف على القيم المكتوبة كما هو متوقع ، فتحقق من إعداد الإعدادات المحلية في الإعدادات / النافذة الرئيسية ...</translation>
+</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="143" />
         <source>, </source>
         <translation>, </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="151" />
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For polar plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>أدخل إحداثيات الرسم البياني الثانية لنقطة المحور.
-
-بالنسبة للاراضي الديكارتية هذا هو Y. بالنسبة للقطعة الارضية هذه هي الزاوية Theta.
-
-يتم تحديد التنسيق المتوقع لقيمة الإحداثيات بواسطة إعداد الإعدادات المحلية. إذا لم يتم التعرف على القيم المكتوبة كما هو متوقع ، فتحقق من إعداد الإعدادات المحلية في الإعدادات / النافذة الرئيسية ...</translation>
+        <translation>قم بإدخال إحداثيات الرسم البياني الثانية لنقطة المحور. بالنسبة إلى المؤامرات الديكارتية ، هذا هو Y. بالنسبة إلى المؤامرات القطبية ، يكون هذا هو نصف القطر R. يتم تحديد التنسيق المتوقع لقيمة الإحداثيات بواسطة إعداد الإعدادات المحلية. إذا لم يتم التعرف على القيم المكتوبة كما هو متوقع ، فتحقق من إعداد الإعدادات المحلية في الإعدادات / النافذة الرئيسية ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="158" />
         <source>)</source>
         <translation>)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="173" />
-        <source>Number format</source>
-        <translation>تنسيق الرقم</translation>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="180" />
+        <source>Number of coordinates per axis point:</source>
+        <translation>عدد الإحداثيات لكل نقطة محور:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="187" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="183" />
+        <source>Three axis points with two coordinates each are normally used. If each axis point has only one known coordinate, then start over with File / Import (Advanced) / 4 Axis Points.</source>
+        <translation>يتم استخدام ثلاث محاور مع إحداثيات كل منها بشكل طبيعي. إذا كانت كل نقطة محور تحتوي على إحداثي واحد معروف فقط ، ابدأ من جديد بالملفات / الاستيراد (متقدم) / 4 نقاط المحور.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="194" />
+        <source>Number format:</source>
+        <translation>تنسيق الرقم:</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="197" />
+        <source>Locale which determines the allowed number formats. This is set by Settings / Main Window.</source>
+        <translation>الإعدادات المحلية التي تحدد تنسيقات الأرقام المسموح بها. يتم تعيين هذا من خلال الإعدادات / النافذة الرئيسية.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="213" />
         <source>Ok</source>
         <translation>موافق</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="191" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="217" />
         <source>Cancel</source>
         <translation>إلغاء</translation>
     </message>
@@ -2792,79 +2801,6 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     </message>
 </context>
 <context>
-    <name>DlgSettingsCurveAddRemove</name>
-    <message>
-        <source>Curve List</source>
-        <translation type="vanished">قائمة المنحنى</translation>
-    </message>
-    <message>
-        <source>Add...</source>
-        <translation type="vanished">إضافة ...</translation>
-    </message>
-    <message>
-        <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
-
-Every curve name must be unique</source>
-        <translation type="vanished">يضيف منحنى جديد إلى قائمة المنحنى. يمكن تحرير اسم المنحنى في قائمة اسم المنحنى.
-
-يجب أن يكون كل اسم منحنى فريدًا</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="vanished">إزالة</translation>
-    </message>
-    <message>
-        <source>Removes the currently selected curve from the curve list.
-
-There must always be at least one curve</source>
-        <translation type="vanished">يزيل المنحنى المحدد حاليًا من قائمة المنحنى. يجب أن يكون هناك دائمًا منحنى واحد على الأقل</translation>
-    </message>
-    <message>
-        <source>Curve Names</source>
-        <translation type="vanished">أسماء المنحنى</translation>
-    </message>
-    <message>
-        <source>List of the curves belonging to this document.
-
-Click on a curve name to edit it. Each curve name must be unique.
-
-Reorder curves by dragging them around.</source>
-        <translation type="vanished">قائمة المنحنيات التي تنتمي إلى هذا المستند. انقر فوق اسم منحنى لتحريره. يجب أن يكون كل اسم منحنى فريدًا. منحنيات إعادة التوجيه عن طريق سحبها حولها.</translation>
-    </message>
-    <message>
-        <source>Save As Default</source>
-        <translation type="vanished">إحفظ كافتراضي</translation>
-    </message>
-    <message>
-        <source>Save the curve names for use as defaults for future graph curves.</source>
-        <translation type="vanished">احفظ أسماء المنحنى لاستخدامها كإعدادات افتراضية لمنحنيات الرسم البياني المستقبلية.</translation>
-    </message>
-    <message>
-        <source>Reset Default</source>
-        <translation type="vanished">اعادة التشغيل الافتراضي</translation>
-    </message>
-    <message>
-        <source>Reset the defaults for future graph curves to the original settings.</source>
-        <translation type="vanished">إعادة تعيين الإعدادات الافتراضية لمنحنيات الرسم البياني المستقبلية إلى الإعدادات الأصلية.</translation>
-    </message>
-    <message>
-        <source>Removing this curve will also remove</source>
-        <translation type="vanished">ستزيل إزالة هذا المنحنى أيضًا</translation>
-    </message>
-    <message>
-        <source>points. Continue?</source>
-        <translation type="vanished">نقاط. استمر؟</translation>
-    </message>
-    <message>
-        <source>Removing these curves will also remove</source>
-        <translation type="vanished">إزالة هذه المنحنيات سيزيل أيضا</translation>
-    </message>
-    <message>
-        <source>Curves With Points</source>
-        <translation type="vanished">منحنيات بالنقاط</translation>
-    </message>
-</context>
-<context>
     <name>DlgSettingsCurveList</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="32" />
@@ -3008,30 +2944,6 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128" />
         <source>Connect as</source>
         <translation>الاتصال ك</translation>
-    </message>
-    <message>
-        <source>Select rule for connecting points with lines.
-
-If the curve is connected as a single-valued function then the points are ordered by increasing value of the independent variable.
-
-If the curve is connected as a closed contour, then the points are ordered by age, except for points placed along an existing line. Any point placed on top of any existing line is inserted between the two endpoints of that line - as if its age was between the ages of the two endpoints.
-
-Lines are drawn between successively ordered points.
-
-Straight curves are drawn with straight lines between successive points. Smooth curves are drawn with smooth lines between successive points.
-
-This applies only to graph curves. No lines are ever drawn between axis points.</source>
-        <translation type="vanished">حدد القاعدة لتوصيل النقاط مع الخطوط.
-
-إذا كان المنحنى متصلاً كدالة ذات قيمة واحدة ، يتم ترتيب النقاط بزيادة قيمة المتغير المستقل.
-
-إذا كان المنحنى متصلاً ككفاف مغلق ، يتم ترتيب النقاط حسب العمر ، باستثناء النقاط الموضوعة على طول خط موجود. يتم إدراج أي نقطة وضعت فوق أي خط موجود بين نقطتي النهاية لهذا الخط - كما لو كان عمره بين أعمار نقطتي النهاية.
-
-يتم رسم الخطوط بين النقاط المطلوبة على التوالي.
-
-يتم رسم المنحنيات المستقيمة بخطوط مستقيمة بين النقاط المتتالية. يتم رسم المنحنيات السلسة مع خطوط ناعمة بين النقاط المتتالية.
-
-هذا ينطبق فقط على منحنيات الرسم البياني. لا يتم رسم أي خطوط بين نقاط المحور.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136" />
@@ -4459,10 +4371,6 @@ Y = Y إحداثيات كل نقطة
 </context>
 <context>
     <name>GraphicsScene</name>
-    <message>
-        <source>Function currently has multiple Y values for one X value. Please adjust nearby points</source>
-        <translation type="vanished">تحتوي الدالة حاليًا على قيم Y متعددة لقيمة X واحدة. يرجى ضبط النقاط القريبة</translation>
-    </message>
     <message>
         <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>

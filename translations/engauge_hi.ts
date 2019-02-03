@@ -1906,65 +1906,80 @@ When pressed, this button Prints all digitized points and lines for all coordina
 <context>
     <name>DlgEditPointAxis</name>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="64" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="65" />
         <source>Edit Axis Point</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="107" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="109" />
         <source>Graph Coordinates</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="116" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="118" />
         <source>as</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="126" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="128" />
         <source>(</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="134" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="136" />
         <source>Enter the first graph coordinate of the axis point.
 
-For cartesian plots this is X. For polar plots this is the radius R.
+For cartesian plots this is X. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished" />
+        <translation>अक्ष बिंदु का पहला ग्राफ समन्वय दर्ज करें। esकार कार्टेसियन भूखंडों के लिए यह एक्स है। ध्रुवीय भूखंडों के लिए यह कोण थीटा है। समन्वय मूल्य का अपेक्षित प्रारूप स्थानीय सेटिंग से निर्धारित होता है। यदि टाइप किए गए मान अपेक्षित के रूप में मान्यता प्राप्त नहीं हैं, तो सेटिंग / मुख्य विंडो में स्थानीय सेटिंग की जांच करें ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="143" />
         <source>, </source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="151" />
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For polar plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished" />
+        <translation>अक्ष बिंदु के दूसरे ग्राफ कोऑर्डिनेट करें। फ़ोर कार्टेसियन प्लॉट यह Y है। ध्रुवीय भूखंडों के लिए यह त्रिज्या R है। समन्वय मूल्य का अपेक्षित प्रारूप स्थानीय सेटिंग द्वारा निर्धारित किया जाता है। यदि टाइप किए गए मान अपेक्षित के रूप में मान्यता प्राप्त नहीं हैं, तो सेटिंग / मुख्य विंडो में स्थानीय सेटिंग की जांच करें ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="158" />
         <source>)</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="173" />
-        <source>Number format</source>
-        <translation type="unfinished" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="180" />
+        <source>Number of coordinates per axis point:</source>
+        <translation>अक्ष बिंदु पर निर्देशांक की संख्या:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="187" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="183" />
+        <source>Three axis points with two coordinates each are normally used. If each axis point has only one known coordinate, then start over with File / Import (Advanced) / 4 Axis Points.</source>
+        <translation>दो निर्देशांक वाले तीन अक्ष बिंदु सामान्य रूप से उपयोग किए जाते हैं। यदि प्रत्येक अक्ष बिंदु में केवल एक ज्ञात समन्वय है, तो फ़ाइल / आयात (उन्नत) / 4 अक्ष बिंदुओं के साथ शुरू करें।</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="194" />
+        <source>Number format:</source>
+        <translation>संख्या स्वरूप:</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="197" />
+        <source>Locale which determines the allowed number formats. This is set by Settings / Main Window.</source>
+        <translation>लोकेल जो अनुमत संख्या स्वरूपों को निर्धारित करता है। यह सेटिंग्स / मुख्य विंडो द्वारा निर्धारित किया गया है।</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="213" />
         <source>Ok</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="191" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="217" />
         <source>Cancel</source>
         <translation type="unfinished" />
     </message>
@@ -2571,18 +2586,11 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     </message>
 </context>
 <context>
-    <name>DlgSettingsCurveAddRemove</name>
-    <message>
-        <source>Curve List</source>
-        <translation type="vanished">वक्र सूची</translation>
-    </message>
-</context>
-<context>
     <name>DlgSettingsCurveList</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="32" />
         <source>Curve List</source>
-        <translation>वक्र सूची</translation>
+        <translation type="unfinished" />
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="69" />
@@ -3976,10 +3984,6 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
 </context>
 <context>
     <name>GraphicsScene</name>
-    <message>
-        <source>Function currently has multiple Y values for one X value. Please adjust nearby points</source>
-        <translation type="vanished">फ़ंक्शन में वर्तमान में एक एक्स मान के लिए एकाधिक वाई मान हैं। कृपया आस-पास के बिंदु समायोजित करें</translation>
-    </message>
     <message>
         <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>

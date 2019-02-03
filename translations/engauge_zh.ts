@@ -1916,65 +1916,80 @@ When pressed, this button Prints all digitized points and lines for all coordina
 <context>
     <name>DlgEditPointAxis</name>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="64" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="65" />
         <source>Edit Axis Point</source>
         <translation>编辑坐标轴的点</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="107" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="109" />
         <source>Graph Coordinates</source>
         <translation>图的坐标系</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="116" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="118" />
         <source>as</source>
         <translation>作为</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="126" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="128" />
         <source>(</source>
         <translation>(</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="134" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="136" />
         <source>Enter the first graph coordinate of the axis point.
 
-For cartesian plots this is X. For polar plots this is the radius R.
+For cartesian plots this is X. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>输入轴点的第一个图坐标。对于笛卡尔图，这是X.对于极坐标图，这是半径R.坐标值的预期格式由区域设置确定。如果键入的值未按预期识别，请检查设置/主窗口中的区域设置...</translation>
+        <translation>輸入軸點的第一個圖形坐標。對於笛卡爾圖，這是X.對於極坐標圖，這是角度θ。坐標值的預期格式由區域設置確定。如果未按預期識別鍵入的值，請檢查“設置/主窗口”中的區域設置...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="143" />
         <source>, </source>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="151" />
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For polar plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>输入轴点的第二个坐标图。对于笛卡尔坐标图，这是Y.对于极坐标图，这是角度θ。坐标值的预期格式由区域设置决定。如果键入的值未按预期识别，请检查设置/主窗口中的区域设置...</translation>
+        <translation>輸入軸點的第二個圖形坐標。對於笛卡爾圖，這是Y.對於極坐標圖，這是半徑R.坐標值的預期格式由區域設置決定。如果未按預期識別鍵入的值，請檢查“設置/主窗口”中的區域設置...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="158" />
         <source>)</source>
         <translation>)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="173" />
-        <source>Number format</source>
-        <translation>数字格式</translation>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="180" />
+        <source>Number of coordinates per axis point:</source>
+        <translation>每個軸點的坐標數：</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="187" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="183" />
+        <source>Three axis points with two coordinates each are normally used. If each axis point has only one known coordinate, then start over with File / Import (Advanced) / 4 Axis Points.</source>
+        <translation>通常使用具有兩個坐標的三個軸點。如果每個軸點只有一個已知坐標，則從文件/導入（高級）/ 4軸點重新開始。</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="194" />
+        <source>Number format:</source>
+        <translation>數字格式：</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="197" />
+        <source>Locale which determines the allowed number formats. This is set by Settings / Main Window.</source>
+        <translation>確定允許的數字格式的區域設置。這由設置/主窗口設置。</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="213" />
         <source>Ok</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="191" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="217" />
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -2586,77 +2601,6 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     </message>
 </context>
 <context>
-    <name>DlgSettingsCurveAddRemove</name>
-    <message>
-        <source>Curve List</source>
-        <translation type="vanished">曲線列表</translation>
-    </message>
-    <message>
-        <source>Add...</source>
-        <translation type="vanished">加...</translation>
-    </message>
-    <message>
-        <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
-
-Every curve name must be unique</source>
-        <translation type="vanished">在曲線列表中添加新曲線。可以在曲線名稱列表中編輯曲線名稱。每條曲線名稱必須是唯一的</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="vanished">去掉</translation>
-    </message>
-    <message>
-        <source>Removes the currently selected curve from the curve list.
-
-There must always be at least one curve</source>
-        <translation type="vanished">從曲線列表中刪除當前選定的曲線。必須始終至少有一條曲線</translation>
-    </message>
-    <message>
-        <source>Curve Names</source>
-        <translation type="vanished">曲線名稱</translation>
-    </message>
-    <message>
-        <source>List of the curves belonging to this document.
-
-Click on a curve name to edit it. Each curve name must be unique.
-
-Reorder curves by dragging them around.</source>
-        <translation type="vanished">屬於此文檔的曲線列表。單擊曲線名稱進行編輯。每個曲線名稱必須是唯一的。通過拖動它們來重新排列曲線。</translation>
-    </message>
-    <message>
-        <source>Save As Default</source>
-        <translation type="vanished">保存为默认</translation>
-    </message>
-    <message>
-        <source>Save the curve names for use as defaults for future graph curves.</source>
-        <translation type="vanished">保存曲線名稱以用作將來圖形曲線的默認值。</translation>
-    </message>
-    <message>
-        <source>Reset Default</source>
-        <translation type="vanished">重置默認值</translation>
-    </message>
-    <message>
-        <source>Reset the defaults for future graph curves to the original settings.</source>
-        <translation type="vanished">將未來圖形曲線的默認值重置為原始設置。</translation>
-    </message>
-    <message>
-        <source>Removing this curve will also remove</source>
-        <translation type="vanished">刪除此曲線也將刪除</translation>
-    </message>
-    <message>
-        <source>points. Continue?</source>
-        <translation type="vanished">點。繼續？</translation>
-    </message>
-    <message>
-        <source>Removing these curves will also remove</source>
-        <translation type="vanished">刪除這些曲線也將刪除</translation>
-    </message>
-    <message>
-        <source>Curves With Points</source>
-        <translation type="vanished">曲線與點</translation>
-    </message>
-</context>
-<context>
     <name>DlgSettingsCurveList</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="32" />
@@ -2794,20 +2738,6 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128" />
         <source>Connect as</source>
         <translation>连接为</translation>
-    </message>
-    <message>
-        <source>Select rule for connecting points with lines.
-
-If the curve is connected as a single-valued function then the points are ordered by increasing value of the independent variable.
-
-If the curve is connected as a closed contour, then the points are ordered by age, except for points placed along an existing line. Any point placed on top of any existing line is inserted between the two endpoints of that line - as if its age was between the ages of the two endpoints.
-
-Lines are drawn between successively ordered points.
-
-Straight curves are drawn with straight lines between successive points. Smooth curves are drawn with smooth lines between successive points.
-
-This applies only to graph curves. No lines are ever drawn between axis points.</source>
-        <translation type="vanished">选择用直线连接点的规则。如果曲线连接为单值函数，则通过增加自变量的值来对点进行排序。如果曲线连接为闭合轮廓，则点是按照年龄排序，除了沿现有线放置的点数外。在任何现有线上放置的任何点都插入该线的两个端点之间，就好像它的年龄介于两个端点的年龄之间一样。在连续排序的点之间绘制线。直线绘制直线连续点之间的连线。平滑曲线在连续点之间用平滑线绘制。这仅适用于图形曲线。轴点之间不会画线。</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136" />
@@ -4071,10 +4001,6 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
 </context>
 <context>
     <name>GraphicsScene</name>
-    <message>
-        <source>Function currently has multiple Y values for one X value. Please adjust nearby points</source>
-        <translation type="vanished">函數當前具有一個X值的多個Y值。請調整附近的積分</translation>
-    </message>
     <message>
         <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>

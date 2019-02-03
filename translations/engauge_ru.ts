@@ -2023,71 +2023,82 @@ When pressed, this button Prints all digitized points and lines for all coordina
 <context>
     <name>DlgEditPointAxis</name>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="64" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="65" />
         <source>Edit Axis Point</source>
         <translation>Изменить ось</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="107" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="109" />
         <source>Graph Coordinates</source>
         <translation>Координаты Графика</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="116" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="118" />
         <source>as</source>
         <translation>как</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="126" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="128" />
         <source>(</source>
         <translation>(</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="134" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="136" />
         <source>Enter the first graph coordinate of the axis point.
 
-For cartesian plots this is X. For polar plots this is the radius R.
+For cartesian plots this is X. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>Введите первую координату опорной точки.
-
-Для декартовой системы координат это X. Для полярной - это радиус R.
-
-Ожидаемый формат значений координат определяется текущими настройками. Если введенное значение не принято как ожидаемое, проверьте текущие настройки в Настройки/ Главное Окно... </translation>
+        <translation>Введите первую координату графика точки оси. Для декартовых графиков это X. Для полярных графиков это угол Theta. Если введенные значения не распознаются должным образом, проверьте настройку языка в меню «Настройки» / «Главное окно» ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="143" />
         <source>, </source>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="151" />
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For polar plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>Введите вторую координату опорной точки.
-Для декартовой системы координат это Y. Для полярной - это угол Тэтта.
-Ожидаемый формат значений координат определяется текущими настройками. Если введенное значение не принято как ожидаемое, проверьте текущие настройки в Настройки/ Главное Окно...</translation>
+        <translation>Введите координату второго графика точки оси. Для декартовых графиков это Y. Для полярных графиков это радиус R. Если введенные значения не распознаются должным образом, проверьте настройку языка в меню «Настройки» / «Главное окно» ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="158" />
         <source>)</source>
         <translation>)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="173" />
-        <source>Number format</source>
-        <translation>Формат номера</translation>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="180" />
+        <source>Number of coordinates per axis point:</source>
+        <translation>Количество координат на точку оси:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="187" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="183" />
+        <source>Three axis points with two coordinates each are normally used. If each axis point has only one known coordinate, then start over with File / Import (Advanced) / 4 Axis Points.</source>
+        <translation>Обычно используются три оси с двумя координатами. Если каждая точка оси имеет только одну известную координату, то начните заново с файла / импорта (расширенный) / 4 точки оси.
+
+Obychno ispol'zuyutsya tri osi s </translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="194" />
+        <source>Number format:</source>
+        <translation>Числовой формат:</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="197" />
+        <source>Locale which determines the allowed number formats. This is set by Settings / Main Window.</source>
+        <translation>Локаль, которая определяет допустимые форматы чисел. Это устанавливается в меню «Настройки» / «Главное окно».</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="213" />
         <source>Ok</source>
         <translation>Ок</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="191" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="217" />
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -2731,77 +2742,6 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     </message>
 </context>
 <context>
-    <name>DlgSettingsCurveAddRemove</name>
-    <message>
-        <source>Curve List</source>
-        <translation type="vanished">Список кривых</translation>
-    </message>
-    <message>
-        <source>Add...</source>
-        <translation type="vanished">Добавлять...</translation>
-    </message>
-    <message>
-        <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
-
-Every curve name must be unique</source>
-        <translation type="vanished">Добавляет новую кривую в список кривых. Имя кривой можно редактировать в списке имен кривой. Каждое имя кривой должно быть уникальным</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="vanished">Удалить</translation>
-    </message>
-    <message>
-        <source>Removes the currently selected curve from the curve list.
-
-There must always be at least one curve</source>
-        <translation type="vanished">Удаляет текущую выбранную кривую из списка кривых. Всегда должна быть хотя бы одна кривая</translation>
-    </message>
-    <message>
-        <source>Curve Names</source>
-        <translation type="vanished">Имена кривых</translation>
-    </message>
-    <message>
-        <source>List of the curves belonging to this document.
-
-Click on a curve name to edit it. Each curve name must be unique.
-
-Reorder curves by dragging them around.</source>
-        <translation type="vanished">Список кривых, принадлежащих этому документу. LickНажмите на имя кривой, чтобы отредактировать его Каждое имя кривой должно быть уникальным. Закажите кривые, перетаскивая их.</translation>
-    </message>
-    <message>
-        <source>Save As Default</source>
-        <translation type="vanished">Сохранить как "По умолчанию"</translation>
-    </message>
-    <message>
-        <source>Save the curve names for use as defaults for future graph curves.</source>
-        <translation type="vanished">Сохраните имена кривых для использования в качестве значений по умолчанию для будущих кривых графика.</translation>
-    </message>
-    <message>
-        <source>Reset Default</source>
-        <translation type="vanished">Сбросить по умолчанию</translation>
-    </message>
-    <message>
-        <source>Reset the defaults for future graph curves to the original settings.</source>
-        <translation type="vanished">Сбросьте настройки по умолчанию для будущих кривых графика к исходным настройкам.</translation>
-    </message>
-    <message>
-        <source>Removing this curve will also remove</source>
-        <translation type="vanished">Удаление этой кривой также удалит</translation>
-    </message>
-    <message>
-        <source>points. Continue?</source>
-        <translation type="vanished">точки. Продолжить?</translation>
-    </message>
-    <message>
-        <source>Removing these curves will also remove</source>
-        <translation type="vanished">Удаление этих кривых также удалит</translation>
-    </message>
-    <message>
-        <source>Curves With Points</source>
-        <translation type="vanished">Кривые с точками</translation>
-    </message>
-</context>
-<context>
     <name>DlgSettingsCurveList</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="32" />
@@ -2941,25 +2881,6 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128" />
         <source>Connect as</source>
         <translation>Соединять как</translation>
-    </message>
-    <message>
-        <source>Select rule for connecting points with lines.
-
-If the curve is connected as a single-valued function then the points are ordered by increasing value of the independent variable.
-
-If the curve is connected as a closed contour, then the points are ordered by age, except for points placed along an existing line. Any point placed on top of any existing line is inserted between the two endpoints of that line - as if its age was between the ages of the two endpoints.
-
-Lines are drawn between successively ordered points.
-
-Straight curves are drawn with straight lines between successive points. Smooth curves are drawn with smooth lines between successive points.
-
-This applies only to graph curves. No lines are ever drawn between axis points.</source>
-        <translation type="vanished">Выбрать правило соединения точек линиями.
-Если кривые соединены как функции одного переменного, то точки будут соединятся в порядке возрастания значения независимой переменной.
-Если кривая соединена как замкнутый контур, то точки будут соединятся по порядку создания, за исключением точек расположенных вдоль уже существующей линии. Любая точка размещенная на уже существующей линии будет добавленна в промежуток между двумя концами этой линии так как будто она была созданна в промежутке времени между временами создания этих концов.
-Линии прорисовываются между последовательно упорядоченными точками.
-Прямые кривые отрисовываются прямыми линиями соединяющими последовательно упорядоченные точки. Сглаженные кривые отрисовываются сглаженными линиями соединяющими последовательно упорядоченные точки. 
-Применяется только к графикам кривых. Линии между опорными точками осей не рисуются.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136" />
@@ -4292,10 +4213,6 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
 </context>
 <context>
     <name>GraphicsScene</name>
-    <message>
-        <source>Function currently has multiple Y values for one X value. Please adjust nearby points</source>
-        <translation type="vanished">Функция в настоящее время имеет несколько значений Y для одного значения X. Отрегулируйте близлежащие точки</translation>
-    </message>
     <message>
         <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>

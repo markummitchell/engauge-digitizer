@@ -2018,73 +2018,80 @@ Po stisknutí tohoto tlačítka vytiskne všechny digitalizované body a čáry 
 <context>
     <name>DlgEditPointAxis</name>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="64" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="65" />
         <source>Edit Axis Point</source>
         <translation>Upravit osový bod</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="107" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="109" />
         <source>Graph Coordinates</source>
         <translation>Souřadnice grafu</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="116" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="118" />
         <source>as</source>
         <translation>jako</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="126" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="128" />
         <source>(</source>
         <translation>(</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="134" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="136" />
         <source>Enter the first graph coordinate of the axis point.
 
-For cartesian plots this is X. For polar plots this is the radius R.
+For cartesian plots this is X. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>Zadejte první souřadnici osového bodu. 
-
-Pro kartézský graf jde o hodnotu X, pro polární jde o rádius R.
-
-Očekávaný formát souřadnice je odvozen od národnostního nastavení. Pokud hodnota není rozpoznána, zkontrolujte národností nastavení v Nastavení / Hlavní okno...</translation>
+        <translation>Zadejte první souřadnici grafu bodu osy. Pro karteziánské grafy je to X. Pro polární grafy je to úhel theta. Očekávaný formát souřadnicové hodnoty je určen nastavením místní hodnoty. Pokud nejsou zadané hodnoty rozpoznány podle očekávání, zkontrolujte nastavení místního nastavení v okně Nastavení / Hlavní okno ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="143" />
         <source>, </source>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="151" />
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For polar plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>Zadejte druhou souřadnici osového bodu.
-
-Pro kartézský graf jde o hodnotu y, pro polární jde o úhel Theta.
-
-Očekávaný formát souřadnice je odvozen od národnostního nastavení. Pokud hodnota není rozpoznána, zkontrolujte národností nastavení v Nastavení / Hlavní okno...</translation>
+        <translation>Zadejte druhou souřadnici grafu bodu osy. • Pro karteziánské grafy je to Y. Pro polární grafy je to poloměr R. • Očekávaný formát souřadné hodnoty je určen nastavením lokalizace. Pokud nejsou zadané hodnoty rozpoznány podle očekávání, zkontrolujte nastavení místního nastavení v okně Nastavení / Hlavní okno ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="158" />
         <source>)</source>
         <translation>)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="173" />
-        <source>Number format</source>
-        <translation>Formát čísla</translation>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="180" />
+        <source>Number of coordinates per axis point:</source>
+        <translation>Počet souřadnic na bod osy:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="187" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="183" />
+        <source>Three axis points with two coordinates each are normally used. If each axis point has only one known coordinate, then start over with File / Import (Advanced) / 4 Axis Points.</source>
+        <translation>Tři osové body se dvěma souřadnicemi se používají obvykle. Pokud má každý bod osy pouze jednu známou souřadnici, začněte znovu se souborem File / Import (Advanced) / 4 Axis Points.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="194" />
+        <source>Number format:</source>
+        <translation>Formát čísel:</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="197" />
+        <source>Locale which determines the allowed number formats. This is set by Settings / Main Window.</source>
+        <translation>Lokalita, která určuje povolené číselné formáty. To je nastaveno v Nastavení / Hlavní okno.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="213" />
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="191" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="217" />
         <source>Cancel</source>
         <translation>Zrušit</translation>
     </message>
@@ -2755,77 +2762,6 @@ Formát obrácení používá jediné reálné číslo. Jedna úplná revoluce j
     </message>
 </context>
 <context>
-    <name>DlgSettingsCurveAddRemove</name>
-    <message>
-        <source>Curve List</source>
-        <translation type="vanished">Seznam krivek</translation>
-    </message>
-    <message>
-        <source>Add...</source>
-        <translation type="vanished">Přidat...</translation>
-    </message>
-    <message>
-        <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
-
-Every curve name must be unique</source>
-        <translation type="vanished">Přidá novou křivku do seznamu křivek. Název křivky lze upravit v seznamu názvů křivek. Každé jméno křivky musí být jedinečné</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="vanished">Odstranit</translation>
-    </message>
-    <message>
-        <source>Removes the currently selected curve from the curve list.
-
-There must always be at least one curve</source>
-        <translation type="vanished">Odstraní aktuálně vybranou křivku ze seznamu křivek. Vždy musí existovat alespoň jedna křivka</translation>
-    </message>
-    <message>
-        <source>Curve Names</source>
-        <translation type="vanished">Názvy křivek</translation>
-    </message>
-    <message>
-        <source>List of the curves belonging to this document.
-
-Click on a curve name to edit it. Each curve name must be unique.
-
-Reorder curves by dragging them around.</source>
-        <translation type="vanished">Seznam křivek tohoto dokumentu.Kliknutím na název křivky jej upravte. Každý název křivky musí být jedinečný. Obnovit křivky přetažením.</translation>
-    </message>
-    <message>
-        <source>Save As Default</source>
-        <translation type="vanished">Uložit jako výchozí</translation>
-    </message>
-    <message>
-        <source>Save the curve names for use as defaults for future graph curves.</source>
-        <translation type="vanished">Uložte názvy křivek pro použití jako výchozí pro budoucí grafové křivky.</translation>
-    </message>
-    <message>
-        <source>Reset Default</source>
-        <translation type="vanished">Resetovat výchozí</translation>
-    </message>
-    <message>
-        <source>Reset the defaults for future graph curves to the original settings.</source>
-        <translation type="vanished">Obnovte výchozí hodnoty pro budoucí grafové křivky na původní nastavení.</translation>
-    </message>
-    <message>
-        <source>Removing this curve will also remove</source>
-        <translation type="vanished">Odstraní se i tato křivka</translation>
-    </message>
-    <message>
-        <source>points. Continue?</source>
-        <translation type="vanished">bodů. Pokračovat?</translation>
-    </message>
-    <message>
-        <source>Removing these curves will also remove</source>
-        <translation type="vanished">Odstranění těchto křivek se také odstraní</translation>
-    </message>
-    <message>
-        <source>Curves With Points</source>
-        <translation type="vanished">Křivky s body</translation>
-    </message>
-</context>
-<context>
     <name>DlgSettingsCurveList</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="32" />
@@ -2967,30 +2903,6 @@ Toto lze aplikovat pouze na křivky grafu. Úsečky mezi osovými body se nikdy 
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128" />
         <source>Connect as</source>
         <translation>Spojit jako</translation>
-    </message>
-    <message>
-        <source>Select rule for connecting points with lines.
-
-If the curve is connected as a single-valued function then the points are ordered by increasing value of the independent variable.
-
-If the curve is connected as a closed contour, then the points are ordered by age, except for points placed along an existing line. Any point placed on top of any existing line is inserted between the two endpoints of that line - as if its age was between the ages of the two endpoints.
-
-Lines are drawn between successively ordered points.
-
-Straight curves are drawn with straight lines between successive points. Smooth curves are drawn with smooth lines between successive points.
-
-This applies only to graph curves. No lines are ever drawn between axis points.</source>
-        <translation type="vanished">Vyberte pravidlo pro připojení bodů s řádky.
-
-Je-li křivka připojena jako funkce s jednou hodnotou, pak jsou body seřazeny podle zvýšené hodnoty nezávislé proměnné.
-
-Pokud je křivka spojena jako uzavřený obrys, jsou body seřazeny podle věku, s výjimkou bodů umístěných podél existující čáry. Kterýkoli bod umístěný nad jakoukoli existující linku je vložen mezi dva koncové body daného řádku - jako by byl jeho věk mezi věkem dvou koncových bodů.
-
-Linky jsou kresleny mezi postupně uspořádanými body.
-
-Rovné křivky jsou kresleny přímými čarami mezi body. Hladké křivky jsou kresleny hladkými čarami mezi následujícími body.
-
-To platí pouze pro křivky grafu. Mezi body os.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136" />
@@ -4408,10 +4320,6 @@ Pokud je funkce přetahování a deaktivace deaktivována, lze klepnutím a pře
 </context>
 <context>
     <name>GraphicsScene</name>
-    <message>
-        <source>Function currently has multiple Y values for one X value. Please adjust nearby points</source>
-        <translation type="vanished">Funkce má v současné době několik hodnot Y pro jednu hodnotu X. Upravte body v okolí</translation>
-    </message>
     <message>
         <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>

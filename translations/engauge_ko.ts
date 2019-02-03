@@ -2055,73 +2055,80 @@ When pressed, this button Prints all digitized points and lines for all coordina
 <context>
     <name>DlgEditPointAxis</name>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="64" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="65" />
         <source>Edit Axis Point</source>
         <translation>축점 편집</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="107" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="109" />
         <source>Graph Coordinates</source>
         <translation>그래프 좌표</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="116" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="118" />
         <source>as</source>
         <translation>같이</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="126" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="128" />
         <source>(</source>
         <translation>(</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="134" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="136" />
         <source>Enter the first graph coordinate of the axis point.
 
-For cartesian plots this is X. For polar plots this is the radius R.
+For cartesian plots this is X. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>축 지점의 첫 번째 그래프 좌표를 입력하십시오.
-
-데카르트 플롯의 경우 X입니다. 극좌표의 경우 반경 R입니다.
-
-좌표 값의 예상 형식은로 I 일 설정에 의해 결정됩니다. 입력 된 값이 예상대로 인식되지 않으면 설정 / 기본 창에서 로켈 설정을 확인하십시오</translation>
+        <translation>축 점의 첫 번째 그래프 좌표를 입력합니다. cart 직교 좌표의 경우 X입니다. 극좌표의 경우이 각도는 Theta입니다. coordinate 좌표 값의 예상 형식은 로캘 설정에 따라 결정됩니다. 입력 된 값이 예상대로 인식되지 않으면 설정 / 기본 창에서 로켈 설정을 확인하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="143" />
         <source>, </source>
         <translation>, </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="151" />
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For polar plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>축점의 두 번째 그래프 좌표를 입력하십시오.
-
-데카르트 플롯의 경우 이것은 Y입니다. 극좌표의 경우이 값은 세타 쎄타입니다.
-
-좌표 값의 예상 형식은로 I 일 설정에 의해 결정됩니다. 입력 된 값이 예상대로 인식되지 않으면 설정 / 기본 창에서 로켈 설정을 확인하십시오</translation>
+        <translation>축 점의 두 번째 그래프 좌표를 입력합니다. cart 직교 좌표의 경우 Y입니다. 극좌표의 경우 반경 R입니다. coordinate 좌표 값의 예상 형식은 로캘 설정에 따라 결정됩니다. 입력 된 값이 예상대로 인식되지 않으면 설정 / 기본 창에서 로켈 설정을 확인하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="158" />
         <source>)</source>
         <translation>)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="173" />
-        <source>Number format</source>
-        <translation>숫자 형식</translation>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="180" />
+        <source>Number of coordinates per axis point:</source>
+        <translation>축 포인트 당 좌표 수 :</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="187" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="183" />
+        <source>Three axis points with two coordinates each are normally used. If each axis point has only one known coordinate, then start over with File / Import (Advanced) / 4 Axis Points.</source>
+        <translation>두 좌표가 각각있는 세 개의 축 지점이 일반적으로 사용됩니다. 각 축 포인트에 알려진 좌표가 하나만있는 경우 파일 / 가져 오기 (고급) / 4 축 포인트부터 다시 시작하십시오.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="194" />
+        <source>Number format:</source>
+        <translation>숫자 형식 :</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="197" />
+        <source>Locale which determines the allowed number formats. This is set by Settings / Main Window.</source>
+        <translation>허용되는 숫자 형식을 결정하는 로케일. 이것은 Settings / Main Window에 의해 설정됩니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="213" />
         <source>Ok</source>
         <translation>승인</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="191" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="217" />
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
@@ -2780,77 +2787,6 @@ Turns 형식은 단일 실수를 사용합니다. 하나의 완전한 혁명은 
     </message>
 </context>
 <context>
-    <name>DlgSettingsCurveAddRemove</name>
-    <message>
-        <source>Curve List</source>
-        <translation type="vanished">곡선 목록</translation>
-    </message>
-    <message>
-        <source>Add...</source>
-        <translation type="vanished">더하다...</translation>
-    </message>
-    <message>
-        <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
-
-Every curve name must be unique</source>
-        <translation type="vanished">커브 목록에 새 커브를 추가합니다. 커브 이름은 커브 이름 목록에서 편집 할 수 있습니다. 모든 커브 이름은 고유해야합니다</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="vanished">풀다</translation>
-    </message>
-    <message>
-        <source>Removes the currently selected curve from the curve list.
-
-There must always be at least one curve</source>
-        <translation type="vanished">커브 목록에서 현재 선택된 커브를 제거합니다. 항상 최소한 하나의 커브 여야합니다.</translation>
-    </message>
-    <message>
-        <source>Curve Names</source>
-        <translation type="vanished">커브 이름</translation>
-    </message>
-    <message>
-        <source>List of the curves belonging to this document.
-
-Click on a curve name to edit it. Each curve name must be unique.
-
-Reorder curves by dragging them around.</source>
-        <translation type="vanished">이 문서에 속한 커브 목록. 편집 할 커브 이름을 클릭하십시오. 각 커브 이름은 고유해야합니다.? 커브를 드래그하여 다시 정렬하십시오.</translation>
-    </message>
-    <message>
-        <source>Save As Default</source>
-        <translation type="vanished">기본값으로 저장</translation>
-    </message>
-    <message>
-        <source>Save the curve names for use as defaults for future graph curves.</source>
-        <translation type="vanished">미래의 그래프 커브의 기본값으로 사용할 커브 이름을 저장하십시오.</translation>
-    </message>
-    <message>
-        <source>Reset Default</source>
-        <translation type="vanished">기본값 재설정</translation>
-    </message>
-    <message>
-        <source>Reset the defaults for future graph curves to the original settings.</source>
-        <translation type="vanished">미래 그래프 곡선의 기본값을 원래 설정으로 재설정하십시오.</translation>
-    </message>
-    <message>
-        <source>Removing this curve will also remove</source>
-        <translation type="vanished">이 커브를 제거하면 제거됩니다.</translation>
-    </message>
-    <message>
-        <source>points. Continue?</source>
-        <translation type="vanished">전철기. 잇다?</translation>
-    </message>
-    <message>
-        <source>Removing these curves will also remove</source>
-        <translation type="vanished">이 커브를 제거하면 제거됩니다.</translation>
-    </message>
-    <message>
-        <source>Curves With Points</source>
-        <translation type="vanished">점을 가진 곡선</translation>
-    </message>
-</context>
-<context>
     <name>DlgSettingsCurveList</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="32" />
@@ -2992,30 +2928,6 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128" />
         <source>Connect as</source>
         <translation>다음 계정으로 연결 :</translation>
-    </message>
-    <message>
-        <source>Select rule for connecting points with lines.
-
-If the curve is connected as a single-valued function then the points are ordered by increasing value of the independent variable.
-
-If the curve is connected as a closed contour, then the points are ordered by age, except for points placed along an existing line. Any point placed on top of any existing line is inserted between the two endpoints of that line - as if its age was between the ages of the two endpoints.
-
-Lines are drawn between successively ordered points.
-
-Straight curves are drawn with straight lines between successive points. Smooth curves are drawn with smooth lines between successive points.
-
-This applies only to graph curves. No lines are ever drawn between axis points.</source>
-        <translation type="vanished">선과 점을 연결하는 규칙을 선택하십시오.
-
-곡선이 단일 값 함수로 연결된 경우 점은 독립 변수의 값을 증가시켜 정렬됩니다.
-
-커브가 닫힌 컨투어로 연결된 경우 점은 기존 선을 따라 배치 된 점을 제외하고는 연령순으로 정렬됩니다. 기존 라인의 맨 위에있는 모든 점은 해당 라인의 두 끝점 사이에 삽입됩니다. 예를 들어 두 끝점의 연령 사이에 연령이있는 것처럼 말입니다.
-
-선은 연속적으로 정렬 된 점 사이에 그려집니다.
-
-직선 곡선은 연속 점 사이에 직선으로 그려집니다. 매끄러운 커브는 연속 점 사이에 매끄러운 선으로 그려집니다.
-
-그래프 커브에만 적용됩니다. 축 점 사이에 선이 그려지지 않습니다.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136" />
@@ -4429,10 +4341,6 @@ Y = 각 점의 Y 좌표
 </context>
 <context>
     <name>GraphicsScene</name>
-    <message>
-        <source>Function currently has multiple Y values for one X value. Please adjust nearby points</source>
-        <translation type="vanished">함수는 현재 하나의 X 값에 대해 여러 Y 값을가집니다. 주변 지점을 조정하십시오.</translation>
-    </message>
     <message>
         <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>

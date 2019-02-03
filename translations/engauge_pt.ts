@@ -2050,73 +2050,80 @@ Quando pressionado, este botão Imprime todos os pontos digitalizados e linhas p
 <context>
     <name>DlgEditPointAxis</name>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="64" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="65" />
         <source>Edit Axis Point</source>
         <translation>Editar Ponto Axis</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="107" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="109" />
         <source>Graph Coordinates</source>
         <translation>Coordenadas Gráfico</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="116" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="118" />
         <source>as</source>
         <translation>como</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="126" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="128" />
         <source>(</source>
         <translation>(</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="134" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="136" />
         <source>Enter the first graph coordinate of the axis point.
 
-For cartesian plots this is X. For polar plots this is the radius R.
+For cartesian plots this is X. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>Digite o primeiro gráfico de coordenadas do ponto do eixo .
-
-Para gráficos cartesianos este é X. Para gráficos polares este é o raio R.
-
-O formato esperado do valor da coordenada é determinada pela configuração de localidade . Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
+        <translation>Digite a primeira coordenada do gráfico do ponto do eixo. Para plotagens cartesianas, isso é X. Para gráficos polares, esse é o ângulo Theta. O formato esperado do valor da coordenada é determinado pela configuração do código de idioma. Se os valores digitados não forem reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="143" />
         <source>, </source>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="151" />
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For polar plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>Introduza o segundo gráfico de coordenadas do eixo point.
-
-Para gráficos cartesianos este é Y. Para gráficos polares este é o ângulo Theta.
-
-O formato esperado do valor da coordenada é determinada pela configuração de localidade. Se os valores digitados não são reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
+        <translation>Digite a segunda coordenada do gráfico do ponto do eixo. Para plotagens cartesianas, isso é Y. Para gráficos polares, esse é o raio R.O formato esperado do valor da coordenada é determinado pela configuração do código do idioma. Se os valores digitados não forem reconhecidos como esperado, verifique a configuração de localidade em Configurações / Janela principal ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="158" />
         <source>)</source>
         <translation>)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="173" />
-        <source>Number format</source>
-        <translation>Formato de número</translation>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="180" />
+        <source>Number of coordinates per axis point:</source>
+        <translation>Número de coordenadas por ponto de eixo:</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="187" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="183" />
+        <source>Three axis points with two coordinates each are normally used. If each axis point has only one known coordinate, then start over with File / Import (Advanced) / 4 Axis Points.</source>
+        <translation>Três pontos do eixo com duas coordenadas cada são normalmente usados. Se cada ponto do eixo tiver apenas uma coordenada conhecida, comece novamente com os pontos de arquivo / importação (avançado) / 4 eixos.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="194" />
+        <source>Number format:</source>
+        <translation>Formato numérico:</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="197" />
+        <source>Locale which determines the allowed number formats. This is set by Settings / Main Window.</source>
+        <translation>Localidade que determina os formatos de números permitidos. Isso é definido por Configurações / Janela principal.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="213" />
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="191" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="217" />
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -2786,77 +2793,6 @@ Acontece formato usa um único número real. Uma volta completa é um turno.</tr
     </message>
 </context>
 <context>
-    <name>DlgSettingsCurveAddRemove</name>
-    <message>
-        <source>Curve List</source>
-        <translation type="vanished">Lista de Curvas</translation>
-    </message>
-    <message>
-        <source>Add...</source>
-        <translation type="vanished">Adicionar...</translation>
-    </message>
-    <message>
-        <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
-
-Every curve name must be unique</source>
-        <translation type="vanished">Adiciona uma nova curva à lista de curvas. O nome da curva pode ser editado na lista de nomes de curvas. Todo nome de curva deve ser único</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="vanished">Remover</translation>
-    </message>
-    <message>
-        <source>Removes the currently selected curve from the curve list.
-
-There must always be at least one curve</source>
-        <translation type="vanished">Remove a curva atualmente selecionada da lista de curvas. Sempre deve haver pelo menos uma curva</translation>
-    </message>
-    <message>
-        <source>Curve Names</source>
-        <translation type="vanished">Nomes de Curva</translation>
-    </message>
-    <message>
-        <source>List of the curves belonging to this document.
-
-Click on a curve name to edit it. Each curve name must be unique.
-
-Reorder curves by dragging them around.</source>
-        <translation type="vanished">Lista das curvas que pertencem a este documento. Clique em um nome de curva para editá-lo. Cada nome de curva deve ser exclusivo. Revise as curvas arrastando-as.</translation>
-    </message>
-    <message>
-        <source>Save As Default</source>
-        <translation type="vanished">Salvar como padrão</translation>
-    </message>
-    <message>
-        <source>Save the curve names for use as defaults for future graph curves.</source>
-        <translation type="vanished">Salve os nomes das curvas para usar como padrões para futuras curvas gráficas.</translation>
-    </message>
-    <message>
-        <source>Reset Default</source>
-        <translation type="vanished">Redefinir Padrão</translation>
-    </message>
-    <message>
-        <source>Reset the defaults for future graph curves to the original settings.</source>
-        <translation type="vanished">Redefina os padrões das futuras curvas gráficas para as configurações originais.</translation>
-    </message>
-    <message>
-        <source>Removing this curve will also remove</source>
-        <translation type="vanished">Remover esta curva também removerá</translation>
-    </message>
-    <message>
-        <source>points. Continue?</source>
-        <translation type="vanished">pontos. Continuar?</translation>
-    </message>
-    <message>
-        <source>Removing these curves will also remove</source>
-        <translation type="vanished">A remoção dessas curvas também removerá</translation>
-    </message>
-    <message>
-        <source>Curves With Points</source>
-        <translation type="vanished">Curvas com pontos</translation>
-    </message>
-</context>
-<context>
     <name>DlgSettingsCurveList</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="32" />
@@ -2999,30 +2935,6 @@ Isso se aplica somente para as curvas do gráfico. Não há linhas são sempre f
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128" />
         <source>Connect as</source>
         <translation>Conectar-se como</translation>
-    </message>
-    <message>
-        <source>Select rule for connecting points with lines.
-
-If the curve is connected as a single-valued function then the points are ordered by increasing value of the independent variable.
-
-If the curve is connected as a closed contour, then the points are ordered by age, except for points placed along an existing line. Any point placed on top of any existing line is inserted between the two endpoints of that line - as if its age was between the ages of the two endpoints.
-
-Lines are drawn between successively ordered points.
-
-Straight curves are drawn with straight lines between successive points. Smooth curves are drawn with smooth lines between successive points.
-
-This applies only to graph curves. No lines are ever drawn between axis points.</source>
-        <translation type="vanished">Selecione regra para conectar os pontos com linhas.
-
-Se a curva é ligado como uma função de um valor único, em seguida, os pontos são ordenadas por valor da variável independente crescente.
-
-Se a curva é ligada como um contorno fechado, em seguida, os pontos são ordenados pela idade, excepto para os pontos situados ao longo de uma linha existente. Qualquer ponto colocado em cima de qualquer linha existente é inserido entre os dois pontos finais dessa linha - como se sua idade estava entre as idades dos dois pontos finais.
-
-As linhas são desenhadas entre os pontos sucessivamente encomendados.
-
-curvas retas são desenhados com linhas retas entre pontos sucessivos. curvas suaves são desenhados com linhas suaves entre pontos sucessivos.
-
-Isso se aplica somente para as curvas do gráfico. Não há linhas são sempre feita entre pontos do eixo.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136" />
@@ -4433,10 +4345,6 @@ Se drag-and-drop é desativado, um conjunto retangular de células podem ser sel
 </context>
 <context>
     <name>GraphicsScene</name>
-    <message>
-        <source>Function currently has multiple Y values for one X value. Please adjust nearby points</source>
-        <translation type="vanished">Atualmente, a função possui vários valores Y para um valor X. Por favor, ajuste os pontos próximos</translation>
-    </message>
     <message>
         <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>

@@ -2057,73 +2057,80 @@ When pressed, this button Prints all digitized points and lines for all coordina
 <context>
     <name>DlgEditPointAxis</name>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="64" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="65" />
         <source>Edit Axis Point</source>
         <translation>座標軸の基準となる ポイント を追加</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="107" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="109" />
         <source>Graph Coordinates</source>
         <translation>座標軸の基準点</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="116" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="118" />
         <source>as</source>
         <translation>以下の</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="126" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="128" />
         <source>(</source>
         <translation>(</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="134" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="136" />
         <source>Enter the first graph coordinate of the axis point.
 
-For cartesian plots this is X. For polar plots this is the radius R.
+For cartesian plots this is X. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>座標軸の基準となる3点のうち最初の点の座標を入力します。
-
-直交座標のグラフの場合は Xを入力します。極座標のグラフの場合は半径 Rを入力します。
-
-座標値をどのような形式で入力すべきかは ロケール により決まります。 もしタイプ入力してみた値が期待通りに認識されないようでしたら 設定 / メイン画面... から ロケール を確認してください。</translation>
+        <translation>軸点の最初のグラフ座標を入力します。デカルトプロットの場合、これはXです。ポーラプロットの場合、これは角度θです。座標値の予想されるフォーマットは、ロケール設定によって決まります。入力した値が期待どおりに認識されない場合は、設定/メインウィンドウのロケール設定を確認してください。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="141" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="143" />
         <source>, </source>
         <translation>, </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="149" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="151" />
         <source>Enter the second graph coordinate of the axis point.
 
-For cartesian plots this is Y. For polar plots this is the angle Theta.
+For cartesian plots this is Y. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation>座標軸の基準となる3点のうち2番目の点の座標を入力します。
-
-直交座標のグラフの場合は Yを入力します。極座標のグラフの場合は偏角 Theta を入力します。
-
-座標値をどのような形式で入力すべきかは ロケール により決まります。 もしタイプ入力してみた値が期待通りに認識されないようでしたら 設定 / メイン画面... から ロケール を確認してください。</translation>
+        <translation>軸点の2番目のグラフ座標を入力します。デカルトプロットの場合、これはYです。ポーラプロットの場合、これは半径Rです。座標値の予想形式は、ロケール設定によって決まります。入力した値が期待どおりに認識されない場合は、設定/メインウィンドウのロケール設定を確認してください。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="156" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="158" />
         <source>)</source>
         <translation>)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="173" />
-        <source>Number format</source>
-        <translation>数字の表示形式</translation>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="180" />
+        <source>Number of coordinates per axis point:</source>
+        <translation>軸点あたりの座標数</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="187" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="183" />
+        <source>Three axis points with two coordinates each are normally used. If each axis point has only one known coordinate, then start over with File / Import (Advanced) / 4 Axis Points.</source>
+        <translation>それぞれ2つの座標を持つ3つの軸点が通常使用されます。各軸点に既知の座標が1つしかない場合は、ファイル/インポート（詳細）/ 4軸点からやり直します。</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="194" />
+        <source>Number format:</source>
+        <translation>数値フォーマット：</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="197" />
+        <source>Locale which determines the allowed number formats. This is set by Settings / Main Window.</source>
+        <translation>許可されている数値フォーマットを決定するロケール。これは設定/メインウィンドウで設定されます。</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="213" />
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="191" />
+        <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="217" />
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
@@ -2793,77 +2800,6 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     </message>
 </context>
 <context>
-    <name>DlgSettingsCurveAddRemove</name>
-    <message>
-        <source>Curve List</source>
-        <translation type="vanished">カーブリスト</translation>
-    </message>
-    <message>
-        <source>Add...</source>
-        <translation type="vanished">追加...</translation>
-    </message>
-    <message>
-        <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
-
-Every curve name must be unique</source>
-        <translation type="vanished">曲線リストに新しい曲線を追加します。カーブ名はカーブ名リストで編集できます。すべてのカーブ名は一意である必要があります</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="vanished">削除する</translation>
-    </message>
-    <message>
-        <source>Removes the currently selected curve from the curve list.
-
-There must always be at least one curve</source>
-        <translation type="vanished">現在選択されている曲線を曲線リストから削除します。常に少なくとも1つの曲線が必要です</translation>
-    </message>
-    <message>
-        <source>Curve Names</source>
-        <translation type="vanished">カーブ名</translation>
-    </message>
-    <message>
-        <source>List of the curves belonging to this document.
-
-Click on a curve name to edit it. Each curve name must be unique.
-
-Reorder curves by dragging them around.</source>
-        <translation type="vanished">この文書に属する曲線のリスト。編集するには、曲線名をクリックします。各カーブ名は一意である必要があります。ドラッグしてカーブを並べ替えます。</translation>
-    </message>
-    <message>
-        <source>Save As Default</source>
-        <translation type="vanished">デフォルトとして設定</translation>
-    </message>
-    <message>
-        <source>Save the curve names for use as defaults for future graph curves.</source>
-        <translation type="vanished">将来のグラフ曲線のデフォルトとして使用するために曲線名を保存します。</translation>
-    </message>
-    <message>
-        <source>Reset Default</source>
-        <translation type="vanished">デフォルトにリセット</translation>
-    </message>
-    <message>
-        <source>Reset the defaults for future graph curves to the original settings.</source>
-        <translation type="vanished">将来のグラフ曲線のデフォルトを元の設定にリセットします。</translation>
-    </message>
-    <message>
-        <source>Removing this curve will also remove</source>
-        <translation type="vanished">この曲線を削除すると、</translation>
-    </message>
-    <message>
-        <source>points. Continue?</source>
-        <translation type="vanished">ポイント持続する？</translation>
-    </message>
-    <message>
-        <source>Removing these curves will also remove</source>
-        <translation type="vanished">これらの曲線を削除すると、</translation>
-    </message>
-    <message>
-        <source>Curves With Points</source>
-        <translation type="vanished">ポイント付き曲線</translation>
-    </message>
-</context>
-<context>
     <name>DlgSettingsCurveList</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="32" />
@@ -3005,29 +2941,6 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128" />
         <source>Connect as</source>
         <translation>ラインとポイントの接続</translation>
-    </message>
-    <message>
-        <source>Select rule for connecting points with lines.
-
-If the curve is connected as a single-valued function then the points are ordered by increasing value of the independent variable.
-
-If the curve is connected as a closed contour, then the points are ordered by age, except for points placed along an existing line. Any point placed on top of any existing line is inserted between the two endpoints of that line - as if its age was between the ages of the two endpoints.
-
-Lines are drawn between successively ordered points.
-
-Straight curves are drawn with straight lines between successive points. Smooth curves are drawn with smooth lines between successive points.
-
-This applies only to graph curves. No lines are ever drawn between axis points.</source>
-        <translation type="vanished">ポイントとラインを接続するために使うルール設定を選択します。
-
-もし カーブ が単変数関数となるのであれば、これらの ポイント は 単純に増減する独立変数に従い並べられます。
-
-もし カーブ が閉じたコンター（等高線）であれば、これらのポイントはすでに存在するコンター上に位置するものを除き age に従い並べられます。既存の ライン 上に位置するポイントはすべて、そのラインにおける端点のあいだに内挿されますーあたかもその age が、この二つの端点の age の間の値を持っているかのように。
-
-ライン は連続して並べられたポイントのあいだに描かれます。
-
-直線の カーブ は連続したポイント間に直線を描きます。曲線は 連続したポイント間を曲線で結びます。
-これらのルールはグラフのカーブにのみ適用されます。座標軸の基準点の間にラインが描かれることはありません。</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136" />
@@ -4439,10 +4352,6 @@ Distance = カーブに沿った 距離で、グラフ 単位あるいはパー�
 </context>
 <context>
     <name>GraphicsScene</name>
-    <message>
-        <source>Function currently has multiple Y values for one X value. Please adjust nearby points</source>
-        <translation type="vanished">関数は現在、1つのX値に対して複数のY値を持っています。近くのポイントを調整してください</translation>
-    </message>
     <message>
         <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>
