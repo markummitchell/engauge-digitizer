@@ -132,15 +132,13 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLinearScreen (double
                                                       ARBITRARY_Y),
                                              posScreenLast);
   double deltaScreenX = posScreenLast.x() - posScreenFirst.x();
-  double deltaScreenY = posScreenLast.y() - posScreenFirst.y();
-  double deltaScreen = qSqrt (deltaScreenX * deltaScreenX + deltaScreenY * deltaScreenY);
 
   // Need calculations to find the scaling to be applied to successive points
   double s = 1.0;
   double interval = m_modelExport.pointsIntervalFunctions();
   if ((interval > 0) &&
-      (interval < deltaScreen)) {
-    s = interval / deltaScreen;
+      (interval < deltaScreenX)) {
+    s = interval / deltaScreenX;
   }
 
   // Example: xThetaMin=0.1 and xThetaMax=100 (points are 0.1, 1, 10, 100) with s=1/3 so scale should be 10
