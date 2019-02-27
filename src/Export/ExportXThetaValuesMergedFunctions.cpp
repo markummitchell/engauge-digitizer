@@ -121,7 +121,9 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLinearScreen (double
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportXThetaValuesMergedFunctions::periodicLinearScreen";
 
-  const double ARBITRARY_Y = 0.0;
+  // This must be greater than zero. Otherwise, logarithmic y axis will trigger errors in the
+  // transform, which cascades into NaN values for the x coordinates below
+  const double ARBITRARY_Y = 1.0;
 
   // Screen coordinates of endpoints
   QPointF posScreenFirst, posScreenLast;
