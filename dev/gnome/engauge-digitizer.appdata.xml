@@ -68,10 +68,12 @@
 		<content_attribute id="money-gambling">none</content_attribute>
 	</content_rating>
 	<releases>
-		<release date="2019-03-08" version="10.12">
+		<release date="2019-03-02" version="10.12">
 			<description>
 			  <ul>
-			    <li>Fixes for regularly spaced export of data points for large y axis dynamic range</li>
+			    <li>Fix for extra x values with regularly spaced export of data points</li>
+			    <li>Fix for crash with logarithmic y coordinates</li>
+			    <li>Geometry Window warns when function points overlap</li>
 			  </ul>
 			</description>
 		</release>
