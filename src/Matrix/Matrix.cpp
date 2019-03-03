@@ -276,9 +276,9 @@ Matrix Matrix::inverseGaussianElimination (int significantDigits,
     int colFirstWithNonZero = rowFrom; // This is true since we should have 1s all down the diagonal at this point
 
     // Normalize the 'from' row with diagonal term set to 1. The first term should be like 0.9999 or 1.0001 but we want exactly one
-    MatrixConsistent matrixConsistent;
-    working.normalizeRow (rowFrom, colFirstWithNonZero, significantDigits, matrixConsistent);
-    if (matrixConsistent == MATRIX_INCONSISTENT) {
+    MatrixConsistent matrixConsistentIter;
+    working.normalizeRow (rowFrom, colFirstWithNonZero, significantDigits, matrixConsistentIter);
+    if (matrixConsistentIter == MATRIX_INCONSISTENT) {
       return inv;
     }
 

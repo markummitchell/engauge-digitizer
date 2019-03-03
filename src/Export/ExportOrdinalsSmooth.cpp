@@ -94,9 +94,9 @@ ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector
     int iTLastInterval = 0;
     for (int iT = 0; iT < NUM_SMALLER_INTERVALS; iT++) {
 
-      double t = tMin + ((tMax - tMin) * iT) / (NUM_SMALLER_INTERVALS - 1.0);
+      double tIter = tMin + ((tMax - tMin) * iT) / (NUM_SMALLER_INTERVALS - 1.0);
 
-      SplinePair pairNew = spline.interpolateCoeff(t);
+      SplinePair pairNew = spline.interpolateCoeff(tIter);
 
       QPointF posNew = QPointF (pairNew.x(),
                                 pairNew.y());
@@ -115,7 +115,7 @@ ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector
         } else {
           sInterp = (double) pointsInterval / (double) integratedSeparation;
         }
-        double tInterp = (1.0 - sInterp) * tLast + sInterp * t;
+        double tInterp = (1.0 - sInterp) * tLast + sInterp * tIter;
 
         integratedSeparation -= pointsInterval; // Part of delta that was not used gets applied to next interval
 
@@ -124,7 +124,7 @@ ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector
         iTLastInterval = iT;
       }
 
-      tLast = t;
+      tLast = tIter;
       posLast = posNew;
     }
 

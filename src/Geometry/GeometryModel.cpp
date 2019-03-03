@@ -22,6 +22,9 @@ GeometryModel::~GeometryModel()
 
 QVariant GeometryModel::data(const QModelIndex &index, int role) const
 {
+  const int HEADER_OFFSET = 1;
+  const int NUM_LEGEND_ROWS_UNSPANNED = 2; // Match with GeometryWindow::NUM_LEGEND_ROWS_UNSPANNED
+
 //  LOG4CPP_DEBUG_S ((*mainCat)) << "GeometryModel::data"
 //                               << " rowHighlighted=" << m_rowToBeHighlighted
 //                               << " index=(row=" << index.row() << ",col=" << index.column() << ",role=" << role << ")="
@@ -32,8 +35,19 @@ QVariant GeometryModel::data(const QModelIndex &index, int role) const
       !m_pointIdentifier.isEmpty () &&
       (index.row () == m_rowToBeHighlighted)) {
 
-    // This row is to be highlighted
+    // This row is to be highlighted with gray
     return QVariant (QColor (230, 230, 230));
+  }
+
+  bool ambiguousSegment = ((role == Qt::BackgroundRole) &&
+                           (m_ambiguousRows.contains (index.row () - HEADER_OFFSET)));
+  bool ambiguousFootnote = ((role == Qt::BackgroundRole) &&
+                            (m_ambiguousRows.size () > 0) &&
+                            (index.row () >= rowCount () - NUM_LEGEND_ROWS_UNSPANNED));
+  if (ambiguousSegment || ambiguousFootnote) {
+
+    // This row is to be highlighted with light red. Note that gray color preempts this behavior
+    return QVariant (QColor (255, 0, 0, 50));
   }
 
   // Standard behavior
@@ -99,4 +113,15 @@ void GeometryModel::setCurrentPointIdentifier (const QString &pointIdentifier)
   emit dataChanged (indexTopLeft,
                     indexBottomRight,
                     roles);
+}
+
+void GeometryModel::setPotentialExportAmbiguity (const QVector<bool> &isPotentialExportAmbiguity)
+{
+  // Save row numbers with ambiguities
+  m_ambiguousRows.clear ();
+  for (int i = 0; i < isPotentialExportAmbiguity.size (); i++) {
+    if (isPotentialExportAmbiguity.at (i)) {
+      m_ambiguousRows [i] = true;
+    }
+  }
 }

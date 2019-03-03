@@ -94,17 +94,17 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
     // This curve
     const int CURVE_COUNT = 1;
     QString curveIncluded = *itr;
-    QStringList curvesIncluded (curveIncluded);
+    QStringList curvesIncludedIter (curveIncluded);
 
     int xThetaCount = xThetaValues.count();
     QVector<QVector<QString*> > yRadiusValues (CURVE_COUNT, QVector<QString*> (xThetaCount));
-    initializeYRadiusValues (curvesIncluded,
+    initializeYRadiusValues (curvesIncludedIter,
                              xThetaValues,
                              yRadiusValues);
     loadYRadiusValues (modelExportOverride,
                        document,
                        modelMainWindow,
-                       curvesIncluded,
+                       curvesIncludedIter,
                        transformation,
                        isLogXTheta,
                        isLogYRadius,
@@ -114,7 +114,7 @@ void ExportFileFunctions::exportOnePerLineXThetaValuesMerged (const DocumentMode
                                document.modelCoords(),
                                document.modelGeneral(),
                                modelMainWindow,
-                               curvesIncluded,
+                               curvesIncludedIter,
                                xThetaValues,
                                transformation,
                                yRadiusValues,

@@ -133,6 +133,16 @@ void GeometryStrategyAbstractBase::insertSubintervalsAndLoadDistances (int subin
   }
 }
 
+void GeometryStrategyAbstractBase::loadPotentialExportVector (QVector<QString> &x,
+                                                              QVector<QString> & /* y */,
+                                                              const Transformation & /* transformation */,
+                                                              QVector<bool> &isPotentialExportAmbiguity) const
+{
+  for (int i = 0; i < x.size(); i++) {
+    isPotentialExportAmbiguity.append (false);
+  }
+}
+
 void GeometryStrategyAbstractBase::loadXY (const QVector<QPointF> &positionsGraph,
                                            const DocumentModelCoords &modelCoords,
                                            const DocumentModelGeneral &modelGeneral,

@@ -21,7 +21,7 @@ environment:
 install:
   - C:\"Program Files (x86)"\"Microsoft Visual Studio 14.0"\VC\vcvarsall.bat %BUILD_TYPE%
 # Qt configurations are listed at https://www.appveyor.com/docs/build-environment/#qt
-  - IF %BUILD_TYPE% == X86 (set QTDIR=C:\Qt\5.10.1\msvc2015) ELSE (set QTDIR=C:\Qt\5.10.1\msvc2015_64)
+  - IF %BUILD_TYPE% == X86 (set QTDIR=C:\Qt\5.11.3\msvc2015) ELSE (set QTDIR=C:\Qt\5.11.3\msvc2015_64)
   - set PATH=%PATH%;%QTDIR%\bin
   - cd %APPVEYOR_BUILD_FOLDER%
   - 7z x %APPVEYOR_BUILD_FOLDER%\dev\windows\appveyor\%LOG4CPP_FILE% -aoa

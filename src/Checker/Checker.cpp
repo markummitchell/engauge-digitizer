@@ -36,6 +36,10 @@ Checker::Checker(QGraphicsScene &scene) :
 {
 }
 
+Checker::~Checker()
+{
+}
+
 void Checker::adjustPolarAngleRanges (const DocumentModelCoords &modelCoords,
                                       const Transformation &transformation,
                                       const QList<Point> &points,

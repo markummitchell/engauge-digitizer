@@ -96,7 +96,8 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth (const LineStyle &lineStyle,
     // Spline through points
     Spline spline (t, xy);
 
-    splineDrawer.bindToSpline (m_graphicsPoints.count(),
+    splineDrawer.bindToSpline (lineStyle,
+                               m_graphicsPoints.count(),
                                spline);
 
     // Create QPainterPath through the points. Loop has one segment per stop point,

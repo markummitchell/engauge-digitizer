@@ -27,8 +27,8 @@ before_install:
      sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb;
    elif [ `uname` = "Darwin" ]; then
      brew update;
-     brew info qt;
-     brew install fftw log4cpp qt;
+     brew info qt5;
+     brew install fftw log4cpp qt5;
      export QT5BREWHOME="/usr/local/opt/qt";
    fi
 
@@ -51,7 +51,11 @@ script:
     sed -ibak3 's|-F/usr/local/Cellar/log4cpp|-L/usr/local/Cellar/log4cpp|g' Makefile;
    fi
  - make
- - cd help && ./build.bash && cd ..;
+ - if [ `uname` = "Linux" ]; then
+    cd help && ./build.bash && cd ..;
+   else
+    cd help && ./build_qt5_12_0.bash && cd ..;   
+   fi
  - if [ `uname` = "Darwin" -a "$BUILD_DEBUG" = "1" ]; then
     cp $FFTW_HOME/lib/lib* src;
     cp $LOG4CPP_HOME/lib/lib* src;

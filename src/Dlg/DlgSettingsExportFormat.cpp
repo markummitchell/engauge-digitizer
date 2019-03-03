@@ -550,12 +550,10 @@ void DlgSettingsExportFormat::initializeIntervalConstraints ()
   bool isEmpty;
   QPointF boundingRectGraphMin = ftor.boundingRectGraphMin (isEmpty);
   QPointF boundingRectGraphMax = ftor.boundingRectGraphMax (isEmpty);
-  double maxSizeGraph = qMax (qAbs (boundingRectGraphMax.x() - boundingRectGraphMin.x()),
-                              qAbs (boundingRectGraphMax.y() - boundingRectGraphMin.y()));
-  double maxSizeScreen = qMax (ftor.boundingRectScreen(isEmpty).width(),
-                               ftor.boundingRectScreen(isEmpty).height());
-  m_minIntervalGraph = maxSizeGraph / MAX_POINTS_ACROSS_RANGE;
-  m_minIntervalScreen = maxSizeScreen / MAX_POINTS_ACROSS_RANGE;
+  double maxSizeGraph = boundingRectGraphMax.x() - boundingRectGraphMin.x();
+  double maxSizeScreen = ftor.boundingRectScreen(isEmpty).width();
+  m_minIntervalGraph = maxSizeGraph / MAX_POINTS_ACROSS_RANGE; // Should be unaffected by y range
+  m_minIntervalScreen = maxSizeScreen / MAX_POINTS_ACROSS_RANGE; // Should be unaffected by y range
 }
 
 void DlgSettingsExportFormat::load (CmdMediator &cmdMediator)
@@ -758,7 +756,7 @@ void DlgSettingsExportFormat::slotFunctionsPointsEvenlySpacedInterval(const QStr
 
   // Prevent infinite loop on empty and "-" values which get treated as zero interval
   if (goodIntervalFunctions()) {
-   m_modelExportAfter->setPointsIntervalFunctions(m_editFunctionsPointsEvenlySpacing->text().toDouble());
+    m_modelExportAfter->setPointsIntervalFunctions(m_editFunctionsPointsEvenlySpacing->text().toDouble());
     updateControls();
     updatePreview();
   } else {

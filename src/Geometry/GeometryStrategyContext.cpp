@@ -5,6 +5,8 @@
  ******************************************************************************************************/
 
 #include "CurveConnectAs.h"
+#include "DocumentModelCoords.h"
+#include "DocumentModelGeneral.h"
 #include "GeometryStrategyContext.h"
 #include "GeometryStrategyFunctionSmooth.h"
 #include "GeometryStrategyFunctionStraight.h"
@@ -34,6 +36,7 @@ void GeometryStrategyContext::calculateGeometry (const Points &points,
                                                  QString &polyArea,
                                                  QVector<QString> &x,
                                                  QVector<QString> &y,
+                                                 QVector<bool> &isPotentialExportAmbiguity,
                                                  QVector<QString> &distanceGraphForward,
                                                  QVector<QString> &distancePercentForward,
                                                  QVector<QString> &distanceGraphBackward,
@@ -50,6 +53,7 @@ void GeometryStrategyContext::calculateGeometry (const Points &points,
                                                  polyArea,
                                                  x,
                                                  y,
+                                                 isPotentialExportAmbiguity,
                                                  distanceGraphForward,
                                                  distancePercentForward,
                                                  distanceGraphBackward,

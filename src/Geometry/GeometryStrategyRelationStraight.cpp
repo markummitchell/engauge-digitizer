@@ -24,6 +24,7 @@ void GeometryStrategyRelationStraight::calculateGeometry (const Points &points,
                                                           QString &polyArea,
                                                           QVector<QString> &x,
                                                           QVector<QString> &y,
+                                                          QVector<bool> &isPotentialExportAmbiguity,
                                                           QVector<QString> &distanceGraphForward,
                                                           QVector<QString> &distancePercentForward,
                                                           QVector<QString> &distanceGraphBackward,
@@ -52,6 +53,11 @@ void GeometryStrategyRelationStraight::calculateGeometry (const Points &points,
           transformation,
           x,
           y);
+
+  loadPotentialExportVector (x,
+                             y,
+                             transformation,
+                             isPotentialExportAmbiguity);
 
   // Set header values
   funcArea = "";

@@ -40,9 +40,8 @@ ExportAlignLinear::ExportAlignLinear(double xMin,
       roundedMin -= nominalStep;
     }
 
-    if (roundedMin + nominalStep <= xMax) {
-
-      // Success. We have found a reasonable range that just fits xMin and xMax
+    // Need at least one step between roundedMin and xMax, otherwise ranges
+    if (roundedMin + 2 * nominalStep <= xMax) {
       break;
     }
 

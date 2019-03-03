@@ -33,7 +33,7 @@ class BackgroundStateAbstractBase
   /// Single constructor
   BackgroundStateAbstractBase(BackgroundStateContext &context,
                               GraphicsScene &scene);
-  ~BackgroundStateAbstractBase();
+  virtual ~BackgroundStateAbstractBase();
 
   /// Method that is called at the exact moment a state is entered. Typically called just after end for the previous state.
   virtual void begin() = 0;

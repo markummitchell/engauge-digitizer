@@ -21,6 +21,7 @@ testsAvailable=( \
     TestProjectedPoint \
     TestSegmentFill \
     TestSpline \
+    TestSplineDrawer \
     TestTransformation \
     TestValidators \
     TestZoomTransition)
@@ -90,12 +91,13 @@ else
     do
 	sed "s/TEST/$t/g" engauge_test_template.pro >engauge_test.pro
 	qmake $CONFIGARGS engauge_test.pro
-	make all 2>>$LOGFILE >/dev/null || {
+	make -j4 all 2>>$LOGFILE >/dev/null || {
 	    echo "FAIL   : Compilation error is described in build_and_run_all_cli_tests.log"
 	    echo "         Testing will be stopped"
 	    exit 1
         }
-	../bin/$t
+	# sed is used to add color to PASS and FAIL. 'Using QtTest' lines are dropped
+	../bin/$t | sed "s/PASS   :/$(tput setaf 2)PASS$(tput sgr0)   :/" | sed "s/FAIL   :/$(tput setaf 1)FAIL$(tput sgr0)   :/" | grep -v 'Using QtTest'
 	if [ $selectedCount -ne 1 ]
 	then
             rm engauge_test.pro

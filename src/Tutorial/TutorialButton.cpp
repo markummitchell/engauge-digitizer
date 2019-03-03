@@ -18,7 +18,9 @@ const int VERTICAL_PADDING = 5;
 const double Z_IN_FRONT = 1;
 
 TutorialButton::TutorialButton (const QString &text,
-                                QGraphicsScene &scene)
+                                QGraphicsScene &scene) :
+  m_rect (0),
+  m_text (0)
 {
   createRect (scene);
   createText (text);
@@ -28,6 +30,9 @@ TutorialButton::~TutorialButton ()
 {
   QGraphicsScene *scene = m_rect->scene();
   scene->removeItem (m_rect); // This also removes m_text from the scene
+
+  delete m_rect;
+  delete m_text;
 }
 
 void TutorialButton::createRect (QGraphicsScene &scene)

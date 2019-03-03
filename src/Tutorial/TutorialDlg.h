@@ -21,6 +21,7 @@ class TutorialDlg : public QDialog
  public:
   /// Single constructor
   TutorialDlg (MainWindow *mainWindow);
+  ~TutorialDlg ();
 
   /// Make geometry available for layout
   QSize backgroundSize () const;

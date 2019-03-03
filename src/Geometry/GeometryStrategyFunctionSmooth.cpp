@@ -5,7 +5,12 @@
  ******************************************************************************************************/
 
 #include "GeometryStrategyFunctionSmooth.h"
+#include "Spline.h"
+#include "SplineDrawer.h"
+#include "SplinePair.h"
 #include "Transformation.h"
+
+using namespace std;
 
 GeometryStrategyFunctionSmooth::GeometryStrategyFunctionSmooth()
 {
@@ -24,6 +29,7 @@ void GeometryStrategyFunctionSmooth::calculateGeometry (const Points &points,
                                                         QString &polyArea,
                                                         QVector<QString> &x,
                                                         QVector<QString> &y,
+                                                        QVector<bool> &isPotentialExportAmbiguity,
                                                         QVector<QString> &distanceGraphForward,
                                                         QVector<QString> &distancePercentForward,
                                                         QVector<QString> &distanceGraphBackward,
@@ -53,7 +59,53 @@ void GeometryStrategyFunctionSmooth::calculateGeometry (const Points &points,
           x,
           y);
 
+  loadSmoothAmbiguityVector (x,
+                             y,
+                             transformation,
+                             isPotentialExportAmbiguity);
+
   // Set header values
   funcArea = QString::number (fArea);
   polyArea = "";
+}
+
+void GeometryStrategyFunctionSmooth::loadSmoothAmbiguityVector (QVector<QString> &x,
+                                                                QVector<QString> &y,
+                                                                const Transformation &transformation,
+                                                                QVector<bool> &isPotentialExportAmbiguity) const
+{
+  // There are N-1 segments for N points
+  int numSegments = x.size () - 1;
+
+  // Graph/screen transformation must be defined for SplineDrawer, and
+  // at least one point must be defined for Spline. Even better, one segment
+  // must be defined for Spline
+  if (transformation.transformIsDefined() &&
+      numSegments > 0) {
+
+    // Create spline
+    vector<double> t (x.size ());
+    vector<SplinePair> xy (x.size ());
+    for (int i = 0; i < x.size (); i++) {
+      t [i] = i;
+      xy [i] = SplinePair (x.at (i).toDouble (),
+                           y.at (i).toDouble ());
+    }
+    Spline s (t,
+              xy);
+
+    SplineDrawer sd (transformation);
+
+    for (int segment = 0; segment < numSegments; segment++) {
+      bool isMultiValued = sd.segmentIsMultiValued (s,
+                                                    x.size (),
+                                                    segment);
+      isPotentialExportAmbiguity.push_back (isMultiValued);
+    }
+  } else {
+
+    for (int segment = 0; segment < numSegments; segment++) {
+      isPotentialExportAmbiguity.push_back (false);
+    }
+  }
 }

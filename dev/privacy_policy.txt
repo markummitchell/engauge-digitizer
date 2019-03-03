@@ -1,0 +1,49 @@
+
+                    Privacy Notice
+
+This privacy notice discloses the privacy practices for Engauge Digitizer. This
+privacy notice applies solely to information collected by this application and
+the software support team. It will notify you of the following:
+   1. What personally identifiable information is collected from you by the 
+      application and the software support options
+   2. What choices are available to you regarding the use of your data
+   3. The security procedures in place to protect the misuse of your 
+      information
+   4. How you can correct any inaccuracies in the information.
+
+Information Collection, Use and Sharing
+---------------------------------------
+We are the sole owners of the information collected on this website. We only 
+have access to/collect information that you voluntarily give us via email,
+support forum, github issue tracker, or other direct contact from you. We will
+not sell or rent this information to anyone.
+
+We will use your information to respond to you, regarding the reason you
+contacted us. We may also share your document information with others as part
+of new regression tests or topics of discussion.
+
+We will not contact after the initial period of assistance has completed.
+Contact by us will be through online forums and other posts, unless responding
+to private emails initiated by you.
+
+Your Access To and Control Over Information
+-------------------------------------------
+You can do the following at any time by contacting us via email, or forum 
+or issue tracker post:
+   * See what data we have about you, if any
+   * Change/correct any data we have about you
+   * Have us delete any data we have about you
+   * Express any concern you have about our use of your data
+
+Security
+--------
+We do not purposefully collect any sensitive information about users. If we
+identify possibly sensitive information, or you notify us that sensitive
+information has been accidentally submitted, we will immediately delete that
+information and notify you of our actions. Non-sensitive information will be
+assumed to include names, nicknames, email addresses, and context for Engauge
+Digitizer sample documents. 
+
+If you feel that we are not abiding by this privacy policy, you should contact
+us immediately through any of the available methods at 
+https://github.com/markummitchell/engauge-digitizer

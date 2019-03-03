@@ -35,7 +35,8 @@ class Checker
 public:
   /// Single constructor for DlgSettingsAxesChecker, which does not have an explicit transformation. The identity transformation is assumed
   Checker(QGraphicsScene &scene);
-
+  virtual ~Checker ();
+  
   /// Create the polygon from current information, including pixel coordinates, just prior to display. This is for DlgSettingsAxesChecker.
   /// The identity matrix is used for the transformations between screen and graph coordinates. The point radius is used to exclude
   /// the lines from  the axes points for clarity

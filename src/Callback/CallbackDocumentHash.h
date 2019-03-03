@@ -4,8 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef CALLBACK_BOUNDING_RECTS_H
-#define CALLBACK_BOUNDING_RECTS_H
+#ifndef CALLBACK_BOUNDING_HASH_H
+#define CALLBACK_BOUNDING_HASH_H
 
 #include "CallbackSearchReturn.h"
 #include "DocumentAxesPointsRequired.h"
@@ -21,6 +21,7 @@ class CallbackDocumentHash
 public:
   /// Single constructor
   CallbackDocumentHash(DocumentAxesPointsRequired documentAxesPointsRequired);
+  virtual ~CallbackDocumentHash ();
 
   /// Callback method.
   CallbackSearchReturn callback (const QString &curveName,
@@ -36,4 +37,4 @@ private:
   QCryptographicHash m_documentHash;
 };
 
-#endif // CALLBACK_BOUNDING_RECTS_H
+#endif // CALLBACK_BOUNDING_HASH_H

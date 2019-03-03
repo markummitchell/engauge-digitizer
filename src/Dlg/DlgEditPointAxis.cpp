@@ -23,6 +23,7 @@
 #include <QGroupBox>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QLineEdit>
 #include <QRect>
 #include "QtToString.h"
 #include <QVBoxLayout>
@@ -64,7 +65,8 @@ DlgEditPointAxis::DlgEditPointAxis (MainWindow &mainWindow,
   setWindowTitle (tr ("Edit Axis Point"));
 
   createCoords (layout);
-  createHint (layout);
+  createHints (layout,
+               documentAxesPointsRequired);
   createOkCancel (layout);
 
   initializeGraphCoordinates (xInitialValue,
@@ -132,7 +134,7 @@ void DlgEditPointAxis::createCoords (QVBoxLayout *layoutOuter)
   m_editGraphX->setValidator (m_validatorGraphX);
   // setStatusTip does not work for modal dialogs
   m_editGraphX->setWhatsThis (tr ("Enter the first graph coordinate of the axis point.\n\n"
-                                  "For cartesian plots this is X. For polar plots this is the radius R.\n\n"
+                                  "For cartesian plots this is X. For polar plots this is the angle Theta.\n\n"
                                   "The expected format of the coordinate value is determined by the locale setting. If "
                                   "typed values are not recognized as expected, check the locale setting in Settings / Main Window..."));
   layout->addWidget(m_editGraphX, 0);
@@ -147,7 +149,7 @@ void DlgEditPointAxis::createCoords (QVBoxLayout *layoutOuter)
   m_editGraphY->setValidator (m_validatorGraphY);
   // setStatusTip does not work for modal dialogs
   m_editGraphY->setWhatsThis (tr ("Enter the second graph coordinate of the axis point.\n\n"
-                                  "For cartesian plots this is Y. For polar plots this is the angle Theta.\n\n"
+                                  "For cartesian plots this is Y. For polar plots this is the radius R.\n\n"
                                   "The expected format of the coordinate value is determined by the locale setting. If "
                                   "typed values are not recognized as expected, check the locale setting in Settings / Main Window..."));
   layout->addWidget(m_editGraphY, 0);
@@ -157,23 +159,47 @@ void DlgEditPointAxis::createCoords (QVBoxLayout *layoutOuter)
   layout->addWidget(labelGraphParRight, 0);
 }
 
-void DlgEditPointAxis::createHint (QVBoxLayout *layoutOuter)
+void DlgEditPointAxis::createHints (QVBoxLayout *layoutOuter,
+                                    DocumentAxesPointsRequired documentAxesPointsRequired)
 {
-  // Insert a hint explaining why decimal points may not be accepted. Very confusing for user to figure out the problem at first, and
-  // then figure out which setting should change to fix it. The hint is centered so it is slightly less intrusive
+  // Insert:
+  // 1) a hint to advertise that axes with only one coordinate can be handled
+  // 2) a hint explaining why decimal points may not be accepted. Very confusing for user to figure out the problem at first, and
+  //    then figure out which setting should change to fix it. The hint is centered so it is slightly less intrusive
+
+  const int MIN_EDIT_WIDTH = 180;
 
   QWidget *widget = new QWidget;
   layoutOuter->addWidget (widget, 0, Qt::AlignCenter);
 
-  QHBoxLayout *layout = new QHBoxLayout;
+  QGridLayout *layout = new QGridLayout;
   widget->setLayout (layout);
+  int row = 0;
 
+  // Hint 1
+  QLabel *labelNumberCoordinates = new QLabel (tr ("Number of coordinates per axis point:"));
+  layout->addWidget (labelNumberCoordinates, row, 0, 1, 1);
+  QLineEdit *editNumberCoordinates = new QLineEdit;
+  editNumberCoordinates->setWhatsThis (tr ("Three axis points with two coordinates each are normally used. "
+                                           "If each axis point has only one known coordinate, then start over "
+                                           "with File / Import (Advanced) / 4 Axis Points."));
+  editNumberCoordinates->setReadOnly (true);
+  editNumberCoordinates->setText (documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3 ?
+                                    "2" :
+                                    "1");
+  editNumberCoordinates->setMinimumWidth (MIN_EDIT_WIDTH);
+  layout->addWidget (editNumberCoordinates, row++, 1, 1, 1);
+
+  // Hint 2
+  QLabel *labelLocale = new QLabel (tr ("Number format:"));
+  layout->addWidget (labelLocale, row, 0, 1, 1);
+  QLineEdit *editLocale = new QLineEdit;
+  editLocale->setWhatsThis (tr ("Locale which determines the allowed number formats. This is set by Settings / Main Window."));
+  editLocale->setReadOnly (true);
   QString locale = QLocaleToString (m_modelMainWindow.locale ());
-  QString hint = QString ("%1: %2")
-                 .arg (tr ("Number format"))
-                 .arg (locale);
-  QLabel *label = new QLabel (hint);
-  layout->addWidget (label);
+  editLocale->setText (locale);
+  editLocale->setMinimumWidth (MIN_EDIT_WIDTH);
+  layout->addWidget (editLocale, row++, 1, 1, 1);
 }
 
 void DlgEditPointAxis::createOkCancel (QVBoxLayout *layoutOuter)

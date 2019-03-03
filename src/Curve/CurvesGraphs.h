@@ -27,7 +27,7 @@ public:
   CurvesGraphs();
 
   /// Append new graph Curve to end of Curve list.
-  void addGraphCurveAtEnd (Curve curve);
+  void addGraphCurveAtEnd (const Curve &curve);
 
   /// Append new Point to the specified Curve.
   void addPoint (const Point &point);

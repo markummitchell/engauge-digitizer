@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
+#include "LineStyle.h"
 #include <qmath.h>
 #include "Spline.h"
 #include "SplineDrawer.h"
@@ -14,7 +15,8 @@ SplineDrawer::SplineDrawer(const Transformation &transformation) :
 {
 }
 
-void SplineDrawer::bindToSpline (int numSegments,
+void SplineDrawer::bindToSpline (const LineStyle &lineStyle,
+                                 int numSegments,
                                  const Spline &spline)
 {
   m_segmentOperations.resize (numSegments);
@@ -27,8 +29,9 @@ void SplineDrawer::bindToSpline (int numSegments,
     bool itsAKeeper = true;
     if (m_transformation.transformIsDefined()) {
 
-      // We have the graph<->screen transformation so let's use it
-      if (segmentIsMultiValued (spline,
+      // We have the graph<->screen transformation so let's use it. Could there be an ambiguity issue?
+      if ((lineStyle.curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH) &&
+          segmentIsMultiValued (spline,
                                 numSegments,
                                 segment)) {
         itsAKeeper = false;
@@ -36,8 +39,8 @@ void SplineDrawer::bindToSpline (int numSegments,
 
       // Invisible or visible?
       m_segmentOperations [segment] = (itsAKeeper ?
-                                         SPLINE_DRAWER_ENUM_VISIBLE_DRAW :
-                                         SPLINE_DRAWER_ENUM_INVISIBLE_MOVE);
+                                       SPLINE_DRAWER_ENUM_VISIBLE_DRAW :
+                                       SPLINE_DRAWER_ENUM_INVISIBLE_MOVE);
     }
   }
 }
@@ -48,10 +51,9 @@ bool SplineDrawer::segmentIsMultiValued (const Spline &spline,
 {
   ENGAUGE_ASSERT (m_transformation.transformIsDefined());
 
-  if ((0 < segment) &&
-      (segment < numSegments - 1)) {
+  if (segment < numSegments - 1) {
 
-    // Not at very start or very end
+    // Not at very end
     double tI = (double) segment;
     double tIp1 = (double) (segment + 1);
 

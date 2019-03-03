@@ -83,11 +83,11 @@ void Pixels::fillHole (QImage &image,
 
   // First pass is for counting
   int countWhite = 0;
-  for (int row = rowStart; row < rowStop; row++) {
-    for (int col = colStart; col < colStop; col++) {
+  for (int rowIter = rowStart; rowIter < rowStop; rowIter++) {
+    for (int colIter = colStart; colIter < colStop; colIter++) {
       if (!pixelIsBlack (image,
-                         col,
-                         row)) {
+                         colIter,
+                         rowIter)) {
         ++countWhite;
       }
     }
@@ -95,10 +95,10 @@ void Pixels::fillHole (QImage &image,
 
   // Second pass fills in the hole
   if (countWhite < thresholdCount) {
-    for (int row = rowStart; row < rowStop; row++) {
-      for (int col = colStart; col < colStop; col++) {
-        image.setPixel (col,
-                        row,
+    for (int rowIter = rowStart; rowIter < rowStop; rowIter++) {
+      for (int colIter = colStart; colIter < colStop; colIter++) {
+        image.setPixel (colIter,
+                        rowIter,
                         Qt::black);
       }
     }
