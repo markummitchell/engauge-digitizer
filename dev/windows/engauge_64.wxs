@@ -27,12 +27,10 @@
 	    <File Id='popplerqt5'   Name='poppler-qt5.dll'     DiskId='1' Source='Engauge Digitizer/poppler-qt5.dll'     />
 	    <File Id='zlib'         Name='zlib.dll'            DiskId='1' Source='Engauge Digitizer/zlib.dll'            />
 	    <File Id='libfftw33'    Name='libfftw3-3.dll'      DiskId='1' Source='Engauge Digitizer/libfftw3-3.dll'      />
-	    <File Id='log4cpp'      Name='log4cpp.dll'         DiskId='1' Source='Engauge Digitizer/log4cpp.dll'         />
-	    <File Id='concrt140'    Name='concrt140.dll'       DiskId='1' Source='Engauge Digitizer/concrt140.dll'       />
+            <File Id='concrt140'    Name='concrt140.dll'       DiskId='1' Source='Engauge Digitizer/concrt140.dll'       />
 	    <File Id='msvcp140'     Name='msvcp140.dll'        DiskId='1' Source='Engauge Digitizer/msvcp140.dll'        />
 	    <File Id='vccorlib140'  Name='vccorlib140.dll'     DiskId='1' Source='Engauge Digitizer/vccorlib140.dll'     />
 	    <File Id='vcruntime140' Name='vcruntime140.dll'    DiskId='1' Source='Engauge Digitizer/vcruntime140.dll'    />
-	    <File Id='clucene'      Name='Qt5CLucene.dll'      DiskId='1' Source='Engauge Digitizer/Qt5CLucene.dll'      />
 	    <File Id='core'         Name='Qt5Core.dll'         DiskId='1' Source='Engauge Digitizer/Qt5Core.dll'         />
 	    <File Id='gui'          Name='Qt5Gui.dll'          DiskId='1' Source='Engauge Digitizer/Qt5Gui.dll'          />
 	    <File Id='help'         Name='Qt5Help.dll'         DiskId='1' Source='Engauge Digitizer/Qt5Help.dll'         />
