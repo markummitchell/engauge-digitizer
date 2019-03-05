@@ -12,7 +12,7 @@ rem                  zip.exe                 Gnuwin32
 rem                  curl.exe                cURL
 rem                  7z.exe                  7-Zip
 rem                  qmake                   Qt 5. Typical minimal setup is provided by setup_32bit.bat
-rem               2) This does NOT need the fftw3 or log4cpp libraries to be installed first, since they are
+rem               2) This does NOT need the fftw3 library to be installed first, since it is
 rem                  downloaded and set up automatically by this script. The DLLs supplied should work for msvc 2015
 
 rem next line sets QTDIR to output of 'qmake -query QT_INSTALL_PREFIX'
@@ -69,10 +69,8 @@ if exist "%RESULTDIR%" del /Q /F "%RESULTDIR%" 2>nul
 if not exist "%RESULTDIR%" mkdir "%RESULTDIR%"
 
 set FFTW_HOME=%APPVEYOR_BUILD_FOLDER%\dev\windows\unzip_fftw
-set LOG4CPP_HOME=%APPVEYOR_BUILD_FOLDER%\dev\windows\unzip_log4cpp
 set SYSTEM32_HOME=%APPVEYOR_BUILD_FOLDER%\dev\windows\unzip_system32
 if not exist %FFTW_HOME% mkdir %FFTW_HOME%
-if not exist %LOG4CPP_HOME% mkdir %LOG4CPP_HOME%
 if not exist %SYSTEM32_HOME% mkdir %SYSTEM32_HOME%
 
 cd %FFTW_HOME%
@@ -93,16 +91,6 @@ cd lib
 lib /def:libfftw3-3.def /out:libfftw3-3.lib
 lib /def:libfftw3f-3.def /out:libfftw3f-3.lib
 lib /def:libfftw3l-3.def /out:libfftw3l-3.lib
-
-cd %LOG4CPP_HOME%
-if exist include rmdir include /s /q
-if exist lib rmdir lib /s /q
-7z x ../appveyor/log4cpp_null_build.zip -aoa
-if "%ARCH%" == "x86" (
-  xcopy/e lib32\* .
-) else (
-  xcopy/e lib64\* .
-)
 
 cd %SYSTEM32_HOME%
 if "%ARCH%" == "x86" (
@@ -154,7 +142,6 @@ echo current directory:
 cd
 echo ENGAUGE_CONFIG: %ENGAUGE_CONFIG%
 echo FFTW_HOME: %FFTW_HOME%
-echo LOG4CPP_HOME: %LOG4CPP_HOME%
 echo POPPLER_INCLUDE: %POPPLER_INCLUDE%
 echo POPPLER_LIB: %POPPLER_LIB%
 echo QTDIRS: %QTDIRS%
@@ -167,7 +154,7 @@ echo Continuing...
 
 lrelease engauge.pro
 if exist Makefile del /S Makefile
-qmake engauge.pro "CONFIG+=%ENGAUGE_CONFIG%" 
+qmake engauge.pro "CONFIG+=%ENGAUGE_CONFIG%" CONFIG+=pdf CONFIG+=debug CONFIG+=log4cpp_null
 
 if not exist Makefile (
    echo qmake command has failed. Quitting
@@ -180,7 +167,6 @@ rem move Makefile Makefile.orig
 rem ps: gc Makefile.orig | %{ $_ -replace '551.lib', %QTLIBEXT% } > Makefile
 nmake clean
 
-rem Make sure the log4cpp library is built with debug info to prevent 'mismatch deteced for _ITERATOR_DEBUG_LEVEL'
 nmake release
 
 if not exist bin/engauge.exe (
@@ -213,7 +199,6 @@ copy "%POPPLER_LIB%\poppler.dll"      "%RESULTDIR%"
 copy "%POPPLER_LIB%\poppler-qt5.dll"  "%RESULTDIR%"
 copy "%POPPLER_LIB%\zlib.dll"         "%RESULTDIR%"
 copy "%FFTW_HOME%\lib\libfftw3-3.dll" "%RESULTDIR%"
-copy "%LOG4CPP_HOME%\lib\log4cpp.dll" "%RESULTDIR%"
 copy "%SYSTEM32_HOME%\*"              "%RESULTDIR%"
 
 copy "%APPVEYOR_BUILD_FOLDER%"\translations "%RESULTDIR%"
