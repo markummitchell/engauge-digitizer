@@ -68,7 +68,7 @@ make
 
 # Help
 cd help
-./build.bash
+./build_qt5_12_0.bash
 cd ..
 cp -r bin/documentation/engauge.* Engauge\ Digitizer.app/Contents/Resources
 
@@ -102,8 +102,9 @@ macdeployqt Engauge\ Digitizer.app -appstore-compliant -dmg
 sudo rm -rf Engauge\ Digitizer.app/Contents/Frameworks/QtNetwork.framework
 sudo rm -rf Engauge\ Digitizer.app/Contents/Frameworks/QtSql.framework
 
-# Signing. QtNetwork, QtDbus and QtSql were removed recently
-frameworks=(QtCLucene QtCore QtGui QtPrintSupport QtWidgets QtXml)
+# Signing. QtNetwork, QtDbus and QtSql were removed recently.
+# QtLucene was removed even more recently (between 5.8 and 5.10)
+frameworks=(QtCore QtDBus QtGui QtPrintSupport QtSvg QtWidgets QtXml)
 for i in "${frameworks[@]}"
 do
     signAppFramework $i
@@ -112,9 +113,11 @@ done
 signAppArray `find Engauge\ Digitizer.app | grep '/Frameworks/lib'           | sed 's/Engauge\ Digitizer\.app//g'` # xcode 5 and 6
 signAppArray `find Engauge\ Digitizer.app | grep '/engauge_'                 | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/bearer/lib'       | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/iconengines/lib'  | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/imageformats/lib' | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/platforms/lib'    | sed 's/Engauge\ Digitizer\.app//g'`
 signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/printsupport/lib' | sed 's/Engauge\ Digitizer\.app//g'`
+signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/styles/lib'       | sed 's/Engauge\ Digitizer\.app//g'`
 # Next line is needed for newer versions of xcode but not for xcode 5 and 6. Update - probably should manually remove unwanted 
 # plugins after the macdeployqt line
 #signAppArray `find Engauge\ Digitizer.app | grep '/PlugIns/sqldrivers/lib'   | sed 's/Engauge\ Digitizer\.app//g'`

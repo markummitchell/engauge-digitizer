@@ -219,7 +219,7 @@ double ExportFileFunctions::linearlyInterpolate (const Points &points,
   // If point is within the range of the function points then interpolation will be used, otherwise
   // extrapolation will be used
   double yRadius = 0;
-  QPointF posGraphBefore, posScreenBefore; // Not set until ip=1
+  QPointF posGraphBefore; // Not set until ip=1
   bool foundIt = false;
   for (int ip = 0; !foundIt && (ip < points.count()); ip++) {
 
