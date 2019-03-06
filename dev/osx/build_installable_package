@@ -62,7 +62,7 @@ if [ ! -f /usr/lib/liblog4cpp.1.dylib ]; then
 fi
 
 # Make into Engauge Digitizer.app
-qmake engauge.pro
+qmake engauge.pro CONFIG+=log4cpp_null
 make clean
 make 
 

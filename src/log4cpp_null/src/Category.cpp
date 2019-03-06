@@ -4,7 +4,7 @@ namespace log4cpp {
 
   Category *Category::m_category = 0;
 
-  Category::Category()
+  Category::Category() noexcept
   {
   }
 

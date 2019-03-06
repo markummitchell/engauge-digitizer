@@ -14,7 +14,7 @@ namespace log4cpp
   class Category
   {
   public:
-    Category();
+    Category() noexcept;
     virtual ~Category();
 
     /// Noop method to add an Appender
