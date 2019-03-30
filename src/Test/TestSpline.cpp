@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Logger.h"
 #include "MainWindow.h"
 #include <map>

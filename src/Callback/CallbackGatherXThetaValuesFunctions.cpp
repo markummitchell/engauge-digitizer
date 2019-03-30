@@ -6,6 +6,7 @@
 
 #include "CallbackGatherXThetaValuesFunctions.h"
 #include "DocumentModelExportFormat.h"
+#include "EngaugeAssert.h"
 #include "ExportAlignLinear.h"
 #include "ExportAlignLog.h"
 #include "ExportLayoutFunctions.h"
@@ -18,6 +19,8 @@ CallbackGatherXThetaValuesFunctions::CallbackGatherXThetaValuesFunctions(const D
                                                                          const Transformation &transformation) :
   m_transformation (transformation)
 {
+  ENGAUGE_ASSERT (modelExport.pointsSelectionFunctions() != EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_GRID_LINES);
+
   bool firstCurveForGatherXTheta = (modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE);
 
   // Included just the first curve, or all curves depending on DocumentModelExportFormat

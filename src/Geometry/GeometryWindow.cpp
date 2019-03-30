@@ -4,7 +4,6 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "CallbackGatherXThetaValuesFunctions.h"
 #include "CmdMediator.h"
 #include "Curve.h"
 #include "CurveConnectAs.h"

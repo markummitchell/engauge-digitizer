@@ -52,6 +52,7 @@ private slots:
   void slotFunctionsPointsEvenlySpacedInterval(const QString  &);
   void slotFunctionsPointsEvenlySpacedIntervalUnits(const QString &);
   void slotFunctionsPointsFirstCurve();
+  void slotFunctionsPointsGridLines();
   void slotFunctionsPointsRaw();
   void slotHeaderGnuplot();
   void slotHeaderNone();
@@ -108,6 +109,7 @@ private:
   QLineEdit *m_editFunctionsPointsEvenlySpacing;
   QDoubleValidator *m_validatorFunctionsPointsEvenlySpacing;
   QComboBox *m_cmbFunctionsPointsEvenlySpacingUnits;
+  QRadioButton *m_btnFunctionsPointsGridLines;
   QRadioButton *m_btnFunctionsPointsRaw;
 
   QRadioButton *m_btnCurvesLayoutAllCurves;

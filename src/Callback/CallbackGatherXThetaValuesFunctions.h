@@ -24,6 +24,7 @@ typedef QMap<double, bool> ValuesVectorXOrY;
 typedef QHash<QString, bool> CurveNamesIncluded;
 
 /// Callback for collecting X/Theta independent variables, for functions, in preparation for exporting.
+/// This is not to be used for EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_GRID_LINES
 class CallbackGatherXThetaValuesFunctions
 {
 public:

@@ -10,6 +10,7 @@
 #include "ExportFileAbstractBase.h"
 #include "ExportPointsIntervalUnits.h"
 #include "ExportValuesOrdinal.h"
+#include "Points.h"
 #include <QStringList>
 #include <QVector>
 

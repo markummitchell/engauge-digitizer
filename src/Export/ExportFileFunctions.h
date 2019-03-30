@@ -9,8 +9,10 @@
 
 #include "ExportFileAbstractBase.h"
 #include "ExportValuesXOrY.h"
+#include "Points.h"
 #include <QStringList>
 #include <QVector>
+#include "ValuesVectorXOrY.h"
 
 class Document;
 class DocumentModelCoords;
@@ -123,6 +125,13 @@ private:
   // since the union of all x/theta values is applied to each curve
   bool rowHasAtLeastOneYRadiusEntry (const QVector<QVector<QString*> > &yRadiusValues,
                                      int row) const;
+
+  // Generate thex/theta values for export
+  ValuesVectorXOrY xThetaValuesGenerator (const MainWindowModel &modelMainWindow,
+                                          const DocumentModelExportFormat &modelExportOverride,
+                                          const QStringList &curvesIncluded,
+                                          const Transformation &transformation,
+                                          const Document &document) const;
 };
 
 #endif // EXPORT_FILE_FUNCTIONS_H

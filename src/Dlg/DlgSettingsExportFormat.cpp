@@ -240,6 +240,11 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
            this, SLOT (slotFunctionsPointsEvenlySpacedIntervalUnits (const QString &))); // activated() ignores code changes
   layoutPointsSelections->addWidget (m_cmbFunctionsPointsEvenlySpacingUnits, row++, 3, 1, 1, Qt::AlignLeft);
 
+  m_btnFunctionsPointsGridLines = new QRadioButton (tr ("Interpolate Ys at grid line X values."));
+  m_btnFunctionsPointsGridLines->setWhatsThis (tr ("Exported file will have values at evenly spaced X values at the vertical grid lines."));
+  layoutPointsSelections->addWidget (m_btnFunctionsPointsGridLines, row++, 0, 1, 4);
+  connect (m_btnFunctionsPointsGridLines, SIGNAL (released()), this, SLOT (slotFunctionsPointsGridLines()));
+
   m_btnFunctionsPointsRaw = new QRadioButton (tr ("Raw Xs and Ys"));
   m_btnFunctionsPointsRaw->setWhatsThis (tr ("Exported file will have only original X and Y values"));
   layoutPointsSelections->addWidget (m_btnFunctionsPointsRaw, row++, 0, 1, 4);
@@ -593,6 +598,7 @@ void DlgSettingsExportFormat::load (CmdMediator &cmdMediator)
   m_btnFunctionsPointsAllCurves->setChecked (pointsSelectionFunctions == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES);
   m_btnFunctionsPointsFirstCurve->setChecked (pointsSelectionFunctions == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE);
   m_btnFunctionsPointsEvenlySpaced->setChecked (pointsSelectionFunctions == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_PERIODIC);
+  m_btnFunctionsPointsGridLines->setChecked (pointsSelectionFunctions == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_GRID_LINES);
   m_btnFunctionsPointsRaw->setChecked (pointsSelectionFunctions == EXPORT_POINTS_SELECTION_FUNCTIONS_RAW);
 
   ExportLayoutFunctions layoutFunctions = m_modelExportAfter->layoutFunctions ();
@@ -784,6 +790,15 @@ void DlgSettingsExportFormat::slotFunctionsPointsFirstCurve()
   m_modelExportAfter->setPointsSelectionFunctions(EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE);
   updateControls();
   updatePreview();
+}
+
+void DlgSettingsExportFormat::slotFunctionsPointsGridLines()
+{
+    LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsPointsGridLines";
+
+    m_modelExportAfter->setPointsSelectionFunctions(EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_GRID_LINES);
+    updateControls();
+    updatePreview();
 }
 
 void DlgSettingsExportFormat::slotFunctionsPointsRaw()
