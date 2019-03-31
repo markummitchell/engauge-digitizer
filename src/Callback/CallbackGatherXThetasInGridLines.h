@@ -11,12 +11,17 @@
 #include "CurveNamesIncluded.h"
 #include "ExportValuesXOrY.h"
 #include "Transformation.h"
+#include <QHash>
+#include <QString>
 #include "ValuesVectorXOrY.h"
 
 class Document;
 class DocumentModelExportFormat;
 class MainWindowModel;
 class Point;
+
+/// Min or max value for each (included) curve name
+typedef QHash<QString, double> CurveLimits;
 
 /// Callback for collecting X/Theta independent variables, for functions, in preparation for exporting,
 /// based on grid lines.
@@ -29,6 +34,7 @@ class CallbackGatherXThetasInGridLines
 public:
   /// Single constructor.
   CallbackGatherXThetasInGridLines(const MainWindowModel &modelMainWindow,
+                                   const DocumentModelExportFormat &modelExportOverride,
                                    const QStringList &curvesIncluded,
                                    const Transformation &transformation,
                                    const Document &document);
@@ -48,8 +54,13 @@ private:
                      const Document &document);
 
   const Transformation m_transformation;
+  const DocumentModelExportFormat m_modelExportOverride;
   CurveNamesIncluded m_curveNamesIncluded;
   ValuesVectorXOrY m_xThetaValues;
+
+  // Curve limits that may or may not be merged into m_xThetaValues
+  CurveLimits m_curveLimitsMin;
+  CurveLimits m_curveLimitsMax;
 };
 
 #endif // CALLBACK_GATHER_X_THETAS_IN_GRID_LINES_H

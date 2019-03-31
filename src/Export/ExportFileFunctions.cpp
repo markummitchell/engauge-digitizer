@@ -155,6 +155,7 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
   ValuesVectorXOrY valuesVector;
   if (modelExportOverride.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_GRID_LINES) {
     CallbackGatherXThetasInGridLines ftor (modelMainWindow,
+                                           modelExportOverride,
                                            curvesIncluded,
                                            transformation,
                                            document);

@@ -19,10 +19,12 @@
 #include <qmath.h>
 
 CallbackGatherXThetasInGridLines::CallbackGatherXThetasInGridLines(const MainWindowModel &modelMainWindow,
+                                                                   const DocumentModelExportFormat &modelExportOverride,
                                                                    const QStringList &curvesIncluded,
                                                                    const Transformation &transformation,
                                                                    const Document &document) :
-  m_transformation (transformation)
+  m_transformation (transformation),
+  m_modelExportOverride (modelExportOverride)
 {
   addGridLines (modelMainWindow,
                 transformation,
@@ -80,13 +82,27 @@ CallbackSearchReturn CallbackGatherXThetasInGridLines::callback (const QString &
                                << " curveName=" << curveName.toLatin1().data()
                                << " point=" << point.identifier().toLatin1().data();
 
-  if (m_curveNamesIncluded.contains (curveName)) {
+  // Skip everything unless the endpoints are to be collected
+  if (m_modelExportOverride.endpoints() == EXPORT_ENDPOINTS_INCLUDE) {
 
-    QPointF posGraph;
-    m_transformation.transformScreenToRawGraph (point.posScreen(),
-                                                posGraph);
+    if (m_curveNamesIncluded.contains (curveName)) {
 
-    m_xThetaValues [posGraph.x ()] = true;
+      QPointF posGraph;
+      m_transformation.transformScreenToRawGraph (point.posScreen(),
+                                                  posGraph);
+
+      if (!m_curveLimitsMin.contains (curveName) ||
+          posGraph.x() < m_curveLimitsMin [curveName]) {
+
+        m_curveLimitsMin [curveName] = posGraph.x ();
+      }
+
+      if (!m_curveLimitsMax.contains (curveName) ||
+          posGraph.x() > m_curveLimitsMax [curveName]) {
+
+        m_curveLimitsMax [curveName] = posGraph.x ();
+      }
+    }
   }
 
   return CALLBACK_SEARCH_RETURN_CONTINUE;
@@ -96,5 +112,18 @@ ValuesVectorXOrY CallbackGatherXThetasInGridLines::xThetaValuesRaw () const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CallbackGatherXThetasInGridLines::xThetaValuesRaw";
 
-  return m_xThetaValues;
+  ValuesVectorXOrY values = m_xThetaValues;
+
+  // Merge any saved endpoints
+  CurveLimits::const_iterator itr;
+  for (itr = m_curveLimitsMin.begin(); itr != m_curveLimitsMin.end(); itr++) {
+    double value = *itr;
+    values [value] = true;
+  }
+  for (itr = m_curveLimitsMax.begin(); itr != m_curveLimitsMax.end(); itr++) {
+    double value = *itr;
+    values [value] = true;
+  }
+
+  return values;
 }

@@ -76,7 +76,7 @@ private:
   double linearlyInterpolate (const Points &points,
                               double xThetaValue,
                               const Transformation &transformation) const;
-  void loadYRadiusValues (const DocumentModelExportFormat &modelExport,
+  void loadYRadiusValues (const DocumentModelExportFormat &modelExportOverride,
                           const Document &document,
                           const MainWindowModel &modelMainWindow,
                           const QStringList &curvesIncluded,
