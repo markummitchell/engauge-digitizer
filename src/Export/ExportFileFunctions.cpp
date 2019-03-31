@@ -4,7 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "CallbackGatherXThetaValuesFunctions.h"
+#include "CallbackGatherXThetasInCurves.h"
+#include "CallbackGatherXThetasInGridLines.h"
 #include "CurveConnectAs.h"
 #include "Document.h"
 #include "DocumentModelGeneral.h"
@@ -151,14 +152,30 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
                                                    modelExportOverride.header() == EXPORT_HEADER_GNUPLOT);
 
   // Get x/theta values to be used
-  ValuesVectorXOrY xThetaValues = xThetaValuesGenerator (modelMainWindow,
-                                                         modelExportOverride,
-                                                         curvesIncluded,
-                                                         transformation,
-                                                         document);
+  ValuesVectorXOrY valuesVector;
+  if (modelExportOverride.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_GRID_LINES) {
+    CallbackGatherXThetasInGridLines ftor (modelMainWindow,
+                                           curvesIncluded,
+                                           transformation,
+                                           document);
+    Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                       &CallbackGatherXThetasInGridLines::callback);
+    document.iterateThroughCurvesPointsGraphs(ftorWithCallback);
+    valuesVector = ftor.xThetaValuesRaw();
+  } else {
+    CallbackGatherXThetasInCurves ftor (modelExportOverride,
+                                        curvesIncluded,
+                                        transformation);
+    Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
+                                                                                                       &CallbackGatherXThetasInCurves::callback);
+    document.iterateThroughCurvesPointsGraphs(ftorWithCallback);
+    valuesVector = ftor.xThetaValuesRaw();
+  }
+
   ExportXThetaValuesMergedFunctions exportXTheta (modelExportOverride,
-                                                  xThetaValues,
+                                                  valuesVector,
                                                   transformation);
+
   ExportValuesXOrY xThetaValuesMerged = exportXTheta.xThetaValues ();
 
   // Skip if every curve was a relation
@@ -627,61 +644,4 @@ bool ExportFileFunctions::rowHasAtLeastOneYRadiusEntry (const QVector<QVector<QS
   }
 
   return hasEntry;
-}
-
-ValuesVectorXOrY ExportFileFunctions::xThetaValuesGenerator (const MainWindowModel &modelMainWindow,
-                                                             const DocumentModelExportFormat &modelExportOverride,
-                                                             const QStringList &curvesIncluded,
-                                                             const Transformation &transformation,
-                                                             const Document &document) const
-{
-  if (modelExportOverride.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_GRID_LINES) {
-
-    // Use grid lines
-    DocumentModelGridDisplay gridLines = document.modelGridDisplay();
-
-    // Prevent overflow
-    GridLineLimiter gridLineLimiter;
-    double startX = document.modelGridDisplay().startX();
-    double stepX = document.modelGridDisplay().stepX();
-    double stopX = document.modelGridDisplay().stopX();
-    gridLineLimiter.limitForXTheta (document,
-                                    transformation,
-                                    document.modelCoords(),
-                                    modelMainWindow,
-                                    document.modelGridDisplay(),
-                                    startX,
-                                    stepX,
-                                    stopX);
-    ValuesVectorXOrY xThetaValues;
-    if (document.modelCoords().coordScaleXTheta() == COORD_SCALE_LINEAR) {
-      // Linear
-      unsigned int countX = (unsigned int) (0.5 + 1 + (stopX - startX) / stepX);
-      for (unsigned int i = 0; i < countX; i++) {
-        double x = startX + i * stepX;
-        xThetaValues [x] = true;
-      }
-    } else {
-      // Log
-      unsigned int countX = 1.0 + (qLn (stopX) - qLn (startX)) / qLn (stepX);
-      for (unsigned int i = 0; i < countX; i++) {
-        double x = startX * qPow (stepX, i);
-        xThetaValues [x] = true;
-      }
-    }
-
-    return xThetaValues;
-
-  } else {
-
-    // Use Document values
-    CallbackGatherXThetaValuesFunctions ftor (modelExportOverride,
-                                              curvesIncluded,
-                                              transformation);
-    Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,
-                                                                                                       &CallbackGatherXThetaValuesFunctions::callback);
-    document.iterateThroughCurvesPointsGraphs(ftorWithCallback);
-
-    return ftor.xThetaValuesRaw();
-  }
 }

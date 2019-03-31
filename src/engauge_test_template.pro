@@ -43,7 +43,8 @@ HEADERS  += \
     Callback/CallbackCheckEditPointAxis.h \
     Callback/CallbackDocumentHash.h \
     Callback/CallbackDocumentScrub.h \
-    Callback/CallbackGatherXThetaValuesFunctions.h \
+    Callback/CallbackGatherXThetasInCurves.h \
+    Callback/CallbackGatherXThetasInGridLines.h \
     Callback/CallbackNextOrdinal.h \
     Callback/CallbackPointOrdinal.h \
     Callback/CallbackRemovePointsInCurvesGraphs.h \
@@ -145,6 +146,7 @@ HEADERS  += \
     Curve/Curve.h \
     Curve/CurveConnectAs.h \
     Curve/CurveNameList.h \
+    include/CurveNamesIncluded.h \
     Curve/CurveSettingsInt.h \
     Curve/CurvesGraphs.h \
     Curve/CurveStyle.h \
@@ -215,6 +217,7 @@ HEADERS  += \
     Export/ExportAlignLinear.h \
     Export/ExportAlignLog.h \
     Export/ExportDelimiter.h \
+    Export/ExportEndpoints.h \
     Export/ExportLayoutFunctions.h \
     Export/ExportPointsIntervalUnits.h \
     Export/ExportPointsSelectionFunctions.h \
@@ -407,7 +410,8 @@ SOURCES += \
     Callback/CallbackCheckEditPointAxis.cpp \
     Callback/CallbackDocumentHash.cpp \
     Callback/CallbackDocumentScrub.cpp \
-    Callback/CallbackGatherXThetaValuesFunctions.cpp \
+    Callback/CallbackGatherXThetasInCurves.cpp \
+    Callback/CallbackGatherXThetasInGridLines.cpp \
     Callback/CallbackNextOrdinal.cpp \
     Callback/CallbackPointOrdinal.cpp \
     Callback/CallbackRemovePointsInCurvesGraphs.cpp \
@@ -572,6 +576,7 @@ SOURCES += \
     Export/ExportAlignLinear.cpp \
     Export/ExportAlignLog.cpp \
     Export/ExportDelimiter.cpp \
+    Export/ExportEndpoints.cpp \
     Export/ExportFileAbstractBase.cpp \
     Export/ExportFileFunctions.cpp \
     Export/ExportFileRelations.cpp \

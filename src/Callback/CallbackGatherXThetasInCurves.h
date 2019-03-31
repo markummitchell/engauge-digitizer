@@ -4,34 +4,31 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef CALLBACK_GATHER_X_THETA_VALUES_FUNCTIONS_H
-#define CALLBACK_GATHER_X_THETA_VALUES_FUNCTIONS_H
+#ifndef CALLBACK_GATHER_X_THETAS_IN_CURVES_H
+#define CALLBACK_GATHER_X_THETAS_IN_CURVES_H
 
 #include "CallbackSearchReturn.h"
+#include "CurveNamesIncluded.h"
 #include "ExportValuesXOrY.h"
-#include <QHash>
-#include <QMap>
 #include "Transformation.h"
 #include "ValuesVectorXOrY.h"
 
 class DocumentModelExportFormat;
 class Point;
 
-// Save values into container that preserves order by key (QMap). These are common to all included curves
-// QMap is for fast random access
-typedef QMap<double, bool> ValuesVectorXOrY;
-
-typedef QHash<QString, bool> CurveNamesIncluded;
-
-/// Callback for collecting X/Theta independent variables, for functions, in preparation for exporting.
-/// This is not to be used for EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_GRID_LINES
-class CallbackGatherXThetaValuesFunctions
+/// Callback for collecting X/Theta independent variables, for functions, in preparation for exporting,
+/// based on curve points.
+///
+/// Although most of the time the X values are extracted from the X values of the document curves, they are sometimes
+/// extracted from the X coordinates of the grid lines (depending on ExportPointsSelectionFunctions), or even
+/// both the document curves and grid lines
+class CallbackGatherXThetasInCurves
 {
 public:
   /// Single constructor.
-  CallbackGatherXThetaValuesFunctions(const DocumentModelExportFormat &modelExport,
-                                      const QStringList &curveNamesIncluded,
-                                      const Transformation &transformation);
+  CallbackGatherXThetasInCurves(const DocumentModelExportFormat &modelExport,
+                                const QStringList &curveNamesIncluded,
+                                const Transformation &transformation);
 
   /// Callback method.
   CallbackSearchReturn callback (const QString &curveName,
@@ -41,11 +38,11 @@ public:
   ValuesVectorXOrY xThetaValuesRaw () const;
 
 private:
-  CallbackGatherXThetaValuesFunctions();
+  CallbackGatherXThetasInCurves();
 
   const Transformation m_transformation;
   CurveNamesIncluded m_curveNamesIncluded;
   ValuesVectorXOrY m_xThetaValues;
 };
 
-#endif // CALLBACK_GATHER_X_THETA_VALUES_FUNCTIONS_H
+#endif // CALLBACK_GATHER_X_THETAS_IN_CURVES_H

@@ -4,7 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "CallbackGatherXThetaValuesFunctions.h"
+#include "CallbackGatherXThetasInCurves.h"
 #include "DocumentModelExportFormat.h"
 #include "EngaugeAssert.h"
 #include "ExportAlignLinear.h"
@@ -14,16 +14,14 @@
 #include "Logger.h"
 #include "Point.h"
 
-CallbackGatherXThetaValuesFunctions::CallbackGatherXThetaValuesFunctions(const DocumentModelExportFormat &modelExport,
-                                                                         const QStringList &curvesIncluded,
-                                                                         const Transformation &transformation) :
+CallbackGatherXThetasInCurves::CallbackGatherXThetasInCurves(const DocumentModelExportFormat &modelExport,
+                                                             const QStringList &curvesIncluded,
+                                                             const Transformation &transformation) :
   m_transformation (transformation)
 {
-  ENGAUGE_ASSERT (modelExport.pointsSelectionFunctions() != EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_GRID_LINES);
-
   bool firstCurveForGatherXTheta = (modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE);
 
-  // Included just the first curve, or all curves depending on DocumentModelExportFormat
+  // Include just the first curve, or all curves depending on DocumentModelExportFormat
   QStringList::const_iterator itr;
   for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
 
@@ -39,10 +37,10 @@ CallbackGatherXThetaValuesFunctions::CallbackGatherXThetaValuesFunctions(const D
   }
 }
 
-CallbackSearchReturn CallbackGatherXThetaValuesFunctions::callback (const QString &curveName,
-                                                                    const Point &point)
+CallbackSearchReturn CallbackGatherXThetasInCurves::callback (const QString &curveName,
+                                                              const Point &point)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "CallbackGatherXThetaValuesFunctions::callback"
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CallbackGatherXThetasInCurves::callback"
                                << " curveName=" << curveName.toLatin1().data()
                                << " point=" << point.identifier().toLatin1().data();
 
@@ -58,9 +56,9 @@ CallbackSearchReturn CallbackGatherXThetaValuesFunctions::callback (const QStrin
   return CALLBACK_SEARCH_RETURN_CONTINUE;
 }
 
-ValuesVectorXOrY CallbackGatherXThetaValuesFunctions::xThetaValuesRaw () const
+ValuesVectorXOrY CallbackGatherXThetasInCurves::xThetaValuesRaw () const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CallbackGatherXThetaValuesFunctions::xThetaValuesRaw";
+  LOG4CPP_INFO_S ((*mainCat)) << "CallbackGatherXThetasInCurves::xThetaValuesRaw";
 
   return m_xThetaValues;
 }

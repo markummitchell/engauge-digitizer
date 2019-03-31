@@ -205,7 +205,7 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
   layoutPointsSelections->addWidget (m_btnFunctionsPointsFirstCurve, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsFirstCurve, SIGNAL (released()), this, SLOT (slotFunctionsPointsFirstCurve()));
 
-  m_btnFunctionsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate Ys at evenly spaced X values."));
+  m_btnFunctionsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate Ys at evenly spaced X values that are automatically selected"));
   m_btnFunctionsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have values at evenly spaced X values, separated by the interval selected below."));
   layoutPointsSelections->addWidget (m_btnFunctionsPointsEvenlySpaced, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsEvenlySpaced, SIGNAL (released()), this, SLOT (slotFunctionsPointsEvenlySpaced()));
@@ -240,7 +240,7 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
            this, SLOT (slotFunctionsPointsEvenlySpacedIntervalUnits (const QString &))); // activated() ignores code changes
   layoutPointsSelections->addWidget (m_cmbFunctionsPointsEvenlySpacingUnits, row++, 3, 1, 1, Qt::AlignLeft);
 
-  m_btnFunctionsPointsGridLines = new QRadioButton (tr ("Interpolate Ys at grid line X values."));
+  m_btnFunctionsPointsGridLines = new QRadioButton (tr ("Interpolate Ys at evenly spaced X values on grid lines"));
   m_btnFunctionsPointsGridLines->setWhatsThis (tr ("Exported file will have values at evenly spaced X values at the vertical grid lines."));
   layoutPointsSelections->addWidget (m_btnFunctionsPointsGridLines, row++, 0, 1, 4);
   connect (m_btnFunctionsPointsGridLines, SIGNAL (released()), this, SLOT (slotFunctionsPointsGridLines()));
@@ -718,6 +718,11 @@ void DlgSettingsExportFormat::slotExclude ()
   m_modelExportAfter->setCurveNamesNotExported(excluded);
   updateControls();
   updatePreview();
+}
+
+void DlgSettingsExportFormat::slotFunctionsEndpoints(const QString &)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsEndpoints";
 }
 
 void DlgSettingsExportFormat::slotFunctionsLayoutAllCurves()
