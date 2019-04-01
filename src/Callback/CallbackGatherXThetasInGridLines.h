@@ -9,6 +9,7 @@
 
 #include "CallbackSearchReturn.h"
 #include "CurveNamesIncluded.h"
+#include "ExportEndpoints.h"
 #include "ExportValuesXOrY.h"
 #include "Transformation.h"
 #include <QHash>
@@ -16,7 +17,6 @@
 #include "ValuesVectorXOrY.h"
 
 class Document;
-class DocumentModelExportFormat;
 class MainWindowModel;
 class Point;
 
@@ -34,7 +34,7 @@ class CallbackGatherXThetasInGridLines
 public:
   /// Single constructor.
   CallbackGatherXThetasInGridLines(const MainWindowModel &modelMainWindow,
-                                   const DocumentModelExportFormat &modelExportOverride,
+                                   ExportEndpoints exportEndpoints,
                                    const QStringList &curvesIncluded,
                                    const Transformation &transformation,
                                    const Document &document);
@@ -54,7 +54,7 @@ private:
                      const Document &document);
 
   const Transformation m_transformation;
-  const DocumentModelExportFormat m_modelExportOverride;
+  ExportEndpoints m_exportEndpoints;
   CurveNamesIncluded m_curveNamesIncluded;
   ValuesVectorXOrY m_xThetaValues;
 

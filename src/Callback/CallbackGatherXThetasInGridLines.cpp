@@ -6,7 +6,6 @@
 
 #include "CallbackGatherXThetasInGridLines.h"
 #include "Document.h"
-#include "DocumentModelExportFormat.h"
 #include "EngaugeAssert.h"
 #include "ExportAlignLinear.h"
 #include "ExportAlignLog.h"
@@ -19,12 +18,12 @@
 #include <qmath.h>
 
 CallbackGatherXThetasInGridLines::CallbackGatherXThetasInGridLines(const MainWindowModel &modelMainWindow,
-                                                                   const DocumentModelExportFormat &modelExportOverride,
+                                                                   ExportEndpoints exportEndpoints,
                                                                    const QStringList &curvesIncluded,
                                                                    const Transformation &transformation,
                                                                    const Document &document) :
   m_transformation (transformation),
-  m_modelExportOverride (modelExportOverride)
+  m_exportEndpoints (exportEndpoints)
 {
   addGridLines (modelMainWindow,
                 transformation,
@@ -83,7 +82,7 @@ CallbackSearchReturn CallbackGatherXThetasInGridLines::callback (const QString &
                                << " point=" << point.identifier().toLatin1().data();
 
   // Skip everything unless the endpoints are to be collected
-  if (m_modelExportOverride.endpoints() == EXPORT_ENDPOINTS_INCLUDE) {
+  if (m_exportEndpoints == EXPORT_ENDPOINTS_INCLUDE) {
 
     if (m_curveNamesIncluded.contains (curveName)) {
 

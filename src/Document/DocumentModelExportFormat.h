@@ -42,8 +42,10 @@ public:
   /// Get method for delimiter.
   ExportDelimiter delimiter() const;
 
-  /// Get method for endpoints.
-  ExportEndpoints endpoints () const;
+  /// Get methods for endpoints.
+  ExportEndpoints endpointsAutomatic () const;
+  ExportEndpoints endpointsFirst () const;
+  ExportEndpoints endpointsGridLines () const;
   
   /// Get method for header.
   ExportHeader header() const;
@@ -86,8 +88,10 @@ public:
   /// Set method for delimiter.
   void setDelimiter(ExportDelimiter exportDelimiter);
 
-  /// Set method for endpoints.
-  void setEndpoints(ExportEndpoints exportEndpoints);
+  /// Set methods for endpoints.
+  void setEndpointsAutomatic (ExportEndpoints exportEndpoints);
+  void setEndpointsFirst (ExportEndpoints exportEndpoints);
+  void setEndpointsGridLines (ExportEndpoints exportEndpoints);
   
   /// Set method for header.
   void setHeader(ExportHeader exportHeader);
@@ -135,7 +139,9 @@ private:
   ExportPointsIntervalUnits m_pointsIntervalUnitsRelations;
   ExportLayoutFunctions m_layoutFunctions;
   ExportDelimiter m_delimiter;
-  ExportEndpoints m_endpoints;
+  ExportEndpoints m_endpointsAutomatic;
+  ExportEndpoints m_endpointsFirst;
+  ExportEndpoints m_endpointsGridLines;
   bool m_overrideCsvTsv;
   ExportHeader m_header;
   QString m_xLabel;

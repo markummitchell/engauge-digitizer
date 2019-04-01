@@ -202,8 +202,23 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
   m_btnFunctionsPointsFirstCurve = new QRadioButton (tr ("Interpolate Ys at Xs from first curve"));
   m_btnFunctionsPointsFirstCurve->setWhatsThis (tr ("Exported file will have values at every unique X "
                                                     "value from the first curve. Y values will be linearly interpolated if necessary"));
-  layoutPointsSelections->addWidget (m_btnFunctionsPointsFirstCurve, row++, 0, 1, 4);
+  layoutPointsSelections->addWidget (m_btnFunctionsPointsFirstCurve, row, 0, 1, 4);
   connect (m_btnFunctionsPointsFirstCurve, SIGNAL (released()), this, SLOT (slotFunctionsPointsFirstCurve()));
+
+  QLabel *labelEndpointsFirst = new QLabel (tr ("Endpoints:"));
+  layoutPointsSelections->addWidget (labelEndpointsFirst, row, 4, 1, 1);
+
+  m_cmbFunctionsEndpointsFirstCurve = new QComboBox;
+  m_cmbFunctionsEndpointsFirstCurve->setWhatsThis (tr ("Endpoint handling when first curve is selected."));
+  m_cmbFunctionsEndpointsFirstCurve->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_OMIT),
+                                             QVariant (EXPORT_ENDPOINTS_OMIT));
+  m_cmbFunctionsEndpointsFirstCurve->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_INCLUDE),
+                                             QVariant (EXPORT_ENDPOINTS_INCLUDE));
+  m_cmbFunctionsEndpointsFirstCurve->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_EXTRAPOLATE_PAST),
+                                             QVariant (EXPORT_ENDPOINTS_EXTRAPOLATE_PAST));
+  layoutPointsSelections->addWidget (m_cmbFunctionsEndpointsFirstCurve, row++, 5, 1, 1);
+  connect (m_cmbFunctionsEndpointsFirstCurve, SIGNAL (activated (const QString &)),
+           this, SLOT (slotFunctionsEndpointsFirst (const QString &)));
 
   m_btnFunctionsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate Ys at evenly spaced X values that are automatically selected"));
   m_btnFunctionsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have values at evenly spaced X values, separated by the interval selected below."));
@@ -233,17 +248,47 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
                                                             "consistent across the graph, even if the X scale is logarithmic.\n\n"
                                                             "Graph units are preferred when the spacing is to depend on the X scale."));
   m_cmbFunctionsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_GRAPH),
-                                                                                     QVariant (EXPORT_POINTS_INTERVAL_UNITS_GRAPH));
+                                                  QVariant (EXPORT_POINTS_INTERVAL_UNITS_GRAPH));
   m_cmbFunctionsPointsEvenlySpacingUnits->addItem(exportPointsIntervalUnitsToString (EXPORT_POINTS_INTERVAL_UNITS_SCREEN),
-                                                                                     QVariant (EXPORT_POINTS_INTERVAL_UNITS_SCREEN));
+                                                  QVariant (EXPORT_POINTS_INTERVAL_UNITS_SCREEN));
   connect (m_cmbFunctionsPointsEvenlySpacingUnits, SIGNAL (activated (const QString &)),
            this, SLOT (slotFunctionsPointsEvenlySpacedIntervalUnits (const QString &))); // activated() ignores code changes
-  layoutPointsSelections->addWidget (m_cmbFunctionsPointsEvenlySpacingUnits, row++, 3, 1, 1, Qt::AlignLeft);
+  layoutPointsSelections->addWidget (m_cmbFunctionsPointsEvenlySpacingUnits, row, 3, 1, 1, Qt::AlignLeft);
+
+  QLabel *labelEndpointsAutomatic = new QLabel (tr ("Endpoints:"));
+  layoutPointsSelections->addWidget (labelEndpointsAutomatic, row, 4, 1, 1);
+
+  m_cmbFunctionsEndpointsAutomatic = new QComboBox;
+  m_cmbFunctionsEndpointsAutomatic->setWhatsThis (tr ("Endpoint handling when evenly spaced is selected."));
+  m_cmbFunctionsEndpointsAutomatic->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_OMIT),
+                                            QVariant (EXPORT_ENDPOINTS_OMIT));
+  m_cmbFunctionsEndpointsAutomatic->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_INCLUDE),
+                                            QVariant (EXPORT_ENDPOINTS_INCLUDE));
+  m_cmbFunctionsEndpointsAutomatic->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_EXTRAPOLATE_PAST),
+                                            QVariant (EXPORT_ENDPOINTS_EXTRAPOLATE_PAST));
+  layoutPointsSelections->addWidget (m_cmbFunctionsEndpointsAutomatic, row++, 5, 1, 1);
+  connect (m_cmbFunctionsEndpointsAutomatic, SIGNAL (activated (const QString &)),
+           this, SLOT (slotFunctionsEndpointsAutomatic (const QString &)));
 
   m_btnFunctionsPointsGridLines = new QRadioButton (tr ("Interpolate Ys at evenly spaced X values on grid lines"));
   m_btnFunctionsPointsGridLines->setWhatsThis (tr ("Exported file will have values at evenly spaced X values at the vertical grid lines."));
-  layoutPointsSelections->addWidget (m_btnFunctionsPointsGridLines, row++, 0, 1, 4);
+  layoutPointsSelections->addWidget (m_btnFunctionsPointsGridLines, row, 0, 1, 4);
   connect (m_btnFunctionsPointsGridLines, SIGNAL (released()), this, SLOT (slotFunctionsPointsGridLines()));
+
+  QLabel *labelEndpointsGridLines = new QLabel (tr ("Endpoints:"));
+  layoutPointsSelections->addWidget (labelEndpointsGridLines, row, 4, 1, 1);
+
+  m_cmbFunctionsEndpointsGridLines = new QComboBox;
+  m_cmbFunctionsEndpointsGridLines->setWhatsThis (tr ("Endpoint handling when grid lines are selected."));
+  m_cmbFunctionsEndpointsGridLines->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_OMIT),
+                                            QVariant (EXPORT_ENDPOINTS_OMIT));
+  m_cmbFunctionsEndpointsGridLines->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_INCLUDE),
+                                            QVariant (EXPORT_ENDPOINTS_INCLUDE));
+  m_cmbFunctionsEndpointsGridLines->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_EXTRAPOLATE_PAST),
+                                            QVariant (EXPORT_ENDPOINTS_EXTRAPOLATE_PAST));
+  layoutPointsSelections->addWidget (m_cmbFunctionsEndpointsGridLines, row++, 5, 1, 1);
+  connect (m_cmbFunctionsEndpointsGridLines, SIGNAL (activated (const QString &)),
+           this, SLOT (slotFunctionsEndpointsGridLines (const QString &)));
 
   m_btnFunctionsPointsRaw = new QRadioButton (tr ("Raw Xs and Ys"));
   m_btnFunctionsPointsRaw->setWhatsThis (tr ("Exported file will have only original X and Y values"));
@@ -720,9 +765,19 @@ void DlgSettingsExportFormat::slotExclude ()
   updatePreview();
 }
 
-void DlgSettingsExportFormat::slotFunctionsEndpoints(const QString &)
+void DlgSettingsExportFormat::slotFunctionsEndpointsAutomatic(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsEndpoints";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsEndpointsAutomatic";
+}
+
+void DlgSettingsExportFormat::slotFunctionsEndpointsFirst(const QString &)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsEndpointsFirst";
+}
+
+void DlgSettingsExportFormat::slotFunctionsEndpointsGridLines(const QString &)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsEndpointsGridLines";
 }
 
 void DlgSettingsExportFormat::slotFunctionsLayoutAllCurves()
@@ -953,6 +1008,12 @@ void DlgSettingsExportFormat::slotSaveDefault()
 
   settings.setValue (SETTINGS_EXPORT_DELIMITER,
                      QVariant (m_modelExportAfter->delimiter()));
+  settings.setValue (SETTINGS_EXPORT_ENDPOINTS_AUTOMATIC,
+                     QVariant (m_modelExportAfter->endpointsAutomatic()));
+  settings.setValue (SETTINGS_EXPORT_ENDPOINTS_FIRST,
+                     QVariant (m_modelExportAfter->endpointsFirst()));
+  settings.setValue (SETTINGS_EXPORT_ENDPOINTS_GRID_LINES,
+                     QVariant (m_modelExportAfter->endpointsGridLines()));
   settings.setValue (SETTINGS_EXPORT_HEADER,
                      QVariant (m_modelExportAfter->header()));
   settings.setValue (SETTINGS_EXPORT_LAYOUT_FUNCTIONS,

@@ -155,7 +155,7 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
   ValuesVectorXOrY valuesVector;
   if (modelExportOverride.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_GRID_LINES) {
     CallbackGatherXThetasInGridLines ftor (modelMainWindow,
-                                           modelExportOverride,
+                                           modelExportOverride.endpointsGridLines(),
                                            curvesIncluded,
                                            transformation,
                                            document);
@@ -411,11 +411,13 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
         double x1 = xy.at (1).x ();
         double y0 = xy.at (0).y ();
         double y1 = xy.at (1).y ();
-        if (x0 == x1) {
+        double numerator = (xTheta - x0);
+        double denominator = (x1 - x0);
+        if (qAbs (denominator) < qAbs (numerator) / 1.0e6) {
           // Cannot do linear interpolation using two points at the same x value
           yRadius = xy.at (0).y ();
         } else {
-          double s = (xTheta - x0) / (x1 - x0);
+          double s = numerator / denominator;
           yRadius = (1.0 - s) * y0 + s * y1;
         }
       }
