@@ -1,0 +1,2 @@
+-errorreport ../test/version11_1.dig -regression -reset
+

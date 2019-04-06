@@ -43,8 +43,8 @@ public:
   ExportDelimiter delimiter() const;
 
   /// Get methods for endpoints.
-  ExportEndpoints endpointsAutomatic () const;
-  ExportEndpoints endpointsFirst () const;
+  ExportEndpoints endpointsEvenlySpaced () const;
+  ExportEndpoints endpointsFirstCurve () const;
   ExportEndpoints endpointsGridLines () const;
   
   /// Get method for header.
@@ -89,8 +89,8 @@ public:
   void setDelimiter(ExportDelimiter exportDelimiter);
 
   /// Set methods for endpoints.
-  void setEndpointsAutomatic (ExportEndpoints exportEndpoints);
-  void setEndpointsFirst (ExportEndpoints exportEndpoints);
+  void setEndpointsEvenlySpaced (ExportEndpoints exportEndpoints);
+  void setEndpointsFirstCurve (ExportEndpoints exportEndpoints);
   void setEndpointsGridLines (ExportEndpoints exportEndpoints);
   
   /// Set method for header.
@@ -139,8 +139,8 @@ private:
   ExportPointsIntervalUnits m_pointsIntervalUnitsRelations;
   ExportLayoutFunctions m_layoutFunctions;
   ExportDelimiter m_delimiter;
-  ExportEndpoints m_endpointsAutomatic;
-  ExportEndpoints m_endpointsFirst;
+  ExportEndpoints m_endpointsEvenlySpaced;
+  ExportEndpoints m_endpointsFirstCurve;
   ExportEndpoints m_endpointsGridLines;
   bool m_overrideCsvTsv;
   ExportHeader m_header;

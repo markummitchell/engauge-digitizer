@@ -45,8 +45,8 @@ private slots:
   void slotDelimitersSpaces();
   void slotDelimitersTabs();
   void slotExclude();
-  void slotFunctionsEndpointsAutomatic(const QString &);
-  void slotFunctionsEndpointsFirst(const QString &);
+  void slotFunctionsEndpointsEvenlySpaced(const QString &);
+  void slotFunctionsEndpointsFirstCurve(const QString &);
   void slotFunctionsEndpointsGridLines(const QString &);
   void slotFunctionsLayoutAllCurves();
   void slotFunctionsLayoutOneCurve();
@@ -113,7 +113,7 @@ private:
   QLineEdit *m_editFunctionsPointsEvenlySpacing;
   QDoubleValidator *m_validatorFunctionsPointsEvenlySpacing;
   QComboBox *m_cmbFunctionsPointsEvenlySpacingUnits;
-  QComboBox *m_cmbFunctionsEndpointsAutomatic;
+  QComboBox *m_cmbFunctionsEndpointsEvenlySpaced;
   QRadioButton *m_btnFunctionsPointsGridLines;
   QComboBox *m_cmbFunctionsEndpointsGridLines;
   QRadioButton *m_btnFunctionsPointsRaw;

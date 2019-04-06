@@ -218,7 +218,7 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
                                              QVariant (EXPORT_ENDPOINTS_EXTRAPOLATE_PAST));
   layoutPointsSelections->addWidget (m_cmbFunctionsEndpointsFirstCurve, row++, 5, 1, 1);
   connect (m_cmbFunctionsEndpointsFirstCurve, SIGNAL (activated (const QString &)),
-           this, SLOT (slotFunctionsEndpointsFirst (const QString &)));
+           this, SLOT (slotFunctionsEndpointsFirstCurve (const QString &)));
 
   m_btnFunctionsPointsEvenlySpaced = new QRadioButton (tr ("Interpolate Ys at evenly spaced X values that are automatically selected"));
   m_btnFunctionsPointsEvenlySpaced->setWhatsThis (tr ("Exported file will have values at evenly spaced X values, separated by the interval selected below."));
@@ -258,17 +258,17 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
   QLabel *labelEndpointsAutomatic = new QLabel (tr ("Endpoints:"));
   layoutPointsSelections->addWidget (labelEndpointsAutomatic, row, 4, 1, 1);
 
-  m_cmbFunctionsEndpointsAutomatic = new QComboBox;
-  m_cmbFunctionsEndpointsAutomatic->setWhatsThis (tr ("Endpoint handling when evenly spaced is selected."));
-  m_cmbFunctionsEndpointsAutomatic->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_OMIT),
+  m_cmbFunctionsEndpointsEvenlySpaced = new QComboBox;
+  m_cmbFunctionsEndpointsEvenlySpaced->setWhatsThis (tr ("Endpoint handling when evenly spaced is selected."));
+  m_cmbFunctionsEndpointsEvenlySpaced->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_OMIT),
                                             QVariant (EXPORT_ENDPOINTS_OMIT));
-  m_cmbFunctionsEndpointsAutomatic->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_INCLUDE),
+  m_cmbFunctionsEndpointsEvenlySpaced->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_INCLUDE),
                                             QVariant (EXPORT_ENDPOINTS_INCLUDE));
-  m_cmbFunctionsEndpointsAutomatic->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_EXTRAPOLATE_PAST),
+  m_cmbFunctionsEndpointsEvenlySpaced->addItem(exportEndpointsToString(EXPORT_ENDPOINTS_EXTRAPOLATE_PAST),
                                             QVariant (EXPORT_ENDPOINTS_EXTRAPOLATE_PAST));
-  layoutPointsSelections->addWidget (m_cmbFunctionsEndpointsAutomatic, row++, 5, 1, 1);
-  connect (m_cmbFunctionsEndpointsAutomatic, SIGNAL (activated (const QString &)),
-           this, SLOT (slotFunctionsEndpointsAutomatic (const QString &)));
+  layoutPointsSelections->addWidget (m_cmbFunctionsEndpointsEvenlySpaced, row++, 5, 1, 1);
+  connect (m_cmbFunctionsEndpointsEvenlySpaced, SIGNAL (activated (const QString &)),
+           this, SLOT (slotFunctionsEndpointsEvenlySpaced (const QString &)));
 
   m_btnFunctionsPointsGridLines = new QRadioButton (tr ("Interpolate Ys at evenly spaced X values on grid lines"));
   m_btnFunctionsPointsGridLines->setWhatsThis (tr ("Exported file will have values at evenly spaced X values at the vertical grid lines."));
@@ -660,6 +660,16 @@ void DlgSettingsExportFormat::load (CmdMediator &cmdMediator)
   m_btnDelimitersTabs->setChecked (delimiter == EXPORT_DELIMITER_TAB);
   m_btnDelimitersSemicolons->setChecked (delimiter == EXPORT_DELIMITER_SEMICOLON);
 
+  ExportEndpoints endpointsFirstCurve = m_modelExportAfter->endpointsFirstCurve ();
+  ExportEndpoints endpointsEvenlySpaced = m_modelExportAfter->endpointsEvenlySpaced ();
+  ExportEndpoints endpointsGridLines = m_modelExportAfter->endpointsGridLines ();
+  int indexFirstCurve = m_cmbFunctionsEndpointsFirstCurve->findData (QVariant (endpointsFirstCurve));
+  int indexEvenlySpaced = m_cmbFunctionsEndpointsEvenlySpaced->findData (QVariant (endpointsEvenlySpaced));
+  int indexGridLines = m_cmbFunctionsEndpointsGridLines->findData (QVariant (endpointsGridLines));
+  m_cmbFunctionsEndpointsFirstCurve->setCurrentIndex (indexFirstCurve);
+  m_cmbFunctionsEndpointsEvenlySpaced->setCurrentIndex (indexEvenlySpaced);
+  m_cmbFunctionsEndpointsGridLines->setCurrentIndex (indexGridLines);
+
   m_chkOverrideCsvTsv->setChecked (m_modelExportAfter->overrideCsvTsv());
 
   ExportHeader header = m_modelExportAfter->header ();
@@ -765,19 +775,40 @@ void DlgSettingsExportFormat::slotExclude ()
   updatePreview();
 }
 
-void DlgSettingsExportFormat::slotFunctionsEndpointsAutomatic(const QString &)
+void DlgSettingsExportFormat::slotFunctionsEndpointsEvenlySpaced(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsEndpointsAutomatic";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsEndpointsEvenlySpaced";
+
+  int index = m_cmbFunctionsEndpointsEvenlySpaced->currentIndex();
+  ExportEndpoints endpoints = (ExportEndpoints) m_cmbFunctionsEndpointsEvenlySpaced->itemData (index).toInt();
+
+  m_modelExportAfter->setEndpointsEvenlySpaced(endpoints);
+  updateControls();
+  updatePreview();
 }
 
-void DlgSettingsExportFormat::slotFunctionsEndpointsFirst(const QString &)
+void DlgSettingsExportFormat::slotFunctionsEndpointsFirstCurve(const QString &)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsEndpointsFirst";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsEndpointsFirstCurve";
+
+  int index = m_cmbFunctionsEndpointsFirstCurve->currentIndex();
+  ExportEndpoints endpoints = (ExportEndpoints) m_cmbFunctionsEndpointsFirstCurve->itemData (index).toInt();
+
+  m_modelExportAfter->setEndpointsFirstCurve(endpoints);
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsExportFormat::slotFunctionsEndpointsGridLines(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsEndpointsGridLines";
+
+  int index = m_cmbFunctionsEndpointsGridLines->currentIndex();
+  ExportEndpoints endpoints = (ExportEndpoints) m_cmbFunctionsEndpointsGridLines->itemData (index).toInt();
+
+  m_modelExportAfter->setEndpointsGridLines(endpoints);
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsExportFormat::slotFunctionsLayoutAllCurves()
@@ -1008,10 +1039,10 @@ void DlgSettingsExportFormat::slotSaveDefault()
 
   settings.setValue (SETTINGS_EXPORT_DELIMITER,
                      QVariant (m_modelExportAfter->delimiter()));
-  settings.setValue (SETTINGS_EXPORT_ENDPOINTS_AUTOMATIC,
-                     QVariant (m_modelExportAfter->endpointsAutomatic()));
-  settings.setValue (SETTINGS_EXPORT_ENDPOINTS_FIRST,
-                     QVariant (m_modelExportAfter->endpointsFirst()));
+  settings.setValue (SETTINGS_EXPORT_ENDPOINTS_EVENLY_SPACED,
+                     QVariant (m_modelExportAfter->endpointsEvenlySpaced()));
+  settings.setValue (SETTINGS_EXPORT_ENDPOINTS_FIRST_CURVE,
+                     QVariant (m_modelExportAfter->endpointsFirstCurve()));
   settings.setValue (SETTINGS_EXPORT_ENDPOINTS_GRID_LINES,
                      QVariant (m_modelExportAfter->endpointsGridLines()));
   settings.setValue (SETTINGS_EXPORT_HEADER,
@@ -1067,6 +1098,10 @@ void DlgSettingsExportFormat::updateControls ()
 
   m_editFunctionsPointsEvenlySpacing->setEnabled (m_haveFunction && m_btnFunctionsPointsEvenlySpaced->isChecked ());
   m_editRelationsPointsEvenlySpacing->setEnabled (m_haveRelation && m_btnRelationsPointsEvenlySpaced->isChecked ());
+
+  m_cmbFunctionsEndpointsFirstCurve->setEnabled (m_btnFunctionsPointsFirstCurve->isChecked ());
+  m_cmbFunctionsEndpointsEvenlySpaced->setEnabled (m_btnFunctionsPointsEvenlySpaced->isChecked ());
+  m_cmbFunctionsEndpointsGridLines->setEnabled (m_btnFunctionsPointsGridLines->isChecked ());
 
   m_editXLabel->setEnabled (!m_btnHeaderNone->isChecked());
 }

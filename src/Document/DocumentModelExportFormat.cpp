@@ -33,10 +33,10 @@ DocumentModelExportFormat::DocumentModelExportFormat()
                                             QVariant (DEFAULT_CURVE_NAMES_NOT_EXPORTED)).toStringList();
   m_delimiter = (ExportDelimiter) settings.value (SETTINGS_EXPORT_DELIMITER,
                                                   QVariant (EXPORT_DELIMITER_COMMA)).toInt();
-  m_endpointsAutomatic = (ExportEndpoints) settings.value (SETTINGS_EXPORT_ENDPOINTS_AUTOMATIC,
-                                                           QVariant (DEFAULT_ENDPOINTS)).toInt();
-  m_endpointsFirst = (ExportEndpoints) settings.value (SETTINGS_EXPORT_ENDPOINTS_FIRST,
-                                                       QVariant (DEFAULT_ENDPOINTS)).toInt();
+  m_endpointsEvenlySpaced = (ExportEndpoints) settings.value (SETTINGS_EXPORT_ENDPOINTS_EVENLY_SPACED,
+                                                              QVariant (DEFAULT_ENDPOINTS)).toInt();
+  m_endpointsFirstCurve = (ExportEndpoints) settings.value (SETTINGS_EXPORT_ENDPOINTS_FIRST_CURVE,
+                                                            QVariant (DEFAULT_ENDPOINTS)).toInt();
   m_endpointsGridLines = (ExportEndpoints) settings.value (SETTINGS_EXPORT_ENDPOINTS_GRID_LINES,
                                                            QVariant (DEFAULT_ENDPOINTS)).toInt();
   m_overrideCsvTsv = settings.value (SETTINGS_EXPORT_DELIMITER_OVERRIDE_CSV_TSV,
@@ -71,8 +71,8 @@ DocumentModelExportFormat::DocumentModelExportFormat (const Document &document) 
   m_pointsIntervalUnitsRelations (document.modelExport().pointsIntervalUnitsRelations()),
   m_layoutFunctions (document.modelExport().layoutFunctions()),
   m_delimiter (document.modelExport().delimiter()),
-  m_endpointsAutomatic (document.modelExport().endpointsAutomatic()),
-  m_endpointsFirst (document.modelExport().endpointsFirst()),
+  m_endpointsEvenlySpaced (document.modelExport().endpointsEvenlySpaced()),
+  m_endpointsFirstCurve (document.modelExport().endpointsFirstCurve()),
   m_endpointsGridLines (document.modelExport().endpointsGridLines()),
   m_overrideCsvTsv (document.modelExport().overrideCsvTsv()),
   m_header (document.modelExport().header()),
@@ -90,8 +90,8 @@ DocumentModelExportFormat::DocumentModelExportFormat(const DocumentModelExportFo
   m_pointsIntervalUnitsRelations (other.pointsIntervalUnitsRelations()),
   m_layoutFunctions (other.layoutFunctions()),
   m_delimiter (other.delimiter()),
-  m_endpointsAutomatic (other.endpointsAutomatic()),
-  m_endpointsFirst (other.endpointsFirst()),
+  m_endpointsEvenlySpaced (other.endpointsEvenlySpaced()),
+  m_endpointsFirstCurve (other.endpointsFirstCurve()),
   m_endpointsGridLines (other.endpointsGridLines()),
   m_overrideCsvTsv (other.overrideCsvTsv()),
   m_header (other.header()),
@@ -110,8 +110,8 @@ DocumentModelExportFormat &DocumentModelExportFormat::operator=(const DocumentMo
   m_pointsIntervalUnitsRelations = other.pointsIntervalUnitsRelations();
   m_layoutFunctions = other.layoutFunctions();
   m_delimiter = other.delimiter();
-  m_endpointsAutomatic = other.endpointsAutomatic();
-  m_endpointsFirst = other.endpointsFirst();
+  m_endpointsEvenlySpaced = other.endpointsEvenlySpaced();
+  m_endpointsFirstCurve = other.endpointsFirstCurve();
   m_endpointsGridLines = other.endpointsGridLines();
   m_overrideCsvTsv = other.overrideCsvTsv();
   m_header = other.header();
@@ -130,14 +130,14 @@ ExportDelimiter DocumentModelExportFormat::delimiter() const
   return m_delimiter;
 }
 
-ExportEndpoints DocumentModelExportFormat::endpointsAutomatic() const
+ExportEndpoints DocumentModelExportFormat::endpointsEvenlySpaced() const
 {
-  return m_endpointsAutomatic;
+  return m_endpointsEvenlySpaced;
 }
 
-ExportEndpoints DocumentModelExportFormat::endpointsFirst() const
+ExportEndpoints DocumentModelExportFormat::endpointsFirstCurve() const
 {
-  return m_endpointsFirst;
+  return m_endpointsFirstCurve;
 }
 
 ExportEndpoints DocumentModelExportFormat::endpointsGridLines() const
@@ -190,15 +190,15 @@ void DocumentModelExportFormat::loadXml(QXmlStreamReader &reader)
 
       setOverrideCsvTsv(stringOverrideCsvTsv == DOCUMENT_SERIALIZE_BOOL_TRUE);
     }
-    if (attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_AUTOMATIC)) {
-      setEndpointsAutomatic ((ExportEndpoints) attributes.value (DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_AUTOMATIC).toInt());
+    if (attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_EVENLY_SPACED)) {
+      setEndpointsEvenlySpaced ((ExportEndpoints) attributes.value (DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_EVENLY_SPACED).toInt());
     } else {
-      setEndpointsAutomatic (DEFAULT_ENDPOINTS);
+      setEndpointsEvenlySpaced (DEFAULT_ENDPOINTS);
     }
-    if (attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_FIRST)) {
-      setEndpointsFirst ((ExportEndpoints) attributes.value (DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_FIRST).toInt());
+    if (attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_FIRST_CURVE)) {
+      setEndpointsFirstCurve ((ExportEndpoints) attributes.value (DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_FIRST_CURVE).toInt());
     } else {
-      setEndpointsFirst (DEFAULT_ENDPOINTS);
+      setEndpointsFirstCurve (DEFAULT_ENDPOINTS);
     }
     if (attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_GRID_LINES)) {
       setEndpointsGridLines ((ExportEndpoints) attributes.value (DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_GRID_LINES).toInt());
@@ -314,8 +314,8 @@ void DocumentModelExportFormat::printStream(QString indentation,
       << exportPointsIntervalUnitsToString (m_pointsIntervalUnitsRelations) << "\n";
   str << indentation << "exportLayoutFunctions=" << exportLayoutFunctionsToString (m_layoutFunctions) << "\n";
   str << indentation << "exportDelimiter=" << exportDelimiterToString (m_delimiter) << "\n";
-  str << indentation << "exportEndpointsAutomatic=" << exportEndpointsToString (m_endpointsAutomatic) << "\n";
-  str << indentation << "exportEndpointsFirst=" << exportEndpointsToString (m_endpointsFirst) << "\n";
+  str << indentation << "exportEndpointsEvenlySpaced=" << exportEndpointsToString (m_endpointsEvenlySpaced) << "\n";
+  str << indentation << "exportEndpointsFirstCurve=" << exportEndpointsToString (m_endpointsFirstCurve) << "\n";
   str << indentation << "exportEndpointsGridLines=" << exportEndpointsToString (m_endpointsGridLines) << "\n";
   str << indentation << "overrideCsvTsv=" << (m_overrideCsvTsv ? "true" : "false") << "\n";
   str << indentation << "exportHeader=" << exportHeaderToString (m_header) << "\n";
@@ -342,10 +342,10 @@ void DocumentModelExportFormat::saveXml(QXmlStreamWriter &writer) const
                           DOCUMENT_SERIALIZE_BOOL_TRUE :
                           DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_DELIMITER_STRING, exportDelimiterToString (m_delimiter));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_AUTOMATIC, QString::number (m_endpointsAutomatic));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_AUTOMATIC_STRING, exportEndpointsToString (m_endpointsAutomatic));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_FIRST, QString::number (m_endpointsFirst));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_FIRST_STRING, exportEndpointsToString (m_endpointsFirst));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_EVENLY_SPACED, QString::number (m_endpointsEvenlySpaced));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_EVENLY_SPACED_STRING, exportEndpointsToString (m_endpointsEvenlySpaced));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_FIRST_CURVE, QString::number (m_endpointsFirstCurve));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_FIRST_CURVE_STRING, exportEndpointsToString (m_endpointsFirstCurve));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_GRID_LINES, QString::number (m_endpointsGridLines));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_GRID_LINES_STRING, exportEndpointsToString (m_endpointsGridLines));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_HEADER, QString::number (m_header));
@@ -376,14 +376,14 @@ void DocumentModelExportFormat::setDelimiter(ExportDelimiter delimiter)
   m_delimiter = delimiter;
 }
 
-void DocumentModelExportFormat::setEndpointsAutomatic(ExportEndpoints endpoints)
+void DocumentModelExportFormat::setEndpointsEvenlySpaced(ExportEndpoints endpoints)
 {
-  m_endpointsAutomatic = endpoints;
+  m_endpointsEvenlySpaced = endpoints;
 }
 
-void DocumentModelExportFormat::setEndpointsFirst(ExportEndpoints endpoints)
+void DocumentModelExportFormat::setEndpointsFirstCurve(ExportEndpoints endpoints)
 {
-  m_endpointsFirst = endpoints;
+  m_endpointsFirstCurve = endpoints;
 }
 
 void DocumentModelExportFormat::setEndpointsGridLines(ExportEndpoints endpoints)

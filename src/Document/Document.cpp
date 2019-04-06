@@ -47,6 +47,7 @@ const int VERSION_7 = 7;
 const int VERSION_8 = 8;
 const int VERSION_9 = 9;
 const int VERSION_10 = 10;
+const int VERSION_11= 11;
 
 Document::Document (const QImage &image) :
   m_name ("untitled"),
@@ -109,6 +110,7 @@ Document::Document (const QString &fileName) :
           case VERSION_8:
           case VERSION_9:
           case VERSION_10:
+          case VERSION_11:
             loadVersions7AndUp (file);
             break;
 
