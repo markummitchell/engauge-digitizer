@@ -8,12 +8,13 @@
 #define CALLBACK_GATHER_X_THETAS_ABSTRACT_BASE_H
 
 #include "CallbackSearchReturn.h"
+#include "CurveLimits.h"
 #include "CurvesIncludedHash.h"
+#include "ExportEndpointsExtrapolation.h"
 #include "ExportValuesXOrY.h"
 #include "Transformation.h"
 #include "ValuesVectorXOrY.h"
 
-class DocumentModelExportFormat;
 class Point;
 
 /// Base callback for collecting X/Theta independent variables, for functions, in preparation for exporting
@@ -21,7 +22,8 @@ class CallbackGatherXThetasAbstractBase
 {
 public:
   /// Single constructor.
-  CallbackGatherXThetasAbstractBase(const DocumentModelExportFormat &modelExport,
+  CallbackGatherXThetasAbstractBase(bool firstCurveOnly,
+                                    ExportEndpointsExtrapolation exportEndpointsExtrapolation,
                                     const QStringList &curvesIncluded,
                                     const Transformation &transformation);
   virtual ~CallbackGatherXThetasAbstractBase ();
@@ -29,9 +31,6 @@ public:
   /// Callback method.
   virtual CallbackSearchReturn callback (const QString &curveName,
                                          const Point &point) = 0;
-
-  /// Perform final processing after iterating through points in Document
-  virtual void finalize () = 0;
 
   /// Resulting x/theta values for all included functions
   ValuesVectorXOrY xThetaValuesRaw () const;
@@ -49,14 +48,23 @@ protected:
 
   /// Get method for transformation
   const Transformation &transformation() const;
-  
+
+  /// Update the tracked min and max values for each curve
+  void updateMinMax (const QString &curveName,
+                     const Point &point);
+
 private:
   CallbackGatherXThetasAbstractBase();
 
+  ExportEndpointsExtrapolation m_exportEndpointsExtrapolation;
   QStringList m_curvesIncluded;
   const Transformation m_transformation;
   CurvesIncludedHash m_curvesIncludedHash;
   ValuesVectorXOrY m_xThetaValues;
+
+  // Curve limits that may or may not be merged into m_xThetaValues
+  CurveLimits m_curveLimitsMin;
+  CurveLimits m_curveLimitsMax;
 };
 
 #endif // CALLBACK_GATHER_X_THETAS_ABSTRACT_BASE_H

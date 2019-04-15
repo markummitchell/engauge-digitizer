@@ -183,6 +183,7 @@ HEADERS  += \
     src/Cursor/CursorSize.h \
     src/Curve/Curve.h \
     src/Curve/CurveConnectAs.h \
+    src/include/CurveLimits.h \
     src/Curve/CurveNameList.h \
     src/include/CurvesIncludedHash.h \
     src/Curve/CurveSettingsInt.h \
@@ -255,7 +256,7 @@ HEADERS  += \
     src/Export/ExportAlignLinear.h \
     src/Export/ExportAlignLog.h \
     src/Export/ExportDelimiter.h \
-    src/Export/ExportEndpoints.h \
+    src/Export/ExportEndpointsExtrapolation.h \
     src/Export/ExportImageForRegression.h \
     src/Export/ExportLayoutFunctions.h \
     src/Export/ExportPointsIntervalUnits.h \
@@ -610,7 +611,7 @@ SOURCES += \
     src/Export/ExportAlignLinear.cpp \
     src/Export/ExportAlignLog.cpp \
     src/Export/ExportDelimiter.cpp \
-    src/Export/ExportEndpoints.cpp \
+    src/Export/ExportEndpointsExtrapolation.cpp \
     src/Export/ExportFileAbstractBase.cpp \
     src/Export/ExportFileFunctions.cpp \
     src/Export/ExportFileRelations.cpp \

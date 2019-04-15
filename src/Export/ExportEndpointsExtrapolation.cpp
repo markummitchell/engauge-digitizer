@@ -4,17 +4,19 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef EXPORT_ENDPOINTS_H
-#define EXPORT_ENDPOINTS_H
+#include "ExportEndpointsExtrapolation.h"
+#include <QObject>
 
-#include <QString>
+QString exportEndpointsExtrapolationToString (ExportEndpointsExtrapolation exportEndpointsExtrapolation)
+{
+  switch (exportEndpointsExtrapolation) {
+    case EXPORT_ENDPOINTS_EXTRAPOLATION_STAY_WITHIN:
+      return QObject::tr ("Stay Within");
 
-enum ExportEndpoints {
-  EXPORT_ENDPOINTS_OMIT,
-  EXPORT_ENDPOINTS_INCLUDE,
-  EXPORT_ENDPOINTS_EXTRAPOLATE_PAST
-};
+    case EXPORT_ENDPOINTS_EXTRAPOLATION_EXTRAPOLATE_OUTSIDE:
+      return QObject::tr ("Extrapolate Outside");
 
-extern QString exportEndpointsToString (ExportEndpoints exportEndpoints);
-
-#endif // EXPORT_ENDPOINTS_H
+    default:
+      return QObject::tr ("Unknown");
+  }
+}

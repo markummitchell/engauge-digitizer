@@ -14,14 +14,14 @@
 #include "Logger.h"
 #include "Point.h"
 
-CallbackGatherXThetasAbstractBase::CallbackGatherXThetasAbstractBase(const DocumentModelExportFormat &modelExport,
+CallbackGatherXThetasAbstractBase::CallbackGatherXThetasAbstractBase(bool firstCurveOnly,
+                                                                     ExportEndpointsExtrapolation exportEndpointsExtrapolation,
                                                                      const QStringList &curvesIncluded,
                                                                      const Transformation &transformation) :
+  m_exportEndpointsExtrapolation (exportEndpointsExtrapolation),
   m_curvesIncluded (curvesIncluded),
   m_transformation (transformation)
 {
-  bool firstCurveOnly = (modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE);
-
   // Include just the first curve, or all curves depending on DocumentModelExportFormat
   QStringList::const_iterator itr;
   for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
@@ -60,6 +60,33 @@ CurvesIncludedHash CallbackGatherXThetasAbstractBase::curvesIncludedHash () cons
 const Transformation &CallbackGatherXThetasAbstractBase::transformation () const
 {
   return m_transformation;
+}
+
+void CallbackGatherXThetasAbstractBase::updateMinMax (const QString &curveName,
+                                                      const Point &point)
+{
+  // Skip unless the endpoints are to be collected
+  if (m_exportEndpointsExtrapolation == EXPORT_ENDPOINTS_EXTRAPOLATION_STAY_WITHIN) {
+
+    if (curvesIncludedHash ().contains (curveName)) {
+
+      QPointF posGraph;
+      transformation ().transformScreenToRawGraph (point.posScreen(),
+                                                   posGraph);
+
+      if (!m_curveLimitsMin.contains (curveName) ||
+          posGraph.x() < m_curveLimitsMin [curveName]) {
+
+        m_curveLimitsMin [curveName] = posGraph.x ();
+      }
+
+      if (!m_curveLimitsMax.contains (curveName) ||
+          posGraph.x() > m_curveLimitsMax [curveName]) {
+
+        m_curveLimitsMax [curveName] = posGraph.x ();
+      }
+    }
+  }
 }
 
 ValuesVectorXOrY CallbackGatherXThetasAbstractBase::xThetaValuesRaw () const

@@ -147,6 +147,7 @@ HEADERS  += \
     Curve/Curve.h \
     Curve/CurveConnectAs.h \
     Curve/CurveNameList.h \
+    include/CurveLimits.h \
     include/CurvesIncludedHash.h \
     Curve/CurveSettingsInt.h \
     Curve/CurvesGraphs.h \
@@ -218,7 +219,7 @@ HEADERS  += \
     Export/ExportAlignLinear.h \
     Export/ExportAlignLog.h \
     Export/ExportDelimiter.h \
-    Export/ExportEndpoints.h \
+    Export/ExportEndpointsExtrapolation.h \
     Export/ExportLayoutFunctions.h \
     Export/ExportPointsIntervalUnits.h \
     Export/ExportPointsSelectionFunctions.h \
@@ -578,7 +579,7 @@ SOURCES += \
     Export/ExportAlignLinear.cpp \
     Export/ExportAlignLog.cpp \
     Export/ExportDelimiter.cpp \
-    Export/ExportEndpoints.cpp \
+    Export/ExportEndpointsExtrapolation.cpp \
     Export/ExportFileAbstractBase.cpp \
     Export/ExportFileFunctions.cpp \
     Export/ExportFileRelations.cpp \

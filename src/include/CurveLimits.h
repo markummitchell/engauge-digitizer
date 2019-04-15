@@ -4,22 +4,13 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "ExportEndpoints.h"
-#include <QObject>
+#ifndef CURVE_LIMITS_H
+#define CURVE_LIMITS_H
 
-QString exportEndpointsToString (ExportEndpoints exportEndpoints)
-{
-  switch (exportEndpoints) {
-    case EXPORT_ENDPOINTS_OMIT:
-      return QObject::tr ("Omit");
+#include <QHash>
+#include <QString>
 
-    case EXPORT_ENDPOINTS_INCLUDE:
-      return QObject::tr ("Include");
+// Container of curve names to include in export, using QHash for rapid access
+typedef QHash<QString, double> CurveLimits;
 
-    case EXPORT_ENDPOINTS_EXTRAPOLATE_PAST:
-      return QObject::tr ("ExtrapolatePast");
-
-    default:
-      return QObject::tr ("Unknown");
-  }
-}
+#endif // CURVE_LIMITS_H

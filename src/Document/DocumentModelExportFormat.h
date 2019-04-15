@@ -9,7 +9,7 @@
 
 #include "DocumentModelAbstractBase.h"
 #include "ExportDelimiter.h"
-#include "ExportEndpoints.h"
+#include "ExportEndpointsExtrapolation.h"
 #include "ExportHeader.h"
 #include "ExportLayoutFunctions.h"
 #include "ExportPointsIntervalUnits.h"
@@ -42,10 +42,8 @@ public:
   /// Get method for delimiter.
   ExportDelimiter delimiter() const;
 
-  /// Get methods for endpoints.
-  ExportEndpoints endpointsEvenlySpaced () const;
-  ExportEndpoints endpointsFirstCurve () const;
-  ExportEndpoints endpointsGridLines () const;
+  /// Get methods for endpoints extrapolation.
+  ExportEndpointsExtrapolation endpointsExtrapolation () const;
   
   /// Get method for header.
   ExportHeader header() const;
@@ -88,10 +86,8 @@ public:
   /// Set method for delimiter.
   void setDelimiter(ExportDelimiter exportDelimiter);
 
-  /// Set methods for endpoints.
-  void setEndpointsEvenlySpaced (ExportEndpoints exportEndpoints);
-  void setEndpointsFirstCurve (ExportEndpoints exportEndpoints);
-  void setEndpointsGridLines (ExportEndpoints exportEndpoints);
+  /// Set methods for endpoint extrapolation.
+  void setEndpointsExtrapolation (ExportEndpointsExtrapolation exportEndpointsExtrapolation);
   
   /// Set method for header.
   void setHeader(ExportHeader exportHeader);
@@ -139,9 +135,7 @@ private:
   ExportPointsIntervalUnits m_pointsIntervalUnitsRelations;
   ExportLayoutFunctions m_layoutFunctions;
   ExportDelimiter m_delimiter;
-  ExportEndpoints m_endpointsEvenlySpaced;
-  ExportEndpoints m_endpointsFirstCurve;
-  ExportEndpoints m_endpointsGridLines;
+  ExportEndpointsExtrapolation m_endpointsExtrapolation;
   bool m_overrideCsvTsv;
   ExportHeader m_header;
   QString m_xLabel;
