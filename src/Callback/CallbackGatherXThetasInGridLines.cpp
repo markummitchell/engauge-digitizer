@@ -18,24 +18,17 @@
 #include <qmath.h>
 
 CallbackGatherXThetasInGridLines::CallbackGatherXThetasInGridLines(const MainWindowModel &modelMainWindow,
-                                                                   ExportEndpoints exportEndpoints,
+                                                                   const DocumentModelExportFormat &modelExport,
                                                                    const QStringList &curvesIncluded,
                                                                    const Transformation &transformation,
                                                                    const Document &document) :
-  m_transformation (transformation),
-  m_exportEndpoints (exportEndpoints)
+  CallbackGatherXThetasAbstractBase (modelExport,
+                                     curvesIncluded,
+                                     transformation)
 {
   addGridLines (modelMainWindow,
                 transformation,
                 document);
-
-  // Include all curves
-  QStringList::const_iterator itr;
-  for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
-
-    QString curveIncluded = *itr;
-    m_curveNamesIncluded [curveIncluded] = true;
-  }
 }
 
 void CallbackGatherXThetasInGridLines::addGridLines (const MainWindowModel &modelMainWindow,
@@ -62,14 +55,14 @@ void CallbackGatherXThetasInGridLines::addGridLines (const MainWindowModel &mode
     unsigned int countX = (unsigned int) (0.5 + 1 + (stopX - startX) / stepX);
     for (unsigned int i = 0; i < countX; i++) {
       double x = startX + i * stepX;
-      m_xThetaValues [x] = true;
+      addGraphX (x);
     }
   } else {
     // Log
     unsigned int countX = 1.0 + (qLn (stopX) - qLn (startX)) / qLn (stepX);
     for (unsigned int i = 0; i < countX; i++) {
       double x = startX * qPow (stepX, i);
-      m_xThetaValues [x] = true;
+      addGraphX (x);
     }
   }
 }
@@ -84,11 +77,11 @@ CallbackSearchReturn CallbackGatherXThetasInGridLines::callback (const QString &
   // Skip everything unless the endpoints are to be collected
   if (m_exportEndpoints == EXPORT_ENDPOINTS_INCLUDE) {
 
-    if (m_curveNamesIncluded.contains (curveName)) {
+    if (curvesIncludedHash ().contains (curveName)) {
 
       QPointF posGraph;
-      m_transformation.transformScreenToRawGraph (point.posScreen(),
-                                                  posGraph);
+      transformation ().transformScreenToRawGraph (point.posScreen(),
+                                                   posGraph);
 
       if (!m_curveLimitsMin.contains (curveName) ||
           posGraph.x() < m_curveLimitsMin [curveName]) {
@@ -107,22 +100,18 @@ CallbackSearchReturn CallbackGatherXThetasInGridLines::callback (const QString &
   return CALLBACK_SEARCH_RETURN_CONTINUE;
 }
 
-ValuesVectorXOrY CallbackGatherXThetasInGridLines::xThetaValuesRaw () const
+void CallbackGatherXThetasInGridLines::finalize ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CallbackGatherXThetasInGridLines::xThetaValuesRaw";
-
-  ValuesVectorXOrY values = m_xThetaValues;
+  LOG4CPP_INFO_S ((*mainCat)) << "CallbackGatherXThetasInGridLines::finalize";
 
   // Merge any saved endpoints
   CurveLimits::const_iterator itr;
   for (itr = m_curveLimitsMin.begin(); itr != m_curveLimitsMin.end(); itr++) {
     double value = *itr;
-    values [value] = true;
+    addGraphX (value);
   }
   for (itr = m_curveLimitsMax.begin(); itr != m_curveLimitsMax.end(); itr++) {
     double value = *itr;
-    values [value] = true;
+    addGraphX (value);
   }
-
-  return values;
 }

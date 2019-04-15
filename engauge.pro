@@ -80,6 +80,7 @@ HEADERS  += \
     src/Callback/CallbackCheckEditPointAxis.h \
     src/Callback/CallbackDocumentHash.h \
     src/Callback/CallbackDocumentScrub.h \
+    src/Callback/CallbackGatherXThetasAbstractBase.h \
     src/Callback/CallbackGatherXThetasInCurves.h \
     src/Callback/CallbackGatherXThetasInGridLines.h \
     src/Callback/CallbackNextOrdinal.h \
@@ -183,7 +184,7 @@ HEADERS  += \
     src/Curve/Curve.h \
     src/Curve/CurveConnectAs.h \
     src/Curve/CurveNameList.h \
-    src/include/CurveNamesIncluded.h \
+    src/include/CurvesIncludedHash.h \
     src/Curve/CurveSettingsInt.h \
     src/Curve/CurvesGraphs.h \
     src/Curve/CurveStyle.h \
@@ -442,6 +443,7 @@ SOURCES += \
     src/Callback/CallbackCheckEditPointAxis.cpp \
     src/Callback/CallbackDocumentHash.cpp \
     src/Callback/CallbackDocumentScrub.cpp \
+    src/Callback/CallbackGatherXThetasAbstractBase.cpp \
     src/Callback/CallbackGatherXThetasInCurves.cpp \
     src/Callback/CallbackGatherXThetasInGridLines.cpp \
     src/Callback/CallbackNextOrdinal.cpp \

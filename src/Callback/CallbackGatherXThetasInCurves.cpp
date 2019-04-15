@@ -17,24 +17,10 @@
 CallbackGatherXThetasInCurves::CallbackGatherXThetasInCurves(const DocumentModelExportFormat &modelExport,
                                                              const QStringList &curvesIncluded,
                                                              const Transformation &transformation) :
-  m_transformation (transformation)
+  CallbackGatherXThetasAbstractBase (modelExport,
+                                     curvesIncluded,
+                                     transformation)
 {
-  bool firstCurveForGatherXTheta = (modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE);
-
-  // Include just the first curve, or all curves depending on DocumentModelExportFormat
-  QStringList::const_iterator itr;
-  for (itr = curvesIncluded.begin(); itr != curvesIncluded.end(); itr++) {
-
-    QString curveIncluded = *itr;
-    m_curveNamesIncluded [curveIncluded] = true;
-
-    if (firstCurveForGatherXTheta) {
-
-      // We only want points belonging to the first included curve so exit this loop
-      break;
-
-    }
-  }
 }
 
 CallbackSearchReturn CallbackGatherXThetasInCurves::callback (const QString &curveName,
@@ -44,21 +30,17 @@ CallbackSearchReturn CallbackGatherXThetasInCurves::callback (const QString &cur
                                << " curveName=" << curveName.toLatin1().data()
                                << " point=" << point.identifier().toLatin1().data();
 
-  if (m_curveNamesIncluded.contains (curveName)) {
+  if (curvesIncludedHash ().contains (curveName)) {
 
     QPointF posGraph;
-    m_transformation.transformScreenToRawGraph (point.posScreen(),
-                                                posGraph);
-
-    m_xThetaValues [posGraph.x ()] = true;
+    transformation ().transformScreenToRawGraph (point.posScreen(),
+                                                 posGraph);
+    addGraphX (posGraph.x ());
   }
 
   return CALLBACK_SEARCH_RETURN_CONTINUE;
 }
 
-ValuesVectorXOrY CallbackGatherXThetasInCurves::xThetaValuesRaw () const
+void CallbackGatherXThetasInCurves::finalize ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CallbackGatherXThetasInCurves::xThetaValuesRaw";
-
-  return m_xThetaValues;
 }

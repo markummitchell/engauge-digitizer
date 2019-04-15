@@ -7,8 +7,8 @@
 #ifndef CALLBACK_GATHER_X_THETAS_IN_GRID_LINES_H
 #define CALLBACK_GATHER_X_THETAS_IN_GRID_LINES_H
 
+#include "CallbackGatherXThetasAbstractBase.h"
 #include "CallbackSearchReturn.h"
-#include "CurveNamesIncluded.h"
 #include "ExportEndpoints.h"
 #include "ExportValuesXOrY.h"
 #include "Transformation.h"
@@ -29,23 +29,22 @@ typedef QHash<QString, double> CurveLimits;
 /// Although most of the time the X values are extracted from the X values of the document curves, they are sometimes
 /// extracted from the X coordinates of the grid lines (depending on ExportPointsSelectionFunctions), or even
 /// both the document curves and grid lines
-class CallbackGatherXThetasInGridLines
+class CallbackGatherXThetasInGridLines : public CallbackGatherXThetasAbstractBase
 {
 public:
   /// Single constructor.
   CallbackGatherXThetasInGridLines(const MainWindowModel &modelMainWindow,
-                                   ExportEndpoints exportEndpoints,
+                                   const DocumentModelExportFormat &modelExport,
                                    const QStringList &curvesIncluded,
                                    const Transformation &transformation,
                                    const Document &document);
 
   /// Callback method.
-  CallbackSearchReturn callback (const QString &curveName,
-                                 const Point &point);
+  virtual CallbackSearchReturn callback (const QString &curveName,
+                                         const Point &point);
 
-  /// Resulting x/theta values for all included functions
-  ValuesVectorXOrY xThetaValuesRaw () const;
-
+  virtual void finalize ();
+  
 private:
   CallbackGatherXThetasInGridLines();
 
@@ -53,10 +52,7 @@ private:
                      const Transformation &transformation,
                      const Document &document);
 
-  const Transformation m_transformation;
   ExportEndpoints m_exportEndpoints;
-  CurveNamesIncluded m_curveNamesIncluded;
-  ValuesVectorXOrY m_xThetaValues;
 
   // Curve limits that may or may not be merged into m_xThetaValues
   CurveLimits m_curveLimitsMin;

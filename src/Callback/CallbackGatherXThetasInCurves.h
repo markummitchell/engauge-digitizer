@@ -7,8 +7,8 @@
 #ifndef CALLBACK_GATHER_X_THETAS_IN_CURVES_H
 #define CALLBACK_GATHER_X_THETAS_IN_CURVES_H
 
+#include "CallbackGatherXThetasAbstractBase.h"
 #include "CallbackSearchReturn.h"
-#include "CurveNamesIncluded.h"
 #include "ExportValuesXOrY.h"
 #include "Transformation.h"
 #include "ValuesVectorXOrY.h"
@@ -22,27 +22,23 @@ class Point;
 /// Although most of the time the X values are extracted from the X values of the document curves, they are sometimes
 /// extracted from the X coordinates of the grid lines (depending on ExportPointsSelectionFunctions), or even
 /// both the document curves and grid lines
-class CallbackGatherXThetasInCurves
+class CallbackGatherXThetasInCurves : public CallbackGatherXThetasAbstractBase
 {
 public:
   /// Single constructor.
   CallbackGatherXThetasInCurves(const DocumentModelExportFormat &modelExport,
-                                const QStringList &curveNamesIncluded,
+                                const QStringList &curvesIncluded,
                                 const Transformation &transformation);
 
   /// Callback method.
-  CallbackSearchReturn callback (const QString &curveName,
-                                 const Point &point);
+  virtual CallbackSearchReturn callback (const QString &curveName,
+                                         const Point &point);
 
-  /// Resulting x/theta values for all included functions
-  ValuesVectorXOrY xThetaValuesRaw () const;
-
+  virtual void finalize ();
+  
 private:
   CallbackGatherXThetasInCurves();
 
-  const Transformation m_transformation;
-  CurveNamesIncluded m_curveNamesIncluded;
-  ValuesVectorXOrY m_xThetaValues;
 };
 
 #endif // CALLBACK_GATHER_X_THETAS_IN_CURVES_H

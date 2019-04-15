@@ -4,13 +4,13 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef CURVE_NAMES_INCLUDED
-#define CURVE_NAMES_INCLUDED
+#ifndef CURVES_INCLUDED_HASH_H
+#define CURVES_INCLUDED_HASH_H
 
 #include <QHash>
 #include <QString>
 
 // Container of curve names to include in export, using QHash for rapid access
-typedef QHash<QString, bool> CurveNamesIncluded;
+typedef QHash<QString, bool> CurvesIncludedHash;
 
-#endif // CURVE_NAMES_INCLUDED
+#endif // CURVES_INCLUDED_HASH_H
