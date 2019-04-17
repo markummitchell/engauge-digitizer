@@ -15,10 +15,10 @@
 #include "Point.h"
 
 CallbackGatherXThetasAbstractBase::CallbackGatherXThetasAbstractBase(bool firstCurveOnly,
-                                                                     ExportEndpointsExtrapolation exportEndpointsExtrapolation,
+                                                                     bool extrapolateOutsideEndpoints,
                                                                      const QStringList &curvesIncluded,
                                                                      const Transformation &transformation) :
-  m_exportEndpointsExtrapolation (exportEndpointsExtrapolation),
+  m_extrapolateOutsideEndpoints (extrapolateOutsideEndpoints),
   m_curvesIncluded (curvesIncluded),
   m_transformation (transformation)
 {
@@ -47,6 +47,16 @@ void CallbackGatherXThetasAbstractBase::addGraphX (double xGraph)
   m_xThetaValues [xGraph] = true;
 }
 
+CurveLimits CallbackGatherXThetasAbstractBase::curveLimitsMax () const
+{
+  return m_curveLimitsMax;
+}
+
+CurveLimits CallbackGatherXThetasAbstractBase::curveLimitsMin () const
+{
+  return m_curveLimitsMin;
+}
+
 QStringList CallbackGatherXThetasAbstractBase::curvesIncluded () const
 {
   return m_curvesIncluded;
@@ -65,26 +75,26 @@ const Transformation &CallbackGatherXThetasAbstractBase::transformation () const
 void CallbackGatherXThetasAbstractBase::updateMinMax (const QString &curveName,
                                                       const Point &point)
 {
-  // Skip unless the endpoints are to be collected
-  if (m_exportEndpointsExtrapolation == EXPORT_ENDPOINTS_EXTRAPOLATION_STAY_WITHIN) {
+  // Skip unless the endpoints are to be collected. We update the min/max values
+  // even if the curve is not curvesIncludedHash since endpoints are sometimes
+  // required for curves other than the first when collecting just xTheta values from
+  // the first curve
+  if (!m_extrapolateOutsideEndpoints) {
 
-    if (curvesIncludedHash ().contains (curveName)) {
+    QPointF posGraph;
+    transformation ().transformScreenToRawGraph (point.posScreen(),
+                                                 posGraph);
 
-      QPointF posGraph;
-      transformation ().transformScreenToRawGraph (point.posScreen(),
-                                                   posGraph);
+    if (!m_curveLimitsMin.contains (curveName) ||
+        posGraph.x() < m_curveLimitsMin [curveName]) {
 
-      if (!m_curveLimitsMin.contains (curveName) ||
-          posGraph.x() < m_curveLimitsMin [curveName]) {
+      m_curveLimitsMin [curveName] = posGraph.x ();
+    }
 
-        m_curveLimitsMin [curveName] = posGraph.x ();
-      }
+    if (!m_curveLimitsMax.contains (curveName) ||
+        posGraph.x() > m_curveLimitsMax [curveName]) {
 
-      if (!m_curveLimitsMax.contains (curveName) ||
-          posGraph.x() > m_curveLimitsMax [curveName]) {
-
-        m_curveLimitsMax [curveName] = posGraph.x ();
-      }
+      m_curveLimitsMax [curveName] = posGraph.x ();
     }
   }
 }

@@ -45,7 +45,7 @@ private slots:
   void slotDelimitersSpaces();
   void slotDelimitersTabs();
   void slotExclude();
-  void slotFunctionsEndpointsExtrapolation(const QString &);
+  void slotFunctionsExtrapolateOutsideEndpoints(int);
   void slotFunctionsLayoutAllCurves();
   void slotFunctionsLayoutOneCurve();
   void slotFunctionsPointsAllCurves();
@@ -110,10 +110,10 @@ private:
   QLineEdit *m_editFunctionsPointsEvenlySpacing;
   QDoubleValidator *m_validatorFunctionsPointsEvenlySpacing;
   QComboBox *m_cmbFunctionsPointsEvenlySpacingUnits;
-  QComboBox *m_cmbFunctionsEndpointsExtrapolation;
   QRadioButton *m_btnFunctionsPointsGridLines;
   QRadioButton *m_btnFunctionsPointsRaw;
-
+  QCheckBox *m_chkExtrapolateOutsideEndpoints;
+  
   QRadioButton *m_btnCurvesLayoutAllCurves;
   QRadioButton *m_btnCurvesLayoutOneCurve;
 

@@ -22,7 +22,7 @@ const QString DEFAULT_X_LABEL ("x");
 const ExportPointsIntervalUnits DEFAULT_POINTS_INTERVAL_UNITS_FUNCTIONS = EXPORT_POINTS_INTERVAL_UNITS_SCREEN; // Consistent with DEFAULT_POINTS_INTERVAL_FUNCTIONS
 const ExportPointsIntervalUnits DEFAULT_POINTS_INTERVAL_UNITS_RELATIONS = EXPORT_POINTS_INTERVAL_UNITS_SCREEN; // Consistent with DEFAULT_POINTS_INTERVAL_RELATIONS
 const bool DEFAULT_EXPORT_DELIMITER_OVERRIDE = false; // Target beginner users who expect simplest behavior. Issue #169
-const ExportEndpointsExtrapolation DEFAULT_ENDPOINTS = EXPORT_ENDPOINTS_EXTRAPOLATION_EXTRAPOLATE_OUTSIDE; // Traditional behavior
+const bool DEFAULT_EXTRAPOLATE = true; // Traditional behavior before version 11
 
 DocumentModelExportFormat::DocumentModelExportFormat()
 {
@@ -33,8 +33,8 @@ DocumentModelExportFormat::DocumentModelExportFormat()
                                             QVariant (DEFAULT_CURVE_NAMES_NOT_EXPORTED)).toStringList();
   m_delimiter = (ExportDelimiter) settings.value (SETTINGS_EXPORT_DELIMITER,
                                                   QVariant (EXPORT_DELIMITER_COMMA)).toInt();
-  m_endpointsExtrapolation = (ExportEndpointsExtrapolation) settings.value (SETTINGS_EXPORT_ENDPOINTS_EXTRAPOLATION,
-                                                                            QVariant (DEFAULT_ENDPOINTS)).toInt();
+  m_extrapolateOutsideEndpoints = settings.value (SETTINGS_EXPORT_EXTRAPOLATE_OUTSIDE_ENDPOINTS,
+                                                  QVariant (DEFAULT_EXTRAPOLATE)).toBool();
   m_overrideCsvTsv = settings.value (SETTINGS_EXPORT_DELIMITER_OVERRIDE_CSV_TSV,
                                      QVariant (DEFAULT_EXPORT_DELIMITER_OVERRIDE)).toBool();
   m_header = (ExportHeader) settings.value (SETTINGS_EXPORT_HEADER,
@@ -67,7 +67,7 @@ DocumentModelExportFormat::DocumentModelExportFormat (const Document &document) 
   m_pointsIntervalUnitsRelations (document.modelExport().pointsIntervalUnitsRelations()),
   m_layoutFunctions (document.modelExport().layoutFunctions()),
   m_delimiter (document.modelExport().delimiter()),
-  m_endpointsExtrapolation (document.modelExport().endpointsExtrapolation()),
+  m_extrapolateOutsideEndpoints (document.modelExport().extrapolateOutsideEndpoints()),
   m_overrideCsvTsv (document.modelExport().overrideCsvTsv()),
   m_header (document.modelExport().header()),
   m_xLabel (document.modelExport().xLabel())
@@ -84,7 +84,7 @@ DocumentModelExportFormat::DocumentModelExportFormat(const DocumentModelExportFo
   m_pointsIntervalUnitsRelations (other.pointsIntervalUnitsRelations()),
   m_layoutFunctions (other.layoutFunctions()),
   m_delimiter (other.delimiter()),
-  m_endpointsExtrapolation (other.endpointsExtrapolation()),
+  m_extrapolateOutsideEndpoints (other.extrapolateOutsideEndpoints()),
   m_overrideCsvTsv (other.overrideCsvTsv()),
   m_header (other.header()),
   m_xLabel (other.xLabel ())
@@ -102,7 +102,7 @@ DocumentModelExportFormat &DocumentModelExportFormat::operator=(const DocumentMo
   m_pointsIntervalUnitsRelations = other.pointsIntervalUnitsRelations();
   m_layoutFunctions = other.layoutFunctions();
   m_delimiter = other.delimiter();
-  m_endpointsExtrapolation = other.endpointsExtrapolation();
+  m_extrapolateOutsideEndpoints = other.extrapolateOutsideEndpoints();
   m_overrideCsvTsv = other.overrideCsvTsv();
   m_header = other.header();
   m_xLabel = other.xLabel();
@@ -120,9 +120,9 @@ ExportDelimiter DocumentModelExportFormat::delimiter() const
   return m_delimiter;
 }
 
-ExportEndpointsExtrapolation DocumentModelExportFormat::endpointsExtrapolation() const
+bool DocumentModelExportFormat::extrapolateOutsideEndpoints() const
 {
-  return m_endpointsExtrapolation;
+  return m_extrapolateOutsideEndpoints;
 }
 
 ExportHeader DocumentModelExportFormat::header() const
@@ -143,7 +143,7 @@ void DocumentModelExportFormat::loadXml(QXmlStreamReader &reader)
 
   QXmlStreamAttributes attributes = reader.attributes();
 
-  // DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_* are specific to versions 11 and newer
+  // DOCUMENT_SERIALIZE_EXPORT_EXTRAPOLATE_OUTSIDE_ENDPOINTS is specific to versions 11 and newer
   if (attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_SELECTION_FUNCTIONS) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_FUNCTIONS) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_POINTS_INTERVAL_UNITS_FUNCTIONS) &&
@@ -170,10 +170,12 @@ void DocumentModelExportFormat::loadXml(QXmlStreamReader &reader)
 
       setOverrideCsvTsv(stringOverrideCsvTsv == DOCUMENT_SERIALIZE_BOOL_TRUE);
     }
-    if (attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_EXTRAPOLATION)) {
-      setEndpointsExtrapolation ((ExportEndpointsExtrapolation) attributes.value (DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_EXTRAPOLATION).toInt());
-    } else {
-      setEndpointsExtrapolation (DEFAULT_ENDPOINTS);
+    if (attributes.hasAttribute(DOCUMENT_SERIALIZE_EXPORT_EXTRAPOLATE_OUTSIDE_ENDPOINTS)) {
+
+      // Boolean value
+      QString stringExtrapolate = attributes.value (DOCUMENT_SERIALIZE_EXPORT_EXTRAPOLATE_OUTSIDE_ENDPOINTS).toString();
+      
+      setExtrapolateOutsideEndpoints (stringExtrapolate == DOCUMENT_SERIALIZE_BOOL_TRUE);
     }
 
     setHeader ((ExportHeader) attributes.value(DOCUMENT_SERIALIZE_EXPORT_HEADER).toInt());
@@ -284,7 +286,7 @@ void DocumentModelExportFormat::printStream(QString indentation,
       << exportPointsIntervalUnitsToString (m_pointsIntervalUnitsRelations) << "\n";
   str << indentation << "exportLayoutFunctions=" << exportLayoutFunctionsToString (m_layoutFunctions) << "\n";
   str << indentation << "exportDelimiter=" << exportDelimiterToString (m_delimiter) << "\n";
-  str << indentation << "exportEndpointsExtrapolation=" << exportEndpointsExtrapolationToString (m_endpointsExtrapolation) << "\n";
+  str << indentation << "exportExtrapolateOutsideEndpoints=" << (m_extrapolateOutsideEndpoints ? "yes" : "no") << "\n";
   str << indentation << "overrideCsvTsv=" << (m_overrideCsvTsv ? "true" : "false") << "\n";
   str << indentation << "exportHeader=" << exportHeaderToString (m_header) << "\n";
   str << indentation << "xLabel=" << m_xLabel << "\n";
@@ -307,11 +309,12 @@ void DocumentModelExportFormat::saveXml(QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_LAYOUT_FUNCTIONS_STRING, exportLayoutFunctionsToString (m_layoutFunctions));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_DELIMITER, QString::number (m_delimiter));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_DELIMITER_OVERRIDE_CSV_TSV, m_overrideCsvTsv ?
-                          DOCUMENT_SERIALIZE_BOOL_TRUE :
-                          DOCUMENT_SERIALIZE_BOOL_FALSE);
+                        DOCUMENT_SERIALIZE_BOOL_TRUE :
+                        DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_DELIMITER_STRING, exportDelimiterToString (m_delimiter));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_EXTRAPOLATION, QString::number (m_endpointsExtrapolation));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_ENDPOINTS_EXTRAPOLATION_STRING, exportEndpointsExtrapolationToString (m_endpointsExtrapolation));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_EXTRAPOLATE_OUTSIDE_ENDPOINTS, m_extrapolateOutsideEndpoints ?
+                        DOCUMENT_SERIALIZE_BOOL_TRUE :
+                        DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_HEADER, QString::number (m_header));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_HEADER_STRING, exportHeaderToString (m_header));
   writer.writeAttribute(DOCUMENT_SERIALIZE_EXPORT_X_LABEL, m_xLabel);
@@ -340,9 +343,9 @@ void DocumentModelExportFormat::setDelimiter(ExportDelimiter delimiter)
   m_delimiter = delimiter;
 }
 
-void DocumentModelExportFormat::setEndpointsExtrapolation(ExportEndpointsExtrapolation endpointsExtrapolation)
+void DocumentModelExportFormat::setExtrapolateOutsideEndpoints(bool extrapolateOutsideEndpoints)
 {
-  m_endpointsExtrapolation = endpointsExtrapolation;
+  m_extrapolateOutsideEndpoints = extrapolateOutsideEndpoints;
 }
 
 void DocumentModelExportFormat::setHeader(ExportHeader header)

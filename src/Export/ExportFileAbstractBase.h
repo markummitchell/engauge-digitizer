@@ -8,8 +8,8 @@
 #define EXPORT_FILE_ABSTRACT_BASE_H
 
 #include "CurveConnectAs.h"
-#include "ExportFileAbstractBase.h"
 #include "ExportHeader.h"
+#include <QPointF>
 #include <QStringList>
 #include <QVector>
 #include <vector>

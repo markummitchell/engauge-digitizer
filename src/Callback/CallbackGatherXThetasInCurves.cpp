@@ -16,7 +16,7 @@ CallbackGatherXThetasInCurves::CallbackGatherXThetasInCurves(const DocumentModel
                                                              const Transformation &transformation) :
   CallbackGatherXThetasAbstractBase ((modelExport.pointsSelectionFunctions() ==
                                       EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE),
-                                     modelExport.endpointsExtrapolation (),
+                                     modelExport.extrapolateOutsideEndpoints (),
                                      curvesIncluded,
                                      transformation)
 {

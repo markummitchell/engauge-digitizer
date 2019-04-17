@@ -9,7 +9,6 @@
 
 #include "DocumentModelAbstractBase.h"
 #include "ExportDelimiter.h"
-#include "ExportEndpointsExtrapolation.h"
 #include "ExportHeader.h"
 #include "ExportLayoutFunctions.h"
 #include "ExportPointsIntervalUnits.h"
@@ -42,8 +41,8 @@ public:
   /// Get method for delimiter.
   ExportDelimiter delimiter() const;
 
-  /// Get methods for endpoints extrapolation.
-  ExportEndpointsExtrapolation endpointsExtrapolation () const;
+  /// Get methods for extrapolation.
+  bool extrapolateOutsideEndpoints() const;
   
   /// Get method for header.
   ExportHeader header() const;
@@ -86,8 +85,8 @@ public:
   /// Set method for delimiter.
   void setDelimiter(ExportDelimiter exportDelimiter);
 
-  /// Set methods for endpoint extrapolation.
-  void setEndpointsExtrapolation (ExportEndpointsExtrapolation exportEndpointsExtrapolation);
+  /// Set methods for extrapolation.
+  void setExtrapolateOutsideEndpoints (bool extrapolateOutsideEndpoints);
   
   /// Set method for header.
   void setHeader(ExportHeader exportHeader);
@@ -135,7 +134,7 @@ private:
   ExportPointsIntervalUnits m_pointsIntervalUnitsRelations;
   ExportLayoutFunctions m_layoutFunctions;
   ExportDelimiter m_delimiter;
-  ExportEndpointsExtrapolation m_endpointsExtrapolation;
+  bool m_extrapolateOutsideEndpoints;
   bool m_overrideCsvTsv;
   ExportHeader m_header;
   QString m_xLabel;

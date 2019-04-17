@@ -64,7 +64,8 @@ bool TestExport::checkCommasInFunctionsForDelimiter (ExportDelimiter delimiter,
     bool isLogYRadius = (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG);
     unsigned int numWritesSoFar = 0;
 
-    ExportFileFunctions exportFile;    
+    ExportFileFunctions exportFile;
+    CurveLimits curveLimitsMin, curveLimitsMax; // Empty containers mean no limits are in effect
     exportFile.exportAllPerLineXThetaValuesMerged (m_modelExportOverride,
                                                    *m_document,
                                                    m_modelMainWindow,
@@ -74,6 +75,8 @@ bool TestExport::checkCommasInFunctionsForDelimiter (ExportDelimiter delimiter,
                                                    m_transformation,
                                                    isLogXTheta,
                                                    isLogYRadius,
+                                                   curveLimitsMin,
+                                                   curveLimitsMax,
                                                    str,
                                                    numWritesSoFar);
   }
@@ -608,7 +611,8 @@ void TestExport::testLogExtrapolationFunctionsAll ()
     bool isLogYRadius = (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG);
     unsigned int numWritesSoFar = 0;
     
-    ExportFileFunctions exportFile;    
+    ExportFileFunctions exportFile;
+    CurveLimits curveLimitsMin, curveLimitsMax; // Empty containers mean no limits are in effect    
     exportFile.exportAllPerLineXThetaValuesMerged (m_modelExportOverride,
                                                    *m_document,
                                                    m_modelMainWindow,
@@ -618,6 +622,8 @@ void TestExport::testLogExtrapolationFunctionsAll ()
                                                    m_transformation,
                                                    isLogXTheta,
                                                    isLogYRadius,
+                                                   curveLimitsMin,
+                                                   curveLimitsMax,
                                                    str,
                                                    numWritesSoFar);
   }

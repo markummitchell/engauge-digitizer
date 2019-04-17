@@ -74,7 +74,7 @@ const QString SETTINGS_IMPORT_PDF_RESOLUTION ("PdfResolution");
 const QString SETTINGS_EXPORT_CURVE_NAMES_NOT_EXPORTED ("curveNamesNotExported");
 const QString SETTINGS_EXPORT_DELIMITER ("delimiter");
 const QString SETTINGS_EXPORT_DELIMITER_OVERRIDE_CSV_TSV ("overrideCsvTsv");
-const QString SETTINGS_EXPORT_ENDPOINTS_EXTRAPOLATION ("endpointsExtrapolation");
+const QString SETTINGS_EXPORT_EXTRAPOLATE_OUTSIDE_ENDPOINTS ("extrapolateOutsideEndpoints");
 const QString SETTINGS_EXPORT_HEADER ("header");
 const QString SETTINGS_EXPORT_LAYOUT_FUNCTIONS ("layoutFunctions");
 const QString SETTINGS_EXPORT_POINTS_INTERVAL_FUNCTIONS ("pointsIntervalFunctions");

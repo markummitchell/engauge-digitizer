@@ -9,7 +9,6 @@
 #include "CmdSettingsExportFormat.h"
 #include "DocumentModelExportFormat.h"
 #include "DlgSettingsExportFormat.h"
-#include "ExportEndpointsExtrapolation.h"
 #include "ExportFileFunctions.h"
 #include "ExportFileRelations.h"
 #include "Logger.h"
@@ -49,7 +48,7 @@ const int TAB_WIDGET_INDEX_RELATIONS = 1;
 
 const QString EMPTY_PREVIEW;
 
-const int MINIMUM_DIALOG_WIDTH_EXPORT_FORMAT = 650;
+const int MINIMUM_DIALOG_WIDTH_EXPORT_FORMAT = 600;
 const int MINIMUM_HEIGHT = 780;
 
 DlgSettingsExportFormat::DlgSettingsExportFormat(MainWindow &mainWindow) :
@@ -197,21 +196,14 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
   m_btnFunctionsPointsAllCurves = new QRadioButton (tr ("Interpolate Ys at Xs from all curves"));
   m_btnFunctionsPointsAllCurves->setWhatsThis (tr ("Exported file will have values at every unique X "
                                                    "value from every curve. Y values will be linearly interpolated if necessary"));
-  layoutPointsSelections->addWidget (m_btnFunctionsPointsAllCurves, row, 0, 1, 4);
+  layoutPointsSelections->addWidget (m_btnFunctionsPointsAllCurves, row, 0, 1, 2);
   connect (m_btnFunctionsPointsAllCurves, SIGNAL (released()), this, SLOT (slotFunctionsPointsAllCurves()));
-
-  QLabel *labelEndpoints = new QLabel (tr ("Endpoints:"));
-  layoutPointsSelections->addWidget (labelEndpoints, row, 4, 1, 1);
-
-  m_cmbFunctionsEndpointsExtrapolation = new QComboBox;
-  m_cmbFunctionsEndpointsExtrapolation->setWhatsThis (tr ("Extrapolation outside of endpoints of each curve."));
-  m_cmbFunctionsEndpointsExtrapolation->addItem(exportEndpointsExtrapolationToString(EXPORT_ENDPOINTS_EXTRAPOLATION_STAY_WITHIN),
-                                                QVariant (EXPORT_ENDPOINTS_EXTRAPOLATION_STAY_WITHIN));
-  m_cmbFunctionsEndpointsExtrapolation->addItem(exportEndpointsExtrapolationToString(EXPORT_ENDPOINTS_EXTRAPOLATION_EXTRAPOLATE_OUTSIDE),
-                                                QVariant (EXPORT_ENDPOINTS_EXTRAPOLATION_EXTRAPOLATE_OUTSIDE));
-  layoutPointsSelections->addWidget (m_cmbFunctionsEndpointsExtrapolation, row++, 5, 1, 1);
-  connect (m_cmbFunctionsEndpointsExtrapolation, SIGNAL (activated (const QString &)),
-           this, SLOT (slotFunctionsEndpointsExtrapolation (const QString &)));
+  
+  // Put extrapolation control up near interpolation controls and away from raw control which never uses extrapolation
+  m_chkExtrapolateOutsideEndpoints = new QCheckBox (tr ("Extrapolate outside endpoints"));
+  m_chkExtrapolateOutsideEndpoints->setWhatsThis (tr ("Enable or disable extrapolation outside of endpoints of each curve."));
+  layoutPointsSelections->addWidget (m_chkExtrapolateOutsideEndpoints, row++, 3, 1, 1, Qt::AlignRight);
+  connect (m_chkExtrapolateOutsideEndpoints, SIGNAL (stateChanged (int)), this, SLOT (slotFunctionsExtrapolateOutsideEndpoints(int)));
 
   m_btnFunctionsPointsFirstCurve = new QRadioButton (tr ("Interpolate Ys at Xs from first curve"));
   m_btnFunctionsPointsFirstCurve->setWhatsThis (tr ("Exported file will have values at every unique X "
@@ -629,9 +621,7 @@ void DlgSettingsExportFormat::load (CmdMediator &cmdMediator)
   m_btnDelimitersTabs->setChecked (delimiter == EXPORT_DELIMITER_TAB);
   m_btnDelimitersSemicolons->setChecked (delimiter == EXPORT_DELIMITER_SEMICOLON);
 
-  ExportEndpointsExtrapolation endpointsExtrapolation = m_modelExportAfter->endpointsExtrapolation ();
-  int indexExtrapolation = m_cmbFunctionsEndpointsExtrapolation->findData (QVariant (endpointsExtrapolation));
-  m_cmbFunctionsEndpointsExtrapolation->setCurrentIndex (indexExtrapolation);
+  m_chkExtrapolateOutsideEndpoints->setChecked (m_modelExportAfter->extrapolateOutsideEndpoints ());
 
   m_chkOverrideCsvTsv->setChecked (m_modelExportAfter->overrideCsvTsv());
 
@@ -738,14 +728,11 @@ void DlgSettingsExportFormat::slotExclude ()
   updatePreview();
 }
 
-void DlgSettingsExportFormat::slotFunctionsEndpointsExtrapolation(const QString &)
+void DlgSettingsExportFormat::slotFunctionsExtrapolateOutsideEndpoints(int)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsEndpointsExtrapolation";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsExtrapolateOutsideEndpoints";
 
-  int index = m_cmbFunctionsEndpointsExtrapolation->currentIndex();
-  ExportEndpointsExtrapolation endpoints = (ExportEndpointsExtrapolation) m_cmbFunctionsEndpointsExtrapolation->itemData (index).toInt();
-
-  m_modelExportAfter->setEndpointsExtrapolation(endpoints);
+  m_modelExportAfter->setExtrapolateOutsideEndpoints (m_chkExtrapolateOutsideEndpoints->isChecked());  
   updateControls();
   updatePreview();
 }
@@ -978,8 +965,8 @@ void DlgSettingsExportFormat::slotSaveDefault()
 
   settings.setValue (SETTINGS_EXPORT_DELIMITER,
                      QVariant (m_modelExportAfter->delimiter()));
-  settings.setValue (SETTINGS_EXPORT_ENDPOINTS_EXTRAPOLATION,
-                     QVariant (m_modelExportAfter->endpointsExtrapolation()));
+  settings.setValue (SETTINGS_EXPORT_EXTRAPOLATE_OUTSIDE_ENDPOINTS,
+                     QVariant (m_modelExportAfter->extrapolateOutsideEndpoints()));
   settings.setValue (SETTINGS_EXPORT_HEADER,
                      QVariant (m_modelExportAfter->header()));
   settings.setValue (SETTINGS_EXPORT_LAYOUT_FUNCTIONS,
@@ -1023,6 +1010,9 @@ void DlgSettingsExportFormat::updateControls ()
   bool isGoodState = goodIntervalFunctions() &&
                      goodIntervalRelations();
   enableOk (isGoodState);
+
+  // Function extrapolation never applies when using raw points
+  m_chkExtrapolateOutsideEndpoints->setEnabled (!m_btnFunctionsPointsRaw->isChecked ());
 
   int selectedForInclude = m_listExcluded->selectedItems().count();
   int selectedForExclude = m_listIncluded->selectedItems().count();

@@ -256,7 +256,6 @@ HEADERS  += \
     src/Export/ExportAlignLinear.h \
     src/Export/ExportAlignLog.h \
     src/Export/ExportDelimiter.h \
-    src/Export/ExportEndpointsExtrapolation.h \
     src/Export/ExportImageForRegression.h \
     src/Export/ExportLayoutFunctions.h \
     src/Export/ExportPointsIntervalUnits.h \
@@ -611,7 +610,6 @@ SOURCES += \
     src/Export/ExportAlignLinear.cpp \
     src/Export/ExportAlignLog.cpp \
     src/Export/ExportDelimiter.cpp \
-    src/Export/ExportEndpointsExtrapolation.cpp \
     src/Export/ExportFileAbstractBase.cpp \
     src/Export/ExportFileFunctions.cpp \
     src/Export/ExportFileRelations.cpp \

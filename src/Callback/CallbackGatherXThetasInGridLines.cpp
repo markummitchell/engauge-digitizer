@@ -25,7 +25,7 @@ CallbackGatherXThetasInGridLines::CallbackGatherXThetasInGridLines(const MainWin
                                                                    const Transformation &transformation,
                                                                    const Document &document) :
   CallbackGatherXThetasAbstractBase (NOT_FIRST_CURVE_ONLY,
-                                     modelExport.endpointsExtrapolation (),
+                                     modelExport.extrapolateOutsideEndpoints (),
                                      curvesIncluded,
                                      transformation)
 {

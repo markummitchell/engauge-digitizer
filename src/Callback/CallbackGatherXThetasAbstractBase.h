@@ -10,7 +10,6 @@
 #include "CallbackSearchReturn.h"
 #include "CurveLimits.h"
 #include "CurvesIncludedHash.h"
-#include "ExportEndpointsExtrapolation.h"
 #include "ExportValuesXOrY.h"
 #include "Transformation.h"
 #include "ValuesVectorXOrY.h"
@@ -23,7 +22,7 @@ class CallbackGatherXThetasAbstractBase
 public:
   /// Single constructor.
   CallbackGatherXThetasAbstractBase(bool firstCurveOnly,
-                                    ExportEndpointsExtrapolation exportEndpointsExtrapolation,
+                                    bool extrapolateOutsideEndpoints,
                                     const QStringList &curvesIncluded,
                                     const Transformation &transformation);
   virtual ~CallbackGatherXThetasAbstractBase ();
@@ -31,6 +30,12 @@ public:
   /// Callback method.
   virtual CallbackSearchReturn callback (const QString &curveName,
                                          const Point &point) = 0;
+
+  /// Endpoint maxima for each curve, if extrapolation has been disabled
+  CurveLimits curveLimitsMax () const;
+
+  /// Endpoint minima for each curve, if extrapolation has been disabled
+  CurveLimits curveLimitsMin () const;
 
   /// Resulting x/theta values for all included functions
   ValuesVectorXOrY xThetaValuesRaw () const;
@@ -56,7 +61,7 @@ protected:
 private:
   CallbackGatherXThetasAbstractBase();
 
-  ExportEndpointsExtrapolation m_exportEndpointsExtrapolation;
+  bool m_extrapolateOutsideEndpoints;
   QStringList m_curvesIncluded;
   const Transformation m_transformation;
   CurvesIncludedHash m_curvesIncludedHash;
