@@ -360,56 +360,64 @@ Select points on the screen.</source>
         <location filename="../src/Create/CreateActions.cpp" line="71" />
         <source>Digitize Axis Point
 
-Digitizes an axis point for a graph by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. In a graph, three axis points are required to define the graph coordinates.</source>
-        <translation>축점 디지타이징
+Digitizes an axis point for a graph by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. After Import and Import (Advanced), three axis points with (X1,Y1) (X2,Y2) (X3,Y3) coordinates can be digitized to define the graph coordinates. Optionally, after Import (Advanced) four axis points with (X1) (X2) (Y3) (Y4) coordinates can be digitized to define the graph coordinates.
 
-마우스 클릭 후 커서에 새로운 점을 배치하여 그래프에 대한 축 점을 디지타이징합니다. 그런 다음 축 포인트의 좌표가 입력됩니다. 그래프에서 그래프 좌표를 정의하려면 세 축의 점이 필요합니다.</translation>
+This tool is disabled when a complete set of axis points has been defined, or after Import (Advanced) if Scale Bar is selected.</source>
+        <translation>축 포인트 디지타이징
+
+마우스 클릭 후 커서에 새로운 점을 배치하여 그래프의 축 점을 디지털화합니다. 그런 다음 축 포인트의 좌표가 입력됩니다. 가져 오기 및 가져 오기 (고급) 후 (X1, Y1) (X2, Y2) (X3, Y3) 좌표가있는 세 개의 축 지점을 디지털화하여 그래프 좌표를 정의 할 수 있습니다. 선택적으로 가져 오기 (고급) 후에 (X1) (X2) (Y3) (Y4) 좌표가있는 4 개의 축 지점을 디지털화하여 그래프 좌표를 정의 할 수 있습니다.
+
+이 도구는 축 점 전체 세트가 정의되거나 스케일 막대가 선택되면 가져 오기 (고급) 이후에 비활성화됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="78" />
+        <location filename="../src/Create/CreateActions.cpp" line="82" />
         <source>Scale Bar Tool</source>
         <translation>스케일 도구</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="79" />
+        <location filename="../src/Create/CreateActions.cpp" line="83" />
         <source>Shift+F8</source>
         <translation>Shift+F8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="81" />
-        <source>Digitize scale bar for a map.</source>
-        <translation>지도의 스케일 막대를 디지타이징합니다.</translation>
+        <location filename="../src/Create/CreateActions.cpp" line="85" />
+        <source>Digitize scale bar for a map. Requires Import (Advanced).</source>
+        <translation>지도의 스케일 막대를 디지타이징합니다. 가져 오기 필요 (고급).</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="82" />
+        <location filename="../src/Create/CreateActions.cpp" line="86" />
         <source>Digitize Scale Bar
 
 Digitize a scale bar for a map by clicking and dragging. The length of the scale bar is then entered. In a map, the two endpoints of the scale bar define the distances in graph coordinates.
 
-Maps must be imported using Import (Advanced).</source>
+This tool is enabled by selecting Scale Bar in Import (Advanced).
+
+This tool is disabled when a scale bar has been defined, or if axis points were selected during import.</source>
         <translation>스케일 바 디지털화
 
-클릭하고 드래그하여지도의 눈금 막대를 디지타이징합니다. 그러면 눈금 막대의 길이가 입력됩니다. 지도에서 축척 막대의 두 끝점은 그래프 좌표의 거리를 정의합니다.
+클릭하고 드래그하여지도의 눈금 막대를 디지타이징하십시오. 스케일 바의 길이가 입력됩니다. 지도에서 축척 막대의 두 끝점은 그래프 좌표의 거리를 정의합니다.
 
-가져 오기 (고급)를 사용하여지도를 가져와야합니다.</translation>
+이 도구는 가져 오기 (고급)에서 배율 막대를 선택하여 사용할 수 있습니다.
+
+이 도구는 축척 막대가 정의되거나 가져 오기 중에 축 점이 선택된 경우 비활성화됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="89" />
+        <location filename="../src/Create/CreateActions.cpp" line="95" />
         <source>Curve Point Tool</source>
         <translation>커브 포인트 도구</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="90" />
+        <location filename="../src/Create/CreateActions.cpp" line="96" />
         <source>Shift+F4</source>
         <translation>Shift+F4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="92" />
+        <location filename="../src/Create/CreateActions.cpp" line="98" />
         <source>Digitize curve points.</source>
         <translation>커브 점을 디지타이징합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="93" />
+        <location filename="../src/Create/CreateActions.cpp" line="99" />
         <source>Digitize Curve Point
 
 Digitizes a curve point by placing a new point at the cursor after a mouse click. Use this mode to digitize points along curves one by one.
@@ -422,22 +430,22 @@ New points will be assigned to the currently selected curve.</source>
 새로운 점이 현재 선택된 커브에 지정됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="100" />
+        <location filename="../src/Create/CreateActions.cpp" line="106" />
         <source>Point Match Tool</source>
         <translation>포인트 매치 도구</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="101" />
+        <location filename="../src/Create/CreateActions.cpp" line="107" />
         <source>Shift+F5</source>
         <translation>Shift+F5</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="103" />
+        <location filename="../src/Create/CreateActions.cpp" line="109" />
         <source>Digitize curve points in a point plot by matching a point.</source>
         <translation>포인트를 일치시켜 점 플롯의 곡선 점을 디지타이징합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="104" />
+        <location filename="../src/Create/CreateActions.cpp" line="110" />
         <source>Digitize Curve Points by Point Matching
 
 Digitizes curve points in a point plot by finding points that match a sample point. The process starts by selecting a representative sample point.
@@ -450,22 +458,22 @@ New points will be assigned to the currently selected curve.</source>
 새로운 점이 현재 선택된 커브에 지정됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="110" />
+        <location filename="../src/Create/CreateActions.cpp" line="116" />
         <source>Color Picker Tool</source>
         <translation>색상 선택 도구</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="111" />
+        <location filename="../src/Create/CreateActions.cpp" line="117" />
         <source>Shift+F6</source>
         <translation>Shift+F6</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="113" />
+        <location filename="../src/Create/CreateActions.cpp" line="119" />
         <source>Select color settings for filtering in Segment Fill mode.</source>
         <translation>세그먼트 채우기 모드에서 필터링을위한 색상 설정을 선택하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="114" />
+        <location filename="../src/Create/CreateActions.cpp" line="120" />
         <source>Select color settings for Segment Fill filtering
 
 Select a pixel along the currently selected curve. That pixel and its neighbors will define the filter settings (color, brightness, and so on) of the currently selected curve while in Segment Fill mode.</source>
@@ -474,22 +482,22 @@ Select a pixel along the currently selected curve. That pixel and its neighbors 
 현재 선택된 커브를 따라 픽셀을 선택하십시오. 이 픽셀과 그 이웃은 세그먼트 채우기 모드에서 현재 선택된 곡선의 필터 설정 (색, 밝기 등)을 정의합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="120" />
+        <location filename="../src/Create/CreateActions.cpp" line="126" />
         <source>Segment Fill Tool</source>
         <translation>세그먼트 채우기 도구</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="121" />
+        <location filename="../src/Create/CreateActions.cpp" line="127" />
         <source>Shift+F7</source>
         <translation>Shift+F7</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="123" />
+        <location filename="../src/Create/CreateActions.cpp" line="129" />
         <source>Digitize curve points along a segment of a curve.</source>
         <translation>커브의 세그먼트를 따라 커브 점을 디지타이징합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="124" />
+        <location filename="../src/Create/CreateActions.cpp" line="130" />
         <source>Digitize Curve Points With Segment Fill
 
 Digitizes curve points by placing new points along the highlighted segment under the cursor. Use this mode to quickly digitize multiple points along a curve with a single click.
@@ -502,17 +510,17 @@ New points will be assigned to the currently selected curve.</source>
 새로운 점이 현재 선택된 커브에 지정됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="145" />
+        <location filename="../src/Create/CreateActions.cpp" line="151" />
         <source>&amp;Undo</source>
         <translation>끄르다</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="147" />
+        <location filename="../src/Create/CreateActions.cpp" line="153" />
         <source>Undo the last operation.</source>
         <translation>마지막 작업 취소</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="148" />
+        <location filename="../src/Create/CreateActions.cpp" line="154" />
         <source>Undo
 
 Undo the last operation.</source>
@@ -521,17 +529,17 @@ Undo the last operation.</source>
 마지막 작업을 취소하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="152" />
+        <location filename="../src/Create/CreateActions.cpp" line="158" />
         <source>&amp;Redo</source>
         <translation>다시 하다</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="154" />
+        <location filename="../src/Create/CreateActions.cpp" line="160" />
         <source>Redo the last operation.</source>
         <translation>마지막 작업 다시 실행</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="155" />
+        <location filename="../src/Create/CreateActions.cpp" line="161" />
         <source>Redo
 
 Redo the last operation.</source>
@@ -540,17 +548,17 @@ Redo the last operation.</source>
 마지막 작업 다시 실행</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="159" />
+        <location filename="../src/Create/CreateActions.cpp" line="165" />
         <source>Cut</source>
         <translation>절단</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="161" />
+        <location filename="../src/Create/CreateActions.cpp" line="167" />
         <source>Cuts the selected points and copies them to the clipboard.</source>
         <translation>선택한 점을 잘라내어 클립 보드에 복사합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="162" />
+        <location filename="../src/Create/CreateActions.cpp" line="168" />
         <source>Cut
 
 Cuts the selected points and copies them to the clipboard.</source>
@@ -559,17 +567,17 @@ Cuts the selected points and copies them to the clipboard.</source>
 선택한 점을 잘라내어 클립 보드에 복사합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="166" />
+        <location filename="../src/Create/CreateActions.cpp" line="172" />
         <source>Copy</source>
         <translation>부</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="168" />
+        <location filename="../src/Create/CreateActions.cpp" line="174" />
         <source>Copies the selected points to the clipboard.</source>
         <translation>선택한 점을 클립 보드에 복사합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="169" />
+        <location filename="../src/Create/CreateActions.cpp" line="175" />
         <source>Copy
 
 Copies the selected points to the clipboard.</source>
@@ -578,17 +586,17 @@ Copies the selected points to the clipboard.</source>
 선택한 점을 클립 보드에 복사합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="173" />
+        <location filename="../src/Create/CreateActions.cpp" line="179" />
         <source>Paste</source>
         <translation>풀</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="175" />
+        <location filename="../src/Create/CreateActions.cpp" line="181" />
         <source>Pastes the selected points from the clipboard.</source>
         <translation>선택한 점을 클립 보드에서 붙여 넣습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="176" />
+        <location filename="../src/Create/CreateActions.cpp" line="182" />
         <source>Paste
 
 Pastes the selected points from the clipboard. They will be assigned to the current curve.</source>
@@ -597,17 +605,17 @@ Pastes the selected points from the clipboard. They will be assigned to the curr
 선택한 점을 클립 보드에서 붙여 넣습니다. 그것들은 현재 곡선에 할당됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="180" />
+        <location filename="../src/Create/CreateActions.cpp" line="186" />
         <source>Delete</source>
         <translation>지우다</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="182" />
+        <location filename="../src/Create/CreateActions.cpp" line="188" />
         <source>Deletes the selected points, after copying them to the clipboard.</source>
         <translation>클립 보드에 복사 한 후 선택한 포인트를 삭제합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="183" />
+        <location filename="../src/Create/CreateActions.cpp" line="189" />
         <source>Delete
 
 Deletes the selected points, after copying them to the clipboard.</source>
@@ -616,17 +624,17 @@ Deletes the selected points, after copying them to the clipboard.</source>
 클립 보드에 복사 한 후 선택한 포인트를 삭제합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="187" />
+        <location filename="../src/Create/CreateActions.cpp" line="193" />
         <source>Paste As New</source>
         <translation>새 항목으로 붙여 넣기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="188" />
+        <location filename="../src/Create/CreateActions.cpp" line="194" />
         <source>Pastes an image from the clipboard.</source>
         <translation>클립 보드에서 이미지를 붙여 넣습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="189" />
+        <location filename="../src/Create/CreateActions.cpp" line="195" />
         <source>Paste as New
 
 Creates a new document by pasting an image from the clipboard.</source>
@@ -635,17 +643,17 @@ Creates a new document by pasting an image from the clipboard.</source>
 클립 보드에서 이미지를 붙여 넣어 새 문서를 만듭니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="193" />
+        <location filename="../src/Create/CreateActions.cpp" line="199" />
         <source>Paste As New (Advanced)...</source>
         <translation>새로 붙여 넣기 (고급)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="194" />
+        <location filename="../src/Create/CreateActions.cpp" line="200" />
         <source>Pastes an image from the clipboard, in advanced mode.</source>
         <translation>고급 모드에서 클립 보드의 이미지를 붙여 넣습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="195" />
+        <location filename="../src/Create/CreateActions.cpp" line="201" />
         <source>Paste as New (Advanced)
 
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
@@ -654,22 +662,22 @@ Creates a new document by pasting an image from the clipboard, in advanced mode.
 고급 모드에서 클립 보드의 이미지를 붙여 넣어 새 문서를 만듭니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="204" />
+        <location filename="../src/Create/CreateActions.cpp" line="210" />
         <source>&amp;Import...</source>
         <translation>수입</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="205" />
+        <location filename="../src/Create/CreateActions.cpp" line="211" />
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="206" />
+        <location filename="../src/Create/CreateActions.cpp" line="212" />
         <source>Creates a new document by importing a simple image.</source>
         <translation>간단한 이미지를 가져와 새 문서를 만듭니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="207" />
+        <location filename="../src/Create/CreateActions.cpp" line="213" />
         <source>Import Image
 
 Creates a new document by importing an image with a single coordinate system, and axes both coordinates known.
@@ -682,17 +690,17 @@ For more complicated images with multiple coordinate systems, and/or floating ax
 여러 좌표계 및 / 또는 부동 축이있는 더 복잡한 이미지의 경우 가져 오기 (고급)가 대신 사용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="214" />
+        <location filename="../src/Create/CreateActions.cpp" line="220" />
         <source>Import (Advanced)...</source>
         <translation>가져 오기 (고급)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="215" />
+        <location filename="../src/Create/CreateActions.cpp" line="221" />
         <source>Creates a new document by importing an image with support for advanced feaures.</source>
         <translation>고급 기능을 지원하는 이미지를 가져 와서 새 문서를 만듭니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="216" />
+        <location filename="../src/Create/CreateActions.cpp" line="222" />
         <source>Import (Advanced)
 
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
@@ -701,17 +709,17 @@ Creates a new document by importing an image with support for advanced feaures. 
 고급 기능을 지원하는 이미지를 가져 와서 새 문서를 만듭니다. 고급 모드에서는 여러 좌표 시스템 및 / 또는 부동 축이있을 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="221" />
+        <location filename="../src/Create/CreateActions.cpp" line="227" />
         <source>Import (Image Replace)...</source>
         <translation>가져 오기 (이미지 바꾸기)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="222" />
+        <location filename="../src/Create/CreateActions.cpp" line="228" />
         <source>Imports a new image into the current document, replacing the existing image.</source>
         <translation>새 이미지를 현재 문서로 가져 와서 기존 이미지를 바꿉니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="223" />
+        <location filename="../src/Create/CreateActions.cpp" line="229" />
         <source>Import (Image Replace)
 
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
@@ -720,17 +728,17 @@ Imports a new image into the current document. The existing image is replaced, a
 새 이미지를 현재 문서로 가져옵니다. 기존 이미지가 대체되고 문서의 모든 커브가 유지됩니다. 이 작업은 기존 문서의 축 지점 및 기타 설정을 다른 이미지에 적용 할 때 유용합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="229" />
+        <location filename="../src/Create/CreateActions.cpp" line="235" />
         <source>&amp;Open...</source>
         <translation>열다</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="231" />
+        <location filename="../src/Create/CreateActions.cpp" line="237" />
         <source>Opens an existing document.</source>
         <translation>기존 문서를 엽니 다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="232" />
+        <location filename="../src/Create/CreateActions.cpp" line="238" />
         <source>Open Document
 
 Opens an existing document.</source>
@@ -739,17 +747,17 @@ Opens an existing document.</source>
 기존 문서를 엽니 다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="245" />
+        <location filename="../src/Create/CreateActions.cpp" line="251" />
         <source>&amp;Close</source>
         <translation>닫기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="247" />
+        <location filename="../src/Create/CreateActions.cpp" line="253" />
         <source>Closes the open document.</source>
         <translation>열려있는 문서를 닫습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="248" />
+        <location filename="../src/Create/CreateActions.cpp" line="254" />
         <source>Close Document
 
 Closes the open document.</source>
@@ -758,17 +766,17 @@ Closes the open document.</source>
 열려있는 문서를 닫습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="252" />
+        <location filename="../src/Create/CreateActions.cpp" line="258" />
         <source>&amp;Save</source>
         <translation>구하다</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="254" />
+        <location filename="../src/Create/CreateActions.cpp" line="260" />
         <source>Saves the current document.</source>
         <translation>현재 문서를 저장합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="255" />
+        <location filename="../src/Create/CreateActions.cpp" line="261" />
         <source>Save Document
 
 Saves the current document.</source>
@@ -777,17 +785,17 @@ Saves the current document.</source>
 현재 문서를 저장합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="259" />
+        <location filename="../src/Create/CreateActions.cpp" line="265" />
         <source>Save As...</source>
         <translation>다른 이름으로 저장</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="261" />
+        <location filename="../src/Create/CreateActions.cpp" line="267" />
         <source>Saves the current document under a new filename.</source>
         <translation>현재 문서를 새 파일 이름으로 저장합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="262" />
+        <location filename="../src/Create/CreateActions.cpp" line="268" />
         <source>Save Document As
 
 Saves the current document under a new filename.</source>
@@ -796,22 +804,22 @@ Saves the current document under a new filename.</source>
 현재 문서를 새 파일 이름으로 저장합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="266" />
+        <location filename="../src/Create/CreateActions.cpp" line="272" />
         <source>Export...</source>
         <translation>수출</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="267" />
+        <location filename="../src/Create/CreateActions.cpp" line="273" />
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="268" />
+        <location filename="../src/Create/CreateActions.cpp" line="274" />
         <source>Exports the current document into a text file.</source>
         <translation>현재 문서를 텍스트 파일로 내 보냅니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="269" />
+        <location filename="../src/Create/CreateActions.cpp" line="275" />
         <source>Export Document
 
 Exports the current document into a text file.</source>
@@ -820,17 +828,17 @@ Exports the current document into a text file.</source>
 현재 문서를 텍스트 파일로 내 보냅니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="273" />
+        <location filename="../src/Create/CreateActions.cpp" line="279" />
         <source>&amp;Print...</source>
         <translation>인쇄</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="275" />
+        <location filename="../src/Create/CreateActions.cpp" line="281" />
         <source>Print the current document.</source>
         <translation>현재 문서를 인쇄하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="276" />
+        <location filename="../src/Create/CreateActions.cpp" line="282" />
         <source>Print Document
 
 Print the current document to a printer or file.</source>
@@ -839,17 +847,17 @@ Print the current document to a printer or file.</source>
 현재 문서를 프린터 또는 파일로 인쇄하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="280" />
+        <location filename="../src/Create/CreateActions.cpp" line="286" />
         <source>&amp;Exit</source>
         <translation>출구</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="282" />
+        <location filename="../src/Create/CreateActions.cpp" line="288" />
         <source>Quits the application.</source>
         <translation>응용 프로그램을 종료합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="283" />
+        <location filename="../src/Create/CreateActions.cpp" line="289" />
         <source>Exit
 
 Quits the application.</source>
@@ -858,17 +866,17 @@ Quits the application.</source>
 응용 프로그램을 종료합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="292" />
+        <location filename="../src/Create/CreateActions.cpp" line="298" />
         <source>Checklist Guide Wizard</source>
         <translation>검사 목록 가이드 마법사</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="294" />
+        <location filename="../src/Create/CreateActions.cpp" line="300" />
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
         <translation>가져 오는 동안 점검 목록 마법사를 열어 디지털화 단계 정의</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="295" />
+        <location filename="../src/Create/CreateActions.cpp" line="301" />
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
@@ -877,17 +885,17 @@ Use Checklist Guide Wizard during import to generate a checklist of steps for th
 가져 오는 동안 체크리스트 가이드 마법사를 사용하여 가져온 문서에 대한 단계별 체크리스트 생성</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="302" />
+        <location filename="../src/Create/CreateActions.cpp" line="308" />
         <source>Tutorial</source>
         <translation>지도 시간</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="303" />
+        <location filename="../src/Create/CreateActions.cpp" line="309" />
         <source>Play tutorial showing steps for digitizing curves</source>
         <translation>커브 디지타이징 단계를 보여주는 튜토리얼 재생</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="304" />
+        <location filename="../src/Create/CreateActions.cpp" line="310" />
         <source>Tutorial
 
 Play tutorial showing steps for digitizing points from curves drawn with lines and/or point</source>
@@ -896,17 +904,17 @@ Play tutorial showing steps for digitizing points from curves drawn with lines a
 선 및 / 또는 점으로 그려진 커브에서 점을 디지타이징하는 단계를 보여주는 자습서 재생</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="310" />
+        <location filename="../src/Create/CreateActions.cpp" line="316" />
         <source>Help</source>
         <translation>도움</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="312" />
+        <location filename="../src/Create/CreateActions.cpp" line="318" />
         <source>Help documentation</source>
         <translation>도움말 문서</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="313" />
+        <location filename="../src/Create/CreateActions.cpp" line="319" />
         <source>Help Documentation
 
 Searchable help documentation</source>
@@ -915,17 +923,17 @@ Searchable help documentation</source>
 검색 가능한 도움말 문서</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="318" />
+        <location filename="../src/Create/CreateActions.cpp" line="324" />
         <source>About Engauge</source>
         <translation>Engauge 정보</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="319" />
+        <location filename="../src/Create/CreateActions.cpp" line="325" />
         <source>About the application.</source>
         <translation>응용 프로그램 정보</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="320" />
+        <location filename="../src/Create/CreateActions.cpp" line="326" />
         <source>About Engauge
 
 About the application.</source>
@@ -934,17 +942,17 @@ About the application.</source>
 응용 프로그램 정보</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="328" />
+        <location filename="../src/Create/CreateActions.cpp" line="334" />
         <source>Coordinates...</source>
         <translation>좌표</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="329" />
+        <location filename="../src/Create/CreateActions.cpp" line="335" />
         <source>Edit Coordinate settings.</source>
         <translation>좌표 설정 편집</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="330" />
+        <location filename="../src/Create/CreateActions.cpp" line="336" />
         <source>Coordinate Settings
 
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
@@ -953,17 +961,17 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
 좌표 설정은 그래프 좌표가 이미지의 픽셀에 매핑되는 방법을 결정합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="334" />
+        <location filename="../src/Create/CreateActions.cpp" line="340" />
         <source>Curve List...</source>
         <translation>커브리스트...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="335" />
+        <location filename="../src/Create/CreateActions.cpp" line="341" />
         <source>Edit Curve List settings.</source>
         <translation>커브 목록 설정 편집.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="336" />
+        <location filename="../src/Create/CreateActions.cpp" line="342" />
         <source>Curve List
 
 Curve list settings add, rename and/or remove curves in the current document</source>
@@ -972,17 +980,17 @@ Curve list settings add, rename and/or remove curves in the current document</so
 커브 목록 설정은 현재 문서에서 커브를 추가, 이름 바꾸기 및 / 또는 제거합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="340" />
+        <location filename="../src/Create/CreateActions.cpp" line="346" />
         <source>Curve Properties...</source>
         <translation>커브 속성</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="341" />
+        <location filename="../src/Create/CreateActions.cpp" line="347" />
         <source>Edit Curve Properties settings.</source>
         <translation>커브 속성 설정 편집.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="342" />
+        <location filename="../src/Create/CreateActions.cpp" line="348" />
         <source>Curve Properties Settings
 
 Curves properties settings determine how each curve appears</source>
@@ -991,17 +999,17 @@ Curves properties settings determine how each curve appears</source>
 커브 속성 설정에 따라 각 커브의 모양이 결정됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="346" />
+        <location filename="../src/Create/CreateActions.cpp" line="352" />
         <source>Digitize Curve...</source>
         <translation>커브 디지타이징</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="347" />
+        <location filename="../src/Create/CreateActions.cpp" line="353" />
         <source>Edit Digitize Axis and Graph Curve settings.</source>
         <translation>디지타이징 축 및 그래프 커브 설정 편집.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="348" />
+        <location filename="../src/Create/CreateActions.cpp" line="354" />
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
@@ -1010,17 +1018,17 @@ Digitize Curve settings determine how points are digitized in Digitize Axis Poin
 디지 타이즈 커브 설정은 디지타이징 축 포인트 및 디지타이징 그래프 포인트 모드에서 포인트가 디지털화되는 방법을 결정합니다</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="353" />
+        <location filename="../src/Create/CreateActions.cpp" line="359" />
         <source>Export Format...</source>
         <translation>내보내기 형식</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="354" />
+        <location filename="../src/Create/CreateActions.cpp" line="360" />
         <source>Edit Export Format settings.</source>
         <translation>내보내기 형식 편집 설정.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="355" />
+        <location filename="../src/Create/CreateActions.cpp" line="361" />
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
@@ -1029,17 +1037,17 @@ Export format settings affect how exported files are formatted</source>
 내보내기 형식 설정은 내 보낸 파일의 형식에 영향을줍니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="359" />
+        <location filename="../src/Create/CreateActions.cpp" line="365" />
         <source>Color Filter...</source>
         <translation>컬러 필터</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="360" />
+        <location filename="../src/Create/CreateActions.cpp" line="366" />
         <source>Edit Color Filter settings.</source>
         <translation>색상 필터 설정 편집.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="361" />
+        <location filename="../src/Create/CreateActions.cpp" line="367" />
         <source>Color Filter Settings
 
 Color filtering simplifies the graphs for easier Point Matching and Segment Filling</source>
@@ -1048,17 +1056,17 @@ Color filtering simplifies the graphs for easier Point Matching and Segment Fill
 색상 필터링은 그래프를 단순화하여보다 쉬운 Point Matching 및 Segment Filling</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="365" />
+        <location filename="../src/Create/CreateActions.cpp" line="371" />
         <source>Axes Checker...</source>
         <translation>축 검사기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="366" />
+        <location filename="../src/Create/CreateActions.cpp" line="372" />
         <source>Edit Axes Checker settings.</source>
         <translation>축 검사기 설정 편집</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="367" />
+        <location filename="../src/Create/CreateActions.cpp" line="373" />
         <source>Axes Checker Settings
 
 Axes checker can reveal any axis point mistakes, which are otherwise hard to find.</source>
@@ -1067,17 +1075,17 @@ Axes checker can reveal any axis point mistakes, which are otherwise hard to fin
 축 검사기는 다른 점 찾기가 어려운 축 지점 실수를 표시 할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="371" />
+        <location filename="../src/Create/CreateActions.cpp" line="377" />
         <source>Grid Line Display...</source>
         <translation>눈금 선 표시</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="372" />
+        <location filename="../src/Create/CreateActions.cpp" line="378" />
         <source>Edit Grid Line Display settings.</source>
         <translation>눈금 선 표시 설정 편집.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="373" />
+        <location filename="../src/Create/CreateActions.cpp" line="379" />
         <source>Grid Line Display Settings
 
 Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions.</source>
@@ -1086,17 +1094,17 @@ Grid lines displayed on the graph can provide more accuracy than the Axis Checke
 그래프에 표시되는 눈금 선은 왜곡 된 그래프의 경우 Axis Checker보다 더 높은 정확도를 제공합니다. 왜곡 된 그래프에서는 그리드 선을 사용하여 다른 지역에서 더 정확한 축 포인트를 조정할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="378" />
+        <location filename="../src/Create/CreateActions.cpp" line="384" />
         <source>Grid Line Removal...</source>
         <translation>그리드 선 제거</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="379" />
+        <location filename="../src/Create/CreateActions.cpp" line="385" />
         <source>Edit Grid Line Removal settings.</source>
         <translation>눈금 선 제거 설정 편집.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="380" />
+        <location filename="../src/Create/CreateActions.cpp" line="386" />
         <source>Grid Line Removal Settings
 
 Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when Color Filtering is not able to separate grid lines from curve lines.</source>
@@ -1105,17 +1113,17 @@ Grid line removal isolates curve lines for easier Point Matching and Segment Fil
 그리드 선 제거는 컬러 필터가 그리드 선을 곡선 선과 분리 할 수없는 경우보다 쉬운 점 매칭 및 세그먼트 채우기를 위해 곡선 선을 분리합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="385" />
+        <location filename="../src/Create/CreateActions.cpp" line="391" />
         <source>Point Match...</source>
         <translation>포인트 매치</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="386" />
+        <location filename="../src/Create/CreateActions.cpp" line="392" />
         <source>Edit Point Match settings.</source>
         <translation>포인트 일치 설정 편집.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="387" />
+        <location filename="../src/Create/CreateActions.cpp" line="393" />
         <source>Point Match Settings
 
 Point match settings determine how points are matched while in Point Match mode</source>
@@ -1124,17 +1132,17 @@ Point match settings determine how points are matched while in Point Match mode<
 지점 일치 설정은 지점 일치 모드에서 지점 일치 방법을 결정합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="391" />
+        <location filename="../src/Create/CreateActions.cpp" line="397" />
         <source>Segment Fill...</source>
         <translation>세그먼트 채우기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="392" />
+        <location filename="../src/Create/CreateActions.cpp" line="398" />
         <source>Edit Segment Fill settings.</source>
         <translation>세그먼트 채우기 설정 수정</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="393" />
+        <location filename="../src/Create/CreateActions.cpp" line="399" />
         <source>Segment Fill Settings
 
 Segment fill settings determine how points are generated in the Segment Fill mode</source>
@@ -1143,17 +1151,17 @@ Segment fill settings determine how points are generated in the Segment Fill mod
 세그먼트 채우기 설정은 세그먼트 채우기 모드에서 포인트가 생성되는 방식을 결정합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="397" />
+        <location filename="../src/Create/CreateActions.cpp" line="403" />
         <source>General...</source>
         <translation>일반</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="398" />
+        <location filename="../src/Create/CreateActions.cpp" line="404" />
         <source>Edit General settings.</source>
         <translation>일반 설정 편집.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="399" />
+        <location filename="../src/Create/CreateActions.cpp" line="405" />
         <source>General Settings
 
 General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects both Color Picker and Point Match modes</source>
@@ -1162,17 +1170,17 @@ General settings are document-specific settings that affect multiple modes. For 
 일반 설정은 여러 모드에 영향을주는 문서 별 설정입니다. 예를 들어, 커서 크기 설정은 [색상 피커] 및 [포인트 일치] 모드 모두에 영향을줍니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="404" />
+        <location filename="../src/Create/CreateActions.cpp" line="410" />
         <source>Main Window...</source>
         <translation>메인 윈도우</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="406" />
+        <location filename="../src/Create/CreateActions.cpp" line="412" />
         <source>Edit Main Window settings.</source>
         <translation>기본 창 설정 편집</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="407" />
+        <location filename="../src/Create/CreateActions.cpp" line="413" />
         <source>Main Window Settings
 
 Main window settings affect the user interface and are not specific to any document</source>
@@ -1181,17 +1189,17 @@ Main window settings affect the user interface and are not specific to any docum
 기본 창 설정은 사용자 인터페이스에 영향을 미치며 어떤 문서에도 관련되지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="416" />
+        <location filename="../src/Create/CreateActions.cpp" line="422" />
         <source>Background Toolbar</source>
         <translation>배경 툴바</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="419" />
+        <location filename="../src/Create/CreateActions.cpp" line="425" />
         <source>Show or hide the background toolbar.</source>
         <translation>배경 도구 모음을 표시하거나 숨 깁니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="420" />
+        <location filename="../src/Create/CreateActions.cpp" line="426" />
         <source>View Background ToolBar
 
 Show or hide the background toolbar</source>
@@ -1200,17 +1208,17 @@ Show or hide the background toolbar</source>
 배경 도구 모음 표시 또는 숨기기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="424" />
+        <location filename="../src/Create/CreateActions.cpp" line="430" />
         <source>Checklist Guide Toolbar</source>
         <translation>점검 목록 가이드 툴바</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="427" />
+        <location filename="../src/Create/CreateActions.cpp" line="433" />
         <source>Show or hide the checklist guide.</source>
         <translation>체크리스트 가이드를 표시하거나 숨 깁니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="428" />
+        <location filename="../src/Create/CreateActions.cpp" line="434" />
         <source>View Checklist Guide
 
 Show or hide the checklist guide</source>
@@ -1219,17 +1227,17 @@ Show or hide the checklist guide</source>
 체크리스트 가이드 표시 또는 숨기기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="432" />
+        <location filename="../src/Create/CreateActions.cpp" line="438" />
         <source>Curve Fitting Window</source>
         <translation>커브 피팅 윈도우</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="435" />
+        <location filename="../src/Create/CreateActions.cpp" line="441" />
         <source>Show or hide the curve fitting window.</source>
         <translation>커브 피팅 윈도우를 표시하거나 숨 깁니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="436" />
+        <location filename="../src/Create/CreateActions.cpp" line="442" />
         <source>View Curve Fitting Window
 
 Show or hide the curve fitting window</source>
@@ -1238,17 +1246,17 @@ Show or hide the curve fitting window</source>
 커브 피팅 창 표시 또는 숨기기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="440" />
+        <location filename="../src/Create/CreateActions.cpp" line="446" />
         <source>Geometry Window</source>
         <translation>기하학 창</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="443" />
+        <location filename="../src/Create/CreateActions.cpp" line="449" />
         <source>Show or hide the geometry window.</source>
         <translation>기하학 창을 표시하거나 숨 깁니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="444" />
+        <location filename="../src/Create/CreateActions.cpp" line="450" />
         <source>View Geometry Window
 
 Show or hide the geometry window</source>
@@ -1257,17 +1265,17 @@ Show or hide the geometry window</source>
 기하학 창 표시 또는 숨기기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="448" />
+        <location filename="../src/Create/CreateActions.cpp" line="454" />
         <source>Digitizing Tools Toolbar</source>
         <translation>디지타이징 도구 툴바</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="451" />
+        <location filename="../src/Create/CreateActions.cpp" line="457" />
         <source>Show or hide the digitizing tools toolbar.</source>
         <translation>디지타이징 도구 모음 표시 또는 숨기기.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="452" />
+        <location filename="../src/Create/CreateActions.cpp" line="458" />
         <source>View Digitizing Tools ToolBar
 
 Show or hide the digitizing tools toolbar</source>
@@ -1276,17 +1284,17 @@ Show or hide the digitizing tools toolbar</source>
 디지타이징 도구 모음 표시 또는 숨기기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="456" />
+        <location filename="../src/Create/CreateActions.cpp" line="462" />
         <source>Settings Views Toolbar</source>
         <translation>설정보기 도구 모음</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="459" />
+        <location filename="../src/Create/CreateActions.cpp" line="465" />
         <source>Show or hide the settings views toolbar.</source>
         <translation>설정보기 도구 모음을 표시하거나 숨 깁니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="460" />
+        <location filename="../src/Create/CreateActions.cpp" line="466" />
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
@@ -1295,17 +1303,17 @@ Show or hide the settings views toolbar. These views graphically show the most i
 설정보기 도구 모음을 표시하거나 숨 깁니다. 이보기는 그래픽으로 가장 중요한 설정을 보여줍니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="465" />
+        <location filename="../src/Create/CreateActions.cpp" line="471" />
         <source>Coordinate System Toolbar</source>
         <translation>좌표계 도구 모음</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="468" />
+        <location filename="../src/Create/CreateActions.cpp" line="474" />
         <source>Show or hide the coordinate system toolbar.</source>
         <translation>좌표계 도구 모음 표시 또는 숨기기.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="469" />
+        <location filename="../src/Create/CreateActions.cpp" line="475" />
         <source>View Coordinate Systems ToolBar
 
 Show or hide the coordinate system selection toolbar. This toolbar is used to select the current coordinate system when the document has multiple coordinate systems. This toolbar is also used to view and print all coordinate systems.
@@ -1318,17 +1326,17 @@ This toolbar is disabled when there is only one coordinate system.</source>
 좌표계가 하나만있는 경우이 도구 모음을 사용할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="477" />
+        <location filename="../src/Create/CreateActions.cpp" line="483" />
         <source>Tool Tips</source>
         <translation>도구 팁</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="480" />
+        <location filename="../src/Create/CreateActions.cpp" line="486" />
         <source>Show or hide the tool tips.</source>
         <translation>도구 설명 표시 또는 숨기기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="481" />
+        <location filename="../src/Create/CreateActions.cpp" line="487" />
         <source>View Tool Tips
 
 Show or hide the tool tips</source>
@@ -1337,17 +1345,17 @@ Show or hide the tool tips</source>
 도구 설명 표시 또는 숨기기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="485" />
+        <location filename="../src/Create/CreateActions.cpp" line="491" />
         <source>Grid Lines</source>
         <translation>눈금 선</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="488" />
+        <location filename="../src/Create/CreateActions.cpp" line="494" />
         <source>Show or hide grid lines.</source>
         <translation>그리드 선을 표시하거나 숨 깁니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="489" />
+        <location filename="../src/Create/CreateActions.cpp" line="495" />
         <source>View Grid Lines
 
 Show or hide grid lines that are added for accurate adjustments of the axes points, which can improve accuracy in distorted graphs</source>
@@ -1356,34 +1364,34 @@ Show or hide grid lines that are added for accurate adjustments of the axes poin
 축 포인트를 정확하게 조정하기 위해 추가 된 그리드 선을 표시하거나 숨김으로써 왜곡 된 그래프의 정확도를 높일 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="494" />
+        <location filename="../src/Create/CreateActions.cpp" line="500" />
         <source>No Background</source>
         <translation>배경 없음</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="496" />
+        <location filename="../src/Create/CreateActions.cpp" line="502" />
         <source>Do not show the image underneath the points.</source>
         <translation>포인트 아래에 이미지를 표시하지 마십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="497" />
+        <location filename="../src/Create/CreateActions.cpp" line="503" />
         <source>No Background
 
 No image is shown so points are easier to see</source>
         <translation>배경 없음</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="500" />
+        <location filename="../src/Create/CreateActions.cpp" line="506" />
         <source>Show Original Image</source>
         <translation>원본 이미지 표시</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="502" />
+        <location filename="../src/Create/CreateActions.cpp" line="508" />
         <source>Show the original image underneath the points.</source>
         <translation>포인트 아래에 원본 이미지를 표시하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="503" />
+        <location filename="../src/Create/CreateActions.cpp" line="509" />
         <source>Show Original Image
 
 Show the original image underneath the points</source>
@@ -1392,17 +1400,17 @@ Show the original image underneath the points</source>
 점들 밑에 원본 이미지를 보여라.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="506" />
+        <location filename="../src/Create/CreateActions.cpp" line="512" />
         <source>Show Filtered Image</source>
         <translation>필터링 된 이미지 표시</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="509" />
+        <location filename="../src/Create/CreateActions.cpp" line="515" />
         <source>Show the filtered image underneath the points.</source>
         <translation>포인트 아래에 필터링 된 이미지를 표시하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="510" />
+        <location filename="../src/Create/CreateActions.cpp" line="516" />
         <source>Show Filtered Image
 
 Show the filtered image underneath the points.
@@ -1415,17 +1423,17 @@ The filtered image is created from the original image according to the Filter pr
 필터링 된 이미지는 필터 환경 설정에 따라 원본 이미지에서 만들어 지므로 중요하지 않은 정보가 숨겨지고 중요한 정보가 강조됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="516" />
+        <location filename="../src/Create/CreateActions.cpp" line="522" />
         <source>Hide All Curves</source>
         <translation>모든 커브 숨기기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="518" />
+        <location filename="../src/Create/CreateActions.cpp" line="524" />
         <source>Hide all digitized curves.</source>
         <translation>모든 디지털화 된 커브 숨기기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="519" />
+        <location filename="../src/Create/CreateActions.cpp" line="525" />
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
@@ -1434,17 +1442,17 @@ No axis points or digitized graph curves are shown so the image is easier to see
 축 점이나 디지털화 된 그래프 커브가 표시되지 않으므로 이미지를보다 쉽게 ​​볼 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="522" />
+        <location filename="../src/Create/CreateActions.cpp" line="528" />
         <source>Show Selected Curve</source>
         <translation>선택한 곡선 표시</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="524" />
+        <location filename="../src/Create/CreateActions.cpp" line="530" />
         <source>Show only the currently selected curve.</source>
         <translation>현재 선택된 커브 만 표시합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="525" />
+        <location filename="../src/Create/CreateActions.cpp" line="531" />
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
@@ -1453,17 +1461,17 @@ Show only the digitized points and line that belong to the currently selected cu
 현재 선택된 커브에 속한 디지털화 된 점과 선만 표시하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="528" />
+        <location filename="../src/Create/CreateActions.cpp" line="534" />
         <source>Show All Curves</source>
         <translation>모든 커브보기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="531" />
+        <location filename="../src/Create/CreateActions.cpp" line="537" />
         <source>Show all curves.</source>
         <translation>모든 커브보기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="532" />
+        <location filename="../src/Create/CreateActions.cpp" line="538" />
         <source>Show All Curves
 
 Show all digitized axis points and graph curves</source>
@@ -1472,323 +1480,323 @@ Show all digitized axis points and graph curves</source>
 모든 디지털화 된 축 지점 및 그래프 커브 표시</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="547" />
+        <location filename="../src/Create/CreateActions.cpp" line="553" />
         <source>Hide Always</source>
         <translation>항상 숨기기</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="549" />
+        <location filename="../src/Create/CreateActions.cpp" line="555" />
         <source>Always hide the status bar.</source>
         <translation>항상 상태 표시 줄을 숨 깁니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="550" />
+        <location filename="../src/Create/CreateActions.cpp" line="556" />
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
         <translation>상태 표시 줄을 숨 깁니다. 임시 상태 또는 피드백 메시지가 나타나지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="552" />
+        <location filename="../src/Create/CreateActions.cpp" line="558" />
         <source>Show Temporary Messages</source>
         <translation>임시 메시지 표시</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="554" />
+        <location filename="../src/Create/CreateActions.cpp" line="560" />
         <source>Hide the status bar except when display temporary messages.</source>
         <translation>임시 메시지를 표시 할 때를 제외하고는 상태 표시 줄을 숨 깁니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="555" />
+        <location filename="../src/Create/CreateActions.cpp" line="561" />
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
         <translation>임시 상태 및 피드백 메시지를 표시 할 때를 제외하고는 상태 표시 줄을 숨 깁니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="557" />
+        <location filename="../src/Create/CreateActions.cpp" line="563" />
         <source>Show Always</source>
         <translation>항상 표시</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="559" />
+        <location filename="../src/Create/CreateActions.cpp" line="565" />
         <source>Always show the status bar.</source>
         <translation>상태 표시 줄을 항상 표시하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="560" />
+        <location filename="../src/Create/CreateActions.cpp" line="566" />
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
         <translation>상태 표시 줄을 보여줍니다. 임시 상태 및 피드백 메시지를 표시하는 것 외에도 상태 표시 줄에는 커서 위치에 대한 정보도 표시됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="569" />
+        <location filename="../src/Create/CreateActions.cpp" line="575" />
         <source>Zoom Out</source>
         <translation>축소</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="570" />
+        <location filename="../src/Create/CreateActions.cpp" line="576" />
         <source>Zoom out</source>
         <translation>축소</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="574" />
+        <location filename="../src/Create/CreateActions.cpp" line="580" />
         <source>Zoom In</source>
         <translation>확대</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="575" />
+        <location filename="../src/Create/CreateActions.cpp" line="581" />
         <source>Zoom in</source>
         <translation>확대</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="582" />
+        <location filename="../src/Create/CreateActions.cpp" line="588" />
         <source>16:1 (1600%)</source>
         <translation>16:1 (1600%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="584" />
+        <location filename="../src/Create/CreateActions.cpp" line="590" />
         <source>Zoom 16:1</source>
         <translation>줌 16:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="588" />
+        <location filename="../src/Create/CreateActions.cpp" line="594" />
         <source>16:1 farther (1270%)</source>
         <translation>16:1 더 멀리 (1270%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="590" />
+        <location filename="../src/Create/CreateActions.cpp" line="596" />
         <source>Zoom 12.7:1</source>
         <translation>줌 12.7:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="594" />
+        <location filename="../src/Create/CreateActions.cpp" line="600" />
         <source>8:1 closer (1008%)</source>
         <translation>8:1 더 가까운 (1008%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="596" />
+        <location filename="../src/Create/CreateActions.cpp" line="602" />
         <source>Zoom 10.08:1</source>
         <translation>줌 10.08:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="600" />
+        <location filename="../src/Create/CreateActions.cpp" line="606" />
         <source>8:1 (800%)</source>
         <translation>8:1 (800%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="602" />
+        <location filename="../src/Create/CreateActions.cpp" line="608" />
         <source>Zoom 8:1</source>
         <translation>줌 8:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="606" />
+        <location filename="../src/Create/CreateActions.cpp" line="612" />
         <source>8:1 farther (635%)</source>
         <translation>8:1 더 멀리 (635%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="608" />
+        <location filename="../src/Create/CreateActions.cpp" line="614" />
         <source>Zoom 6.35:1</source>
         <translation>줌 6.35:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="612" />
+        <location filename="../src/Create/CreateActions.cpp" line="618" />
         <source>4:1 closer (504%)</source>
         <translation>4:1 더 가까운 (504%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="614" />
+        <location filename="../src/Create/CreateActions.cpp" line="620" />
         <source>Zoom 5.04:1</source>
         <translation>줌 5.04:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="618" />
+        <location filename="../src/Create/CreateActions.cpp" line="624" />
         <source>4:1 (400%)</source>
         <translation>4:1 (400%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="620" />
+        <location filename="../src/Create/CreateActions.cpp" line="626" />
         <source>Zoom 4:1</source>
         <translation>줌 4:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="624" />
+        <location filename="../src/Create/CreateActions.cpp" line="630" />
         <source>4:1 farther (317%)</source>
         <translation>4:1 더 멀리 (317%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="626" />
+        <location filename="../src/Create/CreateActions.cpp" line="632" />
         <source>Zoom 3.17:1</source>
         <translation>줌 3.17:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="630" />
+        <location filename="../src/Create/CreateActions.cpp" line="636" />
         <source>2:1 closer (252%)</source>
         <translation>2:1 더 가까운 (252%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="632" />
+        <location filename="../src/Create/CreateActions.cpp" line="638" />
         <source>Zoom 2.52:1</source>
         <translation>줌 2.52:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="636" />
+        <location filename="../src/Create/CreateActions.cpp" line="642" />
         <source>2:1 (200%)</source>
         <translation>2:1 (200%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="638" />
+        <location filename="../src/Create/CreateActions.cpp" line="644" />
         <source>Zoom 2:1</source>
         <translation>줌 2:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="642" />
+        <location filename="../src/Create/CreateActions.cpp" line="648" />
         <source>2:1 farther (159%)</source>
         <translation>2:1 더 멀리 (159%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="644" />
+        <location filename="../src/Create/CreateActions.cpp" line="650" />
         <source>Zoom 1.59:1</source>
         <translation>줌 1.59:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="648" />
+        <location filename="../src/Create/CreateActions.cpp" line="654" />
         <source>1:1 closer (126%)</source>
         <translation>1:1 더 가까운 (126%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="651" />
+        <location filename="../src/Create/CreateActions.cpp" line="657" />
         <source>Zoom 1.3:1</source>
         <translation>줌 1.3:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="655" />
+        <location filename="../src/Create/CreateActions.cpp" line="661" />
         <source>1:1 (100%)</source>
         <translation>1:1 (100%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="658" />
+        <location filename="../src/Create/CreateActions.cpp" line="664" />
         <source>Zoom 1:1</source>
         <translation>줌 1:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="662" />
+        <location filename="../src/Create/CreateActions.cpp" line="668" />
         <source>1:1 farther (79%)</source>
         <translation>1:1 더 멀리 (79%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="665" />
+        <location filename="../src/Create/CreateActions.cpp" line="671" />
         <source>Zoom 0.8:1</source>
         <translation>줌 0.8:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="669" />
+        <location filename="../src/Create/CreateActions.cpp" line="675" />
         <source>1:2 closer (63%)</source>
         <translation>1:2 더 가까운 (63%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="671" />
+        <location filename="../src/Create/CreateActions.cpp" line="677" />
         <source>Zoom 1.3:2</source>
         <translation>줌 1.3:2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="675" />
+        <location filename="../src/Create/CreateActions.cpp" line="681" />
         <source>1:2 (50%)</source>
         <translation>1:2 (50%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="677" />
+        <location filename="../src/Create/CreateActions.cpp" line="683" />
         <source>Zoom 1:2</source>
         <translation>줌 1:2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="681" />
+        <location filename="../src/Create/CreateActions.cpp" line="687" />
         <source>1:2 farther (40%)</source>
         <translation>1:2 더 멀리 (40%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="683" />
+        <location filename="../src/Create/CreateActions.cpp" line="689" />
         <source>Zoom 0.8:2</source>
         <translation>줌 0.8:2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="687" />
+        <location filename="../src/Create/CreateActions.cpp" line="693" />
         <source>1:4 closer (31%)</source>
         <translation>1:4 더 가까운 (31%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="689" />
+        <location filename="../src/Create/CreateActions.cpp" line="695" />
         <source>Zoom 1.3:4</source>
         <translation>줌 1.3:2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="693" />
+        <location filename="../src/Create/CreateActions.cpp" line="699" />
         <source>1:4 (25%)</source>
         <translation>1:4 (25%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="695" />
+        <location filename="../src/Create/CreateActions.cpp" line="701" />
         <source>Zoom 1:4</source>
         <translation>줌 1:4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="699" />
+        <location filename="../src/Create/CreateActions.cpp" line="705" />
         <source>1:4 farther (20%)</source>
         <translation>1:4 더 멀리 (20%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="701" />
+        <location filename="../src/Create/CreateActions.cpp" line="707" />
         <source>Zoom 0.8:4</source>
         <translation>줌 0.8:4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="705" />
+        <location filename="../src/Create/CreateActions.cpp" line="711" />
         <source>1:8 closer (12.5%)</source>
         <translation>1:8 더 가까운 (12.5%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="707" />
         <location filename="../src/Create/CreateActions.cpp" line="713" />
+        <location filename="../src/Create/CreateActions.cpp" line="719" />
         <source>Zoom 1:8</source>
         <translation>줌 1:8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="711" />
+        <location filename="../src/Create/CreateActions.cpp" line="717" />
         <source>1:8 (12.5%)</source>
         <translation>1:8 (12.5%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="717" />
+        <location filename="../src/Create/CreateActions.cpp" line="723" />
         <source>1:8 farther (10%)</source>
         <translation>1:8 더 멀리 (10%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="719" />
+        <location filename="../src/Create/CreateActions.cpp" line="725" />
         <source>Zoom 0.8:8</source>
         <translation>줌 0.8:8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="723" />
+        <location filename="../src/Create/CreateActions.cpp" line="729" />
         <source>1:16 closer (8%)</source>
         <translation>1:16 더 가까운 (8%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="725" />
+        <location filename="../src/Create/CreateActions.cpp" line="731" />
         <source>Zoom 1.3:16</source>
         <translation>줌 1.3:16</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="729" />
+        <location filename="../src/Create/CreateActions.cpp" line="735" />
         <source>1:16 (6.25%)</source>
         <translation>1:16 (6.25%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="731" />
+        <location filename="../src/Create/CreateActions.cpp" line="737" />
         <source>Zoom 1:16</source>
         <translation>줌 1:16</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="735" />
+        <location filename="../src/Create/CreateActions.cpp" line="741" />
         <source>Fill</source>
         <translation>가득 따르다</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="737" />
+        <location filename="../src/Create/CreateActions.cpp" line="743" />
         <source>Zoom with stretching to fill window</source>
         <translation>창을 채우기 위해 늘려 줌</translation>
     </message>
@@ -3225,33 +3233,43 @@ The order of the curves here does not affect the order in the exported file. Tha
         <translation>내 보낸 파일에는 모든 곡선의 고유 X 값마다 값이 있습니다. 필요한 경우 Y 값이 선형 보간됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="202" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="203" />
+        <source>Extrapolate outside endpoints</source>
+        <translation>외부 끝점을 외삽</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="204" />
+        <source>Enable or disable extrapolation outside of endpoints of each curve. If disabled, only points between the endpoints of each curve are exported</source>
+        <translation>각 곡선의 끝점 외부에서 외삽을 활성화 또는 비활성화합니다. 비활성화 된 경우 각 곡선의 끝점 사이의 점만 내보내집니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="209" />
         <source>Interpolate Ys at Xs from first curve</source>
         <translation>첫 번째 곡선에서 Xs로 Ys 보간</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="203" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="210" />
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
         <translation>내 보낸 파일에는 첫 번째 곡선의 모든 고유 X 값에 값이 있습니다. 필요한 경우 Y 값이 선형 보간됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="208" />
-        <source>Interpolate Ys at evenly spaced X values.</source>
-        <translation>균등하게 간격을 둔 X 값으로 Y를 보간합니다.</translation>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="215" />
+        <source>Interpolate Ys at evenly spaced X values that are automatically selected</source>
+        <translation>자동으로 선택된 균일하게 간격을 둔 X 값으로 Y를 보간합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="216" />
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
         <translation>내 보낸 파일은 균등하게 간격을 둔 X 값을 아래 선택한 간격으로 구분하여 표시합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="213" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="350" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="220" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="362" />
         <source>Interval</source>
         <translation>간격</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="221" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="228" />
         <source>Interval, in the units of X, between successive points in the X direction.
 
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
@@ -3264,7 +3282,7 @@ The X values will be automatically aligned along simple numbers. If the first an
 X 값은 간단한 숫자를 따라 자동으로 정렬됩니다. 첫 번째 및 / 또는 마지막 점이 정렬 된 X 값을 따르지 않으면 필요에 따라 하나 또는 두 개의 추가 점이 추가됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="231" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="238" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
@@ -3277,54 +3295,64 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
 그래프 단위는 간격이 X 축척에 의존 할 때 선호됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="243" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="376" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="250" />
+        <source>Interpolate Ys at evenly spaced X values on grid lines</source>
+        <translation>그리드 선에서 균일하게 간격을 둔 X 값으로 Y를 보간합니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="251" />
+        <source>Exported file will have values at evenly spaced X values at the vertical grid lines.</source>
+        <translation>내 보낸 파일은 수직 그리드 선에서 균일하게 간격을 둔 X 값에 값을 갖습니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="255" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
         <source>Raw Xs and Ys</source>
         <translation>원시 X 및 Y</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="244" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="377" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="256" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="389" />
         <source>Exported file will have only original X and Y values</source>
         <translation>내 보낸 파일에는 원본 X 및 Y 값만 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="255" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="267" />
         <source>Header</source>
         <translation>머리글</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="265" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="277" />
         <source>Exported file will have no header line</source>
         <translation>내 보낸 파일에는 헤더 행이 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="270" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="282" />
         <source>Exported file will have simple header line</source>
         <translation>내 보낸 파일에는 간단한 헤더 행이 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="275" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="287" />
         <source>Exported file will have gnuplot header line</source>
         <translation>내 보낸 파일에는 gnuplot 헤더 행이 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="287" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="299" />
         <source>Save As Default</source>
         <translation>기본값으로 저장</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="288" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="300" />
         <source>Save the settings for use as future defaults.</source>
         <translation>향후 기본값으로 사용할 설정을 저장하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="297" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="309" />
         <source>Preview</source>
         <translation>시사</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="313" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="325" />
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
@@ -3333,27 +3361,27 @@ Functions (shown here in blue) are output first, followed by relations (shown he
 기능 (파란색으로 표시)이 먼저 출력되고 관계가있는 경우 여기에 녹색으로 표시됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="329" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="341" />
         <source>Relation Points Selection</source>
         <translation>관계 지점 선택</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="343" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="355" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation>균일 한 간격으로 X와 Y를 보간하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="344" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="356" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation>내 보낸 파일은 각 관계를 따라 균등하게 간격을두고 아래에서 선택한 간격으로 구분됩니다. 마지막 간격이 마지막 지점에서 끝나지 않으면 가장 짧은 마지막 간격이 추가되어 마지막 지점에서 끝납니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="358" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="370" />
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation>등 간격 (X, Y) 좌표로 내보낼 때 연속 점 사이의 간격입니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="364" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="376" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -3366,12 +3394,12 @@ Graph units are usually preferred when the X and Y scales are identical.</source
 그래프 단위는 일반적으로 X와 Y 축척이 동일 할 때 선호됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="420" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="432" />
         <source>Functions</source>
         <translation>기능들</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="422" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="434" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
@@ -3380,12 +3408,12 @@ Controls for specifying the format of functions during export</source>
 내보내기 중에 함수 형식을 지정하기위한 컨트롤</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="428" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="440" />
         <source>Relations</source>
         <translation>처지</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="430" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="442" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
@@ -3394,27 +3422,27 @@ Controls for specifying the format of relations during export</source>
 내보내기 도중 관계 형식 지정을위한 컨트롤</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="451" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="463" />
         <source>X Label</source>
         <translation>X 라벨</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="453" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="465" />
         <source>Theta Label</source>
         <translation>세타 레이블</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="459" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="471" />
         <source>Label in the header for x values</source>
         <translation>x 값의 헤더에 레이블 지정</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="461" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="473" />
         <source>Label in the header for theta values</source>
         <translation>theta 값의 헤더에 레이블 지정</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1116" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1152" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>미리보기는 축 포인트가 정의 될 때까지 사용할 수 없습니다.</translation>
     </message>
@@ -4291,13 +4319,13 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
 <context>
     <name>GeometryWindow</name>
     <message>
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="27" />
         <location filename="../src/Geometry/GeometryWindow.cpp" line="28" />
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="29" />
         <source>Geometry Window</source>
         <translation>기하학 창</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="30" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="29" />
         <source>Geometry Window
 
 This table displays the following geometry data for the currently selected curve:
@@ -4334,7 +4362,7 @@ Y = 각 점의 Y 좌표
 드래그 앤 드롭이 비활성화 된 경우 클릭하고 드래그하여 직사각형 셀 집합을 선택할 수 있습니다. 그렇지 않으면 드래그 앤 드롭이 활성화 된 경우 클릭 및 드래그가 드래그 작업을 시작하기 때문에 클릭 한 다음 Shift + 클릭을 사용하여 직사각형 셀 집합을 선택할 수 있습니다. 끌어서 놓기 모드는 기본 창 설정에서 설정됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="271" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="270" />
         <source>Highlighted segments may have unexpected values when exported due to overlaps. Adjust points or change Settings / Curve Properties / Connect As.</source>
         <translation>하이라이트 된 세그먼트는 겹침으로 인해 내보낼 때 예기치 않은 값을 가질 수 있습니다. 점을 조정하거나 설정 / 곡선 속성 / 연결 이름을 변경하십시오.</translation>
     </message>
@@ -4860,34 +4888,34 @@ Do you want to save your changes?</source>
         <translation>이동</translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="93" />
-        <location filename="../src/Document/Document.cpp" line="133" />
+        <location filename="../src/Document/Document.cpp" line="94" />
+        <location filename="../src/Document/Document.cpp" line="135" />
         <source>Operating system says file is not readable</source>
         <translation>운영 체제가 파일을 읽을 수 없다고 말함</translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="119" />
+        <location filename="../src/Document/Document.cpp" line="121" />
         <source>cannot read newer files from version</source>
         <translation>버전에서 최신 파일을 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="121" />
+        <location filename="../src/Document/Document.cpp" line="123" />
         <source>of</source>
         <translation>의</translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="140" />
+        <location filename="../src/Document/Document.cpp" line="142" />
         <location filename="../src/util/Xml.cpp" line="40" />
         <source>File</source>
         <translation>파일</translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="142" />
+        <location filename="../src/Document/Document.cpp" line="144" />
         <source>was not found</source>
         <translation>찾을 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="513" />
+        <location filename="../src/Document/Document.cpp" line="515" />
         <source>Cannot read image data</source>
         <translation>이미지 데이터를 읽을 수 없습니다.</translation>
     </message>
@@ -4912,7 +4940,7 @@ Do you want to save your changes?</source>
         <translation>디지털화 된 곡선 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Document/DocumentModelExportFormat.cpp" line="203" />
+        <location filename="../src/Document/DocumentModelExportFormat.cpp" line="223" />
         <source>Cannot read export data</source>
         <translation>내보내기 데이터를 읽을 수 없습니다.</translation>
     </message>
@@ -5048,43 +5076,43 @@ Do you want to save your changes?</source>
         <translation>디렉토리에서</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="147" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="146" />
         <source>CurveName</source>
         <translation>곡선 이름</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="152" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="151" />
         <source>Distance</source>
         <translation>거리</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="157" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="156" />
         <source>Percent</source>
         <translation>퍼센트</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="162" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="161" />
         <source>FunctionArea</source>
         <translation>기능 영역</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="167" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="166" />
         <source>Index</source>
         <translation>색인</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="172" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="171" />
         <source>PolygonArea</source>
         <translation>다각형 영역</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="177" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="176" />
         <location filename="../src/Point/PointShape.cpp" line="29" />
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="182" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="181" />
         <source>Y</source>
         <translation>Y</translation>
     </message>

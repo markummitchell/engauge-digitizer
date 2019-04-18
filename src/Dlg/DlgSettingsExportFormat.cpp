@@ -201,7 +201,8 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
   
   // Put extrapolation control up near interpolation controls and away from raw control which never uses extrapolation
   m_chkExtrapolateOutsideEndpoints = new QCheckBox (tr ("Extrapolate outside endpoints"));
-  m_chkExtrapolateOutsideEndpoints->setWhatsThis (tr ("Enable or disable extrapolation outside of endpoints of each curve."));
+  m_chkExtrapolateOutsideEndpoints->setWhatsThis (tr ("Enable or disable extrapolation outside of endpoints of each curve. If disabled, "
+                                                      "only points between the endpoints of each curve are exported"));
   layoutPointsSelections->addWidget (m_chkExtrapolateOutsideEndpoints, row++, 3, 1, 1, Qt::AlignRight);
   connect (m_chkExtrapolateOutsideEndpoints, SIGNAL (stateChanged (int)), this, SLOT (slotFunctionsExtrapolateOutsideEndpoints(int)));
 

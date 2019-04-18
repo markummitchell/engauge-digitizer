@@ -360,56 +360,64 @@ Select points on the screen.</source>
         <location filename="../src/Create/CreateActions.cpp" line="71" />
         <source>Digitize Axis Point
 
-Digitizes an axis point for a graph by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. In a graph, three axis points are required to define the graph coordinates.</source>
-        <translation>座標軸の基準となる ポイント の デジタイズ
+Digitizes an axis point for a graph by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. After Import and Import (Advanced), three axis points with (X1,Y1) (X2,Y2) (X3,Y3) coordinates can be digitized to define the graph coordinates. Optionally, after Import (Advanced) four axis points with (X1) (X2) (Y3) (Y4) coordinates can be digitized to define the graph coordinates.
 
-グラフ の座標軸の基準となる ポイント を、マウス の クリック で追加するとともに、座標値を入力していきます。グラフ の場合には座標軸を決めるために 3 点 の ポイント が必要になります。</translation>
+This tool is disabled when a complete set of axis points has been defined, or after Import (Advanced) if Scale Bar is selected.</source>
+        <translation>軸点をデジタル化
+
+マウスクリック後にカーソルに新しい点を配置することによって、グラフの軸点をデジタル化します。軸点の座標が入力されます。インポートおよびインポート（詳細）の後、（X 1、Y 1）（X 2、Y 2）（X 3、Y 3）座標を持つ3つの軸点をデジタル化してグラフ座標を定義できます。オプションとして、インポート（詳細）後に（X 1）（X 2）（Y 3）（Y 4）座標を持つ4つの軸点をデジタル化してグラフ座標を定義することができます。
+
+このツールは、軸点の完全なセットが定義されている場合、または[スケールバー]が選択されている場合は[インポート]（詳細）の後に無効になります。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="78" />
+        <location filename="../src/Create/CreateActions.cpp" line="82" />
         <source>Scale Bar Tool</source>
         <translation>スケールバー ツール</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="79" />
+        <location filename="../src/Create/CreateActions.cpp" line="83" />
         <source>Shift+F8</source>
         <translation>Shift+F8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="81" />
-        <source>Digitize scale bar for a map.</source>
-        <translation>マップ を対象に スケールバー を デジタイズ</translation>
+        <location filename="../src/Create/CreateActions.cpp" line="85" />
+        <source>Digitize scale bar for a map. Requires Import (Advanced).</source>
+        <translation>地図の縮尺記号をデジタル化します。インポートが必要です（上級）。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="82" />
+        <location filename="../src/Create/CreateActions.cpp" line="86" />
         <source>Digitize Scale Bar
 
 Digitize a scale bar for a map by clicking and dragging. The length of the scale bar is then entered. In a map, the two endpoints of the scale bar define the distances in graph coordinates.
 
-Maps must be imported using Import (Advanced).</source>
-        <translation>スケールバー を デジタイズ
+This tool is enabled by selecting Scale Bar in Import (Advanced).
 
-マップ を 対象に、スケールバー の位置で マウス を クリック してから ドラッグ します。続いて スケールバー の示す距離を入力してください。 マップ の場合には スケールバー の両端の座標が距離を設定するために使われます。
+This tool is disabled when a scale bar has been defined, or if axis points were selected during import.</source>
+        <translation>スケールバーをデジタル化
 
-マップ 画像は、ファイル メニュー の インポート (アドバンス) を選択して インポート してください。</translation>
+クリックしてドラッグして、地図の縮尺記号をデジタル化します。次にスケールバーの長さを入力します。地図では、スケールバーの2つの端点がグラフ座標での距離を定義します。
+
+このツールは、[インポート（詳細）]で[スケールバー]を選択すると有効になります。
+
+スケールバーが定義されている場合、またはインポート中に軸点が選択されている場合、このツールは無効になります。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="89" />
+        <location filename="../src/Create/CreateActions.cpp" line="95" />
         <source>Curve Point Tool</source>
         <translation>カーブ ポイント ツール</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="90" />
+        <location filename="../src/Create/CreateActions.cpp" line="96" />
         <source>Shift+F4</source>
         <translation>Shift+F4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="92" />
+        <location filename="../src/Create/CreateActions.cpp" line="98" />
         <source>Digitize curve points.</source>
         <translation>カーブ の ポイント を デジタイズ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="93" />
+        <location filename="../src/Create/CreateActions.cpp" line="99" />
         <source>Digitize Curve Point
 
 Digitizes a curve point by placing a new point at the cursor after a mouse click. Use this mode to digitize points along curves one by one.
@@ -422,22 +430,22 @@ New points will be assigned to the currently selected curve.</source>
 新たに ポイント をデジタイズ するたびに、それらの ポイント は現在選択中の カーブ に追加されます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="100" />
+        <location filename="../src/Create/CreateActions.cpp" line="106" />
         <source>Point Match Tool</source>
         <translation>ポイント マッチング ツール</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="101" />
+        <location filename="../src/Create/CreateActions.cpp" line="107" />
         <source>Shift+F5</source>
         <translation>Shift+F5</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="103" />
+        <location filename="../src/Create/CreateActions.cpp" line="109" />
         <source>Digitize curve points in a point plot by matching a point.</source>
         <translation>ポイント を マッチング して カーブ 上の ポイント 座標を決定します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="104" />
+        <location filename="../src/Create/CreateActions.cpp" line="110" />
         <source>Digitize Curve Points by Point Matching
 
 Digitizes curve points in a point plot by finding points that match a sample point. The process starts by selecting a representative sample point.
@@ -450,22 +458,22 @@ New points will be assigned to the currently selected curve.</source>
 新たに 得られた ポイント は現在選択されている カーブ のポイントとなります。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="110" />
+        <location filename="../src/Create/CreateActions.cpp" line="116" />
         <source>Color Picker Tool</source>
         <translation>カラーピッカー ツール</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="111" />
+        <location filename="../src/Create/CreateActions.cpp" line="117" />
         <source>Shift+F6</source>
         <translation>Shift+F6</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="113" />
+        <location filename="../src/Create/CreateActions.cpp" line="119" />
         <source>Select color settings for filtering in Segment Fill mode.</source>
         <translation>セグメント フィル モード の色指定</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="114" />
+        <location filename="../src/Create/CreateActions.cpp" line="120" />
         <source>Select color settings for Segment Fill filtering
 
 Select a pixel along the currently selected curve. That pixel and its neighbors will define the filter settings (color, brightness, and so on) of the currently selected curve while in Segment Fill mode.</source>
@@ -474,22 +482,22 @@ Select a pixel along the currently selected curve. That pixel and its neighbors 
 現在 選択中の カーブ に沿ってピクセルを選択します。このピクセルおよびその周辺の画像情報 (色・明度等) が セグメント フィル モード で利用されます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="120" />
+        <location filename="../src/Create/CreateActions.cpp" line="126" />
         <source>Segment Fill Tool</source>
         <translation>セグメント フィル ツール</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="121" />
+        <location filename="../src/Create/CreateActions.cpp" line="127" />
         <source>Shift+F7</source>
         <translation>Shift+F7</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="123" />
+        <location filename="../src/Create/CreateActions.cpp" line="129" />
         <source>Digitize curve points along a segment of a curve.</source>
         <translation>カーブの線分とポイントのデジタイズ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="124" />
+        <location filename="../src/Create/CreateActions.cpp" line="130" />
         <source>Digitize Curve Points With Segment Fill
 
 Digitizes curve points by placing new points along the highlighted segment under the cursor. Use this mode to quickly digitize multiple points along a curve with a single click.
@@ -502,17 +510,17 @@ New points will be assigned to the currently selected curve.</source>
 生成された新たなポイントは現在選択されているカーブに追加されます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="145" />
+        <location filename="../src/Create/CreateActions.cpp" line="151" />
         <source>&amp;Undo</source>
         <translation>やり直し</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="147" />
+        <location filename="../src/Create/CreateActions.cpp" line="153" />
         <source>Undo the last operation.</source>
         <translation>直前の操作を取り消します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="148" />
+        <location filename="../src/Create/CreateActions.cpp" line="154" />
         <source>Undo
 
 Undo the last operation.</source>
@@ -521,17 +529,17 @@ Undo the last operation.</source>
 直前の操作を取り消します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="152" />
+        <location filename="../src/Create/CreateActions.cpp" line="158" />
         <source>&amp;Redo</source>
         <translation>繰り返し</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="154" />
+        <location filename="../src/Create/CreateActions.cpp" line="160" />
         <source>Redo the last operation.</source>
         <translation>直前の操作を再度実行します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="155" />
+        <location filename="../src/Create/CreateActions.cpp" line="161" />
         <source>Redo
 
 Redo the last operation.</source>
@@ -540,17 +548,17 @@ Redo the last operation.</source>
 直前の操作を再度実行します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="159" />
+        <location filename="../src/Create/CreateActions.cpp" line="165" />
         <source>Cut</source>
         <translation>カット</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="161" />
+        <location filename="../src/Create/CreateActions.cpp" line="167" />
         <source>Cuts the selected points and copies them to the clipboard.</source>
         <translation>選択されたポイントを切り取り、クリップボード にコピーします。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="162" />
+        <location filename="../src/Create/CreateActions.cpp" line="168" />
         <source>Cut
 
 Cuts the selected points and copies them to the clipboard.</source>
@@ -559,17 +567,17 @@ Cuts the selected points and copies them to the clipboard.</source>
 選択されたポイントを切り取り、クリップボード にコピーします。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="166" />
+        <location filename="../src/Create/CreateActions.cpp" line="172" />
         <source>Copy</source>
         <translation>コピー</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="168" />
+        <location filename="../src/Create/CreateActions.cpp" line="174" />
         <source>Copies the selected points to the clipboard.</source>
         <translation>選択されたポイントをクリップボード にコピーします。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="169" />
+        <location filename="../src/Create/CreateActions.cpp" line="175" />
         <source>Copy
 
 Copies the selected points to the clipboard.</source>
@@ -578,17 +586,17 @@ Copies the selected points to the clipboard.</source>
 選択されたポイントをクリップボード にコピーします。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="173" />
+        <location filename="../src/Create/CreateActions.cpp" line="179" />
         <source>Paste</source>
         <translation>貼り付け</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="175" />
+        <location filename="../src/Create/CreateActions.cpp" line="181" />
         <source>Pastes the selected points from the clipboard.</source>
         <translation>選択されたポイントをクリップボード からコピーします。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="176" />
+        <location filename="../src/Create/CreateActions.cpp" line="182" />
         <source>Paste
 
 Pastes the selected points from the clipboard. They will be assigned to the current curve.</source>
@@ -597,17 +605,17 @@ Pastes the selected points from the clipboard. They will be assigned to the curr
 選択されたポイントを クリップボード から貼り付けます。現在のカーブに追加されます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="180" />
+        <location filename="../src/Create/CreateActions.cpp" line="186" />
         <source>Delete</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="182" />
+        <location filename="../src/Create/CreateActions.cpp" line="188" />
         <source>Deletes the selected points, after copying them to the clipboard.</source>
         <translation>選択された ポイント を クリップボードに コピーしたうえで削除します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="183" />
+        <location filename="../src/Create/CreateActions.cpp" line="189" />
         <source>Delete
 
 Deletes the selected points, after copying them to the clipboard.</source>
@@ -616,17 +624,17 @@ Deletes the selected points, after copying them to the clipboard.</source>
 選択された ポイント をクリップボードにコピーしたうえで削除します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="187" />
+        <location filename="../src/Create/CreateActions.cpp" line="193" />
         <source>Paste As New</source>
         <translation>新規画像として貼り付け</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="188" />
+        <location filename="../src/Create/CreateActions.cpp" line="194" />
         <source>Pastes an image from the clipboard.</source>
         <translation>クリップボード から 画像を貼り付けます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="189" />
+        <location filename="../src/Create/CreateActions.cpp" line="195" />
         <source>Paste as New
 
 Creates a new document by pasting an image from the clipboard.</source>
@@ -635,17 +643,17 @@ Creates a new document by pasting an image from the clipboard.</source>
 クリップボード から 画像を貼り付けて 新たなドキュメントを作成します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="193" />
+        <location filename="../src/Create/CreateActions.cpp" line="199" />
         <source>Paste As New (Advanced)...</source>
         <translation>新規画像として貼り付け (アドバンス)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="194" />
+        <location filename="../src/Create/CreateActions.cpp" line="200" />
         <source>Pastes an image from the clipboard, in advanced mode.</source>
         <translation>アドバンス モード で クリップボード から画像を貼り付けます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="195" />
+        <location filename="../src/Create/CreateActions.cpp" line="201" />
         <source>Paste as New (Advanced)
 
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
@@ -654,22 +662,22 @@ Creates a new document by pasting an image from the clipboard, in advanced mode.
 アドバンス モード で クリップボード から画像を貼り付けます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="204" />
+        <location filename="../src/Create/CreateActions.cpp" line="210" />
         <source>&amp;Import...</source>
         <translation>インポート</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="205" />
+        <location filename="../src/Create/CreateActions.cpp" line="211" />
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="206" />
+        <location filename="../src/Create/CreateActions.cpp" line="212" />
         <source>Creates a new document by importing a simple image.</source>
         <translation>画像をインポートすることで新たにドキュメントを作成します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="207" />
+        <location filename="../src/Create/CreateActions.cpp" line="213" />
         <source>Import Image
 
 Creates a new document by importing an image with a single coordinate system, and axes both coordinates known.
@@ -682,17 +690,17 @@ For more complicated images with multiple coordinate systems, and/or floating ax
 複数の座標系からなるさらに複雑な画像を利用する場合あるいは座標軸が変化するような場合には、画像のインポート (アドバンス) を代わりに実行します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="214" />
+        <location filename="../src/Create/CreateActions.cpp" line="220" />
         <source>Import (Advanced)...</source>
         <translation>画像のインポート (アドバンス)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="215" />
+        <location filename="../src/Create/CreateActions.cpp" line="221" />
         <source>Creates a new document by importing an image with support for advanced feaures.</source>
         <translation>画像をインポートして新たにドキュメントを作る際に、アドバンス機能を利用します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="216" />
+        <location filename="../src/Create/CreateActions.cpp" line="222" />
         <source>Import (Advanced)
 
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
@@ -701,17 +709,17 @@ Creates a new document by importing an image with support for advanced feaures. 
 画像をインポートして新たにドキュメントを作る際に、アドバンス機能を利用します。このアドバンス モードでは、複数の座標軸や、変化する座標軸を利用できます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="221" />
+        <location filename="../src/Create/CreateActions.cpp" line="227" />
         <source>Import (Image Replace)...</source>
         <translation>画像のインポート (差し替え)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="222" />
+        <location filename="../src/Create/CreateActions.cpp" line="228" />
         <source>Imports a new image into the current document, replacing the existing image.</source>
         <translation>現在のドキュメントに新たな画像をインポートし、既存の画像を差し替えます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="223" />
+        <location filename="../src/Create/CreateActions.cpp" line="229" />
         <source>Import (Image Replace)
 
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
@@ -720,17 +728,17 @@ Imports a new image into the current document. The existing image is replaced, a
 現在のドキュメントに新たな画像をインポートします。既存の画像は新たな画像に差し替えられますが、ドキュメント内の全てのカーブはそのまま保持されます。この操作は設定を変えずに新たな画像に対して作業を行いたい場合に大変便利です。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="229" />
+        <location filename="../src/Create/CreateActions.cpp" line="235" />
         <source>&amp;Open...</source>
         <translation>開く</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="231" />
+        <location filename="../src/Create/CreateActions.cpp" line="237" />
         <source>Opens an existing document.</source>
         <translation>既存のドキュメントを開きます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="232" />
+        <location filename="../src/Create/CreateActions.cpp" line="238" />
         <source>Open Document
 
 Opens an existing document.</source>
@@ -739,17 +747,17 @@ Opens an existing document.</source>
 既存のドキュメントを開きます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="245" />
+        <location filename="../src/Create/CreateActions.cpp" line="251" />
         <source>&amp;Close</source>
         <translation>閉じる</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="247" />
+        <location filename="../src/Create/CreateActions.cpp" line="253" />
         <source>Closes the open document.</source>
         <translation>現在開いているドキュメントを閉じます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="248" />
+        <location filename="../src/Create/CreateActions.cpp" line="254" />
         <source>Close Document
 
 Closes the open document.</source>
@@ -758,17 +766,17 @@ Closes the open document.</source>
 現在開いているドキュメントを閉じます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="252" />
+        <location filename="../src/Create/CreateActions.cpp" line="258" />
         <source>&amp;Save</source>
         <translation>上書き保存</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="254" />
+        <location filename="../src/Create/CreateActions.cpp" line="260" />
         <source>Saves the current document.</source>
         <translation>現在のドキュメントを上書き保存します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="255" />
+        <location filename="../src/Create/CreateActions.cpp" line="261" />
         <source>Save Document
 
 Saves the current document.</source>
@@ -777,17 +785,17 @@ Saves the current document.</source>
 現在のドキュメントを上書き保存します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="259" />
+        <location filename="../src/Create/CreateActions.cpp" line="265" />
         <source>Save As...</source>
         <translation>名前を付けて保存</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="261" />
+        <location filename="../src/Create/CreateActions.cpp" line="267" />
         <source>Saves the current document under a new filename.</source>
         <translation>現在開いているドキュメントを新たにファイル名をつけて保存します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="262" />
+        <location filename="../src/Create/CreateActions.cpp" line="268" />
         <source>Save Document As
 
 Saves the current document under a new filename.</source>
@@ -796,22 +804,22 @@ Saves the current document under a new filename.</source>
 現在開いているドキュメントを粗らにファイル名をつけて保存します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="266" />
+        <location filename="../src/Create/CreateActions.cpp" line="272" />
         <source>Export...</source>
         <translation>エクスポート</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="267" />
+        <location filename="../src/Create/CreateActions.cpp" line="273" />
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="268" />
+        <location filename="../src/Create/CreateActions.cpp" line="274" />
         <source>Exports the current document into a text file.</source>
         <translation>現在のドキュメントをテキストファイルとしてエクスポートします。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="269" />
+        <location filename="../src/Create/CreateActions.cpp" line="275" />
         <source>Export Document
 
 Exports the current document into a text file.</source>
@@ -820,17 +828,17 @@ Exports the current document into a text file.</source>
 現在のドキュメントをテキストファイルとしてエクスポートします。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="273" />
+        <location filename="../src/Create/CreateActions.cpp" line="279" />
         <source>&amp;Print...</source>
         <translation>印刷</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="275" />
+        <location filename="../src/Create/CreateActions.cpp" line="281" />
         <source>Print the current document.</source>
         <translation>現在のドキュメントを印刷します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="276" />
+        <location filename="../src/Create/CreateActions.cpp" line="282" />
         <source>Print Document
 
 Print the current document to a printer or file.</source>
@@ -839,17 +847,17 @@ Print the current document to a printer or file.</source>
 現在のドキュメントをプリンターまたはファイルに出力します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="280" />
+        <location filename="../src/Create/CreateActions.cpp" line="286" />
         <source>&amp;Exit</source>
         <translation>終了</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="282" />
+        <location filename="../src/Create/CreateActions.cpp" line="288" />
         <source>Quits the application.</source>
         <translation>アプリケーションを終了します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="283" />
+        <location filename="../src/Create/CreateActions.cpp" line="289" />
         <source>Exit
 
 Quits the application.</source>
@@ -858,17 +866,17 @@ Quits the application.</source>
 アプリケーションを終了します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="292" />
+        <location filename="../src/Create/CreateActions.cpp" line="298" />
         <source>Checklist Guide Wizard</source>
         <translation>チェックリストと手引きウィザード</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="294" />
+        <location filename="../src/Create/CreateActions.cpp" line="300" />
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
         <translation>インポートの作業の過程で、チェックリストと手引きウィザードを開きます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="295" />
+        <location filename="../src/Create/CreateActions.cpp" line="301" />
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
@@ -877,17 +885,17 @@ Use Checklist Guide Wizard during import to generate a checklist of steps for th
 インポートの過程でチェックリストと手引きウィザードを使い、画像をインポートしてドキュメントを作成するための一連の手順のチェックリストを作成します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="302" />
+        <location filename="../src/Create/CreateActions.cpp" line="308" />
         <source>Tutorial</source>
         <translation>チュートリアル</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="303" />
+        <location filename="../src/Create/CreateActions.cpp" line="309" />
         <source>Play tutorial showing steps for digitizing curves</source>
         <translation>カーブ をデジタイズ する手順を チュートリアル形式で実行します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="304" />
+        <location filename="../src/Create/CreateActions.cpp" line="310" />
         <source>Tutorial
 
 Play tutorial showing steps for digitizing points from curves drawn with lines and/or point</source>
@@ -896,17 +904,17 @@ Play tutorial showing steps for digitizing points from curves drawn with lines a
 カーブ をデジタイズ する手順をチュートリアル形式で実行します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="310" />
+        <location filename="../src/Create/CreateActions.cpp" line="316" />
         <source>Help</source>
         <translation>ヘルプ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="312" />
+        <location filename="../src/Create/CreateActions.cpp" line="318" />
         <source>Help documentation</source>
         <translation>ヘルプ ドキュメント</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="313" />
+        <location filename="../src/Create/CreateActions.cpp" line="319" />
         <source>Help Documentation
 
 Searchable help documentation</source>
@@ -915,17 +923,17 @@ Searchable help documentation</source>
 検索可能なヘルプ ドキュメント</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="318" />
+        <location filename="../src/Create/CreateActions.cpp" line="324" />
         <source>About Engauge</source>
         <translation>Engaugeについて</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="319" />
+        <location filename="../src/Create/CreateActions.cpp" line="325" />
         <source>About the application.</source>
         <translation>このアプリケーションについて</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="320" />
+        <location filename="../src/Create/CreateActions.cpp" line="326" />
         <source>About Engauge
 
 About the application.</source>
@@ -934,17 +942,17 @@ About the application.</source>
 このアプリケーションについて</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="328" />
+        <location filename="../src/Create/CreateActions.cpp" line="334" />
         <source>Coordinates...</source>
         <translation>座標系</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="329" />
+        <location filename="../src/Create/CreateActions.cpp" line="335" />
         <source>Edit Coordinate settings.</source>
         <translation>座標系の設定を編集します</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="330" />
+        <location filename="../src/Create/CreateActions.cpp" line="336" />
         <source>Coordinate Settings
 
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
@@ -953,17 +961,17 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
 座標系の設定はグラフに設定した座標がどのように画像上のピクセル位置に対応するかを定めます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="334" />
+        <location filename="../src/Create/CreateActions.cpp" line="340" />
         <source>Curve List...</source>
         <translation>曲線リスト...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="335" />
+        <location filename="../src/Create/CreateActions.cpp" line="341" />
         <source>Edit Curve List settings.</source>
         <translation>曲線リストの設定を編集します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="336" />
+        <location filename="../src/Create/CreateActions.cpp" line="342" />
         <source>Curve List
 
 Curve list settings add, rename and/or remove curves in the current document</source>
@@ -972,17 +980,17 @@ Curve list settings add, rename and/or remove curves in the current document</so
 カーブリストの設定は、現在のドキュメントのカーブの追加、名前の変更、または削除</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="340" />
+        <location filename="../src/Create/CreateActions.cpp" line="346" />
         <source>Curve Properties...</source>
         <translation>カーブ 設定</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="341" />
+        <location filename="../src/Create/CreateActions.cpp" line="347" />
         <source>Edit Curve Properties settings.</source>
         <translation>カーブ の設定を行います。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="342" />
+        <location filename="../src/Create/CreateActions.cpp" line="348" />
         <source>Curve Properties Settings
 
 Curves properties settings determine how each curve appears</source>
@@ -991,17 +999,17 @@ Curves properties settings determine how each curve appears</source>
 カーブ 設定では、それぞれの カーブ をどのように表示するかを設定します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="346" />
+        <location filename="../src/Create/CreateActions.cpp" line="352" />
         <source>Digitize Curve...</source>
         <translation>カーブ を デジタイズ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="347" />
+        <location filename="../src/Create/CreateActions.cpp" line="353" />
         <source>Edit Digitize Axis and Graph Curve settings.</source>
         <translation>座標軸 および グラフ 設定の編集</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="348" />
+        <location filename="../src/Create/CreateActions.cpp" line="354" />
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
@@ -1010,17 +1018,17 @@ Digitize Curve settings determine how points are digitized in Digitize Axis Poin
 デジタイズ 設定は座標軸上の基準点やカーブ ポイント をデジタイズする際の設定を行います。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="353" />
+        <location filename="../src/Create/CreateActions.cpp" line="359" />
         <source>Export Format...</source>
         <translation>エクスポート フォーマット</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="354" />
+        <location filename="../src/Create/CreateActions.cpp" line="360" />
         <source>Edit Export Format settings.</source>
         <translation>エクスポート フォーマット の編集</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="355" />
+        <location filename="../src/Create/CreateActions.cpp" line="361" />
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
@@ -1029,17 +1037,17 @@ Export format settings affect how exported files are formatted</source>
 エクスポートされたファイルのフォーマットを指定します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="359" />
+        <location filename="../src/Create/CreateActions.cpp" line="365" />
         <source>Color Filter...</source>
         <translation>カラー フィルター</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="360" />
+        <location filename="../src/Create/CreateActions.cpp" line="366" />
         <source>Edit Color Filter settings.</source>
         <translation>カラー フィルター 設定の編集</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="361" />
+        <location filename="../src/Create/CreateActions.cpp" line="367" />
         <source>Color Filter Settings
 
 Color filtering simplifies the graphs for easier Point Matching and Segment Filling</source>
@@ -1048,17 +1056,17 @@ Color filtering simplifies the graphs for easier Point Matching and Segment Fill
 カラー フィルター により、 ポイント マッチング や セグメント フィル の処理に際して グラフの認識がより効率的になります。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="365" />
+        <location filename="../src/Create/CreateActions.cpp" line="371" />
         <source>Axes Checker...</source>
         <translation>座標軸 チェッカー</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="366" />
+        <location filename="../src/Create/CreateActions.cpp" line="372" />
         <source>Edit Axes Checker settings.</source>
         <translation>座標軸 チェッカー の設定を編集</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="367" />
+        <location filename="../src/Create/CreateActions.cpp" line="373" />
         <source>Axes Checker Settings
 
 Axes checker can reveal any axis point mistakes, which are otherwise hard to find.</source>
@@ -1067,17 +1075,17 @@ Axes checker can reveal any axis point mistakes, which are otherwise hard to fin
 座標軸 チェッカー により、座標軸の基準点に問題がないかどうかを確認することができます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="371" />
+        <location filename="../src/Create/CreateActions.cpp" line="377" />
         <source>Grid Line Display...</source>
         <translation>グリッド 線の表示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="372" />
+        <location filename="../src/Create/CreateActions.cpp" line="378" />
         <source>Edit Grid Line Display settings.</source>
         <translation>グリット 線の表示設定を編集</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="373" />
+        <location filename="../src/Create/CreateActions.cpp" line="379" />
         <source>Grid Line Display Settings
 
 Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions.</source>
@@ -1086,17 +1094,17 @@ Grid lines displayed on the graph can provide more accuracy than the Axis Checke
 グラフ上にグリッド 線を表示すると、座標軸 チェッカー よりもさらに正確に グラフ の歪みなどをチェックすることができます。グラフの画像が歪んでいる場合には、グリッド 線を利用して座標軸の基準点を微調整することで、グラフ の各部分にわたって精度を上げることができます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="378" />
+        <location filename="../src/Create/CreateActions.cpp" line="384" />
         <source>Grid Line Removal...</source>
         <translation>グリッド 線の除去</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="379" />
+        <location filename="../src/Create/CreateActions.cpp" line="385" />
         <source>Edit Grid Line Removal settings.</source>
         <translation>グリッド 線の除去機能の設定</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="380" />
+        <location filename="../src/Create/CreateActions.cpp" line="386" />
         <source>Grid Line Removal Settings
 
 Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when Color Filtering is not able to separate grid lines from curve lines.</source>
@@ -1105,17 +1113,17 @@ Grid line removal isolates curve lines for easier Point Matching and Segment Fil
 特に カラー フィルター がグリッド 線と カーブ を区別できないときなど、カーブ の線を残してグリッド 線を除去することで、ポイント マッチング やセグメント フィル 処理が容易になります。 </translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="385" />
+        <location filename="../src/Create/CreateActions.cpp" line="391" />
         <source>Point Match...</source>
         <translation>ポイント マッチング</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="386" />
+        <location filename="../src/Create/CreateActions.cpp" line="392" />
         <source>Edit Point Match settings.</source>
         <translation>ポイント マッチング 設定</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="387" />
+        <location filename="../src/Create/CreateActions.cpp" line="393" />
         <source>Point Match Settings
 
 Point match settings determine how points are matched while in Point Match mode</source>
@@ -1124,17 +1132,17 @@ Point match settings determine how points are matched while in Point Match mode<
 ポイント マッチング 設定では ポイント マッチング モード でどのようにポイント を認識するか を指定します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="391" />
+        <location filename="../src/Create/CreateActions.cpp" line="397" />
         <source>Segment Fill...</source>
         <translation>セグメント フィル</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="392" />
+        <location filename="../src/Create/CreateActions.cpp" line="398" />
         <source>Edit Segment Fill settings.</source>
         <translation>セグメント フィル 設定</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="393" />
+        <location filename="../src/Create/CreateActions.cpp" line="399" />
         <source>Segment Fill Settings
 
 Segment fill settings determine how points are generated in the Segment Fill mode</source>
@@ -1143,17 +1151,17 @@ Segment fill settings determine how points are generated in the Segment Fill mod
 セグメント フィル 設定では、セグメント フィル モードでどのように ポイント を決定するかを指定します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="397" />
+        <location filename="../src/Create/CreateActions.cpp" line="403" />
         <source>General...</source>
         <translation>一般設定</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="398" />
+        <location filename="../src/Create/CreateActions.cpp" line="404" />
         <source>Edit General settings.</source>
         <translation>全般的な設定を行います。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="399" />
+        <location filename="../src/Create/CreateActions.cpp" line="405" />
         <source>General Settings
 
 General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects both Color Picker and Point Match modes</source>
@@ -1162,17 +1170,17 @@ General settings are document-specific settings that affect multiple modes. For 
 一般設定では、それぞれのドキュメントについて複数のモードに影響を及ぼす設定を行います。 例えば、カーソル サイズの 設定は カラーピッカー と ポイントマッチ モード に影響します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="404" />
+        <location filename="../src/Create/CreateActions.cpp" line="410" />
         <source>Main Window...</source>
         <translation>メイン画面</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="406" />
+        <location filename="../src/Create/CreateActions.cpp" line="412" />
         <source>Edit Main Window settings.</source>
         <translation>メイン画面 の設定を編集します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="407" />
+        <location filename="../src/Create/CreateActions.cpp" line="413" />
         <source>Main Window Settings
 
 Main window settings affect the user interface and are not specific to any document</source>
@@ -1181,17 +1189,17 @@ Main window settings affect the user interface and are not specific to any docum
 メイン画面 の設定はユーザーインターフェースに関するもので、特定のドキュメントに関わる設定項目ではありません。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="416" />
+        <location filename="../src/Create/CreateActions.cpp" line="422" />
         <source>Background Toolbar</source>
         <translation>バックグラウンド ツールバー</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="419" />
+        <location filename="../src/Create/CreateActions.cpp" line="425" />
         <source>Show or hide the background toolbar.</source>
         <translation>バックグラウンド ツールバー の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="420" />
+        <location filename="../src/Create/CreateActions.cpp" line="426" />
         <source>View Background ToolBar
 
 Show or hide the background toolbar</source>
@@ -1200,17 +1208,17 @@ Show or hide the background toolbar</source>
 バックグラウンド ツールバー の表示・非表示を切り替えます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="424" />
+        <location filename="../src/Create/CreateActions.cpp" line="430" />
         <source>Checklist Guide Toolbar</source>
         <translation>チェックリスト と手引き ツールバー</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="427" />
+        <location filename="../src/Create/CreateActions.cpp" line="433" />
         <source>Show or hide the checklist guide.</source>
         <translation>チェックリスト と手引き の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="428" />
+        <location filename="../src/Create/CreateActions.cpp" line="434" />
         <source>View Checklist Guide
 
 Show or hide the checklist guide</source>
@@ -1219,17 +1227,17 @@ Show or hide the checklist guide</source>
 チェックリスト と手引き の表示・非表示を切り替えます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="432" />
+        <location filename="../src/Create/CreateActions.cpp" line="438" />
         <source>Curve Fitting Window</source>
         <translation>カーブ フィッティング 画面</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="435" />
+        <location filename="../src/Create/CreateActions.cpp" line="441" />
         <source>Show or hide the curve fitting window.</source>
         <translation>カーブ フィッティング 画面の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="436" />
+        <location filename="../src/Create/CreateActions.cpp" line="442" />
         <source>View Curve Fitting Window
 
 Show or hide the curve fitting window</source>
@@ -1238,17 +1246,17 @@ Show or hide the curve fitting window</source>
 カーブ フィッティング 画面の表示・非表示を切り替えます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="440" />
+        <location filename="../src/Create/CreateActions.cpp" line="446" />
         <source>Geometry Window</source>
         <translation>カーブ の形状画面</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="443" />
+        <location filename="../src/Create/CreateActions.cpp" line="449" />
         <source>Show or hide the geometry window.</source>
         <translation>カーブ の形状画面の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="444" />
+        <location filename="../src/Create/CreateActions.cpp" line="450" />
         <source>View Geometry Window
 
 Show or hide the geometry window</source>
@@ -1257,17 +1265,17 @@ Show or hide the geometry window</source>
 カーブ の形状画面の表示・非表示を切り替えます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="448" />
+        <location filename="../src/Create/CreateActions.cpp" line="454" />
         <source>Digitizing Tools Toolbar</source>
         <translation>デジタイズ ツール ツールバー</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="451" />
+        <location filename="../src/Create/CreateActions.cpp" line="457" />
         <source>Show or hide the digitizing tools toolbar.</source>
         <translation>デジタイズ ツール の ツールバー の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="452" />
+        <location filename="../src/Create/CreateActions.cpp" line="458" />
         <source>View Digitizing Tools ToolBar
 
 Show or hide the digitizing tools toolbar</source>
@@ -1276,17 +1284,17 @@ Show or hide the digitizing tools toolbar</source>
 デジタイズ ツール ツールバー の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="456" />
+        <location filename="../src/Create/CreateActions.cpp" line="462" />
         <source>Settings Views Toolbar</source>
         <translation>設定 ビュー ツールバー</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="459" />
+        <location filename="../src/Create/CreateActions.cpp" line="465" />
         <source>Show or hide the settings views toolbar.</source>
         <translation>設定 ビュー ツールバー の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="460" />
+        <location filename="../src/Create/CreateActions.cpp" line="466" />
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
@@ -1295,17 +1303,17 @@ Show or hide the settings views toolbar. These views graphically show the most i
 設定 ビュー ツールバー の表示・非表示を切り替えます。これらの ビュー では 最も重要な設定を画像として確認することができます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="465" />
+        <location filename="../src/Create/CreateActions.cpp" line="471" />
         <source>Coordinate System Toolbar</source>
         <translation>座標系 ツールバー</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="468" />
+        <location filename="../src/Create/CreateActions.cpp" line="474" />
         <source>Show or hide the coordinate system toolbar.</source>
         <translation>座標系 ツールバー の表示 非表示を切り替えます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="469" />
+        <location filename="../src/Create/CreateActions.cpp" line="475" />
         <source>View Coordinate Systems ToolBar
 
 Show or hide the coordinate system selection toolbar. This toolbar is used to select the current coordinate system when the document has multiple coordinate systems. This toolbar is also used to view and print all coordinate systems.
@@ -1318,17 +1326,17 @@ This toolbar is disabled when there is only one coordinate system.</source>
 この ツールバー は、座標系 が一つしかないときにはアクティブになりません。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="477" />
+        <location filename="../src/Create/CreateActions.cpp" line="483" />
         <source>Tool Tips</source>
         <translation>ツール ティップ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="480" />
+        <location filename="../src/Create/CreateActions.cpp" line="486" />
         <source>Show or hide the tool tips.</source>
         <translation>ツール ティップ の表示・非表示の切り替え</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="481" />
+        <location filename="../src/Create/CreateActions.cpp" line="487" />
         <source>View Tool Tips
 
 Show or hide the tool tips</source>
@@ -1337,17 +1345,17 @@ Show or hide the tool tips</source>
 ツール ティップ の表示・非表示を切り替えます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="485" />
+        <location filename="../src/Create/CreateActions.cpp" line="491" />
         <source>Grid Lines</source>
         <translation>グリッド 線</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="488" />
+        <location filename="../src/Create/CreateActions.cpp" line="494" />
         <source>Show or hide grid lines.</source>
         <translation>グリッド 線の表示・非表示を切り替え</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="489" />
+        <location filename="../src/Create/CreateActions.cpp" line="495" />
         <source>View Grid Lines
 
 Show or hide grid lines that are added for accurate adjustments of the axes points, which can improve accuracy in distorted graphs</source>
@@ -1356,17 +1364,17 @@ Show or hide grid lines that are added for accurate adjustments of the axes poin
 グリッド 線の表示・非表示を切り替えます。グリッド 線は座標軸の基準点を微調整するために利用すると、特に画像が歪んだ グラフ を デジタイズ するときの精度の向上に役立ちます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="494" />
+        <location filename="../src/Create/CreateActions.cpp" line="500" />
         <source>No Background</source>
         <translation>バックグラウンド 画像なし</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="496" />
+        <location filename="../src/Create/CreateActions.cpp" line="502" />
         <source>Do not show the image underneath the points.</source>
         <translation>ポイント の背景に 画像を表示しません。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="497" />
+        <location filename="../src/Create/CreateActions.cpp" line="503" />
         <source>No Background
 
 No image is shown so points are easier to see</source>
@@ -1375,17 +1383,17 @@ No image is shown so points are easier to see</source>
 背景に画像を表示せず、ポイントをより視認しやすくします。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="500" />
+        <location filename="../src/Create/CreateActions.cpp" line="506" />
         <source>Show Original Image</source>
         <translation>オリジナル画像を表示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="502" />
+        <location filename="../src/Create/CreateActions.cpp" line="508" />
         <source>Show the original image underneath the points.</source>
         <translation>ポイントの背景としてオリジナル画像を表示します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="503" />
+        <location filename="../src/Create/CreateActions.cpp" line="509" />
         <source>Show Original Image
 
 Show the original image underneath the points</source>
@@ -1394,17 +1402,17 @@ Show the original image underneath the points</source>
 ポイントの背景としてオリジナル画像を表示します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="506" />
+        <location filename="../src/Create/CreateActions.cpp" line="512" />
         <source>Show Filtered Image</source>
         <translation>フィルタ 処理された画像</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="509" />
+        <location filename="../src/Create/CreateActions.cpp" line="515" />
         <source>Show the filtered image underneath the points.</source>
         <translation>ポイント の背景に フィルタ 処理された画像を表示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="510" />
+        <location filename="../src/Create/CreateActions.cpp" line="516" />
         <source>Show Filtered Image
 
 Show the filtered image underneath the points.
@@ -1417,17 +1425,17 @@ The filtered image is created from the original image according to the Filter pr
 フィルタに関する設定に基づきオリジナル画像をフィルタ処理したものを背景として利用します。画像に含まれる重要ではない情報を除くことで、重要な情報を強調する狙いがあります。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="516" />
+        <location filename="../src/Create/CreateActions.cpp" line="522" />
         <source>Hide All Curves</source>
         <translation>全てのカーブを非表示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="518" />
+        <location filename="../src/Create/CreateActions.cpp" line="524" />
         <source>Hide all digitized curves.</source>
         <translation>全てのカーブを非表示にします。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="519" />
+        <location filename="../src/Create/CreateActions.cpp" line="525" />
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
@@ -1436,17 +1444,17 @@ No axis points or digitized graph curves are shown so the image is easier to see
 座標軸の基準点やデジタイズされたカーブを全て非表示にしますので、画像が見やすくなります。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="522" />
+        <location filename="../src/Create/CreateActions.cpp" line="528" />
         <source>Show Selected Curve</source>
         <translation>選択中のカーブを表示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="524" />
+        <location filename="../src/Create/CreateActions.cpp" line="530" />
         <source>Show only the currently selected curve.</source>
         <translation>現在選択されているカーブのみを表示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="525" />
+        <location filename="../src/Create/CreateActions.cpp" line="531" />
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
@@ -1455,17 +1463,17 @@ Show only the digitized points and line that belong to the currently selected cu
 デジタイズされたポイントとラインのうち、現在選択中のカーブに属するものだけを表示します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="528" />
+        <location filename="../src/Create/CreateActions.cpp" line="534" />
         <source>Show All Curves</source>
         <translation>全てのカーブを表示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="531" />
+        <location filename="../src/Create/CreateActions.cpp" line="537" />
         <source>Show all curves.</source>
         <translation>全てのカーブを表示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="532" />
+        <location filename="../src/Create/CreateActions.cpp" line="538" />
         <source>Show All Curves
 
 Show all digitized axis points and graph curves</source>
@@ -1474,323 +1482,323 @@ Show all digitized axis points and graph curves</source>
 デジタイズされた座標軸とグラフの全てのポイントとカーブを表示します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="547" />
+        <location filename="../src/Create/CreateActions.cpp" line="553" />
         <source>Hide Always</source>
         <translation>常に非表示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="549" />
+        <location filename="../src/Create/CreateActions.cpp" line="555" />
         <source>Always hide the status bar.</source>
         <translation>ステータスバーを常に非表示にします。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="550" />
+        <location filename="../src/Create/CreateActions.cpp" line="556" />
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
         <translation>ステータスバー を非表示とし、ステータス情報や メッセージ が表示されなくなります。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="552" />
+        <location filename="../src/Create/CreateActions.cpp" line="558" />
         <source>Show Temporary Messages</source>
         <translation>メッセージ を表示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="554" />
+        <location filename="../src/Create/CreateActions.cpp" line="560" />
         <source>Hide the status bar except when display temporary messages.</source>
         <translation>メッセージ があるとき以外ステータスバー を非表示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="555" />
+        <location filename="../src/Create/CreateActions.cpp" line="561" />
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
         <translation>メッセージ があるときを除いて ステータスバー を非表示とします。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="557" />
+        <location filename="../src/Create/CreateActions.cpp" line="563" />
         <source>Show Always</source>
         <translation>常に表示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="559" />
+        <location filename="../src/Create/CreateActions.cpp" line="565" />
         <source>Always show the status bar.</source>
         <translation>ステータスバーを常に表示します。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="560" />
+        <location filename="../src/Create/CreateActions.cpp" line="566" />
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
         <translation>ステータスバー を表示します。ステータスバー には実行状況やフェードバック メッセージに加えて、カーソルの位置における情報も表示されます。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="569" />
+        <location filename="../src/Create/CreateActions.cpp" line="575" />
         <source>Zoom Out</source>
         <translation>縮小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="570" />
+        <location filename="../src/Create/CreateActions.cpp" line="576" />
         <source>Zoom out</source>
         <translation>縮小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="574" />
+        <location filename="../src/Create/CreateActions.cpp" line="580" />
         <source>Zoom In</source>
         <translation>拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="575" />
+        <location filename="../src/Create/CreateActions.cpp" line="581" />
         <source>Zoom in</source>
         <translation>拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="582" />
+        <location filename="../src/Create/CreateActions.cpp" line="588" />
         <source>16:1 (1600%)</source>
         <translation>16:1 (1600%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="584" />
+        <location filename="../src/Create/CreateActions.cpp" line="590" />
         <source>Zoom 16:1</source>
         <translation>倍率を16:1倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="588" />
+        <location filename="../src/Create/CreateActions.cpp" line="594" />
         <source>16:1 farther (1270%)</source>
         <translation>16:1 よりやや遠望 (1270%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="590" />
+        <location filename="../src/Create/CreateActions.cpp" line="596" />
         <source>Zoom 12.7:1</source>
         <translation>倍率を 12.7:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="594" />
+        <location filename="../src/Create/CreateActions.cpp" line="600" />
         <source>8:1 closer (1008%)</source>
         <translation>8:1 よりやや近接 (1008%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="596" />
+        <location filename="../src/Create/CreateActions.cpp" line="602" />
         <source>Zoom 10.08:1</source>
         <translation>倍率を 10.08:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="600" />
+        <location filename="../src/Create/CreateActions.cpp" line="606" />
         <source>8:1 (800%)</source>
         <translation>8:1 (800%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="602" />
+        <location filename="../src/Create/CreateActions.cpp" line="608" />
         <source>Zoom 8:1</source>
         <translation>倍率を8:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="606" />
+        <location filename="../src/Create/CreateActions.cpp" line="612" />
         <source>8:1 farther (635%)</source>
         <translation>8:1 よりやや遠望 (635%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="608" />
+        <location filename="../src/Create/CreateActions.cpp" line="614" />
         <source>Zoom 6.35:1</source>
         <translation>倍率を 6.35:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="612" />
+        <location filename="../src/Create/CreateActions.cpp" line="618" />
         <source>4:1 closer (504%)</source>
         <translation>4:1 よりやや近接 (504%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="614" />
+        <location filename="../src/Create/CreateActions.cpp" line="620" />
         <source>Zoom 5.04:1</source>
         <translation>倍率を 5.04:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="618" />
+        <location filename="../src/Create/CreateActions.cpp" line="624" />
         <source>4:1 (400%)</source>
         <translation>4:1 (400%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="620" />
+        <location filename="../src/Create/CreateActions.cpp" line="626" />
         <source>Zoom 4:1</source>
         <translation>倍率を 4:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="624" />
+        <location filename="../src/Create/CreateActions.cpp" line="630" />
         <source>4:1 farther (317%)</source>
         <translation>4:1 よりやや遠望 (317%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="626" />
+        <location filename="../src/Create/CreateActions.cpp" line="632" />
         <source>Zoom 3.17:1</source>
         <translation>倍率を 3.17:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="630" />
+        <location filename="../src/Create/CreateActions.cpp" line="636" />
         <source>2:1 closer (252%)</source>
         <translation>2:1 よりやや近接 (252%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="632" />
+        <location filename="../src/Create/CreateActions.cpp" line="638" />
         <source>Zoom 2.52:1</source>
         <translation>倍率を 2.52:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="636" />
+        <location filename="../src/Create/CreateActions.cpp" line="642" />
         <source>2:1 (200%)</source>
         <translation>2:1 (200%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="638" />
+        <location filename="../src/Create/CreateActions.cpp" line="644" />
         <source>Zoom 2:1</source>
         <translation>倍率を 2:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="642" />
+        <location filename="../src/Create/CreateActions.cpp" line="648" />
         <source>2:1 farther (159%)</source>
         <translation>2:1 よりやや遠望 (159%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="644" />
+        <location filename="../src/Create/CreateActions.cpp" line="650" />
         <source>Zoom 1.59:1</source>
         <translation>倍率を 1.59:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="648" />
+        <location filename="../src/Create/CreateActions.cpp" line="654" />
         <source>1:1 closer (126%)</source>
         <translation>1:1 よりやや近接 (126%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="651" />
+        <location filename="../src/Create/CreateActions.cpp" line="657" />
         <source>Zoom 1.3:1</source>
         <translation>倍率を 1.3:1 倍に拡大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="655" />
+        <location filename="../src/Create/CreateActions.cpp" line="661" />
         <source>1:1 (100%)</source>
         <translation>1:1 (100%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="658" />
+        <location filename="../src/Create/CreateActions.cpp" line="664" />
         <source>Zoom 1:1</source>
         <translation>倍率を 1:1 の等倍に</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="662" />
+        <location filename="../src/Create/CreateActions.cpp" line="668" />
         <source>1:1 farther (79%)</source>
         <translation>1:1 よりやや遠望 (79%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="665" />
+        <location filename="../src/Create/CreateActions.cpp" line="671" />
         <source>Zoom 0.8:1</source>
         <translation>倍率を 0.8:1 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="669" />
+        <location filename="../src/Create/CreateActions.cpp" line="675" />
         <source>1:2 closer (63%)</source>
         <translation>1:2 よりやや近接 (63%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="671" />
+        <location filename="../src/Create/CreateActions.cpp" line="677" />
         <source>Zoom 1.3:2</source>
         <translation>倍率を 1.3:2 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="675" />
+        <location filename="../src/Create/CreateActions.cpp" line="681" />
         <source>1:2 (50%)</source>
         <translation>1:2 (50%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="677" />
+        <location filename="../src/Create/CreateActions.cpp" line="683" />
         <source>Zoom 1:2</source>
         <translation>倍率を 1:2 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="681" />
+        <location filename="../src/Create/CreateActions.cpp" line="687" />
         <source>1:2 farther (40%)</source>
         <translation>1:2 よりやや遠望 (40%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="683" />
+        <location filename="../src/Create/CreateActions.cpp" line="689" />
         <source>Zoom 0.8:2</source>
         <translation>倍率を 0.8:2 倍に縮小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="687" />
+        <location filename="../src/Create/CreateActions.cpp" line="693" />
         <source>1:4 closer (31%)</source>
         <translation>1:4 よりやや遠望 (31%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="689" />
+        <location filename="../src/Create/CreateActions.cpp" line="695" />
         <source>Zoom 1.3:4</source>
         <translation>倍率を 1.3:4 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="693" />
+        <location filename="../src/Create/CreateActions.cpp" line="699" />
         <source>1:4 (25%)</source>
         <translation>1:4 (25%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="695" />
+        <location filename="../src/Create/CreateActions.cpp" line="701" />
         <source>Zoom 1:4</source>
         <translation>倍率を 1:4 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="699" />
+        <location filename="../src/Create/CreateActions.cpp" line="705" />
         <source>1:4 farther (20%)</source>
         <translation>1:4 よりやや遠望 (20%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="701" />
+        <location filename="../src/Create/CreateActions.cpp" line="707" />
         <source>Zoom 0.8:4</source>
         <translation>倍率を 0.8:4 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="705" />
+        <location filename="../src/Create/CreateActions.cpp" line="711" />
         <source>1:8 closer (12.5%)</source>
         <translation>1:8 よりやや近接 (12.5%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="707" />
         <location filename="../src/Create/CreateActions.cpp" line="713" />
+        <location filename="../src/Create/CreateActions.cpp" line="719" />
         <source>Zoom 1:8</source>
         <translation>倍率を 1:8 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="711" />
+        <location filename="../src/Create/CreateActions.cpp" line="717" />
         <source>1:8 (12.5%)</source>
         <translation>1:8 (12.5%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="717" />
+        <location filename="../src/Create/CreateActions.cpp" line="723" />
         <source>1:8 farther (10%)</source>
         <translation>1:8 よりやや遠望 (10%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="719" />
+        <location filename="../src/Create/CreateActions.cpp" line="725" />
         <source>Zoom 0.8:8</source>
         <translation>倍率を 0.8:8 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="723" />
+        <location filename="../src/Create/CreateActions.cpp" line="729" />
         <source>1:16 closer (8%)</source>
         <translation>1:16 よりやや近接 (8%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="725" />
+        <location filename="../src/Create/CreateActions.cpp" line="731" />
         <source>Zoom 1.3:16</source>
         <translation>倍率を 1.3:16 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="729" />
+        <location filename="../src/Create/CreateActions.cpp" line="735" />
         <source>1:16 (6.25%)</source>
         <translation>1:16 (6.25%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="731" />
+        <location filename="../src/Create/CreateActions.cpp" line="737" />
         <source>Zoom 1:16</source>
         <translation>倍率を 1:16 に縮小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="735" />
+        <location filename="../src/Create/CreateActions.cpp" line="741" />
         <source>Fill</source>
         <translation>フィル</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="737" />
+        <location filename="../src/Create/CreateActions.cpp" line="743" />
         <source>Zoom with stretching to fill window</source>
         <translation>画面サイズに合わせて拡大</translation>
     </message>
@@ -3238,33 +3246,43 @@ The order of the curves here does not affect the order in the exported file. Tha
         <translation>エクスポートされたファイルには、全てのカーブから 重複しない X を全て用います。Y の値は必要に応じて 補間 されます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="202" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="203" />
+        <source>Extrapolate outside endpoints</source>
+        <translation>外部エンドポイントを推定する</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="204" />
+        <source>Enable or disable extrapolation outside of endpoints of each curve. If disabled, only points between the endpoints of each curve are exported</source>
+        <translation>各曲線の端点以外の外挿を有効または無効にします。無効にすると、各曲線の端点間の点のみがエクスポートされます。</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="209" />
         <source>Interpolate Ys at Xs from first curve</source>
         <translation>最初の カーブ の  X について Y を 補間</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="203" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="210" />
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
         <translation>エクスポートされたファイルには、最初の カーブ から X を用います。Y の値は必要に応じて 補間 されます</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="208" />
-        <source>Interpolate Ys at evenly spaced X values.</source>
-        <translation>等間隔の X について Y を 補間 </translation>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="215" />
+        <source>Interpolate Ys at evenly spaced X values that are automatically selected</source>
+        <translation>自動的に選択された等間隔のX値でYを補間</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="216" />
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
         <translation>エクスポートされたファイルには、等間隔に区切られた X が用いられます。インターバルは以下にて設定できます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="213" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="350" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="220" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="362" />
         <source>Interval</source>
         <translation>インターバル：</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="221" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="228" />
         <source>Interval, in the units of X, between successive points in the X direction.
 
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
@@ -3277,7 +3295,7 @@ The X values will be automatically aligned along simple numbers. If the first an
 X 値は できるだけシンプルな数値の並びになるように設定されます。もし最初のポイントあるいは最後のポイントが数値の並びに沿わない場合、1 あるいは 2 つのポイントが必要に応じて追加されます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="231" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="238" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
@@ -3290,54 +3308,64 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
 なおインターバル間隔を X の目盛単位に合わせるには、グラフの目盛単位を利用します。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="243" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="376" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="250" />
+        <source>Interpolate Ys at evenly spaced X values on grid lines</source>
+        <translation>グリッド線上の等間隔のX値でYを補間</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="251" />
+        <source>Exported file will have values at evenly spaced X values at the vertical grid lines.</source>
+        <translation>エクスポートされたファイルは、垂直グリッド線に等間隔のX値の値を持ちます。</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="255" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
         <source>Raw Xs and Ys</source>
         <translation>X および Y の原データ</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="244" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="377" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="256" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="389" />
         <source>Exported file will have only original X and Y values</source>
         <translation>エクスポートされたファイルは元のXとYの値だけを含みます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="255" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="267" />
         <source>Header</source>
         <translation>ヘッダー情報</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="265" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="277" />
         <source>Exported file will have no header line</source>
         <translation>エクスポートされたファイルはヘッダー行を含みません。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="270" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="282" />
         <source>Exported file will have simple header line</source>
         <translation>エクスポートされたファイルは簡易なヘッダー行を含みます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="275" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="287" />
         <source>Exported file will have gnuplot header line</source>
         <translation>エクスポートされたファイルはgnuplotに対応するヘッダー行を含みます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="287" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="299" />
         <source>Save As Default</source>
         <translation>デフォルトとして設定</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="288" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="300" />
         <source>Save the settings for use as future defaults.</source>
         <translation>設定情報を以後のデフォルトとして保存します。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="297" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="309" />
         <source>Preview</source>
         <translation>プレビュー表示</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="313" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="325" />
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
@@ -3346,27 +3374,27 @@ Functions (shown here in blue) are output first, followed by relations (shown he
 (青色で表示された) 近似式による補間結果がまず出力され、またポイント 間を順に接続して得られたライン (緑色) による補間結果があれば、これも続いて出力されます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="329" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="341" />
         <source>Relation Points Selection</source>
         <translation>ポイント 間の接続線からの X 値の読み取り方法の選択</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="343" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="355" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation>XとYについて、それぞれ等間隔に 補間 して値を出力します。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="344" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="356" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation>エクスポートされたファイルは、それぞれの リレーション に沿って、等間隔に ポイント を含みます。もし最後のインターバルが最後の点で丁度終わらなければ、最後のインターバル間隔は最後の点と合致するように少し短く調整されます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="358" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="370" />
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation>等間隔の座標でエクスポートする際の、連続したポイント間の間隔</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="364" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="376" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -3379,12 +3407,12 @@ X 軸・ Y 軸の目盛とは別に間隔を設定したい場合にはピクセ
 グラフの目盛単位は通常X 軸・ Y 軸の目盛が同一である場合に利用が勧められます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="420" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="432" />
         <source>Functions</source>
         <translation>座標取得機能</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="422" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="434" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
@@ -3393,12 +3421,12 @@ Controls for specifying the format of functions during export</source>
 座標を取得してエクスポートする際に利用するオプションを選択します。X軸について等間隔とする場合にはそのインターバルも指定します。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="428" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="440" />
         <source>Relations</source>
         <translation>リレーション機能</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="430" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="442" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
@@ -3407,27 +3435,27 @@ Controls for specifying the format of relations during export</source>
 座標を取得してエクスポートする際に利用するオプションを選択し、等間隔とする場合にはインターバルを指定します。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="451" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="463" />
         <source>X Label</source>
         <translation>X軸ラベル</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="453" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="465" />
         <source>Theta Label</source>
         <translation>偏角ラベル</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="459" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="471" />
         <source>Label in the header for x values</source>
         <translation>ヘッダー情報に X軸 をラベルとして含める。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="461" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="473" />
         <source>Label in the header for theta values</source>
         <translation>ヘッダー情報に 偏角 をラベルとして含める。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1116" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1152" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>プレビュー 画面は座標軸の基準となる ポイント が設定されるまでは表示されません。</translation>
     </message>
@@ -4302,13 +4330,13 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
 <context>
     <name>GeometryWindow</name>
     <message>
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="27" />
         <location filename="../src/Geometry/GeometryWindow.cpp" line="28" />
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="29" />
         <source>Geometry Window</source>
         <translation>カーブ の形状画面</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="30" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="29" />
         <source>Geometry Window
 
 This table displays the following geometry data for the currently selected curve:
@@ -4345,7 +4373,7 @@ Distance = カーブに沿った 距離で、グラフ 単位あるいはパー�
 ドラッグ アンド ドロップ 機能が無効になっているときは、マウス をクリックしドラッグすることで四角形の範囲のセルを選択することができるでしょう。逆に、ドラッグ アンド ドロップ 機能を有効にしていれば、マウスをクリックして Shift キーを押しながらクリックすることで四角形の範囲のセルを選択することになるでしょう。なおドラッグ アンド ドロップ 機能 はメイン画面の設定 で切り替えできます。</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="271" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="270" />
         <source>Highlighted segments may have unexpected values when exported due to overlaps. Adjust points or change Settings / Curve Properties / Connect As.</source>
         <translation>強調表示されたセグメントは、オーバーラップのためにエクスポート時に予期しない値になることがあります。点を調整するか、設定/カーブプロパティ/別名で接続を変更します。</translation>
     </message>
@@ -4871,34 +4899,34 @@ Do you want to save your changes?</source>
         <translation>上へ 移動</translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="93" />
-        <location filename="../src/Document/Document.cpp" line="133" />
+        <location filename="../src/Document/Document.cpp" line="94" />
+        <location filename="../src/Document/Document.cpp" line="135" />
         <source>Operating system says file is not readable</source>
         <translation>この オペレーティング システム（OS） で読み込みできるファイルタイプではないようです。</translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="119" />
+        <location filename="../src/Document/Document.cpp" line="121" />
         <source>cannot read newer files from version</source>
         <translation>この バージョン のファイル からは 新規読み込みができません。</translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="121" />
+        <location filename="../src/Document/Document.cpp" line="123" />
         <source>of</source>
         <translation>この</translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="140" />
+        <location filename="../src/Document/Document.cpp" line="142" />
         <location filename="../src/util/Xml.cpp" line="40" />
         <source>File</source>
         <translation>ファイル</translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="142" />
+        <location filename="../src/Document/Document.cpp" line="144" />
         <source>was not found</source>
         <translation>見つかりませんでした。</translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="513" />
+        <location filename="../src/Document/Document.cpp" line="515" />
         <source>Cannot read image data</source>
         <translation>画像を読み込むことができません。</translation>
     </message>
@@ -4923,7 +4951,7 @@ Do you want to save your changes?</source>
         <translation>デジタイズ された カーブ の 情報 を読み込むことができません。</translation>
     </message>
     <message>
-        <location filename="../src/Document/DocumentModelExportFormat.cpp" line="203" />
+        <location filename="../src/Document/DocumentModelExportFormat.cpp" line="223" />
         <source>Cannot read export data</source>
         <translation>エクスポート 情報を読み込むことができません。</translation>
     </message>
@@ -5059,43 +5087,43 @@ Do you want to save your changes?</source>
         <translation>指定のディレクトリから</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="147" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="146" />
         <source>CurveName</source>
         <translation>カーブ 名</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="152" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="151" />
         <source>Distance</source>
         <translation>距離</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="157" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="156" />
         <source>Percent</source>
         <translation>パーセント</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="162" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="161" />
         <source>FunctionArea</source>
         <translation>補間範囲</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="167" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="166" />
         <source>Index</source>
         <translation>インデックス</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="172" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="171" />
         <source>PolygonArea</source>
         <translation>図形の範囲</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="177" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="176" />
         <location filename="../src/Point/PointShape.cpp" line="29" />
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="182" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="181" />
         <source>Y</source>
         <translation>Y</translation>
     </message>
