@@ -14,7 +14,7 @@
 #include "WindowTable.h"
 
 WindowModelBase::WindowModelBase () :
-  m_view (0)
+  m_view (nullptr)
 {
 }
 

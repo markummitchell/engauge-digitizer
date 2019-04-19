@@ -9,26 +9,33 @@
 
 QString pointShapeToString (PointShape pointShape)
 {
+  QString rtn;
+
   switch (pointShape) {
     case POINT_SHAPE_CIRCLE:
-      return QObject::tr ("Circle");
+      rtn = QObject::tr ("Circle");
+      break;
 
     case POINT_SHAPE_CROSS:
-      return QObject::tr ("Cross");
+      rtn = QObject::tr ("Cross");
+      break;
 
     case POINT_SHAPE_DIAMOND:
-      return QObject::tr ("Diamond");
+      rtn = QObject::tr ("Diamond");
+      break;
 
     case POINT_SHAPE_SQUARE:
-      return QObject::tr ("Square");
+      rtn = QObject::tr ("Square");
+      break;
 
     case POINT_SHAPE_TRIANGLE:
-      return QObject::tr ("Triangle");
+      rtn = QObject::tr ("Triangle");
+      break;
 
     case POINT_SHAPE_X:
-      return QObject::tr ("X");
-
-    default:
-      return QObject::tr ("Unknown");
+      rtn = QObject::tr ("X");
+      break;
   }
+
+  return rtn;
 }

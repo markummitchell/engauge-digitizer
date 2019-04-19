@@ -2,9 +2,9 @@
 
 namespace log4cpp {
 
-  Category *Category::m_category = 0;
+  Category *Category::m_category = nullptr;
 
-  Category::Category() noexcept
+  Category::Category()
   {
   }
 
@@ -23,7 +23,7 @@ namespace log4cpp {
 
   Category &Category::getRoot()
   {
-    if (m_category == 0) {
+    if (m_category == nullptr) {
       m_category = new Category();
     }
 

@@ -14,10 +14,10 @@ TranslatorContainer::TranslatorContainer(QApplication & /* app */)
   settings.beginGroup(SETTINGS_GROUP_MAIN_WINDOW);
 
   // Get the locale settings outside of the settings retrieval methods in MainWindow
-  QLocale::Language language = (QLocale::Language) settings.value (SETTINGS_LOCALE_LANGUAGE,
-                                                                   QVariant (localeDefault.language())).toInt();
-  QLocale::Country country = (QLocale::Country) settings.value (SETTINGS_LOCALE_COUNTRY,
-                                                                QVariant (localeDefault.country())).toInt();
+  QLocale::Language language = static_cast<QLocale::Language> (settings.value (SETTINGS_LOCALE_LANGUAGE,
+                                                                               QVariant (localeDefault.language())).toInt());
+  QLocale::Country country = static_cast<QLocale::Country> (settings.value (SETTINGS_LOCALE_COUNTRY,
+                                                                            QVariant (localeDefault.country())).toInt());
   QLocale locale (language,
                   country);
   

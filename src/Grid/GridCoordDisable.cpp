@@ -9,20 +9,25 @@
 
 QString gridCoordDisableToString (GridCoordDisable gridCoordDisable)
 {
+  QString rtn;
+
   switch (gridCoordDisable) {
     case GRID_COORD_DISABLE_COUNT:
-      return QObject::tr ("Count");
+      rtn = QObject::tr ("Count");
+      break;
 
     case GRID_COORD_DISABLE_START:
-      return QObject::tr ("Start");
+      rtn = QObject::tr ("Start");
+      break;
 
     case GRID_COORD_DISABLE_STEP:
-      return QObject::tr ("Step");
+      rtn = QObject::tr ("Step");
+      break;
 
     case GRID_COORD_DISABLE_STOP:
-      return QObject::tr ("Stop");
-
-    default:
-      return QObject::tr ("Unknown");
+      rtn = QObject::tr ("Stop");
+      break;
   }
+
+  return rtn;
 }

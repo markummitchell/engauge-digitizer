@@ -13,14 +13,14 @@ DlgFilterThread::DlgFilterThread(const QPixmap &pixmapOriginal,
   m_pixmapOriginal (pixmapOriginal),
   m_rgbBackground (rgbBackground),
   m_dlgSettingsColorFilter (dlgSettingsColorFilter),
-  m_dlgFilterWorker (0)
+  m_dlgFilterWorker (nullptr)
 {
 }
 
 void DlgFilterThread::run ()
 {
   // Create worker only once
-  if (m_dlgFilterWorker == 0) {
+  if (m_dlgFilterWorker == nullptr) {
 
     m_dlgFilterWorker = new DlgFilterWorker (m_pixmapOriginal,
                                              m_rgbBackground);

@@ -43,7 +43,7 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                                     Document &document,
                                     QXmlStreamReader &reader)
 {
-  CmdAbstract *cmd = 0;
+  CmdAbstract *cmd = nullptr;
 
   QXmlStreamAttributes attributes = reader.attributes();
   if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_CMD_TYPE) ||

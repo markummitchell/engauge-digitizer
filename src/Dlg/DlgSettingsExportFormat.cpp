@@ -55,8 +55,8 @@ DlgSettingsExportFormat::DlgSettingsExportFormat(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Export Format"),
                            "DlgSettingsExportFormat",
                            mainWindow),
-  m_modelExportBefore (0),
-  m_modelExportAfter (0),
+  m_modelExportBefore (nullptr),
+  m_modelExportAfter (nullptr),
   m_haveFunction (false),
   m_haveRelation (false)
 {
@@ -420,7 +420,7 @@ QWidget *DlgSettingsExportFormat::createSubPanel ()
 }
 
 void DlgSettingsExportFormat::createTabWidget (QGridLayout *layout,
-                                         int &row)
+                                               int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createTabWidget";
 
@@ -452,26 +452,17 @@ void DlgSettingsExportFormat::createTabWidget (QGridLayout *layout,
 }
 
 void DlgSettingsExportFormat::createXLabel (QGridLayout *layoutHeader,
-                                      int colLabel)
+                                            int colLabel)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createXLabel";
 
   int row = 1; // Skip first row
 
-  QLabel *title;
-  if (true) {
-    title = new QLabel (QString ("%1:").arg (tr ("X Label")));
-  } else {
-    title = new QLabel (QString ("%1:").arg (tr ("Theta Label")));
-  }
+  QLabel *title = new QLabel (QString ("%1:").arg (tr ("X Label")));
   layoutHeader->addWidget (title, row++, colLabel, 1, 1);
 
   m_editXLabel = new QLineEdit;
-  if (true) {
-    m_editXLabel->setWhatsThis (tr ("Label in the header for x values"));
-  } else {
-    m_editXLabel->setWhatsThis (tr ("Label in the header for theta values"));
-  }
+  m_editXLabel->setWhatsThis (tr ("Label in the header for x values"));
   layoutHeader->addWidget (m_editXLabel, row++, colLabel, 1, 1);
   connect (m_editXLabel, SIGNAL (textChanged (const QString &)), this, SLOT (slotXLabel(const QString &)));
 }
@@ -793,7 +784,7 @@ void DlgSettingsExportFormat::slotFunctionsPointsEvenlySpacedIntervalUnits(const
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsPointsEvenlySpacedIntervalUnits";
 
   int index = m_cmbFunctionsPointsEvenlySpacingUnits->currentIndex();
-  ExportPointsIntervalUnits units = (ExportPointsIntervalUnits) m_cmbFunctionsPointsEvenlySpacingUnits->itemData (index).toInt();
+  ExportPointsIntervalUnits units = static_cast<ExportPointsIntervalUnits> (m_cmbFunctionsPointsEvenlySpacingUnits->itemData (index).toInt());
 
   m_modelExportAfter->setPointsIntervalUnitsFunctions(units);
   updateIntervalConstraints(); // Call this before updateControls so constraint checking is updated for ok button
@@ -940,7 +931,7 @@ void DlgSettingsExportFormat::slotRelationsPointsEvenlySpacedIntervalUnits(const
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotRelationsPointsEvenlySpacedIntervalUnits";
 
   int index = m_cmbRelationsPointsEvenlySpacingUnits->currentIndex();
-  ExportPointsIntervalUnits units = (ExportPointsIntervalUnits) m_cmbRelationsPointsEvenlySpacingUnits->itemData (index).toInt();
+  ExportPointsIntervalUnits units = static_cast<ExportPointsIntervalUnits> (m_cmbRelationsPointsEvenlySpacingUnits->itemData (index).toInt());
 
   m_modelExportAfter->setPointsIntervalUnitsRelations(units);
   updateIntervalConstraints(); // Call this before updateControls so constraint checking is updated for ok button

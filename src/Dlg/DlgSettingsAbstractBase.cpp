@@ -25,7 +25,7 @@ DlgSettingsAbstractBase::DlgSettingsAbstractBase(const QString &title,
                                                  MainWindow &mainWindow) :
   QDialog (&mainWindow),
   m_mainWindow (mainWindow),
-  m_cmdMediator (0),
+  m_cmdMediator (nullptr),
   m_dialogName (dialogName),
   m_disableOkAtStartup (true)
 {

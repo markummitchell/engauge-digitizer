@@ -12,6 +12,10 @@
 #include "QtToString.h"
 #include "Transformation.h"
 
+// Epsilon test values
+const double ONE_PIXEL = 1.0; // Screen coordinates
+const double ZERO_EPSILON = 0.0; // Graph coordinates
+
 CallbackAxisPointsAbstract::CallbackAxisPointsAbstract(const DocumentModelCoords &modelCoords,
                                                        DocumentAxesPointsRequired documentAxesPointsRequired) :
   m_modelCoords (modelCoords),
@@ -34,13 +38,14 @@ CallbackAxisPointsAbstract::CallbackAxisPointsAbstract(const DocumentModelCoords
 {
 }
 
-bool CallbackAxisPointsAbstract::anyPointsRepeatPair (const CoordPairVector &vector) const
+bool CallbackAxisPointsAbstract::anyPointsRepeatPair (const CoordPairVector &vector,
+                                                      double epsilon) const
 {
   for (int pointLeft = 0; pointLeft < vector.count(); pointLeft++) {
     for (int pointRight = pointLeft + 1; pointRight < vector.count(); pointRight++) {
 
-      if ((vector.at(pointLeft).x() == vector.at(pointRight).x()) &&
-          (vector.at(pointLeft).y() == vector.at(pointRight).y())) {
+      if (qAbs (vector.at(pointLeft).x() - vector.at(pointRight).x()) <= epsilon &&
+          qAbs (vector.at(pointLeft).y() - vector.at(pointRight).y()) <= epsilon) {
 
         // Points pointLeft and pointRight repeat each other, which means matrix cannot be inverted
         return true;
@@ -52,12 +57,13 @@ bool CallbackAxisPointsAbstract::anyPointsRepeatPair (const CoordPairVector &vec
   return false;
 }
 
-bool CallbackAxisPointsAbstract::anyPointsRepeatSingle (const CoordSingleVector &vector) const
+bool CallbackAxisPointsAbstract::anyPointsRepeatSingle (const CoordSingleVector &vector,
+                                                        double epsilon) const
 {
   for (int pointLeft = 0; pointLeft < vector.count(); pointLeft++) {
     for (int pointRight = pointLeft + 1; pointRight < vector.count(); pointRight++) {
 
-      if (vector.at(pointLeft) == vector.at(pointRight)) {
+      if (qAbs (vector.at(pointLeft) - vector.at(pointRight)) <= epsilon) {
 
         // Points pointLeft and pointRight repeat each other, which means matrix cannot be inverted
         return true;
@@ -120,7 +126,8 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire2AxisPoints (con
     }
 
     // Error checking
-    if (anyPointsRepeatPair (m_screenInputs)) {
+    if (anyPointsRepeatPair (m_screenInputs,
+                             ONE_PIXEL)) {
 
       m_isError = true;
       m_errorMessage = QObject::tr ("New axis point cannot be at the same screen position as an existing axis point");
@@ -165,7 +172,7 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire3AxisPoints (con
     // Error checking
     if ((m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_2 ||
          m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) &&
-        anyPointsRepeatPair (m_screenInputs)) {
+        anyPointsRepeatPair (m_screenInputs, ONE_PIXEL)) {
 
       m_isError = true;
       m_errorMessage = QObject::tr ("New axis point cannot be at the same screen position as an existing axis point");
@@ -173,7 +180,7 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire3AxisPoints (con
 
     } else if ((m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_2 ||
                 m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) &&
-               anyPointsRepeatPair (m_graphOutputs)) {
+               anyPointsRepeatPair (m_graphOutputs, ZERO_EPSILON)) {
 
       m_isError = true;
       m_errorMessage = QObject::tr ("New axis point cannot have the same graph coordinates as an existing axis point");
@@ -260,15 +267,19 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire4AxisPoints (boo
     }
 
     // Error checking
-    if (anyPointsRepeatPair (m_screenInputsX) ||
-        anyPointsRepeatPair (m_screenInputsY)) {
+    if (anyPointsRepeatPair (m_screenInputsX,
+                             ONE_PIXEL) ||
+        anyPointsRepeatPair (m_screenInputsY,
+                             ONE_PIXEL)) {
 
       m_isError = true;
       m_errorMessage = QObject::tr ("New axis point cannot be at the same screen position as an existing axis point");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
-    } else if (anyPointsRepeatSingle (m_graphOutputsX) ||
-               anyPointsRepeatSingle (m_graphOutputsY)) {
+    } else if (anyPointsRepeatSingle (m_graphOutputsX,
+                                      ZERO_EPSILON) ||
+               anyPointsRepeatSingle (m_graphOutputsY,
+                                      ZERO_EPSILON)) {
 
       m_isError = true;
       m_errorMessage = QObject::tr ("New axis point cannot have the same graph coordinates as an existing axis point");
@@ -469,15 +480,15 @@ QTransform CallbackAxisPointsAbstract::matrixScreen () const
 unsigned int CallbackAxisPointsAbstract::numberAxisPoints () const
 {
   if (m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_2) {
-    return m_screenInputs.count();
+    return unsigned (m_screenInputs.count());
   } else if (m_documentAxesPointsRequired == DOCUMENT_AXES_POINTS_REQUIRED_3) {
-    return m_screenInputs.count();
+    return unsigned (m_screenInputs.count());
   } else {
-    return m_screenInputsX.count() + m_screenInputsY.count();
+    return unsigned (m_screenInputsX.count() + m_screenInputsY.count());
   }
 }
 
 bool CallbackAxisPointsAbstract::threePointsAreCollinear (const QTransform &transform)
 {
-  return (transform.determinant() == 0);
+  return !transform.isInvertible ();
 }

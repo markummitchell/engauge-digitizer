@@ -64,14 +64,14 @@ PointStyle PointStyle::defaultAxesCurve ()
   // Get settings if available, otherwise use defaults
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   settings.beginGroup (SETTINGS_GROUP_CURVE_AXES);
-  PointShape shape = (PointShape) settings.value (SETTINGS_CURVE_POINT_SHAPE,
-                                                  DEFAULT_POINT_SHAPE_AXIS).toInt();
-  int radius = settings.value (SETTINGS_CURVE_POINT_RADIUS,
-                               DEFAULT_POINT_RADIUS).toInt();
+  PointShape shape = static_cast<PointShape> (settings.value (SETTINGS_CURVE_POINT_SHAPE,
+                                                              DEFAULT_POINT_SHAPE_AXIS).toInt());
+  unsigned int radius = settings.value (SETTINGS_CURVE_POINT_RADIUS,
+                                        DEFAULT_POINT_RADIUS).toUInt();
   int pointLineWidth = settings.value (SETTINGS_CURVE_POINT_LINE_WIDTH,
                                        DEFAULT_POINT_LINE_WIDTH).toInt();
-  ColorPalette pointColor = (ColorPalette) settings.value (SETTINGS_CURVE_POINT_COLOR,
-                                                           DEFAULT_POINT_COLOR_AXES).toInt();
+  ColorPalette pointColor = static_cast<ColorPalette> (settings.value (SETTINGS_CURVE_POINT_COLOR,
+                                                                       DEFAULT_POINT_COLOR_AXES).toInt());
   settings.endGroup ();
 
   return PointStyle (shape,
@@ -97,12 +97,12 @@ PointStyle PointStyle::defaultGraphCurve (int index)
   // Get settings if available, otherwise use defaults
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   settings.beginGroup (groupName);
-  int radius = settings.value (SETTINGS_CURVE_POINT_RADIUS,
-                               DEFAULT_POINT_RADIUS).toInt();
+  unsigned int radius = settings.value (SETTINGS_CURVE_POINT_RADIUS,
+                                        DEFAULT_POINT_RADIUS).toUInt();
   int pointLineWidth = settings.value (SETTINGS_CURVE_POINT_LINE_WIDTH,
                                        DEFAULT_POINT_LINE_WIDTH).toInt();
-  ColorPalette pointColor = (ColorPalette) settings.value (SETTINGS_CURVE_POINT_COLOR,
-                                                           DEFAULT_POINT_COLOR_GRAPH).toInt();
+  ColorPalette pointColor = static_cast<ColorPalette> (settings.value (SETTINGS_CURVE_POINT_COLOR,
+                                                                       DEFAULT_POINT_COLOR_GRAPH).toInt());
   settings.endGroup ();
 
   return PointStyle (shape,
@@ -132,10 +132,10 @@ void PointStyle::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_STYLE_COLOR) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE)) {
 
-    setRadius (attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS).toInt());
+    setRadius (attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_RADIUS).toUInt());
     setLineWidth (attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_LINE_WIDTH).toInt());
-    setPaletteColor ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_COLOR).toInt());
-    setShape ((PointShape) attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE).toInt());
+    setPaletteColor (static_cast<ColorPalette> (attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_COLOR).toInt()));
+    setShape (static_cast<PointShape> (attributes.value(DOCUMENT_SERIALIZE_POINT_STYLE_SHAPE).toInt()));
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
@@ -161,9 +161,9 @@ QPolygonF PointStyle::polygon () const
 
     case POINT_SHAPE_CIRCLE:
       {
-        int xyWidth = m_radius;
+        int xyWidth = signed (m_radius);
         for (int i = 0; i <= NUM_XY; i++) {
-          double angle = TWO_PI * (double) i / (double) NUM_XY;
+          double angle = TWO_PI * double (i) / double (NUM_XY);
           double x = xyWidth * cos (angle);
           double y = xyWidth * sin (angle);
           points.append (QPointF (x, y));
@@ -173,7 +173,7 @@ QPolygonF PointStyle::polygon () const
 
     case POINT_SHAPE_CROSS:
       {
-        int xyWidth = m_radius;
+        int xyWidth = signed (m_radius);
 
         points.append (QPointF (-1 * xyWidth, 0));
         points.append (QPointF (xyWidth, 0));
@@ -186,7 +186,7 @@ QPolygonF PointStyle::polygon () const
 
     case POINT_SHAPE_DIAMOND:
       {
-        int xyWidth = m_radius;
+        int xyWidth = signed (m_radius);
 
         points.append (QPointF (0, -1 * xyWidth));
         points.append (QPointF (-1 * xyWidth, 0));
@@ -197,7 +197,7 @@ QPolygonF PointStyle::polygon () const
 
     case POINT_SHAPE_SQUARE:
       {
-        int xyWidth = m_radius;
+        int xyWidth = signed (m_radius);
 
         points.append (QPointF (-1 * xyWidth, -1 * xyWidth));
         points.append (QPointF (-1 * xyWidth, xyWidth));
@@ -208,7 +208,7 @@ QPolygonF PointStyle::polygon () const
 
     case POINT_SHAPE_TRIANGLE:
       {
-        int xyWidth = m_radius;
+        int xyWidth = signed (m_radius);
 
         points.append (QPointF (-1 * xyWidth, -1 * xyWidth));
         points.append (QPointF (0, xyWidth));
@@ -218,7 +218,7 @@ QPolygonF PointStyle::polygon () const
 
     case POINT_SHAPE_X:
       {
-        int xyWidth = m_radius * qSqrt (0.5);
+        int xyWidth = qFloor (m_radius * qSqrt (0.5));
 
         points.append (QPointF (-1 * xyWidth, -1 * xyWidth));
         points.append (QPointF (xyWidth, xyWidth));
@@ -228,9 +228,6 @@ QPolygonF PointStyle::polygon () const
         points.append (QPointF (0, 0));
       }
       break;
-
-    default:
-      ENGAUGE_ASSERT (false);
   }
 
   QPolygonF polygon (points);
@@ -250,7 +247,7 @@ void PointStyle::printStream(QString indentation,
   str << indentation << "color=" << colorPaletteToString (m_paletteColor) << "\n";
 }
 
-int PointStyle::radius () const
+unsigned int PointStyle::radius () const
 {
   return m_radius;
 }
@@ -279,7 +276,7 @@ void PointStyle::setPaletteColor (ColorPalette paletteColor)
   m_paletteColor = paletteColor;
 }
 
-void PointStyle::setRadius (int radius)
+void PointStyle::setRadius (unsigned int radius)
 {
   m_radius = radius;
 }

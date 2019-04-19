@@ -35,11 +35,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <assert.h>
+#include <math.h>
+#include <qmath.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <math.h>
-#include <assert.h>
 
 #include "Jpeg2000Color.h"
 
@@ -68,13 +69,13 @@ void sycc_to_rgb(int offset, int upb, int y, int cb, int cr,
   int r, g, b;
 
   cb -= offset; cr -= offset;
-  r = y + (int)(1.402 * (float)cr);
+  r = y + qFloor (1.402 * double (cr));
   if(r < 0) r = 0; else if(r > upb) r = upb; *out_r = r;
 
-  g = y - (int)(0.344 * (float)cb + 0.714 * (float)cr);
+  g = y - qFloor (0.344 * double (cb) + 0.714 * double (cr));
   if(g < 0) g = 0; else if(g > upb) g = upb; *out_g = g;
 
-  b = y + (int)(1.772 * (float)cb);
+  b = y + qFloor (1.772 * double (cb));
   if(b < 0) b = 0; else if(b > upb) b = upb; *out_b = b;
 }
 
@@ -84,19 +85,20 @@ void sycc444_to_rgb(opj_image_t *img)
   const int *y, *cb, *cr;
   int maxw, maxh, max, i, offset, upb;
 
-  i = (int)img->comps[0].prec;
+  i = qFloor (img->comps[0].prec);
   offset = 1<<(i - 1); upb = (1<<i)-1;
 
-  maxw = (int)img->comps[0].w; maxh = (int)img->comps[0].h;
+  maxw = qFloor (img->comps[0].w);
+  maxh = qFloor (img->comps[0].h);
   max = maxw * maxh;
 
   y = img->comps[0].data;
   cb = img->comps[1].data;
   cr = img->comps[2].data;
 
-  d0 = r = (int*)malloc(sizeof(int) * (size_t)max);
-  d1 = g = (int*)malloc(sizeof(int) * (size_t)max);
-  d2 = b = (int*)malloc(sizeof(int) * (size_t)max);
+  d0 = r = static_cast<int*> (malloc(sizeof(int) * static_cast<size_t> (max)));
+  d1 = g = static_cast<int*> (malloc(sizeof(int) * static_cast<size_t> (max)));
+  d2 = b = static_cast<int*> (malloc(sizeof(int) * static_cast<size_t> (max)));
 
   for(i = 0; i < max; ++i)
   {
@@ -117,19 +119,20 @@ void sycc422_to_rgb(opj_image_t *img)
   int maxw, maxh, max, offset, upb;
   int i, j;
 
-  i = (int)img->comps[0].prec;
+  i = qFloor (img->comps[0].prec);
   offset = 1<<(i - 1); upb = (1<<i)-1;
 
-  maxw = (int)img->comps[0].w; maxh = (int)img->comps[0].h;
+  maxw = qFloor (img->comps[0].w);
+  maxh = qFloor (img->comps[0].h);
   max = maxw * maxh;
 
   y = img->comps[0].data;
   cb = img->comps[1].data;
   cr = img->comps[2].data;
 
-  d0 = r = (int*)malloc(sizeof(int) * (size_t)max);
-  d1 = g = (int*)malloc(sizeof(int) * (size_t)max);
-  d2 = b = (int*)malloc(sizeof(int) * (size_t)max);
+  d0 = r = static_cast<int*> (malloc(sizeof(int) * static_cast<size_t> (max)));
+  d1 = g = static_cast<int*> (malloc(sizeof(int) * static_cast<size_t> (max)));
+  d2 = b = static_cast<int*> (malloc(sizeof(int) * static_cast<size_t> (max)));
 
   for(i=0; i < maxh; ++i)
   {
@@ -169,19 +172,20 @@ void sycc420_to_rgb(opj_image_t *img)
   int maxw, maxh, max, offset, upb;
   int i, j;
 
-  i = (int)img->comps[0].prec;
+  i = qFloor (img->comps[0].prec);
   offset = 1<<(i - 1); upb = (1<<i)-1;
 
-  maxw = (int)img->comps[0].w; maxh = (int)img->comps[0].h;
+  maxw = qFLoor (img->comps[0].w);
+  maxh = qFloor (img->comps[0].h);
   max = maxw * maxh;
 
   y = img->comps[0].data;
   cb = img->comps[1].data;
   cr = img->comps[2].data;
 
-  d0 = r = (int*)malloc(sizeof(int) * (size_t)max);
-  d1 = g = (int*)malloc(sizeof(int) * (size_t)max);
-  d2 = b = (int*)malloc(sizeof(int) * (size_t)max);
+  d0 = r = static_cast<int*> (malloc(sizeof(int) * static_cast<size_t> (max)));
+  d1 = g = static_cast<int*> (malloc(sizeof(int) * static_cast<size_t> (max)));
+  d2 = b = static_cast<int*> (malloc(sizeof(int) * static_cast<size_t> (max)));
 
   for(i=0; i < maxh; i += 2)
   {
@@ -311,9 +315,9 @@ void color_apply_icc_profile(opj_image_t *image)
   intent = cmsGetHeaderRenderingIntent(in_prof);
 
 	
-  max_w = (int)image->comps[0].w;
-  max_h = (int)image->comps[0].h;
-  prec = (int)image->comps[0].prec;
+  max_w = qFloor (image->comps[0].w);
+  max_h = qFloor (image->comps[0].h);
+  prec = qFloor (image->comps[0].prec);
   oldspace = image->color_space;
 
   if(out_space == cmsSigRgbData) /* enumCS 16 */
@@ -403,9 +407,9 @@ void color_apply_icc_profile(opj_image_t *image)
 
       for(i = 0; i < max; ++i)
       {
-	*r++ = (int)*out++;
-	*g++ = (int)*out++;
-	*b++ = (int)*out++;
+	*r++ = qFloor (*out++);
+	*g++ = qFloor (*out++);
+        *b++ = qFloor (*out++);
       }
       free(inbuf); free(outbuf);
     }
@@ -436,9 +440,9 @@ void color_apply_icc_profile(opj_image_t *image)
 
       for(i = 0; i < max; ++i)
       {
-	*r++ = (int)*out++;
-	*g++ = (int)*out++;
-	*b++ = (int)*out++;
+	*r++ = qFloor (*out++);
+	*g++ = qFloor (*out++);
+	*b++ = qFloor (*out++);
       }
       free(inbuf); free(outbuf);
     }
@@ -479,7 +483,9 @@ void color_apply_icc_profile(opj_image_t *image)
 
     for(i = 0; i < max; ++i)
     {
-      *r++ = (int)*out++; *g++ = (int)*out++; *b++ = (int)*out++;
+      *r++ = qFloor (*out++);
+      *g++ = qFloor (*out++);
+      *b++ = qFloor (*out++);
     }
     free(inbuf); free(outbuf);
 

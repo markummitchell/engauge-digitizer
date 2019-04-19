@@ -36,10 +36,10 @@ DlgSettingsGridRemoval::DlgSettingsGridRemoval(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Grid Removal"),
                            "DlgSettingsGridRemoval",
                            mainWindow),
-  m_scenePreview (0),
-  m_viewPreview (0),
-  m_modelGridRemovalBefore (0),
-  m_modelGridRemovalAfter (0)
+  m_scenePreview (nullptr),
+  m_viewPreview (nullptr),
+  m_modelGridRemovalBefore (nullptr),
+  m_modelGridRemovalAfter (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::DlgSettingsGridRemoval";
 
@@ -378,7 +378,7 @@ void DlgSettingsGridRemoval::slotDisableX(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotDisableX";
 
-  GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableX->currentData().toInt();
+  GridCoordDisable gridCoordDisable = static_cast<GridCoordDisable> (m_cmbDisableX->currentData().toInt());
   m_modelGridRemovalAfter->setGridCoordDisableX(gridCoordDisable);
   updateDisplayedVariableX ();
   updateControls();
@@ -389,7 +389,7 @@ void DlgSettingsGridRemoval::slotDisableY(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::slotDisableY";
 
-  GridCoordDisable gridCoordDisable = (GridCoordDisable) m_cmbDisableY->currentData().toInt();
+  GridCoordDisable gridCoordDisable = static_cast<GridCoordDisable> (m_cmbDisableY->currentData().toInt());
   m_modelGridRemovalAfter->setGridCoordDisableY(gridCoordDisable);
   updateDisplayedVariableY ();
   updateControls();
@@ -471,7 +471,7 @@ void DlgSettingsGridRemoval::updateControls ()
 
   m_cmbDisableX->setEnabled (m_chkRemoveGridLines->isChecked ());
 
-  GridCoordDisable disableX = (GridCoordDisable) m_cmbDisableX->currentData().toInt();
+  GridCoordDisable disableX = static_cast<GridCoordDisable> (m_cmbDisableX->currentData().toInt());
   m_editCountX->setEnabled (m_chkRemoveGridLines->isChecked () && (disableX != GRID_COORD_DISABLE_COUNT));
   m_editStartX->setEnabled (m_chkRemoveGridLines->isChecked () && (disableX != GRID_COORD_DISABLE_START));
   m_editStepX->setEnabled (m_chkRemoveGridLines->isChecked () && (disableX != GRID_COORD_DISABLE_STEP));
@@ -479,7 +479,7 @@ void DlgSettingsGridRemoval::updateControls ()
 
   m_cmbDisableY->setEnabled (m_chkRemoveGridLines->isChecked ());
 
-  GridCoordDisable disableY = (GridCoordDisable) m_cmbDisableY->currentData().toInt();
+  GridCoordDisable disableY = static_cast<GridCoordDisable> (m_cmbDisableY->currentData().toInt());
   m_editCountY->setEnabled (m_chkRemoveGridLines->isChecked () && (disableY != GRID_COORD_DISABLE_COUNT));
   m_editStartY->setEnabled (m_chkRemoveGridLines->isChecked () && (disableY != GRID_COORD_DISABLE_START));
   m_editStepY->setEnabled (m_chkRemoveGridLines->isChecked () && (disableY != GRID_COORD_DISABLE_STEP));
@@ -542,10 +542,6 @@ void DlgSettingsGridRemoval::updateDisplayedVariableX ()
                                                                       m_modelGridRemovalAfter->stepX (),
                                                                       m_modelGridRemovalAfter->countX ())));
       break;
-
-    default:
-      LOG4CPP_ERROR_S ((*mainCat)) << "DlgSettingsGridRemoval::updateDisplayedVariableX";
-      break;
   }
 }
 
@@ -582,10 +578,6 @@ void DlgSettingsGridRemoval::updateDisplayedVariableY ()
                                                                       m_modelGridRemovalAfter->startY (),
                                                                       m_modelGridRemovalAfter->stepY (),
                                                                       m_modelGridRemovalAfter->countY ())));
-      break;
-
-    default:
-      LOG4CPP_ERROR_S ((*mainCat)) << "DlgSettingsGridRemoval::updateDisplayedVariableY";
       break;
   }
 }

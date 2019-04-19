@@ -41,10 +41,10 @@ DlgSettingsDigitizeCurve::DlgSettingsDigitizeCurve(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Digitize Curve"),
                            "DlgSettingsDigitizeCurve",
                            mainWindow),
-  m_scenePreview (0),
-  m_viewPreview (0),
-  m_modelDigitizeCurveBefore (0),
-  m_modelDigitizeCurveAfter (0)
+  m_scenePreview (nullptr),
+  m_viewPreview (nullptr),
+  m_modelDigitizeCurveBefore (nullptr),
+  m_modelDigitizeCurveAfter (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsDigitizeCurve::DlgSettingsDigitizeCurve";
 
@@ -249,7 +249,7 @@ void DlgSettingsDigitizeCurve::slotCursorSize (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsDigitizeCurve::slotCursorSize";
 
-  m_modelDigitizeCurveAfter->setCursorSize ((CursorSize) m_cmbSize->currentData().toInt());
+  m_modelDigitizeCurveAfter->setCursorSize (static_cast<CursorSize> (m_cmbSize->currentData().toInt()));
   updateControls();
   updatePreview();
 }

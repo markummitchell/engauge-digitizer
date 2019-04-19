@@ -24,7 +24,7 @@ void WindowAbstractBase::getTableStatus (bool &tableIsActive,
   tableIsActive = false;
   tableIsCopyable = false;
 
-  if (view() != 0) {
+  if (view() != nullptr) {
 
     QItemSelectionModel *selectionModel = view()->selectionModel ();
     QModelIndexList selection = selectionModel->selectedIndexes ();

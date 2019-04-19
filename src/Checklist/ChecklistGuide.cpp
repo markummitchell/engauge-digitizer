@@ -13,7 +13,7 @@
 
 ChecklistGuide::ChecklistGuide (QWidget *parent) :
   QDockWidget (parent),
-  m_browser (0)
+  m_browser (nullptr)
 {
   setVisible (false);
   setAllowedAreas (Qt::AllDockWidgetAreas);

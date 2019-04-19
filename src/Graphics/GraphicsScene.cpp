@@ -28,7 +28,7 @@
 
 GraphicsScene::GraphicsScene(MainWindow *mainWindow) :
   QGraphicsScene(mainWindow),
-  m_pathItemMultiValued (0)
+  m_pathItemMultiValued (nullptr)
 {
 }
 
@@ -93,7 +93,7 @@ GraphicsPoint *GraphicsScene::createPoint (const QString &identifier,
 
 QString GraphicsScene::dumpCursors () const
 {
-  QString cursorOverride = (QApplication::overrideCursor () != 0) ?
+  QString cursorOverride = (QApplication::overrideCursor () != nullptr) ?
                              QtCursorToString (QApplication::overrideCursor ()->shape ()) :
                              "<null>";
   QString cursorImage = QtCursorToString (image()->cursor().shape ());
@@ -134,11 +134,11 @@ const QGraphicsPixmapItem *GraphicsScene::image () const
     QGraphicsItem* item = *itr;
     if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () == GRAPHICS_ITEM_TYPE_IMAGE) {
 
-      return (QGraphicsPixmapItem *) item;
+      return dynamic_cast<QGraphicsPixmapItem *> (item);
     }
   }
 
-  return 0;
+  return nullptr;
 }
 
 QStringList GraphicsScene::positionHasChangedPointIdentifiers () const
@@ -339,7 +339,7 @@ void GraphicsScene::updatePathItemMultiValued (const QPainterPath &pathMultiValu
                                                const LineStyle &lineMultiValued)
 {
   // It looks much better to use a consistent line width
-  int lineWidth = lineMultiValued.width();
+  int lineWidth = signed (lineMultiValued.width());
 
   // Draw m_curveMultiValued. If empty then nothing will appear
   delete m_pathItemMultiValued;

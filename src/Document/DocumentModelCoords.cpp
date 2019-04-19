@@ -146,16 +146,16 @@ void DocumentModelCoords::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_DATE) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_COORDS_UNITS_TIME)) {
 
-    setCoordsType ((CoordsType) attributes.value(DOCUMENT_SERIALIZE_COORDS_TYPE).toInt());
+    setCoordsType (static_cast<CoordsType> (attributes.value(DOCUMENT_SERIALIZE_COORDS_TYPE).toInt()));
     setOriginRadius (attributes.value(DOCUMENT_SERIALIZE_COORDS_ORIGIN_RADIUS).toDouble());
-    setCoordScaleXTheta ((CoordScale) attributes.value(DOCUMENT_SERIALIZE_COORDS_SCALE_X_THETA).toInt());
-    setCoordScaleYRadius ((CoordScale) attributes.value(DOCUMENT_SERIALIZE_COORDS_SCALE_Y_RADIUS).toInt());
-    setCoordUnitsX ((CoordUnitsNonPolarTheta) attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_X).toInt());
-    setCoordUnitsY ((CoordUnitsNonPolarTheta) attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_Y).toInt());
-    setCoordUnitsTheta ((CoordUnitsPolarTheta) attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_THETA).toInt());
-    setCoordUnitsRadius ((CoordUnitsNonPolarTheta) attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_RADIUS).toInt());
-    setCoordUnitsDate ((CoordUnitsDate) attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_DATE).toInt());
-    setCoordUnitsTime ((CoordUnitsTime) attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_TIME).toInt());
+    setCoordScaleXTheta (static_cast<CoordScale> (attributes.value(DOCUMENT_SERIALIZE_COORDS_SCALE_X_THETA).toInt()));
+    setCoordScaleYRadius (static_cast<CoordScale> (attributes.value(DOCUMENT_SERIALIZE_COORDS_SCALE_Y_RADIUS).toInt()));
+    setCoordUnitsX (static_cast<CoordUnitsNonPolarTheta> (attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_X).toInt()));
+    setCoordUnitsY (static_cast<CoordUnitsNonPolarTheta> (attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_Y).toInt()));
+    setCoordUnitsTheta (static_cast<CoordUnitsPolarTheta> (attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_THETA).toInt()));
+    setCoordUnitsRadius (static_cast<CoordUnitsNonPolarTheta> (attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_RADIUS).toInt()));
+    setCoordUnitsDate (static_cast<CoordUnitsDate> (attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_DATE).toInt()));
+    setCoordUnitsTime (static_cast<CoordUnitsTime> (attributes.value(DOCUMENT_SERIALIZE_COORDS_UNITS_TIME).toInt()));
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||

@@ -7,6 +7,7 @@
 #include "CallbackNextOrdinal.h"
 #include "Logger.h"
 #include "Point.h"
+#include <qmath.h>
 
 CallbackNextOrdinal::CallbackNextOrdinal(const QString &curveName) :
   m_curveName (curveName),
@@ -28,7 +29,7 @@ CallbackSearchReturn CallbackNextOrdinal::callback (const QString &curveName,
 
 double CallbackNextOrdinal::nextOrdinal () const
 {
-  int nextOrdinal = m_maxOrdinalUsed + 1;
+  int nextOrdinal = qFloor (m_maxOrdinalUsed) + 1;
 
   LOG4CPP_INFO_S ((*mainCat)) << "CallbackNextOrdinal::nextOrdinal"
                               << " ordinal=" << nextOrdinal;

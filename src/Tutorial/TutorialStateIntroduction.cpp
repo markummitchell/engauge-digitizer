@@ -63,12 +63,12 @@ void TutorialStateIntroduction::end ()
   delete m_text2;
   delete m_next;
 
-  m_title = 0;
-  m_background = 0;
-  m_text0 = 0;
-  m_text1 = 0;
-  m_text2 = 0;
-  m_next = 0;
+  m_title = nullptr;
+  m_background = nullptr;
+  m_text0 = nullptr;
+  m_text1 = nullptr;
+  m_text2 = nullptr;
+  m_next = nullptr;
 }
 
 void TutorialStateIntroduction::slotNext ()

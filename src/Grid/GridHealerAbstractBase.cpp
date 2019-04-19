@@ -112,7 +112,7 @@ const MutualPairHalves &GridHealerAbstractBase::mutualPairHalvesBelow () const
 int GridHealerAbstractBase::pixelCountInRegionThreshold (const DocumentModelGridRemoval &modelGridRemoval)
 {
   // For now we will use the close distance as the minimum pixel count
-  return modelGridRemoval.closeDistance();
+  return qFloor (modelGridRemoval.closeDistance());
 }
 
 bool GridHealerAbstractBase::pointsAreGood (const QImage &image,
@@ -135,6 +135,6 @@ void GridHealerAbstractBase::saveGapSeparation (double gapSeparation)
 {
   // Right triangle with one edge crossing the gap (separation value) and hypotenuse giving
   // maximum point separation (closest distance) gives the maximum horizontal separation
-  m_maxPointSeparation = qSqrt (qPow (modelGridRemoval().closeDistance(), 2) -
-                                qPow (gapSeparation, 2));
+  m_maxPointSeparation = qFloor (qSqrt (qPow (modelGridRemoval().closeDistance(), 2) -
+                                        qPow (gapSeparation, 2)));
 }

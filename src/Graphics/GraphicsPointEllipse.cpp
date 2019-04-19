@@ -16,7 +16,7 @@ GraphicsPointEllipse::GraphicsPointEllipse(GraphicsPoint &graphicsPoint,
                                            const QRect &rect) :
   QGraphicsEllipseItem (rect),
   m_graphicsPoint (graphicsPoint),
-  m_shadow (0)
+  m_shadow (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsPointEllipse::GraphicsPointEllipse";
 }
@@ -62,7 +62,7 @@ void GraphicsPointEllipse::setOpacityForSubtree (double opacity)
   // Set this item
   setOpacity (opacity);
 
-  if (m_shadow != 0) {
+  if (m_shadow != nullptr) {
 
     // Set the child item. Opacity < MAX_OPACITY is too dark so child is set to totally transparent
     m_shadow->setOpacity (opacity < MAX_OPACITY ? 0.0 : opacity);

@@ -19,7 +19,7 @@
 #include "Xml.h"
 
 CmdStackShadow::CmdStackShadow() :
-  m_mainWindow (0)
+  m_mainWindow (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdStackShadow::CmdStackShadow";
 }
@@ -73,18 +73,18 @@ void CmdStackShadow::slotRedo ()
     // Remove this command from the shadow command stack
     m_cmdList.pop_front();
 
-    if (m_mainWindow != 0) {
+    if (m_mainWindow != nullptr) {
 
       CmdRedoForTest *cmdRedoForTest = dynamic_cast<CmdRedoForTest*> (cmd);
       CmdUndoForTest *cmdUndoForTest = dynamic_cast<CmdUndoForTest*> (cmd);
 
-      if (cmdRedoForTest != 0) {
+      if (cmdRedoForTest != nullptr) {
 
         // Redo command is a special case. Redo of this command is equivalent to redo of the last command on the command stack
         // (which will never be CmdRedoForTest or CmdUndoForTest since they are never passed onto that command stack)
         emit (signalRedo ());
 
-      } else if (cmdUndoForTest != 0) {
+      } else if (cmdUndoForTest != nullptr) {
 
         // Undo command is a special case. Redo of this command is equivalent to undo of the last command on the command stack
         // (which will never be CmdRedoForTest or CmdUndoForTest since they are never passed onto that command stack)

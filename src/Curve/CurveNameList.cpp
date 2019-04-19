@@ -179,7 +179,7 @@ unsigned int CurveNameList::numPointsForSelectedCurves (const QList<unsigned int
 {
   int numPoints = 0;
   for (int i = 0; i < rowsSelected.count(); i++) {
-    int row = rowsSelected [i];
+    int row = signed (rowsSelected [i]);
 
     QModelIndex idx = index (row, CURVE_NAME_LIST_COLUMN_CURRENT);
     QString currentCurve = data (idx).toString ();
@@ -193,7 +193,7 @@ unsigned int CurveNameList::numPointsForSelectedCurves (const QList<unsigned int
     }
   }
 
-  return numPoints;
+  return unsigned (numPoints);
 }
 
 bool CurveNameList::removeRows (int row,

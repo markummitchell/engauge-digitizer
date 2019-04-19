@@ -84,8 +84,13 @@ protected:
 
 private:
 
-  bool anyPointsRepeatPair (const CoordPairVector &vector) const;
-  bool anyPointsRepeatSingle (const CoordSingleVector &vector) const;
+  /// Check for repeating points. Epsilon test is used to prevent floating point comparison compiler warning for -Wall
+  bool anyPointsRepeatPair (const CoordPairVector &vector,
+                            double epsilon) const;
+  
+  /// Check for repeating points. Epsilon test is used to prevent floating point comparison compiler warning for -Wall
+  bool anyPointsRepeatSingle (const CoordSingleVector &vector,
+                              double epsilon) const;
   CallbackSearchReturn callbackRequire2AxisPoints (const QPointF &posScreen,
                                                    const QPointF &posGraph);
   CallbackSearchReturn callbackRequire3AxisPoints (const QPointF &posScreen,

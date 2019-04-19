@@ -39,8 +39,8 @@ ViewProfileDivider::ViewProfileDivider (QGraphicsScene &scene,
                      PADDLE_HEIGHT),
   m_view (view),
   m_yCenter (yCenter),
-  m_divider (0),
-  m_shadedArea (0),
+  m_divider (nullptr),
+  m_shadedArea (nullptr),
   m_sceneWidth (sceneWidth),
   m_sceneHeight (sceneHeight),
   m_isLowerBoundary (isLowerBoundary)
@@ -92,7 +92,7 @@ QVariant ViewProfileDivider::itemChange (GraphicsItemChange change, const QVaria
     QPointF newPos = QPointF (value.toPointF().x(), 0.0) + m_startDragPos;
     double newX = newPos.x();
     newX = qMax (newX, 0.0);
-    newX = qMin (newX, (double) m_sceneWidth);
+    newX = qMin (newX, double (m_sceneWidth));
     newPos.setX (newX);
     newPos -= m_startDragPos; // Change from absolute coordinates back to relative coordinates
 

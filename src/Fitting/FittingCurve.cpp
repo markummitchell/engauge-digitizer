@@ -32,7 +32,7 @@ FittingCurve::FittingCurve (const FittingCurveCoefficients &fittingCoef,
     for (int i = 0; i < NUM_POINTS; i++) {
 
       // Compute (x,y) point in graph coordinates
-      double s = (double) i / (double) (NUM_POINTS - 1);
+      double s = double (i) / double (NUM_POINTS - 1);
       double x = xMin + s * (xMax - xMin);
       double y = yFromCoefficientsAndX (fittingCoef,
                                         x);

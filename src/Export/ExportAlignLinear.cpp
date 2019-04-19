@@ -22,7 +22,7 @@ ExportAlignLinear::ExportAlignLinear(double xMin,
   // are D=0 for 0.1 to 0.99..., D=1 for 1 to 9.99..., D=2 for 10 to 99.999...
   double absMin = qAbs (xMin);
   double absMax = qAbs (xMax);
-  int D = (int) (log10 (qMax (absMin, absMax)) + EPSILON);
+  int D = qFloor (log10 (qMax (absMin, absMax)) + EPSILON);
 
   // Number of significant digits S will start at 1 and then get increased until
   //    rounded(xMin) + 10^R <= xMax
@@ -65,7 +65,7 @@ double ExportAlignLinear::roundToDigit (double value,
                                         int digit) const
 {
   double scale = qPow (10.0, digit);
-  int valueRoundedWithWrongScale = (int) (value / scale + EPSILON);
+  int valueRoundedWithWrongScale = qFloor (value / scale + EPSILON);
   double valueRounded = valueRoundedWithWrongScale * scale;
 
   return valueRounded;

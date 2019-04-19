@@ -191,7 +191,7 @@ void GraphicsView::keyPressEvent (QKeyEvent *event)
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsView::keyPressEvent";
 
   // Intercept up/down/left/right if any items are selected
-  Qt::Key key = (Qt::Key) event->key();
+  Qt::Key key = static_cast<Qt::Key> (event->key());
 
   bool atLeastOneSelectedItem = (scene ()->selectedItems ().count () > 0);
 
@@ -260,7 +260,7 @@ void GraphicsView::mouseReleaseEvent (QMouseEvent *event)
   // Send a signal, unless this is a right click. We still send if out of bounds since
   // a click-and-drag often ends out of bounds (and user is unlikely to expect different
   // behavior when endpoint is outside, versus inside, the image boundary)
-  int bitFlag = (event->buttons () & Qt::RightButton);
+  int bitFlag = (unsigned (event->buttons ()) & Qt::RightButton);
   bool isRightClick = (bitFlag != 0);
 
   if (!isRightClick) {
@@ -282,7 +282,7 @@ QStringList GraphicsView::pointIdentifiersFromSelection (const QList<QGraphicsIt
   for (itr = items.begin(); itr != items.end(); itr++) {
 
     QGraphicsItem *item = *itr;
-    GraphicsItemType type = (GraphicsItemType) item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt ();
+    GraphicsItemType type = static_cast<GraphicsItemType> (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt ());
     ENGAUGE_ASSERT (type == GRAPHICS_ITEM_TYPE_POINT);
 
     QString pointIdentifier = item->data (DATA_KEY_IDENTIFIER).toString ();

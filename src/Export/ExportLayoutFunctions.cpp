@@ -9,14 +9,17 @@
 
 QString exportLayoutFunctionsToString (ExportLayoutFunctions exportLayoutFunctions)
 {
+  QString rtn;
+
   switch (exportLayoutFunctions) {
     case EXPORT_LAYOUT_ALL_PER_LINE:
-      return QObject::tr ("AllPerLine");
+      rtn = QObject::tr ("AllPerLine");
+      break;
 
     case EXPORT_LAYOUT_ONE_PER_LINE:
-      return QObject::tr ("OnePerLine");
-
-    default:
-      return QObject::tr ("Unknown");
+      rtn = QObject::tr ("OnePerLine");
+      break;
   }
+
+  return rtn;
 }

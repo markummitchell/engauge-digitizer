@@ -121,7 +121,7 @@ void DlgImportAdvanced::load(CmdMediator & /* cmdMediator */)
 
 unsigned int DlgImportAdvanced::numberCoordSystem () const
 {
-  return m_spinCoordSystemCount->value ();
+  return unsigned (m_spinCoordSystemCount->value ());
 }
 
 void DlgImportAdvanced::setSmallDialogs(bool /* smallDialogs */)

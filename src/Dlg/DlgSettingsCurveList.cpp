@@ -32,7 +32,7 @@ DlgSettingsCurveList::DlgSettingsCurveList(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Curve List"),
                            "DlgSettingsCurveList",
                            mainWindow),
-  m_curveNameList (0)
+  m_curveNameList (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveList::DlgSettingsCurveList";
 
@@ -189,7 +189,7 @@ void DlgSettingsCurveList::insertCurveName (int row,
   m_curveNameList->insertRow (row,
                               curveNameNew,
                               curveNameOriginal,
-                              numPoints);
+                              unsigned (numPoints));
 }
 
 void DlgSettingsCurveList::load (CmdMediator &cmdMediator)
@@ -358,7 +358,7 @@ unsigned int DlgSettingsCurveList::numPointsForSelectedCurves () const
   for (int i = 0; i < m_listCurves->selectionModel()->selectedIndexes ().count (); i++) {
 
     int row = m_listCurves->selectionModel()->selectedIndexes ().at (i).row ();
-    rowsSelected << row;
+    rowsSelected << unsigned (row);
   }
 
   return m_curveNameList->numPointsForSelectedCurves (rowsSelected);
@@ -496,7 +496,7 @@ void DlgSettingsCurveList::slotRemove ()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveList::slotRemove";
 
   // Count the number of curve points to be deleted
-  int numPoints = numPointsForSelectedCurves ();
+  int numPoints = signed (numPointsForSelectedCurves ());
 
   int rtn = QMessageBox::Ok;
   if (numPoints > 0) {
@@ -514,7 +514,7 @@ void DlgSettingsCurveList::slotRemove ()
             .arg (tr ("points. Continue?"));
     }
 
-    rtn = QMessageBox::warning (0,
+    rtn = QMessageBox::warning (nullptr,
                                 tr ("Curves With Points"),
                                 msg,
                                 QMessageBox::Ok,

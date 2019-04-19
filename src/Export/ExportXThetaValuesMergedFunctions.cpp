@@ -263,7 +263,7 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::xThetaValues () const
   if (m_modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_PERIODIC) {
 
     // Special case that occurs when there are no points
-    if (m_modelExport.pointsIntervalFunctions() == 0) {
+    if (qAbs (m_modelExport.pointsIntervalFunctions()) <= 0) {
 
       ExportValuesXOrY empty;
       return empty;

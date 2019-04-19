@@ -127,7 +127,7 @@ Document::Document (const QString &fileName) :
         // Close and deactivate
         file->close ();
         delete file;
-        file = 0;
+        file = nullptr;
 
       } else {
 
@@ -638,7 +638,7 @@ void Document::loadVersions7AndUp (QFile *file)
 
       QXmlStreamAttributes attributes = reader.attributes();
       if (attributes.hasAttribute (DOCUMENT_SERIALIZE_AXES_POINTS_REQUIRED)) {
-        m_documentAxesPointsRequired = (DocumentAxesPointsRequired) attributes.value (DOCUMENT_SERIALIZE_AXES_POINTS_REQUIRED).toInt();
+        m_documentAxesPointsRequired = static_cast<DocumentAxesPointsRequired> (attributes.value (DOCUMENT_SERIALIZE_AXES_POINTS_REQUIRED).toInt());
       } else {
         m_documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
       }
@@ -1086,7 +1086,7 @@ int Document::versionFromFile (QFile *file) const
       if (attributes.contains (DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER)) {
 
         QDomElement elem = node.toElement();
-        version = (int) elem.attribute (DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER).toDouble();
+        version = qFloor (elem.attribute (DOCUMENT_SERIALIZE_APPLICATION_VERSION_NUMBER).toDouble());
       }
     }
   }

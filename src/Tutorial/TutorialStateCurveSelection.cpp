@@ -9,6 +9,7 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <qmath.h>
 #include "TutorialButton.h"
 #include "TutorialDlg.h"
 #include "TutorialStateCurveSelection.h"
@@ -60,8 +61,8 @@ void TutorialStateCurveSelection::begin ()
 
   m_colorFilter = new TutorialButton (tr ("Color Filter Settings"),
                                       context().tutorialDlg().scene());
-  m_colorFilter->setGeometry (QPoint (backgroundSize.width () / 2.0 - m_colorFilter->size ().width () / 2,
-                                      backgroundSize.height () - buttonMargin () - m_colorFilter->size ().height ()));
+  m_colorFilter->setGeometry (QPoint (qFloor (backgroundSize.width () / 2.0 - m_colorFilter->size ().width () / 2),
+                                      qFloor (backgroundSize.height () - buttonMargin () - m_colorFilter->size ().height ())));
   connect (m_colorFilter, SIGNAL (signalTriggered ()), this, SLOT (slotColorFilter ()));
 
   m_next = new TutorialButton (tr ("Next"),
@@ -93,15 +94,15 @@ void TutorialStateCurveSelection::end ()
   delete m_colorFilter;
   delete m_previous;
 
-  m_title = 0;
-  m_background = 0;
-  m_text0 = 0;
-  m_text1 = 0;
-  m_text2 = 0;
-  m_text3 = 0;
-  m_next = 0;
-  m_colorFilter = 0;
-  m_previous = 0;
+  m_title = nullptr;
+  m_background = nullptr;
+  m_text0 = nullptr;
+  m_text1 = nullptr;
+  m_text2 = nullptr;
+  m_text3 = nullptr;
+  m_next = nullptr;
+  m_colorFilter = nullptr;
+  m_previous = nullptr;
 }
 
 void TutorialStateCurveSelection::slotColorFilter ()

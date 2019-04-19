@@ -316,7 +316,7 @@ void Point::loadXml(QXmlStreamReader &reader)
     }
 
     m_identifier = fixUnderscores (attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER).toString());
-    m_identifierIndex = attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX).toInt();
+    m_identifierIndex = attributes.value(DOCUMENT_SERIALIZE_POINT_IDENTIFIER_INDEX).toUInt();
     m_isAxisPoint = (isAxisPoint == DOCUMENT_SERIALIZE_BOOL_TRUE);
     m_hasPosGraph = false;
     m_posGraph.setX (MISSING_POSGRAPH_VALUE);

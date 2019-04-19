@@ -165,12 +165,12 @@ void DocumentModelGridRemoval::loadXml(QXmlStreamReader &reader)
     setStable (stableValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
     setRemoveDefinedGridLines (definedValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
     setCloseDistance (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_CLOSE_DISTANCE).toDouble());
-    setGridCoordDisableX ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_X).toInt());
+    setGridCoordDisableX (static_cast<GridCoordDisable> (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_X).toInt()));
     setCountX (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_X).toInt());
     setStartX (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_X).toDouble());
     setStepX (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_X).toDouble());
     setStopX (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STOP_X).toDouble());
-    setGridCoordDisableY ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_Y).toInt());
+    setGridCoordDisableY (static_cast<GridCoordDisable> (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COORD_DISABLE_Y).toInt()));
     setCountY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_COUNT_Y).toInt());
     setStartY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_START_Y).toDouble());
     setStepY (attributes.value(DOCUMENT_SERIALIZE_GRID_REMOVAL_STEP_Y).toDouble());

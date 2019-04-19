@@ -7,6 +7,7 @@
 #include "ColorConstants.h"
 #include "ColorFilterSettings.h"
 #include "ColorFilterSettingsStrategyValue.h"
+#include <qmath.h>
 #include <QTextStream>
 
 ColorFilterSettingsStrategyValue::ColorFilterSettingsStrategyValue ()
@@ -19,14 +20,14 @@ ColorFilterSettingsStrategyValue::~ColorFilterSettingsStrategyValue ()
 
 double ColorFilterSettingsStrategyValue::high (const ColorFilterSettings &colorFilterSettings) const
 {
-  return (double) (colorFilterSettings.valueHigh () - VALUE_MIN) /
-    (double) (VALUE_MAX - VALUE_MIN); 
+  return double (colorFilterSettings.valueHigh () - VALUE_MIN) /
+    double (VALUE_MAX - VALUE_MIN);
 }
 
 double ColorFilterSettingsStrategyValue::low (const ColorFilterSettings &colorFilterSettings) const
 {
-  return (double) (colorFilterSettings.valueLow () - VALUE_MIN) /
-    (double) (VALUE_MAX - VALUE_MIN);
+  return double (colorFilterSettings.valueLow () - VALUE_MIN) /
+    double (VALUE_MAX - VALUE_MIN);
 }
 
 void ColorFilterSettingsStrategyValue::printStream (const ColorFilterSettings &colorFilterSettings,
@@ -40,11 +41,11 @@ void ColorFilterSettingsStrategyValue::printStream (const ColorFilterSettings &c
 void ColorFilterSettingsStrategyValue::setHigh (ColorFilterSettings &colorFilterSettings,
                                                 double s0To1)
 {
-  colorFilterSettings.setValueHigh (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN));  
+  colorFilterSettings.setValueHigh (qFloor (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN)));
 }
 
 void ColorFilterSettingsStrategyValue::setLow (ColorFilterSettings &colorFilterSettings,
                                                double s0To1)
 {
-  colorFilterSettings.setValueLow (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN));
+  colorFilterSettings.setValueLow (qFloor (VALUE_MIN + s0To1 * (VALUE_MAX - VALUE_MIN)));
 }

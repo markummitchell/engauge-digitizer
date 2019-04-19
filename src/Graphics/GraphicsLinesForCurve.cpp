@@ -118,10 +118,10 @@ QPainterPath GraphicsLinesForCurve::drawLinesSmooth (const LineStyle &lineStyle,
 
       SplineDrawerOperation operation = splineDrawer.segmentOperation (segment);
 
-      QPointF p1 (spline.p1 (segment).x(),
-                  spline.p1 (segment).y());
-      QPointF p2 (spline.p2 (segment).x(),
-                  spline.p2 (segment).y());
+      QPointF p1 (spline.p1 (unsigned (segment)).x(),
+                  spline.p1 (unsigned (segment)).y());
+      QPointF p2 (spline.p2 (unsigned (segment)).x(),
+                  spline.p2 (unsigned (segment)).y());
 
       switch (operation) {
       case SPLINE_DRAWER_ENUM_VISIBLE_DRAW:
@@ -286,7 +286,7 @@ bool GraphicsLinesForCurve::needOrdinalRenumbering () const
 void GraphicsLinesForCurve::printStream (QString indentation,
                                          QTextStream &str) const
 {
-  DataKey type = (DataKey) data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt();
+  DataKey type = static_cast<DataKey> (data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt());
 
   str << indentation << "GraphicsLinesForCurve=" << m_curveName
       << " dataIdentifier=" << data (DATA_KEY_IDENTIFIER).toString().toLatin1().data()
@@ -324,6 +324,8 @@ void GraphicsLinesForCurve::removeTemporaryPointIfExists()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::removeTemporaryPointIfExists";
 
+  // Compiler warning about this loop only iterating once is not an issue since there
+  // is never more than one temporary point
   OrdinalToGraphicsPoint::iterator itr;
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
@@ -370,7 +372,7 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
                                << " curve=" << m_curveName.toLatin1().data()
                                << " pointCount=" << m_graphicsPoints.count();
 
-  GraphicsPoint *graphicsPoint = 0;
+  GraphicsPoint *graphicsPoint = nullptr;
   if (m_graphicsPoints.contains (point.ordinal())) {
 
     graphicsPoint = m_graphicsPoints [point.ordinal()];

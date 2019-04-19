@@ -37,7 +37,7 @@ QString FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSeconds (doub
   value = qAbs (value);
   int degrees = qFloor (value);
   value -= degrees;
-  int minutes = value * DEGREES_TO_MINUTES;
+  int minutes = qFloor (value * DEGREES_TO_MINUTES);
   value -= minutes * MINUTES_TO_DEGREES;
   double seconds = value * DEGREES_TO_SECONDS;
   degrees *= (negative ? -1.0 : 1.0);
@@ -63,7 +63,7 @@ QString FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSecondsNsew (
   value = qAbs (value);
   int degrees = qFloor (value);
   value -= degrees;
-  int minutes = value * DEGREES_TO_MINUTES;
+  int minutes = qFloor (value * DEGREES_TO_MINUTES);
   value -= minutes * MINUTES_TO_DEGREES;
   double seconds = value * DEGREES_TO_SECONDS;
 

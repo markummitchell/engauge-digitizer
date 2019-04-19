@@ -33,8 +33,8 @@ CallbackSearchReturn CallbackScaleBar::callback (const QString &curveName,
 
   if (curveName == AXIS_CURVE_NAME) {
 
-    bool isNonzeroX = (point.posGraph ().x () != 0);
-    bool isNonzeroY = (point.posGraph ().y () != 0);
+    bool isNonzeroX = (qAbs (point.posGraph ().x ()) > 0);
+    bool isNonzeroY = (qAbs (point.posGraph ().y ()) > 0);
     
     if (isNonzeroX || isNonzeroY) {
 

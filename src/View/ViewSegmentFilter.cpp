@@ -9,6 +9,7 @@
 #include "ColorFilterSettings.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
+#include <qmath.h>
 #include <QPainter>
 #include <QPixmap>
 #include "ViewSegmentFilter.h"
@@ -37,17 +38,17 @@ QColor ViewSegmentFilter::colorFromSetting (ColorFilterMode coloFilterMode,
   {
     case COLOR_FILTER_MODE_FOREGROUND:
       {
-        double s = (double) (foreground - FOREGROUND_MIN) / (double) (FOREGROUND_MAX - FOREGROUND_MIN);
+        double s = double (foreground - FOREGROUND_MIN) / double (FOREGROUND_MAX - FOREGROUND_MIN);
         if (qGray (m_rgbBackground.rgb ()) < 127) {
           // Go from blackish to white
-          r = s * 255;
-          g = s * 255;
-          b = s * 255;
+          r = qFloor (s * 255);
+          g = qFloor (s * 255);
+          b = qFloor (s * 255);
         } else {
           // Go from whitish to black
-          r = (1.0 - s) * 255;
-          g = (1.0 - s) * 255;
-          b = (1.0 - s) * 255;
+          r = qFloor ((1.0 - s) * 255);
+          g = qFloor ((1.0 - s) * 255);
+          b = qFloor ((1.0 - s) * 255);
         }
       }
       break;
@@ -56,24 +57,24 @@ QColor ViewSegmentFilter::colorFromSetting (ColorFilterMode coloFilterMode,
       {
         // red-green and green-blue like ViewProfileScale::paintHue
 
-        int HUE_THRESHOLD_LOW = 0.666 * HUE_MIN + 0.333 * HUE_MAX;
-        int HUE_THRESHOLD_HIGH = 0.333 * HUE_MIN + 0.666 * HUE_MAX;
+        int HUE_THRESHOLD_LOW = qFloor (0.666 * HUE_MIN + 0.333 * HUE_MAX);
+        int HUE_THRESHOLD_HIGH = qFloor (0.333 * HUE_MIN + 0.666 * HUE_MAX);
 
         if (hue < HUE_THRESHOLD_LOW) {
           // 0-0.333 is red-green
-          double s = (double) (hue - HUE_MIN) / (double) (HUE_THRESHOLD_LOW - HUE_MIN);
-          r = (1.0 - s) * 255;
-          g = s * 255;
+          double s = double (hue - HUE_MIN) / double (HUE_THRESHOLD_LOW - HUE_MIN);
+          r = qFloor ((1.0 - s) * 255);
+          g = qFloor (s * 255);
         } else if (hue < HUE_THRESHOLD_HIGH) {
           // 0.333-0.666 is green-blue
-          double s = (double) (hue - HUE_THRESHOLD_LOW) / (double) (HUE_THRESHOLD_HIGH - HUE_THRESHOLD_LOW);
-          g = (1.0 - s) * 255;
-          b = s * 255;
+          double s = double (hue - HUE_THRESHOLD_LOW) / double (HUE_THRESHOLD_HIGH - HUE_THRESHOLD_LOW);
+          g = qFloor ((1.0 - s) * 255);
+          b = qFloor (s * 255);
         } else {
           // 0.666-1 is blue-red
-          double s = (double) (hue - HUE_THRESHOLD_HIGH) / (double) (HUE_MAX - HUE_THRESHOLD_HIGH);
-          b = (1.0 - s) * 255;
-          r = s * 255;
+          double s = double (hue - HUE_THRESHOLD_HIGH) / double (HUE_MAX - HUE_THRESHOLD_HIGH);
+          b = qFloor ((1.0 - s) * 255);
+          r = qFloor (s * 255);
         }
       }
       break;
@@ -82,10 +83,10 @@ QColor ViewSegmentFilter::colorFromSetting (ColorFilterMode coloFilterMode,
       {
         // black-white like ViewProfileScale::paintIntensity
 
-        double s = (double) (intensity - INTENSITY_MIN) / (double) (INTENSITY_MAX - INTENSITY_MIN);
-        r = s * 255;
-        g = s * 255;
-        b = s * 255;
+        double s = double (intensity - INTENSITY_MIN) / double (INTENSITY_MAX - INTENSITY_MIN);
+        r = qFloor (s * 255);
+        g = qFloor (s * 255);
+        b = qFloor (s * 255);
       }
       break;
 
@@ -93,10 +94,10 @@ QColor ViewSegmentFilter::colorFromSetting (ColorFilterMode coloFilterMode,
       {
         // white-red like ViewProfileScale::paintSaturation
 
-        double s = (double) (saturation - SATURATION_MIN) / (double) (SATURATION_MAX - SATURATION_MIN);
-        r = 255;
-        g = (1.0 - s) * 255;
-        b = (1.0 - s) * 255;
+        double s = double (saturation - SATURATION_MIN) / double (SATURATION_MAX - SATURATION_MIN);
+        r = qFloor (255);
+        g = qFloor ((1.0 - s) * 255);
+        b = qFloor ((1.0 - s) * 255);
       }
       break;
 
@@ -104,10 +105,10 @@ QColor ViewSegmentFilter::colorFromSetting (ColorFilterMode coloFilterMode,
       {
         // black-red like ViewProfileScale::paintValue
 
-        double s = (double) (value - VALUE_MIN) / (double) (VALUE_MAX - VALUE_MIN);
-        r = s * 255;
-        g = 0;
-        b = 0;
+        double s = double (value - VALUE_MIN) / double (VALUE_MAX - VALUE_MIN);
+        r = qFloor (s * 255);
+        g = qFloor (0);
+        b = qFloor (0);
       }
       break;
 

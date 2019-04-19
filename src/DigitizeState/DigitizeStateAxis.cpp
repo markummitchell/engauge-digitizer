@@ -56,7 +56,7 @@ void DigitizeStateAxis::createTemporaryPoint (CmdMediator *cmdMediator,
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateAxis::createTemporaryPoint";
 
-  GeometryWindow *NULL_GEOMETRY_WINDOW = 0;
+  GeometryWindow *NULL_GEOMETRY_WINDOW = nullptr;
 
   // Temporary point that user can see while DlgEditPointAxis is active
   const Curve &curveAxes = cmdMediator->curveAxes();
@@ -131,7 +131,7 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
 
   if (context().mainWindow().transformIsDefined()) {
 
-    QMessageBox::warning (0,
+    QMessageBox::warning (nullptr,
                           QObject::tr ("Engauge Digitizer"),
                           QObject::tr ("Three axis points have been defined, and no more are needed or allowed."));
 
@@ -172,7 +172,7 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
 
       if (isError) {
 
-        QMessageBox::warning (0,
+        QMessageBox::warning (nullptr,
                               QObject::tr ("Engauge Digitizer"),
                               errorMessage);
 

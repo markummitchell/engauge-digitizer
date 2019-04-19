@@ -28,11 +28,11 @@ LineStyle::LineStyle ()
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   settings.beginGroup (SETTINGS_GROUP_CURVE_AXES);
   m_width = settings.value (SETTINGS_CURVE_LINE_WIDTH,
-                            DEFAULT_LINE_WIDTH_AXES).toInt();
-  m_paletteColor = (ColorPalette) settings.value (SETTINGS_CURVE_LINE_COLOR,
-                                                  DEFAULT_LINE_COLOR_AXES).toInt();
-  m_curveConnectAs = (CurveConnectAs) settings.value (SETTINGS_CURVE_LINE_CONNECT_AS,
-                                                      DEFAULT_LINE_CONNECT_AS_AXES).toInt();
+                            DEFAULT_LINE_WIDTH_AXES).toUInt();
+  m_paletteColor = static_cast<ColorPalette> (settings.value (SETTINGS_CURVE_LINE_COLOR,
+                                                              DEFAULT_LINE_COLOR_AXES).toInt());
+  m_curveConnectAs = static_cast<CurveConnectAs> (settings.value (SETTINGS_CURVE_LINE_CONNECT_AS,
+                                                                  DEFAULT_LINE_CONNECT_AS_AXES).toInt());
 }
 
 LineStyle::LineStyle (unsigned int width,
@@ -71,12 +71,12 @@ LineStyle LineStyle::defaultAxesCurve ()
   settings.beginGroup (SETTINGS_GROUP_CURVE_AXES);
   int width = settings.value (SETTINGS_CURVE_LINE_WIDTH,
                               DEFAULT_LINE_WIDTH_AXES).toInt();
-  ColorPalette color = (ColorPalette) settings.value (SETTINGS_CURVE_LINE_COLOR,
-                                                      DEFAULT_LINE_COLOR_AXES).toInt();
-  CurveConnectAs connectAs = (CurveConnectAs) settings.value (SETTINGS_CURVE_LINE_CONNECT_AS,
-                                                              DEFAULT_LINE_CONNECT_AS_AXES).toInt();
+  ColorPalette color = static_cast<ColorPalette> (settings.value (SETTINGS_CURVE_LINE_COLOR,
+                                                                  DEFAULT_LINE_COLOR_AXES).toInt());
+  CurveConnectAs connectAs = static_cast<CurveConnectAs> (settings.value (SETTINGS_CURVE_LINE_CONNECT_AS,
+                                                                          DEFAULT_LINE_CONNECT_AS_AXES).toInt());
 
-  return LineStyle (width,
+  return LineStyle (unsigned (width),
                     color,
                     connectAs);
 }
@@ -91,12 +91,12 @@ LineStyle LineStyle::defaultGraphCurve (int index)
   settings.beginGroup (groupName);
   int width = settings.value (SETTINGS_CURVE_LINE_WIDTH,
                               DEFAULT_LINE_WIDTH_GRAPH).toInt();
-  ColorPalette color = (ColorPalette) settings.value (SETTINGS_CURVE_LINE_COLOR,
-                                                      DEFAULT_LINE_COLOR_GRAPH).toInt();
-  CurveConnectAs connectAs = (CurveConnectAs) settings.value (SETTINGS_CURVE_LINE_CONNECT_AS,
-                                                              DEFAULT_LINE_CONNECT_AS_GRAPH).toInt();
+  ColorPalette color = static_cast<ColorPalette> (settings.value (SETTINGS_CURVE_LINE_COLOR,
+                                                                  DEFAULT_LINE_COLOR_GRAPH).toInt());
+  CurveConnectAs connectAs = static_cast<CurveConnectAs> (settings.value (SETTINGS_CURVE_LINE_CONNECT_AS,
+                                                                          DEFAULT_LINE_CONNECT_AS_GRAPH).toInt());
 
-  return LineStyle (width,
+  return LineStyle (unsigned (width),
                     color,
                     connectAs);
 }
@@ -112,8 +112,8 @@ void LineStyle::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_LINE_STYLE_CONNECT_AS)) {
 
     setWidth (attributes.value(DOCUMENT_SERIALIZE_LINE_STYLE_WIDTH).toInt());
-    setPaletteColor ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_LINE_STYLE_COLOR).toInt());
-    setCurveConnectAs ((CurveConnectAs) attributes.value(DOCUMENT_SERIALIZE_LINE_STYLE_CONNECT_AS).toInt());
+    setPaletteColor (static_cast<ColorPalette> (attributes.value(DOCUMENT_SERIALIZE_LINE_STYLE_COLOR).toInt()));
+    setCurveConnectAs (static_cast<CurveConnectAs> (attributes.value(DOCUMENT_SERIALIZE_LINE_STYLE_CONNECT_AS).toInt()));
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
@@ -167,7 +167,7 @@ void LineStyle::setPaletteColor (ColorPalette paletteColor)
 
 void LineStyle::setWidth (int width)
 {
-  m_width = width;
+  m_width = unsigned (width);
 }
 
 unsigned int LineStyle::width () const

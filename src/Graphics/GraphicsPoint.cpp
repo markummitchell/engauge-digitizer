@@ -37,10 +37,10 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
                              GeometryWindow *geometryWindow) :
   GraphicsPointAbstractBase (),
   m_scene (scene),
-  m_graphicsItemEllipse (0),
-  m_shadowZeroWidthEllipse (0),
-  m_graphicsItemPolygon (0),
-  m_shadowZeroWidthPolygon (0),
+  m_graphicsItemEllipse (nullptr),
+  m_shadowZeroWidthEllipse (nullptr),
+  m_graphicsItemPolygon (nullptr),
+  m_shadowZeroWidthPolygon (nullptr),
   m_identifier (identifier),
   m_posScreen (posScreen),
   m_color (color),
@@ -64,10 +64,10 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
                              GeometryWindow *geometryWindow) :
   GraphicsPointAbstractBase (),
   m_scene (scene),
-  m_graphicsItemEllipse (0),
-  m_shadowZeroWidthEllipse (0),
-  m_graphicsItemPolygon (0),
-  m_shadowZeroWidthPolygon (0),
+  m_graphicsItemEllipse (nullptr),
+  m_shadowZeroWidthEllipse (nullptr),
+  m_graphicsItemPolygon (nullptr),
+  m_shadowZeroWidthPolygon (nullptr),
   m_identifier (identifier),
   m_posScreen (posScreen),
   m_color (color),
@@ -86,15 +86,15 @@ GraphicsPoint::~GraphicsPoint()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::~GraphicsPoint";
 
-  if (m_graphicsItemEllipse == 0) {
+  if (m_graphicsItemEllipse == nullptr) {
 
     QGraphicsScene *scene = m_graphicsItemPolygon->scene();
 
     // Since m_shadowZeroWidthPolygon is a child of m_graphicsItemPolygon, removing the parent removes both
     scene->removeItem (m_graphicsItemPolygon);
     delete m_graphicsItemPolygon;
-    m_graphicsItemPolygon = 0;
-    m_shadowZeroWidthPolygon = 0;
+    m_graphicsItemPolygon = nullptr;
+    m_shadowZeroWidthPolygon = nullptr;
 
 
   } else {
@@ -104,15 +104,15 @@ GraphicsPoint::~GraphicsPoint()
     // Since m_shadowZeroWidthEllipse is a child of m_graphicsItemEllipse, removing the parent removes both
     scene->removeItem (m_graphicsItemEllipse);
     delete m_graphicsItemEllipse;
-    m_graphicsItemEllipse = 0;
-    m_shadowZeroWidthEllipse = 0;
+    m_graphicsItemEllipse = nullptr;
+    m_shadowZeroWidthEllipse = nullptr;
 
   }
 }
 
 QRectF GraphicsPoint::boundingRect () const
 {
-  if (m_graphicsItemEllipse == 0) {
+  if (m_graphicsItemEllipse == nullptr) {
     return m_graphicsItemPolygon->boundingRect ();
   } else {
     return m_graphicsItemEllipse->boundingRect ();
@@ -123,7 +123,7 @@ void GraphicsPoint::createPointEllipse (unsigned int radius)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::createPointEllipse";
 
-  const int radiusSigned = radius; // Radius must be signed before multiplying by -1 below, for Visual Studio
+  const int radiusSigned = signed (radius); // Radius must be signed before multiplying by -1 below, for Visual Studio
   m_graphicsItemEllipse = new GraphicsPointEllipse (*this,
                                                     QRect (- radiusSigned,
                                                            - radiusSigned,
@@ -142,7 +142,7 @@ void GraphicsPoint::createPointEllipse (unsigned int radius)
                                    QGraphicsItem::ItemIsMovable |
                                    QGraphicsItem::ItemSendsGeometryChanges);
   m_graphicsItemEllipse->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
-  if (m_geometryWindow != 0) {
+  if (m_geometryWindow != nullptr) {
     QObject::connect (m_graphicsItemEllipse, SIGNAL (signalPointHoverEnter (QString)), m_geometryWindow, SLOT (slotPointHoverEnter (QString)));
     QObject::connect (m_graphicsItemEllipse, SIGNAL (signalPointHoverLeave (QString)), m_geometryWindow, SLOT (slotPointHoverLeave (QString)));
   }
@@ -181,7 +181,7 @@ void GraphicsPoint::createPointPolygon (const QPolygonF &polygon)
                                    QGraphicsItem::ItemIsMovable |
                                    QGraphicsItem::ItemSendsGeometryChanges);
   m_graphicsItemPolygon->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
-  if (m_geometryWindow != 0) {
+  if (m_geometryWindow != nullptr) {
     QObject::connect (m_graphicsItemPolygon, SIGNAL (signalPointHoverEnter (QString)), m_geometryWindow, SLOT (slotPointHoverEnter (QString)));
     QObject::connect (m_graphicsItemPolygon, SIGNAL (signalPointHoverLeave (QString)), m_geometryWindow, SLOT (slotPointHoverLeave (QString)));
   }
@@ -200,7 +200,7 @@ void GraphicsPoint::createPointPolygon (const QPolygonF &polygon)
 
 QVariant GraphicsPoint::data (int key) const
 {
-  if (m_graphicsItemEllipse == 0) {
+  if (m_graphicsItemEllipse == nullptr) {
     return m_graphicsItemPolygon->data (key);
   } else {
     return m_graphicsItemEllipse->data (key);
@@ -214,7 +214,7 @@ double GraphicsPoint::highlightOpacity () const
 
 QPointF GraphicsPoint::pos () const
 {
-  if (m_graphicsItemEllipse == 0) {
+  if (m_graphicsItemEllipse == nullptr) {
     return m_graphicsItemPolygon->pos ();
   } else {
     return m_graphicsItemEllipse->pos ();
@@ -232,7 +232,7 @@ void GraphicsPoint::printStream (QString indentation,
   QString identifier;
   QString pointType;
   QPointF pos;
-  if (m_graphicsItemEllipse == 0) {
+  if (m_graphicsItemEllipse == nullptr) {
     identifier = m_graphicsItemPolygon->data (DATA_KEY_IDENTIFIER).toString ();
     pointType = "polygon";
     pos = m_graphicsItemPolygon->pos();
@@ -242,7 +242,7 @@ void GraphicsPoint::printStream (QString indentation,
     pos = m_graphicsItemEllipse->pos();
   }
 
-  DataKey type = (DataKey) data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt();
+  DataKey type = static_cast<DataKey> (data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt());
 
   str << indentation << identifier
       << " ordinalKey=" << ordinalKey
@@ -259,10 +259,10 @@ void GraphicsPoint::reset ()
 void GraphicsPoint::setData (int key, const QVariant &data)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::setData"
-                               << " key=" << dataKeyToString ((DataKey) key).toLatin1().data()
+                               << " key=" << dataKeyToString (static_cast<DataKey> (key)).toLatin1().data()
                                << " data=" << data.toString().toLatin1().data();
 
-  if (m_graphicsItemEllipse == 0) {
+  if (m_graphicsItemEllipse == nullptr) {
     m_graphicsItemPolygon->setData (key, data);
   } else {
     m_graphicsItemEllipse->setData (key, data);
@@ -280,7 +280,7 @@ void GraphicsPoint::setHighlightOpacity (double highlightOpacity)
 
 void GraphicsPoint::setPassive ()
 {
-  if (m_graphicsItemEllipse == 0) {
+  if (m_graphicsItemEllipse == nullptr) {
     m_graphicsItemPolygon->setFlag (QGraphicsItem::ItemIsFocusable, false);
     m_graphicsItemPolygon->setFlag (QGraphicsItem::ItemIsMovable, false);
     m_graphicsItemPolygon->setFlag (QGraphicsItem::ItemIsSelectable, false);
@@ -295,15 +295,15 @@ void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
 {
   // Setting pen and radius of parent graphics items below also affects the child shadows
   // (m_shadowItemPolygon and m_shadowItemEllipse)
-  if (m_graphicsItemEllipse == 0) {
+  if (m_graphicsItemEllipse == nullptr) {
     if (pointStyle.shape() == POINT_SHAPE_CIRCLE) {
 
       // Transition from non-circle to circle. Deleting parent also deletes child shadow
       delete m_graphicsItemPolygon;
-      m_graphicsItemPolygon = 0;
-      m_shadowZeroWidthPolygon = 0;
+      m_graphicsItemPolygon = nullptr;
+      m_shadowZeroWidthPolygon = nullptr;
 
-      createPointEllipse (pointStyle.radius());
+      createPointEllipse (unsigned (pointStyle.radius()));
 
     } else {
 
@@ -321,8 +321,8 @@ void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
 
       // Transition from circle to non-circlee. Deleting parent also deletes child shadow
       delete m_graphicsItemEllipse;
-      m_graphicsItemEllipse = 0;
-      m_shadowZeroWidthEllipse = 0;
+      m_graphicsItemEllipse = nullptr;
+      m_shadowZeroWidthEllipse = nullptr;
 
       createPointPolygon (pointStyle.polygon());
 
@@ -341,7 +341,7 @@ void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
 
 void GraphicsPoint::setPos (const QPointF pos)
 {
-  if (m_graphicsItemEllipse == 0) {
+  if (m_graphicsItemEllipse == nullptr) {
     m_graphicsItemPolygon->setPos (pos);
   } else {
     m_graphicsItemEllipse->setPos (pos);

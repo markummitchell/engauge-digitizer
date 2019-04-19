@@ -228,8 +228,8 @@ void DlgEditPointAxis::initializeGraphCoordinates (const double *xInitialValue,
   LOG4CPP_INFO_S ((*mainCat)) << "DlgEditPointAxis::initializeGraphCoordinates";
 
   QString xTheta, yRadius;
-  if ((xInitialValue != 0) &&
-      (yInitialValue != 0)) {
+  if ((xInitialValue != nullptr) &&
+      (yInitialValue != nullptr)) {
 
     FormatCoordsUnits format;
     format.unformattedToFormatted (*xInitialValue,

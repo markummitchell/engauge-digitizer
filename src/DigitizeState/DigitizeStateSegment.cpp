@@ -8,6 +8,7 @@
 #include "DigitizeStateContext.h"
 #include "DigitizeStateSegment.h"
 #include "EngaugeAssert.h"
+#include "GraphicsScene.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "OrdinalGenerator.h"
@@ -66,7 +67,7 @@ void DigitizeStateSegment::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::end";
 
   GraphicsScene &scene = context().mainWindow().scene();
-  SegmentFactory segmentFactory ((QGraphicsScene &) scene,
+  SegmentFactory segmentFactory (dynamic_cast<QGraphicsScene &> (scene),
                                  context().isGnuplot());
 
   segmentFactory.clearSegments(m_segments);
@@ -93,7 +94,7 @@ void DigitizeStateSegment::handleCurveChange(CmdMediator *cmdMediator)
   QImage img = context().mainWindow().imageFiltered();
 
   GraphicsScene &scene = context().mainWindow().scene();
-  SegmentFactory segmentFactory ((QGraphicsScene &) scene,
+  SegmentFactory segmentFactory (dynamic_cast<QGraphicsScene &> (scene),
                                  context().isGnuplot());
 
   segmentFactory.clearSegments (m_segments);
@@ -158,7 +159,7 @@ Segment *DigitizeStateSegment::segmentFromSegmentStart (const QPointF &posSegmen
 
   LOG4CPP_ERROR_S ((*mainCat)) << "DigitizeStateSegment::segmentFromSegmentStart";
   ENGAUGE_ASSERT (false);
-  return 0;
+  return nullptr;
 }
 
 void DigitizeStateSegment::slotMouseClickOnSegment(QPointF posSegmentStart)
@@ -173,7 +174,7 @@ void DigitizeStateSegment::slotMouseClickOnSegment(QPointF posSegmentStart)
 
   // Generate point coordinates. Nothing is created in the GraphicsScene at this point
   GraphicsScene &scene = context().mainWindow().scene();
-  SegmentFactory segmentFactory ((QGraphicsScene &) scene,
+  SegmentFactory segmentFactory (dynamic_cast<QGraphicsScene &> (scene),
                                  context().isGnuplot());
 
   QList<QPoint> points = segmentFactory.fillPoints (m_cmdMediator->document().modelSegments(),

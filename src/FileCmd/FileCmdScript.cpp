@@ -32,7 +32,7 @@ FileCmdScript::FileCmdScript(const QString &fileCmdScriptFile)
       .arg (fileCmdScriptFile)
       .arg (QObject::tr ("from directory"))
       .arg (QDir::currentPath());
-    QMessageBox::critical (0,
+    QMessageBox::critical (nullptr,
                            "Script File",
                            msg);
     exit (-1);

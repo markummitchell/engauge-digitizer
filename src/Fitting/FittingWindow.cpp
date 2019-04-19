@@ -63,13 +63,13 @@ void FittingWindow::calculateCurveFitAndStatistics ()
   FittingStatistics fittingStatistics;
 
   double mse = 0, rms = 0, rSquared = 0;
-  fittingStatistics.calculateCurveFitAndStatistics (maxOrder (),
+  fittingStatistics.calculateCurveFitAndStatistics (unsigned (maxOrder ()),
                                                     m_pointsConvenient,
                                                     m_coefficients,
                                                     mse,
                                                     rms,
                                                     rSquared,
-                                                    m_significantDigits);
+                                                    qFloor (m_significantDigits));
 
   m_lblMeanSquareError->setText (QString::number (mse));
   m_lblRootMeanSquare->setText (QString::number (rms));

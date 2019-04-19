@@ -20,13 +20,13 @@ ColorFilterStrategyIntensity::~ColorFilterStrategyIntensity ()
 double ColorFilterStrategyIntensity::pixelToZeroToOne (const QColor &pixel,
                                                        QRgb /* rgbBackground */) const
 {
-  double distance = qSqrt (pow ((double) pixel.red(), 2) +
-                           pow ((double) pixel.green(), 2) +
-                           pow ((double) pixel.blue(), 2));
+  double distance = qSqrt (pow (double (pixel.red())  , 2) +
+                           pow (double (pixel.green()), 2) +
+                           pow (double (pixel.blue()) , 2));
   return distance / qSqrt (255.0 * 255.0 + 255.0 * 255.0 + 255.0 * 255.0);
 }
 
 int ColorFilterStrategyIntensity::zeroToOneToValue (double s) const
 {
-  return INTENSITY_MIN + s * (INTENSITY_MAX - INTENSITY_MIN);
+  return qFloor (INTENSITY_MIN + s * (INTENSITY_MAX - INTENSITY_MIN));
 }

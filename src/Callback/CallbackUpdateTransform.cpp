@@ -26,9 +26,6 @@ bool CallbackUpdateTransform::transformIsDefined () const
 
   case DOCUMENT_AXES_POINTS_REQUIRED_4:
     return !isError () && (numberAxisPoints () == 4);
-
-  default:
-    ENGAUGE_ASSERT (false);
   }
 
   return !isError () && (numberAxisPoints () == 4);

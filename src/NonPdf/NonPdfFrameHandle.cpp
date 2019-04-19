@@ -9,6 +9,7 @@
 #include <QBrush>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <qmath.h>
 #include <QStyleOptionGraphicsItem>
 
 const double HANDLE_SIZE_AS_FRACTION_OF_WINDOW_SIZE = 30;
@@ -92,8 +93,8 @@ QVariant NonPdfFrameHandle::itemChange (GraphicsItemChange change,
 
     // This sequence is from http://www.qtcentre.org/threads/47248-How-to-efficiently-get-position-of-a-QGraphicsItem-in-view-coordinates
     QRectF newRectItem (newPos,
-                        QSize (boundingRect().size().width(),
-                               boundingRect().size().height()));
+                        QSize (qFloor (boundingRect().size().width()),
+                               qFloor (boundingRect().size().height())));
     QPolygonF newRectScene = mapToScene (newRectItem);
     QPolygon newRectView = m_view.mapFromScene (newRectScene.boundingRect());
 

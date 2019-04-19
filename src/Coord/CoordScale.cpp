@@ -8,14 +8,17 @@
 
 QString coordScaleToString (CoordScale coordScale)
 {
+  QString rtn;
+
   switch (coordScale) {
     case COORD_SCALE_LINEAR:
-      return "Linear";
+      rtn ="Linear";
+      break;
 
     case COORD_SCALE_LOG:
-      return "Log";
-
-    default:
-      return "Unknown";
+      rtn = "Log";
+      break;
   }
+
+  return rtn;
 }

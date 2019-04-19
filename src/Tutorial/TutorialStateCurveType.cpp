@@ -9,6 +9,7 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <qmath.h>
 #include "TutorialButton.h"
 #include "TutorialDlg.h"
 #include "TutorialStateContext.h"
@@ -49,15 +50,15 @@ void TutorialStateCurveType::begin ()
   connect (m_previous, SIGNAL (signalTriggered ()), this, SLOT (slotPrevious ()));
 
   m_nextLines = new TutorialButton (tr ("Next (Lines)"),
-                                     context().tutorialDlg().scene());
-  m_nextLines->setGeometry (QPoint (backgroundSize.width () - buttonMargin () - m_nextLines->size ().width (),
-                                     backgroundSize.height () / 3.0 - m_nextLines->size ().height () / 2.0));
+                                    context().tutorialDlg().scene());
+  m_nextLines->setGeometry (QPoint (qFloor (backgroundSize.width () - buttonMargin () - m_nextLines->size ().width ()),
+                                    qFloor (backgroundSize.height () / 3.0 - m_nextLines->size ().height () / 2.0)));
   connect (m_nextLines, SIGNAL (signalTriggered ()), this, SLOT (slotNextCurves ()));
 
   m_nextPoints = new TutorialButton (tr ("Next (Points)"),
-                                    context().tutorialDlg().scene());
-  m_nextPoints->setGeometry (QPoint (backgroundSize.width () - buttonMargin () - m_nextPoints->size ().width (),
-                                    backgroundSize.height () * 2.0 / 3.0 - m_nextPoints->size ().height () / 2.0));
+                                     context().tutorialDlg().scene());
+  m_nextPoints->setGeometry (QPoint (qFloor (backgroundSize.width () - buttonMargin () - m_nextPoints->size ().width ()),
+                                     qFloor (backgroundSize.height () * 2.0 / 3.0 - m_nextPoints->size ().height () / 2.0)));
   connect (m_nextPoints, SIGNAL (signalTriggered ()), this, SLOT (slotNextLines ()));
 }
 
@@ -81,14 +82,14 @@ void TutorialStateCurveType::end ()
   delete m_nextPoints;
   delete m_previous;
 
-  m_title = 0;
-  m_background = 0;
-  m_text0 = 0;
-  m_text1 = 0;
-  m_text2 = 0;
-  m_nextLines = 0;
-  m_nextPoints = 0;
-  m_previous = 0;
+  m_title = nullptr;
+  m_background = nullptr;
+  m_text0 = nullptr;
+  m_text1 = nullptr;
+  m_text2 = nullptr;
+  m_nextLines = nullptr;
+  m_nextPoints = nullptr;
+  m_previous = nullptr;
 }
 
 void TutorialStateCurveType::slotNextCurves ()

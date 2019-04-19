@@ -68,7 +68,7 @@ ZoomFactor ZoomTransition::zoomIn (ZoomFactor currentZoomFactor,
     double scale = qMin(xScale, yScale); // Fit so large extent just fits
 
     for (int zoom = ZOOM_1_TO_16_CLOSER; zoom >= 0; zoom--) {
-      ZoomFactor zoomFactor = (ZoomFactor) zoom;
+      ZoomFactor zoomFactor = static_cast<ZoomFactor> (zoom);
       if (scale < m_zoomMapToFactor [zoomFactor]) {
         zoomFactorOld = zoomFactor;
         break;
@@ -78,7 +78,7 @@ ZoomFactor ZoomTransition::zoomIn (ZoomFactor currentZoomFactor,
 
   ZoomFactor zoomFactorNew = ZOOM_16_TO_1;
   if (zoomFactorOld > ZOOM_16_TO_1) {
-    zoomFactorNew = (ZoomFactor) (zoomFactorOld - 1);
+    zoomFactorNew = static_cast<ZoomFactor> (zoomFactorOld - 1);
   }
 
   return zoomFactorNew;
@@ -103,7 +103,7 @@ ZoomFactor ZoomTransition::zoomOut (ZoomFactor currentZoomFactor,
     double scale = qMax(xScale, yScale); // Fit so larger extent just fits
 
     for (int zoom = 0; zoom <= ZOOM_1_TO_16_CLOSER; zoom++) {
-      ZoomFactor zoomFactor = (ZoomFactor) zoom;
+      ZoomFactor zoomFactor = static_cast<ZoomFactor> (zoom);
       if (scale > m_zoomMapToFactor [zoomFactor]) {
         zoomFactorOld = zoomFactor;
         break;
@@ -113,7 +113,7 @@ ZoomFactor ZoomTransition::zoomOut (ZoomFactor currentZoomFactor,
 
   ZoomFactor zoomFactorNew = ZOOM_1_TO_16;
   if (zoomFactorOld < ZOOM_1_TO_16) {
-    zoomFactorNew = (ZoomFactor) (zoomFactorOld + 1);
+    zoomFactorNew = static_cast<ZoomFactor> (zoomFactorOld + 1);
   }
 
   return zoomFactorNew;

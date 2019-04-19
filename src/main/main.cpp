@@ -330,7 +330,7 @@ void sanityCheckValue (bool requiredCondition,
 void showMessageAndQuit (const QString &msg)
 {
   // Show message in QMessageBox instead of cout or cerr since console output is disabled in Microsoft Windows
-  QMessageBox::critical (0,
+  QMessageBox::critical (nullptr,
                          QObject::tr ("Engauge Digitizer"),
                          msg);
   exit (0);

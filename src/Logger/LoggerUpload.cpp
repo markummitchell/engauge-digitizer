@@ -8,7 +8,7 @@
 #include "LoggerUpload.h"
 #include "MainWindow.h"
 
-MainWindow *LoggerUpload::m_mainWindow = (MainWindow*) 0;
+MainWindow *LoggerUpload::m_mainWindow = static_cast<MainWindow*> (nullptr);
 
 LoggerUpload::LoggerUpload()
 {
@@ -44,7 +44,7 @@ void LoggerUpload::loggerOutput(const char *comment,
                                 int line,
                                 const char *context)
 {
-  if (m_mainWindow != 0) {
+  if (m_mainWindow != nullptr) {
     m_mainWindow->saveErrorReportFileAndExit(comment,
                                              file,
                                              line,

@@ -7,6 +7,7 @@
 #include "ColorConstants.h"
 #include "ColorFilterSettings.h"
 #include "ColorFilterSettingsStrategyHue.h"
+#include <qmath.h>
 #include <QTextStream>
 
 ColorFilterSettingsStrategyHue::ColorFilterSettingsStrategyHue ()
@@ -19,14 +20,14 @@ ColorFilterSettingsStrategyHue::~ColorFilterSettingsStrategyHue ()
 
 double ColorFilterSettingsStrategyHue::high (const ColorFilterSettings &colorFilterSettings) const
 {
-  return (double) (colorFilterSettings.hueHigh () - HUE_MIN) /
-    (double) (HUE_MAX - HUE_MIN); 
+  return double (colorFilterSettings.hueHigh () - HUE_MIN) /
+    double (HUE_MAX - HUE_MIN);
 }
 
 double ColorFilterSettingsStrategyHue::low (const ColorFilterSettings &colorFilterSettings) const
 {
-  return (double) (colorFilterSettings.hueLow () - HUE_MIN) /
-    (double) (HUE_MAX - HUE_MIN);
+  return double (colorFilterSettings.hueLow () - HUE_MIN) /
+    double (HUE_MAX - HUE_MIN);
 }
 
 void ColorFilterSettingsStrategyHue::printStream (const ColorFilterSettings &colorFilterSettings,
@@ -40,11 +41,11 @@ void ColorFilterSettingsStrategyHue::printStream (const ColorFilterSettings &col
 void ColorFilterSettingsStrategyHue::setHigh (ColorFilterSettings &colorFilterSettings,
                                               double s0To1)
 {
-  colorFilterSettings.setHueHigh (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN));  
+  colorFilterSettings.setHueHigh (qFloor (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN)));
 }
 
 void ColorFilterSettingsStrategyHue::setLow (ColorFilterSettings &colorFilterSettings,
                                              double s0To1)
 {
-  colorFilterSettings.setHueLow (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN));
+  colorFilterSettings.setHueLow (qFloor (HUE_MIN + s0To1 * (HUE_MAX - HUE_MIN)));
 }

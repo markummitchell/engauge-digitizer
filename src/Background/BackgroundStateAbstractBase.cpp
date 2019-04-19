@@ -16,7 +16,7 @@ BackgroundStateAbstractBase::BackgroundStateAbstractBase(BackgroundStateContext 
                                                          GraphicsScene &scene) :
   m_context (context),
   m_scene (scene),
-  m_imageItem (0)
+  m_imageItem (nullptr)
 {
   // Create an image but do not show it until the appropriate state is reached
   QPixmap dummy;

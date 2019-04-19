@@ -61,7 +61,7 @@ public:
                     QTextStream &str) const;
 
   /// Radius of point. For a circle this is all that is needed to draw a circle. For a polygon, the radius determines the size of the polygon
-  int radius () const;
+  unsigned int radius () const;
 
   /// Serialize to stream
   void saveXml(QXmlStreamWriter &writer) const;
@@ -73,7 +73,7 @@ public:
   void setPaletteColor (ColorPalette paletteColor);
 
   /// Set method for point radius.
-  void setRadius (int radius);
+  void setRadius (unsigned int radius);
 
   /// Set method for point shape.
   void setShape (PointShape shape);

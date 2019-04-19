@@ -25,7 +25,7 @@ ChecklistGuidePageCurves::ChecklistGuidePageCurves(const QString &title) :
   addHtml (QString ("<p>%1</p>")
            .arg (tr ("What are the names of the curves that are to be digitized? At least one entry is required.")));
 
-  m_edit = new ChecklistLineEdit* [NUM_CURVE_NAMES()];
+  m_edit = new ChecklistLineEdit* [unsigned (NUM_CURVE_NAMES())];
 
   for (int i = 0; i < NUM_CURVE_NAMES(); i++) {
     m_edit [i] = new ChecklistLineEdit;

@@ -33,7 +33,7 @@ void Ghosts::captureGraphicsItems (QGraphicsScene &scene)
     QGraphicsItem *item = *itr;
 
     QGraphicsEllipseItem *itemEllipse = dynamic_cast<QGraphicsEllipseItem*> (item);
-    if (itemEllipse != 0) {
+    if (itemEllipse != nullptr) {
 
       GhostEllipse ghost (itemEllipse->boundingRect(),
                           itemEllipse->pen(),
@@ -43,7 +43,7 @@ void Ghosts::captureGraphicsItems (QGraphicsScene &scene)
     } else {
 
       QGraphicsPathItem *itemPath = dynamic_cast<QGraphicsPathItem*> (item);
-      if (itemPath != 0) {
+      if (itemPath != nullptr) {
 
         GhostPath ghost (itemPath->path (),
                          itemPath->pen(),
@@ -53,7 +53,7 @@ void Ghosts::captureGraphicsItems (QGraphicsScene &scene)
       } else {
 
         QGraphicsPolygonItem *itemPolygon = dynamic_cast<QGraphicsPolygonItem*> (item);
-        if (itemPolygon != 0) {
+        if (itemPolygon != nullptr) {
 
           // Polygon is centered at origin so we have to add offset
           QPolygonF polygon = itemPolygon->polygon();

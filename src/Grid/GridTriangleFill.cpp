@@ -9,6 +9,7 @@
 #include "GridTriangleFill.h"
 #include <QImage>
 #include <QList>
+#include <qmath.h>
 #include <QPoint>
 
 // Non-member comparison function
@@ -81,8 +82,8 @@ void GridTriangleFill::fill (GridLog &gridLog,
 
       // General case is handled by splitting the triangle into one flat top piece and
       // one flat bottom piece. Fourth point is at same y value as middle point p1
-      double s = (double) (p1.y() - p0.y())/ (double) (p2.y() - p0.y());
-      QPoint p3 ((int) (p0.x() + s * (p2.x() - p0.x())),
+      double s = double (p1.y() - p0.y()) / double (p2.y() - p0.y());
+      QPoint p3 (qFloor (p0.x() + s * (p2.x() - p0.x())),
                  p1.y());
       flatBottom (gridLog, image, p0, p1, p3);
       flatTop (gridLog, image, p1, p3, p2);
@@ -99,7 +100,7 @@ void GridTriangleFill::flatBottom (GridLog &gridLog,
   // Either neither or both denominators are zero, since p1.y()=p2.y()
   double denom0 = p1.y() - p0.y();
   double denom1 = p2.y() - p0.y();
-  if (denom0 == 0 || denom1 == 0) {
+  if (qAbs (denom0) <= 0 || qAbs (denom1) <= 0) {
     drawLine (gridLog,
               image,
               p0.x(),
@@ -123,8 +124,8 @@ void GridTriangleFill::flatBottom (GridLog &gridLog,
     for (int scanLineY = p0.y(); scanLineY <= p1.y(); scanLineY++) {
       drawLine (gridLog,
                 image,
-                (int) x0,
-                (int) x1,
+                qFloor (x0),
+                qFloor (x1),
                 scanLineY);
       x0 += slopeInverse0;
       x1 += slopeInverse1;
@@ -141,7 +142,7 @@ void GridTriangleFill::flatTop (GridLog &gridLog,
   // Either neither or both denominators are zero, since p0.y()=p1.y()
   double denom0 = p2.y() - p0.y();
   double denom1 = p2.y() - p1.y();
-  if (denom0 == 0 || denom1 == 0) {
+  if (qAbs (denom0) <= 0 || qAbs (denom1) <= 0) {
     drawLine (gridLog,
               image,
               p0.x(),
@@ -165,8 +166,8 @@ void GridTriangleFill::flatTop (GridLog &gridLog,
     for (int scanLineY = p2.y(); scanLineY >= p0.y(); scanLineY--) {
       drawLine (gridLog,
                 image,
-                (int) x0,
-                (int) x1,
+                qFloor (x0),
+                qFloor (x1),
                 scanLineY);
       x0 -= slopeInverse0;
       x1 -= slopeInverse1;

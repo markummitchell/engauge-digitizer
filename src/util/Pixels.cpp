@@ -76,10 +76,10 @@ void Pixels::fillHole (QImage &image,
   //           2-4 pixels               4x4                  -2 to +2
   //           5-9                      5x5                  -2 to +3
   //           10-16                    6x6                  -3 to +3
-  int rowStart = row - (1 + qSqrt (thresholdCount - 1)); // Inclusive
-  int colStart = col - (1 + qSqrt (thresholdCount - 1)); // Inclusive
-  int rowStop = row + (1 + qSqrt (thresholdCount)); // Exclusive
-  int colStop = col + (1 + qSqrt (thresholdCount)); // Exclusive
+  int rowStart = qFloor (row - (1 + qSqrt (thresholdCount - 1))); // Inclusive
+  int colStart = qFloor (col - (1 + qSqrt (thresholdCount - 1))); // Inclusive
+  int rowStop = qFloor (row + (1 + qSqrt (thresholdCount))); // Exclusive
+  int colStop = qFloor (col + (1 + qSqrt (thresholdCount))); // Exclusive
 
   // First pass is for counting
   int countWhite = 0;

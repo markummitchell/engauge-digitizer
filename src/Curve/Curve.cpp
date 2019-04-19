@@ -15,6 +15,7 @@
 #include "PointComparator.h"
 #include <QDataStream>
 #include <QDebug>
+#include <qmath.h>
 #include <QMultiMap>
 #include <QTextStream>
 #include <QXmlStreamReader>
@@ -249,7 +250,7 @@ void Curve::exportToClipboard (const QHash<QString, bool> &selectedHash,
       curveStyleDefault.setPointStyle(PointStyle::defaultGraphCurve (curvesGraphs.numCurves ()));
 
       // Check if this curve already exists from a previously exported point
-      if (curvesGraphs.curveForCurveName (m_curveName) == 0) {
+      if (curvesGraphs.curveForCurveName (m_curveName) == nullptr) {
         Curve curve(m_curveName,
                     ColorFilterSettings::defaultFilter (),
                     curveStyleDefault);
@@ -289,7 +290,6 @@ bool Curve::isXOnly(const QString &pointIdentifier) const
     const Point &point = *itr;
     if (pointIdentifier == point.identifier ()) {
       return point.isXOnly();
-      break;
     }
   }
 
@@ -318,12 +318,12 @@ void Curve::iterateThroughCurveSegments (const Functor2wRet<const Point&, const 
   // Loop through Points. They are assumed to be already sorted by their ordinals, but we do NOT
   // check the ordinal ordering since this could be called before, or while, the ordinal sorting is done
   QList<Point>::const_iterator itr;
-  const Point *pointBefore = 0;
+  const Point *pointBefore = nullptr;
   for (itr = m_points.begin(); itr != m_points.end(); itr++) {
 
     const Point &point = *itr;
 
-    if (pointBefore != 0) {
+    if (pointBefore != nullptr) {
 
       CallbackSearchReturn rtn = ftorWithCallback (*pointBefore,
                                                    point);
@@ -445,7 +445,7 @@ Point *Curve::pointForPointIdentifier (const QString pointIdentifier)
   }
 
   ENGAUGE_ASSERT (false);
-  return 0;
+  return nullptr;
 }
 
 const Points Curve::points () const
@@ -655,7 +655,7 @@ void Curve::updatePointOrdinalsFunctions (const Transformation &transformation)
     ENGAUGE_ASSERT (pointIdentifierToOrdinal.contains (point.identifier()));
 
     // Point is to be included since it is in the map list.
-    int ordinalNew = pointIdentifierToOrdinal [point.identifier()];
+    int ordinalNew = qFloor (pointIdentifierToOrdinal [point.identifier()]);
     point.setOrdinal (ordinalNew);
   }
 }

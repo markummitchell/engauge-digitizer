@@ -69,8 +69,8 @@ void TestProjectedPoint::testProjectedPoints ()
   int angleStep = 13;
 
   // Critical angle in degrees
-  int angleCriticalRight = (int) (0.5 + qAcos (radiusCircle / radiusProjection) * RADIANS_TO_DEGREES);
-  int angleCriticalUp = (int) (0.5 + qAsin (radiusCircle / radiusProjection) * RADIANS_TO_DEGREES);
+  int angleCriticalRight = qFloor (0.5 + qAcos (radiusCircle / radiusProjection) * RADIANS_TO_DEGREES);
+  int angleCriticalUp = qFloor (0.5 + qAsin (radiusCircle / radiusProjection) * RADIANS_TO_DEGREES);
 
   for (int angle = 0; angle <= 360; angle += angleStep) {
 

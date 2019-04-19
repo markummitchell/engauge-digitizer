@@ -9,6 +9,7 @@
 #include "PdfFrameHandle.h"
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
+#include <qmath.h>
 #include <QRect>
 #include "QtToString.h"
 #include "ViewPreview.h"
@@ -28,13 +29,13 @@ void PdfCropping::createWidgets(QGraphicsScene &scene)
   const double MARGIN_PERCENT = 5.0;
   const int ZERO_WIDTH_IS_ALWAYS_VISIBLE = 0;
 
-  int marginHor = scene.width()  * MARGIN_PERCENT / 100.0;
-  int marginVer = scene.height() * MARGIN_PERCENT / 100.0;
+  int marginHor = qFloor (scene.width()  * MARGIN_PERCENT / 100.0);
+  int marginVer = qFloor (scene.height() * MARGIN_PERCENT / 100.0);
 
-  QRect box (scene.sceneRect().left() + marginHor,
-             scene.sceneRect().top()  + marginVer,
-             scene.sceneRect().width() - 2 * marginHor,
-             scene.sceneRect().height() - 2 * marginVer);
+  QRect box (qFloor (scene.sceneRect().left() + marginHor),
+             qFloor (scene.sceneRect().top()  + marginVer),
+             qFloor (scene.sceneRect().width() - 2 * marginHor),
+             qFloor (scene.sceneRect().height() - 2 * marginVer));
 
   m_handleTL     = new PdfFrameHandle (scene, m_view, box.topLeft()    , PDF_CROPPING_LEFT   | PDF_CROPPING_TOP    , *this, Z_HANDLE);
   m_handleTR     = new PdfFrameHandle (scene, m_view, box.topRight()   , PDF_CROPPING_RIGHT  | PDF_CROPPING_TOP    , *this, Z_HANDLE);
@@ -164,6 +165,6 @@ void PdfCropping::updateBox ()
 
 QSize PdfCropping::windowSize () const
 {
-  return QSize (m_view.scene()->width(),
-                m_view.scene()->height());
+  return QSize (qFloor (m_view.scene()->width()),
+                qFloor (m_view.scene()->height()));
 }

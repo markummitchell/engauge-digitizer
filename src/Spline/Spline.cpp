@@ -5,6 +5,7 @@
 #include "EngaugeAssert.h"
 #include <iostream>
 #include "Logger.h"
+#include <qmath.h>
 #include "Spline.h"
 
 using namespace std;
@@ -45,8 +46,9 @@ void Spline::computeCoefficientsForIntervals (const std::vector<double> &t,
   if (xy.size() > 1) {
 
     // There are enough points to compute the coefficients
-    int i, j;
-    int n = (int) xy.size() - 1;
+    unsigned int i;
+    int jneg; // Can go negative
+    unsigned int n = unsigned (qFloor (xy.size()) - 1);
 
     m_t = t;
     m_xy = xy;
@@ -71,7 +73,8 @@ void Spline::computeCoefficientsForIntervals (const std::vector<double> &t,
     z[n] = SplinePair (0.0);
     c[n] = SplinePair (0.0);
 
-    for (j = n - 1; j >= 0; j--) {
+    for (jneg = signed (n - 1); jneg >= 0; jneg--) {
+      unsigned int j = unsigned (jneg);
       c[j] = z[j] - u[j] * c[j+1];
       b[j] = (xy[j+1] - xy[j]) / (h[j]) - (h[j] * (c[j+1] + SplinePair (2.0) * c[j])) / SplinePair (3.0);
       d[j] = (c[j+1] - c[j]) / (SplinePair (3.0) * h[j]);
@@ -97,7 +100,7 @@ void Spline::computeCoefficientsForIntervals (const std::vector<double> &t,
 
 void Spline::computeControlPointsForIntervals ()
 {
-  int i, n = (int) m_xy.size() - 1;
+  unsigned int i, n = unsigned (qFloor (m_xy.size()) - 1);
 
   for (i = 0; i < n; i++) {
     const SplineCoeff &element = m_elements[i];
@@ -118,7 +121,7 @@ void Spline::computeControlPointsForIntervals ()
   }
 
   // Debug logging
-  for (i = 0; i < (int) m_xy.size () - 1; i++) {
+  for (i = 0; i < unsigned (qFloor (m_xy.size ()) - 1); i++) {
     LOG4CPP_DEBUG_S ((*mainCat)) << "Spline::computeControlPointsForIntervals" << " i=" << i
              << " xy=" << m_xy [i]
              << " elementt=" << m_elements[i].t()
@@ -129,7 +132,7 @@ void Spline::computeControlPointsForIntervals ()
              << " p1=" << m_p1[i]
              << " p2=" << m_p2[i];
   }
-  i = m_xy.size() - 1;
+  i = unsigned (m_xy.size() - 1);
   LOG4CPP_DEBUG_S ((*mainCat)) << "Spline::computeControlPointsForIntervals" << " i=" << i
                 << " xy=" << m_xy [i];
 }
@@ -239,7 +242,7 @@ SplinePair Spline::interpolateControlPoints (double t) const
 {
   ENGAUGE_ASSERT (m_xy.size() != 0);
 
-  for (int i = 0; i < (signed) m_xy.size() - 1; i++) {
+  for (unsigned int i = 0; i < unsigned (m_xy.size() - 1); i++) {
 
     if (m_t[i] <= t && t <= m_t[i+1]) {
 
@@ -260,14 +263,14 @@ SplinePair Spline::interpolateControlPoints (double t) const
 
 SplinePair Spline::p1 (unsigned int i) const
 {
-  ENGAUGE_ASSERT (i < (unsigned int) m_p1.size ());
+  ENGAUGE_ASSERT (i < m_p1.size ());
 
   return m_p1 [i];
 }
 
 SplinePair Spline::p2 (unsigned int i) const
 {
-  ENGAUGE_ASSERT (i < (unsigned int) m_p2.size ());
+  ENGAUGE_ASSERT (i < m_p2.size ());
 
   return m_p2 [i];
 }

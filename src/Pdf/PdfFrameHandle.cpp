@@ -9,6 +9,7 @@
 #include <QBrush>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <qmath.h>
 #include <QStyleOptionGraphicsItem>
 
 const double HANDLE_SIZE_AS_FRACTION_OF_WINDOW_SIZE = 30;
@@ -57,14 +58,14 @@ PdfFrameHandle::PdfFrameHandle (QGraphicsScene &scene,
 
   // Adjust positions of handles that are not at the top left so handles are laid out symmetrically
   QPointF pointPos = pointReference;
-  if ((orientationFlags && PdfCropping::PDF_CROPPING_LEFT) != 0) {
+  if ((orientationFlags & PdfCropping::PDF_CROPPING_LEFT) != 0) {
     pointPos.setX (pointPos.x() - handleSize.width() / 2.0);
-  } else if ((orientationFlags && PdfCropping::PDF_CROPPING_RIGHT) != 0) {
+  } else if ((orientationFlags & PdfCropping::PDF_CROPPING_RIGHT) != 0) {
     pointPos.setX (pointPos.x() + handleSize.width() / 2.0);
   }
-  if ((orientationFlags && PdfCropping::PDF_CROPPING_TOP) != 0) {
+  if ((orientationFlags & PdfCropping::PDF_CROPPING_TOP) != 0) {
     pointPos.setY (pointPos.y() - handleSize.height() / 2.0);
-  } else if ((orientationFlags && PdfCropping::PDF_CROPPING_BOTTOM) != 0) {
+  } else if ((orientationFlags & PdfCropping::PDF_CROPPING_BOTTOM) != 0) {
     pointPos.setY (pointPos.y() + handleSize.height() / 2.0);
   }
 
@@ -92,8 +93,8 @@ QVariant PdfFrameHandle::itemChange (GraphicsItemChange change,
 
     // This sequence is from http://www.qtcentre.org/threads/47248-How-to-efficiently-get-position-of-a-QGraphicsItem-in-view-coordinates
     QRectF newRectItem (newPos,
-                        QSize (boundingRect().size().width(),
-                               boundingRect().size().height()));
+                        QSize (qFloor (boundingRect().size().width()),
+                               qFloor (boundingRect().size().height())));
     QPolygonF newRectScene = mapToScene (newRectItem);
     QPolygon newRectView = m_view.mapFromScene (newRectScene.boundingRect());
 

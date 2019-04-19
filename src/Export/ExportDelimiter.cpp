@@ -9,45 +9,55 @@
 
 QString exportDelimiterToString (ExportDelimiter exportDelimiter)
 {
+  QString rtn;
+
   switch (exportDelimiter) {
     case EXPORT_DELIMITER_COMMA:
-      return QObject::tr ("Commas");
+      rtn = QObject::tr ("Commas");
+      break;
 
     case EXPORT_DELIMITER_SEMICOLON:
-      return QObject::tr ("Semicolons");
+      rtn = QObject::tr ("Semicolons");
+      break;
 
     case EXPORT_DELIMITER_SPACE:
-      return QObject::tr ("Spaces");
+      rtn = QObject::tr ("Spaces");
+      break;
 
     case EXPORT_DELIMITER_TAB:
-      return QObject::tr ("Tabs");
-
-    default:
-      return QObject::tr ("Unknown");
+      rtn = QObject::tr ("Tabs");
+      break;
   }
+
+  return rtn;
 }
 
 QString exportDelimiterToText (ExportDelimiter exportDelimiter,
                                bool isGnuplotDelimiter)
 {
+  QString rtn;
+
   switch (exportDelimiter) {
     case EXPORT_DELIMITER_COMMA:
       if (isGnuplotDelimiter) {
-        return ", "; // Gnuplot needs a space
+        rtn = ", "; // Gnuplot needs a space
       } else {
-        return ",";
+        rtn = ",";
       }
+      break;
 
     case EXPORT_DELIMITER_SEMICOLON:
-      return ";";
+      rtn = ";";
+      break;
 
     case EXPORT_DELIMITER_SPACE:
-      return " ";
+      rtn = " ";
+      break;
 
     case EXPORT_DELIMITER_TAB:
-      return "\t";
-
-    default:
-      return "?";
+      rtn = "\t";
+      break;
   }
+
+  return rtn;
 }

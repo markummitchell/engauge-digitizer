@@ -28,7 +28,7 @@ PdfReturn Pdf::load (const QString &fileName,
                      ImportCropping importCropping,
                      bool isErrorReportRegressionTest) const
 {
-  Document *document = 0;
+  Document *document = nullptr;
 
   ImportCroppingUtilPdf importCroppingUtil;
   bool cropping = importCroppingUtil.applyImportCropping (isErrorReportRegressionTest,
@@ -54,7 +54,7 @@ PdfReturn Pdf::load (const QString &fileName,
   QApplication::restoreOverrideCursor();
 
   delete document;
-  document = 0;
+  document = nullptr;
 
   return rtn;
 }
@@ -96,11 +96,11 @@ PdfReturn Pdf::loadWithoutCropping (const QString &fileName,
     // Try to read the file
     Document *document = Document::load (fileName);
 
-    if (document != 0) {
+    if (document != nullptr) {
       if (!document->isLocked ()) {
 
         Page *page = document->page (FIRST_PAGE_1_BASED - 1);
-        if (page != 0) {
+        if (page != nullptr) {
 
           image = page->renderToImage (resolution,
                                        resolution,

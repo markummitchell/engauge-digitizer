@@ -17,8 +17,8 @@
 LoadImageFromUrl::LoadImageFromUrl (MainWindow &mainWindow) :
   m_mainWindow (mainWindow),
   m_http (this),
-  m_reply (0),
-  m_buffer (0)
+  m_reply (nullptr),
+  m_buffer (nullptr)
 {
   connect (this, SIGNAL (signalImportImage (QString, QImage)), &m_mainWindow, SLOT (slotFileImportImage (QString, QImage)));
 }
@@ -33,8 +33,8 @@ void LoadImageFromUrl::deallocate ()
   delete m_reply;
   delete m_buffer;
   
-  m_reply = 0;
-  m_buffer = 0;
+  m_reply = nullptr;
+  m_buffer = nullptr;
 }
 
 void LoadImageFromUrl::slotFinished ()

@@ -17,8 +17,8 @@ CmdPointChangeBase::CmdPointChangeBase(MainWindow &mainWindow,
   CmdAbstract (mainWindow,
                document,
                cmdDescription),
-  m_curveAxes (0),
-  m_curvesGraphs (0)
+  m_curveAxes (nullptr),
+  m_curvesGraphs (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdPointChangeBase::CmdPointChangeBase";
 }
@@ -31,8 +31,8 @@ void CmdPointChangeBase::restoreDocumentState (Document &document) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdPointChangeBase::restoreDocumentState";
 
-  ENGAUGE_ASSERT (m_curveAxes != 0);
-  ENGAUGE_ASSERT (m_curvesGraphs != 0);
+  ENGAUGE_CHECK_PTR (m_curveAxes);
+  ENGAUGE_CHECK_PTR (m_curvesGraphs);
 
   document.setCurveAxes (*m_curveAxes);
   document.setCurvesGraphs (*m_curvesGraphs);

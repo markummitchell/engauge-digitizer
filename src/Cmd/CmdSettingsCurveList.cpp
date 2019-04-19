@@ -36,7 +36,8 @@ CmdSettingsCurveList::CmdSettingsCurveList(MainWindow &mainWindow,
     if (!curveNameOriginal.isEmpty ()) {
 
       // There was an original Curve
-      const Curve *curveOriginal = ((const Document&) document).curveForCurveName (curveNameOriginal);
+      const Document &documentConst = const_cast<Document&> (document);
+      const Curve *curveOriginal = documentConst.curveForCurveName (curveNameOriginal);
       Curve curveCurrent (*curveOriginal);
       curveCurrent.setCurveName (curveNameCurrent);
 

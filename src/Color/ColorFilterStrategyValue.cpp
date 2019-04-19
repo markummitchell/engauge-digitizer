@@ -25,5 +25,5 @@ double ColorFilterStrategyValue::pixelToZeroToOne (const QColor &pixel,
 
 int ColorFilterStrategyValue::zeroToOneToValue (double s) const
 {
-  return VALUE_MIN + s * (VALUE_MAX - VALUE_MIN);
+  return qFloor (VALUE_MIN + s * (VALUE_MAX - VALUE_MIN));
 }

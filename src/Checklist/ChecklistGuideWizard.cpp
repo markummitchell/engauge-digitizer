@@ -46,7 +46,7 @@ ChecklistGuideWizard::ChecklistGuideWizard (MainWindow &mainWindow,
 
 QStringList ChecklistGuideWizard::curveNames(CoordSystemIndex coordSystemIndex) const
 {
-  return m_pageCurves [coordSystemIndex]->curveNames();
+  return m_pageCurves [signed (coordSystemIndex)]->curveNames();
 }
 
 QString ChecklistGuideWizard::pageCurvesTitle (CoordSystemIndex coordSystemIndex,
@@ -77,7 +77,7 @@ void ChecklistGuideWizard::populateCurvesGraphs (CoordSystemIndex coordSystemInd
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::populateCurvesGraphs";
 
-  QStringList curveNames = m_pageCurves [coordSystemIndex]->curveNames();
+  QStringList curveNames = m_pageCurves [signed (coordSystemIndex)]->curveNames();
   QStringList::const_iterator itr;
   for (itr = curveNames.begin(); itr != curveNames.end(); itr++) {
 
@@ -94,8 +94,8 @@ QString ChecklistGuideWizard::templateHtml (CoordSystemIndex coordSystemIndex) c
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ChecklistGuideWizard::templateHtml";
 
-  QStringList curveNames = m_pageCurves [coordSystemIndex]->curveNames();
-  bool withLines = m_pageCurves [coordSystemIndex]->withLines();
+  QStringList curveNames = m_pageCurves [signed (coordSystemIndex)]->curveNames();
+  bool withLines = m_pageCurves [signed (coordSystemIndex)]->withLines();
 
   QString html;
   QTextStream str (&html);

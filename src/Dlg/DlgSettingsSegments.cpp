@@ -40,10 +40,10 @@ DlgSettingsSegments::DlgSettingsSegments(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Segment Fill"),
                            "DlgSettingsSegments",
                            mainWindow),
-  m_scenePreview (0),
-  m_viewPreview (0),
-  m_modelSegmentsBefore (0),
-  m_modelSegmentsAfter (0),
+  m_scenePreview (nullptr),
+  m_viewPreview (nullptr),
+  m_modelSegmentsBefore (nullptr),
+  m_modelSegmentsAfter (nullptr),
   m_loading (false)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::DlgSettingsSegments";
@@ -170,15 +170,15 @@ QImage DlgSettingsSegments::createPreviewImage () const
   int margin = IMAGE_WIDTH / 15;
   int yCenter = IMAGE_HEIGHT / 2;
   int yHeight = IMAGE_HEIGHT / 4;
-  int x, y, xLast, yLast;
+  int x, y, xLast = 0, yLast = 0;
   bool isFirst;
 
   // Draw sinusoid
   isFirst = true;
   int xStart = margin, xEnd = IMAGE_WIDTH / 2 - margin;
   for (x = xStart; x < xEnd; x++) {
-    double s = (double) (x - xStart) / (double) (xEnd - xStart);
-    int y = yCenter - yHeight * qSin (TWOPI * s);
+    double s = double (x - xStart) / double (xEnd - xStart);
+    int y = qFloor (yCenter - yHeight * qSin (TWOPI * s));
 
     if (!isFirst) {
       painter.drawLine (xLast, yLast, x, y);
@@ -190,15 +190,16 @@ QImage DlgSettingsSegments::createPreviewImage () const
 
   // Draw triangular waveform that looks like sinusoid straightened up into line segments
   isFirst = true;
-  xStart = IMAGE_WIDTH / 2 + margin, xEnd = IMAGE_WIDTH - margin;
+  xStart = IMAGE_WIDTH / 2 + margin;
+  xEnd = IMAGE_WIDTH - margin;
   for (x = xStart; x < xEnd; x++) {
-    double s = (double) (x - xStart) / (double) (xEnd - xStart);
+    double s = double (x - xStart) / double (xEnd - xStart);
     if (s <= 0.25) {
-      y = yCenter - yHeight * (4.0 * s);
+      y = qFloor (yCenter - yHeight * (4.0 * s));
     } else if (s < 0.75) {
-      y = yCenter - yHeight * (1.0 - 4.0 * (s - 0.25));
+      y = qFloor (yCenter - yHeight * (1.0 - 4.0 * (s - 0.25)));
     } else {
-      y = yCenter + yHeight * (1.0 - 4 * (s - 0.75));
+      y = qFloor (yCenter + yHeight * (1.0 - 4 * (s - 0.75)));
     }
 
     if (!isFirst) {
@@ -271,10 +272,10 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   ENGAUGE_ASSERT (POINT_SEPARATION_MAX >= m_modelSegmentsAfter->pointSeparation());
 
   // Populate controls
-  m_spinPointSeparation->setValue (m_modelSegmentsAfter->pointSeparation());
-  m_spinMinLength->setValue (m_modelSegmentsAfter->minLength());
+  m_spinPointSeparation->setValue (qFloor (m_modelSegmentsAfter->pointSeparation()));
+  m_spinMinLength->setValue (qFloor (m_modelSegmentsAfter->minLength()));
   m_chkFillCorners->setChecked (m_modelSegmentsAfter->fillCorners ());
-  m_spinLineWidth->setValue (m_modelSegmentsAfter->lineWidth());
+  m_spinLineWidth->setValue (qFloor (m_modelSegmentsAfter->lineWidth()));
 
   int indexLineColor = m_cmbLineColor->findData(QVariant (m_modelSegmentsAfter->lineColor()));
   ENGAUGE_ASSERT (indexLineColor >= 0);
@@ -308,7 +309,7 @@ void DlgSettingsSegments::slotLineColor (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineColor";
 
-  m_modelSegmentsAfter->setLineColor((ColorPalette) m_cmbLineColor->currentData().toInt());
+  m_modelSegmentsAfter->setLineColor(static_cast<ColorPalette> (m_cmbLineColor->currentData().toInt()));
   updateControls();
   updatePreview();
 }
@@ -353,7 +354,7 @@ void DlgSettingsSegments::updatePreview()
   const QString ARBITRARY_IDENTIFIER ("");
   const QColor COLOR (Qt::blue);
   const int RADIUS = 5;
-  GeometryWindow *NULL_GEOMETRY_WINDOW = 0;
+  GeometryWindow *NULL_GEOMETRY_WINDOW = nullptr;
 
   if (!m_loading) {
 
@@ -378,7 +379,7 @@ void DlgSettingsSegments::updatePreview()
     // Create some points
     PointStyle pointStyle (POINT_SHAPE_CROSS,
                            RADIUS,
-                           BRUSH_WIDTH,
+                           qFloor (BRUSH_WIDTH),
                            COLOR_PALETTE_BLUE);
     QPolygonF polygon = pointStyle.polygon();
     QList<QPoint> points = segmentFactory.fillPoints (*m_modelSegmentsAfter,

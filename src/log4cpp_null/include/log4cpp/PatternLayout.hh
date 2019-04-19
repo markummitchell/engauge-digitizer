@@ -22,7 +22,7 @@ namespace log4cpp {
 
     /// Noop method for setting the conversion pattern. This used to throw
     /// ConfigureFailure but newer compilers do not like explicit throws
-    virtual void setConversionPattern (const std::string &conversionPattern);
+    void setConversionPattern (const std::string &conversionPattern);
 
   private:
     std::string m_conversionPattern;

@@ -15,6 +15,11 @@ GridLine::GridLine ()
 {
 }
 
+GridLine::GridLine (const GridLine & /* other */)
+{
+  ENGAUGE_ASSERT (false);
+}
+
 GridLine::~GridLine ()
 {
   // Crash here means QGraphicsScene::clear was called, which is entirely unnecessary
@@ -25,11 +30,6 @@ GridLine::~GridLine ()
   }
 
   m_segments.clear ();
-}
-
-GridLine::GridLine (const GridLine & /* other */)
-{
-  ENGAUGE_ASSERT (false);
 }
 
 GridLine &GridLine::operator= (GridLine & /* other */)
@@ -48,14 +48,14 @@ void GridLine::setPen (const QPen &pen)
 {
   for (int i = 0; i < m_segments.count(); i++) {
     QGraphicsItem *item = m_segments [i];
-    if (item != 0) {
+    if (item != nullptr) {
 
       // Downcast since QGraphicsItem does not have a pen
       QGraphicsLineItem *itemLine = dynamic_cast<QGraphicsLineItem*> (item);
       QGraphicsEllipseItem *itemArc = dynamic_cast<QGraphicsEllipseItem*> (item);
-      if (itemLine != 0) {
+      if (itemLine != nullptr) {
         itemLine->setPen (pen);
-      } else if (itemArc != 0) {
+      } else if (itemArc != nullptr) {
         itemArc->setPen (pen);
       }
     }

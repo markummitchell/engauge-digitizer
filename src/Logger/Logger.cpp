@@ -22,7 +22,7 @@ void initializeLogging (const QString &name,
                         const QString &filename,
                         bool isDebug)
 {
-  LayoutAppender *appender = 0;
+  LayoutAppender *appender = nullptr;
 
   const size_t MAX_FILE_SIZE_BYTES = 6 * 1024 * 1024; // Size that should satisfy most email servers
   const unsigned int MAX_BACKUP_INDEX = 2;

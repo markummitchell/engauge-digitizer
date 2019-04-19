@@ -8,6 +8,7 @@
 #include "FormatDateTime.h"
 #include "Logger.h"
 #include <QDateTime>
+#include <qmath.h>
 #include <QTimeZone>
 
 // Need a reference time zone so exported outputs do not exhibit unpredictable local/UTC hours differences
@@ -136,7 +137,9 @@ QString FormatDateTime::formatOutput (CoordUnitsDate coordUnitsDate,
   QString format = m_formatsDateFormat [coordUnitsDate] + " " + m_formatsTimeFormat [coordUnitsTime];
   format = format.trimmed();
 
-  QDateTime dt = QDateTime::fromTime_t (value);
+  // Range of unsigned versus signed is not a problem here. A signed value maxes out at 2.4 billion
+  // which is year 2038
+  QDateTime dt = QDateTime::fromTime_t (unsigned (qFloor (value)));
 
   return dt.toTimeSpec(REFERENCE_TIME_ZONE).toString (format);
 }

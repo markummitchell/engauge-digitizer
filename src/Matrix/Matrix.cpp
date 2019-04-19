@@ -247,7 +247,7 @@ Matrix Matrix::inverseGaussianElimination (int significantDigits,
 
     // In pathological situations we have (rowFrom, colFirstWithNonzero) = 0 in which case the solution cannot be obtained
     // so we exit
-    if (working.get (rowFrom, colFirstWithNonZero) == 0) {
+    if (qAbs (working.get (rowFrom, colFirstWithNonZero)) <= 0) {
       matrixConsistent = MATRIX_INCONSISTENT;
       return inv;
     }
@@ -261,7 +261,7 @@ Matrix Matrix::inverseGaussianElimination (int significantDigits,
     // Apply the 'from' row to all the 'to' rows
     for (rowTo = rowFrom + 1; rowTo < rows (); rowTo++) {
 
-      if (working.get (rowTo, colFirstWithNonZero) != 0) {
+      if (qAbs (working.get (rowTo, colFirstWithNonZero)) > 0) {
 
         // We need to merge rowFrom and rowTo into rowTo
         double denominator = working.get (rowFrom, colFirstWithNonZero);
@@ -285,7 +285,7 @@ Matrix Matrix::inverseGaussianElimination (int significantDigits,
     // Apply the 'from' row to all the 'to' rows
     for (rowTo = rowFrom - 1; rowTo >= 0; rowTo--) {
 
-      if (working.get (rowTo, colFirstWithNonZero) != 0) {
+      if (qAbs (working.get (rowTo, colFirstWithNonZero)) > 0) {
 
         // We need to merge rowFro and rowTo into rowTo
         double denominator = working.get (rowFrom, colFirstWithNonZero);
@@ -315,7 +315,7 @@ unsigned int Matrix::leadingZeros (int row) const
 {
   unsigned int sum = 0;
   for (int col = 0; col < cols (); col++) {
-    if (get (row, col) != 0) {
+    if (qAbs (get (row, col)) > 0) {
       ++sum;
     }
   }

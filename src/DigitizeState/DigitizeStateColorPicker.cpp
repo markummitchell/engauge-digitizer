@@ -18,6 +18,7 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QImage>
+#include <qmath.h>
 #include <QMessageBox>
 
 DigitizeStateColorPicker::DigitizeStateColorPicker (DigitizeStateContext &context) :
@@ -100,7 +101,7 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (CmdMediator *cmdMediator,
     }
 
     // Generate histogram
-    double *histogramBins = new double [ColorFilterHistogram::HISTOGRAM_BINS ()];
+    double *histogramBins = new double [unsigned (ColorFilterHistogram::HISTOGRAM_BINS ())];
 
     ColorFilterHistogram filterHistogram;
     int maxBinCount;
@@ -147,7 +148,7 @@ bool DigitizeStateColorPicker::computeFilterFromPixel (CmdMediator *cmdMediator,
 
   } else {
 
-    QMessageBox::warning (0,
+    QMessageBox::warning (nullptr,
                           QObject::tr ("Color Picker"),
                           QObject::tr ("Sorry, but the color picker point must be near a non-background pixel. Please try again."));
 
@@ -292,9 +293,12 @@ void DigitizeStateColorPicker::handleMouseRelease (CmdMediator *cmdMediator,
 
 void DigitizeStateColorPicker::saveLowerValueUpperValue (DocumentModelColorFilter &modelColorFilterAfter,
                                                          const QString &curveName,
-                                                         double lowerValue,
-                                                         double upperValue)
+                                                         double lowerValueIn,
+                                                         double upperValueIn)
 {
+  int lowerValue = qFloor (lowerValueIn);
+  int upperValue = qFloor (upperValueIn);
+
   switch (modelColorFilterAfter.colorFilterMode (curveName)) {
     case COLOR_FILTER_MODE_FOREGROUND:
       modelColorFilterAfter.setForegroundLow(curveName,

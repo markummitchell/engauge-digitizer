@@ -7,6 +7,7 @@
 #include "ColorConstants.h"
 #include "ColorFilterSettings.h"
 #include "ColorFilterSettingsStrategySaturation.h"
+#include <qmath.h>
 #include <QTextStream>
 
 ColorFilterSettingsStrategySaturation::ColorFilterSettingsStrategySaturation ()
@@ -19,14 +20,14 @@ ColorFilterSettingsStrategySaturation::~ColorFilterSettingsStrategySaturation ()
 
 double ColorFilterSettingsStrategySaturation::high (const ColorFilterSettings &colorFilterSettings) const
 {
-  return (double) (colorFilterSettings.saturationHigh () - SATURATION_MIN) /
-    (double) (SATURATION_MAX - SATURATION_MIN); 
+  return double (colorFilterSettings.saturationHigh () - SATURATION_MIN) /
+    double (SATURATION_MAX - SATURATION_MIN);
 }
 
 double ColorFilterSettingsStrategySaturation::low (const ColorFilterSettings &colorFilterSettings) const
 {
-  return (double) (colorFilterSettings.saturationLow () - SATURATION_MIN) /
-    (double) (SATURATION_MAX - SATURATION_MIN);
+  return double (colorFilterSettings.saturationLow () - SATURATION_MIN) /
+    double (SATURATION_MAX - SATURATION_MIN);
 }
 
 void ColorFilterSettingsStrategySaturation::printStream (const ColorFilterSettings &colorFilterSettings,
@@ -40,11 +41,11 @@ void ColorFilterSettingsStrategySaturation::printStream (const ColorFilterSettin
 void ColorFilterSettingsStrategySaturation::setHigh (ColorFilterSettings &colorFilterSettings,
                                                      double s0To1)
 {
-  colorFilterSettings.setSaturationHigh (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN));  
+  colorFilterSettings.setSaturationHigh (qFloor (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN)));
 }
 
 void ColorFilterSettingsStrategySaturation::setLow (ColorFilterSettings &colorFilterSettings,
                                                     double s0To1)
 {
-  colorFilterSettings.setSaturationLow (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN));
+  colorFilterSettings.setSaturationLow (qFloor (SATURATION_MIN + s0To1 * (SATURATION_MAX - SATURATION_MIN)));
 }

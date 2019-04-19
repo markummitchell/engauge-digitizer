@@ -26,9 +26,9 @@
 
 DigitizeStateScale::DigitizeStateScale (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context),
-  m_temporaryPoint0 (0),
-  m_temporaryPoint1 (0),
-  m_line (0)
+  m_temporaryPoint0 (nullptr),
+  m_temporaryPoint1 (nullptr),
+  m_line (nullptr)
 {
 }
 
@@ -102,7 +102,7 @@ void DigitizeStateScale::handleKeyPress (CmdMediator * /* cmdMediator */,
 void DigitizeStateScale::handleMouseMove (CmdMediator * /* cmdMediator */,
                                           QPointF posScreen)
 {
-  if (m_temporaryPoint1 != 0) {
+  if (m_temporaryPoint1 != nullptr) {
 
     LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateScale::handleMouseMove"
                                  << " oldPos=" << QPointFToString (m_temporaryPoint1->pos ()).toLatin1().data()
@@ -119,7 +119,7 @@ void DigitizeStateScale::handleMousePress (CmdMediator *cmdMediator,
 { 
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::handleMousePress";
 
-  GeometryWindow *NULL_GEOMETRY_WINDOW = 0;
+  GeometryWindow *NULL_GEOMETRY_WINDOW = nullptr;
 
   // Create the scale bar to give the user immediate feedback that something was created
   const Curve &curveAxes = cmdMediator->curveAxes();
@@ -169,7 +169,7 @@ void DigitizeStateScale::handleMouseRelease (CmdMediator *cmdMediator,
 
   if (context().mainWindow().transformIsDefined()) {
 
-    QMessageBox::warning (0,
+    QMessageBox::warning (nullptr,
                           QObject::tr ("Engauge Digitizer"),
                           QObject::tr ("The scale bar has been defined, and another is not needed or allowed."));
 
@@ -219,9 +219,9 @@ void DigitizeStateScale::removeTemporaryPointsAndLine ()
   context().mainWindow().scene().removePoint (m_pointIdentifier1); // Deallocates GraphicsPoint automaticall
   context().mainWindow().scene().removeItem (m_line);
   delete m_line;
-  m_temporaryPoint0 = 0;
-  m_temporaryPoint1 = 0;
-  m_line = 0;
+  m_temporaryPoint0 = nullptr;
+  m_temporaryPoint1 = nullptr;
+  m_line = nullptr;
 }
 
 QString DigitizeStateScale::state() const

@@ -102,7 +102,8 @@ void BackgroundStateContext::setBackgroundImage (BackgroundImage backgroundImage
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::setBackgroundImage"
                               << " background=" << backgroundImageToString (backgroundImage).toLatin1().data();
 
-  BackgroundState backgroundState;
+  BackgroundState backgroundState= BACKGROUND_STATE_NONE;
+  
   switch (backgroundImage) {
     case BACKGROUND_IMAGE_FILTERED:
       backgroundState = BACKGROUND_STATE_CURVE;
@@ -115,10 +116,6 @@ void BackgroundStateContext::setBackgroundImage (BackgroundImage backgroundImage
      case BACKGROUND_IMAGE_ORIGINAL:
       backgroundState = BACKGROUND_STATE_ORIGINAL;
       break;
-
-    default:
-      LOG4CPP_ERROR_S ((*mainCat)) << "BackgroundStateContext::selectBackgroundImage";
-      exit (-1);
   }
 
   // It is safe to transition to the new state immediately since no BackgroundState classes are on the stack

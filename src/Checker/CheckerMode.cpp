@@ -9,17 +9,21 @@
 
 QString checkerModeToString (CheckerMode checkerMode)
 {
+  QString rtn;
+
   switch (checkerMode) {
     case CHECKER_MODE_NEVER:
-      return QObject::tr ("Never");
+      rtn = QObject::tr ("Never");
+      break;
 
     case CHECKER_MODE_N_SECONDS:
-      return QObject::tr ("NSeconds");
+      rtn = QObject::tr ("NSeconds");
+      break;
 
     case CHECKER_MODE_FOREVER:
-      return QObject::tr ("Forever");
-
-    default:
-      return QObject::tr ("Unknown");
+      rtn = QObject::tr ("Forever");
+      break;
   }
+
+  return rtn;
 }

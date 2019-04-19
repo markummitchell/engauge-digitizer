@@ -7,6 +7,7 @@
 #include "ColorConstants.h"
 #include "ColorFilterSettings.h"
 #include "ColorFilterSettingsStrategyForeground.h"
+#include <qmath.h>
 #include <QTextStream>
 
 ColorFilterSettingsStrategyForeground::ColorFilterSettingsStrategyForeground ()
@@ -19,14 +20,14 @@ ColorFilterSettingsStrategyForeground::~ColorFilterSettingsStrategyForeground ()
 
 double ColorFilterSettingsStrategyForeground::high (const ColorFilterSettings &colorFilterSettings) const
 {
-  return (double) (colorFilterSettings.foregroundHigh () - FOREGROUND_MIN) /
-    (double) (FOREGROUND_MAX - FOREGROUND_MIN); 
+  return double (colorFilterSettings.foregroundHigh () - FOREGROUND_MIN) /
+    double (FOREGROUND_MAX - FOREGROUND_MIN);
 }
 
 double ColorFilterSettingsStrategyForeground::low (const ColorFilterSettings &colorFilterSettings) const
 {
-  return (double) (colorFilterSettings.foregroundLow () - FOREGROUND_MIN) /
-    (double) (FOREGROUND_MAX - FOREGROUND_MIN);
+  return double (colorFilterSettings.foregroundLow () - FOREGROUND_MIN) /
+    double (FOREGROUND_MAX - FOREGROUND_MIN);
 }
 
 void ColorFilterSettingsStrategyForeground::printStream (const ColorFilterSettings &colorFilterSettings,
@@ -40,11 +41,11 @@ void ColorFilterSettingsStrategyForeground::printStream (const ColorFilterSettin
 void ColorFilterSettingsStrategyForeground::setHigh (ColorFilterSettings &colorFilterSettings,
                                                      double s0To1)
 {
-  colorFilterSettings.setForegroundHigh (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN));  
+  colorFilterSettings.setForegroundHigh (qFloor (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN)));
 }
 
 void ColorFilterSettingsStrategyForeground::setLow (ColorFilterSettings &colorFilterSettings,
                                                     double s0To1)
 {
-  colorFilterSettings.setForegroundLow (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN));
+  colorFilterSettings.setForegroundLow (qFloor (FOREGROUND_MIN + s0To1 * (FOREGROUND_MAX - FOREGROUND_MIN)));
 }

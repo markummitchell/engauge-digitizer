@@ -84,12 +84,12 @@ void GeometryStrategyFunctionSmooth::loadSmoothAmbiguityVector (QVector<QString>
       numSegments > 0) {
 
     // Create spline
-    vector<double> t (x.size ());
-    vector<SplinePair> xy (x.size ());
-    for (int i = 0; i < x.size (); i++) {
+    vector<double> t (unsigned (x.size ()));
+    vector<SplinePair> xy (unsigned (x.size ()));
+    for (unsigned int i = 0; i < unsigned (x.size ()); i++) {
       t [i] = i;
-      xy [i] = SplinePair (x.at (i).toDouble (),
-                           y.at (i).toDouble ());
+      xy [i] = SplinePair (x.at (signed (i)).toDouble (),
+                           y.at (signed (i)).toDouble ());
     }
     Spline s (t,
               xy);

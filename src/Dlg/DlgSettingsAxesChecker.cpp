@@ -39,10 +39,10 @@ DlgSettingsAxesChecker::DlgSettingsAxesChecker(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Axes Checker"),
                            "DlgSettingsAxesChecker",
                            mainWindow),
-  m_checker (0),
-  m_modelAxesCheckerBefore (0),
-  m_modelAxesCheckerAfter (0),
-  m_modelCoords (0)
+  m_checker (nullptr),
+  m_modelAxesCheckerBefore (nullptr),
+  m_modelAxesCheckerAfter (nullptr),
+  m_modelCoords (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::DlgSettingsAxesChecker";
 
@@ -263,7 +263,7 @@ void DlgSettingsAxesChecker::slotLineColor(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::slotLineColor";
 
-  m_modelAxesCheckerAfter->setLineColor ((ColorPalette) m_cmbLineColor->currentData().toInt());
+  m_modelAxesCheckerAfter->setLineColor (static_cast<ColorPalette> (m_cmbLineColor->currentData().toInt()));
   updateControls();
   updatePreview();
 }
@@ -294,7 +294,7 @@ void DlgSettingsAxesChecker::updatePreview()
 
   QPolygonF polygon (points);
 
-  ENGAUGE_ASSERT (m_checker != 0);
+  ENGAUGE_CHECK_PTR (m_checker);
   m_checker->prepareForDisplay (polygon,
                                 ZERO_RADIUS_SINCE_NO_POINTS,
                                 *m_modelAxesCheckerAfter,

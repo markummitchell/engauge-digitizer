@@ -27,8 +27,8 @@ int DlgImportCroppingNonPdf::MINIMUM_PREVIEW_HEIGHT = 200;
 
 DlgImportCroppingNonPdf::DlgImportCroppingNonPdf(const QString &fileName) :
   m_fileName (fileName),
-  m_pixmap (0),
-  m_nonPdfCropping (0)
+  m_pixmap (nullptr),
+  m_nonPdfCropping (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingNonPdf::DlgImportCroppingNonPdf";
 
@@ -134,7 +134,7 @@ QImage DlgImportCroppingNonPdf::image () const
 {
   // If the entire page was to be returned, then this method would simply return m_image. However, only the framed
   // portion is to be returned
-  ENGAUGE_ASSERT (m_nonPdfCropping != 0);
+  ENGAUGE_CHECK_PTR (m_nonPdfCropping);
   QRectF rectFramePixels = m_nonPdfCropping->frameRect ();
 
   return m_image.copy (rectFramePixels.toRect ());
@@ -206,7 +206,7 @@ void DlgImportCroppingNonPdf::updatePreview ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingNonPdf::updatePreview";
 
-  if (m_pixmap != 0) {
+  if (m_pixmap != nullptr) {
     m_scenePreview->removeItem (m_pixmap);
   }
 

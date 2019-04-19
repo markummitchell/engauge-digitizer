@@ -28,7 +28,7 @@ void xmlExitWithError (QXmlStreamReader &reader,
   // Try to extract as much useful context as possible
   QString context;
   QFileDevice *fileDevice = dynamic_cast<QFileDevice*> (reader.device());
-  if (fileDevice == 0) {
+  if (fileDevice == nullptr) {
 
     context = QString ("%1 %2: ")
               .arg (QObject::tr ("Start at line"))
@@ -50,7 +50,7 @@ void xmlExitWithError (QXmlStreamReader &reader,
                        .arg (message)
                        .arg (QObject::tr ("Quitting"));
 
-  QMessageBox::critical (0,
+  QMessageBox::critical (nullptr,
                          QObject::tr ("Error reading xml"),
                          adornedMsg);
 

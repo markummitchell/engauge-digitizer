@@ -47,7 +47,7 @@ void ViewPreview::resizeEvent(QResizeEvent *event)
     for (int i = 0; i < scene()->items().count (); i++) {
       const QGraphicsItem *item = scene()->items().at (i);
       const QGraphicsPixmapItem *itemPixmap = dynamic_cast<const QGraphicsPixmapItem*> (item);
-      if (itemPixmap != 0) {
+      if (itemPixmap != nullptr) {
         foundImage = true;
         fitInView (itemPixmap->boundingRect());
       }

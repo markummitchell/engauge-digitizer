@@ -70,13 +70,13 @@ QRgb pixelRGB1(const QImage &image1Bit, int x, int y)
     bit = *(image1Bit.scanLine (y) + (x >> 3)) & (1 << (7 - (x & 7)));
   }
 
-  unsigned int tableIndex = ((bit == 0) ? 0 : 1);
+  int tableIndex = ((bit == 0) ? 0 : 1);
   return image1Bit.color(tableIndex);
 }
 
 QRgb pixelRGB8(const QImage &image8Bit, int x, int y)
 {
-  unsigned int tableIndex = *(image8Bit.scanLine(y) + x);
+  int tableIndex = *(image8Bit.scanLine(y) + x);
   return image8Bit.color(tableIndex);
 }
 
@@ -199,7 +199,7 @@ void setPixelRGB8(QImage &image8Bit, int x, int y, QRgb q)
   for (int index = 0; index < image8Bit.colorCount(); index++) {
     if (q == image8Bit.color(index))
     {
-      *(image8Bit.scanLine(y) + x) = index;
+      *(image8Bit.scanLine(y) + x) = static_cast<uchar> (index);
       return;
     }
   }
@@ -208,5 +208,5 @@ void setPixelRGB8(QImage &image8Bit, int x, int y, QRgb q)
 void setPixelRGB32(QImage &image32Bit, int x, int y, QRgb q)
 {
   int* p = (int *)image32Bit.scanLine(y) + x;
-  *p = q;
+  *p = signed (q);
 }

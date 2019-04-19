@@ -6,6 +6,8 @@
 
 QTEST_MAIN (TestGraphCoords)
 
+const double EPSILON = 0.0;
+
 TestGraphCoords::TestGraphCoords(QObject *parent) :
   QObject(parent)
 {
@@ -56,7 +58,8 @@ void TestGraphCoords::testAnyColumnsRepeatNo ()
   vector.push_back (QPointF (300, 100));
   vector.push_back (QPointF (200, 200));
 
-  QVERIFY (!m_callback->anyPointsRepeatPair (vector));
+  QVERIFY (!m_callback->anyPointsRepeatPair (vector,
+                                             EPSILON));
 }
 
 void TestGraphCoords::testAnyColumnsRepeatYes ()
@@ -68,7 +71,8 @@ void TestGraphCoords::testAnyColumnsRepeatYes ()
   vector.push_back (QPointF (100, 100));
   vector.push_back (QPointF (200, 200));
 
-  QVERIFY (m_callback->anyPointsRepeatPair (vector));
+  QVERIFY (m_callback->anyPointsRepeatPair (vector,
+                                            EPSILON));
 }
 
 void TestGraphCoords::testThreeCollinearPointsNo ()

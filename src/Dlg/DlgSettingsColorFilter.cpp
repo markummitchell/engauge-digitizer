@@ -37,11 +37,11 @@ DlgSettingsColorFilter::DlgSettingsColorFilter(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Color Filter"),
                            "DlgSettingsColorFilter",
                            mainWindow),
-  m_scenePreview (0),
-  m_viewPreview (0),
-  m_filterThread (0),
-  m_modelColorFilterBefore (0),
-  m_modelColorFilterAfter (0)
+  m_scenePreview (nullptr),
+  m_viewPreview (nullptr),
+  m_filterThread (nullptr),
+  m_modelColorFilterBefore (nullptr),
+  m_modelColorFilterAfter (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsColorFilter::DlgSettingsColorFilter";
 
@@ -203,7 +203,7 @@ QRgb DlgSettingsColorFilter::createThread ()
   QRgb rgbBackground = filter.marginColor(&image);
 
   // Only create thread once
-  if (m_filterThread == 0) {
+  if (m_filterThread == nullptr) {
 
     m_filterThread = new DlgFilterThread (cmdMediator().document().pixmap(),
                                           rgbBackground,
@@ -267,7 +267,7 @@ void DlgSettingsColorFilter::loadForCurveName()
   QString curveName = m_cmbCurveName->currentText();
 
   // Skip if everything is not set up yet
-  if (!curveName.isEmpty () && m_modelColorFilterAfter != 0) {
+  if (!curveName.isEmpty () && m_modelColorFilterAfter != nullptr) {
 
     // Populate controls
     ColorFilterMode colorFilterMode = m_modelColorFilterAfter->colorFilterMode(curveName);
@@ -306,14 +306,14 @@ void DlgSettingsColorFilter::slotCurveName(const QString & /* curveName */)
 void DlgSettingsColorFilter::slotDividerHigh (double xCenter)
 {
   m_modelColorFilterAfter->setHigh (m_cmbCurveName->currentText(),
-                                    xCenter / (double) PROFILE_SCENE_WIDTH ());
+                                    xCenter / double (PROFILE_SCENE_WIDTH ()));
   updatePreview();
 }
 
 void DlgSettingsColorFilter::slotDividerLow (double xCenter)
 {
   m_modelColorFilterAfter->setLow (m_cmbCurveName->currentText(),
-                                   xCenter / (double) PROFILE_SCENE_WIDTH ());
+                                   xCenter / double (PROFILE_SCENE_WIDTH ()));
   updatePreview();
 }
 
@@ -409,7 +409,7 @@ void DlgSettingsColorFilter::updateHistogram()
   // Start with original image
   QImage image = cmdMediator().document().pixmap().toImage();
 
-  double *histogramBins = new double [ColorFilterHistogram::HISTOGRAM_BINS ()];
+  double *histogramBins = new double [unsigned (ColorFilterHistogram::HISTOGRAM_BINS ())];
 
   ColorFilter filter;
   ColorFilterHistogram filterHistogram;
@@ -423,7 +423,7 @@ void DlgSettingsColorFilter::updateHistogram()
   // Draw histogram, normalizing so highest peak exactly fills the vertical range. Log scale is used
   // so smaller peaks do not disappear
   double logMaxBinCount = qLn (maxBinCount);
-  if (logMaxBinCount != 0) { // Will not have divide by zero from logMaxBinCount below
+  if (qAbs (logMaxBinCount) > 0) { // Will not have divide by zero from logMaxBinCount below
     for (int bin = 1; bin < ColorFilterHistogram::HISTOGRAM_BINS (); bin++) {
 
       double x0 = PROFILE_SCENE_WIDTH () * (bin - 1.0) / (ColorFilterHistogram::HISTOGRAM_BINS () - 1.0);
@@ -449,13 +449,13 @@ void DlgSettingsColorFilter::updateHistogram()
                                         *m_viewProfile,
                                         PROFILE_SCENE_WIDTH (),
                                         PROFILE_SCENE_HEIGHT (),
-                                        PROFILE_SCENE_HEIGHT () * 2.0 / 3.0,
+                                        qFloor (PROFILE_SCENE_HEIGHT () * 2.0 / 3.0),
                                         true);
   m_dividerHigh = new ViewProfileDivider(*m_sceneProfile,
                                          *m_viewProfile,
                                          PROFILE_SCENE_HEIGHT (),
                                          PROFILE_SCENE_WIDTH (),
-                                         PROFILE_SCENE_HEIGHT () / 3.0,
+                                         qFloor (PROFILE_SCENE_HEIGHT () / 3.0),
                                          false);
 
   // Connect the dividers to each other since the shaded areas depend on both divides when low divider is

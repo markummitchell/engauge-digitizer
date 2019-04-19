@@ -7,6 +7,7 @@
 #include "ColorConstants.h"
 #include "ColorFilterSettings.h"
 #include "ColorFilterSettingsStrategyIntensity.h"
+#include <qmath.h>
 #include <QTextStream>
 
 ColorFilterSettingsStrategyIntensity::ColorFilterSettingsStrategyIntensity ()
@@ -19,14 +20,14 @@ ColorFilterSettingsStrategyIntensity::~ColorFilterSettingsStrategyIntensity ()
 
 double ColorFilterSettingsStrategyIntensity::high (const ColorFilterSettings &colorFilterSettings) const
 {
-  return (double) (colorFilterSettings.intensityHigh () - INTENSITY_MIN) /
-    (double) (INTENSITY_MAX - INTENSITY_MIN); 
+  return double (colorFilterSettings.intensityHigh () - INTENSITY_MIN) /
+    double (INTENSITY_MAX - INTENSITY_MIN);
 }
 
 double ColorFilterSettingsStrategyIntensity::low (const ColorFilterSettings &colorFilterSettings) const
 {
-  return (double) (colorFilterSettings.intensityLow () - INTENSITY_MIN) /
-    (double) (INTENSITY_MAX - INTENSITY_MIN);
+  return double (colorFilterSettings.intensityLow () - INTENSITY_MIN) /
+    double (INTENSITY_MAX - INTENSITY_MIN);
 }
 
 void ColorFilterSettingsStrategyIntensity::printStream (const ColorFilterSettings &colorFilterSettings,
@@ -40,11 +41,11 @@ void ColorFilterSettingsStrategyIntensity::printStream (const ColorFilterSetting
 void ColorFilterSettingsStrategyIntensity::setHigh (ColorFilterSettings &colorFilterSettings,
                                                     double s0To1)
 {
-  colorFilterSettings.setIntensityHigh (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN));  
+  colorFilterSettings.setIntensityHigh (qFloor (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN)));
 }
 
 void ColorFilterSettingsStrategyIntensity::setLow (ColorFilterSettings &colorFilterSettings,
                                                    double s0To1)
 {
-  colorFilterSettings.setIntensityLow (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN));
+  colorFilterSettings.setIntensityLow (qFloor (INTENSITY_MIN + s0To1 * (INTENSITY_MAX - INTENSITY_MIN)));
 }

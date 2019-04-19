@@ -102,7 +102,7 @@ const LineStyle CurveStyles::lineStyle (const QString &curveName) const
 int CurveStyles::lineWidth (const QString &curveName) const
 {
   ENGAUGE_ASSERT (m_curveStyles.contains (curveName));
-  return m_curveStyles [curveName].lineStyle().width();
+  return signed (m_curveStyles [curveName].lineStyle().width());
 }
 
 void CurveStyles::loadXml (QXmlStreamReader &reader)

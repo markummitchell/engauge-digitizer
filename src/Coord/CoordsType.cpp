@@ -8,14 +8,17 @@
 
 QString coordsTypeToString (CoordsType coordsType)
 {
+  QString rtn;
+
   switch (coordsType) {
     case COORDS_TYPE_CARTESIAN:
-      return "Cartesian";
+      rtn = "Cartesian";
+      break;
 
      case COORDS_TYPE_POLAR:
-      return "Polar";
-
-    default:
-      return "Unknown";
+      rtn = "Polar";
+      break;
   }
+
+  return rtn;
 }

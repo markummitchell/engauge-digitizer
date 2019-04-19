@@ -13,12 +13,12 @@
 
 Correlation::Correlation(int N) :
   m_N (N),
-  m_signalA ((fftw_complex *) fftw_malloc(sizeof(fftw_complex) * (2 * N - 1))),
-  m_signalB ((fftw_complex *) fftw_malloc(sizeof(fftw_complex) * (2 * N - 1))),
-  m_outShifted ((fftw_complex *) fftw_malloc(sizeof(fftw_complex) * (2 * N - 1))),
-  m_outA ((fftw_complex *) fftw_malloc(sizeof(fftw_complex) * (2 * N - 1))),
-  m_outB ((fftw_complex *) fftw_malloc(sizeof(fftw_complex) * (2 * N - 1))),
-  m_out ((fftw_complex *) fftw_malloc(sizeof(fftw_complex) * (2 * N - 1)))
+  m_signalA (static_cast<fftw_complex *> (fftw_malloc(sizeof(fftw_complex) * unsigned (2 * N - 1)))),
+  m_signalB (static_cast<fftw_complex *> (fftw_malloc(sizeof(fftw_complex) * unsigned (2 * N - 1)))),
+  m_outShifted (static_cast<fftw_complex *> (fftw_malloc(sizeof(fftw_complex) * unsigned (2 * N - 1)))),
+  m_outA (static_cast<fftw_complex *> (fftw_malloc(sizeof(fftw_complex) * unsigned (2 * N - 1)))),
+  m_outB (static_cast<fftw_complex *> (fftw_malloc(sizeof(fftw_complex) * unsigned (2 * N - 1)))),
+  m_out (static_cast<fftw_complex *> (fftw_malloc(sizeof(fftw_complex) * unsigned (2 * N - 1))))
 {
   m_planA = fftw_plan_dft_1d(2 * N - 1, m_signalA, m_outA, FFTW_FORWARD, FFTW_ESTIMATE);
   m_planB = fftw_plan_dft_1d(2 * N - 1, m_signalB, m_outB, FFTW_FORWARD, FFTW_ESTIMATE);

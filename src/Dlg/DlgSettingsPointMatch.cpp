@@ -30,11 +30,11 @@ DlgSettingsPointMatch::DlgSettingsPointMatch(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Point Match"),
                            "DlgSettingsPointMatch",
                            mainWindow),
-  m_scenePreview (0),
-  m_viewPreview (0),
-  m_circle (0),
-  m_modelPointMatchBefore (0),
-  m_modelPointMatchAfter (0)
+  m_scenePreview (nullptr),
+  m_viewPreview (nullptr),
+  m_circle (nullptr),
+  m_modelPointMatchBefore (nullptr),
+  m_modelPointMatchAfter (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::DlgSettingsPointMatch";
 
@@ -223,7 +223,7 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
   ENGAUGE_ASSERT (POINT_SIZE_MAX > m_modelPointMatchAfter->maxPointSize());
 
   // Populate controls
-  m_spinPointSize->setValue(m_modelPointMatchAfter->maxPointSize());
+  m_spinPointSize->setValue(qFloor (m_modelPointMatchAfter->maxPointSize()));
 
   int indexAccepted = m_cmbAcceptedPointColor->findData(QVariant(m_modelPointMatchAfter->paletteColorAccepted()));
   ENGAUGE_ASSERT (indexAccepted >= 0);
@@ -271,7 +271,7 @@ void DlgSettingsPointMatch::slotAcceptedPointColor (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotAcceptedPointColor";
 
-  m_modelPointMatchAfter->setPaletteColorAccepted((ColorPalette) m_cmbAcceptedPointColor->currentData().toInt());
+  m_modelPointMatchAfter->setPaletteColorAccepted(static_cast<ColorPalette> (m_cmbAcceptedPointColor->currentData().toInt()));
 
   updateControls();
   updatePreview();
@@ -281,7 +281,7 @@ void DlgSettingsPointMatch::slotCandidatePointColor (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotCandidatePointColor";
 
-  m_modelPointMatchAfter->setPaletteColorCandidate((ColorPalette) m_cmbCandidatePointColor->currentData().toInt());
+  m_modelPointMatchAfter->setPaletteColorCandidate(static_cast<ColorPalette> (m_cmbCandidatePointColor->currentData().toInt()));
   updateControls();
   updatePreview();
 }
@@ -308,7 +308,7 @@ void DlgSettingsPointMatch::slotRejectedPointColor (const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsPointMatch::slotRejectedPointColor";
 
-  m_modelPointMatchAfter->setPaletteColorRejected((ColorPalette) m_cmbRejectedPointColor->currentData().toInt());
+  m_modelPointMatchAfter->setPaletteColorRejected(static_cast<ColorPalette> (m_cmbRejectedPointColor->currentData().toInt()));
   updateControls();
   updatePreview();
 }

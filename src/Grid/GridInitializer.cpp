@@ -46,11 +46,11 @@ void GridInitializer::axisScale (double xMin,
   // Round off average to first significant digit of range
   xAverage = (xMin + xMax) / 2.0;
   xRange = xMax - xMin;
-  if (xRange == 0) {
+  if (qAbs (xRange) <= 0) {
     xRange = fabs (xAverage / 10.0); // for null range use arbitrary range
   }
   nDigitRange = valuePower (xRange);
-  xDelta = pow ((double) 10.0, (double) nDigitRange);
+  xDelta = pow (10.0, double (nDigitRange));
   xAverageRoundedUp = xDelta * floor ((xAverage + xDelta / 2.0) / xDelta);
 
   if (xRange > range_epsilon) {
@@ -72,14 +72,14 @@ void GridInitializer::axisScale (double xMin,
     xStop += xDelta;
   }
 
-  xCount = 1 + (int) floor ((xStop - xStart) / xDelta + 0.5);
+  xCount = 1 + qFloor ((xStop - xStart) / xDelta + 0.5);
 
   if (!linearAxis) {
 
     // Convert from log scale back to linear scale. We make sure to keep numbers like 10^-8 unmolested
-    xStart = pow((double) 10.0, xStart);
-    xStop = pow((double) 10.0, xStop);
-    xDelta = pow((double) 10.0, xDelta);
+    xStart = pow(10.0, xStart);
+    xStop = pow(10.0, xStop);
+    xDelta = pow(10.0, xDelta);
 
   } else {
 
@@ -100,16 +100,16 @@ int GridInitializer::computeCount (bool linearAxis,
   int count;
 
   if (linearAxis) {
-    if (step == 0) {
+    if (qAbs (step) <= 0) {
       count = 1;
     } else {
-      count = (int) (1.0 + (stop - start) / step);
+      count = qFloor (1.0 + (stop - start) / step);
     }
   } else {
     if ((start <= 0) || (step <= 0.0)) {
       count = 1;
     } else {
-      count = (int) (1.0 + log10 (stop / start) / log10 (step));
+      count = qFloor (1.0 + log10 (stop / start) / log10 (step));
     }
   }
 
@@ -126,7 +126,7 @@ double GridInitializer::computeStart (bool linearAxis,
   if (linearAxis) {
     start = stop - step * (count - 1);
   } else {
-    start = stop / pow (step, (double) (count - 1));
+    start = stop / pow (step, double (count - 1));
   }
 
   return start;
@@ -150,7 +150,7 @@ double GridInitializer::computeStep (bool linearAxis,
       step = 1.0;
     } else {
       if (count > 1) {
-        step = pow (stop / start, (double) 1.0 / (count - 1));
+        step = pow (stop / start, 1.0 / double (count - 1));
       } else {
         step = stop / start;
       }
@@ -170,7 +170,7 @@ double GridInitializer::computeStop (bool linearAxis,
   if (linearAxis) {
     stop = start + step * (count - 1);
   } else {
-    stop = start * pow (step, (double) (count - 1));
+    stop = start * pow (step, double (count - 1));
   }
 
   return stop;
@@ -197,7 +197,7 @@ DocumentModelGridDisplay GridInitializer::initializeWithNarrowCoverage (const QP
              count);
 
   modelGridDisplay.setDisableX (GRID_COORD_DISABLE_COUNT);
-  modelGridDisplay.setCountX (count);
+  modelGridDisplay.setCountX (unsigned (count));
   modelGridDisplay.setStartX (start);
   modelGridDisplay.setStepX (step);
   modelGridDisplay.setStopX (stop);
@@ -212,7 +212,7 @@ DocumentModelGridDisplay GridInitializer::initializeWithNarrowCoverage (const QP
              count);
 
   modelGridDisplay.setDisableY (GRID_COORD_DISABLE_COUNT);
-  modelGridDisplay.setCountY (count);
+  modelGridDisplay.setCountY (unsigned (count));
   modelGridDisplay.setStartY (start);
   modelGridDisplay.setStepY (step);
   modelGridDisplay.setStopY (stop);
@@ -257,11 +257,11 @@ void GridInitializer::overridePolarCoordinateSettings (const DocumentModelCoords
   double startX = 0.0;
   double stopX = 360.0;
   double stepX = 30.0;
-  int countX = (int) (0.5 + (stopX - startX) / stepX);
+  int countX = qFloor (0.5 + (stopX - startX) / stepX);
   modelGridDisplay.setStartX (startX);
   modelGridDisplay.setStepX (stepX);
   modelGridDisplay.setStopX (stopX);
-  modelGridDisplay.setCountX (countX);
+  modelGridDisplay.setCountX (unsigned (countX));
 
   // We extend the range to cover the four corners of the image, since otherwise
   // areas around at least some graph corners are not covered by the grid lines
@@ -287,21 +287,21 @@ void GridInitializer::overridePolarCoordinateSettings (const DocumentModelCoords
                         stepY :
                         qLn (stepY));
   int countY = 1;
-  if (denominator != 0) {
+  if (qAbs (denominator) > 0) {
     countY = (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR ?
-              (int) (0.5 + (stopY - startY) / denominator) :
-              (int) (0.5 + (qLn (stopY) - qLn (startY)) / denominator));
+              qFloor (0.5 + (stopY - startY) / denominator) :
+              qFloor (0.5 + (qLn (stopY) - qLn (startY)) / denominator));
   }
 
   modelGridDisplay.setStartY (startY);
   modelGridDisplay.setStopY (stopY);
-  modelGridDisplay.setCountY (countY);
+  modelGridDisplay.setCountY (unsigned (countY));
 }
 
 double GridInitializer::roundOffToPower(double arg,
                                         int power) const
 {
-  double powerOf10 = pow ((double) 10, power);
+  double powerOf10 = pow (10.0, power);
   return powerOf10 * floor (arg / powerOf10 + 0.5);
 }
 
@@ -313,6 +313,6 @@ int GridInitializer::valuePower(double value) const
   if (avalue < pow(10.0, minPower)) {
     return minPower;
   } else {
-    return (int) floor (log10 (avalue));
+    return qFloor (log10 (avalue));
   }
 }

@@ -55,15 +55,15 @@ void CallbackGatherXThetasInGridLines::addGridLines (const MainWindowModel &mode
                                   stopX);
   if (document.modelCoords().coordScaleXTheta() == COORD_SCALE_LINEAR) {
     // Linear
-    unsigned int countX = (unsigned int) (0.5 + 1 + (stopX - startX) / stepX);
-    for (unsigned int i = 0; i < countX; i++) {
+    int countX = qFloor (0.5 + 1 + (stopX - startX) / stepX);
+    for (int i = 0; i < countX; i++) {
       double x = startX + i * stepX;
       addGraphX (x);
     }
   } else {
     // Log
-    unsigned int countX = (unsigned int) (1.0 + (qLn (stopX) - qLn (startX)) / qLn (stepX));
-    for (unsigned int i = 0; i < countX; i++) {
+    int countX = qFloor (1.0 + (qLn (stopX) - qLn (startX)) / qLn (stepX));
+    for (int i = 0; i < countX; i++) {
       double x = startX * qPow (stepX, i);
       addGraphX (x);
     }

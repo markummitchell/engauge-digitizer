@@ -25,8 +25,8 @@ DlgSettingsGeneral::DlgSettingsGeneral(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("General"),
                            "DlgSettingsGeneral",
                            mainWindow),
-  m_modelGeneralBefore (0),
-  m_modelGeneralAfter (0)
+  m_modelGeneralBefore (nullptr),
+  m_modelGeneralAfter (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGeneral::DlgSettingsGeneral";
 

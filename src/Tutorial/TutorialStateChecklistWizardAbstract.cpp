@@ -73,13 +73,13 @@ void TutorialStateChecklistWizardAbstract::end ()
   delete m_text3;
   delete m_previous;
 
-  m_title = 0;
-  m_background = 0;
-  m_text0 = 0;
-  m_text1 = 0;
-  m_text2 = 0;
-  m_text3 = 0;
-  m_previous = 0;
+  m_title = nullptr;
+  m_background = nullptr;
+  m_text0 = nullptr;
+  m_text1 = nullptr;
+  m_text2 = nullptr;
+  m_text3 = nullptr;
+  m_previous = nullptr;
 }
 
 TutorialButton *TutorialStateChecklistWizardAbstract::previous()

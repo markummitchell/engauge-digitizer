@@ -186,14 +186,14 @@ void ColorFilterSettings::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_VALUE_LOW) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_COLOR_FILTER_VALUE_HIGH)) {
 
-    setColorFilterMode ((ColorFilterMode) attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_MODE).toInt());
+    setColorFilterMode (static_cast<ColorFilterMode> (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_MODE).toInt()));
     setIntensityLow (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_INTENSITY_LOW).toInt());
-    setIntensityHigh ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_INTENSITY_HIGH).toInt());
+    setIntensityHigh (static_cast<GridCoordDisable> (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_INTENSITY_HIGH).toInt()));
     setForegroundLow (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_FOREGROUND_LOW).toInt());
     setForegroundHigh (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_FOREGROUND_HIGH).toInt());
     setHueLow (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_HUE_LOW).toInt());
     setHueHigh (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_HUE_HIGH).toInt());
-    setSaturationLow ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_SATURATION_LOW).toInt());
+    setSaturationLow (static_cast<GridCoordDisable> (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_SATURATION_LOW).toInt()));
     setSaturationHigh (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_SATURATION_HIGH).toInt());
     setValueLow (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_VALUE_LOW).toInt());
     setValueHigh (attributes.value(DOCUMENT_SERIALIZE_COLOR_FILTER_VALUE_HIGH).toInt());

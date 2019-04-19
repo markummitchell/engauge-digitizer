@@ -76,13 +76,13 @@ void TutorialStateAxisPoints::end ()
   delete m_next;
   delete m_previous;
 
-  m_title = 0;
-  m_background = 0;
-  m_text0 = 0;
-  m_text1 = 0;
-  m_text2 = 0;
-  m_next = 0;
-  m_previous = 0;
+  m_title = nullptr;
+  m_background = nullptr;
+  m_text0 = nullptr;
+  m_text1 = nullptr;
+  m_text2 = nullptr;
+  m_next = nullptr;
+  m_previous = nullptr;
 }
 
 void TutorialStateAxisPoints::slotNext ()

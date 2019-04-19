@@ -90,7 +90,7 @@ void DocumentModelDigitizeCurve::loadXml(QXmlStreamReader &reader)
 
     setCursorInnerRadius (attributes.value(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_INNER_RADIUS).toInt());
     setCursorLineWidth (attributes.value(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_LINE_WIDTH).toInt());
-    setCursorSize ((CursorSize) attributes.value(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_SIZE).toInt());
+    setCursorSize (static_cast<CursorSize> (attributes.value(DOCUMENT_SERIALIZE_DIGITIZE_CURVE_CURSOR_SIZE).toInt()));
     setCursorStandardCross (standardCrossValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
 
     // Read until end of this subtree

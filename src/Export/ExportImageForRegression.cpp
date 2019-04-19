@@ -22,7 +22,7 @@ void ExportImageForRegression::fileExport (const QString &filename) const
 {
   QFile file (filename);
   if (!file.open (QIODevice::WriteOnly)) {
-    QMessageBox::critical (0,
+    QMessageBox::critical (nullptr,
                            QObject::tr ("Export Image"),
                            QObject::tr ("Cannot export file"));
   } else {

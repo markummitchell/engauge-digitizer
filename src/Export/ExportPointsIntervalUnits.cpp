@@ -9,14 +9,17 @@
 
 QString exportPointsIntervalUnitsToString (ExportPointsIntervalUnits exportPointsIntervalUnits)
 {
+  QString rtn;
+
   switch (exportPointsIntervalUnits) {
   case EXPORT_POINTS_INTERVAL_UNITS_GRAPH:
-    return QObject::tr ("Graph Units");
+    rtn = QObject::tr ("Graph Units");
+    break;
 
   case EXPORT_POINTS_INTERVAL_UNITS_SCREEN:
-    return QObject::tr ("Pixels");
-
-  default:
-    return QObject::tr ("Unknown");
+    rtn = QObject::tr ("Pixels");
+    break;
   }
+
+  return rtn;
 }

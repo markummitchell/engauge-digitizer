@@ -163,13 +163,13 @@ void GridRemoval::removeLine (const QPointF &posMin,
                                                          modelGridRemoval);
       gridHealers.push_back (gridHealer);
 
-      int xMin = qMin (pos1.x(), pos2.x());
-      int xMax = qMax (pos1.x(), pos2.x());
-      int yAtXMin = (pos1.x() < pos2.x() ? pos1.y() : pos2.y());
-      int yAtXMax = (pos1.x() < pos2.x() ? pos2.y() : pos1.y());
+      int xMin = qMin (qFloor (pos1.x()), qFloor (pos2.x()));
+      int xMax = qMax (qFloor (pos1.x()), qFloor (pos2.x()));
+      int yAtXMin = (pos1.x() < pos2.x() ? qFloor (pos1.y()) : qFloor (pos2.y()));
+      int yAtXMax = (pos1.x() < pos2.x() ? qFloor (pos2.y()) : qFloor (pos1.y()));
       for (int x = xMin; x <= xMax; x++) {
-        double s = (double) (x - xMin) / (double) (xMax - xMin);
-        int yLine = (int) (0.5 + (1.0 - s) * yAtXMin + s * yAtXMax);
+        double s = double (x - xMin) / double (xMax - xMin);
+        int yLine = qFloor (0.5 + (1.0 - s) * yAtXMin + s * yAtXMax);
         for (int yOffset = -HALF_WIDTH; yOffset <= HALF_WIDTH; yOffset++) {
           int y = yLine + yOffset;
           image.setPixel (x, y, QColor(Qt::white).rgb());
@@ -184,13 +184,13 @@ void GridRemoval::removeLine (const QPointF &posMin,
                                                                    modelGridRemoval);
       gridHealers.push_back (gridHealer);
 
-      int yMin = qMin (pos1.y(), pos2.y());
-      int yMax = qMax (pos1.y(), pos2.y());
-      int xAtYMin = (pos1.y() < pos2.y() ? pos1.x() : pos2.x());
-      int xAtYMax = (pos1.y() < pos2.y() ? pos2.x() : pos1.x());
+      int yMin = qMin (qFloor (pos1.y()), qFloor (pos2.y()));
+      int yMax = qMax (qFloor (pos1.y()), qFloor (pos2.y()));
+      int xAtYMin = (pos1.y() < pos2.y() ? qFloor (pos1.x()) : qFloor (pos2.x()));
+      int xAtYMax = (pos1.y() < pos2.y() ? qFloor (pos2.x()) : qFloor (pos1.x()));
       for (int y = yMin; y <= yMax; y++) {
-        double s = (double) (y - yMin) / (double) (yMax - yMin);
-        int xLine = (int) (0.5  + (1.0 - s) * xAtYMin + s * xAtYMax);
+        double s = double (y - yMin) / double (yMax - yMin);
+        int xLine = qFloor (0.5  + (1.0 - s) * xAtYMin + s * xAtYMax);
         for (int xOffset = -HALF_WIDTH; xOffset <= HALF_WIDTH; xOffset++) {
           int x = xLine + xOffset;
           image.setPixel (x, y, QColor(Qt::white).rgb());

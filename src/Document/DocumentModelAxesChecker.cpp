@@ -77,9 +77,9 @@ void DocumentModelAxesChecker::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_SECONDS) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_AXES_CHECKER_LINE_COLOR)) {
 
-    setCheckerMode ((CheckerMode) attributes.value(DOCUMENT_SERIALIZE_AXES_CHECKER_MODE).toInt());
+    setCheckerMode (static_cast<CheckerMode> (attributes.value(DOCUMENT_SERIALIZE_AXES_CHECKER_MODE).toInt()));
     setCheckerSeconds (attributes.value(DOCUMENT_SERIALIZE_AXES_CHECKER_SECONDS).toInt());
-    setLineColor ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_AXES_CHECKER_LINE_COLOR).toInt());
+    setLineColor (static_cast<ColorPalette> (attributes.value(DOCUMENT_SERIALIZE_AXES_CHECKER_LINE_COLOR).toInt()));
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||

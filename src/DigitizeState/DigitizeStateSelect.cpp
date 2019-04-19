@@ -144,7 +144,7 @@ void DigitizeStateSelect::handleContextMenuEventAxis2 (CmdMediator *cmdMediator)
     bool isError;
     QString errorMessage;
 
-    bool isXNonzero = (posGraphBefore.x() != 0); // Identify which coordinate is to be edited
+    bool isXNonzero = (qAbs (posGraphBefore.x()) > 0); // Identify which coordinate is to be edited
     QPointF posGraphAfter (isXNonzero ? scaleLength : 0,
                            isXNonzero ? 0 : scaleLength);
     context().mainWindow().cmdMediator()->document().checkEditPointAxis(pointIdentifier,
@@ -155,7 +155,7 @@ void DigitizeStateSelect::handleContextMenuEventAxis2 (CmdMediator *cmdMediator)
 
     if (isError) {
 
-      QMessageBox::warning (0,
+      QMessageBox::warning (nullptr,
                             engaugeWindowTitle(),
                             errorMessage);
 
@@ -216,7 +216,7 @@ void DigitizeStateSelect::handleContextMenuEventAxis34 (CmdMediator *cmdMediator
 
     if (isError) {
 
-      QMessageBox::warning (0,
+      QMessageBox::warning (nullptr,
                             engaugeWindowTitle(),
                             errorMessage);
 
@@ -241,7 +241,7 @@ void DigitizeStateSelect::handleContextMenuEventGraph (CmdMediator *cmdMediator,
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::handleContextMenuEventGraph "
                               << "points=" << pointIdentifiers.join(",").toLatin1 ().data ();
 
-  double *x = 0, *y = 0;
+  double *x = nullptr, *y = nullptr;
 
   if (pointIdentifiers.count() == 1) {
 
@@ -269,8 +269,8 @@ void DigitizeStateSelect::handleContextMenuEventGraph (CmdMediator *cmdMediator,
   delete x;
   delete y;
 
-  x = 0;
-  y = 0;
+  x = nullptr;
+  y = nullptr;
 
   int rtn = dlg->exec ();
 
@@ -349,8 +349,8 @@ void DigitizeStateSelect::handleMouseRelease (CmdMediator *cmdMediator,
   bool positionHasChanged = (positionHasChangedIdentifers.count () > 0);
 
   if (positionHasChanged && (
-        deltaScreen.x () != 0 ||
-        deltaScreen.y () != 0)) {
+        qAbs (deltaScreen.x ()) > 0 ||
+        qAbs (deltaScreen.y ()) > 0)) {
 
     QString moveText = moveTextFromDeltaScreen (deltaScreen);
 

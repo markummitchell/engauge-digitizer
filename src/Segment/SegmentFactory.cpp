@@ -10,9 +10,11 @@
 #include "Logger.h"
 #include <QApplication>
 #include <QGraphicsScene>
+#include <qmath.h>
 #include <QProgressDialog>
 #include "Segment.h"
 #include "SegmentFactory.h"
+#include <vector>
 
 using namespace std;
 
@@ -54,13 +56,13 @@ Segment *SegmentFactory::adjacentSegment(SegmentVector &lastSegment,
     if ((0 <= y) && (y < height)) {
 
       ENGAUGE_ASSERT (y < height);
-      if (lastSegment [y]) {
-        return lastSegment [y];
+      if (lastSegment [unsigned (y)]) {
+        return lastSegment [unsigned (y)];
       }
     }
   }
 
-  return 0;
+  return nullptr;
 }
 
 int SegmentFactory::adjacentSegments(SegmentVector &lastSegment,
@@ -75,11 +77,11 @@ int SegmentFactory::adjacentSegments(SegmentVector &lastSegment,
     if ((0 <= y) && (y < height)) {
 
       ENGAUGE_ASSERT (y < height);
-      if (!inSegment && lastSegment [y]) {
+      if (!inSegment && lastSegment [unsigned (y)]) {
 
        inSegment = true;
         ++adjacentSegments;
-      } else if (inSegment && !lastSegment [y]) {
+      } else if (inSegment && !lastSegment [unsigned (y)]) {
         inSegment = false;
       }
     }
@@ -141,7 +143,7 @@ void SegmentFactory::finishRun(bool *lastBool,
 
     // This is the start of a new segment
     seg = new Segment(m_scene,
-                      (int) (0.5 + (yStart + yStop) / 2.0),
+                      qFloor (0.5 + (yStart + yStop) / 2.0),
                       m_isGnuplot);
     ENGAUGE_CHECK_PTR (seg);
 
@@ -152,13 +154,13 @@ void SegmentFactory::finishRun(bool *lastBool,
 
     ++(*madeLines);
     ENGAUGE_CHECK_PTR(seg);
-    seg->appendColumn(x, (int) (0.5 + (yStart + yStop) / 2.0), modelSegments);
+    seg->appendColumn(x, qFloor (0.5 + (yStart + yStop) / 2.0), modelSegments);
   }
 
   for (int y = yStart; y <= yStop; y++) {
 
     ENGAUGE_ASSERT (y < height);
-    currSegment [y] = seg;
+    currSegment [unsigned (y)] = seg;
   }
 }
 
@@ -180,7 +182,7 @@ void SegmentFactory::loadSegment (SegmentVector &columnSegment,
                                   int height)
 {
   for (int y = 0; y < height; y++) {
-    columnSegment [y] = 0;
+    columnSegment [unsigned (y)] = nullptr;
   }
 }
 
@@ -211,7 +213,7 @@ void SegmentFactory::makeSegments (const QImage &imageFiltered,
   int width = imageFiltered.width();
   int height = imageFiltered.height();
 
-  QProgressDialog* dlg = 0;
+  QProgressDialog* dlg = nullptr;
   if (useDlg)
   {
 
@@ -220,14 +222,14 @@ void SegmentFactory::makeSegments (const QImage &imageFiltered,
     dlg->show();
   }
 
-  bool* lastBool = new bool [height];
+  bool* lastBool = new bool [unsigned (height)];
   ENGAUGE_CHECK_PTR(lastBool);
-  bool* currBool = new bool [height];
+  bool* currBool = new bool [unsigned (height)];
   ENGAUGE_CHECK_PTR(currBool);
-  bool* nextBool = new bool [height];
+  bool* nextBool = new bool [unsigned (height)];
   ENGAUGE_CHECK_PTR(nextBool);
-  SegmentVector lastSegment (height);
-  SegmentVector currSegment (height);
+  SegmentVector lastSegment (static_cast<unsigned long> (height));
+  SegmentVector currSegment (static_cast<unsigned long> (height));
 
   ColorFilter filter;
   loadBool(filter, lastBool, imageFiltered, -1);
@@ -372,20 +374,20 @@ void SegmentFactory::removeUnneededLines(SegmentVector &lastSegment,
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "SegmentFactory::removeUnneededLines";
 
-  Segment *segLast = 0;
+  Segment *segLast = nullptr;
   for (int yLast = 0; yLast < height; yLast++) {
 
     ENGAUGE_ASSERT (yLast < height);
-    if (lastSegment [yLast] && (lastSegment [yLast] != segLast)) {
+    if (lastSegment [unsigned (yLast)] && (lastSegment [unsigned (yLast)] != segLast)) {
 
-      segLast = lastSegment [yLast];
+      segLast = lastSegment [unsigned (yLast)];
 
       // If the segment is found in the current column then it is still in work so postpone processing
       bool found = false;
       for (int yCur = 0; yCur < height; yCur++) {
 
         ENGAUGE_ASSERT (yCur < height);
-        if (segLast == currSegment [yCur]) {
+        if (segLast == currSegment [unsigned (yCur)]) {
           found = true;
           break;
         }
@@ -401,7 +403,7 @@ void SegmentFactory::removeUnneededLines(SegmentVector &lastSegment,
           // covers more than one pixel
           *shortLines += segLast->lineCount();
           delete segLast;
-          lastSegment [yLast] = 0;
+          lastSegment [unsigned (yLast)] = nullptr;
 
         } else {
 
@@ -431,7 +433,7 @@ void SegmentFactory::scrollSegment(SegmentVector &left,
                                    int height)
 {
   for (int y = 0; y < height; y++) {
-    left [y] = right [y];
+    left [static_cast<unsigned long> (y)] = right [static_cast<unsigned long> (y)];
   }
 }
 

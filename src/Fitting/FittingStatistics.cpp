@@ -122,7 +122,7 @@ void FittingStatistics::calculateCurveFitAndStatistics (unsigned int order,
   // To prevent having an underdetermined system with an infinite number of solutions (which will result
   // in divide by zero when computing an inverse) we reduce the order here if necessary.
   // In other words, we limit the order to -1 for no points, 0 for one point, 1 for two points, and so on
-  int orderReduced = qMin ((int) order,
+  int orderReduced = qMin (qFloor (order),
                            pointsConvenient.size() - 1);
 
   calculateCurveFit (orderReduced,
@@ -217,7 +217,7 @@ double FittingStatistics::yFromXAndCoefficients (const FittingCurveCoefficients 
     if (order < coefficients.size ()) {
       coef = coefficients [order];
     }
-    sum += coef * qPow (x, (double) order);
+    sum += coef * qPow (x, double (order));
   }
 
   return sum;

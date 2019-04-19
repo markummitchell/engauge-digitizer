@@ -46,7 +46,7 @@ Curve *CurvesGraphs::curveForCurveName (const QString &curveName)
     }
   }
 
-  return 0;
+  return nullptr;
 }
 
 const Curve *CurvesGraphs::curveForCurveName (const QString &curveName) const
@@ -61,7 +61,7 @@ const Curve *CurvesGraphs::curveForCurveName (const QString &curveName) const
     }
   }
 
-  return 0;
+  return nullptr;
 }
 
 QStringList CurvesGraphs::curvesGraphsNames () const

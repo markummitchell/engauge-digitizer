@@ -30,5 +30,5 @@ double ColorFilterStrategyHue::pixelToZeroToOne (const QColor &pixel,
 
 int ColorFilterStrategyHue::zeroToOneToValue (double s) const
 {
-  return HUE_MIN + s * (HUE_MAX - HUE_MIN);
+  return qFloor (HUE_MIN + s * (HUE_MAX - HUE_MIN));
 }

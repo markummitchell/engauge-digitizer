@@ -24,7 +24,7 @@ FileCmdFactory::~FileCmdFactory()
 
 FileCmdAbstract *FileCmdFactory::createFileCmd (QXmlStreamReader &reader) const
 {
-  FileCmdAbstract *cmd = 0;
+  FileCmdAbstract *cmd = nullptr;
 
   QXmlStreamAttributes attributes = reader.attributes();
   if (!attributes.hasAttribute (FILE_CMD_SERIALIZE_CMD_TYPE)) {

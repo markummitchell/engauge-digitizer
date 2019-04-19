@@ -84,7 +84,7 @@ void GridHealerVertical::doHealingAcrossGaps (QImage &image)
             doHealingOnBelowRange (image,
                                    yBelowStart,
                                    yBelowEnd,
-                                   maxPointSeparation());
+                                   qFloor (maxPointSeparation()));
 
             // Go back to outer loop, which will skip to xBelowEnd
             break;

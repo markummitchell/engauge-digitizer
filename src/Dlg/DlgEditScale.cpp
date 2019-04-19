@@ -126,7 +126,7 @@ void DlgEditScale::createScaleLength (QVBoxLayout *layoutOuter)
 
 void DlgEditScale::initializeScaleLength (const double *scaleLength)
 {
-  if (scaleLength != 0) {
+  if (scaleLength != nullptr) {
     m_editScaleLength->setText (QString::number (*scaleLength));
   }
 }

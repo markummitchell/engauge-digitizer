@@ -27,7 +27,7 @@ const int MAX_HEIGHT_EDIT_COORDS = 24;
 StatusBar::StatusBar(QStatusBar &statusBar) :
   m_statusBar (statusBar),
   m_statusBarMode (STATUS_BAR_MODE_ALWAYS),
-  m_timer (0)
+  m_timer (nullptr)
 {
   createZoom ();
   createZoomMaps ();
@@ -279,7 +279,7 @@ void StatusBar::slotTimeout()
   LOG4CPP_INFO_S ((*mainCat)) << "StatusBar::slotTimeout";
 
   delete m_timer;
-  m_timer = 0;
+  m_timer = nullptr;
 
   m_statusBar.show();
 }
@@ -289,7 +289,7 @@ void StatusBar::slotZoom(int zoom)
   LOG4CPP_INFO_S ((*mainCat)) << "StatusBar::slotZoom zoom=" << zoom;
 
   // Show string for the numeric zoom value
-  ZoomFactor zoomFactor = (ZoomFactor) zoom;
+  ZoomFactor zoomFactor = static_cast<ZoomFactor> (zoom);
   ENGAUGE_ASSERT (m_zoomMapToLabel.contains (zoomFactor));
   m_cmbZoom->setCurrentText (m_zoomMapToLabel [zoomFactor]);
 }

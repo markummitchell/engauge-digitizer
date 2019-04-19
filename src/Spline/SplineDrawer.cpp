@@ -54,15 +54,15 @@ bool SplineDrawer::segmentIsMultiValued (const Spline &spline,
   if (segment < numSegments - 1) {
 
     // Not at very end
-    double tI = (double) segment;
-    double tIp1 = (double) (segment + 1);
+    double tI = double (segment);
+    double tIp1 = double (segment + 1);
 
     // Compute number of pixels between endpoints
     SplinePair posScreenStart  = spline.interpolateCoeff (tI);
     SplinePair posScreenEnd = spline.interpolateCoeff (tIp1);
 
-    int deltaX = posScreenEnd.x() - posScreenStart.x();
-    int deltaY = posScreenEnd.y() - posScreenStart.y();
+    int deltaX = qFloor (posScreenEnd.x() - posScreenStart.x());
+    int deltaY = qFloor (posScreenEnd.y() - posScreenStart.y());
     double pixelDistance = qSqrt (deltaX * deltaX + deltaY * deltaY);
     double numSteps = pixelDistance;
 

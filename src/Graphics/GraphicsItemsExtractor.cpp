@@ -29,7 +29,7 @@ bool GraphicsItemsExtractor::allSelectedItemsAreEitherAxisOrGraph (const QList<Q
   for (itr = items.begin(); itr != items.end(); itr++) {
 
     QGraphicsItem *item = *itr;
-    GraphicsItemType type = (GraphicsItemType) item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt ();
+    GraphicsItemType type = static_cast<GraphicsItemType> (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt ());
 
     if (type == GRAPHICS_ITEM_TYPE_POINT) {
 

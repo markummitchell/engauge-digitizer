@@ -24,7 +24,7 @@ inline void engauge_noop(bool) {}
 ///#if defined(QT_NO_DEBUG) && !defined(QT_FORCE_ASSERTS)
 ///#define ENGAUGE_CHECK_PTR(ptr) engauge_noop((ptr)==0)
 ///#else
-#define ENGAUGE_CHECK_PTR(ptr) (((ptr)==0) ? LoggerUpload::loggerCheckPtr(#ptr,__FILE__,__LINE__) : engauge_noop((ptr)==0))
+#define ENGAUGE_CHECK_PTR(ptr) (((ptr)==nullptr) ? LoggerUpload::loggerCheckPtr(#ptr,__FILE__,__LINE__) : engauge_noop((ptr)==nullptr))
 ///#endif
 
 #endif // ENGAUGE_ASSERT_H

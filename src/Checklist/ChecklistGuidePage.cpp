@@ -15,8 +15,8 @@
 
 ChecklistGuidePage::ChecklistGuidePage(const QString &title) :
   m_row (0),
-  m_checklineLineEditContainer (0),
-  m_checklineLineEditLayout (0)
+  m_checklineLineEditContainer (nullptr),
+  m_checklineLineEditLayout (nullptr)
 {
   setTitle (title);
 
@@ -59,7 +59,7 @@ void ChecklistGuidePage::addLineEdit (ChecklistLineEdit *edit,
 
   bool isFirst = false;
 
-  if (m_checklineLineEditContainer == 0) {
+  if (m_checklineLineEditContainer == nullptr) {
 
     isFirst = true;
 

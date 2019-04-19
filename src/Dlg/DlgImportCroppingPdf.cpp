@@ -13,6 +13,7 @@
 #include <QApplication>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
+#include <QGridLayout>
 #include <QImage>
 #include <QLabel>
 #include <QLayout>
@@ -36,7 +37,7 @@ DlgImportCroppingPdf::DlgImportCroppingPdf(const Poppler::Document &document,
                                            int resolution) :
   m_document (document),
   m_resolution (resolution),
-  m_pixmap (0)
+  m_pixmap (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingPdf::DlgImportCroppingPdf";
 

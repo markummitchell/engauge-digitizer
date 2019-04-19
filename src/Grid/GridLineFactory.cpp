@@ -101,7 +101,7 @@ GridLine *GridLineFactory::createGridLine (double xFrom,
   // Loop through steps. Final step i=NUM_STEPS does final processing if a segment is active
   for (int i = 0; i <= NUM_STEPS; i++) {
 
-    double s = (double) i / (double) NUM_STEPS;
+    double s = double (i) / double (NUM_STEPS);
 
     // Interpolate coordinates assuming normal linear scaling
     double xGraph = (1.0 - s) * xFrom + s * xTo;
@@ -331,8 +331,8 @@ QGraphicsItem *GridLineFactory::ellipseItem (const Transformation &transformatio
                        2 * ellipseXAxis,
                        2 * ellipseYAxis);
   GraphicsArcItem *item = new GraphicsArcItem (boundingRect);
-  item->setStartAngle (angleStart * RADIANS_TO_TICS);
-  item->setSpanAngle (angleSpan * RADIANS_TO_TICS);
+  item->setStartAngle (qFloor (angleStart * RADIANS_TO_TICS));
+  item->setSpanAngle (qFloor (angleSpan * RADIANS_TO_TICS));
 
   item->setTransform (transformAlign.transposed ().inverted ());
 

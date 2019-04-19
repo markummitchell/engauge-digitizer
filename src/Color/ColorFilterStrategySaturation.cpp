@@ -25,5 +25,5 @@ double ColorFilterStrategySaturation::pixelToZeroToOne (const QColor &pixel,
 
 int ColorFilterStrategySaturation::zeroToOneToValue (double s) const
 {
-  return SATURATION_MIN + s * (SATURATION_MAX - SATURATION_MIN);
+  return qFloor (SATURATION_MIN + s * (SATURATION_MAX - SATURATION_MIN));
 }

@@ -74,7 +74,7 @@ void GeometryStrategyAbstractBase::insertSubintervalsAndLoadDistances (int subin
     vector<double> t;
     vector<SplinePair> xy;
     for (int i = 0; i < positionsGraph.size (); i++) {
-      t.push_back ((double) i);
+      t.push_back (double (i));
       xy.push_back (SplinePair (positionsGraph [i].x(),
                                 positionsGraph [i].y()));
     }
@@ -91,7 +91,7 @@ void GeometryStrategyAbstractBase::insertSubintervalsAndLoadDistances (int subin
       for (int subinterval = 0; subinterval < subintervalsPerInterval; subinterval++) {
 
         // Go from i-1 (exclusive) to i (inclusive)
-        double t = (double) (i - 1.0) + (double) (subinterval + 1) / (double) (subintervalsPerInterval);
+        double t = double (i - 1.0) + double (subinterval + 1) / double (subintervalsPerInterval);
 
         SplinePair splinePair = spline.interpolateCoeff (t);
 

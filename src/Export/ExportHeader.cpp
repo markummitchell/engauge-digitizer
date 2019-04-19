@@ -9,17 +9,21 @@
 
 QString exportHeaderToString (ExportHeader exportHeader)
 {
+  QString rtn;
+
   switch (exportHeader) {
     case EXPORT_HEADER_GNUPLOT:
-      return QObject::tr ("Gnuplot");
+      rtn = QObject::tr ("Gnuplot");
+      break;
 
     case EXPORT_HEADER_NONE:
-      return QObject::tr ("None");
+      rtn = QObject::tr ("None");
+      break;
 
     case EXPORT_HEADER_SIMPLE:
-      return QObject::tr ("Simple");
-
-    default:
-      return QObject::tr ("Unknown");
+      rtn = QObject::tr ("Simple");
+      break;
   }
+
+  return rtn;
 }

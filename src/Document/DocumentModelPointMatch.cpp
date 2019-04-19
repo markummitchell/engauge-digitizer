@@ -68,9 +68,9 @@ void DocumentModelPointMatch::loadXml(QXmlStreamReader &reader)
       attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_REJECTED)) {
 
     setMaxPointSize (attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_POINT_SIZE).toDouble());
-    setPaletteColorAccepted ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED).toInt());
-    setPaletteColorCandidate ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_CANDIDATE).toInt());
-    setPaletteColorRejected ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_REJECTED).toInt());
+    setPaletteColorAccepted (static_cast<ColorPalette> (attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_ACCEPTED).toInt()));
+    setPaletteColorCandidate (static_cast<ColorPalette> (attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_CANDIDATE).toInt()));
+    setPaletteColorRejected (static_cast<ColorPalette> (attributes.value(DOCUMENT_SERIALIZE_POINT_MATCH_COLOR_REJECTED).toInt()));
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||

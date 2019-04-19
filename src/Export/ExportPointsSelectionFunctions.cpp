@@ -9,20 +9,29 @@
 
 QString exportPointsSelectionFunctionsToString (ExportPointsSelectionFunctions exportPointsSelectionFunctions)
 {
+  QString rtn;
+
   switch (exportPointsSelectionFunctions) {
     case EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES:
-      return QObject::tr ("InterpolateAllCurves");
+      rtn = QObject::tr ("InterpolateAllCurves");
+      break;
 
     case EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE:
-      return QObject::tr ("InterpolateFirstCurve");
+      rtn = QObject::tr ("InterpolateFirstCurve");
+      break;
 
     case EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_PERIODIC:
-      return QObject::tr ("InterpolatePeriodic");
+      rtn = QObject::tr ("InterpolatePeriodic");
+      break;
 
     case EXPORT_POINTS_SELECTION_FUNCTIONS_RAW:
-      return QObject::tr ("Raw");
+      rtn = QObject::tr ("Raw");
+      break;
 
     default:
-      return QObject::tr ("Unknown");
+      rtn = QObject::tr ("Unknown");
+      break;
   }
+
+  return rtn;
 }

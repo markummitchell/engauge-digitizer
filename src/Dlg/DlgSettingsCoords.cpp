@@ -26,6 +26,7 @@
 #include <QGraphicsScene>
 #include <QLabel>
 #include <QLineEdit>
+#include <qmath.h>
 #include <QPalette>
 #include <QRadioButton>
 #include <QStackedWidget>
@@ -75,15 +76,15 @@ DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Coordinates"),
                            "DlgSettingsCoords",
                            mainWindow),
-  m_btnCartesian (0),
-  m_btnPolar (0),
-  m_validatorOriginRadius (0),
-  m_cmbDate (0),
-  m_cmbTime (0),
-  m_scenePreview (0),
-  m_viewPreview (0),
-  m_modelCoordsBefore (0),
-  m_modelCoordsAfter (0)
+  m_btnCartesian (nullptr),
+  m_btnPolar (nullptr),
+  m_validatorOriginRadius (nullptr),
+  m_cmbDate (nullptr),
+  m_cmbTime (nullptr),
+  m_scenePreview (nullptr),
+  m_viewPreview (nullptr),
+  m_modelCoordsBefore (nullptr),
+  m_modelCoordsAfter (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::DlgSettingsCoords";
 
@@ -103,7 +104,7 @@ void DlgSettingsCoords::annotateAngles (const QFont &defaultFont) {
   for (int direction = 0; direction < 4; direction++) {
 
     QString angle;
-    CoordUnitsPolarTheta thetaUnits = (CoordUnitsPolarTheta) m_cmbXThetaUnits->currentData().toInt();
+    CoordUnitsPolarTheta thetaUnits = static_cast<CoordUnitsPolarTheta> (m_cmbXThetaUnits->currentData().toInt());
 
     switch (thetaUnits) {
       case COORD_UNITS_POLAR_THETA_DEGREES:
@@ -717,10 +718,10 @@ void DlgSettingsCoords::loadComboBoxUnitsPolar (QComboBox &cmb,
 
 void DlgSettingsCoords::resetSceneRectangle ()
 {
-  QRect rect (CARTESIAN_COORD_MIN - CARTESIAN_COORD_STEP / 2.0,
-              CARTESIAN_COORD_MIN - CARTESIAN_COORD_STEP / 2.0,
-              CARTESIAN_COORD_MAX - CARTESIAN_COORD_MIN + CARTESIAN_COORD_STEP,
-              CARTESIAN_COORD_MAX - CARTESIAN_COORD_MIN + CARTESIAN_COORD_STEP);
+  QRect rect (qFloor (CARTESIAN_COORD_MIN - CARTESIAN_COORD_STEP / 2.0),
+              qFloor (CARTESIAN_COORD_MIN - CARTESIAN_COORD_STEP / 2.0),
+              qFloor (CARTESIAN_COORD_MAX - CARTESIAN_COORD_MIN + CARTESIAN_COORD_STEP),
+              qFloor (CARTESIAN_COORD_MAX - CARTESIAN_COORD_MIN + CARTESIAN_COORD_STEP));
 
   QGraphicsRectItem *itemPerimeter = new QGraphicsRectItem(rect);
   itemPerimeter->setVisible(false);
@@ -753,7 +754,7 @@ void DlgSettingsCoords::slotDate(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotDate";
 
-  CoordUnitsDate coordUnits = (CoordUnitsDate) m_cmbDate->currentData ().toInt();
+  CoordUnitsDate coordUnits = static_cast<CoordUnitsDate> (m_cmbDate->currentData ().toInt());
   m_modelCoordsAfter->setCoordUnitsDate(coordUnits);
   updateControls();
   updatePreview();
@@ -774,7 +775,7 @@ void DlgSettingsCoords::slotTime(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotTime";
 
-  CoordUnitsTime coordUnits = (CoordUnitsTime) m_cmbTime->currentData ().toInt();
+  CoordUnitsTime coordUnits = static_cast<CoordUnitsTime> (m_cmbTime->currentData ().toInt());
   m_modelCoordsAfter->setCoordUnitsTime(coordUnits);
   updateControls();
   updatePreview();
@@ -785,10 +786,10 @@ void DlgSettingsCoords::slotUnitsXTheta(const QString &)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotUnitsXTheta";
 
   if (m_modelCoordsAfter->coordsType() == COORDS_TYPE_CARTESIAN) {
-    CoordUnitsNonPolarTheta coordUnits = (CoordUnitsNonPolarTheta) m_cmbXThetaUnits->currentData ().toInt ();
+    CoordUnitsNonPolarTheta coordUnits = static_cast<CoordUnitsNonPolarTheta> (m_cmbXThetaUnits->currentData ().toInt ());
     m_modelCoordsAfter->setCoordUnitsX(coordUnits);
   } else {
-    CoordUnitsPolarTheta coordUnits = (CoordUnitsPolarTheta) m_cmbXThetaUnits->currentData ().toInt ();
+    CoordUnitsPolarTheta coordUnits = static_cast<CoordUnitsPolarTheta> (m_cmbXThetaUnits->currentData ().toInt ());
     m_modelCoordsAfter->setCoordUnitsTheta(coordUnits);
   }
   updateControls ();
@@ -799,7 +800,7 @@ void DlgSettingsCoords::slotUnitsYRadius(const QString &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::slotUnitsYRadius";
 
-  CoordUnitsNonPolarTheta coordUnits = (CoordUnitsNonPolarTheta) m_cmbYRadiusUnits->currentData ().toInt ();
+  CoordUnitsNonPolarTheta coordUnits = static_cast<CoordUnitsNonPolarTheta> (m_cmbYRadiusUnits->currentData ().toInt ());
   if (m_modelCoordsAfter->coordsType() == COORDS_TYPE_CARTESIAN) {
     m_modelCoordsAfter->setCoordUnitsY(coordUnits);
   } else {
@@ -927,10 +928,10 @@ void DlgSettingsCoords::updateControls ()
 
   bool enableDateTime;
   if (m_btnCartesian->isChecked()) {
-    enableDateTime = (((CoordUnitsNonPolarTheta) m_cmbXThetaUnits->currentData ().toInt() == COORD_UNITS_NON_POLAR_THETA_DATE_TIME) ||
-                      ((CoordUnitsNonPolarTheta) m_cmbYRadiusUnits->currentData ().toInt() == COORD_UNITS_NON_POLAR_THETA_DATE_TIME));
+    enableDateTime = ((static_cast<CoordUnitsNonPolarTheta> (m_cmbXThetaUnits->currentData ().toInt()) == COORD_UNITS_NON_POLAR_THETA_DATE_TIME) ||
+                      (static_cast<CoordUnitsNonPolarTheta> (m_cmbYRadiusUnits->currentData ().toInt()) == COORD_UNITS_NON_POLAR_THETA_DATE_TIME));
   } else {
-    enableDateTime = ((CoordUnitsNonPolarTheta) m_cmbYRadiusUnits->currentData ().toInt() == COORD_UNITS_NON_POLAR_THETA_DATE_TIME);
+    enableDateTime = (static_cast<CoordUnitsNonPolarTheta> (m_cmbYRadiusUnits->currentData ().toInt()) == COORD_UNITS_NON_POLAR_THETA_DATE_TIME);
   }
   m_cmbDate->setEnabled (enableDateTime);
   m_cmbTime->setEnabled (enableDateTime);

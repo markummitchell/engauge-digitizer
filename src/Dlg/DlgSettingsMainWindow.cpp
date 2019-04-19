@@ -40,8 +40,8 @@ DlgSettingsMainWindow::DlgSettingsMainWindow(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Main Window"),
                            "DlgSettingsMainWindow",
                            mainWindow),
-  m_modelMainWindowBefore (0),
-  m_modelMainWindowAfter (0)
+  m_modelMainWindowBefore (nullptr),
+  m_modelMainWindowAfter (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::DlgSettingsMainWindow";
 
@@ -343,7 +343,7 @@ void DlgSettingsMainWindow::slotImportCropping (int index)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotImportCropping";
 
-  m_modelMainWindowAfter->setImportCropping ((ImportCropping) m_cmbImportCropping->itemData (index).toInt ());
+  m_modelMainWindowAfter->setImportCropping (static_cast<ImportCropping> (m_cmbImportCropping->itemData (index).toInt ()));
   updateControls();
 }
 
@@ -411,7 +411,7 @@ void DlgSettingsMainWindow::slotZoomControl(const QString)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotZoomControl";
 
-  m_modelMainWindowAfter->setZoomControl ((ZoomControl) m_cmbZoomControl->currentData().toInt());
+  m_modelMainWindowAfter->setZoomControl (static_cast<ZoomControl> (m_cmbZoomControl->currentData().toInt()));
   updateControls();
 }
 
@@ -419,7 +419,7 @@ void DlgSettingsMainWindow::slotZoomFactor(const QString)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWIndow::slotZoomFactor";
 
-  m_modelMainWindowAfter->setZoomFactorInitial((ZoomFactorInitial) m_cmbZoomFactor->currentData().toInt());
+  m_modelMainWindowAfter->setZoomFactorInitial(static_cast<ZoomFactorInitial> (m_cmbZoomFactor->currentData().toInt()));
   updateControls();
 }
 

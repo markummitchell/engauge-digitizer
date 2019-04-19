@@ -128,17 +128,17 @@ void DocumentModelGridDisplay::loadXml(QXmlStreamReader &reader)
     QString stableValue = attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STABLE).toString();
 
     setStable (stableValue == DOCUMENT_SERIALIZE_BOOL_TRUE);
-    setDisableX ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_X).toInt());
-    setCountX (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_X).toInt());
+    setDisableX (static_cast<GridCoordDisable> (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_X).toInt()));
+    setCountX (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_X).toUInt());
     setStartX (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_X).toDouble());
     setStepX (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_X).toDouble());
     setStopX (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_X).toDouble());
-    setDisableY ((GridCoordDisable) attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_Y).toInt());
-    setCountY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_Y).toInt());
+    setDisableY (static_cast<GridCoordDisable> (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_Y).toUInt()));
+    setCountY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_Y).toUInt());
     setStartY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_START_Y).toDouble());
     setStepY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_Y).toDouble());
     setStopY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_Y).toDouble());
-    setPaletteColor ((ColorPalette) attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_COLOR).toInt());
+    setPaletteColor (static_cast<ColorPalette> (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_COLOR).toInt()));
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||

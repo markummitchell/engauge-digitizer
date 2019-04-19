@@ -113,7 +113,7 @@ ExportValuesOrdinal ExportOrdinalsSmooth::ordinalsAtIntervalsGraph (const vector
         if (iT == 0) {
           sInterp = 0.0;
         } else {
-          sInterp = (double) pointsInterval / (double) integratedSeparation;
+          sInterp = double (pointsInterval) / double (integratedSeparation);
         }
         double tInterp = (1.0 - sInterp) * tLast + sInterp * tIter;
 

@@ -41,13 +41,14 @@ CallbackSearchReturn CallbackPointOrdinal::callback (const Point &pointStart,
                        &projectedDistanceOutsideLine,
                        &distanceToLine);
 
-  // Compare to best so far
+  // Compare the best so far
+  bool distancesAreEqual = (qAbs (distanceToLine - m_minimumDistanceToLine) <= 0); // Epsilon test prevents compiler warning
   if (!m_haveMinimumDistanceToLine ||
       (distanceToLine < m_minimumDistanceToLine) ||
-      (distanceToLine == m_minimumDistanceToLine && projectedDistanceOutsideLine < m_minimumProjectedDistanceOutsideLine)) {
+      (distancesAreEqual && projectedDistanceOutsideLine < m_minimumProjectedDistanceOutsideLine)) {
 
-    // Compute ordinal
-    if (projectedDistanceOutsideLine == 0) {
+    // Compute ordinal using epsilon test to prevent compiler warning
+    if (qAbs (projectedDistanceOutsideLine) <= 0) {
 
       // Put new point inside the line segment
       m_ordinal = (pointStart.ordinal() + pointStop.ordinal()) / 2.0;

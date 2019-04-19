@@ -26,7 +26,7 @@ GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
                                                   const PointStyle &pointStyle,
                                                   GeometryWindow *geometryWindow)
 {
-  GraphicsPoint *item = 0;
+  GraphicsPoint *item = nullptr;
 
   switch (pointStyle.shape ())
   {
@@ -36,7 +36,7 @@ GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
                                   identifier,
                                   posScreen,
                                   ColorPaletteToQColor (pointStyle.paletteColor ()),
-                                  pointStyle.radius (),
+                                  unsigned (pointStyle.radius ()),
                                   pointStyle.lineWidth(),
                                   geometryWindow);
       }

@@ -65,9 +65,6 @@ CallbackSearchReturn CallbackDocumentHash::callback (const QString &curveName,
 
       }
       break;
-
-    default:
-      ENGAUGE_ASSERT (false);
     }
   }
 

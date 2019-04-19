@@ -35,8 +35,8 @@ const double Z_VALUE = 200.0;
 
 DigitizeStatePointMatch::DigitizeStatePointMatch (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context),
-  m_outline (0),
-  m_candidatePoint (0)
+  m_outline (nullptr),
+  m_candidatePoint (nullptr)
 {
 }
 
@@ -98,7 +98,7 @@ void DigitizeStatePointMatch::createTemporaryPoint (CmdMediator *cmdMediator,
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStatePointMatch::createTemporaryPoint";
 
-  GeometryWindow *NULL_GEOMETRY_WINDOW = 0;
+  GeometryWindow *NULL_GEOMETRY_WINDOW = nullptr;
 
   const DocumentModelPointMatch &modelPointMatch = cmdMediator->document().modelPointMatch();
 
@@ -137,7 +137,7 @@ void DigitizeStatePointMatch::end ()
   // Remove outline before leaving state
   ENGAUGE_CHECK_PTR (m_outline);
   context().mainWindow().scene().removeItem (m_outline);
-  m_outline = 0;
+  m_outline = nullptr;
 }
 
 QList<PointMatchPixel> DigitizeStatePointMatch::extractSamplePointPixels (const QImage &img,
@@ -151,15 +151,15 @@ QList<PointMatchPixel> DigitizeStatePointMatch::extractSamplePointPixels (const 
   // were happening (example, 3x3 point would appear to be found in several places inside 8x32 rectangle)
   QList<PointMatchPixel> samplePointPixels;
 
-  int radiusMax = modelPointMatch.maxPointSize() / 2;
+  int radiusMax = qFloor (modelPointMatch.maxPointSize() / 2);
 
   ColorFilter colorFilter;
   for (int xOffset = -radiusMax; xOffset <= radiusMax; xOffset++) {
     for (int yOffset = -radiusMax; yOffset <= radiusMax; yOffset++) {
 
-      int x = posScreen.x() + xOffset;
-      int y = posScreen.y() + yOffset;
-      int radius = qSqrt (xOffset * xOffset + yOffset * yOffset);
+      int x = qFloor (posScreen.x() + xOffset);
+      int y = qFloor (posScreen.y() + yOffset);
+      int radius = qFloor (qSqrt (xOffset * xOffset + yOffset * yOffset));
 
       if (radius <= radiusMax) {
 
@@ -230,8 +230,8 @@ void DigitizeStatePointMatch::handleMouseMove (CmdMediator *cmdMediator,
   const QImage &img = context().mainWindow().imageFiltered();
   int radiusLimit = cmdMediator->document().modelGeneral().cursorSize();
   bool pixelShouldBeOn = pixelIsOnInImage (img,
-                                           posScreen.x(),
-                                           posScreen.y(),
+                                           qFloor (posScreen.x()),
+                                           qFloor (posScreen.y()),
                                            radiusLimit);
 
   QColor penColorIs = m_outline->pen().color();
@@ -303,7 +303,7 @@ bool DigitizeStatePointMatch::pixelIsOnInImage (const QImage &img,
   for (int xOffset = -radiusLimit; xOffset <= radiusLimit; xOffset++) {
     for (int yOffset = -radiusLimit; yOffset <= radiusLimit; yOffset++) {
 
-      int radius = qSqrt (xOffset * xOffset + yOffset * yOffset);
+      int radius = qFloor (qSqrt (xOffset * xOffset + yOffset * yOffset));
 
       if (radius <= radiusLimit) {
 
@@ -346,7 +346,7 @@ void DigitizeStatePointMatch::popCandidatePoint (CmdMediator *cmdMediator)
   } else {
 
     // No more points. Inform user
-    QMessageBox::information (0,
+    QMessageBox::information (nullptr,
                               QObject::tr ("Point Match"),
                               QObject::tr ("There are no more matching points"));
 

@@ -51,7 +51,7 @@ void GridLineLimiter::limitForXTheta (const Document &document,
   startX = modelGrid.startX();
   stopX = modelGrid.stopX();
   stepX = modelGrid.stepX();
-  int countX = modelGrid.countX();
+  int countX = signed (modelGrid.countX());
 
   bool needReduction = (countX > modelMainWindow.maximumGridLines());
 
@@ -63,7 +63,7 @@ void GridLineLimiter::limitForXTheta (const Document &document,
         stepX = 0;
         needReduction = true;
       } else {
-        countX = 1.0 + (stopX - startX) / stepX;
+        countX = qFloor (1.0 + (stopX - startX) / stepX);
         needReduction = (countX > modelMainWindow.maximumGridLines());
       }
     }
@@ -93,7 +93,7 @@ void GridLineLimiter::limitForXTheta (const Document &document,
         stepX = 1;
         needReduction = true;        
       } else {
-        countX = 1.0 + (qLn (stopX) - qLn (startX)) / qLn (stepX);
+        countX = qFloor (1.0 + (qLn (stopX) - qLn (startX)) / qLn (stepX));
         needReduction = (countX > modelMainWindow.maximumGridLines());
       }
     }
@@ -116,7 +116,7 @@ void GridLineLimiter::limitForYRadius (const Document &document,
   startY = modelGrid.startY();
   stopY = modelGrid.stopY();
   stepY = modelGrid.stepY();
-  int countY = modelGrid.countY();
+  int countY = signed (modelGrid.countY());
 
   bool needReduction = (countY > modelMainWindow.maximumGridLines());
 
@@ -128,7 +128,7 @@ void GridLineLimiter::limitForYRadius (const Document &document,
         stepY = 0;
         needReduction = true;        
       } else {
-        countY = 1.0 + (stopY - startY) / stepY;
+        countY = qFloor (1.0 + (stopY - startY) / stepY);
         needReduction = (countY > modelMainWindow.maximumGridLines());
       }
     }
@@ -158,7 +158,7 @@ void GridLineLimiter::limitForYRadius (const Document &document,
         stepY = 1;
         needReduction = true;        
       } else {
-        countY = 1.0 + (qLn (stopY) - qLn (startY)) / qLn (stepY);
+        countY = qFloor (1.0 + (qLn (stopY) - qLn (startY)) / qLn (stepY));
         needReduction = (countY > modelMainWindow.maximumGridLines());
       }
     }

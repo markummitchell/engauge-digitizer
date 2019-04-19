@@ -37,10 +37,10 @@ void PointMatchAlgorithm::allocateMemory(double** array,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "PointMatchAlgorithm::allocateMemory";
 
-  *array = new double [width * height];
+  *array = new double [unsigned (width * height)];
   ENGAUGE_CHECK_PTR(*array);
 
-  *arrayPrime = new fftw_complex [width * height];
+  *arrayPrime = new fftw_complex [unsigned (width * height)];
   ENGAUGE_CHECK_PTR(*arrayPrime);
 }
 
@@ -146,7 +146,7 @@ void PointMatchAlgorithm::computeConvolution(fftw_complex* imagePrime,
 
   // The convolution pattern is shifted by (sampleXExtent, sampleYExtent). So the downstream code
   // does not have to repeatedly compensate for that shift, we unshift it here
-  double *temp = new double [width * height];
+  double *temp = new double [unsigned (width * height)];
   ENGAUGE_CHECK_PTR(temp);
 
   for (int i = 0; i < width; i++) {
@@ -332,7 +332,7 @@ void PointMatchAlgorithm::loadImage(const QImage &imageProcessed,
                                  width,
                                  height,
                                  pointsExisting,
-                                 modelPointMatch.maxPointSize());
+                                 qFloor (modelPointMatch.maxPointSize()));
 
   // Forward transform the image
   fftw_plan pImage = fftw_plan_dft_r2c_2d(width,
@@ -480,10 +480,10 @@ void PointMatchAlgorithm::populateSampleArray(const QList<PointMatchPixel> &samp
   bool first = true;
   unsigned int i;
   int xMin = width, yMin = height, xMax = 0, yMax = 0;
-  for (i = 0; i < (unsigned int) samplePointPixels.size(); i++) {
+  for (i = 0; i < static_cast<unsigned int> (samplePointPixels.size()); i++) {
 
-    int x = (samplePointPixels.at(i)).xOffset();
-    int y = (samplePointPixels.at(i)).yOffset();
+    int x = samplePointPixels.at(signed (i)).xOffset();
+    int y = samplePointPixels.at(signed (i)).yOffset();
     if (first || (x < xMin))
       xMin = x;
     if (first || (x > xMax))
@@ -516,15 +516,15 @@ void PointMatchAlgorithm::populateSampleArray(const QList<PointMatchPixel> &samp
   // affect the center of mass computed only from on pixels
   double xSumOn = 0, ySumOn = 0, countOn = 0;
 
-  for (i = 0; i < (unsigned int) samplePointPixels.size(); i++) {
+  for (i = 0; i < static_cast<unsigned int> (samplePointPixels.size()); i++) {
 
     // Place, quite arbitrarily, the sample image up against the top left corner
-    x = (samplePointPixels.at(i)).xOffset() - xMin;
-    y = (samplePointPixels.at(i)).yOffset() - yMin;
+    x = (samplePointPixels.at(signed (i))).xOffset() - xMin;
+    y = (samplePointPixels.at(signed (i))).yOffset() - yMin;
     ENGAUGE_ASSERT((0 < x) && (x < width));
     ENGAUGE_ASSERT((0 < y) && (y < height));
 
-    bool pixelIsOn = samplePointPixels.at(i).pixelIsOn();
+    bool pixelIsOn = samplePointPixels.at(signed (i)).pixelIsOn();
 
     (*sample) [FOLD2DINDEX(x, y, height)] = (pixelIsOn ? PIXEL_ON : PIXEL_OFF);
 
@@ -537,8 +537,8 @@ void PointMatchAlgorithm::populateSampleArray(const QList<PointMatchPixel> &samp
 
   // Compute location of center of mass, which will represent the center of the point
   countOn = qMax (1.0, countOn);
-  *sampleXCenter = (int) (0.5 + xSumOn / countOn);
-  *sampleYCenter = (int) (0.5 + ySumOn / countOn);
+  *sampleXCenter = qFloor (0.5 + xSumOn / countOn);
+  *sampleYCenter = qFloor (0.5 + ySumOn / countOn);
 
   // Dimensions of portion of array actually used by sample (rest is empty)
   *sampleXExtent = xMax - xMin + 1;
@@ -571,8 +571,8 @@ void PointMatchAlgorithm::removePixelsNearExistingPoints(double* image,
 
   for (int i = 0; i < pointsExisting.size(); i++) {
 
-    int xPoint = pointsExisting.at(i).posScreen().x();
-    int yPoint = pointsExisting.at(i).posScreen().y();
+    int xPoint = qFloor (pointsExisting.at(signed (i)).posScreen().x());
+    int yPoint = qFloor (pointsExisting.at(signed (i)).posScreen().y());
 
     // Loop through rows of pixels
     int yMin = yPoint - pointSeparation;
@@ -588,7 +588,7 @@ void PointMatchAlgorithm::removePixelsNearExistingPoints(double* image,
       int radical = pointSeparation * pointSeparation - (y - yPoint) * (y - yPoint);
       if (0 < radical) {
 
-        int xMin = (int) (xPoint - qSqrt((double) radical));
+        int xMin = qFloor (xPoint - qSqrt(double (radical)));
         if (xMin < 0)
           xMin = 0;
         int xMax = xPoint + (xPoint - xMin);

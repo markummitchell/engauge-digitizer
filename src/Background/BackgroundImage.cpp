@@ -8,20 +8,21 @@
 
 QString backgroundImageToString (BackgroundImage backgroundImage)
 {
+  QString rtn;
+
   switch (backgroundImage) {
     case BACKGROUND_IMAGE_NONE:
-      return "None";
+      rtn = "None";
       break;
 
     case BACKGROUND_IMAGE_ORIGINAL:
-      return "Original";
+      rtn = "Original";
       break;
 
     case BACKGROUND_IMAGE_FILTERED:
-      return "Filtered";
+      rtn = "Filtered";
       break;
-
-    default:
-      return "Unknown";
   }
+
+  return rtn;
 }

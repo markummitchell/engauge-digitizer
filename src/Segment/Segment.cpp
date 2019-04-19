@@ -49,7 +49,7 @@ void Segment::appendColumn(int x,
   int yNew = y;
 
   LOG4CPP_DEBUG_S ((*mainCat)) << "Segment::appendColumn"
-                               << " segment=0x" << std::hex << (quintptr) this << std::dec
+                               << " segment=0x" << std::hex << static_cast<void*> (this) << std::dec
                                << " adding ("
                                << xOld << "," << yOld << ") to ("
                                << xNew << "," << yNew << ")";
@@ -80,10 +80,10 @@ void Segment::createAcceptablePoint(bool *pFirst,
                                     double x,
                                     double y)
 {
-  int iOld = (int) (*xPrev + 0.5);
-  int jOld = (int) (*yPrev + 0.5);
-  int i = (int) (x + 0.5);
-  int j = (int) (y + 0.5);
+  int iOld = qFloor (*xPrev + 0.5);
+  int jOld = qFloor (*yPrev + 0.5);
+  int i = qFloor (x + 0.5);
+  int j = qFloor (y + 0.5);
 
   if (*pFirst || (iOld != i) || (jOld != j)) {
     *xPrev = x;
@@ -130,10 +130,10 @@ void Segment::dumpToGnuplot (QTextStream &strDump,
       SegmentLine *line = *itr;
       ENGAUGE_CHECK_PTR (line);
 
-      int x1 = line->line().x1();
-      int y1 = line->line().y1();
-      int x2 = line->line().x2();
-      int y2 = line->line().y2();
+      int x1 = qFloor (line->line().x1());
+      int y1 = qFloor (line->line().y1());
+      int x2 = qFloor (line->line().x2());
+      int y2 = qFloor (line->line().y2());
 
       rows = qMax (rows, y1 + 1);
       rows = qMax (rows, y2 + 1);
@@ -143,10 +143,10 @@ void Segment::dumpToGnuplot (QTextStream &strDump,
 
     // Horizontal and vertical width is computed so merged line mostly fills the plot window,
     // and (xInt,yInt) is at the center
-    int halfWidthX = 1.5 * qMax (qAbs (lineOld->line().dx()),
-                                 qAbs (lineNew->line().dx()));
-    int halfWidthY = 1.5 * qMax (qAbs (lineOld->line().dy()),
-                                 qAbs (lineNew->line().dy()));
+    int halfWidthX = qFloor (1.5 * qMax (qAbs (lineOld->line().dx()),
+                                         qAbs (lineNew->line().dx())));
+    int halfWidthY = qFloor (1.5 * qMax (qAbs (lineOld->line().dy()),
+                                         qAbs (lineNew->line().dy())));
 
     // Zoom in so changes are easier to see
     strDump << "set xrange [" << (xInt - halfWidthX - 1) << ":" << (xInt + halfWidthX + 1) << "]\n";
@@ -177,10 +177,10 @@ void Segment::dumpToGnuplot (QTextStream &strDump,
     for (int index = 0; index < m_lines.count(); index++) {
 
       SegmentLine *line = m_lines.at (index);
-      int x1 = line->line().x1();
-      int y1 = line->line().y1();
-      int x2 = line->line().x2();
-      int y2 = line->line().y2();
+      int x1 = qFloor (line->line().x1());
+      int y1 = qFloor (line->line().y1());
+      int x2 = qFloor (line->line().x2());
+      int y2 = qFloor (line->line().y2());
 
       if (index % 2 == 0) {
         strEven << x1 << " " << y1 << "\n";
@@ -236,11 +236,11 @@ QList<QPoint> Segment::fillPointsFillingCorners(const DocumentModelSegments &mod
       SegmentLine *line = *itr;
 
       ENGAUGE_CHECK_PTR(line);
-      xNext = (double) line->line().x2();
-      yNext = (double) line->line().y2();
+      xNext = double (line->line().x2());
+      yNext = double (line->line().y2());
 
-      double xStart = (double) line->line().x1();
-      double yStart = (double) line->line().y1();
+      double xStart = double (line->line().x1());
+      double yStart = double (line->line().y1());
       if (isCorner (yPrev, yStart, yNext)) {
 
         // Insert a corner point
@@ -339,8 +339,8 @@ QList<QPoint> Segment::fillPointsWithoutFillingCorners(const DocumentModelSegmen
       SegmentLine *line = *itr;
 
       ENGAUGE_CHECK_PTR(line);
-      xNext = (double) line->line().x2();
-      yNext = (double) line->line().y2();
+      xNext = double (line->line().x2());
+      yNext = double (line->line().y2());
 
       // Distance formula
       double segmentLength = sqrt((xNext - xLast) * (xNext - xLast) + (yNext - yLast) * (yNext - yLast));
@@ -405,7 +405,12 @@ bool Segment::pointsAreCloseToLine(double xLeft,
 {
   QList<QPoint>::iterator itr;
   for (itr = removedPoints.begin(); itr != removedPoints.end(); ++itr) {
-    if (!pointIsCloseToLine(xLeft, yLeft, (double) (*itr).x(), (double) (*itr).y(), xRight, yRight)) {
+    if (!pointIsCloseToLine(xLeft,
+                            yLeft,
+                            double ((*itr).x()),
+                            double ((*itr).y()),
+                            xRight,
+                            yRight)) {
       return false;
     }
   }
@@ -417,8 +422,8 @@ void Segment::removeUnneededLines (int *foldedLines)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Segment::removeUnneededLines";
 
-  QFile *fileDump = 0;
-  QTextStream *strDump = 0;
+  QFile *fileDump = nullptr;
+  QTextStream *strDump = nullptr;
   if (m_isGnuplot) {
 
     QString filename ("segment.gnuplot");
@@ -435,7 +440,7 @@ void Segment::removeUnneededLines (int *foldedLines)
   // into optimizing away all but one point at the origin and another point at the far right.
   // From this we see that we cannot simply throw away points that were optimized away since they
   // are needed later to see if we have diverged from the curve
-  SegmentLine *linePrevious = 0; // Previous line which corresponds to itrPrevious
+  SegmentLine *linePrevious = nullptr; // Previous line which corresponds to itrPrevious
   QList<SegmentLine*>::iterator itr, itrPrevious;
   QList<QPoint> removedPoints;
   for (itr = m_lines.begin(); itr != m_lines.end(); itr++) {
@@ -443,7 +448,7 @@ void Segment::removeUnneededLines (int *foldedLines)
     SegmentLine *line = *itr;
     ENGAUGE_CHECK_PTR(line);
 
-    if (linePrevious != 0) {
+    if (linePrevious != nullptr) {
 
       double xLeft = linePrevious->line().x1();
       double yLeft = linePrevious->line().y1();
@@ -464,8 +469,8 @@ void Segment::removeUnneededLines (int *foldedLines)
 
             // Dump
             dumpToGnuplot (*strDump,
-                           xInt,
-                           yInt,
+                           qFloor (xInt),
+                           qFloor (yInt),
                            linePrevious,
                            line);
           }
@@ -474,7 +479,7 @@ void Segment::removeUnneededLines (int *foldedLines)
           ++(*foldedLines);
 
           LOG4CPP_DEBUG_S ((*mainCat)) << "Segment::removeUnneededLines"
-                                       << " segment=0x" << std::hex << (quintptr) this << std::dec
+                                       << " segment=0x" << std::hex << static_cast<void*> (this) << std::dec
                                        << " removing ("
                                        << linePrevious->line().x1() << "," << linePrevious->line().y1() << ") to ("
                                        << linePrevious->line().x2() << "," << linePrevious->line().y2() << ") "
@@ -484,7 +489,8 @@ void Segment::removeUnneededLines (int *foldedLines)
                                        << xLeft << "," << yLeft << ") to ("
                                        << xRight << "," << yRight << ")";
 
-          removedPoints.append(QPoint((int) xInt, (int) yInt));
+          removedPoints.append(QPoint(qFloor (xInt),
+                                      qFloor (yInt)));
           m_lines.erase (itrPrevious);
           delete linePrevious;
 
@@ -508,7 +514,7 @@ void Segment::removeUnneededLines (int *foldedLines)
     }
   }
 
-  if (strDump != 0) {
+  if (strDump != nullptr) {
 
     // Final gnuplot processing
     *strDump << "set terminal x11 persist\n";

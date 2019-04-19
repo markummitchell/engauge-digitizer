@@ -44,12 +44,13 @@
 #include <QBuffer>
 #include <QDataStream>
 #include <QDebug>
+#include <qmath.h>
 #include <string.h>
 
 int imagetopnm(opj_image_t * image,
                QBuffer &buffer)
 {
-  int *red, *green, *blue, *alpha = NULL;
+  int *red, *green, *blue, *alpha = nullptr;
   int wr, hr, max;
   int i;
   unsigned int compno, ncomp;
@@ -59,7 +60,7 @@ int imagetopnm(opj_image_t * image,
   char bufferLocal[1024];
   QDataStream str (&buffer);
 
-  if((prec = (int)image->comps[0].prec) > 16)
+  if((prec = qFloor (image->comps[0].prec)) > 16)
   {
     fprintf(stderr,"%s:%d:imagetopnm\n\tprecision %d is larger than 16"
             "\n\t: refused.\n",__FILE__,__LINE__,prec);
@@ -80,7 +81,8 @@ int imagetopnm(opj_image_t * image,
   {
     two = (prec > 8);
     triple = (ncomp > 2);
-    wr = (int)image->comps[0].w; hr = (int)image->comps[0].h;
+    wr = qFloor (image->comps[0].w);
+    hr = qFloor (image->comps[0].h);
     max = (1<<prec) - 1; has_alpha = (ncomp == 4 || ncomp == 2);
 
     red = image->comps[0].data;
@@ -90,7 +92,7 @@ int imagetopnm(opj_image_t * image,
       green = image->comps[1].data;
       blue = image->comps[2].data;
     }
-    else green = blue = NULL;
+    else green = blue = nullptr;
 
     if(has_alpha)
     {
@@ -141,8 +143,8 @@ int imagetopnm(opj_image_t * image,
 
         sprintf(bufferLocal,
                 "%c%c",
-                (unsigned char)(v>>8),
-                (unsigned char)v);
+                static_cast<unsigned char> (v>>8),
+                static_cast<unsigned char> (v));
         str.writeRawData (bufferLocal,
                           2);
 
@@ -153,8 +155,8 @@ int imagetopnm(opj_image_t * image,
 
           sprintf(bufferLocal,
                   "%c%c",
-                  (unsigned char)(v>>8),
-                  (unsigned char)v);
+                  static_cast<unsigned char> (v>>8),
+                  static_cast<unsigned char> (v));
           str.writeRawData  (bufferLocal,
                              2);
 
@@ -163,8 +165,8 @@ int imagetopnm(opj_image_t * image,
 
           sprintf(bufferLocal,
                   "%c%c",
-                  (unsigned char)(v>>8),
-                  (unsigned char)v);
+                  static_cast<unsigned char> (v>>8),
+                  static_cast<unsigned char> (v));
           str.writeRawData (bufferLocal,
                             2);
 
@@ -177,8 +179,8 @@ int imagetopnm(opj_image_t * image,
 
           sprintf(bufferLocal,
                   "%c%c",
-                  (unsigned char)(v>>8),
-                  (unsigned char)v);
+                  static_cast<unsigned char> (v>>8),
+                  static_cast<unsigned char> (v));
           str.writeRawData (bufferLocal,
                             2);
         }
@@ -192,7 +194,7 @@ int imagetopnm(opj_image_t * image,
 
       sprintf(bufferLocal,
               "%c",
-              (unsigned char)v);
+              static_cast<unsigned char> (v));
       str.writeRawData (bufferLocal,
                         1);
       if(triple)
@@ -202,7 +204,7 @@ int imagetopnm(opj_image_t * image,
 
         sprintf(bufferLocal,
                 "%c",
-                (unsigned char)v);
+                static_cast<unsigned char> (v));
         str.writeRawData (bufferLocal,
                           1);
 	v = *blue++;
@@ -210,7 +212,7 @@ int imagetopnm(opj_image_t * image,
 
         sprintf(bufferLocal,
                 "%c",
-                (unsigned char)v);
+                static_cast<unsigned char> (v));
         str.writeRawData (bufferLocal,
                           1);
       }
@@ -221,7 +223,7 @@ int imagetopnm(opj_image_t * image,
 
         sprintf(bufferLocal,
                 "%c",
-                (unsigned char)v);
+                static_cast<unsigned char> (v));
         str.writeRawData (bufferLocal,
                           1);
       }
@@ -239,9 +241,9 @@ int imagetopnm(opj_image_t * image,
 
   for (compno = 0; compno < ncomp; compno++)
   {
-    wr = (int)image->comps[compno].w;
-    hr = (int)image->comps[compno].h;
-    prec = (int)image->comps[compno].prec;
+    wr = qFloor (image->comps[compno].w);
+    hr = qFloor (image->comps[compno].h);
+    prec = qFloor (image->comps[compno].prec);
     max = (1<<prec) - 1;
 
     sprintf(bufferLocal,
@@ -266,7 +268,8 @@ int imagetopnm(opj_image_t * image,
 
         sprintf(bufferLocal,
                 "%c%c",
-                (unsigned char)(v>>8), (unsigned char)v);
+                static_cast<unsigned char> (v>>8),
+                static_cast<unsigned char> (v));
         str.writeRawData (bufferLocal,
                           2);
 
@@ -277,7 +280,8 @@ int imagetopnm(opj_image_t * image,
 
           sprintf(bufferLocal,
                   "%c%c",
-                  (unsigned char)(v>>8), (unsigned char)v);
+                  static_cast<unsigned char> (v>>8),
+                  static_cast<unsigned char> (v));
           str.writeRawData (bufferLocal,
                             2);
         }
@@ -292,7 +296,7 @@ int imagetopnm(opj_image_t * image,
 
         sprintf(bufferLocal,
                 "%c",
-                (unsigned char)v);
+                static_cast<unsigned char> (v));
         str.writeRawData (bufferLocal,
                           1);
       }

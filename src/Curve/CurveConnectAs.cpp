@@ -9,24 +9,30 @@
 
 QString curveConnectAsToString (CurveConnectAs curveConnectAs)
 {
+  QString rtn;
+
   switch (curveConnectAs) {
 
     case CONNECT_AS_FUNCTION_SMOOTH:
-      return QObject::tr ("FunctionSmooth");
+      rtn = QObject::tr ("FunctionSmooth");
+      break;
 
     case CONNECT_AS_FUNCTION_STRAIGHT:
-      return QObject::tr ("FunctionStraight");
+      rtn = QObject::tr ("FunctionStraight");
+      break;
 
     case CONNECT_AS_RELATION_SMOOTH:
-      return QObject::tr ("RelationSmooth");
+      rtn = QObject::tr ("RelationSmooth");
+      break;
 
     case CONNECT_AS_RELATION_STRAIGHT:
-      return QObject::tr ("RelationStraight");
+      rtn = QObject::tr ("RelationStraight");
+      break;
 
     case CONNECT_SKIP_FOR_AXIS_CURVE:
-      return QObject::tr ("ConnectSkipForAxisCurve");
-
-    default:
-      return QObject::tr ("Unknown");
+      rtn = QObject::tr ("ConnectSkipForAxisCurve");
+      break;
   }
+
+  return rtn;
 }
