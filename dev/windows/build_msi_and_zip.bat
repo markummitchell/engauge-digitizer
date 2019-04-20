@@ -5,7 +5,7 @@ rem           typically accomplished by calling this script from Qt 5.8 shell fo
 rem        2) build_msi_and_zip.bat 
 rem
 rem Requirements: 1) Path set to point to:
-rem                  vcvarsall.bat           Microsoft Visual Studio X/vc/bin, where X=12.0 (MSVC2012) and 14.0 (MSVC2015) work,
+rem                  vcvarsall.bat           Microsoft Visual Studio X/vc/bin, where X=12.0 (MSVC2012) 14.0 (MSVC2015) 15.0 (MSVC2017) work,
 rem                                          with MSVC2015 used to build supporting libraries and official releases
 rem                  candle.exe/light.exe    Wix Toolset
 rem                  zip.exe                 Gnuwin32
@@ -13,30 +13,30 @@ rem                  curl.exe                cURL
 rem                  7z.exe                  7-Zip
 rem                  qmake                   Qt 5. Typical minimal setup is provided by setup_32bit.bat
 rem               2) This does NOT need the fftw3 library to be installed first, since it is
-rem                  downloaded and set up automatically by this script. The DLLs supplied should work for msvc 2015
+rem                  downloaded and set up automatically by this script. The DLLs supplied should work for msvc 2015/2017
 
 rem next line sets QTDIR to output of 'qmake -query QT_INSTALL_PREFIX'
 for /f "delims=" %%a in ('qmake -query QT_INSTALL_PREFIX') do @set QTDIR=%%a
 
-if not x%QTDIR:msvc2015_64=%==x%QTDIR% (
-  rem QTDIR includes msvc2015_64 (for 64 bits)
+if not x%QTDIR:msvc2017_64=%==x%QTDIR% (
+  rem QTDIR includes msvc2017_64 (for 64 bits)
   set ARCH=x64
   set BITS=64
   set WXSFILE=engauge_64.wxs
   set WXSOBJFILE=engauge_64.wixobj
-  echo Building for Microsoft Visual Studio 2015 with 64 bits
+  echo Building for Microsoft Visual Studio 2017 with 64 bits
   set /p rtn=Press Enter to continue...
 ) else (
-  if not x%QTDIR:msvc2015=%==x%QTDIR% (
-    rem QTDIR includes msvc2015 (for 32 bits)
+  if not x%QTDIR:msvc2017=%==x%QTDIR% (
+    rem QTDIR includes msvc2017 (for 32 bits)
     set ARCH=x86
     set BITS=32
     set WXSFILE=engauge.wxs
     set WXSOBJFILE=engauge.wixobj
-    echo Building for Microsoft Visual Studio 2015 with 32 bits
+    echo Building for Microsoft Visual Studio 2017 with 32 bits
     set /p rtn=Press any key to continue...
   ) else (
-    echo Unknown build setup encountered. MSVC 2015 with 32 or 64 bits expected according to 'qmake -query'. Quitting
+    echo Unknown build setup encountered. MSVC 2017 with 32 or 64 bits expected according to 'qmake -query'. Quitting
     set /p rtn=Press any key to continue...
     exit /b
   )
@@ -165,8 +165,9 @@ if not exist bin mkdir bin
 
 rem move Makefile Makefile.orig
 rem ps: gc Makefile.orig | %{ $_ -replace '551.lib', %QTLIBEXT% } > Makefile
-nmake clean
 
+rem jom is qt's faster dropin replacement for nmake, but jom sometimes froze up when -j4 was used for speed
+nmake clean
 nmake release
 
 if not exist bin/engauge.exe (

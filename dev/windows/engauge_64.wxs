@@ -43,7 +43,6 @@
 	  <Directory Id='bearer' Name='bearer'>
 	    <Component Id='bearer' Guid='C7385BF7-2EF9-499A-90FF-17C3F8D4C708' Win64='yes'>
 	      <File Id='generic'  Name='qgenericbearer.dll'    DiskId='1' Source='Engauge Digitizer/bearer/qgenericbearer.dll'          />
-	      <File Id='native'   Name='qnativewifibearer.dll' DiskId='1' Source='Engauge Digitizer/bearer/qnativewifibearer.dll'       />
 	    </Component>
 	  </Directory>
 	  <Directory Id='documentation' Name='documentation'>
