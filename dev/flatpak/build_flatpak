@@ -3,9 +3,49 @@
 # Run this on mark-HP-Notebook in Kubuntu 18.04 (64 bit)
 #
 # Assumes prerequisites are already installed:
-# 1) flatpak install flathub org.kde.Platform//5.11
-# 2) flatpak install flathub org.kde.Sdk//5.11
-# According to Nick Richards email on 7/17/18 qt version 5.10 is deprecated for 5.9 or 5.11
+# 1) Starting at https://flatpak.org/setup and picking Kubuntu (versus Ubuntu) leads
+#    to steps installing with plasma instead of gnome.
+#    Be sure to add the flathub repository
+# 2) Then installing SDK according to http://docs.flatpak.org/en/latest/first-build.html.
+#    This step will fail if the flathub repository was not added in the previous step.
+#    installed:
+#      org.freedesktop.Platform
+#      org.freedesktop.Platform.Locale
+#      org.freedesktop.Sdk
+#      org.freedesktop.Platform.GL.nvidia-389-116
+#      org.freedesktop.Sdk.Locale
+#      org.freedesktop.Platform.html5-codecs
+#      org.freedesktop.Platform.VAAPI.Intel
+# 3) sudo apt install flatpak-builder
+# 4) Install engauge-specific github repo
+#      cd $HOME
+#      git clone git@github.com:flathub/io.github.markummitchell.Engauge_Digitizer.git
+# 5) Running this script gives error about org.kde.Sdk/x86_64/5.11 not installed so
+#      flatpak install flathub org.kde.Sdk
+#    and pick the version option matching the error message
+# 6) Running this script gives error about org.kde.Platform/x86_64/5.11 not installed so
+#      flatpak install flathub org.kde.Platform
+#    and pick the version option matching the error message
+# 7) Got error:
+#      Remote listing engauge-digitizer not available; server has no summary file.
+#      Check the URL passed to remote-add was valid
+#      error: app/io.github.markummitchell.Engauge_Digitizer/x86_64/master not installed
+#    fix: flatpak remote-add --user --no-gpg-verify engauge-digitizer \
+#         file:///home/mark/io.github.markummitchell.Engauge_Digitizer/repo
+# 8) Issue 311 'Flatpak is missing default filename on Save' occurs on at least Mint/Cinnamon,
+#    with SaveAs file default file and file extension not set. Fix requires multiple steps to
+#    environment (outside of Engauge):
+#      + sudo apt install plasma-discover-flatpak-backend     (one time step)
+#      + sudo apt install xdg-desktop-portal-kde              (one time step)
+#      + find /usr -name xdg-desktop-portal                   (find xdg-desktop-portal executable)
+#      + find /usr -name xdg-desktop-portal-kde               (find xdg-desktop-portal-kde executable)
+#      + kill xdg-desktop-portal
+#      + kill xdg-desktop-portal-kde
+#      + export XDG_CURRENT_DESKTOP=KDE
+#      + /usr/.../xdg-desktop-portal-kde &
+#      + /usr/.../xdg-desktop-portal &                        (this connects later flatpak apps to KDE)
+#      + flatpak run io.github.markummitchell.Engauge_Digitizer
+
 if [[ -z $1 ]]; then
     echo "Usage: build_flathub <version>"
     exit
@@ -17,6 +57,7 @@ echo "Downloading $TARBALLDOWNLOAD"
 echo "Update the version changes in dev/gnome/engauge-digitizer.appdata.xml"
 read -n 1 -s -r -p "Press any key to continue"
 
+# If next line fails then create a prelease at github. May need to Publish. Also may need to wait for tarball to be built
 wget "https://github.com/markummitchell/engauge-digitizer/archive/$TARBALLDOWNLOAD" --output-document="$TARBALLLOCAL"
 CKSUM=`sha256sum $TARBALLLOCAL | awk '{print $1}'`
 
