@@ -82,7 +82,11 @@ QRgb pixelRGB8(const QImage &image8Bit, int x, int y)
 
 QRgb pixelRGB32(const QImage &image32Bit, int x, int y)
 {
-  unsigned int* p = (unsigned int *) image32Bit.scanLine(y) + x;
+  // QImage::scanLine documentation says:
+  // 1) Cast return value to QRgb* (which is 32 bit) which hides platform-specific byte orders
+  // 2) Scanline data is aligned on 32 bit boundary
+  // unsigned int* p = (unsigned int *) image32Bit.scanLine(y) + x;  
+  const QRgb *p = reinterpret_cast<const QRgb *> (image32Bit.scanLine(y)) + x;
   return *p;
 }
 
