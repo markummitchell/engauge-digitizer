@@ -72,6 +72,7 @@
 			<description>
 			  <ul>
 			    <li>Export points at grid lines</li>
+			    <li>Extrapolation past endpoints during export is optional</li>
 			  </ul>
 			</description>
 		</release>
