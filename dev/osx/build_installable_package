@@ -42,6 +42,17 @@ if [[ $LOG4CPP_HOME != *"null"* ]]; then
     exit
 fi
 
+# Xcode updates seem to update minimum target OS which is newer than this build system
+# Release dates:
+# 10.10 2014
+# 10.11 2015
+# 10.12 2016
+# 10.13 2017
+# 10.14 2018
+QMAKE_MACOSX_DEPLOYMENT_TARGET=10.10
+echo "Minimal target OSX version=$QMAKE_MACOSX_DEPLOYMENT_TARGET"
+read -p "Press any key to continue"
+
 # Remove old build. Need root privileges. Note that this step implicitly removes any leftover 
 # engauge.log file, which would other break the sandbox
 sudo rm Engauge\ Digitizer.dmg
@@ -64,7 +75,7 @@ fi
 # Make into Engauge Digitizer.app
 qmake engauge.pro CONFIG+=log4cpp_null
 make clean
-make 
+make -j8
 
 # Help
 cd help
