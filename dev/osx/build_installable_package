@@ -50,7 +50,8 @@ fi
 # 10.13 2017
 # 10.14 2018
 QMAKE_MACOSX_DEPLOYMENT_TARGET=10.10
-echo "Minimal target OSX version=$QMAKE_MACOSX_DEPLOYMENT_TARGET"
+echo "TargetSystemVersion:    $QMAKE_MACOSX_DEPLOYMENT_TARGET"
+sw_vers | grep ProductVersion | sed 's/Product/BuildSystem/'
 read -p "Press any key to continue"
 
 # Remove old build. Need root privileges. Note that this step implicitly removes any leftover 
