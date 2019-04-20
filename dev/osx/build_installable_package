@@ -49,8 +49,8 @@ fi
 # 10.12 2016
 # 10.13 2017
 # 10.14 2018
-QMAKE_MACOSX_DEPLOYMENT_TARGET=10.10
-echo "TargetSystemVersion:    $QMAKE_MACOSX_DEPLOYMENT_TARGET"
+TARGETVER=`awk 'f{print;f=0} /LSMinimumSystemVersion/{f=1}' dev/osx/Info_valid.plist  | sed 's/[[:space:]]<string>//' | sed 's/<\/string>//'`
+echo "BuildSystemVersion:     $TARGETVER"
 sw_vers | grep ProductVersion | sed 's/Product/BuildSystem/'
 read -p "Press any key to continue"
 

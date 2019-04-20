@@ -49,11 +49,16 @@ else
 fi
 
 # Specifying ../bin/documentation directory here creates files in this directory
-# AND ../bin/documentation (with different sizes) so we build into the local directory
-qhelpgenerator engauge.qhp -o engauge.qhc
+# AND ../bin/documentation (with different sizes) so we build into the local directory.
+# Outputs:
+#   engauge.qch 3MB binary file
+#   engauge.qhc 32K SQLite file
+qhelpgenerator engauge.qhp
 
-# Move to target directory which is relative to the help subdirectory
+# Move to target directory which is relative to the help subdirectory. OSX does not use qhc file
 mkdir -p $DESTDIR
 mv engauge.qch $DESTDIR
-mv engauge.qhc $DESTDIR
+if [ -f engauge.qhc ]; then
+    mv engauge.qhc $DESTDIR
+fi
 
