@@ -38,6 +38,7 @@
 # More comments are in the INSTALL file, and below
 
 QT += core gui printsupport widgets xml
+CONFIG += c++11 # For nullptr
 
 !mac {
 QT += help

@@ -308,7 +308,7 @@ void color_apply_icc_profile(opj_image_t *image)
   in_prof = 
   cmsOpenProfileFromMem(image->icc_profile_buf, image->icc_profile_len);
 
-  if(in_prof == NULL) return;
+  if(in_prof == nullptr) return;
 
   in_space = cmsGetPCS(in_prof);
   out_space = cmsGetColorSpace(in_prof);
@@ -368,7 +368,7 @@ void color_apply_icc_profile(opj_image_t *image)
   cmsCloseProfile(out_prof);
 #endif
 
-  if(transform == NULL)
+  if(transform == nullptr)
   {
     image->color_space = oldspace;
 #ifdef OPJ_HAVE_LIBLCMS1

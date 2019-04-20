@@ -76,7 +76,7 @@ int Jpeg2000::getFileFormat(const char *filename) const
                                TIF_DFMT, RAW_DFMT, RAWL_DFMT, TGA_DFMT, PNG_DFMT,
                                J2K_CFMT, JP2_CFMT, JPT_CFMT, J2K_CFMT, J2K_CFMT};
   const char * ext = strrchr(filename, '.');
-  if (ext == NULL) {
+  if (ext == nullptr) {
     return -1;
   }
   ext++;
@@ -121,7 +121,7 @@ int Jpeg2000::inputFormat(const char *filename) const
   reader = fopen(filename,
                  "rb");
 
-  if (reader == NULL) {
+  if (reader == nullptr) {
     return -2;
   }
 

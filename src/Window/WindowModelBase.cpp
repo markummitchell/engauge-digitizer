@@ -34,7 +34,7 @@ int WindowModelBase::fold2dIndexes (int row,
 QMimeData *WindowModelBase::mimeData(const QModelIndexList &indexes) const
 {
   if (indexes.isEmpty ()) {
-    return Q_NULLPTR;
+    return nullptr;
   }
 
   QMimeData *data = new QMimeData ();

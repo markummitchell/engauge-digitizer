@@ -21,7 +21,8 @@ TEMPLATE    = app
 #       qmake "CONFIG+=debug pdf"
 # 3) Gratuitous warning about import_qpa_plugin in Fedora is due to 'CONFIG=qt' but that option takes care of 
 #    include/library files in an automated and platform-independent manner, so it will not be removed
-CONFIG      += qt warn_on thread testcase 
+# 4) c++11 is required for nullptr
+CONFIG      += qt warn_on thread testcase c++11
 
 OBJECTS_DIR = .objs_test
 MOC_DIR = .moc_test
