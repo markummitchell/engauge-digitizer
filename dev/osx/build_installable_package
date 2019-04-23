@@ -50,7 +50,7 @@ fi
 # 10.13 2017
 # 10.14 2018
 TARGETVER=`awk 'f{print;f=0} /LSMinimumSystemVersion/{f=1}' dev/osx/Info_valid.plist  | sed 's/[[:space:]]<string>//' | sed 's/<\/string>//'`
-echo "BuildSystemVersion:     $TARGETVER"
+echo "MinimumSystemVersion:   $TARGETVER"
 sw_vers | grep ProductVersion | sed 's/Product/BuildSystem/'
 read -p "Press any key to continue"
 
