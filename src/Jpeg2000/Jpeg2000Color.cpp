@@ -175,7 +175,7 @@ void sycc420_to_rgb(opj_image_t *img)
   i = qFloor (img->comps[0].prec);
   offset = 1<<(i - 1); upb = (1<<i)-1;
 
-  maxw = qFLoor (img->comps[0].w);
+  maxw = qFloor (img->comps[0].w);
   maxh = qFloor (img->comps[0].h);
   max = maxw * maxh;
 
