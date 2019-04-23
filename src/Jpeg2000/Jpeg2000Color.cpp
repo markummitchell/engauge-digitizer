@@ -155,8 +155,10 @@ void sycc422_to_rgb(opj_image_t *img)
   img->comps[1].w = maxw; img->comps[1].h = maxh;
   img->comps[2].w = maxw; img->comps[2].h = maxh;
 #else
-  img->comps[1].w = (OPJ_UINT32)maxw; img->comps[1].h = (OPJ_UINT32)maxh;
-  img->comps[2].w = (OPJ_UINT32)maxw; img->comps[2].h = (OPJ_UINT32)maxh;
+  img->comps[1].w = static_cast<OPJ_UINT32> (maxw);
+  img->comps[1].h = static_cast<OPJ_UINT32> (maxh);
+  img->comps[2].w = static_cast<OPJ_UINT32> (maxw);
+  img->comps[2].h = static_cast<OPJ_UINT32> (maxh);
 #endif
   img->comps[1].dx = img->comps[0].dx;
   img->comps[2].dx = img->comps[0].dx;
@@ -175,7 +177,7 @@ void sycc420_to_rgb(opj_image_t *img)
   i = qFloor (img->comps[0].prec);
   offset = 1<<(i - 1); upb = (1<<i)-1;
 
-  maxw = qFLoor (img->comps[0].w);
+  maxw = qFloor (img->comps[0].w);
   maxh = qFloor (img->comps[0].h);
   max = maxw * maxh;
 
@@ -220,8 +222,10 @@ void sycc420_to_rgb(opj_image_t *img)
   img->comps[1].w = maxw; img->comps[1].h = maxh;
   img->comps[2].w = maxw; img->comps[2].h = maxh;
 #else
-  img->comps[1].w = (OPJ_UINT32)maxw; img->comps[1].h = (OPJ_UINT32)maxh;
-  img->comps[2].w = (OPJ_UINT32)maxw; img->comps[2].h = (OPJ_UINT32)maxh;
+  img->comps[1].w = static_cast<OPJ_UINT32> (maxw);
+  img->comps[1].h = static_cast<OPJ_UINT32> (maxh);
+  img->comps[2].w = static_cast<OPJ_UINT32> (maxw);
+  img->comps[2].h = static_cast<OPJ_UINT32> (maxh);
 #endif
   img->comps[1].dx = img->comps[0].dx;
   img->comps[2].dx = img->comps[0].dx;
