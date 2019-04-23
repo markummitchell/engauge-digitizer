@@ -13,9 +13,9 @@
 	<key>CFBundleExecutable</key>
 	<string>Engauge Digitizer</string>
 	<key>CFBundleVersion</key>
-	<string>11.0</string>
+	<string>11.1</string>
 	<key>CFBundleShortVersionString</key>
-	<string>11.0</string>
+	<string>11.1</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.10.0</string>
 	<key>LSApplicationCategoryType</key>
