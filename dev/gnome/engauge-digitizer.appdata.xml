@@ -68,11 +68,10 @@
 		<content_attribute id="money-gambling">none</content_attribute>
 	</content_rating>
 	<releases>
-		<release date="2019-04-01" version="11.0">
+		<release date="2019-04-22" version="11.1">
 			<description>
 			  <ul>
-			    <li>Export points at grid lines</li>
-			    <li>Extrapolation past endpoints during export is optional</li>
+			    <li>Fix for point match</li>
 			  </ul>
 			</description>
 		</release>

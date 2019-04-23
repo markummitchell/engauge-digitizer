@@ -100,20 +100,21 @@ void Spline::computeCoefficientsForIntervals (const std::vector<double> &t,
 
 void Spline::computeControlPointsForIntervals ()
 {
-  unsigned int i, n = unsigned (qFloor (m_xy.size()) - 1);
+  int i, n = qFloor (m_xy.size()) - 1; // Must be signed to handle zero length array
 
   for (i = 0; i < n; i++) {
-    const SplineCoeff &element = m_elements[i];
+    unsigned int iU = unsigned (i);
+    const SplineCoeff &element = m_elements[iU];
 
     // Derivative at P0 from (1-s)^3*P0+(1-s)^2*s*P1+(1-s)*s^2*P2+s^3*P3 with s=0 evaluates to 3(P1-P0). That
     // derivative must match the derivative of y=a+b*(t-ti)+c*(t-ti)^2+d*(t-ti)^3 with t=ti which evaluates to b.
     // So 3(P1-P0)=b
-    SplinePair p1 = m_xy [i] + element.b() /
+    SplinePair p1 = m_xy [iU] + element.b() /
                     SplinePair (3.0);
 
     // Derivative at P2 from (1-s)^3*P0+(1-s)^2*s*P1+(1-s)*s^2*P2+s^3*P3 with s=1 evaluates to 3(P3-P2). That
     // derivative must match the derivative of y=a+b*(t-ti)+c*(t-ti)^2+d*(t-ti)^3 with t=ti+1 which evaluates to b+2*c+3*d
-    SplinePair p2 = m_xy [i + 1] - (element.b() + SplinePair (2.0) * element.c() + SplinePair (3.0) * element.d()) /
+    SplinePair p2 = m_xy [iU + 1] - (element.b() + SplinePair (2.0) * element.c() + SplinePair (3.0) * element.d()) /
                     SplinePair (3.0);
 
     m_p1.push_back (p1);
@@ -121,20 +122,24 @@ void Spline::computeControlPointsForIntervals ()
   }
 
   // Debug logging
-  for (i = 0; i < unsigned (qFloor (m_xy.size ()) - 1); i++) {
+  for (i = 0; i < qFloor (m_xy.size ()) - 1; i++) {
+    unsigned int iU = unsigned (i);
     LOG4CPP_DEBUG_S ((*mainCat)) << "Spline::computeControlPointsForIntervals" << " i=" << i
-             << " xy=" << m_xy [i]
-             << " elementt=" << m_elements[i].t()
-             << " elementa=" << m_elements[i].a()
-             << " elementb=" << m_elements[i].b()
-             << " elementc=" << m_elements[i].c()
-             << " elementd=" << m_elements[i].d()
-             << " p1=" << m_p1[i]
-             << " p2=" << m_p2[i];
+             << " xy=" << m_xy [iU]
+             << " elementt=" << m_elements[iU].t()
+             << " elementa=" << m_elements[iU].a()
+             << " elementb=" << m_elements[iU].b()
+             << " elementc=" << m_elements[iU].c()
+             << " elementd=" << m_elements[iU].d()
+             << " p1=" << m_p1[iU]
+             << " p2=" << m_p2[iU];
   }
-  i = unsigned (m_xy.size() - 1);
-  LOG4CPP_DEBUG_S ((*mainCat)) << "Spline::computeControlPointsForIntervals" << " i=" << i
-                << " xy=" << m_xy [i];
+
+  if (m_xy.size() > 1) {
+    unsigned int iU = unsigned (m_xy.size() - 1);
+    LOG4CPP_DEBUG_S ((*mainCat)) << "Spline::computeControlPointsForIntervals" << " i=" << iU
+                  << " xy=" << m_xy [iU];
+  }
 }
 
 void Spline::computeUntranslatedCoefficients (double aTranslated,
