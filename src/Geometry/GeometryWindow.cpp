@@ -233,6 +233,9 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
   // Was there a potential export ambiguity
   bool wasAmbiguity = isPotentialExportAmbiguity.contains (true);
 
+  // Unmerge any merged cells from the previous update
+  m_view->clearSpans();
+
   // Output to table
   resizeTable (NUM_HEADER_ROWS + points.count() + (wasAmbiguity ? NUM_LEGEND_ROWS_UNSPANNED : 0));
 
@@ -245,8 +248,7 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
     m_model->setPotentialExportAmbiguity (isPotentialExportAmbiguity);
 
     int row = NUM_HEADER_ROWS;
-    int index = 0;
-    for (; index < points.count(); row++, index++) {
+    for (int index = 0; index < points.count(); row++, index++) {
 
       const Point &point = points.at (index);
 
@@ -265,6 +267,7 @@ void GeometryWindow::update (const CmdMediator &cmdMediator,
     }
 
     if (wasAmbiguity) {
+      // Merge row into one big cell so text fits. Requires unmerge at start of next update
       m_view->setSpan (row, 0, NUM_LEGEND_ROWS_UNSPANNED, NUM_BODY_COLUMNS);
       m_model->setItem (row, COLUMN_BODY_X,
                         new QStandardItem (tr ("Highlighted segments may have unexpected values when exported due to overlaps. "
