@@ -538,25 +538,28 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedStraight (const D
 
     double xTheta = xThetaValues.at (row);
 
-    double yRadius = linearlyInterpolate (points,
-                                          xTheta,
-                                          transformation);
+    // Interpolation on curve with no points will trigger an assert so check the point count
+    *(yRadiusValues [row]) = "";
+    if (points.count () > 0) {
 
-    // Save y/radius value for this row into yRadiusValues, after appropriate formatting
-    if (xThetaIsNotOutOfBounds (xTheta,
-                                curveName,
-                                curveLimitsMin,
-                                curveLimitsMax)) {
-      format.unformattedToFormatted (xTheta,
-                                     yRadius,
-                                     modelCoords,
-                                     modelGeneral,
-                                     modelMainWindow,
-                                     dummyXThetaOut,
-                                     *(yRadiusValues [row]),
-                                     transformation);
-    } else {
-      *(yRadiusValues [row]) = "";
+      double yRadius = linearlyInterpolate (points,
+                                            xTheta,
+                                            transformation);
+
+      // Save y/radius value for this row into yRadiusValues, after appropriate formatting
+      if (xThetaIsNotOutOfBounds (xTheta,
+                                  curveName,
+                                  curveLimitsMin,
+                                  curveLimitsMax)) {
+        format.unformattedToFormatted (xTheta,
+                                       yRadius,
+                                       modelCoords,
+                                       modelGeneral,
+                                       modelMainWindow,
+                                       dummyXThetaOut,
+                                       *(yRadiusValues [row]),
+                                       transformation);
+      }
     }
   }
 }
