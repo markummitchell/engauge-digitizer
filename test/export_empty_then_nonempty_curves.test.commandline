@@ -1,0 +1,1 @@
+-errorreport ../test/export_empty_then_nonempty_curves.dig -regression -reset
