@@ -8,6 +8,8 @@
 #  3) desktop-qt5 only snaps a minimal qt application, so other packages must be added by us
 #  4) sql plugins must be added so sqlite is available, which prevents a runtime error message about missing qsqlite
 #     that disappeared when the help feature started working
+#
+# Error like 'Authorization header missing' is fixed with 'snapcraft login'
 
 echo "Run in Kubuntu 16.04 virtual machine"
 

@@ -15,34 +15,26 @@
 # ftp stage uses password and ssh key as explained at www.cygwin.com/package-upload.html
 
 show_usage_and_quit() {
-    echo "Usage: build_version <versiontag>"
+    echo "Usage: build_version <versiontag> <32|64>"
     echo "where versiontag has the format #.# or #.#.#"
     exit
 }
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -ne 2 ]; then
     show_usage_and_quit
 fi
 
 # Version number format is documented in show_usage_and_quit
 VERSION=$1
-
-# 32 versus 64 comes from HOSTTYPE
-if [ $HOSTTYPE == "i686" ]; then
-    BITS=32
-    BITSARG="--32"
-elif [ $HOSTTYPE == "x86_64" ]; then
-    BITS=64;
-    BITSARG="--64"
-else
-    echo "HOSTTYPE has unexpected value of $HOSTTYPE. Expected i686 or x86_64"
-    exit
-fi
-OTHER="$((96 - $BITS))"
-echo "Building $BITS bit package. Rerun this in a separate Cygin$OTHER window"
+BITS=$2
+BITSARG=--$BITS
 
 # Formats are like 11 (for version 11.0) or 11.2
 if [[ ! $VERSION =~ ^[0-9]+$ ]] && [[ ! $VERSION =~ ^[0-9]+\.[0-9]+$ ]]; then
+    show_usage_and_quit
+fi
+
+if [[ ! $BITSARG =~ ^(--32|--64)$ ]]; then
     show_usage_and_quit
 fi
 
