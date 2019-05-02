@@ -92,12 +92,12 @@
 	    The Engauge Digitizer tool accepts image files (like PNG, JPEG and TIFF) containing graphs, and recovers the
 	    data points from those graphs. The resulting data points are usually used as input to other software applications.
 	    Conceptually, Engauge Digitizer is the opposite of a graphing tool that converts data points to graphs. The process
-	    is shown below - an image file is imported and then digitized within Engauge by placing points along each curve.
+	    is shown below - an image file is imported and then digitized within Engauge by placing points along axes and curves.
 	    Data points can be transferred to other software applications by exporting to a text file, or directly using copy and
 	    paste. Work can be saved into an Engauge DIG file for later editing.
 	  </p>
 	  <p>
-	    <img width="690" height="276" src="images/ProcessFlowchart.png" alt="process flowchart" />
+	    <img width="692" height="289" src="images/ProcessFlowchart.png" alt="process flowchart" />
 	  </p>
 	  <p>
 	    Engauge users range from one-time users digitizing a single image file, to large government and commercial
@@ -168,7 +168,7 @@
 	      Linux, OSX and Windows operating systems as downloads:</p>
 	      <ul>
 		<li>
-		  <p>Version 11.2 (5/1/2019) fixes jpeg2000 build, and crash during export when a curve has no points</p>
+		  <p>Version 11.2 (5/1/2019) fixes jpeg2000 build, and export when a curve has no points</p>
 		</li>		  
 		<li>
 		  <p>Version 11.1 (4/21/2019) has fix for point match tool</p>
@@ -179,7 +179,7 @@
 	      </li>		
 	      <li>
 		<p>Version 10.12 (3/6/2019) warns when function coordinates overlap, gives better default range of exported points,
-		and fixes a crash with logarithmic y coordinates</p>
+		and fixes an error with logarithmic y coordinates</p>
 	      </li>
 	      <li>
 		<p>Version 10.11 (10/27/2018) highlights multi-valued sections in functions, ensures there is always at least one
@@ -207,7 +207,7 @@
 		<p>Version 10.6 (4/8/2018) supports flathub release</p>
 	      </li>	    
 	      <li>
-		<p>Version 10.5 (4/7/2018) adds pdf file support to Windows releases, and fixes crash on certain log data cases</p>
+		<p>Version 10.5 (4/7/2018) adds pdf file support to Windows releases, and fixes error on certain log data cases</p>
 	      </li>
 	      <li>
 		<p>Version 10.4 (10/10/2017) gracefully handles too many grid lines, handles commas in csv exports, and no longer
