@@ -89,17 +89,19 @@
 	  </div>
 	  <div style="clear: both"></div>	  
 	  <p>
-	    The Engauge Digitizer tool accepts image files (like PNG, JPEG and TIFF) containing graphs, and recovers the data points from those graphs. The resulting
-	    data points are usually used as input to other software applications. Conceptually, Engauge Digitizer is the opposite of a graphing tool that converts data 
-	    points to graphs. The process is shown below - an image file is imported, digitized within Engauge, and exported as a table of numeric data to a text file. 
-	    Work can be saved into an Engauge DIG file.
+	    The Engauge Digitizer tool accepts image files (like PNG, JPEG and TIFF) containing graphs, and recovers the
+	    data points from those graphs. The resulting data points are usually used as input to other software applications.
+	    Conceptually, Engauge Digitizer is the opposite of a graphing tool that converts data points to graphs. The process
+	    is shown below - an image file is imported and then digitized within Engauge by placing points along each curve.
+	    Data points can be transferred to other software applications by exporting to a text file, or directly using copy and
+	    paste. Work can be saved into an Engauge DIG file for later editing.
 	  </p>
 	  <p>
-	    <img width="657" height="242" src="images/ProcessFlowchart.png" alt="process flowchart" />
+	    <img width="690" height="276" src="images/ProcessFlowchart.png" alt="process flowchart" />
 	  </p>
 	  <p>
-	    Engauge users range from one-time users digitizing a single image file, to large government and commercial organizations managing
-	    databases of thousands of image files.
+	    Engauge users range from one-time users digitizing a single image file, to large government and commercial
+	    organizations managing databases of thousands of image files.
 	  </p>
 	  <p>
 	    Interested in translating Engauge to another language? We welcome translations of file translations/engauge.ts to 
@@ -164,7 +166,13 @@
 	    <p>Engauge Digitizer is distributed with most Linux distributions and through the Mac App Store.
 	      <a href="https://github.com/markummitchell/engauge-digitizer/releases">Releases</a> are also available for 
 	      Linux, OSX and Windows operating systems as downloads:</p>
-            <ul>
+	      <ul>
+		<li>
+		  <p>Version 11.2 (5/1/2019) fixes jpeg2000 build, and crash during export when a curve has no points</p>
+		</li>		  
+		<li>
+		  <p>Version 11.1 (4/21/2019) has fix for point match tool</p>
+		</li>
 	      <li>
 		<p>Version 11 (4/19/2019) has an option to export points at grid lines, with optional extrapolation past the
 		endpoints</p>
