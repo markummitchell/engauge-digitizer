@@ -1,9 +1,10 @@
 #!/usr/bin/bash
 
 # Required packages:
-#   binutils (i686 and x64)
+#   cygwin32-gcc (for 32 bit builds)
+#   cygwin32-w32api-runtime (for 32 bit builds)
 #   cygport
-#   gcc-g++ (i686 and x64)
+#   gcc-g++
 #   libfftw3-devel
 #   libGL-devel
 #   libQt5Core-devel (for qmake-qt5)
