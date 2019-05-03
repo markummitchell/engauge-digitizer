@@ -1,8 +1,9 @@
 #!/usr/bin/bash
 
 # Required packages:
+#   binutils (i686 and x64)
 #   cygport
-#   gcc-g++
+#   gcc-g++ (i686 and x64)
 #   libfftw3-devel
 #   libGL-devel
 #   libQt5Core-devel (for qmake-qt5)
