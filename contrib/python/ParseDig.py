@@ -21,10 +21,14 @@ class ParseDig:
         graphX = np.empty(shape=(3, 1))
         graphY = np.empty(shape=(3, 1))
         graph1 = np.empty(shape=(3, 1))
-        screenToGraph = np.array([])
+        self._screenToGraph = np.array([])
+        self._delimiter = ','
         for node in tree.iter():
             # print (node.tag, '<->', node.attrib)
-            if (node.tag == 'Curve'):
+            if (node.tag == 'Export'):
+                delimiterEnum = node.attrib.get ('Delimiter')
+                delimiter = self.delimiterEnumToDelimiter (delimiterEnum)
+            elif (node.tag == 'Curve'):                
                 curveName = node.attrib.get ('CurveName');
                 if (curveName == 'Axes'):
                     for nodeAxes in node.iter():
@@ -46,7 +50,7 @@ class ParseDig:
                                     graph1 [rowsGraph] = 1;
                                     # print ('Input positionGraphAxes', x, y)
                                     rowsGraph = rowsGraph + 1;
-                    screenToGraph = self.computeAffineTransformation(screen, graphX, graphY, graph1)
+                    self._screenToGraph = self.computeAffineTransformation(screen, graphX, graphY, graph1)
                 else:
                     for nodeGraph in node.iter():
                         if (nodeGraph.tag == 'Point'):
@@ -56,7 +60,7 @@ class ParseDig:
                                     y = float (nodePoint.attrib.get ('Y'))
                                     # print ('Input positionScreen', x, y)
                                     vecScreen = np.array ([x, y, 1])
-                                    vecGraph = np.dot (screenToGraph, 
+                                    vecGraph = np.dot (self._screenToGraph, 
                                                        vecScreen)
                                     x = vecGraph [0]
                                     y = vecGraph [1]
@@ -74,3 +78,20 @@ class ParseDig:
         return list (self.curves [curveName]);
     def curveNames (self):
         return list (self.curves.keys ());
+    def delimiterEnumToDelimiter (self, delimiterEnum):
+        # Mapping ExportDelimiter enum
+        switcher = {
+            0: ',',
+            1: ' ',
+            2: '\t',
+            3: ';'
+            }
+        return switcher.get (delimiterEnum, ' ')
+    def exportDelimiter (self):
+        return self._delimiter
+    def transformGraphToScreen (self, xGraph, yGraph):
+        graphToScreen = np.linalg.inv (self._screenToGraph)
+        vecGraph = np.array ([xGraph, yGraph, 1])
+        vecScreen = np.dot (graphToScreen,
+                            vecGraph)
+        return int (0.5 + vecScreen [0]), int (0.5 + vecScreen [1])
