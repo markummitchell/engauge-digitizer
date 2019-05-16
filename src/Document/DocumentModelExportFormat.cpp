@@ -29,7 +29,8 @@ DocumentModelExportFormat::DocumentModelExportFormat()
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   settings.beginGroup (SETTINGS_GROUP_EXPORT);
 
-  // Sync these settings with DlgSettingsExportFormat::slotSaveDefault()
+  // Sync these settings with DlgSettingsExportFormat::slotLoadDefault()
+  // and DlgSettingsExportFormat::slotSaveDefault()
   m_curveNamesNotExported = settings.value (SETTINGS_EXPORT_CURVE_NAMES_NOT_EXPORTED,
                                             QVariant (DEFAULT_CURVE_NAMES_NOT_EXPORTED)).toStringList();
   m_delimiter = static_cast<ExportDelimiter> (settings.value (SETTINGS_EXPORT_DELIMITER,
