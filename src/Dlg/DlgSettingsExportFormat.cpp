@@ -955,8 +955,11 @@ void DlgSettingsExportFormat::slotSaveDefault()
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   settings.beginGroup (SETTINGS_GROUP_EXPORT);
 
+  // Sync these settings with DocumentModelExportFormat::DocumentModelExportFormat()
   settings.setValue (SETTINGS_EXPORT_DELIMITER,
                      QVariant (m_modelExportAfter->delimiter()));
+  settings.setValue (SETTINGS_EXPORT_DELIMITER_OVERRIDE_CSV_TSV,
+                     QVariant (m_modelExportAfter->overrideCsvTsv()));
   settings.setValue (SETTINGS_EXPORT_EXTRAPOLATE_OUTSIDE_ENDPOINTS,
                      QVariant (m_modelExportAfter->extrapolateOutsideEndpoints()));
   settings.setValue (SETTINGS_EXPORT_HEADER,

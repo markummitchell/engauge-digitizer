@@ -57,7 +57,7 @@ private:
   MainWindow *m_mainWindow;
   Document *m_document;
   DocumentModelCoords m_modelCoords;
-  DocumentModelExportFormat m_modelExportOverride;
+  DocumentModelExportFormat m_modelExportOverride; // Values from constructor, loaded before settings reset, are overwritten
   DocumentModelGeneral m_modelGeneral;
   MainWindowModel m_modelMainWindow;
   Transformation m_transformation;
