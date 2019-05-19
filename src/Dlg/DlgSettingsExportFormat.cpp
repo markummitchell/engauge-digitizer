@@ -915,7 +915,7 @@ void DlgSettingsExportFormat::slotLoadDefault()
 
   m_btnHeaderGnuplot->setChecked (modelExportDefaults.header() == EXPORT_HEADER_GNUPLOT);
   m_btnHeaderNone->setChecked (modelExportDefaults.header() == EXPORT_HEADER_NONE);
-  m_btnHeaderNone->setChecked (modelExportDefaults.header() == EXPORT_HEADER_SIMPLE);
+  m_btnHeaderSimple->setChecked (modelExportDefaults.header() == EXPORT_HEADER_SIMPLE);
 
   m_editXLabel->setText (modelExportDefaults.xLabel());
 
@@ -947,6 +947,9 @@ void DlgSettingsExportFormat::slotLoadDefault()
   int indexRelations = m_cmbRelationsPointsEvenlySpacingUnits->findData (QVariant (modelExportDefaults.pointsIntervalUnitsRelations ()));
   m_cmbFunctionsPointsEvenlySpacingUnits->setCurrentIndex (indexFunctions);
   m_cmbRelationsPointsEvenlySpacingUnits->setCurrentIndex (indexRelations);
+
+  // Apply defaults to 'after' settings
+  *m_modelExportAfter = modelExportDefaults;
 
   updateControls();
   updatePreview();
