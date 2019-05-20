@@ -9,10 +9,11 @@
 # 3) DefaultListOrderedDict.py from the Engauge scripts directory
 # 4) ParseDig.py from the Engauge scripts directory
 
+import os
 from ParseDig import ParseDig
 import sys
 
-if len(sys.argv) != 2:
+if len(sys.argv) != 2 or not os.path.exists (sys.argv [1]):
     print ("Usage: python3 DumpGraphAndScreenCoordinates.py <dig file>")
 else:
     parseDig = ParseDig (sys.argv [1])
