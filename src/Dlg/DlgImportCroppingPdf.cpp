@@ -168,7 +168,7 @@ QImage DlgImportCroppingPdf::image () const
 {
   // If the entire page was to be returned, then this method would simply return m_image. However, only the framed
   // portion is to be returned
-  ENGAUGE_ASSERT (m_pdfCropping != 0);
+  ENGAUGE_ASSERT (m_pdfCropping != nullptr);
   QRectF rectFramePixels = m_pdfCropping->frameRect ();
 
   return m_image.copy (rectFramePixels.toRect ());
@@ -190,7 +190,7 @@ QImage DlgImportCroppingPdf::loadImage (int page1Based) const
 
   int page0Based = page1Based - 1;
   Page *page = m_document.page (page0Based);
-  if (page != 0) {
+  if (page != nullptr) {
 
     image = page->renderToImage (m_resolution,
                                  m_resolution,
@@ -208,7 +208,7 @@ QImage DlgImportCroppingPdf::loadImage (int page1Based) const
 void DlgImportCroppingPdf::saveGeometryToSettings()
 {
   // Store the settings for use by showEvent
-  QSettings settings;
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   settings.beginGroup (SETTINGS_GROUP_IMPORT_CROPPING);
   settings.setValue (SETTINGS_IMPORT_CROPPING_POS, saveGeometry ());
   settings.endGroup();
@@ -216,13 +216,14 @@ void DlgImportCroppingPdf::saveGeometryToSettings()
 
 void DlgImportCroppingPdf::showEvent (QShowEvent * /* event */)
 {
-  QSettings settings;
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   settings.beginGroup (SETTINGS_GROUP_IMPORT_CROPPING);
   if (settings.contains (SETTINGS_IMPORT_CROPPING_POS)) {
 
     // Restore the settings that were stored by the last call to saveGeometryToSettings
     restoreGeometry (settings.value (SETTINGS_IMPORT_CROPPING_POS).toByteArray ());
   }
+  settings.endGroup ();
 }
 
 void DlgImportCroppingPdf::slotCancel ()
@@ -272,7 +273,7 @@ void DlgImportCroppingPdf::updatePreview ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgImportCroppingPdf::updatePreview";
 
-  if (m_pixmap != 0) {
+  if (m_pixmap != nullptr) {
     m_scenePreview->removeItem (m_pixmap);
   }
 
