@@ -9,19 +9,25 @@ import os
 import subprocess
 import sys
 
-# Operating system dependent location of Engauge executable. Some values are:
-#  cygwin  /usr/bin/engauge-digitizer.exe
-#  linux   
-#  osx     
-#  windows C:/Program Files/Engauge Digitizer/engauge.exe
-ENGAUGE_EXECUTABLE = "../../bin/engauge"
-ENGAUGE_EXECUTABLE = "../../dev/windows/Engauge Digitizer/engauge.exe"
-        
+# Operating system dependent location of Engauge executable. Some typical values are:
+#  cygwin      /usr/bin/engauge-digitizer.exe
+#  linux       /usr/bin/engauge
+#  osx         /Applications/Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer
+#  windows     C:/Program Files/Engauge Digitizer/engauge.exe
+ENGAUGE_EXECUTABLE = "/usr/bin/engauge"
+
+NO_EXE_ERROR = 'Execution error. You may need to modify ENGAUGE_EXECUTABLE to find the Engauge executable. ' + \
+               'Version 11.3 or newer is required'
+
 class ParseDig:
     def __init__(self, digFile):
         # Hash table of curve name to lists, with each list consisting of graph points
         self._curves = DefaultListOrderedDict()
 
+        if not os.path.exists (ENGAUGE_EXECUTABLE):
+            print (NO_EXE_ERROR)
+            sys.exit (0)
+            
         try:
             with open(digFile, 'rt') as f:
                 tree = ElementTree.parse (f)
@@ -160,7 +166,7 @@ class ParseDig:
                                 "-upgrade",
                                 digFile])
         if rtn:
-            print ('Execution error. You may need to modify ENGAUGE_EXECUTABLE to find the Engauge executable')
+            print (NO_EXE_ERROR)
             sys.exit (0)
 
         return digFileUpgraded
