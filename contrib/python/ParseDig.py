@@ -9,6 +9,14 @@ import os
 import subprocess
 import sys
 
+# Operating system dependent location of Engauge executable. Some values are:
+#  cygwin  /usr/bin/engauge-digitizer.exe
+#  linux   
+#  osx     
+#  windows C:/Program Files/Engauge Digitizer/engauge.exe
+ENGAUGE_EXECUTABLE = "../../bin/engauge"
+ENGAUGE_EXECUTABLE = "../../dev/windows/Engauge Digitizer/engauge.exe"
+        
 class ParseDig:
     def __init__(self, digFile):
         # Hash table of curve name to lists, with each list consisting of graph points
@@ -147,9 +155,12 @@ class ParseDig:
             print ('Upgrade file exists and will not be overwritten. Quitting')
             sys.exit (0)
 
-        # Create the upgrade
-        subprocess.call (["../../bin/engauge",
-                         "-upgrade",
-                         digFile])
+        # Create the upgrade from the old dig file. It will be removed after
+        rtn = subprocess.call ([ENGAUGE_EXECUTABLE,
+                                "-upgrade",
+                                digFile])
+        if rtn:
+            print ('Execution error. You may need to modify ENGAUGE_EXECUTABLE to find the Engauge executable')
+            sys.exit (0)
 
         return digFileUpgraded
