@@ -51,6 +51,90 @@ class ParseDig:
         screenToGraph = np.array ([m1.flatten(), m2.flatten(), m3.flatten()])
         return screenToGraph
 
+    def getScreenAndGraph(self, node):
+        #Get screen and graph coordinates from axis data
+        #Allows for three or four axis points
+        rowsGraph = 0
+        rowsScreen = 0
+        screen = np.empty(shape=(3, 3))
+        graphX = np.empty(shape=(3, 1))
+        graphY = np.empty(shape=(3, 1))
+        graph1 = np.ones(3)
+        try:
+            for nodeAxes in node.iter():
+                if (nodeAxes.tag == 'Point'):
+                    for nodePoint in nodeAxes.iter():
+                        if (nodePoint.tag == 'PositionScreen'):
+                            x = float(nodePoint.attrib.get('X'))
+                            y = float(nodePoint.attrib.get('Y'))
+                            screen[rowsScreen][0] = x
+                            screen[rowsScreen][1] = y
+                            screen[rowsScreen][2] = 1
+                            # print ('Input positionScreenAxes', x, y)
+                            rowsScreen += 1
+                        elif (nodePoint.tag == 'PositionGraph'):
+                            x = float(nodePoint.attrib.get('X'))
+                            y = float(nodePoint.attrib.get('Y'))
+                            graphX[rowsGraph] = x
+                            graphY[rowsGraph] = y
+                            graph1[rowsGraph] = 1
+                            # print ('Input positionGraphAxes', x, y)
+                            rowsGraph += 1
+            return screen, graphX, graphY, np.ones(3), rowsGraph, rowsScreen
+        except Exception as e:
+            screenX = []
+            screenY = []
+            screenXNew = []
+            screenYNew = []
+            graphX = []
+            graphY = []
+            IsXOnly = np.array([], dtype='str')
+            for nodeAxes in node.iter():
+                if (nodeAxes.tag == 'Point'):
+                    for nodePoint in nodeAxes.iter():
+                        if (nodePoint.tag == 'Point'):
+                            IsXOnly = np.append(IsXOnly, nodePoint.attrib.get('IsXOnly'))
+                        if (nodePoint.tag == 'PositionScreen'):
+                            x = float(nodePoint.attrib.get('X'))
+                            screenX.append(x)
+                            y = float(nodePoint.attrib.get('Y')) 
+                            screenY.append(y)
+                        elif (nodePoint.tag == 'PositionGraph'):
+                            x = float(nodePoint.attrib.get('X'))
+                            graphX.append(x)
+                            y = float(nodePoint.attrib.get('Y'))
+                            graphY.append(y)
+            graphX = np.array(graphX)
+            graphX = graphX[IsXOnly == 'True']
+            graphX = np.append(graphX, graphX[0])
+            graphY = np.array(graphY)
+            graphY = graphY[IsXOnly == 'False']
+            graphY = np.append(graphY, graphY[1])
+            graphY[1] = graphY[0]
+            screenX = np.array(screenX)
+            screenY = np.array(screenY)
+            xAxesScreenX = screenX[IsXOnly == 'True']
+            xAxesScreenY = screenY[IsXOnly == 'True']
+            yAxesScreenX = screenX[IsXOnly == 'False']
+            yAxesScreenY = screenY[IsXOnly == 'False']
+            #The below section calculates the screen coords of intersections of 
+            #lines formed by the x and y axes
+            m1 = (yAxesScreenY[1] - yAxesScreenY[0]) / (yAxesScreenX[1] - yAxesScreenX[0])
+            m3 = (xAxesScreenY[1] - xAxesScreenY[0]) / (xAxesScreenX[1] - xAxesScreenX[0])
+            m2 = m1
+            m4 = m3
+            b1 = xAxesScreenY[0] - m1 * xAxesScreenX[0]
+            b2 = xAxesScreenY[1] - m2 * xAxesScreenX[1]
+            b3 = yAxesScreenY[0] - m3 * yAxesScreenX[0]
+            b4 = yAxesScreenY[1] - m4 * yAxesScreenX[1]
+            screenXNew.append((b1 - b3) / (m3 - m1))
+            screenYNew.append(m3 * screenXNew[0] + b3)
+            screenXNew.append((b2 - b3) / (m3 - m2))
+            screenYNew.append(m3 * screenXNew[1] + b3)
+            screenXNew.append((b1 - b4) / (m4 - m1))
+            screenYNew.append(m4 * screenXNew[2] + b4)
+            return np.array([screenXNew, screenYNew, np.ones(3)]).T, graphX, graphY, np.ones(3), rowsGraph, rowsScreen  
+      
     def curve (self, curveName):
         return list (self._curves [curveName])
 
@@ -78,12 +162,6 @@ class ParseDig:
         # screen = (xS1 yS1 1)
         #          (xS2 yS2 1)
         #          (xS3 yS3 1)
-        rowsGraph = 0
-        rowsScreen = 0
-        screen = np.empty(shape=(3, 3))
-        graphX = np.empty(shape=(3, 1))
-        graphY = np.empty(shape=(3, 1))
-        graph1 = np.empty(shape=(3, 1))
         self._screenToGraph = np.array([])
         self._delimiter = ','
         for node in tree.iter():
@@ -94,25 +172,7 @@ class ParseDig:
             elif (node.tag == 'Curve'):
                 curveName = node.attrib.get('CurveName')
                 if (curveName == 'Axes'):
-                    for nodeAxes in node.iter():
-                        if (nodeAxes.tag == 'Point'):
-                            for nodePoint in nodeAxes.iter():
-                                if (nodePoint.tag == 'PositionScreen'):
-                                    x = float(nodePoint.attrib.get('X'))
-                                    y = float(nodePoint.attrib.get('Y'))
-                                    screen[rowsScreen][0] = x
-                                    screen[rowsScreen][1] = y
-                                    screen[rowsScreen][2] = 1
-                                    # print ('Input positionScreenAxes', x, y)
-                                    rowsScreen += 1
-                                elif (nodePoint.tag == 'PositionGraph'):
-                                    x = float(nodePoint.attrib.get('X'))
-                                    y = float(nodePoint.attrib.get('Y'))
-                                    graphX[rowsGraph] = x
-                                    graphY[rowsGraph] = y
-                                    graph1[rowsGraph] = 1
-                                    # print ('Input positionGraphAxes', x, y)
-                                    rowsGraph += 1
+                    screen, graphX, graphY, graph1, rowsGraph, rowsScreen = self.getScreenAndGraph(node)
                     if rowsGraph < 3 or rowsScreen < 3:
                         print ('This script requires three axes points. Quitting')
                         sys.exit (1)
