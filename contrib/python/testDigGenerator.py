@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu May 23 08:07:45 2019
-
-@author: kts2
-"""
-
 # lxml supports CDATA and xml.etree.ElementTree does not
 # See https://lxml.de/tutorial.html
 from lxml.etree import CDATA, Element, SubElement, tostring
