@@ -28,9 +28,6 @@ def addGraphPoint (curvePoints, identifierIndex, ordinal, xScreen, yScreen):
     positionScreen.set ('X', '{}' . format (xScreen))
     positionScreen.set ('Y', '{}' . format (yScreen))
 
-
-
-
 def createTestCase(xAxes, yAxes, xData, yData, xScale, yScale, title):
     """xAxes looks like [xScreen, xGraph], where xScreen is an array of
     x pixel values for the axes, and xGraph is the corresponding graph 
@@ -59,16 +56,19 @@ def createTestCase(xAxes, yAxes, xData, yData, xScale, yScale, title):
     coords.set ('Type', '0')
     coords.set ('TypeString', 'Cartesian')
     coords.set ('Coords', '0')
+	
     if (xScale == 'Linear'):
         coords.set ('ScaleXTheta', '0')
     elif (xScale == 'Log'):
         coords.set ('ScaleXTheta', '1')
     coords.set ('ScaleXThetaString', xScale)
+	
     if (yScale == 'Linear'):
         coords.set ('ScaleYRadius', '0')
     elif (yScale == 'Log'):
         coords.set ('ScaleYRadius', '1')
     coords.set ('ScaleYRadiusString', yScale)
+	
     coords.set ('UnitsX', '0')
     coords.set ('UnitsXString', 'Number')
     coords.set ('UnitsY', '0')
@@ -256,5 +256,3 @@ def createTestCase(xAxes, yAxes, xData, yData, xScale, yScale, title):
         f = open(title, 'w+')
     f.write(testFile)
     f.close()
-    
-    
