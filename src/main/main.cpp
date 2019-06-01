@@ -24,6 +24,7 @@
 using namespace std;
 
 const QString CMD_DEBUG ("debug");
+const QString CMD_DROP_REGRESSION ("dropregression");
 const QString CMD_ERROR_REPORT ("errorreport");
 const QString CMD_EXPORT_ONLY ("exportonly");
 const QString CMD_EXTRACT_IMAGE_ONLY ("extractimageonly");
@@ -36,6 +37,7 @@ const QString CMD_STYLES ("styles"); // Not to be confused with -style option th
 const QString CMD_UPGRADE ("upgrade");
 const QString DASH ("-");
 const QString DASH_DEBUG ("-" + CMD_DEBUG);
+const QString DASH_DROP_REGRESSION ("-" + CMD_DROP_REGRESSION);
 const QString DASH_ERROR_REPORT ("-" + CMD_ERROR_REPORT);
 const QString DASH_EXTRACT_IMAGE_ONLY ("-" + CMD_EXTRACT_IMAGE_ONLY);
 const QString DASH_EXPORT_ONLY ("-" + CMD_EXPORT_ONLY);
@@ -56,6 +58,7 @@ bool engaugeLogFilenameAttempt (const QString &path,
 void parseCmdLine (int argc,
                    char **argv,
                    bool &isDebug,
+                   bool &isDropRegression,
                    bool &isReset,
                    QString &errorReportFile,
                    QString &fileCmdScriptFile,
@@ -140,12 +143,13 @@ int main(int argc, char *argv[])
   TranslatorContainer translatorContainer (app); // Must exist until execution terminates
 
   // Command line
-  bool isDebug, isReset, isGnuplot, isErrorReportRegressionTest, isExportOnly, isExtractImageOnly, isUpgrade;
+  bool isDebug, isDropRegression, isReset, isGnuplot, isErrorReportRegressionTest, isExportOnly, isExtractImageOnly, isUpgrade;
   QString errorReportFile, extractImageOnlyExtension, fileCmdScriptFile;
   QStringList loadStartupFiles, commandLineWithoutLoadStartupFiles;
   parseCmdLine (argc,
                 argv,
                 isDebug,
+                isDropRegression,
                 isReset,
                 errorReportFile,
                 fileCmdScriptFile,
@@ -172,6 +176,7 @@ int main(int argc, char *argv[])
     // Create and show main window
     MainWindow w (errorReportFile,
                   fileCmdScriptFile,
+                  isDropRegression,
                   isErrorReportRegressionTest,
                   isGnuplot,
                   isReset,
@@ -192,6 +197,7 @@ int main(int argc, char *argv[])
 void parseCmdLine (int argc,
                    char **argv,
                    bool &isDebug,
+                   bool &isDropRegression,
                    bool &isReset,
                    QString &errorReportFile,
                    QString &fileCmdScriptFile,
@@ -215,6 +221,7 @@ void parseCmdLine (int argc,
 
   // Defaults
   isDebug = false;
+  isDropRegression = false;
   isReset = false;
   errorReportFile = "";
   fileCmdScriptFile = "";
@@ -249,6 +256,8 @@ void parseCmdLine (int argc,
       nextIsFileCmdScript = false;
     } else if (strcmp (argv [i], DASH_DEBUG.toLatin1().data()) == 0) {
       isDebug = true;
+    } else if (strcmp (argv [i], DASH_DROP_REGRESSION.toLatin1().data()) == 0) {
+      isDropRegression = true;
     } else if (strcmp (argv [i], DASH_ERROR_REPORT.toLatin1().data()) == 0) {
       nextIsErrorReportFile = true;
     } else if (strcmp (argv [i], DASH_EXPORT_ONLY.toLatin1().data()) == 0) {
@@ -277,7 +286,7 @@ void parseCmdLine (int argc,
       // so relative paths must be changed in advance to absolute so the files can still be found
       QString fileName = argv [i];
       QFileInfo fInfo (fileName);
-      if (fInfo.isRelative()) {
+      if (fInfo.isRelative() && !fileName.startsWith ("http")) {
         fileName = fInfo.absoluteFilePath();
       }
 
@@ -367,6 +376,7 @@ void showUsageAndQuit ()
   QTextStream str (&msg);
   str << "<html>Usage: engauge "
       << "[" << DASH_DEBUG.toLatin1().data() << "] "
+      << "[" << DASH_DROP_REGRESSION.toLatin1().data() << "] "
       << "[" << DASH_ERROR_REPORT.toLatin1().data() << " &lt;file&gt;] "
       << "[" << DASH_EXPORT_ONLY.toLatin1().data() << "] "
       << "[" << DASH_EXTRACT_IMAGE_ONLY.toLatin1().data() << " &lt;extension&gt;] "
@@ -382,6 +392,12 @@ void showUsageAndQuit ()
       << "<td>" << DASH_DEBUG.toLatin1().data() << "</td>"
       << "<td>"
       << QObject::tr ("Enables extra debug information. Used for debugging").toLatin1().data()
+      << "</td>"
+      << "</tr>"
+      << "<tr>"
+      << "<td>" << DASH_DROP_REGRESSION.toLatin1().data() << "</td>"
+      << "<td>"
+      << QObject::tr ("Indicates files opened at startup are for testing drag and drop. Used for debugging").toLatin1().data()
       << "</td>"
       << "</tr>"
       << "<tr>"

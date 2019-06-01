@@ -21,35 +21,40 @@ FileCmdScript::FileCmdScript(const QString &fileCmdScriptFile)
   LOG4CPP_INFO_S ((*mainCat)) << "FileCmdScript::FileCmdScript"
                               << " curDir=" << QDir::currentPath().toLatin1().data();
 
-  // Read commands into stack. The file is known to exist since it was checked in parseCmdLine
-  QFile file (fileCmdScriptFile);
+  // A non-existent script file is allowed in which case nothing gets done, as a way
+  // of tracking MainWindow being in a regression test that has no command script
+  if (!fileCmdScriptFile.isEmpty ()) {
 
-  QXmlStreamReader reader (&file);
-  if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    // Read commands into stack. The file is known to exist since it was checked in parseCmdLine
+    QFile file (fileCmdScriptFile);
 
-    QString msg = QString ("%1 %2 %3 %4")
-      .arg (QObject::tr ("Cannot read script file"))
-      .arg (fileCmdScriptFile)
-      .arg (QObject::tr ("from directory"))
-      .arg (QDir::currentPath());
-    QMessageBox::critical (nullptr,
-                           "Script File",
-                           msg);
-    exit (-1);
-  }
+    QXmlStreamReader reader (&file);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
 
-  // Load commands
-  FileCmdFactory factory;
-  while (!reader.atEnd() && !reader.hasError()) {
-
-    if ((loadNextFromReader (reader) == QXmlStreamReader::StartElement) &&
-        (reader.name() == FILE_CMD_SERIALIZE_CMD)) {
-
-      // Extract and append new command to command stack
-      m_fileCmdStack.push_back (factory.createFileCmd (reader));
+      QString msg = QString ("%1 %2 %3 %4")
+          .arg (QObject::tr ("Cannot read script file"))
+          .arg (fileCmdScriptFile)
+          .arg (QObject::tr ("from directory"))
+          .arg (QDir::currentPath());
+      QMessageBox::critical (nullptr,
+                             "Script File",
+                             msg);
+      exit (-1);
     }
+
+    // Load commands
+    FileCmdFactory factory;
+    while (!reader.atEnd() && !reader.hasError()) {
+
+      if ((loadNextFromReader (reader) == QXmlStreamReader::StartElement) &&
+          (reader.name() == FILE_CMD_SERIALIZE_CMD)) {
+
+        // Extract and append new command to command stack
+        m_fileCmdStack.push_back (factory.createFileCmd (reader));
+      }
+    }
+    file.close();
   }
-  file.close();
 }
 
 FileCmdScript::~FileCmdScript()

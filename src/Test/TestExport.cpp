@@ -21,6 +21,7 @@ QTEST_MAIN (TestExport)
 
 using namespace std;
 
+const bool NO_DROP_REGRESSION = false;
 const bool NOT_USING_GNUPLOT = false;
 const bool EXPORT_ONLY= true;
 const QString NO_ERROR_REPORT_LOG_FILE;
@@ -216,6 +217,7 @@ void TestExport::initTestCase ()
 
   m_mainWindow = new MainWindow (NO_ERROR_REPORT_LOG_FILE,
                                  NO_REGRESSION_OPEN_FILE,
+                                 NO_DROP_REGRESSION,
                                  NO_REGRESSION_IMPORT,                
                                  NO_GNUPLOT_LOG_FILES,
                                  IS_RESET,

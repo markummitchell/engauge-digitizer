@@ -78,6 +78,9 @@ These steps build and run, in Linux, the standard engauge executable for digitiz
      libopenjpeg-dev    For reading jpeg2000 image files (optional). Compiles
                         with version 2.1.7 but not with version 2.1.3
      libpng12-dev       For reading png image files (optional)
+     libssl1.0-dev      For import by dragging images from browsers. Version 1.0.2
+                        is known to work but newer version 1.1.0 gives error
+			'qt.network.ssl: Incompatible version of OpenSSL'
 
    In Debian and Ubuntu distributions, the following packages are required for
    building Engauge for your own use:

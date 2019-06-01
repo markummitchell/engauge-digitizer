@@ -129,6 +129,7 @@ public:
   /// \param parent Optional parent widget for this widget
   MainWindow(const QString &errorReportFile,
              const QString &fileCmdScriptFile,
+             bool isDropRegression,
              bool isRegressionTest,
              bool isGnuplot,
              bool isReset,
@@ -356,6 +357,9 @@ private slots:
   void slotViewZoomOutFromWheelEvent ();
 
 signals:
+  /// Send drag and drop regression test url
+  void signalDropRegression(QString);
+
   /// Send zoom selection, picked from menu or keystroke, to StatusBar.
   void signalZoom(int);
 
@@ -435,6 +439,7 @@ private:
                                      const QString &temporaryMessage,
                                      ImportType ImportType);
   void startRegressionTestErrorReport (const QString &regressionInputFile);
+  void startRegressionDropTest (const QStringList &loadStartupFiles);
   void startRegressionTestFileCmdScript ();
   void updateAfterCommandStatusBarCoords ();
   void updateChecklistGuide ();
