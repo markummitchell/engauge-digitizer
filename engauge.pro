@@ -345,6 +345,7 @@ HEADERS  += \
     src/util/LinearToLog.h \
     src/Line/LineStyle.h \
     src/Load/LoadFileInfo.h \
+    src/Load/LoadImageFromUrl.h \
     src/Logger/Logger.h \
     src/Logger/LoggerUpload.h \
     src/Matrix/Matrix.h \
@@ -689,6 +690,7 @@ SOURCES += \
     src/util/LinearToLog.cpp \
     src/Line/LineStyle.cpp \
     src/Load/LoadFileInfo.cpp \
+    src/Load/LoadImageFromUrl.cpp \
     src/Logger/Logger.cpp \
     src/Logger/LoggerUpload.cpp \
     src/Matrix/Matrix.cpp \
@@ -796,10 +798,8 @@ linux-* {
   QMAKE_CXXFLAGS += -Wunused-parameter
   QT += network
   DEFINES += "NETWORKING"
-  HEADERS += src/Load/LoadImageFromUrl.h \
-             src/Network/NetworkClient.h
-  SOURCES += src/Load/LoadImageFromUrl.cpp \
-             src/Network/NetworkClient.cpp
+  HEADERS += src/Network/NetworkClient.h
+  SOURCES += src/Network/NetworkClient.cpp
   INCLUDEPATH += $$(FFTW_HOME)/include
   LIBS += -L/$$(FFTW_HOME)/lib
   !log4cpp_null {

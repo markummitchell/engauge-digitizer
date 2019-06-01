@@ -62,9 +62,7 @@
 #include "Jpeg2000.h"
 #endif // ENGAUGE_JPEG2000
 #include "LoadFileInfo.h"
-#ifdef NETWORKING
 #include "LoadImageFromUrl.h"
-#endif
 #include "Logger.h"
 #include "MainDirectoryPersist.h"
 #include "MainTitleBarFormat.h"
@@ -2332,9 +2330,9 @@ void MainWindow::slotFileImportDraggedImageUrl(QUrl url)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportDraggedImageUrl url=" << url.toString ().toLatin1 ().data ();
 
-#ifdef NETWORKING
+  // This is required for drag and drop from GraphicsView. This had an #ifdef
+  // around it for NETWORKING but restored for drag and drop
   m_loadImageFromUrl->startLoadImage (url);
-#endif
 }
 
 void MainWindow::slotFileImportImage(QString fileName, QImage image)
