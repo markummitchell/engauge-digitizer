@@ -166,6 +166,7 @@ bool GraphicsView::handleDropEvent (const QString &possibleDigFileName,
   LoadFileInfo loadFileInfo;
   if (loadFileInfo.loadsAsDigFile (possibleDigFileName)) {
 
+    // Branch that applies when a dig file name has been dropped
     LOG4CPP_INFO_S ((*mainCat)) << "QGraphicsView::handleDropEvent dig file";
     QUrl url (possibleDigFileName);
     emit signalDraggedDigFile (url.toLocalFile());
@@ -173,15 +174,14 @@ bool GraphicsView::handleDropEvent (const QString &possibleDigFileName,
 
   } else if (hasImage) {
 
-    // This branch never seems to get executed, but will be kept in case it ever applies (since hasUrls branch is messier and less reliable)
+    // Branch that applies when an image selected within another application (e.g. LibreOffice Draw) has been dropped
     LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::handleDropEvent image";
     emit signalDraggedImage (image);
     willAccept = true;
 
   } else if (hasUrl) {
 
-    // Sometimes images can be dragged in, but sometimes the url points to an html page that
-    // contains just the image, in which case importing will fail
+    // Branch that applies when a local file name or internet url has been dropped
     LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::handleDropEvent url=" << urlFirst.toString ().toLatin1 ().data ();
     emit signalDraggedImageUrl (urlFirst);
     willAccept = true;

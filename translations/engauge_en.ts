@@ -4971,12 +4971,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="400"/>
-        <source>Indicates files opened at startup are for testing drag and drop. Used for debugging</source>
+        <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="406"/>
-        <source>Specifies an error report file as input. Used for debugging and testing</source>
+        <source>Specifies an error report file as input. Used for debugging and regression testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

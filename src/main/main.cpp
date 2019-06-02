@@ -397,13 +397,13 @@ void showUsageAndQuit ()
       << "<tr>"
       << "<td>" << DASH_DROP_REGRESSION.toLatin1().data() << "</td>"
       << "<td>"
-      << QObject::tr ("Indicates files opened at startup are for testing drag and drop. Used for debugging").toLatin1().data()
+      << QObject::tr ("Indicates files opened at startup are for testing drag and drop. Used for regression testing").toLatin1().data()
       << "</td>"
       << "</tr>"
       << "<tr>"
       << "<td>" << DASH_ERROR_REPORT.toLatin1().data() << "</td>"
       << "<td>"
-      << QObject::tr ("Specifies an error report file as input. Used for debugging and testing").toLatin1().data()
+      << QObject::tr ("Specifies an error report file as input. Used for debugging and regression testing").toLatin1().data()
       << "</td>"
       << "</tr>"
       << "<tr>"
