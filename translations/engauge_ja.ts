@@ -3933,9 +3933,13 @@ Select which inputs are used to zoom in and out.</source>
 倍率の拡大・縮小にどの入力方法を使うかを選べます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Locale</source>
-        <translation>ロケール</translation>
+        <translation type="vanished">ロケール</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <source>Locale (requires restart)</source>
+        <translation>ロケール（再起動が必要）</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />

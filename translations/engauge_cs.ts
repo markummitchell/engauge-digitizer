@@ -3899,9 +3899,13 @@ Select which inputs are used to zoom in and out.</source>
 Zvolte, jakými vstupy bude přiblížení ovládáno</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Locale</source>
-        <translation>Národnostní nastavení</translation>
+        <translation type="vanished">Národnostní nastavení</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <source>Locale (requires restart)</source>
+        <translation>Národní prostředí (vyžaduje restart)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />

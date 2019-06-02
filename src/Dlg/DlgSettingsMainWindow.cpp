@@ -96,7 +96,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_cmbZoomControl, SIGNAL (currentTextChanged (const QString)), this, SLOT (slotZoomControl(const QString)));
   layout->addWidget (m_cmbZoomControl, row++, 2);
 
-  QLabel *labelLocale = new QLabel (QString ("%1:").arg (tr ("Locale")));
+  QLabel *labelLocale = new QLabel (QString ("%1:").arg (tr ("Locale (requires restart)")));
   layout->addWidget (labelLocale, row, 1);
 
   // Initialization of combobox is liberated from Qt Calendar example

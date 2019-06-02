@@ -3931,9 +3931,15 @@ Select which inputs are used to zoom in and out.</source>
 Selecione as entradas que são usados para zoom in e out.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Locale</source>
-        <translation>Localidade</translation>
+        <translation type="vanished">Localidade</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <source>Locale (requires restart)</source>
+        <translation>Localidade (requer reinicialização)
+ 
+ </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />
