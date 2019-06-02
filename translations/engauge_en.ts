@@ -2262,12 +2262,12 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgSettingsAbstractBase</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="99"/>
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="100"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="107"/>
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="108"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4048,12 +4048,12 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>LoadImageFromUrl</name>
     <message>
-        <location filename="../src/Load/LoadImageFromUrl.cpp" line="60"/>
+        <location filename="../src/Load/LoadImageFromUrl.cpp" line="66"/>
         <source>Unable to download image from</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Load/LoadImageFromUrl.cpp" line="92"/>
+        <location filename="../src/Load/LoadImageFromUrl.cpp" line="98"/>
         <source>Unable to load image from</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4061,113 +4061,113 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="443"/>
+        <location filename="../src/main/MainWindow.cpp" line="454"/>
         <source>Unable to export to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="477"/>
+        <location filename="../src/main/MainWindow.cpp" line="488"/>
         <source>Unable to extract image to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="552"/>
-        <location filename="../src/main/MainWindow.cpp" line="712"/>
-        <location filename="../src/main/MainWindow.cpp" line="891"/>
+        <location filename="../src/main/MainWindow.cpp" line="563"/>
+        <location filename="../src/main/MainWindow.cpp" line="723"/>
+        <location filename="../src/main/MainWindow.cpp" line="902"/>
         <source>Cannot read file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="554"/>
-        <location filename="../src/main/MainWindow.cpp" line="714"/>
-        <location filename="../src/main/MainWindow.cpp" line="893"/>
+        <location filename="../src/main/MainWindow.cpp" line="565"/>
+        <location filename="../src/main/MainWindow.cpp" line="725"/>
+        <location filename="../src/main/MainWindow.cpp" line="904"/>
         <source>from directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="628"/>
+        <location filename="../src/main/MainWindow.cpp" line="639"/>
         <source>Import Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="868"/>
+        <location filename="../src/main/MainWindow.cpp" line="879"/>
         <source>File opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="913"/>
+        <location filename="../src/main/MainWindow.cpp" line="924"/>
         <source>File not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="930"/>
+        <location filename="../src/main/MainWindow.cpp" line="941"/>
         <source>Error report opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="985"/>
-        <location filename="../src/main/MainWindow.cpp" line="1059"/>
+        <location filename="../src/main/MainWindow.cpp" line="996"/>
+        <location filename="../src/main/MainWindow.cpp" line="1070"/>
         <source>File imported</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1093"/>
+        <location filename="../src/main/MainWindow.cpp" line="1104"/>
         <source>Background image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1094"/>
+        <location filename="../src/main/MainWindow.cpp" line="1105"/>
         <source>Currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1095"/>
+        <location filename="../src/main/MainWindow.cpp" line="1106"/>
         <source>Point style for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1096"/>
+        <location filename="../src/main/MainWindow.cpp" line="1107"/>
         <source>Segment Fill filter for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1144"/>
+        <location filename="../src/main/MainWindow.cpp" line="1155"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1228"/>
+        <location filename="../src/main/MainWindow.cpp" line="1239"/>
         <source>Cannot write file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1276"/>
+        <location filename="../src/main/MainWindow.cpp" line="1287"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2289"/>
+        <location filename="../src/main/MainWindow.cpp" line="2300"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2371"/>
+        <location filename="../src/main/MainWindow.cpp" line="2382"/>
         <source>Open Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3583"/>
+        <location filename="../src/main/MainWindow.cpp" line="3638"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3584"/>
+        <location filename="../src/main/MainWindow.cpp" line="3639"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3714"/>
+        <location filename="../src/main/MainWindow.cpp" line="3769"/>
         <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4450,7 +4450,7 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135"/>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176"/>
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173"/>
-        <location filename="../src/main/main.cpp" line="351"/>
+        <location filename="../src/main/main.cpp" line="360"/>
         <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4683,12 +4683,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FileCmd/FileCmdScript.cpp" line="31"/>
+        <location filename="../src/FileCmd/FileCmdScript.cpp" line="35"/>
         <source>Cannot read script file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/FileCmd/FileCmdScript.cpp" line="33"/>
+        <location filename="../src/FileCmd/FileCmdScript.cpp" line="37"/>
         <source>from directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4934,7 +4934,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="562"/>
+        <location filename="../src/main/MainWindow.cpp" line="573"/>
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4944,98 +4944,103 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="235"/>
-        <location filename="../src/main/main.cpp" line="247"/>
+        <location filename="../src/main/main.cpp" line="242"/>
+        <location filename="../src/main/main.cpp" line="254"/>
         <source>is not a valid file name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="241"/>
+        <location filename="../src/main/main.cpp" line="248"/>
         <source>is not a valid image file extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="328"/>
+        <location filename="../src/main/main.cpp" line="337"/>
         <source>is used only with one or more load files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="360"/>
+        <location filename="../src/main/main.cpp" line="369"/>
         <source>Available styles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="384"/>
+        <location filename="../src/main/main.cpp" line="394"/>
         <source>Enables extra debug information. Used for debugging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="390"/>
+        <location filename="../src/main/main.cpp" line="400"/>
+        <source>Indicates files opened at startup are for testing drag and drop. Used for debugging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="406"/>
         <source>Specifies an error report file as input. Used for debugging and testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="396"/>
+        <location filename="../src/main/main.cpp" line="412"/>
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="402"/>
+        <location filename="../src/main/main.cpp" line="418"/>
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="408"/>
+        <location filename="../src/main/main.cpp" line="424"/>
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="414"/>
+        <location filename="../src/main/main.cpp" line="430"/>
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="420"/>
+        <location filename="../src/main/main.cpp" line="436"/>
         <source>Show this help information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="426"/>
+        <location filename="../src/main/main.cpp" line="442"/>
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="432"/>
+        <location filename="../src/main/main.cpp" line="448"/>
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="438"/>
+        <location filename="../src/main/main.cpp" line="454"/>
         <source>Show a list of available styles that can be used with the -style command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="444"/>
+        <location filename="../src/main/main.cpp" line="460"/>
         <source>Upgrade files opened at startup to the most recent version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="450"/>
+        <location filename="../src/main/main.cpp" line="466"/>
         <source>File(s) to be imported or opened at startup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="495"/>
+        <location filename="../src/main/main.cpp" line="511"/>
         <source>Could not write to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="508"/>
+        <location filename="../src/main/main.cpp" line="524"/>
         <source>Upgraded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="510"/>
+        <location filename="../src/main/main.cpp" line="526"/>
         <source>to</source>
         <translation type="unfinished"></translation>
     </message>
