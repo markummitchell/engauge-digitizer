@@ -111,7 +111,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
                                 "by the user, displayed in the user interface, or exported to a file."));
   QStringList qmFilenames;
   qmFilenames << gatherQmFilenames ("/translations"); // Linux and Windows. Do NOT apply tr()!
-  qmFilenames << gatherQmFilenames ("../Resources/translations"); // OSX. Do not apply tr()!
+  qmFilenames << gatherQmFilenames ("/../Resources/translations"); // OSX. Do not apply tr()!
   for (int i = 0; i < qmFilenames.size(); i++) {
     QString locale = qmFilenames [i]; // "engauge_de.qm"
     locale.truncate (locale.lastIndexOf ('.')); // "engauge_de"
