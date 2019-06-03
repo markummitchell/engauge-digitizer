@@ -9,6 +9,8 @@
 
 #include "DlgSettingsAbstractBase.h"
 #include <QLocale>
+#include <QString>
+#include <QStringList>
 
 class QCheckBox;
 class QComboBox;
@@ -58,6 +60,7 @@ private:
 
   void createControls (QGridLayout *layout,
                        int &row);
+  QStringList gatherQmFilenames (const QString &dir) const;
   void updateControls();
 
   QComboBox *m_cmbZoomFactor;
