@@ -1,6 +1,8 @@
 #ifndef TRANSLATOR_CONTAINER_H
 #define TRANSLATOR_CONTAINER_H
 
+#include <QString>
+
 class QApplication;
 class QTranslator;
 
@@ -10,6 +12,9 @@ class TranslatorContainer
  public:
   /// Single constructor. Argument is needed so object is not optimized away in main() in Windows
   TranslatorContainer(QApplication &app);
+
+  /// Platform dependent directory containing qm translation files
+  static QString qmDirectory ();
 
  private:
   TranslatorContainer();

@@ -24,6 +24,7 @@
 #include <QPushButton>
 #include <QSpinBox>
 #include "QtToString.h"
+#include "TranslatorContainer.h"
 #include "ZoomControl.h"
 #include "ZoomFactorInitial.h"
 #include "ZoomLabels.h"
@@ -110,8 +111,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
                                 "periods will be used as group delimiters in each number entered "
                                 "by the user, displayed in the user interface, or exported to a file."));
   QStringList qmFilenames;
-  qmFilenames << gatherQmFilenames ("/translations"); // Linux and Windows. Do NOT apply tr()!
-  qmFilenames << gatherQmFilenames ("/../Resources/translations"); // OSX. Do not apply tr()!
+  qmFilenames << gatherQmFilenames ();
   for (int i = 0; i < qmFilenames.size(); i++) {
     QString localeSelector = qmFilenames [i]; // "engauge_de.qm"
     localeSelector.truncate (localeSelector.lastIndexOf ('.')); // "engauge_de"
@@ -267,13 +267,11 @@ QWidget *DlgSettingsMainWindow::createSubPanel ()
   return subPanel;
 }
 
-QStringList DlgSettingsMainWindow::gatherQmFilenames (const QString &dir) const
+QStringList DlgSettingsMainWindow::gatherQmFilenames () const
 {
   // Get available locales. The static QLocale::matchingLocales gives the few available translations
   // but also the many unavailable translations. We use a list of translation files to see what is available
-  QString translationPathStr = QApplication::applicationDirPath();
-  translationPathStr.append (dir);
-  QDir translationPath (translationPathStr);
+  QDir translationPath (TranslatorContainer::qmDirectory ());
   QStringList filenames = translationPath.entryList (QStringList ("engauge_*.qm"));
 
   return filenames;

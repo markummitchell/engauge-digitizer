@@ -60,7 +60,7 @@ private:
 
   void createControls (QGridLayout *layout,
                        int &row);
-  QStringList gatherQmFilenames (const QString &dir) const;
+  QStringList gatherQmFilenames () const;
   void updateControls();
 
   QComboBox *m_cmbZoomFactor;
