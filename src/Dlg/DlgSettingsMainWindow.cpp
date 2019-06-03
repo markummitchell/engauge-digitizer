@@ -11,8 +11,10 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include "MainWindowModel.h"
+#include <QApplication>
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDir>
 #include <QDoubleSpinBox>
 #include <QGraphicsScene>
 #include <QGridLayout>
@@ -107,15 +109,18 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
                                 "The locale determines how numbers are formatted. Specifically, either commas or "
                                 "periods will be used as group delimiters in each number entered "
                                 "by the user, displayed in the user interface, or exported to a file."));
-  for (int indexLang = QLocale::C; indexLang <= QLocale::LastLanguage; indexLang++) {
-    QLocale::Language lang = static_cast<QLocale::Language> (indexLang);
-    QList<QLocale::Country> countries = QLocale::countriesForLanguage(lang);
-    for (int indexCountry = 0; indexCountry < countries.count(); indexCountry++) {
-      QLocale::Country country = countries.at(indexCountry);
-      QLocale locale (lang, country);
-      QString label = QLocaleToString (locale);
-      m_cmbLocale->addItem (label, locale);
-    }
+  // Get available locales. The static QLocale::matchingLocales gives the few available translations
+  // but also the many unavailable translations. We use a list of translation files to see what is available
+  QString translationPathStr = QApplication::applicationDirPath();
+  translationPathStr.append ("/translations");
+  QDir translationPath (translationPathStr);
+  QStringList filenames = translationPath.entryList (QStringList ("engauge_*.qm"));
+  for (int i = 0; i < filenames.size(); i++) {
+    QString locale = filenames [i]; // "engauge_de.qm"
+    locale.truncate (locale.lastIndexOf ('.')); // "engauge_de"
+    locale.remove (0, locale.indexOf ('_') + 1); // "de"
+    QString label = QLocaleToString (locale);
+    m_cmbLocale->addItem (label, locale);
   }
   m_cmbLocale->model()->sort(COLUMN0); // Sort the new entries
   connect (m_cmbLocale, SIGNAL (currentIndexChanged (int)), this, SLOT (slotLocale (int)));
@@ -301,6 +306,11 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   m_cmbZoomControl->setCurrentIndex (index);
   QString locLabel = QLocaleToString (m_modelMainWindowAfter->locale());
   index = m_cmbLocale->findText (locLabel);
+  if (index < 0) {
+    // Somehow an invalid locale is selected. Fix it by setting to default
+    locLabel = QLocaleToString (QLocale::system().name());
+    index = m_cmbLocale->findText (locLabel);
+  }
   m_cmbLocale->setCurrentIndex(index);
   index = m_cmbImportCropping->findData (m_modelMainWindowAfter->importCropping());
   m_cmbImportCropping->setCurrentIndex (index);
