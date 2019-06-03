@@ -4856,7 +4856,7 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="360" />
+        <location filename="../src/main/main.cpp" line="365" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5334,28 +5334,28 @@ Do you want to save your changes?</source>
         <translation>لا يمكن قراءة بيانات النافذة الرئيسية</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="242" />
-        <location filename="../src/main/main.cpp" line="254" />
+        <location filename="../src/main/main.cpp" line="244" />
+        <location filename="../src/main/main.cpp" line="256" />
         <source>is not a valid file name</source>
         <translation>ليس اسم ملف صالح</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="248" />
+        <location filename="../src/main/main.cpp" line="250" />
         <source>is not a valid image file extension</source>
         <translation>ليس امتداد ملف صورة صالح</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="337" />
+        <location filename="../src/main/main.cpp" line="342" />
         <source>is used only with one or more load files</source>
         <translation>يستخدم فقط مع واحد أو أكثر من ملفات التحميل</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="369" />
+        <location filename="../src/main/main.cpp" line="374" />
         <source>Available styles</source>
         <translation>الأنماط المتاحة</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="394" />
+        <location filename="../src/main/main.cpp" line="400" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>لتمكين معلومات التصحيح الإضافية. تستخدم لتصحيح الأخطاء</translation>
     </message>
@@ -5364,77 +5364,88 @@ Do you want to save your changes?</source>
         <translation type="vanished">يحدد ملف تقرير الخطأ كمدخل. تستخدم لتصحيح الأخطاء والاختبار</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="400" />
+        <location filename="../src/main/main.cpp" line="406" />
         <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
         <translation>يشير إلى أن الملفات المفتوحة عند بدء التشغيل هي لاختبار السحب والإفلات. تستخدم لاختبار الانحدار</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="406" />
+        <location filename="../src/main/main.cpp" line="412" />
         <source>Specifies an error report file as input. Used for debugging and regression testing</source>
         <translation>يحدد ملف تقرير الخطأ كمدخلات. يستخدم للتصحيح واختبار الانحدار</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="412" />
+        <location filename="../src/main/main.cpp" line="418" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>قم بتصدير كل ملف بدء تشغيل تم تحميله ، والذي يجب أن يحتوي على جميع نقاط المحور المحددة ، ثم قم بإيقافها</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="418" />
+        <location filename="../src/main/main.cpp" line="424" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>قم باستخراج الصورة في كل ملف بدء تشغيل تم تحميله إلى ملف بالملحق المحدد ، ثم قم بإيقافه</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="424" />
+        <location filename="../src/main/main.cpp" line="430" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>يحدد ملف البرنامج النصي لأمر الملف كمدخل. تستخدم لتصحيح الأخطاء والاختبار</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="430" />
+        <location filename="../src/main/main.cpp" line="436" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>إخراج ملفات التشخيص gnuplot الإدخال. تستخدم لتصحيح الأخطاء</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="436" />
+        <location filename="../src/main/main.cpp" line="442" />
         <source>Show this help information</source>
         <translation>عرض معلومات المساعدة هذه</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="442" />
+        <location filename="../src/main/main.cpp" line="448" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>ينفذ ملف تقرير الخطأ أو البرنامج النصي لأمر الملف. تستخدم لاختبار الانحدار</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="448" />
+        <location filename="../src/main/main.cpp" line="454" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>يزيل كل الإعدادات المخزنة ، بما في ذلك أوضاع النوافذ. تستخدم عند تشغيل النوافذ خارج الشاشة</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="454" />
-        <source>Show a list of available styles that can be used with the -style command</source>
-        <translation>إظهار قائمة بالأنماط المتوفرة التي يمكن استخدامها مع الأمر -style</translation>
+        <location filename="../src/main/main.cpp" line="461" />
+        <source>Set the window style to one of the styles listed by the command line option</source>
+        <translation>قم بتعيين نمط الإطار على أحد الأنماط المدرجة بواسطة خيار سطر الأوامر
+ 
+</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="460" />
+        <location filename="../src/main/main.cpp" line="469" />
+        <source>Show a list of available styles that can be used with the command line option</source>
+        <translation>عرض قائمة من الأنماط المتاحة التي يمكن استخدامها مع خيار سطر الأوامر</translation>
+    </message>
+    <message>
+        <source>Show a list of available styles that can be used with the -style command</source>
+        <translation type="vanished">إظهار قائمة بالأنماط المتوفرة التي يمكن استخدامها مع الأمر -style</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="476" />
         <source>Upgrade files opened at startup to the most recent version</source>
         <translation>ترقية الملفات المفتوحة عند بدء التشغيل إلى الإصدار الأحدث</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="466" />
+        <location filename="../src/main/main.cpp" line="482" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>ملف (ملفات) ليتم استيراده أو فتحه عند بدء التشغيل</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="511" />
+        <location filename="../src/main/main.cpp" line="527" />
         <source>Could not write to</source>
         <translation>لا يمكن الكتابة إلى</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="524" />
+        <location filename="../src/main/main.cpp" line="540" />
         <source>Upgraded</source>
         <translation>ترقية</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="526" />
+        <location filename="../src/main/main.cpp" line="542" />
         <source>to</source>
         <translation>إلى</translation>
     </message>

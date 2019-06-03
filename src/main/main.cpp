@@ -33,6 +33,7 @@ const QString CMD_GNUPLOT ("gnuplot");
 const QString CMD_HELP ("help");
 const QString CMD_REGRESSION ("regression");
 const QString CMD_RESET ("reset");
+const QString CMD_STYLE ("style"); // Qt handles this
 const QString CMD_STYLES ("styles"); // Not to be confused with -style option that qt handles
 const QString CMD_UPGRADE ("upgrade");
 const QString DASH ("-");
@@ -46,6 +47,7 @@ const QString DASH_GNUPLOT ("-" + CMD_GNUPLOT);
 const QString DASH_HELP ("-" + CMD_HELP);
 const QString DASH_REGRESSION ("-" + CMD_REGRESSION);
 const QString DASH_RESET ("-" + CMD_RESET);
+const QString DASH_STYLE ("-" + CMD_STYLE);
 const QString DASH_STYLES ("-" + CMD_STYLES);
 const QString DASH_UPGRADE ("-" + CMD_UPGRADE);
 const QString ENGAUGE_LOG_FILE (".engauge.log");
@@ -275,6 +277,9 @@ void parseCmdLine (int argc,
       isErrorReportRegressionTest = true;
     } else if (strcmp (argv [i], DASH_RESET.toLatin1().data()) == 0) {
       isReset = true;
+    } else if (strcmp (argv [i], DASH_STYLE.toLatin1().data()) == 0) {
+      // This branch never executes because Qt strips out '-style <style>' and processes it.
+      // This comment is here just to document that special handling
     } else if (strcmp (argv [i], DASH_STYLES.toLatin1().data()) == 0) {
       showStylesAndQuit ();
     } else if (strcmp (argv [i], DASH_UPGRADE.toLatin1().data()) == 0) {
@@ -385,6 +390,7 @@ void showUsageAndQuit ()
       << "[" << DASH_HELP.toLatin1().data() << "] "
       << "[" << DASH_REGRESSION.toLatin1().data() << "] "
       << "[" << DASH_RESET.toLatin1().data () << "] "
+      << "[" << DASH_STYLE.toLatin1().data () << " &lt;style&gt;] "
       << "[" << DASH_STYLES.toLatin1().data () << "] "
       << "[&lt;load_file1&gt;] [&lt;load_file2&gt;] ..." << endl
       << "<table>"
@@ -449,9 +455,19 @@ void showUsageAndQuit ()
       << "</td>"
       << "</tr>"
       << "<tr>"
+      << "<td>" << DASH_STYLE.toLatin1().data() << "</td>"
+      << "<td>"
+      << QString ("%1 %2")
+         .arg (QObject::tr ("Set the window style to one of the styles listed by the command line option"))
+         .arg (DASH_STYLES).toLatin1().data()
+      << "</td>"
+      << "</tr>"
+      << "<tr>"
       << "<td>" << DASH_STYLES.toLatin1().data() << "</td>"
       << "<td>"
-      << QObject::tr ("Show a list of available styles that can be used with the -style command").toLatin1().data()
+      << QString ("%1 %2")
+         .arg (QObject::tr ("Show a list of available styles that can be used with the command line option"))
+         .arg (DASH_STYLE).toLatin1().data()
       << "</td>"
       << "</tr>"
       << "<tr>"

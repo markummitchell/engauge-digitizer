@@ -4835,7 +4835,7 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="360" />
+        <location filename="../src/main/main.cpp" line="365" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5311,28 +5311,28 @@ Do you want to save your changes?</source>
         <translation>No se puede leer los datos principales de la ventana</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="242" />
-        <location filename="../src/main/main.cpp" line="254" />
+        <location filename="../src/main/main.cpp" line="244" />
+        <location filename="../src/main/main.cpp" line="256" />
         <source>is not a valid file name</source>
         <translation>no es un nombre de archivo válido</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="248" />
+        <location filename="../src/main/main.cpp" line="250" />
         <source>is not a valid image file extension</source>
         <translation>no es una extensión de archivo de imagen válida</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="337" />
+        <location filename="../src/main/main.cpp" line="342" />
         <source>is used only with one or more load files</source>
         <translation>se usa solo con uno o más archivos de carga</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="369" />
+        <location filename="../src/main/main.cpp" line="374" />
         <source>Available styles</source>
         <translation>Estilos disponibles</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="394" />
+        <location filename="../src/main/main.cpp" line="400" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>Permite la información de depuración extra. Se utiliza para la depuración</translation>
     </message>
@@ -5341,77 +5341,86 @@ Do you want to save your changes?</source>
         <translation type="vanished">Especifica un archivo de informe de errores como entrada. Se utiliza para la depuración y pruebas</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="400" />
+        <location filename="../src/main/main.cpp" line="406" />
         <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
         <translation>Indica que los archivos abiertos al inicio son para probar arrastrar y soltar. Usado para pruebas de regresión</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="406" />
+        <location filename="../src/main/main.cpp" line="412" />
         <source>Specifies an error report file as input. Used for debugging and regression testing</source>
         <translation>Especifica un archivo de informe de error como entrada. Usado para depuración y pruebas de regresión</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="412" />
+        <location filename="../src/main/main.cpp" line="418" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>Exportar cada archivo de inicio cargado, que debe tener todos los puntos de eje definidos, luego detener</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="418" />
+        <location filename="../src/main/main.cpp" line="424" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>Extraiga la imagen en cada archivo de inicio cargado en un archivo con la extensión especificada, luego deténgalo</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="424" />
+        <location filename="../src/main/main.cpp" line="430" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>Especifica un archivo de secuencia de comandos de archivo como entrada . Se utiliza para la depuración y pruebas</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="430" />
+        <location filename="../src/main/main.cpp" line="436" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>Salida de los archivos de entrada gnuplot diagnóstico. Se utiliza para la depuración</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="436" />
+        <location filename="../src/main/main.cpp" line="442" />
         <source>Show this help information</source>
         <translation>Mostrar esta información de ayuda</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="442" />
+        <location filename="../src/main/main.cpp" line="448" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>Ejecuta la secuencia de comandos de archivo de informe de errores o archivo . Se utiliza para las pruebas de regresión</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="448" />
+        <location filename="../src/main/main.cpp" line="454" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>Elimina todos los ajustes almacenados, incluyendo las posiciones de la ventana. Se utiliza cuando windows se inicia fuera de la pantalla</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="454" />
-        <source>Show a list of available styles that can be used with the -style command</source>
-        <translation>Mostrar una lista de estilos disponibles que se pueden usar con el comando -style</translation>
+        <location filename="../src/main/main.cpp" line="461" />
+        <source>Set the window style to one of the styles listed by the command line option</source>
+        <translation>Establezca el estilo de la ventana en uno de los estilos enumerados por la opción de línea de comando</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="460" />
+        <location filename="../src/main/main.cpp" line="469" />
+        <source>Show a list of available styles that can be used with the command line option</source>
+        <translation>Muestre una lista de estilos disponibles que se pueden usar con la opción de línea de comando</translation>
+    </message>
+    <message>
+        <source>Show a list of available styles that can be used with the -style command</source>
+        <translation type="vanished">Mostrar una lista de estilos disponibles que se pueden usar con el comando -style</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="476" />
         <source>Upgrade files opened at startup to the most recent version</source>
         <translation>Actualiza los archivos abiertos en el inicio a la versión más reciente</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="466" />
+        <location filename="../src/main/main.cpp" line="482" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>Archivo (s) que se importa o se abre en el arranque</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="511" />
+        <location filename="../src/main/main.cpp" line="527" />
         <source>Could not write to</source>
         <translation>No se pudo escribir a</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="524" />
+        <location filename="../src/main/main.cpp" line="540" />
         <source>Upgraded</source>
         <translation>Actualizado</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="526" />
+        <location filename="../src/main/main.cpp" line="542" />
         <source>to</source>
         <translation>a</translation>
     </message>

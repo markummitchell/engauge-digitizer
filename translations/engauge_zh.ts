@@ -4484,7 +4484,7 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="360" />
+        <location filename="../src/main/main.cpp" line="365" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -4960,28 +4960,28 @@ Do you want to save your changes?</source>
         <translation>无法读取主窗口数据</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="242" />
-        <location filename="../src/main/main.cpp" line="254" />
+        <location filename="../src/main/main.cpp" line="244" />
+        <location filename="../src/main/main.cpp" line="256" />
         <source>is not a valid file name</source>
         <translation>不是有效的文件名</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="248" />
+        <location filename="../src/main/main.cpp" line="250" />
         <source>is not a valid image file extension</source>
         <translation>不是有效的圖像文件擴展名</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="337" />
+        <location filename="../src/main/main.cpp" line="342" />
         <source>is used only with one or more load files</source>
         <translation>僅用於一個或多個加載文件</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="369" />
+        <location filename="../src/main/main.cpp" line="374" />
         <source>Available styles</source>
         <translation>可用款式</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="394" />
+        <location filename="../src/main/main.cpp" line="400" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>启用额外的调试信息。用于调试</translation>
     </message>
@@ -4990,77 +4990,86 @@ Do you want to save your changes?</source>
         <translation type="vanished">指定错误报告文件作为输入。用于调试和测试</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="400" />
+        <location filename="../src/main/main.cpp" line="406" />
         <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
         <translation>表示啟動時打開的文件用於測試拖放。用於回歸測試</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="406" />
+        <location filename="../src/main/main.cpp" line="412" />
         <source>Specifies an error report file as input. Used for debugging and regression testing</source>
         <translation>指定錯誤報告文件作為輸入。用於調試和回歸測試</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="412" />
+        <location filename="../src/main/main.cpp" line="418" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>導出每個已加載的啟動文件，必須定義所有軸點，然後停止</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="418" />
+        <location filename="../src/main/main.cpp" line="424" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>將每個加載的啟動文件中的圖像提取到具有指定擴展名的文件，然後停止</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="424" />
+        <location filename="../src/main/main.cpp" line="430" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>指定一个文件命令脚本文件作为输入。用于调试和测试</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="430" />
+        <location filename="../src/main/main.cpp" line="436" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>输出诊断gnuplot输入文件。用于调试</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="436" />
+        <location filename="../src/main/main.cpp" line="442" />
         <source>Show this help information</source>
         <translation>显示此帮助信息</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="442" />
+        <location filename="../src/main/main.cpp" line="448" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>执行错误报告文件或文件命令脚本。用于回归测试</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="448" />
+        <location filename="../src/main/main.cpp" line="454" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>删除所有存储的设置，包括窗口位置。当窗口在屏幕外启动时使用</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="454" />
-        <source>Show a list of available styles that can be used with the -style command</source>
-        <translation>显示可用于-style命令的可用样式的列表</translation>
+        <location filename="../src/main/main.cpp" line="461" />
+        <source>Set the window style to one of the styles listed by the command line option</source>
+        <translation>將窗口樣式設置為命令行選項列出的樣式之一</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="460" />
+        <location filename="../src/main/main.cpp" line="469" />
+        <source>Show a list of available styles that can be used with the command line option</source>
+        <translation>顯示可與命令行選項一起使用的可用樣式列表</translation>
+    </message>
+    <message>
+        <source>Show a list of available styles that can be used with the -style command</source>
+        <translation type="vanished">显示可用于-style命令的可用样式的列表</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="476" />
         <source>Upgrade files opened at startup to the most recent version</source>
         <translation>將啟動時打開的文件升級到最新版本</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="466" />
+        <location filename="../src/main/main.cpp" line="482" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>要在启动时导入或打开的文件</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="511" />
+        <location filename="../src/main/main.cpp" line="527" />
         <source>Could not write to</source>
         <translation>無法寫信給</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="524" />
+        <location filename="../src/main/main.cpp" line="540" />
         <source>Upgraded</source>
         <translation>升級</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="526" />
+        <location filename="../src/main/main.cpp" line="542" />
         <source>to</source>
         <translation>至</translation>
     </message>

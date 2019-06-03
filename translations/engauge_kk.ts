@@ -4540,7 +4540,7 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="360" />
+        <location filename="../src/main/main.cpp" line="365" />
         <source>Engauge Digitizer</source>
         <translation type="unfinished" />
     </message>
@@ -4944,28 +4944,28 @@ Do you want to save your changes?</source>
         <translation>Негізгі терезе деректерін оқи алмайды</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="242" />
-        <location filename="../src/main/main.cpp" line="254" />
+        <location filename="../src/main/main.cpp" line="244" />
+        <location filename="../src/main/main.cpp" line="256" />
         <source>is not a valid file name</source>
         <translation>файлдың жарамды атауы емес</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="248" />
+        <location filename="../src/main/main.cpp" line="250" />
         <source>is not a valid image file extension</source>
         <translation>жарамды бейне файл кеңейтімі емес</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="337" />
+        <location filename="../src/main/main.cpp" line="342" />
         <source>is used only with one or more load files</source>
         <translation>бір немесе бірнеше жүктеме файлдарымен ғана пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="369" />
+        <location filename="../src/main/main.cpp" line="374" />
         <source>Available styles</source>
         <translation>Қол жетімді стильдер</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="394" />
+        <location filename="../src/main/main.cpp" line="400" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>Қосымша отладтау туралы ақпаратты қосады. Отладка үшін пайдаланылады</translation>
     </message>
@@ -4974,77 +4974,86 @@ Do you want to save your changes?</source>
         <translation type="vanished">Қате туралы есеп файлын енгізу ретінде анықтайды. Отладка және тестілеу үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="400" />
+        <location filename="../src/main/main.cpp" line="406" />
         <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
         <translation>Іске қосу барысында ашылған файлдарды апарып тастауды және тастауды тексеру үшін көрсетеді. Регрессиялық тестілеу үшін қолданылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="406" />
+        <location filename="../src/main/main.cpp" line="412" />
         <source>Specifies an error report file as input. Used for debugging and regression testing</source>
         <translation>Қате туралы есеп файлын енгізу ретінде анықтайды. Отладка және регрессиялық тестілеу үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="412" />
+        <location filename="../src/main/main.cpp" line="418" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>Белгіленген барлық ось нүктелері болуы керек жүктелген әрбір іске қосу файлын экспорттап, тоқтаңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="418" />
+        <location filename="../src/main/main.cpp" line="424" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>Әр жүктелген іске қосу файлында көрсетілген кеңейтілімдегі файлға суретті шығарыңыз, содан кейін тоқтаңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="424" />
+        <location filename="../src/main/main.cpp" line="430" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>Файлдың пәрмен сценарий файлын енгізу ретінде анықтайды. Отладка және тестілеу үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="430" />
+        <location filename="../src/main/main.cpp" line="436" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>Шығу диагностикалық gnuplot кіріс файлдары. Отладка үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="436" />
+        <location filename="../src/main/main.cpp" line="442" />
         <source>Show this help information</source>
         <translation>Бұл анықтама ақпаратын көрсетіңіз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="442" />
+        <location filename="../src/main/main.cpp" line="448" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>Қате туралы есеп файлын немесе файл пәрмен сценарийін орындайды. Регрессиялық тестілеу үшін қолданылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="448" />
+        <location filename="../src/main/main.cpp" line="454" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>Барлық сақталған параметрлерді, соның ішінде терезе орындарын жояды. Терезелер экраннан бастағанда қолданылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="454" />
-        <source>Show a list of available styles that can be used with the -style command</source>
-        <translation>-Style командасымен пайдалануға болатын қол жетімді стильдердің тізімін көрсетіңіз</translation>
+        <location filename="../src/main/main.cpp" line="461" />
+        <source>Set the window style to one of the styles listed by the command line option</source>
+        <translation>Терезе стилін пәрмен жолы параметрімен тізімделген мәнерлердің біріне орнатыңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="460" />
+        <location filename="../src/main/main.cpp" line="469" />
+        <source>Show a list of available styles that can be used with the command line option</source>
+        <translation>Пәрмен жолы параметрімен пайдалануға болатын қол жетімді мәнерлер тізімін көрсетіңіз</translation>
+    </message>
+    <message>
+        <source>Show a list of available styles that can be used with the -style command</source>
+        <translation type="vanished">-Style командасымен пайдалануға болатын қол жетімді стильдердің тізімін көрсетіңіз</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="476" />
         <source>Upgrade files opened at startup to the most recent version</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="466" />
+        <location filename="../src/main/main.cpp" line="482" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>Импортталатын немесе іске қосылған кезде ашылатын файл (дар)</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="511" />
+        <location filename="../src/main/main.cpp" line="527" />
         <source>Could not write to</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="524" />
+        <location filename="../src/main/main.cpp" line="540" />
         <source>Upgraded</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="526" />
+        <location filename="../src/main/main.cpp" line="542" />
         <source>to</source>
         <translation type="unfinished" />
     </message>
