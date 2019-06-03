@@ -113,9 +113,10 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   qmFilenames << gatherQmFilenames ("/translations"); // Linux and Windows. Do NOT apply tr()!
   qmFilenames << gatherQmFilenames ("/../Resources/translations"); // OSX. Do not apply tr()!
   for (int i = 0; i < qmFilenames.size(); i++) {
-    QString locale = qmFilenames [i]; // "engauge_de.qm"
-    locale.truncate (locale.lastIndexOf ('.')); // "engauge_de"
-    locale.remove (0, locale.indexOf ('_') + 1); // "de"
+    QString localeSelector = qmFilenames [i]; // "engauge_de.qm"
+    localeSelector.truncate (localeSelector.lastIndexOf ('.')); // "engauge_de"
+    localeSelector.remove (0, localeSelector.indexOf ('_') + 1); // "de"
+    QLocale locale (localeSelector);
     QString label = QLocaleToString (locale);
     m_cmbLocale->addItem (label, locale);
   }
@@ -370,7 +371,9 @@ void DlgSettingsMainWindow::slotLocale (int index)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotLocale";
 
-  m_modelMainWindowAfter->setLocale (m_cmbLocale->itemData (index).toLocale());
+  QLocale locale = m_cmbLocale->itemData (index).toLocale();
+
+  m_modelMainWindowAfter->setLocale (locale);
   updateControls();
 }
 
