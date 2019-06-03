@@ -1731,7 +1731,7 @@ Mostra tutti i punti degli assi digitalizzati e le curve del grafico</translatio
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="741" />
         <source>Fill</source>
-        <translation>Riempi</translation>
+        <translation>Riempire</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="743" />
@@ -3703,17 +3703,17 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsMainWindow</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="40" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="43" />
         <source>Main Window</source>
         <translation>Finestra principale</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="65" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="68" />
         <source>Initial zoom</source>
         <translation>Ingrandimento iniziale</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="80" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="83" />
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
@@ -3722,32 +3722,32 @@ Select the initial zoom factor when a new document is loaded. Either the previou
 Selezionare il fattore di ingrandimento iniziale quando un nuovo documento viene caricato. L'apos;ingrandimento precedente può essere mantenuto, oppure l'apos;ingrandimento specificato può essere applicato.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="89" />
         <source>Zoom control</source>
         <translation>Controllo dell'apos;ingrandimento</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="90" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93" />
         <source>Menu only</source>
         <translation>Solo menù</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="94" />
         <source>Menu and mouse wheel</source>
         <translation>Menù e rotellina del mouse</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="92" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="95" />
         <source>Menu and +/- keys</source>
         <translation>Menù e tasti +/-</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="96" />
         <source>Menu, mouse wheel and +/- keys</source>
         <translation>Menù, rotellina del mouse e tasti +/-</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="94" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="97" />
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
@@ -3760,12 +3760,12 @@ Seleziona quali input sono usati per ingrandire e rimpicciolire.</translation>
         <translation type="vanished">Località</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
         <source>Locale (requires restart)</source>
         <translation>Locale (richiede il riavvio)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="107" />
         <source>Locale
 
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
@@ -3774,12 +3774,12 @@ The locale determines how numbers are formatted. Specifically, either commas or 
         <translation>LocalitàSeleziona le impostazioni locali che verranno utilizzate nei numeri (immediatamente) e la lingua nell'apos;interfaccia utente (dopo il riavvio) .Il locale determina la modalità di formattazione dei numeri. In particolare, le virgole oi punti verranno utilizzati come delimitatori di gruppo in ciascun numero immesso dall'apos;utente, visualizzato nell'apos;interfaccia utente o esportato in un file.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="124" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="127" />
         <source>Import cropping</source>
         <translation>Importare il ritaglio</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="128" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="131" />
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
@@ -3788,12 +3788,12 @@ This setting only has an effect when Engauge has been built with support for pdf
         <translation>Importa ritaglio Abilita o disabilita il ritaglio dell'apos;immagine importata durante l'apos;importazione. Ritagliare l'apos;immagine è utile per rimuovere informazioni non importanti intorno a un grafico, ma è meno utile quando il grafico riempie già l'apos;intera immagine. "Questa impostazione ha effetto solo quando Engauge è stato creato con il supporto per i file PDF.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="141" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="144" />
         <source>Import PDF resolution (dots per inch)</source>
         <translation>Risoluzione importazione PDF (punti per pollice)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="145" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="148" />
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
@@ -3802,12 +3802,12 @@ Imported Portable Document Format (PDF) files will be converted to this pixel re
 I file Portable Document Format (PDF) importati saranno convertiti a questa risoluzione in punti per pollice (DPI), dove ogni pixel è un punto. Un valore più alto aumenta la risoluzione dell'apos;immagine e può anche migliorare la precisione di digitalizzazione numerica. Comunque, un valore molto elevato può rendere l'apos;immagine così grande che Engauge rallenterà.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="160" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="163" />
         <source>Maximum grid lines</source>
         <translation>Numero massimo di linee della griglia</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="165" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="168" />
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
@@ -3816,12 +3816,12 @@ Maximum number of grid lines to be processed. This limit is applied when the ste
 Il numero massimo di linee della griglia da elaborare. Questo limite è applicato quando il passo è troppo piccolo per i valori di inizio e fine, che visivamente risulterebbero in troppe linee sulla griglia e probabilmente in tempi di elaborazione estremamente lunghi (poiché ogni linea dovrebbe essere elaborata)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="172" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="175" />
         <source>Highlight opacity</source>
         <translation>Opacità della evidenziatura</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="178" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="181" />
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
@@ -3830,17 +3830,17 @@ Opacity to be applied when the cursor is over a curve or axis point in Select mo
 L'apos;opacità da applicare quando il cursore è sopra una curva o punto assiale in modalità selezione. Il cambio nell'apos;aspetto mostra quando il punto può essere selezionato.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="184" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
         <source>Recent file list</source>
         <translation>Lista file recenti</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="190" />
         <source>Clear</source>
         <translation>Pulisci</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="189" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="192" />
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
@@ -3849,36 +3849,36 @@ Clear the recent file list in the File menu.</source>
 Pulisce la lista dei file recenti nel menù File.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="195" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="198" />
         <source>Include title bar path</source>
         <translation>Includi il percorso nella barra del titolo</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="200" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="203" />
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
         <translation>Title Bar FilenameInclude o esclude il percorso e l'apos;estensione del file dal nome file nella barra del titolo.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="205" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="208" />
         <source>Allow small dialogs</source>
         <translation>Consenti piccoli dialoghi</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="210" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="213" />
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
         <translation>Consenti finestre di dialogo piccoleConsente di rendere le finestre di dialogo delle impostazioni molto ridotte per adattarsi agli schermi dei piccoli computer.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="215" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="218" />
         <source>Allow drag and drop export</source>
         <translation>Consenti esportazione drag'apos;n'apos;drop</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="220" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="223" />
         <source>Allow Drag and Drop Export
 
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
@@ -3887,12 +3887,12 @@ When drag and drop is disabled, a rectangular set of table cells can be selected
         <translation>Consenti trascinamento della selezione e trascinamento: consente di trascinare e rilasciare l'apos;esportazione dalle tabelle Curve Fitting e Geometry Window.Quando il trascinamento è disabilitato, è possibile selezionare un insieme rettangolare di celle di tabella facendo clic e trascinando. Quando è abilitato il trascinamento della selezione, è possibile selezionare un insieme rettangolare di celle di una tabella facendo clic su, quindi su Maiusc + clic, poiché il clic e il trascinamento avvia l'apos;operazione di trascinamento.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="228" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="231" />
         <source>Significant digits</source>
         <translation>Cifre significative</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="233" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
@@ -4977,17 +4977,17 @@ Do you want to save your changes?</source>
         <translation>Impossibile leggere i dati dello stile del punto</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="193" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="225" />
         <source>Coordinates (graph)</source>
         <translation>Coordinate del grafico</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="198" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="230" />
         <source>Coordinates (pixels)</source>
         <translation>Le coordinate del pixel</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="203" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="235" />
         <source>Resolution (graph)</source>
         <translation>Risoluzione grafico</translation>
     </message>
@@ -5002,94 +5002,76 @@ Do you want to save your changes?</source>
         <translation>Hai bisogno di più punti degli assi</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="11" />
         <source>16:1 farther</source>
-        <translation>16:1 più lontano</translation>
+        <translation type="vanished"> 16: 1 più lontano</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="12" />
         <source>8:1 closer</source>
-        <translation>8:1 più vicino</translation>
+        <translation type="vanished">8: 1 più vicino</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="14" />
         <source>8:1 farther</source>
-        <translation>8:1 più lontano</translation>
+        <translation type="vanished"> 8: 1 più lontano</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="15" />
         <source>4:1 closer</source>
-        <translation>4:1 più vicino</translation>
+        <translation type="vanished">4: 1 più vicino</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="17" />
         <source>4:1 farther</source>
-        <translation>4:1 più lontano</translation>
+        <translation type="vanished"> 4: 1 più lontano</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="18" />
         <source>2:1 closer</source>
-        <translation>2:1 più vicino</translation>
+        <translation type="vanished">2: 1 più vicino</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="20" />
         <source>2:1 farther</source>
-        <translation>2:1 più lontano</translation>
+        <translation type="vanished"> 2: 1 più lontano</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="21" />
         <source>1:1 closer</source>
-        <translation>1:1 più vicino</translation>
+        <translation type="vanished">1: 1 più vicino</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="23" />
         <source>1:1 farther</source>
-        <translation>1:1 più lontano</translation>
+        <translation type="vanished"> 1: 1 più lontano</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="24" />
         <source>1:2 closer</source>
-        <translation>1:2 più vicino</translation>
+        <translation type="vanished">1: 2 più vicino</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="26" />
         <source>1:2 farther</source>
-        <translation>1:2 più lontano</translation>
+        <translation type="vanished"> 1: 2 più lontano</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="27" />
         <source>1:4 closer</source>
-        <translation>1:4 più vicino</translation>
+        <translation type="vanished">1: 4 più vicino</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="29" />
         <source>1:4 farther</source>
-        <translation>1:4 più lontano</translation>
+        <translation type="vanished"> 1: 4 più lontano</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="30" />
         <source>1:8 closer</source>
-        <translation>1:8 più vicino</translation>
+        <translation type="vanished">1: 8 più vicino</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="32" />
         <source>1:8 farther</source>
-        <translation>1:8 più lontano</translation>
+        <translation type="vanished"> 1: 8 più lontano</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="33" />
         <source>1:16 closer</source>
-        <translation>1:16 più vicino</translation>
+        <translation type="vanished">1: 16 più vicino</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="35" />
         <source>Fill</source>
-        <translation>Riempi</translation>
+        <translation type="vanished">Riempire</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="36" />
         <source>Previous</source>
-        <translation>Precedente</translation>
+        <translation type="vanished">Precedente</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="573" />
@@ -5230,42 +5212,177 @@ Do you want to save your changes?</source>
 <context>
     <name>StatusBar</name>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="56" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="57" />
         <source>Select cursor coordinate values to display.</source>
         <translation>Seleziona i valori delle coordinate del cursore da visualizzare.</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="57" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="58" />
         <source>Select Cursor Coordinate Values
 
 Values at cursor coordinates to display. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
         <translation>Seleziona i valori delle coordinate del cursoreValore con le coordinate del cursore da visualizzare. Le coordinate sono in schermo (pixel) o unità di grafico. La risoluzione (che è il numero di unità di grafico per pixel) è espressa in unità di grafico. Le unità del grafico sono disponibili solo dopo aver definito i punti dell'apos;asse.</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="70" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="71" />
         <source>Cursor coordinate values.</source>
         <translation>Valori delle coordinate del cursore.</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="71" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="72" />
         <source>Cursor Coordinate Values
 
 Values at cursor coordinates. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
         <translation>Valori delle coordinate del cursoreValore delle coordinate del cursore. Le coordinate sono in schermo (pixel) o unità di grafico. La risoluzione (che è il numero di unità di grafico per pixel) è espressa in unità di grafico. Le unità del grafico sono disponibili solo dopo aver definito i punti dell'apos;asse.</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="125" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="126" />
         <source>Select zoom.</source>
         <translation>Seleziona l'apos;ingrandimento.</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="126" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="127" />
         <source>Select Zoom
 
 Points can be more accurately placed by zooming in.</source>
         <translation>Seleziona Ingrandimento
 
 I punti possono essere posizionati più accuratamente ingrandendo.</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="137" />
+        <source>16:1</source>
+        <translation>16: 1</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="138" />
+        <source>16:1 farther</source>
+        <translation> 16: 1 più lontano</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="139" />
+        <source>8:1 closer</source>
+        <translation>8: 1 più vicino</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="140" />
+        <source>8:1</source>
+        <translation>8: 1</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="141" />
+        <source>8:1 farther</source>
+        <translation> 8: 1 più lontano</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="142" />
+        <source>4:1 closer</source>
+        <translation>4: 1 più vicino</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="143" />
+        <source>4:1</source>
+        <translation>4: 1</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="144" />
+        <source>4:1 farther</source>
+        <translation> 4: 1 più lontano</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="145" />
+        <source>2:1 closer</source>
+        <translation>2: 1 più vicino</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="146" />
+        <source>2:1</source>
+        <translation>2: 1</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="147" />
+        <source>2:1 farther</source>
+        <translation> 2: 1 più lontano</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="148" />
+        <source>1:1 closer</source>
+        <translation>1: 1 più vicino</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="149" />
+        <source>1:1</source>
+        <translation>1: 1</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="150" />
+        <source>1:1 farther</source>
+        <translation> 1: 1 più lontano</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="151" />
+        <source>1:2 closer</source>
+        <translation>1: 2 più vicino</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="152" />
+        <source>1:2</source>
+        <translation>1: 2</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="153" />
+        <source>1:2 farther</source>
+        <translation> 1: 2 più lontano</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="154" />
+        <source>1:4 closer</source>
+        <translation>1: 4 più vicino</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="155" />
+        <source>1:4</source>
+        <translation>1: 4</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="156" />
+        <source>1:4 farther</source>
+        <translation> 1: 4 più lontano</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="157" />
+        <source>1:8 closer</source>
+        <translation>1: 8 più vicino</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="158" />
+        <source>1:8</source>
+        <translation>1: 8</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="159" />
+        <source>1:8 farther</source>
+        <translation> 1: 8 più lontano</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="160" />
+        <source>1:16 closer</source>
+        <translation>1: 16 più vicino</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="161" />
+        <source>1:16</source>
+        <translation>1: 16</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="162" />
+        <source>Fill</source>
+        <translation>Riempire</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="163" />
+        <source>Previous</source>
+        <translation>Precedente</translation>
     </message>
 </context>
 <context>

@@ -74,6 +74,7 @@ private:
 
   void createGroupUnits ();
   void createZoom ();
+  void createZoomLabels ();
   void createZoomMaps ();
   QString labelCoordsGraph () const; // Return string initialized after QTranslator has become available
   QString labelCoordsScreen () const; // Return string initialized after QTranslator has become available

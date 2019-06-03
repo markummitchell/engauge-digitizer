@@ -3867,17 +3867,17 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsMainWindow</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="40" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="43" />
         <source>Main Window</source>
         <translation>메인 윈도우</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="65" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="68" />
         <source>Initial zoom</source>
         <translation>초기 확대 / 축소</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="80" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="83" />
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
@@ -3886,32 +3886,32 @@ Select the initial zoom factor when a new document is loaded. Either the previou
 새 문서가로드되면 초기 확대 / 축소 비율을 선택하십시오. 이전 확대 / 축소를 유지하거나 지정된 확대 / 축소를 적용 할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="86" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="89" />
         <source>Zoom control</source>
         <translation>줌 제어</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="90" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93" />
         <source>Menu only</source>
         <translation>메뉴 만</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="94" />
         <source>Menu and mouse wheel</source>
         <translation>메뉴 및 마우스 휠</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="92" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="95" />
         <source>Menu and +/- keys</source>
         <translation>메뉴 및 +/- 키</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="96" />
         <source>Menu, mouse wheel and +/- keys</source>
         <translation>메뉴, 마우스 휠 및 +/- 키</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="94" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="97" />
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
@@ -3924,12 +3924,12 @@ Select which inputs are used to zoom in and out.</source>
         <translation type="vanished">장소</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
         <source>Locale (requires restart)</source>
         <translation>로켈 (다시 시작해야 함)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="107" />
         <source>Locale
 
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
@@ -3942,12 +3942,12 @@ The locale determines how numbers are formatted. Specifically, either commas or 
 로케일은 숫자의 형식을 지정합니다. 특히 쉼표 나 마침표는 사용자가 입력하거나 사용자 인터페이스에 표시되거나 파일로 내보내는 각 숫자에서 그룹 구분 기호로 사용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="124" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="127" />
         <source>Import cropping</source>
         <translation>자르기 가져 오기</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="128" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="131" />
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
@@ -3960,12 +3960,12 @@ This setting only has an effect when Engauge has been built with support for pdf
 이 설정은 Engauge가 PDF 파일을 지원하도록 빌드 된 경우에만 적용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="141" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="144" />
         <source>Import PDF resolution (dots per inch)</source>
         <translation>PDF 해상도 가져 오기 (인치당 도트 수)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="145" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="148" />
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
@@ -3974,12 +3974,12 @@ Imported Portable Document Format (PDF) files will be converted to this pixel re
 가져온 PDF (Portable Document Format) 파일은 DPI (dots per inch)로이 픽셀 해상도로 변환되며 각 픽셀은 한 점입니다. 값이 높을수록 그림 해상도가 향상되고 수치 디지털화 정확도가 향상 될 수 있습니다. 그러나 매우 높은 값으로 설정하면 이미지가 너무 커져서 Engauge가 느려집니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="160" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="163" />
         <source>Maximum grid lines</source>
         <translation>최대 그리드 선</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="165" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="168" />
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
@@ -3988,12 +3988,12 @@ Maximum number of grid lines to be processed. This limit is applied when the ste
 처리 할 그리드 라인의 최대 수. 이 제한은 시작 값과 종료 값에 대해 단계 값이 너무 작 으면 시각적으로 그리드 선이 너무 많아지며 처리 시간이 매우 길어집니다 (각 그리드 선을 처리해야하기 때문에)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="172" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="175" />
         <source>Highlight opacity</source>
         <translation>불투명도 강조 표시</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="178" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="181" />
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
@@ -4002,17 +4002,17 @@ Opacity to be applied when the cursor is over a curve or axis point in Select mo
 선택 모드에서 커서가 곡선 또는 축 포인트 위에있을 때 적용 할 불투명도입니다. 모양의 변경은 포인트를 선택할 수있는 시점을 나타냅니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="184" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
         <source>Recent file list</source>
         <translation>최근 파일 목록</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="190" />
         <source>Clear</source>
         <translation>명확한</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="189" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="192" />
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
@@ -4021,12 +4021,12 @@ Clear the recent file list in the File menu.</source>
 파일 메뉴에서 최근 파일 목록을 지 웁니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="195" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="198" />
         <source>Include title bar path</source>
         <translation>제목 표시 줄 경로 포함</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="200" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="203" />
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
@@ -4035,12 +4035,12 @@ Includes or excludes the path and file extension from the filename in the title 
 제목 표시 줄에 파일 이름의 경로 및 파일 확장명을 포함하거나 제외합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="205" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="208" />
         <source>Allow small dialogs</source>
         <translation>작은 파일 창 허용</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="210" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="213" />
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
@@ -4049,12 +4049,12 @@ Allows settings dialogs to be made very small so they fit on small computer scre
 설정 대화 상자를 작게 만들어 소형 컴퓨터 화면에 맞출 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="215" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="218" />
         <source>Allow drag and drop export</source>
         <translation>드래그 앤 드롭 내보내기 허용</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="220" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="223" />
         <source>Allow Drag and Drop Export
 
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
@@ -4067,12 +4067,12 @@ Curve Fitting Window 및 Geometry Window 테이블에서 끌어서 놓기를 내
 드래그 앤 드롭을 사용하지 않으면 클릭하고 끌기를 사용하여 사각형 셀 세트를 선택할 수 있습니다. 드래그 앤 드롭을 사용하면 클릭 한 다음 Shift 키를 누른 상태로 클릭하면 사각형 셀 집합을 선택할 수 있습니다. 클릭 및 드래그로 드래그 작업이 시작되기 때문입니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="228" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="231" />
         <source>Significant digits</source>
         <translation>유효 숫자</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="233" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
@@ -5197,17 +5197,17 @@ Do you want to save your changes?</source>
         <translation>포인트 스타일 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="193" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="225" />
         <source>Coordinates (graph)</source>
         <translation>그래프 좌표</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="198" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="230" />
         <source>Coordinates (pixels)</source>
         <translation>픽셀 좌표</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="203" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="235" />
         <source>Resolution (graph)</source>
         <translation>그래프 해상도</translation>
     </message>
@@ -5222,94 +5222,76 @@ Do you want to save your changes?</source>
         <translation>더 축 포인트 필요</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="11" />
         <source>16:1 farther</source>
-        <translation>16:1 더 멀리</translation>
+        <translation type="vanished"> 16 : 1 더 멀리</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="12" />
         <source>8:1 closer</source>
-        <translation>8:1 더 가까운</translation>
+        <translation type="vanished">8 : 1 가까이</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="14" />
         <source>8:1 farther</source>
-        <translation>8:1 더 멀리</translation>
+        <translation type="vanished"> 8 : 1 더 멀리</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="15" />
         <source>4:1 closer</source>
-        <translation>4:1 더 가까운</translation>
+        <translation type="vanished">4 : 1 가까이</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="17" />
         <source>4:1 farther</source>
-        <translation>4:1 더 멀리</translation>
+        <translation type="vanished"> 4 : 1 더 멀리</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="18" />
         <source>2:1 closer</source>
-        <translation>2:1 더 가까운</translation>
+        <translation type="vanished">2 : 1 가까이</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="20" />
         <source>2:1 farther</source>
-        <translation>2:1 더 멀리</translation>
+        <translation type="vanished"> 2 : 1 더 멀리</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="21" />
         <source>1:1 closer</source>
-        <translation>1:1 더 가까운</translation>
+        <translation type="vanished">1 : 1 가까이</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="23" />
         <source>1:1 farther</source>
-        <translation>1:1 더 멀리</translation>
+        <translation type="vanished"> 1 : 1 더 멀리</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="24" />
         <source>1:2 closer</source>
-        <translation>1:2 더 가까운</translation>
+        <translation type="vanished">1 : 2 가까이</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="26" />
         <source>1:2 farther</source>
-        <translation>1:2 더 멀리</translation>
+        <translation type="vanished"> 1 : 2 더 멀리</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="27" />
         <source>1:4 closer</source>
-        <translation>1:4 더 가까운</translation>
+        <translation type="vanished">1 : 4 가까이</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="29" />
         <source>1:4 farther</source>
-        <translation>1:4 더 멀리</translation>
+        <translation type="vanished"> 1 : 4 더 멀리</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="30" />
         <source>1:8 closer</source>
-        <translation>1:8 더 가까운</translation>
+        <translation type="vanished">1 : 8 가까이</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="32" />
         <source>1:8 farther</source>
-        <translation>1:8 더 멀리</translation>
+        <translation type="vanished"> 1 : 8 더 멀리</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="33" />
         <source>1:16 closer</source>
-        <translation>1:16 더 가까운</translation>
+        <translation type="vanished">1 : 16 가까이</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="35" />
         <source>Fill</source>
-        <translation>가득 따르다</translation>
+        <translation type="vanished">가득 따르다</translation>
     </message>
     <message>
-        <location filename="../src/Zoom/ZoomLabels.cpp" line="36" />
         <source>Previous</source>
-        <translation>너무 이른</translation>
+        <translation type="vanished">너무 이른</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="573" />
@@ -5450,12 +5432,12 @@ Do you want to save your changes?</source>
 <context>
     <name>StatusBar</name>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="56" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="57" />
         <source>Select cursor coordinate values to display.</source>
         <translation>표시 할 커서 좌표 값을 선택하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="57" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="58" />
         <source>Select Cursor Coordinate Values
 
 Values at cursor coordinates to display. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
@@ -5464,12 +5446,12 @@ Values at cursor coordinates to display. Coordinates are in screen (pixels) or g
 표시 할 커서 좌표 값. 좌표는 화면 (픽셀) 또는 그래프 단위입니다. 해상도 (픽셀 당 그래프 단위의 수)는 그래프 단위입니다. 그래프 단위는 축 포인트가 정의 된 후에 만 ​​사용할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="70" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="71" />
         <source>Cursor coordinate values.</source>
         <translation>커서 좌표 값.</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="71" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="72" />
         <source>Cursor Coordinate Values
 
 Values at cursor coordinates. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
@@ -5478,18 +5460,153 @@ Values at cursor coordinates. Coordinates are in screen (pixels) or graph units.
 커서 좌표 값. 좌표는 화면 (픽셀) 또는 그래프 단위입니다. 해상도 (픽셀 당 그래프 단위의 수)는 그래프 단위입니다. 그래프 단위는 축 포인트가 정의 된 후에 만 ​​사용할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="125" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="126" />
         <source>Select zoom.</source>
         <translation>확대 / 축소 선택</translation>
     </message>
     <message>
-        <location filename="../src/StatusBar/StatusBar.cpp" line="126" />
+        <location filename="../src/StatusBar/StatusBar.cpp" line="127" />
         <source>Select Zoom
 
 Points can be more accurately placed by zooming in.</source>
         <translation>확대 / 축소 선택
 
 확대하여 점을보다 정확하게 배치 할 수 있습니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="137" />
+        <source>16:1</source>
+        <translation>16: 1</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="138" />
+        <source>16:1 farther</source>
+        <translation> 16 : 1 더 멀리</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="139" />
+        <source>8:1 closer</source>
+        <translation>8 : 1 가까이</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="140" />
+        <source>8:1</source>
+        <translation>8: 1</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="141" />
+        <source>8:1 farther</source>
+        <translation> 8 : 1 더 멀리</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="142" />
+        <source>4:1 closer</source>
+        <translation>4 : 1 가까이</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="143" />
+        <source>4:1</source>
+        <translation>4: 1</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="144" />
+        <source>4:1 farther</source>
+        <translation> 4 : 1 더 멀리</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="145" />
+        <source>2:1 closer</source>
+        <translation>2 : 1 가까이</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="146" />
+        <source>2:1</source>
+        <translation>2: 1</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="147" />
+        <source>2:1 farther</source>
+        <translation> 2 : 1 더 멀리</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="148" />
+        <source>1:1 closer</source>
+        <translation>1 : 1 가까이</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="149" />
+        <source>1:1</source>
+        <translation>1: 1</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="150" />
+        <source>1:1 farther</source>
+        <translation> 1 : 1 더 멀리</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="151" />
+        <source>1:2 closer</source>
+        <translation>1 : 2 가까이</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="152" />
+        <source>1:2</source>
+        <translation>1: 2</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="153" />
+        <source>1:2 farther</source>
+        <translation> 1 : 2 더 멀리</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="154" />
+        <source>1:4 closer</source>
+        <translation>1 : 4 가까이</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="155" />
+        <source>1:4</source>
+        <translation>1: 4</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="156" />
+        <source>1:4 farther</source>
+        <translation> 1 : 4 더 멀리</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="157" />
+        <source>1:8 closer</source>
+        <translation>1 : 8 가까이</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="158" />
+        <source>1:8</source>
+        <translation>1: 8</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="159" />
+        <source>1:8 farther</source>
+        <translation> 1 : 8 더 멀리</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="160" />
+        <source>1:16 closer</source>
+        <translation>1 : 16 가까이</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="161" />
+        <source>1:16</source>
+        <translation>1: 16</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="162" />
+        <source>Fill</source>
+        <translation>가득 따르다</translation>
+    </message>
+    <message>
+        <location filename="../src/StatusBar/StatusBar.cpp" line="163" />
+        <source>Previous</source>
+        <translation>너무 이른</translation>
     </message>
 </context>
 <context>

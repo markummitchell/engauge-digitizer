@@ -69,17 +69,17 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   layout->addWidget (labelZoomFactor, row, 1);
 
   m_cmbZoomFactor = new QComboBox;
-  m_cmbZoomFactor->addItem (LABEL_ZOOM_16_TO_1  , QVariant (ZOOM_INITIAL_16_TO_1));
-  m_cmbZoomFactor->addItem (LABEL_ZOOM_8_TO_1   , QVariant (ZOOM_INITIAL_8_TO_1));
-  m_cmbZoomFactor->addItem (LABEL_ZOOM_4_TO_1   , QVariant (ZOOM_INITIAL_4_TO_1));
-  m_cmbZoomFactor->addItem (LABEL_ZOOM_2_TO_1   , QVariant (ZOOM_INITIAL_2_TO_1));
-  m_cmbZoomFactor->addItem (LABEL_ZOOM_1_TO_1   , QVariant (ZOOM_INITIAL_1_TO_1));
-  m_cmbZoomFactor->addItem (LABEL_ZOOM_1_TO_2   , QVariant (ZOOM_INITIAL_1_TO_2));
-  m_cmbZoomFactor->addItem (LABEL_ZOOM_1_TO_4   , QVariant (ZOOM_INITIAL_1_TO_4));
-  m_cmbZoomFactor->addItem (LABEL_ZOOM_1_TO_8   , QVariant (ZOOM_INITIAL_1_TO_8));
-  m_cmbZoomFactor->addItem (LABEL_ZOOM_1_TO_16  , QVariant (ZOOM_INITIAL_1_TO_16));
-  m_cmbZoomFactor->addItem (LABEL_ZOOM_FILL     , QVariant (ZOOM_INITIAL_FILL));
-  m_cmbZoomFactor->addItem (LABEL_ZOOM_PREVIOUS , QVariant (ZOOM_INITIAL_PREVIOUS));
+  m_cmbZoomFactor->addItem (*LABEL_ZOOM_16_TO_1  , QVariant (ZOOM_INITIAL_16_TO_1));
+  m_cmbZoomFactor->addItem (*LABEL_ZOOM_8_TO_1   , QVariant (ZOOM_INITIAL_8_TO_1));
+  m_cmbZoomFactor->addItem (*LABEL_ZOOM_4_TO_1   , QVariant (ZOOM_INITIAL_4_TO_1));
+  m_cmbZoomFactor->addItem (*LABEL_ZOOM_2_TO_1   , QVariant (ZOOM_INITIAL_2_TO_1));
+  m_cmbZoomFactor->addItem (*LABEL_ZOOM_1_TO_1   , QVariant (ZOOM_INITIAL_1_TO_1));
+  m_cmbZoomFactor->addItem (*LABEL_ZOOM_1_TO_2   , QVariant (ZOOM_INITIAL_1_TO_2));
+  m_cmbZoomFactor->addItem (*LABEL_ZOOM_1_TO_4   , QVariant (ZOOM_INITIAL_1_TO_4));
+  m_cmbZoomFactor->addItem (*LABEL_ZOOM_1_TO_8   , QVariant (ZOOM_INITIAL_1_TO_8));
+  m_cmbZoomFactor->addItem (*LABEL_ZOOM_1_TO_16  , QVariant (ZOOM_INITIAL_1_TO_16));
+  m_cmbZoomFactor->addItem (*LABEL_ZOOM_FILL     , QVariant (ZOOM_INITIAL_FILL));
+  m_cmbZoomFactor->addItem (*LABEL_ZOOM_PREVIOUS , QVariant ());
   m_cmbZoomFactor->setWhatsThis(tr ("Initial Zoom\n\n"
                                     "Select the initial zoom factor when a new document is loaded. Either the previous "
                                     "zoom can be kept, or the specified zoom can be applied."));
