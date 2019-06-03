@@ -3836,9 +3836,13 @@ Select which inputs are used to zoom in and out.</source>
 Выбор доступных механизмов для изменения масштаба.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Locale</source>
-        <translation>Языковые стандарты</translation>
+        <translation type="vanished">Языковые стандарты</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <source>Locale (requires restart)</source>
+        <translation>Локаль (требуется перезагрузка)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />

@@ -3910,9 +3910,13 @@ Select which inputs are used to zoom in and out.</source>
 Indique les méthodes permettant de réaliser un zoom avant ou arrière.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Locale</source>
-        <translation>Langue</translation>
+        <translation type="vanished">Langue</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <source>Locale (requires restart)</source>
+        <translation>Locale (nécessite un redémarrage)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />

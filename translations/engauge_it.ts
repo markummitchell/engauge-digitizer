@@ -3756,9 +3756,13 @@ Select which inputs are used to zoom in and out.</source>
 Seleziona quali input sono usati per ingrandire e rimpicciolire.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Locale</source>
-        <translation>Località</translation>
+        <translation type="vanished">Località</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <source>Locale (requires restart)</source>
+        <translation>Locale (richiede il riavvio)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />

@@ -3623,7 +3623,7 @@ Select which inputs are used to zoom in and out.</source>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99"/>
-        <source>Locale</source>
+        <source>Locale (requires restart)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

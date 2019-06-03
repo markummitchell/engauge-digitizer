@@ -3804,9 +3804,13 @@ Select which inputs are used to zoom in and out.</source>
 legt fest, welches Eingabegerät die Vergrößerung verändert.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Locale</source>
-        <translation>Sprache</translation>
+        <translation type="vanished">Sprache</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <source>Locale (requires restart)</source>
+        <translation>Gebietsschema (Neustart erforderlich)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />

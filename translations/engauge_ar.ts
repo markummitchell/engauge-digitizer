@@ -3944,9 +3944,13 @@ Select which inputs are used to zoom in and out.</source>
 حدد المدخلات التي يتم استخدامها للتكبير والتصغير.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Locale</source>
-        <translation>مكان</translation>
+        <translation type="vanished">مكان</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <source>Locale (requires restart)</source>
+        <translation>الإعدادات المحلية (يتطلب إعادة التشغيل)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />

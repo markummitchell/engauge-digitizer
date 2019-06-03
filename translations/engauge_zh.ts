@@ -3650,9 +3650,13 @@ Select which inputs are used to zoom in and out.</source>
         <translation>变焦控制选择使用哪些输入来放大和缩小。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Locale</source>
-        <translation>地点：</translation>
+        <translation type="vanished">地点：</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <source>Locale (requires restart)</source>
+        <translation>區域設置（需要重啟）</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />

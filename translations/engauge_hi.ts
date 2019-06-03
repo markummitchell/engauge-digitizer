@@ -3660,8 +3660,8 @@ Select which inputs are used to zoom in and out.</source>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
-        <source>Locale</source>
-        <translation type="unfinished" />
+        <source>Locale (requires restart)</source>
+        <translation>लोकेल (पुनः आरंभ करने की आवश्यकता है)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />

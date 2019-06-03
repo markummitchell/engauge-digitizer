@@ -3920,9 +3920,13 @@ Select which inputs are used to zoom in and out.</source>
 확대 및 축소하는 데 사용할 입력을 선택하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Locale</source>
-        <translation>장소</translation>
+        <translation type="vanished">장소</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <source>Locale (requires restart)</source>
+        <translation>로켈 (다시 시작해야 함)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />

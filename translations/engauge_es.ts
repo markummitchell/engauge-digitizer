@@ -3928,9 +3928,13 @@ Select which inputs are used to zoom in and out.</source>
 Seleccionar qué insumos se utiliza para acercar y alejar .</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Locale</source>
-        <translation>Lugar</translation>
+        <translation type="vanished">Lugar</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <source>Locale (requires restart)</source>
+        <translation>Locale (requiere reinicio)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />
