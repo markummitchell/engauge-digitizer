@@ -88,9 +88,18 @@ signals:
   /// Send wheel event to MainWindow for zooming out
   void signalViewZoomOut();
 
+public slots:
+  /// Receive drag and drop regression test url
+  void slotDropRegression (QString);
+
 private:
   GraphicsView();
 
+  bool handleDropEvent (const QString &possibleDigFileName,
+                        bool hasUrls,
+                        const QUrl &urlFirst,
+                        bool hasImage,
+                        const QImage &image);
   QStringList pointIdentifiersFromSelection (const QList<QGraphicsItem*> &items) const;
   bool inBounds (const QPointF &posScreen);
 

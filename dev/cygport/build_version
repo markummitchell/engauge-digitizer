@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 
 # Required packages:
+#   cygwin32-gcc (for 32 bit builds)
+#   cygwin32-w32api-runtime (for 32 bit builds)
 #   cygport
 #   gcc-g++
 #   libfftw3-devel

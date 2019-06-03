@@ -99,6 +99,9 @@ private:
 
   void saveGeometryToSettings ();
   
+  /// Do shutdown when dialog disappears
+  virtual void hideEvent (QHideEvent *event);
+
   /// Do preparation before dialog is displayed.
   virtual void showEvent (QShowEvent *event);
 

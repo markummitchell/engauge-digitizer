@@ -19,6 +19,7 @@ void TestMatrix::cleanupTestCase ()
 
 void TestMatrix::initTestCase ()
 {
+  const bool NO_DROP_REGRESSION = false;
   const QString NO_ERROR_REPORT_LOG_FILE;
   const QString NO_REGRESSION_OPEN_FILE;
   const bool NO_GNUPLOT_LOG_FILES = false;
@@ -37,6 +38,7 @@ void TestMatrix::initTestCase ()
 
   MainWindow w (NO_ERROR_REPORT_LOG_FILE,
                 NO_REGRESSION_OPEN_FILE,
+                NO_DROP_REGRESSION,
                 NO_REGRESSION_IMPORT,                
                 NO_GNUPLOT_LOG_FILES,
                 NO_RESET,

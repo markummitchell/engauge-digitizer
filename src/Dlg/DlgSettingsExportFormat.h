@@ -61,6 +61,7 @@ private slots:
   void slotInclude();
   void slotListExcluded();
   void slotListIncluded();
+  void slotLoadDefault();
   void slotOverrideCsvTsv(int);
   void slotRelationsPointsEvenlySpaced();
   void slotRelationsPointsEvenlySpacedInterval(const QString &);
@@ -138,6 +139,7 @@ private:
   QTextEdit *m_editPreview;
 
   QPushButton *m_btnSaveDefault;
+  QPushButton *m_btnLoadDefault;
 
   DocumentModelExportFormat *m_modelExportBefore;
   DocumentModelExportFormat *m_modelExportAfter;

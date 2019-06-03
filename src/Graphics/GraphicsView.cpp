@@ -121,59 +121,73 @@ void GraphicsView::dragMoveEvent (QDragMoveEvent *event)
 
 void GraphicsView::dropEvent (QDropEvent *event)
 {
-  const QString MIME_FORMAT_TEXT_PLAIN ("text/plain");
+  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::dropEvent";
 
   // Urls from text/uri-list
   QList<QUrl> urlList = event->mimeData ()->urls ();
-  QString urls;
-  QTextStream str (&urls);
-  QList<QUrl>::const_iterator itr;
-  for (itr = urlList.begin (); itr != urlList.end (); itr++) {
-    QUrl url = *itr;
-    str << " url=" << url.toString () << " ";
-  }
 
+  const QString MIME_FORMAT_TEXT_PLAIN ("text/plain");
   QString textPlain (event->mimeData()->data (MIME_FORMAT_TEXT_PLAIN));
 
-  LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::dropEvent"
-                              << " formats=(" << event->mimeData()->formats().join (", ").toLatin1().data() << ")"
-                              << " hasUrls=" << (event->mimeData()->hasUrls() ? "yes" : "no")
-                              << " urlCount=" << urlList.count()
-                              << " urls=(" << urls.toLatin1().data() << ")"
-                              << " text=" << textPlain.toLatin1().data()
-                              << " hasImage=" << (event->mimeData()->hasImage() ? "yes" : "no");
+  QUrl urlFirst;
+  if (event->mimeData ()->hasUrls () &&
+      urlList.count () > 0) {
+    urlFirst = urlList.at (0);
+  }
 
-  LoadFileInfo loadFileInfo;
-  if (loadFileInfo.loadsAsDigFile (textPlain)) {
+  QImage image;
+  if (event->mimeData()->hasImage()) {
+    image = qvariant_cast<QImage> (event->mimeData ()->imageData ());
+  }
 
-    LOG4CPP_INFO_S ((*mainCat)) << "QGraphicsView::dropEvent dig file";
-    QUrl url (textPlain);
-    emit signalDraggedDigFile (url.toLocalFile());
-    event->acceptProposedAction();
+  if (handleDropEvent (textPlain,
+                       event->mimeData ()->hasUrls (),
+                       urlFirst,
+                       event->mimeData ()->hasImage (),
+                       image)) {
 
-  } else if (event->mimeData ()->hasImage ()) {
-
-    // This branch never seems to get executed, but will be kept in case it ever applies (since hasUrls branch is messier and less reliable)
-    QImage image = qvariant_cast<QImage> (event->mimeData ()->imageData ());
-    LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::dropEvent image";
-    emit signalDraggedImage (image);
-
-  } else if (event->mimeData ()->hasUrls () &&
-             urlList.count () > 0) {
-
-    // Sometimes images can be dragged in, but sometimes the url points to an html page that
-    // contains just the image, in which case importing will fail
-    QUrl url = urlList.at(0);
-    LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::dropEvent url=" << url.toString ().toLatin1 ().data ();
-    emit signalDraggedImageUrl (url);
     event->acceptProposedAction();
 
   } else {
 
     LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::dropEvent dropped";
     QGraphicsView::dropEvent (event);
-
   }
+}
+
+bool GraphicsView::handleDropEvent (const QString &possibleDigFileName,
+                                    bool hasUrl,
+                                    const QUrl &urlFirst,
+                                    bool hasImage,
+                                    const QImage &image)
+{
+  bool willAccept = false;
+
+  LoadFileInfo loadFileInfo;
+  if (loadFileInfo.loadsAsDigFile (possibleDigFileName)) {
+
+    // Branch that applies when a dig file name has been dropped
+    LOG4CPP_INFO_S ((*mainCat)) << "QGraphicsView::handleDropEvent dig file";
+    QUrl url (possibleDigFileName);
+    emit signalDraggedDigFile (url.toLocalFile());
+    willAccept = true;
+
+  } else if (hasImage) {
+
+    // Branch that applies when an image selected within another application (e.g. LibreOffice Draw) has been dropped
+    LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::handleDropEvent image";
+    emit signalDraggedImage (image);
+    willAccept = true;
+
+  } else if (hasUrl) {
+
+    // Branch that applies when a local file name or internet url has been dropped
+    LOG4CPP_INFO_S ((*mainCat)) << "GraphicsView::handleDropEvent url=" << urlFirst.toString ().toLatin1 ().data ();
+    emit signalDraggedImageUrl (urlFirst);
+    willAccept = true;
+  }
+
+  return willAccept;
 }
 
 bool GraphicsView::inBounds (const QPointF &posScreen)
@@ -290,6 +304,25 @@ QStringList GraphicsView::pointIdentifiersFromSelection (const QList<QGraphicsIt
   }
 
   return pointIdentifiers;
+}
+
+void GraphicsView::slotDropRegression (QString urlText)
+{
+  // Regression test with local file or internet url specified
+  QString emptyDigFileName;
+  bool hasUrl = true;
+  QUrl url (urlText); // Works as is for internet url
+  if (!urlText.contains ("http")) {
+    url = QUrl::fromLocalFile (urlText);
+  }
+  bool hasImage = false;
+  QImage emptyImage;
+
+  handleDropEvent (emptyDigFileName,
+                   hasUrl,
+                   url,
+                   hasImage,
+                   emptyImage);
 }
 
 void GraphicsView::wheelEvent(QWheelEvent *event)

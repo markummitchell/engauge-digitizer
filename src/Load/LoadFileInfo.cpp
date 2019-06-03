@@ -21,14 +21,21 @@ bool LoadFileInfo::loadsAsDigFile (const QString &urlString) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "LoadFileInfo::loadsAsDigFile";
 
-  QString fileName = urlString;
+  bool success = false;
 
-  QUrl url (urlString);
-  if (url.isLocalFile ()) {
-    fileName = url.toLocalFile();
+  if (urlString.length() > 0) {
+
+    QString fileName = urlString;
+
+    QUrl url (urlString);
+    if (url.isLocalFile ()) {
+      fileName = url.toLocalFile();
+    }
+
+    Document document (fileName);
+
+    success = document.successfulRead();
   }
 
-  Document document (fileName);
-
-  return document.successfulRead();
+  return success;
 }

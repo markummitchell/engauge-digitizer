@@ -287,7 +287,7 @@ Kiris koordïnattarın an</translation>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="191" />
         <source>Hint - The background image can be switched between the original image and filtered image.</source>
-        <translation type="unfinished" />
+        <translation>Кеңес - Фондық сурет бастапқы сурет пен сүзілген кескін арасында ауыса алады.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="194" />
@@ -309,12 +309,12 @@ Kiris koordïnattarın an</translation>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211" />
         <source>Select the method for filtering. Hue is best if the curves have different colors</source>
-        <translation type="unfinished" />
+        <translation>Сүзу әдісін таңдаңыз. Қисықтардың әр түрлі түстері болса, реңк жақсы</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="212" />
         <source>Slide the green buttons back and forth until the curve is easily visible in the preview window</source>
-        <translation type="unfinished" />
+        <translation>Алдын ала қарау терезесінде қисық көрінетінше жасыл түймелерді алға-артқа сырғытыңыз</translation>
     </message>
 </context>
 <context>
@@ -519,143 +519,159 @@ New points will be assigned to the currently selected curve.</source>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="151" />
         <source>&amp;Undo</source>
-        <translation type="unfinished" />
+        <translation>Болдырмау</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="153" />
         <source>Undo the last operation.</source>
-        <translation type="unfinished" />
+        <translation>Соңғы әрекетті болдырмаңыз.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="154" />
         <source>Undo
 
 Undo the last operation.</source>
-        <translation type="unfinished" />
+        <translation>Болдырмау
+
+Соңғы әрекетті болдырмаңыз.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="158" />
         <source>&amp;Redo</source>
-        <translation type="unfinished" />
+        <translation>Қайталау</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="160" />
         <source>Redo the last operation.</source>
-        <translation type="unfinished" />
+        <translation>Соңғы әрекетті қайталаңыз.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="161" />
         <source>Redo
 
 Redo the last operation.</source>
-        <translation type="unfinished" />
+        <translation>Қайталау
+
+Соңғы әрекетті қайталаңыз.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="165" />
         <source>Cut</source>
-        <translation type="unfinished" />
+        <translation>Кесу</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="167" />
         <source>Cuts the selected points and copies them to the clipboard.</source>
-        <translation type="unfinished" />
+        <translation>Таңдалған нүктелерді қиып алып, оларды аралық сақтағышқа көшіреді.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="168" />
         <source>Cut
 
 Cuts the selected points and copies them to the clipboard.</source>
-        <translation type="unfinished" />
+        <translation>Кесу
+
+Таңдалған нүктелерді қиып алып, оларды аралық сақтағышқа көшіреді.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="172" />
         <source>Copy</source>
-        <translation type="unfinished" />
+        <translation>Көшіру</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="174" />
         <source>Copies the selected points to the clipboard.</source>
-        <translation type="unfinished" />
+        <translation>Таңдалған нүктелерді аралық сақтағышқа көшіреді.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="175" />
         <source>Copy
 
 Copies the selected points to the clipboard.</source>
-        <translation type="unfinished" />
+        <translation>Көшіру
+
+Таңдалған нүктелерді аралық сақтағышқа көшіреді.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="179" />
         <source>Paste</source>
-        <translation type="unfinished" />
+        <translation>Қою</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="181" />
         <source>Pastes the selected points from the clipboard.</source>
-        <translation type="unfinished" />
+        <translation>Таңдалған нүктелерді аралық сақтағыштан өткізеді.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="182" />
         <source>Paste
 
 Pastes the selected points from the clipboard. They will be assigned to the current curve.</source>
-        <translation type="unfinished" />
+        <translation>Қою
+
+Таңдалған нүктелерді аралық сақтағыштан өткізеді. Олар ағымдағы қисыққа тағайындалады.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="186" />
         <source>Delete</source>
-        <translation type="unfinished" />
+        <translation>Жою</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="188" />
         <source>Deletes the selected points, after copying them to the clipboard.</source>
-        <translation type="unfinished" />
+        <translation>Таңдалған нүктелерді айырбастың буферіне көшіргеннен кейін жойылады.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="189" />
         <source>Delete
 
 Deletes the selected points, after copying them to the clipboard.</source>
-        <translation type="unfinished" />
+        <translation>Жою
+
+Таңдалған нүктелерді айырбастың буферіне көшіргеннен кейін жойылады.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="193" />
         <source>Paste As New</source>
-        <translation type="unfinished" />
+        <translation>Жаңа ретінде қою</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="194" />
         <source>Pastes an image from the clipboard.</source>
-        <translation type="unfinished" />
+        <translation>Суретті аралық сақтағыштан өткізеді.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="195" />
         <source>Paste as New
 
 Creates a new document by pasting an image from the clipboard.</source>
-        <translation type="unfinished" />
+        <translation> Жаңа ретінде қою
+
+Суретті аралық сақтағыштан қою арқылы жаңа құжат жасайды.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="199" />
         <source>Paste As New (Advanced)...</source>
-        <translation type="unfinished" />
+        <translation>Жаңа (қосымша) ретінде қою ...</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="200" />
         <source>Pastes an image from the clipboard, in advanced mode.</source>
-        <translation type="unfinished" />
+        <translation>Суретті аралық сақтағыштан, озық режимде өткізеді.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="201" />
         <source>Paste as New (Advanced)
 
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
-        <translation type="unfinished" />
+        <translation>Жаңа (қосымша) ретінде қою
+
+Кескінді алмасу буферінен кеңейтілген режимде қою арқылы жаңа құжатты жасайды.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="210" />
         <source>&amp;Import...</source>
-        <translation type="unfinished" />
+        <translation>Импорт</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="211" />
@@ -665,7 +681,7 @@ Creates a new document by pasting an image from the clipboard, in advanced mode.
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="212" />
         <source>Creates a new document by importing a simple image.</source>
-        <translation type="unfinished" />
+        <translation>Қарапайым кескінді импорттау арқылы жаңа құжатты жасайды.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="213" />
@@ -674,114 +690,130 @@ Creates a new document by pasting an image from the clipboard, in advanced mode.
 Creates a new document by importing an image with a single coordinate system, and axes both coordinates known.
 
 For more complicated images with multiple coordinate systems, and/or floating axes, Import (Advanced) is used instead.</source>
-        <translation type="unfinished" />
+        <translation>Кескінді импорттау
+
+Кескінді бірыңғай координат жүйесімен импорттау арқылы жаңа құжатты жасайды және осьтер белгілі белгілі координаттармен де жасалады.
+
+Көптеген координаттар жүйелері және / немесе өзгермелі осьтері бар күрделі кескіндер үшін, оның орнына Import (Advanced) пайдаланылады.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="220" />
         <source>Import (Advanced)...</source>
-        <translation type="unfinished" />
+        <translation>Импорттау (қосымша) ...</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="221" />
         <source>Creates a new document by importing an image with support for advanced feaures.</source>
-        <translation type="unfinished" />
+        <translation>Қосымша бейнені қолдайтын кескінді импорттау арқылы жаңа құжатты жасайды.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="222" />
         <source>Import (Advanced)
 
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
-        <translation type="unfinished" />
+        <translation> Импорттау (Кеңейтілген)
+
+Қосымша бейнені қолдайтын кескінді импорттау арқылы жаңа құжатты жасайды. Кеңейтілген режимде көптеген координаталық жүйелер және / немесе өзгермелі осьтер болуы мүмкін.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="227" />
         <source>Import (Image Replace)...</source>
-        <translation type="unfinished" />
+        <translation>Импорттау (сурет ауыстыру) ...</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="228" />
         <source>Imports a new image into the current document, replacing the existing image.</source>
-        <translation type="unfinished" />
+        <translation>Қолданыстағы суретті ауыстырып, ағымдағы құжатқа жаңа суретті импорттайды.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="229" />
         <source>Import (Image Replace)
 
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
-        <translation type="unfinished" />
+        <translation> Импорттау (сурет ауыстыру)
+
+Ағымдағы құжатқа жаңа суретті импорттайды. Бұрыннан бар кескін ауыстырылады және құжаттың барлық қисықтары сақталады. Бұл операция ось нүктелерін және басқа параметрлерді қолданыстағы құжаттың басқа суретке қолдану үшін пайдалы.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="235" />
         <source>&amp;Open...</source>
-        <translation type="unfinished" />
+        <translation>Ашық</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="237" />
         <source>Opens an existing document.</source>
-        <translation type="unfinished" />
+        <translation> Бар құжатты ашады.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="238" />
         <source>Open Document
 
 Opens an existing document.</source>
-        <translation type="unfinished" />
+        <translation>Құжатты ашыңыз
+
+Бар құжатты ашады.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="251" />
         <source>&amp;Close</source>
-        <translation type="unfinished" />
+        <translation>Жабық</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="253" />
         <source>Closes the open document.</source>
-        <translation type="unfinished" />
+        <translation>Ашық құжатты жабады.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="254" />
         <source>Close Document
 
 Closes the open document.</source>
-        <translation type="unfinished" />
+        <translation>Құжатты жабыңыз
+
+Ашық құжатты жабады.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="258" />
         <source>&amp;Save</source>
-        <translation type="unfinished" />
+        <translation>Сақтау</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="260" />
         <source>Saves the current document.</source>
-        <translation type="unfinished" />
+        <translation>Ағымдағы құжатты сақтайды.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="261" />
         <source>Save Document
 
 Saves the current document.</source>
-        <translation type="unfinished" />
+        <translation>Құжатты сақтау
+
+Ағымдағы құжатты сақтайды.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="265" />
         <source>Save As...</source>
-        <translation type="unfinished" />
+        <translation>Сақтау ретінде</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="267" />
         <source>Saves the current document under a new filename.</source>
-        <translation type="unfinished" />
+        <translation>Ағымдағы құжатты жаңа файл атауында сақтайды.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="268" />
         <source>Save Document As
 
 Saves the current document under a new filename.</source>
-        <translation type="unfinished" />
+        <translation> Құжатты басқаша сақтау
+
+Ағымдағы құжатты жаңа файл атауында сақтайды.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="272" />
         <source>Export...</source>
-        <translation type="unfinished" />
+        <translation>Экспорт</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="273" />
@@ -791,24 +823,26 @@ Saves the current document under a new filename.</source>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="274" />
         <source>Exports the current document into a text file.</source>
-        <translation type="unfinished" />
+        <translation>Ағымдағы құжатты мәтіндік файлға экспорттайды.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="275" />
         <source>Export Document
 
 Exports the current document into a text file.</source>
-        <translation type="unfinished" />
+        <translation>Экспорт құжаты
+
+Ағымдағы құжатты мәтіндік файлға экспорттайды.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="279" />
         <source>&amp;Print...</source>
-        <translation type="unfinished" />
+        <translation>Басып шығару</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="281" />
         <source>Print the current document.</source>
-        <translation type="unfinished" />
+        <translation> Ағымдағы құжатты басып шығарыңыз.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="282" />
@@ -2256,37 +2290,37 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgImportCroppingPdf</name>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="43" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="44" />
         <source>PDF File Import Cropping</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="77" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="78" />
         <source>Page</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="82" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="83" />
         <source>Page number that will be imported</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="100" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="101" />
         <source>Preview</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="107" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="108" />
         <source>Preview window that shows what part of the image will be imported. The image portion inside the rectangular frame will be imported from the currently selected page. The frame can be moved and resized by dragging the corner handles.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="151" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="152" />
         <source>Ok</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="158" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="159" />
         <source>Cancel</source>
         <translation type="unfinished" />
     </message>
@@ -2302,12 +2336,12 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgSettingsAbstractBase</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="99" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="100" />
         <source>Ok</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="107" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="108" />
         <source>Cancel</source>
         <translation type="unfinished" />
     </message>
@@ -2459,61 +2493,61 @@ The Value component is also called the Lightness.</source>
 <context>
     <name>DlgSettingsCoords</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="75" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="914" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="918" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="76" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="915" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="919" />
         <source>Coordinates</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="219" />
         <source>Date/Time</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="228" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="229" />
         <source>Date format to be used for date values, and date portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the time portion appearing in output.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="235" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="236" />
         <source>Time format to be used for time values, and time portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the date portion appearing in output.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="247" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="248" />
         <source>Coordinates Types</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="252" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="253" />
         <source>Polar</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="252" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="917" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="253" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="918" />
         <source>R</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="254" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="255" />
         <source>Cartesian (X, Y)</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="255" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="256" />
         <source>Select cartesian coordinates.
 
 The X and Y coordinates will be used</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="261" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="262" />
         <source>Select polar coordinates.
 
 The Theta and R coordinates will be used.
@@ -2522,30 +2556,30 @@ Polar coordinates are not allowed with log scale for Theta</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="280" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="315" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="281" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="316" />
         <source>Scale</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="283" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="318" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="284" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="319" />
         <source>Linear</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="284" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="285" />
         <source>Specifies linear scale for the X or Theta coordinate</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="288" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="326" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="289" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="327" />
         <source>Log</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="289" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="290" />
         <source>Specifies logarithmic scale for the X or Theta coordinate.
 
 Log scale is not allowed if there are negative coordinates.
@@ -2554,47 +2588,47 @@ Log scale is not allowed for the Theta coordinate.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="295" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="340" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="296" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="341" />
         <source>Units</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="319" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="320" />
         <source>Specifies linear scale for the Y or R coordinate</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="323" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="324" />
         <source>Origin radius value</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="327" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="328" />
         <source>Specifies logarithmic scale for the Y or R coordinate
 
 Log scale is not allowed if there are negative coordinates.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="334" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="335" />
         <source>Specify radius value at origin.
 
 Normally the radius at the origin is 0, but a nonzero value may be applied in other cases (like when the radial units are decibels).</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="357" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="358" />
         <source>Preview</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="364" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="365" />
         <source>Preview window that shows how current settings affect the coordinate system.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="672" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="673" />
         <source>Numbers have the simplest and most general format.
 
 Date and time values have date and/or time components.
@@ -2603,7 +2637,7 @@ Degrees Minutes Seconds (DDD MM SS.S) format uses two integer number for degrees
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="705" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="706" />
         <source>Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.
 
 Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are 60 minutes per degree. During input, a space must be inserted between the two numbers.
@@ -2618,12 +2652,12 @@ Turns format uses a single real number. One complete revolution is one turn.</so
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="912" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="913" />
         <source>X</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="916" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="917" />
         <source>Y</source>
         <translation type="unfinished" />
     </message>
@@ -2718,57 +2752,57 @@ Reorder curves by dragging them around.</source>
 <context>
     <name>DlgSettingsCurveProperties</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="61" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="62" />
         <source>Curve Properties</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="88" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="89" />
         <source>Curve Name</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="92" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="93" />
         <source>Name of the curve that is currently selected for editing</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="102" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="103" />
         <source>Line</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="108" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="109" />
         <source>Width</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="112" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="113" />
         <source>Select a width for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="118" />
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="204" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="119" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="205" />
         <source>Color</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="122" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="123" />
         <source>Select a color for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="129" />
         <source>Connect as</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="137" />
         <source>Select rule for connecting points with lines.
 
 If the curve is connected as a single-valued function then the points are ordered by increasing value of the independent variable.
@@ -2783,49 +2817,49 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
         <translation>Желілерді сызықтармен қосу ережесін таңдаңыз. Егер қисық бір мәнді функция ретінде жалғанса, онда нүктелер тәуелсіз айнымалы мәннің артуымен реттеледі. Егер қисық жабық контур ретінде жалғанса, нүктелер бар сызық бойымен орналастырылған баллдарды қоспағанда, жасы бойынша реттеледі. Кез-келген желінің кез келген нүктесі сол сызықтың екі соңғы нүктесі арасында орналасқан - егер оның жасының екі соңғы нүктенің жастары арасында болған болса, кірістіріледі. Сәйкесінше реттелген нүктелер арасындағы сызықтар. дәйекті нүктелер арасындағы сызықтар. Тегіс қисықтар скаляр реттік (t) мәндеріне қарсы (x, y) жұбының табиғи текше сплейлерін пайдалана отырып, дәйекті нүктелер арасында тегіс сызықтармен сызылады. Бұл тек графикалық қисықтарға қатысты. Ақ нүктелер арасында ешқашан сызықтар жасалмаған.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="157" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="158" />
         <source>Point</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="163" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="164" />
         <source>Shape</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="167" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="168" />
         <source>Select a shape for the points</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="183" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="184" />
         <source>Radius</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="187" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="188" />
         <source>Select a radius, in pixels, for the points</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="192" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="193" />
         <source>Line width</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="196" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="197" />
         <source>Select a line width, in pixels, for the points.
 
 A larger width results in a thicker line, with the exception of a value of zero which always results in a line that is one pixel wide (which is easy to see even when zoomed far out)</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="208" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="209" />
         <source>Select a color for the line used to draw the point shapes</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="219" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="220" />
         <source>Save the visible curve settings for use as future defaults, according to the curve name selection.
 
 If the visible settings are for the axes curve, then they will be used for future axes curves, until new settings are saved as the defaults.
@@ -2834,12 +2868,12 @@ If the visible settings are for the Nth graph curve in the curve list, then they
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="233" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="234" />
         <source>Preview</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="240" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="241" />
         <source>Preview window that shows how current settings affect the points and line of the selected curve.
 
 The X coordinate is in the horizontal direction, and the Y coordinate is in the vertical direction. A function can have only one Y value, at most, for any X value, but a relation can have multiple Y values for one X value.</source>
@@ -3082,7 +3116,7 @@ The order of the curves here does not affect the order in the exported file. Tha
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="220" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="362" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="367" />
         <source>Interval</source>
         <translation type="unfinished" />
     </message>
@@ -3116,13 +3150,13 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="255" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="393" />
         <source>Raw Xs and Ys</source>
         <translation type="unfinished" />
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="256" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="389" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="394" />
         <source>Exported file will have only original X and Y values</source>
         <translation type="unfinished" />
     </message>
@@ -3157,39 +3191,49 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="309" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="304" />
+        <source>Load Default</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="305" />
+        <source>Load the default settings.</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="314" />
         <source>Preview</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="325" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="330" />
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="341" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="346" />
         <source>Relation Points Selection</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="355" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="360" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="356" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="361" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="370" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="375" />
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="376" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="381" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -3198,51 +3242,41 @@ Graph units are usually preferred when the X and Y scales are identical.</source
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="432" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="437" />
         <source>Functions</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="434" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="439" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="440" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="445" />
         <source>Relations</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="442" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="447" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="463" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="466" />
         <source>X Label</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="465" />
-        <source>Theta Label</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="471" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="470" />
         <source>Label in the header for x values</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="473" />
-        <source>Label in the header for theta values</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1152" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1203" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation type="unfinished" />
     </message>
@@ -3663,8 +3697,8 @@ Select which inputs are used to zoom in and out.</source>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
-        <source>Locale</source>
-        <translation type="unfinished" />
+        <source>Locale (requires restart)</source>
+        <translation>Жергілікті (қайта іске қосу қажет)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />
@@ -4056,7 +4090,7 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
 Егер апарып тастау ажыратылса, түймені апару арқылы ұяшықтардың төртбұрыш жиынтығы таңдалуы мүмкін. Әйтпесе, апарып тастау функциясы қосылған болса, басу және сүйреп апару әрекетін бастағандықтан, Басу, содан кейін Shift + Click басу арқылы ұяшықтардың тікбұрышты жиынтығы таңдалуы мүмкін. Апарып тастау режимі Негізгі терезе параметрлерінде орнатылған</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="270" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="273" />
         <source>Highlighted segments may have unexpected values when exported due to overlaps. Adjust points or change Settings / Curve Properties / Connect As.</source>
         <translation type="unfinished" />
     </message>
@@ -4104,12 +4138,12 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>LoadImageFromUrl</name>
     <message>
-        <location filename="../src/Load/LoadImageFromUrl.cpp" line="60" />
+        <location filename="../src/Load/LoadImageFromUrl.cpp" line="66" />
         <source>Unable to download image from</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Load/LoadImageFromUrl.cpp" line="92" />
+        <location filename="../src/Load/LoadImageFromUrl.cpp" line="98" />
         <source>Unable to load image from</source>
         <translation type="unfinished" />
     </message>
@@ -4117,113 +4151,113 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="443" />
+        <location filename="../src/main/MainWindow.cpp" line="454" />
         <source>Unable to export to file</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="477" />
+        <location filename="../src/main/MainWindow.cpp" line="488" />
         <source>Unable to extract image to file</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="552" />
-        <location filename="../src/main/MainWindow.cpp" line="712" />
-        <location filename="../src/main/MainWindow.cpp" line="891" />
+        <location filename="../src/main/MainWindow.cpp" line="563" />
+        <location filename="../src/main/MainWindow.cpp" line="723" />
+        <location filename="../src/main/MainWindow.cpp" line="902" />
         <source>Cannot read file</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="554" />
-        <location filename="../src/main/MainWindow.cpp" line="714" />
-        <location filename="../src/main/MainWindow.cpp" line="893" />
+        <location filename="../src/main/MainWindow.cpp" line="565" />
+        <location filename="../src/main/MainWindow.cpp" line="725" />
+        <location filename="../src/main/MainWindow.cpp" line="904" />
         <source>from directory</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="628" />
+        <location filename="../src/main/MainWindow.cpp" line="639" />
         <source>Import Image</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="868" />
+        <location filename="../src/main/MainWindow.cpp" line="879" />
         <source>File opened</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="913" />
+        <location filename="../src/main/MainWindow.cpp" line="924" />
         <source>File not found</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="930" />
+        <location filename="../src/main/MainWindow.cpp" line="941" />
         <source>Error report opened</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="985" />
-        <location filename="../src/main/MainWindow.cpp" line="1059" />
+        <location filename="../src/main/MainWindow.cpp" line="996" />
+        <location filename="../src/main/MainWindow.cpp" line="1070" />
         <source>File imported</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1093" />
+        <location filename="../src/main/MainWindow.cpp" line="1104" />
         <source>Background image.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1094" />
+        <location filename="../src/main/MainWindow.cpp" line="1105" />
         <source>Currently selected curve.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1095" />
+        <location filename="../src/main/MainWindow.cpp" line="1106" />
         <source>Point style for currently selected curve.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1096" />
+        <location filename="../src/main/MainWindow.cpp" line="1107" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1144" />
+        <location filename="../src/main/MainWindow.cpp" line="1155" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1228" />
+        <location filename="../src/main/MainWindow.cpp" line="1239" />
         <source>Cannot write file</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1276" />
+        <location filename="../src/main/MainWindow.cpp" line="1287" />
         <source>Save</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2289" />
+        <location filename="../src/main/MainWindow.cpp" line="2300" />
         <source>Export</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2371" />
+        <location filename="../src/main/MainWindow.cpp" line="2382" />
         <source>Open Document</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3583" />
+        <location filename="../src/main/MainWindow.cpp" line="3638" />
         <source>+</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3584" />
+        <location filename="../src/main/MainWindow.cpp" line="3639" />
         <source>-</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3714" />
+        <location filename="../src/main/MainWindow.cpp" line="3769" />
         <source>Engauge Digitizer</source>
         <translation type="unfinished" />
     </message>
@@ -4231,72 +4265,53 @@ Do you want to save your changes?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="126" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="171" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="267" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="133" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="178" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="276" />
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="179" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="274" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="186" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="285" />
         <source>New axis point cannot have the same graph coordinates as an existing axis point</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="185" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="280" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="192" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="291" />
         <source>No more than two axis points can lie along the same line on the screen</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="191" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="286" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="198" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="297" />
         <source>No more than two axis points can lie along the same line in graph coordinates</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="244" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="251" />
         <source>Too many x axis points. There should only be two</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="250" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="257" />
         <source>Too many y axis points. There should only be two</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Checker/CheckerMode.cpp" line="14" />
+        <location filename="../src/Checker/CheckerMode.cpp" line="16" />
         <source>Never</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Checker/CheckerMode.cpp" line="17" />
+        <location filename="../src/Checker/CheckerMode.cpp" line="20" />
         <source>NSeconds</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Checker/CheckerMode.cpp" line="20" />
+        <location filename="../src/Checker/CheckerMode.cpp" line="24" />
         <source>Forever</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
-        <location filename="../src/Checker/CheckerMode.cpp" line="23" />
-        <location filename="../src/Color/ColorFilterMode.cpp" line="29" />
-        <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="28" />
-        <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="49" />
-        <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="36" />
-        <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="65" />
-        <location filename="../src/Curve/CurveConnectAs.cpp" line="30" />
-        <location filename="../src/Export/ExportDelimiter.cpp" line="26" />
-        <location filename="../src/Export/ExportHeader.cpp" line="23" />
-        <location filename="../src/Export/ExportLayoutFunctions.cpp" line="20" />
-        <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="20" />
-        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="26" />
-        <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="20" />
-        <location filename="../src/Grid/GridCoordDisable.cpp" line="26" />
-        <location filename="../src/Point/PointShape.cpp" line="32" />
-        <source>Unknown</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -4346,7 +4361,7 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdSettingsAxesChecker.cpp" line="50" />
         <location filename="../src/Cmd/CmdSettingsColorFilter.cpp" line="50" />
         <location filename="../src/Cmd/CmdSettingsCoords.cpp" line="51" />
-        <location filename="../src/Cmd/CmdSettingsCurveList.cpp" line="78" />
+        <location filename="../src/Cmd/CmdSettingsCurveList.cpp" line="79" />
         <location filename="../src/Cmd/CmdSettingsCurveProperties.cpp" line="51" />
         <location filename="../src/Cmd/CmdSettingsDigitizeCurve.cpp" line="50" />
         <location filename="../src/Cmd/CmdSettingsExportFormat.cpp" line="51" />
@@ -4381,6 +4396,16 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Color/ColorFilterMode.cpp" line="26" />
         <source>Value</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <location filename="../src/Color/ColorFilterMode.cpp" line="29" />
+        <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="28" />
+        <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="49" />
+        <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="36" />
+        <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="65" />
+        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="32" />
+        <source>Unknown</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -4461,7 +4486,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/CoordSystem/CoordSystem.cpp" line="607" />
+        <location filename="../src/CoordSystem/CoordSystem.cpp" line="608" />
         <source>Unexpected xml token</source>
         <translation type="unfinished" />
     </message>
@@ -4472,27 +4497,27 @@ Do you want to save your changes?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Curve/CurveConnectAs.cpp" line="15" />
+        <location filename="../src/Curve/CurveConnectAs.cpp" line="17" />
         <source>FunctionSmooth</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Curve/CurveConnectAs.cpp" line="18" />
+        <location filename="../src/Curve/CurveConnectAs.cpp" line="21" />
         <source>FunctionStraight</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Curve/CurveConnectAs.cpp" line="21" />
+        <location filename="../src/Curve/CurveConnectAs.cpp" line="25" />
         <source>RelationSmooth</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Curve/CurveConnectAs.cpp" line="24" />
+        <location filename="../src/Curve/CurveConnectAs.cpp" line="29" />
         <source>RelationStraight</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Curve/CurveConnectAs.cpp" line="27" />
+        <location filename="../src/Curve/CurveConnectAs.cpp" line="33" />
         <source>ConnectSkipForAxisCurve</source>
         <translation type="unfinished" />
     </message>
@@ -4515,7 +4540,7 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="334" />
+        <location filename="../src/main/main.cpp" line="360" />
         <source>Engauge Digitizer</source>
         <translation type="unfinished" />
     </message>
@@ -4525,12 +4550,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="151" />
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="152" />
         <source>Color Picker</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="152" />
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="153" />
         <source>Sorry, but the color picker point must be near a non-background pixel. Please try again.</source>
         <translation type="unfinished" />
     </message>
@@ -4622,7 +4647,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Document/DocumentModelExportFormat.cpp" line="223" />
+        <location filename="../src/Document/DocumentModelExportFormat.cpp" line="225" />
         <source>Cannot read export data</source>
         <translation type="unfinished" />
     </message>
@@ -4657,37 +4682,37 @@ Do you want to save your changes?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportDelimiter.cpp" line="14" />
+        <location filename="../src/Export/ExportDelimiter.cpp" line="16" />
         <source>Commas</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportDelimiter.cpp" line="17" />
+        <location filename="../src/Export/ExportDelimiter.cpp" line="20" />
         <source>Semicolons</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportDelimiter.cpp" line="20" />
+        <location filename="../src/Export/ExportDelimiter.cpp" line="24" />
         <source>Spaces</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportDelimiter.cpp" line="23" />
+        <location filename="../src/Export/ExportDelimiter.cpp" line="28" />
         <source>Tabs</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportHeader.cpp" line="14" />
+        <location filename="../src/Export/ExportHeader.cpp" line="16" />
         <source>Gnuplot</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportHeader.cpp" line="17" />
+        <location filename="../src/Export/ExportHeader.cpp" line="20" />
         <source>None</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportHeader.cpp" line="20" />
+        <location filename="../src/Export/ExportHeader.cpp" line="24" />
         <source>Simple</source>
         <translation type="unfinished" />
     </message>
@@ -4702,58 +4727,58 @@ Do you want to save your changes?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportLayoutFunctions.cpp" line="14" />
+        <location filename="../src/Export/ExportLayoutFunctions.cpp" line="16" />
         <source>AllPerLine</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportLayoutFunctions.cpp" line="17" />
+        <location filename="../src/Export/ExportLayoutFunctions.cpp" line="20" />
         <source>OnePerLine</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="14" />
+        <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="16" />
         <source>Graph Units</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="17" />
+        <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="20" />
         <source>Pixels</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="14" />
+        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="16" />
         <source>InterpolateAllCurves</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="17" />
+        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="20" />
         <source>InterpolateFirstCurve</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="20" />
+        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="24" />
         <source>InterpolatePeriodic</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="23" />
-        <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="17" />
+        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="28" />
+        <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="20" />
         <source>Raw</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="14" />
+        <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="16" />
         <source>Interpolate</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/FileCmd/FileCmdScript.cpp" line="31" />
+        <location filename="../src/FileCmd/FileCmdScript.cpp" line="35" />
         <source>Cannot read script file</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/FileCmd/FileCmdScript.cpp" line="33" />
+        <location filename="../src/FileCmd/FileCmdScript.cpp" line="37" />
         <source>from directory</source>
         <translation type="unfinished" />
     </message>
@@ -4789,7 +4814,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="176" />
-        <location filename="../src/Point/PointShape.cpp" line="29" />
+        <location filename="../src/Point/PointShape.cpp" line="36" />
         <source>X</source>
         <translation type="unfinished" />
     </message>
@@ -4799,22 +4824,22 @@ Do you want to save your changes?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Grid/GridCoordDisable.cpp" line="14" />
+        <location filename="../src/Grid/GridCoordDisable.cpp" line="16" />
         <source>Count</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Grid/GridCoordDisable.cpp" line="17" />
+        <location filename="../src/Grid/GridCoordDisable.cpp" line="20" />
         <source>Start</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Grid/GridCoordDisable.cpp" line="20" />
+        <location filename="../src/Grid/GridCoordDisable.cpp" line="24" />
         <source>Step</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Grid/GridCoordDisable.cpp" line="23" />
+        <location filename="../src/Grid/GridCoordDisable.cpp" line="28" />
         <source>Stop</source>
         <translation type="unfinished" />
     </message>
@@ -4854,27 +4879,27 @@ Do you want to save your changes?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Point/PointShape.cpp" line="14" />
+        <location filename="../src/Point/PointShape.cpp" line="16" />
         <source>Circle</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Point/PointShape.cpp" line="17" />
+        <location filename="../src/Point/PointShape.cpp" line="20" />
         <source>Cross</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Point/PointShape.cpp" line="20" />
+        <location filename="../src/Point/PointShape.cpp" line="24" />
         <source>Diamond</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Point/PointShape.cpp" line="23" />
+        <location filename="../src/Point/PointShape.cpp" line="28" />
         <source>Square</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Point/PointShape.cpp" line="26" />
+        <location filename="../src/Point/PointShape.cpp" line="32" />
         <source>Triangle</source>
         <translation type="unfinished" />
     </message>
@@ -4999,7 +5024,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="562" />
+        <location filename="../src/main/MainWindow.cpp" line="573" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation type="unfinished" />
     </message>
@@ -5009,80 +5034,109 @@ Do you want to save your changes?</source>
         <translation>Негізгі терезе деректерін оқи алмайды</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="220" />
-        <location filename="../src/main/main.cpp" line="232" />
+        <location filename="../src/main/main.cpp" line="242" />
+        <location filename="../src/main/main.cpp" line="254" />
         <source>is not a valid file name</source>
         <translation>файлдың жарамды атауы емес</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="226" />
+        <location filename="../src/main/main.cpp" line="248" />
         <source>is not a valid image file extension</source>
         <translation>жарамды бейне файл кеңейтімі емес</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="311" />
+        <location filename="../src/main/main.cpp" line="337" />
         <source>is used only with one or more load files</source>
         <translation>бір немесе бірнеше жүктеме файлдарымен ғана пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="343" />
+        <location filename="../src/main/main.cpp" line="369" />
         <source>Available styles</source>
         <translation>Қол жетімді стильдер</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="367" />
+        <location filename="../src/main/main.cpp" line="394" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>Қосымша отладтау туралы ақпаратты қосады. Отладка үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="373" />
         <source>Specifies an error report file as input. Used for debugging and testing</source>
-        <translation>Қате туралы есеп файлын енгізу ретінде анықтайды. Отладка және тестілеу үшін пайдаланылады</translation>
+        <translation type="vanished">Қате туралы есеп файлын енгізу ретінде анықтайды. Отладка және тестілеу үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="379" />
+        <location filename="../src/main/main.cpp" line="400" />
+        <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
+        <translation>Іске қосу барысында ашылған файлдарды апарып тастауды және тастауды тексеру үшін көрсетеді. Регрессиялық тестілеу үшін қолданылады</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="406" />
+        <source>Specifies an error report file as input. Used for debugging and regression testing</source>
+        <translation>Қате туралы есеп файлын енгізу ретінде анықтайды. Отладка және регрессиялық тестілеу үшін пайдаланылады</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="412" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>Белгіленген барлық ось нүктелері болуы керек жүктелген әрбір іске қосу файлын экспорттап, тоқтаңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="385" />
+        <location filename="../src/main/main.cpp" line="418" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>Әр жүктелген іске қосу файлында көрсетілген кеңейтілімдегі файлға суретті шығарыңыз, содан кейін тоқтаңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="391" />
+        <location filename="../src/main/main.cpp" line="424" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>Файлдың пәрмен сценарий файлын енгізу ретінде анықтайды. Отладка және тестілеу үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="397" />
+        <location filename="../src/main/main.cpp" line="430" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>Шығу диагностикалық gnuplot кіріс файлдары. Отладка үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="403" />
+        <location filename="../src/main/main.cpp" line="436" />
         <source>Show this help information</source>
         <translation>Бұл анықтама ақпаратын көрсетіңіз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="409" />
+        <location filename="../src/main/main.cpp" line="442" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>Қате туралы есеп файлын немесе файл пәрмен сценарийін орындайды. Регрессиялық тестілеу үшін қолданылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="415" />
+        <location filename="../src/main/main.cpp" line="448" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>Барлық сақталған параметрлерді, соның ішінде терезе орындарын жояды. Терезелер экраннан бастағанда қолданылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="421" />
+        <location filename="../src/main/main.cpp" line="454" />
         <source>Show a list of available styles that can be used with the -style command</source>
         <translation>-Style командасымен пайдалануға болатын қол жетімді стильдердің тізімін көрсетіңіз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="427" />
+        <location filename="../src/main/main.cpp" line="460" />
+        <source>Upgrade files opened at startup to the most recent version</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="466" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>Импортталатын немесе іске қосылған кезде ашылатын файл (дар)</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="511" />
+        <source>Could not write to</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="524" />
+        <source>Upgraded</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="526" />
+        <source>to</source>
+        <translation type="unfinished" />
     </message>
     <message>
         <location filename="../src/util/Xml.cpp" line="34" />
@@ -5283,7 +5337,7 @@ Click Ok when finished.</source>
 <context>
     <name>TutorialStateCurveSelection</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="29" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="30" />
         <source>After the axis points have been created, a
 curve is selected to receive curve points.
 Step 1 - click on Curve, Point Match, Color
@@ -5291,7 +5345,7 @@ Picker or Segment Fill buttons.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="34" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="35" />
         <source>Step 2 - Select the desired curve name. If
 that curve name has not been created yet,
 use the menu option Settings / Curve Names
@@ -5299,7 +5353,7 @@ to create it.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="39" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="40" />
         <source>Step 3 - Change the background from the
 original image to the filtered image
 produced for the current curve, using the
@@ -5310,7 +5364,7 @@ the tutorial.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="47" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="48" />
         <source>If the current curve is no longer visible
 in the filtered image, then change the
 current Color Filter settings. In the figure,
@@ -5318,17 +5372,17 @@ the orange points have disappeared.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="55" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="56" />
         <source>Previous</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="61" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="62" />
         <source>Color Filter Settings</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="67" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="68" />
         <source>Next</source>
         <translation type="unfinished" />
     </message>
@@ -5336,18 +5390,18 @@ the orange points have disappeared.</source>
 <context>
     <name>TutorialStateCurveType</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="26" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="27" />
         <source>Curve Type</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="29" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="30" />
         <source>The next steps depend on how the curves
 are drawn, in terms of lines and points.</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="32" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="33" />
         <source>If the curves are drawn
 with lines (with or without
 points) then click on
@@ -5355,7 +5409,7 @@ Next (Lines).</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="37" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="38" />
         <source>If the curves are drawn
 without lines and only
 with points, then click on
@@ -5363,17 +5417,17 @@ Next (Points).</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="45" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="46" />
         <source>Previous</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="51" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="52" />
         <source>Next (Lines)</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="57" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="58" />
         <source>Next (Points)</source>
         <translation type="unfinished" />
     </message>

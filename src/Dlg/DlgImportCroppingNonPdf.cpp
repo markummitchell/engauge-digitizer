@@ -161,7 +161,7 @@ QImage DlgImportCroppingNonPdf::loadImage () const
 void DlgImportCroppingNonPdf::saveGeometryToSettings()
 {
   // Store the settings for use by showEvent
-  QSettings settings;
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   settings.beginGroup (SETTINGS_GROUP_IMPORT_CROPPING);
   settings.setValue (SETTINGS_IMPORT_CROPPING_POS, saveGeometry ());
   settings.endGroup();
@@ -169,13 +169,14 @@ void DlgImportCroppingNonPdf::saveGeometryToSettings()
 
 void DlgImportCroppingNonPdf::showEvent (QShowEvent * /* event */)
 {
-  QSettings settings;
+  QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   settings.beginGroup (SETTINGS_GROUP_IMPORT_CROPPING);
   if (settings.contains (SETTINGS_IMPORT_CROPPING_POS)) {
 
     // Restore the settings that were stored by the last call to saveGeometryToSettings
     restoreGeometry (settings.value (SETTINGS_IMPORT_CROPPING_POS).toByteArray ());
   }
+  settings.endGroup ();
 }
 
 void DlgImportCroppingNonPdf::slotCancel ()

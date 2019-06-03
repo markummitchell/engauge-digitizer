@@ -62,9 +62,7 @@
 #include "Jpeg2000.h"
 #endif // ENGAUGE_JPEG2000
 #include "LoadFileInfo.h"
-#ifdef NETWORKING
 #include "LoadImageFromUrl.h"
-#endif
 #include "Logger.h"
 #include "MainDirectoryPersist.h"
 #include "MainTitleBarFormat.h"
@@ -126,13 +124,14 @@
 #include "ZoomTransition.h"
 
 const QString EMPTY_FILENAME ("");
-const char *ENGAUGE_FILENAME_DESCRIPTION = "Engauge Document";
+static const char *ENGAUGE_FILENAME_DESCRIPTION = "Engauge Document";
 const QString ENGAUGE_FILENAME_EXTENSION ("dig");
 const int REGRESSION_INTERVAL = 400; // Milliseconds
 const unsigned int MAX_RECENT_FILE_LIST_SIZE = 8;
 
 MainWindow::MainWindow(const QString &errorReportFile,
                        const QString &fileCmdScriptFile,
+                       bool isDropRegression,
                        bool isRegressionTest,
                        bool isGnuplot,
                        bool isReset,
@@ -216,6 +215,9 @@ MainWindow::MainWindow(const QString &errorReportFile,
   } else if (!fileCmdScriptFile.isEmpty()) {
     m_fileCmdScript = new FileCmdScript (fileCmdScriptFile);
     startRegressionTestFileCmdScript();
+  } else if (isDropRegression) {
+    m_fileCmdScript = new FileCmdScript (""); // Hack to keep dialogs from popping up
+    startRegressionDropTest (loadStartupFiles);
   } else {
 
     // Save file names for later, after gui becomes available. The file names are dropped if error report file is specified
@@ -398,11 +400,20 @@ void MainWindow::exportAllCoordinateSystemsAfterRegressionTests()
 
 QString MainWindow::exportRegressionFilenameFromInputFilename (const QString &fileName) const
 {
+  // Include file extensions used in loading, importing or drag and drop. Note html is before htm
+  // so the "l" gets replaced
+  QStringList befores;
+  befores << ".dig" << ".gif" << ".html" << ".htm" << ".jp2" << ".jpg" << ".pbm"
+          << ".pdf" << ".pgm" << ".png" << ".ppm" << ".xbm" << ".xpm" << ".xml";
+
   QString outFileName = fileName;
 
-  outFileName = outFileName.replace (".xml", ".csv_actual", Qt::CaseInsensitive); // Applies when extension is xml
-  outFileName = outFileName.replace (".dig", ".csv_actual", Qt::CaseInsensitive); // Applies when extension is dig
-  outFileName = outFileName.replace (".pdf", ".csv_actual", Qt::CaseInsensitive); // Applies when extension is pdf
+  QStringList::iterator itr;
+  for (itr = befores.begin(); itr != befores.end(); itr++) {
+    QString suffix = *itr;
+
+    outFileName = outFileName.replace (suffix, ".csv_actual", Qt::CaseInsensitive);
+  }
 
   return outFileName;
 }
@@ -2332,9 +2343,9 @@ void MainWindow::slotFileImportDraggedImageUrl(QUrl url)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotFileImportDraggedImageUrl url=" << url.toString ().toLatin1 ().data ();
 
-#ifdef NETWORKING
+  // This is required for drag and drop from GraphicsView. This had an #ifdef
+  // around it for NETWORKING but restored for drag and drop
   m_loadImageFromUrl->startLoadImage (url);
-#endif
 }
 
 void MainWindow::slotFileImportImage(QString fileName, QImage image)
@@ -3084,6 +3095,50 @@ void MainWindow::slotViewZoomOutFromWheelEvent ()
 
     m_view->setTransformationAnchor(QGraphicsView::NoAnchor);
   }
+}
+
+void MainWindow::startRegressionDropTest (const QStringList &loadStartupFiles)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::startRegressionTestErrorReport";
+
+  // Regression testing of drag and drop has some constraints:
+  // 1) Need graphics window (GraphicsView) or else its events will not work. This is why
+  //    drag and drop testing is not done as one of the cli tests, which do not show the gui
+  // 2) Drag and drop by itself does not produce the csv file, so this code will output the
+  //    x,y dimensions of the imported image instead of a normal csv file
+  connect (this, SIGNAL (signalDropRegression (QString)), m_view, SLOT (slotDropRegression (QString)));
+
+  for (int counter = 0; counter < loadStartupFiles.size (); counter++) {
+    QString filenameDrop = loadStartupFiles.at (counter);
+
+    // Trigger drop part of drag and drop operation
+    emit signalDropRegression (filenameDrop);
+
+    QSize siz = m_view->size();
+
+    QString filenameCsv;
+    if (filenameDrop.startsWith ("http")) {
+
+      // Internet url is not useful for computing local file name. Only regression tests reach this branch
+      // so filename is hardcoded
+      filenameCsv = "../test/drag_and_drop_http.csv_actual_1";
+
+    } else {
+
+      // Local file
+      filenameCsv = QString ("%1_%2")
+        .arg (exportRegressionFilenameFromInputFilename (filenameDrop))
+        .arg (counter + 1);
+    }
+
+    QFile file (filenameCsv);
+    file.open (QIODevice::WriteOnly);
+    QTextStream str (&file);
+    str << siz.width() << "x" << siz.height() << "\n";
+    file.close ();
+  }
+
+  exit (0);
 }
 
 void MainWindow::startRegressionTestErrorReport(const QString &regressionInputFile)

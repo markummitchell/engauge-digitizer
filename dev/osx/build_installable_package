@@ -60,19 +60,6 @@ sudo rm Engauge\ Digitizer.dmg
 sudo rm Engauge\ Digitizer.pkg
 sudo rm -rf Engauge\ Digitizer.app 2>/dev/null
 
-# Test to make sure macdeployqt step below will work
-if [ ! -f /usr/lib/liblog4cpp.1.dylib ]; then
-    echo "Macdeployqt requires log4cpp library at /usr/lib/liblog4cpp.1.dylib. To copy to /usr/lib, you"
-    echo "must disable System Integrity Protection by:"
-    echo "1) Reboot with Command+R pressed"
-    echo "2) Utilities / Terminal"
-    echo "3) csrutil disable"
-    echo "4) Reboot"
-    echo "5) cp $LOG4CPP_HOME/lib/liblog4cpp.1.dylib /usr/lib"
-    echo "6) csrutil enable"
-    exit
-fi
-
 # Make into Engauge Digitizer.app
 qmake engauge.pro CONFIG+=log4cpp_null
 make clean

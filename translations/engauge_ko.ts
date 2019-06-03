@@ -2386,37 +2386,37 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgImportCroppingPdf</name>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="43" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="44" />
         <source>PDF File Import Cropping</source>
         <translation>PDF 파일 가져 오기 자르기</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="77" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="78" />
         <source>Page</source>
         <translation>페이지</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="82" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="83" />
         <source>Page number that will be imported</source>
         <translation>가져올 페이지 번호</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="100" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="101" />
         <source>Preview</source>
         <translation>시사</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="107" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="108" />
         <source>Preview window that shows what part of the image will be imported. The image portion inside the rectangular frame will be imported from the currently selected page. The frame can be moved and resized by dragging the corner handles.</source>
         <translation>가져올 이미지의 부분을 보여주는 미리보기 창. 사각형 프레임 내부의 이미지 부분은 현재 선택된 페이지에서 가져옵니다. 코너 핸들을 드래그하여 프레임을 이동하고 크기를 조정할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="151" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="152" />
         <source>Ok</source>
         <translation>승인</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="158" />
+        <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="159" />
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
@@ -2432,12 +2432,12 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgSettingsAbstractBase</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="99" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="100" />
         <source>Ok</source>
         <translation>승인</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="107" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="108" />
         <source>Cancel</source>
         <translation>취소</translation>
     </message>
@@ -2593,19 +2593,19 @@ The Value component is also called the Lightness.</source>
 <context>
     <name>DlgSettingsCoords</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="75" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="914" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="918" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="76" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="915" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="919" />
         <source>Coordinates</source>
         <translation>좌표</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="219" />
         <source>Date/Time</source>
         <translation>날짜 시간</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="228" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="229" />
         <source>Date format to be used for date values, and date portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the time portion appearing in output.</source>
@@ -2614,7 +2614,7 @@ Setting the format to an empty value results in just the time portion appearing 
 형식을 빈 값으로 설정하면 시간 부분 만 출력됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="235" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="236" />
         <source>Time format to be used for time values, and time portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the date portion appearing in output.</source>
@@ -2623,28 +2623,28 @@ Setting the format to an empty value results in just the date portion appearing 
 형식을 빈 값으로 설정하면 날짜 부분 만 출력됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="247" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="248" />
         <source>Coordinates Types</source>
         <translation>좌표 유형</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="252" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="253" />
         <source>Polar</source>
         <translation>극선</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="252" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="917" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="253" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="918" />
         <source>R</source>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="254" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="255" />
         <source>Cartesian (X, Y)</source>
         <translation>데카르 (X, Y)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="255" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="256" />
         <source>Select cartesian coordinates.
 
 The X and Y coordinates will be used</source>
@@ -2653,7 +2653,7 @@ The X and Y coordinates will be used</source>
 X와 Y 좌표가 사용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="261" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="262" />
         <source>Select polar coordinates.
 
 The Theta and R coordinates will be used.
@@ -2666,30 +2666,30 @@ Theta 및 R 좌표가 사용됩니다.
 Theta의 로그 배율에는 극좌표가 허용되지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="280" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="315" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="281" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="316" />
         <source>Scale</source>
         <translation>규모</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="283" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="318" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="284" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="319" />
         <source>Linear</source>
         <translation>선의</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="284" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="285" />
         <source>Specifies linear scale for the X or Theta coordinate</source>
         <translation>X 또는 세타 좌표의 선형 스케일을 지정합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="288" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="326" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="289" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="327" />
         <source>Log</source>
         <translation>로</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="289" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="290" />
         <source>Specifies logarithmic scale for the X or Theta coordinate.
 
 Log scale is not allowed if there are negative coordinates.
@@ -2702,23 +2702,23 @@ Log scale is not allowed for the Theta coordinate.</source>
 Theta 좌표에는 로그 스케일을 사용할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="295" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="340" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="296" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="341" />
         <source>Units</source>
         <translation>단위</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="319" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="320" />
         <source>Specifies linear scale for the Y or R coordinate</source>
         <translation>Y 또는 R 좌표의 선형 스케일을 지정합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="323" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="324" />
         <source>Origin radius value</source>
         <translation>원점 반지름 값</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="327" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="328" />
         <source>Specifies logarithmic scale for the Y or R coordinate
 
 Log scale is not allowed if there are negative coordinates.</source>
@@ -2727,7 +2727,7 @@ Log scale is not allowed if there are negative coordinates.</source>
 음의 좌표가 있으면 로그 배율을 사용할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="334" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="335" />
         <source>Specify radius value at origin.
 
 Normally the radius at the origin is 0, but a nonzero value may be applied in other cases (like when the radial units are decibels).</source>
@@ -2736,17 +2736,17 @@ Normally the radius at the origin is 0, but a nonzero value may be applied in ot
 일반적으로 원점의 반지름은 0이지만 다른 경우에는 0이 아닌 값이 적용될 수 있습니다 (예 : 반지름 단위가 데시벨 일 때).</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="357" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="358" />
         <source>Preview</source>
         <translation>시사</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="364" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="365" />
         <source>Preview window that shows how current settings affect the coordinate system.</source>
         <translation>현재 설정이 좌표계에 미치는 영향을 보여주는 미리보기 창.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="672" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="673" />
         <source>Numbers have the simplest and most general format.
 
 Date and time values have date and/or time components.
@@ -2759,7 +2759,7 @@ Degrees Minutes Seconds (DDD MM SS.S) format uses two integer number for degrees
 도 분 초 (DDD MM SS.S) 형식은도 및 분에 대해 두 개의 정수를 사용하고 초 동안 실수를 사용합니다. 분당 60 초입니다. 입력하는 동안 세 개의 숫자 사이에 공백을 삽입해야합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="705" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="706" />
         <source>Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.
 
 Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are 60 minutes per degree. During input, a space must be inserted between the two numbers.
@@ -2784,12 +2784,12 @@ Gradians 형식은 하나의 실수를 사용합니다. 하나의 완전한 혁�
 Turns 형식은 단일 실수를 사용합니다. 하나의 완전한 혁명은 1 턴입니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="912" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="913" />
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="916" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="917" />
         <source>Y</source>
         <translation>Y</translation>
     </message>
@@ -2884,32 +2884,32 @@ Reorder curves by dragging them around.</source>
 <context>
     <name>DlgSettingsCurveProperties</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="61" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="62" />
         <source>Curve Properties</source>
         <translation>커브 속성</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="88" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="89" />
         <source>Curve Name</source>
         <translation>곡선 이름</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="92" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="93" />
         <source>Name of the curve that is currently selected for editing</source>
         <translation>편집을 위해 현재 선택된 곡선의 이름입니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="102" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="103" />
         <source>Line</source>
         <translation>선</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="108" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="109" />
         <source>Width</source>
         <translation>폭</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="112" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="113" />
         <source>Select a width for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
@@ -2918,13 +2918,13 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
 그래프 커브에만 적용됩니다. 축 점 사이에 선이 그려지지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="118" />
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="204" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="119" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="205" />
         <source>Color</source>
         <translation>색깔</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="122" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="123" />
         <source>Select a color for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
@@ -2933,12 +2933,12 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
 그래프 커브에만 적용됩니다. 축 점 사이에 선이 그려지지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="128" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="129" />
         <source>Connect as</source>
         <translation>다음 계정으로 연결 :</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="137" />
         <source>Select rule for connecting points with lines.
 
 If the curve is connected as a single-valued function then the points are ordered by increasing value of the independent variable.
@@ -2953,37 +2953,37 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
         <translation>점을 선과 연결하는 규칙 선택. graph 그래프가 단일 값 함수로 연결되면 점은 독립 변수의 값을 증가시켜 정렬됩니다. curve 곡선이 닫힌 등고선으로 연결된 경우 점은 기존 선을 따라 배치 된 점을 제외하고는 연령순으로 정렬합니다. 기존 선의 맨 위에있는 모든 점은 해당 선의 두 끝점 사이에 삽입됩니다. 두 선의 끝점 사이에 나이가있는 것처럼 삽입됩니다. success 점차적으로 정렬 된 점 사이에 선이 그려집니다. 연직 커브는 직선 연속되는 점 사이의 선. 매끄러운 커브는 (x, y) 쌍 대 자연 스퀘어 스플라인을 사용하여 연속 점 사이의 매끄러운 선으로 그려집니다. 이것은 그래프 커브에만 적용됩니다. 축 점 사이에 선이 그려지지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="157" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="158" />
         <source>Point</source>
         <translation>포인트</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="163" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="164" />
         <source>Shape</source>
         <translation>모양</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="167" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="168" />
         <source>Select a shape for the points</source>
         <translation>포인트의 모양 선택</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="183" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="184" />
         <source>Radius</source>
         <translation>반지름</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="187" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="188" />
         <source>Select a radius, in pixels, for the points</source>
         <translation>포인트의 반경 (픽셀 단위)을 선택하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="192" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="193" />
         <source>Line width</source>
         <translation>선의 폭</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="196" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="197" />
         <source>Select a line width, in pixels, for the points.
 
 A larger width results in a thicker line, with the exception of a value of zero which always results in a line that is one pixel wide (which is easy to see even when zoomed far out)</source>
@@ -2992,12 +2992,12 @@ A larger width results in a thicker line, with the exception of a value of zero 
 폭이 넓을수록 더 두꺼운 선이됩니다. 0의 값을 제외하고는 항상 1 픽셀의 선이됩니다 (이는 멀리 확대 된 경우에도 쉽게 볼 수 있습니다)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="208" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="209" />
         <source>Select a color for the line used to draw the point shapes</source>
         <translation>점 모양 그리기에 사용되는 선의 색상 선택</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="219" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="220" />
         <source>Save the visible curve settings for use as future defaults, according to the curve name selection.
 
 If the visible settings are for the axes curve, then they will be used for future axes curves, until new settings are saved as the defaults.
@@ -3010,12 +3010,12 @@ If the visible settings are for the Nth graph curve in the curve list, then they
 가시적 인 설정이 곡선 목록의 N 번째 그래프 곡선에 대한 것이면, 새 설정이 기본값으로 저장 될 때까지 곡선 목록의 N 번째 그래프 곡선 인 향후 그래프 곡선에 사용됩니다</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="233" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="234" />
         <source>Preview</source>
         <translation>시사</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="240" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="241" />
         <source>Preview window that shows how current settings affect the points and line of the selected curve.
 
 The X coordinate is in the horizontal direction, and the Y coordinate is in the vertical direction. A function can have only one Y value, at most, for any X value, but a relation can have multiple Y values for one X value.</source>
@@ -3264,7 +3264,7 @@ The order of the curves here does not affect the order in the exported file. Tha
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="220" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="362" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="367" />
         <source>Interval</source>
         <translation>간격</translation>
     </message>
@@ -3306,13 +3306,13 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="255" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="393" />
         <source>Raw Xs and Ys</source>
         <translation>원시 X 및 Y</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="256" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="389" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="394" />
         <source>Exported file will have only original X and Y values</source>
         <translation>내 보낸 파일에는 원본 X 및 Y 값만 있습니다.</translation>
     </message>
@@ -3347,12 +3347,22 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
         <translation>향후 기본값으로 사용할 설정을 저장하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="309" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="304" />
+        <source>Load Default</source>
+        <translation>기본값로드</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="305" />
+        <source>Load the default settings.</source>
+        <translation>기본 설정을로드하십시오.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="314" />
         <source>Preview</source>
         <translation>시사</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="325" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="330" />
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
@@ -3361,27 +3371,27 @@ Functions (shown here in blue) are output first, followed by relations (shown he
 기능 (파란색으로 표시)이 먼저 출력되고 관계가있는 경우 여기에 녹색으로 표시됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="341" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="346" />
         <source>Relation Points Selection</source>
         <translation>관계 지점 선택</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="355" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="360" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation>균일 한 간격으로 X와 Y를 보간하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="356" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="361" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation>내 보낸 파일은 각 관계를 따라 균등하게 간격을두고 아래에서 선택한 간격으로 구분됩니다. 마지막 간격이 마지막 지점에서 끝나지 않으면 가장 짧은 마지막 간격이 추가되어 마지막 지점에서 끝납니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="370" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="375" />
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation>등 간격 (X, Y) 좌표로 내보낼 때 연속 점 사이의 간격입니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="376" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="381" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -3394,12 +3404,12 @@ Graph units are usually preferred when the X and Y scales are identical.</source
 그래프 단위는 일반적으로 X와 Y 축척이 동일 할 때 선호됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="432" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="437" />
         <source>Functions</source>
         <translation>기능들</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="434" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="439" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
@@ -3408,12 +3418,12 @@ Controls for specifying the format of functions during export</source>
 내보내기 중에 함수 형식을 지정하기위한 컨트롤</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="440" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="445" />
         <source>Relations</source>
         <translation>처지</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="442" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="447" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
@@ -3422,27 +3432,17 @@ Controls for specifying the format of relations during export</source>
 내보내기 도중 관계 형식 지정을위한 컨트롤</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="463" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="466" />
         <source>X Label</source>
         <translation>X 라벨</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="465" />
-        <source>Theta Label</source>
-        <translation>세타 레이블</translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="471" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="470" />
         <source>Label in the header for x values</source>
         <translation>x 값의 헤더에 레이블 지정</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="473" />
-        <source>Label in the header for theta values</source>
-        <translation>theta 값의 헤더에 레이블 지정</translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1152" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1203" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>미리보기는 축 포인트가 정의 될 때까지 사용할 수 없습니다.</translation>
     </message>
@@ -3920,9 +3920,13 @@ Select which inputs are used to zoom in and out.</source>
 확대 및 축소하는 데 사용할 입력을 선택하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Locale</source>
-        <translation>장소</translation>
+        <translation type="vanished">장소</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <source>Locale (requires restart)</source>
+        <translation>로켈 (다시 시작해야 함)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />
@@ -4362,7 +4366,7 @@ Y = 각 점의 Y 좌표
 드래그 앤 드롭이 비활성화 된 경우 클릭하고 드래그하여 직사각형 셀 집합을 선택할 수 있습니다. 그렇지 않으면 드래그 앤 드롭이 활성화 된 경우 클릭 및 드래그가 드래그 작업을 시작하기 때문에 클릭 한 다음 Shift + 클릭을 사용하여 직사각형 셀 집합을 선택할 수 있습니다. 끌어서 놓기 모드는 기본 창 설정에서 설정됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Geometry/GeometryWindow.cpp" line="270" />
+        <location filename="../src/Geometry/GeometryWindow.cpp" line="273" />
         <source>Highlighted segments may have unexpected values when exported due to overlaps. Adjust points or change Settings / Curve Properties / Connect As.</source>
         <translation>하이라이트 된 세그먼트는 겹침으로 인해 내보낼 때 예기치 않은 값을 가질 수 있습니다. 점을 조정하거나 설정 / 곡선 속성 / 연결 이름을 변경하십시오.</translation>
     </message>
@@ -4421,12 +4425,12 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>LoadImageFromUrl</name>
     <message>
-        <location filename="../src/Load/LoadImageFromUrl.cpp" line="60" />
+        <location filename="../src/Load/LoadImageFromUrl.cpp" line="66" />
         <source>Unable to download image from</source>
         <translation>에서 이미지를 다운로드 할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Load/LoadImageFromUrl.cpp" line="92" />
+        <location filename="../src/Load/LoadImageFromUrl.cpp" line="98" />
         <source>Unable to load image from</source>
         <translation>이미지를로드 할 수 없습니다.</translation>
     </message>
@@ -4434,114 +4438,114 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="443" />
+        <location filename="../src/main/MainWindow.cpp" line="454" />
         <source>Unable to export to file</source>
         <translation>파일로 내보낼 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="477" />
+        <location filename="../src/main/MainWindow.cpp" line="488" />
         <source>Unable to extract image to file</source>
         <translation>이미지를 파일로 추출 할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="552" />
-        <location filename="../src/main/MainWindow.cpp" line="712" />
-        <location filename="../src/main/MainWindow.cpp" line="891" />
+        <location filename="../src/main/MainWindow.cpp" line="563" />
+        <location filename="../src/main/MainWindow.cpp" line="723" />
+        <location filename="../src/main/MainWindow.cpp" line="902" />
         <source>Cannot read file</source>
         <translation>파일을 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="554" />
-        <location filename="../src/main/MainWindow.cpp" line="714" />
-        <location filename="../src/main/MainWindow.cpp" line="893" />
+        <location filename="../src/main/MainWindow.cpp" line="565" />
+        <location filename="../src/main/MainWindow.cpp" line="725" />
+        <location filename="../src/main/MainWindow.cpp" line="904" />
         <source>from directory</source>
         <translation>디렉토리에서</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="628" />
+        <location filename="../src/main/MainWindow.cpp" line="639" />
         <source>Import Image</source>
         <translation>이미지 가져 오기</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="868" />
+        <location filename="../src/main/MainWindow.cpp" line="879" />
         <source>File opened</source>
         <translation>파일 열림</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="913" />
+        <location filename="../src/main/MainWindow.cpp" line="924" />
         <source>File not found</source>
         <translation>파일을 찾을 수 없음</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="930" />
+        <location filename="../src/main/MainWindow.cpp" line="941" />
         <source>Error report opened</source>
         <translation>오류 보고서가 열림</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="985" />
-        <location filename="../src/main/MainWindow.cpp" line="1059" />
+        <location filename="../src/main/MainWindow.cpp" line="996" />
+        <location filename="../src/main/MainWindow.cpp" line="1070" />
         <source>File imported</source>
         <translation>가져온 파일</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1093" />
+        <location filename="../src/main/MainWindow.cpp" line="1104" />
         <source>Background image.</source>
         <translation>배경 이미지.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1094" />
+        <location filename="../src/main/MainWindow.cpp" line="1105" />
         <source>Currently selected curve.</source>
         <translation>현재 선택된 커브입니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1095" />
+        <location filename="../src/main/MainWindow.cpp" line="1106" />
         <source>Point style for currently selected curve.</source>
         <translation>현재 선택한 커브의 점 스타일입니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1096" />
+        <location filename="../src/main/MainWindow.cpp" line="1107" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>세그먼트 현재 선택된 커브의 필터를 채 웁니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1144" />
+        <location filename="../src/main/MainWindow.cpp" line="1155" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>문서가 수정되었습니다.
 변경 사항을 저장 하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1228" />
+        <location filename="../src/main/MainWindow.cpp" line="1239" />
         <source>Cannot write file</source>
         <translation>파일을 쓸 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1276" />
+        <location filename="../src/main/MainWindow.cpp" line="1287" />
         <source>Save</source>
         <translation>구하다</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2289" />
+        <location filename="../src/main/MainWindow.cpp" line="2300" />
         <source>Export</source>
         <translation>수출</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2371" />
+        <location filename="../src/main/MainWindow.cpp" line="2382" />
         <source>Open Document</source>
         <translation>문서 열기</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3583" />
+        <location filename="../src/main/MainWindow.cpp" line="3638" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3584" />
+        <location filename="../src/main/MainWindow.cpp" line="3639" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3714" />
+        <location filename="../src/main/MainWindow.cpp" line="3769" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -4549,73 +4553,54 @@ Do you want to save your changes?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="126" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="171" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="267" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="133" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="178" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="276" />
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
         <translation>새 축 포인트는 기존 축 포인트와 동일한 화면 위치에있을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="179" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="274" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="186" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="285" />
         <source>New axis point cannot have the same graph coordinates as an existing axis point</source>
         <translation>새 축 포인트는 기존 축 포인트와 동일한 그래프 좌표를 가질 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="185" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="280" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="192" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="291" />
         <source>No more than two axis points can lie along the same line on the screen</source>
         <translation>두 개 이상의 축 지점이 화면의 같은 선을 따라 놓일 수 없습니다</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="191" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="286" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="198" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="297" />
         <source>No more than two axis points can lie along the same line in graph coordinates</source>
         <translation>그래프 좌표에서 동일한 선을 따라 두 개 이상의 축 점이있을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="244" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="251" />
         <source>Too many x axis points. There should only be two</source>
         <translation>너무 많은 x 축 지점. 두 개만 있어야합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="250" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="257" />
         <source>Too many y axis points. There should only be two</source>
         <translation>Y 축 포인트가 너무 많습니다. 두 개만 있어야합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Checker/CheckerMode.cpp" line="14" />
+        <location filename="../src/Checker/CheckerMode.cpp" line="16" />
         <source>Never</source>
         <translation>못</translation>
     </message>
     <message>
-        <location filename="../src/Checker/CheckerMode.cpp" line="17" />
+        <location filename="../src/Checker/CheckerMode.cpp" line="20" />
         <source>NSeconds</source>
         <translation>N 초</translation>
     </message>
     <message>
-        <location filename="../src/Checker/CheckerMode.cpp" line="20" />
+        <location filename="../src/Checker/CheckerMode.cpp" line="24" />
         <source>Forever</source>
         <translation>영원히</translation>
-    </message>
-    <message>
-        <location filename="../src/Checker/CheckerMode.cpp" line="23" />
-        <location filename="../src/Color/ColorFilterMode.cpp" line="29" />
-        <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="28" />
-        <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="49" />
-        <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="36" />
-        <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="65" />
-        <location filename="../src/Curve/CurveConnectAs.cpp" line="30" />
-        <location filename="../src/Export/ExportDelimiter.cpp" line="26" />
-        <location filename="../src/Export/ExportHeader.cpp" line="23" />
-        <location filename="../src/Export/ExportLayoutFunctions.cpp" line="20" />
-        <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="20" />
-        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="26" />
-        <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="20" />
-        <location filename="../src/Grid/GridCoordDisable.cpp" line="26" />
-        <location filename="../src/Point/PointShape.cpp" line="32" />
-        <source>Unknown</source>
-        <translation>알 수 없는</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="69" />
@@ -4664,7 +4649,7 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdSettingsAxesChecker.cpp" line="50" />
         <location filename="../src/Cmd/CmdSettingsColorFilter.cpp" line="50" />
         <location filename="../src/Cmd/CmdSettingsCoords.cpp" line="51" />
-        <location filename="../src/Cmd/CmdSettingsCurveList.cpp" line="78" />
+        <location filename="../src/Cmd/CmdSettingsCurveList.cpp" line="79" />
         <location filename="../src/Cmd/CmdSettingsCurveProperties.cpp" line="51" />
         <location filename="../src/Cmd/CmdSettingsDigitizeCurve.cpp" line="50" />
         <location filename="../src/Cmd/CmdSettingsExportFormat.cpp" line="51" />
@@ -4700,6 +4685,16 @@ Do you want to save your changes?</source>
         <location filename="../src/Color/ColorFilterMode.cpp" line="26" />
         <source>Value</source>
         <translation>값</translation>
+    </message>
+    <message>
+        <location filename="../src/Color/ColorFilterMode.cpp" line="29" />
+        <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="28" />
+        <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="49" />
+        <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="36" />
+        <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="65" />
+        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="32" />
+        <source>Unknown</source>
+        <translation>알 수 없는</translation>
     </message>
     <message>
         <location filename="../src/Color/ColorFilterSettings.cpp" line="214" />
@@ -4779,7 +4774,7 @@ Do you want to save your changes?</source>
         <translation>HH:MM:SS</translation>
     </message>
     <message>
-        <location filename="../src/CoordSystem/CoordSystem.cpp" line="607" />
+        <location filename="../src/CoordSystem/CoordSystem.cpp" line="608" />
         <source>Unexpected xml token</source>
         <translation>예기치 않은 xml 토큰</translation>
     </message>
@@ -4790,27 +4785,27 @@ Do you want to save your changes?</source>
         <translation>곡선 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Curve/CurveConnectAs.cpp" line="15" />
+        <location filename="../src/Curve/CurveConnectAs.cpp" line="17" />
         <source>FunctionSmooth</source>
         <translation>부드러운 기능</translation>
     </message>
     <message>
-        <location filename="../src/Curve/CurveConnectAs.cpp" line="18" />
+        <location filename="../src/Curve/CurveConnectAs.cpp" line="21" />
         <source>FunctionStraight</source>
         <translation>스트레이트 기능</translation>
     </message>
     <message>
-        <location filename="../src/Curve/CurveConnectAs.cpp" line="21" />
+        <location filename="../src/Curve/CurveConnectAs.cpp" line="25" />
         <source>RelationSmooth</source>
         <translation>부드러운 관계</translation>
     </message>
     <message>
-        <location filename="../src/Curve/CurveConnectAs.cpp" line="24" />
+        <location filename="../src/Curve/CurveConnectAs.cpp" line="29" />
         <source>RelationStraight</source>
         <translation>직선 관계</translation>
     </message>
     <message>
-        <location filename="../src/Curve/CurveConnectAs.cpp" line="27" />
+        <location filename="../src/Curve/CurveConnectAs.cpp" line="33" />
         <source>ConnectSkipForAxisCurve</source>
         <translation>축 커브 연결 건너 뛰기</translation>
     </message>
@@ -4833,7 +4828,7 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176" />
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173" />
-        <location filename="../src/main/main.cpp" line="334" />
+        <location filename="../src/main/main.cpp" line="360" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -4843,12 +4838,12 @@ Do you want to save your changes?</source>
         <translation>세 개의 축 포인트가 정의되어 더 이상 필요하거나 허용되지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="151" />
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="152" />
         <source>Color Picker</source>
         <translation>색상 선택기</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="152" />
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="153" />
         <source>Sorry, but the color picker point must be near a non-background pixel. Please try again.</source>
         <translation>죄송 합니다만 색상 피커 지점은 배경색이 아닌 픽셀 근처에 있어야합니다. 다시 시도하십시오.</translation>
     </message>
@@ -4940,7 +4935,7 @@ Do you want to save your changes?</source>
         <translation>디지털화 된 곡선 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Document/DocumentModelExportFormat.cpp" line="223" />
+        <location filename="../src/Document/DocumentModelExportFormat.cpp" line="225" />
         <source>Cannot read export data</source>
         <translation>내보내기 데이터를 읽을 수 없습니다.</translation>
     </message>
@@ -4975,37 +4970,37 @@ Do you want to save your changes?</source>
         <translation>포인트 식별자 오류가 발생했습니다. Engauge 개발자에게 국가 및 언어에 대한 의견이 있으면 알려주십시오. 유효하지 않은 포인트 이름은</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportDelimiter.cpp" line="14" />
+        <location filename="../src/Export/ExportDelimiter.cpp" line="16" />
         <source>Commas</source>
         <translation>쉼표</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportDelimiter.cpp" line="17" />
+        <location filename="../src/Export/ExportDelimiter.cpp" line="20" />
         <source>Semicolons</source>
         <translation>세미콜론</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportDelimiter.cpp" line="20" />
+        <location filename="../src/Export/ExportDelimiter.cpp" line="24" />
         <source>Spaces</source>
         <translation>공백</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportDelimiter.cpp" line="23" />
+        <location filename="../src/Export/ExportDelimiter.cpp" line="28" />
         <source>Tabs</source>
         <translation>탭</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportHeader.cpp" line="14" />
+        <location filename="../src/Export/ExportHeader.cpp" line="16" />
         <source>Gnuplot</source>
         <translation>Gnuplot</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportHeader.cpp" line="17" />
+        <location filename="../src/Export/ExportHeader.cpp" line="20" />
         <source>None</source>
         <translation>없음</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportHeader.cpp" line="20" />
+        <location filename="../src/Export/ExportHeader.cpp" line="24" />
         <source>Simple</source>
         <translation>단순한</translation>
     </message>
@@ -5020,58 +5015,58 @@ Do you want to save your changes?</source>
         <translation>파일을 내보낼 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportLayoutFunctions.cpp" line="14" />
+        <location filename="../src/Export/ExportLayoutFunctions.cpp" line="16" />
         <source>AllPerLine</source>
         <translation>한 줄에 모든</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportLayoutFunctions.cpp" line="17" />
+        <location filename="../src/Export/ExportLayoutFunctions.cpp" line="20" />
         <source>OnePerLine</source>
         <translation>한 줄에 하나씩</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="14" />
+        <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="16" />
         <source>Graph Units</source>
         <translation>그래프 단위</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="17" />
+        <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="20" />
         <source>Pixels</source>
         <translation>픽셀</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="14" />
+        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="16" />
         <source>InterpolateAllCurves</source>
         <translation>모든 곡선을 보간하다.</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="17" />
+        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="20" />
         <source>InterpolateFirstCurve</source>
         <translation>첫 번째 곡선을 보간하다.</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="20" />
+        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="24" />
         <source>InterpolatePeriodic</source>
         <translation>주기적으로 보간하다</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="23" />
-        <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="17" />
+        <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="28" />
+        <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="20" />
         <source>Raw</source>
         <translation>노골적인</translation>
     </message>
     <message>
-        <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="14" />
+        <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="16" />
         <source>Interpolate</source>
         <translation>보완하다</translation>
     </message>
     <message>
-        <location filename="../src/FileCmd/FileCmdScript.cpp" line="31" />
+        <location filename="../src/FileCmd/FileCmdScript.cpp" line="35" />
         <source>Cannot read script file</source>
         <translation>포인트 스타일 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/FileCmd/FileCmdScript.cpp" line="33" />
+        <location filename="../src/FileCmd/FileCmdScript.cpp" line="37" />
         <source>from directory</source>
         <translation>디렉토리에서</translation>
     </message>
@@ -5107,7 +5102,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="176" />
-        <location filename="../src/Point/PointShape.cpp" line="29" />
+        <location filename="../src/Point/PointShape.cpp" line="36" />
         <source>X</source>
         <translation>X</translation>
     </message>
@@ -5117,22 +5112,22 @@ Do you want to save your changes?</source>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="../src/Grid/GridCoordDisable.cpp" line="14" />
+        <location filename="../src/Grid/GridCoordDisable.cpp" line="16" />
         <source>Count</source>
         <translation>카운트</translation>
     </message>
     <message>
-        <location filename="../src/Grid/GridCoordDisable.cpp" line="17" />
+        <location filename="../src/Grid/GridCoordDisable.cpp" line="20" />
         <source>Start</source>
         <translation>스타트</translation>
     </message>
     <message>
-        <location filename="../src/Grid/GridCoordDisable.cpp" line="20" />
+        <location filename="../src/Grid/GridCoordDisable.cpp" line="24" />
         <source>Step</source>
         <translation>단계</translation>
     </message>
     <message>
-        <location filename="../src/Grid/GridCoordDisable.cpp" line="23" />
+        <location filename="../src/Grid/GridCoordDisable.cpp" line="28" />
         <source>Stop</source>
         <translation>중지</translation>
     </message>
@@ -5172,27 +5167,27 @@ Do you want to save your changes?</source>
         <translation>포인트 식별자를 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Point/PointShape.cpp" line="14" />
+        <location filename="../src/Point/PointShape.cpp" line="16" />
         <source>Circle</source>
         <translation>원</translation>
     </message>
     <message>
-        <location filename="../src/Point/PointShape.cpp" line="17" />
+        <location filename="../src/Point/PointShape.cpp" line="20" />
         <source>Cross</source>
         <translation>십자가</translation>
     </message>
     <message>
-        <location filename="../src/Point/PointShape.cpp" line="20" />
+        <location filename="../src/Point/PointShape.cpp" line="24" />
         <source>Diamond</source>
         <translation>다이아몬드</translation>
     </message>
     <message>
-        <location filename="../src/Point/PointShape.cpp" line="23" />
+        <location filename="../src/Point/PointShape.cpp" line="28" />
         <source>Square</source>
         <translation>광장</translation>
     </message>
     <message>
-        <location filename="../src/Point/PointShape.cpp" line="26" />
+        <location filename="../src/Point/PointShape.cpp" line="32" />
         <source>Triangle</source>
         <translation>삼각형</translation>
     </message>
@@ -5317,7 +5312,7 @@ Do you want to save your changes?</source>
         <translation>너무 이른</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="562" />
+        <location filename="../src/main/MainWindow.cpp" line="573" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>파일이 Windows 명령 행에서 작동하지 않는 다국어 알파벳의 문자를 가지고있는 것으로 보입니다.</translation>
     </message>
@@ -5327,80 +5322,109 @@ Do you want to save your changes?</source>
         <translation>주 창 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="220" />
-        <location filename="../src/main/main.cpp" line="232" />
+        <location filename="../src/main/main.cpp" line="242" />
+        <location filename="../src/main/main.cpp" line="254" />
         <source>is not a valid file name</source>
         <translation>유효한 파일 이름이 아닙니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="226" />
+        <location filename="../src/main/main.cpp" line="248" />
         <source>is not a valid image file extension</source>
         <translation>유효한 이미지 파일 확장자가 아닙니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="311" />
+        <location filename="../src/main/main.cpp" line="337" />
         <source>is used only with one or more load files</source>
         <translation>하나 이상의로드 파일에서만 사용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="343" />
+        <location filename="../src/main/main.cpp" line="369" />
         <source>Available styles</source>
         <translation>사용 가능한 스타일</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="367" />
+        <location filename="../src/main/main.cpp" line="394" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>추가 디버그 정보를 사용합니다. 디버깅에 사용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="373" />
         <source>Specifies an error report file as input. Used for debugging and testing</source>
-        <translation>오류 보고서 파일을 입력으로 지정합니다. 디버깅 및 테스트에 사용됩니다.</translation>
+        <translation type="vanished">오류 보고서 파일을 입력으로 지정합니다. 디버깅 및 테스트에 사용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="379" />
+        <location filename="../src/main/main.cpp" line="400" />
+        <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
+        <translation>시작할 때 열었던 파일이 끌어서 놓기 테스트 용임을 나타냅니다. 회귀 테스트에 사용</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="406" />
+        <source>Specifies an error report file as input. Used for debugging and regression testing</source>
+        <translation>오류 보고서 파일을 입력으로 지정합니다. 디버깅 및 회귀 테스트에 사용됩니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="412" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>로드 된 모든 시작 파일을 내 보냅니다. 모든 시작점 파일은 정의 된 모든 축 점을 가져야 만합니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="385" />
+        <location filename="../src/main/main.cpp" line="418" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>로드 된 각 시작 파일의 이미지를 지정된 확장자를 가진 파일로 추출한 다음 중지하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="391" />
+        <location filename="../src/main/main.cpp" line="424" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>파일 명령 스크립트 파일을 입력으로 지정합니다. 디버깅 및 테스트에 사용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="397" />
+        <location filename="../src/main/main.cpp" line="430" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>진단 gnuplot 입력 파일을 출력합니다. 디버깅에 사용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="403" />
+        <location filename="../src/main/main.cpp" line="436" />
         <source>Show this help information</source>
         <translation>이 도움말 정보 표시</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="409" />
+        <location filename="../src/main/main.cpp" line="442" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>오류 보고서 파일 또는 파일 명령 스크립트를 실행합니다. 회귀 테스트에 사용</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="415" />
+        <location filename="../src/main/main.cpp" line="448" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>창 위치를 포함하여 저장된 모든 설정을 제거합니다. 화면이 창을 시작할 때 사용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="421" />
+        <location filename="../src/main/main.cpp" line="454" />
         <source>Show a list of available styles that can be used with the -style command</source>
         <translation>-style 명령과 함께 사용할 수있는 스타일 목록 표시</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="427" />
+        <location filename="../src/main/main.cpp" line="460" />
+        <source>Upgrade files opened at startup to the most recent version</source>
+        <translation>시작할 때 열어 본 파일을 최신 버전으로 업그레이드하십시오.</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="466" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>시작시 가져 오거나 열 파일</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="511" />
+        <source>Could not write to</source>
+        <translation>쓸 수 없습니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="524" />
+        <source>Upgraded</source>
+        <translation>업그레이드 됨</translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="526" />
+        <source>to</source>
+        <translation>에</translation>
     </message>
     <message>
         <location filename="../src/util/Xml.cpp" line="34" />
@@ -5630,7 +5654,7 @@ Click Ok when finished.</source>
 <context>
     <name>TutorialStateCurveSelection</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="29" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="30" />
         <source>After the axis points have been created, a
 curve is selected to receive curve points.
 Step 1 - click on Curve, Point Match, Color
@@ -5638,7 +5662,7 @@ Picker or Segment Fill buttons.</source>
         <translation>축 점이 생성 된 후 커브 점을 받도록 커브가 선택됩니다. 1 단계 - 커브, 포인트 매치, 색상 선택기 또는 세그먼트 채우기 버튼을 클릭하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="34" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="35" />
         <source>Step 2 - Select the desired curve name. If
 that curve name has not been created yet,
 use the menu option Settings / Curve Names
@@ -5646,7 +5670,7 @@ to create it.</source>
         <translation>2 단계 - 원하는 커브 이름을 선택하십시오. 해당 커브 이름이 아직 생성되지 않은 경우 메뉴 옵션 설정 / 커브 이름을 사용하여 커브 이름을 만듭니다.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="39" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="40" />
         <source>Step 3 - Change the background from the
 original image to the filtered image
 produced for the current curve, using the
@@ -5658,7 +5682,7 @@ the tutorial.</source>
 뷰 / 배경 / 필터링 된 이미지 메뉴 옵션을 사용하여 현재 커브에 대해 생성됩니다. 이 필터링을 통해 자습서의 뒷부분에서 설명 할 강력한 자동 알고리즘을 사용할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="47" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="48" />
         <source>If the current curve is no longer visible
 in the filtered image, then change the
 current Color Filter settings. In the figure,
@@ -5668,17 +5692,17 @@ the orange points have disappeared.</source>
 현재 색상 필터 설정. 그림에서 주황색 점이 사라졌습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="55" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="56" />
         <source>Previous</source>
         <translation>너무 이른</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="61" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="62" />
         <source>Color Filter Settings</source>
         <translation>색상 필터 설정</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="67" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="68" />
         <source>Next</source>
         <translation>다음 것</translation>
     </message>
@@ -5686,18 +5710,18 @@ the orange points have disappeared.</source>
 <context>
     <name>TutorialStateCurveType</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="26" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="27" />
         <source>Curve Type</source>
         <translation>곡선 유형</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="29" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="30" />
         <source>The next steps depend on how the curves
 are drawn, in terms of lines and points.</source>
         <translation>다음 단계는 선과 점의 관점에서 곡선이 그려지는 방식에 따라 다릅니다.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="32" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="33" />
         <source>If the curves are drawn
 with lines (with or without
 points) then click on
@@ -5705,7 +5729,7 @@ Next (Lines).</source>
         <translation>곡선이 선으로 그려지는 경우 (점이 있거나없는 경우) 다음 (선)을 클릭하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="37" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="38" />
         <source>If the curves are drawn
 without lines and only
 with points, then click on
@@ -5713,17 +5737,17 @@ Next (Points).</source>
         <translation>곡선이 선없이 점으로 만 그려진 경우, 다음 (점)을 클릭하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="45" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="46" />
         <source>Previous</source>
         <translation>너무 이른</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="51" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="52" />
         <source>Next (Lines)</source>
         <translation>다음 (행)</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="57" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="58" />
         <source>Next (Points)</source>
         <translation>다음 (포인트)</translation>
     </message>

@@ -24,6 +24,7 @@
 using namespace std;
 
 const QString CMD_DEBUG ("debug");
+const QString CMD_DROP_REGRESSION ("dropregression");
 const QString CMD_ERROR_REPORT ("errorreport");
 const QString CMD_EXPORT_ONLY ("exportonly");
 const QString CMD_EXTRACT_IMAGE_ONLY ("extractimageonly");
@@ -33,8 +34,10 @@ const QString CMD_HELP ("help");
 const QString CMD_REGRESSION ("regression");
 const QString CMD_RESET ("reset");
 const QString CMD_STYLES ("styles"); // Not to be confused with -style option that qt handles
+const QString CMD_UPGRADE ("upgrade");
 const QString DASH ("-");
 const QString DASH_DEBUG ("-" + CMD_DEBUG);
+const QString DASH_DROP_REGRESSION ("-" + CMD_DROP_REGRESSION);
 const QString DASH_ERROR_REPORT ("-" + CMD_ERROR_REPORT);
 const QString DASH_EXTRACT_IMAGE_ONLY ("-" + CMD_EXTRACT_IMAGE_ONLY);
 const QString DASH_EXPORT_ONLY ("-" + CMD_EXPORT_ONLY);
@@ -44,6 +47,7 @@ const QString DASH_HELP ("-" + CMD_HELP);
 const QString DASH_REGRESSION ("-" + CMD_REGRESSION);
 const QString DASH_RESET ("-" + CMD_RESET);
 const QString DASH_STYLES ("-" + CMD_STYLES);
+const QString DASH_UPGRADE ("-" + CMD_UPGRADE);
 const QString ENGAUGE_LOG_FILE (".engauge.log");
 
 // Prototypes
@@ -54,6 +58,7 @@ bool engaugeLogFilenameAttempt (const QString &path,
 void parseCmdLine (int argc,
                    char **argv,
                    bool &isDebug,
+                   bool &isDropRegression,
                    bool &isReset,
                    QString &errorReportFile,
                    QString &fileCmdScriptFile,
@@ -62,6 +67,7 @@ void parseCmdLine (int argc,
                    bool &isExportOnly,
                    bool &isExtractImageOnly,
                    QString &extractImageOnlyExtension,
+                   bool &isUpgrade,
                    QStringList &loadStartupFiles,
                    QStringList &commandLineWithoutLoadStartupFiles);
 void sanityCheckLoadStartupFiles (bool isRepeatingFlag,
@@ -75,6 +81,7 @@ void sanityCheckValue (bool requiredCondition,
 void showMessageAndQuit (const QString &msg);
 void showStylesAndQuit ();
 void showUsageAndQuit ();
+void upgradeFiles (const QStringList &loadStartupFiles);
 
 // Functions
 bool checkFileExists (const QString &file)
@@ -136,12 +143,13 @@ int main(int argc, char *argv[])
   TranslatorContainer translatorContainer (app); // Must exist until execution terminates
 
   // Command line
-  bool isDebug, isReset, isGnuplot, isErrorReportRegressionTest, isExportOnly, isExtractImageOnly;
+  bool isDebug, isDropRegression, isReset, isGnuplot, isErrorReportRegressionTest, isExportOnly, isExtractImageOnly, isUpgrade;
   QString errorReportFile, extractImageOnlyExtension, fileCmdScriptFile;
   QStringList loadStartupFiles, commandLineWithoutLoadStartupFiles;
   parseCmdLine (argc,
                 argv,
                 isDebug,
+                isDropRegression,
                 isReset,
                 errorReportFile,
                 fileCmdScriptFile,
@@ -150,6 +158,7 @@ int main(int argc, char *argv[])
                 isExportOnly,
                 isExtractImageOnly,
                 extractImageOnlyExtension,
+                isUpgrade,
                 loadStartupFiles,
                 commandLineWithoutLoadStartupFiles);
 
@@ -159,26 +168,36 @@ int main(int argc, char *argv[])
                      isDebug);
   LOG4CPP_INFO_S ((*mainCat)) << "main args=" << QApplication::arguments().join (" ").toLatin1().data();
 
-  // Create and show main window
-  MainWindow w (errorReportFile,
-                fileCmdScriptFile,
-                isErrorReportRegressionTest,
-                isGnuplot,
-                isReset,
-                isExportOnly,
-                isExtractImageOnly,
-                extractImageOnlyExtension,
-                loadStartupFiles,
-                commandLineWithoutLoadStartupFiles);
-  w.show();
+  // Upgrade or run normally
+  int rtn = 0;
+  if (isUpgrade) {
+    upgradeFiles (loadStartupFiles);
+  } else {
+    // Create and show main window
+    MainWindow w (errorReportFile,
+                  fileCmdScriptFile,
+                  isDropRegression,
+                  isErrorReportRegressionTest,
+                  isGnuplot,
+                  isReset,
+                  isExportOnly,
+                  isExtractImageOnly,
+                  extractImageOnlyExtension,
+                  loadStartupFiles,
+                  commandLineWithoutLoadStartupFiles);
+    w.show();
 
-  // Event loop
-  return app.exec();
+    // Event loop
+    rtn = app.exec();
+  }
+
+  return rtn;
 }
 
 void parseCmdLine (int argc,
                    char **argv,
                    bool &isDebug,
+                   bool &isDropRegression,
                    bool &isReset,
                    QString &errorReportFile,
                    QString &fileCmdScriptFile,
@@ -187,6 +206,7 @@ void parseCmdLine (int argc,
                    bool &isExportOnly,
                    bool &isExtractImageOnly,
                    QString &extractImageOnlyExtension,
+                   bool &isUpgrade,
                    QStringList &loadStartupFiles,
                    QStringList &commandLineWithoutLoadStartupFiles)
 {
@@ -201,6 +221,7 @@ void parseCmdLine (int argc,
 
   // Defaults
   isDebug = false;
+  isDropRegression = false;
   isReset = false;
   errorReportFile = "";
   fileCmdScriptFile = "";
@@ -209,6 +230,7 @@ void parseCmdLine (int argc,
   isExportOnly = false;
   isExtractImageOnly = false;
   extractImageOnlyExtension = "";
+  isUpgrade = false;
 
   for (int i = 1; i < argc; i++) {
 
@@ -234,6 +256,8 @@ void parseCmdLine (int argc,
       nextIsFileCmdScript = false;
     } else if (strcmp (argv [i], DASH_DEBUG.toLatin1().data()) == 0) {
       isDebug = true;
+    } else if (strcmp (argv [i], DASH_DROP_REGRESSION.toLatin1().data()) == 0) {
+      isDropRegression = true;
     } else if (strcmp (argv [i], DASH_ERROR_REPORT.toLatin1().data()) == 0) {
       nextIsErrorReportFile = true;
     } else if (strcmp (argv [i], DASH_EXPORT_ONLY.toLatin1().data()) == 0) {
@@ -253,6 +277,8 @@ void parseCmdLine (int argc,
       isReset = true;
     } else if (strcmp (argv [i], DASH_STYLES.toLatin1().data()) == 0) {
       showStylesAndQuit ();
+    } else if (strcmp (argv [i], DASH_UPGRADE.toLatin1().data()) == 0) {
+      isUpgrade = true;
     } else if (strncmp (argv [i], DASH.toLatin1().data(), 1) == 0) {
       showUsage = true; // User entered an unrecognized token
     } else {
@@ -260,7 +286,7 @@ void parseCmdLine (int argc,
       // so relative paths must be changed in advance to absolute so the files can still be found
       QString fileName = argv [i];
       QFileInfo fInfo (fileName);
-      if (fInfo.isRelative()) {
+      if (fInfo.isRelative() && !fileName.startsWith ("http")) {
         fileName = fInfo.absoluteFilePath();
       }
 
@@ -350,6 +376,7 @@ void showUsageAndQuit ()
   QTextStream str (&msg);
   str << "<html>Usage: engauge "
       << "[" << DASH_DEBUG.toLatin1().data() << "] "
+      << "[" << DASH_DROP_REGRESSION.toLatin1().data() << "] "
       << "[" << DASH_ERROR_REPORT.toLatin1().data() << " &lt;file&gt;] "
       << "[" << DASH_EXPORT_ONLY.toLatin1().data() << "] "
       << "[" << DASH_EXTRACT_IMAGE_ONLY.toLatin1().data() << " &lt;extension&gt;] "
@@ -368,9 +395,15 @@ void showUsageAndQuit ()
       << "</td>"
       << "</tr>"
       << "<tr>"
+      << "<td>" << DASH_DROP_REGRESSION.toLatin1().data() << "</td>"
+      << "<td>"
+      << QObject::tr ("Indicates files opened at startup are for testing drag and drop. Used for regression testing").toLatin1().data()
+      << "</td>"
+      << "</tr>"
+      << "<tr>"
       << "<td>" << DASH_ERROR_REPORT.toLatin1().data() << "</td>"
       << "<td>"
-      << QObject::tr ("Specifies an error report file as input. Used for debugging and testing").toLatin1().data()
+      << QObject::tr ("Specifies an error report file as input. Used for debugging and regression testing").toLatin1().data()
       << "</td>"
       << "</tr>"
       << "<tr>"
@@ -422,6 +455,12 @@ void showUsageAndQuit ()
       << "</td>"
       << "</tr>"
       << "<tr>"
+      << "<td>" << DASH_UPGRADE.toLatin1().data() << "</td>"
+      << "<td>"
+      << QObject::tr ("Upgrade files opened at startup to the most recent version").toLatin1().data()
+      << "</td>"
+      << "</tr>"
+      << "<tr>"
       << "<td>" << QString ("&lt;load file&gt; ").toLatin1().data() << "</td>"
       << "<td>"
       << QObject::tr ("File(s) to be imported or opened at startup").toLatin1().data()
@@ -430,4 +469,68 @@ void showUsageAndQuit ()
       << "</table></html>";
 
   showMessageAndQuit (msg);
+}
+
+void upgradeFiles (const QStringList &loadStartupFiles)
+{
+  QString FILE_SUFFIX (".dig");
+  QString UPGRADE_TOKEN ("_upgrade");
+
+  QString msg;
+
+  QStringList::const_iterator itr;
+  for (itr = loadStartupFiles.begin(); itr != loadStartupFiles.end(); itr++) {
+
+    QString filenameOld = *itr;
+    QString filenameNew;
+
+    // First try to insert upgrade token before file prefix if it is recognized
+    if (filenameOld.endsWith (FILE_SUFFIX,
+                              Qt::CaseInsensitive)) {
+      QString withoutSuffix = filenameOld.left (filenameOld.size () - FILE_SUFFIX.size ());
+      filenameNew = QString ("%1%2%3")
+          .arg (withoutSuffix)
+          .arg (UPGRADE_TOKEN)
+          .arg (FILE_SUFFIX);
+    } else {
+
+      // Otherwise append upgrade token
+      filenameNew = QString ("%1%2")
+          .arg (filenameOld)
+          .arg (UPGRADE_TOKEN);
+    }
+
+    // Get old file
+    Document document (filenameOld);
+
+    // Make new file
+    QFile file (filenameNew);
+    if (!file.open (QFile::WriteOnly)) {
+
+      msg += QString ("%1 %2")
+        .arg (QObject::tr ("Could not write to"))
+        .arg (filenameNew);
+
+    } else {
+
+      QXmlStreamWriter writer (&file);
+      writer.setAutoFormatting (true);
+      writer.writeStartDocument();
+      writer.writeDTD ("<!DOCTYPE engauge>");
+      document.saveXml (writer);
+      writer.writeEndDocument ();
+
+      msg += QString ("%1 %2 %3 %4")
+        .arg (QObject::tr ("Upgraded"))
+        .arg (filenameOld)
+        .arg (QObject::tr ("to"))
+        .arg (filenameNew);
+    }
+  }
+
+  // Do not show a message using QMessageBox since upgrade mode may be called hundreds
+  // of times successively by python scripts. Logging is used instead
+  LOG4CPP_INFO_S ((*mainCat)) << "Upgrade results: " << msg.toLatin1().data ();
+  
+  exit (0);
 }

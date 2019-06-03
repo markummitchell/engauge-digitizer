@@ -10,14 +10,18 @@
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QTextStream>
+#ifdef NETWORKING
 #include <QtNetwork/QNetworkReply>
+#endif
 #include <QUrl>
 #include "Version.h"
 
 LoadImageFromUrl::LoadImageFromUrl (MainWindow &mainWindow) :
   m_mainWindow (mainWindow),
+#ifdef NETWORKING
   m_http (this),
   m_reply (nullptr),
+#endif
   m_buffer (nullptr)
 {
   connect (this, SIGNAL (signalImportImage (QString, QImage)), &m_mainWindow, SLOT (slotFileImportImage (QString, QImage)));
@@ -30,11 +34,13 @@ LoadImageFromUrl::~LoadImageFromUrl ()
 
 void LoadImageFromUrl::deallocate ()
 {
+#ifdef NETWORKING
   delete m_reply;
   delete m_buffer;
   
   m_reply = nullptr;
   m_buffer = nullptr;
+#endif
 }
 
 void LoadImageFromUrl::slotFinished ()
@@ -99,6 +105,8 @@ void LoadImageFromUrl::startLoadImage (const QUrl &url)
 
   } else {
 
+    // Drop on the floor if networking is not enabled
+#ifdef NETWORKING
     // Asynchronous read from url
     deallocate ();
     m_buffer = new QByteArray;
@@ -107,10 +115,13 @@ void LoadImageFromUrl::startLoadImage (const QUrl &url)
 
     connect (m_reply, SIGNAL (readyRead()), this, SLOT (slotReadData()));
     connect (m_reply, SIGNAL (finished ()), this, SLOT (slotFinished ()));
+#endif
   }
 }
 
 void LoadImageFromUrl::slotReadData ()
 {
+#ifdef NETWORKING
   *m_buffer += m_reply->readAll ();
+#endif
 }

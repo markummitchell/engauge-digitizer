@@ -70,7 +70,8 @@ const QString SETTINGS_GROUP_IMPORT ("Import");
 const QString SETTINGS_IMPORT_CROPPING ("Cropping");
 const QString SETTINGS_IMPORT_PDF_RESOLUTION ("PdfResolution");
 
-// Export group
+// Export group. Any new entries here should probably be added to DlgSettingsExportFormat::slotSaveDefault()
+// and DocumentModelExportFormat::DocumentModelExportFormat()
 const QString SETTINGS_EXPORT_CURVE_NAMES_NOT_EXPORTED ("curveNamesNotExported");
 const QString SETTINGS_EXPORT_DELIMITER ("delimiter");
 const QString SETTINGS_EXPORT_DELIMITER_OVERRIDE_CSV_TSV ("overrideCsvTsv");

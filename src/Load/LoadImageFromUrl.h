@@ -8,7 +8,9 @@
 #define LOAD_IMAGE_FROM_URL_H
 
 #include <QImage>
+#ifdef NETWORKING
 #include <QtNetwork/QNetworkAccessManager>
+#endif
 #include <QObject>
 #include <QString>
 #include <QUrl>
@@ -44,8 +46,10 @@ private:
 
   MainWindow &m_mainWindow;
   QUrl m_url;
+#ifdef NETWORKING
   QNetworkAccessManager m_http;
   QNetworkReply *m_reply;
+#endif
   QByteArray *m_buffer;
 };
 

@@ -29,10 +29,12 @@ DocumentModelExportFormat::DocumentModelExportFormat()
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   settings.beginGroup (SETTINGS_GROUP_EXPORT);
 
+  // Sync these settings with DlgSettingsExportFormat::slotLoadDefault()
+  // and DlgSettingsExportFormat::slotSaveDefault()
   m_curveNamesNotExported = settings.value (SETTINGS_EXPORT_CURVE_NAMES_NOT_EXPORTED,
                                             QVariant (DEFAULT_CURVE_NAMES_NOT_EXPORTED)).toStringList();
   m_delimiter = static_cast<ExportDelimiter> (settings.value (SETTINGS_EXPORT_DELIMITER,
-                                                              QVariant (EXPORT_DELIMITER_COMMA)).toInt());
+                                                              QVariant (EXPORT_DELIMITER_COMMA)).toInt());  
   m_extrapolateOutsideEndpoints = settings.value (SETTINGS_EXPORT_EXTRAPOLATE_OUTSIDE_ENDPOINTS,
                                                   QVariant (DEFAULT_EXTRAPOLATE)).toBool();
   m_overrideCsvTsv = settings.value (SETTINGS_EXPORT_DELIMITER_OVERRIDE_CSV_TSV,

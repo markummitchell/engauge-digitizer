@@ -300,6 +300,11 @@ void DlgSettingsExportFormat::createOptionalSaveDefault (QHBoxLayout *layout)
   m_btnSaveDefault->setWhatsThis (tr ("Save the settings for use as future defaults."));
   connect (m_btnSaveDefault, SIGNAL (released ()), this, SLOT (slotSaveDefault ()));
   layout->addWidget (m_btnSaveDefault, 0, Qt::AlignLeft);
+
+  m_btnLoadDefault = new QPushButton (tr ("Load Default"));
+  m_btnLoadDefault->setWhatsThis (tr ("Load the default settings."));
+  connect (m_btnLoadDefault, SIGNAL (released ()), this, SLOT (slotLoadDefault ()));
+  layout->addWidget (m_btnLoadDefault, 0, Qt::AlignLeft);
 }
 
 void DlgSettingsExportFormat::createPreview(QGridLayout *layout, int &row)
@@ -899,6 +904,57 @@ void DlgSettingsExportFormat::slotListIncluded()
   // Do not call updatePreview since this method changes nothing
 }
 
+void DlgSettingsExportFormat::slotLoadDefault()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotLoadDefault";
+
+  // Get defaults from constructor
+  DocumentModelExportFormat modelExportDefaults;
+
+  // Apply defaults to controls. That will trigger updates to m_modelExportAfter
+
+  m_btnHeaderGnuplot->setChecked (modelExportDefaults.header() == EXPORT_HEADER_GNUPLOT);
+  m_btnHeaderNone->setChecked (modelExportDefaults.header() == EXPORT_HEADER_NONE);
+  m_btnHeaderSimple->setChecked (modelExportDefaults.header() == EXPORT_HEADER_SIMPLE);
+
+  m_editXLabel->setText (modelExportDefaults.xLabel());
+
+  m_btnDelimitersCommas->setChecked (modelExportDefaults.delimiter() == EXPORT_DELIMITER_COMMA);
+  m_btnDelimitersSemicolons->setChecked (modelExportDefaults.delimiter() == EXPORT_DELIMITER_SEMICOLON);
+  m_btnDelimitersSpaces->setChecked (modelExportDefaults.delimiter() == EXPORT_DELIMITER_SPACE);
+  m_btnDelimitersTabs->setChecked (modelExportDefaults.delimiter() == EXPORT_DELIMITER_TAB);
+
+  m_chkOverrideCsvTsv->setChecked (modelExportDefaults.overrideCsvTsv());
+
+  m_btnCurvesLayoutAllCurves->setChecked (modelExportDefaults.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE);
+  m_btnCurvesLayoutOneCurve->setChecked (modelExportDefaults.layoutFunctions() == EXPORT_LAYOUT_ONE_PER_LINE);
+
+  m_editFunctionsPointsEvenlySpacing->setText (QString::number (modelExportDefaults.pointsIntervalFunctions ()));
+  m_editRelationsPointsEvenlySpacing->setText (QString::number (modelExportDefaults.pointsIntervalRelations ()));
+
+  m_btnFunctionsPointsAllCurves->setChecked (modelExportDefaults.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES);
+  m_btnFunctionsPointsFirstCurve->setChecked (modelExportDefaults.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_FIRST_CURVE);
+  m_btnFunctionsPointsEvenlySpaced->setChecked (modelExportDefaults.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_PERIODIC);
+  m_btnFunctionsPointsGridLines->setChecked (modelExportDefaults.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_GRID_LINES);
+  m_btnFunctionsPointsRaw->setChecked (modelExportDefaults.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_RAW);
+
+  m_btnRelationsPointsEvenlySpaced->setChecked (modelExportDefaults.pointsSelectionRelations() == EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE);
+  m_btnRelationsPointsRaw->setChecked (modelExportDefaults.pointsSelectionRelations() == EXPORT_POINTS_SELECTION_RELATIONS_RAW);
+
+  m_chkExtrapolateOutsideEndpoints->setChecked (modelExportDefaults.extrapolateOutsideEndpoints());
+
+  int indexFunctions = m_cmbFunctionsPointsEvenlySpacingUnits->findData (QVariant (modelExportDefaults.pointsIntervalUnitsFunctions ()));
+  int indexRelations = m_cmbRelationsPointsEvenlySpacingUnits->findData (QVariant (modelExportDefaults.pointsIntervalUnitsRelations ()));
+  m_cmbFunctionsPointsEvenlySpacingUnits->setCurrentIndex (indexFunctions);
+  m_cmbRelationsPointsEvenlySpacingUnits->setCurrentIndex (indexRelations);
+
+  // Apply defaults to 'after' settings
+  *m_modelExportAfter = modelExportDefaults;
+
+  updateControls();
+  updatePreview();
+}
+
 void DlgSettingsExportFormat::slotOverrideCsvTsv(int)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotOverrideCsvTsv";
@@ -955,8 +1011,12 @@ void DlgSettingsExportFormat::slotSaveDefault()
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
   settings.beginGroup (SETTINGS_GROUP_EXPORT);
 
+  // Sync these settings with DocumentModelExportFormat::DocumentModelExportFormat()
+  // and DlgSettingsExportFormat::slotLoadDefault()
   settings.setValue (SETTINGS_EXPORT_DELIMITER,
                      QVariant (m_modelExportAfter->delimiter()));
+  settings.setValue (SETTINGS_EXPORT_DELIMITER_OVERRIDE_CSV_TSV,
+                     QVariant (m_modelExportAfter->overrideCsvTsv()));
   settings.setValue (SETTINGS_EXPORT_EXTRAPOLATE_OUTSIDE_ENDPOINTS,
                      QVariant (m_modelExportAfter->extrapolateOutsideEndpoints()));
   settings.setValue (SETTINGS_EXPORT_HEADER,

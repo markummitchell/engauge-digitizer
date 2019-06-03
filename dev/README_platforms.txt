@@ -74,6 +74,10 @@ Linux Distribution Issues
           |Solution (openSUSE):       The command to install the fuse package on openSUSE is:                              |
           |                             >sudo zypper install fuse                                                          |
           |----------------------------------------------------------------------------------------------------------------|
+	  |Error Indication:          'qt.network.ssl: Incompatible version of OpenSSL'                                    |
+	  |Description:               An compatible version of libssl-dev is installed (e.g. 1.1.0 versus 1.0.2)           |
+	  |Solution (Ubuntu/Kubuntu)  Try a different version of the libssl-dev package                                    |
+          |----------------------------------------------------------------------------------------------------------------|
           |Error Indication:          'D-Bus library appears to be incorrectly set up; failed to read machine uuid'        |
           |Description:               D-Bus is has not been configured yet                                                 |
           |Solution (Fedora):         The commands to configure D-Bus are:                                                 |

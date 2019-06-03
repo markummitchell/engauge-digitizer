@@ -1,67 +1,47 @@
+# This file converts non-xml dig files to xml if required. Directly reading non-xml
+# files (=binary) was attempted but the unpredictable length of the QPixMap in the
+# middle of the binary data, and use of string (versus bytes) by pyside2 prevented
+# that option from succeeding
 from xml.etree import ElementTree
 from DefaultListOrderedDict import DefaultListOrderedDict
 import numpy as np
+import os
+import subprocess
+import sys
+
+# Operating system dependent location of Engauge executable. Some typical values are:
+#  cygwin      /usr/bin/engauge-digitizer.exe
+#  linux       /usr/bin/engauge
+#  osx         /Applications/Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer
+#  windows     C:/Program Files/Engauge Digitizer/engauge.exe
+ENGAUGE_EXECUTABLE = "/usr/bin/engauge"
+
+NO_EXE_ERROR = 'Execution error. You may need to modify ENGAUGE_EXECUTABLE to find the Engauge executable. ' + \
+               'Version 11.3 or newer is required'
 
 class ParseDig:
-    curves = DefaultListOrderedDict () # Hash table of curve name to lists, with each list consisting of graph points
     def __init__(self, digFile):
-        with open(digFile, 'rt') as f:
-            tree = ElementTree.parse (f)
+        # Hash table of curve name to lists, with each list consisting of graph points
+        self._curves = DefaultListOrderedDict()
 
-        # (xG1 xG2 xG3) = screen * (m11 m12 m13)
-        # (yG1 yG2 yG3) = screen * (m21 m22 m23)
-        # (1   1   1  ) = screen * (m31 m32 m33)
-        # where 
-        # screen = (xS1 yS1 1)
-        #          (xS2 yS2 1)
-        #          (xS3 yS3 1)
-        rowsGraph = 0
-        rowsScreen = 0
-        screen = np.empty(shape=(3, 3)) 
-        graphX = np.empty(shape=(3, 1))
-        graphY = np.empty(shape=(3, 1))
-        graph1 = np.empty(shape=(3, 1))
-        screenToGraph = np.array([])
-        for node in tree.iter():
-            # print (node.tag, '<->', node.attrib)
-            if (node.tag == 'Curve'):
-                curveName = node.attrib.get ('CurveName');
-                if (curveName == 'Axes'):
-                    for nodeAxes in node.iter():
-                        if (nodeAxes.tag == 'Point'):
-                            for nodePoint in nodeAxes.iter():
-                                if (nodePoint.tag == 'PositionScreen'):
-                                    x = float (nodePoint.attrib.get ('X'))
-                                    y = float (nodePoint.attrib.get ('Y'))
-                                    screen [rowsScreen] [0] = x
-                                    screen [rowsScreen] [1] = y
-                                    screen [rowsScreen] [2] = 1
-                                    # print ('Input positionScreenAxes', x, y)
-                                    rowsScreen = rowsScreen + 1;
-                                elif (nodePoint.tag == 'PositionGraph'):
-                                    x = float (nodePoint.attrib.get ('X'))
-                                    y = float (nodePoint.attrib.get ('Y'))
-                                    graphX [rowsGraph] = x;
-                                    graphY [rowsGraph] = y;
-                                    graph1 [rowsGraph] = 1;
-                                    # print ('Input positionGraphAxes', x, y)
-                                    rowsGraph = rowsGraph + 1;
-                    screenToGraph = self.computeAffineTransformation(screen, graphX, graphY, graph1)
-                else:
-                    for nodeGraph in node.iter():
-                        if (nodeGraph.tag == 'Point'):
-                            for nodePoint in nodeGraph.iter():
-                                if (nodePoint.tag == 'PositionScreen'):
-                                    x = float (nodePoint.attrib.get ('X'))
-                                    y = float (nodePoint.attrib.get ('Y'))
-                                    # print ('Input positionScreen', x, y)
-                                    vecScreen = np.array ([x, y, 1])
-                                    vecGraph = np.dot (screenToGraph, 
-                                                       vecScreen)
-                                    x = vecGraph [0]
-                                    y = vecGraph [1]
-                                    # print ('Computed positionGraph', x, y)
-                                    self.curves [curveName].append ([x, y]);
+        if not os.path.exists (ENGAUGE_EXECUTABLE):
+            print (NO_EXE_ERROR)
+            sys.exit (0)
+            
+        try:
+            with open(digFile, 'rt') as f:
+                tree = ElementTree.parse (f)
+            self.parseXml (tree)
+        except Exception as e:
+            digFileUpgraded = self.upgrade (digFile)
+            try:
+                with open(digFileUpgraded, 'rt') as f:
+                    tree = ElementTree.parse (f)
+                os.remove (digFileUpgraded)
+                self.parseXml (tree)
+            except Exception as e:
+                print ("Could not load {} even after trying an upgrade" . format (digFile))
+
     def computeAffineTransformation (self, screen, graphX, graphY, graph1):
         # Compute screen-to-graph affine transformation from screen and graph points in axes
         screenInverse = np.linalg.inv (screen)
@@ -70,7 +50,183 @@ class ParseDig:
         m3 = np.dot (screenInverse, graph1)
         screenToGraph = np.array ([m1.flatten(), m2.flatten(), m3.flatten()])
         return screenToGraph
+
+    def getScreenAndGraph(self, node):
+        #Get screen and graph coordinates from axis data
+        #Allows for three or four axis points
+        rowsGraph = 0
+        rowsScreen = 0
+        screen = np.empty(shape=(3, 3))
+        graphX = np.empty(shape=(3, 1))
+        graphY = np.empty(shape=(3, 1))
+        graph1 = np.ones(3)
+        try:
+            for nodeAxes in node.iter():
+                if (nodeAxes.tag == 'Point'):
+                    for nodePoint in nodeAxes.iter():
+                        if (nodePoint.tag == 'PositionScreen'):
+                            x = float(nodePoint.attrib.get('X'))
+                            y = float(nodePoint.attrib.get('Y'))
+                            screen[rowsScreen][0] = x
+                            screen[rowsScreen][1] = y
+                            screen[rowsScreen][2] = 1
+                            # print ('Input positionScreenAxes', x, y)
+                            rowsScreen += 1
+                        elif (nodePoint.tag == 'PositionGraph'):
+                            x = float(nodePoint.attrib.get('X'))
+                            y = float(nodePoint.attrib.get('Y'))
+                            graphX[rowsGraph] = x
+                            graphY[rowsGraph] = y
+                            graph1[rowsGraph] = 1
+                            # print ('Input positionGraphAxes', x, y)
+                            rowsGraph += 1
+            return screen, graphX, graphY, np.ones(3), rowsGraph, rowsScreen
+        except Exception as e:
+            screenX = []
+            screenY = []
+            screenXNew = []
+            screenYNew = []
+            graphX = []
+            graphY = []
+            IsXOnly = np.array([], dtype='str')
+            for nodeAxes in node.iter():
+                if (nodeAxes.tag == 'Point'):
+                    for nodePoint in nodeAxes.iter():
+                        if (nodePoint.tag == 'Point'):
+                            IsXOnly = np.append(IsXOnly, nodePoint.attrib.get('IsXOnly'))
+                        if (nodePoint.tag == 'PositionScreen'):
+                            x = float(nodePoint.attrib.get('X'))
+                            screenX.append(x)
+                            y = float(nodePoint.attrib.get('Y')) 
+                            screenY.append(y)
+                        elif (nodePoint.tag == 'PositionGraph'):
+                            x = float(nodePoint.attrib.get('X'))
+                            graphX.append(x)
+                            y = float(nodePoint.attrib.get('Y'))
+                            graphY.append(y)
+            graphX = np.array(graphX)
+            graphX = graphX[IsXOnly == 'True']
+            graphX = np.append(graphX, graphX[0])
+            graphY = np.array(graphY)
+            graphY = graphY[IsXOnly == 'False']
+            graphY = np.append(graphY, graphY[1])
+            graphY[1] = graphY[0]
+            screenX = np.array(screenX)
+            screenY = np.array(screenY)
+            xAxesScreenX = screenX[IsXOnly == 'True']
+            xAxesScreenY = screenY[IsXOnly == 'True']
+            yAxesScreenX = screenX[IsXOnly == 'False']
+            yAxesScreenY = screenY[IsXOnly == 'False']
+            #The below section calculates the screen coords of intersections of 
+            #lines formed by the x and y axes
+            m1 = (yAxesScreenY[1] - yAxesScreenY[0]) / (yAxesScreenX[1] - yAxesScreenX[0])
+            m3 = (xAxesScreenY[1] - xAxesScreenY[0]) / (xAxesScreenX[1] - xAxesScreenX[0])
+            m2 = m1
+            m4 = m3
+            b1 = xAxesScreenY[0] - m1 * xAxesScreenX[0]
+            b2 = xAxesScreenY[1] - m2 * xAxesScreenX[1]
+            b3 = yAxesScreenY[0] - m3 * yAxesScreenX[0]
+            b4 = yAxesScreenY[1] - m4 * yAxesScreenX[1]
+            screenXNew.append((b1 - b3) / (m3 - m1))
+            screenYNew.append(m3 * screenXNew[0] + b3)
+            screenXNew.append((b2 - b3) / (m3 - m2))
+            screenYNew.append(m3 * screenXNew[1] + b3)
+            screenXNew.append((b1 - b4) / (m4 - m1))
+            screenYNew.append(m4 * screenXNew[2] + b4)
+            return np.array([screenXNew, screenYNew, np.ones(3)]).T, graphX, graphY, np.ones(3), rowsGraph, rowsScreen  
+      
     def curve (self, curveName):
-        return list (self.curves [curveName]);
+        return list (self._curves [curveName])
+
     def curveNames (self):
-        return list (self.curves.keys ());
+        return list (self._curves.keys ())
+
+    def delimiterEnumToDelimiter (self, delimiterEnum):
+        # Mapping ExportDelimiter enum
+        switcher = {
+            0: ',',
+            1: ' ',
+            2: '\t',
+            3: ';'
+            }
+        return switcher.get (delimiterEnum, ' ')
+
+    def exportDelimiter (self):
+        return self._delimiter
+
+    def parseXml(self, tree):
+        # (xG1 xG2 xG3) = screen * (m11 m12 m13)
+        # (yG1 yG2 yG3) = screen * (m21 m22 m23)
+        # (1   1   1  ) = screen * (m31 m32 m33)
+        # where
+        # screen = (xS1 yS1 1)
+        #          (xS2 yS2 1)
+        #          (xS3 yS3 1)
+        self._screenToGraph = np.array([])
+        self._delimiter = ','
+        for node in tree.iter():
+            # print (node.tag, '<->', node.attrib)
+            if (node.tag == 'Export'):
+                delimiterEnum = node.attrib.get('Delimiter')
+                delimiter = self.delimiterEnumToDelimiter(delimiterEnum)
+            elif (node.tag == 'Curve'):
+                curveName = node.attrib.get('CurveName')
+                if (curveName == 'Axes'):
+                    screen, graphX, graphY, graph1, rowsGraph, rowsScreen = self.getScreenAndGraph(node)
+                    if rowsGraph < 3 or rowsScreen < 3:
+                        print ('This script requires three axes points. Quitting')
+                        sys.exit (1)
+                    self._screenToGraph = self.computeAffineTransformation(screen, graphX, graphY, graph1)
+                else:
+                    for nodeGraph in node.iter():
+                        if (nodeGraph.tag == 'Point'):
+                            for nodePoint in nodeGraph.iter():
+                                if (nodePoint.tag == 'PositionScreen'):
+                                    x = float(nodePoint.attrib.get('X'))
+                                    y = float(nodePoint.attrib.get('Y'))
+                                    # print ('Input positionScreen', x, y)
+                                    vecScreen = np.array([x, y, 1])
+                                    vecGraph = np.dot(self._screenToGraph,
+                                                      vecScreen)
+                                    x = vecGraph[0]
+                                    y = vecGraph[1]
+                                    # print ('Computed positionGraph', x, y)
+                                    self._curves[curveName].append([x, y])
+
+    def transformGraphToScreen (self, xGraph, yGraph):
+        graphToScreen = np.linalg.inv (self._screenToGraph)
+        vecGraph = np.array ([xGraph, yGraph, 1])
+        vecScreen = np.dot (graphToScreen,
+                            vecGraph)
+        return int (0.5 + vecScreen [0]), int (0.5 + vecScreen [1])
+
+    def upgrade (self, digFile):
+        # File naming consistent with main.cpp
+        FILE_SUFFIX = '.dig'
+        UPGRADE_TOKEN = '_upgrade'
+        count = len (FILE_SUFFIX)
+        if digFile [-count:].lower () == FILE_SUFFIX.lower ():
+            # xyz.dig turns into xyz_upgrade.dig
+            digFileWithoutSuffix = digFile [: -count]
+            digFileUpgraded = '{}{}{}' . format (digFileWithoutSuffix,
+                                                 UPGRADE_TOKEN,
+                                                 FILE_SUFFIX)
+        else:
+            # xyz turns into xyz_upgrade
+            digFileUpgraded = '{}{}' . format (digFile,
+                                               UPGRADE_TOKEN)
+
+        # Stop if this could overwrite valuable information
+        if os.path.exists (digFileUpgraded):
+            print ('Upgrade file exists and will not be overwritten. Quitting')
+            sys.exit (0)
+
+        # Create the upgrade from the old dig file. It will be removed after
+        rtn = subprocess.call ([ENGAUGE_EXECUTABLE,
+                                "-upgrade",
+                                digFile])
+        if rtn:
+            print (NO_EXE_ERROR)
+            sys.exit (0)
+
+        return digFileUpgraded
