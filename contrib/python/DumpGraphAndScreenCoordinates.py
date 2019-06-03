@@ -27,7 +27,7 @@ else:
         for row in curve:
             xGraph = row [0]
             yGraph = row [1]
-            (xScreen, yScreen) = parseDig.transformGraphToScreen (xGraph, yGraph)
+            (xScreen, yScreen) = row [2], row [3] #parseDig.transformGraphToScreen (xGraph, yGraph)
             print ("{}{}{}{}{}{}{}" . format (xGraph, exportDelimiter,
                                               yGraph, exportDelimiter,
                                               xScreen, exportDelimiter,

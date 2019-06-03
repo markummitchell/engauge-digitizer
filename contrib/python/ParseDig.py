@@ -21,7 +21,8 @@ NO_EXE_ERROR = 'Execution error. You may need to modify ENGAUGE_EXECUTABLE to fi
 
 class ParseDig:
     def __init__(self, digFile):
-        # Hash table of curve name to lists, with each list consisting of graph points
+        # Hash table of curve name to lists, with each list consisting of graph points 
+        # and screen coordinates
         self._curves = DefaultListOrderedDict()
         if not os.path.exists (ENGAUGE_EXECUTABLE):
             print (NO_EXE_ERROR)
@@ -180,10 +181,9 @@ class ParseDig:
         for node in tree.iter():
             # print (node.tag, '<->', node.attrib)
             if (node.tag == 'Coords'):
-                xAxisType = node.attrib.get('ScaleXThetaString')
-                yAxisType = node.attrib.get('ScaleYRadiusString')
-                if ((xAxisType == 'Log') or (yAxisType == 'Log')):
-                    print('Failed to export: log scale')
+                self.xAxisType = node.attrib.get('ScaleXThetaString')
+                self.yAxisType = node.attrib.get('ScaleYRadiusString')
+                if ((self.xAxisType == 'Log') or (self.yAxisType == 'Log')):
                     self.LogPlot = True
                     #sys.exit (1)
             elif (node.tag == 'Export'):
@@ -193,6 +193,19 @@ class ParseDig:
                 curveName = node.attrib.get('CurveName')
                 if (curveName == 'Axes'):
                     screen, graphX, graphY, graph1, rowsGraph, rowsScreen = self.getScreenAndGraph(node)
+                    self.xScreenMax = screen[:, 0].max()
+                    self.yScreenMax = screen[:, 1].max()
+                    self.xScreenMin = screen[:, 0].min()
+                    self.yScreenMin = screen[:, 1].min()
+                    self.xMin = min(graphX)
+                    self.yMin = min(graphY)
+                    self.xMax = max(graphX)
+                    self.yMax = max(graphY)
+                    print(self.yScreenMin)
+                    print(self.yScreenMax)
+                    print(self.yMin)
+                    print(self.yMax)
+                    print(screen)
                     if rowsGraph < 3 or rowsScreen < 3:
                         print ('This script requires three axes points. Quitting')
                         sys.exit (1)
@@ -208,10 +221,20 @@ class ParseDig:
                                     vecScreen = np.array([x, y, 1])
                                     vecGraph = np.dot(self._screenToGraph,
                                                       vecScreen)
-                                    x = vecGraph[0]
-                                    y = vecGraph[1]
+                                    xGraph = vecGraph[0]
+                                    yGraph = vecGraph[1]
+                                    if (self.xAxisType == 'Log'):
+                                        xGraph = np.exp( (xGraph - self.xMin) \
+                                                 * (np.log(self.xMax) - np.log(self.xMin)) \
+                                                 / (self.xMax - self.xMin) \
+                                                 + np.log(self.xMin) )[0]
+                                    if (self.yAxisType == 'Log'):
+                                        yGraph = np.exp( (yGraph - self.yMin) \
+                                                 * (np.log(self.yMax) - np.log(self.yMin)) \
+                                                 / (self.yMax - self.yMin) \
+                                                 + np.log(self.yMin) )[0]
                                     # print ('Computed positionGraph', x, y)
-                                    self._curves[curveName].append([x, y])
+                                    self._curves[curveName].append([xGraph, yGraph, x, y]) 
 
     def transformGraphToScreen (self, xGraph, yGraph):
         graphToScreen = np.linalg.inv (self._screenToGraph)
