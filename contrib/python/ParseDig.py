@@ -14,17 +14,26 @@ import sys
 #  linux       /usr/bin/engauge
 #  osx         /Applications/Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer
 #  windows     C:/Program Files/Engauge Digitizer/engauge.exe
-ENGAUGE_EXECUTABLE = "/usr/bin/engauge"
+envTag = 'ENGAUGE_EXECUTABLE'
+if envTag in os.environ and os.environ [envTag] != '':
+    engaugeExecutable = os.environ [envTag]
+else:
+    engaugeExecutable = "/usr/bin/engauge"
 
-NO_EXE_ERROR = 'Execution error. You may need to modify ENGAUGE_EXECUTABLE to find the Engauge executable. ' + \
-               'Version 11.3 or newer is required'
+NO_EXE_ERROR = '{} {}. {} {} {}. {}' . format (
+    'Could not execute Engauge at',
+    engaugeExecutable,
+    'Try setting environemnt variable',
+    envTag,
+    'to the executable path',
+    'Version 11.3 or newer is required')
 
 class ParseDig:
     def __init__(self, digFile):
         # Hash table of curve name to lists, with each list consisting of graph points
         self._curves = DefaultListOrderedDict()
 
-        if not os.path.exists (ENGAUGE_EXECUTABLE):
+        if not os.path.exists (engaugeExecutable):
             print (NO_EXE_ERROR)
             sys.exit (0)
             
@@ -168,7 +177,6 @@ class ParseDig:
             # print (node.tag, '<->', node.attrib)
             if (node.tag == 'Export'):
                 delimiterEnum = node.attrib.get('Delimiter')
-                delimiter = self.delimiterEnumToDelimiter(delimiterEnum)
             elif (node.tag == 'Curve'):
                 curveName = node.attrib.get('CurveName')
                 if (curveName == 'Axes'):
@@ -222,7 +230,7 @@ class ParseDig:
             sys.exit (0)
 
         # Create the upgrade from the old dig file. It will be removed after
-        rtn = subprocess.call ([ENGAUGE_EXECUTABLE,
+        rtn = subprocess.call ([engaugeExecutable,
                                 "-upgrade",
                                 digFile])
         if rtn:
