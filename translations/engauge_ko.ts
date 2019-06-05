@@ -4068,11 +4068,25 @@ Curve Fitting Window 및 Geometry Window 테이블에서 끌어서 놓기를 내
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="231" />
+        <source>Image replace renames document</source>
+        <translation>이미지 대체 이름 바꾸기 문서</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
+        <source>Image Replace Renames Document
+
+When an image is imported to replace the current image, the document will be renamed if this is true, otherwise the name will stay the same.</source>
+        <translation>이미지 바꾸기 이름 바꾸기 문서
+
+현재 이미지를 바꾸기 위해 이미지를 가져 오면이 경우 문서의 이름이 바뀌고, 그렇지 않으면 이름은 그대로 유지됩니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242" />
         <source>Significant digits</source>
         <translation>유효 숫자</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="247" />
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
@@ -4525,27 +4539,27 @@ Do you want to save your changes?</source>
         <translation>구하다</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2300" />
+        <location filename="../src/main/MainWindow.cpp" line="2307" />
         <source>Export</source>
         <translation>수출</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2382" />
+        <location filename="../src/main/MainWindow.cpp" line="2389" />
         <source>Open Document</source>
         <translation>문서 열기</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3638" />
+        <location filename="../src/main/MainWindow.cpp" line="3645" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3639" />
+        <location filename="../src/main/MainWindow.cpp" line="3646" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3769" />
+        <location filename="../src/main/MainWindow.cpp" line="3776" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5299,7 +5313,7 @@ Do you want to save your changes?</source>
         <translation>파일이 Windows 명령 행에서 작동하지 않는 다국어 알파벳의 문자를 가지고있는 것으로 보입니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="109" />
+        <location filename="../src/main/MainWindowModel.cpp" line="118" />
         <source>Cannot read main window data</source>
         <translation>주 창 데이터를 읽을 수 없습니다.</translation>
     </message>

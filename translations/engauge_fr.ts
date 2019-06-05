@@ -4059,11 +4059,25 @@ Lorsque le glisser-déposer est désactivé, un ensemble rectangulaire de cellul
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="231" />
+        <source>Image replace renames document</source>
+        <translation>Image remplaçant renomme le document </translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
+        <source>Image Replace Renames Document
+
+When an image is imported to replace the current image, the document will be renamed if this is true, otherwise the name will stay the same.</source>
+        <translation>Document de remplacement d'images renommé
+
+Lorsqu'une image est importée pour remplacer l'image actuelle, le document sera renommé si cela est vrai, sinon le nom restera le même.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242" />
         <source>Significant digits</source>
         <translation>Chiffres significatifs</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="247" />
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
@@ -4514,27 +4528,27 @@ Voulez-vous enregistrer vos modifications?</translation>
         <translation>Sauvegarder</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2300" />
+        <location filename="../src/main/MainWindow.cpp" line="2307" />
         <source>Export</source>
         <translation>Exporter</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2382" />
+        <location filename="../src/main/MainWindow.cpp" line="2389" />
         <source>Open Document</source>
         <translation>Ouvrir un fichier</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3638" />
+        <location filename="../src/main/MainWindow.cpp" line="3645" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3639" />
+        <location filename="../src/main/MainWindow.cpp" line="3646" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3769" />
+        <location filename="../src/main/MainWindow.cpp" line="3776" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5288,7 +5302,7 @@ Voulez-vous enregistrer vos modifications?</translation>
         <translation>Le fichier semble contenir des caractères de plusieurs alphabets de langue, ce qui ne fonctionne pas dans la ligne de commande Windows</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="109" />
+        <location filename="../src/main/MainWindowModel.cpp" line="118" />
         <source>Cannot read main window data</source>
         <translation>Ne peut lire les données de la fenêtre principale</translation>
     </message>

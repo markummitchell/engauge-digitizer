@@ -3946,11 +3946,25 @@ Allows per Drag &amp; Drop Export aus dem Curve Fitting Fenster und Geometrie Fe
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="231" />
+        <source>Image replace renames document</source>
+        <translation>Das Bild, das ersetzt, benennt Dokument um</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
+        <source>Image Replace Renames Document
+
+When an image is imported to replace the current image, the document will be renamed if this is true, otherwise the name will stay the same.</source>
+        <translation>Beim Ersetzen von Bildern wird das Dokument umbenannt
+
+Wenn ein Bild als Ersatz für das aktuelle Bild importiert wird, wird das Dokument umbenannt, wenn dies zutrifft. Andernfalls bleibt der Name unverändert. </translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242" />
         <source>Significant digits</source>
         <translation>Wichtige Ziffer</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="247" />
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
@@ -4364,27 +4378,27 @@ Wollen Sie die Änderungen speichern?</translation>
         <translation>Datei speichern</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2300" />
+        <location filename="../src/main/MainWindow.cpp" line="2307" />
         <source>Export</source>
         <translation>Exportiere</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2382" />
+        <location filename="../src/main/MainWindow.cpp" line="2389" />
         <source>Open Document</source>
         <translation>Öffne Dokument</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3638" />
+        <location filename="../src/main/MainWindow.cpp" line="3645" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3639" />
+        <location filename="../src/main/MainWindow.cpp" line="3646" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3769" />
+        <location filename="../src/main/MainWindow.cpp" line="3776" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5138,7 +5152,7 @@ Wollen Sie die Änderungen speichern?</translation>
         <translation>Die Datei scheint Zeichen aus mehreren Sprachen-Alphabeten zu enthalten, was in der Windows-Befehlszeile nicht funktioniert</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="109" />
+        <location filename="../src/main/MainWindowModel.cpp" line="118" />
         <source>Cannot read main window data</source>
         <translation>Kann Daten für dasHauptfenster nicht lesen</translation>
     </message>

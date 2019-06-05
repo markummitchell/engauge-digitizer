@@ -20,10 +20,11 @@ class QTextStream;
 extern bool DEFAULT_DRAG_DROP_EXPORT;
 extern int DEFAULT_SIGNIFICANT_DIGITS;
 extern bool DEFAULT_SMALL_DIALOGS;
+extern bool DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT;
 
 /// Model for DlgSettingsMainWindow. Unlike the other models (DocumentModel*) this data is not saved and 
 /// loaded within the document, so no xml or working with the Document class is involved. Also, there is
-/// no associated Cmd. Instead, the settings are saved using QSettings. Method involving xml/Document 
+/// no associated Cmd. Instead, the settings are saved using QSettings. Methods involving xml/Document
 /// (from DocumentModelAbstractBase) are stubbed out
 class MainWindowModel : public DocumentModelAbstractBase
 {
@@ -44,6 +45,9 @@ public:
 
   /// Get method for highlight opacity
   double highlightOpacity() const;
+
+  /// Get method for image replaces renames document
+  bool imageReplaceRenamesDocument () const;
 
   /// Get method for import cropping
   ImportCropping importCropping () const;
@@ -72,15 +76,18 @@ public:
   /// Set method for highlight opacity
   void setHighlightOpacity (double highlightOpacity);
 
+  /// Set method for image replace renames document
+  void setImageReplaceRenamesDocument (bool imageReplaceRenamesDocument);
+
+  /// Set method for import cropping
+  void setImportCropping (ImportCropping importCropping);
+
   /// Set method for locale given attributes
   void setLocale (QLocale::Language language,
                   QLocale::Country country);
 
   /// Set method for locale given locale object
   void setLocale (const QLocale &locale);
-
-  /// Set method for import cropping
-  void setImportCropping (ImportCropping importCropping);
 
   /// Set method for MainWindow titlebar filename format
   void setMainTitleBarFormat (MainTitleBarFormat mainTitleBarFormat);
@@ -128,7 +135,7 @@ private:
   bool m_smallDialogs;
   bool m_dragDropExport;
   int m_significantDigits;
-
+  bool m_imageReplaceRenamesDocument;
 };
 
 #endif // MAIN_WINDOW_MODEL_H

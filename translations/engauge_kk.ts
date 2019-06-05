@@ -3816,11 +3816,25 @@ When drag and drop is disabled, a rectangular set of table cells can be selected
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="231" />
+        <source>Image replace renames document</source>
+        <translation>Өңдеуге арналған құжатты алмастыратын сурет</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
+        <source>Image Replace Renames Document
+
+When an image is imported to replace the current image, the document will be renamed if this is true, otherwise the name will stay the same.</source>
+        <translation>Сурет атын өзгерту құжаты
+
+Кескінді ауыстыру үшін импортталған кезде, құжат дұрыс болса, атын өзгертеді, әйтпесе атау бірдей болады.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242" />
         <source>Significant digits</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="247" />
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
@@ -4237,27 +4251,27 @@ Do you want to save your changes?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2300" />
+        <location filename="../src/main/MainWindow.cpp" line="2307" />
         <source>Export</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2382" />
+        <location filename="../src/main/MainWindow.cpp" line="2389" />
         <source>Open Document</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3638" />
+        <location filename="../src/main/MainWindow.cpp" line="3645" />
         <source>+</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3639" />
+        <location filename="../src/main/MainWindow.cpp" line="3646" />
         <source>-</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3769" />
+        <location filename="../src/main/MainWindow.cpp" line="3776" />
         <source>Engauge Digitizer</source>
         <translation type="unfinished" />
     </message>
@@ -4939,7 +4953,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished" />
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="109" />
+        <location filename="../src/main/MainWindowModel.cpp" line="118" />
         <source>Cannot read main window data</source>
         <translation>Негізгі терезе деректерін оқи алмайды</translation>
     </message>

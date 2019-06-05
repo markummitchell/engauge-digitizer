@@ -42,6 +42,7 @@ public:
 private slots:
   void slotDragDropExport (bool);
   void slotHighlightOpacity (double);
+  void slotImageReplaceRenamesDocument (bool);
   void slotImportCropping (int index);
   void slotLocale (int index);
   void slotMaximumGridLines (int limit);
@@ -75,6 +76,7 @@ private:
   QCheckBox *m_chkSmallDialogs;
   QCheckBox *m_chkDragDropExport;
   QSpinBox *m_spinSignificantDigits;
+  QCheckBox *m_chkImageReplaceRenamesDocument;
 
   MainWindowModel *m_modelMainWindowBefore;
   MainWindowModel *m_modelMainWindowAfter;

@@ -79,7 +79,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   m_cmbZoomFactor->addItem (*LABEL_ZOOM_1_TO_8   , QVariant (ZOOM_INITIAL_1_TO_8));
   m_cmbZoomFactor->addItem (*LABEL_ZOOM_1_TO_16  , QVariant (ZOOM_INITIAL_1_TO_16));
   m_cmbZoomFactor->addItem (*LABEL_ZOOM_FILL     , QVariant (ZOOM_INITIAL_FILL));
-  m_cmbZoomFactor->addItem (*LABEL_ZOOM_PREVIOUS , QVariant ());
+  m_cmbZoomFactor->addItem (*LABEL_ZOOM_PREVIOUS , QVariant (ZOOM_INITIAL_PREVIOUS));
   m_cmbZoomFactor->setWhatsThis(tr ("Initial Zoom\n\n"
                                     "Select the initial zoom factor when a new document is loaded. Either the previous "
                                     "zoom can be kept, or the specified zoom can be applied."));
@@ -228,6 +228,17 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_chkDragDropExport, SIGNAL (toggled (bool)), this, SLOT (slotDragDropExport (bool)));
   layout->addWidget (m_chkDragDropExport, row++, 2);
 
+  QLabel *labelImageReplaceRenamesDocument = new QLabel (QString ("%1:").arg (tr ("Image replace renames document")));
+  layout->addWidget (labelImageReplaceRenamesDocument, row, 1);
+
+  m_chkImageReplaceRenamesDocument = new QCheckBox;
+  m_chkImageReplaceRenamesDocument->setSizePolicy (QSizePolicy::Fixed, QSizePolicy::Fixed);
+  m_chkImageReplaceRenamesDocument->setWhatsThis (tr ("Image Replace Renames Document\n\n"
+                                                      "When an image is imported to replace the current image, the document "
+                                                      "will be renamed if this is true, otherwise the name will stay the same."));
+  connect (m_chkImageReplaceRenamesDocument, SIGNAL (toggled (bool)), this, SLOT (slotImageReplaceRenamesDocument (bool)));
+  layout->addWidget (m_chkImageReplaceRenamesDocument, row++, 2);
+
   QLabel *labelSignificantDigits = new QLabel (QString ("%1:").arg (tr ("Significant digits")));
   layout->addWidget (labelSignificantDigits, row, 1);
 
@@ -285,6 +296,7 @@ void DlgSettingsMainWindow::handleOk ()
 
   hide ();
 }
+
 void DlgSettingsMainWindow::load (CmdMediator & /* cmdMediator */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::load";
@@ -332,6 +344,7 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   m_chkSmallDialogs->setChecked (m_modelMainWindowAfter->smallDialogs());
   m_chkDragDropExport->setChecked (m_modelMainWindowAfter->dragDropExport());
   m_spinSignificantDigits->setValue (m_modelMainWindowAfter->significantDigits ());
+  m_chkImageReplaceRenamesDocument->setChecked (m_modelMainWindowAfter->imageReplaceRenamesDocument());
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
@@ -355,6 +368,14 @@ void DlgSettingsMainWindow::slotHighlightOpacity(double)
 
   m_modelMainWindowAfter->setHighlightOpacity (m_spinHighlightOpacity->value());
   updateControls();
+}
+
+void DlgSettingsMainWindow::slotImageReplaceRenamesDocument (bool)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotImageReplaceRenamesDocument";
+
+  m_modelMainWindowAfter->setImageReplaceRenamesDocument (m_chkImageReplaceRenamesDocument->isChecked());
+  updateControls ();
 }
 
 void DlgSettingsMainWindow::slotImportCropping (int index)

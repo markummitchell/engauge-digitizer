@@ -1643,6 +1643,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                        QVariant (DEFAULT_DRAG_DROP_EXPORT)).toBool ());
   m_modelMainWindow.setSignificantDigits (settings.value (SETTINGS_SIGNIFICANT_DIGITS,
                                                           QVariant (DEFAULT_SIGNIFICANT_DIGITS)).toInt ());
+  m_modelMainWindow.setImageReplaceRenamesDocument (settings.value (SETTINGS_IMAGE_REPLACE_RENAMES_DOCUMENT,
+                                                                    QVariant (DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT)).toBool ());
 
   updateSettingsMainWindow();
   updateSmallDialogs();
@@ -1697,6 +1699,7 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_CHECKLIST_GUIDE_WIZARD, m_actionHelpChecklistGuideWizard->isChecked ());
   settings.setValue (SETTINGS_DRAG_DROP_EXPORT, m_modelMainWindow.dragDropExport ());
   settings.setValue (SETTINGS_HIGHLIGHT_OPACITY, m_modelMainWindow.highlightOpacity());
+  settings.setValue (SETTINGS_IMAGE_REPLACE_RENAMES_DOCUMENT, m_modelMainWindow.imageReplaceRenamesDocument());
   settings.setValue (SETTINGS_IMPORT_CROPPING, m_modelMainWindow.importCropping());
   settings.setValue (SETTINGS_IMPORT_PDF_RESOLUTION, m_modelMainWindow.pdfResolution ());
   settings.setValue (SETTINGS_LOCALE_LANGUAGE, m_modelMainWindow.locale().language());
@@ -1824,7 +1827,11 @@ bool MainWindow::setupAfterLoadReplacingImage (const QString &fileName,
 
   applyZoomFactorAfterLoad(); // Zoom factor must be reapplied after background image is set, to have any effect
 
-  setCurrentFile(fileName);
+  // Some people prefer
+  if (m_modelMainWindow.imageReplaceRenamesDocument()) {
+    setCurrentFile(fileName);
+  }
+
   m_statusBar->showTemporaryMessage (temporaryMessage);
   m_statusBar->wakeUp ();
 
