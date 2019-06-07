@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 # Script that outputs the graph and screen coordinates of each point in a DIG file.
 # The format is:
 # 1) "xGraph yGraph xScreen yScreen" on each line
@@ -27,7 +29,7 @@ else:
         for row in curve:
             xGraph = row [0]
             yGraph = row [1]
-            (xScreen, yScreen) = parseDig.transformGraphToScreen (xGraph, yGraph)
+            (xScreen, yScreen) = row [2], row [3] #parseDig.transformGraphToScreen (xGraph, yGraph)
             print ("{}{}{}{}{}{}{}" . format (xGraph, exportDelimiter,
                                               yGraph, exportDelimiter,
                                               xScreen, exportDelimiter,

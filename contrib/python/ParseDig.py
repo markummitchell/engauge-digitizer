@@ -30,10 +30,12 @@ NO_EXE_ERROR = '{} {}. {} {} {}. {}' . format (
 
 class ParseDig:
     def __init__(self, digFile):
-        # Hash table of curve name to lists, with each list consisting of graph points
+        # Hash table of curve name to lists, with each list consisting of graph points 
+        # and screen coordinates
         self._curves = DefaultListOrderedDict()
 
         if not os.path.exists (engaugeExecutable):
+
             print (NO_EXE_ERROR)
             sys.exit (0)
             
@@ -128,7 +130,10 @@ class ParseDig:
             yAxesScreenY = screenY[IsXOnly == 'False']
             #The below section calculates the screen coords of intersections of 
             #lines formed by the x and y axes
-            m1 = (yAxesScreenY[1] - yAxesScreenY[0]) / (yAxesScreenX[1] - yAxesScreenX[0])
+            if ((yAxesScreenX[1] - yAxesScreenX[0]) != 0):
+                m1 = (yAxesScreenY[1] - yAxesScreenY[0]) / (yAxesScreenX[1] - yAxesScreenX[0])
+            else:
+                m1 = np.inf
             m3 = (xAxesScreenY[1] - xAxesScreenY[0]) / (xAxesScreenX[1] - xAxesScreenX[0])
             m2 = m1
             m4 = m3
@@ -136,12 +141,22 @@ class ParseDig:
             b2 = xAxesScreenY[1] - m2 * xAxesScreenX[1]
             b3 = yAxesScreenY[0] - m3 * yAxesScreenX[0]
             b4 = yAxesScreenY[1] - m4 * yAxesScreenX[1]
-            screenXNew.append((b1 - b3) / (m3 - m1))
-            screenYNew.append(m3 * screenXNew[0] + b3)
-            screenXNew.append((b2 - b3) / (m3 - m2))
-            screenYNew.append(m3 * screenXNew[1] + b3)
-            screenXNew.append((b1 - b4) / (m4 - m1))
-            screenYNew.append(m4 * screenXNew[2] + b4)
+            #Use a slightly different procedure if the y-axis
+            #has an infinite slope
+            if ((m1 == np.inf) or (m1 == -np.inf)):
+                screenXNew.append(xAxesScreenX[0])
+                screenYNew.append(m3 * screenXNew[0] + b3)
+                screenXNew.append(xAxesScreenX[1])
+                screenYNew.append(m3 * screenXNew[1] + b3)
+                screenXNew.append(xAxesScreenX[0])
+                screenYNew.append(m4 * screenXNew[2] + b4)
+            else:
+                screenXNew.append((b1 - b3) / (m3 - m1))
+                screenYNew.append(m3 * screenXNew[0] + b3)
+                screenXNew.append((b2 - b3) / (m3 - m2))
+                screenYNew.append(m3 * screenXNew[1] + b3)
+                screenXNew.append((b1 - b4) / (m4 - m1))
+                screenYNew.append(m4 * screenXNew[2] + b4)
             return np.array([screenXNew, screenYNew, np.ones(3)]).T, graphX, graphY, np.ones(3), rowsGraph, rowsScreen  
       
     def curve (self, curveName):
@@ -171,16 +186,36 @@ class ParseDig:
         # screen = (xS1 yS1 1)
         #          (xS2 yS2 1)
         #          (xS3 yS3 1)
+        self.LogPlot = False
         self._screenToGraph = np.array([])
         self._delimiter = ','
         for node in tree.iter():
             # print (node.tag, '<->', node.attrib)
-            if (node.tag == 'Export'):
+            if (node.tag == 'Coords'):
+                self.xAxisType = node.attrib.get('ScaleXThetaString')
+                self.yAxisType = node.attrib.get('ScaleYRadiusString')
+                if ((self.xAxisType == 'Log') or (self.yAxisType == 'Log')):
+                    self.LogPlot = True
+                    #sys.exit (1)
+            elif (node.tag == 'Export'):
                 delimiterEnum = node.attrib.get('Delimiter')
             elif (node.tag == 'Curve'):
                 curveName = node.attrib.get('CurveName')
                 if (curveName == 'Axes'):
                     screen, graphX, graphY, graph1, rowsGraph, rowsScreen = self.getScreenAndGraph(node)
+                    self.xScreenMax = screen[:, 0].max()
+                    self.yScreenMax = screen[:, 1].max()
+                    self.xScreenMin = screen[:, 0].min()
+                    self.yScreenMin = screen[:, 1].min()
+                    self.xMin = min(graphX)
+                    self.yMin = min(graphY)
+                    self.xMax = max(graphX)
+                    self.yMax = max(graphY)
+                    #print(self.yScreenMin)
+                    #print(self.yScreenMax)
+                    #print(self.yMin)
+                    #print(self.yMax)
+                    #print(screen)
                     if rowsGraph < 3 or rowsScreen < 3:
                         print ('This script requires three axes points. Quitting')
                         sys.exit (1)
@@ -196,10 +231,20 @@ class ParseDig:
                                     vecScreen = np.array([x, y, 1])
                                     vecGraph = np.dot(self._screenToGraph,
                                                       vecScreen)
-                                    x = vecGraph[0]
-                                    y = vecGraph[1]
+                                    xGraph = vecGraph[0]
+                                    yGraph = vecGraph[1]
+                                    if (self.xAxisType == 'Log'):
+                                        xGraph = np.exp( (xGraph - self.xMin) \
+                                                 * (np.log(self.xMax) - np.log(self.xMin)) \
+                                                 / (self.xMax - self.xMin) \
+                                                 + np.log(self.xMin) )[0]
+                                    if (self.yAxisType == 'Log'):
+                                        yGraph = np.exp( (yGraph - self.yMin) \
+                                                 * (np.log(self.yMax) - np.log(self.yMin)) \
+                                                 / (self.yMax - self.yMin) \
+                                                 + np.log(self.yMin) )[0]
                                     # print ('Computed positionGraph', x, y)
-                                    self._curves[curveName].append([x, y])
+                                    self._curves[curveName].append([xGraph, yGraph, x, y]) 
 
     def transformGraphToScreen (self, xGraph, yGraph):
         graphToScreen = np.linalg.inv (self._screenToGraph)
