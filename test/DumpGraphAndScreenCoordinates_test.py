@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 # Script that outputs the graph and screen coordinates of each point in a DIG file.
 # The format is:
 # 1) "xGraph yGraph xScreen yScreen" on each line
@@ -17,7 +19,6 @@ import sys
 import testDigGenerator as TDG
 
 sys.path.insert (0, '../contrib/python')
-
 from ParseDig import ParseDig
 
 def parseDigFile (fileName):

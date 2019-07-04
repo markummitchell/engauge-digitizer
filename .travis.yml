@@ -27,7 +27,8 @@ before_install:
      sudo apt-get update -qq;
      sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake;
      sudo apt-get install --yes --no-install-recommends liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb;
-     sudo apt-get install --yes --no-install-recommends python3;
+     sudo apt-get install --yes --no-install-recommends python3 python3-pip;
+     pip3 install 
    elif [ `uname` = "Darwin" ]; then
      brew update;
      brew info qt5;
@@ -73,7 +74,7 @@ script:
    fi
 #no python tests on OSX. Needs ENGAUGE_EXECUTABLE and python3
 -  if [ `uname` = "Linux" ]; then
-    cd test && python3 DumpGraphAndScreenCoordinates_test.py && cd ..;
+    cd test && ./DumpGraphAndScreenCoordinates_test.py && cd ..;
    fi
  
 after_success:
