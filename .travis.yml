@@ -25,7 +25,9 @@ before_script:
 before_install:
  - if [ `uname` = "Linux" ]; then
      sudo apt-get update -qq;
-     sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb;
+     sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake;
+     sudo apt-get install --yes --no-install-recommends liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb;
+     sudo apt-get install --yes --no-install-recommends python3;
    elif [ `uname` = "Darwin" ]; then
      brew update;
      brew info qt5;
@@ -69,7 +71,7 @@ script:
  - if [ `uname` = "Linux" ]; then
     cd src && ./build_and_run_all_cli_tests && cd ..;
    fi
-#no python tests on OSX. Needs ENGAUGE_EXECUTABLE
+#no python tests on OSX. Needs ENGAUGE_EXECUTABLE and python3
 -  if [ `uname` = "Linux" ]; then
     cd test && python3 DumpGraphAndScreenCoordinates_test.py && cd ..;
    fi
