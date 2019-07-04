@@ -16,18 +16,17 @@ matrix:
      
 before_script:
  - if [ `uname` = "Linux" ]; then
+     # xvfb setup is discussed at https://docs.travis-ci.com/user/gui-and-headless-browsers/
      export DISPLAY=:99.0;
-     export ENGAUGE_EXECUTABLE=`pwd`/bin
      sh -e /etc/init.d/xvfb start;
      sleep 3;
+     export ENGAUGE_EXECUTABLE=`pwd`/bin     
    fi
 
 before_install:
  - if [ `uname` = "Linux" ]; then
      sudo apt-get update -qq;
-     sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake;
-     sudo apt-get install --yes --no-install-recommends liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb;
-     sudo apt-get install --yes --no-install-recommends python3 python3-pip;
+     sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb python3 python3-pip;
    elif [ `uname` = "Darwin" ]; then
      brew update;
      brew info qt5;
