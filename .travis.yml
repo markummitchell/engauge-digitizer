@@ -28,7 +28,6 @@ before_install:
      sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake;
      sudo apt-get install --yes --no-install-recommends liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb;
      sudo apt-get install --yes --no-install-recommends python3 python3-pip;
-     pip3 install 
    elif [ `uname` = "Darwin" ]; then
      brew update;
      brew info qt5;
