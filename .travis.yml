@@ -17,6 +17,7 @@ matrix:
 before_script:
  - if [ `uname` = "Linux" ]; then
      export DISPLAY=:99.0;
+     export ENGAUGE_EXECUTABLE=`pwd`/bin
      sh -e /etc/init.d/xvfb start;
      sleep 3;
    fi
@@ -67,6 +68,10 @@ script:
 #no cli tests on OSX
  - if [ `uname` = "Linux" ]; then
     cd src && ./build_and_run_all_cli_tests && cd ..;
+   fi
+#no python tests on OSX. Needs ENGAUGE_EXECUTABLE
+-  if [ `uname` = "Linux" ]; then
+    cd test && python3 DumpGraphAndScreenCoordinates_test.py && cd ..;
    fi
  
 after_success:

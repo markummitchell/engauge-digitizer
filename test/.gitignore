@@ -6,3 +6,5 @@
 .file2
 extract_image_only_1.png
 extract_image_only_2.png
+__pycache__
+.Test*

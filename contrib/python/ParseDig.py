@@ -9,36 +9,12 @@ import os
 import subprocess
 import sys
 
-# Operating system dependent location of Engauge executable. Some typical values are:
-#  cygwin      /usr/bin/engauge-digitizer.exe
-#  linux       /usr/bin/engauge
-#  osx         /Applications/Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer
-#  windows     C:/Program Files/Engauge Digitizer/engauge.exe
-envTag = 'ENGAUGE_EXECUTABLE'
-if envTag in os.environ and os.environ [envTag] != '':
-    engaugeExecutable = os.environ [envTag]
-else:
-    engaugeExecutable = "/usr/bin/engauge"
-
-NO_EXE_ERROR = '{} {}. {} {} {}. {}' . format (
-    'Could not execute Engauge at',
-    engaugeExecutable,
-    'Try setting environemnt variable',
-    envTag,
-    'to the executable path',
-    'Version 11.3 or newer is required')
-
 class ParseDig:
     def __init__(self, digFile):
         # Hash table of curve name to lists, with each list consisting of graph points 
         # and screen coordinates
         self._curves = DefaultListOrderedDict()
 
-        if not os.path.exists (engaugeExecutable):
-
-            print (NO_EXE_ERROR)
-            sys.exit (0)
-            
         try:
             with open(digFile, 'rt') as f:
                 tree = ElementTree.parse (f)
@@ -53,6 +29,40 @@ class ParseDig:
             except Exception as e:
                 print ("Could not load {} even after trying an upgrade" . format (digFile))
 
+    @staticmethod
+    def callEngauge (argumentsArray):
+        # Operating system dependent location of Engauge executable. Some typical values are:
+        #  cygwin      /usr/bin/engauge-digitizer.exe
+        #  linux       /usr/bin/engauge
+        #  osx         /Applications/Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer
+        #  windows     C:/Program Files/Engauge Digitizer/engauge.exe
+        envTag = 'ENGAUGE_EXECUTABLE'
+        if envTag in os.environ and os.environ [envTag] != '':
+            engaugeExecutable = os.environ [envTag]
+        else:
+            engaugeExecutable = "/usr/bin/engauge"
+
+        noExeError = '{} {}. {} {} {}. {}' . format (
+            'Could not execute Engauge at',
+            engaugeExecutable,
+            'Try setting environemnt variable',
+            envTag,
+            'to the executable path',
+            'Version 11.3 or newer is required')
+
+        if not os.path.exists (engaugeExecutable):
+
+            print (noExeError)
+            sys.exit (0)
+
+        fullArgsArray = [engaugeExecutable] + argumentsArray
+
+        rtn = subprocess.call (fullArgsArray)
+        
+        if rtn:
+            print (noExeError)
+            sys.exit (0)
+
     def computeAffineTransformation (self, screen, graphX, graphY, graph1):
         # Compute screen-to-graph affine transformation from screen and graph points in axes
         screenInverse = np.linalg.inv (screen)
@@ -61,6 +71,25 @@ class ParseDig:
         m3 = np.dot (screenInverse, graph1)
         screenToGraph = np.array ([m1.flatten(), m2.flatten(), m3.flatten()])
         return screenToGraph
+      
+    def curve (self, curveName):
+        return list (self._curves [curveName])
+
+    def curveNames (self):
+        return list (self._curves.keys ())
+
+    def delimiterEnumToDelimiter (self, delimiterEnum):
+        # Mapping ExportDelimiter enum
+        switcher = {
+            0: ',',
+            1: ' ',
+            2: '\t',
+            3: ';'
+            }
+        return switcher.get (delimiterEnum, ' ')
+
+    def exportDelimiter (self):
+        return self._delimiter
 
     def getScreenAndGraph(self, node):
         #Get screen and graph coordinates from axis data
@@ -158,25 +187,6 @@ class ParseDig:
                 screenXNew.append((b1 - b4) / (m4 - m1))
                 screenYNew.append(m4 * screenXNew[2] + b4)
             return np.array([screenXNew, screenYNew, np.ones(3)]).T, graphX, graphY, np.ones(3), rowsGraph, rowsScreen  
-      
-    def curve (self, curveName):
-        return list (self._curves [curveName])
-
-    def curveNames (self):
-        return list (self._curves.keys ())
-
-    def delimiterEnumToDelimiter (self, delimiterEnum):
-        # Mapping ExportDelimiter enum
-        switcher = {
-            0: ',',
-            1: ' ',
-            2: '\t',
-            3: ';'
-            }
-        return switcher.get (delimiterEnum, ' ')
-
-    def exportDelimiter (self):
-        return self._delimiter
 
     def parseXml(self, tree):
         # (xG1 xG2 xG3) = screen * (m11 m12 m13)
@@ -275,11 +285,10 @@ class ParseDig:
             sys.exit (0)
 
         # Create the upgrade from the old dig file. It will be removed after
-        rtn = subprocess.call ([engaugeExecutable,
-                                "-upgrade",
-                                digFile])
-        if rtn:
-            print (NO_EXE_ERROR)
-            sys.exit (0)
+        callEngauge (["-upgrade",
+                      digFile])
 
         return digFileUpgraded
+
+        
+
