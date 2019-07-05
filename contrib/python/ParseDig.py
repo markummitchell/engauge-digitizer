@@ -36,12 +36,14 @@ class ParseDig:
         #  linux       /usr/bin/engauge
         #  osx         /Applications/Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer
         #  windows     C:/Program Files/Engauge Digitizer/engauge.exe
+        print ('helloa')
         envTag = 'ENGAUGE_EXECUTABLE'
         if envTag in os.environ and os.environ [envTag] != '':
             engaugeExecutable = os.environ [envTag]
         else:
             engaugeExecutable = "/usr/bin/engauge"
 
+        print ('hellob')            
         if not os.path.exists (engaugeExecutable):
             noExeError = '{} {} - {}. {} {} {}.' . format (
                 'Could not execute Engauge at',
@@ -56,16 +58,21 @@ class ParseDig:
 
         fullArgsArray = [engaugeExecutable] + argumentsArray
 
+        print ('helloc')        
         p = subprocess.Popen (fullArgsArray,
                               stdin = subprocess.PIPE,
                               stdout = subprocess.PIPE,
                               stderr = subprocess.PIPE)
+        print ('hellod')        
         out, err = p.communicate ()
+        print ('helloe')        
         if p.returncode:
-            noExeError = "{} {} - return={}.\nout='{}'\nerr='{}'\n{}" . format (
+            print ('hellof')            
+            noExeError = "{} {} - return={}.\nCommand line '{}'\nout='{}'\nerr='{}'\n{}" . format (
                 'Error while executing Engauge at',
                 engaugeExecutable,
                 p.returncode,
+                fullArgsArray,
                 out.decode ('utf-8'),
                 err.decode ('utf-8'),
                 'Version 11.3 or newer is required')

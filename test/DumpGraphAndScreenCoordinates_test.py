@@ -70,9 +70,9 @@ def TestFourAxesInfiniteSlope ():
                        'Linear', 'Linear', title)
     print ('hello3')    
     ParseDig.callEngauge (['-exportonly', title])
-    engaugeOutput = pd.read_csv (title[:-3] + 'csv')
+    engaugeOutput = pd.read_csv (title [:-3] + 'csv')
     parsedData = np.array (parseDigFile (title).iloc [:, :2])[0]
-    testData = np.array (engaugeOutput.iloc [:,:2]) [0]
+    testData = np.array (engaugeOutput.iloc [:, :2]) [0]
     print ('hello4')        
     for i in range (len (testData)):
         decimalIndex = str (testData [i]).find ('.')
