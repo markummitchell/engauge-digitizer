@@ -67,7 +67,10 @@ class ParseDig:
         out, err = p.communicate ()
         print ('helloe')        
         if p.returncode:
-            print ('hellof')            
+            print ('hellof')
+            with open ('.engauge.log', 'r') as f:
+                for line in f:
+                    print (line, end='')
             noExeError = "{} {} - return={}.\nCommand line '{}'\nout='{}'\nerr='{}'\n{}" . format (
                 'Error while executing Engauge at',
                 engaugeExecutable,
