@@ -69,13 +69,13 @@ script:
  - if [ `uname` != "Darwin" -o "$BUILD_DEBUG" = "1" ]; then
     cd src && ./build_and_run_all_gui_tests && cd ..;
    fi
+#no python tests on OSX. Needs executable from build_and_run_all_gui_tests (removed by build_and_run_all_cli_tests)
+ - if [ `uname` = "Linux" ]; then
+    cd test && ./DumpGraphAndScreenCoordinates_test.py && cd ..;
+   fi
 #no cli tests on OSX
  - if [ `uname` = "Linux" ]; then
     cd src && ./build_and_run_all_cli_tests && cd ..;
-   fi
-#no python tests on OSX. Needs ENGAUGE_EXECUTABLE and python3
- - if [ `uname` = "Linux" ]; then
-    cd test && ./DumpGraphAndScreenCoordinates_test.py && cd ..;
    fi
  
 after_success:
