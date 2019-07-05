@@ -68,7 +68,7 @@ class ParseDig:
         out, err = p.communicate ()
         if p.returncode:
             # Dump log file but only, for simplicity, if it exists in the executable directory
-            engaugeLogFilename = os.path.dirname (ENGAUGE_EXECUTABLE) + os.sep() + '.engauge.log'
+            engaugeLogFilename = os.path.dirname (ENGAUGE_EXECUTABLE) + os.sep + '.engauge.log'
             if os.path.exists (engaugeLogFilename):
                 with open (engaugeLogFilename, 'r') as engaugeLogFile:
                     for line in engaugeLogFile:
