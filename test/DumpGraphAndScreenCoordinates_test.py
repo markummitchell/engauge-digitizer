@@ -11,6 +11,7 @@
 # 3) DefaultListOrderedDict.py from the Engauge scripts directory
 # 4) ParseDig.py from the Engauge scripts directory
 
+import faulthandler
 import inspect
 import numpy as np
 import pandas as pd
@@ -122,7 +123,8 @@ def TestRandomSlope ():
         parsedData [i] = np.round (parsedData [i], decimals)
     showResults ((parsedData == testData).all(),
                  inspect.stack () [0] [3])
-    
+
+faulthandler.enable ()    
 TestFourAxesInfiniteSlope ()
 TestInfiniteSlope ()
 TestRandomSlope ()

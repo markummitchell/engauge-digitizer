@@ -62,7 +62,7 @@ class ParseDig:
                               stderr = subprocess.PIPE)
         out, err = p.communicate ()
         if p.returncode:
-            noExeError = '{} {} - return={}.\nout='{}'\nerr='{}'\n{}' . format (
+            noExeError = "{} {} - return={}.\nout='{}'\nerr='{}'\n{}" . format (
                 'Error while executing Engauge at',
                 engaugeExecutable,
                 p.returncode,
