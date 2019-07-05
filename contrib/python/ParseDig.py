@@ -30,21 +30,21 @@ class ParseDig:
                 print ("Could not load {} even after trying an upgrade" . format (digFile))
 
     @staticmethod
-    def callEngauge (argumentsArray):
+    def callEngauge (argumentsArray, debug = False):
         # Operating system dependent location of Engauge executable. Some typical values are:
         #  cygwin      /usr/bin/engauge-digitizer.exe
         #  linux       /usr/bin/engauge
         #  osx         /Applications/Engauge\ Digitizer.app/Contents/MacOS/Engauge\ Digitizer
         #  windows     C:/Program Files/Engauge Digitizer/engauge.exe
-        print ('helloa')
         envTag = 'ENGAUGE_EXECUTABLE'
         if envTag in os.environ and os.environ [envTag] != '':
             engaugeExecutable = os.environ [envTag]
         else:
             engaugeExecutable = "/usr/bin/engauge"
 
-        print ('hellob')            
         if not os.path.exists (engaugeExecutable):
+
+            # Show error message            
             noExeError = '{} {} - {}. {} {} {}.' . format (
                 'Could not execute Engauge at',
                 engaugeExecutable,
@@ -56,21 +56,25 @@ class ParseDig:
             print (noExeError)
             sys.exit (0)
 
-        fullArgsArray = [engaugeExecutable] + argumentsArray
+        debugArgs = []
+        if (debug):
+            debugArgs = ['-debug']
+        fullArgs = [engaugeExecutable] + debugArgs + argumentsArray
 
-        print ('helloc')        
-        p = subprocess.Popen (fullArgsArray,
+        p = subprocess.Popen (fullArgs,
                               stdin = subprocess.PIPE,
                               stdout = subprocess.PIPE,
                               stderr = subprocess.PIPE)
-        print ('hellod')        
         out, err = p.communicate ()
-        print ('helloe')        
         if p.returncode:
-            print ('hellof')
-            with open ('.engauge.log', 'r') as f:
-                for line in f:
-                    print (line, end='')
+            # Dump log file but only, for simplicity, if it exists in the executable directory
+            engaugeLogFilename = os.path.dirname (ENGAUGE_EXECUTABLE) + os.sep() + '.engauge.log'
+            if os.path.exists (engaugeLogFilename):
+                with open (engaugeLogFilename, 'r') as engaugeLogFile:
+                    for line in engaugeLogFile:
+                        print (line, end='')
+
+            # Show error message
             noExeError = "{} {} - return={}.\nCommand line '{}'\nout='{}'\nerr='{}'\n{}" . format (
                 'Error while executing Engauge at',
                 engaugeExecutable,

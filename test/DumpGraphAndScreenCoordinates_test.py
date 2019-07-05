@@ -22,6 +22,8 @@ import testDigGenerator as TDG
 sys.path.insert (0, '../contrib/python')
 from ParseDig import ParseDig
 
+DEBUG_ENABLE = True
+
 def parseDigFile (fileName):
     parseDig = ParseDig (fileName)
     curveNames = parseDig.curveNames ()
@@ -63,27 +65,22 @@ def TestFourAxesInfiniteSlope ():
     xPoints = 55
     yPoints = 96
     title = '.TestFourAxesInfiniteSlope.dig'
-    print ('hello2')    
     TDG.createTestCase(np.array ([xScreen, xGraph]),
                        np.array ([yScreen, yGraph]),
                        xPoints, yPoints,
                        'Linear', 'Linear', title)
-    print ('hello3')    
-    ParseDig.callEngauge (['-exportonly', title])
+    ParseDig.callEngauge (['-exportonly', title], DEBUG_ENABLE)
     engaugeOutput = pd.read_csv (title [:-3] + 'csv')
     parsedData = np.array (parseDigFile (title).iloc [:, :2])[0]
     testData = np.array (engaugeOutput.iloc [:, :2]) [0]
-    print ('hello4')        
     for i in range (len (testData)):
         decimalIndex = str (testData [i]).find ('.')
         decimals = len (str (testData [i])) - decimalIndex - 1
         parsedData[i] = np.round (parsedData [i], decimals)
-    print ('hello4')            
     showResults ((parsedData == testData).all(),
                  inspect.stack () [0] [3])
       
 def TestInfiniteSlope():
-    print ('hello5')                
     xScreen = [45, 587, 45]
     yScreen = [327, 171, 15]
     xGraph = [0, 14, 0]
@@ -95,7 +92,7 @@ def TestInfiniteSlope():
                         np.array ([yScreen, yGraph]),
                         xPoints, yPoints,
                         'Linear', 'Linear', title)
-    ParseDig.callEngauge (['-exportonly', title])
+    ParseDig.callEngauge (['-exportonly', title], DEBUG_ENABLE)
     engaugeOutput = pd.read_csv (title [:-3] + 'csv')
     parsedData = np.array (parseDigFile (title).iloc [:, :2]) [0]
     testData = np.array (engaugeOutput.iloc [:, :2]) [0]
@@ -105,10 +102,8 @@ def TestInfiniteSlope():
         parsedData[i] = np.round (parsedData [i], decimals)
     showResults ((parsedData == testData).all(),
                  inspect.stack () [0] [3])
-    print ('hello6')
     
 def TestRandomSlope ():
-    print ('hello7')                    
     xScreen = [np.random.randint(100, 150), 587, 45]
     yScreen = [327, 171, 15]
     xGraph = [0, 14, 0]
@@ -120,7 +115,7 @@ def TestRandomSlope ():
                         np.array ([yScreen, yGraph]),
                         xPoints, yPoints,
                         'Linear', 'Linear', title)
-    ParseDig.callEngauge (['-exportonly', title])
+    ParseDig.callEngauge (['-exportonly', title], DEBUG_ENABLE)
     engaugeOutput = pd.read_csv (title [:-3] + 'csv')
     parsedData = np.array (parseDigFile (title).iloc [:, :2]) [0]
     testData = np.array (engaugeOutput.iloc [:, :2]) [0]
@@ -130,9 +125,7 @@ def TestRandomSlope ():
         parsedData [i] = np.round (parsedData [i], decimals)
     showResults ((parsedData == testData).all(),
                  inspect.stack () [0] [3])
-    print ('hello8')
     
-print ('hello1')
 faulthandler.enable ()    
 TestFourAxesInfiniteSlope ()
 TestInfiniteSlope ()
