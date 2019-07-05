@@ -56,16 +56,18 @@ class ParseDig:
 
         fullArgsArray = [engaugeExecutable] + argumentsArray
 
-        rtn = subprocess.call (fullArgsArray)
-        
-        if rtn:
-            with open (argumentsArray [1], 'r') as f:
-                for line in f:
-                    print (line)
-            noExeError = '{} {} - rtn={}. {}' . format (
+        p = subprocess.Popen (fullArgsArray,
+                              stdin = subprocess.PIPE,
+                              stdout = subprocess.PIPE,
+                              stderr = subprocess.PIPE)
+        out, err = p.communicate ()
+        if p.returncode
+            noExeError = '{} {} - return={}.\nout={}\nerr={}\n{}' . format (
                 'Error while executing Engauge at',
                 engaugeExecutable,
-                rtn,
+                p.returncode,
+                out,
+                err,
                 'Version 11.3 or newer is required')
             
             print (noExeError)
