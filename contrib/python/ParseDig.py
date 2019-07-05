@@ -43,14 +43,13 @@ class ParseDig:
             engaugeExecutable = "/usr/bin/engauge"
 
         if not os.path.exists (engaugeExecutable):
-            noExeError = '{} {} - {}. {} {} {}. {}' . format (
+            noExeError = '{} {} - {}. {} {} {}.' . format (
                 'Could not execute Engauge at',
                 engaugeExecutable,
                 'Path does not exist',
                 'Try setting environment variable',
                 envTag,
-                'to the executable path',
-                'Version 11.3 or newer is required')
+                'to the executable path')
 
             print (noExeError)
             sys.exit (0)
@@ -60,13 +59,13 @@ class ParseDig:
         rtn = subprocess.call (fullArgsArray)
         
         if rtn:
-            noExeError = '{} {} - rtn={}. {} {} {}. {}' . format (
-                'Could not execute Engauge at',
+            with open (argumentsArray [1], 'r') as f:
+                for line in f:
+                    print (line)
+            noExeError = '{} {} - rtn={}. {}' . format (
+                'Error while executing Engauge at',
                 engaugeExecutable,
                 rtn,
-                'Try setting environment variable',
-                envTag,
-                'to the executable path',
                 'Version 11.3 or newer is required')
             
             print (noExeError)
