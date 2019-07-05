@@ -20,7 +20,6 @@ before_script:
      export DISPLAY=:99.0;
      sh -e /etc/init.d/xvfb start;
      sleep 3;
-     export ENGAUGE_EXECUTABLE=`pwd`/bin/engauge;
    fi
 
 before_install:
@@ -71,6 +70,7 @@ script:
    fi
 #no python tests on OSX. Needs executable from build_and_run_all_gui_tests (removed by build_and_run_all_cli_tests)
  - if [ `uname` = "Linux" ]; then
+    export ENGAUGE_EXECUTABLE=../bin/engauge;
     cd test && ./DumpGraphAndScreenCoordinates_test.py && cd ..;
    fi
 #no cli tests on OSX
