@@ -27,6 +27,8 @@ before_install:
  - if [ `uname` = "Linux" ]; then
      sudo apt-get update -qq;
      sudo apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb python3 python3-pip;
+     sudo pip3 install numpy
+     sudo pip3 install pandas     
    elif [ `uname` = "Darwin" ]; then
      brew update;
      brew info qt5;
