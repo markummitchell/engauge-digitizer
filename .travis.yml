@@ -20,7 +20,7 @@ before_script:
      export DISPLAY=:99.0;
      sh -e /etc/init.d/xvfb start;
      sleep 3;
-     export ENGAUGE_EXECUTABLE=`pwd`/bin;
+     export ENGAUGE_EXECUTABLE=`pwd`/bin/engauge;
    fi
 
 before_install:

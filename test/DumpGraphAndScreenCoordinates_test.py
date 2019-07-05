@@ -52,7 +52,7 @@ def showResults (result, testName):
     RED = '\033[31m'
     ENDCOLOR = '\033[0m'
     passFail = (GREEN + "PASS" + ENDCOLOR) if result else (RED + "FAIL" + ENDCOLOR)
-    print ('{}  : {}' . format (passFail, testName))
+    print ('{}   : {}' . format (passFail, testName))
     
 def TestFourAxesInfiniteSlope ():
     xScreen = [45, 587, 45, 45]
