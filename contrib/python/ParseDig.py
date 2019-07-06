@@ -61,10 +61,19 @@ class ParseDig:
             debugArgs = ['-debug']
         fullArgs = [engaugeExecutable] + debugArgs + argumentsArray
 
-        p = subprocess.Popen (fullArgs,
-                              stdin = subprocess.PIPE,
-                              stdout = subprocess.PIPE,
-                              stderr = subprocess.PIPE)
+        useShell = False
+        if useShell:
+            # Linux has a bug where using shell requires arguments to be joined or else only first is seen            
+            p = subprocess.Popen (' '.join (fullArgs),
+                                  stdin = subprocess.PIPE,
+                                  stdout = subprocess.PIPE,
+                                  stderr = subprocess.PIPE,
+                                  shell = True)
+        else:
+            p = subprocess.Popen (fullArgs,
+                                  stdin = subprocess.PIPE,
+                                  stdout = subprocess.PIPE,
+                                  stderr = subprocess.PIPE)
         out, err = p.communicate ()
         if p.returncode:
             # Dump log file but only, for simplicity, if it exists in the executable directory

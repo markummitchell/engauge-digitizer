@@ -50,10 +50,13 @@ def parseDigFile (fileName):
     f.close()
     return pd.read_csv(fileName[:-4] + 'Parsed.csv')
 
-def showResults (result, testName):
+def showResults (testName, expected, actual):
     GREEN = '\033[32m'
     RED = '\033[31m'
     ENDCOLOR = '\033[0m'
+    expected = np.array ([round (elem, 3) for elem in expected]) # Remove issues due to roundoff
+    actual = np.array ([round (elem, 3) for elem in actual])
+    result = (expected == actual).all ()
     passFail = (GREEN + "PASS" + ENDCOLOR) if result else (RED + "FAIL" + ENDCOLOR)
     print ('{}   : {}' . format (passFail, testName))
     
@@ -77,9 +80,10 @@ def TestFourAxesInfiniteSlope ():
         decimalIndex = str (testData [i]).find ('.')
         decimals = len (str (testData [i])) - decimalIndex - 1
         parsedData[i] = np.round (parsedData [i], decimals)
-    showResults ((parsedData == testData).all(),
-                 inspect.stack () [0] [3])
-      
+    showResults (inspect.stack () [0] [3],
+                 testData,
+                 parsedData)
+
 def TestInfiniteSlope():
     xScreen = [45, 587, 45]
     yScreen = [327, 171, 15]
@@ -100,8 +104,9 @@ def TestInfiniteSlope():
         decimalIndex = str (testData[i]).find ('.')
         decimals = len (str (testData [i])) - decimalIndex - 1
         parsedData[i] = np.round (parsedData [i], decimals)
-    showResults ((parsedData == testData).all(),
-                 inspect.stack () [0] [3])
+    showResults (inspect.stack () [0] [3],
+                 testData,
+                 parsedData)
     
 def TestRandomSlope ():
     xScreen = [np.random.randint(100, 150), 587, 45]
@@ -123,8 +128,9 @@ def TestRandomSlope ():
         decimalIndex = str (testData[i]).find ('.')
         decimals = len(str (testData[i])) - decimalIndex - 1
         parsedData [i] = np.round (parsedData [i], decimals)
-    showResults ((parsedData == testData).all(),
-                 inspect.stack () [0] [3])
+    showResults (inspect.stack () [0] [3],
+                 testData,
+                 parsedData)
     
 faulthandler.enable ()    
 TestFourAxesInfiniteSlope ()
