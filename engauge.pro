@@ -348,11 +348,11 @@ HEADERS  += \
     src/Load/LoadImageFromUrl.h \
     src/Logger/Logger.h \
     src/Logger/LoggerUpload.h \
-    src/Matrix/Matrix.h \
     src/main/MainDirectoryPersist.h \
     src/main/MainTitleBarFormat.h \
     src/main/MainWindow.h \
     src/main/MainWindowModel.h \
+    src/Matrix/Matrix.h \
     src/util/MigrateToVersion6.h \
     src/Mime/MimePointsDetector.h \
     src/Mime/MimePointsExport.h \
@@ -693,11 +693,11 @@ SOURCES += \
     src/Load/LoadImageFromUrl.cpp \
     src/Logger/Logger.cpp \
     src/Logger/LoggerUpload.cpp \
-    src/Matrix/Matrix.cpp \
     src/main/main.cpp \
     src/main/MainDirectoryPersist.cpp \
     src/main/MainWindow.cpp \
     src/main/MainWindowModel.cpp \
+    src/Matrix/Matrix.cpp \
     src/util/MigrateToVersion6.cpp \
     src/Mime/MimePointsDetector.cpp \
     src/Mime/MimePointsExport.cpp \

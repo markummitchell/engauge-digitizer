@@ -662,10 +662,10 @@ SOURCES += \
     Load/LoadImageFromUrl.cpp \
     Logger/Logger.cpp \
     Logger/LoggerUpload.cpp \
-    Matrix/Matrix.cpp \
     main/MainDirectoryPersist.cpp \
     main/MainWindow.cpp \
     main/MainWindowModel.cpp \
+    Matrix/Matrix.cpp \
     util/MigrateToVersion6.cpp \
     Mime/MimePointsDetector.cpp \
     Mime/MimePointsExport.cpp \
