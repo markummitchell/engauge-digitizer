@@ -71,7 +71,7 @@ script:
 #no python tests on OSX. cd test && python3 ./DumpGraphAndScreenCoordinates_test.py && cd ..;
  - if [ `uname` = "Linux" ]; then
     export ENGAUGE_EXECUTABLE=../bin/engauge;
-    cd test && engauge -debug -exportonly deleteme.dig && cd ..;
+    cd test && $ENGAUGE_EXECUTABLE -debug -exportonly deleteme.dig && cd ..;
    fi
 #no cli tests on OSX
  - if [ `uname` = "Linux" ]; then
