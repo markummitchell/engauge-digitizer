@@ -68,11 +68,10 @@ script:
  - if [ `uname` != "Darwin" -o "$BUILD_DEBUG" = "1" ]; then
     cd src && ./build_and_run_all_gui_tests && cd ..;
    fi
-#no python tests on OSX. Needs executable from build_and_run_all_gui_tests. Tests work outside Travis but not yet in Travis
- - if [ `uname` = "Linux" ]; then
+#no python tests on OSX. Needs executable from build_and_run_all_gui_tests. Tests work outside Travis but not yet in Travis. cd test && python3 ./DumpGraphAndScreenCoordinates_test.py && cd ..;
+- if [ `uname` = "Linux" ]; then
     export ENGAUGE_EXECUTABLE=../bin/engauge;
     cd test && engauge -debug -exportonly deleteme.dig && cd ..;
-#    cd test && python3 ./DumpGraphAndScreenCoordinates_test.py && cd ..;
    fi
 #no cli tests on OSX
  - if [ `uname` = "Linux" ]; then
