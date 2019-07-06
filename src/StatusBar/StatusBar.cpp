@@ -14,6 +14,7 @@
 #include <QTimer>
 #include <QWhatsThis>
 #include "StatusBar.h"
+#include "StatusBarMode.h"
 #include "ZoomFactor.h"
 #include "ZoomLabels.h"
 
@@ -266,7 +267,9 @@ void StatusBar::setStatusBarMode(StatusBarMode statusBarMode)
 
 void StatusBar::showTemporaryMessage(const QString &message)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "StatusBar::showTemporaryMessage message=" << message.toLatin1 ().data ();
+  LOG4CPP_DEBUG_S ((*mainCat)) << "StatusBar::showTemporaryMessage"
+                               << " mode=" << statusBarModeToString (m_statusBarMode).toLatin1 ().data ()
+                               << " message=" << message.toLatin1 ().data ();
 
   if (m_statusBarMode != STATUS_BAR_MODE_NEVER) {
     if (m_statusBarMode == STATUS_BAR_MODE_TEMPORARY) {

@@ -7,10 +7,14 @@
 #ifndef STATUS_BAR_MODE_H
 #define STATUS_BAR_MODE_H
 
+#include <QString>
+
 enum StatusBarMode {
   STATUS_BAR_MODE_ALWAYS,
   STATUS_BAR_MODE_NEVER,
   STATUS_BAR_MODE_TEMPORARY
 };
+
+extern QString statusBarModeToString (StatusBarMode statusBarMode);
 
 #endif // STATUS_BAR_MODE_H

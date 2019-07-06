@@ -697,6 +697,7 @@ SOURCES += \
     Spline/SplineDrawer.cpp \
     Spline/SplinePair.cpp \
     StatusBar/StatusBar.cpp \
+    StatusBar/StatusBarMode.cpp \
     Test/TEST.cpp \
     Transformation/Transformation.cpp \
     Transformation/TransformationStateAbstractBase.cpp \

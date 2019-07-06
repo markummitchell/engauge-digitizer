@@ -79,7 +79,7 @@ class ParseDig:
                 'Error while executing Engauge at',
                 engaugeExecutable,
                 p.returncode,
-                fullArgsArray,
+                fullArgs,
                 out.decode ('utf-8'),
                 err.decode ('utf-8'),
                 'Version 11.3 or newer is required')

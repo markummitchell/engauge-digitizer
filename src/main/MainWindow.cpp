@@ -200,6 +200,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
     m_regressionFile = exportRegressionFilenameFromInputFilename (loadStartupFiles.first ()); // For regression test
     slotLoadStartupFiles ();
     slotFileExport (); // Export one file. QProcess::startDetached will be called for each remaining file
+    LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::MainWindow";
     exit (0);
   } else if (isExtractImageOnly) {
     m_loadStartupFiles = loadStartupFiles;
