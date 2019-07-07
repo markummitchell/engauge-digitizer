@@ -78,7 +78,7 @@ class ParseDig:
         # In travis tests engauge returns -11 which is a segfault during shutdown after all engauge operations have
         # successfully completed. Testing with -fsanitizer-threads (see engauge.pro) suggests error is in gui threads
         # which are much harder to code around than simply ignoring -11 here
-        if p.returncode and p.returnCode != -11:
+        if p.returncode and p.returncode != -11:
             # Dump log file but only, for simplicity, if it exists in the executable directory
             engaugeLogFilename = os.path.dirname (engaugeExecutable) + os.sep + '.engauge.log'
             if os.path.exists (engaugeLogFilename):

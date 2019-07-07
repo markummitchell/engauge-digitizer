@@ -51,7 +51,7 @@ script:
     sed -ibak2 's|-L/usr/local/Cellar|-F/usr/local/Cellar|g' Makefile;
     sed -ibak3 's|-F/usr/local/Cellar/log4cpp|-L/usr/local/Cellar/log4cpp|g' Makefile;
    fi
- - make
+ - make -j4
  - if [ `uname` = "Linux" ]; then
     cd help && ./build.bash && cd ..;
    else
