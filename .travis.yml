@@ -25,8 +25,7 @@ before_script:
 before_install:
  - if [ `uname` = "Linux" ]; then
      sudo -E apt-get update -qq;
-     sudo -E apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb python3 python3-pip gdb;
-     pip3 install lxml numpy pandas --user;
+     sudo -E apt-get install --yes --no-install-recommends qtbase5-dev qttools5-dev qt5-default qttools5-dev-tools qt5-qmake liblog4cpp5-dev libfftw3-dev libqt5sql5-sqlite xvfb python3 python3-pip python3-lxml python3-numpy python3-pandas gdb;
    elif [ `uname` = "Darwin" ]; then
      brew update;
      brew info qt5;
