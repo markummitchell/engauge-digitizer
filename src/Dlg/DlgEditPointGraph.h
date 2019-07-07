@@ -7,16 +7,16 @@
 #ifndef DLG_EDIT_POINT_GRAPH_H
 #define DLG_EDIT_POINT_GRAPH_H
 
+#include "DocumentModelCoords.h"
+#include "DocumentModelGeneral.h"
+#include "MainWindowModel.h"
 #include <QDialog>
 #include <QPointF>
 #include <QString>
 
 class DlgEditPointGraphLineEdit;
 class DlgValidatorAbstract;
-class DocumentModelCoords;
-class DocumentModelGeneral;
 class MainWindow;
-class MainWindowModel;
 class QPushButton;
 class QVBoxLayout;
 class Transformation;
@@ -69,9 +69,9 @@ private:
   // Enable Ok button once text has changed. For simplicity, this is true even when original text is restored
   bool m_changed;
 
-  const DocumentModelCoords &m_modelCoords;
-  const DocumentModelGeneral &m_modelGeneral;
-  const MainWindowModel &m_modelMainWindow;
+  const DocumentModelCoords m_modelCoords;
+  const DocumentModelGeneral m_modelGeneral;
+  const MainWindowModel m_modelMainWindow;
 };
 
 #endif // DLG_EDIT_POINT_GRAPH_H

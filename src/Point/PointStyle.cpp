@@ -26,7 +26,12 @@ const PointShape DEFAULT_POINT_SHAPE_AXIS = POINT_SHAPE_CROSS;
 const double PI = 3.1415926535;
 const double TWO_PI = 2.0 * PI;
 
-PointStyle::PointStyle ()
+PointStyle::PointStyle () :
+  // Default that prevent address sanitizer warnings. Overwritten later
+  m_shape (DEFAULT_POINT_SHAPE_AXIS),
+  m_radius (DEFAULT_POINT_RADIUS),
+  m_lineWidth (DEFAULT_POINT_LINE_WIDTH),
+  m_paletteColor (DEFAULT_POINT_COLOR_GRAPH)
 {
 }
 
