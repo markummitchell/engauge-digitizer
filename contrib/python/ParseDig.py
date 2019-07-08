@@ -62,19 +62,12 @@ class ParseDig:
             debugArgs = ['-debug']
         fullArgs = [engaugeExecutable] + debugArgs + argumentsArray
 
-        useShell = False
-        if useShell:
-            # Linux has a bug where using shell requires arguments to be joined or else only first is seen            
-            p = subprocess.Popen (' '.join (fullArgs),
-                                  stdin = subprocess.PIPE,
-                                  stdout = subprocess.PIPE,
-                                  stderr = subprocess.PIPE,
-                                  shell = True)
-        else:
-            p = subprocess.Popen (fullArgs,
-                                  stdin = subprocess.PIPE,
-                                  stdout = subprocess.PIPE,
-                                  stderr = subprocess.PIPE)
+        # Linux has a bug where using shell requires arguments to be joined or else only first is seen. So if shell=True
+        # is added then first argument becomes ' '.join (fullArgs)
+        p = subprocess.Popen (fullArgs,
+                              stdin = subprocess.PIPE,
+                              stdout = subprocess.PIPE,
+                              stderr = subprocess.PIPE)
         out, err = p.communicate ()
         preturncode = p.returncode
         if preturncode == -SIGSEGV:
@@ -246,7 +239,8 @@ class ParseDig:
                     self.LogPlot = True
                     #sys.exit (1)
             elif (node.tag == 'Export'):
-                delimiterEnum = node.attrib.get('Delimiter')
+                # delimiterEnum = node.attrib.get('Delimiter')
+                pass
             elif (node.tag == 'Curve'):
                 curveName = node.attrib.get('CurveName')
                 if (curveName == 'Axes'):
