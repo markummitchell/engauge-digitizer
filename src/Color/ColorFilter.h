@@ -23,6 +23,9 @@ public:
   /// Single constructor.
   ColorFilter();
 
+  /// Destructor deallocates memory
+  ~ColorFilter();
+
   /// See if the two color values are close enough to be considered to be the same.
   bool colorCompare (QRgb rgb1,
                      QRgb rgb2) const;

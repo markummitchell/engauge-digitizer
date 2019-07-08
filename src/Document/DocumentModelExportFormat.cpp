@@ -54,7 +54,7 @@ DocumentModelExportFormat::DocumentModelExportFormat()
   m_pointsSelectionFunctions = static_cast<ExportPointsSelectionFunctions> (settings.value (SETTINGS_EXPORT_POINTS_SELECTION_FUNCTIONS,
                                                                                             QVariant (EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_ALL_CURVES)).toInt());
   m_pointsSelectionRelations = static_cast<ExportPointsSelectionRelations> (settings.value (SETTINGS_EXPORT_POINTS_SELECTION_RELATIONS,
-                                                                                QVariant (EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE)).toInt());
+                                                                                            QVariant (EXPORT_POINTS_SELECTION_RELATIONS_INTERPOLATE)).toInt());
   m_xLabel = settings.value (SETTINGS_EXPORT_X_LABEL,
                              QVariant (DEFAULT_X_LABEL)).toString();
 }
@@ -262,7 +262,7 @@ ExportPointsSelectionRelations DocumentModelExportFormat::pointsSelectionRelatio
 }
 
 void DocumentModelExportFormat::printStream(QString indentation,
-                                      QTextStream &str) const
+                                            QTextStream &str) const
 {
   str << indentation << "DocumentModelExportFormat\n";
 

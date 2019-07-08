@@ -77,9 +77,9 @@ void StatusBar::createGroupUnits ()
 
   m_groupUnits = new QFrame;
   m_groupUnits->setFrameStyle (QFrame::Box);
-  QPalette *palette = new QPalette;
-  palette->setColor (QPalette::Foreground, Qt::gray);
-  m_groupUnits->setPalette (*palette);
+  QPalette palette;
+  palette.setColor (QPalette::Foreground, Qt::gray);
+  m_groupUnits->setPalette (palette);
 
   QHBoxLayout *groupLayout = new QHBoxLayout;
   m_groupUnits->setLayout (groupLayout);

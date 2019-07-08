@@ -22,6 +22,11 @@ ColorFilter::ColorFilter()
   createStrategies ();
 }
 
+ColorFilter::~ColorFilter()
+{
+  qDeleteAll (m_strategies);
+}
+
 bool ColorFilter::colorCompare (QRgb rgb1,
                                 QRgb rgb2) const
 {

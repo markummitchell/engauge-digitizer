@@ -537,12 +537,14 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
   if (curveScaleIn->numPoints() == 2) {
     // Nondefault case is map with scale bar
     documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_2;
+    delete m_curveAxes;
     m_curveAxes = curveScaleIn;
     m_curveAxes->setCurveName (AXIS_CURVE_NAME); // Override existing "Scale" name
     delete curveAxesIn;
   } else {
     // Default case is graph with axes
     documentAxesPointsRequired = DOCUMENT_AXES_POINTS_REQUIRED_3;
+    delete m_curveAxes;    
     m_curveAxes = curveAxesIn;
     delete curveScaleIn;
   }
@@ -585,6 +587,7 @@ void CoordSystem::loadVersion6 (QXmlStreamReader &reader,
       } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
         m_modelCoords.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
+        delete m_curveAxes;        
         m_curveAxes = new Curve (reader);
       } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
         m_curvesGraphs.loadXml (reader);
@@ -642,6 +645,7 @@ void CoordSystem::loadVersions7AndUp (QXmlStreamReader &reader)
       } else if (tag == DOCUMENT_SERIALIZE_COORDS) {
         m_modelCoords.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_CURVE) {
+        delete m_curveAxes;                
         m_curveAxes = new Curve (reader);
       } else if (tag == DOCUMENT_SERIALIZE_CURVES_GRAPHS) {
         m_curvesGraphs.loadXml (reader);

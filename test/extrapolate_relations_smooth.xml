@@ -6,7 +6,7 @@
    <General ExtraPrecision="1" CursorSize="3"/>
    <Coords ScaleYRadiusString="Linear" ScaleYRadius="0" UnitsDate="3" UnitsDateString="YYYY/MM/DD" UnitsRadius="0" UnitsThetaString="Degrees (DDD.DDDDD)" UnitsTimeString="HH:MM:SS" ScaleXThetaString="Linear" UnitsX="0" UnitsY="0" Coords="0" UnitsRadiusString="Number" Type="0" UnitsTime="2" ScaleXTheta="0" UnitsTheta="0" UnitsYString="Number" TypeString="Cartesian" UnitsXString="Number"/>
    <DigitizeCurve CursorInnerRadius="5" CursorStandardCross="True" CursorSize="1" CursorLineWidth="2"/>
-   <Export DelimiterString="Commas" LayoutFunctionsString="OnePerLine" PointsIntervalRelations="1" Header="1" HeaderString="Simple" PointsSelectionRelationsString="Unknown" PointsSelectionFunctions="3" PointsIntervalUnitsFunctions="1" PointsSelectionFunctionsString="Raw" OverrideCsvTsv="True" LayoutFunctions="1" PointsIntervalFunctions="10" PointsSelectionRelations="3" PointsIntervalUnitsRelations="1" Delimiter="0" XLabel="x">
+   <Export DelimiterString="Commas" LayoutFunctionsString="OnePerLine" PointsIntervalRelations="1" Header="1" HeaderString="Simple" PointsSelectionRelationsString="Interpolate" PointsSelectionFunctions="3" PointsIntervalUnitsFunctions="1" PointsSelectionFunctionsString="Raw" OverrideCsvTsv="True" LayoutFunctions="1" PointsIntervalFunctions="10" PointsSelectionRelations="0" PointsIntervalUnitsRelations="1" Delimiter="0" XLabel="x">
     <CurveNamesNotExported/>
    </Export>
    <AxesChecker LineColor="6" Mode="1" Seconds="3"/>

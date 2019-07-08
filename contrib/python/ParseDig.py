@@ -6,6 +6,7 @@ from xml.etree import ElementTree
 from DefaultListOrderedDict import DefaultListOrderedDict
 import numpy as np
 import os
+from signal import SIGSEGV
 import subprocess
 import sys
 
@@ -76,6 +77,9 @@ class ParseDig:
                                   stderr = subprocess.PIPE)
         out, err = p.communicate ()
         preturncode = p.returncode
+        if preturncode == -SIGSEGV:
+            # On Travis engauge segfaults when running engauge with -exportonly, but after high level code has completed
+            preturncode = 0
         if preturncode:
             # Dump log file but only, for simplicity, if it exists in the executable directory
             engaugeLogFilename = os.path.dirname (engaugeExecutable) + os.sep + '.engauge.log'

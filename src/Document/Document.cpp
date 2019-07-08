@@ -73,11 +73,11 @@ Document::Document (const QString &fileName) :
   m_successfulRead = true;
 
   // Grab first few bytes to determine the version number
-  QFile *file = new QFile (fileName);
-  if (file->open(QIODevice::ReadOnly)) {
+  QFile fileVersion (fileName);
+  if (fileVersion.open(QIODevice::ReadOnly)) {
 
-    QByteArray bytesStart = file->read (FOUR_BYTES);
-    file->close ();
+    QByteArray bytesStart = fileVersion.read (FOUR_BYTES);
+    fileVersion.close ();
 
     if (bytesIndicatePreVersion6 (bytesStart)) {
 
@@ -136,7 +136,7 @@ Document::Document (const QString &fileName) :
       }
     }
   } else {
-    file->close ();
+    fileVersion.close ();
     m_successfulRead = false;
     m_reasonForUnsuccessfulRead = QString ("%1 '%2' %3")
                                   .arg (QObject::tr ("File"))

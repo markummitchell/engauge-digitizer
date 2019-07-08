@@ -34,11 +34,11 @@
 # 9) To include log4cpp_null as part of the build, add the 'log4cpp_null' config argument. This is meant only for
 #    building the snap package.
 #        qmake CONFIG+=log4cpp_null
-# 10) To add thread sanitizer (sometimes trigggering race condition segfault in ubuntu), with line numbers for later gdb debugging
-#        qmake "QMAKE_CXXFLAGS+=-fsanitize=thread" "QMAKE_CXXFLAGS+=-g1" "LIBS=-ltsan" engauge.pro
-# 11) To add address sanitizer (sometimes trigggering race condition segfault in ubuntu), with line numbers for later gdb debugging
+# 10) To add address sanitizer (sometimes trigggering race condition segfault in ubuntu), with line numbers for later gdb debugging
 #        qmake "QMAKE_CXXFLAGS+=-fsanitize=address,undefined" "QMAKE_CXXFLAGS+=-Werror=format" "QMAKE_CXXFLAGS+=-g1"
 #        "QMAKE_CXXFLAGS+=-fno-stack-protector" "LIBS=-fsanitize=address,undefined" engauge.pro
+# 11) To add thread sanitizer (sometimes trigggering race condition segfault in ubuntu), with line numbers for later gdb debugging
+#        qmake "QMAKE_CXXFLAGS+=-fsanitize=thread" "QMAKE_CXXFLAGS+=-g1" "LIBS=-fsanitize=thread" engauge.pro
 #
 # More comments are in the INSTALL file, and below
 

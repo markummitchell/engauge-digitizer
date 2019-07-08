@@ -104,6 +104,11 @@ ColorFilterSettings &ColorFilterSettings::operator=(const ColorFilterSettings &o
   return *this;
 }
 
+ColorFilterSettings::~ColorFilterSettings ()
+{
+  qDeleteAll (m_strategies);
+}
+
 ColorFilterMode ColorFilterSettings::colorFilterMode() const
 {
   return m_colorFilterMode;
@@ -111,6 +116,8 @@ ColorFilterMode ColorFilterSettings::colorFilterMode() const
 
 void ColorFilterSettings::createStrategies ()
 {
+  qDeleteAll (m_strategies); // Prevent memory leak from one constructor calling another
+  
   m_strategies [COLOR_FILTER_MODE_FOREGROUND] = new ColorFilterSettingsStrategyForeground ();
   m_strategies [COLOR_FILTER_MODE_HUE       ] = new ColorFilterSettingsStrategyHue        ();
   m_strategies [COLOR_FILTER_MODE_INTENSITY ] = new ColorFilterSettingsStrategyIntensity  ();

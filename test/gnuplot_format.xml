@@ -6,7 +6,7 @@
    <General ExtraPrecision="1" CursorSize="3"/>
    <Coords UnitsDateString="YYYY/MM/DD" TypeString="Cartesian" ScaleXThetaString="Linear" UnitsX="0" UnitsY="0" UnitsTimeString="HH:MM:SS" UnitsThetaString="Degrees (DDD.DDDDD)" Type="0" UnitsRadiusString="Number" UnitsYString="Number" UnitsXString="Number" UnitsDate="3" UnitsRadius="0" Coords="0" ScaleYRadius="0" ScaleXTheta="0" UnitsTime="2" UnitsTheta="0" ScaleYRadiusString="Linear"/>
    <DigitizeCurve CursorStandardCross="True" CursorLineWidth="2" CursorInnerRadius="5" CursorSize="1"/>
-   <Export PointsIntervalFunctions="10" PointsSelectionRelationsString="Unknown" PointsIntervalUnitsRelations="1" LayoutFunctions="1" LayoutFunctionsString="OnePerLine" XLabel="x" PointsSelectionFunctions="3" PointsSelectionFunctionsString="Raw" PointsIntervalRelations="1" DelimiterString="Commas" Delimiter="0" Header="1" HeaderString="Simple" PointsSelectionRelations="3" PointsIntervalUnitsFunctions="1" OverrideCsvTsv="True">
+   <Export PointsIntervalFunctions="10" PointsSelectionRelationsString="Interpolate" PointsIntervalUnitsRelations="1" LayoutFunctions="1" LayoutFunctionsString="OnePerLine" XLabel="x" PointsSelectionFunctions="3" PointsSelectionFunctionsString="Raw" PointsIntervalRelations="1" DelimiterString="Commas" Delimiter="0" Header="1" HeaderString="Simple" PointsSelectionRelations="0" PointsIntervalUnitsFunctions="1" OverrideCsvTsv="True">
     <CurveNamesNotExported/>
    </Export>
    <AxesChecker Seconds="3" Mode="1" LineColor="6"/>
@@ -368,10 +368,10 @@
     <Point ScreenY="82" Ordinal="1" Identifier="blue&#x9;point&#x9;197" ScreenX="949"/>
    </Cmd>
    <Cmd Description="Export settings" Type="CmdSettingsExport">
-    <Export PointsIntervalFunctions="10" PointsSelectionRelationsString="Unknown" PointsIntervalUnitsRelations="1" LayoutFunctions="1" LayoutFunctionsString="OnePerLine" XLabel="x" PointsSelectionFunctions="3" PointsSelectionFunctionsString="Raw" PointsIntervalRelations="1" DelimiterString="Commas" Delimiter="0" Header="1" HeaderString="Simple" PointsSelectionRelations="3" PointsIntervalUnitsFunctions="1" OverrideCsvTsv="True">
+    <Export PointsIntervalFunctions="10" PointsSelectionRelationsString="Interpolate" PointsIntervalUnitsRelations="1" LayoutFunctions="1" LayoutFunctionsString="OnePerLine" XLabel="x" PointsSelectionFunctions="3" PointsSelectionFunctionsString="Raw" PointsIntervalRelations="1" DelimiterString="Commas" Delimiter="0" Header="1" HeaderString="Simple" PointsSelectionRelations="0" PointsIntervalUnitsFunctions="1" OverrideCsvTsv="True">
      <CurveNamesNotExported/>
     </Export>
-    <Export PointsIntervalFunctions="10" PointsSelectionRelationsString="Unknown" PointsIntervalUnitsRelations="1" LayoutFunctions="1" LayoutFunctionsString="OnePerLine" XLabel="x" PointsSelectionFunctions="3" PointsSelectionFunctionsString="Raw" PointsIntervalRelations="1" DelimiterString="Commas" Delimiter="0" Header="2" HeaderString="Gnuplot" PointsSelectionRelations="3" PointsIntervalUnitsFunctions="1" OverrideCsvTsv="True">
+    <Export PointsIntervalFunctions="10" PointsSelectionRelationsString="Interpolate" PointsIntervalUnitsRelations="1" LayoutFunctions="1" LayoutFunctionsString="OnePerLine" XLabel="x" PointsSelectionFunctions="3" PointsSelectionFunctionsString="Raw" PointsIntervalRelations="1" DelimiterString="Commas" Delimiter="0" Header="2" HeaderString="Gnuplot" PointsSelectionRelations="0" PointsIntervalUnitsFunctions="1" OverrideCsvTsv="True">
      <CurveNamesNotExported/>
     </Export>
    </Cmd>

@@ -44,6 +44,9 @@ public:
   /// Assignment operator.
   ColorFilterSettings &operator= (const ColorFilterSettings &other);
 
+  /// Destructor deallocates memory
+  ~ColorFilterSettings ();
+  
   /// Get method for filter mode.
   ColorFilterMode colorFilterMode() const;
 
