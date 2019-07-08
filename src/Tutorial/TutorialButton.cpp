@@ -29,12 +29,10 @@ TutorialButton::TutorialButton (const QString &text,
 
 TutorialButton::~TutorialButton ()
 {
-  if (m_rect != nullptr) {
-    QGraphicsScene *scene = m_rect->scene();
-    scene->removeItem (m_rect); // This also removes m_text from the scene
+  QGraphicsScene *scene = m_rect->scene();
+  scene->removeItem (m_rect); // This also removes m_text from the scene
 
-    delete m_rect;
-  }
+  delete m_rect;
   delete m_text;
 }
 

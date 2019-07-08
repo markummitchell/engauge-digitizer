@@ -142,7 +142,6 @@ MainWindow::MainWindow(const QString &errorReportFile,
                        const QStringList &commandLineWithoutLoadStartupFiles,
                        QWidget *parent) :
   QMainWindow(parent),
-  m_originalFileWasImported (false),
   m_isDocumentExported (false),
   m_engaugeFile (EMPTY_FILENAME),
   m_currentFile (EMPTY_FILENAME),
