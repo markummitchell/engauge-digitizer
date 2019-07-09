@@ -35,6 +35,11 @@ BackgroundStateContext::BackgroundStateContext(MainWindow &mainWindow) :
   completeRequestedStateTransitionIfExists();
 }
 
+BackgroundStateContext::~BackgroundStateContext()
+{
+  qDeleteAll (m_states);
+}
+
 void BackgroundStateContext::close()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "BackgroundStateContext::close";

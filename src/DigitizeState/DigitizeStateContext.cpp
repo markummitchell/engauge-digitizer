@@ -53,6 +53,7 @@ DigitizeStateContext::DigitizeStateContext(MainWindow &mainWindow,
 
 DigitizeStateContext::~DigitizeStateContext()
 {
+  qDeleteAll (m_states);
 }
 
 QString DigitizeStateContext::activeCurve () const

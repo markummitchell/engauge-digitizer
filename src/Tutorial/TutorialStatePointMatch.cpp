@@ -15,8 +15,17 @@
 #include "TutorialStatePointMatch.h"
 
 TutorialStatePointMatch::TutorialStatePointMatch (TutorialStateContext &context) : 
-  TutorialStateAbstractBase (context)
+  TutorialStateAbstractBase (context),
+  m_title (nullptr),
+  m_background (nullptr),
+  m_text0 (nullptr),
+  m_text1 (nullptr),
+  m_text2 (nullptr),
+  m_text3 (nullptr),
+  m_previous (nullptr),
+  m_next (nullptr)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStatePointMatch::TutorialStatePointMatch";
 }
 
 void TutorialStatePointMatch::begin ()

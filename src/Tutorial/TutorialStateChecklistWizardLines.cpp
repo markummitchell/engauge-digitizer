@@ -12,6 +12,7 @@
 TutorialStateChecklistWizardLines::TutorialStateChecklistWizardLines (TutorialStateContext &context) : 
   TutorialStateChecklistWizardAbstract (context)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateChecklistWizardLines::TutorialStateChecklistWizardLines";
 }
 
 void TutorialStateChecklistWizardLines::begin ()

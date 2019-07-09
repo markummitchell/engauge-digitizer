@@ -36,6 +36,15 @@ DlgSettingsGridRemoval::DlgSettingsGridRemoval(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Grid Removal"),
                            "DlgSettingsGridRemoval",
                            mainWindow),
+  m_validatorCloseDistance (nullptr),
+  m_validatorCountX (nullptr),
+  m_validatorStartX (nullptr),
+  m_validatorStepX (nullptr),
+  m_validatorStopX (nullptr),      
+  m_validatorCountY (nullptr),
+  m_validatorStartY (nullptr),
+  m_validatorStepY (nullptr),
+  m_validatorStopY (nullptr),  
   m_scenePreview (nullptr),
   m_viewPreview (nullptr),
   m_modelGridRemovalBefore (nullptr),
@@ -50,6 +59,16 @@ DlgSettingsGridRemoval::DlgSettingsGridRemoval(MainWindow &mainWindow) :
 DlgSettingsGridRemoval::~DlgSettingsGridRemoval()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridRemoval::~DlgSettingsGridRemoval";
+
+  delete m_validatorCloseDistance;
+  delete m_validatorCountX;
+  delete m_validatorStartX;
+  delete m_validatorStepX;
+  delete m_validatorStopX;      
+  delete m_validatorCountY;
+  delete m_validatorStartY;
+  delete m_validatorStepY;
+  delete m_validatorStopY;
 }
 
 void DlgSettingsGridRemoval::createOptionalSaveDefault (QHBoxLayout * /* layout */)

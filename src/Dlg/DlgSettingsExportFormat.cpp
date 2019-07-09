@@ -55,6 +55,8 @@ DlgSettingsExportFormat::DlgSettingsExportFormat(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Export Format"),
                            "DlgSettingsExportFormat",
                            mainWindow),
+  m_validatorFunctionsPointsEvenlySpacing (nullptr),
+  m_validatorRelationsPointsEvenlySpacing (nullptr),
   m_modelExportBefore (nullptr),
   m_modelExportAfter (nullptr),
   m_haveFunction (false),
@@ -70,6 +72,9 @@ DlgSettingsExportFormat::DlgSettingsExportFormat(MainWindow &mainWindow) :
 DlgSettingsExportFormat::~DlgSettingsExportFormat()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::~DlgSettingsExportFormat";
+
+  delete m_validatorFunctionsPointsEvenlySpacing;
+  delete m_validatorRelationsPointsEvenlySpacing;  
 }
 
 void DlgSettingsExportFormat::createCurveSelection (QGridLayout *layout, int &row)

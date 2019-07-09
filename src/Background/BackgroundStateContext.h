@@ -35,6 +35,9 @@ class BackgroundStateContext
   /// Single constructor
   BackgroundStateContext(MainWindow &mainWindow);
 
+  /// Destructor deallocates memory
+  ~BackgroundStateContext();
+  
   /// Open Document is being closed so remove the background
   void close();
 

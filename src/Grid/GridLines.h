@@ -21,6 +21,9 @@ class GridLines
   /// Single constructor
   GridLines();
 
+  /// Destructor deallocates memory
+  ~GridLines();
+  
   /// Add specified grid line. Ownership of all allocated QGraphicsItems is passed to new GridLine
   void add (GridLine *gridLine);
 

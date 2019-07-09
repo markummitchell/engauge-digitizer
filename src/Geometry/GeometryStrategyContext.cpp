@@ -24,6 +24,7 @@ GeometryStrategyContext::GeometryStrategyContext()
 
 GeometryStrategyContext::~GeometryStrategyContext()
 {
+  qDeleteAll (m_strategies);
 }
 
 void GeometryStrategyContext::calculateGeometry (const Points &points,

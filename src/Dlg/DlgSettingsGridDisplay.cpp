@@ -31,6 +31,14 @@ DlgSettingsGridDisplay::DlgSettingsGridDisplay(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Grid Display"),
                            "DlgSettingsGridDisplay",
                            mainWindow),
+  m_validatorCountX (nullptr),
+  m_validatorStartX (nullptr),
+  m_validatorStepX (nullptr),
+  m_validatorStopX (nullptr),
+  m_validatorCountY (nullptr),
+  m_validatorStartY (nullptr),
+  m_validatorStepY (nullptr),
+  m_validatorStopY (nullptr),  
   m_scenePreview (nullptr),
   m_viewPreview (nullptr),
   m_modelGridDisplayBefore (nullptr),
@@ -45,6 +53,15 @@ DlgSettingsGridDisplay::DlgSettingsGridDisplay(MainWindow &mainWindow) :
 DlgSettingsGridDisplay::~DlgSettingsGridDisplay()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::~DlgSettingsGridDisplay";
+
+  delete m_validatorCountX;
+  delete m_validatorStartX;
+  delete m_validatorStepX;
+  delete m_validatorStopX;
+  delete m_validatorCountY;
+  delete m_validatorStartY;
+  delete m_validatorStepY;
+  delete m_validatorStopY;
 }
 
 void DlgSettingsGridDisplay::createDisplayCommon (QGridLayout *layout, int &row)

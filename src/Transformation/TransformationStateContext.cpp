@@ -27,6 +27,7 @@ TransformationStateContext::TransformationStateContext(QGraphicsScene &scene,
 
 TransformationStateContext::~TransformationStateContext()
 {
+  qDeleteAll (m_states);
 }
 
 bool TransformationStateContext::isGnuplot() const

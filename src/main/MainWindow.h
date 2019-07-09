@@ -626,7 +626,7 @@ private:
   DlgSettingsCoords *m_dlgSettingsCoords;
   DlgSettingsCurveList *m_dlgSettingsCurveList;
   DlgSettingsCurveProperties *m_dlgSettingsCurveProperties;
-  DlgSettingsDigitizeCurve * m_dlgSettingsDigitizeCurve;
+  DlgSettingsDigitizeCurve *m_dlgSettingsDigitizeCurve;
   DlgSettingsExportFormat *m_dlgSettingsExportFormat;
   DlgSettingsGeneral *m_dlgSettingsGeneral;
   DlgSettingsGridDisplay *m_dlgSettingsGridDisplay;

@@ -20,13 +20,7 @@ CoordSystemContext::~CoordSystemContext()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::~CoordSystemContext";
 
-  for (int i = 0; i < m_coordSystems.count(); i++) {
-    CoordSystem *coordSystem = m_coordSystems.at (i);
-    delete coordSystem;
-  }
-
-  m_coordSystems.clear ();
-  m_coordSystemIndex = 0;
+  qDeleteAll (m_coordSystems);
 }
 
 void CoordSystemContext::addCoordSystems(unsigned int numberCoordSystemToAdd)

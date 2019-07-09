@@ -230,7 +230,30 @@ MainWindow::MainWindow(const QString &errorReportFile,
 
 MainWindow::~MainWindow()
 {
+#if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
+  delete m_helpWindow;
+#endif
+  delete m_tutorialDlg;
+  delete m_cmdMediator;
+  delete m_cmdStackShadow;
+  delete m_digitizeStateContext;
+  delete m_transformationStateContext;
+  delete m_backgroundStateContext;
+  delete m_dlgSettingsAxesChecker;
+  delete m_dlgSettingsColorFilter;
+  delete m_dlgSettingsCoords;
+  delete m_dlgSettingsCurveList;
+  delete m_dlgSettingsCurveProperties;
+  delete m_dlgSettingsDigitizeCurve;
+  delete m_dlgSettingsExportFormat;
+  delete m_dlgSettingsGeneral;
+  delete m_dlgSettingsGridDisplay;
+  delete m_dlgSettingsGridRemoval;
+  delete m_dlgSettingsMainWindow;
+  delete m_dlgSettingsPointMatch;
+  delete m_dlgSettingsSegments;
   delete m_fileCmdScript;
+  m_gridLines.clear ();  
 }
 
 void MainWindow::addDockWindow (QDockWidget *dockWidget,

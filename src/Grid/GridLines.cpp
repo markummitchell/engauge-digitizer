@@ -11,6 +11,11 @@ GridLines::GridLines()
 {
 }
 
+GridLines::~GridLines()
+{
+  qDeleteAll (m_gridLinesContainer);
+}
+
 void GridLines::add (GridLine *gridLine)
 {
   m_gridLinesContainer.push_back (gridLine);

@@ -22,7 +22,7 @@ class TutorialStateIntroduction : public TutorialStateAbstractBase
  public:
   /// Single constructor
   TutorialStateIntroduction (TutorialStateContext &context);
-
+  
   virtual void begin ();
   virtual void end ();
 

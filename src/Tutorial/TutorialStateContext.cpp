@@ -29,6 +29,11 @@ TutorialStateContext::TutorialStateContext (TutorialDlg &tutorialDlg) :
   createTimer ();
 }
 
+TutorialStateContext::~TutorialStateContext ()
+{
+  qDeleteAll (m_states);
+}
+
 void TutorialStateContext::createStates ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateContext::createStates";

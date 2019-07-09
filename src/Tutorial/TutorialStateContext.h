@@ -25,6 +25,9 @@ class TutorialStateContext : public QObject
   /// Single constructor
   TutorialStateContext(TutorialDlg &tutorialDlg);
 
+  /// Destructor deallocates memory
+  ~TutorialStateContext();
+
   /// Request a transition to the specified state from the current state. A timer is used. This assumes TutorialStateContext
   /// is NOT on the stack - probably since an external event (mouse click, ...) resulted in a callback to the current state
   void requestDelayedStateTransition (TutorialState tutorialState);

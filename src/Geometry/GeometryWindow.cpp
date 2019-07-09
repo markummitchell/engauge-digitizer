@@ -47,6 +47,7 @@ GeometryWindow::GeometryWindow (MainWindow *mainWindow) :
 
 GeometryWindow::~GeometryWindow()
 {
+  delete m_model;
 }
 
 void GeometryWindow::clear ()
