@@ -241,56 +241,62 @@ void DigitizeStateSelect::handleContextMenuEventGraph (CmdMediator *cmdMediator,
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::handleContextMenuEventGraph "
                               << "points=" << pointIdentifiers.join(",").toLatin1 ().data ();
 
-  double *x = nullptr, *y = nullptr;
+  // Editing graph coordinates before the axes are defined is not useful because:
+  // 1) That functionality is for fine tuning point placement based on defined axes
+  // 2) The transformation from screen to graph coordinates below will crash
+  if (context().mainWindow().transformation().transformIsDefined()) {
 
-  if (pointIdentifiers.count() == 1) {
+    double *x = nullptr, *y = nullptr;
 
-    // There is exactly one point so pass its coordinates to the dialog
-    x = new double;
-    y = new double;
+    if (pointIdentifiers.count() == 1) {
 
-    QPointF posScreenBefore = cmdMediator->document().positionScreen (pointIdentifiers.first());
-    QPointF posGraphBefore;
-    context().mainWindow().transformation().transformScreenToRawGraph (posScreenBefore,
-                                                                       posGraphBefore);
+      // There is exactly one point so pass its coordinates to the dialog
+      x = new double;
+      y = new double;
 
-    // Ask user for coordinates
-    *x = posGraphBefore.x();
-    *y = posGraphBefore.y();
-  }
+      QPointF posScreenBefore = cmdMediator->document().positionScreen (pointIdentifiers.first());
+      QPointF posGraphBefore;
+      context().mainWindow().transformation().transformScreenToRawGraph (posScreenBefore,
+                                                                         posGraphBefore);
 
-  DlgEditPointGraph *dlg = new DlgEditPointGraph (context().mainWindow(),
-                                                  cmdMediator->document().modelCoords(),
-                                                  cmdMediator->document().modelGeneral(),
-                                                  context().mainWindow().modelMainWindow(),
-                                                  context().mainWindow().transformation(),
-                                                  x,
-                                                  y);
-  delete x;
-  delete y;
+      // Ask user for coordinates
+      *x = posGraphBefore.x();
+      *y = posGraphBefore.y();
+    }
 
-  x = nullptr;
-  y = nullptr;
+    DlgEditPointGraph *dlg = new DlgEditPointGraph (context().mainWindow(),
+                                                    cmdMediator->document().modelCoords(),
+                                                    cmdMediator->document().modelGeneral(),
+                                                    context().mainWindow().modelMainWindow(),
+                                                    context().mainWindow().transformation(),
+                                                    x,
+                                                    y);
+    delete x;
+    delete y;
 
-  int rtn = dlg->exec ();
+    x = nullptr;
+    y = nullptr;
 
-  bool isXGiven, isYGiven;
-  double xGiven, yGiven;
-  dlg->posGraph (isXGiven, xGiven, isYGiven, yGiven); // One or both coordinates are returned
-  delete dlg;
+    int rtn = dlg->exec ();
 
-  if (rtn == QDialog::Accepted) {
+    bool isXGiven, isYGiven;
+    double xGiven, yGiven;
+    dlg->posGraph (isXGiven, xGiven, isYGiven, yGiven); // One or both coordinates are returned
+    delete dlg;
 
-    // Create a command to edit the point
-    CmdEditPointGraph *cmd = new CmdEditPointGraph (context().mainWindow(),
-                                                    cmdMediator->document(),
-                                                    pointIdentifiers,
-                                                    isXGiven,
-                                                    isYGiven,
-                                                    xGiven,
-                                                    yGiven);
-    context().appendNewCmd(cmdMediator,
-                           cmd);
+    if (rtn == QDialog::Accepted) {
+
+      // Create a command to edit the point
+      CmdEditPointGraph *cmd = new CmdEditPointGraph (context().mainWindow(),
+                                                      cmdMediator->document(),
+                                                      pointIdentifiers,
+                                                      isXGiven,
+                                                      isYGiven,
+                                                      xGiven,
+                                                      yGiven);
+      context().appendNewCmd(cmdMediator,
+                             cmd);
+    }
   }
 }
 
