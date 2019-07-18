@@ -22,6 +22,7 @@ rm -rf build
 rm -rf documentation
 
 mkdir -p build/desktop-file
+mkdir -p build/meta/gui
 cd build
 BUILD=`pwd`
 
@@ -33,6 +34,7 @@ sed 's/DESTDIR = bin/DESTDIR = ./g' ../../../engauge.pro >engauge.pro
 
 cp ../snapcraft.yaml .
 cp ../../engauge-digitizer.desktop desktop-file
+cp ../../../src/img/digitizer-32.png meta/gui/icon.png
 cp -r ../../../help .
 cp -r ../../../src .
 
