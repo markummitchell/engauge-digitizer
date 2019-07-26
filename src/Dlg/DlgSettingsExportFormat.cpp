@@ -1136,6 +1136,12 @@ void DlgSettingsExportFormat::updateIntervalConstraints ()
                            m_minIntervalGraph :
                            m_minIntervalScreen);
 
+  if (cmdMediator().document().modelCoords().coordScaleYRadius() == COORD_SCALE_LOG) {
+    // Override scale factor with log scale so Export classes are assured that multiplying by the scale factor will
+    // cause an increase
+    functionsMin = qMax (1.00000001, functionsMin);
+  }
+
   if (m_tabWidget->currentIndex() == TAB_WIDGET_INDEX_FUNCTIONS) {
 
     if (m_modelExportAfter->pointsIntervalFunctions() < functionsMin) {

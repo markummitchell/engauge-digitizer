@@ -191,17 +191,21 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLogGraph (double xTh
   // Convert the gathered values into a periodic sequence
   ValuesVectorXOrY values;
   double xTheta = xThetaFirstSimplestNumber;
-  while (xTheta > xThetaMin) {
-    xTheta /= m_modelExport.pointsIntervalFunctions(); // Go backwards until reaching or passing minimum
+  if (m_modelExport.pointsIntervalFunctions() > 1) { // Safe to iterate
+    while (xTheta > xThetaMin) {
+      xTheta /= m_modelExport.pointsIntervalFunctions(); // Go backwards until reaching or passing minimum
+    }
   }
   if (xTheta < xThetaMin) {
     values [xThetaMin] = true; // We passed minimum so insert point right at xThetaMin
   }
 
-  xTheta *= m_modelExport.pointsIntervalFunctions();
-  while (xTheta <= xThetaMax) {
-    values [xTheta] = true;
-    xTheta *= m_modelExport.pointsIntervalFunctions(); // Insert point at a simple number
+  if (m_modelExport.pointsIntervalFunctions() > 1) { // Safe to iterate
+    xTheta *= m_modelExport.pointsIntervalFunctions();
+    while (xTheta <= xThetaMax) {
+      values [xTheta] = true;
+      xTheta *= m_modelExport.pointsIntervalFunctions(); // Insert point at a simple number
+    }
   }
 
   if (xTheta > xThetaMax) {
