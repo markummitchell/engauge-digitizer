@@ -36,6 +36,8 @@ public:
                                   QVector<QString> &distanceGraphBackward,
                                   QVector<QString> &distancePercentBackward) const;
 
+  /// Generate a vector that identifies points belonging to segments that overlap, for
+  /// smoothly connected functions
   virtual void loadSmoothAmbiguityVector (QVector<QString> &x,
                                           QVector<QString> &y,
                                           const Transformation &transformation,

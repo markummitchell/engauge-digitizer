@@ -118,6 +118,7 @@ public:
   /// Single constructor.
   /// \param errorReportFile Optional error report file to be read at startup. Empty if unused. Incompatible with fileCmdScript
   /// \param fileCmdScriptFile Optional file command script file to be read at startup. Empty if unused. Incompatible with errorReportFile
+  /// \param isDropRegression True if files loaded at startup are for drag and drop testing
   /// \param isRegressionTest True if errorReportFile or fileCmdScript is for regression testing, in which case it is executed and the program exits
   /// \param isGnuplot True if diagnostic gnuplot files are generated for math-intense sections of the code. Used for development and debugging
   /// \param isReset True to reset all settings that would otherwise be restored from the previous execution of Engauge
