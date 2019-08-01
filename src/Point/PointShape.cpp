@@ -24,6 +24,10 @@ QString pointShapeToString (PointShape pointShape)
       rtn = QObject::tr ("Diamond");
       break;
 
+    case POINT_SHAPE_HOURGLASS:
+      rtn = QObject::tr ("Hourglass");
+      break;      
+
     case POINT_SHAPE_SQUARE:
       rtn = QObject::tr ("Square");
       break;
@@ -31,6 +35,10 @@ QString pointShapeToString (PointShape pointShape)
     case POINT_SHAPE_TRIANGLE:
       rtn = QObject::tr ("Triangle");
       break;
+
+    case POINT_SHAPE_TRIANGLE2:
+      rtn = QObject::tr ("Triangle2");
+      break;      
 
     case POINT_SHAPE_X:
       rtn = QObject::tr ("X");

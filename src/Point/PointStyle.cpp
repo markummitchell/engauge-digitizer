@@ -200,6 +200,17 @@ QPolygonF PointStyle::polygon () const
       }
       break;
 
+    case POINT_SHAPE_HOURGLASS:
+      {
+        int xyWidth = signed (m_radius);
+
+        points.append (QPointF (-1 * xyWidth, -1 * xyWidth));
+        points.append (QPointF (xyWidth, -1 * xyWidth));
+        points.append (QPointF (-1 * xyWidth, xyWidth));
+        points.append (QPointF (xyWidth, xyWidth));        
+      }
+      break;      
+
     case POINT_SHAPE_SQUARE:
       {
         int xyWidth = signed (m_radius);
@@ -220,6 +231,16 @@ QPolygonF PointStyle::polygon () const
         points.append (QPointF (xyWidth, -1 * xyWidth));
       }
       break;
+
+    case POINT_SHAPE_TRIANGLE2:
+      {
+        int xyWidth = signed (m_radius);
+
+        points.append (QPointF (-1 * xyWidth, xyWidth));
+        points.append (QPointF (0, -1 * xyWidth));
+        points.append (QPointF (xyWidth, xyWidth));
+      }
+      break;      
 
     case POINT_SHAPE_X:
       {

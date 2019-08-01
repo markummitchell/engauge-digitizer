@@ -68,13 +68,10 @@
 		<content_attribute id="money-gambling">none</content_attribute>
 	</content_rating>
 	<releases>
-		<release date="2019-05-21" version="11.3">
+		<release date="2019-08-02" version="12.0">
 			<description>
 			  <ul>
-			    <li>Handle editing of graph point coordinates before axes are defined</li>
-			    <li>More support for drag-and-drop import</li>
-			    <li>New Load Default button for export settings</li>
-			    <li>Python script to export point coordinates</li>
+			    <li>More points styles </li>
 			  </ul>
 			</description>
 		</release>

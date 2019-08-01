@@ -172,10 +172,14 @@ void DlgSettingsCurveProperties::createPoint (QGridLayout *layout,
                             POINT_SHAPE_CROSS);
   m_cmbPointShape->addItem (pointShapeToString (POINT_SHAPE_DIAMOND),
                             POINT_SHAPE_DIAMOND);
+  m_cmbPointShape->addItem (pointShapeToString (POINT_SHAPE_HOURGLASS),
+                            POINT_SHAPE_HOURGLASS);  
   m_cmbPointShape->addItem (pointShapeToString (POINT_SHAPE_SQUARE),
                             POINT_SHAPE_SQUARE);
   m_cmbPointShape->addItem (pointShapeToString (POINT_SHAPE_TRIANGLE),
                             POINT_SHAPE_TRIANGLE);
+  m_cmbPointShape->addItem (pointShapeToString (POINT_SHAPE_TRIANGLE2),
+                            POINT_SHAPE_TRIANGLE2);
   m_cmbPointShape->addItem (pointShapeToString (POINT_SHAPE_X),
                             POINT_SHAPE_X);
   connect (m_cmbPointShape, SIGNAL (activated (const QString &)), this, SLOT (slotPointShape (const QString &))); // activated() ignores code changes
