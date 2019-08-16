@@ -503,7 +503,7 @@ Digitizes curve points by placing new points along the highlighted segment under
 New points will be assigned to the currently selected curve.</source>
         <translation>Numérise des points de courbe en mode remplissage par segment
 
-Numérise la courbe en plaçant des points le long du segment en surbrillance sous le curseur. Utiliser ce mode pour rapidement numériser plusieurs points d'apos;une courbe en un clic.
+Numérise la courbe en plaçant des points le long du segment en surbrillance sous le curseur. Utiliser ce mode pour rapidement numériser plusieurs points d'une courbe en un clic.
 
 Les nouveaux points seront affectés à la courbe actuellement sélectionnée.</translation>
     </message>
@@ -638,7 +638,7 @@ Supprime les points sélectionnés après les avoir copiés vers le presse-papie
 Creates a new document by pasting an image from the clipboard.</source>
         <translation>Coller comme Nouveau
 
-Crée un nouveau document à partir d'apos;une image du presse-papier.</translation>
+Crée un nouveau document à partir d'une image du presse-papier.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="199" />
@@ -657,7 +657,7 @@ Crée un nouveau document à partir d'apos;une image du presse-papier.</translat
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
         <translation>Coller comme Nouveau (Avancé)
 
-Crée un nouveau document en mode avancé à partir d'apos;une image du presse-papier.</translation>
+Crée un nouveau document en mode avancé à partir d'une image du presse-papier.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="210" />
@@ -672,7 +672,7 @@ Crée un nouveau document en mode avancé à partir d'apos;une image du presse-p
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="212" />
         <source>Creates a new document by importing a simple image.</source>
-        <translation>Crée un nouveau document à partir d'apos;une image.</translation>
+        <translation>Crée un nouveau document à partir d'une image.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="213" />
@@ -683,7 +683,7 @@ Creates a new document by importing an image with a single coordinate system, an
 For more complicated images with multiple coordinate systems, and/or floating axes, Import (Advanced) is used instead.</source>
         <translation>Importer une image
 
-Crée un nouveau document à partir d'apos;une image ayant un seul système de coordonées, dont les coordonnées des deux axes sont connus.
+Crée un nouveau document à partir d'une image ayant un seul système de coordonées, dont les coordonnées des deux axes sont connus.
 
 Pour des images plus complexes avec de multiples systèmes de coordonnées, et/ou des axes flottant, utiliser Importer (Avancé).</translation>
     </message>
@@ -695,7 +695,7 @@ Pour des images plus complexes avec de multiples systèmes de coordonnées, et/o
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="221" />
         <source>Creates a new document by importing an image with support for advanced feaures.</source>
-        <translation>Crée un nouveau document à partir d'apos;une image et le support de fonctions avancées.</translation>
+        <translation>Crée un nouveau document à partir d'une image et le support de fonctions avancées.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="222" />
@@ -704,26 +704,26 @@ Pour des images plus complexes avec de multiples systèmes de coordonnées, et/o
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
         <translation>Importer (Avancé)
 
-Crée un nouveau document à partir d'apos;une image et le support de fonctions avancées. En mode avancé, l'apos;image peut contenir plusieurs systèmes de coordonnées et/ou des axes flottants.</translation>
+Crée un nouveau document à partir d'une image et le support de fonctions avancées. En mode avancé, l'image peut contenir plusieurs systèmes de coordonnées et/ou des axes flottants.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="227" />
         <source>Import (Image Replace)...</source>
-        <translation>Importer (Remplacer l'apos;image)...</translation>
+        <translation>Importer (Remplacer l'image)...</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="228" />
         <source>Imports a new image into the current document, replacing the existing image.</source>
-        <translation>Importe une nouvelle image dans le document actuel en remplaçant l'apos;image existante.</translation>
+        <translation>Importe une nouvelle image dans le document actuel en remplaçant l'image existante.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="229" />
         <source>Import (Image Replace)
 
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
-        <translation>Importer (Remplacer l'apos;image)
+        <translation>Importer (Remplacer l'image)
 
-Importe une nouvelle image dans le document courant. L'apos;image existante est remplacée, et les courbes du document sont conservées. Utile pour appliquer les points d'apos;axes et autres réglages d'apos;un document existant sur une image différente.</translation>
+Importe une nouvelle image dans le document courant. L'image existante est remplacée, et les courbes du document sont conservées. Utile pour appliquer les points d'axes et autres réglages d'un document existant sur une image différente.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="235" />
@@ -852,7 +852,7 @@ Imprime le document actif sur papier ou dans un fichier.</translation>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="288" />
         <source>Quits the application.</source>
-        <translation>Quitte l'apos;application.</translation>
+        <translation>Quitte l'application.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="289" />
@@ -861,7 +861,7 @@ Imprime le document actif sur papier ou dans un fichier.</translation>
 Quits the application.</source>
         <translation>Quitter
 
-Quitte l'apos;application.</translation>
+Quitte l'application.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="298" />
@@ -871,7 +871,7 @@ Quitte l'apos;application.</translation>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="300" />
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
-        <translation>Ouvre l'apos;assistant pas à pas lors d'apos;une importation pour indiquer les étapes de numérisation</translation>
+        <translation>Ouvre l'assistant pas à pas lors d'une importation pour indiquer les étapes de numérisation</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="301" />
@@ -880,7 +880,7 @@ Quitte l'apos;application.</translation>
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
         <translation>Assistant pas à pas
 
-Utiliser l'apos;assistant pas à pas lors d'apos;une importation pour obtenir une liste d'apos;étapes à suivre pour traiter le document</translation>
+Utiliser l'assistant pas à pas lors d'une importation pour obtenir une liste d'étapes à suivre pour traiter le document</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="308" />
@@ -909,35 +909,35 @@ Démarre le tutoriel montrant les étapes pour numériser des points sur des cou
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="318" />
         <source>Help documentation</source>
-        <translation>Documentation d'apos;aide</translation>
+        <translation>Documentation d'aide</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="319" />
         <source>Help Documentation
 
 Searchable help documentation</source>
-        <translation>Documentation d'apos;aide
+        <translation>Documentation d'aide
 
-Recherche d'apos;aide dans la documentation</translation>
+Recherche d'aide dans la documentation</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="324" />
         <source>About Engauge</source>
-        <translation>A propos d'apos;Engauge</translation>
+        <translation>A propos d'Engauge</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="325" />
         <source>About the application.</source>
-        <translation>A propos de l'apos;application.</translation>
+        <translation>A propos de l'application.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="326" />
         <source>About Engauge
 
 About the application.</source>
-        <translation>A propos d'apos;Engauge
+        <translation>A propos d'Engauge
 
-A propos de l'apos;application.</translation>
+A propos de l'application.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="334" />
@@ -956,7 +956,7 @@ A propos de l'apos;application.</translation>
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
         <translation>Réglages des coordonnées
 
-Les réglages des coordonnées déterminent le placement des coordonnées graphiques dans l'apos;image</translation>
+Les réglages des coordonnées déterminent le placement des coordonnées graphiques dans l'image</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="340" />
@@ -994,7 +994,7 @@ Les paramètres de liste de courbes ajoutent, renomment et / ou suppriment des c
 Curves properties settings determine how each curve appears</source>
         <translation>Propriétés de la courbe
 
-Les propriétés de la courbe déterminent l'apos;apparence de chaque courbe</translation>
+Les propriétés de la courbe déterminent l'apparence de chaque courbe</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="352" />
@@ -1004,35 +1004,35 @@ Les propriétés de la courbe déterminent l'apos;apparence de chaque courbe</tr
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="353" />
         <source>Edit Digitize Axis and Graph Curve settings.</source>
-        <translation>Edite les réglages de numérisation d'apos;axes et de courbes.</translation>
+        <translation>Edite les réglages de numérisation d'axes et de courbes.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="354" />
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
-        <translation>Réglages de numérisation d'apos;axes et de courbes.
+        <translation>Réglages de numérisation d'axes et de courbes.
 
-Les réglages de numérisation déterminent la façon dont les points sont numérisés en mode points d'apos;axes et numérisation des courbes</translation>
+Les réglages de numérisation déterminent la façon dont les points sont numérisés en mode points d'axes et numérisation des courbes</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="359" />
         <source>Export Format...</source>
-        <translation>Format d'apos;export...</translation>
+        <translation>Format d'export...</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="360" />
         <source>Edit Export Format settings.</source>
-        <translation>Réglages d'apos;export des données.</translation>
+        <translation>Réglages d'export des données.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="361" />
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
-        <translation>Réglages d'apos;export des données
+        <translation>Réglages d'export des données
 
-Affecte la façon d'apos;exporter les données dans un fichier</translation>
+Affecte la façon d'exporter les données dans un fichier</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="365" />
@@ -1070,7 +1070,7 @@ Les réglages du filtrage couleur simplifient le graphique pour faciliter la dé
 Axes checker can reveal any axis point mistakes, which are otherwise hard to find.</source>
         <translation>Réglages de vérification des axes
 
-La vérification des axes peut indiquer des erreurs de points d'apos;axes difficiles à trouver autrement.</translation>
+La vérification des axes peut indiquer des erreurs de points d'axes difficiles à trouver autrement.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="377" />
@@ -1080,16 +1080,16 @@ La vérification des axes peut indiquer des erreurs de points d'apos;axes diffic
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="378" />
         <source>Edit Grid Line Display settings.</source>
-        <translation>Edite les paramètres d'apos;affichage de la grille.</translation>
+        <translation>Edite les paramètres d'affichage de la grille.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="379" />
         <source>Grid Line Display Settings
 
 Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions.</source>
-        <translation>Réglages d'apos;affichage de la grille
+        <translation>Réglages d'affichage de la grille
 
-La grille affichée sur le graphique peut permettre une précision supérieure au vérificateur des axes sur un graphique distordu. Sur un graphique distordu, la grille permet d'apos;ajuster les points d'apos;axes pour une meilleure précision dans certaines zones.</translation>
+La grille affichée sur le graphique peut permettre une précision supérieure au vérificateur des axes sur un graphique distordu. Sur un graphique distordu, la grille permet d'ajuster les points d'axes pour une meilleure précision dans certaines zones.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="384" />
@@ -1108,7 +1108,7 @@ La grille affichée sur le graphique peut permettre une précision supérieure a
 Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when Color Filtering is not able to separate grid lines from curve lines.</source>
         <translation>Réglages de la suppression des lignes de grille
 
-La suppression des lignes de grille permet d'apos;isoler une courbe des lignes d'apos;une grille pour faciliter la numérisation de ses points lorsque le filtrage par couleur n'apos;est pas efficace.</translation>
+La suppression des lignes de grille permet d'isoler une courbe des lignes d'une grille pour faciliter la numérisation de ses points lorsque le filtrage par couleur n'est pas efficace.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="391" />
@@ -1184,64 +1184,64 @@ Les réglages généraux sont des réglages propres au document et affectant plu
 Main window settings affect the user interface and are not specific to any document</source>
         <translation>Réglages de la fenêtre principale
 
-Les réglages de la fenêtre principale concernent l'apos;interface utilisateur. Ils ne sont pas liés à un document particulier</translation>
+Les réglages de la fenêtre principale concernent l'interface utilisateur. Ils ne sont pas liés à un document particulier</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="422" />
         <source>Background Toolbar</source>
-        <translation>Outils d'apos;arrière-plan</translation>
+        <translation>Outils d'arrière-plan</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="425" />
         <source>Show or hide the background toolbar.</source>
-        <translation>Montre ou cache la barre d'apos;outils d'apos;arrière-plan.</translation>
+        <translation>Montre ou cache la barre d'outils d'arrière-plan.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="426" />
         <source>View Background ToolBar
 
 Show or hide the background toolbar</source>
-        <translation>Affichage Barre d'apos;outils Arrière-plan
+        <translation>Affichage Barre d'outils Arrière-plan
 
-Affiche ou masque la barre d'apos;outils d'apos;arrière-plan</translation>
+Affiche ou masque la barre d'outils d'arrière-plan</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="430" />
         <source>Checklist Guide Toolbar</source>
-        <translation>Barre d'apos;outils de l'apos;assistant pas à pas</translation>
+        <translation>Barre d'outils de l'assistant pas à pas</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="433" />
         <source>Show or hide the checklist guide.</source>
-        <translation>Affiche ou masque l'apos;assistant pas à pas.</translation>
+        <translation>Affiche ou masque l'assistant pas à pas.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="434" />
         <source>View Checklist Guide
 
 Show or hide the checklist guide</source>
-        <translation>Afficher l'apos;assistant pas à pas
+        <translation>Afficher l'assistant pas à pas
 
-Affiche ou masque l'apos;assistant pas à pas</translation>
+Affiche ou masque l'assistant pas à pas</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="438" />
         <source>Curve Fitting Window</source>
-        <translation>Fenêtre d'apos;Ajustement de Courbe</translation>
+        <translation>Fenêtre d'Ajustement de Courbe</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="441" />
         <source>Show or hide the curve fitting window.</source>
-        <translation>Affiche ou masque la fenêtre d'apos;ajustement de courbe.</translation>
+        <translation>Affiche ou masque la fenêtre d'ajustement de courbe.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="442" />
         <source>View Curve Fitting Window
 
 Show or hide the curve fitting window</source>
-        <translation>Afficher la Fenêtre d'apos;Ajustement de Courbe
+        <translation>Afficher la Fenêtre d'Ajustement de Courbe
 
-Affiche ou masque la fenêtre d'apos;ajustement de courbe</translation>
+Affiche ou masque la fenêtre d'ajustement de courbe</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="446" />
@@ -1265,45 +1265,45 @@ Affiche ou masque la fenêtre Géométrie</translation>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="454" />
         <source>Digitizing Tools Toolbar</source>
-        <translation>Barre d'apos;outils de numérisation</translation>
+        <translation>Barre d'outils de numérisation</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="457" />
         <source>Show or hide the digitizing tools toolbar.</source>
-        <translation>Affiche ou masque la barre d'apos;outils de numérisation.</translation>
+        <translation>Affiche ou masque la barre d'outils de numérisation.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="458" />
         <source>View Digitizing Tools ToolBar
 
 Show or hide the digitizing tools toolbar</source>
-        <translation>Afficher la barre d'apos;outils de numérisation
+        <translation>Afficher la barre d'outils de numérisation
 
-Affiche ou masque la barre d'apos;outils de numérisation</translation>
+Affiche ou masque la barre d'outils de numérisation</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="462" />
         <source>Settings Views Toolbar</source>
-        <translation>Barre d'apos;outils des réglages d'apos;affichages</translation>
+        <translation>Barre d'outils des réglages d'affichages</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="465" />
         <source>Show or hide the settings views toolbar.</source>
-        <translation>Affiche ou masque les outils des réglages d'apos;affichages.</translation>
+        <translation>Affiche ou masque les outils des réglages d'affichages.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="466" />
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
-        <translation>Affihcer la barre d'apos;outils des réglages d'apos;affichages
+        <translation>Affihcer la barre d'outils des réglages d'affichages
 
-Affiche ou masque les outils des réglages d'apos;affichages. Ces affichages montrent les données importantes du graphique.</translation>
+Affiche ou masque les outils des réglages d'affichages. Ces affichages montrent les données importantes du graphique.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="471" />
         <source>Coordinate System Toolbar</source>
-        <translation>Barre d'apos;outils des systèmes de coordonées</translation>
+        <translation>Barre d'outils des systèmes de coordonées</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="474" />
@@ -1319,9 +1319,9 @@ Show or hide the coordinate system selection toolbar. This toolbar is used to se
 This toolbar is disabled when there is only one coordinate system.</source>
         <translation>Afficher les outils des systèmes de coordonnées
 
-Affiche ou masque les outils des systèmes de coordonnées. Cette barre d'apos;outils permet de choisir un système de coordonnées quand le document en contient plusieurs. Elle sert aussi à afficher et imprimer tous les systèmes de coordonnées.
+Affiche ou masque les outils des systèmes de coordonnées. Cette barre d'outils permet de choisir un système de coordonnées quand le document en contient plusieurs. Elle sert aussi à afficher et imprimer tous les systèmes de coordonnées.
 
-Cette barre d'apos;outils est inhibée quand il n'apos;y a qu'apos;un seul système de coordonnées.</translation>
+Cette barre d'outils est inhibée quand il n'y a qu'un seul système de coordonnées.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="483" />
@@ -1359,45 +1359,45 @@ Affiche ou masque les info-bulles</translation>
 Show or hide grid lines that are added for accurate adjustments of the axes points, which can improve accuracy in distorted graphs</source>
         <translation>Afficher la grille
 
-Affiche ou masque les lignes de grilles ajoutées pour un placement précis des points d'apos;axes, pouvant améliorer la précision sur des graphiques distordus</translation>
+Affiche ou masque les lignes de grilles ajoutées pour un placement précis des points d'axes, pouvant améliorer la précision sur des graphiques distordus</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="500" />
         <source>No Background</source>
-        <translation>Pas d'apos;arrière-plan</translation>
+        <translation>Pas d'arrière-plan</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="502" />
         <source>Do not show the image underneath the points.</source>
-        <translation>N'apos;affiche pas l'apos;image sous les points.</translation>
+        <translation>N'affiche pas l'image sous les points.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="503" />
         <source>No Background
 
 No image is shown so points are easier to see</source>
-        <translation>Pas d'apos;arrière-plan
+        <translation>Pas d'arrière-plan
 
-Aucune image n'apos;est affichée afin de mieux voir les points</translation>
+Aucune image n'est affichée afin de mieux voir les points</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="506" />
         <source>Show Original Image</source>
-        <translation>Iimage d'apos;origine</translation>
+        <translation>Iimage d'origine</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="508" />
         <source>Show the original image underneath the points.</source>
-        <translation>Affiche l'apos;image d'apos;origine  sous les points.</translation>
+        <translation>Affiche l'image d'origine  sous les points.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="509" />
         <source>Show Original Image
 
 Show the original image underneath the points</source>
-        <translation>Afficher l'apos;image d'apos;origine.
+        <translation>Afficher l'image d'origine.
 
-Affiche l'apos;image d'apos;origine sous les points</translation>
+Affiche l'image d'origine sous les points</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="512" />
@@ -1407,7 +1407,7 @@ Affiche l'apos;image d'apos;origine sous les points</translation>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="515" />
         <source>Show the filtered image underneath the points.</source>
-        <translation>Affiche l'apos;image filtrée sous les points.</translation>
+        <translation>Affiche l'image filtrée sous les points.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="516" />
@@ -1416,9 +1416,9 @@ Affiche l'apos;image d'apos;origine sous les points</translation>
 Show the filtered image underneath the points.
 
 The filtered image is created from the original image according to the Filter preferences so unimportant information is hidden and important information is emphasized</source>
-        <translation>Afficher l'apos;image filtrée
+        <translation>Afficher l'image filtrée
 
-Affiche l'apos;image filtrée sous les points. L'apos;image filtrée est obtenue à partir de l'apos;image d'apos;origine à laquelle sont appliqués les réglages de filtrage afin de masquer les informations non essentielles et d'apos;accentuer les informations importantes</translation>
+Affiche l'image filtrée sous les points. L'image filtrée est obtenue à partir de l'image d'origine à laquelle sont appliqués les réglages de filtrage afin de masquer les informations non essentielles et d'accentuer les informations importantes</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="522" />
@@ -1437,7 +1437,7 @@ Affiche l'apos;image filtrée sous les points. L'apos;image filtrée est obtenue
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
         <translation>Masquer toutes les courbes
 
-Les points d'apos;axes et les courbes numérisées sont masqués afin de rendre l'apos;image plus visible.</translation>
+Les points d'axes et les courbes numérisées sont masqués afin de rendre l'image plus visible.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="528" />
@@ -1475,7 +1475,7 @@ Affiche uniquement les points numérisés et la ligne appartenant à la courbe a
 Show all digitized axis points and graph curves</source>
         <translation>Afficher toutes les courbes
 
-Affiche tous les points d'apos;axes et les courbes numérisées</translation>
+Affiche tous les points d'axes et les courbes numérisées</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="553" />
@@ -1485,12 +1485,12 @@ Affiche tous les points d'apos;axes et les courbes numérisées</translation>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="555" />
         <source>Always hide the status bar.</source>
-        <translation>Cache la barre d'apos;état en permanence.</translation>
+        <translation>Cache la barre d'état en permanence.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="556" />
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
-        <translation>Cache la barre d'apos;état. Les messages temporaires d'apos;état ou d'apos;information n'apos;apparaîtront pas.</translation>
+        <translation>Cache la barre d'état. Les messages temporaires d'état ou d'information n'apparaîtront pas.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="558" />
@@ -1500,12 +1500,12 @@ Affiche tous les points d'apos;axes et les courbes numérisées</translation>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="560" />
         <source>Hide the status bar except when display temporary messages.</source>
-        <translation>Cache la barre d'apos;état sauf pour afficher des messages temporaires.</translation>
+        <translation>Cache la barre d'état sauf pour afficher des messages temporaires.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="561" />
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
-        <translation>Cache la barre d'apos;état, sauf pour afficher des messages temporaires d'apos;état ou d'apos;information.</translation>
+        <translation>Cache la barre d'état, sauf pour afficher des messages temporaires d'état ou d'information.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="563" />
@@ -1515,12 +1515,12 @@ Affiche tous les points d'apos;axes et les courbes numérisées</translation>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="565" />
         <source>Always show the status bar.</source>
-        <translation>Affiche la barre d'apos;état en permanence.</translation>
+        <translation>Affiche la barre d'état en permanence.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="566" />
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
-        <translation>Affiche la barre d'apos;état. En plus d'apos;afficher des messages temporaires d'apos;état ou d'apos;information, la barre d'apos;état indique aussi la position du curseur.</translation>
+        <translation>Affiche la barre d'état. En plus d'afficher des messages temporaires d'état ou d'information, la barre d'état indique aussi la position du curseur.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="575" />
@@ -1839,7 +1839,7 @@ Affiche tous les points d'apos;axes et les courbes numérisées</translation>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="87" />
         <source>Status Bar</source>
-        <translation>Barre d'apos;état</translation>
+        <translation>Barre d'état</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="92" />
@@ -1862,7 +1862,7 @@ Affiche tous les points d'apos;axes et les courbes numérisées</translation>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="42" />
         <source>Select background image</source>
-        <translation>Choisir l'apos;image d'apos;arrière-plan</translation>
+        <translation>Choisir l'image d'arrière-plan</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="43" />
@@ -1874,20 +1874,20 @@ Select background image:
 3) Filtered image which highlights important details</source>
         <translation>Arrière-plan sélectionné
 
-Sélectionne l'apos;arrière-plan:
+Sélectionne l'arrière-plan:
 1) Sans arrière-plan met les points en valeur
-2) L'apos;image d'apos;origine affiche tout
-3) L'apos;image filtrée met en valeur les détails importants</translation>
+2) L'image d'origine affiche tout
+3) L'image filtrée met en valeur les détails importants</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="48" />
         <source>No background</source>
-        <translation>Pas d'apos;arrière-plan</translation>
+        <translation>Pas d'arrière-plan</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="49" />
         <source>Original image</source>
-        <translation>Image d'apos;origine</translation>
+        <translation>Image d'origine</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="50" />
@@ -1934,7 +1934,7 @@ Ceci peut être changé tandis que dans les modes de point de courbe, Match Poin
 Points style for the currently selected curve. The points style is only displayed in this toolbar. To change the points style, use the Curve Properties dialog.</source>
         <translation>Type de point
 
-Style des points pour la courbe sélectionnée. Le style des points n'apos;est affiché que dans cette barre. Pour changer le style, utiliser la fenêtre de propriétés de la courbe.</translation>
+Style des points pour la courbe sélectionnée. Le style des points n'est affiché que dans cette barre. Pour changer le style, utiliser la fenêtre de propriétés de la courbe.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="96" />
@@ -1948,7 +1948,7 @@ Style des points pour la courbe sélectionnée. Le style des points n'apos;est a
 View of filter for the current curve in Segment Fill mode. The filter settings are only displayed in this toolbar. To changed the filter settings, use the Color Picker mode or the Filter Settings dialog.</source>
         <translation>Filtre du remplissage par segment
 
-Couleur de filtre pour la courbe sélectionnée en mode remplissage par segment. Les réglages du filtre sont uniquement affichés dans cette barre d'apos;outils. Pour les changer, utiliser la pipette à couleurs ou la fenêtre de réglage de filtre.</translation>
+Couleur de filtre pour la courbe sélectionnée en mode remplissage par segment. Les réglages du filtre sont uniquement affichés dans cette barre d'outils. Pour les changer, utiliser la pipette à couleurs ou la fenêtre de réglage de filtre.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="103" />
@@ -2009,7 +2009,7 @@ Maintenu appuyé, ce bouton imprime tous les points et toutes les lignes pour le
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="15" />
         <source>About Engauge</source>
-        <translation>A propos d'apos;Engauge</translation>
+        <translation>A propos d'Engauge</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgAbout.cpp" line="32" />
@@ -2064,7 +2064,7 @@ Maintenu appuyé, ce bouton imprime tous les points et toutes les lignes pour le
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="65" />
         <source>Edit Axis Point</source>
-        <translation>Modifier le point d'apos;axe</translation>
+        <translation>Modifier le point d'axe</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="109" />
@@ -2173,9 +2173,9 @@ For cartesian plots this is the X coordinate. For polar plots this is the radius
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
         <translation>Entrer la première coordonnée à attribuer au point de courbe.
 
-Laisser vide si aucune valeur n'apos;est à attribuer au point de courbe.
+Laisser vide si aucune valeur n'est à attribuer au point de courbe.
 
-Pour un plan cartésien il s'apos;agit du X, pour un graphique polaire il s'apos;agit du rayon R.
+Pour un plan cartésien il s'agit du X, pour un graphique polaire il s'agit du rayon R.
 
 Le format des valeurs est déterminé par la localisation. Si les valeurs entrées ne sont pas reconnues, vérifier la localisation dans le menu Paramètres/Fenêtre principale...</translation>
     </message>
@@ -2195,9 +2195,9 @@ For cartesian plots this is the Y coordinate. For polar plots this is the angle 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
         <translation>Entrer la seconde coordonnée graphique du point de courbe.
 
-Laisser vide si aucune valeur n'apos;est à attribuer au point de courbe.
+Laisser vide si aucune valeur n'est à attribuer au point de courbe.
 
-Pour un plan cartésien il s'apos;agit du Y, pour un graphique polaire il s'apos;agit de l'apos;angle Theta.
+Pour un plan cartésien il s'agit du Y, pour un graphique polaire il s'git de l'angle Theta.
 
 Le format des valeurs est déterminé par la localisation. Si les valeurs entrées ne sont pas reconnues, vérifier la localisation dans le menu Paramètres/Fenêtre principale...</translation>
     </message>
@@ -2227,7 +2227,7 @@ Le format des valeurs est déterminé par la localisation. Si les valeurs entré
     <message>
         <location filename="../src/Dlg/DlgEditScale.cpp" line="51" />
         <source>Edit Axis Point</source>
-        <translation>Modifier le point d'apos;axe</translation>
+        <translation>Modifier le point d'axe</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditScale.cpp" line="80" />
@@ -2247,12 +2247,12 @@ Le format des valeurs est déterminé par la localisation. Si les valeurs entré
     <message>
         <location filename="../src/Dlg/DlgEditScale.cpp" line="110" />
         <source>Scale Length</source>
-        <translation>Longueur d'apos;échelle</translation>
+        <translation>Longueur d'échelle</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditScale.cpp" line="122" />
         <source>Enter the scale bar length</source>
-        <translation>Entrez la longueur de la barre d'apos;échelle</translation>
+        <translation>Entrez la longueur de la barre d'échelle</translation>
     </message>
 </context>
 <context>
@@ -2260,19 +2260,19 @@ Le format des valeurs est déterminé par la localisation. Si les valeurs entré
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="31" />
         <source>Error Report</source>
-        <translation>Rapport d'apos;erreur</translation>
+        <translation>Rapport d'erreur</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="34" />
         <source>An unrecoverable error has occurred. Would you like to save an error report that can be sent later to the Engauge developers?
 
 The original document can be sent as part of the error report, which increases the chances of finding and fixing the problem(s). However, if any information is private then an anonymized version of the document will be sent.</source>
-        <translation>Une erreur irrécupérable s'apos;est produite. Souhaitez-vous enregistrer un rapport d'apos;erreurs qui peut être envoyé ultérieurement aux développeurs Engauge? Le document original peut être envoyé dans le cadre du rapport d'apos;erreurs, ce qui augmente les chances de trouver et de résoudre le (s) problème (s). Cependant, si des informations sont privées, une version anonymisée du document sera envoyée.</translation>
+        <translation>Une erreur irrécupérable s'est produite. Souhaitez-vous enregistrer un rapport d'erreurs qui peut être envoyé ultérieurement aux développeurs Engauge? Le document original peut être envoyé dans le cadre du rapport d'erreurs, ce qui augmente les chances de trouver et de résoudre le (s) problème (s). Cependant, si des informations sont privées, une version anonymisée du document sera envoyée.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="42" />
         <source>Include original document information, otherwise anonymize the information</source>
-        <translation>Inclure les informations du document original, sinon anonymiser l'apos;information</translation>
+        <translation>Inclure les informations du document original, sinon anonymiser l'information</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="54" />
@@ -2304,7 +2304,7 @@ The original document can be sent as part of the error report, which increases t
 Specifies the total number of coordinate systems that will be used in the imported image. There can be one or more graphs in the image, and each graph can have one or more coordinate systems. Each coordinate system is defined by a pair of coordinate axes.</source>
         <translation>Nombre de systèmes de coordonnées
 
-Indique le nombre de systèmes de coordonnées qui seront utilisés dans l'apos;image importée. L'apos;image peut contenir un ou plusieurs graphiques, et chacun peut comprendre un ou plusieurs systèmes de coordonnées. Chaque système est défini par deux axes de coordonnées.</translation>
+Indique le nombre de systèmes de coordonnées qui seront utilisés dans l'image importée. L'image peut contenir un ou plusieurs graphiques, et chacun peut comprendre un ou plusieurs systèmes de coordonnées. Chaque système est défini par deux axes de coordonnées.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="63" />
@@ -2314,14 +2314,14 @@ Indique le nombre de systèmes de coordonnées qui seront utilisés dans l'apos;
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="66" />
         <source>1 scale bar - Used for maps with a scale bar defining the map scale</source>
-        <translation>1 barre d'apos;échelle - Utilisé pour les cartes avec une barre d'apos;échelle définissant l'apos;échelle de la carte</translation>
+        <translation>1 barre d'échelle - Utilisé pour les cartes avec une barre d'échelle définissant l'échelle de la carte</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="67" />
         <source>The two endpoints of the scale bar will define the scale of a map. The scale bar can edited to set its length.
 
 This setting is used when importing a map that has only a scale bar to define distance, rather than a graph with axes that define two coordinates.</source>
-        <translation>Les deux points finaux de la barre d'apos;échelle définissent l'apos;échelle d'apos;une carte. La barre d'apos;échelle peut être éditée pour définir sa longueur. Ce paramètre est utilisé lors de l'apos;importation d'apos;une carte qui n'apos;a qu'apos;une barre d'apos;échelle pour définir la distance, plutôt qu'apos;un graphique avec des axes qui définissent deux coordonnées.</translation>
+        <translation>Les deux points finaux de la barre d'échelle définissent l'échelle d'une carte. La barre d'échelle peut être éditée pour définir sa longueur. Ce paramètre est utilisé lors de l'importation d'une carte qui n'a qu'une barre d'échelle pour définir la distance, plutôt qu'un graphique avec des axes qui définissent deux coordonnées.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="74" />
@@ -2344,7 +2344,7 @@ Au total, il y aura trois points situés en (x1,y1), (x2,y2) et (x3,y3).</transl
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="84" />
         <source>4 axis points - Used for graphs with only one coordinate defined on each axis</source>
-        <translation>4 Points d'apos;axe - Utilisé pour les graphiques avec une seule coordonnée définie sur chaque axe</translation>
+        <translation>4 Points d'axe - Utilisé pour les graphiques avec une seule coordonnée définie sur chaque axe</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="85" />
@@ -2355,9 +2355,9 @@ This setting is required when the x coordinate of the y axis is unknown, and/or 
 In total, there will be two points on the x axis as (x1) and (x2), and two points on the y axis as (y1) and (y2).</source>
         <translation>Quatre points serviront à définir le système de coordonnées. Chacun aura uniquement une coordonnée en x ou en y.
 
-Ce réglage est utile lorsque la coordonnée en x de l'apos;axe des y est inconnue, et/ou lorsque la coordonnée en y de l'apos;axe des x est inconnue.
+Ce réglage est utile lorsque la coordonnée en x de l'axe des y est inconnue, et/ou lorsque la coordonnée en y de l'axe des x est inconnue.
 
-Au total, il y aura deux points sur l'apos;axe des x situés en (x1) et (x2), et deux points sur l'apos;axe des y situés en (y1) et (y2).</translation>
+Au total, il y aura deux points sur l'axe des x situés en (x1) et (x2), et deux points sur l'axe des y situés en (y1) et (y2).</translation>
     </message>
 </context>
 <context>
@@ -2365,7 +2365,7 @@ Au total, il y aura deux points sur l'apos;axe des x situés en (x1) et (x2), et
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="35" />
         <source>Image File Import Cropping</source>
-        <translation>Recadrage de l'apos;image importée</translation>
+        <translation>Recadrage de l'image importée</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="74" />
@@ -2375,7 +2375,7 @@ Au total, il y aura deux points sur l'apos;axe des x situés en (x1) et (x2), et
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="81" />
         <source>Preview window that shows what part of the image will be imported. The image portion inside the rectangular frame will be imported from the currently selected page. The frame can be moved and resized by dragging the corner handles.</source>
-        <translation>Aperçu montrant la partie de l'apos;image qui sera importée. La portion d'apos;image à l'apos;intérieur du cadre rectangulaire sera importée depuis la page sélectionnée. Le cadre peut être déplacé et redimenssionné à l'apos;aide des poignées dans chacun de ses coins.</translation>
+        <translation>Aperçu montrant la partie de l'image qui sera importée. La portion d'image à l'intérieur du cadre rectangulaire sera importée depuis la page sélectionnée. Le cadre peut être déplacé et redimenssionné à l'aide des poignées dans chacun de ses coins.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="118" />
@@ -2413,7 +2413,7 @@ Au total, il y aura deux points sur l'apos;axe des x situés en (x1) et (x2), et
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="108" />
         <source>Preview window that shows what part of the image will be imported. The image portion inside the rectangular frame will be imported from the currently selected page. The frame can be moved and resized by dragging the corner handles.</source>
-        <translation>Aperçu montrant la partie de l'apos;image qui sera importée. La portion d'apos;image à l'apos;intérieur du cadre rectangulaire sera importée depuis la page sélectionnée. Le cadre peut être déplacé et redimenssionné à l'apos;aide des poignées dans chacun de ses coins.</translation>
+        <translation>Aperçu montrant la partie de l'image qui sera importée. La portion d'image à l'intérieur du cadre rectangulaire sera importée depuis la page sélectionnée. Le cadre peut être déplacé et redimenssionné à l'aide des poignées dans chacun de ses coins.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="152" />
@@ -2431,7 +2431,7 @@ Au total, il y aura deux points sur l'apos;axe des x situés en (x1) et (x2), et
     <message>
         <location filename="../src/Dlg/DlgRequiresTransform.cpp" line="16" />
         <source>can only be performed after three axis points have been created, so the coordinates are defined</source>
-        <translation>ne peut se faire qu'apos;après la création de trois points d'apos;axe, afin de pouvoir déterminer les coordonnées</translation>
+        <translation>ne peut se faire qu'après la création de trois points d'axe, afin de pouvoir déterminer les coordonnées</translation>
     </message>
 </context>
 <context>
@@ -2457,7 +2457,7 @@ Au total, il y aura deux points sur l'apos;axe des x situés en (x1) et (x2), et
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="65" />
         <source>Axes Checker Lifetime</source>
-        <translation>Durée d'apos;affichage</translation>
+        <translation>Durée d'affichage</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="72" />
@@ -2467,7 +2467,7 @@ Au total, il y aura deux points sur l'apos;axe des x situés en (x1) et (x2), et
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="73" />
         <source>Never show axes checker.</source>
-        <translation>N'apos;affiche jamais le cadre de vérification des axes.</translation>
+        <translation>N'affiche jamais le cadre de vérification des axes.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="76" />
@@ -2477,7 +2477,7 @@ Au total, il y aura deux points sur l'apos;axe des x situés en (x1) et (x2), et
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="77" />
         <source>Show axes checker for a number of seconds after changing axes points.</source>
-        <translation>Affiche le cadre de vérification des axes pendant quelques secondes après un changement des points d'apos;axes.</translation>
+        <translation>Affiche le cadre de vérification des axes pendant quelques secondes après un changement des points d'axes.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="87" />
@@ -2497,7 +2497,7 @@ Au total, il y aura deux points sur l'apos;axe des x situés en (x1) et (x2), et
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="101" />
         <source>Select a color for the highlight lines drawn at each axis point</source>
-        <translation>Sélectionne la couleur d'apos;affichage du cadre reliant les points d'apos;axes</translation>
+        <translation>Sélectionne la couleur d'affichage du cadre reliant les points d'axes</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="155" />
@@ -2507,7 +2507,7 @@ Au total, il y aura deux points sur l'apos;axe des x situés en (x1) et (x2), et
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="162" />
         <source>Preview window that shows how current settings affect the displayed axes checker</source>
-        <translation>Zône d'apos;aperçu montrant l'apos;aspect donné au cadre de vérification des axes en fonction des réglages choisis</translation>
+        <translation>Zône d'aperçu montrant l'aspect donné au cadre de vérification des axes en fonction des réglages choisis</translation>
     </message>
 </context>
 <context>
@@ -2537,9 +2537,9 @@ Au total, il y aura deux points sur l'apos;axe des x situés en (x1) et (x2), et
         <source>Filter the original image into black and white pixels using the Intensity parameter, to hide unimportant information and emphasize important information.
 
 The Intensity value of a pixel is computed from the red, green and blue components as I = squareroot (R * R + G * G + B * B)</source>
-        <translation>Transforme l'apos;image d'apos;origine en pixels noirs et blancs via le paramètre d'apos;Intensité, afin de cacher les informations inutiles et d'apos;augmenter les informations importantes.
+        <translation>Transforme l'image d'origine en pixels noirs et blancs via le paramètre d'Intensité, afin de cacher les informations inutiles et d'augmenter les informations importantes.
 
-La valeur Intensité d'apos;un pixel est calculée à partir de ses composantes Rouge, Vert, Bleu avec la formule I = racine carrée (R * R + V * V + B * B)</translation>
+La valeur Intensité d'un pixel est calculée à partir de ses composantes Rouge, Vert, Bleu avec la formule I = racine carrée (R * R + V * V + B * B)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="84" />
@@ -2548,28 +2548,28 @@ La valeur Intensité d'apos;un pixel est calculée à partir de ses composantes 
 The background color is shown on the left side of the scale bar.
 
 The distance of any color (R, G, B) from the background color (Rb, Gb, Bb) is computed as F = squareroot ((R - Rb) * (R - Rb) + (G - Gb) * (G - Gb) + (B - Bb)). On the left end of the scale, the foreground distance value is zero, and it increases linearly to the maximum on the far right.</source>
-        <translation>Transforme l'apos;image d'apos;origine en pixels noirs et blancs en isolant le premier plan de l'apos;arrière-plan, afin de cacher les informations inutiles et d'apos;augmenter les informations importantes.
+        <translation>Transforme l'image d'origine en pixels noirs et blancs en isolant le premier plan de l'arrière-plan, afin de cacher les informations inutiles et d'augmenter les informations importantes.
 
-La couleur d'apos;arrière-plan est affichée du coté gauche de l'apos;échelle.
+La couleur d'arrière-plan est affichée du coté gauche de l'échelle.
 
-La distance d'apos;une couleur (R, V, B) par rapport à celle d'apos;arrière-plan (Rb, Vb, Bb) est calculée comme F = racine carrée ((R - Rb) * (R - Rb) + (G - Gb) * (G - Gb) + (B - Bb)). Du coté gauche de l'apos;échelle, la distance est de zéro, puis elle augmente linéairement jusqu'apos;à son maximum sur la droite.</translation>
+La distance d'une couleur (R, V, B) par rapport à celle d'arrière-plan (Rb, Vb, Bb) est calculée comme F = racine carrée ((R - Rb) * (R - Rb) + (G - Gb) * (G - Gb) + (B - Bb)). Du coté gauche de l'échelle, la distance est de zéro, puis elle augmente linéairement jusqu'à son maximum sur la droite.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="94" />
         <source>Filter the original image into black and white pixels using the Hue component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.</source>
-        <translation>Transforme l'apos;image d'apos;origine en pixels noirs et blancs via la composante Teinte des données Teinte, Saturation et Valeur (TSV ou HSV) des couleurs, afin de cacher les informations inutiles et d'apos;augmenter les informations importantes.</translation>
+        <translation>Transforme l'image d'origine en pixels noirs et blancs via la composante Teinte des données Teinte, Saturation et Valeur (TSV ou HSV) des couleurs, afin de cacher les informations inutiles et d'augmenter les informations importantes.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="101" />
         <source>Filter the original image into black and white pixels using the Saturation component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.</source>
-        <translation>Transforme l'apos;image d'apos;origine en pixels noirs et blancs via la composante Saturation des données Teinte, Saturation et Valeur (TSV ou HSV) des couleurs, afin de cacher les informations inutiles et d'apos;augmenter les informations importantes.</translation>
+        <translation>Transforme l'image d'origine en pixels noirs et blancs via la composante Saturation des données Teinte, Saturation et Valeur (TSV ou HSV) des couleurs, afin de cacher les informations inutiles et d'augmenter les informations importantes.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="108" />
         <source>Filter the original image into black and white pixels using the Value component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.
 
 The Value component is also called the Lightness.</source>
-        <translation>Transforme l'apos;image d'apos;origine en pixels noirs et blancs via la composante Valeur des données Teinte, Saturation et Valeur (TSV ou HSV) des couleurs, afin de cacher les informations inutiles et d'apos;augmenter les informations importantes.</translation>
+        <translation>Transforme l'image d'origine en pixels noirs et blancs via la composante Valeur des données Teinte, Saturation et Valeur (TSV ou HSV) des couleurs, afin de cacher les informations inutiles et d'augmenter les informations importantes.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="124" />
@@ -2579,7 +2579,7 @@ The Value component is also called the Lightness.</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="131" />
         <source>Preview window that shows how current settings affect the filtering of the original image.</source>
-        <translation>Prévisualisation montrant comment les réglages en cours vont affecter le filtrage de l'apos;image d'apos;origine.</translation>
+        <translation>Prévisualisation montrant comment les réglages en cours vont affecter le filtrage de l'image d'origine.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="146" />
@@ -2589,13 +2589,13 @@ The Value component is also called the Lightness.</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="154" />
         <source>Histogram profile of the selected filter parameter. The two Dividers can be moved back and forth to adjust the range of filter parameter values that will be included in the filtered image. The clear portion will be included, and the shaded portion will be excluded.</source>
-        <translation>Histogramme du paramètre de filtrage sélectionné. Les deux délimiteurs se déplacent d'apos;avant en arrière pour ajuster la plage de valeurs à inclure dans l'apos;image filtrée. La zone claire sera incluse, la zone grisée sera exclue.
+        <translation>Histogramme du paramètre de filtrage sélectionné. Les deux délimiteurs se déplacent d'avant en arrière pour ajuster la plage de valeurs à inclure dans l'image filtrée. La zone claire sera incluse, la zone grisée sera exclue.
 </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="161" />
         <source>This read-only box displays a graphical representation of the horizontal axis in the histogram profile above.</source>
-        <translation>Cette zone en lecture seule est la représentation graphique de l'apos;axe horizontal de l'apos;histogramme ci-dessus.</translation>
+        <translation>Cette zone en lecture seule est la représentation graphique de l'axe horizontal de l'histogramme ci-dessus.</translation>
     </message>
 </context>
 <context>
@@ -2626,7 +2626,7 @@ Régler le format sur une valeur vide ne fera apparaître qua la partie Heure da
         <source>Time format to be used for time values, and time portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the date portion appearing in output.</source>
-        <translation>Format d'apos;heure à utiliser pour les heures et pour la partie heure des données mixtes date/heure, lors des saisies et des enregistrements.
+        <translation>Format d'heure à utiliser pour les heures et pour la partie heure des données mixtes date/heure, lors des saisies et des enregistrements.
 
 Régler le format sur une valeur vide ne fera apparaître qua la partie Date dans les enregistrements.</translation>
     </message>
@@ -2671,7 +2671,7 @@ Polar coordinates are not allowed with log scale for Theta</source>
 
 Des coordonnées en Theta et R seront utilisées.
 
-En coordonnées polaires, l'apos;usage d'apos;une échelle logarithmique n'apos;est pas possible pour Theta</translation>
+En coordonnées polaires, l'usage d'une échelle logarithmique n'est pas possible pour Theta</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="281" />
@@ -2705,9 +2705,9 @@ Log scale is not allowed if there are negative coordinates.
 Log scale is not allowed for the Theta coordinate.</source>
         <translation>Utilise une échelle logarithmique pour la coordonnée X.
 
-L'apos;échelle Log est interdite s'apos;il y a des coordonnées négatives.
+L'échelle Log est interdite s'il y a des coordonnées négatives.
 
-L'apos;échelle Log est'apos; interdite pour la coordonnée Theta.</translation>
+L'échelle Log est' interdite pour la coordonnée Theta.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="296" />
@@ -2723,7 +2723,7 @@ L'apos;échelle Log est'apos; interdite pour la coordonnée Theta.</translation>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="324" />
         <source>Origin radius value</source>
-        <translation>Valeur de rayon à l'apos;origine</translation>
+        <translation>Valeur de rayon à l'origine</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="328" />
@@ -2739,9 +2739,9 @@ Log scale is not allowed if there are negative coordinates.</translation>
         <source>Specify radius value at origin.
 
 Normally the radius at the origin is 0, but a nonzero value may be applied in other cases (like when the radial units are decibels).</source>
-        <translation>Indique la valeur du rayon à l'apos;origine.
+        <translation>Indique la valeur du rayon à l'origine.
 
-Habituellement la valeur à l'apos;origine est 0, mais une valeur non nulle peut être appliquées dans certains cas (par exemple lorsque l'apos;unité du rayon est en décibels).</translation>
+Habituellement la valeur à l'origine est 0, mais une valeur non nulle peut être appliquées dans certains cas (par exemple lorsque l'unité du rayon est en décibels).</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="358" />
@@ -2751,7 +2751,7 @@ Habituellement la valeur à l'apos;origine est 0, mais une valeur non nulle peut
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="365" />
         <source>Preview window that shows how current settings affect the coordinate system.</source>
-        <translation>Prévisualisation montrant l'apos;impact des réglages sur le système de coordonnées.</translation>
+        <translation>Prévisualisation montrant l'impact des réglages sur le système de coordonnées.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="673" />
@@ -2762,7 +2762,7 @@ Date and time values have date and/or time components.
 Degrees Minutes Seconds (DDD MM SS.S) format uses two integer number for degrees and minutes, and a real number for seconds. There are 60 seconds per minute. During input, spaces must be inserted between the three numbers.</source>
         <translation>Nombres est le format le plus simple et le plus générique.
 
-Les valeurs de Dates et Heures ont des composantes de date et/ou d'apos;heure.
+Les valeurs de Dates et Heures ont des composantes de date et/ou d'heure.
 
 Le format Degrés Minutes Secondes (DDD MM SS.S) utilise deux nombres entiers pour les degrés et minutes, et un nombre réel pour les secondes. Il y a 60 secondes par minute. Lors de la saisie, insérer des espaces entre ces trois nombres.</translation>
     </message>
@@ -2923,7 +2923,7 @@ Reorder curves by dragging them around.</source>
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
         <translation>Epaisseur de ligne tracée entre les points.
 
-S'apos;applique aux courbes uniquement. Aucune ligne n'apos;est tracée entre les points d'apos;axe.</translation>
+S'applique aux courbes uniquement. Aucune ligne n'est tracée entre les points d'axe.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="119" />
@@ -2938,7 +2938,7 @@ S'apos;applique aux courbes uniquement. Aucune ligne n'apos;est tracée entre le
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
         <translation>Couleur pour les lignes tracées entre les points.
 
-S'apos;applique aux courbes uniquement. Aucune ligne n'apos;est tracée entre les points d'apos;axe.</translation>
+S'applique aux courbes uniquement. Aucune ligne n'est tracée entre les points d'axe.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="129" />
@@ -3013,9 +3013,9 @@ If the visible settings are for the axes curve, then they will be used for futur
 If the visible settings are for the Nth graph curve in the curve list, then they will be used for future graph curves that are also the Nth graph curve in their curve list, until new settings are saved as the defaults.</source>
         <translation>Enregistre les réglages de la courbe comme future valeurs par défaut, en fonction du nom de la courbe.
 
-Si les paramètres visibles sont ceux des axes, ils seront utilisés pour les futurs axes, jusqu'apos;à ce que de nouveaux réglages par défaut soient enregistrés.
+Si les paramètres visibles sont ceux des axes, ils seront utilisés pour les futurs axes, jusqu'à ce que de nouveaux réglages par défaut soient enregistrés.
 
-Si les paramètres visibles sont ceux de la Nième courbe, ils seront utilisés pour les futures courbes situés en Nième position de la liste de courbes, jusqu'apos;à ce que de nouveaux réglages par défaut soient enregistrés.</translation>
+Si les paramètres visibles sont ceux de la Nième courbe, ils seront utilisés pour les futures courbes situés en Nième position de la liste de courbes, jusqu'à ce que de nouveaux réglages par défaut soient enregistrés.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="238" />
@@ -3027,9 +3027,9 @@ Si les paramètres visibles sont ceux de la Nième courbe, ils seront utilisés 
         <source>Preview window that shows how current settings affect the points and line of the selected curve.
 
 The X coordinate is in the horizontal direction, and the Y coordinate is in the vertical direction. A function can have only one Y value, at most, for any X value, but a relation can have multiple Y values for one X value.</source>
-        <translation>Prévisualisation montrant l'apos;effet des réglages sur les points et lignes de la courbe sélectionnée.
+        <translation>Prévisualisation montrant l'effet des réglages sur les points et lignes de la courbe sélectionnée.
 
-L'apos;axe des X est à l'apos;horizontale, celui les Y est à la verticale. Une fonction peut avoir une seule valeur Y pour une valeur X donnée, une relation peut avoir plusieurs valeurs Y pour une seule valeur X.</translation>
+L'axe des X est à l'horizontale, celui les Y est à la verticale. Une fonction peut avoir une seule valeur Y pour une valeur X donnée, une relation peut avoir plusieurs valeurs Y pour une seule valeur X.</translation>
     </message>
 </context>
 <context>
@@ -3111,7 +3111,7 @@ L'apos;axe des X est à l'apos;horizontale, celui les Y est à la verticale. Une
 Drag the cursor over this area to see the effects of the current settings on the cursor shape.</source>
         <translation>La fenêtre de prévisualisation montre le curseur actuellement sélectionné.
 
-Placer le curseur sur cette zone pour voir l'apos;effet des réglages sur la forme du curseur.</translation>
+Placer le curseur sur cette zone pour voir l'effet des réglages sur la forme du curseur.</translation>
     </message>
 </context>
 <context>
@@ -3119,7 +3119,7 @@ Placer le curseur sur cette zone pour voir l'apos;effet des réglages sur la for
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="55" />
         <source>Export Format</source>
-        <translation>Format d'apos;export</translation>
+        <translation>Format d'export</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="84" />
@@ -3136,9 +3136,9 @@ Placer le curseur sur cette zone pour voir l'apos;effet des réglages sur la for
         <source>List of curves to be included in the exported file.
 
 The order of the curves here does not affect the order in the exported file. That order is determined by the Curves settings.</source>
-        <translation>Liste des courbes à inclure dans le fichier d'apos;export.
+        <translation>Liste des courbes à inclure dans le fichier d'export.
 
-L'apos;ordre des courbes dans cette liste n'apos;affecte pas l'apos;ordre dans le fichier d'apos;export. Cet ordre est déterminé par les paramètres Ajouter/Enlever des courbes.</translation>
+L'ordre des courbes dans cette liste n'affecte pas l'ordre dans le fichier d'export. Cet ordre est déterminé par les paramètres Ajouter/Enlever des courbes.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="101" />
@@ -3153,7 +3153,7 @@ L'apos;ordre des courbes dans cette liste n'apos;affecte pas l'apos;ordre dans l
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="108" />
         <source>Move the currently selected curve(s) from the excluded list</source>
-        <translation>Enlève les courbe(s) sélectionnée(s) de la liste d'apos;exclusion</translation>
+        <translation>Enlève les courbe(s) sélectionnée(s) de la liste d'exclusion</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="112" />
@@ -3163,7 +3163,7 @@ L'apos;ordre des courbes dans cette liste n'apos;affecte pas l'apos;ordre dans l
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="114" />
         <source>Move the currently selected curve(s) from the included list</source>
-        <translation>Ajoute les courbe(s) sélectionnée(s) à la liste d'apos;exclusion</translation>
+        <translation>Ajoute les courbe(s) sélectionnée(s) à la liste d'exclusion</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="125" />
@@ -3223,7 +3223,7 @@ L'apos;ordre des courbes dans cette liste n'apos;affecte pas l'apos;ordre dans l
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="177" />
         <source>Exported file will have all the points for the first curve, with one X-Y pair on each line, then the points for the second curve,...</source>
-        <translation>Le fichier contiendra d'apos;abord un couple X-Y de la première courbe sur chaque ligne, puis les points de la deuxième courbe, ...</translation>
+        <translation>Le fichier contiendra d'abord un couple X-Y de la première courbe sur chaque ligne, puis les points de la deuxième courbe, ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="187" />
@@ -3268,7 +3268,7 @@ L'apos;ordre des courbes dans cette liste n'apos;affecte pas l'apos;ordre dans l
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="221" />
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
-        <translation>Le fichier exporté contiendra des valeurs à intervalles réguliers de X, séparées par l'apos;intervalle ci-dessous.</translation>
+        <translation>Le fichier exporté contiendra des valeurs à intervalles réguliers de X, séparées par l'intervalle ci-dessous.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="225" />
@@ -3283,9 +3283,9 @@ L'apos;ordre des courbes dans cette liste n'apos;affecte pas l'apos;ordre dans l
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
 
 The X values will be automatically aligned along simple numbers. If the first and/or last points are not along the aligned X values, then one or two additional points are added as necessary.</source>
-        <translation>Intervalle, en unités de X, séparant deux points successifs dans l'apos;ordre des X.
+        <translation>Intervalle, en unités de X, séparant deux points successifs dans l'ordre des X.
 
-Si l'apos;échelle est linéaire, cet intervalle est ajouté à chaque valeur en X. Si elle est linéaire, cet intervalle est multiplié à chaque valeur en X.
+Si l'échelle est linéaire, cet intervalle est ajouté à chaque valeur en X. Si elle est linéaire, cet intervalle est multiplié à chaque valeur en X.
 
 Les valeurs en X seront alignées automatiquement sur des nombres arrondis. Si le premier et/ou dernier point ne sont pas alignés sur une valeur en X, un ou deux points additionnels sont ajoutés si nécessaire.</translation>
     </message>
@@ -3296,11 +3296,11 @@ Les valeurs en X seront alignées automatiquement sur des nombres arrondis. Si l
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
 
 Graph units are preferred when the spacing is to depend on the X scale.</source>
-        <translation>Unité pour l'apos;intervalle.
+        <translation>Unité pour l'intervalle.
 
-Les pixels sont préférés si l'apos;espacement doit être indépendant de l'apos;échelle des X. L'apos;espacement sera régulier, même si l'apos;échelle des X est logarithmique.
+Les pixels sont préférés si l'espacement doit être indépendant de l'échelle des X. L'espacement sera régulier, même si l'échelle des X est logarithmique.
 
-L'apos;unité Graphique est préférée lorsque l'apos;espacement doit dépendre de l'apos;échelle des X.</translation>
+L'unité Graphique est préférée lorsque l'espacement doit dépendre de l'échelle des X.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="255" />
@@ -3322,7 +3322,7 @@ L'apos;unité Graphique est préférée lorsque l'apos;espacement doit dépendre
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="261" />
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="399" />
         <source>Exported file will have only original X and Y values</source>
-        <translation>Le fichier exporté contiendra uniquement les données X et Y d'apos;origine</translation>
+        <translation>Le fichier exporté contiendra uniquement les données X et Y d'origine</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="272" />
@@ -3389,7 +3389,7 @@ Functions (shown here in blue) are output first, followed by relations (shown he
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="366" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
-        <translation>Le fichier exporté contiendra des valeurs espacées régulièrement pour chaque relation, séparées par l'apos;intervalle ci-dessous. Si le dernier intervalle ne correspond pas au dernier point, un intervalle plus court sera utilisé pour ce dernier point.</translation>
+        <translation>Le fichier exporté contiendra des valeurs espacées régulièrement pour chaque relation, séparées par l'intervalle ci-dessous. Si le dernier intervalle ne correspond pas au dernier point, un intervalle plus court sera utilisé pour ce dernier point.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="380" />
@@ -3403,11 +3403,11 @@ Functions (shown here in blue) are output first, followed by relations (shown he
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
 
 Graph units are usually preferred when the X and Y scales are identical.</source>
-        <translation>Unité pour l'apos;intervalle.
+        <translation>Unité pour l'intervalle.
 
-Les pixels sont préférés si l'apos;espacement doit être indépendant de des échelles des X et des Y. L'apos;espacement sera régulier, même si une échelle est logarithmique ou si l'apos;échelle des X et celle des Y sont différentes.
+Les pixels sont préférés si l'espacement doit être indépendant de des échelles des X et des Y. L'espacement sera régulier, même si une échelle est logarithmique ou si l'échelle des X et celle des Y sont différentes.
 
-L'apos;unité Graphique est préférée lorsque les échelles des X et des Y sont identiques.</translation>
+L'unité Graphique est préférée lorsque les échelles des X et des Y sont identiques.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="442" />
@@ -3421,7 +3421,7 @@ L'apos;unité Graphique est préférée lorsque les échelles des X et des Y son
 Controls for specifying the format of functions during export</source>
         <translation>Onglet Fonctions
 
-Réglages pour l'apos;export de fonctions</translation>
+Réglages pour l'export de fonctions</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="450" />
@@ -3435,7 +3435,7 @@ Réglages pour l'apos;export de fonctions</translation>
 Controls for specifying the format of relations during export</source>
         <translation>Onglet Relations
 
-Réglages pour l'apos;export de relations</translation>
+Réglages pour l'export de relations</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="471" />
@@ -3450,7 +3450,7 @@ Réglages pour l'apos;export de relations</translation>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1214" />
         <source>Preview is unavailable until axis points are defined.</source>
-        <translation>L'apos;aperçu n'apos;est pas disponible jusqu'apos;à ce que les points d'apos;axe soient définis.</translation>
+        <translation>L'aperçu n'est pas disponible jusqu'à ce que les points d'axe soient définis.</translation>
     </message>
 </context>
 <context>
@@ -3474,7 +3474,7 @@ This is the effective width and height of the cursor when clicking on a pixel th
 This parameter is used in the Color Picker and Point Match modes</source>
         <translation>Taille du curseur
 
-Largeur et hauteur du curseur lorsqu'apos;on clique sur un pixel qui ne fait pas partie de l'apos;arrière-plan.
+Largeur et hauteur du curseur lorsqu'on clique sur un pixel qui ne fait pas partie de l'arrière-plan.
 
 Ce réglage est utilisé dans les modes Pipette à couleurs et Détection de point</translation>
     </message>
@@ -3492,9 +3492,9 @@ This is the number of additional digits of precision appended after the signific
 This parameter is used on the coordinates in the Status Bar and during Export</source>
         <translation>Décimales additionnelles
 
-Nombre de décimales ajoutées après la valeur significative déterminée par la précision de numérisation du point. La précision de numérisation correspond au changement des coordonnées pour un mouvement d'apos;un pixel dans chaque direction. Ajouter des décimales n'apos;améliore pas l'apos;exactitude des nombres. Pour plus d'apos;information, voir les discussions entre précision et exactitude.
+Nombre de décimales ajoutées après la valeur significative déterminée par la précision de numérisation du point. La précision de numérisation correspond au changement des coordonnées pour un mouvement d'un pixel dans chaque direction. Ajouter des décimales n'améliore pas l'exactitude des nombres. Pour plus d'information, voir les discussions entre précision et exactitude.
 
-Paramètre utilisé dans les coordonnées exportées et de la barre d'apos;état</translation>
+Paramètre utilisé dans les coordonnées exportées et de la barre d'état</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="79" />
@@ -3504,7 +3504,7 @@ Paramètre utilisé dans les coordonnées exportées et de la barre d'apos;état
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="80" />
         <source>Save the settings for use as future defaults, according to the curve name selection.</source>
-        <translation>Enregistre les réglages pour une utilisation par défaut, en relation avec la sélection d'apos;un nom de courbe.</translation>
+        <translation>Enregistre les réglages pour une utilisation par défaut, en relation avec la sélection d'un nom de courbe.</translation>
     </message>
 </context>
 <context>
@@ -3644,7 +3644,7 @@ The stop value cannot be less than the start value</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="265" />
         <source>Preview window that shows how current settings affect grid display</source>
-        <translation>Prévisualisation montrant l'apos;effet des réglages sur l'apos;affichage de la grille</translation>
+        <translation>Prévisualisation montrant l'effet des réglages sur l'affichage de la grille</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="322" />
@@ -3687,7 +3687,7 @@ The stop value cannot be less than the start value</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="89" />
         <source>Preview window that shows how current settings affect grid removal</source>
-        <translation>Prévisualisation montrant l'apos;effet des réglages sur la suppression de grille</translation>
+        <translation>Prévisualisation montrant l'effet des réglages sur la suppression de grille</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="100" />
@@ -3701,7 +3701,7 @@ The stop value cannot be less than the start value</source>
 This option is only available when the axis points have all been defined.</source>
         <translation>Cocher cette case pour supprimer les pixels proches de lignes de grille régulièrement espacées.
 
-Cette option est disponible une fois que tous les points d'apos;axe ont été définis.</translation>
+Cette option est disponible une fois que tous les points d'axe ont été définis.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="106" />
@@ -3873,7 +3873,7 @@ The stop value cannot be less than the start value</source>
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
         <translation>Zoom par défaut
 
-Indique l'apos;affichage initial lorsqu'apos;un nouveau document est chargé. L'apos;affichage précédent peut être conservé, ou un zoom spécifique peut être sélectionné.</translation>
+Indique l'affichage initial lorsqu'un nouveau document est chargé. L'affichage précédent peut être conservé, ou un zoom spécifique peut être sélectionné.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="89" />
@@ -3927,14 +3927,14 @@ Select the locale that will be used in numbers (immediately), and the language i
 The locale determines how numbers are formatted. Specifically, either commas or periods will be used as group delimiters in each number entered by the user, displayed in the user interface, or exported to a file.</source>
         <translation>Langue
 
-Indique la localisation qui sera appliquée aux nombres (immédiatement), et la langue appliquée à l'apos;interface utilisateur (après redémarrage).
+Indique la localisation qui sera appliquée aux nombres (immédiatement), et la langue appliquée à l'interface utilisateur (après redémarrage).
 
-La localisation détermine le formatage des nombres. Par exemple si des points ou des virgules seront utilisés comme délimiteurs des nombres entrés par l'apos;utilisateur, affichés dans l'apos;interface ou exportés dans un fichier.</translation>
+La localisation détermine le formatage des nombres. Par exemple si des points ou des virgules seront utilisés comme délimiteurs des nombres entrés par l'utilisateur, affichés dans l'interface ou exportés dans un fichier.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="127" />
         <source>Import cropping</source>
-        <translation>Recadrage de l'apos;importation</translation>
+        <translation>Recadrage de l'importation</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="131" />
@@ -3945,24 +3945,24 @@ Enables or disables cropping of the imported image when importing. Cropping the 
 This setting only has an effect when Engauge has been built with support for pdf files.</source>
         <translation>Recadrage de l&amp;apos;importation
 
-Active ou non le choix de recadrage lors de l&amp;apos;importation d&amp;apos;une image. Recadrer l&amp;apos;image est utile pour éliminer des informations inutiles du graphique, ça l&amp;apos;est moins si le graphique remplit déjà toute la page.
+Active ou non le choix de recadrage lors de l&amp;apos;importation d&amp;apos;une image. Recadrer l&amp;image est utile pour éliminer des informations inutiles du graphique, ça l&amp;est moins si le graphique remplit déjà toute la page.
 
-Ce paramètre n'apos;a d'apos;effet que lorsque Engauge a été créé avec la prise en charge des fichiers PDF.
+Ce paramètre n'a d'effet que lorsque Engauge a été créé avec la prise en charge des fichiers PDF.
 </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="144" />
         <source>Import PDF resolution (dots per inch)</source>
-        <translation>Résolution d'apos;importation PDF (points par pouce)</translation>
+        <translation>Résolution d'importation PDF (points par pouce)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="148" />
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
-        <translation>Résolution d'apos;importation PDF
+        <translation>Résolution d'importation PDF
 
-Les fichiers PDF (Portable Document Format) sont convertis avec cette résolution en points par pouce (PPP), où chaque pixel représente un point. Une valeur élevée augmente la résolution de l'apos;image et peut améliorer la précision de numérisation. Cependant une valeur trop élevée risque de faire ralentir Engauge.</translation>
+Les fichiers PDF (Portable Document Format) sont convertis avec cette résolution en points par pouce (PPP), où chaque pixel représente un point. Une valeur élevée augmente la résolution de l'image et peut améliorer la précision de numérisation. Cependant une valeur trop élevée risque de faire ralentir Engauge.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="163" />
@@ -3976,7 +3976,7 @@ Les fichiers PDF (Portable Document Format) sont convertis avec cette résolutio
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
         <translation>Nombre maximum de lignes de grilles
 
-Nombre maximal de lignes à traiter. Cette limite s'apos;applique lorsque le pas entre la valeur de début et celle de fin est trop petite, ce qui donnerait visuellement trop de lignes et pourrait conduire à un temps de traitement très long (puisque chaque ligne devrait être traitée)</translation>
+Nombre maximal de lignes à traiter. Cette limite s'applique lorsque le pas entre la valeur de début et celle de fin est trop petite, ce qui donnerait visuellement trop de lignes et pourrait conduire à un temps de traitement très long (puisque chaque ligne devrait être traitée)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="175" />
@@ -3988,9 +3988,9 @@ Nombre maximal de lignes à traiter. Cette limite s'apos;applique lorsque le pas
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
-        <translation>Mettre en évidence l'apos;opacité
+        <translation>Mettre en évidence l'opacité
 
-Opacité à appliquer lorsqu'apos;un curseur est sur un point d'apos;une courbe ou d'apos;un axe en mode Sélection. Le changement d'apos;apparence montre qu'apos;un point peut être sélectionné.</translation>
+Opacité à appliquer lorsqu'un curseur est sur un point d'une courbe ou d'un axe en mode Sélection. Le changement d'apparence montre qu'un point peut être sélectionné.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
@@ -4023,7 +4023,7 @@ Vide la liste des fichiers récents dans le menu Fichier.</translation>
 Includes or excludes the path and file extension from the filename in the title bar.</source>
         <translation>Nom de fichier dans la barre de titre
 
-Indique ou masque le chemin d'apos;accès et l'apos;extension du fichier dans la barre de titre.</translation>
+Indique ou masque le chemin d'accès et l'extension du fichier dans la barre de titre.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="208" />
@@ -4037,12 +4037,12 @@ Indique ou masque le chemin d'apos;accès et l'apos;extension du fichier dans la
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
         <translation>Permettre de petites boîtes de dialogue:
 
-Permet aux boîtes de dialogue d'apos;être très petites de manière à tenir dans les petits écrans d'apos;ordinateur.</translation>
+Permet aux boîtes de dialogue d'être très petites de manière à tenir dans les petits écrans d'ordinateur.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="218" />
         <source>Allow drag and drop export</source>
-        <translation>Permettre l'apos;Export par Glisser-Déposer</translation>
+        <translation>Permettre l'Export par Glisser-Déposer</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="223" />
@@ -4051,11 +4051,11 @@ Permet aux boîtes de dialogue d'apos;être très petites de manière à tenir d
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
 
 When drag and drop is disabled, a rectangular set of table cells can be selected using click and drag. When drag and drop is enabled, a rectangular set of table cells can be selected using Click then Shift+Click, since click and drag starts the drag operation.</source>
-        <translation>Permettre l'apos;Export par Glisser-Déposer
+        <translation>Permettre l'Export par Glisser-Déposer
 
-Permet l'apos;export par glisser-déposer dans les tables des Fenêtre d'apos;Ajustement de Courbe et Fenêtre de Géométrie.
+Permet l'export par glisser-déposer dans les tables des Fenêtre d'Ajustement de Courbe et Fenêtre de Géométrie.
 
-Lorsque le glisser-déposer est désactivé, un ensemble rectangulaire de cellules d'apos;une table peut être sélectionné par un clic et glissé. Lorsque le glisser-déposer est activé, un ensemble rectangulaire de cellules peut être sélectionné par un clic et ensuite Shift+Clic, car le clic et glissé commence l'apos;opération de glisser.</translation>
+Lorsque le glisser-déposer est désactivé, un ensemble rectangulaire de cellules d'une table peut être sélectionné par un clic et glissé. Lorsque le glisser-déposer est activé, un ensemble rectangulaire de cellules peut être sélectionné par un clic et ensuite Shift+Clic, car le clic et glissé commence l'opération de glisser.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="231" />
@@ -4081,7 +4081,7 @@ Lorsqu'une image est importée pour remplacer l'image actuelle, le document sera
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
-        <translation>Chiffres significatifsNombre de chiffres de précision en nombres à virgule flottante. Cette valeur affecte les calculs pour les ajustements de courbes, puisque les résultats intermédiaires inférieurs à un seuil T indiquent qu'apos;une courbe polynomiale avec un ordre spécifique ne peut pas être ajustée aux données. Le seuil T est calculé à partir de l'apos;élément matriciel maximal M et des chiffres significatifs S comme T = M / 10 ^ S.</translation>
+        <translation>Chiffres significatifsNombre de chiffres de précision en nombres à virgule flottante. Cette valeur affecte les calculs pour les ajustements de courbes, puisque les résultats intermédiaires inférieurs à un seuil T indiquent qu'une courbe polynomiale avec un ordre spécifique ne peut pas être ajustée aux données. Le seuil T est calculé à partir de l'élément matriciel maximal M et des chiffres significatifs S comme T = M / 10 ^ S.</translation>
     </message>
 </context>
 <context>
@@ -4105,18 +4105,18 @@ Sample match points must fit within a square box, around the cursor, having widt
 This size is also used to determine if a region of pixels that are on, in the processed image, should be ignored since that region is wider or taller than this limit.
 
 This value has a lower limit</source>
-        <translation>Choisir la taille maximale d'apos;un point en pixels.
+        <translation>Choisir la taille maximale d'un point en pixels.
 
 Les points à détecter doivent entrer dans une zone carrée, autour du curseur, ayant une largeur et une hauteur égales à ce maximum.
 
-Cette taille permet aussi de déterminer si une région colorée de pixels, sur l'apos;image traitée, doit être ignorée si elle est plus large ou haute que cette limite.
+Cette taille permet aussi de déterminer si une région colorée de pixels, sur l'image traitée, doit être ignorée si elle est plus large ou haute que cette limite.
 
 Ce réglage a une valeur minimale</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="98" />
         <source>Accepted point color</source>
-        <translation>Couleur d'apos;un point accepté</translation>
+        <translation>Couleur d'un point accepté</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="102" />
@@ -4126,7 +4126,7 @@ Ce réglage a une valeur minimale</translation>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="107" />
         <source>Rejected point color</source>
-        <translation>Couleur d'apos;un point rejeté</translation>
+        <translation>Couleur d'un point rejeté</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="111" />
@@ -4136,7 +4136,7 @@ Ce réglage a une valeur minimale</translation>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="116" />
         <source>Candidate point color</source>
-        <translation>Couleur d'apos;un point proposé</translation>
+        <translation>Couleur d'un point proposé</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="120" />
@@ -4223,7 +4223,7 @@ Place des points sur chaque coin, en plus des points régulièrement espacés. C
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="118" />
         <source>Select a size for the lines drawn along a segment</source>
-        <translation>Epaisseur de la ligne dessinée le long d'apos;un segment</translation>
+        <translation>Epaisseur de la ligne dessinée le long d'un segment</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="123" />
@@ -4233,7 +4233,7 @@ Place des points sur chaque coin, en plus des points régulièrement espacés. C
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="127" />
         <source>Select a color for the lines drawn along a segment</source>
-        <translation>Couleur de la ligne dessinée le long d'apos;un segment</translation>
+        <translation>Couleur de la ligne dessinée le long d'un segment</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="142" />
@@ -4243,7 +4243,7 @@ Place des points sur chaque coin, en plus des points régulièrement espacés. C
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="149" />
         <source>Preview window shows the shortest line that can be segment filled, and the effects of current settings on segments and points generated by segment fill</source>
-        <translation>Prévisualisation montrant un segment minimum et l'apos;effet des réglages sur le segment et les points générés dans ce mode</translation>
+        <translation>Prévisualisation montrant un segment minimum et l'effet des réglages sur le segment et les points générés dans ce mode</translation>
     </message>
 </context>
 <context>
@@ -4252,7 +4252,7 @@ Place des points sur chaque coin, en plus des points régulièrement espacés. C
         <location filename="../src/Fitting/FittingWindow.cpp" line="42" />
         <location filename="../src/Fitting/FittingWindow.cpp" line="43" />
         <source>Curve Fitting Window</source>
-        <translation>Fenêtre d'apos;Ajustement de Courbe</translation>
+        <translation>Fenêtre d'Ajustement de Courbe</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="44" />
@@ -4261,11 +4261,11 @@ Place des points sur chaque coin, en plus des points régulièrement espacés. C
 This window applies a curve fit to the currently selected curve.
 
 If drag-and-drop is disabled, a rectangular set of cells may be selected by clicking and dragging. Otherwise, if drag-and-drop is enabled, a rectangular set of cells may be selected using Click then Shift+Click, since click and drag starts the dragging operation. Drag-and-drop mode is set in the Main Window settings</source>
-        <translation>Fenêtre d'apos;Ajustement de Courbe
+        <translation>Fenêtre d'Ajustement de Courbe
 
-Cette fenêtre applique une courbe d'apos;ajustement à la courbe sélectionnée pour le moment.
+Cette fenêtre applique une courbe d'ajustement à la courbe sélectionnée pour le moment.
 
-Lorsque le glisser-déposer est désactivé, un ensemble rectangulaire de cellules d'apos;une table peut être sélectionné par un clic et glissé. Sinon, lorsque le glisser-déposer est activé, un ensemble rectangulaire de cellules peut être sélectionné par un clic et ensuite Shift+Clic, car le clic et glissé commence l'apos;opération de glisser. Le mode glisser-déposer est défini dans les paramètres de la Fenêtre Principale.</translation>
+Lorsque le glisser-déposer est désactivé, un ensemble rectangulaire de cellules d'une table peut être sélectionné par un clic et glissé. Sinon, lorsque le glisser-déposer est activé, un ensemble rectangulaire de cellules peut être sélectionné par un clic et ensuite Shift+Clic, car le clic et glissé commence l'opération de glisser. Le mode glisser-déposer est défini dans les paramètres de la Fenêtre Principale.</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="128" />
@@ -4280,7 +4280,7 @@ Lorsque le glisser-déposer est désactivé, un ensemble rectangulaire de cellul
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="158" />
         <source>Calculated mean square error statistic</source>
-        <translation>Statistique calculée d'apos;erreur quadratique moyenne</translation>
+        <translation>Statistique calculée d'erreur quadratique moyenne</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="161" />
@@ -4290,7 +4290,7 @@ Lorsque le glisser-déposer est désactivé, un ensemble rectangulaire de cellul
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="166" />
         <source>Calculated root mean square statistic. This is calculated as the square root of the mean square error</source>
-        <translation>Statistique calculée de racine carrée. Ceci est calculé comme la racine carrée de l'apos;erreur quadratique moyenne.</translation>
+        <translation>Statistique calculée de racine carrée. Ceci est calculé comme la racine carrée de l'erreur quadratique moyenne.</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="169" />
@@ -4354,9 +4354,9 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
 
 Ce tableau affiche les données géométriques suivantes pour la courbe sélectionnée pour le moment:
 
-Aire de la fonction = aire sous la courbe s'apos;il s'apos;agit d'apos;une fonction
+Aire de la fonction = aire sous la courbe s'il s'agit d'une fonction
 
-Aire du polygone = aire à l'apos;intérieur de la courbe s'apos;il s'apos;agit d'apos;une relation. Cette valeur n'apos;est correcte que si aucune des courbes ne se croise
+Aire du polygone = aire à l'intérieur de la courbe s'il s'agit d'une relation. Cette valeur n'est correcte que si aucune des courbes ne se croise
 
 X = coordonnée en X de chaque point
 
@@ -4366,7 +4366,7 @@ Index = numéro du point
 
 Distance = distance devant ou derrière le long de la courbe, en unités du graphique ou en pourcentage
 
-Lorsque le glisser-déposer est désactivé, un ensemble rectangulaire de cellules peut être sélectionné par un clic et glissé. Sinon, lorsque le glisser-déposer est activé, un ensemble rectangulaire de cellules peut être sélectionné par un clic et ensuite Shift+Clic, car le clic et glissé commence l'apos;opération de glisser. Le mode glisser-déposer est défini dans les paramètres de la Fenêtre Principale.</translation>
+Lorsque le glisser-déposer est désactivé, un ensemble rectangulaire de cellules peut être sélectionné par un clic et glissé. Sinon, lorsque le glisser-déposer est activé, un ensemble rectangulaire de cellules peut être sélectionné par un clic et ensuite Shift+Clic, car le clic et glissé commence l'opération de glisser. Le mode glisser-déposer est défini dans les paramètres de la Fenêtre Principale.</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="274" />
@@ -4400,14 +4400,14 @@ Zooming the image in or out is performed using any of several methods:
 3) selecting a new zoom setting from the View/Zoom menu</source>
         <translation>Fenêtre principale
 
-Après l'apos;import d'apos;une image, ou l'apos;ouverture d'apos;un document Engauge, une image apparaît dans cette zône. Les points sont ajoutés à l'apos;image.
+Après l'import d'une image, ou l'ouverture d'un document Engauge, une image apparaît dans cette zône. Les points sont ajoutés à l'image.
 
-Si l'apos;image est un graphique avec deux axes et une ou plusieurs courbes, alors trois points d'apos;axe doivent être créés le long de ces axes. Placer deux points sur un axe, et un troisième point sur l'apos;autre axe, les plus éloignés possible les uns des autres pour augmenter la précision. Ensuite, les points des courbes peuvent être ajoutés le long des courbes.
+Si l'image est un graphique avec deux axes et une ou plusieurs courbes, alors trois points d'axe doivent être créés le long de ces axes. Placer deux points sur un axe, et un troisième point sur l'autre axe, les plus éloignés possible les uns des autres pour augmenter la précision. Ensuite, les points des courbes peuvent être ajoutés le long des courbes.
 
-Si l'apos;image est un plan avec une échelle définissant les distances, alors deux points d'apos;axe doivent être créés aux extrémités de l'apos;échelle. Ensuite les points de courbes peuvent être ajoutés.
+Si l'image est un plan avec une échelle définissant les distances, alors deux points d'axe doivent être créés aux extrémités de l'échelle. Ensuite les points de courbes peuvent être ajoutés.
 
-Le zoom avant ou arrière de l'apos;image est réalisé selon une des métodes suivantes:
-1) tourner la molette de la souris lorsque le curseur est en-dehors de l'apos;image
+Le zoom avant ou arrière de l'image est réalisé selon une des métodes suivantes:
+1) tourner la molette de la souris lorsque le curseur est en-dehors de l'image
 2) appuyer sur les ouches plus ou moins
 3) choisir un nouveau réglage de zoom dans le menu Affichage/Zoom</translation>
     </message>
@@ -4435,7 +4435,7 @@ Le zoom avant ou arrière de l'apos;image est réalisé selon une des métodes s
     <message>
         <location filename="../src/Load/LoadImageFromUrl.cpp" line="98" />
         <source>Unable to load image from</source>
-        <translation>Echec du chargement de l'apos;image depuis</translation>
+        <translation>Echec du chargement de l'image depuis</translation>
     </message>
 </context>
 <context>
@@ -4443,7 +4443,7 @@ Le zoom avant ou arrière de l'apos;image est réalisé selon une des métodes s
     <message>
         <location filename="../src/main/MainWindow.cpp" line="478" />
         <source>Unable to export to file</source>
-        <translation>Impossible d'apos;exporter le fichier </translation>
+        <translation>Impossible d'exporter le fichier </translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="512" />
@@ -4482,7 +4482,7 @@ Le zoom avant ou arrière de l'apos;image est réalisé selon une des métodes s
     <message>
         <location filename="../src/main/MainWindow.cpp" line="965" />
         <source>Error report opened</source>
-        <translation>Rapport d'apos;erreur ouvert</translation>
+        <translation>Rapport d'erreur ouvert</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1020" />
@@ -4520,7 +4520,7 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1263" />
         <source>Cannot write file</source>
-        <translation>Impossible d'apos;écrire le fichier</translation>
+        <translation>Impossible d'écrire le fichier</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1311" />
@@ -4560,35 +4560,35 @@ Voulez-vous enregistrer vos modifications?</translation>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="178" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="276" />
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
-        <translation>Le nouveau point d'apos;axe ne peut être placé au même endroit qu'apos;un point d'apos;axe déjà existant</translation>
+        <translation>Le nouveau point d'axe ne peut être placé au même endroit qu'un point d'axe déjà existant</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="186" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="285" />
         <source>New axis point cannot have the same graph coordinates as an existing axis point</source>
-        <translation>Le nouveau point d'apos;axe ne peut pas avoir les mêmes coordonnées qu'apos;un point d'apos;axe déjà existant</translation>
+        <translation>Le nouveau point d'axe ne peut pas avoir les mêmes coordonnées qu'un point d'axe déjà existant</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="192" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="291" />
         <source>No more than two axis points can lie along the same line on the screen</source>
-        <translation>Pas plus de deux points d'apos;axe peuvent être placés sur la même ligne à l'apos;écran</translation>
+        <translation>Pas plus de deux points d'axe peuvent être placés sur la même ligne à l'écran</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="198" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="297" />
         <source>No more than two axis points can lie along the same line in graph coordinates</source>
-        <translation>Pas plus de deux points d'apos;axe peuvent être placés sur une même ligne du graphique</translation>
+        <translation>Pas plus de deux points d'axe peuvent être placés sur une même ligne du graphique</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="251" />
         <source>Too many x axis points. There should only be two</source>
-        <translation>Trop de points d'apos;axes sur l'apos;axe des x. Seuls deux sont autorisés</translation>
+        <translation>Trop de points d'axes sur l'axe des x. Seuls deux sont autorisés</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="257" />
         <source>Too many y axis points. There should only be two</source>
-        <translation>Trop de points d'apos;axes sur l'apos;axe des y. Seuls deux sont autorisés</translation>
+        <translation>Trop de points d'axes sur l'axe des y. Seuls deux sont autorisés</translation>
     </message>
     <message>
         <location filename="../src/Checker/CheckerMode.cpp" line="16" />
@@ -4662,7 +4662,7 @@ Voulez-vous enregistrer vos modifications?</translation>
         <location filename="../src/Cmd/CmdSettingsPointMatch.cpp" line="50" />
         <location filename="../src/Cmd/CmdSettingsSegments.cpp" line="50" />
         <source>Reached end of file before finding end element for</source>
-        <translation>Fin de fichier atteinte avant de trouver la fin de l'apos;élément</translation>
+        <translation>Fin de fichier atteinte avant de trouver la fin de l'élément</translation>
     </message>
     <message>
         <location filename="../src/Color/ColorFilterMode.cpp" line="14" />
@@ -4838,7 +4838,7 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="136" />
         <source>Three axis points have been defined, and no more are needed or allowed.</source>
-        <translation>Trois points d'apos;axes ont été définis. Aucun autre point n'apos;est nécessaire ou autorisé.</translation>
+        <translation>Trois points d'axes ont été définis. Aucun autre point n'est nécessaire ou autorisé.</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="152" />
@@ -4848,7 +4848,7 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="153" />
         <source>Sorry, but the color picker point must be near a non-background pixel. Please try again.</source>
-        <translation>Désolé. La prise de couleur ne doit pas se faire près de/sur l'apos;arrière-plan. Merci de recommencer.</translation>
+        <translation>Désolé. La prise de couleur ne doit pas se faire près de/sur l'arrière-plan. Merci de recommencer.</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="350" />
@@ -4858,12 +4858,12 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="351" />
         <source>There are no more matching points</source>
-        <translation>Il n'apos;y a plus de point détecté</translation>
+        <translation>Il n'y a plus de point détecté</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="174" />
         <source>The scale bar has been defined, and another is not needed or allowed.</source>
-        <translation>La barre d'apos;échelle a été définie et une autre n'apos;est pas nécessaire ou autorisée.</translation>
+        <translation>La barre d'échelle a été définie et une autre n'est pas nécessaire ou autorisée.</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateSelect.cpp" line="35" />
@@ -4889,12 +4889,12 @@ Voulez-vous enregistrer vos modifications?</translation>
         <location filename="../src/Document/Document.cpp" line="95" />
         <location filename="../src/Document/Document.cpp" line="137" />
         <source>Operating system says file is not readable</source>
-        <translation>Le système d'apos;exploitation indique que le fichier n'apos;est pas accessible en lecture</translation>
+        <translation>Le système d'exploitation indique que le fichier n'est pas accessible en lecture</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="123" />
         <source>cannot read newer files from version</source>
-        <translation>Impossible de lire un fichier d'apos;une version plus récente</translation>
+        <translation>Impossible de lire un fichier d'une version plus récente</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="125" />
@@ -4915,7 +4915,7 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/Document/Document.cpp" line="517" />
         <source>Cannot read image data</source>
-        <translation>Ne peut lire les données d'apos;image</translation>
+        <translation>Ne peut lire les données d'image</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelAxesChecker.cpp" line="96" />
@@ -4940,7 +4940,7 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/Document/DocumentModelExportFormat.cpp" line="225" />
         <source>Cannot read export data</source>
-        <translation>Ne peut lire les données d'apos;exportation</translation>
+        <translation>Ne peut lire les données d'exportation</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelGeneral.cpp" line="93" />
@@ -4950,7 +4950,7 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="155" />
         <source>Cannot read grid display data</source>
-        <translation>Ne peut lire les données d'apos;affichage de grille</translation>
+        <translation>Ne peut lire les données d'affichage de grille</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelGridRemoval.cpp" line="191" />
@@ -4970,7 +4970,7 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/Document/DocumentScrub.cpp" line="40" />
         <source>Point identifier error encountered. Please notify the Engauge developers along with any comments about the country and language locale. The invalid point name was</source>
-        <translation>Erreur d'apos;identificateur de point rencontrée. Merci d'apos;informer les développeurs Engauge de tout commentaire sur les paramètres régionaux du pays et de la langue. Le nom de point non valide était</translation>
+        <translation>Erreur d'identificateur de point rencontrée. Merci d'informer les développeurs Engauge de tout commentaire sur les paramètres régionaux du pays et de la langue. Le nom de point non valide était</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="16" />
@@ -5010,7 +5010,7 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/Export/ExportImageForRegression.cpp" line="26" />
         <source>Export Image</source>
-        <translation>Exporter l'apos;image</translation>
+        <translation>Exporter l'image</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportImageForRegression.cpp" line="27" />
@@ -5137,7 +5137,7 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/Grid/GridLineFactory.cpp" line="67" />
         <source>Axes checker. If this does not align with the axes, then the axes points should be checked</source>
-        <translation>Vérification des axes. Si le cadre ne s'apos;aligne pas sur les axes, vérifier les points d'apos;axes</translation>
+        <translation>Vérification des axes. Si le cadre ne s'aligne pas sur les axes, vérifier les points d'axes</translation>
     </message>
     <message>
         <location filename="../src/Import/ImportCroppingUtilBase.cpp" line="22" />
@@ -5227,12 +5227,12 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/Transformation/Transformation.cpp" line="178" />
         <source>Need scale bar</source>
-        <translation>Besoin d'apos;une barre d'apos;échelle</translation>
+        <translation>Besoin d'une barre d'échelle</translation>
     </message>
     <message>
         <location filename="../src/Transformation/Transformation.cpp" line="179" />
         <source>Need more axis points</source>
-        <translation>Besoin de plus de points d'apos;axe</translation>
+        <translation>Besoin de plus de points d'axe</translation>
     </message>
     <message>
         <source>16:1 farther</source>
@@ -5384,12 +5384,12 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/main/main.cpp" line="448" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
-        <translation>Exécutet le fichier de rapport d'apos;erreur ou de script. Utile pour les tests de régression</translation>
+        <translation>Exécutet le fichier de rapport d'erreur ou de script. Utile pour les tests de régression</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="454" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
-        <translation>Supprime les réglages mémorisés, y compris les positions des fenêtres. Utile quand des fenêtre s'apos;ouvrent en-dehors de l'apos;écran</translation>
+        <translation>Supprime les réglages mémorisés, y compris les positions des fenêtres. Utile quand des fenêtre s'ouvrent en-dehors de l'écran</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="461" />
@@ -5456,16 +5456,16 @@ Voulez-vous enregistrer vos modifications?</translation>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="58" />
         <source>Select cursor coordinate values to display.</source>
-        <translation>Choix d'apos;affichage des coordonnées du curseur.</translation>
+        <translation>Choix d'affichage des coordonnées du curseur.</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="59" />
         <source>Select Cursor Coordinate Values
 
 Values at cursor coordinates to display. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
-        <translation>Choix d'apos;affichage des coordonnées du curseur.
+        <translation>Choix d'affichage des coordonnées du curseur.
 
-Valeurs à afficher pour la position du curseur. Les coordonnées sont en unités d'apos;écran (pixels) ou du graphique. La résolution (nombre d'apos;unités du graphique par pixel) est en unités du graphique. Les unités du graphique sont disponibles quand les points d'apos;axes ont été définis.</translation>
+Valeurs à afficher pour la position du curseur. Les coordonnées sont en unités d'écran (pixels) ou du graphique. La résolution (nombre d'unités du graphique par pixel) est en unités du graphique. Les unités du graphique sont disponibles quand les points d'axes ont été définis.</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="72" />
@@ -5479,7 +5479,7 @@ Valeurs à afficher pour la position du curseur. Les coordonnées sont en unité
 Values at cursor coordinates. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
         <translation>Valeurs des coordonnées du curseur
 
-Valeurs de la position du curseur. Les coordonnées sont en unités d'apos;écran (pixels) ou du graphique. La résolution (nombre d'apos;unités du graphique par pixel) est en unités du graphique. Les unités du graphique sont disponibles quand les points d'apos;axes ont été définis.</translation>
+Valeurs de la position du curseur. Les coordonnées sont en unités d'écran (pixels) ou du graphique. La résolution (nombre d'unités du graphique par pixel) est en unités du graphique. Les unités du graphique sont disponibles quand les points d'axes ont été définis.</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="127" />
@@ -5636,16 +5636,16 @@ Les points peuvent être placés de façon plus précise en faisant un zoom avan
     <message>
         <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="33" />
         <source>Axis Points</source>
-        <translation>Points d'apos;axes</translation>
+        <translation>Points d'axes</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="36" />
         <source>Axis points are first defined to
 define the coordinates. Step 1 -
 Click on the Axis Points button</source>
-        <translation>Les points d'apos;axes sont placés
+        <translation>Les points d'axes sont placés
 afin de définir les coordonnées.
-Etape 1 - Cliquer sur le bouton Points d'apos;axes</translation>
+Etape 1 - Cliquer sur le bouton Points d'axes</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="40" />
@@ -5654,7 +5654,7 @@ line with known coordinates. An axis
 point appears, with a dialog window
 for entering the axis point
 coordinates</source>
-        <translation>Étape 2 - Cliquez sur un axe ou une grille avec des coordonnées connues. Un point d'apos;axe apparaît, avec une fenêtre de dialogue pour saisir les coordonnées du point de l'apos;axe</translation>
+        <translation>Étape 2 - Cliquez sur un axe ou une grille avec des coordonnées connues. Un point d'axe apparaît, avec une fenêtre de dialogue pour saisir les coordonnées du point de l'axe</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="46" />
@@ -5663,9 +5663,9 @@ of the axis point and then click Ok.
 Repeat steps 2 and 3 twice more
 until three axis points are created</source>
         <translation>Etape 3 - Entrer les deux coordonnées
-de ce point d'apos;axe et cliquer sur OK.
+de ce point d'axe et cliquer sur OK.
 Répéter deux fois les étapes 2 et 3
-afin de créer trois points d'apos;axes</translation>
+afin de créer trois points d'axes</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="54" />
@@ -5691,16 +5691,16 @@ afin de créer trois points d'apos;axes</translation>
 is available when importing an image file.
 This wizard produces a helpful checklist of
 steps to follow to digitize the image file.</source>
-        <translation>Un assistant est proposé aux utilisateurs d'apos;Engauge
-lors de l'apos;importation d'apos;une image.
-Cet assistant donne une liste complète d'apos;actions
-à mener pour numériser un fichier d'apos;image.</translation>
+        <translation>Un assistant est proposé aux utilisateurs d'Engauge
+lors de l'importation d'une image.
+Cet assistant donne une liste complète d'actions
+à mener pour numériser un fichier d'image.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="41" />
         <source>Step 1 - Enable the menu option Help /
 Checklist Guide Wizard.</source>
-        <translation>Etape 1 - Activer l'apos;option Aide /
+        <translation>Etape 1 - Activer l'option Aide /
 Assistant pas à pas.</translation>
     </message>
     <message>
@@ -5711,10 +5711,10 @@ and ask some simple questions to
 determine how the image can be
 digitized.</source>
         <translation>Etape 2 - Importer un fichier via Fichier /
-Importer. L'apos;assistant pas à pas apparait
+Importer. L'assistant pas à pas apparait
 et pose quelques questions pour 
 déterminer comment sera numérisée
-l'apos;image.</translation>
+l'image.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="50" />
@@ -5803,7 +5803,7 @@ Cliquer sur OK pour terminer.</translation>
 curve is selected to receive curve points.
 Step 1 - click on Curve, Point Match, Color
 Picker or Segment Fill buttons.</source>
-        <translation>Après avoir créé les points d'apos;axes, une
+        <translation>Après avoir créé les points d'axes, une
 courbe est activée pour recevoir les points.
 Etape 1 - cliquer sur le bouton Courbe, Détection
 de point,pipette à couleurs ou remplissage par segment.
@@ -5815,8 +5815,8 @@ de point,pipette à couleurs ou remplissage par segment.
 that curve name has not been created yet,
 use the menu option Settings / Curve Names
 to create it.</source>
-        <translation>Etape 2 - Choisir un nom de la courbe. S'apos;il
-n'apos;a pas encore été créé, utiliser le menu
+        <translation>Etape 2 - Choisir un nom de la courbe. S'il
+n'a pas encore été créé, utiliser le menu
 Réglages / Noms de courbes pour le créer.</translation>
     </message>
     <message>
@@ -5938,7 +5938,7 @@ des courbes graphiques ou des cartes.</translation>
         <source>The digitized curve points can be
 exported, as numbers, to other software tools.</source>
         <translation>Les points numérisés peuvent être exportés
-sous forme de nombres vers d'apos;autres logiciels.</translation>
+sous forme de nombres vers d'autres logiciels.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="48" />
@@ -5979,7 +5979,7 @@ appartiendront les points.</translation>
 The circle turns green when it
 contains what may be a point.</source>
         <translation>Etape 3 - Cliquer sur un point typique.
-Le cercle devient vert s'apos;il contient
+Le cercle devient vert s'il contient
 ce qui pourrait être un point.</translation>
     </message>
     <message>
@@ -5990,8 +5990,8 @@ Press the Right Arrow key to accept
 the matched point. Repeat this step
 until there are no more points.</source>
         <translation>Etape 4 - Engauge montrera un point
-potentiel à l'apos;aide d'apos;une croix jaune.
-Appuyer sur la flèche droite pour l'apos;accepter.
+potentiel à l'aide d'une croix jaune.
+Appuyer sur la flèche droite pour l'accepter.
 Répéter cette étape pour les autres points.</translation>
     </message>
     <message>
