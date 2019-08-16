@@ -1018,17 +1018,23 @@ contains(DEFINES, NETWORKING) {
 #   XX = two letter language codes in column '639-1' at https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 #   YY = two letter country codes in column 'ISO 3166-2' at https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 # where XX and YY are:
+#
+#    ************************************************************
+#    THIS LIST MUST BE UPDATED BELOW AND IN translations/step_*
+#    ************************************************************
 #   ar = Arabic     Egypt=_eg
 #   cs = Czech      Czech Republic=_cs
 #   de = German     Germany=_de
 #   en = English    USA=us
 #   es = Spanish    Spain=_es
+#   fa = Farsi      Iraq=_ir
 #   fr = French     France=_fr
 #   hi = Hindi      India=_in
 #   it = Italian    Italy=_it
 #   ja = Japanese   Japan=_jp
 #   kk = Kazakh     Kazakhstan=_kz
 #   ko = Korean     SouthKorea=_kr
+#   nb = Norwegian  
 #   pt = Portuguese Brazil=_br
 #   ru = Russian    Federation=_ru
 #   zh = Chinese    China=_cn
@@ -1043,12 +1049,14 @@ TRANSLATIONS = translations/engauge_ar.ts \
                translations/engauge_de.ts \
                translations/engauge_en.ts \
                translations/engauge_es.ts \
+               translations/engauge_fa_IR.ts \               
                translations/engauge_fr.ts \               
                translations/engauge_hi.ts \               
                translations/engauge_it.ts \               
                translations/engauge_ja.ts \               
                translations/engauge_kk.ts \
                translations/engauge_ko.ts \
+               translations/engauge_nb.ts \               
                translations/engauge_pt.ts \
                translations/engauge_ru.ts \
                translations/engauge_zh.ts

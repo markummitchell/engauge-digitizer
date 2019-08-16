@@ -5,7 +5,7 @@
 #        (which is handled below)
 
 function main {
-    languages=(ar cs de en es fr hi it ja kk ko pt ru zh)
+    languages=(ar cs de en es fa_IR fr hi it ja kk ko nb pt ru zh)
     for language in "${languages[@]}"
     do
         merge_one $language
