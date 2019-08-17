@@ -72,6 +72,7 @@
 			<description>
 			  <ul>
 			    <li>More points styles </li>
+			    <li>Fix data export for log scale with small step factor</li>
 			  </ul>
 			</description>
 		</release>
