@@ -1021,6 +1021,7 @@ contains(DEFINES, NETWORKING) {
 #
 #    ************************************************************
 #    THIS LIST MUST BE UPDATED BELOW AND IN translations/step_*
+#    AND IN dev/windows/engauge*.wxs
 #    ************************************************************
 #   ar = Arabic     Egypt=_eg
 #   cs = Czech      Czech Republic=_cs
