@@ -3770,8 +3770,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
-The step value must be greater than zero</source>
+The step value must be greater than zero (linear) or one (log)</source>
         <translation>تفاوت در ارزش بین دو خط شبکه X متوالی.
+
+مقدار گام باید بیشتر از صفر (خطی) یا یک (لگاریتمی) باشد</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>تفاوت در ارزش بین دو خط شبکه Y متوالی.
+
+مقدار گام باید بیشتر از صفر (خطی) یا یک (لگاریتمی) باشد</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
+The step value must be greater than zero</source>
+        <translation type="vanished">تفاوت در ارزش بین دو خط شبکه X متوالی.
 
 مقدار مرحله باید بیشتر از صفر باشد</translation>
     </message>
@@ -3819,11 +3836,10 @@ The start value cannot be greater than the stop value</source>
 مقدار شروع نمی تواند بیشتر از مقدار توقف باشد</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>تفاوت در ارزش بین دو خط شبکه Y متوالی.
+        <translation type="vanished">تفاوت در ارزش بین دو خط شبکه Y متوالی.
 
 مقدار مرحله باید بیشتر از صفر باشد</translation>
     </message>
@@ -3990,8 +4006,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
-The step value must be greater than zero</source>
+The step value must be greater than zero (linear) or one (log)</source>
         <translation>تفاوت در ارزش بین دو خط شبکه X متوالی.
+
+مقدار گام باید بیشتر از صفر (خطی) یا یک (لگاریتمی) باشد</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>تفاوت در ارزش بین دو خط شبکه Y متوالی.
+
+مقدار گام باید بیشتر از صفر (خطی) یا یک (لگاریتمی) باشد</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
+The step value must be greater than zero</source>
+        <translation type="vanished">تفاوت در ارزش بین دو خط شبکه X متوالی.
 
 مقدار مرحله باید بیشتر از صفر باشد</translation>
     </message>
@@ -4049,11 +4082,10 @@ The start value cannot be greater than the stop value</source>
 مقدار شروع نمی تواند بیشتر از مقدار توقف باشد</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>تفاوت در ارزش بین دو خط شبکه Y متوالی.
+        <translation type="vanished">تفاوت در ارزش بین دو خط شبکه Y متوالی.
 
 مقدار مرحله باید بیشتر از صفر باشد</translation>
     </message>

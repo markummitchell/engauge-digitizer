@@ -3347,8 +3347,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>兩個連續X網格線之間的值差異。
+
+步長值必須大於零（線性）或一（對數）</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>兩個連續Y網格線之間的值差異。
+
+步長值必須大於零（線性）或一（對數）</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>两个连续的X格线之间的差值。步长值必须大于零</translation>
+        <translation type="vanished">两个连续的X格线之间的差值。步长值必须大于零</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="162" />
@@ -3385,11 +3402,10 @@ The start value cannot be greater than the stop value</source>
         <translation>第一个Y网格线的值。起始值不能大于停止值</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>两个连续的Y网格线之间的差值。步长值必须大于零</translation>
+        <translation type="vanished">两个连续的Y网格线之间的差值。步长值必须大于零</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="242" />
@@ -3536,8 +3552,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>兩個連續X網格線之間的值差異。
+
+步長值必須大於零（線性）或一（對數）</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>兩個連續Y網格線之間的值差異。
+
+步長值必須大於零（線性）或一（對數）</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>两个连续的X格线之间的差值。步长值必须大于零</translation>
+        <translation type="vanished">两个连续的X格线之间的差值。步长值必须大于零</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="189" />
@@ -3584,11 +3617,10 @@ The start value cannot be greater than the stop value</source>
         <translation>第一个Y网格线的值。起始值不能大于停止值</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>两个连续的Y网格线之间的差值。步长值必须大于零</translation>
+        <translation type="vanished">两个连续的Y网格线之间的差值。步长值必须大于零</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="271" />

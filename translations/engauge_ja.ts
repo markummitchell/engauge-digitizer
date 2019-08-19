@@ -3586,8 +3586,25 @@ X 枠線を開始する位置です。この値は終了位置の値よりも大
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>連続する2つのXグリッド線の値の差。
+
+ステップ値は、ゼロ（線形）または1（対数）より大きくなければなりません。</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>2つの連続するYグリッド線の値の差。
+
+ステップ値は、ゼロ（線形）または1（対数）より大きくなければなりません。</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>左右に隣り合う 2 本の X 枠線の値の差分に相当します。
+        <translation type="vanished">左右に隣り合う 2 本の X 枠線の値の差分に相当します。
 
 ゼロよりも大きな値を指定します。</translation>
     </message>
@@ -3634,11 +3651,10 @@ The start value cannot be greater than the stop value</source>
 Y 枠線を開始する位置です。この値は終了位置の値よりも大きくならないようにしてください。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>上下に隣り合う 2 本の Y 枠線の値の差分に相当します。
+        <translation type="vanished">上下に隣り合う 2 本の Y 枠線の値の差分に相当します。
 
 ゼロよりも大きな値を指定します。</translation>
     </message>
@@ -3801,8 +3817,25 @@ X 枠線を開始する位置です。この値は終了位置の値よりも大
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>連続する2つのXグリッド線の値の差。
+
+ステップ値は、ゼロ（線形）または1（対数）より大きくなければなりません。</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>2つの連続するYグリッド線の値の差。
+
+ステップ値は、ゼロ（線形）または1（対数）より大きくなければなりません。</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>左右に隣り合う 2 本の X 枠線の値の差分に相当します。
+        <translation type="vanished">左右に隣り合う 2 本の X 枠線の値の差分に相当します。
 
 ゼロよりも大きな値を指定します。</translation>
     </message>
@@ -3859,11 +3892,10 @@ The start value cannot be greater than the stop value</source>
 Y 枠線を開始する位置です。この値は終了位置の値よりも大きくならないようにしてください。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>上下に隣り合う 2 本の Y 枠線の値の差分に相当します。
+        <translation type="vanished">上下に隣り合う 2 本の Y 枠線の値の差分に相当します。
 
 ゼロよりも大きな値を指定します。</translation>
     </message>

@@ -3319,7 +3319,14 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155"/>
         <source>Difference in value between two successive X grid lines.
 
-The step value must be greater than zero</source>
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231"/>
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3354,13 +3361,6 @@ The number of Y grid lines must be entered as an integer greater than zero</sour
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231"/>
-        <source>Difference in value between two successive Y grid lines.
-
-The step value must be greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3508,7 +3508,14 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182"/>
         <source>Difference in value between two successive X grid lines.
 
-The step value must be greater than zero</source>
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260"/>
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3553,13 +3560,6 @@ The number of Y grid lines must be entered as an integer greater than zero</sour
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260"/>
-        <source>Difference in value between two successive Y grid lines.
-
-The step value must be greater than zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

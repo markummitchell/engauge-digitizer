@@ -3510,8 +3510,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Разница в значении между двумя последовательными линиями сетки X
+
+Значение шага должно быть больше нуля (линейное) или единицы (логарифмическое)</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Разница в значении между двумя последовательными линиями сетки Y
+
+Значение шага должно быть больше нуля (линейное) или единицы (логарифмическое)</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>Различие в значении между двумя последовательными X линиями сетки.
+        <translation type="vanished">Различие в значении между двумя последовательными X линиями сетки.
 Значение шага должно быть больше нуля.</translation>
     </message>
     <message>
@@ -3553,11 +3570,10 @@ The start value cannot be greater than the stop value</source>
 Начальное значение не может быть больше чем конечное</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>Различие в значении между двумя последовательными Y линиями сетки.
+        <translation type="vanished">Различие в значении между двумя последовательными Y линиями сетки.
 Значение шага должно быть больше нуля.</translation>
     </message>
     <message>
@@ -3712,8 +3728,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Разница в значении между двумя последовательными линиями сетки X
+
+Значение шага должно быть больше нуля (линейное) или единицы (логарифмическое)</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Разница в значении между двумя последовательными линиями сетки Y
+
+Значение шага должно быть больше нуля (линейное) или единицы (логарифмическое)</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>Различие в значении между двумя последовательными X линиями сетки.
+        <translation type="vanished">Различие в значении между двумя последовательными X линиями сетки.
 Значение шага должно быть больше нуля.</translation>
     </message>
     <message>
@@ -3765,11 +3798,10 @@ The start value cannot be greater than the stop value</source>
 Начальное значение не может быть больше чем конечное</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>Различие в значении между двумя последовательными Y линиями сетки.
+        <translation type="vanished">Различие в значении между двумя последовательными Y линиями сетки.
 Значение шага должно быть больше нуля.</translation>
     </message>
     <message>

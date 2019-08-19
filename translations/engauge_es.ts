@@ -3581,8 +3581,25 @@ El valor de inicio no puede ser mayor que el valor de parada</translation>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Diferencia de valor entre dos líneas de cuadrícula X sucesivas.
+
+El valor del paso debe ser mayor que cero (lineal) o uno (logarítmico)</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Diferencia de valor entre dos líneas de cuadrícula Y sucesivas.
+
+El valor del paso debe ser mayor que cero (lineal) o uno (logarítmico)</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>Diferencia de valor entre dos líneas de la cuadrícula X sucesivas .
+        <translation type="vanished">Diferencia de valor entre dos líneas de la cuadrícula X sucesivas .
 
 El valor de paso debe ser mayor que cero</translation>
     </message>
@@ -3629,11 +3646,10 @@ The start value cannot be greater than the stop value</source>
 El valor de inicio no puede ser mayor que el valor de parada</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>Diferencia de valor entre dos sucesivas líneas de la cuadrícula y.
+        <translation type="vanished">Diferencia de valor entre dos sucesivas líneas de la cuadrícula y.
 
 El valor de paso debe ser mayor que cero</translation>
     </message>
@@ -3796,8 +3812,25 @@ El valor de inicio no puede ser mayor que el valor de parada</translation>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Diferencia de valor entre dos líneas de cuadrícula X sucesivas.
+
+El valor del paso debe ser mayor que cero (lineal) o uno (logarítmico)</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Diferencia de valor entre dos líneas de cuadrícula Y sucesivas.
+
+El valor del paso debe ser mayor que cero (lineal) o uno (logarítmico)</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>Diferencia de valor entre dos líneas de la cuadrícula X sucesivas .
+        <translation type="vanished">Diferencia de valor entre dos líneas de la cuadrícula X sucesivas .
 
 El valor de paso debe ser mayor que cero</translation>
     </message>
@@ -3854,11 +3887,10 @@ The start value cannot be greater than the stop value</source>
 El valor de inicio no puede ser mayor que el valor de parada</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>Diferencia de valor entre dos sucesivas líneas de la cuadrícula y.
+        <translation type="vanished">Diferencia de valor entre dos sucesivas líneas de la cuadrícula y.
 
 El valor de paso debe ser mayor que cero</translation>
     </message>

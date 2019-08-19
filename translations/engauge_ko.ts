@@ -3573,8 +3573,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>두 개의 연속 X 그리드 선 사이의 값 차이
+
+단계 값은 0 (선형) 또는 1 (로그)보다 커야합니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>두 개의 연속 Y 그리드 선 사이의 값 차이
+
+단계 값은 0 (선형) 또는 1 (로그)보다 커야합니다.</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>두 개의 연속적인 X 그리드 선 사이의 값의 차이.
+        <translation type="vanished">두 개의 연속적인 X 그리드 선 사이의 값의 차이.
 
 단계 값은 0보다 커야합니다.</translation>
     </message>
@@ -3621,11 +3638,10 @@ The start value cannot be greater than the stop value</source>
 시작 값은 정지 값보다 클 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>두 개의 연속적인 Y 그리드 선 사이의 값의 차이.
+        <translation type="vanished">두 개의 연속적인 Y 그리드 선 사이의 값의 차이.
 
 단계 값은 0보다 커야합니다.</translation>
     </message>
@@ -3788,8 +3804,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>두 개의 연속 X 그리드 선 사이의 값 차이
+
+단계 값은 0 (선형) 또는 1 (로그)보다 커야합니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>두 개의 연속 Y 그리드 선 사이의 값 차이
+
+단계 값은 0 (선형) 또는 1 (로그)보다 커야합니다.</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>두 개의 연속적인 X 그리드 선 사이의 값의 차이.
+        <translation type="vanished">두 개의 연속적인 X 그리드 선 사이의 값의 차이.
 
 단계 값은 0보다 커야합니다.</translation>
     </message>
@@ -3846,11 +3879,10 @@ The start value cannot be greater than the stop value</source>
 시작 값은 정지 값보다 클 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>두 개의 연속적인 Y 그리드 선 사이의 값의 차이.
+        <translation type="vanished">두 개의 연속적인 Y 그리드 선 사이의 값의 차이.
 
 단계 값은 0보다 커야합니다.</translation>
     </message>

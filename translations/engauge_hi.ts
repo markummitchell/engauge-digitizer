@@ -3356,8 +3356,19 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
-The step value must be greater than zero</source>
-        <translation type="unfinished" />
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>दो क्रमिक एक्स ग्रिड लाइनों के बीच मूल्य में अंतर।
+
+चरण मान शून्य (रैखिक) या एक (लघुगणकीय) से अधिक होना चाहिए</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>दो क्रमिक वाई ग्रिड लाइनों के बीच मूल्य में अंतर।
+
+चरण मान शून्य (रैखिक) या एक (लघुगणकीय) से अधिक होना चाहिए</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="162" />
@@ -3391,13 +3402,6 @@ The number of Y grid lines must be entered as an integer greater than zero</sour
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
-        <source>Difference in value between two successive Y grid lines.
-
-The step value must be greater than zero</source>
         <translation type="unfinished" />
     </message>
     <message>
@@ -3545,8 +3549,19 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
-The step value must be greater than zero</source>
-        <translation type="unfinished" />
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>दो क्रमिक एक्स ग्रिड लाइनों के बीच मूल्य में अंतर।
+
+चरण मान शून्य (रैखिक) या एक (लघुगणकीय) से अधिक होना चाहिए</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>दो क्रमिक वाई ग्रिड लाइनों के बीच मूल्य में अंतर।
+
+चरण मान शून्य (रैखिक) या एक (लघुगणकीय) से अधिक होना चाहिए</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="189" />
@@ -3590,13 +3605,6 @@ The number of Y grid lines must be entered as an integer greater than zero</sour
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
-        <source>Difference in value between two successive Y grid lines.
-
-The step value must be greater than zero</source>
         <translation type="unfinished" />
     </message>
     <message>

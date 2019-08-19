@@ -3449,8 +3449,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Differenza di valore tra due linee della griglia X successive.
+
+Il valore del passo deve essere maggiore di zero (lineare) o uno (logaritmico) </translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Differenza di valore tra due linee della griglia Y successive.
+
+Il valore del passo deve essere maggiore di zero (lineare) o uno (logaritmico)</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>Differenza di valore tra due successive linee della griglia X.Il valore del passo deve essere maggiore di zero</translation>
+        <translation type="vanished">Differenza di valore tra due successive linee della griglia X.Il valore del passo deve essere maggiore di zero</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="162" />
@@ -3487,11 +3504,10 @@ The start value cannot be greater than the stop value</source>
         <translation>Valore della prima linea della griglia Y.Il valore iniziale non può essere maggiore del valore di arresto</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>Differenza di valore tra due successive linee della griglia Y.Il valore del passo deve essere maggiore di zero</translation>
+        <translation type="vanished">Differenza di valore tra due successive linee della griglia Y.Il valore del passo deve essere maggiore di zero</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="242" />
@@ -3638,8 +3654,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Differenza di valore tra due linee della griglia X successive.
+
+Il valore del passo deve essere maggiore di zero (lineare) o uno (logaritmico) </translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Differenza di valore tra due linee della griglia Y successive.
+
+Il valore del passo deve essere maggiore di zero (lineare) o uno (logaritmico)</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>Differenza di valore tra due successive linee della griglia X.Il valore del passo deve essere maggiore di zero</translation>
+        <translation type="vanished">Differenza di valore tra due successive linee della griglia X.Il valore del passo deve essere maggiore di zero</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="189" />
@@ -3686,11 +3719,10 @@ The start value cannot be greater than the stop value</source>
         <translation>Valore della prima linea della griglia Y.Il valore iniziale non può essere maggiore del valore di arresto</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>Differenza di valore tra due successive linee della griglia Y.Il valore del passo deve essere maggiore di zero</translation>
+        <translation type="vanished">Differenza di valore tra due successive linee della griglia Y.Il valore del passo deve essere maggiore di zero</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="271" />

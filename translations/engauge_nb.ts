@@ -2072,7 +2072,7 @@ Når du trykker på den, skriver denne knappen ut alle digitaliserte punkter og 
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="65" />
         <source>Edit Axis Point</source>
-        <translation>Rediger Axis Point</translation>
+        <translation>Rediger aksepunkt</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="109" />
@@ -2105,7 +2105,7 @@ Det forventede formatet for koordinatverdien bestemmes av lokalinnstillingen. Hv
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="143" />
         <source>, </source>
-        <translation type="unfinished" />
+        <translation>, </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="151" />
@@ -2124,12 +2124,12 @@ Det forventede formatet for koordinatverdien bestemmes av lokalinnstillingen. Hv
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="158" />
         <source>)</source>
-        <translation type="unfinished" />
+        <translation>)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="180" />
         <source>Number of coordinates per axis point:</source>
-        <translation type="unfinished" />
+        <translation>Antall koordinater per aksepunkt:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="183" />
@@ -2139,22 +2139,22 @@ Det forventede formatet for koordinatverdien bestemmes av lokalinnstillingen. Hv
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="194" />
         <source>Number format:</source>
-        <translation type="unfinished" />
+        <translation>Nummerformat:</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="197" />
         <source>Locale which determines the allowed number formats. This is set by Settings / Main Window.</source>
-        <translation type="unfinished" />
+        <translation>Område som bestemmer tillatte tallformater. Dette er satt av Innstillinger / Hovedvindu.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="213" />
         <source>Ok</source>
-        <translation type="unfinished" />
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointAxis.cpp" line="217" />
         <source>Cancel</source>
-        <translation type="unfinished" />
+        <translation> Avbryt</translation>
     </message>
 </context>
 <context>
@@ -2162,7 +2162,7 @@ Det forventede formatet for koordinatverdien bestemmes av lokalinnstillingen. Hv
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="48" />
         <source>Edit Curve Point(s)</source>
-        <translation type="unfinished" />
+        <translation>Rediger kurvepunkt (er)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="90" />
@@ -2188,12 +2188,18 @@ Leave this field empty if no value is to be applied to the graph points.
 For cartesian plots this is the X coordinate. For polar plots this is the radius R.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished" />
+        <translation>Angi den første grafkoordinatverdien som skal brukes på grafpunktene.
+
+La dette feltet være tomt hvis det ikke brukes noen verdi på grafpunktene.
+
+For kartesiske tomter er dette X-koordinaten. For polare plott er dette radien R.
+
+Det forventede formatet for koordinatverdien bestemmes av lokalinnstillingen. Hvis inntastede verdier ikke blir gjenkjent som forventet, sjekk innstillingen for sted i Innstillinger / hovedvindu ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="123" />
         <source>, </source>
-        <translation type="unfinished" />
+        <translation>, </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="131" />
@@ -2204,27 +2210,33 @@ Leave this field empty if no value is to be applied to the graph points.
 For cartesian plots this is the Y coordinate. For polar plots this is the angle Theta.
 
 The expected format of the coordinate value is determined by the locale setting. If typed values are not recognized as expected, check the locale setting in Settings / Main Window...</source>
-        <translation type="unfinished" />
+        <translation>Angi den andre grafkoordinatverdien som skal brukes på grafpunktene.
+
+La dette feltet være tomt hvis det ikke brukes noen verdi på grafpunktene.
+
+For kartesiske tomter er dette Y-koordinaten. For polare plott er dette vinkelen Theta.
+
+Det forventede formatet for koordinatverdien bestemmes av lokalinnstillingen. Hvis inntastede verdier ikke blir gjenkjent som forventet, sjekk innstillingen for sted i Innstillinger / hovedvindu ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="139" />
         <source>)</source>
-        <translation type="unfinished" />
+        <translation>)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="156" />
         <source>Number format</source>
-        <translation type="unfinished" />
+        <translation>Nummerformat</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="170" />
         <source>Ok</source>
-        <translation type="unfinished" />
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditPointGraph.cpp" line="174" />
         <source>Cancel</source>
-        <translation type="unfinished" />
+        <translation> Avbryt</translation>
     </message>
 </context>
 <context>
@@ -2232,32 +2244,32 @@ The expected format of the coordinate value is determined by the locale setting.
     <message>
         <location filename="../src/Dlg/DlgEditScale.cpp" line="51" />
         <source>Edit Axis Point</source>
-        <translation>Rediger Axis Point</translation>
+        <translation>Rediger aksepunkt</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditScale.cpp" line="80" />
         <source>Number format</source>
-        <translation type="unfinished" />
+        <translation>Nummerformat</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditScale.cpp" line="94" />
         <source>Ok</source>
-        <translation type="unfinished" />
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditScale.cpp" line="98" />
         <source>Cancel</source>
-        <translation type="unfinished" />
+        <translation> Avbryt</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditScale.cpp" line="110" />
         <source>Scale Length</source>
-        <translation type="unfinished" />
+        <translation>Skala Lengde</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgEditScale.cpp" line="122" />
         <source>Enter the scale bar length</source>
-        <translation type="unfinished" />
+        <translation>Angi målestangens lengde</translation>
     </message>
 </context>
 <context>
@@ -2265,29 +2277,31 @@ The expected format of the coordinate value is determined by the locale setting.
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="31" />
         <source>Error Report</source>
-        <translation type="unfinished" />
+        <translation>Feilrapport</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="34" />
         <source>An unrecoverable error has occurred. Would you like to save an error report that can be sent later to the Engauge developers?
 
 The original document can be sent as part of the error report, which increases the chances of finding and fixing the problem(s). However, if any information is private then an anonymized version of the document will be sent.</source>
-        <translation type="unfinished" />
+        <translation>En uopprettelig feil har oppstått. Vil du lagre en feilrapport som kan sendes senere til Engauge-utviklerne?
+
+Originaldokumentet kan sendes som en del av feilrapporten, noe som øker sjansene for å finne og løse problemet. Imidlertid, hvis noe informasjon er privat, vil en anonymisert versjon av dokumentet bli sendt.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="42" />
         <source>Include original document information, otherwise anonymize the information</source>
-        <translation type="unfinished" />
+        <translation>Inkluder originalinformasjon, ellers anonymiser informasjonen</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="54" />
         <source>Save</source>
-        <translation type="unfinished" />
+        <translation>Lagre</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgErrorReportLocal.cpp" line="59" />
         <source>Cancel</source>
-        <translation type="unfinished" />
+        <translation> Avbryt</translation>
     </message>
 </context>
 <context>
@@ -2295,41 +2309,45 @@ The original document can be sent as part of the error report, which increases t
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="18" />
         <source>Import Advanced</source>
-        <translation type="unfinished" />
+        <translation>Importer avansert</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="49" />
         <source>Coordinate System Count</source>
-        <translation type="unfinished" />
+        <translation>Koordinatsystemtelling</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="55" />
         <source>Coordinate System Count
 
 Specifies the total number of coordinate systems that will be used in the imported image. There can be one or more graphs in the image, and each graph can have one or more coordinate systems. Each coordinate system is defined by a pair of coordinate axes.</source>
-        <translation type="unfinished" />
+        <translation>Koordinatsystemtelling
+
+Angir det totale antallet koordinatsystemer som skal brukes i det importerte bildet. Det kan være en eller flere grafer i bildet, og hver graf kan ha ett eller flere koordinatsystemer. Hvert koordinatsystem er definert av et par koordinatakser.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="63" />
         <source>Graph Coordinates Definition</source>
-        <translation type="unfinished" />
+        <translation>Grafkoordinater Definisjon</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="66" />
         <source>1 scale bar - Used for maps with a scale bar defining the map scale</source>
-        <translation type="unfinished" />
+        <translation>1 skala bar - Brukes for kart med en skala bar som definerer kart skalaen</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="67" />
         <source>The two endpoints of the scale bar will define the scale of a map. The scale bar can edited to set its length.
 
 This setting is used when importing a map that has only a scale bar to define distance, rather than a graph with axes that define two coordinates.</source>
-        <translation type="unfinished" />
+        <translation>De to sluttpunktene på skalaen skal definere skalaen til et kart. Skalafeltet kan redigeres for å angi lengden.
+
+Denne innstillingen brukes når du importerer et kart som bare har en skala for å definere avstand, i stedet for en graf med akser som definerer to koordinater.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="74" />
         <source>3 axis points - Used for graphs with both coordinates defined on each axis</source>
-        <translation type="unfinished" />
+        <translation>3 aksepunkter - Brukes for grafer med begge koordinatene definert på hver akse</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="76" />
@@ -2338,12 +2356,16 @@ This setting is used when importing a map that has only a scale bar to define di
 This setting is always used when importing images in non-advanced mode.
 
 In total, there will be three points as (x1,y1), (x2,y2) and (x3,y3).</source>
-        <translation type="unfinished" />
+        <translation>Tre aksepunkter vil definere koordinatsystemet. Hver vil ha både x- og y-koordinater.
+
+Denne innstillingen brukes alltid når du importerer bilder i ikke-avansert modus.
+
+Totalt vil det være tre punkter som (x1, y1), (x2, y2) og (x3, y3).</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="84" />
         <source>4 axis points - Used for graphs with only one coordinate defined on each axis</source>
-        <translation type="unfinished" />
+        <translation>4 aksepunkter - Brukes for grafer med bare en koordinat definert på hver akse</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportAdvanced.cpp" line="85" />
@@ -2352,7 +2374,11 @@ In total, there will be three points as (x1,y1), (x2,y2) and (x3,y3).</source>
 This setting is required when the x coordinate of the y axis is unknown, and/or the y coordinate of the x axis is unknown.
 
 In total, there will be two points on the x axis as (x1) and (x2), and two points on the y axis as (y1) and (y2).</source>
-        <translation type="unfinished" />
+        <translation>Fire aksespunkter vil definere koordinatsystemet. Hver vil ha en enkelt x- eller y-koordinat.
+
+Denne innstillingen er nødvendig når x-koordinaten til y-aksen er ukjent, og / eller y-koordinaten til x-aksen er ukjent.
+
+Totalt vil det være to punkter på x-aksen som (x1) og (x2), og to punkter på y-aksen som (y1) og (y2).</translation>
     </message>
 </context>
 <context>
@@ -2360,27 +2386,27 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="35" />
         <source>Image File Import Cropping</source>
-        <translation type="unfinished" />
+        <translation>Bildevisning av import beskjæring</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="74" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="81" />
         <source>Preview window that shows what part of the image will be imported. The image portion inside the rectangular frame will be imported from the currently selected page. The frame can be moved and resized by dragging the corner handles.</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisningsvindu som viser hvilken del av bildet som skal importeres. Bildedelen i den rektangulære rammen importeres fra den valgte siden. Rammen kan flyttes og endres størrelse ved å dra hjørnehåndtakene.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="118" />
         <source>Ok</source>
-        <translation type="unfinished" />
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="125" />
         <source>Cancel</source>
-        <translation type="unfinished" />
+        <translation> Avbryt</translation>
     </message>
 </context>
 <context>
@@ -2388,37 +2414,37 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="44" />
         <source>PDF File Import Cropping</source>
-        <translation type="unfinished" />
+        <translation>PDF-fil importere beskjæring</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="78" />
         <source>Page</source>
-        <translation type="unfinished" />
+        <translation>Side</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="83" />
         <source>Page number that will be imported</source>
-        <translation type="unfinished" />
+        <translation>Sidetall som blir importert</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="101" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="108" />
         <source>Preview window that shows what part of the image will be imported. The image portion inside the rectangular frame will be imported from the currently selected page. The frame can be moved and resized by dragging the corner handles.</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisningsvindu som viser hvilken del av bildet som skal importeres. Bildedelen i den rektangulære rammen importeres fra den valgte siden. Rammen kan flyttes og endres størrelse ved å dra hjørnehåndtakene.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="152" />
         <source>Ok</source>
-        <translation type="unfinished" />
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="159" />
         <source>Cancel</source>
-        <translation type="unfinished" />
+        <translation> Avbryt</translation>
     </message>
 </context>
 <context>
@@ -2426,7 +2452,7 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgRequiresTransform.cpp" line="16" />
         <source>can only be performed after three axis points have been created, so the coordinates are defined</source>
-        <translation type="unfinished" />
+        <translation>kan bare utføres etter at tre aksepunkter er opprettet, så koordinatene er definert</translation>
     </message>
 </context>
 <context>
@@ -2434,12 +2460,12 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="100" />
         <source>Ok</source>
-        <translation type="unfinished" />
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="108" />
         <source>Cancel</source>
-        <translation type="unfinished" />
+        <translation> Avbryt</translation>
     </message>
 </context>
 <context>
@@ -2447,62 +2473,62 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="39" />
         <source>Axes Checker</source>
-        <translation type="unfinished" />
+        <translation>Aksjekontroller</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="65" />
         <source>Axes Checker Lifetime</source>
-        <translation type="unfinished" />
+        <translation>Axes checker levetid</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="72" />
         <source>Do not show</source>
-        <translation type="unfinished" />
+        <translation>Ikke vis</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="73" />
         <source>Never show axes checker.</source>
-        <translation type="unfinished" />
+        <translation>Vis aldri akselkontroll.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="76" />
         <source>Show for a number of seconds</source>
-        <translation type="unfinished" />
+        <translation>Vis i et par sekunder</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="77" />
         <source>Show axes checker for a number of seconds after changing axes points.</source>
-        <translation type="unfinished" />
+        <translation>Vis akselkontrollen i et antall sekunder etter at du har skiftet aksepunkt.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="87" />
         <source>Show always</source>
-        <translation type="unfinished" />
+        <translation>Vis alltid</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="88" />
         <source>Always show axes checker.</source>
-        <translation type="unfinished" />
+        <translation>Vis alltid akselkontroll.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="97" />
         <source>Line color</source>
-        <translation type="unfinished" />
+        <translation>Linjefarge</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="101" />
         <source>Select a color for the highlight lines drawn at each axis point</source>
-        <translation type="unfinished" />
+        <translation>Velg en farge for høydepunktlinjene tegnet ved hvert aksepunkt</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="155" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="162" />
         <source>Preview window that shows how current settings affect the displayed axes checker</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisningsvindu som viser hvordan gjeldende innstillinger påvirker den viste akseskontrolleren</translation>
     </message>
 </context>
 <context>
@@ -2510,29 +2536,31 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="37" />
         <source>Color Filter</source>
-        <translation type="unfinished" />
+        <translation>Fargefilter</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="64" />
         <source>Curve Name</source>
-        <translation type="unfinished" />
+        <translation>Navn på kurve</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="68" />
         <source>Name of the curve that is currently selected for editing</source>
-        <translation type="unfinished" />
+        <translation>Navn på kurven som er valgt for redigering</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="72" />
         <source>Filter mode</source>
-        <translation type="unfinished" />
+        <translation>Filtermodus</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="76" />
         <source>Filter the original image into black and white pixels using the Intensity parameter, to hide unimportant information and emphasize important information.
 
 The Intensity value of a pixel is computed from the red, green and blue components as I = squareroot (R * R + G * G + B * B)</source>
-        <translation type="unfinished" />
+        <translation>Filtrer originalbildet i svart-hvitt piksler ved å bruke intensitetsparameteren, for å skjule uviktig informasjon og fremheve viktig informasjon.
+
+Intensitetsverdien til en piksel beregnes fra de røde, grønne og blå komponentene som I = squareroot (R * R + G * G + B * B)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="84" />
@@ -2541,49 +2569,55 @@ The Intensity value of a pixel is computed from the red, green and blue componen
 The background color is shown on the left side of the scale bar.
 
 The distance of any color (R, G, B) from the background color (Rb, Gb, Bb) is computed as F = squareroot ((R - Rb) * (R - Rb) + (G - Gb) * (G - Gb) + (B - Bb)). On the left end of the scale, the foreground distance value is zero, and it increases linearly to the maximum on the far right.</source>
-        <translation type="unfinished" />
+        <translation>Filtrer originalbildet i svarte og hvite piksler ved å isolere forgrunnen fra bakgrunnen, for å skjule uviktig informasjon og fremheve viktig informasjon.
+
+Bakgrunnsfargen vises på venstre side av skalafeltet.
+
+Avstanden til hvilken som helst farge (R, G, B) fra bakgrunnsfargen (Rb, Gb, Bb) beregnes som F = firkant ((R - Rb) * (R - Rb) + (G - Gb) * (G - Gb) + (B - Bb)). På venstre ende av skalaen er forgrunnsavstanden null, og den øker lineært til det maksimale helt til høyre.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="94" />
         <source>Filter the original image into black and white pixels using the Hue component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.</source>
-        <translation type="unfinished" />
+        <translation>Filtrer originalbildet i svarte og hvite piksler ved å bruke Hue-komponenten i fargekomponentene fargetone, metning og verdi (HSV), for å skjule uviktig informasjon og fremheve viktig informasjon.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="101" />
         <source>Filter the original image into black and white pixels using the Saturation component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.</source>
-        <translation type="unfinished" />
+        <translation>Filtrer det originale bildet i svart-hvitt piksler ved å bruke metningskomponenten i fargekomponentene fargetone, metning og verdi (HSV), for å skjule uviktig informasjon og fremheve viktig informasjon.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="108" />
         <source>Filter the original image into black and white pixels using the Value component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.
 
 The Value component is also called the Lightness.</source>
-        <translation type="unfinished" />
+        <translation>Filtrer originalbildet i svart-hvitt piksler ved å bruke verdikomponenten i fargekomponentene fargetone, metning og verdi (HSV), for å skjule uviktig informasjon og fremheve viktig informasjon.
+
+Verdikomponenten kalles også lyshet.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="124" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="131" />
         <source>Preview window that shows how current settings affect the filtering of the original image.</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisningsvindu som viser hvordan gjeldende innstillinger påvirker filtreringen av det originale bildet.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="146" />
         <source>Filter Parameter Histogram Profile</source>
-        <translation type="unfinished" />
+        <translation>Filtrer parameterhistogramprofil</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="154" />
         <source>Histogram profile of the selected filter parameter. The two Dividers can be moved back and forth to adjust the range of filter parameter values that will be included in the filtered image. The clear portion will be included, and the shaded portion will be excluded.</source>
-        <translation type="unfinished" />
+        <translation>Histogramprofil for den valgte filterparameteren. De to skillelinjene kan flyttes frem og tilbake for å justere rekkevidden for filterparameterverdier som vil bli inkludert i det filtrerte bildet. Den klare delen vil være inkludert, og den skyggelagte delen vil bli ekskludert.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="161" />
         <source>This read-only box displays a graphical representation of the horizontal axis in the histogram profile above.</source>
-        <translation type="unfinished" />
+        <translation>Denne skrivebeskyttede boksen viser en grafisk fremstilling av den horisontale aksen i histogramprofilen over.</translation>
     </message>
 </context>
 <context>
@@ -2593,54 +2627,60 @@ The Value component is also called the Lightness.</source>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="915" />
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="919" />
         <source>Coordinates</source>
-        <translation type="unfinished" />
+        <translation>koordinater</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="219" />
         <source>Date/Time</source>
-        <translation type="unfinished" />
+        <translation>Dato tid</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="229" />
         <source>Date format to be used for date values, and date portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the time portion appearing in output.</source>
-        <translation type="unfinished" />
+        <translation>Datoformat som skal brukes for datoverdier og datodel av blandede dato / klokkeslettverdier under input og output.
+
+Hvis du setter formatet til en tom verdi, blir det bare tidsdelen som vises i utdata.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="236" />
         <source>Time format to be used for time values, and time portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the date portion appearing in output.</source>
-        <translation type="unfinished" />
+        <translation>Tidsformat som skal brukes for tidsverdier og tidsdel av blandede dato / tidsverdier under inndata og utdata.
+
+Hvis du setter formatet til en tom verdi, blir det bare datodelen som vises i utdata.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="248" />
         <source>Coordinates Types</source>
-        <translation type="unfinished" />
+        <translation>Koordinatetyper</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="253" />
         <source>Polar</source>
-        <translation type="unfinished" />
+        <translation>Polar</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="253" />
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="918" />
         <source>R</source>
-        <translation type="unfinished" />
+        <translation>R</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="255" />
         <source>Cartesian (X, Y)</source>
-        <translation type="unfinished" />
+        <translation>Kartesisk (X, Y)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="256" />
         <source>Select cartesian coordinates.
 
 The X and Y coordinates will be used</source>
-        <translation type="unfinished" />
+        <translation>Velg kartesiske koordinater.
+
+X- og Y-koordinatene vil bli brukt</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="262" />
@@ -2649,30 +2689,34 @@ The X and Y coordinates will be used</source>
 The Theta and R coordinates will be used.
 
 Polar coordinates are not allowed with log scale for Theta</source>
-        <translation type="unfinished" />
+        <translation>Velg polare koordinater.
+
+Theta- og R-koordinatene vil bli brukt.
+
+Polarkoordinater er ikke tillatt med loggskala for theta</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="281" />
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="316" />
         <source>Scale</source>
-        <translation type="unfinished" />
+        <translation>Skala</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="284" />
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="319" />
         <source>Linear</source>
-        <translation type="unfinished" />
+        <translation>Lineær</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="285" />
         <source>Specifies linear scale for the X or Theta coordinate</source>
-        <translation type="unfinished" />
+        <translation>Angir lineær skala for X- eller Theta-koordinaten</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="289" />
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="327" />
         <source>Log</source>
-        <translation type="unfinished" />
+        <translation>Logaritmisk</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="290" />
@@ -2681,47 +2725,55 @@ Polar coordinates are not allowed with log scale for Theta</source>
 Log scale is not allowed if there are negative coordinates.
 
 Log scale is not allowed for the Theta coordinate.</source>
-        <translation type="unfinished" />
+        <translation>Angir logaritmisk skala for X- eller Theta-koordinaten.
+
+Loggskala er ikke tillatt hvis det er negative koordinater.
+
+Loggskala er ikke tillatt for Theta-koordinaten.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="296" />
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="341" />
         <source>Units</source>
-        <translation type="unfinished" />
+        <translation>Enheter</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="320" />
         <source>Specifies linear scale for the Y or R coordinate</source>
-        <translation type="unfinished" />
+        <translation>Angir lineær skala for Y- eller R-koordinaten</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="324" />
         <source>Origin radius value</source>
-        <translation type="unfinished" />
+        <translation>Opprinnelsesradiusverdi</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="328" />
         <source>Specifies logarithmic scale for the Y or R coordinate
 
 Log scale is not allowed if there are negative coordinates.</source>
-        <translation type="unfinished" />
+        <translation>Spesifiserer logaritmisk skala for Y- eller R-koordinaten
+
+Loggskala er ikke tillatt hvis det er negative koordinater.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="335" />
         <source>Specify radius value at origin.
 
 Normally the radius at the origin is 0, but a nonzero value may be applied in other cases (like when the radial units are decibels).</source>
-        <translation type="unfinished" />
+        <translation>Angi radiusverdi ved opprinnelse.
+
+Normalt er radien ved opprinnelsen 0, men en nullverdi kan brukes i andre tilfeller (som når radialenhetene er desibel).</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="358" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="365" />
         <source>Preview window that shows how current settings affect the coordinate system.</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisningsvindu som viser hvordan gjeldende innstillinger påvirker koordinatsystemet.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="673" />
@@ -2730,7 +2782,11 @@ Normally the radius at the origin is 0, but a nonzero value may be applied in ot
 Date and time values have date and/or time components.
 
 Degrees Minutes Seconds (DDD MM SS.S) format uses two integer number for degrees and minutes, and a real number for seconds. There are 60 seconds per minute. During input, spaces must be inserted between the three numbers.</source>
-        <translation type="unfinished" />
+        <translation>Tall har det enkleste og mest generelle formatet.
+
+Verdi for dato og tid har dato- og / eller tidskomponenter.
+
+Grader minutter sekunder (DDD MM SS.S) format bruker to heltallstall for grader og minutter, og et reelt tall i sekunder. Det er 60 sekunder per minutt. Under inndata må det settes inn mellomrom mellom de tre tallene.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="706" />
@@ -2745,17 +2801,27 @@ Gradians format uses a single real number. One complete revolution is 400 gradia
 Radians format uses a single real number. One complete revolution is 2*pi radians.
 
 Turns format uses a single real number. One complete revolution is one turn.</source>
-        <translation type="unfinished" />
+        <translation>Grader (DDD.DDDDD) format bruker et enkelt reelt tall. En komplett revolusjon er 360 grader.
+
+Grader minutter (DDD MM.MMM) format bruker ett heltall for grader, og et reelt tall i minutter. Det er 60 minutter per grad. Under inndata må det settes inn et mellomrom mellom de to tallene.
+
+Grader minutter sekunder (DDD MM SS.S) format bruker to heltallstall for grader og minutter, og et reelt tall i sekunder. Det er 60 sekunder per minutt. Under inndata må det settes inn mellomrom mellom de tre tallene.
+
+Gradians-formatet bruker ett reelt tall. En komplett revolusjon er 400 gradianer.
+
+Radians-formatet bruker ett reelt tall. En komplett revolusjon er 2 * pi radianer.
+
+Turns-format bruker ett reelt tall. En komplett revolusjon er en tur.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="913" />
         <source>X</source>
-        <translation type="unfinished" />
+        <translation>X</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="917" />
         <source>Y</source>
-        <translation type="unfinished" />
+        <translation>Y</translation>
     </message>
 </context>
 <context>
@@ -2763,36 +2829,40 @@ Turns format uses a single real number. One complete revolution is one turn.</so
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="32" />
         <source>Curve List</source>
-        <translation type="unfinished" />
+        <translation>Kurveliste</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="69" />
         <source>Add...</source>
-        <translation type="unfinished" />
+        <translation>Legg til...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="70" />
         <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
 
 Every curve name must be unique</source>
-        <translation type="unfinished" />
+        <translation>Legger til en ny kurve i kurvelisten. Navnet på kurven kan redigeres i listen over kurvenavn.
+
+Hvert kurvenavn må være unikt</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="76" />
         <source>Remove</source>
-        <translation type="unfinished" />
+        <translation>Fjerne</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="77" />
         <source>Removes the currently selected curve from the curve list.
 
 There must always be at least one curve</source>
-        <translation type="unfinished" />
+        <translation>Fjerner den valgte kurven fra kurvelisten.
+
+Det må alltid være minst en kurve</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="89" />
         <source>Curve Names</source>
-        <translation type="unfinished" />
+        <translation>Navn på kurver</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="94" />
@@ -2801,48 +2871,52 @@ There must always be at least one curve</source>
 Click on a curve name to edit it. Each curve name must be unique.
 
 Reorder curves by dragging them around.</source>
-        <translation type="unfinished" />
+        <translation>Liste over kurvene som tilhører dette dokumentet.
+
+Klikk på et kurvenavn for å redigere det. Hvert kurvenavn må være unikt.
+
+Ombestill kurver ved å dra dem rundt.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="121" />
         <source>Save As Default</source>
-        <translation type="unfinished" />
+        <translation>Lagre som standard</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="122" />
         <source>Save the curve names for use as defaults for future graph curves.</source>
-        <translation type="unfinished" />
+        <translation>Lagre kurvenavnene for bruk som standard for fremtidige grafkurver.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="126" />
         <source>Reset Default</source>
-        <translation type="unfinished" />
+        <translation>Tilbakestill standard</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="127" />
         <source>Reset the defaults for future graph curves to the original settings.</source>
-        <translation type="unfinished" />
+        <translation>Tilbakestill standardverdiene for fremtidige grafkurver til de opprinnelige innstillingene.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="507" />
         <source>Removing this curve will also remove</source>
-        <translation type="unfinished" />
+        <translation>Hvis du fjerner denne kurven, fjernes det også</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="509" />
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="514" />
         <source>points. Continue?</source>
-        <translation type="unfinished" />
+        <translation>punkter. Fortsette?</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="512" />
         <source>Removing these curves will also remove</source>
-        <translation type="unfinished" />
+        <translation>Å fjerne disse kurvene vil også fjerne</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="518" />
         <source>Curves With Points</source>
-        <translation type="unfinished" />
+        <translation>Kurver med poeng</translation>
     </message>
 </context>
 <context>
@@ -2850,52 +2924,56 @@ Reorder curves by dragging them around.</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="62" />
         <source>Curve Properties</source>
-        <translation type="unfinished" />
+        <translation>Kurveegenskaper</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="89" />
         <source>Curve Name</source>
-        <translation type="unfinished" />
+        <translation>Navn på kurve</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="93" />
         <source>Name of the curve that is currently selected for editing</source>
-        <translation type="unfinished" />
+        <translation>Navn på kurven som er valgt for redigering</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="103" />
         <source>Line</source>
-        <translation type="unfinished" />
+        <translation>Linje</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="109" />
         <source>Width</source>
-        <translation type="unfinished" />
+        <translation>Bredde</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="113" />
         <source>Select a width for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
-        <translation type="unfinished" />
+        <translation>Velg en bredde for linjene som trekkes mellom punktene.
+
+Dette gjelder bare grafkurver. Det blir aldri trukket linjer mellom aksepunktene.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="119" />
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="209" />
         <source>Color</source>
-        <translation type="unfinished" />
+        <translation>Farge</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="123" />
         <source>Select a color for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
-        <translation type="unfinished" />
+        <translation>Velg en farge for linjene som trekkes mellom punktene.
+
+Dette gjelder bare grafkurver. Det blir aldri trukket linjer mellom aksepunktene.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="129" />
         <source>Connect as</source>
-        <translation type="unfinished" />
+        <translation>Koble til som</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="137" />
@@ -2910,49 +2988,61 @@ Lines are drawn between successively ordered points.
 Straight curves are drawn with straight lines between successive points. Smooth curves are drawn with smooth lines between successive points, using natural cubic splines of (x,y) pairs versus scalar ordinal (t) values.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
-        <translation type="unfinished" />
+        <translation>Velg regel for å koble punkter med linjer.
+
+Hvis kurven er koblet til som en enkeltverdsfunksjon, blir poengene ordnet ved å øke verdien på den uavhengige variabelen.
+
+Hvis kurven er koblet som en lukket kontur, blir poengene ordnet etter alder, bortsett fra punkter plassert langs en eksisterende linje. Ethvert punkt som er plassert på toppen av en eksisterende linje blir satt inn mellom de to endepunktene på linjen - som om alderen var mellom alderen til de to sluttpunktene.
+
+Det trekkes linjer mellom suksessivt bestilte punkter.
+
+Rette kurver tegnes med rette linjer mellom påfølgende punkter. Glatte kurver tegnes med jevne linjer mellom suksessive punkter, ved bruk av naturlige kubiske linjer med (x, y) par versus skalale ordinære (t) verdier.
+
+Dette gjelder bare grafkurver. Det blir aldri trukket linjer mellom aksepunktene.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="158" />
         <source>Point</source>
-        <translation type="unfinished" />
+        <translation>Punkt</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="164" />
         <source>Shape</source>
-        <translation type="unfinished" />
+        <translation>Form</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="168" />
         <source>Select a shape for the points</source>
-        <translation type="unfinished" />
+        <translation>Velg en form for punktene</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="188" />
         <source>Radius</source>
-        <translation type="unfinished" />
+        <translation>Radius</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="192" />
         <source>Select a radius, in pixels, for the points</source>
-        <translation type="unfinished" />
+        <translation>Velg en radius, i piksler, for punktene</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="197" />
         <source>Line width</source>
-        <translation type="unfinished" />
+        <translation>Linje bredde</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="201" />
         <source>Select a line width, in pixels, for the points.
 
 A larger width results in a thicker line, with the exception of a value of zero which always results in a line that is one pixel wide (which is easy to see even when zoomed far out)</source>
-        <translation type="unfinished" />
+        <translation>Velg en linjebredde, i piksler, for punktene.
+
+En større bredde resulterer i en tykkere linje, med unntak av en verdi på null som alltid resulterer i en linje som er en piksel bred (som er lett å se selv når du zoomet langt ut)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="213" />
         <source>Select a color for the line used to draw the point shapes</source>
-        <translation type="unfinished" />
+        <translation>Velg en farge for linjen som skal brukes til å tegne punktformene</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="224" />
@@ -2961,19 +3051,25 @@ A larger width results in a thicker line, with the exception of a value of zero 
 If the visible settings are for the axes curve, then they will be used for future axes curves, until new settings are saved as the defaults.
 
 If the visible settings are for the Nth graph curve in the curve list, then they will be used for future graph curves that are also the Nth graph curve in their curve list, until new settings are saved as the defaults.</source>
-        <translation type="unfinished" />
+        <translation>Lagre de synlige kurveinnstillingene for bruk som fremtidige standarder, i henhold til valg av kurvenavn.
+
+Hvis de synlige innstillingene er for aksekurven, vil de bli brukt til fremtidige aksekurver, inntil nye innstillinger er lagret som standard.
+
+Hvis de synlige innstillingene er for den Nde grafkurven i kurvelisten, vil de bli brukt for fremtidige grafkurver som også er den Nde grafkurven i kurvelisten deres, til nye innstillinger blir lagret som standard.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="238" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="245" />
         <source>Preview window that shows how current settings affect the points and line of the selected curve.
 
 The X coordinate is in the horizontal direction, and the Y coordinate is in the vertical direction. A function can have only one Y value, at most, for any X value, but a relation can have multiple Y values for one X value.</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisningsvindu som viser hvordan gjeldende innstillinger påvirker punktene og linjen til den valgte kurven.
+
+X-koordinaten er i horisontal retning, og Y-koordinaten er i vertikal retning. En funksjon kan maksimalt ha en Y-verdi for enhver X-verdi, men en relasjon kan ha flere Y-verdier for en X-verdi.</translation>
     </message>
 </context>
 <context>
@@ -2981,79 +3077,81 @@ The X coordinate is in the horizontal direction, and the Y coordinate is in the 
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="41" />
         <source>Digitize Curve</source>
-        <translation type="unfinished" />
+        <translation>Digitaliser kurve</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="65" />
         <source>Cursor</source>
-        <translation type="unfinished" />
+        <translation>Markør</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="73" />
         <source>Type</source>
-        <translation type="unfinished" />
+        <translation>Type</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="76" />
         <source>Standard cross</source>
-        <translation type="unfinished" />
+        <translation>Standard kors</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="77" />
         <source>Selects the standard cross cursor</source>
-        <translation type="unfinished" />
+        <translation>Velger standard kryssmarkør</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="81" />
         <source>Custom cross</source>
-        <translation type="unfinished" />
+        <translation>Tilpasset kryss</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="82" />
         <source>Selects a custom cursor based on the settings selected below</source>
-        <translation type="unfinished" />
+        <translation>Velger en tilpasset markør basert på innstillingene som er valgt nedenfor</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="86" />
         <source>Size (pixels)</source>
-        <translation type="unfinished" />
+        <translation>Størrelse (piksler)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="95" />
         <source>Horizontal and vertical size of the cursor in pixels</source>
-        <translation type="unfinished" />
+        <translation>Markørets horisontale og vertikale størrelse i piksler</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="99" />
         <source>Inner radius (pixels)</source>
-        <translation type="unfinished" />
+        <translation>Indre radius (piksler)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="104" />
         <source>Radius of circle at the center of the cursor that will remain empty</source>
-        <translation type="unfinished" />
+        <translation>Sirkelradius i midten av markøren som vil forbli tom</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="108" />
         <source>Line width (pixels)</source>
-        <translation type="unfinished" />
+        <translation>Linjebredde (piksler)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="113" />
         <source>Width of each arm of the cross of the cursor</source>
-        <translation type="unfinished" />
+        <translation>Bredde på hver arm på krysset av markøren</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="127" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="139" />
         <source>Preview window showing the currently selected cursor.
 
 Drag the cursor over this area to see the effects of the current settings on the cursor shape.</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisningsvindu som viser den valgte markøren.
+
+Dra markøren over dette området for å se effekten av gjeldende innstillinger på markørformen.</translation>
     </message>
 </context>
 <context>
@@ -3061,160 +3159,162 @@ Drag the cursor over this area to see the effects of the current settings on the
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="55" />
         <source>Export Format</source>
-        <translation type="unfinished" />
+        <translation>Eksporter format</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="84" />
         <source>Included</source>
-        <translation type="unfinished" />
+        <translation>Inkludert</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="87" />
         <source>Not included</source>
-        <translation type="unfinished" />
+        <translation>Ikke inkludert</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="92" />
         <source>List of curves to be included in the exported file.
 
 The order of the curves here does not affect the order in the exported file. That order is determined by the Curves settings.</source>
-        <translation type="unfinished" />
+        <translation>Liste over kurver som skal inkluderes i den eksporterte filen.
+
+Rekkefølgen på kurvene her påvirker ikke rekkefølgen i den eksporterte filen. Den rekkefølgen bestemmes av kurveinnstillingene.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="101" />
         <source>List of curves to be excluded from the exported file</source>
-        <translation type="unfinished" />
+        <translation>Liste over kurver som skal ekskluderes fra den eksporterte filen</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="106" />
         <source>Include</source>
-        <translation type="unfinished" />
+        <translation>Inkludere</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="108" />
         <source>Move the currently selected curve(s) from the excluded list</source>
-        <translation type="unfinished" />
+        <translation>Flytt de valgte kurver (er) fra listen som er ekskludert</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="112" />
         <source>Exclude</source>
-        <translation type="unfinished" />
+        <translation>Utelukke</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="114" />
         <source>Move the currently selected curve(s) from the included list</source>
-        <translation type="unfinished" />
+        <translation>Flytt de valgte kurver (er) fra listen som er inkludert</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="125" />
         <source>Delimiters</source>
-        <translation type="unfinished" />
+        <translation>Skilletegn</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="132" />
         <source>Exported file will have commas between adjacent values, unless overridden by tabs in TSV files.</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil ha komma mellom tilstøtende verdier, med mindre de overstyres av faner i TSV-filer.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="137" />
         <source>Exported file will have spaces between adjacent values, unless overridden by commas in CSV files, or tabs in TSV files.</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil ha mellomrom mellom tilstøtende verdier, med mindre de overstyres av komma i CSV-filer, eller faner i TSV-filer.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="143" />
         <source>Exported file will have tabs between adjacent values, unless overridden by commas in CSV files.</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil ha faner mellom tilstøtende verdier, med mindre de overstyres av komma i CSV-filer.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="148" />
         <source>Exported file will have semicolons between adjacent values, unless overridden by commas in CSV files.</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil ha semikolon mellom tilstøtende verdier, med mindre de overstyres av komma i CSV-filer.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="152" />
         <source>Override in CSV/TSV files</source>
-        <translation type="unfinished" />
+        <translation>Overstyr i CSV / TSV-filer</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="153" />
         <source>Comma-separated value (CSV) files and tab-separated value (TSV) files will use commas and tabs respectively, unless this setting is selected. Selecting this setting will apply the delimiter setting to every file.</source>
-        <translation type="unfinished" />
+        <translation>CSV-filer med kommaseparerte verdier og TSV-filer vil bruke henholdsvis komma og faner, med mindre denne innstillingen er valgt. Valg av denne innstillingen vil angi avgrensningsinnstillingen på hver fil.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="164" />
         <source>Layout</source>
-        <translation type="unfinished" />
+        <translation>Oppsett</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="170" />
         <source>All curves on each line</source>
-        <translation type="unfinished" />
+        <translation>Alle kurver på hver linje</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="171" />
         <source>Exported file will have, on each line, an X value, the Y value for the first curve, the Y value for the second curve,...</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil ha på hver linje en X-verdi, Y-verdien for den første kurven, Y-verdien for den andre kurven, ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="176" />
         <source>One curve on each line</source>
-        <translation type="unfinished" />
+        <translation>En kurve på hver linje</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="177" />
         <source>Exported file will have all the points for the first curve, with one X-Y pair on each line, then the points for the second curve,...</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil ha alle punktene for den første kurven, med ett X-Y-par på hver linje, deretter poengene for den andre kurven, ...</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="187" />
         <source>Function Points Selection</source>
-        <translation type="unfinished" />
+        <translation>Valg av funksjonspunkter</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="201" />
         <source>Interpolate Ys at Xs from all curves</source>
-        <translation type="unfinished" />
+        <translation>Interpolér Ys ved Xs fra alle kurver</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="202" />
         <source>Exported file will have values at every unique X value from every curve. Y values will be linearly interpolated if necessary</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil ha verdier på hver unike X-verdi fra hver kurve. Y-verdiene blir interpolert lineært om nødvendig</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="208" />
         <source>Extrapolate outside endpoints</source>
-        <translation type="unfinished" />
+        <translation>Ekstrapolere utenfor endepunkter</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="209" />
         <source>Enable or disable extrapolation outside of endpoints of each curve. If disabled, only points between the endpoints of each curve are exported</source>
-        <translation type="unfinished" />
+        <translation>Aktiver eller deaktiver ekstrapolering utenfor endepunktene for hver kurve. Hvis den er deaktivert, eksporteres bare punkter mellom endepunktene for hver kurve</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="214" />
         <source>Interpolate Ys at Xs from first curve</source>
-        <translation type="unfinished" />
+        <translation>Interpolere Ys ved Xs fra første kurve</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="215" />
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil ha verdier på hver unike X-verdi fra den første kurven. Y-verdiene blir interpolert lineært om nødvendig</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="220" />
         <source>Interpolate Ys at evenly spaced X values that are automatically selected</source>
-        <translation type="unfinished" />
+        <translation>Interpolér Ys med jevnt fordelt X-verdier som automatisk blir valgt</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="221" />
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil ha verdier med jevnt fordelt X-verdier, atskilt med intervallet valgt nedenfor.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="225" />
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="372" />
         <source>Interval</source>
-        <translation type="unfinished" />
+        <translation>Intervall</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="233" />
@@ -3223,7 +3323,11 @@ The order of the curves here does not affect the order in the exported file. Tha
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
 
 The X values will be automatically aligned along simple numbers. If the first and/or last points are not along the aligned X values, then one or two additional points are added as necessary.</source>
-        <translation type="unfinished" />
+        <translation>Intervall, i enhetene til X, mellom påfølgende punkter i X-retningen.
+
+Hvis skalaen er lineær, legges dette intervallet til påfølgende X-verdier. Hvis skalaen er logaritmisk, multipliseres dette intervallet til påfølgende X-verdier.
+
+X-verdiene blir automatisk justert langs enkle tall. Hvis de første og / eller siste punktene ikke er langs de justerte X-verdiene, legges ett eller to tilleggspunkter etter behov.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="243" />
@@ -3232,101 +3336,107 @@ The X values will be automatically aligned along simple numbers. If the first an
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
 
 Graph units are preferred when the spacing is to depend on the X scale.</source>
-        <translation type="unfinished" />
+        <translation>Enheter for mellomrom.
+
+Pixelenheter foretrekkes når avstanden skal være uavhengig av X-skalaen. Avstanden vil være konsistent på tvers av grafen, selv om X-skalaen er logaritmisk.
+
+Grafenheter foretrekkes når avstanden er avhengig av X-skalaen.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="255" />
         <source>Interpolate Ys at evenly spaced X values on grid lines</source>
-        <translation type="unfinished" />
+        <translation>Interpolér Ys med jevnt fordelt X-verdier på rutenettlinjer</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="256" />
         <source>Exported file will have values at evenly spaced X values at the vertical grid lines.</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil ha verdier på jevnt fordelt X-verdier ved de vertikale rutenettlinjene.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="260" />
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="398" />
         <source>Raw Xs and Ys</source>
-        <translation type="unfinished" />
+        <translation>Rå Xs og Ys</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="261" />
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="399" />
         <source>Exported file will have only original X and Y values</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil bare ha originale X- og Y-verdier</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="272" />
         <source>Header</source>
-        <translation type="unfinished" />
+        <translation>Overskrift</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="282" />
         <source>Exported file will have no header line</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil har ingen overskriftslinje</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="287" />
         <source>Exported file will have simple header line</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil ha enkel overskriftslinje</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="292" />
         <source>Exported file will have gnuplot header line</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil ha gnuplot-topplinje</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="304" />
         <source>Save As Default</source>
-        <translation type="unfinished" />
+        <translation>Lagre som standard</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="305" />
         <source>Save the settings for use as future defaults.</source>
-        <translation type="unfinished" />
+        <translation>Lagre innstillingene for bruk som fremtidige standardinnstillinger.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="309" />
         <source>Load Default</source>
-        <translation type="unfinished" />
+        <translation>Last inn standard</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="310" />
         <source>Load the default settings.</source>
-        <translation type="unfinished" />
+        <translation>Last inn standardinnstillingene.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="319" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="335" />
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisningsvindu viser hvordan gjeldende innstillinger påvirker den eksporterte filen.
+
+Funksjoner (vist her i blått) sendes ut først, etterfulgt av relasjoner (vist her i grønt) hvis det finnes noen.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351" />
         <source>Relation Points Selection</source>
-        <translation type="unfinished" />
+        <translation>Valg av forholdspunkt</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="365" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
-        <translation type="unfinished" />
+        <translation>Interpolér Xs og Ys med jevnt mellomrom.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="366" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
-        <translation type="unfinished" />
+        <translation>Eksportert fil vil ha punkter jevnt fordelt langs hver relasjon, atskilt med intervallet valgt nedenfor. Hvis det siste intervallet ikke slutter på det siste punktet, legges det til et kortere siste intervall som slutter på det siste punktet.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="380" />
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
-        <translation type="unfinished" />
+        <translation>Intervall mellom påfølgende punkter når du eksporterer med jevnt fordelt (X, Y) koordinater.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="386" />
@@ -3335,46 +3445,54 @@ Functions (shown here in blue) are output first, followed by relations (shown he
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
 
 Graph units are usually preferred when the X and Y scales are identical.</source>
-        <translation type="unfinished" />
+        <translation>Enheter for mellomrom.
+
+Pixelenheter foretrekkes når avstanden skal være uavhengig av X- og Y-skalaene. Avstanden vil være konsistent på tvers av grafen, selv om en skala er logaritmisk eller X- og Y-skalaene er forskjellige.
+
+Grafenheter foretrekkes vanligvis når X- og Y-skalaene er identiske.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="442" />
         <source>Functions</source>
-        <translation type="unfinished" />
+        <translation>Funksjoner</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="444" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
-        <translation type="unfinished" />
+        <translation>Funksjoner-fanen
+
+Kontroller for å spesifisere formatet for funksjoner under eksport</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="450" />
         <source>Relations</source>
-        <translation type="unfinished" />
+        <translation>Relasjoner</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="452" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
-        <translation type="unfinished" />
+        <translation>Forhold Tab
+
+Kontroller for å spesifisere formatet for forhold under eksport</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="471" />
         <source>X Label</source>
-        <translation type="unfinished" />
+        <translation>X-etikett</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="475" />
         <source>Label in the header for x values</source>
-        <translation type="unfinished" />
+        <translation>Merk i overskriften for x-verdier</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1214" />
         <source>Preview is unavailable until axis points are defined.</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisning er ikke tilgjengelig til aksepunktene er definert.</translation>
     </message>
 </context>
 <context>
@@ -3382,12 +3500,12 @@ Controls for specifying the format of relations during export</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="25" />
         <source>General</source>
-        <translation type="unfinished" />
+        <translation>Generell</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="47" />
         <source>Effective cursor size (pixels)</source>
-        <translation type="unfinished" />
+        <translation>Effektiv markørstørrelse (piksler)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="52" />
@@ -3396,12 +3514,16 @@ Controls for specifying the format of relations during export</source>
 This is the effective width and height of the cursor when clicking on a pixel that is not part of the background.
 
 This parameter is used in the Color Picker and Point Match modes</source>
-        <translation type="unfinished" />
+        <translation>Effektiv markørstørrelse
+
+Dette er den effektive bredden og høyden på markøren når du klikker på en piksel som ikke er en del av bakgrunnen.
+
+Denne parameteren brukes i Color Picker og Point Match modus</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="59" />
         <source>Extra precision (digits)</source>
-        <translation type="unfinished" />
+        <translation>Ekstra presisjon (sifre)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="64" />
@@ -3410,17 +3532,22 @@ This parameter is used in the Color Picker and Point Match modes</source>
 This is the number of additional digits of precision appended after the significant digits determined by the digitization accuracy at that point. The digitization accuracy at any point equals the change in graph coordinates from moving one pixel in each direction. Appending extra digits does not improve the accuracy of the numbers. More information can be found in discussions of accuracy versus precision.
 
 This parameter is used on the coordinates in the Status Bar and during Export</source>
-        <translation type="unfinished" />
+        <translation>Ekstra siffer for presisjon
+
+Dette er antallet presisjonssifre som er lagt ved etter de betydelige sifrene bestemt av digitaliseringsnøyaktigheten på det tidspunktet. Digitaliseringsnøyaktigheten når som helst tilsvarer endringen i grafkoordinater fra å bevege en piksel i hver retning. Å legge til ekstra sifre forbedrer ikke tallene. Mer informasjon finner du i diskusjoner om nøyaktighet kontra presisjon.
+
+Denne parameteren brukes på koordinatene i statuslinjen og under eksport
+ </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="79" />
         <source>Save As Default</source>
-        <translation type="unfinished" />
+        <translation>Lagre som standard</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="80" />
         <source>Save the settings for use as future defaults, according to the curve name selection.</source>
-        <translation type="unfinished" />
+        <translation>Lagre innstillingene for bruk som fremtidige standarder, i henhold til valg av kurvenavn.</translation>
     </message>
 </context>
 <context>
@@ -3428,132 +3555,152 @@ This parameter is used on the coordinates in the Status Bar and during Export</s
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="31" />
         <source>Grid Display</source>
-        <translation type="unfinished" />
+        <translation>Rutenettvisning</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="82" />
         <source>Color</source>
-        <translation type="unfinished" />
+        <translation>Farge</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="86" />
         <source>Select a color for the lines</source>
-        <translation type="unfinished" />
+        <translation>Velg en farge for linjene</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="108" />
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="184" />
         <source>Disable</source>
-        <translation type="unfinished" />
+        <translation>Deaktiver</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="112" />
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished" />
+        <translation>Deaktivert verdi.
+
+X-rutenettlinjene er spesifisert med bare tre verdier om gangen. For fleksibilitet tilbys fire verdier, så du må velge hvilken verdi som er deaktivert. Når den er deaktivert, oppdateres den verdien ganske enkelt når de andre verdiene endres</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="127" />
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="203" />
         <source>Count</source>
-        <translation type="unfinished" />
+        <translation>Telle</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="131" />
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Antall X-rutenettlinjer.
+
+Antall X-rutenettlinjer må legges inn som et heltall større enn null</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="140" />
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="216" />
         <source>Start</source>
-        <translation type="unfinished" />
+        <translation>Start</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="144" />
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
+        <translation>Verdien av den første X-rutenettet.
+
+Startverdien kan ikke være større enn stoppverdien</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="151" />
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="227" />
         <source>Step</source>
-        <translation type="unfinished" />
+        <translation>Skritt</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
-The step value must be greater than zero</source>
-        <translation type="unfinished" />
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Forskjell i verdi mellom to påfølgende X-rutenettlinjer.
+
+Trinnverdien må være større enn null (lineær) eller en (logaritmisk)</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Forskjell i verdi mellom to påfølgende Y-rutenettlinjer.
+
+Trinnverdien må være større enn null (lineær) eller en (logaritmisk)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="162" />
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="238" />
         <source>Stop</source>
-        <translation type="unfinished" />
+        <translation>Stoppe</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="166" />
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished" />
+        <translation>Verdien av den siste X-rutenettet.
+
+Stoppverdien kan ikke være mindre enn startverdien</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="188" />
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished" />
+        <translation>Deaktivert verdi.
+
+Y-rutenettlinjene er spesifisert med bare tre verdier om gangen. For fleksibilitet tilbys fire verdier, så du må velge hvilken verdi som er deaktivert. Når den er deaktivert, oppdateres den verdien ganske enkelt når de andre verdiene endres</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="207" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Antall Y-rutenettlinjer.
+
+Antall Y-rutenettlinjer må legges inn som et heltall større enn null</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="220" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
-        <source>Difference in value between two successive Y grid lines.
+        <translation>Verdien av den første Y-rutenettet.
 
-The step value must be greater than zero</source>
-        <translation type="unfinished" />
+Startverdien kan ikke være større enn stoppverdien</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="242" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished" />
+        <translation>Verdien av den siste Y-rutenettet.
+
+Stoppverdien kan ikke være mindre enn startverdien</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="258" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="265" />
         <source>Preview window that shows how current settings affect grid display</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisningsvindu som viser hvordan gjeldende innstillinger påvirker rutenettvisningen</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="322" />
         <source>X Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>X rutenettlinjer</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="324" />
@@ -3563,17 +3710,17 @@ The stop value cannot be less than the start value</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="328" />
         <source>Y Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>Y rutenettlinjer</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="330" />
         <source>Radius Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>Radiusnettlinjer</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="588" />
         <source>Grid line count exceeds limit set by Settings / Main Window.</source>
-        <translation type="unfinished" />
+        <translation>Rutenettlinje teller over grensen som er angitt av Innstillinger / Hovedvindu.</translation>
     </message>
 </context>
 <context>
@@ -3581,34 +3728,36 @@ The stop value cannot be less than the start value</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="36" />
         <source>Grid Removal</source>
-        <translation type="unfinished" />
+        <translation>Fjerning av nett</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="82" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="89" />
         <source>Preview window that shows how current settings affect grid removal</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisningsvindu som viser hvordan gjeldende innstillinger påvirker fjerning av nett</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="100" />
         <source>Remove pixels close to defined grid lines</source>
-        <translation type="unfinished" />
+        <translation>Fjern piksler nær definerte rutenettlinjer</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="101" />
         <source>Check this box to have pixels close to regularly spaced gridlines removed.
 
 This option is only available when the axis points have all been defined.</source>
-        <translation type="unfinished" />
+        <translation>Merk av i denne boksen for å fjerne piksler i nærheten av regelmessige avstander.
+
+Dette alternativet er bare tilgjengelig når aksepunktene er definert.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="106" />
         <source>Close distance (pixels)</source>
-        <translation type="unfinished" />
+        <translation>Lukk avstand (piksler)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="110" />
@@ -3617,12 +3766,16 @@ This option is only available when the axis points have all been defined.</sourc
 Pixels that are closer to the regularly spaced gridlines, than this distance, will be removed.
 
 This value cannot be negative. A zero value disables this feature. Decimal values are allowed</source>
-        <translation type="unfinished" />
+        <translation>Angi nærhetsavstand i piksler.
+
+Piksler som er nærmere rutelinjene med regelmessig avstand, enn denne avstanden, vil bli fjernet.
+
+Denne verdien kan ikke være negativ. En nullverdi deaktiverer denne funksjonen. Desimalverdier er tillatt</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="127" />
         <source>X Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>X rutenettlinjer</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="129" />
@@ -3633,111 +3786,131 @@ This value cannot be negative. A zero value disables this feature. Decimal value
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="137" />
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="215" />
         <source>Disable</source>
-        <translation type="unfinished" />
+        <translation>Deaktiver</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="141" />
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished" />
+        <translation>Deaktivert verdi.
+
+X-rutenettlinjene er spesifisert med bare tre verdier om gangen. For fleksibilitet tilbys fire verdier, så du må velge hvilken verdi som er deaktivert. Når den er deaktivert, oppdateres den verdien ganske enkelt når de andre verdiene endres</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="156" />
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="234" />
         <source>Count</source>
-        <translation type="unfinished" />
+        <translation>Telle</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="160" />
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Antall X-rutenettlinjer.
+
+Antall X-rutenettlinjer må legges inn som et heltall større enn null</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="167" />
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="245" />
         <source>Start</source>
-        <translation type="unfinished" />
+        <translation>Start</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="171" />
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
+        <translation>Verdien av den første X-rutenettet.
+
+Startverdien kan ikke være større enn stoppverdien</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="178" />
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="256" />
         <source>Step</source>
-        <translation type="unfinished" />
+        <translation>Skritt</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
-The step value must be greater than zero</source>
-        <translation type="unfinished" />
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Forskjell i verdi mellom to påfølgende X-rutenettlinjer.
+
+Trinnverdien må være større enn null (lineær) eller en (logaritmisk)</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Forskjell i verdi mellom to påfølgende Y-rutenettlinjer.
+
+Trinnverdien må være større enn null (lineær) eller en (logaritmisk)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="189" />
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="267" />
         <source>Stop</source>
-        <translation type="unfinished" />
+        <translation>Stoppe</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="193" />
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished" />
+        <translation>Verdien av den siste X-rutenettet.
+
+Stoppverdien kan ikke være mindre enn startverdien</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="205" />
         <source>Y Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>Y rutenettlinjer</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="207" />
         <source>R Grid Lines</source>
-        <translation type="unfinished" />
+        <translation>R rutenettlinjer</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="219" />
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished" />
+        <translation>Deaktivert verdi.
+
+Y-rutenettlinjene er spesifisert med bare tre verdier om gangen. For fleksibilitet tilbys fire verdier, så du må velge hvilken verdi som er deaktivert. Når den er deaktivert, oppdateres den verdien ganske enkelt når de andre verdiene endres</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="238" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Antall Y-rutenettlinjer.
+
+Antall Y-rutenettlinjer må legges inn som et heltall større enn null</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="249" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
-        <source>Difference in value between two successive Y grid lines.
+        <translation>Verdien av den første Y-rutenettet.
 
-The step value must be greater than zero</source>
-        <translation type="unfinished" />
+Startverdien kan ikke være større enn stoppverdien</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="271" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished" />
+        <translation>Verdien av den siste Y-rutenettet.
+
+Stoppverdien kan ikke være mindre enn startverdien</translation>
     </message>
 </context>
 <context>
@@ -3991,7 +4164,7 @@ This value has a lower limit</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="135" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="142" />
@@ -4051,7 +4224,7 @@ In addition to the points placed at regular intervals, this option causes a poin
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="114" />
         <source>Line width</source>
-        <translation type="unfinished" />
+        <translation>Linje bredde</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="118" />
@@ -4061,7 +4234,7 @@ In addition to the points placed at regular intervals, this option causes a poin
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="123" />
         <source>Line color</source>
-        <translation type="unfinished" />
+        <translation>Linjefarge</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="127" />
@@ -4071,7 +4244,7 @@ In addition to the points placed at regular intervals, this option causes a poin
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="142" />
         <source>Preview</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="149" />
@@ -4149,7 +4322,7 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="235" />
         <source>X</source>
-        <translation type="unfinished" />
+        <translation>X</translation>
     </message>
 </context>
 <context>
@@ -4326,7 +4499,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="1311" />
         <source>Save</source>
-        <translation type="unfinished" />
+        <translation>Lagre</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="2331" />
@@ -4550,7 +4723,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="37" />
         <source>Date/Time</source>
-        <translation type="unfinished" />
+        <translation>Dato tid</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="27" />
@@ -4908,32 +5081,32 @@ Do you want to save your changes?</source>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="177" />
         <location filename="../src/Point/PointShape.cpp" line="44" />
         <source>X</source>
-        <translation type="unfinished" />
+        <translation>X</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="182" />
         <source>Y</source>
-        <translation type="unfinished" />
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="../src/Grid/GridCoordDisable.cpp" line="16" />
         <source>Count</source>
-        <translation type="unfinished" />
+        <translation>Telle</translation>
     </message>
     <message>
         <location filename="../src/Grid/GridCoordDisable.cpp" line="20" />
         <source>Start</source>
-        <translation type="unfinished" />
+        <translation>Start</translation>
     </message>
     <message>
         <location filename="../src/Grid/GridCoordDisable.cpp" line="24" />
         <source>Step</source>
-        <translation type="unfinished" />
+        <translation>Skritt</translation>
     </message>
     <message>
         <location filename="../src/Grid/GridCoordDisable.cpp" line="28" />
         <source>Stop</source>
-        <translation type="unfinished" />
+        <translation>Stoppe</translation>
     </message>
     <message>
         <location filename="../src/Grid/GridLineFactory.cpp" line="67" />
@@ -5438,7 +5611,7 @@ This ends the tutorial. Good luck!</source>
     <message>
         <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="35" />
         <source>Color Filter</source>
-        <translation type="unfinished" />
+        <translation>Fargefilter</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="38" />

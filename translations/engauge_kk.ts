@@ -849,7 +849,9 @@ Exports the current document into a text file.</source>
         <source>Print Document
 
 Print the current document to a printer or file.</source>
-        <translation type="unfinished" />
+        <translation>Құжатты басып шығару
+
+Ағымдағы құжатты принтерге немесе файлға басып шығарыңыз.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="286" />
@@ -876,14 +878,16 @@ Quits the application.</source>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="300" />
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
-        <translation type="unfinished" />
+        <translation>Сандық белгілеу қадамдарын анықтау үшін импорттау кезінде тексеру парағы нұсқаулығының шеберін ашыңыз</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="301" />
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
-        <translation type="unfinished" />
+        <translation>Тексеру парағы бойынша нұсқаулық шебері
+
+Импорт кезінде бақылау тізімінің нұсқаушысы шебері импортталған құжаттың қадамдарының тізімін жасау үшін пайдаланыңыз</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="308" />
@@ -893,14 +897,16 @@ Use Checklist Guide Wizard during import to generate a checklist of steps for th
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="309" />
         <source>Play tutorial showing steps for digitizing curves</source>
-        <translation type="unfinished" />
+        <translation>Оқулықта қисықтарды сандық өлшеу қадамдары көрсетілген</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="310" />
         <source>Tutorial
 
 Play tutorial showing steps for digitizing points from curves drawn with lines and/or point</source>
-        <translation type="unfinished" />
+        <translation>Оқулық
+
+Оқулықта сызықтармен және / немесе нүктелермен қисық сызықтардан нүктелерді сандық өлшеу қадамдары көрсетілген</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="316" />
@@ -951,7 +957,9 @@ About the application.</source>
         <source>Coordinate Settings
 
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
-        <translation type="unfinished" />
+        <translation>Параметрлерді үйлестіру
+
+Координаталық параметрлер графикалық координаталардың кескіндегі пикселдермен қалай салыстырылатындығын анықтайды</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="340" />
@@ -1004,7 +1012,9 @@ Curves properties settings determine how each curve appears</source>
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
-        <translation type="unfinished" />
+        <translation>Осьтік және графикалық қисық параметрлерді сандық жүйеге келтіріңіз
+
+Digitize Curve параметрлері нүктелер сандық санды қалай сандық жүйеге келтіретінін анықтайды</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="359" />
@@ -1021,7 +1031,9 @@ Digitize Curve settings determine how points are digitized in Digitize Axis Poin
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
-        <translation type="unfinished" />
+        <translation>Пішім параметрлерін экспорттау
+
+Экспорттау пішімі экспортталған файлдардың пішімделуіне әсер етеді</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="365" />
@@ -1038,7 +1050,9 @@ Export format settings affect how exported files are formatted</source>
         <source>Color Filter Settings
 
 Color filtering simplifies the graphs for easier Point Matching and Segment Filling</source>
-        <translation type="unfinished" />
+        <translation>Түс сүзгісінің параметрлері
+
+Түсті сүзу нүктелерді сәйкестендіру және сегментке толтыруды жеңілдету үшін графиктерді жеңілдетеді</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="371" />
@@ -1055,7 +1069,9 @@ Color filtering simplifies the graphs for easier Point Matching and Segment Fill
         <source>Axes Checker Settings
 
 Axes checker can reveal any axis point mistakes, which are otherwise hard to find.</source>
-        <translation type="unfinished" />
+        <translation>Біліктерді тексеру параметрлері
+
+Біліктерді тексергіштің көмегімен кез келген қателіктерді табуға болады, оларды табу қиын.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="377" />
@@ -1072,7 +1088,9 @@ Axes checker can reveal any axis point mistakes, which are otherwise hard to fin
         <source>Grid Line Display Settings
 
 Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions.</source>
-        <translation type="unfinished" />
+        <translation>Тор сызығын көрсету параметрлері
+
+Графикте көрсетілген тор сызықтары бұрмаланған графиктер үшін Axis Checker-ге қарағанда дәлірек бола алады. Бұрмаланған графикте тор сызықтарын әртүрлі аймақтардағы дәлдікті дәлдеу үшін пайдалануға болады.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="384" />
@@ -1089,7 +1107,9 @@ Grid lines displayed on the graph can provide more accuracy than the Axis Checke
         <source>Grid Line Removal Settings
 
 Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when Color Filtering is not able to separate grid lines from curve lines.</source>
-        <translation type="unfinished" />
+        <translation>Торды жою параметрлері
+
+Торды алып тастау қисық сызықтарды оңай сәйкестендіру үшін және бөлімді толтыру үшін бөледі, егер түстерді сүзу тор сызықтарын қисық сызықтардан бөле алмаса.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="391" />
@@ -1106,7 +1126,9 @@ Grid line removal isolates curve lines for easier Point Matching and Segment Fil
         <source>Point Match Settings
 
 Point match settings determine how points are matched while in Point Match mode</source>
-        <translation type="unfinished" />
+        <translation>Нүктелік сәйкестік параметрлері
+
+Нүктелерді сәйкестендіру параметрлері Point Match режимінде ұпайлардың сәйкестігін анықтайды</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="397" />
@@ -1123,7 +1145,9 @@ Point match settings determine how points are matched while in Point Match mode<
         <source>Segment Fill Settings
 
 Segment fill settings determine how points are generated in the Segment Fill mode</source>
-        <translation type="unfinished" />
+        <translation>Сегментті толтыру параметрлері
+
+Сегментті толтыру параметрлері Segment толтыру режимінде нүктелер қалай құрылатындығын анықтайды</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="403" />
@@ -1140,7 +1164,9 @@ Segment fill settings determine how points are generated in the Segment Fill mod
         <source>General Settings
 
 General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects both Color Picker and Point Match modes</source>
-        <translation type="unfinished" />
+        <translation>Жалпы параметрлер
+
+Жалпы параметрлер - бұл бірнеше режимдерге әсер ететін құжатқа қатысты параметрлер. Мысалы, жүгіргі өлшемінің параметрі Color Picker және Point Match режимдеріне де әсер етеді</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="410" />
@@ -1157,7 +1183,9 @@ General settings are document-specific settings that affect multiple modes. For 
         <source>Main Window Settings
 
 Main window settings affect the user interface and are not specific to any document</source>
-        <translation type="unfinished" />
+        <translation>Негізгі терезе параметрлері
+
+Терезенің негізгі параметрлері пайдаланушы интерфейсіне әсер етеді және ешқандай құжатқа тән емес</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="422" />
@@ -1259,7 +1287,9 @@ Show or hide the digitizing tools toolbar</source>
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
-        <translation type="unfinished" />
+        <translation>Құралдар тақтасы параметрлерін қарау
+
+Параметрлер көріністерінің құралдар тақтасын көрсету немесе жасыру. Бұл көріністер графикалық түрде ең маңызды параметрлерді көрсетеді.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="471" />
@@ -1278,7 +1308,11 @@ Show or hide the settings views toolbar. These views graphically show the most i
 Show or hide the coordinate system selection toolbar. This toolbar is used to select the current coordinate system when the document has multiple coordinate systems. This toolbar is also used to view and print all coordinate systems.
 
 This toolbar is disabled when there is only one coordinate system.</source>
-        <translation type="unfinished" />
+        <translation>Координаттар жүйесінің құралдар тақтасын қарау
+
+Координаталық жүйені таңдау құралдар тақтасын көрсету немесе жасыру. Бұл құралдар тақтасы құжатта бірнеше координат жүйелері болған кезде ағымдағы координаттар жүйесін таңдау үшін қолданылады. Бұл құралдар тақтасы барлық координат жүйелерін қарау және басып шығару үшін де қолданылады.
+
+Бұл құралдар тақтасы тек бір координат жүйесі болған кезде ажыратылады.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="483" />
@@ -1365,7 +1399,11 @@ Show the original image underneath the points</source>
 Show the filtered image underneath the points.
 
 The filtered image is created from the original image according to the Filter preferences so unimportant information is hidden and important information is emphasized</source>
-        <translation type="unfinished" />
+        <translation>Сүзілген суретті көрсету
+
+Сүзілген суретті нүктелердің астына көрсет.
+
+Сүзілген сурет бастапқы кескіннен Сүзгі теңшелімдеріне сәйкес жасалады, сондықтан маңызды емес ақпарат жасырын болады және маңызды ақпарат баса көрсетіледі.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="522" />
@@ -1375,31 +1413,35 @@ The filtered image is created from the original image according to the Filter pr
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="524" />
         <source>Hide all digitized curves.</source>
-        <translation type="unfinished" />
+        <translation>Барлық сандық қисықтарды жасырыңыз.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="525" />
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
-        <translation type="unfinished" />
+        <translation>Барлық қисықтарды жасырыңыз
+
+Кескінді оңай көру үшін осьтік нүктелер немесе графикалық қисық сызықтар көрсетілмейді.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="528" />
         <source>Show Selected Curve</source>
-        <translation type="unfinished" />
+        <translation>Таңдалған қисық сызықты көрсету</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="530" />
         <source>Show only the currently selected curve.</source>
-        <translation type="unfinished" />
+        <translation>Тек қазір таңдалған қисықты көрсетіңіз.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="531" />
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
-        <translation type="unfinished" />
+        <translation>Таңдалған қисық сызықты көрсету
+
+Тек таңдалған қисыққа жататын цифрланған нүктелер мен сызықты көрсетіңіз.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="534" />
@@ -3355,7 +3397,9 @@ This parameter is used on the coordinates in the Status Bar and during Export</s
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished" />
+        <translation>Ажыратылған мән.
+
+X тор сызықтары бір уақытта үш мәнді қолдану арқылы көрсетіледі. Икемділік үшін төрт мән ұсынылады, сондықтан сіз қай мән өшірілгенін таңдауыңыз керек. Өшірілгеннен кейін, басқа мәндер өзгерген кезде бұл мән жай жаңартылады</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="127" />
@@ -3368,7 +3412,9 @@ The X grid lines are specified using only three values at a time. For flexibilit
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished" />
+        <translation>X тор сызықтарының саны.
+
+X тор сызықтарының саны нөлден үлкен бүтін сан түрінде енгізілуі керек</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="140" />
@@ -3381,7 +3427,9 @@ The number of X grid lines must be entered as an integer greater than zero</sour
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
+        <translation>Бірінші X тор сызығының мәні.
+
+Бастапқы мән тоқтау мәнінен үлкен болмауы керек</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="151" />
@@ -3393,8 +3441,19 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
-The step value must be greater than zero</source>
-        <translation type="unfinished" />
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Екі қатардағы Х торларының арасындағы айырмашылық.
+
+Қадам мәні нөлден (сызықтық) немесе бірден (логарифмдік) үлкен болуы керек</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Екі қатарлы Y торлы сызықтар арасындағы айырмашылық.
+
+Қадам мәні нөлден (сызықтық) немесе бірден (логарифмдік) үлкен болуы керек</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="162" />
@@ -3407,42 +3466,45 @@ The step value must be greater than zero</source>
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished" />
+        <translation>Соңғы X тор сызығының мәні.
+
+Тоқтату мәні бастапқы мәннен төмен болмауы керек</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="188" />
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished" />
+        <translation>Ажыратылған мән.
+
+Y тор сызықтары бір уақытта үш мәнді қолдану арқылы көрсетіледі. Икемділік үшін төрт мән ұсынылады, сондықтан сіз қай мән өшірілгенін таңдауыңыз керек. Өшірілгеннен кейін, басқа мәндер өзгерген кезде бұл мән жай жаңартылады</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="207" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Y тор сызықтарының саны.
+
+Y тор сызықтарының саны нөлден үлкен бүтін сан түрінде енгізілуі керек</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="220" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
-        <source>Difference in value between two successive Y grid lines.
+        <translation>Бірінші Y тор сызығының мәні.
 
-The step value must be greater than zero</source>
-        <translation type="unfinished" />
+Бастапқы мән тоқтау мәнінен үлкен болмауы керек</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="242" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished" />
+        <translation>Соңғы Y тор сызығының мәні.
+
+Тоқтату мәні бастапқы мәннен төмен болмауы керек</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="258" />
@@ -3507,7 +3569,9 @@ The stop value cannot be less than the start value</source>
         <source>Check this box to have pixels close to regularly spaced gridlines removed.
 
 This option is only available when the axis points have all been defined.</source>
-        <translation type="unfinished" />
+        <translation>Тұрақты тор сызықтарын алып тастауға жақын пиксель болуы үшін осы құсбелгіні қойыңыз.
+
+Бұл опция білік нүктелері анықталған кезде ғана қол жетімді.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="106" />
@@ -3521,7 +3585,11 @@ This option is only available when the axis points have all been defined.</sourc
 Pixels that are closer to the regularly spaced gridlines, than this distance, will be removed.
 
 This value cannot be negative. A zero value disables this feature. Decimal values are allowed</source>
-        <translation type="unfinished" />
+        <translation>Жақындық қашықтығын пиксельде орнатыңыз.
+
+Бұл қашықтыққа қарағанда жүйелі түрде орналасқан тор сызықтарына жақын пиксельдер алынып тасталады.
+
+Бұл мән теріс болуы мүмкін емес. Нөлдік мән бұл мүмкіндікті ажыратады. Ондық мәндерге рұқсат етіледі</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="127" />
@@ -3544,7 +3612,9 @@ This value cannot be negative. A zero value disables this feature. Decimal value
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished" />
+        <translation>Ажыратылған мән.
+
+X тор сызықтары бір уақытта үш мәнді қолдану арқылы көрсетіледі. Икемділік үшін төрт мән ұсынылады, сондықтан сіз қай мән өшірілгенін таңдауыңыз керек. Өшірілгеннен кейін, басқа мәндер өзгерген кезде бұл мән жай жаңартылады</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="156" />
@@ -3557,7 +3627,9 @@ The X grid lines are specified using only three values at a time. For flexibilit
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished" />
+        <translation>X тор сызықтарының саны.
+
+X тор сызықтарының саны нөлден үлкен бүтін сан түрінде енгізілуі керек</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="167" />
@@ -3570,7 +3642,9 @@ The number of X grid lines must be entered as an integer greater than zero</sour
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
+        <translation>Бірінші X тор сызығының мәні.
+
+Бастапқы мән тоқтау мәнінен үлкен болмауы керек</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="178" />
@@ -3582,8 +3656,19 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
-The step value must be greater than zero</source>
-        <translation type="unfinished" />
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Екі қатардағы Х торларының арасындағы айырмашылық.
+
+Қадам мәні нөлден (сызықтық) немесе бірден (логарифмдік) үлкен болуы керек</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Екі қатарлы Y торлы сызықтар арасындағы айырмашылық.
+
+Қадам мәні нөлден (сызықтық) немесе бірден (логарифмдік) үлкен болуы керек</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="189" />
@@ -3596,7 +3681,9 @@ The step value must be greater than zero</source>
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished" />
+        <translation>Соңғы X тор сызығының мәні.
+
+Тоқтату мәні бастапқы мәннен төмен болмауы керек</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="205" />
@@ -3613,35 +3700,36 @@ The stop value cannot be less than the start value</source>
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
-        <translation type="unfinished" />
+        <translation>Ажыратылған мән.
+
+Y тор сызықтары бір уақытта үш мәнді қолдану арқылы көрсетіледі. Икемділік үшін төрт мән ұсынылады, сондықтан сіз қай мән өшірілгенін таңдауыңыз керек. Өшірілгеннен кейін, басқа мәндер өзгерген кезде бұл мән жай жаңартылады</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="238" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
-        <translation type="unfinished" />
+        <translation>Y тор сызықтарының саны.
+
+Y тор сызықтарының саны нөлден үлкен бүтін сан түрінде енгізілуі керек</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="249" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
-        <source>Difference in value between two successive Y grid lines.
+        <translation>Бірінші Y тор сызығының мәні.
 
-The step value must be greater than zero</source>
-        <translation type="unfinished" />
+Бастапқы мән тоқтау мәнінен үлкен болмауы керек</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="271" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
-        <translation type="unfinished" />
+        <translation>Соңғы Y тор сызығының мәні.
+
+Тоқтату мәні бастапқы мәннен төмен болмауы керек</translation>
     </message>
 </context>
 <context>
@@ -3693,7 +3781,9 @@ Select the initial zoom factor when a new document is loaded. Either the previou
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
-        <translation type="unfinished" />
+        <translation>Масштабты басқару
+
+Үлкейту және кішірейту үшін қандай кірістер пайдаланылатынын таңдаңыз.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
@@ -3707,7 +3797,11 @@ Select which inputs are used to zoom in and out.</source>
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
 
 The locale determines how numbers are formatted. Specifically, either commas or periods will be used as group delimiters in each number entered by the user, displayed in the user interface, or exported to a file.</source>
-        <translation type="unfinished" />
+        <translation>Тіл
+
+Сандармен (бірден) қолданылатын тілді және пайдаланушы интерфейсіндегі тілді таңдаңыз (қайта іске қосылғаннан кейін).
+
+Тіл сандардың қалай пішімделетінін анықтайды. Атап айтқанда, үтірлер немесе нүктелер пайдаланушы енгізген, пайдаланушы интерфейсінде көрсетілген немесе файлға экспортталған әр нөмірде топтық бөлгіш ретінде пайдаланылады.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="127" />
@@ -3721,7 +3815,11 @@ The locale determines how numbers are formatted. Specifically, either commas or 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
 
 This setting only has an effect when Engauge has been built with support for pdf files.</source>
-        <translation type="unfinished" />
+        <translation>Кесуді импорттау
+
+Импорттау кезінде импортталған кескіннің кесуін қосады немесе өшіреді. Кескінді кесу графиктің айналасындағы маңызды емес ақпаратты жою үшін пайдалы, бірақ график бүкіл кескінді толтырған кезде азырақ пайдалы.
+
+Бұл параметр Engauge pdf файлдарының қолдауымен жасалған кезде ғана әсер етеді.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="144" />
@@ -3733,7 +3831,9 @@ This setting only has an effect when Engauge has been built with support for pdf
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
-        <translation type="unfinished" />
+        <translation>PDF ажыратымдылығын импорттаңыз
+
+Импорттық портативті құжат пішімі (PDF) файлдары осы пиксель ажыратымдылығына дюймдегі нүктелермен (DPI) түрлендіріледі, мұнда әр пиксель бір нүктеден тұрады. Жоғары мән суреттің ажыратымдылығын арттырады және сандық цифрландырудың дәлдігін жақсарта алады. Алайда, өте жоғары мән кескінді соншалықты үлкен ете алады, сондықтан Engauge баяулайды.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="163" />
@@ -3745,7 +3845,9 @@ Imported Portable Document Format (PDF) files will be converted to this pixel re
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
-        <translation type="unfinished" />
+        <translation>Максималды тор сызықтары
+
+Өңделетін тор сызықтарының максималды саны. Бұл шектеу қадамның мәні бастау және тоқтату мәндері үшін тым кішкентай болған кезде қолданылады, бұл көптеген тор сызықтарын көрнекі және өте ұзақ өңдеуді қажет етеді (әр тор сызығын өңдеу керек болғандықтан)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="175" />
@@ -3757,7 +3859,9 @@ Maximum number of grid lines to be processed. This limit is applied when the ste
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
-        <translation type="unfinished" />
+        <translation>Ашықтықты бөлу
+
+Таңдау режимінде курсор қисық немесе осьтік нүктеден асқан кезде қолданылатын мөлдірлік. Сыртқы көріністің өзгеруі нүктені қашан таңдауға болатындығын көрсетеді.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
@@ -3786,7 +3890,9 @@ Clear the recent file list in the File menu.</source>
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
-        <translation type="unfinished" />
+        <translation>Тақырып жолының атауы
+
+Файлдың атауынан тақырып жолындағы файлдың кеңейтілу жолы мен жолын қосады немесе алып тастайды.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="208" />
@@ -3798,7 +3904,9 @@ Includes or excludes the path and file extension from the filename in the title 
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
-        <translation type="unfinished" />
+        <translation>Шағын диалогтарға рұқсат етіңіз
+
+Параметрлер диалогтарын кішкентай етіп жасауға мүмкіндік береді, сондықтан олар кішкентай компьютер экрандарына сәйкес келеді.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="218" />
@@ -3812,7 +3920,11 @@ Allows settings dialogs to be made very small so they fit on small computer scre
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
 
 When drag and drop is disabled, a rectangular set of table cells can be selected using click and drag. When drag and drop is enabled, a rectangular set of table cells can be selected using Click then Shift+Click, since click and drag starts the drag operation.</source>
-        <translation type="unfinished" />
+        <translation>Экспорттауға апарыңыз
+
+Curve Fitting терезесі мен геометрия терезелерінің кестелерінен экспортты апаруға мүмкіндік береді.
+
+Апарып тастау өшірілгенде, басу және апару арқылы кесте ұяшықтарының тікбұрышты жиынтығын таңдауға болады. Апарып тастау іске қосылғанда, кесте ұяшықтарының тікбұрышты жиынтығын Click, содан кейін Shift + Click көмегімен таңдауға болады, өйткені басу және апару сүйреу әрекетін бастайды.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="231" />
@@ -3838,7 +3950,7 @@ When an image is imported to replace the current image, the document will be ren
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
-        <translation type="unfinished" />
+        <translation>Қалқымалы нүкте сандарындағы дәлдік сандарының саны. Бұл шама қисық сызықтардың есептеулеріне әсер етеді, өйткені T шекті мәнінен кіші аралық нәтижелер мәліметтерге белгілі бір ретті полиномиялық қисықтың орнатылмайтындығын көрсетеді. T шегі M матрица элементінің максималды элементінен және S мәні T = M / 10 ^ S болғандықтан есептеледі.</translation>
     </message>
 </context>
 <context>
@@ -3862,7 +3974,13 @@ Sample match points must fit within a square box, around the cursor, having widt
 This size is also used to determine if a region of pixels that are on, in the processed image, should be ignored since that region is wider or taller than this limit.
 
 This value has a lower limit</source>
-        <translation type="unfinished" />
+        <translation>Пиксельде максималды нүкте өлшемін таңдаңыз.
+
+Үлгі сәйкестік нүктелері ені мен биіктігі осы максимумға тең келетін жүгіргі айналасында квадрат қорапта орналасуы керек.
+
+Бұл өлшем сонымен бірге өңделген кескіндегі пикселдердің ауданын елемеу керек екенін анықтау үшін қолданылады, өйткені бұл аймақ осы шекке қарағанда кеңірек немесе ұзынырақ.
+
+Бұл мәннің төменгі шегі бар</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="98" />
@@ -3904,7 +4022,9 @@ This value has a lower limit</source>
         <source>Preview window shows how current settings affect point matching, and how the marked and candidate points are displayed.
 
 The points are separated by the point separation value, and the maximum point size is shown as a box in the center</source>
-        <translation type="unfinished" />
+        <translation>Алдын-ала қарау терезесі ағымдағы параметрлердің нүктелерді сәйкестендіруге қалай әсер ететінін және белгіленген және кандидат ұпайларының қалай көрсетілетінін көрсетеді.
+
+Нүктелер нүктені бөлу мәнімен бөлінеді, ал максималды нүкте мөлшері ортадағы қорап түрінде көрсетілген</translation>
     </message>
 </context>
 <context>
@@ -3926,7 +4046,11 @@ The points are separated by the point separation value, and the maximum point si
 Only segments with more points will be created.
 
 This value should be as large as possible to reduce memory usage. This value has a lower limit</source>
-        <translation type="unfinished" />
+        <translation>Сегменттегі ең аз ұпай санын таңдаңыз.
+
+Тек көп ұпайы бар сегменттер жасалады.
+
+Бұл мән жадты пайдалануды азайту үшін мүмкіндігінше үлкен болуы керек. Бұл мәннің төменгі шегі бар</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="90" />
@@ -3940,7 +4064,11 @@ This value should be as large as possible to reduce memory usage. This value has
 Successive points added to a segment will be separated by this number of pixels. If Fill Corners is enabled, then additional points will be inserted at corners so some points will be closer.
 
 This value has a lower limit</source>
-        <translation type="unfinished" />
+        <translation>Нүкте бөлінуін пикселмен таңдаңыз.
+
+Сегментке қосылған сәтті нүктелер осы санмен бөлінеді. Егер «Бұрыштарды толтыру» мүмкіндігі қосылса, онда қосымша нүктелер бұрыштарға енгізіліп, кейбір нүктелер жақындай түседі.
+
+Бұл мәннің төменгі шегі бар</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="103" />
@@ -3952,7 +4080,9 @@ This value has a lower limit</source>
         <source>Fill corners.
 
 In addition to the points placed at regular intervals, this option causes a point to be placed at each corner. This option can capture important information in piecewise linear graphs, but gradually curving graphs may not benefit from the additional points</source>
-        <translation type="unfinished" />
+        <translation>Бұрыштарды толтырыңыз.
+
+Тұрақты аралықта орналастырылған нүктелерден басқа, бұл опция нүктенің әр бұрышына орналастырылуын талап етеді. Бұл опция маңызды ақпаратты сызықтық сызбалар түрінде жинай алады, бірақ біртіндеп қисық сызбалар қосымша нүктелерден пайда көрмейді</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="114" />
@@ -3982,7 +4112,7 @@ In addition to the points placed at regular intervals, this option causes a poin
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="149" />
         <source>Preview window shows the shortest line that can be segment filled, and the effects of current settings on segments and points generated by segment fill</source>
-        <translation type="unfinished" />
+        <translation>Алдын-ала қарау терезесінде сегментке толтыруға болатын ең қысқа жол, сондай-ақ сегментке толтыру нәтижесінде пайда болатын бөлімдер мен нүктелерге ағымдағы параметрлердің әсері көрсетілген</translation>
     </message>
 </context>
 <context>
@@ -4000,7 +4130,7 @@ In addition to the points placed at regular intervals, this option causes a poin
 This window applies a curve fit to the currently selected curve.
 
 If drag-and-drop is disabled, a rectangular set of cells may be selected by clicking and dragging. Otherwise, if drag-and-drop is enabled, a rectangular set of cells may be selected using Click then Shift+Click, since click and drag starts the dragging operation. Drag-and-drop mode is set in the Main Window settings</source>
-        <translation type="unfinished" />
+        <translation>Қисық сызғыш терезесі - Бұл терезе қазіргі таңдалған қисыққа сәйкес қисық сызықты қолданады. Егер апарып тастау өшірілсе, төртбұрышты ұяшықтар жиынтығын басу және сүйреу арқылы таңдауға болады. Әйтпесе, апарып тастау қосылған болса, Shift + Click түймесін басу арқылы басу арқылы сүйреу әрекетін бастайтын тіктөртбұрышты ұяшықтар жиынтығы таңдалуы мүмкін. Апарып тастау режимі Негізгі терезенің параметрлерінде орнатылған</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="128" />
@@ -4025,7 +4155,7 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="166" />
         <source>Calculated root mean square statistic. This is calculated as the square root of the mean square error</source>
-        <translation type="unfinished" />
+        <translation>Есептелген тамырдың орташа квадраттық статистикалық мәні. Бұл орташа квадраттық қатенің квадрат түбірі ретінде есептеледі</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="169" />
@@ -4106,7 +4236,7 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="274" />
         <source>Highlighted segments may have unexpected values when exported due to overlaps. Adjust points or change Settings / Curve Properties / Connect As.</source>
-        <translation type="unfinished" />
+        <translation>Бөлектелген сегменттер қабаттасуға байланысты экспортталған кезде күтпеген мәндер болуы мүмкін. Нүктелерді реттеңіз немесе Параметрлер / Қисық сипаттар / Қосылу.</translation>
     </message>
 </context>
 <context>
@@ -4114,7 +4244,7 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
     <message>
         <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>
-        <translation type="unfinished" />
+        <translation>Қазіргі уақытта функцияда бір X мәні үшін бірнеше Y мәні бар. Маңайдағы нүктелерді реттеңіз немесе қисық сипаттардағы қисық түрін өзгертіңіз</translation>
     </message>
 </context>
 <context>
@@ -4133,7 +4263,18 @@ Zooming the image in or out is performed using any of several methods:
 1) rotating the mouse wheel when the cursor is outside of the image
 2) pressing the minus or plus keys
 3) selecting a new zoom setting from the View/Zoom menu</source>
-        <translation type="unfinished" />
+        <translation>Негізгі терезе
+
+Кескін файлы импортталғаннан кейін немесе Engauge құжаты ашылғаннан кейін осы аймақта кескін пайда болады. Суретке ұпайлар қосылады.
+
+Егер сурет екі осьпен және бір немесе бірнеше қисық сызықпен сызылған болса, онда сол осьтер бойымен үш ось нүктесін құру керек. Бір оське екі осьті, ал екінші оське үшінші осьті дәлірек қойыңыз, дәлірек дәлдік беру үшін. Содан кейін қисық сызықтарды қисық сызықтар бойымен қосуға болады.
+
+Егер кескін ұзындығын анықтайтын масштабтағы карта болса, онда масштабтың екі жағында екі ось нүктесі жасалуы керек. Содан кейін қисық нүктелерді қосуға болады.
+
+Кескінді үлкейту немесе кішірейту бірнеше әдістердің кез келгенін қолдана отырып жасалады:
+1) курсор кескіннен тыс болған кезде тінтуірдің дөңгелегін бұру
+2) минус немесе плюс батырмаларын басу
+3) Көру / Масштабтау мәзірінен жаңа масштабтау параметрін таңдау</translation>
     </message>
 </context>
 <context>
@@ -4283,35 +4424,35 @@ Do you want to save your changes?</source>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="178" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="276" />
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
-        <translation type="unfinished" />
+        <translation>Жаңа ось нүктесі экранның орнында бар ось нүктесімен бірдей болуы мүмкін емес</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="186" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="285" />
         <source>New axis point cannot have the same graph coordinates as an existing axis point</source>
-        <translation type="unfinished" />
+        <translation>Жаңа осьтік нүктеде қолданыстағы ось нүктесімен бірдей графикалық координаталар бола алмайды</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="192" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="291" />
         <source>No more than two axis points can lie along the same line on the screen</source>
-        <translation type="unfinished" />
+        <translation>Экранда бір сызық бойымен екіден көп нүкте бола алмайды</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="198" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="297" />
         <source>No more than two axis points can lie along the same line in graph coordinates</source>
-        <translation type="unfinished" />
+        <translation>Графикалық координаталарда бір сызық бойында екі осьтен көп нүкте бола алмайды</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="251" />
         <source>Too many x axis points. There should only be two</source>
-        <translation type="unfinished" />
+        <translation>Х осінің нүктелері өте көп. Тек екеуі болуы керек</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="257" />
         <source>Too many y axis points. There should only be two</source>
-        <translation type="unfinished" />
+        <translation>Y осінің нүктелері өте көп. Тек екеуі болуы керек</translation>
     </message>
     <message>
         <location filename="../src/Checker/CheckerMode.cpp" line="16" />
@@ -4693,7 +4834,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Document/DocumentScrub.cpp" line="40" />
         <source>Point identifier error encountered. Please notify the Engauge developers along with any comments about the country and language locale. The invalid point name was</source>
-        <translation type="unfinished" />
+        <translation>Нүкте анықтағыш қатесі табылды. Engauge жасаушыларына ел мен тіл туралы пікірлермен бірге хабарлаңыз. Жарамсыз нүкте атауы болды</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="16" />
@@ -4960,7 +5101,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="597" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
-        <translation type="unfinished" />
+        <translation>Файлда Windows пәрмен жолында жұмыс жасамайтын бірнеше тіл алфавитінің таңбалары бар сияқты</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindowModel.cpp" line="118" />
@@ -5059,7 +5200,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/main/main.cpp" line="476" />
         <source>Upgrade files opened at startup to the most recent version</source>
-        <translation type="unfinished" />
+        <translation>Іске қосу кезінде ашылған файлдарды ең соңғы нұсқаға жаңартыңыз</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="482" />
@@ -5114,7 +5255,9 @@ Do you want to save your changes?</source>
         <source>Select Cursor Coordinate Values
 
 Values at cursor coordinates to display. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
-        <translation type="unfinished" />
+        <translation>Меңзердің координаталық мәндерін таңдаңыз
+
+Көрсетілетін курсордың координаталарындағы мәндер. Координаттар экран (пиксель) немесе графикалық бірліктерде болады. Ажыратымдылық (бұл пиксельге графикалық бірліктер саны) графикалық бірліктерде. Графикалық бірліктер тек білік нүктелері анықталғаннан кейін қол жетімді болады.</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="72" />
@@ -5126,7 +5269,9 @@ Values at cursor coordinates to display. Coordinates are in screen (pixels) or g
         <source>Cursor Coordinate Values
 
 Values at cursor coordinates. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
-        <translation type="unfinished" />
+        <translation>Меңзердің координаталық мәндері
+
+Меңзердің координаталарындағы мәндер. Координаттар экран (пиксель) немесе графикалық бірліктерде болады. Ажыратымдылық (бұл пиксельге графикалық бірліктер саны) графикалық бірліктерде. Графикалық бірліктер тек білік нүктелері анықталғаннан кейін қол жетімді болады.</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="127" />
@@ -5288,7 +5433,9 @@ Points can be more accurately placed by zooming in.</source>
         <source>Axis points are first defined to
 define the coordinates. Step 1 -
 Click on the Axis Points button</source>
-        <translation type="unfinished" />
+        <translation>Осьтік нүктелер алдымен анықталады
+координаталарын анықтаңыз. 1-қадам -
+Осьтік нүктелер түймесін басыңыз</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="40" />
@@ -5297,7 +5444,11 @@ line with known coordinates. An axis
 point appears, with a dialog window
 for entering the axis point
 coordinates</source>
-        <translation type="unfinished" />
+        <translation>2-қадам - ​​осьті немесе торды нұқыңыз
+белгілі координаталар сызығы. Ось
+диалогтық терезесі бар нүкте пайда болады
+осьтік нүктеге ену үшін
+координаттары</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="46" />
@@ -5305,7 +5456,10 @@ coordinates</source>
 of the axis point and then click Ok.
 Repeat steps 2 and 3 twice more
 until three axis points are created</source>
-        <translation type="unfinished" />
+        <translation>3-қадам - ​​екі координатаны енгізіңіз
+осьтің нүктесін таңдаңыз да, OK түймесін басыңыз.
+2 және 3 қадамдарды тағы екі рет қайталаңыз
+үш осьтік нүкте құрылғанға дейін</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="54" />
@@ -5323,7 +5477,7 @@ until three axis points are created</source>
     <message>
         <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="33" />
         <source>Checklist Wizard and Checklist Guide</source>
-        <translation type="unfinished" />
+        <translation>Тексеру парағы шебері және бақылау парағы</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="36" />
@@ -5331,13 +5485,17 @@ until three axis points are created</source>
 is available when importing an image file.
 This wizard produces a helpful checklist of
 steps to follow to digitize the image file.</source>
-        <translation type="unfinished" />
+        <translation>Engauge жаңа пайдаланушылары үшін тексеру парағы шебері
+кескін файлын импорттау кезінде қол жетімді.
+Бұл шебер пайдалы тізім жасайды
+кескін файлын цифрландыру үшін келесі қадамдарды орындаңыз.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="41" />
         <source>Step 1 - Enable the menu option Help /
 Checklist Guide Wizard.</source>
-        <translation type="unfinished" />
+        <translation>1-қадам - ​​Анықтама / мәзір мәзірін қосу
+Тексеру парағы бойынша нұсқаулық шебері.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="44" />
@@ -5346,7 +5504,11 @@ Import. The Checklist Wizard will appear
 and ask some simple questions to
 determine how the image can be
 digitized.</source>
-        <translation type="unfinished" />
+        <translation>2-қадам - ​​File / File көмегімен файлды импорттаңыз.
+Импорттау. Тексеру тізімі шебері пайда болады
+және қарапайым сұрақтар қойыңыз
+кескіннің қалай болатынын анықтаңыз
+цифрландырылған.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="50" />
@@ -5354,7 +5516,10 @@ digitized.</source>
 the various Settings menus.
 
 This ends the tutorial. Good luck!</source>
-        <translation type="unfinished" />
+        <translation>Қосымша опциялар қол жетімді
+түрлі параметрлер мәзірлері.
+
+Бұл оқулықпен аяқталады. Іске сәт!</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="57" />
@@ -5375,26 +5540,33 @@ This ends the tutorial. Good luck!</source>
 are applied in Segment Fill mode. For
 black lines the defaults work well, but for
 colored lines the settings can be improved.</source>
-        <translation type="unfinished" />
+        <translation>Әр қисықта түрлі-түсті фильтр параметрлері бар
+сегментті толтыру режимінде қолданылады. Үшін
+қара сызықтар әдепкі бойынша жақсы жұмыс істейді, бірақ
+түрлі-түсті сызықтардың параметрлерін жақсартуға болады.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="43" />
         <source>Step 1 - Select the Settings / Color
 Filter menu option.</source>
-        <translation type="unfinished" />
+        <translation>1-қадам - ​​Параметрлер / Түс таңдаңыз
+Сүзгі мәзірінің параметрі.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="46" />
         <source>Step 2 - Select the curve that will
 be given the new settings.</source>
-        <translation type="unfinished" />
+        <translation>2-қадам - ​​болатын қисықты таңдаңыз
+жаңа параметрлер беріледі.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="49" />
         <source>Step 3 - Select the mode. Intensity is
 suggested for uncolored lines, and Hue
 is suggested for colored lines.</source>
-        <translation type="unfinished" />
+        <translation>3-қадам - ​​режимді таңдаңыз. Қарқындылық - бұл
+түссіз сызықтар үшін ұсынылған және Hue
+түрлі-түсті сызықтар үшін ұсынылады.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="53" />
@@ -5404,7 +5576,12 @@ curve is clear in the preview window
 below. The graph shows a histogram
 distribution of the values underneath.
 Click Ok when finished.</source>
-        <translation type="unfinished" />
+        <translation>4-қадам - ​​Берілген ауқымды келесі бойынша реттеңіз
+жасыл тұтқаларды сүйреп, дейін
+алдын-ала қарау терезесінде қисық анық
+төменде. Графограммада гистограмма көрсетілген
+астындағы құндылықтарды бөлу.
+Аяқтаған кезде OK түймесін басыңыз.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="63" />
@@ -5420,7 +5597,10 @@ Click Ok when finished.</source>
 curve is selected to receive curve points.
 Step 1 - click on Curve, Point Match, Color
 Picker or Segment Fill buttons.</source>
-        <translation type="unfinished" />
+        <translation>Білік нүктелері жасалғаннан кейін, a
+қисық нүктелер алу үшін қисық таңдалады.
+1-қадам - ​​қисық, нүктелік сәйкестік, түсті таңдаңыз
+Таңдау немесе Сегментті толтыру түймелері.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="45" />
@@ -5428,7 +5608,10 @@ Picker or Segment Fill buttons.</source>
 that curve name has not been created yet,
 use the menu option Settings / Curve Names
 to create it.</source>
-        <translation type="unfinished" />
+        <translation>2-қадам - ​​қалаған қисық атауды таңдаңыз. Егер
+бұл қисық атау әлі жасалмады,
+мәзір параметрлерін Параметрлер / Қисық атаулар қолданыңыз
+оны жасау.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="50" />
@@ -5439,7 +5622,13 @@ menu option View / Background / Filtered
 Image. This filtering enables the powerful
 automated algorithms discussed later in
 the tutorial.</source>
-        <translation type="unfinished" />
+        <translation>3-қадам - ​​Өңін фонынан өзгертіңіз
+фильтрленген кескінге түпнұсқа кескін
+қолдана отырып, ағымдағы қисық үшін шығарылады
+мәзір опциясы Көрініс / Фон / Сүзілген
+Сурет. Бұл сүзгі қуатты мүмкіндік береді
+автоматтандырылған алгоритмдер кейінірек қарастырылады
+оқулық.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="58" />
@@ -5447,7 +5636,10 @@ the tutorial.</source>
 in the filtered image, then change the
 current Color Filter settings. In the figure,
 the orange points have disappeared.</source>
-        <translation type="unfinished" />
+        <translation>Егер қазіргі қисық көрінбесе
+сүзгіден өткен суретте таңдаңыз, содан кейін өзгертіңіз
+түс сүзгісінің ағымдағы параметрлері. Суретте,
+сарғыш нүктелер жоғалып кетті.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="66" />
@@ -5476,7 +5668,8 @@ the orange points have disappeared.</source>
         <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="39" />
         <source>The next steps depend on how the curves
 are drawn, in terms of lines and points.</source>
-        <translation type="unfinished" />
+        <translation>Келесі қадамдар қисық сызықтарға байланысты
+сызықтар мен нүктелер бойынша сызылады.</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="42" />
@@ -5484,7 +5677,10 @@ are drawn, in terms of lines and points.</source>
 with lines (with or without
 points) then click on
 Next (Lines).</source>
-        <translation type="unfinished" />
+        <translation>Егер қисық сызылған болса
+сызықтармен (немесе онсыз
+ұпайлар) содан кейін басыңыз
+Келесі (жолдар).</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="47" />
@@ -5492,7 +5688,10 @@ Next (Lines).</source>
 without lines and only
 with points, then click on
 Next (Points).</source>
-        <translation type="unfinished" />
+        <translation>Егер қисық сызылған болса
+сызықсыз және тек
+нүктелермен, содан кейін нұқыңыз
+Келесі (Ұпайлар).</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="55" />

@@ -3577,8 +3577,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Différence de valeur entre deux lignes de grille X successives.
+
+La valeur du pas doit être supérieure à zéro (linéaire) ou à un (logarithmique).</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Différence de valeur entre deux lignes de grille Y successives.
+
+La valeur du pas doit être supérieure à zéro (linéaire) ou à un (logarithmique).</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>Ecart entre deux lignes successives en X de la grille.
+        <translation type="vanished">Ecart entre deux lignes successives en X de la grille.
 
 La valeur doit être supérieure à zéro</translation>
     </message>
@@ -3621,11 +3638,10 @@ The start value cannot be greater than the stop value</source>
         <translation>Coordonnée de la première ligne de grille en Y. La valeur de départ ne peut être supérieure à celle de fin</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>Ecart entre deux lignes successives en Y de la grille.
+        <translation type="vanished">Ecart entre deux lignes successives en Y de la grille.
 
 La valeur doit être supérieure à zéro</translation>
     </message>
@@ -3784,8 +3800,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Différence de valeur entre deux lignes de grille X successives.
+
+La valeur du pas doit être supérieure à zéro (linéaire) ou à un (logarithmique).</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Différence de valeur entre deux lignes de grille Y successives.
+
+La valeur du pas doit être supérieure à zéro (linéaire) ou à un (logarithmique).</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>Ecart entre deux lignes successives en X de la grille.
+        <translation type="vanished">Ecart entre deux lignes successives en X de la grille.
 
 La valeur doit être supérieure à zéro</translation>
     </message>
@@ -3838,11 +3871,10 @@ The start value cannot be greater than the stop value</source>
         <translation>Coordonnée de la première ligne de grille en Y. La valeur de départ ne peut être supérieure à celle de fin</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>Ecart entre deux lignes successives en Y de la grille.
+        <translation type="vanished">Ecart entre deux lignes successives en Y de la grille.
 
 La valeur doit être supérieure à zéro</translation>
     </message>

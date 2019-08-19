@@ -3497,8 +3497,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Wertunterschied zwischen zwei aufeinanderfolgenden X-Gitterlinien.
+
+Der Schrittwert muss größer als Null (linear) oder Eins (logarithmisch) sein</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Wertunterschied zwischen zwei aufeinanderfolgenden Y-Gitterlinien.
+
+Der Schrittwert muss größer als Null (linear) oder Eins (logarithmisch) sein</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>Wertunterschied zwischen zwei aufeinanderfolgenden X-Rasterlinien. Der Schrittwert muss größer als Null sein</translation>
+        <translation type="vanished">Wertunterschied zwischen zwei aufeinanderfolgenden X-Rasterlinien. Der Schrittwert muss größer als Null sein</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="162" />
@@ -3535,11 +3552,10 @@ The start value cannot be greater than the stop value</source>
         <translation>Wert der ersten Y-Rasterlinie. Der Startwert darf nicht größer als der Stoppwert sein</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>Wertunterschied zwischen zwei aufeinanderfolgenden Y-Gitterlinien. Der Schrittwert muss größer als Null sein</translation>
+        <translation type="vanished">Wertunterschied zwischen zwei aufeinanderfolgenden Y-Gitterlinien. Der Schrittwert muss größer als Null sein</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="242" />
@@ -3686,8 +3702,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Wertunterschied zwischen zwei aufeinanderfolgenden X-Gitterlinien.
+
+Der Schrittwert muss größer als Null (linear) oder Eins (logarithmisch) sein</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Wertunterschied zwischen zwei aufeinanderfolgenden Y-Gitterlinien.
+
+Der Schrittwert muss größer als Null (linear) oder Eins (logarithmisch) sein</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>Wertunterschied zwischen zwei aufeinanderfolgenden X-Rasterlinien. Der Schrittwert muss größer als Null sein</translation>
+        <translation type="vanished">Wertunterschied zwischen zwei aufeinanderfolgenden X-Rasterlinien. Der Schrittwert muss größer als Null sein</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="189" />
@@ -3734,11 +3767,10 @@ The start value cannot be greater than the stop value</source>
         <translation>Wert der ersten Y-Rasterlinie. Der Startwert darf nicht größer als der Stoppwert sein</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>Wertunterschied zwischen zwei aufeinanderfolgenden Y-Gitterlinien. Der Schrittwert muss größer als Null sein</translation>
+        <translation type="vanished">Wertunterschied zwischen zwei aufeinanderfolgenden Y-Gitterlinien. Der Schrittwert muss größer als Null sein</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="271" />

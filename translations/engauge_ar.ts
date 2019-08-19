@@ -3595,8 +3595,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>الفرق في القيمة بين خطي شبكة X متعاقبين.
+
+يجب أن تكون قيمة الخطوة أكبر من الصفر (خطي) أو واحد (لوغاريتمي)</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>الفرق في القيمة بين خطي شبكة Y متعاقبين.
+
+يجب أن تكون قيمة الخطوة أكبر من الصفر (خطي) أو واحد (لوغاريتمي)</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>الفرق في القيمة بين خطين متتاليين للشبكة X.
+        <translation type="vanished">الفرق في القيمة بين خطين متتاليين للشبكة X.
 
 يجب أن تكون قيمة الخطوة أكبر من الصفر</translation>
     </message>
@@ -3643,11 +3660,10 @@ The start value cannot be greater than the stop value</source>
 لا يمكن أن تكون قيمة البدء أكبر من قيمة الإيقاف</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>الفرق في القيمة بين خطين شبكيين متعاقبين.
+        <translation type="vanished">الفرق في القيمة بين خطين شبكيين متعاقبين.
 
 يجب أن تكون قيمة الخطوة أكبر من الصفر</translation>
     </message>
@@ -3812,8 +3828,25 @@ The start value cannot be greater than the stop value</source>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>الفرق في القيمة بين خطي شبكة X متعاقبين.
+
+يجب أن تكون قيمة الخطوة أكبر من الصفر (خطي) أو واحد (لوغاريتمي)</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>الفرق في القيمة بين خطي شبكة Y متعاقبين.
+
+يجب أن تكون قيمة الخطوة أكبر من الصفر (خطي) أو واحد (لوغاريتمي)</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>الفرق في القيمة بين خطين متتاليين للشبكة X.
+        <translation type="vanished">الفرق في القيمة بين خطين متتاليين للشبكة X.
 
 يجب أن تكون قيمة الخطوة أكبر من الصفر</translation>
     </message>
@@ -3870,11 +3903,10 @@ The start value cannot be greater than the stop value</source>
 لا يمكن أن تكون قيمة البدء أكبر من قيمة الإيقاف</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>الفرق في القيمة بين خطين شبكيين متعاقبين.
+        <translation type="vanished">الفرق في القيمة بين خطين شبكيين متعاقبين.
 
 يجب أن تكون قيمة الخطوة أكبر من الصفر</translation>
     </message>

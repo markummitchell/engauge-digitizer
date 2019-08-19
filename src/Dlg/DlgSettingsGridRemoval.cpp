@@ -180,7 +180,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesX (QGridLayout *layout, int &r
 
   m_editStepX = new QLineEdit;
   m_editStepX->setWhatsThis (tr ("Difference in value between two successive X grid lines.\n\n"
-                                 "The step value must be greater than zero"));
+                                 "The step value must be greater than zero (linear) or one (log)"));
   m_validatorStepX = new QDoubleValidator;
   m_editStepX->setValidator (m_validatorStepX);
   connect (m_editStepX, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepX (const QString &)));
@@ -258,7 +258,7 @@ void DlgSettingsGridRemoval::createRemoveGridLinesY (QGridLayout *layout, int &r
 
   m_editStepY = new QLineEdit;
   m_editStepY->setWhatsThis (tr ("Difference in value between two successive Y grid lines.\n\n"
-                                 "The step value must be greater than zero"));
+                                 "The step value must be greater than zero (linear) or one (log)"));
   m_validatorStepY = new QDoubleValidator;
   m_editStepY->setValidator (m_validatorStepY);
   connect (m_editStepY, SIGNAL (textChanged (const QString &)), this, SLOT  (slotStepY (const QString &)));

@@ -3548,8 +3548,25 @@ Hodnota začátku nesmí být vyšší, než hodnota konce</translation>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Rozdíl v hodnotě mezi dvěma po sobě jdoucími řádky X mřížky.
+
+Hodnota kroku musí být větší než nula (lineární) nebo jedna (logaritmická)</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Rozdíl v hodnotě mezi dvěma po sobě jdoucími řádky Y.
+
+Hodnota kroku musí být větší než nula (lineární) nebo jedna (logaritmická)</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>Rozdíl v hodnotě mezi dvěma následujícími čarami mřížky na ose X.
+        <translation type="vanished">Rozdíl v hodnotě mezi dvěma následujícími čarami mřížky na ose X.
 
 
 Hodnota kroku musí být větší než nula</translation>
@@ -3597,11 +3614,10 @@ The start value cannot be greater than the stop value</source>
 Hodnota začátku nesmí být vyšší, než hodnota konce</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>Rozdíl v hodnotě mezi dvěma následujícími čarami mřížky na ose Y.
+        <translation type="vanished">Rozdíl v hodnotě mezi dvěma následujícími čarami mřížky na ose Y.
 
 
 Hodnota kroku musí být větší než nula</translation>
@@ -3765,8 +3781,25 @@ Hodnota začátku nesmí být vyšší, než hodnota konce</translation>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
         <source>Difference in value between two successive X grid lines.
 
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Rozdíl v hodnotě mezi dvěma po sobě jdoucími řádky X mřížky.
+
+Hodnota kroku musí být větší než nula (lineární) nebo jedna (logaritmická)</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <source>Difference in value between two successive Y grid lines.
+
+The step value must be greater than zero (linear) or one (log)</source>
+        <translation>Rozdíl v hodnotě mezi dvěma po sobě jdoucími řádky Y.
+
+Hodnota kroku musí být větší než nula (lineární) nebo jedna (logaritmická)</translation>
+    </message>
+    <message>
+        <source>Difference in value between two successive X grid lines.
+
 The step value must be greater than zero</source>
-        <translation>Rozdíl v hodnotě mezi dvěma následujícími čarami mřížky na ose X.
+        <translation type="vanished">Rozdíl v hodnotě mezi dvěma následujícími čarami mřížky na ose X.
 
 
 Hodnota kroku musí být větší než nula</translation>
@@ -3824,11 +3857,10 @@ The start value cannot be greater than the stop value</source>
 Hodnota začátku nesmí být vyšší, než hodnota konce</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero</source>
-        <translation>Rozdíl v hodnotě mezi dvěma následujícími čarami mřížky na ose Y.
+        <translation type="vanished">Rozdíl v hodnotě mezi dvěma následujícími čarami mřížky na ose Y.
 
 
 Hodnota kroku musí být větší než nula</translation>
