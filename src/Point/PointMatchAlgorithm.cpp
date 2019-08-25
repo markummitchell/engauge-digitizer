@@ -11,6 +11,7 @@
 #include <iostream>
 #include "Logger.h"
 #include "PointMatchAlgorithm.h"
+#include <qdebug.h>
 #include <QFile>
 #include <QImage>
 #include <qmath.h>
@@ -189,7 +190,7 @@ void PointMatchAlgorithm::dumpToGnuplot (double* convolution,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "PointMatchAlgorithm::dumpToGnuplot";
 
-  cout << GNUPLOT_FILE_MESSAGE.toLatin1().data() << filename.toLatin1().data() << "\n";
+  qDebug () << GNUPLOT_FILE_MESSAGE.toLatin1().data() << filename.toLatin1().data();
 
   QFile file (filename);
   if (file.open (QIODevice::WriteOnly | QIODevice::Text)) {
@@ -283,7 +284,8 @@ QList<QPoint> PointMatchAlgorithm::findPoints (const QList<PointMatchPixel> &sam
                       listCreated,
                       width,
                       height);
-  qSort (listCreated);
+  std::sort (listCreated.begin (),
+             listCreated.end ()); // qSort(listCreated) is deprecated
 
   // Copy sorted match points to output
   QList<QPoint> pointsCreated;

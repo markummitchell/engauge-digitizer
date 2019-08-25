@@ -8,6 +8,7 @@
 #include "GridIndependentToDependent.h"
 #include "GridLog.h"
 #include <iostream>
+#include <qdebug.h>
 #include <QFile>
 #include <QPoint>
 #include <QTextStream>
@@ -48,7 +49,7 @@ GridLog::~GridLog()
     QFile file (filename);
     QTextStream fileStr (&file);
 
-    std::cout << GNUPLOT_FILE_MESSAGE.toLatin1().data() << filename.toLatin1().data() << "\n";
+    qDebug() << GNUPLOT_FILE_MESSAGE.toLatin1().data() << filename.toLatin1().data();
 
     file.open (QIODevice::WriteOnly | QIODevice::Append);
     fileStr << m_log;

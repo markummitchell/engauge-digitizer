@@ -428,7 +428,7 @@ void Segment::removeUnneededLines (int *foldedLines)
 
     QString filename ("segment.gnuplot");
 
-    std::cout << GNUPLOT_FILE_MESSAGE.toLatin1().data() << filename.toLatin1().data() << "\n";
+    qDebug () << GNUPLOT_FILE_MESSAGE.toLatin1().data() << filename.toLatin1().data();
 
     fileDump = new QFile (filename);
     fileDump->open (QIODevice::WriteOnly | QIODevice::Text);

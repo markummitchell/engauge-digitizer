@@ -2,6 +2,7 @@
 .qmake.stash
 object_script.*
 \#*
+android*json
 digit-exe-*.pkg
 documentation
 engauge

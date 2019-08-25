@@ -187,7 +187,7 @@ void GridClassifier::dumpGnuplotCoordinate (const QString &coordinateLabel,
                             .arg (binStart)
                             .arg (binStep);
 
-  cout << GNUPLOT_FILE_MESSAGE.toLatin1().data() << filename.toLatin1().data() << "\n";
+  qDebug () << GNUPLOT_FILE_MESSAGE.toLatin1().data() << filename.toLatin1().data();
 
   QFile fileDump (filename);
   fileDump.open (QIODevice::WriteOnly | QIODevice::Text);
@@ -246,7 +246,7 @@ void GridClassifier::dumpGnuplotCorrelations (const QString &coordinateLabel,
   QString filename = QString ("gridclassifier_%1_correlations.gnuplot")
                             .arg (coordinateLabel);
 
-  cout << GNUPLOT_FILE_MESSAGE.toLatin1().data() << filename.toLatin1().data() << "\n";
+  qDebug() << GNUPLOT_FILE_MESSAGE.toLatin1().data() << filename.toLatin1().data();
 
   QFile fileDump (filename);
   fileDump.open (QIODevice::WriteOnly | QIODevice::Text);

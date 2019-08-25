@@ -14,7 +14,7 @@
 #        qmake CONFIG+=jpeg2000
 #        qmake "CONFIG+=debug jpeg2000"
 #    At some point, Qt may provide its own support for this format, at which point this can be skipped
-# 4) Add 'pdf' to the qmake command line to include support for PDF input files. Requires
+# 4) Add 'pdf' to the qmake command line to include support for PDF input files. Require
 #        1) Linux and Mac OSX builds only. Unfortunately, the old software libraries needed to support
 #           PDF in Windows no longer compile and link correctly with newer Engauge builds. 
 #        2) previous installation of the poppler-qt5 development package
@@ -800,7 +800,7 @@ macx-* {
   DESTDIR = bin
 }
 
-linux-* {
+linux-*|android-* {
   QMAKE_CXXFLAGS += -Wunused-parameter
   QT += network
   DEFINES += "NETWORKING"
