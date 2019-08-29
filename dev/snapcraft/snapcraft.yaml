@@ -1,5 +1,5 @@
 name: engauge-digitizer
-version: '12.0'
+version: '12.1'
 summary: Interactively convert a bitmap graph or map into numbers.
 description: Software tool for extracting numbers from images of graphs and maps.
 grade: stable

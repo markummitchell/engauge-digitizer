@@ -68,11 +68,10 @@
 		<content_attribute id="money-gambling">none</content_attribute>
 	</content_rating>
 	<releases>
-		<release date="2019-08-02" version="12.0">
+		<release date="2019-08-02" version="12.1">
 			<description>
 			  <ul>
-			    <li>More points styles </li>
-			    <li>Fix data export for log scale with small step factor</li>
+			    <li></li>
 			  </ul>
 			</description>
 		</release>
