@@ -13,6 +13,7 @@
 #include "DocumentAxesPointsRequired.h"
 #include "FittingCurveCoefficients.h"
 #include "GridLines.h"
+#include "GuidelineContainer.h"
 #include "MainWindowModel.h"
 #include <QCursor>
 #include <QMainWindow>
@@ -139,7 +140,7 @@ public:
              const QString &extractImageOnlyExtension,
              const QStringList &loadStartupFiles,
              const QStringList &commandLineWithoutLoadStartupFiles,
-             QWidget *parent = 0);
+             QWidget *parent = nullptr);
   ~MainWindow();
 
   /// Close file. This is called from a file script command
@@ -682,6 +683,10 @@ private:
   // Extract the image from the single dig file that was loaded in the command line, as enforced by parseCmdLine
   bool m_isExtractImageOnly;
   QString m_extractImageOnlyExtension;
+
+  // Guidelines that are effectively invisible until cursor gets to outermost pixels in scene (and view if zoomed out
+  // enough that there is no scroll bar)
+  GuidelineContainer m_guidelineContainer;
 };
 
 #endif // MAIN_WINDOW_H

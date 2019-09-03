@@ -13,18 +13,29 @@
 #include <QPen>
 #include "ZValues.h"
 
+// Presupplied guidelines are thicker so they can be easily clicked on for dragging
+const double GUIDELINE_LINEWIDTH_PRESUPPLIED = 6;
+
+// Cloned guidelines are as thin as possible so their measurements are as precise as possible
+const double GUIDELINE_LINEWIDTH_CLONE = -1;
+
 Guideline::Guideline(QGraphicsScene  &scene)
 {
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_GUIDELINE));
 
   // Make this transparent now, but always visible so hover events work
   scene.addItem (this);
-  setPen (QPen (Qt::transparent));
+  setPen (QPen (QBrush (Qt::transparent),
+                GUIDELINE_LINEWIDTH_PRESUPPLIED));
   setZValue (Z_VALUE_CURVE);
   setVisible (true);
   setAcceptHoverEvents (true);
   setHover (false); // Initially the cursor is not hovering over this object. Later a hover event will change this state
-  setFlags (QGraphicsItem::ItemIsFocusable);
+
+  // ItemIsMovable requires ItemIsSelectable
+  setFlags (QGraphicsItem::ItemIsFocusable |
+            QGraphicsItem::ItemIsSelectable |
+            QGraphicsItem::ItemIsMovable);
 }
 
 Guideline::~Guideline ()
@@ -34,11 +45,20 @@ Guideline::~Guideline ()
 void Guideline::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Guideline::hoverEnterEvent";
+
+  setHover (true);
 }
 
 void Guideline::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Guideline::hoverLeaveEvent";
+
+  setHover (false);
+}
+
+double Guideline::linewidthPresupplied ()
+{
+  return GUIDELINE_LINEWIDTH_PRESUPPLIED;
 }
 
 void Guideline::setHover (bool hover)

@@ -10,7 +10,6 @@
 #include <QGraphicsLineItem>
 
 class QGraphicsScene;
-class Segment;
 
 /// This class is a special case of the standard QGraphicsLineItem for guidelines.
 class Guideline : public QObject, public QGraphicsLineItem
@@ -27,6 +26,9 @@ public:
 
   /// Unset highlighting triggered by hover enter
   virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+
+  /// Displayed line width of presupplied guidelines
+  static double linewidthPresupplied ();
 
   /// Apply/remove highlighting triggered by hover enter/leave
   void setHover (bool hover);

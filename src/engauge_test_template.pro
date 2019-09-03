@@ -57,6 +57,7 @@ HEADERS  += \
     Checker/Checker.h \
     Checker/CheckerMode.h \
     Checklist/ChecklistGuide.h \
+    Checklist/ChecklistGuideContainer.h \
     Checklist/ChecklistGuideBrowser.h \
     Checklist/ChecklistGuidePage.h \
     Checklist/ChecklistGuidePageConclusion.h \
@@ -653,6 +654,7 @@ SOURCES += \
     Grid/GridRemoval.cpp \
     Grid/GridTriangleFill.cpp \
     Guideline/Guideline.cpp \
+    Guideline/GuidelineContainer.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Import/ImportCroppingUtilBase.cpp \

@@ -1057,7 +1057,7 @@ bool MainWindow::loadImageNewDocument (const QString &fileName,
     }
 
     // Start axis mode
-    m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points
+    m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points  
 
     // Trigger transition so cursor gets updated immediately
     if (modeMap ()) {
@@ -1528,6 +1528,8 @@ void MainWindow::setPixmap (const QString &curveSelected,
                                        m_cmdMediator->document().modelColorFilter(),
                                        pixmap,
                                        curveSelected);
+
+  m_guidelineContainer.updateGuidelines (*m_scene);
 }
 
 void MainWindow::settingsRead (bool isReset)

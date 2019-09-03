@@ -344,6 +344,7 @@ HEADERS  += \
     src/Grid/GridRemoval.h \
     src/Grid/GridTriangleFill.h \
     src/Guideline/Guideline.h \
+    src/Guideline/GuidelineContainer.h \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
@@ -691,6 +692,7 @@ SOURCES += \
     src/Grid/GridRemoval.cpp \
     src/Grid/GridTriangleFill.cpp \
     src/Guideline/Guideline.cpp \
+    src/Guideline/GuidelineContainer.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/Import/ImportImageExtensions.cpp \
