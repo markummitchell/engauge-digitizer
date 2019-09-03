@@ -301,6 +301,7 @@ HEADERS  += \
     Grid/GridLog.h \
     Grid/GridRemoval.h \
     Grid/GridTriangleFill.h \
+    Guideline/Guideline.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Import/ImportCropping.h \
@@ -651,6 +652,7 @@ SOURCES += \
     Grid/GridLog.cpp \
     Grid/GridRemoval.cpp \
     Grid/GridTriangleFill.cpp \
+    Guideline/Guideline.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Import/ImportCroppingUtilBase.cpp \
@@ -772,6 +774,7 @@ INCLUDEPATH += Background \
                Ghosts \
                Graphics \
                Grid \
+               Guideline \
                Help \
                img \
                Import \
