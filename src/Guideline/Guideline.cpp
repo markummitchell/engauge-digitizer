@@ -32,7 +32,6 @@ Guideline::Guideline(QGraphicsScene  &scene)
   setAcceptHoverEvents (true);
   setHover (false); // Initially the cursor is not hovering over this object. Later a hover event will change this state
 
-  // ItemIsMovable requires ItemIsSelectable
   setFlags (QGraphicsItem::ItemIsFocusable |
             QGraphicsItem::ItemIsSelectable |
             QGraphicsItem::ItemIsMovable);

@@ -7,6 +7,7 @@
 #include "Guideline.h"
 #include "GuidelineContainer.h"
 #include <QGraphicsScene>
+#include <qmath.h>
 
 GuidelineContainer::GuidelineContainer() :
   m_guidelinePresuppliedLeft (nullptr),
@@ -45,14 +46,20 @@ void GuidelineContainer::updateGuidelines (QGraphicsScene &scene)
   // Shift to outermost pixels are at border
   double halfLinewidth = Guideline::linewidthPresupplied () / 2.0 - 2;
 
+  // Minimum length extending past each border is the screen's diagonal length so, in the worst case,
+  // when user drags from one corner to the far corner that extension still covers the entire screen extent.
+  // In other words, the guideline has to look like
+  double diagonal = qSqrt (qPow (scene.sceneRect().width (), 2) +
+                           qPow (scene.sceneRect().height (), 2));
+
   // The presupplied guidelines are always just inside the scene boundaries, which means they are NOT aligned
   // with the graphics reference frame unless (rarely) the scene and graphics reference frames are co-aligned
-  m_guidelinePresuppliedLeft->setLine(QLineF (scene.sceneRect().bottomLeft() + QPointF (halfLinewidth, 0),
-                                              scene.sceneRect().topLeft() + QPointF (halfLinewidth, 0)));
-  m_guidelinePresuppliedRight->setLine (QLineF (scene.sceneRect().bottomRight() - QPointF (halfLinewidth, 0),
-                                                scene.sceneRect().topRight() - QPointF (halfLinewidth, 0)));
-  m_guidelinePresuppliedTop->setLine (QLineF (scene.sceneRect().topLeft() + QPointF (0, halfLinewidth),
-                                              scene.sceneRect().topRight() + QPointF (0, halfLinewidth)));
-  m_guidelinePresuppliedBottom->setLine (QLineF (scene.sceneRect().bottomLeft() - QPointF (0, halfLinewidth),
-                                                 scene.sceneRect().bottomRight() - QPointF (0, halfLinewidth)));
+  m_guidelinePresuppliedLeft->setLine(QLineF (scene.sceneRect().bottomLeft() + QPointF (halfLinewidth, diagonal),
+                                              scene.sceneRect().topLeft() + QPointF (halfLinewidth, -1.0 * diagonal)));
+  m_guidelinePresuppliedRight->setLine (QLineF (scene.sceneRect().bottomRight() - QPointF (halfLinewidth, diagonal),
+                                                scene.sceneRect().topRight() - QPointF (halfLinewidth, -1.0 * diagonal)));
+  m_guidelinePresuppliedTop->setLine (QLineF (scene.sceneRect().topLeft() + QPointF (-1.0 * diagonal, halfLinewidth),
+                                              scene.sceneRect().topRight() + QPointF (diagonal, halfLinewidth)));
+  m_guidelinePresuppliedBottom->setLine (QLineF (scene.sceneRect().bottomLeft() - QPointF (-1.0 * diagonal, halfLinewidth),
+                                                 scene.sceneRect().bottomRight() - QPointF (diagonal, halfLinewidth)));
 }
