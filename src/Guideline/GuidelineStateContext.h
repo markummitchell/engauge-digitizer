@@ -7,27 +7,45 @@
 #ifndef GUIDELINE_STATE_CONTEXT_H
 #define GUIDELINE_STATE_CONTEXT_H
 
+#include "GuidelineState.h"
 #include "GuidelineStateAbstractBase.h"
 #include <QLineF>
 #include <QVector>
+
+class Guideline;
 
 /// Context class for state machine that wraps around GuidelineStateAbstract
 class GuidelineStateContext
 {
 public:
   /// Single constructor.
-  GuidelineStateContext(GuidelineState guidelineStateInitial);
+  GuidelineStateContext (Guideline &guideline,
+                         GuidelineState guidelineStateInitial);
   virtual ~GuidelineStateContext();
 
-  //// Request a state transition
+  /// Initial state of clone made from this Guideline
+  GuidelineState cloneState () const;
+
+  /// Guideline that owns this context class
+  Guideline &guideline ();
+
+  /// Use this method to distinguish template and cloned guidelines
+  bool isTemplate () const;
+
+  /// Request a state transition
   void requestStateTransition (GuidelineState guidelineState);
   
+  /// Returns the geometry of a template guideline
+  QLineF templateHomeLine () const;
+
 private:
   GuidelineStateContext();
 
   /// Transition if requested
   void transitionIfRequested ();
   
+  Guideline &m_guideline;
+
   QVector<GuidelineStateAbstractBase*> m_states;
   GuidelineState m_currentState;
   GuidelineState m_nextState;

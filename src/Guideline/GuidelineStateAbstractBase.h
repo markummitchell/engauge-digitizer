@@ -8,6 +8,8 @@
 #define GUIDELINE_STATE_ABSTRACT_BASE_H
 
 #include "GuidelineState.h"
+#include <QLineF>
+#include <QRectF>
 
 class GuidelineStateContext;
 
@@ -22,9 +24,29 @@ public:
   /// Transition into state
   virtual void begin () = 0;
 
+  /// Initial state of clone made from this Guideline
+  virtual GuidelineState cloneState () const = 0;
+
+  /// Use this method to distinguish template and cloned guidelines
+  virtual bool isTemplate () const = 0;
+
   /// Transition out of state
   virtual void end () = 0;
+
+  /// Returns the geometry of a template guideline
+  virtual QLineF templateHomeLine () const = 0;
+
+protected:
+
+  /// Context in charge of the state classes
+  GuidelineStateContext &context () const;
   
+  /// Length of diagonal of scene in screen coordinates (pixels)
+  double diagonal () const;
+
+  /// Scene rectangle in screen coordinates (=pixels)
+  QRectF sceneRect () const;
+
 private:
   GuidelineStateAbstractBase();
 

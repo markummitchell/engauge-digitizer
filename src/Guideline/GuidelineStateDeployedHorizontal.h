@@ -18,8 +18,11 @@ public:
   virtual ~GuidelineStateDeployedHorizontal();
 
   virtual void begin ();
+  virtual GuidelineState cloneState () const;
   virtual void end ();
-  
+  virtual bool isTemplate () const;
+  virtual QLineF templateHomeLine () const;
+
 private:
   GuidelineStateDeployedHorizontal();
 

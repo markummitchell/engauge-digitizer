@@ -5,32 +5,69 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
+#include "Guideline.h"
 #include "GuidelineStateAbstractBase.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedHorizontal.h"
 #include "GuidelineStateDeployedVertical.h"
-#include "GuidelineStateTemplateHorizontal.h"
-#include "GuidelineStateTemplateVertical.h"
+#include "GuidelineStateTemplateHorizontalBottom.h"
+#include "GuidelineStateTemplateHorizontalTop.h"
+#include "GuidelineStateTemplateVerticalLeft.h"
+#include "GuidelineStateTemplateVerticalRight.h"
 
-GuidelineStateContext::GuidelineStateContext(GuidelineState guidelineStateInitial)
+GuidelineStateContext::GuidelineStateContext (Guideline &guideline,
+                                              GuidelineState guidelineStateInitial) :
+  m_guideline (guideline)
 {
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_HORIZONTAL  , new GuidelineStateDeployedHorizontal (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL    , new GuidelineStateDeployedVertical   (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL  , new GuidelineStateTemplateHorizontal (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL    , new GuidelineStateTemplateVertical   (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_HORIZONTAL       , new GuidelineStateDeployedHorizontal       (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL         , new GuidelineStateDeployedVertical         (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM, new GuidelineStateTemplateHorizontalBottom (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP   , new GuidelineStateTemplateHorizontalTop    (*this));  
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT    , new GuidelineStateTemplateVerticalLeft     (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT   , new GuidelineStateTemplateVerticalRight    (*this));  
   ENGAUGE_ASSERT (m_states.size () == NUM_GUIDELINE_STATES);
 
   m_currentState = NUM_GUIDELINE_STATES; // Value that forces a transition right away
   m_nextState = guidelineStateInitial;
+
+  transitionIfRequested ();
 }
 
 GuidelineStateContext::~GuidelineStateContext ()
 {
 }
 
+GuidelineState GuidelineStateContext::cloneState () const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->cloneState ();
+}
+
+Guideline &GuidelineStateContext::guideline ()
+{
+  return m_guideline;
+}
+
+bool GuidelineStateContext::isTemplate () const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->isTemplate();
+}
+
 void GuidelineStateContext::requestStateTransition (GuidelineState guidelineState)
 {
+  ENGAUGE_ASSERT (guidelineState != NUM_GUIDELINE_STATES);
+
   m_nextState = guidelineState;
+}
+
+QLineF GuidelineStateContext::templateHomeLine() const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->templateHomeLine ();
 }
 
 void GuidelineStateContext::transitionIfRequested ()

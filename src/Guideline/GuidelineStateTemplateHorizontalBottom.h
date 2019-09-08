@@ -4,25 +4,28 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_H
-#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_H
+#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_H
+#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_H
 
 #include "GuidelineStateAbstractBase.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL
-class GuidelineStateTemplateHorizontal : public GuidelineStateAbstractBase
+/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM
+class GuidelineStateTemplateHorizontalBottom : public GuidelineStateAbstractBase
 {
 public:
   /// Single constructor.
-  GuidelineStateTemplateHorizontal(GuidelineStateContext &context);
-  virtual ~GuidelineStateTemplateHorizontal();
+  GuidelineStateTemplateHorizontalBottom(GuidelineStateContext &context);
+  virtual ~GuidelineStateTemplateHorizontalBottom();
 
   virtual void begin ();
+  virtual GuidelineState cloneState () const;
   virtual void end ();
-  
+  virtual bool isTemplate () const;
+  virtual QLineF templateHomeLine () const;
+
 private:
-  GuidelineStateTemplateHorizontal();
+  GuidelineStateTemplateHorizontalBottom();
 
 };
 
-#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_H
+#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_H

@@ -31,8 +31,11 @@ public:
   /// Unset highlighting triggered by hover enter
   virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 
-  /// Displayed line width of presupplied guidelines
-  static double linewidthPresupplied ();
+  /// Displayed line width of template guidelines
+  double lineWidthTemplate () const;
+
+  /// Cleanup after being dragged
+  virtual void mouseReleaseEvent (QGraphicsSceneMouseEvent *event);
 
   /// Apply/remove highlighting triggered by hover enter/leave
   void setHover (bool hover);

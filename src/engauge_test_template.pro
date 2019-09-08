@@ -308,8 +308,10 @@ HEADERS  += \
     Guideline/GuidelineStateContext.h \
     Guideline/GuidelineStateDeployedHorizontal.h \
     Guideline/GuidelineStateDeployedVertical.h \
-    Guideline/GuidelineStateTemplateHorizontal.h \
-    Guideline/GuidelineStateTemplateVertical.h \
+    Guideline/GuidelineStateTemplateHorizontalBottom.h \
+    Guideline/GuidelineStateTemplateHorizontalTop.h \
+    Guideline/GuidelineStateTemplateVerticalLeft.h \
+    Guideline/GuidelineStateTemplateVerticalRight.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Import/ImportCropping.h \
@@ -666,8 +668,10 @@ SOURCES += \
     Guideline/GuidelineStateContext.cpp \
     Guideline/GuidelineStateDeployedHorizontal.cpp \
     Guideline/GuidelineStateDeployedVertical.cpp \
-    Guideline/GuidelineStateTemplateHorizontal.cpp \
-    Guideline/GuidelineStateTemplateVertical.cpp \
+    Guideline/GuidelineStateTemplateHorizontalBottom.cpp \
+    Guideline/GuidelineStateTemplateHorizontalTop.cpp \
+    Guideline/GuidelineStateTemplateVerticalLeft.cpp \
+    Guideline/GuidelineStateTemplateVerticalRight.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Import/ImportCroppingUtilBase.cpp \

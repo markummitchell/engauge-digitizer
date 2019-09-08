@@ -350,8 +350,10 @@ HEADERS  += \
     src/Guideline/GuidelineStateContext.h \
     src/Guideline/GuidelineStateDeployedHorizontal.h \
     src/Guideline/GuidelineStateDeployedVertical.h \
-    src/Guideline/GuidelineStateTemplateHorizontal.h \
-    src/Guideline/GuidelineStateTemplateVertical.h \
+    src/Guideline/GuidelineStateTemplateHorizontalBottom.h \
+    src/Guideline/GuidelineStateTemplateHorizontalTop.h \
+    src/Guideline/GuidelineStateTemplateVerticalLeft.h \
+    src/Guideline/GuidelineStateTemplateVerticalRight.h \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
@@ -704,8 +706,10 @@ SOURCES += \
     src/Guideline/GuidelineStateContext.cpp \
     src/Guideline/GuidelineStateDeployedHorizontal.cpp \
     src/Guideline/GuidelineStateDeployedVertical.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontal.cpp \
-    src/Guideline/GuidelineStateTemplateVertical.cpp \
+    src/Guideline/GuidelineStateTemplateHorizontalBottom.cpp \
+    src/Guideline/GuidelineStateTemplateHorizontalTop.cpp \
+    src/Guideline/GuidelineStateTemplateVerticalLeft.cpp \
+    src/Guideline/GuidelineStateTemplateVerticalRight.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/Import/ImportImageExtensions.cpp \
