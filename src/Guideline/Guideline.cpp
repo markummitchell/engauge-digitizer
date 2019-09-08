@@ -18,15 +18,13 @@
 #include "ZValues.h"
 
 // Template guidelines are thicker so they can be easily clicked on for dragging
-const double GUIDELINE_LINEWIDTH_TEMPLATE = 10;
+const double GUIDELINE_LINEWIDTH_TEMPLATE = 2;
 
 // Cloned guidelines are as thin as possible so their measurements are as precise as possible
 //const double GUIDELINE_LINEWIDTH_CLONE = -1;
 
 Guideline::Guideline(QGraphicsScene  &scene,
-                     GuidelineState guidelineStateInitial) :
-  m_context (*this,
-             guidelineStateInitial)
+                     GuidelineState guidelineStateInitial)
 {
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_GUIDELINE));
 
@@ -42,10 +40,15 @@ Guideline::Guideline(QGraphicsScene  &scene,
   setFlags (QGraphicsItem::ItemIsFocusable |
             QGraphicsItem::ItemIsSelectable |
             QGraphicsItem::ItemIsMovable);
+
+  // Create context after registering with the scene
+  m_context = new GuidelineStateContext (*this,
+                                         guidelineStateInitial);
 }
 
 Guideline::~Guideline ()
 {
+  delete m_context;
 }
 
 void Guideline::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
@@ -69,16 +72,16 @@ double Guideline::lineWidthTemplate () const
 
 void Guideline::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
 {
-  ENGAUGE_ASSERT (m_context.isTemplate ());
+  ENGAUGE_ASSERT (m_context->isTemplate ());
 
   // Clone this Guideline and put the clone at the current position
   QLineF newLine = line ();
   Guideline *newGuideline = new Guideline (*(scene ()),
-                                           m_context.cloneState ());
+                                           m_context->cloneState ());
   newGuideline->setLine (newLine);
 
   // Move this template Guideline back to its original border spot
-  QLineF homeLine = m_context.templateHomeLine ();
+  QLineF homeLine = m_context->templateHomeLine ();
   setLine (homeLine);
 
   // Handle the event
@@ -89,13 +92,15 @@ void Guideline::setHover (bool hover)
 {
   if (hover) {
 
-    QColor color (Qt::gray);
+    QColor color (Qt::blue);
 
-    setPen (QPen (color));
+    setPen (QPen (QBrush (color),
+                  GUIDELINE_LINEWIDTH_TEMPLATE));
 
   } else {
 
-    setPen (QPen (Qt::transparent));
+    setPen (QPen (QBrush (Qt::transparent),
+                  GUIDELINE_LINEWIDTH_TEMPLATE));
 
   }
 }

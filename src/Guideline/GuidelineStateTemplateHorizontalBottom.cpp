@@ -23,6 +23,8 @@ GuidelineStateTemplateHorizontalBottom::~GuidelineStateTemplateHorizontalBottom 
 void GuidelineStateTemplateHorizontalBottom::begin ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottom::begin";
+
+  context().guideline().setLine (templateHomeLine());
 }
 
 GuidelineState GuidelineStateTemplateHorizontalBottom::cloneState () const
@@ -44,6 +46,6 @@ QLineF GuidelineStateTemplateHorizontalBottom::templateHomeLine () const
 {
   double lineWidth = context().guideline().lineWidthTemplate();
   
-  return QLineF (sceneRect().bottomLeft() + QPointF (-1.0 * diagonal(), -1.0 * lineWidth),
-                 sceneRect().bottomRight() + QPointF (diagonal(), -1.0 * lineWidth));
+  return QLineF (sceneRect().bottomLeft() + QPointF (-1.0 * diagonal(), -0.5 * lineWidth),
+                 sceneRect().bottomRight() + QPointF (diagonal(), -0.5 * lineWidth));
 }

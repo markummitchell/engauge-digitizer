@@ -43,7 +43,9 @@ public:
 private:
   Guideline();
 
-  GuidelineStateContext m_context;
+  // Context is allocated as a final step in the constructor, at which point
+  // this class has registered with the QGraphicsScene
+  GuidelineStateContext *m_context;
 };
 
 #endif // GUIDELINE_H
