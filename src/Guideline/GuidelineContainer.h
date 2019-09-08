@@ -9,8 +9,8 @@
 
 #include <QList>
 
-class Guideline;
 class QGraphicsScene;
+class Guideline;
 
 typedef QList<Guideline*> GuidelineContainerPrivate;
 

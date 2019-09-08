@@ -4,8 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "Guideline.h"
 #include "GuidelineContainer.h"
+#include "Guideline.h"
 #include <QGraphicsScene>
 #include <qmath.h>
 
@@ -28,19 +28,23 @@ GuidelineContainer::~GuidelineContainer ()
 void GuidelineContainer::updateGuidelines (QGraphicsScene &scene)
 {
   if (m_guidelinePresuppliedLeft == nullptr) {
-    m_guidelinePresuppliedLeft = new Guideline (scene);
+    m_guidelinePresuppliedLeft = new Guideline (scene,
+                                                GUIDELINE_STATE_TEMPLATE_VERTICAL);
   }
 
   if (m_guidelinePresuppliedRight == nullptr) {
-    m_guidelinePresuppliedRight = new Guideline (scene);
+    m_guidelinePresuppliedRight = new Guideline (scene,
+                                                 GUIDELINE_STATE_TEMPLATE_VERTICAL);
   }
 
   if (m_guidelinePresuppliedTop == nullptr) {
-    m_guidelinePresuppliedTop = new Guideline (scene);
+    m_guidelinePresuppliedTop = new Guideline (scene,
+                                               GUIDELINE_STATE_TEMPLATE_HORIZONTAL);
   }
 
   if (m_guidelinePresuppliedBottom == nullptr) {
-    m_guidelinePresuppliedBottom = new Guideline (scene);
+    m_guidelinePresuppliedBottom = new Guideline (scene,
+                                                  GUIDELINE_STATE_TEMPLATE_HORIZONTAL);
   }
 
   // Shift to outermost pixels are at border

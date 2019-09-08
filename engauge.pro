@@ -345,6 +345,13 @@ HEADERS  += \
     src/Grid/GridTriangleFill.h \
     src/Guideline/Guideline.h \
     src/Guideline/GuidelineContainer.h \
+    src/Guideline/GuidelineState.h \
+    src/Guideline/GuidelineStateAbstractBase.h \
+    src/Guideline/GuidelineStateContext.h \
+    src/Guideline/GuidelineStateDeployedHorizontal.h \
+    src/Guideline/GuidelineStateDeployedVertical.h \
+    src/Guideline/GuidelineStateTemplateHorizontal.h \
+    src/Guideline/GuidelineStateTemplateVertical.h \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
@@ -693,6 +700,12 @@ SOURCES += \
     src/Grid/GridTriangleFill.cpp \
     src/Guideline/Guideline.cpp \
     src/Guideline/GuidelineContainer.cpp \
+    src/Guideline/GuidelineStateAbstractBase.cpp \
+    src/Guideline/GuidelineStateContext.cpp \
+    src/Guideline/GuidelineStateDeployedHorizontal.cpp \
+    src/Guideline/GuidelineStateDeployedVertical.cpp \
+    src/Guideline/GuidelineStateTemplateHorizontal.cpp \
+    src/Guideline/GuidelineStateTemplateVertical.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/Import/ImportImageExtensions.cpp \

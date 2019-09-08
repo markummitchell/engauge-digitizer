@@ -8,6 +8,7 @@
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "Guideline.h"
+#include "GuidelineStateContext.h"
 #include "Logger.h"
 #include <QGraphicsScene>
 #include <QPen>
@@ -19,7 +20,9 @@ const double GUIDELINE_LINEWIDTH_PRESUPPLIED = 6;
 // Cloned guidelines are as thin as possible so their measurements are as precise as possible
 const double GUIDELINE_LINEWIDTH_CLONE = -1;
 
-Guideline::Guideline(QGraphicsScene  &scene)
+Guideline::Guideline(QGraphicsScene  &scene,
+                     GuidelineState guidelineStateInitial) :
+  m_context (guidelineStateInitial)
 {
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_GUIDELINE));
 

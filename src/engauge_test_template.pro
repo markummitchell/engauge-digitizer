@@ -56,7 +56,12 @@ HEADERS  += \
     Callback/CallbackUpdateTransform.h \
     Checker/Checker.h \
     Checker/CheckerMode.h \
-    Checklist/ChecklistGuide.h \
+    Checklist/ChecklistGuideStateAbstract.h \
+    Checklist/ChecklistGuideStateContext.h \
+    Checklist/ChecklistGuideStateDeployedHorizontal.h \
+    Checklist/ChecklistGuideStateDeployedVertical.h \
+    Checklist/ChecklistGuideStateTemplateHorizontal.h \
+    Checklist/ChecklistGuideStateTempalteVertical.h \    
     Checklist/ChecklistGuideContainer.h \
     Checklist/ChecklistGuideBrowser.h \
     Checklist/ChecklistGuidePage.h \
@@ -303,6 +308,14 @@ HEADERS  += \
     Grid/GridRemoval.h \
     Grid/GridTriangleFill.h \
     Guideline/Guideline.h \
+    Guideline/GuidelineContainer.h \
+    Guideline/GuidelineState.h \
+    Guideline/GuidelineStateAbstractBase.h \
+    Guideline/GuidelineStateContext.h \
+    Guideline/GuidelineStateDeployedHorizontal.h \
+    Guideline/GuidelineStateDeployedVertical.h \
+    Guideline/GuidelineStateTemplateHorizontal.h \
+    Guideline/GuidelineStateTemplateVertical.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Import/ImportCropping.h \
@@ -655,6 +668,12 @@ SOURCES += \
     Grid/GridTriangleFill.cpp \
     Guideline/Guideline.cpp \
     Guideline/GuidelineContainer.cpp \
+    Guideline/GuidelineStateAbstractBase.cpp \
+    Guideline/GuidelineStateContext.cpp \
+    Guideline/GuidelineStateDeployedHorizontal.cpp \
+    Guideline/GuidelineStateDeployedVertical.cpp \
+    Guideline/GuidelineStateTemplateHorizontal.cpp \
+    Guideline/GuidelineStateTemplateVertical.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Import/ImportCroppingUtilBase.cpp \

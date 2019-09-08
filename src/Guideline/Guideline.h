@@ -7,18 +7,22 @@
 #ifndef GUIDELINE_H
 #define GUIDELINE_H
 
+#include "GuidelineStateContext.h"
 #include <QGraphicsLineItem>
 
 class QGraphicsScene;
 
-/// This class is a special case of the standard QGraphicsLineItem for guidelines.
+/// This class is a special case of the standard QGraphicsLineItem for guidelines,
+/// and serves as the base class for the guideline state classes. This class has
+/// a state machine to handle the different states
 class Guideline : public QObject, public QGraphicsLineItem
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  Guideline(QGraphicsScene &scene);
+  Guideline(QGraphicsScene &scene,
+            GuidelineState guidelineStateInitial);
   ~Guideline();
 
   /// Highlight this Guideline upon hover enter
@@ -32,10 +36,11 @@ public:
 
   /// Apply/remove highlighting triggered by hover enter/leave
   void setHover (bool hover);
-
+  
 private:
   Guideline();
 
+  GuidelineStateContext m_context;
 };
 
 #endif // GUIDELINE_H
