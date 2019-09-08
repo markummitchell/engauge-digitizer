@@ -56,13 +56,7 @@ HEADERS  += \
     Callback/CallbackUpdateTransform.h \
     Checker/Checker.h \
     Checker/CheckerMode.h \
-    Checklist/ChecklistGuideStateAbstract.h \
-    Checklist/ChecklistGuideStateContext.h \
-    Checklist/ChecklistGuideStateDeployedHorizontal.h \
-    Checklist/ChecklistGuideStateDeployedVertical.h \
-    Checklist/ChecklistGuideStateTemplateHorizontal.h \
-    Checklist/ChecklistGuideStateTempalteVertical.h \    
-    Checklist/ChecklistGuideContainer.h \
+    Checklist/ChecklistGuide.h \
     Checklist/ChecklistGuideBrowser.h \
     Checklist/ChecklistGuidePage.h \
     Checklist/ChecklistGuidePageConclusion.h \
