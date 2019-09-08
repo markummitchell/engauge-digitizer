@@ -21,11 +21,17 @@ public:
   GuidelineStateAbstractBase (GuidelineStateContext &context);
   virtual ~GuidelineStateAbstractBase();
 
+  /// True/false to keep object always visible (typically for deployed/template respectively)
+  virtual bool alwaysVisible () const = 0;
+
   /// Transition into state
   virtual void begin () = 0;
 
   /// Initial state of clone made from this Guideline
   virtual GuidelineState cloneState () const = 0;
+
+  /// True/false to enable/disable hover events initially for the Guideline
+  virtual bool initialHoverEventsEnable () const = 0;
 
   /// Use this method to distinguish template and cloned guidelines
   virtual bool isTemplate () const = 0;

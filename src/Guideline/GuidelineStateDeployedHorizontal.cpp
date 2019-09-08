@@ -19,6 +19,11 @@ GuidelineStateDeployedHorizontal::~GuidelineStateDeployedHorizontal ()
 {
 }
 
+bool GuidelineStateDeployedHorizontal::alwaysVisible () const
+{
+  return true;
+}
+
 void GuidelineStateDeployedHorizontal::begin ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedHorizontal::begin";
@@ -34,6 +39,11 @@ GuidelineState GuidelineStateDeployedHorizontal::cloneState () const
 void GuidelineStateDeployedHorizontal::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedHorizontal::end";
+}
+
+bool GuidelineStateDeployedHorizontal::initialHoverEventsEnable () const
+{
+  return true;
 }
 
 bool GuidelineStateDeployedHorizontal::isTemplate () const

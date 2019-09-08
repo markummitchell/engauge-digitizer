@@ -37,6 +37,13 @@ GuidelineStateContext::~GuidelineStateContext ()
 {
 }
 
+bool GuidelineStateContext::alwaysVisible () const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->alwaysVisible ();
+}
+
 GuidelineState GuidelineStateContext::cloneState () const
 {
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
@@ -47,6 +54,13 @@ GuidelineState GuidelineStateContext::cloneState () const
 Guideline &GuidelineStateContext::guideline ()
 {
   return m_guideline;
+}
+
+bool GuidelineStateContext::initialHoverEventsEnable () const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->initialHoverEventsEnable();
 }
 
 bool GuidelineStateContext::isTemplate () const

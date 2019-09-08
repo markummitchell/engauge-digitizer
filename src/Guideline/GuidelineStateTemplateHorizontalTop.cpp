@@ -20,6 +20,11 @@ GuidelineStateTemplateHorizontalTop::~GuidelineStateTemplateHorizontalTop ()
 {
 }
 
+bool GuidelineStateTemplateHorizontalTop::alwaysVisible () const
+{
+  return false;
+}
+
 void GuidelineStateTemplateHorizontalTop::begin ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalTop::begin";
@@ -35,6 +40,11 @@ GuidelineState GuidelineStateTemplateHorizontalTop::cloneState () const
 void GuidelineStateTemplateHorizontalTop::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalTop::end";
+}
+
+bool GuidelineStateTemplateHorizontalTop::initialHoverEventsEnable () const
+{
+  return false;
 }
 
 bool GuidelineStateTemplateHorizontalTop::isTemplate () const

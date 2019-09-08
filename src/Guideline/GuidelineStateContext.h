@@ -14,7 +14,13 @@
 
 class Guideline;
 
-/// Context class for state machine that wraps around GuidelineStateAbstract
+/// Context class for state machine that wraps around GuidelineStateAbstract. This is
+/// a strange state machine since:
+/// # There are no transitions from one state to another
+/// # Instead of state transitions, there is cloning of a template state object into
+///   a corresponding deployed state object
+/// However, the state machine's ability to nicely encapsulate behaviors according to
+/// the situation make the state machine approach attractive
 class GuidelineStateContext
 {
 public:
@@ -23,11 +29,21 @@ public:
                          GuidelineState guidelineStateInitial);
   virtual ~GuidelineStateContext();
 
+  /// True/false to keep object always visible (typically for deployed/template respectively)
+  bool alwaysVisible () const;
+
   /// Initial state of clone made from this Guideline
   GuidelineState cloneState () const;
 
   /// Guideline that owns this context class
   Guideline &guideline ();
+
+  /// True/false to enable/disable hover events initially for the Guideline. This works out to
+  /// being enabled initially for deployed states because template guidelines are only enabled
+  /// in DigitizeStateSelect so that is the only time deployed guidelines can be created, which
+  /// is the only time deployed guidelines can be dragged. Template guidelines are created before
+  /// much happens so they are disabled initially (and first enabled by DigitizeStateSelect::begin())
+  bool initialHoverEventsEnable () const;
 
   /// Use this method to distinguish template and cloned guidelines
   bool isTemplate () const;

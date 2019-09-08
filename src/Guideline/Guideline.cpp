@@ -34,9 +34,6 @@ Guideline::Guideline(QGraphicsScene  &scene,
                 GUIDELINE_LINEWIDTH_TEMPLATE));
   setZValue (Z_VALUE_CURVE);
   setVisible (true);
-  setAcceptHoverEvents (true);
-  setHover (false); // Initially the cursor is not hovering over this object. Later a hover event will change this state
-
   setFlags (QGraphicsItem::ItemIsFocusable |
             QGraphicsItem::ItemIsSelectable |
             QGraphicsItem::ItemIsMovable);
@@ -44,6 +41,10 @@ Guideline::Guideline(QGraphicsScene  &scene,
   // Create context after registering with the scene
   m_context = new GuidelineStateContext (*this,
                                          guidelineStateInitial);
+
+  // Final step is to enable/disable hover events
+  setAcceptHoverEvents (m_context->initialHoverEventsEnable ());
+  setHover (false); // Initially the cursor is not hovering over this object. Later a hover event will change this state
 }
 
 Guideline::~Guideline ()
@@ -90,7 +91,7 @@ void Guideline::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
 
 void Guideline::setHover (bool hover)
 {
-  if (hover) {
+  if (hover || m_context->alwaysVisible ()) {
 
     QColor color (Qt::blue);
 

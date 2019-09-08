@@ -17,9 +17,11 @@ public:
   GuidelineStateTemplateHorizontalTop(GuidelineStateContext &context);
   virtual ~GuidelineStateTemplateHorizontalTop();
 
+  virtual bool alwaysVisible () const;
   virtual void begin ();
   virtual GuidelineState cloneState () const;
   virtual void end ();
+  virtual bool initialHoverEventsEnable () const;
   virtual bool isTemplate () const;
   virtual QLineF templateHomeLine () const;
 

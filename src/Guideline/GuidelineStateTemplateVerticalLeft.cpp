@@ -20,6 +20,11 @@ GuidelineStateTemplateVerticalLeft::~GuidelineStateTemplateVerticalLeft ()
 {
 }
 
+bool GuidelineStateTemplateVerticalLeft::alwaysVisible () const
+{
+  return false;
+}
+
 void GuidelineStateTemplateVerticalLeft::begin ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalLeft::begin";
@@ -35,6 +40,11 @@ GuidelineState GuidelineStateTemplateVerticalLeft::cloneState () const
 void GuidelineStateTemplateVerticalLeft::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalLeft::end";
+}
+
+bool GuidelineStateTemplateVerticalLeft::initialHoverEventsEnable () const
+{
+  return false;
 }
 
 bool GuidelineStateTemplateVerticalLeft::isTemplate () const

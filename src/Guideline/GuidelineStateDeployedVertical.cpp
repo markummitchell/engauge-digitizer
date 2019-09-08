@@ -20,6 +20,11 @@ GuidelineStateDeployedVertical::~GuidelineStateDeployedVertical ()
 {
 }
 
+bool GuidelineStateDeployedVertical::alwaysVisible () const
+{
+  return true;
+}
+
 void GuidelineStateDeployedVertical::begin ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedVertical::begin";
@@ -35,6 +40,11 @@ GuidelineState GuidelineStateDeployedVertical::cloneState () const
 void GuidelineStateDeployedVertical::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedVertical::end";
+}
+
+bool GuidelineStateDeployedVertical::initialHoverEventsEnable () const
+{
+  return true;
 }
 
 bool GuidelineStateDeployedVertical::isTemplate () const
