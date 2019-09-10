@@ -7,10 +7,11 @@
 #ifndef GUIDELINE_STATE_DEPLOYED_HORIZONTAL_H
 #define GUIDELINE_STATE_DEPLOYED_HORIZONTAL_H
 
-#include "GuidelineStateAbstractBase.h"
+#include "GuidelineStateDeployedAbstract.h"
+#include <QPointF>
 
 /// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_HORIZONTAL
-class GuidelineStateDeployedHorizontal : public GuidelineStateAbstractBase
+class GuidelineStateDeployedHorizontal : public GuidelineStateDeployedAbstract
 {
 public:
   /// Single constructor.
@@ -21,9 +22,6 @@ public:
   virtual void begin ();
   virtual GuidelineState cloneState () const;
   virtual void end ();
-  virtual bool initialHoverEventsEnable () const;
-  virtual bool isTemplate () const;
-  virtual QLineF templateHomeLine () const;
 
 private:
   GuidelineStateDeployedHorizontal();

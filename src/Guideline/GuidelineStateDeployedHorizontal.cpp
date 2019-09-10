@@ -5,13 +5,13 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
-#include "GuidelineStateAbstractBase.h"
+#include "Guideline.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedHorizontal.h"
 #include "Logger.h"
 
 GuidelineStateDeployedHorizontal::GuidelineStateDeployedHorizontal (GuidelineStateContext &context) :
-  GuidelineStateAbstractBase (context)
+  GuidelineStateDeployedAbstract (context)
 {
 }
 
@@ -33,28 +33,11 @@ GuidelineState GuidelineStateDeployedHorizontal::cloneState () const
 {
   LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateDeployedHorizontal::cloneState cannot clone a deployed guideline";
 
-  return GUIDELINE_STATE_DEPLOYED_HORIZONTAL;
+  // This should not be called
+  return GUIDELINE_STATE_NULL;
 }
 
 void GuidelineStateDeployedHorizontal::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedHorizontal::end";
-}
-
-bool GuidelineStateDeployedHorizontal::initialHoverEventsEnable () const
-{
-  return true;
-}
-
-bool GuidelineStateDeployedHorizontal::isTemplate () const
-{
-  return false;
-}
-
-QLineF GuidelineStateDeployedHorizontal::templateHomeLine() const
-{
-  // Should have called isTemplate() first
-  ENGAUGE_ASSERT (false);
-  
-  return QLineF (0, 0, 0, 0);
 }

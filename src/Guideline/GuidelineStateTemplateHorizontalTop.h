@@ -7,10 +7,10 @@
 #ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_H
 #define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_H
 
-#include "GuidelineStateAbstractBase.h"
+#include "GuidelineStateTemplateAbstract.h"
 
 /// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP
-class GuidelineStateTemplateHorizontalTop : public GuidelineStateAbstractBase
+class GuidelineStateTemplateHorizontalTop : public GuidelineStateTemplateAbstract
 {
 public:
   /// Single constructor.
@@ -21,8 +21,6 @@ public:
   virtual void begin ();
   virtual GuidelineState cloneState () const;
   virtual void end ();
-  virtual bool initialHoverEventsEnable () const;
-  virtual bool isTemplate () const;
   virtual QLineF templateHomeLine () const;
 
 private:

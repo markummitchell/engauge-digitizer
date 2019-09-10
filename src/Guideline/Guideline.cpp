@@ -13,6 +13,7 @@
 #include "Logger.h"
 #include <QGraphicsLineItem>
 #include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
 #include <QLineF>
 #include <QPen>
 #include "ZValues.h"
@@ -38,7 +39,8 @@ Guideline::Guideline(QGraphicsScene  &scene,
             QGraphicsItem::ItemIsSelectable |
             QGraphicsItem::ItemIsMovable);
 
-  // Create context after registering with the scene
+  // Create context after registering with the scene. The transition
+  // into the initial state will position the line if it is a template guideline
   m_context = new GuidelineStateContext (*this,
                                          guidelineStateInitial);
 
@@ -73,20 +75,10 @@ double Guideline::lineWidthTemplate () const
 
 void Guideline::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
 {
-  ENGAUGE_ASSERT (m_context->isTemplate ());
-
-  // Clone this Guideline and put the clone at the current position
-  QLineF newLine = line ();
-  Guideline *newGuideline = new Guideline (*(scene ()),
-                                           m_context->cloneState ());
-  newGuideline->setLine (newLine);
-
-  // Move this template Guideline back to its original border spot
-  QLineF homeLine = m_context->templateHomeLine ();
-  setLine (homeLine);
-
   // Handle the event
   QGraphicsLineItem::mouseReleaseEvent (event);
+
+  m_context->cloneDraggedGuideline ();
 }
 
 void Guideline::setHover (bool hover)

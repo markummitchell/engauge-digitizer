@@ -5,14 +5,13 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
-#include "GuidelineStateAbstractBase.h"
+#include "Guideline.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedVertical.h"
 #include "Logger.h"
-#include <QGraphicsScene>
 
 GuidelineStateDeployedVertical::GuidelineStateDeployedVertical (GuidelineStateContext &context) :
-  GuidelineStateAbstractBase (context)
+  GuidelineStateDeployedAbstract (context)
 {
 }
 
@@ -34,29 +33,12 @@ GuidelineState GuidelineStateDeployedVertical::cloneState () const
 {
   LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateDeployedVertical::cloneState cannot clone a deployed guideline";
 
-  return GUIDELINE_STATE_DEPLOYED_VERTICAL;
+  // This should not be called
+  return GUIDELINE_STATE_NULL;
 }
 
 void GuidelineStateDeployedVertical::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedVertical::end";
-}
-
-bool GuidelineStateDeployedVertical::initialHoverEventsEnable () const
-{
-  return true;
-}
-
-bool GuidelineStateDeployedVertical::isTemplate () const
-{
-  return false;
-}
-
-QLineF GuidelineStateDeployedVertical::templateHomeLine () const
-{
-  // Should have called isTemplate() first
-  ENGAUGE_ASSERT (false);
-
-  return QLineF (0, 0, 0, 0);
 }
 

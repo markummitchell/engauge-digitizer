@@ -5,14 +5,12 @@
  ******************************************************************************************************/
 
 #include "Guideline.h"
-#include "GuidelineStateAbstractBase.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateVerticalLeft.h"
 #include "Logger.h"
-#include <QGraphicsScene>
 
 GuidelineStateTemplateVerticalLeft::GuidelineStateTemplateVerticalLeft (GuidelineStateContext &context) :
-  GuidelineStateAbstractBase (context)
+  GuidelineStateTemplateAbstract (context)
 {
 }
 
@@ -40,16 +38,6 @@ GuidelineState GuidelineStateTemplateVerticalLeft::cloneState () const
 void GuidelineStateTemplateVerticalLeft::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalLeft::end";
-}
-
-bool GuidelineStateTemplateVerticalLeft::initialHoverEventsEnable () const
-{
-  return false;
-}
-
-bool GuidelineStateTemplateVerticalLeft::isTemplate () const
-{
-  return true;
 }
 
 QLineF GuidelineStateTemplateVerticalLeft::templateHomeLine () const

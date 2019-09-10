@@ -348,8 +348,11 @@ HEADERS  += \
     src/Guideline/GuidelineState.h \
     src/Guideline/GuidelineStateAbstractBase.h \
     src/Guideline/GuidelineStateContext.h \
+    src/Guideline/GuidelineStateDeployedAbstract.h \
     src/Guideline/GuidelineStateDeployedHorizontal.h \
     src/Guideline/GuidelineStateDeployedVertical.h \
+    src/Guideline/GuidelineStateNull.h \
+    src/Guideline/GuidelineStateTemplateAbstract.h \
     src/Guideline/GuidelineStateTemplateHorizontalBottom.h \
     src/Guideline/GuidelineStateTemplateHorizontalTop.h \
     src/Guideline/GuidelineStateTemplateVerticalLeft.h \
@@ -704,8 +707,11 @@ SOURCES += \
     src/Guideline/GuidelineContainer.cpp \
     src/Guideline/GuidelineStateAbstractBase.cpp \
     src/Guideline/GuidelineStateContext.cpp \
+    src/Guideline/GuidelineStateDeployedAbstract.cpp \
     src/Guideline/GuidelineStateDeployedHorizontal.cpp \
     src/Guideline/GuidelineStateDeployedVertical.cpp \
+    src/Guideline/GuidelineStateNull.cpp \
+    src/Guideline/GuidelineStateTemplateAbstract.cpp \
     src/Guideline/GuidelineStateTemplateHorizontalBottom.cpp \
     src/Guideline/GuidelineStateTemplateHorizontalTop.cpp \
     src/Guideline/GuidelineStateTemplateVerticalLeft.cpp \

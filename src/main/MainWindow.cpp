@@ -1242,13 +1242,15 @@ void MainWindow::rebuildRecentFileListForCurrentFile(const QString &filePath)
   updateRecentFileList();
 }
 
-void MainWindow::resizeEvent(QResizeEvent * /* event */)
+void MainWindow::resizeEvent(QResizeEvent *event)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::resizeEvent";
 
   if (m_actionZoomFill->isChecked ()) {
     slotViewZoomFactor (ZOOM_FILL);
   }
+
+  QMainWindow::resizeEvent(event);
 }
 
 bool MainWindow::saveDocumentFile (const QString &fileName)

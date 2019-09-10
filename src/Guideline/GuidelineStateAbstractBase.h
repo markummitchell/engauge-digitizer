@@ -27,14 +27,15 @@ public:
   /// Transition into state
   virtual void begin () = 0;
 
+  /// Clone the Guideline that owns the state machine where these states live. Default implementation
+  /// is a noop
+  virtual void cloneDraggedGuideline();
+  
   /// Initial state of clone made from this Guideline
   virtual GuidelineState cloneState () const = 0;
 
   /// True/false to enable/disable hover events initially for the Guideline
   virtual bool initialHoverEventsEnable () const = 0;
-
-  /// Use this method to distinguish template and cloned guidelines
-  virtual bool isTemplate () const = 0;
 
   /// Transition out of state
   virtual void end () = 0;

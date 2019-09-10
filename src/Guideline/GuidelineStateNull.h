@@ -4,27 +4,29 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_DEPLOYED_VERTICAL_H
-#define GUIDELINE_STATE_DEPLOYED_VERTICAL_H
+#ifndef GUIDELINE_STATE_NULL_H
+#define GUIDELINE_STATE_NULL_H
 
-#include "GuidelineStateDeployedAbstract.h"
+#include "GuidelineStateAbstractBase.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_VERTICAL
-class GuidelineStateDeployedVertical : public GuidelineStateDeployedAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_NULL
+class GuidelineStateNull : public GuidelineStateAbstractBase
 {
 public:
   /// Single constructor.
-  GuidelineStateDeployedVertical(GuidelineStateContext &context);
-  virtual ~GuidelineStateDeployedVertical();
+  GuidelineStateNull(GuidelineStateContext &context);
+  virtual ~GuidelineStateNull();
 
   virtual bool alwaysVisible () const;
-  virtual void begin();
+  virtual void begin ();
   virtual GuidelineState cloneState () const;
-  virtual void end();
+  virtual void end ();
+  virtual bool initialHoverEventsEnable () const;
+  virtual QLineF templateHomeLine () const;
 
 private:
-  GuidelineStateDeployedVertical();
+  GuidelineStateNull();
 
 };
 
-#endif // GUIDELINE_STATE_DEPLOYED_VERTICAL_H
+#endif // GUIDELINE_STATE_NULL_H

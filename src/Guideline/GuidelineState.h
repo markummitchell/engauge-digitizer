@@ -12,9 +12,11 @@
 /// # vertical = Follows constant-x isocontour
 /// # template = One of the guidelines along every scene border that can be dragged
 /// # deployed = One of the guidelines created by the user dragging a template guideline
+/// # null = An invalid state. This enum is used as a return value, and the state is a noop
 enum GuidelineState {
   GUIDELINE_STATE_DEPLOYED_HORIZONTAL,
   GUIDELINE_STATE_DEPLOYED_VERTICAL,
+  GUIDELINE_STATE_NULL,
   GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM,
   GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP,  
   GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT,

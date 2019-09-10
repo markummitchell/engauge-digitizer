@@ -14,13 +14,7 @@
 
 class Guideline;
 
-/// Context class for state machine that wraps around GuidelineStateAbstract. This is
-/// a strange state machine since:
-/// # There are no transitions from one state to another
-/// # Instead of state transitions, there is cloning of a template state object into
-///   a corresponding deployed state object
-/// However, the state machine's ability to nicely encapsulate behaviors according to
-/// the situation make the state machine approach attractive
+/// Context class for state machine that belongs to the Guideline class
 class GuidelineStateContext
 {
 public:
@@ -32,6 +26,9 @@ public:
   /// True/false to keep object always visible (typically for deployed/template respectively)
   bool alwaysVisible () const;
 
+  /// Clone the Guideline that owns the state machine where these states live
+  void cloneDraggedGuideline();
+  
   /// Initial state of clone made from this Guideline
   GuidelineState cloneState () const;
 
@@ -45,12 +42,19 @@ public:
   /// much happens so they are disabled initially (and first enabled by DigitizeStateSelect::begin())
   bool initialHoverEventsEnable () const;
 
-  /// Use this method to distinguish template and cloned guidelines
-  bool isTemplate () const;
+  /// Make immediate state transition. This is called from outside the state machine only.
+  /// This CANNOT be called from a state class or else the stack will be corrupted (in that
+  /// case use requestStateTransition and let this class call transitionIfRequested when that
+  /// is safe to do)
+  void makeStateTransition (GuidelineState guidelineState);
 
   /// Request a state transition
   void requestStateTransition (GuidelineState guidelineState);
   
+  /// Current state. This should be used when cloning only, and should never be used
+  /// with if/then logic
+  GuidelineState state () const;
+
   /// Returns the geometry of a template guideline
   QLineF templateHomeLine () const;
 
