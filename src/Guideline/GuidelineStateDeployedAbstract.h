@@ -18,6 +18,8 @@ public:
   GuidelineStateDeployedAbstract(GuidelineStateContext &context);
   virtual ~GuidelineStateDeployedAbstract();
 
+  virtual void handleMousePress ();
+  virtual void handleMouseRelease ();  
   virtual bool initialHoverEventsEnable () const;
   virtual QLineF templateHomeLine () const;
 };

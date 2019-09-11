@@ -18,10 +18,6 @@ public:
   GuidelineStateTemplateAbstract(GuidelineStateContext &context);
   virtual ~GuidelineStateTemplateAbstract();
 
-  /// Clone the Guideline that owns the state machine where these states live. This
-  /// overrides the parent class implementation
-  virtual void cloneDraggedGuideline();
-
   virtual bool initialHoverEventsEnable () const;
 };
 

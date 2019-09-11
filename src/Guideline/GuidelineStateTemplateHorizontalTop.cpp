@@ -30,14 +30,24 @@ void GuidelineStateTemplateHorizontalTop::begin ()
   context().guideline().setLine (templateHomeLine());
 }
 
-GuidelineState GuidelineStateTemplateHorizontalTop::cloneState () const
-{
-  return GUIDELINE_STATE_DEPLOYED_HORIZONTAL;
-}
-
 void GuidelineStateTemplateHorizontalTop::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalTop::end";
+}
+
+void GuidelineStateTemplateHorizontalTop::handleMousePress ()
+{
+}
+
+void GuidelineStateTemplateHorizontalTop::handleMouseRelease ()
+{
+  // See comments in GuidelineStateTemplateHorizontalTop::handleMouseRelease
+  Guideline *guidelineReplacement = new Guideline (*context().guideline().scene(),
+                                                   GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP);
+
+  guidelineReplacement->setAcceptHoverEvents (true);
+
+  context().requestStateTransition (GUIDELINE_STATE_DEPLOYED_HORIZONTAL);
 }
 
 QLineF GuidelineStateTemplateHorizontalTop::templateHomeLine () const

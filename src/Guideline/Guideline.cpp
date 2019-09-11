@@ -78,7 +78,7 @@ void Guideline::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
   // Handle the event
   QGraphicsLineItem::mouseReleaseEvent (event);
 
-  m_context->cloneDraggedGuideline ();
+  m_context->handleMouseRelease ();
 }
 
 void Guideline::setHover (bool hover)

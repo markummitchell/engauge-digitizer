@@ -351,6 +351,7 @@ HEADERS  += \
     src/Guideline/GuidelineStateDeployedAbstract.h \
     src/Guideline/GuidelineStateDeployedHorizontal.h \
     src/Guideline/GuidelineStateDeployedVertical.h \
+    src/Guideline/GuidelineStateHandle.h \
     src/Guideline/GuidelineStateNull.h \
     src/Guideline/GuidelineStateTemplateAbstract.h \
     src/Guideline/GuidelineStateTemplateHorizontalBottom.h \
@@ -710,6 +711,7 @@ SOURCES += \
     src/Guideline/GuidelineStateDeployedAbstract.cpp \
     src/Guideline/GuidelineStateDeployedHorizontal.cpp \
     src/Guideline/GuidelineStateDeployedVertical.cpp \
+    src/Guideline/GuidelineStateHandle.cpp \
     src/Guideline/GuidelineStateNull.cpp \
     src/Guideline/GuidelineStateTemplateAbstract.cpp \
     src/Guideline/GuidelineStateTemplateHorizontalBottom.cpp \

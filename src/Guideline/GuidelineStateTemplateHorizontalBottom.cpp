@@ -30,14 +30,34 @@ void GuidelineStateTemplateHorizontalBottom::begin ()
   context().guideline().setLine (templateHomeLine());
 }
 
-GuidelineState GuidelineStateTemplateHorizontalBottom::cloneState () const
-{
-  return GUIDELINE_STATE_DEPLOYED_HORIZONTAL;
-}
-
 void GuidelineStateTemplateHorizontalBottom::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottom::end";
+}
+
+void GuidelineStateTemplateHorizontalBottom::handleMousePress ()
+{
+}
+
+void GuidelineStateTemplateHorizontalBottom::handleMouseRelease ()
+{
+  // Clone this Guideline and put the clone back at the border. We cannot move the
+  // currently dragged line back to the border since the current event is handled
+  // asynchronously and the final move is not until after this method has completed
+  // (which would override any setLine() call to move this Guideline back to the border).
+  // The returned pointer is not saved since the object is already registered with
+  // the QGraphicsScene
+  Guideline *guidelineReplacement = new Guideline (*context().guideline().scene(),
+                                                   GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM);
+
+  // We are currently in DigitizeStateSelect and the other 3 template guidelines
+  // have hover enabled. The Guideline constructor above assumed we are not in
+  // DigitizeStateSelect (since right here is the only exception) so we enable
+  // hover events here
+  guidelineReplacement->setAcceptHoverEvents (true);
+
+  // Transition state for the current Guideline
+  context().requestStateTransition (GUIDELINE_STATE_DEPLOYED_HORIZONTAL);
 }
 
 QLineF GuidelineStateTemplateHorizontalBottom::templateHomeLine () const

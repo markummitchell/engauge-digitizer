@@ -19,7 +19,6 @@ public:
 
   virtual bool alwaysVisible () const;
   virtual void begin();
-  virtual GuidelineState cloneState () const;
   virtual void end();
 
 private:

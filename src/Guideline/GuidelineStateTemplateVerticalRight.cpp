@@ -30,14 +30,24 @@ void GuidelineStateTemplateVerticalRight::begin ()
   context().guideline().setLine (templateHomeLine());
 }
 
-GuidelineState GuidelineStateTemplateVerticalRight::cloneState () const
-{
-  return GUIDELINE_STATE_DEPLOYED_VERTICAL;
-}
-
 void GuidelineStateTemplateVerticalRight::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalRight::end";
+}
+
+void GuidelineStateTemplateVerticalRight::handleMousePress ()
+{
+}
+
+void GuidelineStateTemplateVerticalRight::handleMouseRelease ()
+{
+  // See comments in GuidelineStateTemplateHorizontalTop::handleMouseRelease
+  Guideline *guidelineReplacement = new Guideline (*context().guideline().scene(),
+                                                   GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT);
+
+  guidelineReplacement->setAcceptHoverEvents (true);
+
+  context().requestStateTransition (GUIDELINE_STATE_DEPLOYED_VERTICAL);
 }
 
 QLineF GuidelineStateTemplateVerticalRight::templateHomeLine () const

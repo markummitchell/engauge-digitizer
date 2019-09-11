@@ -19,8 +19,9 @@ public:
 
   virtual bool alwaysVisible () const;
   virtual void begin ();
-  virtual GuidelineState cloneState () const;
   virtual void end ();
+  virtual void handleMousePress ();
+  virtual void handleMouseRelease ();
   virtual QLineF templateHomeLine () const;
 
 private:

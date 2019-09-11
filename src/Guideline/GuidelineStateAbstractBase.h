@@ -27,18 +27,18 @@ public:
   /// Transition into state
   virtual void begin () = 0;
 
-  /// Clone the Guideline that owns the state machine where these states live. Default implementation
-  /// is a noop
-  virtual void cloneDraggedGuideline();
+  /// Transition out of state
+  virtual void end () = 0;
+
+  /// At the start of dragging, convert the template Guideline into an invisible handle and visible
+  /// slaved deployed Guideline
+  virtual void handleMousePress () = 0;
   
-  /// Initial state of clone made from this Guideline
-  virtual GuidelineState cloneState () const = 0;
+  /// At the end of dragging, clone the Guideline that owns the state machine where these states live
+  virtual void handleMouseRelease () = 0;
 
   /// True/false to enable/disable hover events initially for the Guideline
   virtual bool initialHoverEventsEnable () const = 0;
-
-  /// Transition out of state
-  virtual void end () = 0;
 
   /// Returns the geometry of a template guideline
   virtual QLineF templateHomeLine () const = 0;

@@ -8,7 +8,6 @@
 #define GUIDELINE_STATE_DEPLOYED_HORIZONTAL_H
 
 #include "GuidelineStateDeployedAbstract.h"
-#include <QPointF>
 
 /// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_HORIZONTAL
 class GuidelineStateDeployedHorizontal : public GuidelineStateDeployedAbstract
@@ -20,7 +19,6 @@ public:
 
   virtual bool alwaysVisible () const;
   virtual void begin ();
-  virtual GuidelineState cloneState () const;
   virtual void end ();
 
 private:

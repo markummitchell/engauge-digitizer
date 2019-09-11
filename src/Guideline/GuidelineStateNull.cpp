@@ -29,15 +29,19 @@ void GuidelineStateNull::begin ()
   LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateNull::begin";
 }
 
-GuidelineState GuidelineStateNull::cloneState () const
-{
-  // This should not be called
-  return GUIDELINE_STATE_NULL;
-}
-
 void GuidelineStateNull::end ()
 {
   LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateNull::end";
+}
+
+void GuidelineStateNull::handleMousePress ()
+{
+  // Noop
+}
+
+void GuidelineStateNull::handleMouseRelease ()
+{
+  // Noop
 }
 
 bool GuidelineStateNull::initialHoverEventsEnable () const

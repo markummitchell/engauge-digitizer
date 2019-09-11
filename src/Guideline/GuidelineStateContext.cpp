@@ -10,6 +10,7 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedHorizontal.h"
 #include "GuidelineStateDeployedVertical.h"
+#include "GuidelineStateHandle.h"
 #include "GuidelineStateNull.h"
 #include "GuidelineStateTemplateHorizontalBottom.h"
 #include "GuidelineStateTemplateHorizontalTop.h"
@@ -22,6 +23,7 @@ GuidelineStateContext::GuidelineStateContext (Guideline &guideline,
 {
   m_states.insert (GUIDELINE_STATE_DEPLOYED_HORIZONTAL       , new GuidelineStateDeployedHorizontal       (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL         , new GuidelineStateDeployedVertical         (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE                    , new GuidelineStateHandle                   (*this));  
   m_states.insert (GUIDELINE_STATE_NULL                      , new GuidelineStateNull                     (*this));
   m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM, new GuidelineStateTemplateHorizontalBottom (*this));
   m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP   , new GuidelineStateTemplateHorizontalTop    (*this));
@@ -46,24 +48,25 @@ bool GuidelineStateContext::alwaysVisible () const
   return m_states[m_currentState]->alwaysVisible ();
 }
 
-void GuidelineStateContext::cloneDraggedGuideline ()
-{
-  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
-
-  m_states[m_currentState]->cloneDraggedGuideline ();
-  transitionIfRequested ();
-}
-
-GuidelineState GuidelineStateContext::cloneState () const
-{
-  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
-
-  return m_states[m_currentState]->cloneState ();
-}
-
 Guideline &GuidelineStateContext::guideline ()
 {
   return m_guideline;
+}
+
+void GuidelineStateContext::handleMousePress ()
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  m_states[m_currentState]->handleMousePress ();
+  transitionIfRequested ();  
+}
+
+void GuidelineStateContext::handleMouseRelease ()
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  m_states[m_currentState]->handleMouseRelease ();
+  transitionIfRequested ();
 }
 
 bool GuidelineStateContext::initialHoverEventsEnable () const
@@ -73,22 +76,11 @@ bool GuidelineStateContext::initialHoverEventsEnable () const
   return m_states[m_currentState]->initialHoverEventsEnable();
 }
 
-void GuidelineStateContext::makeStateTransition (GuidelineState guidelineState)
-{
-  m_currentState = guidelineState;
-  transitionIfRequested ();
-}
-
 void GuidelineStateContext::requestStateTransition (GuidelineState guidelineState)
 {
   ENGAUGE_ASSERT (guidelineState != NUM_GUIDELINE_STATES);
 
   m_nextState = guidelineState;
-}
-
-GuidelineState GuidelineStateContext::state () const
-{
-  return m_currentState;
 }
 
 QLineF GuidelineStateContext::templateHomeLine() const

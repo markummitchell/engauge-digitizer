@@ -29,14 +29,6 @@ void GuidelineStateDeployedHorizontal::begin ()
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedHorizontal::begin";
 }
 
-GuidelineState GuidelineStateDeployedHorizontal::cloneState () const
-{
-  LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateDeployedHorizontal::cloneState cannot clone a deployed guideline";
-
-  // This should not be called
-  return GUIDELINE_STATE_NULL;
-}
-
 void GuidelineStateDeployedHorizontal::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedHorizontal::end";

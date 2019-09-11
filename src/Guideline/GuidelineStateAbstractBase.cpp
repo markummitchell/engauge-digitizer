@@ -22,11 +22,6 @@ GuidelineStateAbstractBase::~GuidelineStateAbstractBase ()
 {
 }
 
-void GuidelineStateAbstractBase::cloneDraggedGuideline ()
-{
-  // Noop
-}
-
 GuidelineStateContext &GuidelineStateAbstractBase::context () const
 {
   return m_context;

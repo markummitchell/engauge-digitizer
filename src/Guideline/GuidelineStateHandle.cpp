@@ -8,34 +8,49 @@
 #include "GraphicsScene.h"
 #include "Guideline.h"
 #include "GuidelineStateContext.h"
-#include "GuidelineStateDeployedAbstract.h"
+#include "GuidelineStateHandle.h"
 #include "Logger.h"
 
-GuidelineStateDeployedAbstract::GuidelineStateDeployedAbstract (GuidelineStateContext &context) :
+GuidelineStateHandle::GuidelineStateHandle (GuidelineStateContext &context) :
   GuidelineStateAbstractBase (context)
 {
 }
 
-GuidelineStateDeployedAbstract::~GuidelineStateDeployedAbstract ()
+GuidelineStateHandle::~GuidelineStateHandle ()
 {
 }
 
-void GuidelineStateDeployedAbstract::handleMousePress ()
-{
-  // Noop
-}
-
-void GuidelineStateDeployedAbstract::handleMouseRelease ()
-{
-  // Noop
-}
-
-bool GuidelineStateDeployedAbstract::initialHoverEventsEnable () const
+bool GuidelineStateHandle::alwaysVisible () const
 {
   return true;
 }
 
-QLineF GuidelineStateDeployedAbstract::templateHomeLine() const
+void GuidelineStateHandle::begin ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateHandle::begin";
+}
+
+void GuidelineStateHandle::end ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateHandle::end";
+}
+
+void GuidelineStateHandle::handleMousePress ()
+{
+  // Noop
+}
+
+void GuidelineStateHandle::handleMouseRelease ()
+{
+  // Noop
+}
+
+bool GuidelineStateHandle::initialHoverEventsEnable () const
+{
+  return true;
+}
+
+QLineF GuidelineStateHandle::templateHomeLine() const
 {
   // Only applies to template guidelines
   ENGAUGE_ASSERT (false);
