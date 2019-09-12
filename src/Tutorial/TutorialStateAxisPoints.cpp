@@ -30,6 +30,8 @@ void TutorialStateAxisPoints::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateAxisPoints::begin ()";
 
+  context().tutorialDlg().scene().clear ();
+
   m_title = createTitle (tr ("Axis Points"));
   m_background = createPixmapItem (":/engauge/img/panel_axis_points.png",
                                    QPoint (0, 30));
@@ -68,28 +70,8 @@ void TutorialStateAxisPoints::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "TutorialStateAxisPoints::end ()";
 
-  context().tutorialDlg().scene().removeItem (m_title);
-  context().tutorialDlg().scene().removeItem (m_background);
-  context().tutorialDlg().scene().removeItem (m_text0);
-  context().tutorialDlg().scene().removeItem (m_text1);
-  context().tutorialDlg().scene().removeItem (m_text2);
-  // TutorialButtons removes themselves from the scene
-
-  delete m_title;
-  delete m_background;
-  delete m_text0;
-  delete m_text1;
-  delete m_text2;
-  delete m_next;
-  delete m_previous;
-
-  m_title = nullptr;
-  m_background = nullptr;
-  m_text0 = nullptr;
-  m_text1 = nullptr;
-  m_text2 = nullptr;
-  m_next = nullptr;
-  m_previous = nullptr;
+  // It is not safe to remove and deallocate items here since an active TutorialButton
+  // may be on the stack. So we clear the scene as the first step in the next begin()
 }
 
 void TutorialStateAxisPoints::slotNext ()
