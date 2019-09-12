@@ -14,8 +14,8 @@
 #include "TutorialDlg.h"
 #include "TutorialStateContext.h"
 
-const int SCENE_WIDTH = 550;
-const int SCENE_HEIGHT = 450;
+const int SCENE_WIDTH = 580;
+const int SCENE_HEIGHT = 480;
 
 TutorialDlg::TutorialDlg (MainWindow *mainWindow) :
   QDialog (mainWindow),
@@ -27,7 +27,7 @@ TutorialDlg::TutorialDlg (MainWindow *mainWindow) :
 
   // Dialog size is determined by scene size
   QVBoxLayout *layout = new QVBoxLayout;
-  layout->setSizeConstraint (QLayout::SetFixedSize);
+  layout->setSizeConstraint (QLayout::SetMinimumSize);
   setLayout (layout);
 
   createSceneAndView();
