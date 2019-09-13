@@ -18,16 +18,13 @@ GuidelineStateTemplateVerticalRight::~GuidelineStateTemplateVerticalRight ()
 {
 }
 
-bool GuidelineStateTemplateVerticalRight::alwaysVisible () const
-{
-  return false;
-}
-
 void GuidelineStateTemplateVerticalRight::begin ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalRight::begin";
 
-  context().guideline().setLine (templateHomeLine());
+  context().guideline().setLine (templateHomeLine(context().guideline().lineWidthTemplate(),
+                                                  diagonal (sceneRect ()),
+                                                  sceneRect ()));
 }
 
 void GuidelineStateTemplateVerticalRight::end ()
@@ -37,23 +34,27 @@ void GuidelineStateTemplateVerticalRight::end ()
 
 void GuidelineStateTemplateVerticalRight::handleMousePress ()
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalRight::handleMousePress";
+
+  QLineF line = templateHomeLine(context().guideline().lineWidthTemplate(),
+                                 diagonal (sceneRect ()),
+                                 sceneRect ());
+
+  handleMousePressCommon (line,
+                          GUIDELINE_STATE_DEPLOYED_VERTICAL);
 }
 
 void GuidelineStateTemplateVerticalRight::handleMouseRelease ()
 {
-  // See comments in GuidelineStateTemplateHorizontalTop::handleMouseRelease
-  Guideline *guidelineReplacement = new Guideline (*context().guideline().scene(),
-                                                   GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT);
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalRight::handleMouseRelease";
 
-  guidelineReplacement->setAcceptHoverEvents (true);
-
-  context().requestStateTransition (GUIDELINE_STATE_DEPLOYED_VERTICAL);
+  handleMouseReleaseCommon (GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT);
 }
 
-QLineF GuidelineStateTemplateVerticalRight::templateHomeLine () const
+QLineF GuidelineStateTemplateVerticalRight::templateHomeLine (double lineWidth,
+                                                              double diagonal,
+                                                              const QRectF &sceneRect)
 {
-  double lineWidth = context().guideline().lineWidthTemplate();
-  
-  return QLineF (sceneRect().bottomRight() + QPointF (-0.5 * lineWidth, diagonal ()),
-                 sceneRect().topRight() + QPointF (-0.5 * lineWidth, -1.0 * diagonal ()));
+  return QLineF (sceneRect.bottomRight() + QPointF (-0.5 * lineWidth, diagonal),
+                 sceneRect.topRight() + QPointF (-0.5 * lineWidth, -1.0 * diagonal));
 }

@@ -15,7 +15,9 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QLineF>
+#include <QMouseEvent>
 #include <QPen>
+#include <QWidget>
 #include "ZValues.h"
 
 // Template guidelines are thicker so they can be easily clicked on for dragging
@@ -25,7 +27,8 @@ const double GUIDELINE_LINEWIDTH_TEMPLATE = 2;
 //const double GUIDELINE_LINEWIDTH_CLONE = -1;
 
 Guideline::Guideline(QGraphicsScene  &scene,
-                     GuidelineState guidelineStateInitial)
+                     GuidelineState guidelineStateInitial) :
+  m_guidelineVisible (nullptr)
 {
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_GUIDELINE));
 
@@ -54,6 +57,13 @@ Guideline::~Guideline ()
   delete m_context;
 }
 
+void Guideline::bindGuidelineVisible (Guideline *guidelineVisible)
+{
+  m_guidelineVisible = guidelineVisible;
+
+  setSelected (true); // Make sure this has selection focus for the upcoming move
+}
+
 void Guideline::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "Guideline::hoverEnterEvent";
@@ -73,12 +83,48 @@ double Guideline::lineWidthTemplate () const
   return GUIDELINE_LINEWIDTH_TEMPLATE;
 }
 
+void Guideline::mouseMoveEvent (QGraphicsSceneMouseEvent *event)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::mouseMoveEvent event=(" << event->pos().x() << "," << event->pos().y() << ") "
+                              << " scenePos=(" << event->scenePos().x() << "," << event->scenePos().y() << ")";
+
+  // This may be the visible Guideline which does not have its own bound visible Guideline
+  if (m_guidelineVisible != nullptr) {
+
+    // Direct call to QGraphicsLineItem::setPos here does nothing (maybe only one object can move at the same time)
+    // so signal is sent
+    emit signalHandleMoved (event->pos ());
+  }
+
+  QGraphicsLineItem::mouseMoveEvent (event);
+}
+
+void Guideline::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Guideline::mousePressEvent";
+
+  m_context->handleMousePress();
+
+  QGraphicsLineItem::mousePressEvent(event);
+}
+
 void Guideline::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Guideline::mouseReleaseEvent";
+
   // Handle the event
   QGraphicsLineItem::mouseReleaseEvent (event);
 
   m_context->handleMouseRelease ();
+}
+
+void Guideline::paint(QPainter *painter,
+                      const QStyleOptionGraphicsItem *option,
+                      QWidget *widget)
+{
+  QGraphicsLineItem::paint (painter,
+                            option,
+                            widget);
 }
 
 void Guideline::setHover (bool hover)
@@ -96,4 +142,11 @@ void Guideline::setHover (bool hover)
                   GUIDELINE_LINEWIDTH_TEMPLATE));
 
   }
+}
+
+void Guideline::slotHandleMoved (QPointF pos)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Guideline::slotHandleMoved pos=(" << pos.x() << ", " << pos.y() << ")";
+
+  setPos (pos);
 }

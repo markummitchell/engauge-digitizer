@@ -8,6 +8,7 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateHorizontalBottom.h"
 #include "Logger.h"
+#include <QObject>
 
 GuidelineStateTemplateHorizontalBottom::GuidelineStateTemplateHorizontalBottom (GuidelineStateContext &context) :
   GuidelineStateTemplateAbstract (context)
@@ -18,52 +19,45 @@ GuidelineStateTemplateHorizontalBottom::~GuidelineStateTemplateHorizontalBottom 
 {
 }
 
-bool GuidelineStateTemplateHorizontalBottom::alwaysVisible () const
-{
-  return false;
-}
-
 void GuidelineStateTemplateHorizontalBottom::begin ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottom::begin";
 
-  context().guideline().setLine (templateHomeLine());
+  context().guideline().setLine (templateHomeLine(context().guideline().lineWidthTemplate(),
+                                                  diagonal (sceneRect ()),
+                                                  sceneRect ()));
 }
 
 void GuidelineStateTemplateHorizontalBottom::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottom::end";
+
+  context().requestStateTransition (GUIDELINE_STATE_HANDLE);
 }
 
 void GuidelineStateTemplateHorizontalBottom::handleMousePress ()
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottom::handleMousePress";
+
+  QLineF line = templateHomeLine(context().guideline().lineWidthTemplate(),
+                                 diagonal (sceneRect ()),
+                                 sceneRect ());
+
+  handleMousePressCommon (line,
+                          GUIDELINE_STATE_DEPLOYED_HORIZONTAL);
 }
 
 void GuidelineStateTemplateHorizontalBottom::handleMouseRelease ()
 {
-  // Clone this Guideline and put the clone back at the border. We cannot move the
-  // currently dragged line back to the border since the current event is handled
-  // asynchronously and the final move is not until after this method has completed
-  // (which would override any setLine() call to move this Guideline back to the border).
-  // The returned pointer is not saved since the object is already registered with
-  // the QGraphicsScene
-  Guideline *guidelineReplacement = new Guideline (*context().guideline().scene(),
-                                                   GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM);
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottom::handleMouseRelease";
 
-  // We are currently in DigitizeStateSelect and the other 3 template guidelines
-  // have hover enabled. The Guideline constructor above assumed we are not in
-  // DigitizeStateSelect (since right here is the only exception) so we enable
-  // hover events here
-  guidelineReplacement->setAcceptHoverEvents (true);
-
-  // Transition state for the current Guideline
-  context().requestStateTransition (GUIDELINE_STATE_DEPLOYED_HORIZONTAL);
+  handleMouseReleaseCommon (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM);
 }
 
-QLineF GuidelineStateTemplateHorizontalBottom::templateHomeLine () const
+QLineF GuidelineStateTemplateHorizontalBottom::templateHomeLine (double lineWidth,
+                                                                 double diagonal,
+                                                                 const QRectF &sceneRect)
 {
-  double lineWidth = context().guideline().lineWidthTemplate();
-  
-  return QLineF (sceneRect().bottomLeft() + QPointF (-1.0 * diagonal(), -0.5 * lineWidth),
-                 sceneRect().bottomRight() + QPointF (diagonal(), -0.5 * lineWidth));
+  return QLineF (sceneRect.bottomLeft() + QPointF (-1.0 * diagonal, -0.5 * lineWidth),
+                 sceneRect.bottomRight() + QPointF (diagonal, -0.5 * lineWidth));
 }

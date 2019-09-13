@@ -22,7 +22,7 @@ GuidelineStateHandle::~GuidelineStateHandle ()
 
 bool GuidelineStateHandle::alwaysVisible () const
 {
-  return true;
+  return false;
 }
 
 void GuidelineStateHandle::begin ()
@@ -37,23 +37,19 @@ void GuidelineStateHandle::end ()
 
 void GuidelineStateHandle::handleMousePress ()
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleMousePress";
+
   // Noop
 }
 
 void GuidelineStateHandle::handleMouseRelease ()
 {
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleMouseRelease";
+
   // Noop
 }
 
 bool GuidelineStateHandle::initialHoverEventsEnable () const
 {
   return true;
-}
-
-QLineF GuidelineStateHandle::templateHomeLine() const
-{
-  // Only applies to template guidelines
-  ENGAUGE_ASSERT (false);
-  
-  return QLineF (0, 0, 0, 0);
 }

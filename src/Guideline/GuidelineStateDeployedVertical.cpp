@@ -19,11 +19,6 @@ GuidelineStateDeployedVertical::~GuidelineStateDeployedVertical ()
 {
 }
 
-bool GuidelineStateDeployedVertical::alwaysVisible () const
-{
-  return true;
-}
-
 void GuidelineStateDeployedVertical::begin ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedVertical::begin";

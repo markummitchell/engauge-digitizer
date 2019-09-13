@@ -17,12 +17,15 @@ public:
   GuidelineStateTemplateHorizontalTop(GuidelineStateContext &context);
   virtual ~GuidelineStateTemplateHorizontalTop();
 
-  virtual bool alwaysVisible () const;
   virtual void begin ();
   virtual void end ();
   virtual void handleMousePress ();
   virtual void handleMouseRelease ();
-  virtual QLineF templateHomeLine () const;
+
+  /// Returns the geometry of a template guideline
+  static QLineF templateHomeLine (double lineWidth,
+                                  double diagonal,
+                                  const QRectF &sceneRect);
 
 private:
   GuidelineStateTemplateHorizontalTop();

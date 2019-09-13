@@ -40,16 +40,13 @@ public:
   /// True/false to enable/disable hover events initially for the Guideline
   virtual bool initialHoverEventsEnable () const = 0;
 
-  /// Returns the geometry of a template guideline
-  virtual QLineF templateHomeLine () const = 0;
-
 protected:
 
   /// Context in charge of the state classes
   GuidelineStateContext &context () const;
   
   /// Length of diagonal of scene in screen coordinates (pixels)
-  double diagonal () const;
+  double diagonal (const QRectF &sceneRect) const;
 
   /// Scene rectangle in screen coordinates (=pixels)
   QRectF sceneRect () const;

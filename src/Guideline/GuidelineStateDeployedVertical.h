@@ -17,7 +17,6 @@ public:
   GuidelineStateDeployedVertical(GuidelineStateContext &context);
   virtual ~GuidelineStateDeployedVertical();
 
-  virtual bool alwaysVisible () const;
   virtual void begin();
   virtual void end();
 

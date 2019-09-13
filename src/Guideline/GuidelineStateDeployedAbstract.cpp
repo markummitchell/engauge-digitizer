@@ -20,6 +20,11 @@ GuidelineStateDeployedAbstract::~GuidelineStateDeployedAbstract ()
 {
 }
 
+bool GuidelineStateDeployedAbstract::alwaysVisible () const
+{
+  return true;
+}
+
 void GuidelineStateDeployedAbstract::handleMousePress ()
 {
   // Noop
@@ -33,12 +38,4 @@ void GuidelineStateDeployedAbstract::handleMouseRelease ()
 bool GuidelineStateDeployedAbstract::initialHoverEventsEnable () const
 {
   return true;
-}
-
-QLineF GuidelineStateDeployedAbstract::templateHomeLine() const
-{
-  // Only applies to template guidelines
-  ENGAUGE_ASSERT (false);
-  
-  return QLineF (0, 0, 0, 0);
 }

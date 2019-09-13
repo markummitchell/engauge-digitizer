@@ -48,10 +48,3 @@ bool GuidelineStateNull::initialHoverEventsEnable () const
 {
   return false;
 }
-
-QLineF GuidelineStateNull::templateHomeLine() const
-{
-  LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateNull::templateHomeLine";
-  
-  return QLineF (0, 0, 0, 0);
-}

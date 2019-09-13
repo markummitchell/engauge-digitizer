@@ -27,10 +27,10 @@ GuidelineStateContext &GuidelineStateAbstractBase::context () const
   return m_context;
 }
 
-double GuidelineStateAbstractBase::diagonal () const
+double GuidelineStateAbstractBase::diagonal (const QRectF &sceneRect) const
 {
-  return qSqrt (qPow (sceneRect().width(), 2) +
-                qPow (sceneRect().height(), 2));
+  return qSqrt (qPow (sceneRect.width(), 2) +
+                qPow (sceneRect.height(), 2));
 }
 
 QRectF GuidelineStateAbstractBase::sceneRect () const

@@ -46,9 +46,6 @@ public:
   /// Request a state transition
   void requestStateTransition (GuidelineState guidelineState);
 
-  /// Returns the geometry of a template guideline
-  QLineF templateHomeLine () const;
-
 private:
   GuidelineStateContext();
 

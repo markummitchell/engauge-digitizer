@@ -18,7 +18,18 @@ public:
   GuidelineStateTemplateAbstract(GuidelineStateContext &context);
   virtual ~GuidelineStateTemplateAbstract();
 
+  virtual bool alwaysVisible () const;
   virtual bool initialHoverEventsEnable () const;
+
+protected:
+
+  /// Common mouse press handling
+  void handleMousePressCommon (const QLineF &line,
+                               GuidelineState stateDeployed);
+
+  /// Common mouse release handling
+  void handleMouseReleaseCommon (GuidelineState stateReplacement);
+
 };
 
 #endif // GUIDELINE_STATE_TEMPLATE_ABSTRACT_H

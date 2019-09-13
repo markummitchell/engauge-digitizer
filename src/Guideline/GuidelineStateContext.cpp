@@ -83,13 +83,6 @@ void GuidelineStateContext::requestStateTransition (GuidelineState guidelineStat
   m_nextState = guidelineState;
 }
 
-QLineF GuidelineStateContext::templateHomeLine() const
-{
-  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
-
-  return m_states[m_currentState]->templateHomeLine ();
-}
-
 void GuidelineStateContext::transitionIfRequested ()
 {
   if (m_currentState != m_nextState) {

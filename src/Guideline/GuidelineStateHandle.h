@@ -29,7 +29,7 @@ public:
   virtual void handleMousePress ();
   virtual void handleMouseRelease ();  
   virtual bool initialHoverEventsEnable () const;
-  virtual QLineF templateHomeLine () const;
+
 };
 
 #endif // GUIDELINE_STATE_HANDLE_H

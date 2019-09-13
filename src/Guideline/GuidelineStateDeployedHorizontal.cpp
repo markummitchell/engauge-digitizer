@@ -19,11 +19,6 @@ GuidelineStateDeployedHorizontal::~GuidelineStateDeployedHorizontal ()
 {
 }
 
-bool GuidelineStateDeployedHorizontal::alwaysVisible () const
-{
-  return true;
-}
-
 void GuidelineStateDeployedHorizontal::begin ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedHorizontal::begin";
