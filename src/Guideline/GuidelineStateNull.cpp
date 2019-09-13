@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
+#include "Guideline.h"
 #include "GuidelineStateAbstractBase.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateNull.h"
@@ -27,6 +28,14 @@ bool GuidelineStateNull::alwaysVisible () const
 void GuidelineStateNull::begin ()
 {
   LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateNull::begin";
+
+  // Move out of the way
+  context().guideline().setLine (0, 0, 0, 0);
+}
+
+QColor GuidelineStateNull::colorForStateAndHover (bool /* hover */) const
+{
+  return QColor (Qt::transparent);
 }
 
 void GuidelineStateNull::end ()

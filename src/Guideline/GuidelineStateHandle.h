@@ -25,6 +25,7 @@ public:
 
   virtual bool alwaysVisible () const;
   virtual void begin ();
+  virtual QColor colorForStateAndHover (bool hover) const;
   virtual void end ();
   virtual void handleMousePress ();
   virtual void handleMouseRelease ();  

@@ -48,6 +48,13 @@ bool GuidelineStateContext::alwaysVisible () const
   return m_states[m_currentState]->alwaysVisible ();
 }
 
+QColor GuidelineStateContext::colorForStateAndHover (bool hover) const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->colorForStateAndHover (hover);
+}
+
 Guideline &GuidelineStateContext::guideline ()
 {
   return m_guideline;
@@ -81,6 +88,16 @@ void GuidelineStateContext::requestStateTransition (GuidelineState guidelineStat
   ENGAUGE_ASSERT (guidelineState != NUM_GUIDELINE_STATES);
 
   m_nextState = guidelineState;
+}
+
+void GuidelineStateContext::setStateReplacement (GuidelineState stateReplacement)
+{
+  m_stateReplacement = stateReplacement;
+}
+
+GuidelineState GuidelineStateContext::stateReplacement () const
+{
+  return m_stateReplacement;
 }
 
 void GuidelineStateContext::transitionIfRequested ()

@@ -61,7 +61,8 @@ void Guideline::bindGuidelineVisible (Guideline *guidelineVisible)
 {
   m_guidelineVisible = guidelineVisible;
 
-  setSelected (true); // Make sure this has selection focus for the upcoming move
+  connect (this, SIGNAL (signalHandleMoved (QPointF)),
+           guidelineVisible, SLOT (slotHandleMoved (QPointF)));
 }
 
 void Guideline::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
@@ -85,7 +86,7 @@ double Guideline::lineWidthTemplate () const
 
 void Guideline::mouseMoveEvent (QGraphicsSceneMouseEvent *event)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::mouseMoveEvent event=(" << event->pos().x() << "," << event->pos().y() << ") "
+  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::mouseMoveEvent pos=(" << event->pos().x() << "," << event->pos().y() << ") "
                               << " scenePos=(" << event->scenePos().x() << "," << event->scenePos().y() << ")";
 
   // This may be the visible Guideline which does not have its own bound visible Guideline
@@ -93,7 +94,7 @@ void Guideline::mouseMoveEvent (QGraphicsSceneMouseEvent *event)
 
     // Direct call to QGraphicsLineItem::setPos here does nothing (maybe only one object can move at the same time)
     // so signal is sent
-    emit signalHandleMoved (event->pos ());
+    emit signalHandleMoved (event->scenePos ());
   }
 
   QGraphicsLineItem::mouseMoveEvent (event);
@@ -103,9 +104,9 @@ void Guideline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "Guideline::mousePressEvent";
 
-  m_context->handleMousePress();
-
   QGraphicsLineItem::mousePressEvent(event);
+
+  m_context->handleMousePress();
 }
 
 void Guideline::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
@@ -129,19 +130,10 @@ void Guideline::paint(QPainter *painter,
 
 void Guideline::setHover (bool hover)
 {
-  if (hover || m_context->alwaysVisible ()) {
+  QColor color = m_context->colorForStateAndHover (hover);
 
-    QColor color (Qt::blue);
-
-    setPen (QPen (QBrush (color),
-                  GUIDELINE_LINEWIDTH_TEMPLATE));
-
-  } else {
-
-    setPen (QPen (QBrush (Qt::transparent),
-                  GUIDELINE_LINEWIDTH_TEMPLATE));
-
-  }
+  setPen (QPen (QBrush (color),
+                GUIDELINE_LINEWIDTH_TEMPLATE));
 }
 
 void Guideline::slotHandleMoved (QPointF pos)

@@ -25,6 +25,11 @@ bool GuidelineStateDeployedAbstract::alwaysVisible () const
   return true;
 }
 
+QColor GuidelineStateDeployedAbstract::colorForStateAndHover (bool /* hover */) const
+{
+  return QColor (Qt::blue);
+}
+
 void GuidelineStateDeployedAbstract::handleMousePress ()
 {
   // Noop

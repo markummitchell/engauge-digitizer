@@ -19,6 +19,7 @@ public:
   virtual ~GuidelineStateDeployedAbstract();
 
   virtual bool alwaysVisible () const;
+  virtual QColor colorForStateAndHover (bool hover) const;
   virtual void handleMousePress ();
   virtual void handleMouseRelease ();  
   virtual bool initialHoverEventsEnable () const;

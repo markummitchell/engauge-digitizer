@@ -19,16 +19,15 @@ public:
   virtual ~GuidelineStateTemplateAbstract();
 
   virtual bool alwaysVisible () const;
+  virtual QColor colorForStateAndHover (bool hover) const;
   virtual bool initialHoverEventsEnable () const;
 
 protected:
 
   /// Common mouse press handling
   void handleMousePressCommon (const QLineF &line,
-                               GuidelineState stateDeployed);
-
-  /// Common mouse release handling
-  void handleMouseReleaseCommon (GuidelineState stateReplacement);
+                               GuidelineState stateDeployed,
+                               GuidelineState stateReplacement);
 
 };
 

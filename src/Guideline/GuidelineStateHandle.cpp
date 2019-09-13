@@ -30,6 +30,11 @@ void GuidelineStateHandle::begin ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateHandle::begin";
 }
 
+QColor GuidelineStateHandle::colorForStateAndHover (bool /* hover */) const
+{
+  return QColor (Qt::transparent);
+}
+
 void GuidelineStateHandle::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateHandle::end";
@@ -46,7 +51,14 @@ void GuidelineStateHandle::handleMouseRelease ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleMouseRelease";
 
-  // Noop
+  Guideline *guidelineReplacement = new Guideline (*context().guideline().scene(),
+                                                   context().stateReplacement ());
+
+  guidelineReplacement->setAcceptHoverEvents (true);
+
+  // This is a small memory leak, since we are not actually deleting this no-longer-needed handle,
+  // but a very reliable way to get this handle out of the way
+  context().requestStateTransition (GUIDELINE_STATE_NULL);
 }
 
 bool GuidelineStateHandle::initialHoverEventsEnable () const

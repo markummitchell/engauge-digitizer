@@ -7,6 +7,8 @@
 #ifndef GUIDELINE_STATE_CONTEXT_H
 #define GUIDELINE_STATE_CONTEXT_H
 
+#include <QColor>
+
 #include "GuidelineState.h"
 #include "GuidelineStateAbstractBase.h"
 #include <QLineF>
@@ -25,6 +27,9 @@ public:
 
   /// True/false to keep object always visible (typically for deployed/template respectively)
   bool alwaysVisible () const;
+
+  /// Return color as a function of state and hover flag
+  QColor colorForStateAndHover (bool hover) const;
 
   /// Guideline that owns this context class
   Guideline &guideline ();
@@ -46,6 +51,12 @@ public:
   /// Request a state transition
   void requestStateTransition (GuidelineState guidelineState);
 
+  /// Pass replacement Guideline state from template Guidelines to handle Guideline
+  void setStateReplacement (GuidelineState stateReplacement);
+
+  /// Get method for replacement state
+  GuidelineState stateReplacement () const;
+
 private:
   GuidelineStateContext();
 
@@ -57,6 +68,8 @@ private:
   QVector<GuidelineStateAbstractBase*> m_states;
   GuidelineState m_currentState;
   GuidelineState m_nextState;
+
+  GuidelineState m_stateReplacement;
 };
 
 #endif // GUIDELINE_STATE_CONTEXT_H

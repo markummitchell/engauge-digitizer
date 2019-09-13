@@ -41,14 +41,13 @@ void GuidelineStateTemplateVerticalRight::handleMousePress ()
                                  sceneRect ());
 
   handleMousePressCommon (line,
-                          GUIDELINE_STATE_DEPLOYED_VERTICAL);
+                          GUIDELINE_STATE_DEPLOYED_VERTICAL,
+                          GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT);
 }
 
 void GuidelineStateTemplateVerticalRight::handleMouseRelease ()
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalRight::handleMouseRelease";
-
-  handleMouseReleaseCommon (GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT);
+  // Not called
 }
 
 QLineF GuidelineStateTemplateVerticalRight::templateHomeLine (double lineWidth,

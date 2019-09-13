@@ -7,6 +7,8 @@
 #ifndef GUIDELINE_STATE_ABSTRACT_BASE_H
 #define GUIDELINE_STATE_ABSTRACT_BASE_H
 
+#include <QColor>
+
 #include "GuidelineState.h"
 #include <QLineF>
 #include <QRectF>
@@ -26,6 +28,9 @@ public:
 
   /// Transition into state
   virtual void begin () = 0;
+
+  /// Return color as a function of state and hover flag
+  virtual QColor colorForStateAndHover (bool hover) const = 0;
 
   /// Transition out of state
   virtual void end () = 0;

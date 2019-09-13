@@ -44,14 +44,13 @@ void GuidelineStateTemplateHorizontalBottom::handleMousePress ()
                                  sceneRect ());
 
   handleMousePressCommon (line,
-                          GUIDELINE_STATE_DEPLOYED_HORIZONTAL);
+                          GUIDELINE_STATE_DEPLOYED_HORIZONTAL,
+                          GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM);
 }
 
 void GuidelineStateTemplateHorizontalBottom::handleMouseRelease ()
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottom::handleMouseRelease";
-
-  handleMouseReleaseCommon (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM);
+  // Not called
 }
 
 QLineF GuidelineStateTemplateHorizontalBottom::templateHomeLine (double lineWidth,
