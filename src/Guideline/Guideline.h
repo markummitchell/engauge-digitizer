@@ -41,8 +41,8 @@ public:
   /// Unset highlighting triggered by hover enter
   virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 
-  /// Displayed line width of template guidelines
-  double lineWidthTemplate () const;
+  /// Line width. This is used to push templates just inside the scene borders
+  double lineWidthTemplate() const;
 
   /// Forwad movements to visible Guideline
   virtual void mouseMoveEvent (QGraphicsSceneMouseEvent *event);
@@ -58,6 +58,9 @@ public:
                      const QStyleOptionGraphicsItem *option,
                      QWidget *widget = Q_NULLPTR);
 
+  /// Set pen color and line width
+  void setPenColor (Qt::GlobalColor color);
+
 signals:
 
   /// Signal for cloned deployed Guideline from handle Guideline
@@ -70,6 +73,9 @@ public slots:
 
 private:
   Guideline();
+
+  // Forces use of setPenColor instead of QGraphicsLineItem::setPen
+  using QGraphicsLineItem::setPen;
 
   // Context is allocated as a final step in the constructor, at which point
   // this class has registered with the QGraphicsScene

@@ -25,6 +25,10 @@ public:
                          GuidelineState guidelineStateInitial);
   virtual ~GuidelineStateContext();
 
+  /// Allow/skip painting of the owner Guideline. This prevents display of selection markings on
+  /// otherwise-invisible handle Guideline
+  bool doPaint () const;
+
   /// Guideline that owns this context class
   Guideline &guideline ();
 

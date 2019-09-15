@@ -10,6 +10,8 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateHandle.h"
 #include "Logger.h"
+#include <QPen>
+#include "ZValues.h"
 
 GuidelineStateHandle::GuidelineStateHandle (GuidelineStateContext &context) :
   GuidelineStateAbstractBase (context)
@@ -23,6 +25,19 @@ GuidelineStateHandle::~GuidelineStateHandle ()
 void GuidelineStateHandle::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateHandle::begin";
+
+  context().guideline().setZValue (Z_VALUE_GUIDELINE_HANDLE);
+  context().guideline().setVisible (true);
+  context().guideline().setFlags (QGraphicsItem::ItemIsFocusable |
+                                  QGraphicsItem::ItemIsSelectable |
+                                  QGraphicsItem::ItemIsMovable);
+  context().guideline().setAcceptHoverEvents (false);
+  context().guideline().setPenColor (Qt::transparent);
+}
+
+bool GuidelineStateHandle::doPaint () const
+{
+  return false;
 }
 
 void GuidelineStateHandle::end ()

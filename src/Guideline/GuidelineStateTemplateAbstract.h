@@ -19,6 +19,7 @@ public:
   virtual ~GuidelineStateTemplateAbstract();
 
   void beginCommon (const QLineF &line);
+  virtual bool doPaint () const;
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
 

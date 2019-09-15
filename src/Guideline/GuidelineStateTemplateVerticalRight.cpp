@@ -42,7 +42,7 @@ void GuidelineStateTemplateVerticalRight::handleMousePress ()
 
   handleMousePressCommon (line,
                           GUIDELINE_STATE_DEPLOYED_VERTICAL,
-                          GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT);
+                          GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT);
 }
 
 void GuidelineStateTemplateVerticalRight::handleMouseRelease ()

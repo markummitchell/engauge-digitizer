@@ -10,6 +10,10 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedAbstract.h"
 #include "Logger.h"
+#include <QPen>
+#include "ZValues.h"
+
+const Qt::GlobalColor COLOR_DEPLOYED = Qt::green;
 
 GuidelineStateDeployedAbstract::GuidelineStateDeployedAbstract (GuidelineStateContext &context) :
   GuidelineStateAbstractBase (context)
@@ -24,7 +28,18 @@ void GuidelineStateDeployedAbstract::begin ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedAbstract::begin";
 
+  context().guideline().setZValue (Z_VALUE_GUIDELINE_DEPLOYED);
+  context().guideline().setVisible (true);
+  context().guideline().setFlags (QGraphicsItem::ItemIsFocusable |
+                                  QGraphicsItem::ItemIsSelectable |
+                                  QGraphicsItem::ItemIsMovable);
   context().guideline().setAcceptHoverEvents (false);
+  context().guideline().setPenColor (COLOR_DEPLOYED);
+}
+
+bool GuidelineStateDeployedAbstract::doPaint () const
+{
+  return true;
 }
 
 void GuidelineStateDeployedAbstract::end ()

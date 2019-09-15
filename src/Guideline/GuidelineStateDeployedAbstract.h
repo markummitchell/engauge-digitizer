@@ -19,6 +19,7 @@ public:
   virtual ~GuidelineStateDeployedAbstract();
 
   virtual void begin ();
+  virtual bool doPaint () const;
   virtual void end ();
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();

@@ -41,6 +41,13 @@ GuidelineStateContext::~GuidelineStateContext ()
 {
 }
 
+bool GuidelineStateContext::doPaint () const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->doPaint ();
+}
+
 Guideline &GuidelineStateContext::guideline ()
 {
   return m_guideline;

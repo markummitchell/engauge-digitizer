@@ -20,25 +20,14 @@
 #include <QWidget>
 #include "ZValues.h"
 
-// Template guidelines are thicker so they can be easily clicked on for dragging
-const double GUIDELINE_LINEWIDTH_TEMPLATE = 2;
-
-// Cloned guidelines are as thin as possible so their measurements are as precise as possible
-//const double GUIDELINE_LINEWIDTH_CLONE = -1;
+const double GUIDELINE_LINEWIDTH = 2;
 
 Guideline::Guideline(QGraphicsScene  &scene,
                      GuidelineState guidelineStateInitial) :
   m_guidelineVisible (nullptr)
 {
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_GUIDELINE));
-
-  // Make this transparent now, but always visible so hover events work
   scene.addItem (this);
-  setZValue (Z_VALUE_CURVE);
-  setVisible (true);
-  setFlags (QGraphicsItem::ItemIsFocusable |
-            QGraphicsItem::ItemIsSelectable |
-            QGraphicsItem::ItemIsMovable);
 
   // Create context after registering with the scene. The transition
   // into the initial state will position the line if it is a template guideline
@@ -75,23 +64,20 @@ void Guideline::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
   m_context->handleHoverLeaveEvent ();
 }
 
-double Guideline::lineWidthTemplate () const
+double Guideline::lineWidthTemplate() const
 {
-  return GUIDELINE_LINEWIDTH_TEMPLATE;
+  return GUIDELINE_LINEWIDTH;
 }
 
 void Guideline::mouseMoveEvent (QGraphicsSceneMouseEvent *event)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::mouseMoveEvent state=" << m_context->state ().toLatin1().data()
-                              << " pos=(" << event->pos().x() << "," << event->pos().y() << ") "
-                              << " scenePos=(" << event->scenePos().x() << "," << event->scenePos().y() << ")";
+  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::mouseMoveEvent";
 
-  // This may be the visible Guideline which does not have its own bound visible Guideline
+  // Skip if there is no bound visible Guideline
   if (m_guidelineVisible != nullptr) {
 
-    // Direct call to QGraphicsLineItem::setPos here does nothing (maybe only one object can move at the same time)
-    // so signal is sent
-    emit signalHandleMoved (event->scenePos ());
+    // Send the position of this Guideline. Using pos and scenePos in the event will not work correctly
+    emit signalHandleMoved (pos ());
   }
 
   QGraphicsLineItem::mouseMoveEvent (event);
@@ -120,9 +106,18 @@ void Guideline::paint(QPainter *painter,
                       const QStyleOptionGraphicsItem *option,
                       QWidget *widget)
 {
-  QGraphicsLineItem::paint (painter,
-                            option,
-                            widget);
+  if (m_context->doPaint ()) {
+
+    QGraphicsLineItem::paint (painter,
+                              option,
+                              widget);
+  }
+}
+
+void Guideline::setPenColor (Qt::GlobalColor color)
+{
+  setPen (QPen (QBrush (QColor (color)),
+                GUIDELINE_LINEWIDTH));
 }
 
 void Guideline::slotHandleMoved (QPointF pos)

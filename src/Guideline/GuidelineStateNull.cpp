@@ -10,6 +10,8 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateNull.h"
 #include "Logger.h"
+#include <QPen>
+#include "ZValues.h"
 
 GuidelineStateNull::GuidelineStateNull (GuidelineStateContext &context) :
   GuidelineStateAbstractBase (context)
@@ -24,8 +26,15 @@ void GuidelineStateNull::begin ()
 {
   LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateNull::begin";
 
-  // Move out of the way
-  context().guideline().setLine (0, 0, 0, 0);
+  context().guideline().setZValue (Z_VALUE_GUIDELINE_NULL);
+  context().guideline().setVisible (false); //
+  context().guideline().setAcceptHoverEvents (false);
+  context().guideline().setPenColor (Qt::transparent);
+}
+
+bool GuidelineStateNull::doPaint () const
+{
+  return false;
 }
 
 void GuidelineStateNull::end ()
@@ -37,14 +46,14 @@ void GuidelineStateNull::handleHoverEnterEvent ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleHoverEnterEvent";
 
-  // Noop
+  // Noop. Never called since hover only works when visible
 }
 
 void GuidelineStateNull::handleHoverLeaveEvent ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleHoverEnterEvent";
 
-  // Noop
+  // Noop. Never called since hover only works when visible
 }
 
 void GuidelineStateNull::handleMousePress ()

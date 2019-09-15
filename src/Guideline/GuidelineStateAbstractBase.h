@@ -27,6 +27,10 @@ public:
   /// Transition into state
   virtual void begin () = 0;
 
+  /// Allow/skip painting of the owner Guideline. This prevents display of selection markings on
+  /// otherwise-invisible handle Guideline
+  virtual bool doPaint () const = 0;
+
   /// Transition out of state
   virtual void end () = 0;
 

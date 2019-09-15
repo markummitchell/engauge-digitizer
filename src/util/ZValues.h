@@ -12,6 +12,10 @@ extern const int Z_VALUE_BACKGROUND;
 extern const int Z_VALUE_CURVE;
 extern const int Z_VALUE_CURVE_ENDPOINT;
 extern const int Z_VALUE_GRID;
+extern const int Z_VALUE_GUIDELINE_DEPLOYED;
+extern const int Z_VALUE_GUIDELINE_HANDLE;
+extern const int Z_VALUE_GUIDELINE_NULL;
+extern const int Z_VALUE_GUIDELINE_TEMPLATE;
 extern const int Z_VALUE_POINT;
 
 #endif // Z_VALUES_H
