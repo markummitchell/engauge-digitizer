@@ -40,10 +40,13 @@ public:
 
   /// At the start of dragging, convert the template Guideline into an invisible handle and
   /// visible slaved deployed Guideline
-  void handleMousePress ();
+  void handleMousePress (const QPointF &posScene);
   
   /// At the end of dragging, clone the Guideline that owns the state machine where these states live
   void handleMouseRelease ();
+
+  /// Return line parallel to an axis line, that passes through the specified point
+  QLineF lineFromPoint (const QPointF &point) const;
 
   /// Request a state transition
   void requestStateTransition (GuidelineState guidelineState);

@@ -9,6 +9,7 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedVertical.h"
 #include "Logger.h"
+#include <QGraphicsScene>
 
 GuidelineStateDeployedVertical::GuidelineStateDeployedVertical (GuidelineStateContext &context) :
   GuidelineStateDeployedAbstract (context)
@@ -17,6 +18,14 @@ GuidelineStateDeployedVertical::GuidelineStateDeployedVertical (GuidelineStateCo
 
 GuidelineStateDeployedVertical::~GuidelineStateDeployedVertical ()
 {
+}
+
+QLineF GuidelineStateDeployedVertical::lineFromPoint (const QPointF &point) const
+{
+  double height = context().guideline().scene()->height();
+
+  return QLineF (QPointF (point.x(), 0),
+                 QPointF (point.x(), height - 1));
 }
 
 QString GuidelineStateDeployedVertical::state () const

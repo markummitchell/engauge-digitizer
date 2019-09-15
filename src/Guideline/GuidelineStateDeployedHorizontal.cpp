@@ -9,6 +9,7 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedHorizontal.h"
 #include "Logger.h"
+#include <QGraphicsScene>
 
 GuidelineStateDeployedHorizontal::GuidelineStateDeployedHorizontal (GuidelineStateContext &context) :
   GuidelineStateDeployedAbstract (context)
@@ -17,6 +18,14 @@ GuidelineStateDeployedHorizontal::GuidelineStateDeployedHorizontal (GuidelineSta
 
 GuidelineStateDeployedHorizontal::~GuidelineStateDeployedHorizontal ()
 {
+}
+
+QLineF GuidelineStateDeployedHorizontal::lineFromPoint (const QPointF &point) const
+{
+  double width = context().guideline().scene()->width();
+
+  return QLineF (QPointF (0, point.y()),
+                 QPointF (width - 1, point.y()));
 }
 
 QString GuidelineStateDeployedHorizontal::state () const

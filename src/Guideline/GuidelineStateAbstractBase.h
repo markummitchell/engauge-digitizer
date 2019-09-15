@@ -7,10 +7,10 @@
 #ifndef GUIDELINE_STATE_ABSTRACT_BASE_H
 #define GUIDELINE_STATE_ABSTRACT_BASE_H
 
-#include <QColor>
-
 #include "GuidelineState.h"
+#include <QColor>
 #include <QLineF>
+#include <QPointF>
 #include <QRectF>
 #include <QString>
 
@@ -42,10 +42,13 @@ public:
 
   /// At the start of dragging, convert the template Guideline into an invisible handle and visible
   /// slaved deployed Guideline
-  virtual void handleMousePress () = 0;
+  virtual void handleMousePress (const QPointF &posScene) = 0;
   
   /// At the end of dragging, clone the Guideline that owns the state machine where these states live
   virtual void handleMouseRelease () = 0;
+
+  /// Return line parallel to an axis line, that passes through the specified point
+  virtual QLineF lineFromPoint (const QPointF &point) const = 0;
 
   /// State as a string for debugging only
   virtual QString state () const = 0;
@@ -54,9 +57,6 @@ protected:
 
   /// Context in charge of the state classes
   GuidelineStateContext &context () const;
-  
-  /// Length of diagonal of scene in screen coordinates (pixels)
-  double diagonal (const QRectF &sceneRect) const;
 
   /// Scene rectangle in screen coordinates (=pixels)
   QRectF sceneRect () const;

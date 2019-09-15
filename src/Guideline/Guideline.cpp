@@ -15,12 +15,13 @@
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
 #include <QLineF>
+#include <qmath.h>
 #include <QMouseEvent>
 #include <QPen>
 #include <QWidget>
 #include "ZValues.h"
 
-const double GUIDELINE_LINEWIDTH = 2;
+const double GUIDELINE_LINEWIDTH = 1;
 
 Guideline::Guideline(QGraphicsScene  &scene,
                      GuidelineState guidelineStateInitial) :
@@ -76,8 +77,9 @@ void Guideline::mouseMoveEvent (QGraphicsSceneMouseEvent *event)
   // Skip if there is no bound visible Guideline
   if (m_guidelineVisible != nullptr) {
 
-    // Send the position of this Guideline. Using pos and scenePos in the event will not work correctly
-    emit signalHandleMoved (pos ());
+    // Send the position of this event
+    QPointF pos = event->scenePos ();
+    emit signalHandleMoved (pos);
   }
 
   QGraphicsLineItem::mouseMoveEvent (event);
@@ -89,7 +91,7 @@ void Guideline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
   QGraphicsLineItem::mousePressEvent(event);
 
-  m_context->handleMousePress();
+  m_context->handleMousePress(event->scenePos());
 }
 
 void Guideline::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
@@ -124,5 +126,14 @@ void Guideline::slotHandleMoved (QPointF pos)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "Guideline::slotHandleMoved pos=(" << pos.x() << ", " << pos.y() << ")";
 
-  setPos (pos);
+   updateGeometry (pos);
+}
+
+void Guideline::updateGeometry (const QPointF &pos)
+{
+  // If graph transformation is known then we draw the line along a graph axis, otherwise
+  // along a screen axis
+  QLineF line = m_context->lineFromPoint (pos);
+
+  setLine (line);
 }

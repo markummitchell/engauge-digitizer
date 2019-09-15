@@ -59,7 +59,7 @@ void GuidelineStateHandle::handleHoverLeaveEvent ()
   // Noop
 }
 
-void GuidelineStateHandle::handleMousePress ()
+void GuidelineStateHandle::handleMousePress (const QPointF & /* posScene */)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleMousePress";
 
@@ -78,6 +78,12 @@ void GuidelineStateHandle::handleMouseRelease ()
   // This is a small memory leak, since we are not actually deleting this no-longer-needed handle,
   // but a very reliable way to get this handle out of the way
   context().requestStateTransition (GUIDELINE_STATE_NULL);
+}
+
+QLineF GuidelineStateHandle::lineFromPoint (const QPointF &/* point */) const
+{
+  return QLineF (QPointF (0, 0),
+                 QPointF (0, 0));
 }
 
 QString GuidelineStateHandle::state () const

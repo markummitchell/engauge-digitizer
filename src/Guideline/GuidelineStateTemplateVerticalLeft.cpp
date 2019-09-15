@@ -23,7 +23,6 @@ void GuidelineStateTemplateVerticalLeft::begin ()
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalLeft::begin";
 
   GuidelineStateTemplateAbstract::beginCommon (templateHomeLine(context().guideline().lineWidthTemplate(),
-                                                                diagonal (sceneRect ()),
                                                                 sceneRect ()));
 }
 
@@ -32,15 +31,11 @@ void GuidelineStateTemplateVerticalLeft::end ()
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalLeft::end";
 }
 
-void GuidelineStateTemplateVerticalLeft::handleMousePress ()
+void GuidelineStateTemplateVerticalLeft::handleMousePress (const QPointF &posScene)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalLeft::handleMousePress";
 
-  QLineF line = templateHomeLine(context().guideline().lineWidthTemplate(),
-                                 diagonal (sceneRect ()),
-                                 sceneRect ());
-
-  handleMousePressCommon (line,
+  handleMousePressCommon (posScene,
                           GUIDELINE_STATE_DEPLOYED_VERTICAL,
                           GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT);
 }
@@ -56,9 +51,8 @@ QString GuidelineStateTemplateVerticalLeft::state () const
 }
 
 QLineF GuidelineStateTemplateVerticalLeft::templateHomeLine (double lineWidth,
-                                                             double diagonal,
                                                              const QRectF &sceneRect)
 {
-  return QLineF (sceneRect.bottomLeft() + QPointF (0.5 * lineWidth, diagonal),
-                 sceneRect.topLeft() + QPointF (0.5 * lineWidth, -1.0 * diagonal));
+  return QLineF (sceneRect.bottomLeft() + QPointF (lineWidth, 0),
+                 sceneRect.topLeft() + QPointF (lineWidth, 0));
 }

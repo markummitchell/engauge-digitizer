@@ -17,6 +17,7 @@ public:
   GuidelineStateDeployedHorizontal(GuidelineStateContext &context);
   virtual ~GuidelineStateDeployedHorizontal();
 
+  virtual QLineF lineFromPoint (const QPointF &point) const;
   virtual QString state () const;
 
 private:

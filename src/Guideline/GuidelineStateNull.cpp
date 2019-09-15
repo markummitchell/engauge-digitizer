@@ -56,7 +56,7 @@ void GuidelineStateNull::handleHoverLeaveEvent ()
   // Noop. Never called since hover only works when visible
 }
 
-void GuidelineStateNull::handleMousePress ()
+void GuidelineStateNull::handleMousePress (const QPointF & /* posScene */)
 {
   // Noop
 }
@@ -64,6 +64,12 @@ void GuidelineStateNull::handleMousePress ()
 void GuidelineStateNull::handleMouseRelease ()
 {
   // Noop
+}
+
+QLineF GuidelineStateNull::lineFromPoint (const QPointF &/* point */) const
+{
+  return QLineF (QPointF (0, 0),
+                 QPointF (0, 0));
 }
 
 QString GuidelineStateNull::state () const

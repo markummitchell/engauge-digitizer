@@ -22,11 +22,12 @@ public:
   virtual bool doPaint () const;
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
+  virtual QLineF lineFromPoint (const QPointF &point) const;
 
 protected:
 
   /// Common mouse press handling
-  void handleMousePressCommon (const QLineF &line,
+  void handleMousePressCommon (const QPointF &pos,
                                GuidelineState stateDeployed,
                                GuidelineState stateReplacement);
 

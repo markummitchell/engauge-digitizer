@@ -69,11 +69,11 @@ void GuidelineStateContext::handleHoverLeaveEvent ()
   transitionIfRequested ();
 }
 
-void GuidelineStateContext::handleMousePress ()
+void GuidelineStateContext::handleMousePress (const QPointF &posScene)
 {
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 
-  m_states[m_currentState]->handleMousePress ();
+  m_states[m_currentState]->handleMousePress (posScene);
   transitionIfRequested ();  
 }
 
@@ -83,6 +83,13 @@ void GuidelineStateContext::handleMouseRelease ()
 
   m_states[m_currentState]->handleMouseRelease ();
   transitionIfRequested ();
+}
+
+QLineF GuidelineStateContext::lineFromPoint (const QPointF &point) const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->lineFromPoint (point);
 }
 
 void GuidelineStateContext::requestStateTransition (GuidelineState guidelineState)

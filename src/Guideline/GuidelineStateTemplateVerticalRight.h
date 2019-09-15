@@ -19,13 +19,12 @@ public:
 
   virtual void begin();
   virtual void end ();
-  virtual void handleMousePress ();
+  virtual void handleMousePress (const QPointF &posScene);
   virtual void handleMouseRelease ();
   virtual QString state () const;
 
   /// Returns the geometry of a template guideline
   static QLineF templateHomeLine (double lineWidth,
-                                  double diagonal,
                                   const QRectF &sceneRect);
 
 private:

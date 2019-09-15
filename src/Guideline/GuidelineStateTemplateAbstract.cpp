@@ -52,19 +52,25 @@ void GuidelineStateTemplateAbstract::handleHoverLeaveEvent ()
   context().guideline().setPenColor (COLOR_HIDDEN); // Hide until hover entry
 }
 
-void GuidelineStateTemplateAbstract::handleMousePressCommon (const QLineF &line,
+void GuidelineStateTemplateAbstract::handleMousePressCommon (const QPointF &pos,
                                                              GuidelineState stateDeployed,
                                                              GuidelineState stateReplacement)
 {
   context().setStateReplacement (stateReplacement);
 
-  // Visible Guideline will follow this one
+  // Visible Guideline will follow this one. Its geometry will be set after every drag event
   Guideline *guidelineVisible = new Guideline (*context().guideline().scene(),
                                                stateDeployed);
 
-  guidelineVisible->setLine (line);
+  guidelineVisible->updateGeometry (pos);
 
   context().guideline().bindGuidelineVisible (guidelineVisible);
 
   context().requestStateTransition (GUIDELINE_STATE_HANDLE);
+}
+
+QLineF GuidelineStateTemplateAbstract::lineFromPoint (const QPointF &/* point */) const
+{
+  return QLineF (QPointF (0, 0),
+                 QPointF (0, 0));
 }

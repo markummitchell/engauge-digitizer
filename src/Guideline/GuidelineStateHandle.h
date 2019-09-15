@@ -28,8 +28,9 @@ public:
   virtual void end ();
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
-  virtual void handleMousePress ();
-  virtual void handleMouseRelease ();  
+  virtual void handleMousePress (const QPointF &posScene);
+  virtual void handleMouseRelease ();
+  virtual QLineF lineFromPoint (const QPointF &point) const;
   virtual QString state () const;
 
 };

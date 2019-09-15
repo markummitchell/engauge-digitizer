@@ -61,6 +61,9 @@ public:
   /// Set pen color and line width
   void setPenColor (Qt::GlobalColor color);
 
+  /// Update the geometry so it passes through the specified point
+  void updateGeometry (const QPointF &pos);
+
 signals:
 
   /// Signal for cloned deployed Guideline from handle Guideline
@@ -83,6 +86,7 @@ private:
 
   // After binding to visible Guideline
   Guideline *m_guidelineVisible;
+
 };
 
 #endif // GUIDELINE_H

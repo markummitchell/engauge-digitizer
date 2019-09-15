@@ -55,7 +55,7 @@ void GuidelineStateDeployedAbstract::handleHoverLeaveEvent ()
 {
 }
 
-void GuidelineStateDeployedAbstract::handleMousePress ()
+void GuidelineStateDeployedAbstract::handleMousePress (const QPointF & /* posScene */)
 {
   // Noop
 }
