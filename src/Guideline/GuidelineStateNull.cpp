@@ -20,11 +20,6 @@ GuidelineStateNull::~GuidelineStateNull ()
 {
 }
 
-bool GuidelineStateNull::alwaysVisible () const
-{
-  return true;
-}
-
 void GuidelineStateNull::begin ()
 {
   LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateNull::begin";
@@ -33,14 +28,23 @@ void GuidelineStateNull::begin ()
   context().guideline().setLine (0, 0, 0, 0);
 }
 
-QColor GuidelineStateNull::colorForStateAndHover (bool /* hover */) const
-{
-  return QColor (Qt::transparent);
-}
-
 void GuidelineStateNull::end ()
 {
   LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateNull::end";
+}
+
+void GuidelineStateNull::handleHoverEnterEvent ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleHoverEnterEvent";
+
+  // Noop
+}
+
+void GuidelineStateNull::handleHoverLeaveEvent ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleHoverEnterEvent";
+
+  // Noop
 }
 
 void GuidelineStateNull::handleMousePress ()
@@ -53,7 +57,7 @@ void GuidelineStateNull::handleMouseRelease ()
   // Noop
 }
 
-bool GuidelineStateNull::initialHoverEventsEnable () const
+QString GuidelineStateNull::state () const
 {
-  return false;
+  return ("GuidelineStateNull");
 }

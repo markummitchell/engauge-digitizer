@@ -34,8 +34,6 @@ Guideline::Guideline(QGraphicsScene  &scene,
 
   // Make this transparent now, but always visible so hover events work
   scene.addItem (this);
-  setPen (QPen (QBrush (Qt::transparent),
-                GUIDELINE_LINEWIDTH_TEMPLATE));
   setZValue (Z_VALUE_CURVE);
   setVisible (true);
   setFlags (QGraphicsItem::ItemIsFocusable |
@@ -46,10 +44,6 @@ Guideline::Guideline(QGraphicsScene  &scene,
   // into the initial state will position the line if it is a template guideline
   m_context = new GuidelineStateContext (*this,
                                          guidelineStateInitial);
-
-  // Final step is to enable/disable hover events
-  setAcceptHoverEvents (m_context->initialHoverEventsEnable ());
-  setHover (false); // Initially the cursor is not hovering over this object. Later a hover event will change this state
 }
 
 Guideline::~Guideline ()
@@ -59,6 +53,8 @@ Guideline::~Guideline ()
 
 void Guideline::bindGuidelineVisible (Guideline *guidelineVisible)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::hoverEnterEvent state=" << m_context->state ().toLatin1().data();
+
   m_guidelineVisible = guidelineVisible;
 
   connect (this, SIGNAL (signalHandleMoved (QPointF)),
@@ -67,16 +63,16 @@ void Guideline::bindGuidelineVisible (Guideline *guidelineVisible)
 
 void Guideline::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::hoverEnterEvent";
+  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::hoverEnterEvent state=" << m_context->state ().toLatin1().data();
 
-  setHover (true);
+  m_context->handleHoverEnterEvent ();
 }
 
 void Guideline::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::hoverLeaveEvent";
+  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::hoverLeaveEvent state=" << m_context->state ().toLatin1().data();
 
-  setHover (false);
+  m_context->handleHoverLeaveEvent ();
 }
 
 double Guideline::lineWidthTemplate () const
@@ -86,7 +82,8 @@ double Guideline::lineWidthTemplate () const
 
 void Guideline::mouseMoveEvent (QGraphicsSceneMouseEvent *event)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::mouseMoveEvent pos=(" << event->pos().x() << "," << event->pos().y() << ") "
+  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::mouseMoveEvent state=" << m_context->state ().toLatin1().data()
+                              << " pos=(" << event->pos().x() << "," << event->pos().y() << ") "
                               << " scenePos=(" << event->scenePos().x() << "," << event->scenePos().y() << ")";
 
   // This may be the visible Guideline which does not have its own bound visible Guideline
@@ -102,7 +99,7 @@ void Guideline::mouseMoveEvent (QGraphicsSceneMouseEvent *event)
 
 void Guideline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "Guideline::mousePressEvent";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Guideline::mousePressEvent state=" << m_context->state ().toLatin1().data();
 
   QGraphicsLineItem::mousePressEvent(event);
 
@@ -111,7 +108,7 @@ void Guideline::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void Guideline::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "Guideline::mouseReleaseEvent";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Guideline::mouseReleaseEvent state=" << m_context->state ().toLatin1().data();
 
   // Handle the event
   QGraphicsLineItem::mouseReleaseEvent (event);
@@ -126,14 +123,6 @@ void Guideline::paint(QPainter *painter,
   QGraphicsLineItem::paint (painter,
                             option,
                             widget);
-}
-
-void Guideline::setHover (bool hover)
-{
-  QColor color = m_context->colorForStateAndHover (hover);
-
-  setPen (QPen (QBrush (color),
-                GUIDELINE_LINEWIDTH_TEMPLATE));
 }
 
 void Guideline::slotHandleMoved (QPointF pos)

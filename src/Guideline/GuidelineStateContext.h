@@ -7,11 +7,11 @@
 #ifndef GUIDELINE_STATE_CONTEXT_H
 #define GUIDELINE_STATE_CONTEXT_H
 
-#include <QColor>
-
 #include "GuidelineState.h"
 #include "GuidelineStateAbstractBase.h"
+#include <QColor>
 #include <QLineF>
+#include <QString>
 #include <QVector>
 
 class Guideline;
@@ -25,14 +25,14 @@ public:
                          GuidelineState guidelineStateInitial);
   virtual ~GuidelineStateContext();
 
-  /// True/false to keep object always visible (typically for deployed/template respectively)
-  bool alwaysVisible () const;
-
-  /// Return color as a function of state and hover flag
-  QColor colorForStateAndHover (bool hover) const;
-
   /// Guideline that owns this context class
   Guideline &guideline ();
+
+  /// If transparent then make visible when hover starts
+  void handleHoverEnterEvent ();
+
+  /// If previously transparent before hover enter then make transparent again
+  void handleHoverLeaveEvent ();
 
   /// At the start of dragging, convert the template Guideline into an invisible handle and
   /// visible slaved deployed Guideline
@@ -41,18 +41,14 @@ public:
   /// At the end of dragging, clone the Guideline that owns the state machine where these states live
   void handleMouseRelease ();
 
-  /// True/false to enable/disable hover events initially for the Guideline. This works out to
-  /// being enabled initially for deployed states because template guidelines are only enabled
-  /// in DigitizeStateSelect so that is the only time deployed guidelines can be created, which
-  /// is the only time deployed guidelines can be dragged. Template guidelines are created before
-  /// much happens so they are disabled initially (and first enabled by DigitizeStateSelect::begin())
-  bool initialHoverEventsEnable () const;
-
   /// Request a state transition
   void requestStateTransition (GuidelineState guidelineState);
 
   /// Pass replacement Guideline state from template Guidelines to handle Guideline
   void setStateReplacement (GuidelineState stateReplacement);
+
+  /// State as a string for debugging only
+  QString state () const;
 
   /// Get method for replacement state
   GuidelineState stateReplacement () const;

@@ -19,12 +19,7 @@ GuidelineStateDeployedHorizontal::~GuidelineStateDeployedHorizontal ()
 {
 }
 
-void GuidelineStateDeployedHorizontal::begin ()
+QString GuidelineStateDeployedHorizontal::state () const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedHorizontal::begin";
-}
-
-void GuidelineStateDeployedHorizontal::end ()
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedHorizontal::end";
+  return ("GuidelineStateDeployedHorizontal");
 }

@@ -19,20 +19,21 @@ GuidelineStateTemplateAbstract::~GuidelineStateTemplateAbstract ()
 {
 }
 
-bool GuidelineStateTemplateAbstract::alwaysVisible () const
+void GuidelineStateTemplateAbstract::beginCommon (const QLineF &line)
 {
-  return false;
+  context().guideline().setLine (line);
+
+  context().guideline().setAcceptHoverEvents (false);
 }
 
-QColor GuidelineStateTemplateAbstract::colorForStateAndHover (bool hover) const
+void GuidelineStateTemplateAbstract::handleHoverEnterEvent ()
 {
-  QColor color (Qt::transparent);
+  // Noop
+}
 
-  if (hover) {
-    color = QColor (Qt::green);
-  }
-
-  return color;
+void GuidelineStateTemplateAbstract::handleHoverLeaveEvent ()
+{
+  // Noop
 }
 
 void GuidelineStateTemplateAbstract::handleMousePressCommon (const QLineF &line,
@@ -50,9 +51,4 @@ void GuidelineStateTemplateAbstract::handleMousePressCommon (const QLineF &line,
   context().guideline().bindGuidelineVisible (guidelineVisible);
 
   context().requestStateTransition (GUIDELINE_STATE_HANDLE);
-}
-
-bool GuidelineStateTemplateAbstract::initialHoverEventsEnable () const
-{
-  return false;
 }

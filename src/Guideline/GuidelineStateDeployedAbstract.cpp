@@ -20,14 +20,24 @@ GuidelineStateDeployedAbstract::~GuidelineStateDeployedAbstract ()
 {
 }
 
-bool GuidelineStateDeployedAbstract::alwaysVisible () const
+void GuidelineStateDeployedAbstract::begin ()
 {
-  return true;
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedAbstract::begin";
+
+  context().guideline().setAcceptHoverEvents (false);
 }
 
-QColor GuidelineStateDeployedAbstract::colorForStateAndHover (bool /* hover */) const
+void GuidelineStateDeployedAbstract::end ()
 {
-  return QColor (Qt::blue);
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedAbstract::end";
+}
+
+void GuidelineStateDeployedAbstract::handleHoverEnterEvent ()
+{
+}
+
+void GuidelineStateDeployedAbstract::handleHoverLeaveEvent ()
+{
 }
 
 void GuidelineStateDeployedAbstract::handleMousePress ()
@@ -38,9 +48,4 @@ void GuidelineStateDeployedAbstract::handleMousePress ()
 void GuidelineStateDeployedAbstract::handleMouseRelease ()
 {
   // Noop
-}
-
-bool GuidelineStateDeployedAbstract::initialHoverEventsEnable () const
-{
-  return true;
 }

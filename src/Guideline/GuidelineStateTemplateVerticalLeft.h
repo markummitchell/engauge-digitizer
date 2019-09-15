@@ -21,6 +21,7 @@ public:
   virtual void end ();
   virtual void handleMousePress ();
   virtual void handleMouseRelease ();
+  virtual QString state () const;
 
   /// Returns the geometry of a template guideline
   static QLineF templateHomeLine (double lineWidth,

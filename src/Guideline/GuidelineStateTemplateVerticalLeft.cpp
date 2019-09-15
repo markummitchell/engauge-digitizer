@@ -22,9 +22,9 @@ void GuidelineStateTemplateVerticalLeft::begin ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalLeft::begin";
 
-  context().guideline().setLine (templateHomeLine(context().guideline().lineWidthTemplate(),
-                                                  diagonal (sceneRect ()),
-                                                  sceneRect ()));
+  GuidelineStateTemplateAbstract::beginCommon (templateHomeLine(context().guideline().lineWidthTemplate(),
+                                                                diagonal (sceneRect ()),
+                                                                sceneRect ()));
 }
 
 void GuidelineStateTemplateVerticalLeft::end ()
@@ -48,6 +48,11 @@ void GuidelineStateTemplateVerticalLeft::handleMousePress ()
 void GuidelineStateTemplateVerticalLeft::handleMouseRelease ()
 {
   // Not called
+}
+
+QString GuidelineStateTemplateVerticalLeft::state () const
+{
+  return ("GuidelineStateTemplateVerticalLeft");
 }
 
 QLineF GuidelineStateTemplateVerticalLeft::templateHomeLine (double lineWidth,

@@ -41,23 +41,25 @@ GuidelineStateContext::~GuidelineStateContext ()
 {
 }
 
-bool GuidelineStateContext::alwaysVisible () const
-{
-  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
-
-  return m_states[m_currentState]->alwaysVisible ();
-}
-
-QColor GuidelineStateContext::colorForStateAndHover (bool hover) const
-{
-  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
-
-  return m_states[m_currentState]->colorForStateAndHover (hover);
-}
-
 Guideline &GuidelineStateContext::guideline ()
 {
   return m_guideline;
+}
+
+void GuidelineStateContext::handleHoverEnterEvent ()
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  m_states[m_currentState]->handleHoverEnterEvent ();
+  transitionIfRequested ();
+}
+
+void GuidelineStateContext::handleHoverLeaveEvent ()
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  m_states[m_currentState]->handleHoverLeaveEvent ();
+  transitionIfRequested ();
 }
 
 void GuidelineStateContext::handleMousePress ()
@@ -76,13 +78,6 @@ void GuidelineStateContext::handleMouseRelease ()
   transitionIfRequested ();
 }
 
-bool GuidelineStateContext::initialHoverEventsEnable () const
-{
-  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
-
-  return m_states[m_currentState]->initialHoverEventsEnable();
-}
-
 void GuidelineStateContext::requestStateTransition (GuidelineState guidelineState)
 {
   ENGAUGE_ASSERT (guidelineState != NUM_GUIDELINE_STATES);
@@ -93,6 +88,13 @@ void GuidelineStateContext::requestStateTransition (GuidelineState guidelineStat
 void GuidelineStateContext::setStateReplacement (GuidelineState stateReplacement)
 {
   m_stateReplacement = stateReplacement;
+}
+
+QString GuidelineStateContext::state () const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->state();
 }
 
 GuidelineState GuidelineStateContext::stateReplacement () const

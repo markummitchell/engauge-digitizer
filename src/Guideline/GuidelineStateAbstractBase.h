@@ -12,6 +12,7 @@
 #include "GuidelineState.h"
 #include <QLineF>
 #include <QRectF>
+#include <QString>
 
 class GuidelineStateContext;
 
@@ -23,17 +24,17 @@ public:
   GuidelineStateAbstractBase (GuidelineStateContext &context);
   virtual ~GuidelineStateAbstractBase();
 
-  /// True/false to keep object always visible (typically for deployed/template respectively)
-  virtual bool alwaysVisible () const = 0;
-
   /// Transition into state
   virtual void begin () = 0;
 
-  /// Return color as a function of state and hover flag
-  virtual QColor colorForStateAndHover (bool hover) const = 0;
-
   /// Transition out of state
   virtual void end () = 0;
+
+  /// If transparent then make visible when hover starts
+  virtual void handleHoverEnterEvent () = 0;
+
+  /// If previously transparent before hover enter then make transparent again
+  virtual void handleHoverLeaveEvent () = 0;
 
   /// At the start of dragging, convert the template Guideline into an invisible handle and visible
   /// slaved deployed Guideline
@@ -42,8 +43,8 @@ public:
   /// At the end of dragging, clone the Guideline that owns the state machine where these states live
   virtual void handleMouseRelease () = 0;
 
-  /// True/false to enable/disable hover events initially for the Guideline
-  virtual bool initialHoverEventsEnable () const = 0;
+  /// State as a string for debugging only
+  virtual QString state () const = 0;
 
 protected:
 

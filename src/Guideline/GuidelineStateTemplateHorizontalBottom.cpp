@@ -23,16 +23,14 @@ void GuidelineStateTemplateHorizontalBottom::begin ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottom::begin";
 
-  context().guideline().setLine (templateHomeLine(context().guideline().lineWidthTemplate(),
-                                                  diagonal (sceneRect ()),
-                                                  sceneRect ()));
+  GuidelineStateTemplateAbstract::beginCommon (templateHomeLine(context().guideline().lineWidthTemplate(),
+                                                                diagonal (sceneRect ()),
+                                                                sceneRect ()));
 }
 
 void GuidelineStateTemplateHorizontalBottom::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottom::end";
-
-  context().requestStateTransition (GUIDELINE_STATE_HANDLE);
 }
 
 void GuidelineStateTemplateHorizontalBottom::handleMousePress ()
@@ -51,6 +49,11 @@ void GuidelineStateTemplateHorizontalBottom::handleMousePress ()
 void GuidelineStateTemplateHorizontalBottom::handleMouseRelease ()
 {
   // Not called
+}
+
+QString GuidelineStateTemplateHorizontalBottom::state () const
+{
+  return ("GuidelineStateTemplateHorizontalBottom");
 }
 
 QLineF GuidelineStateTemplateHorizontalBottom::templateHomeLine (double lineWidth,

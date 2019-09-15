@@ -19,13 +19,7 @@ GuidelineStateDeployedVertical::~GuidelineStateDeployedVertical ()
 {
 }
 
-void GuidelineStateDeployedVertical::begin ()
+QString GuidelineStateDeployedVertical::state () const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedVertical::begin";
+  return ("GuidelineStateDeployedVertical");
 }
-
-void GuidelineStateDeployedVertical::end ()
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedVertical::end";
-}
-

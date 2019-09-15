@@ -18,9 +18,9 @@ public:
   GuidelineStateTemplateAbstract(GuidelineStateContext &context);
   virtual ~GuidelineStateTemplateAbstract();
 
-  virtual bool alwaysVisible () const;
-  virtual QColor colorForStateAndHover (bool hover) const;
-  virtual bool initialHoverEventsEnable () const;
+  void beginCommon (const QLineF &line);
+  virtual void handleHoverEnterEvent ();
+  virtual void handleHoverLeaveEvent ();
 
 protected:
 

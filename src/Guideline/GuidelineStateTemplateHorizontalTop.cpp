@@ -22,9 +22,9 @@ void GuidelineStateTemplateHorizontalTop::begin ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalTop::begin";
 
-  context().guideline().setLine (templateHomeLine(context().guideline().lineWidthTemplate(),
-                                                  diagonal (sceneRect ()),
-                                                  sceneRect ()));
+  GuidelineStateTemplateAbstract::beginCommon (templateHomeLine(context().guideline().lineWidthTemplate(),
+                                                                diagonal (sceneRect ()),
+                                                                sceneRect ()));
 }
 
 void GuidelineStateTemplateHorizontalTop::end ()
@@ -48,6 +48,11 @@ void GuidelineStateTemplateHorizontalTop::handleMousePress ()
 void GuidelineStateTemplateHorizontalTop::handleMouseRelease ()
 {
   // Not called
+}
+
+QString GuidelineStateTemplateHorizontalTop::state () const
+{
+  return ("GuidelineStateTemplateHorizontalTop");
 }
 
 QLineF GuidelineStateTemplateHorizontalTop::templateHomeLine (double lineWidth,

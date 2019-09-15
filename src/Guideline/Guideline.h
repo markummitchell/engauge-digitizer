@@ -58,9 +58,6 @@ public:
                      const QStyleOptionGraphicsItem *option,
                      QWidget *widget = Q_NULLPTR);
 
-  /// Apply/remove highlighting triggered by hover enter/leave
-  void setHover (bool hover);
-
 signals:
 
   /// Signal for cloned deployed Guideline from handle Guideline

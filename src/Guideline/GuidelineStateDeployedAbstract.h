@@ -18,11 +18,12 @@ public:
   GuidelineStateDeployedAbstract(GuidelineStateContext &context);
   virtual ~GuidelineStateDeployedAbstract();
 
-  virtual bool alwaysVisible () const;
-  virtual QColor colorForStateAndHover (bool hover) const;
+  virtual void begin ();
+  virtual void end ();
+  virtual void handleHoverEnterEvent ();
+  virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress ();
   virtual void handleMouseRelease ();  
-  virtual bool initialHoverEventsEnable () const;
 
 };
 

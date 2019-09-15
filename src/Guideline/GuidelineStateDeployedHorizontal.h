@@ -17,8 +17,7 @@ public:
   GuidelineStateDeployedHorizontal(GuidelineStateContext &context);
   virtual ~GuidelineStateDeployedHorizontal();
 
-  virtual void begin ();
-  virtual void end ();
+  virtual QString state () const;
 
 private:
   GuidelineStateDeployedHorizontal();

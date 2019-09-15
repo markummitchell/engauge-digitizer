@@ -23,13 +23,13 @@ public:
   GuidelineStateHandle(GuidelineStateContext &context);
   virtual ~GuidelineStateHandle();
 
-  virtual bool alwaysVisible () const;
   virtual void begin ();
-  virtual QColor colorForStateAndHover (bool hover) const;
   virtual void end ();
+  virtual void handleHoverEnterEvent ();
+  virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress ();
   virtual void handleMouseRelease ();  
-  virtual bool initialHoverEventsEnable () const;
+  virtual QString state () const;
 
 };
 
