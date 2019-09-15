@@ -26,11 +26,6 @@ public:
 
 protected:
 
-  /// Common mouse press handling
-  void handleMousePressCommon (const QPointF &pos,
-                               GuidelineState stateDeployed,
-                               GuidelineState stateReplacement);
-
 };
 
 #endif // GUIDELINE_STATE_TEMPLATE_ABSTRACT_H

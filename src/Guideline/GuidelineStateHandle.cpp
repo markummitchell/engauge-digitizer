@@ -70,14 +70,17 @@ void GuidelineStateHandle::handleMouseRelease ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleMouseRelease";
 
-  Guideline *guidelineReplacement = new Guideline (*context().guideline().scene(),
-                                                   context().stateReplacement ());
+  if (context().state() != GUIDELINE_STATE_NULL) {
 
-  guidelineReplacement->setAcceptHoverEvents (true);
+    Guideline *guidelineReplacement = new Guideline (*context().guideline().scene(),
+                                                     context().stateReplacement ());
 
-  // This is a small memory leak, since we are not actually deleting this no-longer-needed handle,
-  // but a very reliable way to get this handle out of the way
-  context().requestStateTransition (GUIDELINE_STATE_NULL);
+    guidelineReplacement->setAcceptHoverEvents (true);
+
+    // This is a small memory leak, since we are not actually deleting this no-longer-needed handle,
+    // but a very reliable way to get this handle out of the way
+    context().requestStateTransition (GUIDELINE_STATE_NULL);
+  }
 }
 
 QLineF GuidelineStateHandle::lineFromPoint (const QPointF &/* point */) const

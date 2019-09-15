@@ -27,6 +27,23 @@ GuidelineStateContext &GuidelineStateAbstractBase::context () const
   return m_context;
 }
 
+void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &pos,
+                                                         GuidelineState stateDeployed,
+                                                         GuidelineState stateReplacement)
+{
+  context().setStateReplacement (stateReplacement);
+
+  // Visible Guideline will follow this one. Its geometry will be set after every drag event
+  Guideline *guidelineVisible = new Guideline (*context().guideline().scene(),
+                                               stateDeployed);
+
+  guidelineVisible->updateGeometry (pos);
+
+  context().guideline().bindGuidelineVisible (guidelineVisible);
+
+  context().requestStateTransition (GUIDELINE_STATE_HANDLE);
+}
+
 QRectF GuidelineStateAbstractBase::sceneRect () const
 {
   return m_context.guideline().scene()->sceneRect();

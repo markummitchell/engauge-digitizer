@@ -58,6 +58,13 @@ protected:
   /// Context in charge of the state classes
   GuidelineStateContext &context () const;
 
+  /// Common mouse press handling. This is expected to be used by
+  /// every derived leaf class except GUIDELINE_STATE_HANDLE (which this method creates)
+  /// and GUIDELINE_STATE_NULL (which is a noop)
+  void handleMousePressCommon (const QPointF &pos,
+                               GuidelineState stateDeployed,
+                               GuidelineState stateReplacement);
+
   /// Scene rectangle in screen coordinates (=pixels)
   QRectF sceneRect () const;
 

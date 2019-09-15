@@ -20,6 +20,13 @@ GuidelineStateDeployedHorizontal::~GuidelineStateDeployedHorizontal ()
 {
 }
 
+void GuidelineStateDeployedHorizontal::handleMousePress (const QPointF &posScene)
+{
+  handleMousePressCommon (posScene,
+                          GUIDELINE_STATE_DEPLOYED_HORIZONTAL,
+                          GUIDELINE_STATE_NULL);
+}
+
 QLineF GuidelineStateDeployedHorizontal::lineFromPoint (const QPointF &point) const
 {
   double width = context().guideline().scene()->width();

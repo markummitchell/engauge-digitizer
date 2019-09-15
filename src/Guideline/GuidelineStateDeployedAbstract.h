@@ -23,7 +23,6 @@ public:
   virtual void end ();
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
-  virtual void handleMousePress (const QPointF &posScene);
   virtual void handleMouseRelease ();  
 
 };

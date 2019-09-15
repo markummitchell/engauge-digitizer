@@ -17,6 +17,7 @@ public:
   GuidelineStateDeployedHorizontal(GuidelineStateContext &context);
   virtual ~GuidelineStateDeployedHorizontal();
 
+  virtual void handleMousePress (const QPointF &posScene);
   virtual QLineF lineFromPoint (const QPointF &point) const;
   virtual QString state () const;
 

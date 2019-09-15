@@ -20,6 +20,13 @@ GuidelineStateDeployedVertical::~GuidelineStateDeployedVertical ()
 {
 }
 
+void GuidelineStateDeployedVertical::handleMousePress (const QPointF &posScene)
+{
+  handleMousePressCommon (posScene,
+                          GUIDELINE_STATE_DEPLOYED_VERTICAL,
+                          GUIDELINE_STATE_NULL);
+}
+
 QLineF GuidelineStateDeployedVertical::lineFromPoint (const QPointF &point) const
 {
   double height = context().guideline().scene()->height();
