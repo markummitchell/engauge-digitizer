@@ -74,8 +74,10 @@ void GuidelineStateHandle::handleMouseRelease ()
 
   guidelineReplacement->setAcceptHoverEvents (true);
 
-  // This is a small memory leak, since we are not actually deleting this no-longer-needed handle,
-  // but a very reliable way to get this handle out of the way
+  // Go dark. This is not a significant memory leak (versus immediately deleting this object)
+  // since the Guideline states are extremely lightweight (few bytes), and there are so few of
+  // them (max expected to be well below 100). Plus, whenever the scene is closed (on exit or
+  // before loading a new Document) all Guidelines get deleted
   context().requestStateTransition (GUIDELINE_STATE_NULL);
 }
 

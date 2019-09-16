@@ -7,12 +7,7 @@
 #ifndef GUIDELINE_STATE_H
 #define GUIDELINE_STATE_H
 
-/// Set of possible guideline states. Terms are defined as:
-/// # horizontal = Follows constant-y isocontour
-/// # vertical = Follows constant-x isocontour
-/// # template = One of the guidelines along every scene border that can be dragged
-/// # deployed = One of the guidelines created by the user dragging a template guideline
-/// # null = An invalid state. This enum is used as a return value, and the state is a noop
+/// Set of possible Guideline states. See class Guideline for more information
 enum GuidelineState {
   GUIDELINE_STATE_DEPLOYED_HORIZONTAL_HIDE,
   GUIDELINE_STATE_DEPLOYED_HORIZONTAL_SHOW,  

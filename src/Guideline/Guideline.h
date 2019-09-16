@@ -18,10 +18,38 @@ class QWidget;
 
 /// This class is a special case of the standard QGraphicsLineItem for guidelines,
 /// and serves as the base class for the guideline state classes. This class has
-/// a state machine to handle the different states
+/// a state machine to handle state-specific behavior for hovering, dragging, and
+/// formatting.
 ///
-/// Selected Guideline is made invisible since a cloned Guideline replaces the
-/// selected Guideline.
+/// General strategy:
+/// 1) Four template Guidelines lie around the four scene borders
+/// 2) A deployed Guideline is created by dragging a template Guideline from its original position
+/// 3) When a (template or deployed) Guideline is dragged, the following process occurs
+///    3a) The dragged Guideline becomes invisible, and its state changes to Handle
+///    3b) A new deployed Guideline is generated where the dragged Guideline was located
+///    3c) Dragging the Handle causes the same movements in the new deployed Guideline
+///    3d) The new deployed Guideline is continually resized to just fit the scene, and in the
+///        case of polar coordinates resized to go between origin and scene edge (theta) or
+///        curved elliptically (range)
+///    3e) At the end of the drag, the Handle is no longer needed so it transitions to Null state
+///    3f) At the end of the drag, if it started with a template Guideline then a replacement
+///        is put back on the scene edge
+///
+/// This strategy works with the following constraints
+/// 1) Since it is not the dragged object that we modify in 3d above, we can resize and adjust
+///    the curvature of the visible new deployed Guideline as necessary
+///
+/// A simple way to describe this approach: Clicking and dragging involves the clicked Guideline
+/// dying and a new Guideline being born in its place
+///
+/// State names are defined as:
+/// # horizontal = Follows constant-y isocontour
+/// # vertical = Follows constant-x isocontour
+/// # template = One of the guidelines along every scene border that can be dragged
+/// # deployed = One of the guidelines created by the user dragging a template guideline
+/// # null = A noop state. The Guideline is no longer useful and has been retired
+/// # handle = This Guideline is invisible, being dragged, and moving a bound deployed
+///            Guideline along the same drag trajectory
 class Guideline : public QObject, public QGraphicsLineItem
 {
   Q_OBJECT;

@@ -17,7 +17,8 @@
 class Guideline;
 class Guidelines;
 
-/// Context class for state machine that belongs to the Guideline class
+/// Context class for state machine that belongs to the Guideline class. See Guideline
+/// class for more information
 class GuidelineStateContext
 {
 public:
