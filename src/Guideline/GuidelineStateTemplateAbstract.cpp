@@ -28,8 +28,8 @@ void GuidelineStateTemplateAbstract::beginCommon (const QLineF &line)
 {
   context().guideline().setZValue (Z_VALUE_GUIDELINE_TEMPLATE);
   context().guideline().setVisible (true); // True is required for hover to work
+  // ItemIsSelectable is overkill, and in special cases adds ugly selected dashes
   context().guideline().setFlags (QGraphicsItem::ItemIsFocusable |
-                                  QGraphicsItem::ItemIsSelectable |
                                   QGraphicsItem::ItemIsMovable);
   context().guideline().setAcceptHoverEvents (true);
   context().guideline().setPenColor (COLOR_HIDDEN); // Hide until hover entry

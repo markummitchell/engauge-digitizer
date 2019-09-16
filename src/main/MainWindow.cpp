@@ -253,7 +253,8 @@ MainWindow::~MainWindow()
   delete m_dlgSettingsPointMatch;
   delete m_dlgSettingsSegments;
   delete m_fileCmdScript;
-  m_gridLines.clear ();  
+  m_gridLines.clear ();
+  m_guidelines.clear ();
 }
 
 void MainWindow::addDockWindow (QDockWidget *dockWidget,
@@ -1531,7 +1532,7 @@ void MainWindow::setPixmap (const QString &curveSelected,
                                        pixmap,
                                        curveSelected);
 
-  m_guidelineContainer.updateGuidelines (*m_scene);
+  m_guidelines.initialize (*m_scene);
 }
 
 void MainWindow::settingsRead (bool isReset)
@@ -2301,6 +2302,7 @@ void MainWindow::slotFileClose()
     setWindowTitle (engaugeWindowTitle ());
 
     m_gridLines.clear();
+    m_guidelines.clear();
     updateControls();
   }
 }
@@ -2946,6 +2948,13 @@ void MainWindow::slotViewGroupStatus(QAction *action)
   }
 }
 
+void MainWindow::slotViewGuidelines ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGuidelines";
+
+  m_guidelines.showHide (m_actionViewGuidelines->isChecked());
+}
+
 void MainWindow::slotViewToolBarBackground ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarBackground";
@@ -3367,6 +3376,7 @@ void MainWindow::updateControls ()
     m_actionViewGridLines->setEnabled (false);
     m_actionViewGridLines->setChecked (false);
   }
+  m_actionViewGuidelines->setEnabled (!m_currentFile.isEmpty());
   m_actionViewBackground->setEnabled (!m_currentFile.isEmpty());
   m_actionViewChecklistGuide->setEnabled (!m_dockChecklistGuide->browserIsEmpty());
   m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());
@@ -3742,6 +3752,8 @@ void MainWindow::updateTransformationAndItsDependencies()
   // Grid display is also affected by new transformation above, if there was a transition into defined state
   // in which case that transition triggered the initialization of the grid display parameters
   updateGridLines();
+
+  m_guidelines.update ();
 }
 
 void MainWindow::updateViewedCurves ()

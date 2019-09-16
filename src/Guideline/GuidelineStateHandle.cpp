@@ -28,8 +28,8 @@ void GuidelineStateHandle::begin ()
 
   context().guideline().setZValue (Z_VALUE_GUIDELINE_HANDLE);
   context().guideline().setVisible (true);
+  // ItemIsSelectable is overkill, and in special cases adds ugly selected dashes
   context().guideline().setFlags (QGraphicsItem::ItemIsFocusable |
-                                  QGraphicsItem::ItemIsSelectable |
                                   QGraphicsItem::ItemIsMovable);
   context().guideline().setAcceptHoverEvents (false);
   context().guideline().setPenColor (Qt::transparent);

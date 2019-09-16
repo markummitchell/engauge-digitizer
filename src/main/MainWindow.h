@@ -13,7 +13,7 @@
 #include "DocumentAxesPointsRequired.h"
 #include "FittingCurveCoefficients.h"
 #include "GridLines.h"
-#include "GuidelineContainer.h"
+#include "Guidelines.h"
 #include "MainWindowModel.h"
 #include <QCursor>
 #include <QMainWindow>
@@ -342,6 +342,7 @@ private slots:
   void slotViewGroupBackground(QAction*);
   void slotViewGroupCurves(QAction*);
   void slotViewGroupStatus(QAction*);
+  void slotViewGuidelines ();
   void slotViewToolBarBackground ();
   void slotViewToolBarChecklistGuide ();
   void slotViewToolBarCoordSystem ();
@@ -511,6 +512,7 @@ private:
   QAction *m_actionViewSettingsViews;
   QAction *m_actionViewToolTips;
   QAction *m_actionViewGridLines;
+  QAction *m_actionViewGuidelines;
   QMenu *m_menuViewBackground;
   QActionGroup *m_groupBackground;
   QAction *m_actionViewBackgroundNone;
@@ -670,6 +672,10 @@ private:
   // Grid lines
   GridLines m_gridLines;
 
+  // Guidelines that are effectively invisible until cursor gets to outermost pixels in scene (and view if zoomed out
+  // enough that there is no scroll bar)
+  Guidelines m_guidelines;
+
   // Map to/from/between zoom enumerations. These eliminate the need for switch statements
   QMap<ZoomFactorInitial, ZoomFactor> m_zoomMapFromInitial;
   QMap<ZoomFactor, QAction*> m_zoomMapToAction;
@@ -683,10 +689,6 @@ private:
   // Extract the image from the single dig file that was loaded in the command line, as enforced by parseCmdLine
   bool m_isExtractImageOnly;
   QString m_extractImageOnlyExtension;
-
-  // Guidelines that are effectively invisible until cursor gets to outermost pixels in scene (and view if zoomed out
-  // enough that there is no scroll bar)
-  GuidelineContainer m_guidelineContainer;
 };
 
 #endif // MAIN_WINDOW_H

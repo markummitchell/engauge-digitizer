@@ -344,7 +344,7 @@ HEADERS  += \
     src/Grid/GridRemoval.h \
     src/Grid/GridTriangleFill.h \
     src/Guideline/Guideline.h \
-    src/Guideline/GuidelineContainer.h \
+    src/Guideline/Guidelines.h \
     src/Guideline/GuidelineState.h \
     src/Guideline/GuidelineStateAbstractBase.h \
     src/Guideline/GuidelineStateContext.h \
@@ -705,7 +705,7 @@ SOURCES += \
     src/Grid/GridRemoval.cpp \
     src/Grid/GridTriangleFill.cpp \
     src/Guideline/Guideline.cpp \
-    src/Guideline/GuidelineContainer.cpp \
+    src/Guideline/Guidelines.cpp \
     src/Guideline/GuidelineStateAbstractBase.cpp \
     src/Guideline/GuidelineStateContext.cpp \
     src/Guideline/GuidelineStateDeployedAbstract.cpp \

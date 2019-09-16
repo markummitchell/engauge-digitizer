@@ -497,6 +497,14 @@ void CreateActions::createView (MainWindow &mw)
                                               "which can improve accuracy in distorted graphs"));
   connect (mw.m_actionViewGridLines, SIGNAL (triggered ()), &mw, SLOT (slotViewGridLines()));
 
+  mw.m_actionViewGuidelines = new QAction (tr ("Guidelines"), &mw);
+  mw.m_actionViewGuidelines->setCheckable (true);
+  mw.m_actionViewGuidelines->setChecked (false);
+  mw.m_actionViewGuidelines->setStatusTip (tr ("Show or hide guidelines."));
+  mw.m_actionViewGuidelines->setWhatsThis (tr ("View Guidelines\n\n"
+                                               "Show or hide guidelines that can be used to align objects."));
+  connect (mw.m_actionViewGuidelines, SIGNAL (triggered ()), &mw, SLOT (slotViewGuidelines()));  
+
   mw.m_actionViewBackgroundNone = new QAction (tr ("No Background"), &mw);
   mw.m_actionViewBackgroundNone->setCheckable (true);
   mw.m_actionViewBackgroundNone->setStatusTip (tr ("Do not show the image underneath the points."));

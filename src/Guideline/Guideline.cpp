@@ -21,7 +21,7 @@
 #include <QWidget>
 #include "ZValues.h"
 
-const double GUIDELINE_LINEWIDTH = 1;
+const double GUIDELINE_LINEWIDTH = 0.5;
 
 Guideline::Guideline(QGraphicsScene  &scene,
                      GuidelineState guidelineStateInitial) :

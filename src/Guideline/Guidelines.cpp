@@ -4,12 +4,12 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "GuidelineContainer.h"
 #include "Guideline.h"
+#include "Guidelines.h"
 #include <QGraphicsScene>
 #include <qmath.h>
 
-GuidelineContainer::GuidelineContainer() :
+Guidelines::Guidelines() :
   m_guidelinePresuppliedLeft (nullptr),
   m_guidelinePresuppliedRight (nullptr),
   m_guidelinePresuppliedTop (nullptr),
@@ -17,7 +17,7 @@ GuidelineContainer::GuidelineContainer() :
 {
 }
 
-GuidelineContainer::~GuidelineContainer ()
+Guidelines::~Guidelines ()
 {
   delete m_guidelinePresuppliedLeft;
   delete m_guidelinePresuppliedRight;
@@ -25,7 +25,10 @@ GuidelineContainer::~GuidelineContainer ()
   delete m_guidelinePresuppliedBottom;
 }
 
-void GuidelineContainer::updateGuidelines (QGraphicsScene &scene)
+void Guidelines::clear ()
+{
+}
+void Guidelines::initialize (QGraphicsScene &scene)
 {
   if (m_guidelinePresuppliedLeft == nullptr) {
     m_guidelinePresuppliedLeft = new Guideline (scene,
@@ -46,4 +49,12 @@ void GuidelineContainer::updateGuidelines (QGraphicsScene &scene)
     m_guidelinePresuppliedBottom = new Guideline (scene,
                                                   GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM);
   }
+}
+
+void Guidelines::showHide (bool show)
+{
+}
+
+void Guidelines::update ()
+{
 }

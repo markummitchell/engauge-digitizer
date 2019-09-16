@@ -4,27 +4,31 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_CONTAINER_H
-#define GUIDELINE_CONTAINER_H
-
-#include <QList>
+#ifndef GUIDELINES_H
+#define GUIDELINES_H
 
 class QGraphicsScene;
 class Guideline;
 
-typedef QList<Guideline*> GuidelineContainerPrivate;
-
 /// This class contains all Guideline objects
-class GuidelineContainer
+class Guidelines
 {
 public:
   /// Single constructor.
-  GuidelineContainer();
-  ~GuidelineContainer();
+  Guidelines();
+  ~Guidelines();
 
-  /// Update the presupplied guidelines at the four boundaries after the scene has (potentially or not)
-  /// been resized
-  void updateGuidelines (QGraphicsScene &scene);
+  /// Remove guidelines since the current Document is about to be closed
+  void clear ();
+
+  /// Load the presupplied template guidelines at the four boundaries after the scene has been loaded
+  void initialize (QGraphicsScene &scene);
+
+  /// Show/hide all guidelines. None are created or destroyed by this method
+  void showHide (bool show);
+
+  /// Update after a change to the transformation. Scene size is assumed to stay the same
+  void update ();
 
 private:
 
@@ -32,7 +36,7 @@ private:
   Guideline *m_guidelinePresuppliedRight;
   Guideline *m_guidelinePresuppliedTop;
   Guideline *m_guidelinePresuppliedBottom;
-  GuidelineContainerPrivate m_containerClones; // Guidelines created by user dragging a presupplied guideline
+
 };
 
-#endif // GUIDELINE_CONTAINER_H
+#endif // GUIDELINES_H

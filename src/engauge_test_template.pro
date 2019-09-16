@@ -302,7 +302,7 @@ HEADERS  += \
     Grid/GridRemoval.h \
     Grid/GridTriangleFill.h \
     Guideline/Guideline.h \
-    Guideline/GuidelineContainer.h \
+    Guideline/Guidelines.h \
     Guideline/GuidelineState.h \
     Guideline/GuidelineStateAbstractBase.h \
     Guideline/GuidelineStateContext.h \
@@ -667,7 +667,7 @@ SOURCES += \
     Grid/GridRemoval.cpp \
     Grid/GridTriangleFill.cpp \
     Guideline/Guideline.cpp \
-    Guideline/GuidelineContainer.cpp \
+    Guideline/Guidelines.cpp \
     Guideline/GuidelineStateAbstractBase.cpp \
     Guideline/GuidelineStateContext.cpp \
     Guideline/GuidelineStateDeployedAbstract.cpp \
