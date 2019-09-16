@@ -7,19 +7,28 @@
 #ifndef GUIDELINES_H
 #define GUIDELINES_H
 
-class QGraphicsScene;
+#include "GuidelineState.h"
+#include <QList>
+
 class Guideline;
+class MainWindow;
+class QGraphicsScene;
+
+typedef QList<Guideline*> GuidelineContainerPrivate;
 
 /// This class contains all Guideline objects
 class Guidelines
 {
 public:
   /// Single constructor.
-  Guidelines();
+  Guidelines(MainWindow &mainWindow);
   ~Guidelines();
 
   /// Remove guidelines since the current Document is about to be closed
   void clear ();
+
+  /// Factory method for creating a new Guideline
+  Guideline *createGuideline (GuidelineState stateInitial);
 
   /// Load the presupplied template guidelines at the four boundaries after the scene has been loaded
   void initialize (QGraphicsScene &scene);
@@ -31,12 +40,14 @@ public:
   void update ();
 
 private:
+  Guidelines();
 
-  Guideline *m_guidelinePresuppliedLeft;
-  Guideline *m_guidelinePresuppliedRight;
-  Guideline *m_guidelinePresuppliedTop;
-  Guideline *m_guidelinePresuppliedBottom;
+  /// Add a new Guideline to the global list maintained by this class
+  void registerGuideline (Guideline *guideline);
 
+  GuidelineContainerPrivate m_guidelineContainer; // Save for easy removal later
+
+  MainWindow &m_mainWindow;
 };
 
 #endif // GUIDELINES_H

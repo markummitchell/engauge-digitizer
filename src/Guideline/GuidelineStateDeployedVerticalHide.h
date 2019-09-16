@@ -4,26 +4,29 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_DEPLOYED_VERTICAL_H
-#define GUIDELINE_STATE_DEPLOYED_VERTICAL_H
+#ifndef GUIDELINE_STATE_DEPLOYED_VERTICAL_HIDE_H
+#define GUIDELINE_STATE_DEPLOYED_VERTICAL_HIDE_H
 
-#include "GuidelineStateDeployedAbstract.h"
+#include "GuidelineStateDeployedVerticalAbstract.h"
 
 /// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_VERTICAL
-class GuidelineStateDeployedVertical : public GuidelineStateDeployedAbstract
+class GuidelineStateDeployedVerticalHide : public GuidelineStateDeployedVerticalAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateDeployedVertical(GuidelineStateContext &context);
-  virtual ~GuidelineStateDeployedVertical();
+  GuidelineStateDeployedVerticalHide(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedVerticalHide();
 
+  virtual void begin ();
+  virtual bool doPaint () const;
+  virtual void end ();
   virtual void handleMousePress (const QPointF &posScene);
-  virtual QLineF lineFromPoint (const QPointF &point) const;
+  virtual void handleShowHide (bool show);
   virtual QString state () const;
 
 private:
-  GuidelineStateDeployedVertical();
+  GuidelineStateDeployedVerticalHide();
 
 };
 
-#endif // GUIDELINE_STATE_DEPLOYED_VERTICAL_H
+#endif // GUIDELINE_STATE_DEPLOYED_VERTICAL_HIDE_H

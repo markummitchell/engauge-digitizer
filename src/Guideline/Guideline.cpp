@@ -9,6 +9,7 @@
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "Guideline.h"
+#include "Guidelines.h"
 #include "GuidelineStateContext.h"
 #include "Logger.h"
 #include <QGraphicsLineItem>
@@ -23,16 +24,19 @@
 
 const double GUIDELINE_LINEWIDTH = 0.5;
 
-Guideline::Guideline(QGraphicsScene  &scene,
+Guideline::Guideline(QGraphicsScene &scene,
+                     Guidelines &guidelines,
                      GuidelineState guidelineStateInitial) :
   m_guidelineVisible (nullptr)
 {
   setData (DATA_KEY_GRAPHICS_ITEM_TYPE, QVariant (GRAPHICS_ITEM_TYPE_GUIDELINE));
+
   scene.addItem (this);
 
   // Create context after registering with the scene. The transition
   // into the initial state will position the line if it is a template guideline
   m_context = new GuidelineStateContext (*this,
+                                         guidelines,
                                          guidelineStateInitial);
 }
 
@@ -51,17 +55,18 @@ void Guideline::bindGuidelineVisible (Guideline *guidelineVisible)
            guidelineVisible, SLOT (slotHandleMoved (QPointF)));
 }
 
+void Guideline::handleShowHide (bool show)
+{
+  m_context->handleShowHide (show);
+}
+
 void Guideline::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::hoverEnterEvent state=" << m_context->state ().toLatin1().data();
-
   m_context->handleHoverEnterEvent ();
 }
 
 void Guideline::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Guideline::hoverLeaveEvent state=" << m_context->state ().toLatin1().data();
-
   m_context->handleHoverLeaveEvent ();
 }
 

@@ -24,7 +24,7 @@ GuidelineStateDeployedAbstract::~GuidelineStateDeployedAbstract ()
 {
 }
 
-void GuidelineStateDeployedAbstract::begin ()
+void GuidelineStateDeployedAbstract::beginCommon ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedAbstract::begin";
 
@@ -35,11 +35,6 @@ void GuidelineStateDeployedAbstract::begin ()
                                   QGraphicsItem::ItemIsMovable);
   context().guideline().setAcceptHoverEvents (false);
   context().guideline().setPenColor (COLOR_DEPLOYED);
-}
-
-bool GuidelineStateDeployedAbstract::doPaint () const
-{
-  return true;
 }
 
 void GuidelineStateDeployedAbstract::end ()

@@ -4,55 +4,89 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "EngaugeAssert.h"
 #include "Guideline.h"
 #include "Guidelines.h"
+#include "MainWindow.h"
 #include <QGraphicsScene>
 #include <qmath.h>
 
-Guidelines::Guidelines() :
-  m_guidelinePresuppliedLeft (nullptr),
-  m_guidelinePresuppliedRight (nullptr),
-  m_guidelinePresuppliedTop (nullptr),
-  m_guidelinePresuppliedBottom (nullptr)
+Guidelines::Guidelines (MainWindow &mainWindow) :
+  m_mainWindow (mainWindow)
 {
 }
 
 Guidelines::~Guidelines ()
 {
-  delete m_guidelinePresuppliedLeft;
-  delete m_guidelinePresuppliedRight;
-  delete m_guidelinePresuppliedTop;
-  delete m_guidelinePresuppliedBottom;
+  clear ();
 }
 
 void Guidelines::clear ()
 {
+  QGraphicsScene *scene = nullptr;
+
+  GuidelineContainerPrivate::iterator itr;
+  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
+    Guideline *guideline = *itr;
+
+    if (scene == nullptr) {
+      scene = guideline->scene();
+    }
+
+    scene->removeItem (guideline);
+  }
+
+  m_guidelineContainer.clear ();
 }
+
 void Guidelines::initialize (QGraphicsScene &scene)
 {
-  if (m_guidelinePresuppliedLeft == nullptr) {
-    m_guidelinePresuppliedLeft = new Guideline (scene,
-                                                GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT);
-  }
+  registerGuideline (new Guideline (scene,
+                                    *this,
+                                    GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_SHOW));
+  registerGuideline (new Guideline (scene,
+                                    *this,
+                                    GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_SHOW));
+  registerGuideline (new Guideline (scene,
+                                    *this,
+                                    GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_SHOW));
+  registerGuideline (new Guideline (scene,
+                                    *this,
+                                    GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_SHOW));
+}
 
-  if (m_guidelinePresuppliedRight == nullptr) {
-    m_guidelinePresuppliedRight = new Guideline (scene,
-                                                 GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT);
-  }
+Guideline *Guidelines::createGuideline (GuidelineState stateInitial)
+{
+  // This method is used to create non-template Guidelines after the template Guidelines
+  // have been created. We grab the scene from the first Guideline in the list
+  ENGAUGE_ASSERT (m_guidelineContainer.size () > 0);
 
-  if (m_guidelinePresuppliedTop == nullptr) {
-    m_guidelinePresuppliedTop = new Guideline (scene,
-                                               GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP);
-  }
+  Guideline *guidelineFirst = m_guidelineContainer.at (0);
+  QGraphicsScene *scene = guidelineFirst->scene ();
 
-  if (m_guidelinePresuppliedBottom == nullptr) {
-    m_guidelinePresuppliedBottom = new Guideline (scene,
-                                                  GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM);
-  }
+  Guideline *guideline = new Guideline (*scene,
+                                        *this,
+                                        stateInitial);
+
+  ENGAUGE_CHECK_PTR (guideline);
+
+  registerGuideline (guideline);
+
+  return guideline;
+}
+
+void Guidelines::registerGuideline (Guideline *guideline)
+{
+  m_guidelineContainer.push_back (guideline);
 }
 
 void Guidelines::showHide (bool show)
 {
+  GuidelineContainerPrivate::iterator itr;
+  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
+    Guideline *guideline = *itr;
+    guideline->handleShowHide (show);
+  }
 }
 
 void Guidelines::update ()

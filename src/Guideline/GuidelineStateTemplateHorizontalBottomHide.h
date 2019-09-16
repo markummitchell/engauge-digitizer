@@ -4,33 +4,29 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_NULL_H
-#define GUIDELINE_STATE_NULL_H
+#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE_H
+#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE_H
 
-#include "GuidelineStateAbstractBase.h"
+#include "GuidelineStateTemplateHorizontalBottomAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_NULL
-class GuidelineStateNull : public GuidelineStateAbstractBase
+/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM
+class GuidelineStateTemplateHorizontalBottomHide : public GuidelineStateTemplateHorizontalBottomAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateNull(GuidelineStateContext &context);
-  virtual ~GuidelineStateNull();
+  GuidelineStateTemplateHorizontalBottomHide(GuidelineStateContext &context);
+  virtual ~GuidelineStateTemplateHorizontalBottomHide();
 
   virtual void begin ();
   virtual bool doPaint () const;
   virtual void end ();
-  virtual void handleHoverEnterEvent ();
-  virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
-  virtual void handleMouseRelease ();
   virtual void handleShowHide (bool show);
-  virtual QLineF lineFromPoint (const QPointF &point) const;
   virtual QString state () const;
 
 private:
-  GuidelineStateNull();
+  GuidelineStateTemplateHorizontalBottomHide();
 
 };
 
-#endif // GUIDELINE_STATE_NULL_H
+#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE_H

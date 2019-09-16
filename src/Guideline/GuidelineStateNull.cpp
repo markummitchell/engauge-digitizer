@@ -24,7 +24,7 @@ GuidelineStateNull::~GuidelineStateNull ()
 
 void GuidelineStateNull::begin ()
 {
-  LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateNull::begin";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateNull::begin";
 
   context().guideline().setZValue (Z_VALUE_GUIDELINE_NULL);
   context().guideline().setVisible (false); //
@@ -39,7 +39,7 @@ bool GuidelineStateNull::doPaint () const
 
 void GuidelineStateNull::end ()
 {
-  LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineStateNull::end";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateNull::end";
 }
 
 void GuidelineStateNull::handleHoverEnterEvent ()
@@ -64,6 +64,10 @@ void GuidelineStateNull::handleMousePress (const QPointF & /* posScene */)
 void GuidelineStateNull::handleMouseRelease ()
 {
   // Noop
+}
+
+void GuidelineStateNull::handleShowHide (bool /* show */)
+{
 }
 
 QLineF GuidelineStateNull::lineFromPoint (const QPointF &/* point */) const

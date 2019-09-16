@@ -37,11 +37,6 @@ void GuidelineStateTemplateAbstract::beginCommon (const QLineF &line)
   context().guideline().setLine (line);
 }
 
-bool GuidelineStateTemplateAbstract::doPaint () const
-{
-  return true;
-}
-
 void GuidelineStateTemplateAbstract::handleHoverEnterEvent ()
 {
   context().guideline().setPenColor (COLOR_VISIBLE); // Hide until hover entry
@@ -50,6 +45,10 @@ void GuidelineStateTemplateAbstract::handleHoverEnterEvent ()
 void GuidelineStateTemplateAbstract::handleHoverLeaveEvent ()
 {
   context().guideline().setPenColor (COLOR_HIDDEN); // Hide until hover entry
+}
+
+void GuidelineStateTemplateAbstract::handleMouseRelease ()
+{
 }
 
 QLineF GuidelineStateTemplateAbstract::lineFromPoint (const QPointF &/* point */) const

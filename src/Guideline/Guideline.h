@@ -29,11 +29,15 @@ class Guideline : public QObject, public QGraphicsLineItem
 public:
   /// Single constructor.
   Guideline(QGraphicsScene &scene,
+            Guidelines &guidelines,
             GuidelineState guidelineStateInitial);
   ~Guideline();
 
   /// Bind a newly-created visible Guideline to this Guideline, and make this one invisible
   void bindGuidelineVisible (Guideline *guidelineVisible);
+
+  /// Show/hide the Guideline objects
+  void handleShowHide (bool show);
 
   /// Highlight this Guideline upon hover enter
   virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);

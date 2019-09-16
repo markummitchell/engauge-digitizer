@@ -34,8 +34,7 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &pos,
   context().setStateReplacement (stateReplacement);
 
   // Visible Guideline will follow this one. Its geometry will be set after every drag event
-  Guideline *guidelineVisible = new Guideline (*context().guideline().scene(),
-                                               stateDeployed);
+  Guideline *guidelineVisible = context().createGuideline (stateDeployed);
 
   guidelineVisible->updateGeometry (pos);
 

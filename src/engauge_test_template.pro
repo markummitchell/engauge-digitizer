@@ -307,15 +307,27 @@ HEADERS  += \
     Guideline/GuidelineStateAbstractBase.h \
     Guideline/GuidelineStateContext.h \
     Guideline/GuidelineStateDeployedAbstract.h \
-    Guideline/GuidelineStateDeployedHorizontal.h \
-    Guideline/GuidelineStateDeployedVertical.h \
+    Guideline/GuidelineStateDeployedHorizontalAbstract.h \
+    Guideline/GuidelineStateDeployedHorizontalHide.h \
+    Guideline/GuidelineStateDeployedHorizontalShow.h \
+    Guideline/GuidelineStateDeployedVerticalAbstract.h \
+    Guideline/GuidelineStateDeployedVerticalHide.h \
+    Guideline/GuidelineStateDeployedVerticalShow.h \
     Guideline/GuidelineStateHandle.h \
     Guideline/GuidelineStateNull.h \
     Guideline/GuidelineStateTemplateAbstract.h \
-    Guideline/GuidelineStateTemplateHorizontalBottom.h \
-    Guideline/GuidelineStateTemplateHorizontalTop.h \
-    Guideline/GuidelineStateTemplateVerticalLeft.h \
-    Guideline/GuidelineStateTemplateVerticalRight.h \
+    Guideline/GuidelineStateTemplateHorizontalBottomAbstract.h \
+    Guideline/GuidelineStateTemplateHorizontalBottomHide.h \
+    Guideline/GuidelineStateTemplateHorizontalBottomShow.h \
+    Guideline/GuidelineStateTemplateHorizontalTopAbstract.h \
+    Guideline/GuidelineStateTemplateHorizontalTopHide.h \
+    Guideline/GuidelineStateTemplateHorizontalTopShow.h \
+    Guideline/GuidelineStateTemplateVerticalLeftAbstract.h \
+    Guideline/GuidelineStateTemplateVerticalLeftHide.h \
+    Guideline/GuidelineStateTemplateVerticalLeftShow.h \
+    Guideline/GuidelineStateTemplateVerticalRightAbstract.h \
+    Guideline/GuidelineStateTemplateVerticalRightHide.h \
+    Guideline/GuidelineStateTemplateVerticalRightShow.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Import/ImportCropping.h \
@@ -671,15 +683,27 @@ SOURCES += \
     Guideline/GuidelineStateAbstractBase.cpp \
     Guideline/GuidelineStateContext.cpp \
     Guideline/GuidelineStateDeployedAbstract.cpp \
-    Guideline/GuidelineStateDeployedHorizontal.cpp \
-    Guideline/GuidelineStateDeployedVertical.cpp \
+    Guideline/GuidelineStateDeployedHorizontalAbstract.cpp \
+    Guideline/GuidelineStateDeployedHorizontalHide.cpp \
+    Guideline/GuidelineStateDeployedHorizontalShow.cpp \
+    Guideline/GuidelineStateDeployedVerticalAbstract.cpp \
+    Guideline/GuidelineStateDeployedVerticalHide.cpp \
+    Guideline/GuidelineStateDeployedVerticalShow.cpp \
     Guideline/GuidelineStateHandle.cpp \
     Guideline/GuidelineStateNull.cpp \
     Guideline/GuidelineStateTemplateAbstract.cpp \
-    Guideline/GuidelineStateTemplateHorizontalBottom.cpp \
-    Guideline/GuidelineStateTemplateHorizontalTop.cpp \
-    Guideline/GuidelineStateTemplateVerticalLeft.cpp \
-    Guideline/GuidelineStateTemplateVerticalRight.cpp \
+    Guideline/GuidelineStateTemplateHorizontalBottomAbstract.cpp \
+    Guideline/GuidelineStateTemplateHorizontalBottomHide.cpp \
+    Guideline/GuidelineStateTemplateHorizontalBottomShow.cpp \
+    Guideline/GuidelineStateTemplateHorizontalTopAbstract.cpp \
+    Guideline/GuidelineStateTemplateHorizontalTopHide.cpp \
+    Guideline/GuidelineStateTemplateHorizontalTopShow.cpp \
+    Guideline/GuidelineStateTemplateVerticalLeftAbstract.cpp \
+    Guideline/GuidelineStateTemplateVerticalLeftHide.cpp \
+    Guideline/GuidelineStateTemplateVerticalLeftShow.cpp \
+    Guideline/GuidelineStateTemplateVerticalRightAbstract.cpp \
+    Guideline/GuidelineStateTemplateVerticalRightHide.cpp \
+    Guideline/GuidelineStateTemplateVerticalRightShow.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Import/ImportCroppingUtilBase.cpp \

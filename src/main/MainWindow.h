@@ -161,6 +161,9 @@ public:
   /// Catch secret keypresses
   virtual bool eventFilter(QObject *, QEvent *);
 
+  /// True/false if guidelines are active/inactive
+  bool guidelinesAreActive () const;
+
   /// Background image that has been filtered for the current curve. This asserts if a curve-specific image is not being shown
   QImage imageFiltered () const;
 

@@ -4,32 +4,29 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_H
-#define GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_H
+#ifndef GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_SHOW_H
+#define GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_SHOW_H
 
-#include "GuidelineStateTemplateAbstract.h"
+#include "GuidelineStateTemplateVerticalLeftAbstract.h"
 
 /// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT
-class GuidelineStateTemplateVerticalLeft : public GuidelineStateTemplateAbstract
+class GuidelineStateTemplateVerticalLeftShow : public GuidelineStateTemplateVerticalLeftAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateTemplateVerticalLeft(GuidelineStateContext &context);
-  virtual ~GuidelineStateTemplateVerticalLeft();
+  GuidelineStateTemplateVerticalLeftShow(GuidelineStateContext &context);
+  virtual ~GuidelineStateTemplateVerticalLeftShow();
 
   virtual void begin();
+  virtual bool doPaint () const;
   virtual void end ();
   virtual void handleMousePress (const QPointF &posScene);
-  virtual void handleMouseRelease ();
+  virtual void handleShowHide (bool show);
   virtual QString state () const;
 
-  /// Returns the geometry of a template guideline
-  static QLineF templateHomeLine (double lineWidth,
-                                  const QRectF &sceneRect);
-
 private:
-  GuidelineStateTemplateVerticalLeft();
+  GuidelineStateTemplateVerticalLeftShow();
 
 };
 
-#endif // GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_H
+#endif // GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_SHOW_H

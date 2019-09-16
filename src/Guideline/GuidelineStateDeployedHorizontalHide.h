@@ -4,26 +4,29 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_DEPLOYED_HORIZONTAL_H
-#define GUIDELINE_STATE_DEPLOYED_HORIZONTAL_H
+#ifndef GUIDELINE_STATE_DEPLOYED_HORIZONTAL_HIDE_H
+#define GUIDELINE_STATE_DEPLOYED_HORIZONTAL_HIDE_H
 
-#include "GuidelineStateDeployedAbstract.h"
+#include "GuidelineStateDeployedHorizontalAbstract.h"
 
 /// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_HORIZONTAL
-class GuidelineStateDeployedHorizontal : public GuidelineStateDeployedAbstract
+class GuidelineStateDeployedHorizontalHide : public GuidelineStateDeployedHorizontalAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateDeployedHorizontal(GuidelineStateContext &context);
-  virtual ~GuidelineStateDeployedHorizontal();
+  GuidelineStateDeployedHorizontalHide(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedHorizontalHide();
 
+  virtual void begin ();
+  virtual bool doPaint () const;
+  virtual void end ();
   virtual void handleMousePress (const QPointF &posScene);
-  virtual QLineF lineFromPoint (const QPointF &point) const;
+  virtual void handleShowHide (bool show);
   virtual QString state () const;
 
 private:
-  GuidelineStateDeployedHorizontal();
+  GuidelineStateDeployedHorizontalHide();
 
 };
 
-#endif // GUIDELINE_STATE_DEPLOYED_HORIZONTAL_H
+#endif // GUIDELINE_STATE_DEPLOYED_HORIZONTAL_HIDE_H

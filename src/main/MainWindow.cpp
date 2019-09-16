@@ -162,6 +162,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_fileCmdScript (nullptr),
   m_isErrorReportRegressionTest (isRegressionTest),
   m_timerRegressionFileCmdScript(nullptr),
+  m_guidelines (*this),
   m_fittingCurve (nullptr),
   m_isExportOnly (isExportOnly),
   m_isExtractImageOnly (isExtractImageOnly),
@@ -816,6 +817,22 @@ void MainWindow::ghostsDestroy ()
 
   delete m_ghosts;
   m_ghosts = nullptr;
+}
+
+bool MainWindow::guidelinesAreActive () const
+{
+  // Rules
+  // 1) We want guidelines to be available as soon as possible since users would probably never know about them otherwise,
+  //    so action should be checked
+  // 2) We do not want to show guidelines until the transformation is working, since to show them earlier would probably mean
+  //    they are aligned along the screen axes - but then when the transformation is working it would be impossible to
+  //    meaningfully convert the old guidelines into the graph reference frame (unless the graph and screen axes happen
+  //    to be parallel which is rarely the case). Note that m_actionViewGuidelines is disabled when the transformation
+  //    is not defined
+  // 3) If transform is defined then file should also be, but we check to make sure
+  return (!m_currentFile.isEmpty() &&
+          m_actionViewGuidelines->isChecked() &&
+          transformIsDefined());
 }
 
 void MainWindow::handlerFileExtractImage ()
@@ -2952,7 +2969,7 @@ void MainWindow::slotViewGuidelines ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGuidelines";
 
-  m_guidelines.showHide (m_actionViewGuidelines->isChecked());
+  m_guidelines.showHide (guidelinesAreActive ());
 }
 
 void MainWindow::slotViewToolBarBackground ()
@@ -3376,7 +3393,7 @@ void MainWindow::updateControls ()
     m_actionViewGridLines->setEnabled (false);
     m_actionViewGridLines->setChecked (false);
   }
-  m_actionViewGuidelines->setEnabled (!m_currentFile.isEmpty());
+  m_actionViewGuidelines->setEnabled (guidelinesAreActive ());
   m_actionViewBackground->setEnabled (!m_currentFile.isEmpty());
   m_actionViewChecklistGuide->setEnabled (!m_dockChecklistGuide->browserIsEmpty());
   m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());

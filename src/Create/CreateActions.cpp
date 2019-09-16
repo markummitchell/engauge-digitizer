@@ -499,10 +499,12 @@ void CreateActions::createView (MainWindow &mw)
 
   mw.m_actionViewGuidelines = new QAction (tr ("Guidelines"), &mw);
   mw.m_actionViewGuidelines->setCheckable (true);
-  mw.m_actionViewGuidelines->setChecked (false);
+  mw.m_actionViewGuidelines->setChecked (true); // Offer initially since otherwise user will never know about the guidelines
   mw.m_actionViewGuidelines->setStatusTip (tr ("Show or hide guidelines."));
   mw.m_actionViewGuidelines->setWhatsThis (tr ("View Guidelines\n\n"
-                                               "Show or hide guidelines that can be used to align objects."));
+                                               "Show or hide guidelines that can be used to align objects. Along each of "
+                                               "the four sides of the main window is a guideline that will appear under "
+                                               "the cursor. Guidelines can be moved by dragging."));
   connect (mw.m_actionViewGuidelines, SIGNAL (triggered ()), &mw, SLOT (slotViewGuidelines()));  
 
   mw.m_actionViewBackgroundNone = new QAction (tr ("No Background"), &mw);

@@ -18,13 +18,14 @@ public:
   GuidelineStateDeployedAbstract(GuidelineStateContext &context);
   virtual ~GuidelineStateDeployedAbstract();
 
-  virtual void begin ();
-  virtual bool doPaint () const;
   virtual void end ();
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMouseRelease ();  
 
+protected:
+  /// Initialization common to all states
+  void beginCommon ();
 };
 
 #endif // GUIDELINE_STATE_DEPLOYED_ABSTRACT_H

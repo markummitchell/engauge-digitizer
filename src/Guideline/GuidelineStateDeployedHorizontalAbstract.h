@@ -4,28 +4,23 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_TEMPLATE_ABSTRACT_H
-#define GUIDELINE_STATE_TEMPLATE_ABSTRACT_H
+#ifndef GUIDELINE_STATE_DEPLOYED_HORIZONTAL_ABSTRACT_H
+#define GUIDELINE_STATE_DEPLOYED_HORIZONTAL_ABSTRACT_H
 
-#include "GuidelineStateAbstractBase.h"
-#include <QPointF>
+#include "GuidelineStateDeployedAbstract.h"
 
-/// Abstract class for template states
-class GuidelineStateTemplateAbstract : public GuidelineStateAbstractBase
+class GuidelineStateDeployedHorizontalAbstract : public GuidelineStateDeployedAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateTemplateAbstract(GuidelineStateContext &context);
-  virtual ~GuidelineStateTemplateAbstract();
+  GuidelineStateDeployedHorizontalAbstract(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedHorizontalAbstract();
 
-  void beginCommon (const QLineF &line);
-  virtual void handleHoverEnterEvent ();
-  virtual void handleHoverLeaveEvent ();
-  virtual void handleMouseRelease ();
   virtual QLineF lineFromPoint (const QPointF &point) const;
 
-protected:
+private:
+  GuidelineStateDeployedHorizontalAbstract();
 
 };
 
-#endif // GUIDELINE_STATE_TEMPLATE_ABSTRACT_H
+#endif // GUIDELINE_STATE_DEPLOYED_HORIZONTAL_ABSTRACT_H

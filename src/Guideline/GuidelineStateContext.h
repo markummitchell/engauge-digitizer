@@ -15,6 +15,7 @@
 #include <QVector>
 
 class Guideline;
+class Guidelines;
 
 /// Context class for state machine that belongs to the Guideline class
 class GuidelineStateContext
@@ -22,8 +23,12 @@ class GuidelineStateContext
 public:
   /// Single constructor.
   GuidelineStateContext (Guideline &guideline,
+                         Guidelines &guidelines,
                          GuidelineState guidelineStateInitial);
   virtual ~GuidelineStateContext();
+
+  /// Factory method for creating a new Guideline
+  Guideline *createGuideline (GuidelineState stateInitial) const;
 
   /// Allow/skip painting of the owner Guideline. This prevents display of selection markings on
   /// otherwise-invisible handle Guideline
@@ -31,6 +36,9 @@ public:
 
   /// Guideline that owns this context class
   Guideline &guideline ();
+
+  /// Show/hide this Guideline
+  void handleShowHide (bool show);
 
   /// If transparent then make visible when hover starts
   void handleHoverEnterEvent ();
@@ -67,6 +75,7 @@ private:
   void transitionIfRequested ();
   
   Guideline &m_guideline;
+  Guidelines &m_guidelines;
 
   QVector<GuidelineStateAbstractBase*> m_states;
   GuidelineState m_currentState;

@@ -34,6 +34,9 @@ public:
   /// Transition out of state
   virtual void end () = 0;
 
+  /// Show/hide this Guideline
+  virtual void handleShowHide (bool show) = 0;
+
   /// If transparent then make visible when hover starts
   virtual void handleHoverEnterEvent () = 0;
 

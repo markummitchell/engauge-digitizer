@@ -7,35 +7,23 @@
 #include "EngaugeAssert.h"
 #include "Guideline.h"
 #include "GuidelineStateContext.h"
-#include "GuidelineStateDeployedVertical.h"
+#include "GuidelineStateDeployedVerticalAbstract.h"
 #include "Logger.h"
 #include <QGraphicsScene>
 
-GuidelineStateDeployedVertical::GuidelineStateDeployedVertical (GuidelineStateContext &context) :
+GuidelineStateDeployedVerticalAbstract::GuidelineStateDeployedVerticalAbstract (GuidelineStateContext &context) :
   GuidelineStateDeployedAbstract (context)
 {
 }
 
-GuidelineStateDeployedVertical::~GuidelineStateDeployedVertical ()
+GuidelineStateDeployedVerticalAbstract::~GuidelineStateDeployedVerticalAbstract ()
 {
 }
 
-void GuidelineStateDeployedVertical::handleMousePress (const QPointF &posScene)
-{
-  handleMousePressCommon (posScene,
-                          GUIDELINE_STATE_DEPLOYED_VERTICAL,
-                          GUIDELINE_STATE_NULL);
-}
-
-QLineF GuidelineStateDeployedVertical::lineFromPoint (const QPointF &point) const
+QLineF GuidelineStateDeployedVerticalAbstract::lineFromPoint (const QPointF &point) const
 {
   double height = context().guideline().scene()->height();
 
   return QLineF (QPointF (point.x(), 0),
                  QPointF (point.x(), height - 1));
-}
-
-QString GuidelineStateDeployedVertical::state () const
-{
-  return ("GuidelineStateDeployedVertical");
 }

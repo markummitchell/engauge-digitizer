@@ -4,32 +4,29 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_H
-#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_H
+#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE_H
+#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE_H
 
-#include "GuidelineStateTemplateAbstract.h"
+#include "GuidelineStateTemplateHorizontalTopAbstract.h"
 
 /// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP
-class GuidelineStateTemplateHorizontalTop : public GuidelineStateTemplateAbstract
+class GuidelineStateTemplateHorizontalTopHide : public GuidelineStateTemplateHorizontalTopAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateTemplateHorizontalTop(GuidelineStateContext &context);
-  virtual ~GuidelineStateTemplateHorizontalTop();
+  GuidelineStateTemplateHorizontalTopHide(GuidelineStateContext &context);
+  virtual ~GuidelineStateTemplateHorizontalTopHide();
 
   virtual void begin ();
+  virtual bool doPaint () const;
   virtual void end ();
   virtual void handleMousePress (const QPointF &posScene);
-  virtual void handleMouseRelease ();
+  virtual void handleShowHide (bool show);
   virtual QString state () const;
 
-  /// Returns the geometry of a template guideline
-  static QLineF templateHomeLine (double lineWidth,
-                                  const QRectF &sceneRect);
-
 private:
-  GuidelineStateTemplateHorizontalTop();
+  GuidelineStateTemplateHorizontalTopHide();
 
 };
 
-#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_H
+#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE_H

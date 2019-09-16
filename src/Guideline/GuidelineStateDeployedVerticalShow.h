@@ -4,33 +4,29 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_NULL_H
-#define GUIDELINE_STATE_NULL_H
+#ifndef GUIDELINE_STATE_DEPLOYED_VERTICAL_SHOW_H
+#define GUIDELINE_STATE_DEPLOYED_VERTICAL_SHOW_H
 
-#include "GuidelineStateAbstractBase.h"
+#include "GuidelineStateDeployedVerticalAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_NULL
-class GuidelineStateNull : public GuidelineStateAbstractBase
+/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_VERTICAL
+class GuidelineStateDeployedVerticalShow : public GuidelineStateDeployedVerticalAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateNull(GuidelineStateContext &context);
-  virtual ~GuidelineStateNull();
+  GuidelineStateDeployedVerticalShow(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedVerticalShow();
 
   virtual void begin ();
   virtual bool doPaint () const;
   virtual void end ();
-  virtual void handleHoverEnterEvent ();
-  virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
-  virtual void handleMouseRelease ();
   virtual void handleShowHide (bool show);
-  virtual QLineF lineFromPoint (const QPointF &point) const;
   virtual QString state () const;
 
 private:
-  GuidelineStateNull();
+  GuidelineStateDeployedVerticalShow();
 
 };
 
-#endif // GUIDELINE_STATE_NULL_H
+#endif // GUIDELINE_STATE_DEPLOYED_VERTICAL_SHOW_H

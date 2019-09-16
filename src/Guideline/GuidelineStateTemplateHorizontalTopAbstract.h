@@ -4,32 +4,26 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_H
-#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_H
+#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_ABSTRACT_H
+#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_ABSTRACT_H
 
 #include "GuidelineStateTemplateAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM
-class GuidelineStateTemplateHorizontalBottom : public GuidelineStateTemplateAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP
+class GuidelineStateTemplateHorizontalTopAbstract : public GuidelineStateTemplateAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateTemplateHorizontalBottom(GuidelineStateContext &context);
-  virtual ~GuidelineStateTemplateHorizontalBottom();
-
-  virtual void begin ();
-  virtual void end ();
-  virtual void handleMousePress (const QPointF &posScene);
-  virtual void handleMouseRelease ();
-  virtual QString state () const;
+  GuidelineStateTemplateHorizontalTopAbstract(GuidelineStateContext &context);
+  virtual ~GuidelineStateTemplateHorizontalTopAbstract();
 
   /// Returns the geometry of a template guideline
   static QLineF templateHomeLine (double lineWidth,
                                   const QRectF &sceneRect);
 
 private:
-  GuidelineStateTemplateHorizontalBottom();
+  GuidelineStateTemplateHorizontalTopAbstract();
 
 };
 
-#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_H
+#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_ABSTRACT_H
