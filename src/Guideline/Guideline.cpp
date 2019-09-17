@@ -9,6 +9,7 @@
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "Guideline.h"
+#include "GuidelineFormat.h"
 #include "Guidelines.h"
 #include "GuidelineStateContext.h"
 #include "Logger.h"
@@ -21,8 +22,6 @@
 #include <QPen>
 #include <QWidget>
 #include "ZValues.h"
-
-const double GUIDELINE_LINEWIDTH = 0.5;
 
 Guideline::Guideline(QGraphicsScene &scene,
                      Guidelines &guidelines,
@@ -68,11 +67,6 @@ void Guideline::hoverEnterEvent(QGraphicsSceneHoverEvent * /* event */)
 void Guideline::hoverLeaveEvent(QGraphicsSceneHoverEvent * /* event */)
 {
   m_context->handleHoverLeaveEvent ();
-}
-
-double Guideline::lineWidthTemplate() const
-{
-  return GUIDELINE_LINEWIDTH;
 }
 
 void Guideline::mouseMoveEvent (QGraphicsSceneMouseEvent *event)
@@ -121,10 +115,13 @@ void Guideline::paint(QPainter *painter,
   }
 }
 
-void Guideline::setPenColor (Qt::GlobalColor color)
+void Guideline::setPenColor (const QColor &color,
+                             double lineWidth)
 {
-  setPen (QPen (QBrush (QColor (color)),
-                GUIDELINE_LINEWIDTH));
+  QBrush brush (color);
+
+  setPen (QPen (brush,
+                lineWidth));
 }
 
 void Guideline::slotHandleMoved (QPointF pos)

@@ -4,29 +4,31 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_SHOW_H
-#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_SHOW_H
+#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING_H
+#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING_H
 
-#include "GuidelineStateTemplateHorizontalTopAbstract.h"
+#include "GuidelineStateTemplateHorizontalBottomAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP
-class GuidelineStateTemplateHorizontalTopShow : public GuidelineStateTemplateHorizontalTopAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM
+class GuidelineStateTemplateHorizontalBottomLurking : public GuidelineStateTemplateHorizontalBottomAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateTemplateHorizontalTopShow(GuidelineStateContext &context);
-  virtual ~GuidelineStateTemplateHorizontalTopShow();
+  GuidelineStateTemplateHorizontalBottomLurking(GuidelineStateContext &context);
+  virtual ~GuidelineStateTemplateHorizontalBottomLurking();
 
   virtual void begin ();
   virtual bool doPaint () const;
   virtual void end ();
+  virtual void handleHoverEnterEvent ();
+  virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleShowHide (bool show);
   virtual QString state () const;
 
 private:
-  GuidelineStateTemplateHorizontalTopShow();
+  GuidelineStateTemplateHorizontalBottomLurking();
 
 };
 
-#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_SHOW_H
+#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING_H

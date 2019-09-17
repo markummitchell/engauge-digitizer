@@ -7,6 +7,7 @@
 #ifndef GUIDELINE_STATE_DEPLOYED_ABSTRACT_H
 #define GUIDELINE_STATE_DEPLOYED_ABSTRACT_H
 
+#include "GuidelineFormat.h"
 #include "GuidelineStateAbstractBase.h"
 #include <QPointF>
 
@@ -19,13 +20,12 @@ public:
   virtual ~GuidelineStateDeployedAbstract();
 
   virtual void end ();
-  virtual void handleHoverEnterEvent ();
-  virtual void handleHoverLeaveEvent ();
   virtual void handleMouseRelease ();  
 
 protected:
+
   /// Initialization common to all states
-  void beginCommon ();
+  void beginCommon (GuidelineFormat::HoverOption hoverOption);
 };
 
 #endif // GUIDELINE_STATE_DEPLOYED_ABSTRACT_H

@@ -6,6 +6,7 @@
 
 #include "EngaugeAssert.h"
 #include "Guideline.h"
+#include "GuidelineFormat.h"
 #include "GuidelineStateAbstractBase.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateNull.h"
@@ -26,10 +27,13 @@ void GuidelineStateNull::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateNull::begin";
 
+  GuidelineFormat guidelineFormat;
+  
   context().guideline().setZValue (Z_VALUE_GUIDELINE_NULL);
   context().guideline().setVisible (false); //
   context().guideline().setAcceptHoverEvents (false);
-  context().guideline().setPenColor (Qt::transparent);
+  context().guideline().setPenColor (guidelineFormat.colorHidden (),
+                                     guidelineFormat.lineWidthNonHover ());
 }
 
 bool GuidelineStateNull::doPaint () const

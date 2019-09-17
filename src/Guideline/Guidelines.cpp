@@ -43,16 +43,16 @@ void Guidelines::initialize (QGraphicsScene &scene)
 {
   registerGuideline (new Guideline (scene,
                                     *this,
-                                    GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_SHOW));
+                                    GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING));
   registerGuideline (new Guideline (scene,
                                     *this,
-                                    GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_SHOW));
+                                    GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING));
   registerGuideline (new Guideline (scene,
                                     *this,
-                                    GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_SHOW));
+                                    GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING));
   registerGuideline (new Guideline (scene,
                                     *this,
-                                    GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_SHOW));
+                                    GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING));
 }
 
 Guideline *Guidelines::createGuideline (GuidelineState stateInitial)

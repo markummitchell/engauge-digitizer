@@ -7,6 +7,7 @@
 #include "EngaugeAssert.h"
 #include "GraphicsScene.h"
 #include "Guideline.h"
+#include "GuidelineFormat.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateHandle.h"
 #include "Logger.h"
@@ -26,13 +27,16 @@ void GuidelineStateHandle::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateHandle::begin";
 
+  GuidelineFormat guidelineFormat;
+  
   context().guideline().setZValue (Z_VALUE_GUIDELINE_HANDLE);
   context().guideline().setVisible (true);
   // ItemIsSelectable is overkill, and in special cases adds ugly selected dashes
   context().guideline().setFlags (QGraphicsItem::ItemIsFocusable |
                                   QGraphicsItem::ItemIsMovable);
   context().guideline().setAcceptHoverEvents (false);
-  context().guideline().setPenColor (Qt::transparent);
+  context().guideline().setPenColor (guidelineFormat.colorHidden (),
+                                     guidelineFormat.lineWidthNonHover ());
 }
 
 bool GuidelineStateHandle::doPaint () const

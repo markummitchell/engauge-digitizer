@@ -344,6 +344,7 @@ HEADERS  += \
     src/Grid/GridRemoval.h \
     src/Grid/GridTriangleFill.h \
     src/Guideline/Guideline.h \
+    src/Guideline/GuidelineFormat.h \
     src/Guideline/Guidelines.h \
     src/Guideline/GuidelineState.h \
     src/Guideline/GuidelineStateAbstractBase.h \
@@ -351,25 +352,31 @@ HEADERS  += \
     src/Guideline/GuidelineStateDeployedAbstract.h \
     src/Guideline/GuidelineStateDeployedHorizontalAbstract.h \
     src/Guideline/GuidelineStateDeployedHorizontalHide.h \
-    src/Guideline/GuidelineStateDeployedHorizontalShow.h \    
+    src/Guideline/GuidelineStateDeployedHorizontalHover.h \
+    src/Guideline/GuidelineStateDeployedHorizontalNormal.h \
     src/Guideline/GuidelineStateDeployedVerticalAbstract.h \
     src/Guideline/GuidelineStateDeployedVerticalHide.h \
-    src/Guideline/GuidelineStateDeployedVerticalShow.h \
+    src/Guideline/GuidelineStateDeployedVerticalHover.h \
+    src/Guideline/GuidelineStateDeployedVerticalNormal.h \
     src/Guideline/GuidelineStateHandle.h \
     src/Guideline/GuidelineStateNull.h \
     src/Guideline/GuidelineStateTemplateAbstract.h \
     src/Guideline/GuidelineStateTemplateHorizontalBottomAbstract.h \
     src/Guideline/GuidelineStateTemplateHorizontalBottomHide.h \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomShow.h \
+    src/Guideline/GuidelineStateTemplateHorizontalBottomHover.h \
+    src/Guideline/GuidelineStateTemplateHorizontalBottomLurking.h \
     src/Guideline/GuidelineStateTemplateHorizontalTopAbstract.h \
     src/Guideline/GuidelineStateTemplateHorizontalTopHide.h \
-    src/Guideline/GuidelineStateTemplateHorizontalTopShow.h \
+    src/Guideline/GuidelineStateTemplateHorizontalTopHover.h \
+    src/Guideline/GuidelineStateTemplateHorizontalTopLurking.h \
     src/Guideline/GuidelineStateTemplateVerticalLeftAbstract.h \
     src/Guideline/GuidelineStateTemplateVerticalLeftHide.h \
-    src/Guideline/GuidelineStateTemplateVerticalLeftShow.h \
+    src/Guideline/GuidelineStateTemplateVerticalLeftHover.h \
+    src/Guideline/GuidelineStateTemplateVerticalLeftLurking.h \
     src/Guideline/GuidelineStateTemplateVerticalRightAbstract.h \
     src/Guideline/GuidelineStateTemplateVerticalRightHide.h \
-    src/Guideline/GuidelineStateTemplateVerticalRightShow.h \
+    src/Guideline/GuidelineStateTemplateVerticalRightHover.h \
+    src/Guideline/GuidelineStateTemplateVerticalRightLurking.h \    
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
@@ -717,31 +724,38 @@ SOURCES += \
     src/Grid/GridRemoval.cpp \
     src/Grid/GridTriangleFill.cpp \
     src/Guideline/Guideline.cpp \
+    src/Guideline/GuidelineFormat.cpp \
     src/Guideline/Guidelines.cpp \
     src/Guideline/GuidelineStateAbstractBase.cpp \
     src/Guideline/GuidelineStateContext.cpp \
     src/Guideline/GuidelineStateDeployedAbstract.cpp \
     src/Guideline/GuidelineStateDeployedHorizontalAbstract.cpp \
     src/Guideline/GuidelineStateDeployedHorizontalHide.cpp \
-    src/Guideline/GuidelineStateDeployedHorizontalShow.cpp \
+    src/Guideline/GuidelineStateDeployedHorizontalHover.cpp \
+    src/Guideline/GuidelineStateDeployedHorizontalNormal.cpp \
     src/Guideline/GuidelineStateDeployedVerticalAbstract.cpp \
     src/Guideline/GuidelineStateDeployedVerticalHide.cpp \
-    src/Guideline/GuidelineStateDeployedVerticalShow.cpp \
+    src/Guideline/GuidelineStateDeployedVerticalHover.cpp \
+    src/Guideline/GuidelineStateDeployedVerticalNormal.cpp \
     src/Guideline/GuidelineStateHandle.cpp \
     src/Guideline/GuidelineStateNull.cpp \
     src/Guideline/GuidelineStateTemplateAbstract.cpp \
     src/Guideline/GuidelineStateTemplateHorizontalBottomAbstract.cpp \
     src/Guideline/GuidelineStateTemplateHorizontalBottomHide.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomShow.cpp \
+    src/Guideline/GuidelineStateTemplateHorizontalBottomHover.cpp \
+    src/Guideline/GuidelineStateTemplateHorizontalBottomLurking.cpp \
     src/Guideline/GuidelineStateTemplateHorizontalTopAbstract.cpp \
     src/Guideline/GuidelineStateTemplateHorizontalTopHide.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalTopShow.cpp \
+    src/Guideline/GuidelineStateTemplateHorizontalTopHover.cpp \
+    src/Guideline/GuidelineStateTemplateHorizontalTopLurking.cpp \
     src/Guideline/GuidelineStateTemplateVerticalLeftAbstract.cpp \
     src/Guideline/GuidelineStateTemplateVerticalLeftHide.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalLeftShow.cpp \
+    src/Guideline/GuidelineStateTemplateVerticalLeftHover.cpp \
+    src/Guideline/GuidelineStateTemplateVerticalLeftLurking.cpp \
     src/Guideline/GuidelineStateTemplateVerticalRightAbstract.cpp \
     src/Guideline/GuidelineStateTemplateVerticalRightHide.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalRightShow.cpp \
+    src/Guideline/GuidelineStateTemplateVerticalRightHover.cpp \
+    src/Guideline/GuidelineStateTemplateVerticalRightLurking.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/Import/ImportImageExtensions.cpp \

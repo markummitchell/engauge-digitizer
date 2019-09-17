@@ -302,6 +302,7 @@ HEADERS  += \
     Grid/GridRemoval.h \
     Grid/GridTriangleFill.h \
     Guideline/Guideline.h \
+    Guideline/GuidelineFormat.h \
     Guideline/Guidelines.h \
     Guideline/GuidelineState.h \
     Guideline/GuidelineStateAbstractBase.h \
@@ -309,25 +310,31 @@ HEADERS  += \
     Guideline/GuidelineStateDeployedAbstract.h \
     Guideline/GuidelineStateDeployedHorizontalAbstract.h \
     Guideline/GuidelineStateDeployedHorizontalHide.h \
-    Guideline/GuidelineStateDeployedHorizontalShow.h \
+    Guideline/GuidelineStateDeployedHorizontalHover.h \
+    Guideline/GuidelineStateDeployedHorizontalNormal.h \
     Guideline/GuidelineStateDeployedVerticalAbstract.h \
     Guideline/GuidelineStateDeployedVerticalHide.h \
-    Guideline/GuidelineStateDeployedVerticalShow.h \
+    Guideline/GuidelineStateDeployedVerticalHover.h \
+    Guideline/GuidelineStateDeployedVerticalNormal.h \
     Guideline/GuidelineStateHandle.h \
     Guideline/GuidelineStateNull.h \
     Guideline/GuidelineStateTemplateAbstract.h \
     Guideline/GuidelineStateTemplateHorizontalBottomAbstract.h \
     Guideline/GuidelineStateTemplateHorizontalBottomHide.h \
-    Guideline/GuidelineStateTemplateHorizontalBottomShow.h \
+    Guideline/GuidelineStateTemplateHorizontalBottomHover.h \
+    Guideline/GuidelineStateTemplateHorizontalBottomLurking.h \
     Guideline/GuidelineStateTemplateHorizontalTopAbstract.h \
     Guideline/GuidelineStateTemplateHorizontalTopHide.h \
-    Guideline/GuidelineStateTemplateHorizontalTopShow.h \
+    Guideline/GuidelineStateTemplateHorizontalTopHover.h \
+    Guideline/GuidelineStateTemplateHorizontalTopLurking.h \
     Guideline/GuidelineStateTemplateVerticalLeftAbstract.h \
     Guideline/GuidelineStateTemplateVerticalLeftHide.h \
-    Guideline/GuidelineStateTemplateVerticalLeftShow.h \
+    Guideline/GuidelineStateTemplateVerticalLeftHover.h \
+    Guideline/GuidelineStateTemplateVerticalLeftLurking.h \
     Guideline/GuidelineStateTemplateVerticalRightAbstract.h \
     Guideline/GuidelineStateTemplateVerticalRightHide.h \
-    Guideline/GuidelineStateTemplateVerticalRightShow.h \
+    Guideline/GuidelineStateTemplateVerticalRightHover.h \
+    Guideline/GuidelineStateTemplateVerticalRightLurking.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Import/ImportCropping.h \
@@ -679,31 +686,38 @@ SOURCES += \
     Grid/GridRemoval.cpp \
     Grid/GridTriangleFill.cpp \
     Guideline/Guideline.cpp \
+    Guideline/GuidelineFormat.cpp \
     Guideline/Guidelines.cpp \
     Guideline/GuidelineStateAbstractBase.cpp \
     Guideline/GuidelineStateContext.cpp \
     Guideline/GuidelineStateDeployedAbstract.cpp \
     Guideline/GuidelineStateDeployedHorizontalAbstract.cpp \
     Guideline/GuidelineStateDeployedHorizontalHide.cpp \
-    Guideline/GuidelineStateDeployedHorizontalShow.cpp \
+    Guideline/GuidelineStateDeployedHorizontalHover.cpp \
+    Guideline/GuidelineStateDeployedHorizontalNormal.cpp \
     Guideline/GuidelineStateDeployedVerticalAbstract.cpp \
     Guideline/GuidelineStateDeployedVerticalHide.cpp \
-    Guideline/GuidelineStateDeployedVerticalShow.cpp \
+    Guideline/GuidelineStateDeployedVerticalHover.cpp \
+    Guideline/GuidelineStateDeployedVerticalNormal.cpp \
     Guideline/GuidelineStateHandle.cpp \
     Guideline/GuidelineStateNull.cpp \
     Guideline/GuidelineStateTemplateAbstract.cpp \
     Guideline/GuidelineStateTemplateHorizontalBottomAbstract.cpp \
     Guideline/GuidelineStateTemplateHorizontalBottomHide.cpp \
-    Guideline/GuidelineStateTemplateHorizontalBottomShow.cpp \
+    Guideline/GuidelineStateTemplateHorizontalBottomHover.cpp \
+    Guideline/GuidelineStateTemplateHorizontalBottomLurking.cpp \
     Guideline/GuidelineStateTemplateHorizontalTopAbstract.cpp \
     Guideline/GuidelineStateTemplateHorizontalTopHide.cpp \
-    Guideline/GuidelineStateTemplateHorizontalTopShow.cpp \
+    Guideline/GuidelineStateTemplateHorizontalTopHover.cpp \
+    Guideline/GuidelineStateTemplateHorizontalTopLurking.cpp \
     Guideline/GuidelineStateTemplateVerticalLeftAbstract.cpp \
     Guideline/GuidelineStateTemplateVerticalLeftHide.cpp \
-    Guideline/GuidelineStateTemplateVerticalLeftShow.cpp \
+    Guideline/GuidelineStateTemplateVerticalLeftHover.cpp \
+    Guideline/GuidelineStateTemplateVerticalLeftLurking.cpp \
     Guideline/GuidelineStateTemplateVerticalRightAbstract.cpp \
     Guideline/GuidelineStateTemplateVerticalRightHide.cpp \
-    Guideline/GuidelineStateTemplateVerticalRightShow.cpp \
+    Guideline/GuidelineStateTemplateVerticalRightHover.cpp \
+    Guideline/GuidelineStateTemplateVerticalRightLurking.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Import/ImportCroppingUtilBase.cpp \

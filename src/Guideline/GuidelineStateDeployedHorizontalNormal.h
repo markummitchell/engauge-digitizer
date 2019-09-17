@@ -4,22 +4,22 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE_H
-#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE_H
+#ifndef GUIDELINE_STATE_DEPLOYED_HORIZONTAL_NORMAL_H
+#define GUIDELINE_STATE_DEPLOYED_HORIZONTAL_NORMAL_H
 
-#include "GuidelineStateTemplateHorizontalBottomAbstract.h"
+#include "GuidelineStateDeployedHorizontalAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM
-class GuidelineStateTemplateHorizontalBottomHide : public GuidelineStateTemplateHorizontalBottomAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_HORIZONTAL_NORMAL
+class GuidelineStateDeployedHorizontalNormal : public GuidelineStateDeployedHorizontalAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateTemplateHorizontalBottomHide(GuidelineStateContext &context);
-  virtual ~GuidelineStateTemplateHorizontalBottomHide();
+  GuidelineStateDeployedHorizontalNormal(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedHorizontalNormal();
 
   virtual void begin ();
   virtual bool doPaint () const;
-  virtual void end ();
+  virtual void end ();  
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
@@ -27,8 +27,8 @@ public:
   virtual QString state () const;
 
 private:
-  GuidelineStateTemplateHorizontalBottomHide();
+  GuidelineStateDeployedHorizontalNormal();
 
 };
 
-#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE_H
+#endif // GUIDELINE_STATE_DEPLOYED_HORIZONTAL_NORMAL_H

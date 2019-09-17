@@ -10,19 +10,25 @@
 #include "GuidelineStateAbstractBase.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedHorizontalHide.h"
-#include "GuidelineStateDeployedHorizontalShow.h"
+#include "GuidelineStateDeployedHorizontalHover.h"
+#include "GuidelineStateDeployedHorizontalNormal.h"
 #include "GuidelineStateDeployedVerticalHide.h"
-#include "GuidelineStateDeployedVerticalShow.h"
+#include "GuidelineStateDeployedVerticalHover.h"
+#include "GuidelineStateDeployedVerticalNormal.h"
 #include "GuidelineStateHandle.h"
 #include "GuidelineStateNull.h"
 #include "GuidelineStateTemplateHorizontalBottomHide.h"
-#include "GuidelineStateTemplateHorizontalBottomShow.h"
+#include "GuidelineStateTemplateHorizontalBottomHover.h"
+#include "GuidelineStateTemplateHorizontalBottomLurking.h"
 #include "GuidelineStateTemplateHorizontalTopHide.h"
-#include "GuidelineStateTemplateHorizontalTopShow.h"
+#include "GuidelineStateTemplateHorizontalTopHover.h"
+#include "GuidelineStateTemplateHorizontalTopLurking.h"
 #include "GuidelineStateTemplateVerticalLeftHide.h"
-#include "GuidelineStateTemplateVerticalLeftShow.h"
+#include "GuidelineStateTemplateVerticalLeftHover.h"
+#include "GuidelineStateTemplateVerticalLeftLurking.h"
 #include "GuidelineStateTemplateVerticalRightHide.h"
-#include "GuidelineStateTemplateVerticalRightShow.h"
+#include "GuidelineStateTemplateVerticalRightHover.h"
+#include "GuidelineStateTemplateVerticalRightLurking.h"
 #include <QGraphicsScene>
 
 GuidelineStateContext::GuidelineStateContext (Guideline &guideline,
@@ -31,20 +37,26 @@ GuidelineStateContext::GuidelineStateContext (Guideline &guideline,
   m_guideline (guideline),
   m_guidelines (guidelines)
 {
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_HORIZONTAL_HIDE       , new GuidelineStateDeployedHorizontalHide       (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_HORIZONTAL_SHOW       , new GuidelineStateDeployedHorizontalShow       (*this));  
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL_HIDE         , new GuidelineStateDeployedVerticalHide         (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL_SHOW         , new GuidelineStateDeployedVerticalShow         (*this));  
-  m_states.insert (GUIDELINE_STATE_HANDLE                         , new GuidelineStateHandle                       (*this));  
-  m_states.insert (GUIDELINE_STATE_NULL                           , new GuidelineStateNull                         (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE, new GuidelineStateTemplateHorizontalBottomHide (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_SHOW, new GuidelineStateTemplateHorizontalBottomShow (*this));  
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE   , new GuidelineStateTemplateHorizontalTopHide    (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_SHOW   , new GuidelineStateTemplateHorizontalTopShow    (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HIDE    , new GuidelineStateTemplateVerticalLeftHide    (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_SHOW    , new GuidelineStateTemplateVerticalLeftShow     (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE   , new GuidelineStateTemplateVerticalRightHide    (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_SHOW   , new GuidelineStateTemplateVerticalRightShow    (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_HORIZONTAL_HIDE          , new GuidelineStateDeployedHorizontalHide         (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_HORIZONTAL_HOVER         , new GuidelineStateDeployedHorizontalHover        (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_HORIZONTAL_NORMAL        , new GuidelineStateDeployedHorizontalNormal       (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL_HIDE            , new GuidelineStateDeployedVerticalHide           (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL_HOVER           , new GuidelineStateDeployedVerticalHover          (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL_NORMAL          , new GuidelineStateDeployedVerticalNormal         (*this));  
+  m_states.insert (GUIDELINE_STATE_HANDLE                            , new GuidelineStateHandle                         (*this));  
+  m_states.insert (GUIDELINE_STATE_NULL                              , new GuidelineStateNull                           (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE   , new GuidelineStateTemplateHorizontalBottomHide   (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HOVER  , new GuidelineStateTemplateHorizontalBottomHover  (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING, new GuidelineStateTemplateHorizontalBottomLurking(*this));  
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE      , new GuidelineStateTemplateHorizontalTopHide      (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HOVER     , new GuidelineStateTemplateHorizontalTopHover     (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING   , new GuidelineStateTemplateHorizontalTopLurking   (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HIDE       , new GuidelineStateTemplateVerticalLeftHide       (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HOVER      , new GuidelineStateTemplateVerticalLeftHover      (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING    , new GuidelineStateTemplateVerticalLeftLurking    (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE      , new GuidelineStateTemplateVerticalRightHide      (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HOVER     , new GuidelineStateTemplateVerticalRightHover     (*this));
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING   , new GuidelineStateTemplateVerticalRightLurking   (*this));
   ENGAUGE_ASSERT (m_states.size () == NUM_GUIDELINE_STATES);
 
   m_currentState = NUM_GUIDELINE_STATES; // Value that forces a transition right away

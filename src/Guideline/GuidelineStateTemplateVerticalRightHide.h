@@ -20,6 +20,8 @@ public:
   virtual void begin();
   virtual bool doPaint () const;
   virtual void end ();
+  virtual void handleHoverEnterEvent ();
+  virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleShowHide (bool show);
   virtual QString state () const;

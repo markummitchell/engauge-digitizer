@@ -7,6 +7,7 @@
 #include "DataKey.h"
 #include "EnumsToQt.h"
 #include "Guideline.h"
+#include "GuidelineFormat.h"
 #include "GuidelineStateAbstractBase.h"
 #include "GuidelineStateContext.h"
 #include "Logger.h"
@@ -35,6 +36,10 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &pos,
 
   // Visible Guideline will follow this one. Its geometry will be set after every drag event
   Guideline *guidelineVisible = context().createGuideline (stateDeployed);
+
+  GuidelineFormat guidelineFormat;
+  guidelineVisible->setPenColor (guidelineFormat.colorDeployedNonHover (),
+                                 guidelineFormat.lineWidthNonHover ());
 
   guidelineVisible->updateGeometry (pos);
 

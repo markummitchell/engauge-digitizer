@@ -23,8 +23,7 @@ void GuidelineStateTemplateHorizontalBottomHide::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottomHide::begin";
 
-  GuidelineStateTemplateAbstract::beginCommon (templateHomeLine(context().guideline().lineWidthTemplate(),
-                                                                sceneRect ()));
+  GuidelineStateTemplateAbstract::beginCommon (templateHomeLine(sceneRect ()));
 
   context().guideline().setVisible (false); // Stop hover and painting (doPoint only stops painting)
 }
@@ -39,6 +38,16 @@ void GuidelineStateTemplateHorizontalBottomHide::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottomHide::end";
 }
 
+void GuidelineStateTemplateHorizontalBottomHide::handleHoverEnterEvent ()
+{
+  // Noop
+}
+
+void GuidelineStateTemplateHorizontalBottomHide::handleHoverLeaveEvent ()
+{
+  // Noop
+}
+
 void GuidelineStateTemplateHorizontalBottomHide::handleMousePress (const QPointF & /* posScene */)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottomHide::handleMousePress";
@@ -47,7 +56,7 @@ void GuidelineStateTemplateHorizontalBottomHide::handleMousePress (const QPointF
 void GuidelineStateTemplateHorizontalBottomHide::handleShowHide (bool show)
 {
   if (show) {
-    context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_SHOW);
+    context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HOVER);
   }
 }
 

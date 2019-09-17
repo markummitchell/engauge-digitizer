@@ -8,6 +8,7 @@
 #define GUIDELINE_H
 
 #include "GuidelineStateContext.h"
+#include <QColor>
 #include <QGraphicsLineItem>
 
 class QMouseEvent;
@@ -47,9 +48,13 @@ class QWidget;
 /// # vertical = Follows constant-x isocontour
 /// # template = One of the guidelines along every scene border that can be dragged
 /// # deployed = One of the guidelines created by the user dragging a template guideline
+/// # hide = Used when all Guidelines have been turned off
+/// # hover = Applies when cursor is hovering over the Guideline, to add some highlighting
+/// # normal = After a deployed Guideline has been created and lost the hover
 /// # null = A noop state. The Guideline is no longer useful and has been retired
 /// # handle = This Guideline is invisible, being dragged, and moving a bound deployed
 ///            Guideline along the same drag trajectory
+/// # lurking = Template Guideline state for when active but not seen, and waiting for hover
 class Guideline : public QObject, public QGraphicsLineItem
 {
   Q_OBJECT;
@@ -73,9 +78,6 @@ public:
   /// Unset highlighting triggered by hover enter
   virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 
-  /// Line width. This is used to push templates just inside the scene borders
-  double lineWidthTemplate() const;
-
   /// Forwad movements to visible Guideline
   virtual void mouseMoveEvent (QGraphicsSceneMouseEvent *event);
 
@@ -91,7 +93,8 @@ public:
                      QWidget *widget = Q_NULLPTR);
 
   /// Set pen color and line width
-  void setPenColor (Qt::GlobalColor color);
+  void setPenColor (const QColor &color,
+                    double lineWidth);
 
   /// Update the geometry so it passes through the specified point
   void updateGeometry (const QPointF &pos);

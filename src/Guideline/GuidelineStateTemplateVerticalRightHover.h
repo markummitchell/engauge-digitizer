@@ -4,29 +4,31 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_SHOW_H
-#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_SHOW_H
+#ifndef GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HOVER_H
+#define GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HOVER_H
 
-#include "GuidelineStateTemplateHorizontalBottomAbstract.h"
+#include "GuidelineStateTemplateVerticalRightAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM
-class GuidelineStateTemplateHorizontalBottomShow : public GuidelineStateTemplateHorizontalBottomAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT
+class GuidelineStateTemplateVerticalRightHover : public GuidelineStateTemplateVerticalRightAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateTemplateHorizontalBottomShow(GuidelineStateContext &context);
-  virtual ~GuidelineStateTemplateHorizontalBottomShow();
+  GuidelineStateTemplateVerticalRightHover(GuidelineStateContext &context);
+  virtual ~GuidelineStateTemplateVerticalRightHover();
 
-  virtual void begin ();
+  virtual void begin();
   virtual bool doPaint () const;
   virtual void end ();
+  virtual void handleHoverEnterEvent ();
+  virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleShowHide (bool show);
   virtual QString state () const;
 
 private:
-  GuidelineStateTemplateHorizontalBottomShow();
+  GuidelineStateTemplateVerticalRightHover();
 
 };
 
-#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_SHOW_H
+#endif // GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HOVER_H

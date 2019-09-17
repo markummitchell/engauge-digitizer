@@ -4,29 +4,31 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_DEPLOYED_VERTICAL_SHOW_H
-#define GUIDELINE_STATE_DEPLOYED_VERTICAL_SHOW_H
+#ifndef GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING_H
+#define GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING_H
 
-#include "GuidelineStateDeployedVerticalAbstract.h"
+#include "GuidelineStateTemplateHorizontalTopAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_VERTICAL
-class GuidelineStateDeployedVerticalShow : public GuidelineStateDeployedVerticalAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP
+class GuidelineStateTemplateHorizontalTopLurking : public GuidelineStateTemplateHorizontalTopAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateDeployedVerticalShow(GuidelineStateContext &context);
-  virtual ~GuidelineStateDeployedVerticalShow();
+  GuidelineStateTemplateHorizontalTopLurking(GuidelineStateContext &context);
+  virtual ~GuidelineStateTemplateHorizontalTopLurking();
 
   virtual void begin ();
   virtual bool doPaint () const;
   virtual void end ();
+  virtual void handleHoverEnterEvent ();
+  virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleShowHide (bool show);
   virtual QString state () const;
 
 private:
-  GuidelineStateDeployedVerticalShow();
+  GuidelineStateTemplateHorizontalTopLurking();
 
 };
 
-#endif // GUIDELINE_STATE_DEPLOYED_VERTICAL_SHOW_H
+#endif // GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING_H

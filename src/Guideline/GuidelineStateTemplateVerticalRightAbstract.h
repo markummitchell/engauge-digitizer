@@ -18,8 +18,7 @@ public:
   virtual ~GuidelineStateTemplateVerticalRightAbstract();
 
   /// Returns the geometry of a template guideline
-  static QLineF templateHomeLine (double lineWidth,
-                                  const QRectF &sceneRect);
+  static QLineF templateHomeLine (const QRectF &sceneRect);
 
 private:
   GuidelineStateTemplateVerticalRightAbstract();

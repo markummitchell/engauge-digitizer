@@ -22,8 +22,7 @@ void GuidelineStateTemplateVerticalRightHide::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateTemplateVerticalRightHide::begin";
 
-  GuidelineStateTemplateAbstract::beginCommon (templateHomeLine(context().guideline().lineWidthTemplate(),
-                                                                sceneRect ()));
+  GuidelineStateTemplateAbstract::beginCommon (templateHomeLine(sceneRect ()));
 
   context().guideline().setVisible (false); // Stop hover and painting (doPoint only stops painting)
 }
@@ -38,6 +37,16 @@ void GuidelineStateTemplateVerticalRightHide::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateTemplateVerticalRightHide::end";
 }
 
+void GuidelineStateTemplateVerticalRightHide::handleHoverEnterEvent ()
+{
+  // Noop
+}
+
+void GuidelineStateTemplateVerticalRightHide::handleHoverLeaveEvent ()
+{
+  // Noop
+}
+
 void GuidelineStateTemplateVerticalRightHide::handleMousePress (const QPointF & /* posScene */)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalRightHide::handleMousePress";
@@ -46,7 +55,7 @@ void GuidelineStateTemplateVerticalRightHide::handleMousePress (const QPointF & 
 void GuidelineStateTemplateVerticalRightHide::handleShowHide (bool show)
 {
   if (show) {
-    context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_SHOW);
+    context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HOVER);
   }
 }
 

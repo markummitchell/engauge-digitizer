@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "Guideline.h"
+#include "GuidelineFormat.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateVerticalLeftAbstract.h"
 #include "Logger.h"
@@ -18,9 +19,11 @@ GuidelineStateTemplateVerticalLeftAbstract::~GuidelineStateTemplateVerticalLeftA
 {
 }
 
-QLineF GuidelineStateTemplateVerticalLeftAbstract::templateHomeLine (double lineWidth,
-                                                                     const QRectF &sceneRect)
+QLineF GuidelineStateTemplateVerticalLeftAbstract::templateHomeLine (const QRectF &sceneRect)
 {
+  GuidelineFormat guidelineFormat;
+  double lineWidth = guidelineFormat.lineWidthHover ();
+
   return QLineF (sceneRect.bottomLeft() + QPointF (lineWidth, 0),
                  sceneRect.topLeft() + QPointF (lineWidth, 0));
 }

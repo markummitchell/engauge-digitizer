@@ -19,8 +19,6 @@ public:
   virtual ~GuidelineStateTemplateAbstract();
 
   void beginCommon (const QLineF &line);
-  virtual void handleHoverEnterEvent ();
-  virtual void handleHoverLeaveEvent ();
   virtual void handleMouseRelease ();
   virtual QLineF lineFromPoint (const QPointF &point) const;
 

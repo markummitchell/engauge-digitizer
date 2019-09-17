@@ -6,6 +6,7 @@
 
 #include "EngaugeAssert.h"
 #include "Guideline.h"
+#include "GuidelineFormat.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedVerticalHide.h"
 #include "Logger.h"
@@ -24,7 +25,7 @@ void GuidelineStateDeployedVerticalHide::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedVerticalHide::begin";
 
-  beginCommon ();
+  beginCommon (GuidelineFormat::HOVER_OFF);
 
   context().guideline().setVisible (false); // Stop hover and painting (doPoint only stops painting)
 }
@@ -39,6 +40,16 @@ void GuidelineStateDeployedVerticalHide::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedVerticalHide::end";
 }
 
+void GuidelineStateDeployedVerticalHide::handleHoverEnterEvent ()
+{
+  // Noop
+}
+
+void GuidelineStateDeployedVerticalHide::handleHoverLeaveEvent ()
+{
+  // Noop
+}
+
 void GuidelineStateDeployedVerticalHide::handleMousePress (const QPointF & /* posScene */)
 {
 }
@@ -46,7 +57,7 @@ void GuidelineStateDeployedVerticalHide::handleMousePress (const QPointF & /* po
 void GuidelineStateDeployedVerticalHide::handleShowHide (bool show)
 {
   if (show) {
-    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_VERTICAL_SHOW);
+    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_VERTICAL_NORMAL);
   }
 }
 

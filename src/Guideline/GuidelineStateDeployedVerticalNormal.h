@@ -4,29 +4,31 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_SHOW_H
-#define GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_SHOW_H
+#ifndef GUIDELINE_STATE_DEPLOYED_VERTICAL_NORMAL_H
+#define GUIDELINE_STATE_DEPLOYED_VERTICAL_NORMAL_H
 
-#include "GuidelineStateTemplateVerticalLeftAbstract.h"
+#include "GuidelineStateDeployedVerticalAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT
-class GuidelineStateTemplateVerticalLeftShow : public GuidelineStateTemplateVerticalLeftAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_VERTICAL
+class GuidelineStateDeployedVerticalNormal : public GuidelineStateDeployedVerticalAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateTemplateVerticalLeftShow(GuidelineStateContext &context);
-  virtual ~GuidelineStateTemplateVerticalLeftShow();
+  GuidelineStateDeployedVerticalNormal(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedVerticalNormal();
 
-  virtual void begin();
+  virtual void begin ();
   virtual bool doPaint () const;
   virtual void end ();
+  virtual void handleHoverEnterEvent ();
+  virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleShowHide (bool show);
   virtual QString state () const;
 
 private:
-  GuidelineStateTemplateVerticalLeftShow();
+  GuidelineStateDeployedVerticalNormal();
 
 };
 
-#endif // GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_SHOW_H
+#endif // GUIDELINE_STATE_DEPLOYED_VERTICAL_NORMAL_H

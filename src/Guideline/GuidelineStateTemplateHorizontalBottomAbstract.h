@@ -17,9 +17,8 @@ public:
   GuidelineStateTemplateHorizontalBottomAbstract(GuidelineStateContext &context);
   virtual ~GuidelineStateTemplateHorizontalBottomAbstract();
 
-  /// Returns the geometry of a template guideline
-  static QLineF templateHomeLine (double lineWidth,
-                                  const QRectF &sceneRect);
+  /// Returns the geometry of a template guideline. This is static so sceneRect must be passed in as an argument
+  static QLineF templateHomeLine (const QRectF &sceneRect);
 
 private:
   GuidelineStateTemplateHorizontalBottomAbstract();
