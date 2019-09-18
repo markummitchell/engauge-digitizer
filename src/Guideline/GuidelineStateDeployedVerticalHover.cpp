@@ -53,7 +53,7 @@ void GuidelineStateDeployedVerticalHover::handleMousePress (const QPointF &posSc
 {
   handleMousePressCommon (posScene,
                           GUIDELINE_STATE_DEPLOYED_VERTICAL_HOVER,
-                          GUIDELINE_STATE_NULL);
+                          GUIDELINE_STATE_DISCARDED);
 }
 
 void GuidelineStateDeployedVerticalHover::handleShowHide (bool show)

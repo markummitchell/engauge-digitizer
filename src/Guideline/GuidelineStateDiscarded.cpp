@@ -9,78 +9,78 @@
 #include "GuidelineFormat.h"
 #include "GuidelineStateAbstractBase.h"
 #include "GuidelineStateContext.h"
-#include "GuidelineStateNull.h"
+#include "GuidelineStateDiscarded.h"
 #include "Logger.h"
 #include <QPen>
 #include "ZValues.h"
 
-GuidelineStateNull::GuidelineStateNull (GuidelineStateContext &context) :
+GuidelineStateDiscarded::GuidelineStateDiscarded (GuidelineStateContext &context) :
   GuidelineStateAbstractBase (context)
 {
 }
 
-GuidelineStateNull::~GuidelineStateNull ()
+GuidelineStateDiscarded::~GuidelineStateDiscarded ()
 {
 }
 
-void GuidelineStateNull::begin ()
+void GuidelineStateDiscarded::begin ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateNull::begin";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDiscarded::begin";
 
   GuidelineFormat guidelineFormat;
   
-  context().guideline().setZValue (Z_VALUE_GUIDELINE_NULL);
+  context().guideline().setZValue (Z_VALUE_GUIDELINE_DISCARDED);
   context().guideline().setVisible (false); //
   context().guideline().setAcceptHoverEvents (false);
   context().guideline().setPenColor (guidelineFormat.colorHidden (),
                                      guidelineFormat.lineWidthNonHover ());
 }
 
-bool GuidelineStateNull::doPaint () const
+bool GuidelineStateDiscarded::doPaint () const
 {
   return false;
 }
 
-void GuidelineStateNull::end ()
+void GuidelineStateDiscarded::end ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateNull::end";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDiscarded::end";
 }
 
-void GuidelineStateNull::handleHoverEnterEvent ()
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleHoverEnterEvent";
-
-  // Noop. Never called since hover only works when visible
-}
-
-void GuidelineStateNull::handleHoverLeaveEvent ()
+void GuidelineStateDiscarded::handleHoverEnterEvent ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleHoverEnterEvent";
 
   // Noop. Never called since hover only works when visible
 }
 
-void GuidelineStateNull::handleMousePress (const QPointF & /* posScene */)
+void GuidelineStateDiscarded::handleHoverLeaveEvent ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleHoverEnterEvent";
+
+  // Noop. Never called since hover only works when visible
+}
+
+void GuidelineStateDiscarded::handleMousePress (const QPointF & /* posScene */)
 {
   // Noop
 }
 
-void GuidelineStateNull::handleMouseRelease ()
+void GuidelineStateDiscarded::handleMouseRelease ()
 {
   // Noop
 }
 
-void GuidelineStateNull::handleShowHide (bool /* show */)
+void GuidelineStateDiscarded::handleShowHide (bool /* show */)
 {
 }
 
-QLineF GuidelineStateNull::lineFromPoint (const QPointF & /* poscreen */) const
+QLineF GuidelineStateDiscarded::lineFromPoint (const QPointF & /* poscreen */) const
 {
   return QLineF (QPointF (0, 0),
                  QPointF (0, 0));
 }
 
-QString GuidelineStateNull::state () const
+QString GuidelineStateDiscarded::state () const
 {
-  return ("GuidelineStateNull");
+  return ("GuidelineStateDiscarded");
 }

@@ -63,7 +63,7 @@ protected:
 
   /// Common mouse press handling. This is expected to be used by
   /// every derived leaf class except GUIDELINE_STATE_HANDLE (which this method creates)
-  /// and GUIDELINE_STATE_NULL (which is a noop)
+  /// and GUIDELINE_STATE_DISCARDED (which is a noop)
   void handleMousePressCommon (const QPointF &pos,
                                GuidelineState stateDeployed,
                                GuidelineState stateReplacement);

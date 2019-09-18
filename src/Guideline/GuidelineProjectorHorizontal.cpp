@@ -7,7 +7,6 @@
 #include <algorithm>
 #include "GuidelineProjectorHorizontal.h"
 #include <QList>
-#include <QPointF>
 #include <QRectF>
 #include "Transformation.h"
 

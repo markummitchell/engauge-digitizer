@@ -4,18 +4,18 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_NULL_H
-#define GUIDELINE_STATE_NULL_H
+#ifndef GUIDELINE_STATE_DISCARDED_H
+#define GUIDELINE_STATE_DISCARDED_H
 
 #include "GuidelineStateAbstractBase.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_NULL
-class GuidelineStateNull : public GuidelineStateAbstractBase
+/// Implements guideline behavior for GUIDELINE_STATE_DISCARDED
+class GuidelineStateDiscarded : public GuidelineStateAbstractBase
 {
 public:
   /// Single constructor.
-  GuidelineStateNull(GuidelineStateContext &context);
-  virtual ~GuidelineStateNull();
+  GuidelineStateDiscarded(GuidelineStateContext &context);
+  virtual ~GuidelineStateDiscarded();
 
   virtual void begin ();
   virtual bool doPaint () const;
@@ -29,8 +29,8 @@ public:
   virtual QString state () const;
 
 private:
-  GuidelineStateNull();
+  GuidelineStateDiscarded();
 
 };
 
-#endif // GUIDELINE_STATE_NULL_H
+#endif // GUIDELINE_STATE_DISCARDED_H

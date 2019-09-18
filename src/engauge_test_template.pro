@@ -318,8 +318,8 @@ HEADERS  += \
     Guideline/GuidelineStateDeployedVerticalHide.h \
     Guideline/GuidelineStateDeployedVerticalHover.h \
     Guideline/GuidelineStateDeployedVerticalNormal.h \
+    Guideline/GuidelineStateDiscarded.h \
     Guideline/GuidelineStateHandle.h \
-    Guideline/GuidelineStateNull.h \
     Guideline/GuidelineStateTemplateAbstract.h \
     Guideline/GuidelineStateTemplateHorizontalBottomAbstract.h \
     Guideline/GuidelineStateTemplateHorizontalBottomHide.h \
@@ -703,8 +703,8 @@ SOURCES += \
     Guideline/GuidelineStateDeployedVerticalHide.cpp \
     Guideline/GuidelineStateDeployedVerticalHover.cpp \
     Guideline/GuidelineStateDeployedVerticalNormal.cpp \
+    Guideline/GuidelineStateDiscarded.cpp \
     Guideline/GuidelineStateHandle.cpp \
-    Guideline/GuidelineStateNull.cpp \
     Guideline/GuidelineStateTemplateAbstract.cpp \
     Guideline/GuidelineStateTemplateHorizontalBottomAbstract.cpp \
     Guideline/GuidelineStateTemplateHorizontalBottomHide.cpp \

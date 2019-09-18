@@ -54,7 +54,7 @@ void GuidelineStateDeployedVerticalNormal::handleMousePress (const QPointF &posS
 {
   handleMousePressCommon (posScene,
                           GUIDELINE_STATE_DEPLOYED_VERTICAL_NORMAL,
-                          GUIDELINE_STATE_NULL);
+                          GUIDELINE_STATE_DISCARDED);
 }
 
 void GuidelineStateDeployedVerticalNormal::handleShowHide (bool show)

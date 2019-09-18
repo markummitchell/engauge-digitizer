@@ -8,8 +8,8 @@
 #define GUIDELINE_PROJECTOR_HORIZONTAL_H
 
 #include <QList>
+#include <QPointF>
 
-class QPointF;
 class QRectF;
 class Transformation;
 

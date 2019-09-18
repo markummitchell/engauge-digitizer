@@ -15,8 +15,8 @@
 #include "GuidelineStateDeployedVerticalHide.h"
 #include "GuidelineStateDeployedVerticalHover.h"
 #include "GuidelineStateDeployedVerticalNormal.h"
+#include "GuidelineStateDiscarded.h"
 #include "GuidelineStateHandle.h"
-#include "GuidelineStateNull.h"
 #include "GuidelineStateTemplateHorizontalBottomHide.h"
 #include "GuidelineStateTemplateHorizontalBottomHover.h"
 #include "GuidelineStateTemplateHorizontalBottomLurking.h"
@@ -43,9 +43,9 @@ GuidelineStateContext::GuidelineStateContext (Guideline &guideline,
   m_states.insert (GUIDELINE_STATE_DEPLOYED_HORIZONTAL_NORMAL        , new GuidelineStateDeployedHorizontalNormal       (*this));  
   m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL_HIDE            , new GuidelineStateDeployedVerticalHide           (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL_HOVER           , new GuidelineStateDeployedVerticalHover          (*this));  
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL_NORMAL          , new GuidelineStateDeployedVerticalNormal         (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL_NORMAL          , new GuidelineStateDeployedVerticalNormal         (*this));
+  m_states.insert (GUIDELINE_STATE_DISCARDED                         , new GuidelineStateDiscarded                      (*this));  
   m_states.insert (GUIDELINE_STATE_HANDLE                            , new GuidelineStateHandle                         (*this));  
-  m_states.insert (GUIDELINE_STATE_NULL                              , new GuidelineStateNull                           (*this));
   m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE   , new GuidelineStateTemplateHorizontalBottomHide   (*this));
   m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HOVER  , new GuidelineStateTemplateHorizontalBottomHover  (*this));
   m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING, new GuidelineStateTemplateHorizontalBottomLurking(*this));  

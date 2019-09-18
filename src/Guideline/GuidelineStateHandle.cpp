@@ -82,7 +82,7 @@ void GuidelineStateHandle::handleMouseRelease ()
   // since the Guideline states are extremely lightweight (few bytes), and there are so few of
   // them (max expected to be well below 100). Plus, whenever the scene is closed (on exit or
   // before loading a new Document) all Guidelines get deleted
-  context().requestStateTransition (GUIDELINE_STATE_NULL);
+  context().requestStateTransition (GUIDELINE_STATE_DISCARDED);
 }
 
 void GuidelineStateHandle::handleShowHide (bool /* show */)

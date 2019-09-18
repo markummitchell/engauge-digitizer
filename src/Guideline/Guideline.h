@@ -32,7 +32,7 @@ class QWidget;
 ///    3d) The new deployed Guideline is continually resized to just fit the scene, and in the
 ///        case of polar coordinates resized to go between origin and scene edge (theta) or
 ///        curved elliptically (range)
-///    3e) At the end of the drag, the Handle is no longer needed so it transitions to Null state
+///    3e) At the end of the drag, the Handle is no longer needed so it transitions to Discarded state
 ///    3f) At the end of the drag, if it started with a template Guideline then a replacement
 ///        is put back on the scene edge
 ///
@@ -51,7 +51,7 @@ class QWidget;
 /// # hide = Used when all Guidelines have been turned off
 /// # hover = Applies when cursor is hovering over the Guideline, to add some highlighting
 /// # normal = After a deployed Guideline has been created and lost the hover
-/// # null = A noop state. The Guideline is no longer useful and has been retired
+/// # discarded = A noop state. The Guideline is no longer useful and has been removed
 /// # handle = This Guideline is invisible, being dragged, and moving a bound deployed
 ///            Guideline along the same drag trajectory
 /// # lurking = Template Guideline state for when active but not seen, and waiting for hover
