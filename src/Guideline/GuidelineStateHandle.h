@@ -31,7 +31,7 @@ public:
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleMouseRelease ();
   virtual void handleShowHide (bool show);
-  virtual QLineF lineFromPoint (const QPointF &point) const;
+  virtual QLineF lineFromPoint (const QPointF &posScreen) const;
   virtual QString state () const;
 
 };

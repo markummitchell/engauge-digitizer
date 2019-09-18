@@ -13,6 +13,7 @@
 class Guideline;
 class MainWindow;
 class QGraphicsScene;
+class Transformation;
 
 typedef QList<Guideline*> GuidelineContainerPrivate;
 
@@ -36,6 +37,9 @@ public:
 
   /// Show/hide all guidelines. None are created or destroyed by this method
   void showHide (bool show);
+
+  /// Return copy of transformation owned by MainWindow
+  Transformation transformation () const;
 
   /// Update after a change to the transformation. Scene size is assumed to stay the same
   void update (bool guidelinesAreActive);

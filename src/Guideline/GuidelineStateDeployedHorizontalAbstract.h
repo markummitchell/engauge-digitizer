@@ -16,7 +16,7 @@ public:
   GuidelineStateDeployedHorizontalAbstract(GuidelineStateContext &context);
   virtual ~GuidelineStateDeployedHorizontalAbstract();
 
-  virtual QLineF lineFromPoint (const QPointF &point) const;
+  virtual QLineF lineFromPoint (const QPointF &posScreen) const;
 
 private:
   GuidelineStateDeployedHorizontalAbstract();

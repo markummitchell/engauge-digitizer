@@ -30,6 +30,7 @@
 #include "GuidelineStateTemplateVerticalRightHover.h"
 #include "GuidelineStateTemplateVerticalRightLurking.h"
 #include <QGraphicsScene>
+#include "Transformation.h"
 
 GuidelineStateContext::GuidelineStateContext (Guideline &guideline,
                                               Guidelines &guidelines,
@@ -126,11 +127,11 @@ void GuidelineStateContext::handleShowHide (bool show)
   transitionIfRequested ();
 }
 
-QLineF GuidelineStateContext::lineFromPoint (const QPointF &point) const
+QLineF GuidelineStateContext::lineFromPoint (const QPointF &posScreen) const
 {
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 
-  return m_states[m_currentState]->lineFromPoint (point);
+  return m_states[m_currentState]->lineFromPoint (posScreen);
 }
 
 void GuidelineStateContext::requestStateTransition (GuidelineState guidelineState)
@@ -155,6 +156,11 @@ QString GuidelineStateContext::state () const
 GuidelineState GuidelineStateContext::stateReplacement () const
 {
   return m_stateReplacement;
+}
+
+Transformation GuidelineStateContext::transformation() const
+{
+  return m_guidelines.transformation ();
 }
 
 void GuidelineStateContext::transitionIfRequested ()

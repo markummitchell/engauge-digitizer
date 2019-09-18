@@ -124,18 +124,16 @@ void Guideline::setPenColor (const QColor &color,
                 lineWidth));
 }
 
-void Guideline::slotHandleMoved (QPointF pos)
+void Guideline::slotHandleMoved (QPointF posScreen)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "Guideline::slotHandleMoved pos=(" << pos.x() << ", " << pos.y() << ")";
-
-   updateGeometry (pos);
+   updateGeometry (posScreen);
 }
 
-void Guideline::updateGeometry (const QPointF &pos)
+void Guideline::updateGeometry (const QPointF &poscreen)
 {
   // If graph transformation is known then we draw the line along a graph axis, otherwise
   // along a screen axis
-  QLineF line = m_context->lineFromPoint (pos);
+  QLineF line = m_context->lineFromPoint (poscreen);
 
   setLine (line);
 }

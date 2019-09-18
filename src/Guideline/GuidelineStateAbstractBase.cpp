@@ -28,7 +28,7 @@ GuidelineStateContext &GuidelineStateAbstractBase::context () const
   return m_context;
 }
 
-void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &pos,
+void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScreen,
                                                          GuidelineState stateDeployed,
                                                          GuidelineState stateReplacement)
 {
@@ -41,7 +41,7 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &pos,
   guidelineVisible->setPenColor (guidelineFormat.colorDeployedNonHover (),
                                  guidelineFormat.lineWidthNonHover ());
 
-  guidelineVisible->updateGeometry (pos);
+  guidelineVisible->updateGeometry (posScreen);
 
   context().guideline().bindGuidelineVisible (guidelineVisible);
 

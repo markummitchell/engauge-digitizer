@@ -89,7 +89,7 @@ void GuidelineStateHandle::handleShowHide (bool /* show */)
 {
 }
 
-QLineF GuidelineStateHandle::lineFromPoint (const QPointF &/* point */) const
+QLineF GuidelineStateHandle::lineFromPoint (const QPointF & /* poscreen */) const
 {
   return QLineF (QPointF (0, 0),
                  QPointF (0, 0));

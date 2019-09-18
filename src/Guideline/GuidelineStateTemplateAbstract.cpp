@@ -39,7 +39,7 @@ void GuidelineStateTemplateAbstract::handleMouseRelease ()
 {
 }
 
-QLineF GuidelineStateTemplateAbstract::lineFromPoint (const QPointF &/* point */) const
+QLineF GuidelineStateTemplateAbstract::lineFromPoint (const QPointF & /* posScreen */) const
 {
   return QLineF (QPointF (0, 0),
                  QPointF (0, 0));

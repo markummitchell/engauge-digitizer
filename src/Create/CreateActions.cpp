@@ -504,7 +504,8 @@ void CreateActions::createView (MainWindow &mw)
   mw.m_actionViewGuidelines->setWhatsThis (tr ("View Guidelines\n\n"
                                                "Show or hide guidelines that can be used to align objects. Along each of "
                                                "the four sides of the main window is a guideline that will appear under "
-                                               "the cursor. Guidelines can be moved by dragging."));
+                                               "the cursor. Guidelines can be moved by dragging. Each guideline shows "
+                                               "a constant coordinate value, as displayed in the status bar."));
   connect (mw.m_actionViewGuidelines, SIGNAL (triggered ()), &mw, SLOT (slotViewGuidelines()));  
 
   mw.m_actionViewBackgroundNone = new QAction (tr ("No Background"), &mw);

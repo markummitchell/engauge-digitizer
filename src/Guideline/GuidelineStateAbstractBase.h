@@ -51,7 +51,7 @@ public:
   virtual void handleMouseRelease () = 0;
 
   /// Return line parallel to an axis line, that passes through the specified point
-  virtual QLineF lineFromPoint (const QPointF &point) const = 0;
+  virtual QLineF lineFromPoint (const QPointF &poscreen) const = 0;
 
   /// State as a string for debugging only
   virtual QString state () const = 0;

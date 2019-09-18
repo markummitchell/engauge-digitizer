@@ -93,6 +93,11 @@ void Guidelines::showHide (bool show)
   }
 }
 
+Transformation Guidelines::transformation() const
+{
+  return m_mainWindow.transformation ();
+}
+
 void Guidelines::update (bool guidelinesAreActive)
 {
   if (guidelinesAreActive) {

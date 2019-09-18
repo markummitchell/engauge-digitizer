@@ -303,6 +303,8 @@ HEADERS  += \
     Grid/GridTriangleFill.h \
     Guideline/Guideline.h \
     Guideline/GuidelineFormat.h \
+    Guideline/GuidelineProjectorHorizontal.h \
+    Guideline/GuidelineProjectorVertical.h \
     Guideline/Guidelines.h \
     Guideline/GuidelineState.h \
     Guideline/GuidelineStateAbstractBase.h \
@@ -687,6 +689,8 @@ SOURCES += \
     Grid/GridTriangleFill.cpp \
     Guideline/Guideline.cpp \
     Guideline/GuidelineFormat.cpp \
+    Guideline/GuidelineProjectorHorizontal.cpp \
+    Guideline/GuidelineProjectorVertical.cpp \
     Guideline/Guidelines.cpp \
     Guideline/GuidelineStateAbstractBase.cpp \
     Guideline/GuidelineStateContext.cpp \

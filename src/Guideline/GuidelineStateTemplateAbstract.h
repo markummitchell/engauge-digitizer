@@ -20,7 +20,7 @@ public:
 
   void beginCommon (const QLineF &line);
   virtual void handleMouseRelease ();
-  virtual QLineF lineFromPoint (const QPointF &point) const;
+  virtual QLineF lineFromPoint (const QPointF &posScreen) const;
 
 protected:
 

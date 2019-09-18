@@ -345,6 +345,8 @@ HEADERS  += \
     src/Grid/GridTriangleFill.h \
     src/Guideline/Guideline.h \
     src/Guideline/GuidelineFormat.h \
+    src/Guideline/GuidelineProjectorHorizontal.h \
+    src/Guideline/GuidelineProjectorVertical.h \
     src/Guideline/Guidelines.h \
     src/Guideline/GuidelineState.h \
     src/Guideline/GuidelineStateAbstractBase.h \
@@ -725,6 +727,8 @@ SOURCES += \
     src/Grid/GridTriangleFill.cpp \
     src/Guideline/Guideline.cpp \
     src/Guideline/GuidelineFormat.cpp \
+    src/Guideline/GuidelineProjectorHorizontal.cpp \
+    src/Guideline/GuidelineProjectorVertical.cpp \
     src/Guideline/Guidelines.cpp \
     src/Guideline/GuidelineStateAbstractBase.cpp \
     src/Guideline/GuidelineStateContext.cpp \

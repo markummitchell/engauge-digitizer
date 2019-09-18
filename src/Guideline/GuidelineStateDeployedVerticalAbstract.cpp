@@ -6,10 +6,12 @@
 
 #include "EngaugeAssert.h"
 #include "Guideline.h"
+#include "GuidelineProjectorVertical.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedVerticalAbstract.h"
 #include "Logger.h"
 #include <QGraphicsScene>
+#include "Transformation.h"
 
 GuidelineStateDeployedVerticalAbstract::GuidelineStateDeployedVerticalAbstract (GuidelineStateContext &context) :
   GuidelineStateDeployedAbstract (context)
@@ -20,10 +22,16 @@ GuidelineStateDeployedVerticalAbstract::~GuidelineStateDeployedVerticalAbstract 
 {
 }
 
-QLineF GuidelineStateDeployedVerticalAbstract::lineFromPoint (const QPointF &point) const
+QLineF GuidelineStateDeployedVerticalAbstract::lineFromPoint (const QPointF &posScreen) const
 {
-  double height = context().guideline().scene()->height();
+  Transformation transformation = context().transformation();
 
-  return QLineF (QPointF (point.x(), 0),
-                 QPointF (point.x(), height - 1));
+  GuidelineProjectorVertical projector (transformation,
+                                        posScreen,
+                                        sceneRect ());
+  QPointF posScreen1 = projector.pos1 ();
+  QPointF posScreen2 = projector.pos2 ();
+
+  return QLineF (posScreen1,
+                 posScreen2);
 }

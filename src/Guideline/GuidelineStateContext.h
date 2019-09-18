@@ -16,6 +16,7 @@
 
 class Guideline;
 class Guidelines;
+class Transformation;
 
 /// Context class for state machine that belongs to the Guideline class. See Guideline
 /// class for more information
@@ -68,6 +69,9 @@ public:
 
   /// Get method for replacement state
   GuidelineState stateReplacement () const;
+
+  /// Return copy of transformation owned by MainWindow
+  Transformation transformation () const;
 
 private:
   GuidelineStateContext();

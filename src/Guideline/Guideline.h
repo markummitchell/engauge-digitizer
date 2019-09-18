@@ -107,7 +107,7 @@ signals:
 public slots:
 
   /// Slot for signal from cloned deployed Guideline from handle Guideline
-  void slotHandleMoved (QPointF);
+  void slotHandleMoved (QPointF posScreen);
 
 private:
   Guideline();
