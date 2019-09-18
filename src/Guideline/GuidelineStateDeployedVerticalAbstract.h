@@ -9,6 +9,7 @@
 
 #include "GuidelineStateDeployedAbstract.h"
 
+/// Compute geometry for deployed vertical Guideline
 class GuidelineStateDeployedVerticalAbstract : public GuidelineStateDeployedAbstract
 {
 public:

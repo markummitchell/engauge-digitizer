@@ -18,7 +18,9 @@ public:
   GuidelineStateTemplateAbstract(GuidelineStateContext &context);
   virtual ~GuidelineStateTemplateAbstract();
 
+  /// Initialization of graphics item for all template Guidelines
   void beginCommon (const QLineF &line);
+  
   virtual void handleMouseRelease ();
   virtual QLineF lineFromPoint (const QPointF &posScreen) const;
 
