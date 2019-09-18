@@ -55,7 +55,7 @@ void GuidelineStateTemplateVerticalRightHide::handleMousePress (const QPointF & 
 void GuidelineStateTemplateVerticalRightHide::handleShowHide (bool show)
 {
   if (show) {
-    context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HOVER);
+    context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING);
   }
 }
 

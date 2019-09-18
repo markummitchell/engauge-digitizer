@@ -31,13 +31,17 @@ public:
   Guideline *createGuideline (GuidelineState stateInitial);
 
   /// Load the presupplied template guidelines at the four boundaries after the scene has been loaded
-  void initialize (QGraphicsScene &scene);
+  void initialize (QGraphicsScene &scene,
+                   bool guidelinesAreActive);
 
   /// Show/hide all guidelines. None are created or destroyed by this method
   void showHide (bool show);
 
   /// Update after a change to the transformation. Scene size is assumed to stay the same
-  void update ();
+  void update (bool guidelinesAreActive);
+
+  /// Update guidelines as selectable or not. This is called on DigitizeState transitions
+  void updateGuidelinesSelectability (bool selectable);
 
 private:
   Guidelines();

@@ -821,6 +821,12 @@ void MainWindow::ghostsDestroy ()
 
 bool MainWindow::guidelinesAreActive () const
 {
+  return (guidelinesCanBeActive() &&
+          m_actionViewGuidelines->isChecked());
+}
+
+bool MainWindow::guidelinesCanBeActive () const
+{
   // Rules
   // 1) We want guidelines to be available as soon as possible since users would probably never know about them otherwise,
   //    so action should be checked
@@ -831,7 +837,6 @@ bool MainWindow::guidelinesAreActive () const
   //    is not defined
   // 3) If transform is defined then file should also be, but we check to make sure
   return (!m_currentFile.isEmpty() &&
-          m_actionViewGuidelines->isChecked() &&
           transformIsDefined());
 }
 
@@ -1549,7 +1554,8 @@ void MainWindow::setPixmap (const QString &curveSelected,
                                        pixmap,
                                        curveSelected);
 
-  m_guidelines.initialize (*m_scene);
+  m_guidelines.initialize (*m_scene,
+                           guidelinesAreActive());
 }
 
 void MainWindow::settingsRead (bool isReset)
@@ -3393,7 +3399,7 @@ void MainWindow::updateControls ()
     m_actionViewGridLines->setEnabled (false);
     m_actionViewGridLines->setChecked (false);
   }
-  m_actionViewGuidelines->setEnabled (guidelinesAreActive ());
+  m_actionViewGuidelines->setEnabled (guidelinesCanBeActive ());
   m_actionViewBackground->setEnabled (!m_currentFile.isEmpty());
   m_actionViewChecklistGuide->setEnabled (!m_dockChecklistGuide->browserIsEmpty());
   m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());
@@ -3543,6 +3549,11 @@ void MainWindow::updateGridLines ()
                                               m_gridLines);
 
   m_gridLines.setVisible (m_actionViewGridLines->isChecked());
+}
+
+void MainWindow::updateGuidelinesSelectability (bool selectable)
+{
+  m_guidelines.updateGuidelinesSelectability (selectable);
 }
 
 void MainWindow::updateHighlightOpacity ()
@@ -3770,7 +3781,7 @@ void MainWindow::updateTransformationAndItsDependencies()
   // in which case that transition triggered the initialization of the grid display parameters
   updateGridLines();
 
-  m_guidelines.update ();
+  m_guidelines.update (guidelinesAreActive());
 }
 
 void MainWindow::updateViewedCurves ()

@@ -161,7 +161,7 @@ public:
   /// Catch secret keypresses
   virtual bool eventFilter(QObject *, QEvent *);
 
-  /// True/false if guidelines are active/inactive
+  /// True/false if guidelines are active/inactive. See also guidelinesCanBeActive
   bool guidelinesAreActive () const;
 
   /// Background image that has been filtered for the current curve. This asserts if a curve-specific image is not being shown
@@ -222,6 +222,9 @@ public:
   /// Update the graphics lines so they follow the graphics points, after a drag, addition, removal, and such. The points
   /// in the Document may (and probably are) out of date with respect to the graphics points
   void updateGraphicsLinesToMatchGraphicsPoints();
+
+  /// Update guidelines as selectable or not. This is called on DigitizeState transitions
+  void updateGuidelinesSelectability (bool selectable);
 
   /// Update with new axes indicator properties.
   void updateSettingsAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);
@@ -401,6 +404,7 @@ private:
   void filePaste (ImportType importType); /// Same steps as fileImport but with import from clipboard
   void ghostsCreate (); /// Create the ghosts for seeing all coordinate systems at once
   void ghostsDestroy (); /// Destroy the ghosts for seeing all coordinate systems at once
+  bool guidelinesCanBeActive () const; /// True/false if guidelines can be activated by guidelines view action
   void handlerFileExtractImage (); /// Analog to slotFileExport but for image extract. Maybe converted to slot in future
   void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.

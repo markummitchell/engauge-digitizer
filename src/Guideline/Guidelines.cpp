@@ -8,6 +8,7 @@
 #include "Guideline.h"
 #include "Guidelines.h"
 #include "MainWindow.h"
+#include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <qmath.h>
 
@@ -39,22 +40,6 @@ void Guidelines::clear ()
   m_guidelineContainer.clear ();
 }
 
-void Guidelines::initialize (QGraphicsScene &scene)
-{
-  registerGuideline (new Guideline (scene,
-                                    *this,
-                                    GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING));
-  registerGuideline (new Guideline (scene,
-                                    *this,
-                                    GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING));
-  registerGuideline (new Guideline (scene,
-                                    *this,
-                                    GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING));
-  registerGuideline (new Guideline (scene,
-                                    *this,
-                                    GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING));
-}
-
 Guideline *Guidelines::createGuideline (GuidelineState stateInitial)
 {
   // This method is used to create non-template Guidelines after the template Guidelines
@@ -75,6 +60,25 @@ Guideline *Guidelines::createGuideline (GuidelineState stateInitial)
   return guideline;
 }
 
+void Guidelines::initialize (QGraphicsScene &scene,
+                             bool guidelinesAreActive)
+{
+  registerGuideline (new Guideline (scene,
+                                    *this,
+                                    GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING));
+  registerGuideline (new Guideline (scene,
+                                    *this,
+                                    GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING));
+  registerGuideline (new Guideline (scene,
+                                    *this,
+                                    GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING));
+  registerGuideline (new Guideline (scene,
+                                    *this,
+                                    GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING));
+
+  showHide (guidelinesAreActive);
+}
+
 void Guidelines::registerGuideline (Guideline *guideline)
 {
   m_guidelineContainer.push_back (guideline);
@@ -89,6 +93,31 @@ void Guidelines::showHide (bool show)
   }
 }
 
-void Guidelines::update ()
+void Guidelines::update (bool guidelinesAreActive)
 {
+  if (guidelinesAreActive) {
+    showHide (true);
+  } else{
+    showHide (false);
+  }
+}
+
+void Guidelines::updateGuidelinesSelectability (bool selectable)
+{
+  GuidelineContainerPrivate::iterator itr;
+  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
+    Guideline *guideline = *itr;
+
+    QGraphicsItem::GraphicsItemFlags flags = guideline->flags ();
+
+    if (selectable) {
+      // Add flag
+      flags |= QGraphicsItem::ItemIsSelectable;
+    } else {
+      // Remove flag
+      flags &= ~QGraphicsItem::ItemIsSelectable;
+    }
+
+    guideline->setFlags (flags);
+  }
 }
