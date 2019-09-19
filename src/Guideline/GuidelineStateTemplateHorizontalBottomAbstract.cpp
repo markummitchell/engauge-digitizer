@@ -4,7 +4,6 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "Guideline.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateHorizontalBottomAbstract.h"
 #include "Logger.h"

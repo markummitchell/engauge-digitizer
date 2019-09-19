@@ -4,7 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "Guideline.h"
+#include "GuidelineAbstract.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateHorizontalTopHide.h"
 #include "Logger.h"
@@ -24,7 +24,7 @@ void GuidelineStateTemplateHorizontalTopHide::begin ()
 
   GuidelineStateTemplateAbstract::beginCommon (templateHomeLine(sceneRect ()));
 
-  context().guideline().setVisible (false); // Stop hover and painting (doPoint only stops painting)
+  context().guideline().setGraphicsItemVisible (false); // Stop hover and painting (doPoint only stops painting)
 }
 
 bool GuidelineStateTemplateHorizontalTopHide::doPaint () const

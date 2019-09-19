@@ -14,7 +14,7 @@
 #include <QString>
 #include <QVector>
 
-class Guideline;
+class GuidelineAbstract;
 class Guidelines;
 class Transformation;
 
@@ -24,20 +24,20 @@ class GuidelineStateContext
 {
 public:
   /// Single constructor.
-  GuidelineStateContext (Guideline &guideline,
+  GuidelineStateContext (GuidelineAbstract &guideline,
                          Guidelines &guidelines,
                          GuidelineState guidelineStateInitial);
   virtual ~GuidelineStateContext();
 
   /// Factory method for creating a new Guideline
-  Guideline *createGuideline (GuidelineState stateInitial) const;
+  GuidelineAbstract *createGuideline (GuidelineState stateInitial) const;
 
   /// Allow/skip painting of the owner Guideline. This prevents display of selection markings on
   /// otherwise-invisible handle Guideline
   bool doPaint () const;
 
   /// Guideline that owns this context class
-  Guideline &guideline ();
+  GuidelineAbstract &guideline ();
 
   /// Show/hide this Guideline
   void handleShowHide (bool show);
@@ -79,7 +79,7 @@ private:
   /// Transition if requested
   void transitionIfRequested ();
   
-  Guideline &m_guideline;
+  GuidelineAbstract &m_guideline;
   Guidelines &m_guidelines;
 
   QVector<GuidelineStateAbstractBase*> m_states;

@@ -5,7 +5,7 @@
  ******************************************************************************************************/
 
 #include "GraphicsScene.h"
-#include "Guideline.h"
+#include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateAbstract.h"
@@ -26,13 +26,13 @@ void GuidelineStateTemplateAbstract::beginCommon (const QLineF &line)
 {
   GuidelineFormat guidelineFormat;
 
-  context().guideline().setZValue (Z_VALUE_GUIDELINE_TEMPLATE);
+  context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_TEMPLATE);
   // ItemIsSelectable is overkill, and in special cases adds ugly selected dashes
-  context().guideline().setFlags (QGraphicsItem::ItemIsFocusable |
-                                  QGraphicsItem::ItemIsMovable);
-  context().guideline().setAcceptHoverEvents (true);
+  context().guideline().setGraphicsItemFlags (QGraphicsItem::ItemIsFocusable |
+                                              QGraphicsItem::ItemIsMovable);
+  context().guideline().setGraphicsItemAcceptHoverEvents (true);
 
-  context().guideline().setLine (line);
+  context().guideline().setGraphicsItemLine (line);
 }
 
 void GuidelineStateTemplateAbstract::handleMouseRelease ()

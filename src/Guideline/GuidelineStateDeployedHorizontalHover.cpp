@@ -5,7 +5,7 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
-#include "Guideline.h"
+#include "GuidelineAbstract.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedHorizontalHover.h"
 #include "Logger.h"
@@ -24,7 +24,7 @@ void GuidelineStateDeployedHorizontalHover::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedHorizontalHover::begin";
 
-  context().guideline().setVisible (true); // Undo setVisible from GuidelineStateDeployedHorizontalHide
+  context().guideline().setGraphicsItemVisible (true); // Undo setVisible from GuidelineStateDeployedHorizontalHide
 
   beginCommon (GuidelineFormat::HOVER_ON);
 }

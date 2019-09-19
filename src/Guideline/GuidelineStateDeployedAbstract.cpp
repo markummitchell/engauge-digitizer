@@ -6,7 +6,7 @@
 
 #include "EngaugeAssert.h"
 #include "GraphicsScene.h"
-#include "Guideline.h"
+#include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedAbstract.h"
@@ -29,18 +29,18 @@ void GuidelineStateDeployedAbstract::beginCommon (GuidelineFormat::HoverOption h
 
   GuidelineFormat guidelineFormat;
 
-  context().guideline().setZValue (Z_VALUE_GUIDELINE_DEPLOYED);
-  context().guideline().setVisible (true);
+  context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_DEPLOYED);
+  context().guideline().setGraphicsItemVisible (true);
   // ItemIsSelectable is overkill, and in special cases adds ugly selected dashes
-  context().guideline().setFlags (QGraphicsItem::ItemIsFocusable |
-                                  QGraphicsItem::ItemIsMovable);
-  context().guideline().setAcceptHoverEvents (true); // Give feedback when user hovers
-  context().guideline().setPenColor (hoverOption == GuidelineFormat::HOVER_ON ?
-                                       guidelineFormat.colorDeployedHover () :
-                                       guidelineFormat.colorDeployedNonHover (),
-                                     hoverOption == GuidelineFormat::HOVER_ON ?
-                                       guidelineFormat.lineWidthHover () :
-                                       guidelineFormat.lineWidthNonHover ());
+  context().guideline().setGraphicsItemFlags (QGraphicsItem::ItemIsFocusable |
+                                              QGraphicsItem::ItemIsMovable);
+  context().guideline().setGraphicsItemAcceptHoverEvents (true); // Give feedback when user hovers
+  context().guideline().setGraphicsItemPen (hoverOption == GuidelineFormat::HOVER_ON ?
+                                            guidelineFormat.colorDeployedHover () :
+                                            guidelineFormat.colorDeployedNonHover (),
+                                            hoverOption == GuidelineFormat::HOVER_ON ?
+                                            guidelineFormat.lineWidthHover () :
+                                            guidelineFormat.lineWidthNonHover ());
 }
 
 void GuidelineStateDeployedAbstract::end ()

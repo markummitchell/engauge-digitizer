@@ -6,7 +6,7 @@
 
 #include "EngaugeAssert.h"
 #include "GraphicsScene.h"
-#include "Guideline.h"
+#include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateHandle.h"
@@ -29,14 +29,14 @@ void GuidelineStateHandle::begin ()
 
   GuidelineFormat guidelineFormat;
   
-  context().guideline().setZValue (Z_VALUE_GUIDELINE_HANDLE);
-  context().guideline().setVisible (true);
+  context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_HANDLE);
+  context().guideline().setGraphicsItemVisible (true);
   // ItemIsSelectable is overkill, and in special cases adds ugly selected dashes
-  context().guideline().setFlags (QGraphicsItem::ItemIsFocusable |
-                                  QGraphicsItem::ItemIsMovable);
-  context().guideline().setAcceptHoverEvents (false);
-  context().guideline().setPenColor (guidelineFormat.colorHidden (),
-                                     guidelineFormat.lineWidthNonHover ());
+  context().guideline().setGraphicsItemFlags (QGraphicsItem::ItemIsFocusable |
+                                              QGraphicsItem::ItemIsMovable);
+  context().guideline().setGraphicsItemAcceptHoverEvents (false);
+  context().guideline().setGraphicsItemPen (guidelineFormat.colorHidden (),
+                                            guidelineFormat.lineWidthNonHover ());
 }
 
 bool GuidelineStateHandle::doPaint () const
@@ -74,9 +74,9 @@ void GuidelineStateHandle::handleMouseRelease ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleMouseRelease";
 
-  Guideline *guidelineReplacement = context().createGuideline (context().stateReplacement ());
+  GuidelineAbstract *guidelineReplacement = context().createGuideline (context().stateReplacement ());
 
-  guidelineReplacement->setAcceptHoverEvents (true);
+  guidelineReplacement->setGraphicsItemAcceptHoverEvents (true);
 
   // Go dark. This is not a significant memory leak (versus immediately deleting this object)
   // since the Guideline states are extremely lightweight (few bytes), and there are so few of

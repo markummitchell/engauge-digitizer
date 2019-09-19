@@ -5,7 +5,6 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
-#include "Guideline.h"
 #include "GuidelineProjectorHorizontal.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedHorizontalAbstract.h"

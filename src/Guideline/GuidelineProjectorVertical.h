@@ -40,7 +40,12 @@ private:
                 double y2,
                 QList<double> &yValuesBelow,
                 QList<double> &yValuesAbove);
-  
+  bool isOutside (const QPointF &posScreen,
+                  const QPointF &posScreenBL,
+                  const QPointF &posScreenTL,
+                  const QPointF &posScreenTR,
+                  const QPointF &posScreenBR) const;
+
   QPointF m_pos1;
   QPointF m_pos2;
 

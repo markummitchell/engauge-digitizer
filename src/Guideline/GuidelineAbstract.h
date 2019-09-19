@@ -4,16 +4,18 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_H
-#define GUIDELINE_H
+#ifndef GUIDELINE_ABSTRACT_H
+#define GUIDELINE_ABSTRACT_H
 
 #include "GuidelineStateContext.h"
 #include <QColor>
-#include <QGraphicsLineItem>
+#include <QGraphicsItem>
+#include <QObject>
 
+class QGraphicsScene;
 class QMouseEvent;
 class QPainter;
-class QGraphicsScene;
+class QPointF;
 class QStyleOptionGraphicsItem;
 class QWidget;
 
@@ -55,49 +57,72 @@ class QWidget;
 /// # handle = This Guideline is invisible, being dragged, and moving a bound deployed
 ///            Guideline along the same drag trajectory
 /// # lurking = Template Guideline state for when active but not seen, and waiting for hover
-class Guideline : public QObject, public QGraphicsLineItem
+///
+/// There are two derived classes:
+/// # one for drawing lines (cartesian and polar angle) with QGraphicsLineItem
+/// # one for drawing ellipses (range angle) with QGraphicsEllipseItem
+/// An attempt to draw lines with just QGraphicsEllipseItem, for simplicity, failed with
+/// the result having sinusoidally changing line width.
+class GuidelineAbstract : public QObject
 {
   Q_OBJECT;
 
 public:
   /// Single constructor.
-  Guideline(QGraphicsScene &scene,
-            Guidelines &guidelines,
-            GuidelineState guidelineStateInitial);
-  ~Guideline();
+  GuidelineAbstract(QGraphicsScene &scene);
+  ~GuidelineAbstract();
 
   /// Bind a newly-created visible Guideline to this Guideline, and make this one invisible
-  void bindGuidelineVisible (Guideline *guidelineVisible);
+  void bindGuidelineVisible (GuidelineAbstract *guidelineVisible);
+  
+  /// Wraps QGraphicsItem::flags
+  virtual QGraphicsItem::GraphicsItemFlags graphicsItemFlags () const = 0;
+  
+  /// Highlight this Guideline upon hover enter
+  void handleHoverEnterEvent();
+
+  /// Unset highlighting triggered by hover enter
+  void handleHoverLeaveEvent();
+
+  /// Forwad movements to visible Guideline
+  void handleMouseMoveEvent (const QPointF &posScene);
+
+  /// Forward press event to state machine
+  void handleMousePressEvent(const QPointF &posScene);
+
+  /// Cleanup after being dragged
+  void handleMouseReleaseEvent ();
 
   /// Show/hide the Guideline objects
   void handleShowHide (bool show);
 
-  /// Highlight this Guideline upon hover enter
-  virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
+  /// Make graphics item remove itself from the scene
+  virtual void removeFromScene (QGraphicsScene *scene) = 0;
+  
+  /// GraphicsScene that owns this class
+  QGraphicsScene &scene ();
 
-  /// Unset highlighting triggered by hover enter
-  virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+  /// Wrapper for QGraphicsItem::setAcceptHoverEvents
+  virtual void setGraphicsItemAcceptHoverEvents (bool accept) = 0;
+  
+  /// Wrapper for QGraphicsItem::setFlags
+  virtual void setGraphicsItemFlags (QGraphicsItem::GraphicsItemFlags flags) = 0;
 
-  /// Forwad movements to visible Guideline
-  virtual void mouseMoveEvent (QGraphicsSceneMouseEvent *event);
+  /// Wrapper for QGraphicsLineItem::setLine
+  virtual void setGraphicsItemLine (const QLineF &line) = 0;
+  
+  /// Wrapper for QGraphicsItem::setPen
+  virtual void setGraphicsItemPen (const QColor &color,
+                                   double lineWidth) = 0;
 
-  /// Forward press event to state machine
-  virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-
-  /// Cleanup after being dragged
-  virtual void mouseReleaseEvent (QGraphicsSceneMouseEvent *event);
-
-  /// Override painting so this disappears when selected. Selected Guidelines are never visible
-  virtual void paint(QPainter *painter,
-                     const QStyleOptionGraphicsItem *option,
-                     QWidget *widget = Q_NULLPTR);
-
-  /// Set pen color and line width
-  void setPenColor (const QColor &color,
-                    double lineWidth);
-
+  /// Wrapper for QGraphicsItem::setVisible
+  virtual void setGraphicsItemVisible (bool visible) = 0;
+  
+  /// Wrapper for QGraphicsItem::setZValue
+  virtual void setGraphicsItemZValue (double z) = 0;
+  
   /// Update the geometry so it passes through the specified point
-  void updateGeometry (const QPointF &pos);
+  virtual void updateGeometry (const QPointF &pos) = 0;
 
 signals:
 
@@ -109,19 +134,25 @@ public slots:
   /// Slot for signal from cloned deployed Guideline from handle Guideline
   void slotHandleMoved (QPointF posScreen);
 
-private:
-  Guideline();
+protected:
+  /// State machine context owned by this class
+  GuidelineStateContext *context();
+  
+  /// Create state machine after virtual methods of child classes have been defined
+  void setContext (GuidelineStateContext *context);
 
-  // Forces use of setPenColor instead of QGraphicsLineItem::setPen
-  using QGraphicsLineItem::setPen;
+private:
+  GuidelineAbstract();
+
+  QGraphicsScene &m_scene;
 
   // Context is allocated as a final step in the constructor, at which point
   // this class has registered with the QGraphicsScene
   GuidelineStateContext *m_context;
 
   // After binding to visible Guideline
-  Guideline *m_guidelineVisible;
+  GuidelineAbstract *m_guidelineVisible;
 
 };
 
-#endif // GUIDELINE_H
+#endif // GUIDELINE_ABSTRACT_H

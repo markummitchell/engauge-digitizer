@@ -343,11 +343,14 @@ HEADERS  += \
     src/Grid/GridLog.h \
     src/Grid/GridRemoval.h \
     src/Grid/GridTriangleFill.h \
-    src/Guideline/Guideline.h \
+    src/Guideline/GuidelineAbstract.h \
+    src/Guideline/GuidelineEllipse.h \
     src/Guideline/GuidelineFormat.h \
+    src/Guideline/GuidelineLine.h \
     src/Guideline/GuidelineProjectorHorizontal.h \
     src/Guideline/GuidelineProjectorVertical.h \
     src/Guideline/Guidelines.h \
+    src/Guideline/GuidelineLine.h \
     src/Guideline/GuidelineState.h \
     src/Guideline/GuidelineStateAbstractBase.h \
     src/Guideline/GuidelineStateContext.h \
@@ -725,8 +728,10 @@ SOURCES += \
     src/Grid/GridLog.cpp \
     src/Grid/GridRemoval.cpp \
     src/Grid/GridTriangleFill.cpp \
-    src/Guideline/Guideline.cpp \
+    src/Guideline/GuidelineAbstract.cpp \
+    src/Guideline/GuidelineEllipse.cpp \
     src/Guideline/GuidelineFormat.cpp \
+    src/Guideline/GuidelineLine.cpp \
     src/Guideline/GuidelineProjectorHorizontal.cpp \
     src/Guideline/GuidelineProjectorVertical.cpp \
     src/Guideline/Guidelines.cpp \

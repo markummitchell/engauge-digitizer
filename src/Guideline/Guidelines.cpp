@@ -5,7 +5,8 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
-#include "Guideline.h"
+#include "GuidelineAbstract.h"
+#include "GuidelineLine.h"
 #include "Guidelines.h"
 #include "MainWindow.h"
 #include <QGraphicsItem>
@@ -28,30 +29,30 @@ void Guidelines::clear ()
 
   GuidelineContainerPrivate::iterator itr;
   for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
-    Guideline *guideline = *itr;
+    GuidelineAbstract *guideline = *itr;
 
     if (scene == nullptr) {
-      scene = guideline->scene();
+      scene = &guideline->scene();
     }
 
-    scene->removeItem (guideline);
+    guideline->removeFromScene (scene);
   }
 
   m_guidelineContainer.clear ();
 }
 
-Guideline *Guidelines::createGuideline (GuidelineState stateInitial)
+GuidelineAbstract *Guidelines::createGuideline (GuidelineState stateInitial)
 {
   // This method is used to create non-template Guidelines after the template Guidelines
   // have been created. We grab the scene from the first Guideline in the list
   ENGAUGE_ASSERT (m_guidelineContainer.size () > 0);
 
-  Guideline *guidelineFirst = m_guidelineContainer.at (0);
-  QGraphicsScene *scene = guidelineFirst->scene ();
+  GuidelineAbstract *guidelineFirst = m_guidelineContainer.at (0);
+  QGraphicsScene &scene = guidelineFirst->scene ();
 
-  Guideline *guideline = new Guideline (*scene,
-                                        *this,
-                                        stateInitial);
+  GuidelineAbstract *guideline = new GuidelineLine (scene,
+                                                    *this,
+                                                    stateInitial);
 
   ENGAUGE_CHECK_PTR (guideline);
 
@@ -63,23 +64,23 @@ Guideline *Guidelines::createGuideline (GuidelineState stateInitial)
 void Guidelines::initialize (QGraphicsScene &scene,
                              bool guidelinesAreActive)
 {
-  registerGuideline (new Guideline (scene,
-                                    *this,
-                                    GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING));
-  registerGuideline (new Guideline (scene,
-                                    *this,
-                                    GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING));
-  registerGuideline (new Guideline (scene,
-                                    *this,
-                                    GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING));
-  registerGuideline (new Guideline (scene,
-                                    *this,
-                                    GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING));
+  registerGuideline (new GuidelineLine (scene,
+                                        *this,
+                                        GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING));
+  registerGuideline (new GuidelineLine (scene,
+                                        *this,
+                                        GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING));
+  registerGuideline (new GuidelineLine (scene,
+                                        *this,
+                                        GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING));
+  registerGuideline (new GuidelineLine (scene,
+                                        *this,
+                                        GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING));
 
   showHide (guidelinesAreActive);
 }
 
-void Guidelines::registerGuideline (Guideline *guideline)
+void Guidelines::registerGuideline (GuidelineAbstract *guideline)
 {
   m_guidelineContainer.push_back (guideline);
 }
@@ -88,7 +89,7 @@ void Guidelines::showHide (bool show)
 {
   GuidelineContainerPrivate::iterator itr;
   for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
-    Guideline *guideline = *itr;
+    GuidelineAbstract *guideline = *itr;
     guideline->handleShowHide (show);
   }
 }
@@ -111,9 +112,9 @@ void Guidelines::updateGuidelinesSelectability (bool selectable)
 {
   GuidelineContainerPrivate::iterator itr;
   for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
-    Guideline *guideline = *itr;
+    GuidelineAbstract *guideline = *itr;
 
-    QGraphicsItem::GraphicsItemFlags flags = guideline->flags ();
+    QGraphicsItem::GraphicsItemFlags flags = guideline->graphicsItemFlags ();
 
     if (selectable) {
       // Add flag
@@ -123,6 +124,6 @@ void Guidelines::updateGuidelinesSelectability (bool selectable)
       flags &= ~QGraphicsItem::ItemIsSelectable;
     }
 
-    guideline->setFlags (flags);
+    guideline->setGraphicsItemFlags (flags);
   }
 }

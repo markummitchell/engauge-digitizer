@@ -4,7 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "Guideline.h"
+#include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateHorizontalTopLurking.h"
@@ -25,11 +25,11 @@ void GuidelineStateTemplateHorizontalTopLurking::begin ()
 
   GuidelineStateTemplateAbstract::beginCommon (templateHomeLine(sceneRect ()));
 
-  context().guideline().setVisible (true); // Undo setVisible(false) from Hide class
+  context().guideline().setGraphicsItemVisible (true); // Undo setVisible(false) from Hide class
 
   GuidelineFormat guidelineFormat;
-  context().guideline().setPenColor (guidelineFormat.colorHidden (),
-                                     guidelineFormat.lineWidthHover ()); // Hide until hover entry
+  context().guideline().setGraphicsItemPen (guidelineFormat.colorHidden (),
+                                            guidelineFormat.lineWidthHover ()); // Hide until hover entry
 }
 
 bool GuidelineStateTemplateHorizontalTopLurking::doPaint () const

@@ -5,7 +5,7 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
-#include "Guideline.h"
+#include "GuidelineAbstract.h"
 #include "Guidelines.h"
 #include "GuidelineStateAbstractBase.h"
 #include "GuidelineStateContext.h"
@@ -32,7 +32,7 @@
 #include <QGraphicsScene>
 #include "Transformation.h"
 
-GuidelineStateContext::GuidelineStateContext (Guideline &guideline,
+GuidelineStateContext::GuidelineStateContext (GuidelineAbstract &guideline,
                                               Guidelines &guidelines,
                                               GuidelineState guidelineStateInitial) :
   m_guideline (guideline),
@@ -70,7 +70,7 @@ GuidelineStateContext::~GuidelineStateContext ()
 {
 }
 
-Guideline *GuidelineStateContext::createGuideline (GuidelineState stateInitial) const
+GuidelineAbstract *GuidelineStateContext::createGuideline (GuidelineState stateInitial) const
 {
   return m_guidelines.createGuideline (stateInitial);
 }
@@ -82,7 +82,7 @@ bool GuidelineStateContext::doPaint () const
   return m_states[m_currentState]->doPaint ();
 }
 
-Guideline &GuidelineStateContext::guideline ()
+GuidelineAbstract &GuidelineStateContext::guideline ()
 {
   return m_guideline;
 }

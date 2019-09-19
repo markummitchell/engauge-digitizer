@@ -5,7 +5,7 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
-#include "Guideline.h"
+#include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedHorizontalHide.h"
@@ -27,7 +27,7 @@ void GuidelineStateDeployedHorizontalHide::begin ()
 
   beginCommon (GuidelineFormat::HOVER_OFF);
 
-  context().guideline().setVisible (false); // Stop hover and painting (doPoint only stops painting)
+  context().guideline().setGraphicsItemVisible (false); // Stop hover and painting (doPoint only stops painting)
 }
 
 bool GuidelineStateDeployedHorizontalHide::doPaint () const

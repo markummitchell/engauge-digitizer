@@ -4,7 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "Guideline.h"
+#include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateHorizontalBottomHover.h"
@@ -26,11 +26,11 @@ void GuidelineStateTemplateHorizontalBottomHover::begin ()
 
   GuidelineStateTemplateAbstract::beginCommon (templateHomeLine(sceneRect ()));
 
-  context().guideline().setVisible (true); // Undo setVisible(false) from Hide class
+  context().guideline().setGraphicsItemVisible (true); // Undo setVisible(false) from Hide class
 
   GuidelineFormat guidelineFormat;
-  context().guideline().setPenColor (guidelineFormat.colorDeployedHover (),
-                                     guidelineFormat.lineWidthHover ()); // Show
+  context().guideline().setGraphicsItemPen (guidelineFormat.colorDeployedHover (),
+                                            guidelineFormat.lineWidthHover ()); // Show
 }
 
 bool GuidelineStateTemplateHorizontalBottomHover::doPaint () const

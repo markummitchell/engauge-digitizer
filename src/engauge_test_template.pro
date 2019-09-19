@@ -301,8 +301,10 @@ HEADERS  += \
     Grid/GridLog.h \
     Grid/GridRemoval.h \
     Grid/GridTriangleFill.h \
-    Guideline/Guideline.h \
+    Guideline/GuidelineAbstract.h \
+    Guideline/GuidelineEllipse.h \
     Guideline/GuidelineFormat.h \
+    Guideline/GuidelineLine.h \
     Guideline/GuidelineProjectorHorizontal.h \
     Guideline/GuidelineProjectorVertical.h \
     Guideline/Guidelines.h \
@@ -687,8 +689,10 @@ SOURCES += \
     Grid/GridLog.cpp \
     Grid/GridRemoval.cpp \
     Grid/GridTriangleFill.cpp \
-    Guideline/Guideline.cpp \
+    Guideline/GuidelineAbstract.cpp \
+    Guideline/GuidelineEllipse.cpp \
     Guideline/GuidelineFormat.cpp \
+    Guideline/GuidelineLine.cpp \
     Guideline/GuidelineProjectorHorizontal.cpp \
     Guideline/GuidelineProjectorVertical.cpp \
     Guideline/Guidelines.cpp \

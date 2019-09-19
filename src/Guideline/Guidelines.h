@@ -10,12 +10,12 @@
 #include "GuidelineState.h"
 #include <QList>
 
-class Guideline;
+class GuidelineAbstract;
 class MainWindow;
 class QGraphicsScene;
 class Transformation;
 
-typedef QList<Guideline*> GuidelineContainerPrivate;
+typedef QList<GuidelineAbstract*> GuidelineContainerPrivate;
 
 /// This class contains all Guideline objects
 class Guidelines
@@ -29,7 +29,7 @@ public:
   void clear ();
 
   /// Factory method for creating a new Guideline
-  Guideline *createGuideline (GuidelineState stateInitial);
+  GuidelineAbstract *createGuideline (GuidelineState stateInitial);
 
   /// Load the presupplied template guidelines at the four boundaries after the scene has been loaded
   void initialize (QGraphicsScene &scene,
@@ -51,7 +51,7 @@ private:
   Guidelines();
 
   /// Add a new Guideline to the global list maintained by this class
-  void registerGuideline (Guideline *guideline);
+  void registerGuideline (GuidelineAbstract *guideline);
 
   GuidelineContainerPrivate m_guidelineContainer; // Save for easy removal later
 

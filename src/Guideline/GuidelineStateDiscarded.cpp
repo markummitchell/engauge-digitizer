@@ -5,7 +5,7 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
-#include "Guideline.h"
+#include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
 #include "GuidelineStateAbstractBase.h"
 #include "GuidelineStateContext.h"
@@ -29,11 +29,11 @@ void GuidelineStateDiscarded::begin ()
 
   GuidelineFormat guidelineFormat;
   
-  context().guideline().setZValue (Z_VALUE_GUIDELINE_DISCARDED);
-  context().guideline().setVisible (false); //
-  context().guideline().setAcceptHoverEvents (false);
-  context().guideline().setPenColor (guidelineFormat.colorHidden (),
-                                     guidelineFormat.lineWidthNonHover ());
+  context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_DISCARDED);
+  context().guideline().setGraphicsItemVisible (false); //
+  context().guideline().setGraphicsItemAcceptHoverEvents (false);
+  context().guideline().setGraphicsItemPen (guidelineFormat.colorHidden (),
+                                            guidelineFormat.lineWidthNonHover ());
 }
 
 bool GuidelineStateDiscarded::doPaint () const
