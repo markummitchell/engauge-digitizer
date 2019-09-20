@@ -5,20 +5,19 @@
  ******************************************************************************************************/
 
 #include <algorithm>
-#include "GuidelineProjectorHorizontal.h"
+#include "GuidelineProjectorConstantT.h"
 #include <QList>
 #include <QRectF>
 #include "Transformation.h"
 
-GuidelineProjectorHorizontal::GuidelineProjectorHorizontal(const Transformation &transformation,
-                                                           const QPointF &posScreen,
-                                                           const QRectF &sceneRect)
+GuidelineProjectorConstantT::GuidelineProjectorConstantT(const Transformation &transformation,
+                                                         const QPointF &posScreen,
+                                                         const QRectF &sceneRect)
 {
   double width = sceneRect.width();
   double height = sceneRect.height();
 
   // Convert sceneRect to graph coordinates
-  QPointF posGraph, posGraphBL, posGraphTL, posGraphTR, posGraphBR;
   QPointF posScreenBL (0, 0), posScreenTL (0, height), posScreenTR (width, height), posScreenBR (width, 0);
 
   if (isOutside (posScreen, posScreenBL, posScreenTL, posScreenTR, posScreenBR)) {
@@ -28,7 +27,8 @@ GuidelineProjectorHorizontal::GuidelineProjectorHorizontal(const Transformation 
     m_pos2 = QPointF (0, 0);
 
   } else {
-
+    
+    QPointF posGraph, posGraphBL, posGraphTL, posGraphTR, posGraphBR;
     transformation.transformScreenToRawGraph (posScreen,   posGraph);
     transformation.transformScreenToRawGraph (posScreenBL, posGraphBL);
     transformation.transformScreenToRawGraph (posScreenTL, posGraphTL);
@@ -91,17 +91,17 @@ GuidelineProjectorHorizontal::GuidelineProjectorHorizontal(const Transformation 
   }
 }
 
-GuidelineProjectorHorizontal::~GuidelineProjectorHorizontal()
+GuidelineProjectorConstantT::~GuidelineProjectorConstantT()
 {
 }
 
-void GuidelineProjectorHorizontal::addSide (double num,
-                                            double den,
-                                            double x,
-                                            double x1,
-                                            double x2,
-                                            QList<double> &xValuesBelow,
-                                            QList<double> &xValuesAbove)
+void GuidelineProjectorConstantT::addSide (double num,
+                                           double den,
+                                           double x,
+                                           double x1,
+                                           double x2,
+                                           QList<double> &xValuesBelow,
+                                           QList<double> &xValuesAbove)
 {
   // Inequalities have to be flipped if multiplying by a negative number
   bool okForDenPositive = (den >= 0) && (-1.0 * den < num) && (num < 2.0 * den);
@@ -118,11 +118,11 @@ void GuidelineProjectorHorizontal::addSide (double num,
   }
 }
 
-bool GuidelineProjectorHorizontal::isOutside (const QPointF &posScreen,
-                                              const QPointF &posScreenBL,
-                                              const QPointF &posScreenTL,
-                                              const QPointF &posScreenTR,
-                                              const QPointF &posScreenBR) const
+bool GuidelineProjectorConstantT::isOutside (const QPointF &posScreen,
+                                             const QPointF &posScreenBL,
+                                             const QPointF &posScreenTL,
+                                             const QPointF &posScreenTR,
+                                             const QPointF &posScreenBR) const
 {
   QPolygonF polygon;
   polygon << posScreenBL << posScreenTL << posScreenTR << posScreenBR;
@@ -132,12 +132,12 @@ bool GuidelineProjectorHorizontal::isOutside (const QPointF &posScreen,
                                  Qt::WindingFill);
 }
 
-QPointF GuidelineProjectorHorizontal::pos1() const
+QPointF GuidelineProjectorConstantT::pos1() const
 {
   return m_pos1;
 }
 
-QPointF GuidelineProjectorHorizontal::pos2() const
+QPointF GuidelineProjectorConstantT::pos2() const
 {
   return m_pos2;
 }

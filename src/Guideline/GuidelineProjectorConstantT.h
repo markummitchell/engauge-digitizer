@@ -4,8 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_PROJECTOR_VERTICAL_H
-#define GUIDELINE_PROJECTOR_VERTICAL_H
+#ifndef GUIDELINE_PROJECTOR_CONSTANT_T_H
+#define GUIDELINE_PROJECTOR_CONSTANT_T_H
 
 #include <QList>
 #include <QPointF>
@@ -13,16 +13,16 @@
 class QRectF;
 class Transformation;
 
-/// Project a point along the vertical direction in graph coordinates to produce
-/// a line segment along the constant-x direction, passing through a specified point
-class GuidelineProjectorVertical
+/// Project a point along the radial direction in graph coordinates to produce
+/// a curve along the constant-theta direction, passing through a specified point
+class GuidelineProjectorConstantT
 {
 public:
   /// Single constructor.
-  GuidelineProjectorVertical(const Transformation &transformation,
-                             const QPointF &posScreen,
-                             const QRectF &sceneRect);
-  ~GuidelineProjectorVertical();  
+  GuidelineProjectorConstantT(const Transformation &transformation,
+                              const QPointF &posScreen,
+                              const QRectF &sceneRect);
+  ~GuidelineProjectorConstantT();  
 
   /// Return first of the two endpoints
   QPointF pos1() const;
@@ -31,15 +31,15 @@ public:
   QPointF pos2() const;  
 
 private:
-  GuidelineProjectorVertical();
+  GuidelineProjectorConstantT();
 
   void addSide (double num,
                 double den,
-                double y,
-                double y1,
-                double y2,
-                QList<double> &yValuesBelow,
-                QList<double> &yValuesAbove);
+                double x,
+                double x1,
+                double x2,
+                QList<double> &xValuesBelow,
+                QList<double> &xValuesAbove);
   bool isOutside (const QPointF &posScreen,
                   const QPointF &posScreenBL,
                   const QPointF &posScreenTL,
@@ -51,4 +51,4 @@ private:
 
 };
 
-#endif // GUIDELINE_PROJECTOR_VERTICAL_H
+#endif // GUIDELINE_PROJECTOR_CONSTANT_T_H

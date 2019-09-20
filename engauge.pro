@@ -347,22 +347,32 @@ HEADERS  += \
     src/Guideline/GuidelineEllipse.h \
     src/Guideline/GuidelineFormat.h \
     src/Guideline/GuidelineLine.h \
-    src/Guideline/GuidelineProjectorHorizontal.h \
-    src/Guideline/GuidelineProjectorVertical.h \
+    src/Guideline/GuidelineProjectorConstantR.h \
+    src/Guideline/GuidelineProjectorConstantT.h \
+    src/Guideline/GuidelineProjectorConstantX.h \
+    src/Guideline/GuidelineProjectorConstantY.h \
     src/Guideline/Guidelines.h \
     src/Guideline/GuidelineLine.h \
     src/Guideline/GuidelineState.h \
     src/Guideline/GuidelineStateAbstractBase.h \
     src/Guideline/GuidelineStateContext.h \
     src/Guideline/GuidelineStateDeployedAbstract.h \
-    src/Guideline/GuidelineStateDeployedHorizontalAbstract.h \
-    src/Guideline/GuidelineStateDeployedHorizontalHide.h \
-    src/Guideline/GuidelineStateDeployedHorizontalHover.h \
-    src/Guideline/GuidelineStateDeployedHorizontalNormal.h \
-    src/Guideline/GuidelineStateDeployedVerticalAbstract.h \
-    src/Guideline/GuidelineStateDeployedVerticalHide.h \
-    src/Guideline/GuidelineStateDeployedVerticalHover.h \
-    src/Guideline/GuidelineStateDeployedVerticalNormal.h \
+    src/Guideline/GuidelineStateDeployedConstantRAbstract.h \
+    src/Guideline/GuidelineStateDeployedConstantRHide.h \
+    src/Guideline/GuidelineStateDeployedConstantRHover.h \
+    src/Guideline/GuidelineStateDeployedConstantRNormal.h \
+    src/Guideline/GuidelineStateDeployedConstantTAbstract.h \
+    src/Guideline/GuidelineStateDeployedConstantTHide.h \
+    src/Guideline/GuidelineStateDeployedConstantTHover.h \
+    src/Guideline/GuidelineStateDeployedConstantTNormal.h \
+    src/Guideline/GuidelineStateDeployedConstantXAbstract.h \
+    src/Guideline/GuidelineStateDeployedConstantXHide.h \
+    src/Guideline/GuidelineStateDeployedConstantXHover.h \
+    src/Guideline/GuidelineStateDeployedConstantXNormal.h \
+    src/Guideline/GuidelineStateDeployedConstantYAbstract.h \
+    src/Guideline/GuidelineStateDeployedConstantYHide.h \
+    src/Guideline/GuidelineStateDeployedConstantYHover.h \
+    src/Guideline/GuidelineStateDeployedConstantYNormal.h \    
     src/Guideline/GuidelineStateDiscarded.h \
     src/Guideline/GuidelineStateHandle.h \
     src/Guideline/GuidelineStateTemplateAbstract.h \
@@ -732,20 +742,30 @@ SOURCES += \
     src/Guideline/GuidelineEllipse.cpp \
     src/Guideline/GuidelineFormat.cpp \
     src/Guideline/GuidelineLine.cpp \
-    src/Guideline/GuidelineProjectorHorizontal.cpp \
-    src/Guideline/GuidelineProjectorVertical.cpp \
+    src/Guideline/GuidelineProjectorConstantR.cpp \
+    src/Guideline/GuidelineProjectorConstantT.cpp \
+    src/Guideline/GuidelineProjectorConstantX.cpp \
+    src/Guideline/GuidelineProjectorConstantY.cpp \
     src/Guideline/Guidelines.cpp \
     src/Guideline/GuidelineStateAbstractBase.cpp \
     src/Guideline/GuidelineStateContext.cpp \
     src/Guideline/GuidelineStateDeployedAbstract.cpp \
-    src/Guideline/GuidelineStateDeployedHorizontalAbstract.cpp \
-    src/Guideline/GuidelineStateDeployedHorizontalHide.cpp \
-    src/Guideline/GuidelineStateDeployedHorizontalHover.cpp \
-    src/Guideline/GuidelineStateDeployedHorizontalNormal.cpp \
-    src/Guideline/GuidelineStateDeployedVerticalAbstract.cpp \
-    src/Guideline/GuidelineStateDeployedVerticalHide.cpp \
-    src/Guideline/GuidelineStateDeployedVerticalHover.cpp \
-    src/Guideline/GuidelineStateDeployedVerticalNormal.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRAbstract.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRHover.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRNormal.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTAbstract.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTHover.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTNormal.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXAbstract.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXHover.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXNormal.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYAbstract.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYHover.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYNormal.cpp \    
     src/Guideline/GuidelineStateDiscarded.cpp \
     src/Guideline/GuidelineStateHandle.cpp \
     src/Guideline/GuidelineStateTemplateAbstract.cpp \

@@ -45,7 +45,8 @@ void GuidelineStateTemplateHorizontalBottomHover::end ()
 
 void GuidelineStateTemplateHorizontalBottomHover::handleHoverEnterEvent ()
 {
-  // This event would have been handled by GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING
+  // This event would have been handled by GUIDELINE_STATE_TEMPLATE_CONSTANT_Y_BOTTOM_LURKING or
+  // GUIDELINE_STATE_TEMPLATE_CONSTANT_R_BOTTOM_LURKING
 }
 
 void GuidelineStateTemplateHorizontalBottomHover::handleHoverLeaveEvent ()
@@ -57,8 +58,12 @@ void GuidelineStateTemplateHorizontalBottomHover::handleMousePress (const QPoint
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottomHover::handleMousePress";
 
+  GuidelineState stateNew = context().cartesian() ?
+    GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HOVER :
+    GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER;
+  
   handleMousePressCommon (posScene,
-                          GUIDELINE_STATE_DEPLOYED_HORIZONTAL_HOVER,
+                          stateNew,
                           GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING);
 }
 

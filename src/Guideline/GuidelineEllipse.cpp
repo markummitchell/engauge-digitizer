@@ -108,11 +108,6 @@ void GuidelineEllipse::removeFromScene (QGraphicsScene *scene)
   scene->removeItem (this);
 }
 
-QGraphicsScene *GuidelineEllipse::sceneForParent()
-{
-  return QGraphicsEllipseItem::scene();
-}
-
 void GuidelineEllipse::setGraphicsItemAcceptHoverEvents (bool accept)
 {
   QGraphicsEllipseItem::setAcceptHoverEvents (accept);

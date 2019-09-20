@@ -305,21 +305,31 @@ HEADERS  += \
     Guideline/GuidelineEllipse.h \
     Guideline/GuidelineFormat.h \
     Guideline/GuidelineLine.h \
-    Guideline/GuidelineProjectorHorizontal.h \
-    Guideline/GuidelineProjectorVertical.h \
+    Guideline/GuidelineProjectorConstantR.h \
+    Guideline/GuidelineProjectorConstantT.h \
+    Guideline/GuidelineProjectorConstantX.h \
+    Guideline/GuidelineProjectorConstantY.h \
     Guideline/Guidelines.h \
     Guideline/GuidelineState.h \
     Guideline/GuidelineStateAbstractBase.h \
     Guideline/GuidelineStateContext.h \
     Guideline/GuidelineStateDeployedAbstract.h \
-    Guideline/GuidelineStateDeployedHorizontalAbstract.h \
-    Guideline/GuidelineStateDeployedHorizontalHide.h \
-    Guideline/GuidelineStateDeployedHorizontalHover.h \
-    Guideline/GuidelineStateDeployedHorizontalNormal.h \
-    Guideline/GuidelineStateDeployedVerticalAbstract.h \
-    Guideline/GuidelineStateDeployedVerticalHide.h \
-    Guideline/GuidelineStateDeployedVerticalHover.h \
-    Guideline/GuidelineStateDeployedVerticalNormal.h \
+    Guideline/GuidelineStateDeployedConstantRAbstract.h \
+    Guideline/GuidelineStateDeployedConstantRHide.h \
+    Guideline/GuidelineStateDeployedConstantRHover.h \
+    Guideline/GuidelineStateDeployedConstantRNormal.h \    
+    Guideline/GuidelineStateDeployedConstantTAbstract.h \
+    Guideline/GuidelineStateDeployedConstantTHide.h \
+    Guideline/GuidelineStateDeployedConstantTHover.h \
+    Guideline/GuidelineStateDeployedConstantTNormal.h \
+    Guideline/GuidelineStateDeployedConstantXAbstract.h \
+    Guideline/GuidelineStateDeployedConstantXHide.h \
+    Guideline/GuidelineStateDeployedConstantXHover.h \
+    Guideline/GuidelineStateDeployedConstantXNormal.h \    
+    Guideline/GuidelineStateDeployedConstantYAbstract.h \
+    Guideline/GuidelineStateDeployedConstantYHide.h \
+    Guideline/GuidelineStateDeployedConstantYHover.h \
+    Guideline/GuidelineStateDeployedConstantYNormal.h \    
     Guideline/GuidelineStateDiscarded.h \
     Guideline/GuidelineStateHandle.h \
     Guideline/GuidelineStateTemplateAbstract.h \
@@ -693,20 +703,30 @@ SOURCES += \
     Guideline/GuidelineEllipse.cpp \
     Guideline/GuidelineFormat.cpp \
     Guideline/GuidelineLine.cpp \
-    Guideline/GuidelineProjectorHorizontal.cpp \
-    Guideline/GuidelineProjectorVertical.cpp \
+    Guideline/GuidelineProjectorConstantR.cpp \
+    Guideline/GuidelineProjectorConstantT.cpp \
+    Guideline/GuidelineProjectorConstantX.cpp \
+    Guideline/GuidelineProjectorConstantY.cpp \
     Guideline/Guidelines.cpp \
     Guideline/GuidelineStateAbstractBase.cpp \
     Guideline/GuidelineStateContext.cpp \
     Guideline/GuidelineStateDeployedAbstract.cpp \
-    Guideline/GuidelineStateDeployedHorizontalAbstract.cpp \
-    Guideline/GuidelineStateDeployedHorizontalHide.cpp \
-    Guideline/GuidelineStateDeployedHorizontalHover.cpp \
-    Guideline/GuidelineStateDeployedHorizontalNormal.cpp \
-    Guideline/GuidelineStateDeployedVerticalAbstract.cpp \
-    Guideline/GuidelineStateDeployedVerticalHide.cpp \
-    Guideline/GuidelineStateDeployedVerticalHover.cpp \
-    Guideline/GuidelineStateDeployedVerticalNormal.cpp \
+    Guideline/GuidelineStateDeployedConstantRAbstract.cpp \
+    Guideline/GuidelineStateDeployedConstantRHide.cpp \
+    Guideline/GuidelineStateDeployedConstantRHover.cpp \
+    Guideline/GuidelineStateDeployedConstantRNormal.cpp \    
+    Guideline/GuidelineStateDeployedConstantTAbstract.cpp \
+    Guideline/GuidelineStateDeployedConstantTHide.cpp \
+    Guideline/GuidelineStateDeployedConstantTHover.cpp \
+    Guideline/GuidelineStateDeployedConstantTNormal.cpp \
+    Guideline/GuidelineStateDeployedConstantXAbstract.cpp \
+    Guideline/GuidelineStateDeployedConstantXHide.cpp \
+    Guideline/GuidelineStateDeployedConstantXHover.cpp \
+    Guideline/GuidelineStateDeployedConstantXNormal.cpp \    
+    Guideline/GuidelineStateDeployedConstantYAbstract.cpp \
+    Guideline/GuidelineStateDeployedConstantYHide.cpp \
+    Guideline/GuidelineStateDeployedConstantYHover.cpp \
+    Guideline/GuidelineStateDeployedConstantYNormal.cpp \    
     Guideline/GuidelineStateDiscarded.cpp \
     Guideline/GuidelineStateHandle.cpp \
     Guideline/GuidelineStateTemplateAbstract.cpp \

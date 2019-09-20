@@ -29,6 +29,9 @@ public:
                          GuidelineState guidelineStateInitial);
   virtual ~GuidelineStateContext();
 
+  /// True/false if coordinates are cartesian/polar
+  bool cartesian() const;
+  
   /// Factory method for creating a new Guideline
   GuidelineAbstract *createGuideline (GuidelineState stateInitial) const;
 

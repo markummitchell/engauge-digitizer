@@ -4,18 +4,18 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_DEPLOYED_HORIZONTAL_HIDE_H
-#define GUIDELINE_STATE_DEPLOYED_HORIZONTAL_HIDE_H
+#ifndef GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE_H
+#define GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE_H
 
-#include "GuidelineStateDeployedHorizontalAbstract.h"
+#include "GuidelineStateDeployedConstantRAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_HORIZONTAL
-class GuidelineStateDeployedHorizontalHide : public GuidelineStateDeployedHorizontalAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_CONSTANT_R
+class GuidelineStateDeployedConstantRHide : public GuidelineStateDeployedConstantRAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateDeployedHorizontalHide(GuidelineStateContext &context);
-  virtual ~GuidelineStateDeployedHorizontalHide();
+  GuidelineStateDeployedConstantRHide(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedConstantRHide();
 
   virtual void begin ();
   virtual bool doPaint () const;
@@ -27,8 +27,8 @@ public:
   virtual QString state () const;
 
 private:
-  GuidelineStateDeployedHorizontalHide();
+  GuidelineStateDeployedConstantRHide();
 
 };
 
-#endif // GUIDELINE_STATE_DEPLOYED_HORIZONTAL_HIDE_H
+#endif // GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE_H

@@ -4,18 +4,18 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_DEPLOYED_VERTICAL_NORMAL_H
-#define GUIDELINE_STATE_DEPLOYED_VERTICAL_NORMAL_H
+#ifndef GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HOVER_H
+#define GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HOVER_H
 
-#include "GuidelineStateDeployedVerticalAbstract.h"
+#include "GuidelineStateDeployedConstantTAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_VERTICAL
-class GuidelineStateDeployedVerticalNormal : public GuidelineStateDeployedVerticalAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_CONSTANT_T
+class GuidelineStateDeployedConstantTHover : public GuidelineStateDeployedConstantTAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateDeployedVerticalNormal(GuidelineStateContext &context);
-  virtual ~GuidelineStateDeployedVerticalNormal();
+  GuidelineStateDeployedConstantTHover(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedConstantTHover();
 
   virtual void begin ();
   virtual bool doPaint () const;
@@ -27,8 +27,8 @@ public:
   virtual QString state () const;
 
 private:
-  GuidelineStateDeployedVerticalNormal();
+  GuidelineStateDeployedConstantTHover();
 
 };
 
-#endif // GUIDELINE_STATE_DEPLOYED_VERTICAL_NORMAL_H
+#endif // GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HOVER_H

@@ -4,8 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_PROJECTOR_HORIZONTAL_H
-#define GUIDELINE_PROJECTOR_HORIZONTAL_H
+#ifndef GUIDELINE_PROJECTOR_CONSTANT_R_H
+#define GUIDELINE_PROJECTOR_CONSTANT_R_H
 
 #include <QList>
 #include <QPointF>
@@ -13,16 +13,16 @@
 class QRectF;
 class Transformation;
 
-/// Project a point along the horizontal direction in graph coordinates to produce
-/// a line segment along the constant-y direction, passing through a specified point
-class GuidelineProjectorHorizontal
+/// Project a point along the tangential direction in graph coordinates to produce
+/// a curve along the constant-range direction, passing through a specified point
+class GuidelineProjectorConstantR
 {
 public:
   /// Single constructor.
-  GuidelineProjectorHorizontal(const Transformation &transformation,
-                               const QPointF &posScreen,
-                               const QRectF &sceneRect);
-  ~GuidelineProjectorHorizontal();  
+  GuidelineProjectorConstantR(const Transformation &transformation,
+                              const QPointF &posScreen,
+                              const QRectF &sceneRect);
+  ~GuidelineProjectorConstantR();  
 
   /// Return first of the two endpoints
   QPointF pos1() const;
@@ -31,7 +31,7 @@ public:
   QPointF pos2() const;  
 
 private:
-  GuidelineProjectorHorizontal();
+  GuidelineProjectorConstantR();
 
   void addSide (double num,
                 double den,
@@ -51,4 +51,4 @@ private:
 
 };
 
-#endif // GUIDELINE_PROJECTOR_HORIZONTAL_H
+#endif // GUIDELINE_PROJECTOR_CONSTANT_R_H

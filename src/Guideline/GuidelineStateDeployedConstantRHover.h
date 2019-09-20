@@ -4,22 +4,22 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_DEPLOYED_VERTICAL_HIDE_H
-#define GUIDELINE_STATE_DEPLOYED_VERTICAL_HIDE_H
+#ifndef GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER_H
+#define GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER_H
 
-#include "GuidelineStateDeployedVerticalAbstract.h"
+#include "GuidelineStateDeployedConstantRAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_VERTICAL
-class GuidelineStateDeployedVerticalHide : public GuidelineStateDeployedVerticalAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER
+class GuidelineStateDeployedConstantRHover : public GuidelineStateDeployedConstantRAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateDeployedVerticalHide(GuidelineStateContext &context);
-  virtual ~GuidelineStateDeployedVerticalHide();
+  GuidelineStateDeployedConstantRHover(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedConstantRHover();
 
   virtual void begin ();
   virtual bool doPaint () const;
-  virtual void end ();
+  virtual void end ();  
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
@@ -27,8 +27,8 @@ public:
   virtual QString state () const;
 
 private:
-  GuidelineStateDeployedVerticalHide();
+  GuidelineStateDeployedConstantRHover();
 
 };
 
-#endif // GUIDELINE_STATE_DEPLOYED_VERTICAL_HIDE_H
+#endif // GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER_H

@@ -9,12 +9,18 @@
 #include "Guidelines.h"
 #include "GuidelineStateAbstractBase.h"
 #include "GuidelineStateContext.h"
-#include "GuidelineStateDeployedHorizontalHide.h"
-#include "GuidelineStateDeployedHorizontalHover.h"
-#include "GuidelineStateDeployedHorizontalNormal.h"
-#include "GuidelineStateDeployedVerticalHide.h"
-#include "GuidelineStateDeployedVerticalHover.h"
-#include "GuidelineStateDeployedVerticalNormal.h"
+#include "GuidelineStateDeployedConstantRHide.h"
+#include "GuidelineStateDeployedConstantRHover.h"
+#include "GuidelineStateDeployedConstantRNormal.h"
+#include "GuidelineStateDeployedConstantTHide.h"
+#include "GuidelineStateDeployedConstantTHover.h"
+#include "GuidelineStateDeployedConstantTNormal.h"
+#include "GuidelineStateDeployedConstantXHide.h"
+#include "GuidelineStateDeployedConstantXHover.h"
+#include "GuidelineStateDeployedConstantXNormal.h"
+#include "GuidelineStateDeployedConstantYHide.h"
+#include "GuidelineStateDeployedConstantYHover.h"
+#include "GuidelineStateDeployedConstantYNormal.h"
 #include "GuidelineStateDiscarded.h"
 #include "GuidelineStateHandle.h"
 #include "GuidelineStateTemplateHorizontalBottomHide.h"
@@ -38,17 +44,23 @@ GuidelineStateContext::GuidelineStateContext (GuidelineAbstract &guideline,
   m_guideline (guideline),
   m_guidelines (guidelines)
 {
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_HORIZONTAL_HIDE          , new GuidelineStateDeployedHorizontalHide         (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_HORIZONTAL_HOVER         , new GuidelineStateDeployedHorizontalHover        (*this));  
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_HORIZONTAL_NORMAL        , new GuidelineStateDeployedHorizontalNormal       (*this));  
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL_HIDE            , new GuidelineStateDeployedVerticalHide           (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL_HOVER           , new GuidelineStateDeployedVerticalHover          (*this));  
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_VERTICAL_NORMAL          , new GuidelineStateDeployedVerticalNormal         (*this));
-  m_states.insert (GUIDELINE_STATE_DISCARDED                         , new GuidelineStateDiscarded                      (*this));  
-  m_states.insert (GUIDELINE_STATE_HANDLE                            , new GuidelineStateHandle                         (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE          , new GuidelineStateDeployedConstantRHide          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER         , new GuidelineStateDeployedConstantRHover         (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_NORMAL        , new GuidelineStateDeployedConstantRNormal        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HIDE          , new GuidelineStateDeployedConstantTHide          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HOVER         , new GuidelineStateDeployedConstantTHover         (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_NORMAL        , new GuidelineStateDeployedConstantTNormal        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HIDE          , new GuidelineStateDeployedConstantXHide          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HOVER         , new GuidelineStateDeployedConstantXHover         (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_NORMAL        , new GuidelineStateDeployedConstantXNormal        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HIDE          , new GuidelineStateDeployedConstantYHide          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HOVER         , new GuidelineStateDeployedConstantYHover         (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_NORMAL        , new GuidelineStateDeployedConstantYNormal        (*this));  
+  m_states.insert (GUIDELINE_STATE_DISCARDED                         , new GuidelineStateDiscarded                      (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE                            , new GuidelineStateHandle                         (*this));
   m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE   , new GuidelineStateTemplateHorizontalBottomHide   (*this));
   m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HOVER  , new GuidelineStateTemplateHorizontalBottomHover  (*this));
-  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING, new GuidelineStateTemplateHorizontalBottomLurking(*this));  
+  m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING, new GuidelineStateTemplateHorizontalBottomLurking(*this));
   m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE      , new GuidelineStateTemplateHorizontalTopHide      (*this));
   m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HOVER     , new GuidelineStateTemplateHorizontalTopHover     (*this));
   m_states.insert (GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING   , new GuidelineStateTemplateHorizontalTopLurking   (*this));
@@ -68,6 +80,11 @@ GuidelineStateContext::GuidelineStateContext (GuidelineAbstract &guideline,
 
 GuidelineStateContext::~GuidelineStateContext ()
 {
+}
+
+bool GuidelineStateContext::cartesian() const
+{
+  return true;
 }
 
 GuidelineAbstract *GuidelineStateContext::createGuideline (GuidelineState stateInitial) const

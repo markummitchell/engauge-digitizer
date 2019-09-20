@@ -4,24 +4,24 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_DEPLOYED_VERTICAL_ABSTRACT_H
-#define GUIDELINE_STATE_DEPLOYED_VERTICAL_ABSTRACT_H
+#ifndef GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ABSTRACT_H
+#define GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ABSTRACT_H
 
 #include "GuidelineStateDeployedAbstract.h"
 
-/// Compute geometry for deployed vertical Guideline
-class GuidelineStateDeployedVerticalAbstract : public GuidelineStateDeployedAbstract
+/// Compute geometry for deployed constant theta Guideline
+class GuidelineStateDeployedConstantTAbstract : public GuidelineStateDeployedAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateDeployedVerticalAbstract(GuidelineStateContext &context);
-  virtual ~GuidelineStateDeployedVerticalAbstract();
+  GuidelineStateDeployedConstantTAbstract(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedConstantTAbstract();
 
   virtual QLineF lineFromPoint (const QPointF &posScreen) const;
 
 private:
-  GuidelineStateDeployedVerticalAbstract();
+  GuidelineStateDeployedConstantTAbstract();
 
 };
 
-#endif // GUIDELINE_STATE_DEPLOYED_VERTICAL_ABSTRACT_H
+#endif // GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ABSTRACT_H

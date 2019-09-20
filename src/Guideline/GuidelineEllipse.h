@@ -50,7 +50,6 @@ public:
                      QWidget *widget = Q_NULLPTR);
 
   virtual void removeFromScene (QGraphicsScene *scene);
-  virtual QGraphicsScene *sceneForParent ();
   virtual void setGraphicsItemAcceptHoverEvents (bool accept);
   virtual void setGraphicsItemFlags (QGraphicsItem::GraphicsItemFlags flags);
   virtual void setGraphicsItemLine (const QLineF &line);

@@ -5,29 +5,29 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
-#include "GuidelineProjectorHorizontal.h"
+#include "GuidelineProjectorConstantX.h"
 #include "GuidelineStateContext.h"
-#include "GuidelineStateDeployedHorizontalAbstract.h"
+#include "GuidelineStateDeployedConstantXAbstract.h"
 #include "Logger.h"
 #include <QGraphicsScene>
 #include "Transformation.h"
 
-GuidelineStateDeployedHorizontalAbstract::GuidelineStateDeployedHorizontalAbstract (GuidelineStateContext &context) :
+GuidelineStateDeployedConstantXAbstract::GuidelineStateDeployedConstantXAbstract (GuidelineStateContext &context) :
   GuidelineStateDeployedAbstract (context)
 {
 }
 
-GuidelineStateDeployedHorizontalAbstract::~GuidelineStateDeployedHorizontalAbstract ()
+GuidelineStateDeployedConstantXAbstract::~GuidelineStateDeployedConstantXAbstract ()
 {
 }
 
-QLineF GuidelineStateDeployedHorizontalAbstract::lineFromPoint (const QPointF &posScreen) const
+QLineF GuidelineStateDeployedConstantXAbstract::lineFromPoint (const QPointF &posScreen) const
 {
   Transformation transformation = context().transformation();
 
-  GuidelineProjectorHorizontal projector (transformation,
-                                          posScreen,
-                                          sceneRect ());
+  GuidelineProjectorConstantX projector (transformation,
+                                         posScreen,
+                                         sceneRect ());
   QPointF posScreen1 = projector.pos1 ();
   QPointF posScreen2 = projector.pos2 ();
 
