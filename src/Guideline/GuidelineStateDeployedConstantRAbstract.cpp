@@ -34,3 +34,14 @@ QLineF GuidelineStateDeployedConstantRAbstract::lineFromPoint (const QPointF &po
   return QLineF (posScreen1,
                  posScreen2);
 }
+
+void GuidelineStateDeployedConstantRAbstract::setPointGraph (const QPointF &posGraph)
+{
+  // Second coordinate is what defines this Guideline
+  setPointCoordinate (posGraph.y ());
+}
+
+void GuidelineStateDeployedConstantRAbstract::updateWithLatestTransformation ()
+{
+
+}

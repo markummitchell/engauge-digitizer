@@ -32,7 +32,9 @@ public:
   virtual void handleMouseRelease ();
   virtual void handleShowHide (bool show);
   virtual QLineF lineFromPoint (const QPointF &posScreen) const;
+  virtual void setPointGraph (const QPointF &posGraph);
   virtual QString state () const;
+  virtual void updateWithLatestTransformation ();
 
 };
 

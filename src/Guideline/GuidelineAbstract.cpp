@@ -22,6 +22,7 @@
 #include <QMouseEvent>
 #include <QPen>
 #include <QWidget>
+#include "Transformation.h"
 #include "ZValues.h"
 
 GuidelineAbstract::GuidelineAbstract(QGraphicsScene &scene) :
@@ -51,11 +52,6 @@ GuidelineStateContext *GuidelineAbstract::context ()
   return m_context;
 }
 
-void GuidelineAbstract::handleShowHide (bool show)
-{
-  m_context->handleShowHide (show);
-}
-
 void GuidelineAbstract::handleHoverEnterEvent()
 {
   m_context->handleHoverEnterEvent ();
@@ -75,6 +71,13 @@ void GuidelineAbstract::handleMouseMoveEvent (const QPointF &posScene)
 
     emit signalHandleMoved (posScene);
   }
+
+  // Save the graph value for later
+  QPointF posGraph;
+  context()->transformation().transformScreenToRawGraph (posScene,
+                                                         posGraph);
+  context()->setPointGraph (posGraph);
+
 }
 
 void GuidelineAbstract::handleMousePressEvent(const QPointF &posScene)
@@ -91,6 +94,11 @@ void GuidelineAbstract::handleMouseReleaseEvent ()
   m_context->handleMouseRelease ();
 }
 
+void GuidelineAbstract::handleShowHide (bool show)
+{
+  m_context->handleShowHide (show);
+}
+
 QGraphicsScene &GuidelineAbstract::scene ()
 {
   return m_scene;
@@ -104,4 +112,9 @@ void GuidelineAbstract::setContext (GuidelineStateContext *context)
 void GuidelineAbstract::slotHandleMoved (QPointF posScreen)
 {
    updateGeometry (posScreen);
+}
+
+void GuidelineAbstract::updateWithLatestTransformation ()
+{
+  m_context->updateWithLatestTransformation ();
 }

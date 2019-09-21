@@ -44,3 +44,13 @@ QLineF GuidelineStateTemplateAbstract::lineFromPoint (const QPointF & /* posScre
   return QLineF (QPointF (0, 0),
                  QPointF (0, 0));
 }
+
+void GuidelineStateTemplateAbstract::setPointGraph (const QPointF & /* posGraph */)
+{
+  // Noop
+}
+
+void GuidelineStateTemplateAbstract::updateWithLatestTransformation ()
+{
+  // Noop
+}

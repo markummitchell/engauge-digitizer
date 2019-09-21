@@ -124,6 +124,9 @@ public:
   /// Update the geometry so it passes through the specified point
   virtual void updateGeometry (const QPointF &pos) = 0;
 
+  /// Update given Transformation in GuidelineStateContext. This is called after a command has been executed
+  void updateWithLatestTransformation ();
+
 signals:
 
   /// Signal for cloned deployed Guideline from handle Guideline

@@ -4,6 +4,9 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "CmdMediator.h"
+#include "Document.h"
+#include "DocumentModelCoords.h"
 #include "EngaugeAssert.h"
 #include "GuidelineAbstract.h"
 #include "GuidelineLine.h"
@@ -39,6 +42,11 @@ void Guidelines::clear ()
   }
 
   m_guidelineContainer.clear ();
+}
+
+CoordsType Guidelines::coordsType () const
+{
+  return m_mainWindow.cmdMediator()->document().modelCoords().coordsType();
 }
 
 GuidelineAbstract *Guidelines::createGuideline (GuidelineState stateInitial)
@@ -99,16 +107,7 @@ Transformation Guidelines::transformation() const
   return m_mainWindow.transformation ();
 }
 
-void Guidelines::update (bool guidelinesAreActive)
-{
-  if (guidelinesAreActive) {
-    showHide (true);
-  } else{
-    showHide (false);
-  }
-}
-
-void Guidelines::updateGuidelinesSelectability (bool selectable)
+void Guidelines::updateSelectability (bool selectable)
 {
   GuidelineContainerPrivate::iterator itr;
   for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
@@ -125,5 +124,23 @@ void Guidelines::updateGuidelinesSelectability (bool selectable)
     }
 
     guideline->setGraphicsItemFlags (flags);
+  }
+}
+
+void Guidelines::updateVisiblity (bool guidelinesAreActive)
+{
+  if (guidelinesAreActive) {
+    showHide (true);
+  } else{
+    showHide (false);
+  }
+}
+
+void Guidelines::updateWithLatestTransformation ()
+{
+  GuidelineContainerPrivate::iterator itr;
+  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
+    GuidelineAbstract *guideline = *itr;
+    guideline->updateWithLatestTransformation ();
   }
 }

@@ -53,8 +53,14 @@ public:
   /// Return line parallel to an axis line, that passes through the specified point
   virtual QLineF lineFromPoint (const QPointF &poscreen) const = 0;
 
+  /// Save the graph position for later
+  virtual void setPointGraph (const QPointF &posGraph) = 0;
+
   /// State as a string for debugging only
   virtual QString state () const = 0;
+
+  /// Update given Transformation in GuidelineStateContext
+  virtual void updateWithLatestTransformation () = 0;
 
 protected:
 

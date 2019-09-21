@@ -21,11 +21,16 @@ public:
 
   virtual void end ();
   virtual void handleMouseRelease ();  
+  virtual void setPointCoordinate (double coordinate);
 
 protected:
 
   /// Initialization common to all states
   void beginCommon (GuidelineFormat::HoverOption hoverOption);
+
+private:
+
+  double m_coordinate;
 };
 
 #endif // GUIDELINE_STATE_DEPLOYED_ABSTRACT_H

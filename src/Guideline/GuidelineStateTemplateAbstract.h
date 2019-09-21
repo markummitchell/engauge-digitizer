@@ -23,6 +23,9 @@ public:
   
   virtual void handleMouseRelease ();
   virtual QLineF lineFromPoint (const QPointF &posScreen) const;
+  virtual void setPointGraph (const QPointF &posGraph);
+  virtual void updateWithLatestTransformation ();
+
 
 protected:
 

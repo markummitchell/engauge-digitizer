@@ -18,6 +18,8 @@ public:
   virtual ~GuidelineStateDeployedConstantYAbstract();
 
   virtual QLineF lineFromPoint (const QPointF &posScreen) const;
+  virtual void setPointGraph (const QPointF &posGraph);
+  virtual void updateWithLatestTransformation ();
 
 private:
   GuidelineStateDeployedConstantYAbstract();

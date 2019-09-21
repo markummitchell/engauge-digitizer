@@ -84,7 +84,7 @@ GuidelineStateContext::~GuidelineStateContext ()
 
 bool GuidelineStateContext::cartesian() const
 {
-  return true;
+  return m_guidelines.coordsType () == COORDS_TYPE_CARTESIAN;
 }
 
 GuidelineAbstract *GuidelineStateContext::createGuideline (GuidelineState stateInitial) const
@@ -158,7 +158,14 @@ void GuidelineStateContext::requestStateTransition (GuidelineState guidelineStat
   m_nextState = guidelineState;
 }
 
-void GuidelineStateContext::setStateReplacement (GuidelineState stateReplacement)
+void GuidelineStateContext::setPointGraph (const QPointF &posGraph)
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  m_states[m_currentState]->setPointGraph (posGraph);
+}
+
+  void GuidelineStateContext::setStateReplacement (GuidelineState stateReplacement)
 {
   m_stateReplacement = stateReplacement;
 }
@@ -194,4 +201,11 @@ void GuidelineStateContext::transitionIfRequested ()
     // Start the requested state
     m_states[m_currentState]->begin();
   }
+}
+
+void GuidelineStateContext::updateWithLatestTransformation()
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  m_states[m_currentState]->updateWithLatestTransformation();
 }

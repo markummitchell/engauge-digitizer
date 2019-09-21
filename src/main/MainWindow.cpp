@@ -3171,7 +3171,7 @@ void MainWindow::startRegressionDropTest (const QStringList &loadStartupFiles)
   // Regression testing of drag and drop has some constraints:
   // 1) Need graphics window (GraphicsView) or else its events will not work. This is why
   //    drag and drop testing is not done as one of the cli tests, which do not show the gui
-  // 2) Drag and drop by itself does not produce the csv file, so this code will output the
+  // 2) Drag and drop by itself does not produce the csv file, so this code will output theupdateTransformFromMatrices
   //    x,y dimensions of the imported image instead of a normal csv file
   connect (this, SIGNAL (signalDropRegression (QString)), m_view, SLOT (slotDropRegression (QString)));
 
@@ -3268,6 +3268,7 @@ void MainWindow::updateAfterCommand ()
   updateChecklistGuide ();
   updateFittingWindow ();
   updateGeometryWindow();
+  m_guidelines.updateWithLatestTransformation ();
 
   // Final actions at the end of a redo/undo are:
   // 1) checkpoint the Document and GraphicsScene to log files so proper state can be verified
@@ -3553,7 +3554,7 @@ void MainWindow::updateGridLines ()
 
 void MainWindow::updateGuidelinesSelectability (bool selectable)
 {
-  m_guidelines.updateGuidelinesSelectability (selectable);
+  m_guidelines.updateSelectability (selectable);
 }
 
 void MainWindow::updateHighlightOpacity ()
@@ -3781,7 +3782,7 @@ void MainWindow::updateTransformationAndItsDependencies()
   // in which case that transition triggered the initialization of the grid display parameters
   updateGridLines();
 
-  m_guidelines.update (guidelinesAreActive());
+  m_guidelines.updateVisiblity (guidelinesAreActive());
 }
 
 void MainWindow::updateViewedCurves ()

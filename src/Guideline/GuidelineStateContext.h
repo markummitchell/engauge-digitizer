@@ -64,6 +64,9 @@ public:
   /// Request a state transition
   void requestStateTransition (GuidelineState guidelineState);
 
+  /// Save the graph position for later
+  void setPointGraph (const QPointF &posGraph);
+
   /// Pass replacement Guideline state from template Guidelines to handle Guideline
   void setStateReplacement (GuidelineState stateReplacement);
 
@@ -75,6 +78,9 @@ public:
 
   /// Return copy of transformation owned by MainWindow
   Transformation transformation () const;
+
+  /// Update given Transformation in GuidelineStateContext
+  void updateWithLatestTransformation ();
 
 private:
   GuidelineStateContext();

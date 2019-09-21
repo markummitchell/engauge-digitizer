@@ -80,7 +80,17 @@ QLineF GuidelineStateDiscarded::lineFromPoint (const QPointF & /* poscreen */) c
                  QPointF (0, 0));
 }
 
+void GuidelineStateDiscarded::setPointGraph (const QPointF & /* posGraph */)
+{
+  // Noop
+}
+
 QString GuidelineStateDiscarded::state () const
 {
   return ("GuidelineStateDiscarded");
+}
+
+void GuidelineStateDiscarded::updateWithLatestTransformation ()
+{
+  // Noop
 }

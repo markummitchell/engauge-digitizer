@@ -95,7 +95,17 @@ QLineF GuidelineStateHandle::lineFromPoint (const QPointF & /* poscreen */) cons
                  QPointF (0, 0));
 }
 
+void GuidelineStateHandle::setPointGraph (const QPointF & /* posGraph */)
+{
+  // Noop
+}
+
 QString GuidelineStateHandle::state () const
 {
   return ("GuidelineStateHandle");
+}
+
+void GuidelineStateHandle::updateWithLatestTransformation ()
+{
+  // Noop
 }

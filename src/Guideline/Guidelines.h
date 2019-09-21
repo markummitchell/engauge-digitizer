@@ -7,13 +7,15 @@
 #ifndef GUIDELINES_H
 #define GUIDELINES_H
 
+#include "CoordsType.h"
 #include "GuidelineState.h"
 #include <QList>
+#include "Transformation.h"
 
+class DocumentModelCoords;
 class GuidelineAbstract;
 class MainWindow;
 class QGraphicsScene;
-class Transformation;
 
 typedef QList<GuidelineAbstract*> GuidelineContainerPrivate;
 
@@ -28,6 +30,9 @@ public:
   /// Remove guidelines since the current Document is about to be closed
   void clear ();
 
+  /// Return cartesian or polar
+  CoordsType coordsType () const;
+
   /// Factory method for creating a new Guideline
   GuidelineAbstract *createGuideline (GuidelineState stateInitial);
 
@@ -41,11 +46,14 @@ public:
   /// Return copy of transformation owned by MainWindow
   Transformation transformation () const;
 
-  /// Update after a change to the transformation. Scene size is assumed to stay the same
-  void update (bool guidelinesAreActive);
-
   /// Update guidelines as selectable or not. This is called on DigitizeState transitions
-  void updateGuidelinesSelectability (bool selectable);
+  void updateSelectability (bool selectable);
+
+  /// Update transformation. This is called after a command has been executed
+  void updateWithLatestTransformation ();
+
+  /// Update guidelines as active or not. This is called on DigitizeState transitions
+  void updateVisiblity (bool guidelinesAreActive);
 
 private:
   Guidelines();
