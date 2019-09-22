@@ -120,7 +120,12 @@ public:
   
   /// Wrapper for QGraphicsItem::setZValue
   virtual void setGraphicsItemZValue (double z) = 0;
-  
+
+  /// Update active versus inactive state. Inactive state applies when DigitizeState is not DigitizeStateSelect, since
+  /// the Guidelines can help with moving points around. This method is called on DigitizeState transitions.
+  /// Active is not the same as visibility. When inactive, guidelines ignore hover and click events
+  void updateActive (bool active);
+
   /// Update the geometry so it passes through the specified point
   virtual void updateGeometry (const QPointF &pos) = 0;
 

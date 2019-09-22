@@ -36,12 +36,10 @@ public:
   /// Factory method for creating a new Guideline
   GuidelineAbstract *createGuideline (GuidelineState stateInitial);
 
-  /// Load the presupplied template guidelines at the four boundaries after the scene has been loaded
-  void initialize (QGraphicsScene &scene,
-                   bool guidelinesAreActive);
-
-  /// Show/hide all guidelines. None are created or destroyed by this method
-  void showHide (bool show);
+  /// Load the presupplied template guidelines at the four boundaries after the scene has been loaded.
+  /// We do not set the initial state as a function of external conditions since during loading those
+  /// conditions are not predictable
+  void initialize (QGraphicsScene &scene);
 
   /// Return copy of transformation owned by MainWindow
   Transformation transformation () const;
@@ -52,8 +50,9 @@ public:
   /// Update transformation. This is called after a command has been executed
   void updateWithLatestTransformation ();
 
-  /// Update guidelines as active or not. This is called on DigitizeState transitions
-  void updateVisiblity (bool guidelinesAreActive);
+  /// Update guidelines as visible or not, probably in response to user toggling guideline visibility. When
+  /// invisible, the guidelines are also not selectable (=ignore hover and click events).
+  void updateVisiblity (bool show);
 
 private:
   Guidelines();

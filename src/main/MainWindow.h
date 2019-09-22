@@ -161,8 +161,8 @@ public:
   /// Catch secret keypresses
   virtual bool eventFilter(QObject *, QEvent *);
 
-  /// True/false if guidelines are active/inactive. See also guidelinesCanBeActive
-  bool guidelinesAreActive () const;
+  /// True/false if guidelines are visible. Selectability is handled elsewhere
+  bool guidelinesAreVisible () const;
 
   /// Background image that has been filtered for the current curve. This asserts if a curve-specific image is not being shown
   QImage imageFiltered () const;
@@ -404,7 +404,7 @@ private:
   void filePaste (ImportType importType); /// Same steps as fileImport but with import from clipboard
   void ghostsCreate (); /// Create the ghosts for seeing all coordinate systems at once
   void ghostsDestroy (); /// Destroy the ghosts for seeing all coordinate systems at once
-  bool guidelinesCanBeActive () const; /// True/false if guidelines can be activated by guidelines view action
+  bool guidelinesVisibilityCanBeEnabled () const; /// True/false if guidelines can be activated by guidelines view action
   void handlerFileExtractImage (); /// Analog to slotFileExport but for image extract. Maybe converted to slot in future
   void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.

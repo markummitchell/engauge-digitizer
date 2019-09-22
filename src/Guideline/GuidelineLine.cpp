@@ -144,9 +144,7 @@ void GuidelineLine::setGraphicsItemZValue (double z)
 
 void GuidelineLine::updateGeometry (const QPointF &posScreen)
 {
-  // If graph transformation is known then we draw the line along a graph axis, otherwise
-  // along a screen axis
-  QLineF line = context()->lineFromPoint (posScreen);
+  QLineF line = context()->pointToLine (posScreen);
 
   setLine (line);
 }

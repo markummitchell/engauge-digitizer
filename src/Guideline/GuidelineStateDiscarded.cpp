@@ -74,15 +74,18 @@ void GuidelineStateDiscarded::handleShowHide (bool /* show */)
 {
 }
 
-QLineF GuidelineStateDiscarded::lineFromPoint (const QPointF & /* poscreen */) const
+QRectF GuidelineStateDiscarded::pointToEllipse (const QPointF & /* poscreen */) const
 {
-  return QLineF (QPointF (0, 0),
-                 QPointF (0, 0));
+  return QRectF (0, 0, 0, 0);
+}
+
+QLineF GuidelineStateDiscarded::pointToLine (const QPointF & /* posGraph */) const
+{
+  return QLineF (0, 0, 0, 0);
 }
 
 void GuidelineStateDiscarded::setPointGraph (const QPointF & /* posGraph */)
 {
-  // Noop
 }
 
 QString GuidelineStateDiscarded::state () const

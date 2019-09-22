@@ -144,9 +144,7 @@ void GuidelineEllipse::setGraphicsItemZValue (double z)
 
 void GuidelineEllipse::updateGeometry (const QPointF &posScreen)
 {
-  // If graph transformation is known then we draw the line along a graph axis, otherwise
-  // along a screen axis
-  QLineF line = context()->lineFromPoint (posScreen);
+  QRectF rect = context()->pointToEllipse (posScreen);
 
-  //  setLine (line);
+  setRect (rect);
 }

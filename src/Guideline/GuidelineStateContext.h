@@ -58,13 +58,17 @@ public:
   /// At the end of dragging, clone the Guideline that owns the state machine where these states live
   void handleMouseRelease ();
 
+  /// Return ellipse representing constant range, that passes through the specified point
+  QRectF pointToEllipse (const QPointF &posScreen) const;
+
   /// Return line parallel to an axis line, that passes through the specified point
-  QLineF lineFromPoint (const QPointF &point) const;
+  QLineF pointToLine (const QPointF &poscreen) const;
 
   /// Request a state transition
   void requestStateTransition (GuidelineState guidelineState);
 
-  /// Save the graph position for later
+  /// Pass the current cursor coordinate to the state so it can save the relevant coordinate for
+  /// later adjustement when the transformation changes
   void setPointGraph (const QPointF &posGraph);
 
   /// Pass replacement Guideline state from template Guidelines to handle Guideline

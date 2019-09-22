@@ -20,7 +20,9 @@ public:
   virtual ~GuidelineStateDeployedAbstract();
 
   virtual void end ();
-  virtual void handleMouseRelease ();  
+  virtual void handleMouseRelease ();
+
+  /// Save the relevant coordinate (R, T, X, Y) that is needed later if transformation changes
   virtual void setPointCoordinate (double coordinate);
 
 protected:

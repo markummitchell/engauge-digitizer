@@ -11,6 +11,7 @@
 #include "GuidelineAbstract.h"
 #include "GuidelineLine.h"
 #include "Guidelines.h"
+#include "Logger.h"
 #include "MainWindow.h"
 #include <QGraphicsItem>
 #include <QGraphicsScene>
@@ -69,8 +70,7 @@ GuidelineAbstract *Guidelines::createGuideline (GuidelineState stateInitial)
   return guideline;
 }
 
-void Guidelines::initialize (QGraphicsScene &scene,
-                             bool guidelinesAreActive)
+void Guidelines::initialize (QGraphicsScene &scene)
 {
   registerGuideline (new GuidelineLine (scene,
                                         *this,
@@ -84,22 +84,11 @@ void Guidelines::initialize (QGraphicsScene &scene,
   registerGuideline (new GuidelineLine (scene,
                                         *this,
                                         GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING));
-
-  showHide (guidelinesAreActive);
 }
 
 void Guidelines::registerGuideline (GuidelineAbstract *guideline)
 {
   m_guidelineContainer.push_back (guideline);
-}
-
-void Guidelines::showHide (bool show)
-{
-  GuidelineContainerPrivate::iterator itr;
-  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
-    GuidelineAbstract *guideline = *itr;
-    guideline->handleShowHide (show);
-  }
 }
 
 Transformation Guidelines::transformation() const
@@ -109,6 +98,9 @@ Transformation Guidelines::transformation() const
 
 void Guidelines::updateSelectability (bool selectable)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Guidelines::updateSelectability selectable="
+                              << (selectable ? "on" : "off");
+
   GuidelineContainerPrivate::iterator itr;
   for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
     GuidelineAbstract *guideline = *itr;
@@ -127,12 +119,12 @@ void Guidelines::updateSelectability (bool selectable)
   }
 }
 
-void Guidelines::updateVisiblity (bool guidelinesAreActive)
+void Guidelines::updateVisiblity (bool show)
 {
-  if (guidelinesAreActive) {
-    showHide (true);
-  } else{
-    showHide (false);
+  GuidelineContainerPrivate::iterator itr;
+  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
+    GuidelineAbstract *guideline = *itr;
+    guideline->handleShowHide (show);
   }
 }
 

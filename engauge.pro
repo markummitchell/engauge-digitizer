@@ -347,6 +347,7 @@ HEADERS  += \
     src/Guideline/GuidelineEllipse.h \
     src/Guideline/GuidelineFormat.h \
     src/Guideline/GuidelineLine.h \
+    src/Guideline/GuidelineProjectorAbstract.h \
     src/Guideline/GuidelineProjectorConstantR.h \
     src/Guideline/GuidelineProjectorConstantT.h \
     src/Guideline/GuidelineProjectorConstantX.h \
@@ -742,6 +743,7 @@ SOURCES += \
     src/Guideline/GuidelineEllipse.cpp \
     src/Guideline/GuidelineFormat.cpp \
     src/Guideline/GuidelineLine.cpp \
+    src/Guideline/GuidelineProjectorAbstract.cpp \
     src/Guideline/GuidelineProjectorConstantR.cpp \
     src/Guideline/GuidelineProjectorConstantT.cpp \
     src/Guideline/GuidelineProjectorConstantX.cpp \

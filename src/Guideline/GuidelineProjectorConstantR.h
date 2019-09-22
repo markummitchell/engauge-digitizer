@@ -7,47 +7,40 @@
 #ifndef GUIDELINE_PROJECTOR_CONSTANT_R_H
 #define GUIDELINE_PROJECTOR_CONSTANT_R_H
 
+#include "GuidelineProjectorAbstract.h"
 #include <QList>
 #include <QPointF>
+#include <QRectF>
 
 class QRectF;
 class Transformation;
 
 /// Project a point along the tangential direction in graph coordinates to produce
 /// a curve along the constant-range direction, passing through a specified point
-class GuidelineProjectorConstantR
+class GuidelineProjectorConstantR : public GuidelineProjectorAbstract
 {
 public:
   /// Single constructor.
-  GuidelineProjectorConstantR(const Transformation &transformation,
-                              const QPointF &posScreen,
-                              const QRectF &sceneRect);
+  GuidelineProjectorConstantR();
   ~GuidelineProjectorConstantR();  
 
-  /// Return first of the two endpoints
-  QPointF pos1() const;
+  /// Return line through y in graph coordinates
+  QRectF fromCoordinateR (const Transformation &transformation,
+                          const QRectF &sceneRect,
+                          double rGraph);
 
-  /// Return second of the two endpoints
-  QPointF pos2() const;  
+  /// Return line through point in screen coordinates
+  QRectF fromPosScreen (const Transformation &transformation,
+                        const QRectF &sceneRect,
+                        const QPointF &posScreen);
 
 private:
-  GuidelineProjectorConstantR();
 
-  void addSide (double num,
-                double den,
-                double x,
-                double x1,
-                double x2,
-                QList<double> &xValuesBelow,
-                QList<double> &xValuesAbove);
-  bool isOutside (const QPointF &posScreen,
-                  const QPointF &posScreenBL,
-                  const QPointF &posScreenTL,
-                  const QPointF &posScreenTR,
-                  const QPointF &posScreenBR) const;
-
-  QPointF m_pos1;
-  QPointF m_pos2;
+  void addSide (const Transformation &transformation,
+                double r,
+                const QPointF &p1,
+                const QPointF &p2,
+                QList<QPointF> &intersections);
 
 };
 

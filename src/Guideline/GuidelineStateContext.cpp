@@ -144,11 +144,18 @@ void GuidelineStateContext::handleShowHide (bool show)
   transitionIfRequested ();
 }
 
-QLineF GuidelineStateContext::lineFromPoint (const QPointF &posScreen) const
+QRectF GuidelineStateContext::pointToEllipse (const QPointF &posScreen) const
 {
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 
-  return m_states[m_currentState]->lineFromPoint (posScreen);
+  return m_states[m_currentState]->pointToEllipse (posScreen);
+}
+
+QLineF GuidelineStateContext::pointToLine (const QPointF &posScreen) const
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  return m_states[m_currentState]->pointToLine (posScreen);
 }
 
 void GuidelineStateContext::requestStateTransition (GuidelineState guidelineState)
@@ -165,7 +172,7 @@ void GuidelineStateContext::setPointGraph (const QPointF &posGraph)
   m_states[m_currentState]->setPointGraph (posGraph);
 }
 
-  void GuidelineStateContext::setStateReplacement (GuidelineState stateReplacement)
+void GuidelineStateContext::setStateReplacement (GuidelineState stateReplacement)
 {
   m_stateReplacement = stateReplacement;
 }

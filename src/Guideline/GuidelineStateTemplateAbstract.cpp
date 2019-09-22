@@ -39,15 +39,18 @@ void GuidelineStateTemplateAbstract::handleMouseRelease ()
 {
 }
 
-QLineF GuidelineStateTemplateAbstract::lineFromPoint (const QPointF & /* posScreen */) const
+QRectF GuidelineStateTemplateAbstract::pointToEllipse (const QPointF & /* poscreen */) const
 {
-  return QLineF (QPointF (0, 0),
-                 QPointF (0, 0));
+  return QRectF (0, 0, 0, 0);
+}
+
+QLineF GuidelineStateTemplateAbstract::pointToLine (const QPointF & /* posGraph */) const
+{
+  return QLineF (0, 0, 0, 0);
 }
 
 void GuidelineStateTemplateAbstract::setPointGraph (const QPointF & /* posGraph */)
 {
-  // Noop
 }
 
 void GuidelineStateTemplateAbstract::updateWithLatestTransformation ()

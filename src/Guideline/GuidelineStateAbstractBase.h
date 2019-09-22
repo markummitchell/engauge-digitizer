@@ -50,14 +50,19 @@ public:
   /// At the end of dragging, clone the Guideline that owns the state machine where these states live
   virtual void handleMouseRelease () = 0;
 
-  /// Return line parallel to an axis line, that passes through the specified point
-  virtual QLineF lineFromPoint (const QPointF &poscreen) const = 0;
+  /// Return ellipse representing constant range, that passes through the specified point
+  virtual QRectF pointToEllipse (const QPointF &posScreen) const = 0;
 
-  /// Save the graph position for later
+  /// Return line parallel to an axis line, that passes through the specified point
+  virtual QLineF pointToLine (const QPointF &poscreen) const = 0;
+
+  /// Pass the current cursor coordinate to the state so it can save the relevant coordinate for
+  /// later adjustement when the transformation changes
   virtual void setPointGraph (const QPointF &posGraph) = 0;
 
   /// State as a string for debugging only
   virtual QString state () const = 0;
+
 
   /// Update given Transformation in GuidelineStateContext
   virtual void updateWithLatestTransformation () = 0;

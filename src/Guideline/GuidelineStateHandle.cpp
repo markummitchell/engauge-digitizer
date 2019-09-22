@@ -89,15 +89,18 @@ void GuidelineStateHandle::handleShowHide (bool /* show */)
 {
 }
 
-QLineF GuidelineStateHandle::lineFromPoint (const QPointF & /* poscreen */) const
+QRectF GuidelineStateHandle::pointToEllipse (const QPointF & /* poscreen */) const
 {
-  return QLineF (QPointF (0, 0),
-                 QPointF (0, 0));
+  return QRectF (0, 0, 0, 0);
+}
+
+QLineF GuidelineStateHandle::pointToLine (const QPointF & /* posGraph */) const
+{
+  return QLineF (0, 0, 0, 0);
 }
 
 void GuidelineStateHandle::setPointGraph (const QPointF & /* posGraph */)
 {
-  // Noop
 }
 
 QString GuidelineStateHandle::state () const

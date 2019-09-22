@@ -21,18 +21,18 @@ GuidelineStateDeployedConstantRAbstract::~GuidelineStateDeployedConstantRAbstrac
 {
 }
 
-QLineF GuidelineStateDeployedConstantRAbstract::lineFromPoint (const QPointF &posScreen) const
+QRectF GuidelineStateDeployedConstantRAbstract::pointToEllipse (const QPointF &posScreen) const
 {
-  Transformation transformation = context().transformation();
+  GuidelineProjectorConstantR projector;
 
-  GuidelineProjectorConstantR projector (transformation,
-                                         posScreen,
-                                         sceneRect ());
-  QPointF posScreen1 = projector.pos1 ();
-  QPointF posScreen2 = projector.pos2 ();
+  return projector.fromPosScreen (context().transformation(),
+                                  sceneRect (),
+                                  posScreen);
+}
 
-  return QLineF (posScreen1,
-                 posScreen2);
+QLineF GuidelineStateDeployedConstantRAbstract::pointToLine (const QPointF & /* posScreen */) const
+{
+  return QLineF (0, 0, 0, 0);
 }
 
 void GuidelineStateDeployedConstantRAbstract::setPointGraph (const QPointF &posGraph)
@@ -43,5 +43,5 @@ void GuidelineStateDeployedConstantRAbstract::setPointGraph (const QPointF &posG
 
 void GuidelineStateDeployedConstantRAbstract::updateWithLatestTransformation ()
 {
-
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantRAbstract::updateWithLatestTransformation";
 }
