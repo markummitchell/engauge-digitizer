@@ -215,6 +215,7 @@ HEADERS  += \
     Document/DocumentModelSegments.h \
     Document/DocumentScrub.h \
     Document/DocumentSerialize.h \
+    util/EllipseParameters.h \
     include/EngaugeAssert.h \
     util/EnumsToQt.h \
     Export/ExportAlignLinear.h \
@@ -624,6 +625,7 @@ SOURCES += \
     Document/DocumentModelSegments.cpp \
     Document/DocumentScrub.cpp \
     Document/DocumentSerialize.cpp \
+    util/EllipseParameters.cpp \
     util/EnumsToQt.cpp \
     Export/ExportAlignLinear.cpp \
     Export/ExportAlignLog.cpp \

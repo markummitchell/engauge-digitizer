@@ -89,9 +89,9 @@ void GuidelineStateHandle::handleShowHide (bool /* show */)
 {
 }
 
-QRectF GuidelineStateHandle::pointToEllipse (const QPointF & /* poscreen */) const
+EllipseParameters GuidelineStateHandle::pointToEllipse (const QPointF & /* poscreen */) const
 {
-  return QRectF (0, 0, 0, 0);
+  return EllipseParameters();
 }
 
 QLineF GuidelineStateHandle::pointToLine (const QPointF & /* posGraph */) const

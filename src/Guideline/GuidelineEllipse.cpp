@@ -144,7 +144,16 @@ void GuidelineEllipse::setGraphicsItemZValue (double z)
 
 void GuidelineEllipse::updateGeometry (const QPointF &posScreen)
 {
-  QRectF rect = context()->pointToEllipse (posScreen);
+  EllipseParameters ellipseParameters = context()->pointToEllipse (posScreen);
 
-  setRect (rect);
+  QPointF posCenter = ellipseParameters.posCenter();
+  double a = ellipseParameters.a();
+  double b=  ellipseParameters.b();
+
+  setRect (QRectF (posCenter - QPointF (a, b),
+                   posCenter + QPointF (a, b)));
+
+  // Rotate
+  setTransformOriginPoint (posCenter);
+  setRotation (ellipseParameters.angleRadians());
 }

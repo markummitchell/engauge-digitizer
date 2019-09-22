@@ -21,7 +21,7 @@ GuidelineStateDeployedConstantRAbstract::~GuidelineStateDeployedConstantRAbstrac
 {
 }
 
-QRectF GuidelineStateDeployedConstantRAbstract::pointToEllipse (const QPointF &posScreen) const
+EllipseParameters GuidelineStateDeployedConstantRAbstract::pointToEllipse (const QPointF &posScreen) const
 {
   GuidelineProjectorConstantR projector;
 

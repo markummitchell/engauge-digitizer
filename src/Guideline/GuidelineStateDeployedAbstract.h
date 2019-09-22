@@ -22,13 +22,16 @@ public:
   virtual void end ();
   virtual void handleMouseRelease ();
 
-  /// Save the relevant coordinate (R, T, X, Y) that is needed later if transformation changes
-  virtual void setPointCoordinate (double coordinate);
-
 protected:
 
   /// Initialization common to all states
   void beginCommon (GuidelineFormat::HoverOption hoverOption);
+
+  /// Get method for relevant coordinate
+  double coordinate () const;
+
+  /// Save the relevant coordinate (R, T, X, Y) that is needed later if transformation changes
+  virtual void setPointCoordinate (double coordinate);
 
 private:
 

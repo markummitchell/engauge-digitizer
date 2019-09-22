@@ -39,9 +39,9 @@ void GuidelineStateTemplateAbstract::handleMouseRelease ()
 {
 }
 
-QRectF GuidelineStateTemplateAbstract::pointToEllipse (const QPointF & /* poscreen */) const
+EllipseParameters GuidelineStateTemplateAbstract::pointToEllipse (const QPointF & /* poscreen */) const
 {
-  return QRectF (0, 0, 0, 0);
+  return EllipseParameters();
 }
 
 QLineF GuidelineStateTemplateAbstract::pointToLine (const QPointF & /* posGraph */) const

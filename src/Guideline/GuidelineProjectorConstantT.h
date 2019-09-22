@@ -35,13 +35,9 @@ public:
                         const QPointF &posScreen);
 
 private:
-
-  void addSide (const Transformation &transformation,
-                double t,
-                const QPointF &p1,
-                const QPointF &p2,
-                QList<QPointF> &intersections);
-
+  QPointF intersect (double theta,
+                     const QPointF &p1,
+                     const QPointF &p2) const;
 };
 
 #endif // GUIDELINE_PROJECTOR_CONSTANT_T_H

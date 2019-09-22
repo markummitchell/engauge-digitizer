@@ -89,5 +89,5 @@ QLineF GuidelineProjectorConstantX::fromPosScreen (const Transformation &transfo
 
   return fromCoordinateX (transformation,
                           sceneRect,
-                          posGraph.y());
+                          posGraph.x());
 }

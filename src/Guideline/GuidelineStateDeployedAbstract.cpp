@@ -44,6 +44,11 @@ void GuidelineStateDeployedAbstract::beginCommon (GuidelineFormat::HoverOption h
                                             guidelineFormat.lineWidthNonHover ());
 }
 
+double GuidelineStateDeployedAbstract::coordinate () const
+{
+  return m_coordinate;
+}
+
 void GuidelineStateDeployedAbstract::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedAbstract::end";

@@ -7,6 +7,7 @@
 #ifndef GUIDELINE_STATE_CONTEXT_H
 #define GUIDELINE_STATE_CONTEXT_H
 
+#include "EllipseParameters.h"
 #include "GuidelineState.h"
 #include "GuidelineStateAbstractBase.h"
 #include <QColor>
@@ -59,7 +60,7 @@ public:
   void handleMouseRelease ();
 
   /// Return ellipse representing constant range, that passes through the specified point
-  QRectF pointToEllipse (const QPointF &posScreen) const;
+  EllipseParameters pointToEllipse (const QPointF &posScreen) const;
 
   /// Return line parallel to an axis line, that passes through the specified point
   QLineF pointToLine (const QPointF &poscreen) const;

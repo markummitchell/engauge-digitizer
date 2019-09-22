@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
+#include "GuidelineLine.h"
 #include "GuidelineProjectorConstantY.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedConstantYAbstract.h"
@@ -21,9 +22,9 @@ GuidelineStateDeployedConstantYAbstract::~GuidelineStateDeployedConstantYAbstrac
 {
 }
 
-QRectF GuidelineStateDeployedConstantYAbstract::pointToEllipse (const QPointF & /* posScreen */) const
+EllipseParameters GuidelineStateDeployedConstantYAbstract::pointToEllipse (const QPointF & /* posScreen */) const
 {
-  return QRectF (0, 0, 0, 0);
+  return EllipseParameters();
 }
 
 QLineF GuidelineStateDeployedConstantYAbstract::pointToLine (const QPointF &posScreen) const
@@ -45,5 +46,10 @@ void GuidelineStateDeployedConstantYAbstract::updateWithLatestTransformation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantYAbstract::updateWithLatestTransformation";
 
+  GuidelineProjectorConstantY projector;
 
+  GuidelineLine *line = dynamic_cast<GuidelineLine*> (&context().guideline());
+  line->setLine (projector.fromCoordinateY (context().transformation(),
+                                            sceneRect (),
+                                            coordinate ()));
 }

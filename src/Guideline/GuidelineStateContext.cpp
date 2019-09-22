@@ -144,7 +144,7 @@ void GuidelineStateContext::handleShowHide (bool show)
   transitionIfRequested ();
 }
 
-QRectF GuidelineStateContext::pointToEllipse (const QPointF &posScreen) const
+EllipseParameters GuidelineStateContext::pointToEllipse (const QPointF &posScreen) const
 {
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 

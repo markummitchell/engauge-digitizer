@@ -22,7 +22,7 @@ public:
   void beginCommon (const QLineF &line);
   
   virtual void handleMouseRelease ();
-  virtual QRectF pointToEllipse (const QPointF &posScreen) const;
+  virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
   virtual QLineF pointToLine (const QPointF &poscreen) const;
   virtual void setPointGraph (const QPointF &posGraph);
   virtual void updateWithLatestTransformation ();

@@ -17,7 +17,7 @@ public:
   GuidelineStateDeployedConstantYAbstract(GuidelineStateContext &context);
   virtual ~GuidelineStateDeployedConstantYAbstract();
 
-  virtual QRectF pointToEllipse (const QPointF &posScreen) const;
+  virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
   virtual QLineF pointToLine (const QPointF &posScreen) const;
   virtual void setPointGraph (const QPointF &posGraph);
   virtual void updateWithLatestTransformation ();

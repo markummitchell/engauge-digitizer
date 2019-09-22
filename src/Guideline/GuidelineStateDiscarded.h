@@ -25,7 +25,7 @@ public:
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleMouseRelease ();
   virtual void handleShowHide (bool show);
-  virtual QRectF pointToEllipse (const QPointF &posScreen) const;
+  virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
   virtual QLineF pointToLine (const QPointF &poscreen) const;
   virtual void setPointGraph (const QPointF &posGraph);
   virtual QString state () const;
