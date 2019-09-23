@@ -84,10 +84,6 @@ QLineF GuidelineStateDiscarded::pointToLine (const QPointF & /* posGraph */) con
   return QLineF (0, 0, 0, 0);
 }
 
-void GuidelineStateDiscarded::setPointGraph (const QPointF & /* posGraph */)
-{
-}
-
 QString GuidelineStateDiscarded::state () const
 {
   return ("GuidelineStateDiscarded");

@@ -158,6 +158,11 @@ QLineF GuidelineStateContext::pointToLine (const QPointF &posScreen) const
   return m_states[m_currentState]->pointToLine (posScreen);
 }
 
+QPointF GuidelineStateContext::posCursorGraph () const
+{
+  return m_posCursorGraph;
+}
+
 void GuidelineStateContext::requestStateTransition (GuidelineState guidelineState)
 {
   ENGAUGE_ASSERT (guidelineState != NUM_GUIDELINE_STATES);
@@ -165,11 +170,11 @@ void GuidelineStateContext::requestStateTransition (GuidelineState guidelineStat
   m_nextState = guidelineState;
 }
 
-void GuidelineStateContext::setPointGraph (const QPointF &posGraph)
+void GuidelineStateContext::setPosCursorGraph (const QPointF &posGraph)
 {
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 
-  m_states[m_currentState]->setPointGraph (posGraph);
+  m_posCursorGraph = posGraph;
 }
 
 void GuidelineStateContext::setStateReplacement (GuidelineState stateReplacement)

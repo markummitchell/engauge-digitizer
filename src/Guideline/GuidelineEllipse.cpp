@@ -156,4 +156,10 @@ void GuidelineEllipse::updateGeometry (const QPointF &posScreen)
   // Rotate
   setTransformOriginPoint (posCenter);
   setRotation (ellipseParameters.angleRadians());
+
+  // Save the graph value for later
+  QPointF posGraph;
+  context()->transformation().transformScreenToRawGraph (posScreen,
+                                                         posGraph);
+  context()->setPosCursorGraph (posGraph);
 }

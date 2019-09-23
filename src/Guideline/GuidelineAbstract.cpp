@@ -71,13 +71,6 @@ void GuidelineAbstract::handleMouseMoveEvent (const QPointF &posScene)
 
     emit signalHandleMoved (posScene);
   }
-
-  // Save the graph value for later
-  QPointF posGraph;
-  context()->transformation().transformScreenToRawGraph (posScene,
-                                                         posGraph);
-  context()->setPointGraph (posGraph);
-
 }
 
 void GuidelineAbstract::handleMousePressEvent(const QPointF &posScene)

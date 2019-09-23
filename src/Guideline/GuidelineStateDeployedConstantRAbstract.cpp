@@ -35,12 +35,6 @@ QLineF GuidelineStateDeployedConstantRAbstract::pointToLine (const QPointF & /* 
   return QLineF (0, 0, 0, 0);
 }
 
-void GuidelineStateDeployedConstantRAbstract::setPointGraph (const QPointF &posGraph)
-{
-  // Second coordinate is what defines this Guideline
-  setPointCoordinate (posGraph.y ());
-}
-
 void GuidelineStateDeployedConstantRAbstract::updateWithLatestTransformation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantRAbstract::updateWithLatestTransformation";

@@ -36,12 +36,6 @@ QLineF GuidelineStateDeployedConstantYAbstract::pointToLine (const QPointF &posS
                                   posScreen);
 }
 
-void GuidelineStateDeployedConstantYAbstract::setPointGraph (const QPointF &posGraph)
-{
-  // Second coordinate is what defines this Guideline
-  setPointCoordinate (posGraph.y ());
-}
-
 void GuidelineStateDeployedConstantYAbstract::updateWithLatestTransformation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantYAbstract::updateWithLatestTransformation";
@@ -51,5 +45,5 @@ void GuidelineStateDeployedConstantYAbstract::updateWithLatestTransformation ()
   GuidelineLine *line = dynamic_cast<GuidelineLine*> (&context().guideline());
   line->setLine (projector.fromCoordinateY (context().transformation(),
                                             sceneRect (),
-                                            coordinate ()));
+                                            context().posCursorGraph ().y()));
 }

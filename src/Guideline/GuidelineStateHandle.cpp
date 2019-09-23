@@ -99,10 +99,6 @@ QLineF GuidelineStateHandle::pointToLine (const QPointF & /* posGraph */) const
   return QLineF (0, 0, 0, 0);
 }
 
-void GuidelineStateHandle::setPointGraph (const QPointF & /* posGraph */)
-{
-}
-
 QString GuidelineStateHandle::state () const
 {
   return ("GuidelineStateHandle");

@@ -11,6 +11,7 @@
 #include "GuidelineStateDeployedConstantTAbstract.h"
 #include "Logger.h"
 #include <QGraphicsScene>
+#include <qmath.h>
 #include "Transformation.h"
 
 GuidelineStateDeployedConstantTAbstract::GuidelineStateDeployedConstantTAbstract (GuidelineStateContext &context) :
@@ -36,20 +37,17 @@ QLineF GuidelineStateDeployedConstantTAbstract::pointToLine (const QPointF &posS
                                   posScreen);
 }
 
-void GuidelineStateDeployedConstantTAbstract::setPointGraph (const QPointF &posGraph)
-{
-  // First coordinate is what defines this Guideline
-  setPointCoordinate (posGraph.x ());
-}
-
 void GuidelineStateDeployedConstantTAbstract::updateWithLatestTransformation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantTAbstract::updateWithLatestTransformation";
 
   GuidelineProjectorConstantT projector;
 
+  double tGraph = qAtan2 (context().posCursorGraph().y (),
+                          context().posCursorGraph().x ());
+
   GuidelineLine *line = dynamic_cast<GuidelineLine*> (&context().guideline());
   line->setLine (projector.fromCoordinateT (context().transformation(),
                                             sceneRect (),
-                                            coordinate ()));
+                                            tGraph));
 }

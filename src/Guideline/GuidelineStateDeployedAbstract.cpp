@@ -15,8 +15,7 @@
 #include "ZValues.h"
 
 GuidelineStateDeployedAbstract::GuidelineStateDeployedAbstract (GuidelineStateContext &context) :
-  GuidelineStateAbstractBase (context),
-  m_coordinate (0)
+  GuidelineStateAbstractBase (context)
 {
 }
 
@@ -44,11 +43,6 @@ void GuidelineStateDeployedAbstract::beginCommon (GuidelineFormat::HoverOption h
                                             guidelineFormat.lineWidthNonHover ());
 }
 
-double GuidelineStateDeployedAbstract::coordinate () const
-{
-  return m_coordinate;
-}
-
 void GuidelineStateDeployedAbstract::end ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedAbstract::end";
@@ -57,9 +51,4 @@ void GuidelineStateDeployedAbstract::end ()
 void GuidelineStateDeployedAbstract::handleMouseRelease ()
 {
   // Noop
-}
-
-void GuidelineStateDeployedAbstract::setPointCoordinate (double coordinate)
-{
-  m_coordinate = coordinate;
 }

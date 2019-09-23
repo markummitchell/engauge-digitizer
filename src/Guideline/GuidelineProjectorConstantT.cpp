@@ -97,8 +97,14 @@ QLineF GuidelineProjectorConstantT::fromCoordinateT (const Transformation &trans
 
   }
 
-  return QLineF (QPointF (0, 0),
-                 posGraph);
+  QPointF posSceneCenter, posSceneOther;
+  transformation.transformRawGraphToScreen (QPointF (0, 0),
+                                            posSceneCenter);
+  transformation.transformRawGraphToScreen (posGraph,
+                                            posSceneOther);
+
+  return QLineF (posSceneCenter,
+                 posSceneOther);
 }
 
 QLineF GuidelineProjectorConstantT::fromPosScreen (const Transformation &transformation,

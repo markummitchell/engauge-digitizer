@@ -27,15 +27,6 @@ protected:
   /// Initialization common to all states
   void beginCommon (GuidelineFormat::HoverOption hoverOption);
 
-  /// Get method for relevant coordinate
-  double coordinate () const;
-
-  /// Save the relevant coordinate (R, T, X, Y) that is needed later if transformation changes
-  virtual void setPointCoordinate (double coordinate);
-
-private:
-
-  double m_coordinate;
 };
 
 #endif // GUIDELINE_STATE_DEPLOYED_ABSTRACT_H

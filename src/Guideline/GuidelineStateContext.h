@@ -65,12 +65,15 @@ public:
   /// Return line parallel to an axis line, that passes through the specified point
   QLineF pointToLine (const QPointF &poscreen) const;
 
+  /// Get method for current cursor coordinate when object was last created/dragged
+  QPointF posCursorGraph () const;
+
   /// Request a state transition
   void requestStateTransition (GuidelineState guidelineState);
 
   /// Pass the current cursor coordinate to the state so it can save the relevant coordinate for
   /// later adjustement when the transformation changes
-  void setPointGraph (const QPointF &posGraph);
+  void setPosCursorGraph (const QPointF &posGraph);
 
   /// Pass replacement Guideline state from template Guidelines to handle Guideline
   void setStateReplacement (GuidelineState stateReplacement);
@@ -101,6 +104,8 @@ private:
   GuidelineState m_nextState;
 
   GuidelineState m_stateReplacement;
+
+  QPointF m_posCursorGraph;
 };
 
 #endif // GUIDELINE_STATE_CONTEXT_H

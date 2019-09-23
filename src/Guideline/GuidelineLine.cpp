@@ -147,4 +147,10 @@ void GuidelineLine::updateGeometry (const QPointF &posScreen)
   QLineF line = context()->pointToLine (posScreen);
 
   setLine (line);
+
+  // Save the graph value for later
+  QPointF posGraph;
+  context()->transformation().transformScreenToRawGraph (posScreen,
+                                                         posGraph);
+  context()->setPosCursorGraph (posGraph);
 }
