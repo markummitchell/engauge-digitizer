@@ -20,7 +20,7 @@ int FormatCoordsUnitsStrategyAbstractBase::precisionDigitsForRawNumber (double v
                                                                         const DocumentModelGeneral &modelGeneral,
                                                                         const Transformation &transformation) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsStrategyAbstractBase::precisionDigitsForRawNumber";
+  //LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsStrategyAbstractBase::precisionDigitsForRawNumber";
 
   const double PIXEL_SHIFT = 1;
   const int DEFAULT_PRECISION = 5; // Precision used before transformation is available. Equal or greater than x/y pixel counts

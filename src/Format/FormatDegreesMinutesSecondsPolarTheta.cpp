@@ -22,7 +22,7 @@ QString FormatDegreesMinutesSecondsPolarTheta::formatOutput (CoordUnitsPolarThet
                                                              double value,
                                                              bool isNsHemisphere) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsPolarTheta::formatOutput";
+  //LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsPolarTheta::formatOutput";
 
   // See if similar method with hemisphere argument should have been called
   ENGAUGE_ASSERT (coordUnits != COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW);
@@ -53,7 +53,7 @@ QString FormatDegreesMinutesSecondsPolarTheta::formatOutput (CoordUnitsPolarThet
 
 QString FormatDegreesMinutesSecondsPolarTheta::formatOutputDegrees (double value) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsPolarTheta::formatOutputDegrees";
+  //LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsPolarTheta::formatOutputDegrees";
 
   // Since version 6 there has been no number-only option (=without degrees symbol) for theta in CoordUnitsPolarTheta.
   // The degrees symbol causes more problems than it is worth for COORD_UNITS_POLAR_THETA_DEGREES, so we output only
@@ -64,7 +64,7 @@ QString FormatDegreesMinutesSecondsPolarTheta::formatOutputDegrees (double value
 
 QString FormatDegreesMinutesSecondsPolarTheta::formatOutputDegreesMinutes (double value) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsPolarTheta::formatOutputDegreesMinutes";
+  //LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsPolarTheta::formatOutputDegreesMinutes";
 
   // Only smallest resolution value is floating point
   bool negative = (value < 0);

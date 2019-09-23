@@ -30,8 +30,8 @@ extern void ellipseFromParallelogram (double xTL,
                                       double xTR,
                                       double yTR,
                                       double &angleRadians,
-                                      double aAligned,
-                                      double bAligned);
+                                      double &aAligned,
+                                      double &bAligned);
 
 /// Get pixel method for any bit depth
 extern QRgb pixelRGB (const QImage &image, int x, int y);

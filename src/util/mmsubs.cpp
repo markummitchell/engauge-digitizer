@@ -54,8 +54,8 @@ void ellipseFromParallelogram (double xTL,
                                double xTR,
                                double yTR,
                                double &angleRadians,
-                               double aAligned,
-                               double bAligned)
+                               double &aAligned,
+                               double &bAligned)
 {
   // Given input describing a parallelogram centered (for simplicity) on the origin,
   // with two adjacent corners at (xTL,yTL) and (xTR,yTR) and two other implicit corners
@@ -86,7 +86,7 @@ void ellipseFromParallelogram (double xTL,
                   (xTL >= 0 && 0 >= xTR && xTL > xTR);
   bool yChanged = (yTL <= 0 && 0 <= yTR && yTL < yTR) ||
                   (yTL >= 0 && 0 >= yTR && yTL > yTR);
-  if (xChanged == yChanged) {
+  if (xChanged != yChanged) {
     // No input issues since the two points are in adjacent quadrants
 
     const double REALLY_BIG_RATIO = 100000; // Used to prevent divide by zero errors
@@ -97,12 +97,12 @@ void ellipseFromParallelogram (double xTL,
     // We assume that the transform will result in the top two points (xTL,yTL) and (xTR,yTR) have the
     // same average y value, and the right two points (-xTL,-yTL) and (xTR,yTR) have the same average x.
     // Those average values will be the axes of the new axis aligned ellipse
-    aAligned = (xTR - xTL) / 2.0;
-    bAligned = (yTR + yTL) / 2.0;
+    aAligned = qAbs ((xTR - xTL) / 2.0);
+    bAligned = qAbs ((yTR + yTL) / 2.0);
     // Done if either aAligned or bAligned is much bigger than the other since no rotation is needed.
     // This branch also prevents divide by zero errors later
-    if (qAbs (aAligned) < REALLY_BIG_RATIO * qAbs (bAligned) &&
-        qAbs (bAligned) < REALLY_BIG_RATIO * qAbs (aAligned)) {
+    if (aAligned < REALLY_BIG_RATIO * bAligned &&
+        bAligned < REALLY_BIG_RATIO * aAligned) {
       // The transform would produce an axis-aligned rectangle centered on the origin, from the original points
       //   aligned = a * original
       //
@@ -171,7 +171,7 @@ void ellipseFromParallelogram (double xTL,
         //            cos(2T) = cT^2 - sT^2
         // so sin(2T)/2 = P3 cos(2T)
         //    tan(2T) = 2 P3
-        if (qAbs (P2) > REALLY_BIG_RATIO * qAbs (P1 - P0)) {
+        if (qAbs (P2) < REALLY_BIG_RATIO * qAbs (P1 - P0)) {
           double P3 = -P2 / 2 / (P1 - P0);
           angleRadians = qAtan (2.0 * P3) / 2.0;
         }

@@ -23,7 +23,7 @@ double FormatCoordsUnitsStrategyNonPolarTheta::formattedToUnformatted (const QSt
                                                                        CoordUnitsDate coordUnitsDate,
                                                                        CoordUnitsTime coordUnitsTime) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsStrategyNonPolarTheta::formattedToUnformatted";
+  //LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsStrategyNonPolarTheta::formattedToUnformatted";
 
   double value;
 
@@ -70,7 +70,7 @@ QString FormatCoordsUnitsStrategyNonPolarTheta::unformattedToFormatted (double v
                                                                         const Transformation &transformation,
                                                                         double valueUnformattedOther) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsStrategyNonPolarTheta::unformattedToFormatted";
+  //LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnitsStrategyNonPolarTheta::unformattedToFormatted";
 
   const char FORMAT ('g');
 
