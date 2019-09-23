@@ -21,7 +21,7 @@ GuidelineProjectorConstantT::~GuidelineProjectorConstantT()
 
 QLineF GuidelineProjectorConstantT::fromCoordinateT (const Transformation &transformation,
                                                      const QRectF &sceneRect,
-                                                     double thetaGraph)
+                                                     double thetaGraphDegrees)
 {
   QPointF posGraphBL, posGraphTL, posGraphTR, posGraphBR;
   calculateCorners (transformation,
@@ -31,80 +31,80 @@ QLineF GuidelineProjectorConstantT::fromCoordinateT (const Transformation &trans
                     posGraphTR,
                     posGraphBR);
 
-  double angleBL = qAtan2 (posGraphBL.y(), posGraphBL.x());
-  double angleTL = qAtan2 (posGraphTL.y(), posGraphTL.x());
-  double angleTR = qAtan2 (posGraphTR.y(), posGraphTR.x());
-  double angleBR = qAtan2 (posGraphBR.y(), posGraphBR.x());
-
   // These containers would be QVector2D to emphasize we are not working with x and y valuees, but
   // QVector2D would give double/float conversion errors
-  QPointF anglesLeft   (qMin (angleBL, angleTL),
-                        qMax (angleBL, angleTL));
-  QPointF anglesTop    (qMin (angleTL, angleTR),
-                        qMax (angleTL, angleTR));
-  QPointF anglesRight  (qMin (angleTR, angleBR),
-                        qMax (angleTR, angleBR));
-  QPointF anglesBottom (qMin (angleBR, angleBL),
-                        qMax (angleBR, angleBL));
+  QPointF anglesLeft   (qMin (posGraphBL.x(), posGraphTL.x()),
+                        qMax (posGraphBL.x(), posGraphTL.x()));
+  QPointF anglesTop    (qMin (posGraphTL.x(), posGraphTR.x()),
+                        qMax (posGraphTL.x(), posGraphTR.x()));
+  QPointF anglesRight  (qMin (posGraphTR.x(), posGraphBR.x()),
+                        qMax (posGraphTR.x(), posGraphBR.x()));
+  QPointF anglesBottom (qMin (posGraphBR.x(), posGraphBL.x()),
+                        qMax (posGraphBR.x(), posGraphBL.x()));
 
   // Fix any side that crosses over the discontinuous transition
-  if (anglesLeft.y() - anglesRight.x() > M_PI) {
+  if (qAbs (anglesLeft.y() - anglesLeft.x()) > 180.0) {
     double temp = anglesLeft.x();
     anglesLeft.setX (anglesLeft.y());
-    anglesLeft.setY (temp + 2 * M_PI);
+    anglesLeft.setY (temp + 360.0);
   }
-  if (anglesTop.y() - anglesTop.x() > M_PI) {
+  if (qAbs (anglesTop.y() - anglesTop.x()) > 180.0) {
     double temp = anglesTop.x();
     anglesTop.setX (anglesTop.y());
-    anglesTop.setY (temp + 2 * M_PI);
+    anglesTop.setY (temp + 360.0);
   }
-  if (anglesRight.y() - anglesRight.x() > M_PI) {
+  if (qAbs (anglesRight.y() - anglesRight.x()) > 180.0) {
     double temp = anglesRight.x();
     anglesRight.setX (anglesRight.y());
-    anglesRight.setY (temp + 2 * M_PI);
+    anglesRight.setY (temp + 360.0);
   }
-  if (anglesBottom.y() - anglesBottom.x() > M_PI) {
+  if (qAbs (anglesBottom.y() - anglesBottom.x()) > 180.0) {
     double temp = anglesBottom.x();
     anglesBottom.setX (anglesBottom.y());
-    anglesBottom.setY (temp + 2 * M_PI);
+    anglesBottom.setY (temp + 360.0);
   }
 
   // Which side matches theta?
-  QPointF posGraph;
-  double thetaGraphPlus = thetaGraph + 2 * M_PI;
-  if ((anglesLeft.x() <= thetaGraph     && thetaGraph     <= anglesLeft.y()) ||
-      (anglesLeft.x() <= thetaGraphPlus && thetaGraphPlus <= anglesLeft.y())) {
+  QLineF line;
+  double thetaGraphPlus = thetaGraphDegrees + 360.0;
+  if ((anglesLeft.x() <= thetaGraphDegrees && thetaGraphDegrees <= anglesLeft.y()) ||
+      (anglesLeft.x() <= thetaGraphPlus    && thetaGraphPlus    <= anglesLeft.y())) {
 
     // Left side
-    posGraph = intersect (thetaGraph, posGraphBL, posGraphTL);
+    line = intersect (transformation,
+                      thetaGraphDegrees,
+                      posGraphBL,
+                      posGraphTL);
 
-  } else if ((anglesTop.x() <= thetaGraph     && thetaGraph     <= anglesTop.y()) ||
-             (anglesTop.x() <= thetaGraphPlus && thetaGraphPlus <= anglesTop.y())) {
+  } else if ((anglesTop.x() <= thetaGraphDegrees && thetaGraphDegrees <= anglesTop.y()) ||
+             (anglesTop.x() <= thetaGraphPlus    && thetaGraphPlus    <= anglesTop.y())) {
 
     // Top side
-    posGraph = intersect (thetaGraph, posGraphTL, posGraphTR);
+    line = intersect (transformation,
+                      thetaGraphDegrees,
+                      posGraphTL,
+                      posGraphTR);
 
-  } else if ((anglesRight.x() <= thetaGraph     && thetaGraph     <= anglesRight.y()) ||
-             (anglesRight.x() <= thetaGraphPlus && thetaGraphPlus <= anglesRight.y())) {
+  } else if ((anglesRight.x() <= thetaGraphDegrees && thetaGraphDegrees <= anglesRight.y()) ||
+             (anglesRight.x() <= thetaGraphPlus    && thetaGraphPlus    <= anglesRight.y())) {
 
     // Right side
-    posGraph = intersect (thetaGraph, posGraphTR, posGraphBR);
+    line = intersect (transformation,
+                      thetaGraphDegrees,
+                      posGraphTR,
+                      posGraphBR);
 
   } else {
 
     // Bottom side
-    posGraph = intersect (thetaGraph, posGraphBR, posGraphBL);
+    line = intersect (transformation,
+                      thetaGraphDegrees,
+                      posGraphBR,
+                      posGraphBL);
 
   }
 
-  QPointF posSceneCenter, posSceneOther;
-  transformation.transformRawGraphToScreen (QPointF (0, 0),
-                                            posSceneCenter);
-  transformation.transformRawGraphToScreen (posGraph,
-                                            posSceneOther);
-
-  return QLineF (posSceneCenter,
-                 posSceneOther);
+  return line;
 }
 
 QLineF GuidelineProjectorConstantT::fromPosScreen (const Transformation &transformation,
@@ -116,14 +116,20 @@ QLineF GuidelineProjectorConstantT::fromPosScreen (const Transformation &transfo
 
   return fromCoordinateT (transformation,
                           sceneRect,
-                          qAtan2 (posGraph.y(),
-                                  posGraph.x()));
+                          posGraph.x());
 }
 
-QPointF GuidelineProjectorConstantT::intersect (double theta,
-                                                const QPointF &p1,
-                                                const QPointF &p2) const
+QLineF GuidelineProjectorConstantT::intersect (const Transformation &transformation,
+                                               double thetaGraphDegrees,
+                                               const QPointF &posPolar1,
+                                               const QPointF &posPolar2) const
 {
+  QPointF p1, p2; // Cartesian coordinates
+  transformation.transformRawGraphToLinearCartesianGraph (posPolar1,
+                                                          p1);
+  transformation.transformRawGraphToLinearCartesianGraph (posPolar2,
+                                                          p2);
+
   // Intersect y = x tan (theta) = slope * x
   //           (x - x0) / (x1 - x0) = (y - y0) / (y1 - y0)
   // with divide by zero errors prevented by treating the second equation as either
@@ -138,24 +144,26 @@ QPointF GuidelineProjectorConstantT::intersect (double theta,
   if (qAbs (deltaX) < qAbs (deltaY)) {
 
     // Safe to compute since mostly horizontal
-    double slope = qTan (theta);
+    double slope = qTan (qDegreesToRadians (thetaGraphDegrees));
 
     // Use OPTION 1 with x - x0 = fraction * (y - y0)
-    //                   x * (1 - fraction * slope) = x0 + fraction * y0
+    // substituting      y = slope * x
+    // we get            x * (1 - fraction * slope) = x0 - fraction * y0
     // since line is mostly vertical (deltaX<deltaY) we know the line y=slope*x
     // that intersects it is mostly horizontal so it cannot have infinite slope
     // so the following code has no way to overflow (by inspection)
     double fraction = deltaX / deltaY;
-    x = (p1.x () + fraction * p1.y ()) / (1.0 - fraction * slope);
+    x = (p1.x () - fraction * p1.y ()) / (1.0 - fraction * slope);
     y = slope * x;
 
   } else {
 
     // Safe to compute since mostly vertical. Derived from tan(theta)=y/x and tan(90-theta)=x/y
-    double slopeInverse = qTan (M_PI_2 - theta);
+    double slopeInverse = qTan (qDegreesToRadians (90.0 - thetaGraphDegrees));
 
     // Use OPTION 2 with y - y0 = fraction * (x - x0)
-    //                   y * (1 - fraction / slope) = y0 - fraction * x0
+    // substituting      x = y / slope
+    // we get            y * (1 - fraction / slope) = y0 - fraction * x0
     // since line is mostly horizontal (deltaY<deltaX) we know the line y=slope*x
     // that intersects it is mostly vertical so it cannot have zero slope
     // so the following code has no way to overflow (by inspection)
@@ -164,6 +172,13 @@ QPointF GuidelineProjectorConstantT::intersect (double theta,
     x = slopeInverse * y;
   }
 
-  return QPointF (x,
-                  y);
+  // Convert graph coordinate points into screen coordinate line
+  QPointF posSceneCenter, posSceneOther;
+  transformation.transformLinearCartesianGraphToScreen (QPointF (0, 0),
+                                                        posSceneCenter);
+  transformation.transformLinearCartesianGraphToScreen (QPointF (x, y),
+                                                        posSceneOther);
+
+  return QLineF (posSceneCenter,
+                 posSceneOther);
 }

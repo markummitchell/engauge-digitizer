@@ -35,9 +35,10 @@ public:
                         const QPointF &posScreen);
 
 private:
-  QPointF intersect (double theta,
-                     const QPointF &p1,
-                     const QPointF &p2) const;
+  QLineF intersect (const Transformation &transformation,
+                    double thetaGraphDegrees,
+                    const QPointF &p1,
+                    const QPointF &p2) const;
 };
 
 #endif // GUIDELINE_PROJECTOR_CONSTANT_T_H

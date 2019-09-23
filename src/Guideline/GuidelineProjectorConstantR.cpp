@@ -70,10 +70,7 @@ EllipseParameters GuidelineProjectorConstantR::fromPosScreen (const Transformati
   QPointF posGraph;
   transformation.transformScreenToRawGraph (posScreen,  posGraph);
 
-  double range = qSqrt (posGraph.x() * posGraph.x() +
-                        posGraph.y() * posGraph.y());
-
   return fromCoordinateR (transformation,
                           sceneRect,
-                          range);
+                          posGraph.y());
 }
