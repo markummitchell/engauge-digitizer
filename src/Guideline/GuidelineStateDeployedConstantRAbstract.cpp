@@ -5,11 +5,13 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
+#include "GuidelineEllipse.h"
 #include "GuidelineProjectorConstantR.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedConstantRAbstract.h"
 #include "Logger.h"
 #include <QGraphicsScene>
+#include <qmath.h>
 #include "Transformation.h"
 
 GuidelineStateDeployedConstantRAbstract::GuidelineStateDeployedConstantRAbstract (GuidelineStateContext &context) :
@@ -38,4 +40,11 @@ QLineF GuidelineStateDeployedConstantRAbstract::pointToLine (const QPointF & /* 
 void GuidelineStateDeployedConstantRAbstract::updateWithLatestTransformation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantRAbstract::updateWithLatestTransformation";
+
+  QPointF posScreen;
+  context().transformation().transformRawGraphToScreen (context().posCursorGraph(),
+                                                        posScreen);
+
+  GuidelineEllipse *ellipse = dynamic_cast<GuidelineEllipse*> (&context().guideline());
+  ellipse->updateGeometry (posScreen);
 }

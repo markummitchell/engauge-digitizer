@@ -7,6 +7,7 @@
 #include <algorithm>
 #include "EllipseParameters.h"
 #include "GuidelineProjectorConstantR.h"
+#include "Logger.h"
 #include "mmsubs.h"
 #include <QList>
 #include <qmath.h>
@@ -25,17 +26,15 @@ EllipseParameters GuidelineProjectorConstantR::fromCoordinateR (const Transforma
                                                                 const QRectF & /* sceneRect */,
                                                                 double rGraph)
 {
-  // X or y component of points at 45, 135, 225 and 315 degrees at range rGraph
-  double rComponent = rGraph / qSqrt (2.0);
-
+  // Points at 45, 135, 225 and 315 degrees at range rGraph
   QPointF posScreenCenter, posScreenTL, posScreenTR, posScreenBR; // No need for BL point
   transformation.transformLinearCartesianGraphToScreen (QPointF (0, 0),
                                                         posScreenCenter);
-  transformation.transformLinearCartesianGraphToScreen (QPointF (-rComponent, rComponent),
+  transformation.transformLinearCartesianGraphToScreen (QPointF (-rGraph, rGraph),
                                                         posScreenTL);
-  transformation.transformLinearCartesianGraphToScreen (QPointF (rComponent, rComponent),
+  transformation.transformLinearCartesianGraphToScreen (QPointF (rGraph, rGraph),
                                                         posScreenTR);
-  transformation.transformLinearCartesianGraphToScreen (QPointF (rComponent, -rComponent),
+  transformation.transformLinearCartesianGraphToScreen (QPointF (rGraph, -rGraph),
                                                         posScreenBR);
 
   double angleRadians = 0, aAligned = 0, bAligned = 0;
@@ -43,6 +42,8 @@ EllipseParameters GuidelineProjectorConstantR::fromCoordinateR (const Transforma
                             posScreenTL.y() - posScreenCenter.y(),
                             posScreenTR.x() - posScreenCenter.x(),
                             posScreenTR.y() - posScreenCenter.y(),
+                            posScreenBR.x() - posScreenCenter.x(),
+                            posScreenBR.y() - posScreenCenter.y(),
                             angleRadians,
                             aAligned,
                             bAligned);

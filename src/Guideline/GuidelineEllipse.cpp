@@ -144,18 +144,23 @@ void GuidelineEllipse::setGraphicsItemZValue (double z)
 
 void GuidelineEllipse::updateGeometry (const QPointF &posScreen)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineEllipse::updateGeometry scale=" << scale()
+                              << " rotation(deg)=" << rotation();
+
   EllipseParameters ellipseParameters = context()->pointToEllipse (posScreen);
 
   QPointF posCenter = ellipseParameters.posCenter();
+
   double a = ellipseParameters.a();
   double b=  ellipseParameters.b();
 
-  setRect (QRectF (posCenter - QPointF (a, b),
-                   posCenter + QPointF (a, b)));
+  setRect (QRectF (- QPointF (a, b),
+                   + QPointF (a, b)));
 
-  // Rotate
-  setTransformOriginPoint (posCenter);
-  setRotation (ellipseParameters.angleRadians());
+  // Rotate. Originally the rectangle was centered at posCenter, the rotation center
+  // was set using setTransformOriginPoint to posCenter, but the resulting shape was not right
+  setRotation (qRadiansToDegrees (ellipseParameters.angleRadians()));
+  setPos (posCenter);
 
   // Save the graph value for later
   QPointF posGraph;

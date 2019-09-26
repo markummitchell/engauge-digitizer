@@ -21,14 +21,14 @@ extern double angleFromVectorToVector (const QPointF &vFrom,
                                        const QPointF &vTo);
 
 /// Calculate ellipse parameters that is incribed in a parallelogram centered at the origin,
-/// given two adjacent corners of that parallelogram. By symmetry the other two corners are
-/// not needed. A zero-size ellipse is returned if two diagonally-opposite corners are
-/// supplied. Although the top left (TL) and top right (TR) corners are labeled as arguments,
-/// any two adjacent corners can probably be used.
+/// given three successive corners of that parallelogram. By symmetry the other corner is
+/// not needed.
 extern void ellipseFromParallelogram (double xTL,
                                       double yTL,
                                       double xTR,
                                       double yTR,
+                                      double xBR,
+                                      double yBR,
                                       double &angleRadians,
                                       double &aAligned,
                                       double &bAligned);
