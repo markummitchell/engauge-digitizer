@@ -27,6 +27,8 @@ public:
                 GuidelineState guidelineStateInitial);
   ~GuidelineLine();
 
+  virtual bool getGraphicsItemSelected () const;
+
   virtual QGraphicsItem::GraphicsItemFlags graphicsItemFlags () const;
   
   /// Highlight this Guideline upon hover enter
@@ -56,7 +58,8 @@ public:
   virtual void setGraphicsItemPen (const QColor &color,
                                    double lineWidth);
   virtual void setGraphicsItemVisible (bool visible);
-  virtual void setGraphicsItemZValue (double z);  
+  virtual void setGraphicsItemZValue (double z);
+  virtual void updateColor ();
   virtual void updateGeometry (const QPointF &posScreen);
   
 private:

@@ -24,7 +24,7 @@ GuidelineStateTemplateAbstract::~GuidelineStateTemplateAbstract ()
 
 void GuidelineStateTemplateAbstract::beginCommon (const QLineF &line)
 {
-  GuidelineFormat guidelineFormat;
+  GuidelineFormat guidelineFormat (context().color());
 
   context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_TEMPLATE);
   // ItemIsSelectable is overkill, and in special cases adds ugly selected dashes

@@ -7,6 +7,7 @@
 #ifndef GUIDELINE_FORMAT_H
 #define GUIDELINE_FORMAT_H
 
+#include "ColorPalette.h"
 #include <QColor>
 
 /// This class centralizes the formatting information (color, line width, alpha) for the Guidelines
@@ -14,7 +15,7 @@ class GuidelineFormat
 {
 public:
   /// Single constructor.
-  GuidelineFormat();
+  GuidelineFormat(ColorPalette color);
   ~GuidelineFormat();
 
   /// Public enum
@@ -23,10 +24,10 @@ public:
     HOVER_ON
   };
 
-  /// Color when cursor is hovering over object
+  /// Guideline color when hovering
   QColor colorDeployedHover () const;
-  
-  /// Color when cursor is not hovering over object
+
+  /// Guideline color when not hovering
   QColor colorDeployedNonHover () const;
 
   /// Color when object is transparent but still handling (probably hover) events
@@ -38,6 +39,10 @@ public:
   /// Guideline line width of template Guideline as drawn
   double lineWidthNonHover () const;
 
+private:
+  GuidelineFormat();
+
+  QColor m_color;
 };
 
 #endif // GUIDELINE_FORMAT_H

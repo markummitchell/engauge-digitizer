@@ -14,10 +14,12 @@
 #include "Guidelines.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "MainWindowModel.h"
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QMap>
 #include <qmath.h>
+#include <QTextStream>
 
 Guidelines::Guidelines (MainWindow &mainWindow) :
   m_mainWindow (mainWindow)
@@ -45,6 +47,11 @@ void Guidelines::clear ()
   }
 
   m_guidelineContainer.clear ();
+}
+
+ColorPalette Guidelines::color () const
+{
+  return m_mainWindow.modelMainWindow().guidelineColor();
 }
 
 CoordsType Guidelines::coordsType () const
@@ -101,6 +108,7 @@ void Guidelines::initialize (QGraphicsScene &scene)
   registerGuideline (new GuidelineLine (scene,
                                         *this,
                                         GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING));
+
   registerGuideline (new GuidelineLine (scene,
                                         *this,
                                         GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING));
@@ -111,9 +119,35 @@ void Guidelines::registerGuideline (GuidelineAbstract *guideline)
   m_guidelineContainer.push_back (guideline);
 }
 
+QString Guidelines::stateDump () const
+{
+  QString out, delimiter;
+  QTextStream str (&out);
+
+  GuidelineContainerPrivate::const_iterator itr;
+  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
+    GuidelineAbstract *guideline = *itr;
+
+    str << delimiter << guideline->state();
+    delimiter = ", ";
+  }
+
+  return out;
+}
+
 Transformation Guidelines::transformation() const
 {
   return m_mainWindow.transformation ();
+}
+
+void Guidelines::updateColor ()
+{
+  GuidelineContainerPrivate::const_iterator itr;
+  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
+    GuidelineAbstract *guideline = *itr;
+
+    guideline->updateColor ();
+  }
 }
 
 void Guidelines::updateSelectability (bool selectable)

@@ -7,9 +7,11 @@
 #ifndef GUIDELINES_H
 #define GUIDELINES_H
 
+#include "ColorPalette.h"
 #include "CoordsType.h"
 #include "GuidelineState.h"
 #include <QList>
+#include <QString>
 #include "Transformation.h"
 
 class DocumentModelCoords;
@@ -30,6 +32,9 @@ public:
   /// Remove guidelines since the current Document is about to be closed
   void clear ();
 
+  /// Color to be used for guidelines
+  ColorPalette color () const;
+
   /// Return cartesian or polar
   CoordsType coordsType () const;
 
@@ -41,8 +46,14 @@ public:
   /// conditions are not predictable
   void initialize (QGraphicsScene &scene);
 
+  /// States listed as a string for debugging only
+  QString stateDump () const;
+
   /// Return copy of transformation owned by MainWindow
   Transformation transformation () const;
+
+  /// Force a color update
+  void updateColor ();
 
   /// Update guidelines as selectable or not. This is called on DigitizeState transitions
   void updateSelectability (bool selectable);

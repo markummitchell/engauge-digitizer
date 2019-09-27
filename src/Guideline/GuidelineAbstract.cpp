@@ -127,6 +127,11 @@ void GuidelineAbstract::slotHandleMoved (QPointF posScreen)
    updateGeometry (posScreen);
 }
 
+QString GuidelineAbstract::state () const
+{
+  return m_context->state() + (getGraphicsItemSelected() ? "(selected)" : "(unselected)");
+}
+
 void GuidelineAbstract::updateWithLatestTransformation ()
 {
   m_context->updateWithLatestTransformation ();

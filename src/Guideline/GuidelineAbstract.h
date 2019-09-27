@@ -81,6 +81,9 @@ public:
   /// Guideline has been dragged off screen so remove it
   void draggedOffScreen ();
 
+  /// Wrapper for QGraphicsItem::isSelected
+  virtual bool getGraphicsItemSelected () const = 0;
+
   /// Wraps QGraphicsItem::flags
   virtual QGraphicsItem::GraphicsItemFlags graphicsItemFlags () const = 0;
   
@@ -127,10 +130,16 @@ public:
   /// Wrapper for QGraphicsItem::setZValue
   virtual void setGraphicsItemZValue (double z) = 0;
 
+  /// State as a string for debugging only
+  QString state () const;
+
   /// Update active versus inactive state. Inactive state applies when DigitizeState is not DigitizeStateSelect, since
   /// the Guidelines can help with moving points around. This method is called on DigitizeState transitions.
   /// Active is not the same as visibility. When inactive, guidelines ignore hover and click events
   void updateActive (bool active);
+
+  /// Force a color update
+  virtual void updateColor () = 0;
 
   /// Update the geometry so it passes through the specified point
   virtual void updateGeometry (const QPointF &pos) = 0;

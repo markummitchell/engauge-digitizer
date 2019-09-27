@@ -43,6 +43,11 @@ GuidelineLine::~GuidelineLine ()
 {
 }
 
+bool GuidelineLine::getGraphicsItemSelected () const
+{
+  return QGraphicsLineItem::isSelected();
+}
+
 QGraphicsItem::GraphicsItemFlags GuidelineLine::graphicsItemFlags () const
 {
   return QGraphicsLineItem::flags ();
@@ -92,6 +97,7 @@ void GuidelineLine::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
 }
 
 void GuidelineLine::paint(QPainter *painter,
+
                           const QStyleOptionGraphicsItem *option,
                           QWidget *widget)
 {
@@ -140,6 +146,23 @@ void GuidelineLine::setGraphicsItemVisible (bool visible)
 void GuidelineLine::setGraphicsItemZValue (double z)
 {
   QGraphicsLineItem::setZValue (z);
+}
+
+void GuidelineLine::updateColor ()
+{
+  // Apply color to brush and pen defined in setGraphicsItemPen.
+  // Alpha from alphaF() on QColor on QBrush is unused
+
+  QPen p = QGraphicsLineItem::pen();
+  QBrush br = p.brush();
+  double alphaF = br.color().alphaF();
+  double lineWidth = p.width ();
+
+  QColor color = ColorPaletteToQColor (context()->color());
+  color.setAlphaF (alphaF);
+
+  setGraphicsItemPen (color,
+                      lineWidth);
 }
 
 void GuidelineLine::updateGeometry (const QPointF &posScreen)

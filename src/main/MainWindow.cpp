@@ -3721,6 +3721,7 @@ void MainWindow::updateSettingsMainWindow()
   updateWindowTitle();
   updateFittingWindow(); // Forward the drag and drop choice
   updateGeometryWindow(); // Forward the drag and drop choice
+  m_guidelines.updateColor ();
 }
 
 void MainWindow::updateSettingsMainWindow(const MainWindowModel &modelMainWindow)

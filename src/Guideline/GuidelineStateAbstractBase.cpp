@@ -33,6 +33,9 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScree
                                                          GuidelineState stateDeployed,
                                                          GuidelineState stateReplacement)
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateAbstractBase::handleMousePressCommon "
+                              << m_context.stateDump ().toLatin1().data();
+
   context().setStateReplacement (stateReplacement);
 
   // Unselect all selected items. This prevents the extremely confusing error where an
@@ -52,7 +55,7 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScree
   // Visible Guideline will follow this one. Its geometry will be set after every drag event
   GuidelineAbstract *guidelineVisible = context().createGuideline (stateDeployed);
 
-  GuidelineFormat guidelineFormat;
+  GuidelineFormat guidelineFormat (context().color());
   guidelineVisible->setGraphicsItemPen (guidelineFormat.colorDeployedNonHover (),
                                         guidelineFormat.lineWidthNonHover ());
 

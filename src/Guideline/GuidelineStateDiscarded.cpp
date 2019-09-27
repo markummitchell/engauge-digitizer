@@ -27,7 +27,7 @@ void GuidelineStateDiscarded::begin ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDiscarded::begin";
 
-  GuidelineFormat guidelineFormat;
+  GuidelineFormat guidelineFormat (context().color());
   
   context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_DISCARDED);
   context().guideline().setGraphicsItemVisible (false); //

@@ -87,6 +87,11 @@ bool GuidelineStateContext::cartesian() const
   return m_guidelines.coordsType () == COORDS_TYPE_CARTESIAN;
 }
 
+ColorPalette GuidelineStateContext::color () const
+{
+  return m_guidelines.color ();
+}
+
 GuidelineAbstract *GuidelineStateContext::createGuideline (GuidelineState stateInitial) const
 {
   return m_guidelines.createGuideline (stateInitial);
@@ -193,6 +198,11 @@ QString GuidelineStateContext::state () const
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 
   return m_states[m_currentState]->state();
+}
+
+QString GuidelineStateContext::stateDump () const
+{
+  return m_guidelines.stateDump ();
 }
 
 GuidelineState GuidelineStateContext::stateReplacement () const

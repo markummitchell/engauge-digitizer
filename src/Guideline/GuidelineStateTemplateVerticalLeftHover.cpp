@@ -27,7 +27,8 @@ void GuidelineStateTemplateVerticalLeftHover::begin ()
 
   context().guideline().setGraphicsItemVisible (true); // Undo setVisible(false) from Hide class
 
-  GuidelineFormat guidelineFormat;
+  GuidelineFormat guidelineFormat (context().color());
+
   context().guideline().setGraphicsItemPen (guidelineFormat.colorDeployedHover (),
                                             guidelineFormat.lineWidthHover ()); // Show
 }

@@ -27,7 +27,7 @@ void GuidelineStateDeployedAbstract::beginCommon (GuidelineFormat::HoverOption h
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedAbstract::begin";
 
-  GuidelineFormat guidelineFormat;
+  GuidelineFormat guidelineFormat (context().color());
 
   context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_DEPLOYED);
   context().guideline().setGraphicsItemVisible (true);

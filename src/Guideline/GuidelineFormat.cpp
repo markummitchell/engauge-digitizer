@@ -4,10 +4,12 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "EnumsToQt.h"
 #include "GuidelineFormat.h"
 #include <QColor>
 
-GuidelineFormat::GuidelineFormat()
+GuidelineFormat::GuidelineFormat(ColorPalette color) :
+  m_color (ColorPaletteToQColor (color))
 {
 }
 
@@ -17,7 +19,7 @@ GuidelineFormat::~GuidelineFormat()
 
 QColor GuidelineFormat::colorDeployedHover () const
 {
-  QColor color (Qt::green);
+  QColor color (m_color);
   color.setAlphaF (0.8);
 
   return color;
@@ -25,7 +27,7 @@ QColor GuidelineFormat::colorDeployedHover () const
 
 QColor GuidelineFormat::colorDeployedNonHover () const
 {
-  return QColor (Qt::green);
+  return m_color;
 }
 
 QColor GuidelineFormat::colorHidden () const

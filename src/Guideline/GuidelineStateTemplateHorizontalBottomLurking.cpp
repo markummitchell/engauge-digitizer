@@ -28,7 +28,8 @@ void GuidelineStateTemplateHorizontalBottomLurking::begin ()
 
   context().guideline().setGraphicsItemVisible (true); // Undo setVisible(false) from Hide class
 
-  GuidelineFormat guidelineFormat;
+  GuidelineFormat guidelineFormat (context().color());
+
   context().guideline().setGraphicsItemPen (guidelineFormat.colorHidden (),
                                             guidelineFormat.lineWidthHover ()); // Hide until hover entry
 }

@@ -43,6 +43,11 @@ GuidelineEllipse::~GuidelineEllipse ()
 {
 }
 
+bool GuidelineEllipse::getGraphicsItemSelected () const
+{
+  return QGraphicsEllipseItem::isSelected ();
+}
+
 QGraphicsItem::GraphicsItemFlags GuidelineEllipse::graphicsItemFlags () const
 {
   return QGraphicsEllipseItem::flags ();
@@ -140,6 +145,22 @@ void GuidelineEllipse::setGraphicsItemVisible (bool visible)
 void GuidelineEllipse::setGraphicsItemZValue (double z)
 {
   QGraphicsEllipseItem::setZValue (z);
+}
+
+void GuidelineEllipse::updateColor ()
+{
+  // Apply color to brush and pen defined in setGraphicsItemPen.
+
+  QPen p = QGraphicsEllipseItem::pen();
+  QBrush br = p.brush();
+  double alphaF = br.color().alphaF();
+  double lineWidth = p.width ();
+
+  QColor color = ColorPaletteToQColor (context()->color());
+  color.setAlphaF (alphaF);
+
+  setGraphicsItemPen (color,
+                      lineWidth);
 }
 
 void GuidelineEllipse::updateGeometry (const QPointF &posScreen)

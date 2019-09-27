@@ -7,10 +7,10 @@
 #ifndef GUIDELINE_STATE_CONTEXT_H
 #define GUIDELINE_STATE_CONTEXT_H
 
+#include "ColorPalette.h"
 #include "EllipseParameters.h"
 #include "GuidelineState.h"
 #include "GuidelineStateAbstractBase.h"
-#include <QColor>
 #include <QLineF>
 #include <QString>
 #include <QVector>
@@ -32,7 +32,10 @@ public:
 
   /// True/false if coordinates are cartesian/polar
   bool cartesian() const;
-  
+
+  /// Color to be used for guidelines
+  ColorPalette color () const;
+
   /// Factory method for creating a new Guideline
   GuidelineAbstract *createGuideline (GuidelineState stateInitial) const;
 
@@ -83,6 +86,9 @@ public:
 
   /// State as a string for debugging only
   QString state () const;
+
+  /// States listed as a string for debugging only
+  QString stateDump () const;
 
   /// Get method for replacement state
   GuidelineState stateReplacement () const;
