@@ -40,6 +40,9 @@ public:
   /// otherwise-invisible handle Guideline
   bool doPaint () const;
 
+  /// Guideline has been dragged off screen so remove it
+  void draggedOffScreen ();
+
   /// Guideline that owns this context class
   GuidelineAbstract &guideline ();
 
@@ -57,7 +60,7 @@ public:
   void handleMousePress (const QPointF &posScene);
   
   /// At the end of dragging, clone the Guideline that owns the state machine where these states live
-  void handleMouseRelease ();
+  void handleMouseRelease (const QPointF &posScene);
 
   /// Return ellipse representing constant range, that passes through the specified point
   EllipseParameters pointToEllipse (const QPointF &posScreen) const;

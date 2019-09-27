@@ -35,8 +35,9 @@ void GuidelineStateTemplateAbstract::beginCommon (const QLineF &line)
   context().guideline().setGraphicsItemLine (line);
 }
 
-void GuidelineStateTemplateAbstract::handleMouseRelease ()
+void GuidelineStateTemplateAbstract::handleMouseRelease (const QPointF & /* posScene */)
 {
+  // Noop
 }
 
 EllipseParameters GuidelineStateTemplateAbstract::pointToEllipse (const QPointF & /* poscreen */) const

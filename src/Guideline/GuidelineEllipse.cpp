@@ -84,11 +84,11 @@ void GuidelineEllipse::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineEllipse::mouseReleaseEvent state=" << context()->state ().toLatin1().data();
 
-  handleMouseReleaseEvent ();
+  handleMouseReleaseEvent (event->scenePos());
   
   QGraphicsEllipseItem::mouseReleaseEvent (event);
 
-  context()->handleMouseRelease ();
+  context()->handleMouseRelease (event->scenePos ());
 }
 
 void GuidelineEllipse::paint(QPainter *painter,

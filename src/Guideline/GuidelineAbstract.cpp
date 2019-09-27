@@ -52,6 +52,26 @@ GuidelineStateContext *GuidelineAbstract::context ()
   return m_context;
 }
 
+void GuidelineAbstract::detachVisibleGuideline (const QPointF &posScene)
+{
+  if (m_guidelineVisible != nullptr) {
+
+    // If scene position is off-screen then user is removing the visible Guideline
+    if (!m_scene.sceneRect().contains (posScene)) {
+
+      m_guidelineVisible->draggedOffScreen ();
+
+    }
+
+    m_guidelineVisible = nullptr;
+  }
+}
+
+void GuidelineAbstract::draggedOffScreen ()
+{
+  m_context->draggedOffScreen ();
+}
+
 void GuidelineAbstract::handleHoverEnterEvent()
 {
   m_context->handleHoverEnterEvent ();
@@ -80,11 +100,11 @@ void GuidelineAbstract::handleMousePressEvent(const QPointF &posScene)
   m_context->handleMousePress(posScene);
 }
 
-void GuidelineAbstract::handleMouseReleaseEvent ()
+void GuidelineAbstract::handleMouseReleaseEvent (const QPointF &posScene)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineAbstract::handleMouseReleaseEvent state=" << m_context->state ().toLatin1().data();
 
-  m_context->handleMouseRelease ();
+  m_context->handleMouseRelease (posScene);
 }
 
 void GuidelineAbstract::handleShowHide (bool show)

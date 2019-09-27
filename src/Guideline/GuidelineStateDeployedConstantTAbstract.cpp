@@ -43,11 +43,8 @@ void GuidelineStateDeployedConstantTAbstract::updateWithLatestTransformation ()
 
   GuidelineProjectorConstantT projector;
 
-  double tGraph = qAtan2 (context().posCursorGraph().y (),
-                          context().posCursorGraph().x ());
-
   GuidelineLine *line = dynamic_cast<GuidelineLine*> (&context().guideline());
   line->setLine (projector.fromCoordinateT (context().transformation(),
                                             sceneRect (),
-                                            tGraph));
+                                            context().posCursorGraph().x ()));
 }

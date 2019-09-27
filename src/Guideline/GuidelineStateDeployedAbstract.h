@@ -20,7 +20,7 @@ public:
   virtual ~GuidelineStateDeployedAbstract();
 
   virtual void end ();
-  virtual void handleMouseRelease ();
+  virtual void handleMouseRelease (const QPointF &posScene);
 
 protected:
 

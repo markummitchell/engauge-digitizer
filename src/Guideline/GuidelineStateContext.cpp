@@ -99,6 +99,12 @@ bool GuidelineStateContext::doPaint () const
   return m_states[m_currentState]->doPaint ();
 }
 
+void GuidelineStateContext::draggedOffScreen ()
+{
+  requestStateTransition (GUIDELINE_STATE_DISCARDED);
+  transitionIfRequested ();
+}
+
 GuidelineAbstract &GuidelineStateContext::guideline ()
 {
   return m_guideline;
@@ -128,11 +134,11 @@ void GuidelineStateContext::handleMousePress (const QPointF &posScene)
   transitionIfRequested ();  
 }
 
-void GuidelineStateContext::handleMouseRelease ()
+void GuidelineStateContext::handleMouseRelease (const QPointF &posScene)
 {
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 
-  m_states[m_currentState]->handleMouseRelease ();
+  m_states[m_currentState]->handleMouseRelease (posScene);
   transitionIfRequested ();
 }
 

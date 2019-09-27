@@ -29,7 +29,7 @@ public:
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
-  virtual void handleMouseRelease ();
+  virtual void handleMouseRelease (const QPointF &posScene);
   virtual void handleShowHide (bool show);
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
   virtual QLineF pointToLine (const QPointF &poscreen) const;

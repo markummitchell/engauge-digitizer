@@ -65,7 +65,7 @@ void GuidelineStateDiscarded::handleMousePress (const QPointF & /* posScene */)
   // Noop
 }
 
-void GuidelineStateDiscarded::handleMouseRelease ()
+void GuidelineStateDiscarded::handleMouseRelease (const QPointF & /* posScene */)
 {
   // Noop
 }

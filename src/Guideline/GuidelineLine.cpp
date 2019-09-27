@@ -84,11 +84,11 @@ void GuidelineLine::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineLine::mouseReleaseEvent state=" << context()->state ().toLatin1().data();
 
-  handleMouseReleaseEvent ();
+  handleMouseReleaseEvent (event->scenePos ());
   
   QGraphicsLineItem::mouseReleaseEvent (event);
 
-  context()->handleMouseRelease ();
+  context()->handleMouseRelease (event->scenePos ());
 }
 
 void GuidelineLine::paint(QPainter *painter,

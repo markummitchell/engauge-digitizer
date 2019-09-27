@@ -49,7 +49,7 @@ public:
   virtual void handleMousePress (const QPointF &posScene) = 0;
   
   /// At the end of dragging, clone the Guideline that owns the state machine where these states live
-  virtual void handleMouseRelease () = 0;
+  virtual void handleMouseRelease (const QPointF &posScene) = 0;
 
   /// Return ellipse representing constant range, that passes through the specified point
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const = 0;

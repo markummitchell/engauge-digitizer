@@ -75,6 +75,12 @@ public:
   /// Bind a newly-created visible Guideline to this Guideline, and make this one invisible
   void bindGuidelineVisible (GuidelineAbstract *guidelineVisible);
   
+  /// Detach visible Guideline after click and drag
+  void detachVisibleGuideline (const QPointF &posScene);
+
+  /// Guideline has been dragged off screen so remove it
+  void draggedOffScreen ();
+
   /// Wraps QGraphicsItem::flags
   virtual QGraphicsItem::GraphicsItemFlags graphicsItemFlags () const = 0;
   
@@ -91,7 +97,7 @@ public:
   void handleMousePressEvent(const QPointF &posScene);
 
   /// Cleanup after being dragged
-  void handleMouseReleaseEvent ();
+  void handleMouseReleaseEvent (const QPointF &posScene);
 
   /// Show/hide the Guideline objects
   void handleShowHide (bool show);

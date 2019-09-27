@@ -70,12 +70,14 @@ void GuidelineStateHandle::handleMousePress (const QPointF & /* posScene */)
   // Noop
 }
 
-void GuidelineStateHandle::handleMouseRelease ()
+void GuidelineStateHandle::handleMouseRelease (const QPointF &posScene)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleMouseRelease";
 
-  GuidelineAbstract *guidelineReplacement = context().createGuideline (context().stateReplacement ());
+  context().guideline().detachVisibleGuideline (posScene);
 
+  // This is the replacement template Guideline
+  GuidelineAbstract *guidelineReplacement = context().createGuideline (context().stateReplacement ());
   guidelineReplacement->setGraphicsItemAcceptHoverEvents (true);
 
   // Go dark. This is not a significant memory leak (versus immediately deleting this object)
