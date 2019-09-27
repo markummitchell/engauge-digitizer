@@ -6,6 +6,7 @@
 
 #include "DataKey.h"
 #include "EnumsToQt.h"
+#include "GraphicsItemType.h"
 #include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
 #include "GuidelineStateAbstractBase.h"
@@ -33,6 +34,20 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScree
                                                          GuidelineState stateReplacement)
 {
   context().setStateReplacement (stateReplacement);
+
+  // Unselect all selected items. This prevents the extremely confusing error where an
+  // existing axis point stays selected and gets dragged along with this Guideline,
+  // which moves the axis unexpectedly
+  QList<QGraphicsItem*>::iterator itr;
+  QList<QGraphicsItem*> items = m_context.guideline().scene().selectedItems();
+  for (itr = items.begin(); itr != items.end(); itr++) {
+    QGraphicsItem *item = *itr;
+
+    // How do we know which is the Guideline that we want to keep selected? By its type
+    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt () != GRAPHICS_ITEM_TYPE_GUIDELINE) {
+      item->setSelected (false);
+    }
+  }
 
   // Visible Guideline will follow this one. Its geometry will be set after every drag event
   GuidelineAbstract *guidelineVisible = context().createGuideline (stateDeployed);
