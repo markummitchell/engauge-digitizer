@@ -8,63 +8,63 @@
 #include "GuidelineAbstract.h"
 #include "GuidelineFormat.h"
 #include "GuidelineStateContext.h"
-#include "GuidelineStateDeployedConstantXNormal.h"
+#include "GuidelineStateDeployedConstantXActive.h"
 #include "Logger.h"
 #include <QGraphicsScene>
 
-GuidelineStateDeployedConstantXNormal::GuidelineStateDeployedConstantXNormal (GuidelineStateContext &context) :
+GuidelineStateDeployedConstantXActive::GuidelineStateDeployedConstantXActive (GuidelineStateContext &context) :
   GuidelineStateDeployedConstantXAbstract (context)
 {
 }
 
-GuidelineStateDeployedConstantXNormal::~GuidelineStateDeployedConstantXNormal ()
+GuidelineStateDeployedConstantXActive::~GuidelineStateDeployedConstantXActive ()
 {
 }
 
-void GuidelineStateDeployedConstantXNormal::begin ()
+void GuidelineStateDeployedConstantXActive::begin ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantXNormal::begin";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantXActive::begin";
 
   context().guideline().setGraphicsItemVisible (true); // Undo setVisible from GuidelineStateDeployedConstantXHide
 
   beginCommon (GuidelineFormat::HOVER_OFF);
 }
 
-bool GuidelineStateDeployedConstantXNormal::doPaint () const
+bool GuidelineStateDeployedConstantXActive::doPaint () const
 {
   return true;
 }
 
-void GuidelineStateDeployedConstantXNormal::end ()
+void GuidelineStateDeployedConstantXActive::end ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantXNormal::end";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantXActive::end";
 }
 
-void GuidelineStateDeployedConstantXNormal::handleHoverEnterEvent ()
+void GuidelineStateDeployedConstantXActive::handleHoverEnterEvent ()
 {
   context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HOVER);
 }
 
-void GuidelineStateDeployedConstantXNormal::handleHoverLeaveEvent ()
+void GuidelineStateDeployedConstantXActive::handleHoverLeaveEvent ()
 {
   // This event would have been handled by GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HOVER
 }
 
-void GuidelineStateDeployedConstantXNormal::handleMousePress (const QPointF &posScene)
+void GuidelineStateDeployedConstantXActive::handleMousePress (const QPointF &posScene)
 {
   handleMousePressCommon (posScene,
-                          GUIDELINE_STATE_DEPLOYED_CONSTANT_X_NORMAL,
+                          GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE,
                           GUIDELINE_STATE_DISCARDED);
 }
 
-void GuidelineStateDeployedConstantXNormal::handleShowHide (bool show)
+void GuidelineStateDeployedConstantXActive::handleShowHide (bool show)
 {
   if (!show) {
     context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HIDE);
   }
 }
 
-QString GuidelineStateDeployedConstantXNormal::state () const
+QString GuidelineStateDeployedConstantXActive::state () const
 {
-  return ("GuidelineStateDeployedConstantXNormal");
+  return ("GuidelineStateDeployedConstantXActive");
 }

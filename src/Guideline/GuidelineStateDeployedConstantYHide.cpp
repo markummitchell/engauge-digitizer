@@ -57,7 +57,7 @@ void GuidelineStateDeployedConstantYHide::handleMousePress (const QPointF & /* p
 void GuidelineStateDeployedConstantYHide::handleShowHide (bool show)
 {
   if (show) {
-    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_NORMAL);
+    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
   }
 }
 

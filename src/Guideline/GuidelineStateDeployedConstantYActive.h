@@ -4,22 +4,22 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_DEPLOYED_CONSTANT_X_NORMAL_H
-#define GUIDELINE_STATE_DEPLOYED_CONSTANT_X_NORMAL_H
+#ifndef GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE_H
+#define GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE_H
 
-#include "GuidelineStateDeployedConstantXAbstract.h"
+#include "GuidelineStateDeployedConstantYAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_CONSTANT_X
-class GuidelineStateDeployedConstantXNormal : public GuidelineStateDeployedConstantXAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE
+class GuidelineStateDeployedConstantYActive : public GuidelineStateDeployedConstantYAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateDeployedConstantXNormal(GuidelineStateContext &context);
-  virtual ~GuidelineStateDeployedConstantXNormal();
+  GuidelineStateDeployedConstantYActive(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedConstantYActive();
 
   virtual void begin ();
   virtual bool doPaint () const;
-  virtual void end ();
+  virtual void end ();  
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
@@ -27,8 +27,8 @@ public:
   virtual QString state () const;
 
 private:
-  GuidelineStateDeployedConstantXNormal();
+  GuidelineStateDeployedConstantYActive();
 
 };
 
-#endif // GUIDELINE_STATE_DEPLOYED_CONSTANT_X_NORMAL_H
+#endif // GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE_H

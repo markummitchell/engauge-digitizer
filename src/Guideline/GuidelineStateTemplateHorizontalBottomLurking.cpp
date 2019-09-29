@@ -59,8 +59,8 @@ void GuidelineStateTemplateHorizontalBottomLurking::handleMousePress (const QPoi
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateHorizontalBottomLurking::handleMousePress";
 
   GuidelineState stateNew = context().cartesian() ?
-    GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_NORMAL :
-    GUIDELINE_STATE_DEPLOYED_CONSTANT_R_NORMAL;
+    GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE :
+    GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE;
   
   handleMousePressCommon (posScene,
                           stateNew,

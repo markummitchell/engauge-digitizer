@@ -4,18 +4,18 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_DEPLOYED_CONSTANT_T_NORMAL_H
-#define GUIDELINE_STATE_DEPLOYED_CONSTANT_T_NORMAL_H
+#ifndef GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE_H
+#define GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE_H
 
 #include "GuidelineStateDeployedConstantTAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_CONSTANT_T
-class GuidelineStateDeployedConstantTNormal : public GuidelineStateDeployedConstantTAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE
+class GuidelineStateDeployedConstantTActive : public GuidelineStateDeployedConstantTAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateDeployedConstantTNormal(GuidelineStateContext &context);
-  virtual ~GuidelineStateDeployedConstantTNormal();
+  GuidelineStateDeployedConstantTActive(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedConstantTActive();
 
   virtual void begin ();
   virtual bool doPaint () const;
@@ -27,8 +27,8 @@ public:
   virtual QString state () const;
 
 private:
-  GuidelineStateDeployedConstantTNormal();
+  GuidelineStateDeployedConstantTActive();
 
 };
 
-#endif // GUIDELINE_STATE_DEPLOYED_CONSTANT_T_NORMAL_H
+#endif // GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE_H

@@ -7,63 +7,63 @@
 #include "EngaugeAssert.h"
 #include "GuidelineAbstract.h"
 #include "GuidelineStateContext.h"
-#include "GuidelineStateDeployedConstantRHover.h"
+#include "GuidelineStateDeployedConstantRLocked.h"
 #include "Logger.h"
 #include <QGraphicsScene>
 
-GuidelineStateDeployedConstantRHover::GuidelineStateDeployedConstantRHover (GuidelineStateContext &context) :
+GuidelineStateDeployedConstantRLocked::GuidelineStateDeployedConstantRLocked (GuidelineStateContext &context) :
   GuidelineStateDeployedConstantRAbstract (context)
 {
 }
 
-GuidelineStateDeployedConstantRHover::~GuidelineStateDeployedConstantRHover ()
+GuidelineStateDeployedConstantRLocked::~GuidelineStateDeployedConstantRLocked ()
 {
 }
 
-void GuidelineStateDeployedConstantRHover::begin ()
+void GuidelineStateDeployedConstantRLocked::begin ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantRHover::begin";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantRLocked::begin";
 
   context().guideline().setGraphicsItemVisible (true); // Undo setVisible from GuidelineStateDeployedConstantRHide
 
   beginCommon (GuidelineFormat::HOVER_ON);
 }
 
-bool GuidelineStateDeployedConstantRHover::doPaint () const
+bool GuidelineStateDeployedConstantRLocked::doPaint () const
 {
   return true;
 }
 
-void GuidelineStateDeployedConstantRHover::end ()
+void GuidelineStateDeployedConstantRLocked::end ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantRHover::end";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantRLocked::end";
 }
 
-void GuidelineStateDeployedConstantRHover::handleHoverEnterEvent ()
+void GuidelineStateDeployedConstantRLocked::handleHoverEnterEvent ()
 {
   // This event would have been handled by GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE
 }
 
-void GuidelineStateDeployedConstantRHover::handleHoverLeaveEvent ()
+void GuidelineStateDeployedConstantRLocked::handleHoverLeaveEvent ()
 {
   context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE);
 }
 
-void GuidelineStateDeployedConstantRHover::handleMousePress (const QPointF &posScene)
+void GuidelineStateDeployedConstantRLocked::handleMousePress (const QPointF &posScene)
 {
   handleMousePressCommon (posScene,
-                          GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER,
+                          GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED,
                           GUIDELINE_STATE_DISCARDED);
 }
 
-void GuidelineStateDeployedConstantRHover::handleShowHide (bool show)
+void GuidelineStateDeployedConstantRLocked::handleShowHide (bool show)
 {
   if (!show) {
     context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE);
   }
 }
 
-QString GuidelineStateDeployedConstantRHover::state () const
+QString GuidelineStateDeployedConstantRLocked::state () const
 {
-  return ("GuidelineStateDeployedConstantRHover");
+  return ("GuidelineStateDeployedConstantRLocked");
 }

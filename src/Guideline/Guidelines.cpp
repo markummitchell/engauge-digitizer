@@ -70,9 +70,9 @@ GuidelineAbstract *Guidelines::createGuideline (GuidelineState stateInitial)
 
   // Map of states that get an ellipse
   QMap<GuidelineState, bool> guidelineStatesWithEllipse;
+  guidelineStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE] = true;
   guidelineStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE] = true;
   guidelineStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER] = true;
-  guidelineStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_NORMAL] = true;
 
   GuidelineAbstract *guideline = nullptr;
 

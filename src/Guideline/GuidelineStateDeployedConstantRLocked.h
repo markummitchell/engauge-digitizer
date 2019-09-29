@@ -4,18 +4,18 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_DEPLOYED_CONSTANT_R_NORMAL_H
-#define GUIDELINE_STATE_DEPLOYED_CONSTANT_R_NORMAL_H
+#ifndef GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED_H
+#define GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED_H
 
 #include "GuidelineStateDeployedConstantRAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_CONSTANT_R_NORMAL
-class GuidelineStateDeployedConstantRNormal : public GuidelineStateDeployedConstantRAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED
+class GuidelineStateDeployedConstantRLocked : public GuidelineStateDeployedConstantRAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateDeployedConstantRNormal(GuidelineStateContext &context);
-  virtual ~GuidelineStateDeployedConstantRNormal();
+  GuidelineStateDeployedConstantRLocked(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedConstantRLocked();
 
   virtual void begin ();
   virtual bool doPaint () const;
@@ -27,8 +27,8 @@ public:
   virtual QString state () const;
 
 private:
-  GuidelineStateDeployedConstantRNormal();
+  GuidelineStateDeployedConstantRLocked();
 
 };
 
-#endif // GUIDELINE_STATE_DEPLOYED_CONSTANT_R_NORMAL_H
+#endif // GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED_H

@@ -7,63 +7,63 @@
 #include "EngaugeAssert.h"
 #include "GuidelineAbstract.h"
 #include "GuidelineStateContext.h"
-#include "GuidelineStateDeployedConstantTHover.h"
+#include "GuidelineStateDeployedConstantTLocked.h"
 #include "Logger.h"
 #include <QGraphicsScene>
 
-GuidelineStateDeployedConstantTHover::GuidelineStateDeployedConstantTHover (GuidelineStateContext &context) :
+GuidelineStateDeployedConstantTLocked::GuidelineStateDeployedConstantTLocked (GuidelineStateContext &context) :
   GuidelineStateDeployedConstantTAbstract (context)
 {
 }
 
-GuidelineStateDeployedConstantTHover::~GuidelineStateDeployedConstantTHover ()
+GuidelineStateDeployedConstantTLocked::~GuidelineStateDeployedConstantTLocked ()
 {
 }
 
-void GuidelineStateDeployedConstantTHover::begin ()
+void GuidelineStateDeployedConstantTLocked::begin ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantTHover::begin";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantTLocked::begin";
 
   context().guideline().setGraphicsItemVisible (true); // Undo setVisible from GuidelineStateDeployedConstantTHide
 
   beginCommon (GuidelineFormat::HOVER_ON);
 }
 
-bool GuidelineStateDeployedConstantTHover::doPaint () const
+bool GuidelineStateDeployedConstantTLocked::doPaint () const
 {
   return true;
 }
 
-void GuidelineStateDeployedConstantTHover::end ()
+void GuidelineStateDeployedConstantTLocked::end ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantTHover::end";
+  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantTLocked::end";
 }
 
-void GuidelineStateDeployedConstantTHover::handleHoverEnterEvent ()
+void GuidelineStateDeployedConstantTLocked::handleHoverEnterEvent ()
 {
   // This event would have been handled by GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE
 }
 
-void GuidelineStateDeployedConstantTHover::handleHoverLeaveEvent ()
+void GuidelineStateDeployedConstantTLocked::handleHoverLeaveEvent ()
 {
   context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE);
 }
 
-void GuidelineStateDeployedConstantTHover::handleMousePress (const QPointF &posScene)
+void GuidelineStateDeployedConstantTLocked::handleMousePress (const QPointF &posScene)
 {
   handleMousePressCommon (posScene,
-                          GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HOVER,
+                          GUIDELINE_STATE_DEPLOYED_CONSTANT_T_LOCKED,
                           GUIDELINE_STATE_DISCARDED);
 }
 
-void GuidelineStateDeployedConstantTHover::handleShowHide (bool show)
+void GuidelineStateDeployedConstantTLocked::handleShowHide (bool show)
 {
   if (!show) {
     context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HIDE);
   }
 }
 
-QString GuidelineStateDeployedConstantTHover::state () const
+QString GuidelineStateDeployedConstantTLocked::state () const
 {
-  return ("GuidelineStateDeployedConstantTHover");
+  return ("GuidelineStateDeployedConstantTLocked");
 }
