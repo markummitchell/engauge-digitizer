@@ -43,6 +43,11 @@ GuidelineLine::~GuidelineLine ()
 {
 }
 
+bool GuidelineLine::getGraphicsItemAcceptHover () const
+{
+  return acceptHoverEvents();
+}
+
 bool GuidelineLine::getGraphicsItemSelected () const
 {
   return QGraphicsLineItem::isSelected();

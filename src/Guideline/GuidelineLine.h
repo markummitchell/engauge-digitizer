@@ -27,6 +27,8 @@ public:
                 GuidelineState guidelineStateInitial);
   ~GuidelineLine();
 
+  virtual bool getGraphicsItemAcceptHover () const;
+
   virtual bool getGraphicsItemSelected () const;
 
   virtual QGraphicsItem::GraphicsItemFlags graphicsItemFlags () const;

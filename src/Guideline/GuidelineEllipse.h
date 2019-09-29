@@ -29,6 +29,8 @@ public:
 
   virtual bool getGraphicsItemSelected () const;
 
+  virtual bool getGraphicsItemAcceptHover () const;
+
   virtual QGraphicsItem::GraphicsItemFlags graphicsItemFlags () const;
   
   /// Highlight this Guideline upon hover enter

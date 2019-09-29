@@ -81,6 +81,9 @@ public:
   /// Guideline has been dragged off screen so remove it
   void draggedOffScreen ();
 
+  /// Return true if accepting hover events
+  virtual bool getGraphicsItemAcceptHover () const = 0;
+
   /// Wrapper for QGraphicsItem::isSelected
   virtual bool getGraphicsItemSelected () const = 0;
 

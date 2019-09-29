@@ -43,6 +43,11 @@ GuidelineEllipse::~GuidelineEllipse ()
 {
 }
 
+bool GuidelineEllipse::getGraphicsItemAcceptHover () const
+{
+  return acceptHoverEvents();
+}
+
 bool GuidelineEllipse::getGraphicsItemSelected () const
 {
   return QGraphicsEllipseItem::isSelected ();

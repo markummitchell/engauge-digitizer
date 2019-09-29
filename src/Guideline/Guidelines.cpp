@@ -108,7 +108,6 @@ void Guidelines::initialize (QGraphicsScene &scene)
   registerGuideline (new GuidelineLine (scene,
                                         *this,
                                         GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING));
-
   registerGuideline (new GuidelineLine (scene,
                                         *this,
                                         GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING));
@@ -121,15 +120,29 @@ void Guidelines::registerGuideline (GuidelineAbstract *guideline)
 
 QString Guidelines::stateDump () const
 {
-  QString out, delimiter;
+  // Sort the entries
+  QStringList sorted;
+  GuidelineContainerPrivate::const_iterator itrSort;
+  for (itrSort = m_guidelineContainer.begin(); itrSort != m_guidelineContainer.end(); itrSort++) {
+    GuidelineAbstract *guideline = *itrSort;
+
+    sorted << guideline->state();
+  }
+
+  qSort (sorted.begin(),
+         sorted.end());
+
+  // Convert entries to output text
+  QString out;
   QTextStream str (&out);
 
-  GuidelineContainerPrivate::const_iterator itr;
-  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
-    GuidelineAbstract *guideline = *itr;
+  str << "Guidelines::stateDump:\n";
 
-    str << delimiter << guideline->state();
-    delimiter = ", ";
+  QStringList::const_iterator itrOut;
+  for (itrOut = sorted.begin(); itrOut != sorted.end(); itrOut++) {
+    QString entry = *itrOut;
+
+    str << "                    " << entry << "\n";
   }
 
   return out;
@@ -152,8 +165,9 @@ void Guidelines::updateColor ()
 
 void Guidelines::updateSelectability (bool selectable)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "Guidelines::updateSelectability selectable="
-                              << (selectable ? "on" : "off");
+  LOG4CPP_INFO_S ((*mainCat)) << "Guidelines::updateSelectability before selectable="
+                              << (selectable ? "on" : "off")
+                              << stateDump().toLatin1().data();
 
   GuidelineContainerPrivate::iterator itr;
   for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
@@ -163,14 +177,24 @@ void Guidelines::updateSelectability (bool selectable)
 
     if (selectable) {
       // Add flag
+      flags |= QGraphicsItem::ItemIsFocusable;
+      flags |= QGraphicsItem::ItemIsMovable;
       flags |= QGraphicsItem::ItemIsSelectable;
+      guideline->setGraphicsItemAcceptHoverEvents (true);
     } else {
       // Remove flag
+      flags &= ~QGraphicsItem::ItemIsFocusable;
+      flags &= ~QGraphicsItem::ItemIsMovable;
       flags &= ~QGraphicsItem::ItemIsSelectable;
+      guideline->setGraphicsItemAcceptHoverEvents (false);
     }
 
     guideline->setGraphicsItemFlags (flags);
   }
+
+  LOG4CPP_INFO_S ((*mainCat)) << "Guidelines::updateSelectability after selectable="
+                              << (selectable ? "on" : "off")
+                              << stateDump().toLatin1().data();
 }
 
 void Guidelines::updateVisiblity (bool show)

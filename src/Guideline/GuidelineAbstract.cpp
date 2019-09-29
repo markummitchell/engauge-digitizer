@@ -21,6 +21,7 @@
 #include <qmath.h>
 #include <QMouseEvent>
 #include <QPen>
+#include <QTextStream>
 #include <QWidget>
 #include "Transformation.h"
 #include "ZValues.h"
@@ -129,7 +130,20 @@ void GuidelineAbstract::slotHandleMoved (QPointF posScreen)
 
 QString GuidelineAbstract::state () const
 {
-  return m_context->state() + (getGraphicsItemSelected() ? "(selected)" : "(unselected)");
+  // This is used by Guidelines::stateDump and GuidelineStateContext::stateDump
+  QString out;
+  QTextStream str (&out);
+
+  str << " " << m_context->state();
+  str << " (";
+  str << (getGraphicsItemSelected() ? "selected" : "unselected") << " ";
+  str << (getGraphicsItemAcceptHover() ? "hoverable" : "unhoverable") << " ";
+  str << ((graphicsItemFlags () & QGraphicsItem::ItemIsFocusable ) != 0 ? "focusable"  : "unfocusable") << " ";
+  str << ((graphicsItemFlags () & QGraphicsItem::ItemIsMovable   ) != 0 ? "movable"    : "unmovable") << " ";
+  str << ((graphicsItemFlags () & QGraphicsItem::ItemIsSelectable) != 0 ? "selectable" : "unselectable") << " ";
+  str << ")";
+
+  return out;
 }
 
 void GuidelineAbstract::updateWithLatestTransformation ()
