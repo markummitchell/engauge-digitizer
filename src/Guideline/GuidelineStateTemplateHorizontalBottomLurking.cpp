@@ -67,9 +67,9 @@ void GuidelineStateTemplateHorizontalBottomLurking::handleMousePress (const QPoi
                           GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING);
 }
 
-void GuidelineStateTemplateHorizontalBottomLurking::handleShowHide (bool show)
+void GuidelineStateTemplateHorizontalBottomLurking::handleVisibleChange (bool visible)
 {
-  if (!show) {
+  if (!visible) {
     context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE);
   }
 }

@@ -97,6 +97,26 @@ GuidelineAbstract *Guidelines::createGuideline (GuidelineState stateInitial)
   return guideline;
 }
 
+void Guidelines::handleActiveChange (bool active)
+{
+  GuidelineContainerPrivate::iterator itr;
+  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
+    GuidelineAbstract *guideline = *itr;
+
+    guideline->handleActiveChange (active);
+  }
+}
+
+void Guidelines::handleVisibleChange (bool visible)
+{
+  GuidelineContainerPrivate::iterator itr;
+  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
+    GuidelineAbstract *guideline = *itr;
+
+    guideline->handleVisibleChange (visible);
+  }
+}
+
 void Guidelines::initialize (QGraphicsScene &scene)
 {
   registerGuideline (new GuidelineLine (scene,
@@ -160,49 +180,6 @@ void Guidelines::updateColor ()
     GuidelineAbstract *guideline = *itr;
 
     guideline->updateColor ();
-  }
-}
-
-void Guidelines::updateSelectability (bool selectable)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "Guidelines::updateSelectability before selectable="
-                              << (selectable ? "on" : "off")
-                              << stateDump().toLatin1().data();
-
-  GuidelineContainerPrivate::iterator itr;
-  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
-    GuidelineAbstract *guideline = *itr;
-
-    QGraphicsItem::GraphicsItemFlags flags = guideline->graphicsItemFlags ();
-
-    if (selectable) {
-      // Add flag
-      flags |= QGraphicsItem::ItemIsFocusable;
-      flags |= QGraphicsItem::ItemIsMovable;
-      flags |= QGraphicsItem::ItemIsSelectable;
-      guideline->setGraphicsItemAcceptHoverEvents (true);
-    } else {
-      // Remove flag
-      flags &= ~QGraphicsItem::ItemIsFocusable;
-      flags &= ~QGraphicsItem::ItemIsMovable;
-      flags &= ~QGraphicsItem::ItemIsSelectable;
-      guideline->setGraphicsItemAcceptHoverEvents (false);
-    }
-
-    guideline->setGraphicsItemFlags (flags);
-  }
-
-  LOG4CPP_INFO_S ((*mainCat)) << "Guidelines::updateSelectability after selectable="
-                              << (selectable ? "on" : "off")
-                              << stateDump().toLatin1().data();
-}
-
-void Guidelines::updateVisiblity (bool show)
-{
-  GuidelineContainerPrivate::iterator itr;
-  for (itr = m_guidelineContainer.begin(); itr != m_guidelineContainer.end(); itr++) {
-    GuidelineAbstract *guideline = *itr;
-    guideline->handleShowHide (show);
   }
 }
 

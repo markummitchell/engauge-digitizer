@@ -39,6 +39,10 @@ void GuidelineStateDeployedConstantYHover::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantYHover::end";
 }
 
+void GuidelineStateDeployedConstantYHover::handleActiveChange (bool /* active */)
+{
+}
+
 void GuidelineStateDeployedConstantYHover::handleHoverEnterEvent ()
 {
   // This event would have been handled by GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE
@@ -56,9 +60,9 @@ void GuidelineStateDeployedConstantYHover::handleMousePress (const QPointF &posS
                           GUIDELINE_STATE_DISCARDED);
 }
 
-void GuidelineStateDeployedConstantYHover::handleShowHide (bool show)
+void GuidelineStateDeployedConstantYHover::handleVisibleChange (bool visible)
 {
-  if (!show) {
+  if (!visible) {
     context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HIDE);
   }
 }

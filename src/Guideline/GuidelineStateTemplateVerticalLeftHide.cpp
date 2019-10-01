@@ -52,9 +52,9 @@ void GuidelineStateTemplateVerticalLeftHide::handleMousePress (const QPointF & /
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateTemplateVerticalLeftHide::handleMousePress";
 }
 
-void GuidelineStateTemplateVerticalLeftHide::handleShowHide (bool show)
+void GuidelineStateTemplateVerticalLeftHide::handleVisibleChange (bool visible)
 {
-  if (show) {
+  if (visible) {
     context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING);
   }
 }

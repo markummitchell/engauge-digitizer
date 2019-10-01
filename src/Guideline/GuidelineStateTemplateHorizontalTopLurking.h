@@ -23,7 +23,7 @@ public:
   virtual void handleHoverEnterEvent ();
   virtual void handleHoverLeaveEvent ();
   virtual void handleMousePress (const QPointF &posScene);
-  virtual void handleShowHide (bool show);
+  virtual void handleVisibleChange (bool visible);
   virtual QString state () const;
 
 private:

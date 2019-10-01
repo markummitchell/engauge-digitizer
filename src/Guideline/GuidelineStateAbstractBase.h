@@ -35,8 +35,8 @@ public:
   /// Transition out of state
   virtual void end () = 0;
 
-  /// Show/hide this Guideline
-  virtual void handleShowHide (bool show) = 0;
+  /// DigitizeState change so active status may (or may not) be toggled
+  virtual void handleActiveChange (bool active) = 0;
 
   /// If transparent then make visible when hover starts
   virtual void handleHoverEnterEvent () = 0;
@@ -50,6 +50,9 @@ public:
   
   /// At the end of dragging, clone the Guideline that owns the state machine where these states live
   virtual void handleMouseRelease (const QPointF &posScene) = 0;
+
+  /// User toggled Guideline visibility
+  virtual void handleVisibleChange (bool visibility) = 0;
 
   /// Return ellipse representing constant range, that passes through the specified point
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const = 0;

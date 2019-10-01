@@ -840,6 +840,11 @@ bool MainWindow::guidelinesVisibilityCanBeEnabled () const
           transformIsDefined());
 }
 
+void MainWindow::handleGuidelinesActiveChange (bool active)
+{
+  m_guidelines.handleActiveChange (active);
+}
+
 void MainWindow::handlerFileExtractImage ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::handlerFileExtractImage";
@@ -2974,7 +2979,7 @@ void MainWindow::slotViewGuidelines ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGuidelines";
 
-  m_guidelines.updateVisiblity (guidelinesAreVisible ());
+  m_guidelines.handleVisibleChange (guidelinesAreVisible ());
 }
 
 void MainWindow::slotViewToolBarBackground ()
@@ -3548,11 +3553,6 @@ void MainWindow::updateGridLines ()
                                               m_gridLines);
 
   m_gridLines.setVisible (m_actionViewGridLines->isChecked());
-}
-
-void MainWindow::updateGuidelinesSelectability (bool selectable)
-{
-  m_guidelines.updateSelectability (selectable);
 }
 
 void MainWindow::updateHighlightOpacity ()

@@ -35,6 +35,10 @@ void GuidelineStateTemplateAbstract::beginCommon (const QLineF &line)
   context().guideline().setGraphicsItemLine (line);
 }
 
+void GuidelineStateTemplateAbstract::handleActiveChange (bool /* active */)
+{
+}
+
 void GuidelineStateTemplateAbstract::handleMouseRelease (const QPointF & /* posScene */)
 {
   // Noop

@@ -90,6 +90,9 @@ public:
   /// Wraps QGraphicsItem::flags
   virtual QGraphicsItem::GraphicsItemFlags graphicsItemFlags () const = 0;
   
+  /// DigitizeState change so active status may (or may not) be toggled
+  void handleActiveChange (bool active);
+
   /// Highlight this Guideline upon hover enter
   void handleHoverEnterEvent();
 
@@ -105,8 +108,8 @@ public:
   /// Cleanup after being dragged
   void handleMouseReleaseEvent (const QPointF &posScene);
 
-  /// Show/hide the Guideline objects
-  void handleShowHide (bool show);
+  /// User toggled Guideline visibility
+  void handleVisibleChange (bool visible);
 
   /// Make graphics item remove itself from the scene
   virtual void removeFromScene (QGraphicsScene *scene) = 0;

@@ -66,9 +66,9 @@ void GuidelineStateTemplateHorizontalTopHover::handleMousePress (const QPointF &
                           GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING);
 }
 
-void GuidelineStateTemplateHorizontalTopHover::handleShowHide (bool show)
+void GuidelineStateTemplateHorizontalTopHover::handleVisibleChange (bool visible)
 {
-  if (!show) {
+  if (!visible) {
     context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE);
   }
 }

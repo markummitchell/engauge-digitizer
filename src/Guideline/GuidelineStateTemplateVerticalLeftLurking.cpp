@@ -66,9 +66,9 @@ void GuidelineStateTemplateVerticalLeftLurking::handleMousePress (const QPointF 
                           GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING);
 }
 
-void GuidelineStateTemplateVerticalLeftLurking::handleShowHide (bool show)
+void GuidelineStateTemplateVerticalLeftLurking::handleVisibleChange (bool visible)
 {
-  if (!show) {
+  if (!visible) {
     context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HIDE);
   }
 }

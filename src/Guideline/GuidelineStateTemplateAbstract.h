@@ -21,6 +21,7 @@ public:
   /// Initialization of graphics item for all template Guidelines
   void beginCommon (const QLineF &line);
   
+  virtual void handleActiveChange (bool active);
   virtual void handleMouseRelease (const QPointF &posScene);
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
   virtual QLineF pointToLine (const QPointF &poscreen) const;

@@ -40,6 +40,10 @@ void GuidelineStateDeployedConstantTActive::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantTActive::end";
 }
 
+void GuidelineStateDeployedConstantTActive::handleActiveChange (bool /* active */)
+{
+}
+
 void GuidelineStateDeployedConstantTActive::handleHoverEnterEvent ()
 {
   context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HOVER);
@@ -57,9 +61,9 @@ void GuidelineStateDeployedConstantTActive::handleMousePress (const QPointF &pos
                           GUIDELINE_STATE_DISCARDED);
 }
 
-void GuidelineStateDeployedConstantTActive::handleShowHide (bool show)
+void GuidelineStateDeployedConstantTActive::handleVisibleChange (bool visible)
 {
-  if (!show) {
+  if (!visible) {
     context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HIDE);
   }
 }

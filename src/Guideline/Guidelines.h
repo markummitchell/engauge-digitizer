@@ -41,6 +41,12 @@ public:
   /// Factory method for creating a new Guideline
   GuidelineAbstract *createGuideline (GuidelineState stateInitial);
 
+  /// DigitizeState change so active status may (or may not) be toggled 
+  void handleActiveChange (bool active);
+  
+  /// User toggled guideline visibility
+  void handleVisibleChange (bool visible);
+
   /// Load the presupplied template guidelines at the four boundaries after the scene has been loaded.
   /// We do not set the initial state as a function of external conditions since during loading those
   /// conditions are not predictable
@@ -55,15 +61,8 @@ public:
   /// Force a color update
   void updateColor ();
 
-  /// Update guidelines as selectable or not. This is called on DigitizeState transitions
-  void updateSelectability (bool selectable);
-
   /// Update transformation. This is called after a command has been executed
   void updateWithLatestTransformation ();
-
-  /// Update guidelines as visible or not, probably in response to user toggling guideline visibility. When
-  /// invisible, the guidelines are also not selectable (=ignore hover and click events).
-  void updateVisiblity (bool show);
 
 private:
   Guidelines();

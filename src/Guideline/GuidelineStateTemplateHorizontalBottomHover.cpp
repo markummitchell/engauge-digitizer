@@ -68,9 +68,9 @@ void GuidelineStateTemplateHorizontalBottomHover::handleMousePress (const QPoint
                           GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING);
 }
 
-void GuidelineStateTemplateHorizontalBottomHover::handleShowHide (bool show)
+void GuidelineStateTemplateHorizontalBottomHover::handleVisibleChange (bool visible)
 {
-  if (!show) {
+  if (!visible) {
     context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE);
   }
 }

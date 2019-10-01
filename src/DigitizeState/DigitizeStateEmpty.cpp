@@ -32,7 +32,7 @@ void DigitizeStateEmpty::begin (CmdMediator *cmdMediator,
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::begin";
 
   setCursor(cmdMediator);
-  context().mainWindow().updateGuidelinesSelectability (false);
+  context().mainWindow().handleGuidelinesActiveChange (false);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 

@@ -76,7 +76,7 @@ void DigitizeStateSelect::begin (CmdMediator *cmdMediator,
   context().setDragMode(QGraphicsView::RubberBandDrag);
 
   addHoverHighlighting();
-  context().mainWindow().updateGuidelinesSelectability (true);
+  context().mainWindow().handleGuidelinesActiveChange (true);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 

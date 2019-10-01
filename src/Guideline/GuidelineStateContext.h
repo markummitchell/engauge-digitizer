@@ -49,8 +49,8 @@ public:
   /// Guideline that owns this context class
   GuidelineAbstract &guideline ();
 
-  /// Show/hide this Guideline
-  void handleShowHide (bool show);
+  /// DigitizeState change so active status may (or may not) be toggled
+  void handleActiveChange (bool active);
 
   /// If transparent then make visible when hover starts
   void handleHoverEnterEvent ();
@@ -64,6 +64,9 @@ public:
   
   /// At the end of dragging, clone the Guideline that owns the state machine where these states live
   void handleMouseRelease (const QPointF &posScene);
+
+  /// User toggled Guideline visibility
+  void handleVisibleChange (bool visibile);
 
   /// Return ellipse representing constant range, that passes through the specified point
   EllipseParameters pointToEllipse (const QPointF &posScreen) const;

@@ -123,6 +123,13 @@ GuidelineAbstract &GuidelineStateContext::guideline ()
   return m_guideline;
 }
 
+void GuidelineStateContext::handleActiveChange (bool active)
+{
+  ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
+
+  m_states[m_currentState]->handleActiveChange (active);
+  transitionIfRequested ();
+}
 void GuidelineStateContext::handleHoverEnterEvent ()
 {
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
@@ -155,11 +162,11 @@ void GuidelineStateContext::handleMouseRelease (const QPointF &posScene)
   transitionIfRequested ();
 }
 
-void GuidelineStateContext::handleShowHide (bool show)
+void GuidelineStateContext::handleVisibleChange (bool visible)
 {
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 
-  m_states[m_currentState]->handleShowHide (show);
+  m_states[m_currentState]->handleVisibleChange (visible);
   transitionIfRequested ();
 }
 

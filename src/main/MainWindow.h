@@ -164,6 +164,9 @@ public:
   /// True/false if guidelines are visible. Selectability is handled elsewhere
   bool guidelinesAreVisible () const;
 
+  /// Handle Guidelines active status toggle
+  void handleGuidelinesActiveChange (bool active);
+  
   /// Background image that has been filtered for the current curve. This asserts if a curve-specific image is not being shown
   QImage imageFiltered () const;
 
@@ -222,9 +225,6 @@ public:
   /// Update the graphics lines so they follow the graphics points, after a drag, addition, removal, and such. The points
   /// in the Document may (and probably are) out of date with respect to the graphics points
   void updateGraphicsLinesToMatchGraphicsPoints();
-
-  /// Update guidelines as selectable or not. This is called on DigitizeState transitions
-  void updateGuidelinesSelectability (bool selectable);
 
   /// Update with new axes indicator properties.
   void updateSettingsAxesChecker(const DocumentModelAxesChecker &modelAxesChecker);

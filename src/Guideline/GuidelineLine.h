@@ -32,7 +32,10 @@ public:
   virtual bool getGraphicsItemSelected () const;
 
   virtual QGraphicsItem::GraphicsItemFlags graphicsItemFlags () const;
-  
+
+  /// User toggled guideline visibility
+  void handleVisibilityChange (bool visible);
+
   /// Highlight this Guideline upon hover enter
   virtual void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
 

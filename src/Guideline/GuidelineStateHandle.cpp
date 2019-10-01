@@ -49,6 +49,10 @@ void GuidelineStateHandle::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateHandle::end";
 }
 
+void GuidelineStateHandle::handleActiveChange (bool /* active */)
+{
+}
+
 void GuidelineStateHandle::handleHoverEnterEvent ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandle::handleHoverEnterEvent";
@@ -87,7 +91,7 @@ void GuidelineStateHandle::handleMouseRelease (const QPointF &posScene)
   context().requestStateTransition (GUIDELINE_STATE_DISCARDED);
 }
 
-void GuidelineStateHandle::handleShowHide (bool /* show */)
+void GuidelineStateHandle::handleVisibleChange (bool /* visible */)
 {
 }
 

@@ -73,6 +73,11 @@ void GuidelineAbstract::draggedOffScreen ()
   m_context->draggedOffScreen ();
 }
 
+void GuidelineAbstract::handleActiveChange (bool active)
+{
+  m_context->handleActiveChange (active);
+}
+
 void GuidelineAbstract::handleHoverEnterEvent()
 {
   m_context->handleHoverEnterEvent ();
@@ -108,9 +113,9 @@ void GuidelineAbstract::handleMouseReleaseEvent (const QPointF &posScene)
   m_context->handleMouseRelease (posScene);
 }
 
-void GuidelineAbstract::handleShowHide (bool show)
+void GuidelineAbstract::handleVisibleChange (bool visible)
 {
-  m_context->handleShowHide (show);
+  m_context->handleVisibleChange (visible);
 }
 
 QGraphicsScene &GuidelineAbstract::scene ()
