@@ -186,13 +186,17 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire3AxisPoints (con
       m_errorMessage = QObject::tr ("New axis point cannot have the same graph coordinates as an existing axis point");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
-    } else if ((numberPoints == 3) && threePointsAreCollinear (m_screenInputsTransform)) {
+    } else if ((numberPoints == 3) && threePointsAreCollinear (m_screenInputsTransform,
+                                                               COORD_IS_LINEAR,
+                                                               COORD_IS_LINEAR)) {
 
       m_isError = true;
       m_errorMessage = QObject::tr ("No more than two axis points can lie along the same line on the screen");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
-    } else if ((numberPoints == 3) && threePointsAreCollinear (m_graphOutputsTransform)) {
+    } else if ((numberPoints == 3) && threePointsAreCollinear (m_graphOutputsTransform,
+                                                               logXGraph (),
+                                                               logYGraph ())) {
 
       m_isError = true;
       m_errorMessage = QObject::tr ("No more than two axis points can lie along the same line in graph coordinates");
@@ -285,13 +289,17 @@ CallbackSearchReturn CallbackAxisPointsAbstract::callbackRequire4AxisPoints (boo
       m_errorMessage = QObject::tr ("New axis point cannot have the same graph coordinates as an existing axis point");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
-    } else if ((numberPoints == 4) && threePointsAreCollinear (m_screenInputsTransform)) {
+    } else if ((numberPoints == 4) && threePointsAreCollinear (m_screenInputsTransform,
+                                                               COORD_IS_LINEAR,
+                                                               COORD_IS_LINEAR)) {
 
       m_isError = true;
       m_errorMessage = QObject::tr ("No more than two axis points can lie along the same line on the screen");
       rtn = CALLBACK_SEARCH_RETURN_INTERRUPT;
 
-    } else if ((numberPoints == 4) && threePointsAreCollinear (m_graphOutputsTransform)) {
+    } else if ((numberPoints == 4) && threePointsAreCollinear (m_graphOutputsTransform,
+                                                               logXGraph (),
+                                                               logYGraph ())) {
 
       m_isError = true;
       m_errorMessage = QObject::tr ("No more than two axis points can lie along the same line in graph coordinates");
@@ -467,6 +475,16 @@ void CallbackAxisPointsAbstract::loadTransforms4 ()
                                         1.0      , 1.0                , 1.0                );
 }
 
+CallbackAxisPointsAbstract::LinearOrLog CallbackAxisPointsAbstract::logXGraph () const
+{
+  return m_modelCoords.coordScaleXTheta() == COORD_SCALE_LOG ? COORD_IS_LOG : COORD_IS_LINEAR;
+}
+
+CallbackAxisPointsAbstract::LinearOrLog CallbackAxisPointsAbstract::logYGraph () const
+{
+  return m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG ? COORD_IS_LOG : COORD_IS_LINEAR;
+}
+
 QTransform CallbackAxisPointsAbstract::matrixGraph () const
 {
   return m_graphOutputsTransform;
@@ -488,7 +506,23 @@ unsigned int CallbackAxisPointsAbstract::numberAxisPoints () const
   }
 }
 
-bool CallbackAxisPointsAbstract::threePointsAreCollinear (const QTransform &transform)
+bool CallbackAxisPointsAbstract::threePointsAreCollinear (const QTransform &transformIn,
+                                                          LinearOrLog logX,
+                                                          LinearOrLog logY) const
 {
+  double m11 = (logX == COORD_IS_LOG) ? qLn (transformIn.m11()) : transformIn.m11();
+  double m12 = (logX == COORD_IS_LOG) ? qLn (transformIn.m12()) : transformIn.m12();
+  double m13 = (logX == COORD_IS_LOG) ? qLn (transformIn.m13()) : transformIn.m13();
+  double m21 = (logY == COORD_IS_LOG) ? qLn (transformIn.m21()) : transformIn.m21();
+  double m22 = (logY == COORD_IS_LOG) ? qLn (transformIn.m22()) : transformIn.m22();
+  double m23 = (logY == COORD_IS_LOG) ? qLn (transformIn.m23()) : transformIn.m23();
+  double m31 = transformIn.m31();
+  double m32 = transformIn.m32();
+  double m33 = transformIn.m33();
+
+  QTransform transform (m11, m12, m13,
+                        m21, m22, m23,
+                        m31, m32, m33);
+
   return !transform.isInvertible ();
 }

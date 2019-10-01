@@ -84,6 +84,11 @@ protected:
 
 private:
 
+  enum LinearOrLog {
+    COORD_IS_LINEAR,
+    COORD_IS_LOG
+  };
+
   /// Check for repeating points. Epsilon test is used to prevent floating point comparison compiler warning for -Wall
   bool anyPointsRepeatPair (const CoordPairVector &vector,
                             double epsilon) const;
@@ -103,7 +108,11 @@ private:
   void loadTransforms2();
   void loadTransforms3();
   void loadTransforms4();
-  bool threePointsAreCollinear (const QTransform &transform);
+  LinearOrLog logXGraph () const;
+  LinearOrLog logYGraph () const;
+  bool threePointsAreCollinear (const QTransform &transform,
+                                LinearOrLog logX,
+                                LinearOrLog logY) const;
 
   // Coordinates information that will be applied to the coordinates before they are used to compute the transformation
   DocumentModelCoords m_modelCoords;
