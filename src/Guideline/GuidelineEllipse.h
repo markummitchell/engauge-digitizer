@@ -27,6 +27,9 @@ public:
                    GuidelineState guidelineStateInitial);
   ~GuidelineEllipse();
 
+  virtual bool collidesWithPath (const QPainterPath &path,
+                                 Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const;
+
   virtual bool getGraphicsItemSelected () const;
 
   virtual bool getGraphicsItemAcceptHover () const;

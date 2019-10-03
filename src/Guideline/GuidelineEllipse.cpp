@@ -13,6 +13,7 @@
 #include "Guidelines.h"
 #include "GuidelineStateContext.h"
 #include "Logger.h"
+#include <qdebug.h>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
@@ -41,6 +42,55 @@ GuidelineEllipse::GuidelineEllipse(QGraphicsScene &scene,
 
 GuidelineEllipse::~GuidelineEllipse ()
 {
+}
+
+bool GuidelineEllipse::collidesWithPath (const QPainterPath &path,
+                                         Qt::ItemSelectionMode mode) const
+{
+  bool collides = false;
+
+  if (QGraphicsEllipseItem::collidesWithPath (path,
+                                              mode)) {
+
+    // Slow test to not count interior region
+    QPolygonF poly = path.toFillPolygon();
+    QPolygonF::const_iterator itr;
+    for (itr = poly.begin(); (itr != poly.end()) && !collides; itr++) {
+      const QPointF &pointUnaligned = *itr;
+
+      // Rotate to align with axes. This point is for an ellipse centered on (0,0)
+      QTransform identity;
+      QTransform unrotate = identity.rotate (rotation (),
+                                             Qt::ZAxis);
+      QPointF point = unrotate.map (pointUnaligned);
+
+      // Bounding box of ellipse
+      double a = rect().width() / 2.0;
+      double b = rect().height() / 2.0;
+
+      // Project point onto ellipse. The projection is assumed to be the closest ellipse portion to that point
+      double theta = qAtan2 (point.y(),
+                             point.x());
+      double cTheta = cos (theta);
+      double sTheta = sin (theta);
+
+      // (x/a)^2+(y/b)^2=1 with x=r cT and y=r sT can be solved for to get r^2 (cT^2/a^2 + sT2/b^2) = 1
+      double rProjected = qSqrt (1.0 / (cTheta * cTheta / a / a + sTheta * sTheta / b / b));
+      double xProjected = rProjected * cTheta;
+      double yProjected = rProjected * sTheta;
+
+      // Distance to projection
+      double distance = qSqrt ((xProjected - point.x()) * (xProjected - point.x()) +
+                               (yProjected - point.y()) * (yProjected - point.y()));
+
+      if (distance < 5) {
+        // This will make the loop exit immediately for speed
+        collides = true;
+      }
+    }
+  }
+
+  return collides;
 }
 
 bool GuidelineEllipse::getGraphicsItemAcceptHover () const
