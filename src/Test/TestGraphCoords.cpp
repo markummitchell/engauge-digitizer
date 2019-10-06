@@ -1,3 +1,4 @@
+#include "CallbackAxisPointsAbstract.h"
 #include "CallbackUpdateTransform.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -84,7 +85,9 @@ void TestGraphCoords::testThreeCollinearPointsNo ()
                 100, 150, 200,
                 1  , 1  , 1  );
 
-  QVERIFY (!m_callback->threePointsAreCollinear (m));
+  QVERIFY (!m_callback->threePointsAreCollinear (m,
+                                                 CallbackAxisPointsAbstract::LinearOrLog::COORD_IS_LINEAR,
+                                                 CallbackAxisPointsAbstract::LinearOrLog::COORD_IS_LINEAR));
 }
 
 void TestGraphCoords::testThreeCollinearPointsYes ()
@@ -94,5 +97,7 @@ void TestGraphCoords::testThreeCollinearPointsYes ()
                 100, 150, 200,
                 1  , 1  , 1  );
 
-  QVERIFY (m_callback->threePointsAreCollinear (m));
+  QVERIFY (m_callback->threePointsAreCollinear (m,
+                                                CallbackAxisPointsAbstract::LinearOrLog::COORD_IS_LINEAR,
+                                                CallbackAxisPointsAbstract::LinearOrLog::COORD_IS_LINEAR));
 }
