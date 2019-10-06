@@ -12,6 +12,7 @@
 #include "GuidelineStateDeployedAbstract.h"
 #include "Logger.h"
 #include <QPen>
+#include "Transformation.h"
 #include "ZValues.h"
 
 GuidelineStateDeployedAbstract::GuidelineStateDeployedAbstract (GuidelineStateContext &context) :
@@ -51,4 +52,14 @@ void GuidelineStateDeployedAbstract::end ()
 void GuidelineStateDeployedAbstract::handleMouseRelease (const QPointF & /* posScene */)
 {
   // Noop
+}
+
+CoordsType GuidelineStateDeployedAbstract::lastCoordsType () const
+{
+  return m_lastCoordsType;
+}
+
+void GuidelineStateDeployedAbstract::saveLastCoordsType ()
+{
+  m_lastCoordsType = context().transformation().modelCoords().coordsType();
 }

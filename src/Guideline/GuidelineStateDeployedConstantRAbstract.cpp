@@ -17,6 +17,7 @@
 GuidelineStateDeployedConstantRAbstract::GuidelineStateDeployedConstantRAbstract (GuidelineStateContext &context) :
   GuidelineStateDeployedAbstract (context)
 {
+  saveLastCoordsType ();
 }
 
 GuidelineStateDeployedConstantRAbstract::~GuidelineStateDeployedConstantRAbstract ()
@@ -41,8 +42,10 @@ void GuidelineStateDeployedConstantRAbstract::updateWithLatestTransformation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantRAbstract::updateWithLatestTransformation";
 
-  if (!context().transformation().transformIsDefined()) {
-    // Discard this Guideline immediately if the transformation transitions to undefined
+  if (!context().transformation().transformIsDefined() ||
+      context().transformation().modelCoords().coordsType() != lastCoordsType ()) {
+    // Discard this Guideline immediately since the transformation just transitioned to undefined,
+    // or cartesian/polar mode has just toggled
     context().requestStateTransition(GUIDELINE_STATE_DISCARDED);
   } else {
 
@@ -52,5 +55,8 @@ void GuidelineStateDeployedConstantRAbstract::updateWithLatestTransformation ()
 
     GuidelineEllipse *ellipse = dynamic_cast<GuidelineEllipse*> (&context().guideline());
     ellipse->updateGeometry (posScreen);
+
   }
+
+  saveLastCoordsType ();
 }

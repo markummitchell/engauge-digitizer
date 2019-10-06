@@ -17,6 +17,7 @@
 GuidelineStateDeployedConstantTAbstract::GuidelineStateDeployedConstantTAbstract (GuidelineStateContext &context) :
   GuidelineStateDeployedAbstract (context)
 {
+  saveLastCoordsType ();
 }
 
 GuidelineStateDeployedConstantTAbstract::~GuidelineStateDeployedConstantTAbstract ()
@@ -41,8 +42,10 @@ void GuidelineStateDeployedConstantTAbstract::updateWithLatestTransformation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantTAbstract::updateWithLatestTransformation";
 
-  if (!context().transformation().transformIsDefined()) {
-    // Discard this Guideline immediately if the transformation transitions to undefined
+  if (!context().transformation().transformIsDefined() ||
+      context().transformation().modelCoords().coordsType() != lastCoordsType ()) {
+    // Discard this Guideline immediately since the transformation just transitioned to undefined,
+    // or cartesian/polar mode has just toggled
     context().requestStateTransition(GUIDELINE_STATE_DISCARDED);
   } else {
 
@@ -53,4 +56,6 @@ void GuidelineStateDeployedConstantTAbstract::updateWithLatestTransformation ()
                                               sceneRect (),
                                               context().posCursorGraph().x ()));
   }
+
+  saveLastCoordsType ();
 }

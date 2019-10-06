@@ -7,6 +7,7 @@
 #ifndef GUIDELINE_STATE_DEPLOYED_ABSTRACT_H
 #define GUIDELINE_STATE_DEPLOYED_ABSTRACT_H
 
+#include "CoordsType.h"
 #include "GuidelineFormat.h"
 #include "GuidelineStateAbstractBase.h"
 #include <QPointF>
@@ -22,11 +23,22 @@ public:
   virtual void end ();
   virtual void handleMouseRelease (const QPointF &posScene);
 
+  /// Coordinates type associated with the last time Transformation matrix was used
+  CoordsType lastCoordsType () const;
+
+  /// Save coordinates type associated with the current Transformation matrix
+  void saveLastCoordsType ();
+
 protected:
 
   /// Initialization common to all states
   void beginCommon (GuidelineFormat::HoverOption hoverOption);
 
+private:
+
+  /// Track coordinates type (cartesian or polar) used with last Transformation. If there
+  /// is a transition than we need to throw all deployed Guidelines
+  CoordsType m_lastCoordsType;
 };
 
 #endif // GUIDELINE_STATE_DEPLOYED_ABSTRACT_H
