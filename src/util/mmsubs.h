@@ -20,6 +20,19 @@ extern double angleBetweenVectors (const QPointF &v1,
 extern double angleFromVectorToVector (const QPointF &vFrom,
                                        const QPointF &vTo);
 
+/// Calculate ellipse parameters that is incribed in a parallelogram centered at the origin,
+/// given three successive corners of that parallelogram. By symmetry the other corner is
+/// not needed.
+extern void ellipseFromParallelogram (double xTL,
+                                      double yTL,
+                                      double xTR,
+                                      double yTR,
+                                      double xBR,
+                                      double yBR,
+                                      double &angleRadians,
+                                      double &aAligned,
+                                      double &bAligned);
+
 /// Get pixel method for any bit depth
 extern QRgb pixelRGB (const QImage &image, int x, int y);
 

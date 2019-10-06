@@ -36,7 +36,9 @@ void initializeLogging (const QString &name,
                                                                      APPEND_TO_PREVIOUS_FILE));
                                            
   PatternLayout *layout = new PatternLayout ();
-  layout->setConversionPattern ("%d{%H:%M:%S.%l} %-5p %c - %m%n");
+  // With date:    %d{%H:%M:%S.%l} %-5p %c - %m%n
+  // Without date:                 %-5p %c - %m%n
+  layout->setConversionPattern ("%-5p %c - %m%n");
   appender->setLayout (layout);
 
   mainCat = &Category::getRoot ();

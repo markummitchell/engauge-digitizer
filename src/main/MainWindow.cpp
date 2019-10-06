@@ -162,6 +162,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_fileCmdScript (nullptr),
   m_isErrorReportRegressionTest (isRegressionTest),
   m_timerRegressionFileCmdScript(nullptr),
+  m_guidelines (*this),
   m_fittingCurve (nullptr),
   m_isExportOnly (isExportOnly),
   m_isExtractImageOnly (isExtractImageOnly),
@@ -253,7 +254,8 @@ MainWindow::~MainWindow()
   delete m_dlgSettingsPointMatch;
   delete m_dlgSettingsSegments;
   delete m_fileCmdScript;
-  m_gridLines.clear ();  
+  m_gridLines.clear ();
+  m_guidelines.clear ();
 }
 
 void MainWindow::addDockWindow (QDockWidget *dockWidget,
@@ -817,6 +819,32 @@ void MainWindow::ghostsDestroy ()
   m_ghosts = nullptr;
 }
 
+bool MainWindow::guidelinesAreVisible () const
+{
+  return (guidelinesVisibilityCanBeEnabled () &&
+          m_actionViewGuidelines->isChecked());
+}
+
+bool MainWindow::guidelinesVisibilityCanBeEnabled () const
+{
+  // Rules
+  // 1) We want guidelines to be available as soon as possible since users would probably never know about them otherwise,
+  //    so action should be checked
+  // 2) We do not want to show guidelines until the transformation is working, since to show them earlier would probably mean
+  //    they are aligned along the screen axes - but then when the transformation is working it would be impossible to
+  //    meaningfully convert the old guidelines into the graph reference frame (unless the graph and screen axes happen
+  //    to be parallel which is rarely the case). Note that m_actionViewGuidelines is disabled when the transformation
+  //    is not defined
+  // 3) If transform is defined then file should also be, but we check to make sure
+  return (!m_currentFile.isEmpty() &&
+          transformIsDefined());
+}
+
+void MainWindow::handleGuidelinesActiveChange (bool active)
+{
+  m_guidelines.handleActiveChange (active);
+}
+
 void MainWindow::handlerFileExtractImage ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::handlerFileExtractImage";
@@ -1057,7 +1085,7 @@ bool MainWindow::loadImageNewDocument (const QString &fileName,
     }
 
     // Start axis mode
-    m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points
+    m_actionDigitizeAxis->setChecked (true); // We assume user first wants to digitize axis points  
 
     // Trigger transition so cursor gets updated immediately
     if (modeMap ()) {
@@ -1242,13 +1270,15 @@ void MainWindow::rebuildRecentFileListForCurrentFile(const QString &filePath)
   updateRecentFileList();
 }
 
-void MainWindow::resizeEvent(QResizeEvent * /* event */)
+void MainWindow::resizeEvent(QResizeEvent *event)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::resizeEvent";
 
   if (m_actionZoomFill->isChecked ()) {
     slotViewZoomFactor (ZOOM_FILL);
   }
+
+  QMainWindow::resizeEvent(event);
 }
 
 bool MainWindow::saveDocumentFile (const QString &fileName)
@@ -1528,6 +1558,8 @@ void MainWindow::setPixmap (const QString &curveSelected,
                                        m_cmdMediator->document().modelColorFilter(),
                                        pixmap,
                                        curveSelected);
+
+  m_guidelines.initialize (*m_scene);
 }
 
 void MainWindow::settingsRead (bool isReset)
@@ -2297,6 +2329,7 @@ void MainWindow::slotFileClose()
     setWindowTitle (engaugeWindowTitle ());
 
     m_gridLines.clear();
+    m_guidelines.clear();
     updateControls();
   }
 }
@@ -2942,6 +2975,13 @@ void MainWindow::slotViewGroupStatus(QAction *action)
   }
 }
 
+void MainWindow::slotViewGuidelines ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGuidelines";
+
+  m_guidelines.handleVisibleChange (guidelinesAreVisible ());
+}
+
 void MainWindow::slotViewToolBarBackground ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarBackground";
@@ -3135,7 +3175,7 @@ void MainWindow::startRegressionDropTest (const QStringList &loadStartupFiles)
   // Regression testing of drag and drop has some constraints:
   // 1) Need graphics window (GraphicsView) or else its events will not work. This is why
   //    drag and drop testing is not done as one of the cli tests, which do not show the gui
-  // 2) Drag and drop by itself does not produce the csv file, so this code will output the
+  // 2) Drag and drop by itself does not produce the csv file, so this code will output theupdateTransformFromMatrices
   //    x,y dimensions of the imported image instead of a normal csv file
   connect (this, SIGNAL (signalDropRegression (QString)), m_view, SLOT (slotDropRegression (QString)));
 
@@ -3363,6 +3403,7 @@ void MainWindow::updateControls ()
     m_actionViewGridLines->setEnabled (false);
     m_actionViewGridLines->setChecked (false);
   }
+  m_actionViewGuidelines->setEnabled (guidelinesVisibilityCanBeEnabled ());
   m_actionViewBackground->setEnabled (!m_currentFile.isEmpty());
   m_actionViewChecklistGuide->setEnabled (!m_dockChecklistGuide->browserIsEmpty());
   m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());
@@ -3680,6 +3721,7 @@ void MainWindow::updateSettingsMainWindow()
   updateWindowTitle();
   updateFittingWindow(); // Forward the drag and drop choice
   updateGeometryWindow(); // Forward the drag and drop choice
+  m_guidelines.updateColor ();
 }
 
 void MainWindow::updateSettingsMainWindow(const MainWindowModel &modelMainWindow)
@@ -3738,6 +3780,8 @@ void MainWindow::updateTransformationAndItsDependencies()
   // Grid display is also affected by new transformation above, if there was a transition into defined state
   // in which case that transition triggered the initialization of the grid display parameters
   updateGridLines();
+
+  m_guidelines.updateWithLatestTransformation ();
 }
 
 void MainWindow::updateViewedCurves ()

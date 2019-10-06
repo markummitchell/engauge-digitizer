@@ -20,7 +20,7 @@ QString FormatDegreesMinutesSecondsNonPolarTheta::formatOutput (CoordUnitsNonPol
                                                                 double value,
                                                                 bool isNsHemisphere) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsNonPolarTheta::formatOutput";
+  //LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsNonPolarTheta::formatOutput";
 
   // See if similar method with hemisphere argument should have been called
   ENGAUGE_ASSERT (coordUnits != COORD_UNITS_NON_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW);

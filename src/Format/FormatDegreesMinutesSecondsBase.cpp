@@ -29,8 +29,8 @@ FormatDegreesMinutesSecondsBase::~FormatDegreesMinutesSecondsBase()
 
 QString FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSeconds (double value) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSeconds"
-                              << " value=" << value;
+  //LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSeconds"
+  //                            << " value=" << value;
 
   // Only smallest resolution value is floating point
   bool negative = (value < 0);
@@ -54,9 +54,9 @@ QString FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSeconds (doub
 QString FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSecondsNsew (double value,
                                                                                 bool isNsHemisphere) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSecondsNsew"
-                              << " value=" << value
-                              << " isNsHemisphere=" << (isNsHemisphere ? "true" : "false");
+  //LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSecondsNsew"
+  //                            << " value=" << value
+  //                            << " isNsHemisphere=" << (isNsHemisphere ? "true" : "false");
 
   // Only smallest resolution value is floating point
   bool negative = (value < 0);
@@ -87,8 +87,8 @@ QString FormatDegreesMinutesSecondsBase::formatOutputDegreesMinutesSecondsNsew (
 QValidator::State FormatDegreesMinutesSecondsBase::parseInput (const QString &stringUntrimmed,
                                                                double &value) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsBase::parseInput"
-                              << " string=" << stringUntrimmed.toLatin1().data();
+  //LOG4CPP_INFO_S ((*mainCat)) << "FormatDegreesMinutesSecondsBase::parseInput"
+  //                            << " string=" << stringUntrimmed.toLatin1().data();
 
   const QString string = stringUntrimmed.trimmed ();
 

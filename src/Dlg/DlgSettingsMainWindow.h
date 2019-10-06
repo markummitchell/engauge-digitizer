@@ -41,6 +41,7 @@ public:
 
 private slots:
   void slotDragDropExport (bool);
+  void slotGuidelineColor (const QString &);
   void slotHighlightOpacity (double);
   void slotImageReplaceRenamesDocument (bool);
   void slotImportCropping (int index);
@@ -77,6 +78,7 @@ private:
   QCheckBox *m_chkDragDropExport;
   QSpinBox *m_spinSignificantDigits;
   QCheckBox *m_chkImageReplaceRenamesDocument;
+  QComboBox *m_cmbGuidelineColor;
 
   MainWindowModel *m_modelMainWindowBefore;
   MainWindowModel *m_modelMainWindowAfter;

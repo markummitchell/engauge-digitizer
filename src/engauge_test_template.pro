@@ -215,6 +215,7 @@ HEADERS  += \
     Document/DocumentModelSegments.h \
     Document/DocumentScrub.h \
     Document/DocumentSerialize.h \
+    util/EllipseParameters.h \
     include/EngaugeAssert.h \
     util/EnumsToQt.h \
     Export/ExportAlignLinear.h \
@@ -301,6 +302,59 @@ HEADERS  += \
     Grid/GridLog.h \
     Grid/GridRemoval.h \
     Grid/GridTriangleFill.h \
+    Guideline/GuidelineAbstract.h \
+    Guideline/GuidelineEllipse.h \
+    Guideline/GuidelineFormat.h \
+    Guideline/GuidelineLine.h \
+    Guideline/GuidelineProjectorAbstract.h \
+    Guideline/GuidelineProjectorConstantR.h \
+    Guideline/GuidelineProjectorConstantT.h \
+    Guideline/GuidelineProjectorConstantX.h \
+    Guideline/GuidelineProjectorConstantY.h \
+    Guideline/Guidelines.h \
+    Guideline/GuidelineState.h \
+    Guideline/GuidelineStateAbstractBase.h \
+    Guideline/GuidelineStateContext.h \
+    Guideline/GuidelineStateDeployedAbstract.h \
+    Guideline/GuidelineStateDeployedConstantRAbstract.h \
+    Guideline/GuidelineStateDeployedConstantRActive.h \
+    Guideline/GuidelineStateDeployedConstantRHide.h \
+    Guideline/GuidelineStateDeployedConstantRHover.h \
+    Guideline/GuidelineStateDeployedConstantRLocked.h \
+    Guideline/GuidelineStateDeployedConstantTAbstract.h \
+    Guideline/GuidelineStateDeployedConstantTActive.h \
+    Guideline/GuidelineStateDeployedConstantTHide.h \
+    Guideline/GuidelineStateDeployedConstantTHover.h \
+    Guideline/GuidelineStateDeployedConstantTLocked.h \
+    Guideline/GuidelineStateDeployedConstantXAbstract.h \
+    Guideline/GuidelineStateDeployedConstantXActive.h \
+    Guideline/GuidelineStateDeployedConstantXHide.h \
+    Guideline/GuidelineStateDeployedConstantXHover.h \
+    Guideline/GuidelineStateDeployedConstantXLocked.h \
+    Guideline/GuidelineStateDeployedConstantYAbstract.h \
+    Guideline/GuidelineStateDeployedConstantYActive.h \
+    Guideline/GuidelineStateDeployedConstantYHide.h \
+    Guideline/GuidelineStateDeployedConstantYHover.h \
+    Guideline/GuidelineStateDeployedConstantYLocked.h \
+    Guideline/GuidelineStateDiscarded.h \
+    Guideline/GuidelineStateHandle.h \
+    Guideline/GuidelineStateTemplateAbstract.h \
+    Guideline/GuidelineStateTemplateHorizontalBottomAbstract.h \
+    Guideline/GuidelineStateTemplateHorizontalBottomHide.h \
+    Guideline/GuidelineStateTemplateHorizontalBottomHover.h \
+    Guideline/GuidelineStateTemplateHorizontalBottomLurking.h \
+    Guideline/GuidelineStateTemplateHorizontalTopAbstract.h \
+    Guideline/GuidelineStateTemplateHorizontalTopHide.h \
+    Guideline/GuidelineStateTemplateHorizontalTopHover.h \
+    Guideline/GuidelineStateTemplateHorizontalTopLurking.h \
+    Guideline/GuidelineStateTemplateVerticalLeftAbstract.h \
+    Guideline/GuidelineStateTemplateVerticalLeftHide.h \
+    Guideline/GuidelineStateTemplateVerticalLeftHover.h \
+    Guideline/GuidelineStateTemplateVerticalLeftLurking.h \
+    Guideline/GuidelineStateTemplateVerticalRightAbstract.h \
+    Guideline/GuidelineStateTemplateVerticalRightHide.h \
+    Guideline/GuidelineStateTemplateVerticalRightHover.h \
+    Guideline/GuidelineStateTemplateVerticalRightLurking.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Import/ImportCropping.h \
@@ -575,6 +629,7 @@ SOURCES += \
     Document/DocumentModelSegments.cpp \
     Document/DocumentScrub.cpp \
     Document/DocumentSerialize.cpp \
+    util/EllipseParameters.cpp \
     util/EnumsToQt.cpp \
     Export/ExportAlignLinear.cpp \
     Export/ExportAlignLog.cpp \
@@ -651,6 +706,58 @@ SOURCES += \
     Grid/GridLog.cpp \
     Grid/GridRemoval.cpp \
     Grid/GridTriangleFill.cpp \
+    Guideline/GuidelineAbstract.cpp \
+    Guideline/GuidelineEllipse.cpp \
+    Guideline/GuidelineFormat.cpp \
+    Guideline/GuidelineLine.cpp \
+    Guideline/GuidelineProjectorAbstract.cpp \
+    Guideline/GuidelineProjectorConstantR.cpp \
+    Guideline/GuidelineProjectorConstantT.cpp \
+    Guideline/GuidelineProjectorConstantX.cpp \
+    Guideline/GuidelineProjectorConstantY.cpp \
+    Guideline/Guidelines.cpp \
+    Guideline/GuidelineStateAbstractBase.cpp \
+    Guideline/GuidelineStateContext.cpp \
+    Guideline/GuidelineStateDeployedAbstract.cpp \
+    Guideline/GuidelineStateDeployedConstantRAbstract.cpp \
+    Guideline/GuidelineStateDeployedConstantRActive.cpp \
+    Guideline/GuidelineStateDeployedConstantRHide.cpp \
+    Guideline/GuidelineStateDeployedConstantRHover.cpp \
+    Guideline/GuidelineStateDeployedConstantRLocked.cpp \
+    Guideline/GuidelineStateDeployedConstantTAbstract.cpp \
+    Guideline/GuidelineStateDeployedConstantTActive.cpp \
+    Guideline/GuidelineStateDeployedConstantTHide.cpp \
+    Guideline/GuidelineStateDeployedConstantTHover.cpp \
+    Guideline/GuidelineStateDeployedConstantTLocked.cpp \
+    Guideline/GuidelineStateDeployedConstantXAbstract.cpp \
+    Guideline/GuidelineStateDeployedConstantXActive.cpp \
+    Guideline/GuidelineStateDeployedConstantXHide.cpp \
+    Guideline/GuidelineStateDeployedConstantXHover.cpp \
+    Guideline/GuidelineStateDeployedConstantXLocked.cpp \
+    Guideline/GuidelineStateDeployedConstantYAbstract.cpp \
+    Guideline/GuidelineStateDeployedConstantYActive.cpp \
+    Guideline/GuidelineStateDeployedConstantYHide.cpp \
+    Guideline/GuidelineStateDeployedConstantYHover.cpp \
+    Guideline/GuidelineStateDeployedConstantYLocked.cpp \
+    Guideline/GuidelineStateDiscarded.cpp \
+    Guideline/GuidelineStateHandle.cpp \
+    Guideline/GuidelineStateTemplateAbstract.cpp \
+    Guideline/GuidelineStateTemplateHorizontalBottomAbstract.cpp \
+    Guideline/GuidelineStateTemplateHorizontalBottomHide.cpp \
+    Guideline/GuidelineStateTemplateHorizontalBottomHover.cpp \
+    Guideline/GuidelineStateTemplateHorizontalBottomLurking.cpp \
+    Guideline/GuidelineStateTemplateHorizontalTopAbstract.cpp \
+    Guideline/GuidelineStateTemplateHorizontalTopHide.cpp \
+    Guideline/GuidelineStateTemplateHorizontalTopHover.cpp \
+    Guideline/GuidelineStateTemplateHorizontalTopLurking.cpp \
+    Guideline/GuidelineStateTemplateVerticalLeftAbstract.cpp \
+    Guideline/GuidelineStateTemplateVerticalLeftHide.cpp \
+    Guideline/GuidelineStateTemplateVerticalLeftHover.cpp \
+    Guideline/GuidelineStateTemplateVerticalLeftLurking.cpp \
+    Guideline/GuidelineStateTemplateVerticalRightAbstract.cpp \
+    Guideline/GuidelineStateTemplateVerticalRightHide.cpp \
+    Guideline/GuidelineStateTemplateVerticalRightHover.cpp \
+    Guideline/GuidelineStateTemplateVerticalRightLurking.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Import/ImportCroppingUtilBase.cpp \
@@ -772,6 +879,7 @@ INCLUDEPATH += Background \
                Ghosts \
                Graphics \
                Grid \
+               Guideline \
                Help \
                img \
                Import \

@@ -252,6 +252,17 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
                                              "element M and significant digits S as T = M / 10^S."));
   connect (m_spinSignificantDigits, SIGNAL (valueChanged (int)), this, SLOT (slotSignificantDigits (int)));
   layout->addWidget (m_spinSignificantDigits, row++, 2);
+
+  QLabel *labelGuidelineColor = new QLabel (QString ("%1:").arg (tr ("Guideline color")));
+  layout->addWidget (labelGuidelineColor, row, 1);
+
+  m_cmbGuidelineColor = new QComboBox;
+  m_cmbGuidelineColor->setWhatsThis (tr ("Guidelines Color\n\n"
+                                         "Set the color of the guidelines that can be dragged from the edges of the scene, and used "
+                                         "to align points"));
+  populateColorComboWithoutTransparent (*m_cmbGuidelineColor);
+  connect (m_cmbGuidelineColor, SIGNAL (activated (const QString &)), this, SLOT (slotGuidelineColor (const QString &))); // activated() ignores code changes
+  layout->addWidget (m_cmbGuidelineColor, row++, 2);
 }
 
 void DlgSettingsMainWindow::createOptionalSaveDefault (QHBoxLayout * /* layout */)
@@ -346,6 +357,10 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   m_spinSignificantDigits->setValue (m_modelMainWindowAfter->significantDigits ());
   m_chkImageReplaceRenamesDocument->setChecked (m_modelMainWindowAfter->imageReplaceRenamesDocument());
 
+  int indexColor = m_cmbGuidelineColor->findData(QVariant(m_modelMainWindowAfter->guidelineColor()));
+  ENGAUGE_ASSERT (indexColor >= 0);
+  m_cmbGuidelineColor->setCurrentIndex(indexColor);
+
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
 }
@@ -360,6 +375,14 @@ void DlgSettingsMainWindow::slotDragDropExport (bool)
 
   m_modelMainWindowAfter->setDragDropExport (m_chkDragDropExport->isChecked());
   updateControls ();
+}
+
+void DlgSettingsMainWindow::slotGuidelineColor (QString const &)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotColor";
+
+  m_modelMainWindowAfter->setGuidelineColor(static_cast<ColorPalette> (m_cmbGuidelineColor->currentData().toInt()));
+  updateControls();
 }
 
 void DlgSettingsMainWindow::slotHighlightOpacity(double)
