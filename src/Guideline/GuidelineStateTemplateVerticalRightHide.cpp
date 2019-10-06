@@ -8,6 +8,7 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateVerticalRightHide.h"
 #include "Logger.h"
+#include "Transformation.h"
 
 GuidelineStateTemplateVerticalRightHide::GuidelineStateTemplateVerticalRightHide (GuidelineStateContext &context) :
   GuidelineStateTemplateVerticalRightAbstract (context)
@@ -62,4 +63,11 @@ void GuidelineStateTemplateVerticalRightHide::handleVisibleChange (bool visible)
 QString GuidelineStateTemplateVerticalRightHide::state () const
 {
   return ("GuidelineStateTemplateVerticalRightHide");
+}
+
+void GuidelineStateTemplateVerticalRightHide::updateWithLatestTransformation ()
+{
+  if (context().transformation().transformIsDefined()) {
+    context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING);
+  }
 }

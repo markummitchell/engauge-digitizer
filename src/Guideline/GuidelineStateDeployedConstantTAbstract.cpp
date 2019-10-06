@@ -41,10 +41,16 @@ void GuidelineStateDeployedConstantTAbstract::updateWithLatestTransformation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantTAbstract::updateWithLatestTransformation";
 
-  GuidelineProjectorConstantT projector;
+  if (!context().transformation().transformIsDefined()) {
+    // Discard this Guideline immediately if the transformation transitions to undefined
+    context().requestStateTransition(GUIDELINE_STATE_DISCARDED);
+  } else {
 
-  GuidelineLine *line = dynamic_cast<GuidelineLine*> (&context().guideline());
-  line->setLine (projector.fromCoordinateT (context().transformation(),
-                                            sceneRect (),
-                                            context().posCursorGraph().x ()));
+    GuidelineProjectorConstantT projector;
+
+    GuidelineLine *line = dynamic_cast<GuidelineLine*> (&context().guideline());
+    line->setLine (projector.fromCoordinateT (context().transformation(),
+                                              sceneRect (),
+                                              context().posCursorGraph().x ()));
+  }
 }

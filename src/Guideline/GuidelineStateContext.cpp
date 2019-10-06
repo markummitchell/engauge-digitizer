@@ -251,4 +251,5 @@ void GuidelineStateContext::updateWithLatestTransformation()
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_STATES);
 
   m_states[m_currentState]->updateWithLatestTransformation();
+  transitionIfRequested ();
 }

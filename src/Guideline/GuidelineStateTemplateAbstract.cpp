@@ -53,8 +53,3 @@ QLineF GuidelineStateTemplateAbstract::pointToLine (const QPointF & /* posGraph 
 {
   return QLineF (0, 0, 0, 0);
 }
-
-void GuidelineStateTemplateAbstract::updateWithLatestTransformation ()
-{
-  // Noop
-}

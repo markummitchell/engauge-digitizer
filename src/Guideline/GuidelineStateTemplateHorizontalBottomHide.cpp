@@ -9,6 +9,7 @@
 #include "GuidelineStateTemplateHorizontalBottomHide.h"
 #include "Logger.h"
 #include <QObject>
+#include "Transformation.h"
 
 GuidelineStateTemplateHorizontalBottomHide::GuidelineStateTemplateHorizontalBottomHide (GuidelineStateContext &context) :
   GuidelineStateTemplateHorizontalBottomAbstract (context)
@@ -65,3 +66,9 @@ QString GuidelineStateTemplateHorizontalBottomHide::state () const
   return ("GuidelineStateTemplateHorizontalBottomHide");
 }
 
+void GuidelineStateTemplateHorizontalBottomHide::updateWithLatestTransformation ()
+{
+  if (context().transformation().transformIsDefined()) {
+    context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING);
+  }
+}

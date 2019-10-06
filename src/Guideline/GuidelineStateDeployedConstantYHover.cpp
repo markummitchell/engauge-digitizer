@@ -10,6 +10,7 @@
 #include "GuidelineStateDeployedConstantYHover.h"
 #include "Logger.h"
 #include <QGraphicsScene>
+#include "Transformation.h"
 
 GuidelineStateDeployedConstantYHover::GuidelineStateDeployedConstantYHover (GuidelineStateContext &context) :
   GuidelineStateDeployedConstantYAbstract (context)

@@ -11,6 +11,7 @@
 #include "GuidelineStateDeployedConstantXActive.h"
 #include "Logger.h"
 #include <QGraphicsScene>
+#include "Transformation.h"
 
 GuidelineStateDeployedConstantXActive::GuidelineStateDeployedConstantXActive (GuidelineStateContext &context) :
   GuidelineStateDeployedConstantXAbstract (context)

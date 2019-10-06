@@ -77,3 +77,8 @@ QString GuidelineStateTemplateHorizontalTopHover::state () const
 {
   return ("GuidelineStateTemplateHorizontalTopHover");
 }
+
+void GuidelineStateTemplateHorizontalTopHover::updateWithLatestTransformation ()
+{
+  // Noop
+}

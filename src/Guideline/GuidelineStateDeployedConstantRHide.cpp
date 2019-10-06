@@ -11,6 +11,7 @@
 #include "GuidelineStateDeployedConstantRHide.h"
 #include "Logger.h"
 #include <QGraphicsScene>
+#include "Transformation.h"
 
 GuidelineStateDeployedConstantRHide::GuidelineStateDeployedConstantRHide (GuidelineStateContext &context) :
   GuidelineStateDeployedConstantRAbstract (context)

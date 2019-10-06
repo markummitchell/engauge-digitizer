@@ -9,6 +9,7 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateHorizontalTopLurking.h"
 #include "Logger.h"
+#include "Transformation.h"
 
 GuidelineStateTemplateHorizontalTopLurking::GuidelineStateTemplateHorizontalTopLurking (GuidelineStateContext &context) :
   GuidelineStateTemplateHorizontalTopAbstract (context)
@@ -76,4 +77,11 @@ void GuidelineStateTemplateHorizontalTopLurking::handleVisibleChange (bool visib
 QString GuidelineStateTemplateHorizontalTopLurking::state () const
 {
   return ("GuidelineStateTemplateHorizontalTopLurking");
+}
+
+void GuidelineStateTemplateHorizontalTopLurking::updateWithLatestTransformation ()
+{
+  if (!context().transformation().transformIsDefined()) {
+    context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE);
+  }
 }

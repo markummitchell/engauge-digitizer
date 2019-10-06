@@ -25,7 +25,6 @@ public:
   virtual void handleMouseRelease (const QPointF &posScene);
   virtual EllipseParameters pointToEllipse (const QPointF &posScreen) const;
   virtual QLineF pointToLine (const QPointF &poscreen) const;
-  virtual void updateWithLatestTransformation ();
 
 protected:
 

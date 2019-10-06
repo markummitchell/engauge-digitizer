@@ -35,14 +35,21 @@ QLineF GuidelineStateDeployedConstantXAbstract::pointToLine (const QPointF &posS
                                   sceneRect (),
                                   posScreen);
 }
+
 void GuidelineStateDeployedConstantXAbstract::updateWithLatestTransformation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantXAbstract::updateWithLatestTransformation";
 
-  GuidelineProjectorConstantX projector;
+  if (!context().transformation().transformIsDefined()) {
+    // Discard this Guideline immediately if the transformation transitions to undefined
+    context().requestStateTransition(GUIDELINE_STATE_DISCARDED);
+  } else {
 
-  GuidelineLine *line = dynamic_cast<GuidelineLine*> (&context().guideline());
-  line->setLine (projector.fromCoordinateX (context().transformation(),
-                                            sceneRect (),
-                                            context().posCursorGraph ().x()));
+    GuidelineProjectorConstantX projector;
+
+    GuidelineLine *line = dynamic_cast<GuidelineLine*> (&context().guideline());
+    line->setLine (projector.fromCoordinateX (context().transformation(),
+                                              sceneRect (),
+                                              context().posCursorGraph ().x()));
+  }
 }

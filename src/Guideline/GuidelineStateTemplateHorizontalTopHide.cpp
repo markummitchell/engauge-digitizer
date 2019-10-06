@@ -8,6 +8,7 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateHorizontalTopHide.h"
 #include "Logger.h"
+#include "Transformation.h"
 
 GuidelineStateTemplateHorizontalTopHide::GuidelineStateTemplateHorizontalTopHide (GuidelineStateContext &context) :
   GuidelineStateTemplateHorizontalTopAbstract (context)
@@ -62,4 +63,11 @@ void GuidelineStateTemplateHorizontalTopHide::handleVisibleChange (bool visible)
 QString GuidelineStateTemplateHorizontalTopHide::state () const
 {
   return ("GuidelineStateTemplateHorizontalTopHide");
+}
+
+void GuidelineStateTemplateHorizontalTopHide::updateWithLatestTransformation ()
+{
+  if (context().transformation().transformIsDefined()) {
+    context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING);
+  }
 }

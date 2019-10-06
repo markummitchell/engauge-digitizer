@@ -9,6 +9,7 @@
 #include "GuidelineStateContext.h"
 #include "GuidelineStateTemplateVerticalRightLurking.h"
 #include "Logger.h"
+#include "Transformation.h"
 
 GuidelineStateTemplateVerticalRightLurking::GuidelineStateTemplateVerticalRightLurking (GuidelineStateContext &context) :
   GuidelineStateTemplateVerticalRightAbstract (context)
@@ -76,4 +77,11 @@ void GuidelineStateTemplateVerticalRightLurking::handleVisibleChange (bool visib
 QString GuidelineStateTemplateVerticalRightLurking::state () const
 {
   return ("GuidelineStateTemplateVerticalRightLurking");
+}
+
+void GuidelineStateTemplateVerticalRightLurking::updateWithLatestTransformation ()
+{
+  if (!context().transformation().transformIsDefined()) {
+    context().requestStateTransition(GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE);
+  }
 }

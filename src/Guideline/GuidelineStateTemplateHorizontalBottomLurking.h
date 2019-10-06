@@ -25,6 +25,7 @@ public:
   virtual void handleMousePress (const QPointF &posScene);
   virtual void handleVisibleChange (bool visible);
   virtual QString state () const;
+  virtual void updateWithLatestTransformation();
 
 private:
   GuidelineStateTemplateHorizontalBottomLurking();

@@ -41,10 +41,16 @@ void GuidelineStateDeployedConstantRAbstract::updateWithLatestTransformation ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantRAbstract::updateWithLatestTransformation";
 
-  QPointF posScreen;
-  context().transformation().transformRawGraphToScreen (context().posCursorGraph(),
-                                                        posScreen);
+  if (!context().transformation().transformIsDefined()) {
+    // Discard this Guideline immediately if the transformation transitions to undefined
+    context().requestStateTransition(GUIDELINE_STATE_DISCARDED);
+  } else {
 
-  GuidelineEllipse *ellipse = dynamic_cast<GuidelineEllipse*> (&context().guideline());
-  ellipse->updateGeometry (posScreen);
+    QPointF posScreen;
+    context().transformation().transformRawGraphToScreen (context().posCursorGraph(),
+                                                          posScreen);
+
+    GuidelineEllipse *ellipse = dynamic_cast<GuidelineEllipse*> (&context().guideline());
+    ellipse->updateGeometry (posScreen);
+  }
 }

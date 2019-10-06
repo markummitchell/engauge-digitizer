@@ -10,6 +10,7 @@
 #include "GuidelineStateDeployedConstantRHover.h"
 #include "Logger.h"
 #include <QGraphicsScene>
+#include "Transformation.h"
 
 GuidelineStateDeployedConstantRHover::GuidelineStateDeployedConstantRHover (GuidelineStateContext &context) :
   GuidelineStateDeployedConstantRAbstract (context)

@@ -119,18 +119,30 @@ void Guidelines::handleVisibleChange (bool visible)
 
 void Guidelines::initialize (QGraphicsScene &scene)
 {
+  GuidelineState stateVerticalLeft = GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING;
+  GuidelineState stateVerticalRight = GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING;
+  GuidelineState stateHorizontalTop = GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING;
+  GuidelineState stateHorizontalBottom = GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING;
+
+  if (!transformation().transformIsDefined()) {
+    stateVerticalLeft = GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_HIDE;
+    stateVerticalRight = GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_HIDE;
+    stateHorizontalTop = GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_HIDE;
+    stateHorizontalBottom = GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_HIDE;
+  }
+
   registerGuideline (new GuidelineLine (scene,
                                         *this,
-                                        GUIDELINE_STATE_TEMPLATE_VERTICAL_LEFT_LURKING));
+                                        stateVerticalLeft));
   registerGuideline (new GuidelineLine (scene,
                                         *this,
-                                        GUIDELINE_STATE_TEMPLATE_VERTICAL_RIGHT_LURKING));
+                                        stateVerticalRight));
   registerGuideline (new GuidelineLine (scene,
                                         *this,
-                                        GUIDELINE_STATE_TEMPLATE_HORIZONTAL_TOP_LURKING));
+                                        stateHorizontalTop));
   registerGuideline (new GuidelineLine (scene,
                                         *this,
-                                        GUIDELINE_STATE_TEMPLATE_HORIZONTAL_BOTTOM_LURKING));
+                                        stateHorizontalBottom));
 }
 
 void Guidelines::registerGuideline (GuidelineAbstract *guideline)
