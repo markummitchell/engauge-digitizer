@@ -53,6 +53,11 @@ GuidelineStateContext *GuidelineAbstract::context ()
   return m_context;
 }
 
+const GuidelineStateContext *GuidelineAbstract::context () const
+{
+  return m_context;
+}
+
 void GuidelineAbstract::detachVisibleGuideline (const QPointF &posScene)
 {
   if (m_guidelineVisible != nullptr) {

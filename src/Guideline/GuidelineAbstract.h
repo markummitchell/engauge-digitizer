@@ -166,7 +166,10 @@ public slots:
 protected:
   /// State machine context owned by this class
   GuidelineStateContext *context();
-  
+
+  /// State machine context owned by this class as a const
+  const GuidelineStateContext *context () const;
+
   /// Create state machine after virtual methods of child classes have been defined
   void setContext (GuidelineStateContext *context);
 

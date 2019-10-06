@@ -8,7 +8,6 @@
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
-#include "GuidelineFormat.h"
 #include "GuidelineLine.h"
 #include "Guidelines.h"
 #include "GuidelineStateContext.h"
@@ -102,7 +101,6 @@ void GuidelineLine::mouseReleaseEvent (QGraphicsSceneMouseEvent *event)
 }
 
 void GuidelineLine::paint(QPainter *painter,
-
                           const QStyleOptionGraphicsItem *option,
                           QWidget *widget)
 {

@@ -13,7 +13,6 @@
 #include "Guidelines.h"
 #include "GuidelineStateContext.h"
 #include "Logger.h"
-#include <qdebug.h>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
@@ -47,45 +46,51 @@ GuidelineEllipse::~GuidelineEllipse ()
 bool GuidelineEllipse::collidesWithPath (const QPainterPath &path,
                                          Qt::ItemSelectionMode mode) const
 {
+  const double RATIO = 1000.0; // Ratio of many pixels to few pixels, for preventing divide by zero
   bool collides = false;
 
   if (QGraphicsEllipseItem::collidesWithPath (path,
                                               mode)) {
 
     // Slow test to not count interior region
+
+    GuidelineFormat guidelineFormat (context ()->color ());
+
+    // Bounding box of ellipse
+    double a = rect().width() / 2.0;
+    double b = rect().height() / 2.0;
+
+    // Loop through points in path polygon
     QPolygonF poly = path.toFillPolygon();
     QPolygonF::const_iterator itr;
     for (itr = poly.begin(); (itr != poly.end()) && !collides; itr++) {
-      const QPointF &pointUnaligned = *itr;
 
-      // Rotate to align with axes. This point is for an ellipse centered on (0,0)
-      QTransform identity;
-      QTransform unrotate = identity.rotate (rotation (),
-                                             Qt::ZAxis);
-      QPointF point = unrotate.map (pointUnaligned);
+      // This point is for the ellipse that has already been rotated to be aligned with axes
+      const QPointF &pointAligned = *itr;
 
-      // Bounding box of ellipse
-      double a = rect().width() / 2.0;
-      double b = rect().height() / 2.0;
+      // Project point onto ellipse. The projection is assumed to be the closest ellipse portion to that point.
+      // Starting with (x/a)^2+(y/b)^2=1 with x=r cos(Theta) and y=r sin(Theta), we can solve to get r^2 (cT^2/a^2 + sT2/b^2) = 1
+      double xGot = pointAligned.x();
+      double yGot = pointAligned.y();
+      double rGot = qSqrt (xGot * xGot + yGot * yGot);
+      if (rGot * RATIO > qAbs (xGot) || rGot * RATIO > qAbs (yGot)) {
 
-      // Project point onto ellipse. The projection is assumed to be the closest ellipse portion to that point
-      double theta = qAtan2 (point.y(),
-                             point.x());
-      double cTheta = cos (theta);
-      double sTheta = sin (theta);
+        // Check for divide by zero passed so keep going
+        double cTheta = xGot / rGot;
+        double sTheta = yGot / rGot;
+        double rProjected = qSqrt (1.0 / (cTheta * cTheta / a / a + sTheta * sTheta / b / b));
+        double xProjected = rProjected * cTheta;
+        double yProjected = rProjected * sTheta;
 
-      // (x/a)^2+(y/b)^2=1 with x=r cT and y=r sT can be solved for to get r^2 (cT^2/a^2 + sT2/b^2) = 1
-      double rProjected = qSqrt (1.0 / (cTheta * cTheta / a / a + sTheta * sTheta / b / b));
-      double xProjected = rProjected * cTheta;
-      double yProjected = rProjected * sTheta;
+        // Distance to projection
+        double distance = qSqrt ((xProjected - xGot) * (xProjected - xGot) +
+                                 (yProjected - yGot) * (yProjected - yGot));
 
-      // Distance to projection
-      double distance = qSqrt ((xProjected - point.x()) * (xProjected - point.x()) +
-                               (yProjected - point.y()) * (yProjected - point.y()));
+        if (distance < guidelineFormat.lineWidthHover()) {
 
-      if (distance < 5) {
-        // This will make the loop exit immediately for speed
-        collides = true;
+          // This will make the loop exit immediately for speed
+          collides = true;
+        }
       }
     }
   }
