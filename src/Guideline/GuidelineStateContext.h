@@ -19,8 +19,9 @@ class GuidelineAbstract;
 class Guidelines;
 class Transformation;
 
-/// Context class for state machine that belongs to the Guideline class. See GuidelineAbstract
-/// class for more information
+/// Context class for state machine that belongs to the Guideline class. The GuidelineAbstract
+/// class owns an instance of this class. The base class for all guideline states is
+/// GuidelineStateAbstractBase.
 ///
 /// The state machine graph:
 /// \dot
