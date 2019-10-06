@@ -37,6 +37,7 @@ class QWidget;
 ///    3e) At the end of the drag, the Handle is no longer needed so it transitions to Discarded state
 ///    3f) At the end of the drag, if it started with a template Guideline then a replacement
 ///        is put back on the scene edge
+/// State transitions are diagrammed in the GuidelineStateContext class
 ///
 /// This strategy works with the following constraints
 /// 1) Since it is not the dragged object that we modify in 3d above, we can resize and adjust

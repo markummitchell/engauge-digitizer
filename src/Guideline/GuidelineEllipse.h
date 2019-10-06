@@ -27,6 +27,8 @@ public:
                    GuidelineState guidelineStateInitial);
   ~GuidelineEllipse();
 
+  /// Override normal QGraphicsEllipseItem collision detection that covers ellipse boundary
+  /// and entire interior region, to exclude the interior region
   virtual bool collidesWithPath (const QPainterPath &path,
                                  Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const;
 

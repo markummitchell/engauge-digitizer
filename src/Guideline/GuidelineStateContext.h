@@ -19,8 +19,94 @@ class GuidelineAbstract;
 class Guidelines;
 class Transformation;
 
-/// Context class for state machine that belongs to the Guideline class. See Guideline
+/// Context class for state machine that belongs to the Guideline class. See GuidelineAbstract
 /// class for more information
+///
+/// The state machine graph:
+/// \dot
+/// digraph guidelines {
+///   rankdir = LR;
+///
+///   Start -> DeployedConstantRHover [label = DragHorizontalTemplateWithPolarCoordinates];
+///   DeployedConstantRHover -> DeployedConstantRActive [label = HoverLeave];
+///   DeployedConstantRHover -> Handle [label = MouseClick];
+///   DeployedConstantRActive -> Discarded [label = TransformLoss];
+///   DeployedConstantRActive -> DeployedConstantRHide [label = TurnedOff];
+///   DeployedConstantRHide -> DeployedConstantRActive [label = TurnedOn];
+///   DeployedConstantRActive -> DeployedConstantRHover [label = HoverEnter];
+///   DeployedConstantRActive -> DeployedConstantRLocked [label = LeaveSelectMode];
+///   DeployedConstantRLocked -> DeployedConstantRActive [label = EnterSelectMode];
+///
+///   Start -> DeployedConstantTHover [label = DragHorizontalTemplateWithPolarCoordinates];
+///   DeployedConstantTHover -> DeployedConstantTActive [label = HoverLeave];
+///   DeployedConstantTHover -> Handle [label = MouseClick];
+///   DeployedConstantTActive -> Discarded [label = TransformLoss];
+///   DeployedConstantTActive -> DeployedConstantTHide [label = TurnedOff];
+///   DeployedConstantTHide -> DeployedConstantTActive [label = TurnedOn];
+///   DeployedConstantTActive -> DeployedConstantTHover [label = HoverEnter];
+///   DeployedConstantTActive -> DeployedConstantTLocked [label = LeaveSelectMode];
+///   DeployedConstantTLocked -> DeployedConstantTActive [label = EnterSelectMode];
+///
+///   Start -> DeployedConstantXHover [label = DragHorizontalTemplateWithCartesianCoordinates];
+///   DeployedConstantXHover -> DeployedConstantXActive [label = HoverLeave];
+///   DeployedConstantXHover -> Handle [label = MouseClick];
+///   DeployedConstantXActive -> Discarded [label = TransformLoss];
+///   DeployedConstantXActive -> DeployedConstantXHide [label = TurnedOff];
+///   DeployedConstantXHide -> DeployedConstantXActive [label = TurnedOn];
+///   DeployedConstantXActive -> DeployedConstantXHover [label = HoverEnter];
+///   DeployedConstantXActive -> DeployedConstantXLocked [label = LeaveSelectMode];
+///   DeployedConstantXLocked -> DeployedConstantXActive [label = EnterSelectMode];
+///
+///   Start -> DeployedConstantYHover [label = DragVerticalTemplateWithCartesianCoordinates];
+///   DeployedConstantYHover -> DeployedConstantYActive [label = HoverLeave];
+///   DeployedConstantYHover -> Handle [label = MouseClick];
+///   DeployedConstantYActive -> Discarded [label = TransformLoss];
+///   DeployedConstantYActive -> DeployedConstantYHide [label = TurnedOff];
+///   DeployedConstantYHide -> DeployedConstantYActive [label = TurnedOn];
+///   DeployedConstantYActive -> DeployedConstantYHover [label = HoverEnter];
+///   DeployedConstantYActive -> DeployedConstantYLocked [label = LeaveSelectMode];
+///   DeployedConstantYLocked -> DeployedConstantYActive [label = EnterSelectMode];
+///
+///   Start -> TemplateHorizontalBottomLurking [label = InitializeWithTransform];
+///   Start -> TemplateHorizontalBottomHide [label = InitializeWithoutTransform];
+///   Start -> TemplateHorizontalBottomHide [label = EndOfTemplateHorizontalBottomDrag];
+///   TemplateHorizontalBottomLurking -> TemplateHorizontalBottomHover [label = HoverEnter];
+///   TemplateHorizontalBottomHover -> TemplateHorizontalBottomLurking [label = HoverLeave];
+///   TemplateHorizontalBottomHover -> Handle [label = MouseClick];
+///   TemplateHorizontalBottomLurking -> TemplateHorizontalBottomHide [label = TurnedOff];
+///   TemplateHorizontalBottomHide -> TemplateHorizontalBottomLurking [label = TurnedOn];
+///
+///   Start -> TemplateHorizontalTopLurking [label = InitializeWithTransform];
+///   Start -> TemplateHorizontalTopHide [label = InitializeWithoutTransform];
+///   Start -> TemplateHorizontalTopHide [label = EndOfTemplateHorizontalTopDrag];
+///   TemplateHorizontalTopLurking -> TemplateHorizontalTopHover [label = HoverEnter];
+///   TemplateHorizontalTopHover -> TemplateHorizontalTopLurking [label = HoverLeave];
+///   TemplateHorizontalTopHover -> Handle [label = MouseClick];
+///   TemplateHorizontalTopLurking -> TemplateHorizontalTopHide [label = TurnedOff];
+///   TemplateHorizontalTopHide -> TemplateHorizontalTopLurking [label = TurnedOn];
+///
+///   Start -> TemplateVerticalLeftLurking [label = InitializeWithTransform];
+///   Start -> TemplateVerticalLeftHide [label = InitializeWithoutTransform];
+///   Start -> TemplateVerticalLeftHide [label = EndOfTemplateVerticalLeftDrag];
+///   TemplateVerticalLeftLurking -> TemplateVerticalLeftHover [label = HoverEnter];
+///   TemplateVerticalLeftHover -> TemplateVerticalLeftLurking [label = HoverLeave];
+///   TemplateVerticalLeftHover -> Handle [label = MouseClick];
+///   TemplateVerticalLeftLurking -> TemplateVerticalLeftHide [label = TurnedOff];
+///   TemplateVerticalLeftHide -> TemplateVerticalLeftLurking [label = TurnedOn];
+///
+///   Start -> TemplateVerticalRightLurking [label = InitializeWithTransform];
+///   Start -> TemplateVerticalRightHide [label = InitializeWithoutTransform];
+///   Start -> TemplateVerticalRightHide [label = EndOfTemplateVerticalRightDrag];
+///   TemplateVerticalRightLurking -> TemplateVerticalRightHover [label = HoverEnter];
+///   TemplateVerticalRightHover -> TemplateVerticalRightLurking [label = HoverLeave];
+///   TemplateVerticalRightHover -> Handle [label = MouseClick];
+///   TemplateVerticalRightLurking -> TemplateVerticalRightHide [label = TurnedOff];
+///   TemplateVerticalRightHide -> TemplateVerticalRightLurking [label = TurnedOn];
+///
+///   Handle -> Discarded [label = MouseRelease];
+///
+/// }
+/// \enddot
 class GuidelineStateContext
 {
 public:
