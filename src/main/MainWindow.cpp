@@ -614,7 +614,17 @@ void MainWindow::fileImport (const QString &fileName,
                         image,
                         importType);
 
-    if (!loaded) {
+    if (loaded) {
+
+      // Success
+      if ((m_cmdMediator->document().coordSystemCount() > 1) &&
+          ! m_actionViewCoordSystem->isChecked ()) {
+
+        // User is working with multiple coordinate systems so make the coordinate system toolbar visible
+        m_actionViewCoordSystem->trigger ();
+      }
+
+    } else {
 
       // Failed
       if (importType == IMPORT_TYPE_ADVANCED) {
@@ -886,7 +896,7 @@ void MainWindow::loadCoordSystemListFromCmdMediator ()
   // Always start with the first entry selected
   m_cmbCoordSystem->setCurrentIndex (0);
 
-  // Disable the controls if there is only one entry. Hopefully the user will not even notice it, thus simplifying the interface
+  // Disable the controls if there is only one entry. Hopefully the user will not even be distracted
   bool enable = (m_cmbCoordSystem->count() > 1);
   m_cmbCoordSystem->setEnabled (enable);
   m_btnShowAll->setEnabled (enable);
