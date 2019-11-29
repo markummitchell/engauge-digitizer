@@ -1594,7 +1594,7 @@ void MainWindow::settingsReadEnvironment (QSettings &settings)
 }
 
 void MainWindow::settingsReadMainWindow (QSettings &settings)
-{
+{  
   settings.beginGroup(SETTINGS_GROUP_MAIN_WINDOW);
 
   // Main window geometry
@@ -1712,6 +1712,13 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   m_modelMainWindow.setImageReplaceRenamesDocument (settings.value (SETTINGS_IMAGE_REPLACE_RENAMES_DOCUMENT,
                                                                     QVariant (DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT)).toBool ());
 
+  // MainDirectoryPersist starts with directories from last execution
+  MainDirectoryPersist directoryPersist;
+  directoryPersist.setDirectoryExportSaveFromSavedPath (settings.value (SETTINGS_MAIN_DIRECTORY_EXPORT_SAVE,
+                                                                        QVariant (QDir::currentPath())).toString ());
+  directoryPersist.setDirectoryImportLoadFromSavedPath (settings.value (SETTINGS_MAIN_DIRECTORY_IMPORT_LOAD,
+                                                                        QVariant (QDir::currentPath())).toString ());
+
   updateSettingsMainWindow();
   updateSmallDialogs();
 
@@ -1720,6 +1727,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
 
 void MainWindow::settingsWrite ()
 {
+  MainDirectoryPersist directoryPersist;
+
   QSettings settings (SETTINGS_ENGAUGE, SETTINGS_DIGITIZER);
 
   settings.beginGroup (SETTINGS_GROUP_ENVIRONMENT);
@@ -1770,6 +1779,10 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_IMPORT_PDF_RESOLUTION, m_modelMainWindow.pdfResolution ());
   settings.setValue (SETTINGS_LOCALE_LANGUAGE, m_modelMainWindow.locale().language());
   settings.setValue (SETTINGS_LOCALE_COUNTRY, m_modelMainWindow.locale().country());
+  settings.setValue (SETTINGS_MAIN_DIRECTORY_EXPORT_SAVE,
+                     directoryPersist.getDirectoryExportSave().absolutePath());
+  settings.setValue (SETTINGS_MAIN_DIRECTORY_IMPORT_LOAD,
+                     directoryPersist.getDirectoryImportOpen().absolutePath());
   settings.setValue (SETTINGS_MAIN_TITLE_BAR_FORMAT, m_modelMainWindow.mainTitleBarFormat());
   settings.setValue (SETTINGS_MAXIMUM_GRID_LINES, m_modelMainWindow.maximumGridLines());
   settings.setValue (SETTINGS_SMALL_DIALOGS, m_modelMainWindow.smallDialogs());

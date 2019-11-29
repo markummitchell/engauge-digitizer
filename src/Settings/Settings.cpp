@@ -31,6 +31,8 @@ const QString SETTINGS_HIGHLIGHT_OPACITY ("highlightOpacity");
 const QString SETTINGS_IMAGE_REPLACE_RENAMES_DOCUMENT ("imageReplaceRenamesDocument");
 const QString SETTINGS_LOCALE_COUNTRY ("country");
 const QString SETTINGS_LOCALE_LANGUAGE ("language");
+const QString SETTINGS_MAIN_DIRECTORY_EXPORT_SAVE ("exportSave");
+const QString SETTINGS_MAIN_DIRECTORY_IMPORT_LOAD ("importLoad");
 const QString SETTINGS_MAIN_TITLE_BAR_FORMAT ("titleBarFormat");
 const QString SETTINGS_MAXIMUM_GRID_LINES ("maximumGridLines");
 const QString SETTINGS_POS ("pos");
