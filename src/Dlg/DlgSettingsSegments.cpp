@@ -355,6 +355,7 @@ void DlgSettingsSegments::updatePreview()
   const QColor COLOR (Qt::blue);
   const int RADIUS = 5;
   GeometryWindow *NULL_GEOMETRY_WINDOW = nullptr;
+  const bool NO_DIALOG = false; // If true then dueling modal dialogs will trigger infinite loops in QSpinBox up/down
 
   if (!m_loading) {
 
@@ -367,7 +368,8 @@ void DlgSettingsSegments::updatePreview()
     // Create new segments
     segmentFactory.makeSegments (createPreviewImage(),
                                  *m_modelSegmentsAfter,
-                                 m_segments);
+                                 m_segments,
+                                 NO_DIALOG);
 
     // Make the segment visible
     QList<Segment*>::iterator itrS;
@@ -384,6 +386,7 @@ void DlgSettingsSegments::updatePreview()
     QPolygonF polygon = pointStyle.polygon();
     QList<QPoint> points = segmentFactory.fillPoints (*m_modelSegmentsAfter,
                                                       m_segments);
+
     QList<QPoint>::iterator itrP;
     for (itrP = points.begin(); itrP != points.end(); itrP++) {
       QPoint pos = *itrP;
