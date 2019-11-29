@@ -35,6 +35,8 @@ public:
 private:
 
   // The directories are static so all instances of this class share the same values
+  static bool m_setExportSave;
+  static bool m_setImportOpen;
   static QDir m_directoryExportSave;
   static QDir m_directoryImportOpen;
 
