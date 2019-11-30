@@ -344,60 +344,6 @@ HEADERS  += \
     src/Grid/GridLog.h \
     src/Grid/GridRemoval.h \
     src/Grid/GridTriangleFill.h \
-    src/Guideline/GuidelineAbstract.h \
-    src/Guideline/GuidelineEllipse.h \
-    src/Guideline/GuidelineFormat.h \
-    src/Guideline/GuidelineLine.h \
-    src/Guideline/GuidelineProjectorAbstract.h \
-    src/Guideline/GuidelineProjectorConstantR.h \
-    src/Guideline/GuidelineProjectorConstantT.h \
-    src/Guideline/GuidelineProjectorConstantX.h \
-    src/Guideline/GuidelineProjectorConstantY.h \
-    src/Guideline/Guidelines.h \
-    src/Guideline/GuidelineLine.h \
-    src/Guideline/GuidelineState.h \
-    src/Guideline/GuidelineStateAbstractBase.h \
-    src/Guideline/GuidelineStateContext.h \
-    src/Guideline/GuidelineStateDeployedAbstract.h \
-    src/Guideline/GuidelineStateDeployedConstantRAbstract.h \
-    src/Guideline/GuidelineStateDeployedConstantRActive.h \
-    src/Guideline/GuidelineStateDeployedConstantRHide.h \
-    src/Guideline/GuidelineStateDeployedConstantRLocked.h \
-    src/Guideline/GuidelineStateDeployedConstantRHover.h \
-    src/Guideline/GuidelineStateDeployedConstantTAbstract.h \
-    src/Guideline/GuidelineStateDeployedConstantTActive.h \
-    src/Guideline/GuidelineStateDeployedConstantTHide.h \
-    src/Guideline/GuidelineStateDeployedConstantTHover.h \
-    src/Guideline/GuidelineStateDeployedConstantTLocked.h \
-    src/Guideline/GuidelineStateDeployedConstantXAbstract.h \
-    src/Guideline/GuidelineStateDeployedConstantXActive.h \
-    src/Guideline/GuidelineStateDeployedConstantXHide.h \
-    src/Guideline/GuidelineStateDeployedConstantXHover.h \
-    src/Guideline/GuidelineStateDeployedConstantXLocked.h \
-    src/Guideline/GuidelineStateDeployedConstantYAbstract.h \
-    src/Guideline/GuidelineStateDeployedConstantYActive.h \
-    src/Guideline/GuidelineStateDeployedConstantYHide.h \
-    src/Guideline/GuidelineStateDeployedConstantYHover.h \
-    src/Guideline/GuidelineStateDeployedConstantYLocked.h \
-    src/Guideline/GuidelineStateDiscarded.h \
-    src/Guideline/GuidelineStateHandle.h \
-    src/Guideline/GuidelineStateTemplateAbstract.h \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomAbstract.h \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomHide.h \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomHover.h \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomLurking.h \
-    src/Guideline/GuidelineStateTemplateHorizontalTopAbstract.h \
-    src/Guideline/GuidelineStateTemplateHorizontalTopHide.h \
-    src/Guideline/GuidelineStateTemplateHorizontalTopHover.h \
-    src/Guideline/GuidelineStateTemplateHorizontalTopLurking.h \
-    src/Guideline/GuidelineStateTemplateVerticalLeftAbstract.h \
-    src/Guideline/GuidelineStateTemplateVerticalLeftHide.h \
-    src/Guideline/GuidelineStateTemplateVerticalLeftHover.h \
-    src/Guideline/GuidelineStateTemplateVerticalLeftLurking.h \
-    src/Guideline/GuidelineStateTemplateVerticalRightAbstract.h \
-    src/Guideline/GuidelineStateTemplateVerticalRightHide.h \
-    src/Guideline/GuidelineStateTemplateVerticalRightHover.h \
-    src/Guideline/GuidelineStateTemplateVerticalRightLurking.h \    
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
@@ -745,58 +691,6 @@ SOURCES += \
     src/Grid/GridLog.cpp \
     src/Grid/GridRemoval.cpp \
     src/Grid/GridTriangleFill.cpp \
-    src/Guideline/GuidelineAbstract.cpp \
-    src/Guideline/GuidelineEllipse.cpp \
-    src/Guideline/GuidelineFormat.cpp \
-    src/Guideline/GuidelineLine.cpp \
-    src/Guideline/GuidelineProjectorAbstract.cpp \
-    src/Guideline/GuidelineProjectorConstantR.cpp \
-    src/Guideline/GuidelineProjectorConstantT.cpp \
-    src/Guideline/GuidelineProjectorConstantX.cpp \
-    src/Guideline/GuidelineProjectorConstantY.cpp \
-    src/Guideline/Guidelines.cpp \
-    src/Guideline/GuidelineStateAbstractBase.cpp \
-    src/Guideline/GuidelineStateContext.cpp \
-    src/Guideline/GuidelineStateDeployedAbstract.cpp \
-    src/Guideline/GuidelineStateDeployedConstantRAbstract.cpp \
-    src/Guideline/GuidelineStateDeployedConstantRActive.cpp \
-    src/Guideline/GuidelineStateDeployedConstantRHide.cpp \
-    src/Guideline/GuidelineStateDeployedConstantRLocked.cpp \
-    src/Guideline/GuidelineStateDeployedConstantRHover.cpp \
-    src/Guideline/GuidelineStateDeployedConstantTAbstract.cpp \
-    src/Guideline/GuidelineStateDeployedConstantTActive.cpp \
-    src/Guideline/GuidelineStateDeployedConstantTHide.cpp \
-    src/Guideline/GuidelineStateDeployedConstantTHover.cpp \
-    src/Guideline/GuidelineStateDeployedConstantTLocked.cpp \
-    src/Guideline/GuidelineStateDeployedConstantXAbstract.cpp \
-    src/Guideline/GuidelineStateDeployedConstantXActive.cpp \
-    src/Guideline/GuidelineStateDeployedConstantXHide.cpp \
-    src/Guideline/GuidelineStateDeployedConstantXHover.cpp \
-    src/Guideline/GuidelineStateDeployedConstantXLocked.cpp \
-    src/Guideline/GuidelineStateDeployedConstantYAbstract.cpp \
-    src/Guideline/GuidelineStateDeployedConstantYActive.cpp \
-    src/Guideline/GuidelineStateDeployedConstantYHide.cpp \
-    src/Guideline/GuidelineStateDeployedConstantYHover.cpp \
-    src/Guideline/GuidelineStateDeployedConstantYLocked.cpp \
-    src/Guideline/GuidelineStateDiscarded.cpp \
-    src/Guideline/GuidelineStateHandle.cpp \
-    src/Guideline/GuidelineStateTemplateAbstract.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomAbstract.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomHide.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomHover.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalBottomLurking.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalTopAbstract.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalTopHide.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalTopHover.cpp \
-    src/Guideline/GuidelineStateTemplateHorizontalTopLurking.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalLeftAbstract.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalLeftHide.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalLeftHover.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalLeftLurking.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalRightAbstract.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalRightHide.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalRightHover.cpp \
-    src/Guideline/GuidelineStateTemplateVerticalRightLurking.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/Import/ImportImageExtensions.cpp \
@@ -986,7 +880,6 @@ INCLUDEPATH += src \
                src/Ghosts \
                src/Graphics \
                src/Grid \
-               src/Guideline \
                src/Help \
                src/img \
                src/Import \

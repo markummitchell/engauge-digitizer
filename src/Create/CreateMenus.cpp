@@ -73,7 +73,6 @@ void CreateMenus::create(MainWindow &mw)
   mw.m_menuView->insertSeparator (mw.m_actionViewToolTips);
   mw.m_menuView->addAction (mw.m_actionViewToolTips);
   mw.m_menuView->addAction (mw.m_actionViewGridLines);
-  mw.m_menuView->addAction (mw.m_actionViewGuidelines);
   mw.m_menuView->insertSeparator (mw.m_actionViewBackgroundNone);
   mw.m_menuViewBackground = new QMenu (tr ("Background"));
   mw.m_menuViewBackground->addAction (mw.m_actionViewBackgroundNone);

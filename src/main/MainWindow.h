@@ -13,7 +13,6 @@
 #include "DocumentAxesPointsRequired.h"
 #include "FittingCurveCoefficients.h"
 #include "GridLines.h"
-#include "Guidelines.h"
 #include "MainWindowModel.h"
 #include <QCursor>
 #include <QMainWindow>
@@ -160,12 +159,6 @@ public:
 
   /// Catch secret keypresses
   virtual bool eventFilter(QObject *, QEvent *);
-
-  /// True/false if guidelines are visible. Selectability is handled elsewhere
-  bool guidelinesAreVisible () const;
-
-  /// Handle Guidelines active status toggle
-  void handleGuidelinesActiveChange (bool active);
   
   /// Background image that has been filtered for the current curve. This asserts if a curve-specific image is not being shown
   QImage imageFiltered () const;
@@ -348,7 +341,6 @@ private slots:
   void slotViewGroupBackground(QAction*);
   void slotViewGroupCurves(QAction*);
   void slotViewGroupStatus(QAction*);
-  void slotViewGuidelines ();
   void slotViewToolBarBackground ();
   void slotViewToolBarChecklistGuide ();
   void slotViewToolBarCoordSystem ();
@@ -404,7 +396,6 @@ private:
   void filePaste (ImportType importType); /// Same steps as fileImport but with import from clipboard
   void ghostsCreate (); /// Create the ghosts for seeing all coordinate systems at once
   void ghostsDestroy (); /// Destroy the ghosts for seeing all coordinate systems at once
-  bool guidelinesVisibilityCanBeEnabled () const; /// True/false if guidelines can be activated by guidelines view action
   void handlerFileExtractImage (); /// Analog to slotFileExport but for image extract. Maybe converted to slot in future
   void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
@@ -519,7 +510,6 @@ private:
   QAction *m_actionViewSettingsViews;
   QAction *m_actionViewToolTips;
   QAction *m_actionViewGridLines;
-  QAction *m_actionViewGuidelines;
   QMenu *m_menuViewBackground;
   QActionGroup *m_groupBackground;
   QAction *m_actionViewBackgroundNone;
@@ -678,10 +668,6 @@ private:
 
   // Grid lines
   GridLines m_gridLines;
-
-  // Guidelines that are effectively invisible until cursor gets to outermost pixels in scene (and view if zoomed out
-  // enough that there is no scroll bar)
-  Guidelines m_guidelines;
 
   // Map to/from/between zoom enumerations. These eliminate the need for switch statements
   QMap<ZoomFactorInitial, ZoomFactor> m_zoomMapFromInitial;

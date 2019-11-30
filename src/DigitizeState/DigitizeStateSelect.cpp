@@ -60,8 +60,7 @@ void DigitizeStateSelect::addHoverHighlighting()
   for (itr = items.begin (); itr != items.end (); itr++) {
 
     QGraphicsItem *item = *itr;
-    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_POINT ||
-        item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_GUIDELINE) {
+    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_POINT) {
        item->setAcceptHoverEvents(true);
     }
   }
@@ -76,7 +75,6 @@ void DigitizeStateSelect::begin (CmdMediator *cmdMediator,
   context().setDragMode(QGraphicsView::RubberBandDrag);
 
   addHoverHighlighting();
-  context().mainWindow().handleGuidelinesActiveChange (true);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 
@@ -455,8 +453,7 @@ void DigitizeStateSelect::removeHoverHighlighting()
   for (itr = items.begin (); itr != items.end (); itr++) {
 
     QGraphicsItem *item = *itr;
-    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_POINT ||
-        item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_GUIDELINE) {
+    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_POINT) {
        item->setAcceptHoverEvents(false);
     }
   }
