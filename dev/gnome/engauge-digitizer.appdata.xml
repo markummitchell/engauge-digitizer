@@ -71,7 +71,12 @@
 		<release date="2019-08-02" version="12.1">
 			<description>
 			  <ul>
-			    <li></li>
+			    <li>Fix autorepeat with Segment Settings dialog</li>
+			    <li>Display Coordinate Toolbar after import</li>
+			    <li>Starting directory is saved and restored</li>
+			    <li>Fix log scale over very small ranges</li>
+			    <li>Fix tutorial page transition</li>
+			    <li>Add Farsi support</li>
 			  </ul>
 			</description>
 		</release>
