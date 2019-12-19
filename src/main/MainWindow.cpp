@@ -428,7 +428,7 @@ QString MainWindow::exportRegressionFilenameFromInputFilename (const QString &fi
   // so the "l" gets replaced
   QStringList befores;
   befores << ".dig" << ".gif" << ".html" << ".htm" << ".jp2" << ".jpg" << ".pbm"
-          << ".pdf" << ".pgm" << ".png" << ".ppm" << ".xbm" << ".xpm" << ".xml";
+          << ".pdf" << ".pgm" << ".png" << ".ppm" << ".webp" << ".xbm" << ".xpm" << ".xml";
 
   QString outFileName = fileName;
 
