@@ -4488,114 +4488,114 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="481" />
+        <location filename="../src/main/MainWindow.cpp" line="480" />
         <source>Unable to export to file</source>
         <translation>파일로 내보낼 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="515" />
+        <location filename="../src/main/MainWindow.cpp" line="514" />
         <source>Unable to extract image to file</source>
         <translation>이미지를 파일로 추출 할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="590" />
-        <location filename="../src/main/MainWindow.cpp" line="760" />
-        <location filename="../src/main/MainWindow.cpp" line="939" />
+        <location filename="../src/main/MainWindow.cpp" line="589" />
+        <location filename="../src/main/MainWindow.cpp" line="759" />
+        <location filename="../src/main/MainWindow.cpp" line="938" />
         <source>Cannot read file</source>
         <translation>파일을 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="592" />
-        <location filename="../src/main/MainWindow.cpp" line="762" />
-        <location filename="../src/main/MainWindow.cpp" line="941" />
+        <location filename="../src/main/MainWindow.cpp" line="591" />
+        <location filename="../src/main/MainWindow.cpp" line="761" />
+        <location filename="../src/main/MainWindow.cpp" line="940" />
         <source>from directory</source>
         <translation>디렉토리에서</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="676" />
+        <location filename="../src/main/MainWindow.cpp" line="675" />
         <source>Import Image</source>
         <translation>이미지 가져 오기</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="916" />
+        <location filename="../src/main/MainWindow.cpp" line="915" />
         <source>File opened</source>
         <translation>파일 열림</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="961" />
+        <location filename="../src/main/MainWindow.cpp" line="960" />
         <source>File not found</source>
         <translation>파일을 찾을 수 없음</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="978" />
+        <location filename="../src/main/MainWindow.cpp" line="977" />
         <source>Error report opened</source>
         <translation>오류 보고서가 열림</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1033" />
-        <location filename="../src/main/MainWindow.cpp" line="1107" />
+        <location filename="../src/main/MainWindow.cpp" line="1032" />
+        <location filename="../src/main/MainWindow.cpp" line="1106" />
         <source>File imported</source>
         <translation>가져온 파일</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1141" />
+        <location filename="../src/main/MainWindow.cpp" line="1140" />
         <source>Background image.</source>
         <translation>배경 이미지.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1142" />
+        <location filename="../src/main/MainWindow.cpp" line="1141" />
         <source>Currently selected curve.</source>
         <translation>현재 선택된 커브입니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1143" />
+        <location filename="../src/main/MainWindow.cpp" line="1142" />
         <source>Point style for currently selected curve.</source>
         <translation>현재 선택한 커브의 점 스타일입니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1144" />
+        <location filename="../src/main/MainWindow.cpp" line="1143" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>세그먼트 현재 선택된 커브의 필터를 채 웁니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1192" />
+        <location filename="../src/main/MainWindow.cpp" line="1191" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>문서가 수정되었습니다.
 변경 사항을 저장 하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1249" />
+        <location filename="../src/main/MainWindow.cpp" line="1248" />
         <source>Cannot write file</source>
         <translation>파일을 쓸 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1297" />
+        <location filename="../src/main/MainWindow.cpp" line="1296" />
         <source>Save</source>
         <translation>구하다</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2330" />
+        <location filename="../src/main/MainWindow.cpp" line="2329" />
         <source>Export</source>
         <translation>수출</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2412" />
+        <location filename="../src/main/MainWindow.cpp" line="2411" />
         <source>Open Document</source>
         <translation>문서 열기</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3668" />
+        <location filename="../src/main/MainWindow.cpp" line="3667" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3669" />
+        <location filename="../src/main/MainWindow.cpp" line="3668" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3799" />
+        <location filename="../src/main/MainWindow.cpp" line="3798" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5354,7 +5354,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">너무 이른</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="600" />
+        <location filename="../src/main/MainWindow.cpp" line="599" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>파일이 Windows 명령 행에서 작동하지 않는 다국어 알파벳의 문자를 가지고있는 것으로 보입니다.</translation>
     </message>
@@ -5496,6 +5496,26 @@ Do you want to save your changes?</source>
         <location filename="../src/util/Xml.cpp" line="54" />
         <source>Error reading xml</source>
         <translation>xml 읽기 오류</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="38" />
+        <source>Preview</source>
+        <translation>시사</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="43" />
+        <source>Preview for CSV files:</source>
+        <translation>CSV 파일 미리보기 :</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="47" />
+        <source>Preview for files without CSV or TSV:</source>
+        <translation>CSV 또는 TSV가없는 파일 미리보기 :</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="51" />
+        <source>Preview for TSV files:</source>
+        <translation>TSV 파일 미리보기 :</translation>
     </message>
 </context>
 <context>

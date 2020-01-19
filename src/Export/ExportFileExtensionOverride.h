@@ -4,25 +4,32 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef EXPORT_BY_FILENAME_H
-#define EXPORT_BY_FILENAME_H
+#ifndef EXPORT_FILE_EXTENSION_OVERRIDE_H
+#define EXPORT_FILE_EXTENSION_OVERRIDE_H
+
+#include <QString>
 
 class DocumentModelExportFormat;
 class ExportToFile;
-class QString;
 
 /// Utility class for adjusting export settings given filename extension
-class ExportByFilename
+class ExportFileExtensionOverride
 {
 public:
   /// Single constructor.
-  ExportByFilename();
-  virtual ~ExportByFilename ();
+  ExportFileExtensionOverride();
+  virtual ~ExportFileExtensionOverride ();
 
+  /// Extension for csv file with period
+  QString extensionWithPeriodCsv (const ExportToFile &exportStrategy) const;
+
+  /// Extension for tsv file with period
+  QString extensionWithPeriodTsv (const ExportToFile &exportStrategy) const; 
+  
   /// Adjust export settings given filename extension
   DocumentModelExportFormat modelExportOverride (const DocumentModelExportFormat &modelExportFormatBefore,
                                                  const ExportToFile &exportStrategy,
                                                  const QString &selectedNameFilter) const; 
 };
 
-#endif // EXPORT_BY_FILENAME_H
+#endif // EXPORT_FILE_EXTENSION_OVERRIDE_H

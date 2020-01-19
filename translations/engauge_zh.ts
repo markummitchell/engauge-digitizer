@@ -2218,7 +2218,7 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="74" />
         <source>Preview</source>
-        <translation>预览</translation>
+        <translation>預習</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="81" />
@@ -2256,7 +2256,7 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="101" />
         <source>Preview</source>
-        <translation>预览</translation>
+        <translation>預習</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="108" />
@@ -2350,7 +2350,7 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="155" />
         <source>Preview</source>
-        <translation>预览</translation>
+        <translation>預習</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="162" />
@@ -2416,7 +2416,7 @@ The Value component is also called the Lightness.</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="124" />
         <source>Preview</source>
-        <translation>预览</translation>
+        <translation>預習</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="131" />
@@ -2572,7 +2572,7 @@ Normally the radius at the origin is 0, but a nonzero value may be applied in ot
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="358" />
         <source>Preview</source>
-        <translation>预览</translation>
+        <translation>預習</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="365" />
@@ -2822,7 +2822,7 @@ If the visible settings are for the Nth graph curve in the curve list, then they
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="238" />
         <source>Preview</source>
-        <translation>预览</translation>
+        <translation>預習</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="245" />
@@ -2902,7 +2902,7 @@ The X coordinate is in the horizontal direction, and the Y coordinate is in the 
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="127" />
         <source>Preview</source>
-        <translation>预览</translation>
+        <translation>預習</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="139" />
@@ -3159,7 +3159,7 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="vanished">预览</translation>
+        <translation type="vanished">預習</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351" />
@@ -3421,7 +3421,7 @@ The stop value cannot be less than the start value</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="258" />
         <source>Preview</source>
-        <translation>预览</translation>
+        <translation>預習</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="265" />
@@ -3464,7 +3464,7 @@ The stop value cannot be less than the start value</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="82" />
         <source>Preview</source>
-        <translation>预览</translation>
+        <translation>預習</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="89" />
@@ -3891,7 +3891,7 @@ This value has a lower limit</source>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="135" />
         <source>Preview</source>
-        <translation>预览</translation>
+        <translation>預習</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="142" />
@@ -3971,7 +3971,7 @@ In addition to the points placed at regular intervals, this option causes a poin
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="142" />
         <source>Preview</source>
-        <translation>预览</translation>
+        <translation>預習</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="149" />
@@ -4143,113 +4143,113 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="481" />
+        <location filename="../src/main/MainWindow.cpp" line="480" />
         <source>Unable to export to file</source>
         <translation>导出失败</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="515" />
+        <location filename="../src/main/MainWindow.cpp" line="514" />
         <source>Unable to extract image to file</source>
         <translation>無法將圖像提取到文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="590" />
-        <location filename="../src/main/MainWindow.cpp" line="760" />
-        <location filename="../src/main/MainWindow.cpp" line="939" />
+        <location filename="../src/main/MainWindow.cpp" line="589" />
+        <location filename="../src/main/MainWindow.cpp" line="759" />
+        <location filename="../src/main/MainWindow.cpp" line="938" />
         <source>Cannot read file</source>
         <translation>不能读取文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="592" />
-        <location filename="../src/main/MainWindow.cpp" line="762" />
-        <location filename="../src/main/MainWindow.cpp" line="941" />
+        <location filename="../src/main/MainWindow.cpp" line="591" />
+        <location filename="../src/main/MainWindow.cpp" line="761" />
+        <location filename="../src/main/MainWindow.cpp" line="940" />
         <source>from directory</source>
         <translation>从目录</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="676" />
+        <location filename="../src/main/MainWindow.cpp" line="675" />
         <source>Import Image</source>
         <translation>导入图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="916" />
+        <location filename="../src/main/MainWindow.cpp" line="915" />
         <source>File opened</source>
         <translation>文件打开</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="961" />
+        <location filename="../src/main/MainWindow.cpp" line="960" />
         <source>File not found</source>
         <translation>找不到文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="978" />
+        <location filename="../src/main/MainWindow.cpp" line="977" />
         <source>Error report opened</source>
         <translation>错误报告打开</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1033" />
-        <location filename="../src/main/MainWindow.cpp" line="1107" />
+        <location filename="../src/main/MainWindow.cpp" line="1032" />
+        <location filename="../src/main/MainWindow.cpp" line="1106" />
         <source>File imported</source>
         <translation>文件已导入</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1141" />
+        <location filename="../src/main/MainWindow.cpp" line="1140" />
         <source>Background image.</source>
         <translation>背景图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1142" />
+        <location filename="../src/main/MainWindow.cpp" line="1141" />
         <source>Currently selected curve.</source>
         <translation>当前选择的图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1143" />
+        <location filename="../src/main/MainWindow.cpp" line="1142" />
         <source>Point style for currently selected curve.</source>
         <translation>当前选定曲线的点样式。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1144" />
+        <location filename="../src/main/MainWindow.cpp" line="1143" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>段填充当前选定曲线的过滤器。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1192" />
+        <location filename="../src/main/MainWindow.cpp" line="1191" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>该文件已被修改。您是否要保存更改？</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1249" />
+        <location filename="../src/main/MainWindow.cpp" line="1248" />
         <source>Cannot write file</source>
         <translation>不能写入文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1297" />
+        <location filename="../src/main/MainWindow.cpp" line="1296" />
         <source>Save</source>
         <translation>文件保存</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2330" />
+        <location filename="../src/main/MainWindow.cpp" line="2329" />
         <source>Export</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2412" />
+        <location filename="../src/main/MainWindow.cpp" line="2411" />
         <source>Open Document</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3668" />
+        <location filename="../src/main/MainWindow.cpp" line="3667" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3669" />
+        <location filename="../src/main/MainWindow.cpp" line="3668" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3799" />
+        <location filename="../src/main/MainWindow.cpp" line="3798" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5010,7 +5010,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">上一步</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="600" />
+        <location filename="../src/main/MainWindow.cpp" line="599" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>该文件似乎具有来自多个语言字母的字符，这些字符在Windows命令行中不起作用</translation>
     </message>
@@ -5152,6 +5152,26 @@ Do you want to save your changes?</source>
         <location filename="../src/util/Xml.cpp" line="54" />
         <source>Error reading xml</source>
         <translation>读取xml时出错</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="38" />
+        <source>Preview</source>
+        <translation>預習</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="43" />
+        <source>Preview for CSV files:</source>
+        <translation>預覽CSV文件：</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="47" />
+        <source>Preview for files without CSV or TSV:</source>
+        <translation>預覽不包含CSV或TSV的文件：</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="51" />
+        <source>Preview for TSV files:</source>
+        <translation>預覽TSV文件：</translation>
     </message>
 </context>
 <context>

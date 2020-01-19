@@ -220,7 +220,6 @@ HEADERS  += \
     util/EnumsToQt.h \
     Export/ExportAlignLinear.h \
     Export/ExportAlignLog.h \
-    Export/ExportByFilename.h \
     Export/ExportDelimiter.h \
     Export/ExportLayoutFunctions.h \
     Export/ExportPointsIntervalUnits.h \
@@ -229,6 +228,7 @@ HEADERS  += \
     Export/ExportDelimiter.h \
     Export/ExportFileAbstractBase.h \
     Export/ExportFileExtension.h \
+    Export/ExportFileExtensionOverride.h \
     Export/ExportFileFunctions.h \
     Export/ExportFileRelations.h \
     Export/ExportHeader.h \
@@ -582,10 +582,10 @@ SOURCES += \
     util/EnumsToQt.cpp \
     Export/ExportAlignLinear.cpp \
     Export/ExportAlignLog.cpp \
-    Export/ExportByFilename.cpp \
     Export/ExportDelimiter.cpp \
     Export/ExportFileAbstractBase.cpp \
     Export/ExportFileExtension.cpp \
+    Export/ExportFileExtensionOverride.cpp \
     Export/ExportFileFunctions.cpp \
     Export/ExportFileRelations.cpp \
     Export/ExportHeader.cpp \

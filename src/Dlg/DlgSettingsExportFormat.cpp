@@ -9,8 +9,8 @@
 #include "CmdSettingsExportFormat.h"
 #include "DocumentModelExportFormat.h"
 #include "DlgSettingsExportFormat.h"
-#include "ExportByFilename.h"
 #include "ExportFileExtension.h"
+#include "ExportFileExtensionOverride.h"
 #include "ExportFileFunctions.h"
 #include "ExportFileRelations.h"
 #include "ExportToFile.h"
@@ -1204,11 +1204,11 @@ void DlgSettingsExportFormat::updatePreview()
     ExportFileExtension exportFileExtension = static_cast<ExportFileExtension> (m_cmbFileExtension->currentData().toInt());
     QString filename = exportFileExtensionToFilename (exportFileExtension);
 
-    ExportByFilename exportByFilename;
+    ExportFileExtensionOverride extensionOverride;
     ExportToFile exportToFile;
-    DocumentModelExportFormat modelAfterWithFileExtension = exportByFilename.modelExportOverride(*m_modelExportAfter,
-                                                                                                 exportToFile,
-                                                                                                 filename);
+    DocumentModelExportFormat modelAfterWithFileExtension = extensionOverride.modelExportOverride(*m_modelExportAfter,
+                                                                                                  exportToFile,
+                                                                                                  filename);
 
     ExportFileFunctions exportStrategyFunctions;
     exportStrategyFunctions.exportToFile (modelAfterWithFileExtension,

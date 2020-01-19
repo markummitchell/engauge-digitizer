@@ -262,21 +262,20 @@ HEADERS  += \
     src/util/EnumsToQt.h \
     src/Export/ExportAlignLinear.h \
     src/Export/ExportAlignLog.h \
-    src/Export/ExportByFilename.h \
     src/Export/ExportDelimiter.h \
+    src/Export/ExportFileAbstractBase.h \    
     src/Export/ExportFileExtension.h \
-    src/Export/ExportImageForRegression.h \
-    src/Export/ExportLayoutFunctions.h \
-    src/Export/ExportPointsIntervalUnits.h \
-    src/Export/ExportPointsSelectionFunctions.h \
-    src/Export/ExportPointsSelectionRelations.h \
-    src/Export/ExportDelimiter.h \
-    src/Export/ExportFileAbstractBase.h \
+    src/Export/ExportFileExtensionOverride.h \
     src/Export/ExportFileFunctions.h \
     src/Export/ExportFileRelations.h \
     src/Export/ExportHeader.h \
+    src/Export/ExportImageForRegression.h \
+    src/Export/ExportLayoutFunctions.h \
     src/Export/ExportOrdinalsSmooth.h \
     src/Export/ExportOrdinalsStraight.h \
+    src/Export/ExportPointsIntervalUnits.h \
+    src/Export/ExportPointsSelectionFunctions.h \
+    src/Export/ExportPointsSelectionRelations.h \
     src/Export/ExportToClipboard.h \
     src/Export/ExportToFile.h \
     src/Export/ExportValuesOrdinal.h \
@@ -620,10 +619,10 @@ SOURCES += \
     src/util/EnumsToQt.cpp \
     src/Export/ExportAlignLinear.cpp \
     src/Export/ExportAlignLog.cpp \
-    src/Export/ExportByFilename.cpp \
     src/Export/ExportDelimiter.cpp \
     src/Export/ExportFileAbstractBase.cpp \
     src/Export/ExportFileExtension.cpp \
+    src/Export/ExportFileExtensionOverride.cpp \
     src/Export/ExportFileFunctions.cpp \
     src/Export/ExportFileRelations.cpp \
     src/Export/ExportHeader.cpp \

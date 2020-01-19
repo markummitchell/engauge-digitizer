@@ -2372,7 +2372,7 @@ No total , haverá dois pontos no eixo X como (x1) e (x2) , e dois pontos no eix
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="74" />
         <source>Preview</source>
-        <translation>Visualização</translation>
+        <translation>Pré-visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingNonPdf.cpp" line="81" />
@@ -2410,7 +2410,7 @@ No total , haverá dois pontos no eixo X como (x1) e (x2) , e dois pontos no eix
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="101" />
         <source>Preview</source>
-        <translation>Visualização</translation>
+        <translation>Pré-visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgImportCroppingPdf.cpp" line="108" />
@@ -2504,7 +2504,7 @@ No total , haverá dois pontos no eixo X como (x1) e (x2) , e dois pontos no eix
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="155" />
         <source>Preview</source>
-        <translation>Visualização</translation>
+        <translation>Pré-visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="162" />
@@ -2578,7 +2578,7 @@ O componente de valor também é chamado de Claridade.</translation>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="124" />
         <source>Preview</source>
-        <translation>Visualização</translation>
+        <translation>Pré-visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="131" />
@@ -2750,7 +2750,7 @@ Normalmente, o raio na origem é 0, mas um valor diferente de zero pode ser apli
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="358" />
         <source>Preview</source>
-        <translation>Visualização</translation>
+        <translation>Pré-visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="365" />
@@ -3025,7 +3025,7 @@ Se as configurações visíveis são para a curva do gráfico Nth na lista curva
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="238" />
         <source>Preview</source>
-        <translation>Visualização</translation>
+        <translation>Pré-visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="245" />
@@ -3107,7 +3107,7 @@ A coordenada X é na direcção horizontal, e a coordenada Y é na direcção ve
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="127" />
         <source>Preview</source>
-        <translation>Visualização</translation>
+        <translation>Pré-visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="139" />
@@ -3376,7 +3376,7 @@ Gráfico unidades são preferidos quando o espaçamento é depender da escala X.
     </message>
     <message>
         <source>Preview</source>
-        <translation type="vanished">Visualização</translation>
+        <translation type="vanished">Pré-visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351" />
@@ -3672,7 +3672,7 @@ O valor parada não pode ser inferior ao valor inicial</translation>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="258" />
         <source>Preview</source>
-        <translation>Visualização</translation>
+        <translation>Pré-visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="265" />
@@ -3715,7 +3715,7 @@ O valor parada não pode ser inferior ao valor inicial</translation>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="82" />
         <source>Preview</source>
-        <translation>Visualização</translation>
+        <translation>Pré-visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="89" />
@@ -4205,7 +4205,7 @@ Este valor tem um limite inferior</translation>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="135" />
         <source>Preview</source>
-        <translation>Visualização</translation>
+        <translation>Pré-visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="142" />
@@ -4297,7 +4297,7 @@ Além dos pontos colocados com intervalos regulares, esta opção faz com que um
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="142" />
         <source>Preview</source>
-        <translation>Visualização</translation>
+        <translation>Pré-visualização</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="149" />
@@ -4500,114 +4500,114 @@ Ampliando a imagem dentro ou para fora é realizada usando qualquer um de vário
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="481" />
+        <location filename="../src/main/MainWindow.cpp" line="480" />
         <source>Unable to export to file</source>
         <translation>Não é possível exportar para o arquivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="515" />
+        <location filename="../src/main/MainWindow.cpp" line="514" />
         <source>Unable to extract image to file</source>
         <translation>Não é possível extrair a imagem para o arquivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="590" />
-        <location filename="../src/main/MainWindow.cpp" line="760" />
-        <location filename="../src/main/MainWindow.cpp" line="939" />
+        <location filename="../src/main/MainWindow.cpp" line="589" />
+        <location filename="../src/main/MainWindow.cpp" line="759" />
+        <location filename="../src/main/MainWindow.cpp" line="938" />
         <source>Cannot read file</source>
         <translation>Não é possível ler o arquivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="592" />
-        <location filename="../src/main/MainWindow.cpp" line="762" />
-        <location filename="../src/main/MainWindow.cpp" line="941" />
+        <location filename="../src/main/MainWindow.cpp" line="591" />
+        <location filename="../src/main/MainWindow.cpp" line="761" />
+        <location filename="../src/main/MainWindow.cpp" line="940" />
         <source>from directory</source>
         <translation>do diretório</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="676" />
+        <location filename="../src/main/MainWindow.cpp" line="675" />
         <source>Import Image</source>
         <translation>Importar imagem</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="916" />
+        <location filename="../src/main/MainWindow.cpp" line="915" />
         <source>File opened</source>
         <translation>Arquivo aberto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="961" />
+        <location filename="../src/main/MainWindow.cpp" line="960" />
         <source>File not found</source>
         <translation>Arquivo não encontrado</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="978" />
+        <location filename="../src/main/MainWindow.cpp" line="977" />
         <source>Error report opened</source>
         <translation>Relatório de erro aberto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1033" />
-        <location filename="../src/main/MainWindow.cpp" line="1107" />
+        <location filename="../src/main/MainWindow.cpp" line="1032" />
+        <location filename="../src/main/MainWindow.cpp" line="1106" />
         <source>File imported</source>
         <translation>Arquivo importado</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1141" />
+        <location filename="../src/main/MainWindow.cpp" line="1140" />
         <source>Background image.</source>
         <translation>Imagem de fundo.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1142" />
+        <location filename="../src/main/MainWindow.cpp" line="1141" />
         <source>Currently selected curve.</source>
         <translation>Atualmente selecionado curva.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1143" />
+        <location filename="../src/main/MainWindow.cpp" line="1142" />
         <source>Point style for currently selected curve.</source>
         <translation>Estilo de ponto para a curva atualmente selecionada.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1144" />
+        <location filename="../src/main/MainWindow.cpp" line="1143" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Filtro de preenchimento segmento de curva atualmente selecionada.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1192" />
+        <location filename="../src/main/MainWindow.cpp" line="1191" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>O documento foi modificado.
 Você deseja salvar as alterações?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1249" />
+        <location filename="../src/main/MainWindow.cpp" line="1248" />
         <source>Cannot write file</source>
         <translation>Não é possível gravar arquivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1297" />
+        <location filename="../src/main/MainWindow.cpp" line="1296" />
         <source>Save</source>
         <translation>Salve</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2330" />
+        <location filename="../src/main/MainWindow.cpp" line="2329" />
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2412" />
+        <location filename="../src/main/MainWindow.cpp" line="2411" />
         <source>Open Document</source>
         <translation>Documento aberto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3668" />
+        <location filename="../src/main/MainWindow.cpp" line="3667" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3669" />
+        <location filename="../src/main/MainWindow.cpp" line="3668" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3799" />
+        <location filename="../src/main/MainWindow.cpp" line="3798" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitalizador</translation>
     </message>
@@ -5366,7 +5366,7 @@ Você deseja salvar as alterações?</translation>
         <translation type="vanished">Anterior</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="600" />
+        <location filename="../src/main/MainWindow.cpp" line="599" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>O arquivo parece ter caracteres de vários alfabetos de idioma, o que não funciona na linha de comando do Windows</translation>
     </message>
@@ -5509,6 +5509,26 @@ Especifica um arquivo de script de comando arquivo como entrada. Usado para depu
         <location filename="../src/util/Xml.cpp" line="54" />
         <source>Error reading xml</source>
         <translation>Erro xml leitura</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="38" />
+        <source>Preview</source>
+        <translation>Pré-visualização</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="43" />
+        <source>Preview for CSV files:</source>
+        <translation>Visualização para arquivos CSV:</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="47" />
+        <source>Preview for files without CSV or TSV:</source>
+        <translation>Visualização para arquivos sem CSV ou TSV:</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="51" />
+        <source>Preview for TSV files:</source>
+        <translation>Visualização para arquivos TSV:</translation>
     </message>
 </context>
 <context>

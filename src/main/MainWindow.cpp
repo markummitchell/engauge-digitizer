@@ -41,7 +41,7 @@
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
-#include "ExportByFilename.h"
+#include "ExportFileExtensionOverride.h"
 #include "ExportImageForRegression.h"
 #include "ExportToFile.h"
 #include "FileCmdScript.h"
@@ -455,11 +455,10 @@ void MainWindow::fileExport(const QString &fileName,
 
     QTextStream str (&file);
 
-    ExportByFilename exportByFilename;
-
-    DocumentModelExportFormat modelExportFormat = exportByFilename.modelExportOverride (m_cmdMediator->document().modelExport(),
-                                                                                        exportStrategy,
-                                                                                        fileName);
+    ExportFileExtensionOverride extensionOverride;
+    DocumentModelExportFormat modelExportFormat = extensionOverride.modelExportOverride (m_cmdMediator->document().modelExport(),
+                                                                                         exportStrategy,
+                                                                                         fileName);
     exportStrategy.exportToFile (modelExportFormat,
                                  m_cmdMediator->document(),
                                  m_modelMainWindow,

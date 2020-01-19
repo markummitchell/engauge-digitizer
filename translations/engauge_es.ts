@@ -4495,114 +4495,114 @@ El zoom de la imagen dentro o fuera se realiza usando cualquiera de varios méto
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="481" />
+        <location filename="../src/main/MainWindow.cpp" line="480" />
         <source>Unable to export to file</source>
         <translation>No se puede exportar a presentar</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="515" />
+        <location filename="../src/main/MainWindow.cpp" line="514" />
         <source>Unable to extract image to file</source>
         <translation>No se puede extraer la imagen al archivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="590" />
-        <location filename="../src/main/MainWindow.cpp" line="760" />
-        <location filename="../src/main/MainWindow.cpp" line="939" />
+        <location filename="../src/main/MainWindow.cpp" line="589" />
+        <location filename="../src/main/MainWindow.cpp" line="759" />
+        <location filename="../src/main/MainWindow.cpp" line="938" />
         <source>Cannot read file</source>
         <translation>No se puede leer el archivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="592" />
-        <location filename="../src/main/MainWindow.cpp" line="762" />
-        <location filename="../src/main/MainWindow.cpp" line="941" />
+        <location filename="../src/main/MainWindow.cpp" line="591" />
+        <location filename="../src/main/MainWindow.cpp" line="761" />
+        <location filename="../src/main/MainWindow.cpp" line="940" />
         <source>from directory</source>
         <translation>del directorio</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="676" />
+        <location filename="../src/main/MainWindow.cpp" line="675" />
         <source>Import Image</source>
         <translation>Importación de imágenes</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="916" />
+        <location filename="../src/main/MainWindow.cpp" line="915" />
         <source>File opened</source>
         <translation>Archivo abierto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="961" />
+        <location filename="../src/main/MainWindow.cpp" line="960" />
         <source>File not found</source>
         <translation>Archivo no encontrado</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="978" />
+        <location filename="../src/main/MainWindow.cpp" line="977" />
         <source>Error report opened</source>
         <translation>Informe de error abierto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1033" />
-        <location filename="../src/main/MainWindow.cpp" line="1107" />
+        <location filename="../src/main/MainWindow.cpp" line="1032" />
+        <location filename="../src/main/MainWindow.cpp" line="1106" />
         <source>File imported</source>
         <translation>Archivo importado</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1141" />
+        <location filename="../src/main/MainWindow.cpp" line="1140" />
         <source>Background image.</source>
         <translation>Imagen de fondo.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1142" />
+        <location filename="../src/main/MainWindow.cpp" line="1141" />
         <source>Currently selected curve.</source>
         <translation>Actualmente seleccionado curva.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1143" />
+        <location filename="../src/main/MainWindow.cpp" line="1142" />
         <source>Point style for currently selected curve.</source>
         <translation>Estilo de punto de curvas seleccionada .</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1144" />
+        <location filename="../src/main/MainWindow.cpp" line="1143" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Filtro de relleno segmento de curvas seleccionada .</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1192" />
+        <location filename="../src/main/MainWindow.cpp" line="1191" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>El documento ha sido modificado .
 ¿Quieres guardar tus cambios?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1249" />
+        <location filename="../src/main/MainWindow.cpp" line="1248" />
         <source>Cannot write file</source>
         <translation>No se puede escribir el archivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1297" />
+        <location filename="../src/main/MainWindow.cpp" line="1296" />
         <source>Save</source>
         <translation>Salvar</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2330" />
+        <location filename="../src/main/MainWindow.cpp" line="2329" />
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2412" />
+        <location filename="../src/main/MainWindow.cpp" line="2411" />
         <source>Open Document</source>
         <translation>Abrir documento</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3668" />
+        <location filename="../src/main/MainWindow.cpp" line="3667" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3669" />
+        <location filename="../src/main/MainWindow.cpp" line="3668" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3799" />
+        <location filename="../src/main/MainWindow.cpp" line="3798" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5361,7 +5361,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Anterior</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="600" />
+        <location filename="../src/main/MainWindow.cpp" line="599" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>El archivo parece tener caracteres de varios alfabetos de idiomas, lo que no funciona en la línea de comandos de Windows</translation>
     </message>
@@ -5503,6 +5503,26 @@ Do you want to save your changes?</source>
         <location filename="../src/util/Xml.cpp" line="54" />
         <source>Error reading xml</source>
         <translation>Xml lectura de error</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="38" />
+        <source>Preview</source>
+        <translation>Avance</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="43" />
+        <source>Preview for CSV files:</source>
+        <translation>Vista previa para archivos CSV:</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="47" />
+        <source>Preview for files without CSV or TSV:</source>
+        <translation>Vista previa para archivos sin CSV o TSV:</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="51" />
+        <source>Preview for TSV files:</source>
+        <translation>Vista previa para archivos TSV:</translation>
     </message>
 </context>
 <context>

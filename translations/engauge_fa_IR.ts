@@ -4705,115 +4705,115 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="481" />
+        <location filename="../src/main/MainWindow.cpp" line="480" />
         <source>Unable to export to file</source>
         <translation>صادر کردن به پرونده امکان پذیر نیست</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="515" />
+        <location filename="../src/main/MainWindow.cpp" line="514" />
         <source>Unable to extract image to file</source>
         <translation>استخراج تصویر در پرونده امکان پذیر نیست</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="590" />
-        <location filename="../src/main/MainWindow.cpp" line="760" />
-        <location filename="../src/main/MainWindow.cpp" line="939" />
+        <location filename="../src/main/MainWindow.cpp" line="589" />
+        <location filename="../src/main/MainWindow.cpp" line="759" />
+        <location filename="../src/main/MainWindow.cpp" line="938" />
         <source>Cannot read file</source>
         <translation>پرونده را نمی توان خواند
  </translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="592" />
-        <location filename="../src/main/MainWindow.cpp" line="762" />
-        <location filename="../src/main/MainWindow.cpp" line="941" />
+        <location filename="../src/main/MainWindow.cpp" line="591" />
+        <location filename="../src/main/MainWindow.cpp" line="761" />
+        <location filename="../src/main/MainWindow.cpp" line="940" />
         <source>from directory</source>
         <translation>از فهرست</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="676" />
+        <location filename="../src/main/MainWindow.cpp" line="675" />
         <source>Import Image</source>
         <translation>تصویر وارد کردن</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="916" />
+        <location filename="../src/main/MainWindow.cpp" line="915" />
         <source>File opened</source>
         <translation>پرونده باز شد</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="961" />
+        <location filename="../src/main/MainWindow.cpp" line="960" />
         <source>File not found</source>
         <translation>پرونده یافت نشد</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="978" />
+        <location filename="../src/main/MainWindow.cpp" line="977" />
         <source>Error report opened</source>
         <translation>گزارش خطا باز شد</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1033" />
-        <location filename="../src/main/MainWindow.cpp" line="1107" />
+        <location filename="../src/main/MainWindow.cpp" line="1032" />
+        <location filename="../src/main/MainWindow.cpp" line="1106" />
         <source>File imported</source>
         <translation>پرونده وارد شده است</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1141" />
+        <location filename="../src/main/MainWindow.cpp" line="1140" />
         <source>Background image.</source>
         <translation>تصویر پس زمینه.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1142" />
+        <location filename="../src/main/MainWindow.cpp" line="1141" />
         <source>Currently selected curve.</source>
         <translation>منحنی انتخاب شده در حال حاضر.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1143" />
+        <location filename="../src/main/MainWindow.cpp" line="1142" />
         <source>Point style for currently selected curve.</source>
         <translation>سبک نقطه برای منحنی انتخاب شده در حال حاضر.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1144" />
+        <location filename="../src/main/MainWindow.cpp" line="1143" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>فیلتر قطعه قطعه را برای منحنی انتخاب شده در حال حاضر پر کنید.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1192" />
+        <location filename="../src/main/MainWindow.cpp" line="1191" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>سند اصلاح شده است.
 آیا می خواهید تغییرات خود را ذخیره کنید؟</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1249" />
+        <location filename="../src/main/MainWindow.cpp" line="1248" />
         <source>Cannot write file</source>
         <translation>نوشتن پرونده امکان پذیر نیست</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1297" />
+        <location filename="../src/main/MainWindow.cpp" line="1296" />
         <source>Save</source>
         <translation>صرفه جویی</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2330" />
+        <location filename="../src/main/MainWindow.cpp" line="2329" />
         <source>Export</source>
         <translation>صادرات</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2412" />
+        <location filename="../src/main/MainWindow.cpp" line="2411" />
         <source>Open Document</source>
         <translation>باز کردن سند</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3668" />
+        <location filename="../src/main/MainWindow.cpp" line="3667" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3669" />
+        <location filename="../src/main/MainWindow.cpp" line="3668" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3799" />
+        <location filename="../src/main/MainWindow.cpp" line="3798" />
         <source>Engauge Digitizer</source>
         <translation>دیجیتایزر Engauge</translation>
     </message>
@@ -5505,7 +5505,7 @@ Do you want to save your changes?</source>
         <translation>به نقاط محور بیشتری نیاز دارید</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="600" />
+        <location filename="../src/main/MainWindow.cpp" line="599" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>به نظر می رسد که این پرونده دارای شخصیت هایی از الفبای چند زبان است که در خط فرمان ویندوز کار نمی کند</translation>
     </message>
@@ -5645,6 +5645,26 @@ Do you want to save your changes?</source>
         <location filename="../src/util/Xml.cpp" line="54" />
         <source>Error reading xml</source>
         <translation>خطا در خواندن xml</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="38" />
+        <source>Preview</source>
+        <translation>پیش نمایش</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="43" />
+        <source>Preview for CSV files:</source>
+        <translation>پیش نمایش پرونده های CSV:</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="47" />
+        <source>Preview for files without CSV or TSV:</source>
+        <translation>پیش نمایش پرونده های بدون CSV یا TSV:</translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileExtension.cpp" line="51" />
+        <source>Preview for TSV files:</source>
+        <translation>پیش نمایش پرونده های TSV:</translation>
     </message>
 </context>
 <context>

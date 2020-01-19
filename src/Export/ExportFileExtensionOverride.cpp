@@ -5,42 +5,52 @@
  ******************************************************************************************************/
 
 #include "DocumentModelExportFormat.h"
-#include "ExportByFilename.h"
+#include "ExportFileExtensionOverride.h"
 #include "ExportToFile.h"
 
-ExportByFilename::ExportByFilename()
+ExportFileExtensionOverride::ExportFileExtensionOverride()
 {
 }
 
-ExportByFilename::~ExportByFilename()
+ExportFileExtensionOverride::~ExportFileExtensionOverride()
 {
 }
 
-DocumentModelExportFormat ExportByFilename::modelExportOverride (const DocumentModelExportFormat &modelExportFormatBefore,
-                                                                 const ExportToFile &exportStrategy,
-                                                                 const QString &fileName) const
+QString ExportFileExtensionOverride::extensionWithPeriodCsv (const ExportToFile &exportStrategy) const
 {
-  DocumentModelExportFormat modelExportFormatAfter = modelExportFormatBefore;
+  return QString (".%1")
+    .arg (exportStrategy.fileExtensionCsv());
+}
+
+QString ExportFileExtensionOverride::extensionWithPeriodTsv (const ExportToFile &exportStrategy) const
+{
+  return QString (".%1")
+    .arg (exportStrategy.fileExtensionTsv());
+}
+
+DocumentModelExportFormat ExportFileExtensionOverride::modelExportOverride (const DocumentModelExportFormat &modelBefore,
+                                                                            const ExportToFile &exportStrategy,
+                                                                            const QString &fileName) const
+{
+  DocumentModelExportFormat modelAfter = modelBefore;
 
   // See if delimiter setting overrides commas/tabs for files with csv/tsv file extensions respectively
-  if (!modelExportFormatAfter.overrideCsvTsv()) {
+  if (!modelAfter.overrideCsvTsv()) {
 
     // Extract file extensions
-    QString csvExtension = QString (".%1")
-                           .arg (exportStrategy.fileExtensionCsv());
-    QString tsvExtension = QString (".%1")
-                           .arg (exportStrategy.fileExtensionTsv());
+    QString csvExtension = extensionWithPeriodCsv (exportStrategy);
+    QString tsvExtension = extensionWithPeriodTsv (exportStrategy);
     QString fileExtensionVersusCsv = fileName.right (csvExtension.size());
     QString fileExtensionVersusTsv = fileName.right (tsvExtension.size());
 
     // Override if CSV or TSV was selected. We cannot use QFileDialog::selectedNameFilter() since that is
     // broken in Linux, so we use the file extension
     if (csvExtension.compare (fileExtensionVersusCsv, Qt::CaseInsensitive) == 0) {
-      modelExportFormatAfter.setDelimiter (EXPORT_DELIMITER_COMMA);
+      modelAfter.setDelimiter (EXPORT_DELIMITER_COMMA);
     } else if (tsvExtension.compare (fileExtensionVersusTsv, Qt::CaseInsensitive) == 0) {
-      modelExportFormatAfter.setDelimiter (EXPORT_DELIMITER_TAB);
+      modelAfter.setDelimiter (EXPORT_DELIMITER_TAB);
     }
   }
 
-  return modelExportFormatAfter;
+  return modelAfter;
 }
