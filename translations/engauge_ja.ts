@@ -3122,22 +3122,22 @@ Drag the cursor over this area to see the effects of the current settings on the
 <context>
     <name>DlgSettingsExportFormat</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="55" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="58" />
         <source>Export Format</source>
         <translation>エクスポート するファイルのフォーマット</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="84" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="87" />
         <source>Included</source>
         <translation>カーブリストを含む</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="87" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="90" />
         <source>Not included</source>
         <translation>カーブリストを含まない</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="92" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="95" />
         <source>List of curves to be included in the exported file.
 
 The order of the curves here does not affect the order in the exported file. That order is determined by the Curves settings.</source>
@@ -3146,143 +3146,143 @@ The order of the curves here does not affect the order in the exported file. Tha
 エクスポート ファイルでのカーブの順番は、カーブリストでの順番に影響されません。この順番は カーブ設定 画面にて指定されます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="101" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="104" />
         <source>List of curves to be excluded from the exported file</source>
         <translation>エクスポートされたファイルには、カーブ リストが含まれません。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="106" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="109" />
         <source>Include</source>
         <translation>含める</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="108" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="111" />
         <source>Move the currently selected curve(s) from the excluded list</source>
         <translation>選択された カーブ を、除外対象 (リスト) から 移動 します。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="112" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="115" />
         <source>Exclude</source>
         <translation>除外</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="114" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="117" />
         <source>Move the currently selected curve(s) from the included list</source>
         <translation>選択された カーブ を、除外対象 (リスト) に移動します。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="125" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="128" />
         <source>Delimiters</source>
         <translation>区切り文字</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="132" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="135" />
         <source>Exported file will have commas between adjacent values, unless overridden by tabs in TSV files.</source>
         <translation>エクスポートされたファイルは隣り合う数値間をコンマで区切られます。但しTSVファイルとしてタブ区切りで置き換えられる場合を除きます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="137" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="140" />
         <source>Exported file will have spaces between adjacent values, unless overridden by commas in CSV files, or tabs in TSV files.</source>
         <translation>エクスポートされたファイルは隣り合う数値間を空白文字で区切られます。但しCSVファイルとしてカンマ区切りとなる場合、あるいはTSVファイルとしてタブ区切りで置き換えられる場合を除きます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="143" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="146" />
         <source>Exported file will have tabs between adjacent values, unless overridden by commas in CSV files.</source>
         <translation>エクスポートされたファイルは隣り合う数値間をタブで区切られます。但しCSVファイルとしてカンマ区切りで置き換えられる場合を除きます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="148" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="151" />
         <source>Exported file will have semicolons between adjacent values, unless overridden by commas in CSV files.</source>
         <translation>エクスポートされたファイルは隣り合う数値間をセミコロンで区切られます。但しCSVファイルとしてカンマ区切りで置き換えられる場合を除きます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="152" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="155" />
         <source>Override in CSV/TSV files</source>
         <translation>CSV/TSV 形式の指定</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="153" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="156" />
         <source>Comma-separated value (CSV) files and tab-separated value (TSV) files will use commas and tabs respectively, unless this setting is selected. Selecting this setting will apply the delimiter setting to every file.</source>
         <translation>ここでCSVあるいはTSVを指定することで直接出力ファイル形式を設定できます。特に指定しなければファイル中でのコンマ区切り(CSV)あるいはタブ区切り(TSV)が尊重されます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="164" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="167" />
         <source>Layout</source>
         <translation>エクスポート ファイルのレイアウト：</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="170" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="173" />
         <source>All curves on each line</source>
         <translation>一行に全カーブ</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="171" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="174" />
         <source>Exported file will have, on each line, an X value, the Y value for the first curve, the Y value for the second curve,...</source>
         <translation>エクスポートされたファイルの各行には、X 値、最初の カーブ の Y 値、次の カーブ のY値、の順にデータが並びます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="176" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="179" />
         <source>One curve on each line</source>
         <translation>一行に 1 つの カーブ</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="177" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="180" />
         <source>Exported file will have all the points for the first curve, with one X-Y pair on each line, then the points for the second curve,...</source>
         <translation>エクスポートされたファイルは、まず 1 つめの カーブ の全ポイントを一組の X - Y のペアとして各行に記述し、引き続き 2 つ目以降の カーブ を順次記述していきます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="187" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="190" />
         <source>Function Points Selection</source>
         <translation>近似式で補間する際に使用する X 値の読み取り方法の選択</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="201" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="204" />
         <source>Interpolate Ys at Xs from all curves</source>
         <translation>全 カーブ の X について Y を 補間 </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="202" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="205" />
         <source>Exported file will have values at every unique X value from every curve. Y values will be linearly interpolated if necessary</source>
         <translation>エクスポートされたファイルには、全てのカーブから 重複しない X を全て用います。Y の値は必要に応じて 補間 されます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="208" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="211" />
         <source>Extrapolate outside endpoints</source>
         <translation>外部エンドポイントを推定する</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="212" />
         <source>Enable or disable extrapolation outside of endpoints of each curve. If disabled, only points between the endpoints of each curve are exported</source>
         <translation>各曲線の端点以外の外挿を有効または無効にします。無効にすると、各曲線の端点間の点のみがエクスポートされます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="214" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="217" />
         <source>Interpolate Ys at Xs from first curve</source>
         <translation>最初の カーブ の  X について Y を 補間</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="215" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="218" />
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
         <translation>エクスポートされたファイルには、最初の カーブ から X を用います。Y の値は必要に応じて 補間 されます</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="220" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="223" />
         <source>Interpolate Ys at evenly spaced X values that are automatically selected</source>
         <translation>自動的に選択された等間隔のX値でYを補間</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="221" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="224" />
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
         <translation>エクスポートされたファイルには、等間隔に区切られた X が用いられます。インターバルは以下にて設定できます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="225" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="372" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="228" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
         <source>Interval</source>
         <translation>インターバル：</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="233" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="236" />
         <source>Interval, in the units of X, between successive points in the X direction.
 
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
@@ -3295,7 +3295,7 @@ The X values will be automatically aligned along simple numbers. If the first an
 X 値は できるだけシンプルな数値の並びになるように設定されます。もし最初のポイントあるいは最後のポイントが数値の並びに沿わない場合、1 あるいは 2 つのポイントが必要に応じて追加されます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="243" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="246" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
@@ -3308,74 +3308,78 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
 なおインターバル間隔を X の目盛単位に合わせるには、グラフの目盛単位を利用します。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="255" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="258" />
         <source>Interpolate Ys at evenly spaced X values on grid lines</source>
         <translation>グリッド線上の等間隔のX値でYを補間</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="256" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="259" />
         <source>Exported file will have values at evenly spaced X values at the vertical grid lines.</source>
         <translation>エクスポートされたファイルは、垂直グリッド線に等間隔のX値の値を持ちます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="260" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="398" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="263" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="414" />
         <source>Raw Xs and Ys</source>
         <translation>X および Y の原データ</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="261" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="399" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="264" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="415" />
         <source>Exported file will have only original X and Y values</source>
         <translation>エクスポートされたファイルは元のXとYの値だけを含みます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="272" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="275" />
         <source>Header</source>
         <translation>ヘッダー情報</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="282" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="285" />
         <source>Exported file will have no header line</source>
         <translation>エクスポートされたファイルはヘッダー行を含みません。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="287" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="290" />
         <source>Exported file will have simple header line</source>
         <translation>エクスポートされたファイルは簡易なヘッダー行を含みます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="292" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="295" />
         <source>Exported file will have gnuplot header line</source>
         <translation>エクスポートされたファイルはgnuplotに対応するヘッダー行を含みます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="304" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="307" />
         <source>Save As Default</source>
         <translation>デフォルトとして設定</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="305" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="308" />
         <source>Save the settings for use as future defaults.</source>
         <translation>設定情報を以後のデフォルトとして保存します。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="309" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="312" />
         <source>Load Default</source>
         <translation>デフォルトをロード</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="310" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="313" />
         <source>Load the default settings.</source>
         <translation>デフォルト設定を読み込みます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="319" />
-        <source>Preview</source>
-        <translation>プレビュー表示</translation>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="325" />
+        <source>File extension used for preview. The CSV and TSV file extensions normally use commas and tabs respectively, but that can be changed in this dialog.</source>
+        <translation>プレビューに使用されるファイル拡張子。 CSVファイル拡張子とTSVファイル拡張子は通常、それぞれカンマとタブを使用しますが、このダイアログで変更できます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="335" />
+        <source>Preview</source>
+        <translation type="vanished">プレビュー表示</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351" />
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
@@ -3384,27 +3388,27 @@ Functions (shown here in blue) are output first, followed by relations (shown he
 (青色で表示された) 近似式による補間結果がまず出力され、またポイント 間を順に接続して得られたライン (緑色) による補間結果があれば、これも続いて出力されます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="367" />
         <source>Relation Points Selection</source>
         <translation>ポイント 間の接続線からの X 値の読み取り方法の選択</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="365" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="381" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation>XとYについて、それぞれ等間隔に 補間 して値を出力します。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="366" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="382" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation>エクスポートされたファイルは、それぞれの リレーション に沿って、等間隔に ポイント を含みます。もし最後のインターバルが最後の点で丁度終わらなければ、最後のインターバル間隔は最後の点と合致するように少し短く調整されます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="380" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="396" />
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation>等間隔の座標でエクスポートする際の、連続したポイント間の間隔</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="386" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="402" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -3417,12 +3421,12 @@ X 軸・ Y 軸の目盛とは別に間隔を設定したい場合にはピクセ
 グラフの目盛単位は通常X 軸・ Y 軸の目盛が同一である場合に利用が勧められます。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="442" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="458" />
         <source>Functions</source>
         <translation>座標取得機能</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="444" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="460" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
@@ -3431,12 +3435,12 @@ Controls for specifying the format of functions during export</source>
 座標を取得してエクスポートする際に利用するオプションを選択します。X軸について等間隔とする場合にはそのインターバルも指定します。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="450" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="466" />
         <source>Relations</source>
         <translation>リレーション機能</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="452" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="468" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
@@ -3445,17 +3449,17 @@ Controls for specifying the format of relations during export</source>
 座標を取得してエクスポートする際に利用するオプションを選択し、等間隔とする場合にはインターバルを指定します。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="471" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="487" />
         <source>X Label</source>
         <translation>X軸ラベル</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="475" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="491" />
         <source>Label in the header for x values</source>
         <translation>ヘッダー情報に X軸 をラベルとして含める。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1214" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1247" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>プレビュー 画面は座標軸の基準となる ポイント が設定されるまでは表示されません。</translation>
     </message>
@@ -4495,114 +4499,114 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="478" />
+        <location filename="../src/main/MainWindow.cpp" line="481" />
         <source>Unable to export to file</source>
         <translation>ファイルのエクスポートに失敗しました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="512" />
+        <location filename="../src/main/MainWindow.cpp" line="515" />
         <source>Unable to extract image to file</source>
         <translation>イメージをファイルに抽出できません</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="587" />
-        <location filename="../src/main/MainWindow.cpp" line="747" />
-        <location filename="../src/main/MainWindow.cpp" line="926" />
+        <location filename="../src/main/MainWindow.cpp" line="590" />
+        <location filename="../src/main/MainWindow.cpp" line="760" />
+        <location filename="../src/main/MainWindow.cpp" line="939" />
         <source>Cannot read file</source>
         <translation>ファイルを読み込むことができません。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="589" />
-        <location filename="../src/main/MainWindow.cpp" line="749" />
-        <location filename="../src/main/MainWindow.cpp" line="928" />
+        <location filename="../src/main/MainWindow.cpp" line="592" />
+        <location filename="../src/main/MainWindow.cpp" line="762" />
+        <location filename="../src/main/MainWindow.cpp" line="941" />
         <source>from directory</source>
         <translation>指定のディレクトリから</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="663" />
+        <location filename="../src/main/MainWindow.cpp" line="676" />
         <source>Import Image</source>
         <translation>画像を インポート</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="903" />
+        <location filename="../src/main/MainWindow.cpp" line="916" />
         <source>File opened</source>
         <translation>ファイルが開かれた</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="948" />
+        <location filename="../src/main/MainWindow.cpp" line="961" />
         <source>File not found</source>
         <translation>ファイル が見つかりません。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="965" />
+        <location filename="../src/main/MainWindow.cpp" line="978" />
         <source>Error report opened</source>
         <translation>エラー レポートを 開きました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1020" />
-        <location filename="../src/main/MainWindow.cpp" line="1094" />
+        <location filename="../src/main/MainWindow.cpp" line="1033" />
+        <location filename="../src/main/MainWindow.cpp" line="1107" />
         <source>File imported</source>
         <translation>ファイル をインポートしました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1128" />
+        <location filename="../src/main/MainWindow.cpp" line="1141" />
         <source>Background image.</source>
         <translation>バックグラウンド 画像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1129" />
+        <location filename="../src/main/MainWindow.cpp" line="1142" />
         <source>Currently selected curve.</source>
         <translation>現在 選択中の カーブ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1130" />
+        <location filename="../src/main/MainWindow.cpp" line="1143" />
         <source>Point style for currently selected curve.</source>
         <translation>現在 選択中の カーブの ポイント 表示設定</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1131" />
+        <location filename="../src/main/MainWindow.cpp" line="1144" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>現在 選択中の カーブに対する セグメント フィル フィルタ </translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1179" />
+        <location filename="../src/main/MainWindow.cpp" line="1192" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>ドキュメントの内容が変更されました。
 変更を保存しますか？</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1263" />
+        <location filename="../src/main/MainWindow.cpp" line="1249" />
         <source>Cannot write file</source>
         <translation>ファイル への書き込みに失敗しました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1311" />
+        <location filename="../src/main/MainWindow.cpp" line="1297" />
         <source>Save</source>
         <translation>セーブ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2331" />
+        <location filename="../src/main/MainWindow.cpp" line="2330" />
         <source>Export</source>
         <translation>エクスポート</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2413" />
+        <location filename="../src/main/MainWindow.cpp" line="2412" />
         <source>Open Document</source>
         <translation>ドキュメントを開く</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3669" />
+        <location filename="../src/main/MainWindow.cpp" line="3668" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3670" />
+        <location filename="../src/main/MainWindow.cpp" line="3669" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3800" />
+        <location filename="../src/main/MainWindow.cpp" line="3799" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -4612,35 +4616,35 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="133" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="178" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="276" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="280" />
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
         <translation>すでに存在する座標軸の基準点と画面上の同じ位置に、新たに基準点を追加することはできません。</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="186" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="285" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="289" />
         <source>New axis point cannot have the same graph coordinates as an existing axis point</source>
         <translation>すでに存在する座標軸の基準点とグラフ上同じとなる位置に、新たに基準点を追加することはできません。</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="192" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="291" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="194" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="297" />
         <source>No more than two axis points can lie along the same line on the screen</source>
         <translation>画面上で同じ ライン 上に 2 点を超える 座標軸の基準点を与えることはできません。</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="198" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="297" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="202" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="305" />
         <source>No more than two axis points can lie along the same line in graph coordinates</source>
         <translation>グラフ座標で同じ ライン 上に 2 点を超える座標軸の基準点を与えることはできません。</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="251" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="255" />
         <source>Too many x axis points. There should only be two</source>
         <translation> X 軸の基準点が多すぎます。基準点は 2 点のみ必要です。</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="257" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="261" />
         <source>Too many y axis points. There should only be two</source>
         <translation> Y 軸の基準点が多すぎます。基準点は 2 点のみ必要です。</translation>
     </message>
@@ -5361,7 +5365,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">前へ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="597" />
+        <location filename="../src/main/MainWindow.cpp" line="600" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>ファイルに複数の言語アルファベットの文字が含まれているように見えますが、これはWindowsコマンドラインでは機能しません</translation>
     </message>
@@ -5688,12 +5692,12 @@ Points can be more accurately placed by zooming in.</source>
 <context>
     <name>TutorialStateAxisPoints</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="33" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="35" />
         <source>Axis Points</source>
         <translation>座標軸の基準となるポイント</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="36" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="38" />
         <source>Axis points are first defined to
 define the coordinates. Step 1 -
 Click on the Axis Points button</source>
@@ -5701,7 +5705,7 @@ Click on the Axis Points button</source>
 ステップ1 - 座標軸の基準ポイント ボタン を押します。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="40" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="42" />
         <source>Step 2 - Click on an axis or grid
 line with known coordinates. An axis
 point appears, with a dialog window
@@ -5714,7 +5718,7 @@ coordinates</source>
 座標</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="46" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="48" />
         <source>Step 3 - Enter the two coordinates
 of the axis point and then click Ok.
 Repeat steps 2 and 3 twice more
@@ -5723,12 +5727,12 @@ until three axis points are created</source>
 この ステップ 2 と 3 をさらに2 回繰り返して、基準となる3つのポイント全てを指定します。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="54" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="56" />
         <source>Previous</source>
         <translation>前へ</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="60" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="62" />
         <source>Next</source>
         <translation>次へ</translation>
     </message>
@@ -5736,12 +5740,12 @@ until three axis points are created</source>
 <context>
     <name>TutorialStateChecklistWizardAbstract</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="33" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="35" />
         <source>Checklist Wizard and Checklist Guide</source>
         <translation>チェックリスト ウィザード と手引き</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="36" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="38" />
         <source>For new Engauge users, a Checklist Wizard
 is available when importing an image file.
 This wizard produces a helpful checklist of
@@ -5750,14 +5754,14 @@ steps to follow to digitize the image file.</source>
 この ウィザード は、画像のデジザイズ に必要な 手順を進めるための チェックリスト として有用です。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="41" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="43" />
         <source>Step 1 - Enable the menu option Help /
 Checklist Guide Wizard.</source>
         <translation>ステップ 1 - ヘルプ メニュー を開きます。 
 チェックリスト と 手引き ウィザード にチェック を入れて有効にしてください。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="44" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="46" />
         <source>Step 2 - Import the file using File /
 Import. The Checklist Wizard will appear
 and ask some simple questions to
@@ -5767,7 +5771,7 @@ digitized.</source>
 すると チェックリスト と 手引き ウィザード 画面が表示されますので、簡単な質問に答えながら画像を デジタイズ するための手順を確認してください。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="50" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="52" />
         <source>Additional options are available in
 the various Settings menus.
 
@@ -5776,7 +5780,7 @@ This ends the tutorial. Good luck!</source>
 Good luck!</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="57" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="59" />
         <source>Previous</source>
         <translation>前へ</translation>
     </message>
@@ -5784,12 +5788,12 @@ Good luck!</translation>
 <context>
     <name>TutorialStateColorFilter</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="35" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="37" />
         <source>Color Filter</source>
         <translation>カラー フィルター</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="38" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="40" />
         <source>Each curve has Color Filter settings that
 are applied in Segment Fill mode. For
 black lines the defaults work well, but for
@@ -5798,19 +5802,19 @@ colored lines the settings can be improved.</source>
 画像の ライン の色が黒である場合には デフォルト の設定で十分ですが、カラー 画像を扱う場合には、この設定を調整して精度を上げてください。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="43" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="45" />
         <source>Step 1 - Select the Settings / Color
 Filter menu option.</source>
         <translation>ステップ 1 - 設定 メニュー から カラー フィルター 設定画面を開きます。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="46" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="48" />
         <source>Step 2 - Select the curve that will
 be given the new settings.</source>
         <translation>ステップ 2 - 設定を変更したい カーブ を選択してください。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="49" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="51" />
         <source>Step 3 - Select the mode. Intensity is
 suggested for uncolored lines, and Hue
 is suggested for colored lines.</source>
@@ -5818,7 +5822,7 @@ is suggested for colored lines.</source>
 一般に、白黒画像の場合には輝度が、 カラー 画像の場合には 色相が、それぞれお勧めです。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="53" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="55" />
         <source>Step 4 - Adjust the included range by
 dragging the green handles, until the
 curve is clear in the preview window
@@ -5831,7 +5835,7 @@ Click Ok when finished.</source>
 調整が終わりましたら Ok ボタンを押してください。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="63" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="65" />
         <source>Back</source>
         <translation>戻る</translation>
     </message>
@@ -5839,7 +5843,7 @@ Click Ok when finished.</source>
 <context>
     <name>TutorialStateCurveSelection</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="40" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="42" />
         <source>After the axis points have been created, a
 curve is selected to receive curve points.
 Step 1 - click on Curve, Point Match, Color
@@ -5848,7 +5852,7 @@ Picker or Segment Fill buttons.</source>
 ステップ 1 - カーブ ・ ポイント マッチ ・ カラーピッカー ・セグメント フィル のいずれかの ボタン をクリック します。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="45" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="47" />
         <source>Step 2 - Select the desired curve name. If
 that curve name has not been created yet,
 use the menu option Settings / Curve Names
@@ -5857,7 +5861,7 @@ to create it.</source>
 もしその カーブ 名がまだないようでしたら、設定 メニュー から カーブ の追加と削除 画面を開いて新規に作成してください。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="50" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="52" />
         <source>Step 3 - Change the background from the
 original image to the filtered image
 produced for the current curve, using the
@@ -5870,7 +5874,7 @@ the tutorial.</source>
 フィルタ 画像を利用することで、強力な自動認識 アルゴリズム を適用できるようになります。この アルゴリズム については この チュートリアル に別途詳しい説明があります。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="58" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="60" />
         <source>If the current curve is no longer visible
 in the filtered image, then change the
 current Color Filter settings. In the figure,
@@ -5878,17 +5882,17 @@ the orange points have disappeared.</source>
         <translation>もし 選択中の カーブ が バックグラウンド の フィルター画像 では見えないあるいは見えにくいようであれば、 カラーフィルター 設定を変更してください。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="66" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="68" />
         <source>Previous</source>
         <translation>前へ</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="72" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="74" />
         <source>Color Filter Settings</source>
         <translation>カラーフィルター 設定</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="78" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="80" />
         <source>Next</source>
         <translation>次へ</translation>
     </message>
@@ -5896,18 +5900,18 @@ the orange points have disappeared.</source>
 <context>
     <name>TutorialStateCurveType</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="36" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="38" />
         <source>Curve Type</source>
         <translation>カーブ の種類</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="39" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="41" />
         <source>The next steps depend on how the curves
 are drawn, in terms of lines and points.</source>
         <translation>次の ステップ は、対象の カーブ が ポイント なのか ライン なのかに応じて選択してください。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="42" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="44" />
         <source>If the curves are drawn
 with lines (with or without
 points) then click on
@@ -5915,7 +5919,7 @@ Next (Lines).</source>
         <translation>もし対象の カーブ が ライン であるとき ( ポイント を伴う場合も含めて) 、ライン (ポイントも含む) を選択して 次へ をクリックしてください。 </translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="47" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="49" />
         <source>If the curves are drawn
 without lines and only
 with points, then click on
@@ -5923,17 +5927,17 @@ Next (Points).</source>
         <translation>もし対象の カーブが ポイント だけで構成されており、ライン を含まない場合には、ポイントのみ (ライン なし) を選択して 次へ をクリックしてください。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="55" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="57" />
         <source>Previous</source>
         <translation>前へ</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="61" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="63" />
         <source>Next (Lines)</source>
         <translation>次へ </translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="67" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="69" />
         <source>Next (Points)</source>
         <translation>次へ</translation>
     </message>
@@ -5941,30 +5945,30 @@ Next (Points).</source>
 <context>
     <name>TutorialStateIntroduction</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="33" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="35" />
         <source>Introduction</source>
         <translation>イントロダクション</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="36" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="38" />
         <source>Engauge Digitizer starts with
 images of graphs and maps.</source>
         <translation>Engauge Digitizer は、まず グラフ や マップ の画像を インポート するところから作業を開始します。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="39" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="41" />
         <source>You create (or digitize) points along
 the graph and map curves.</source>
         <translation>ここでの デジタイズ 作業は グラフ や マップ の カーブ に沿って ポイント を 打つ (デジタイズ する) ことを指します。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="42" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="44" />
         <source>The digitized curve points can be
 exported, as numbers, to other software tools.</source>
         <translation>デジタイズ された カーブ の ポイント は 数値として 他の ソフトウェア で利用できるよう、 エクスポート することが可能です。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="48" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="50" />
         <source>Next</source>
         <translation>次へ</translation>
     </message>
@@ -5972,12 +5976,12 @@ exported, as numbers, to other software tools.</source>
 <context>
     <name>TutorialStatePointMatch</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="35" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="37" />
         <source>Point Match</source>
         <translation>ポイント マッチング</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="38" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="40" />
         <source>In Point Match mode, you pick
 one sample point, and Engauge
 then finds all matching points.
@@ -5988,13 +5992,13 @@ Step 1 - Click on Point Match mode.</source>
 ステップ 1 - ポイント マッチング モード ボタン を クリック してください。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="43" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="45" />
         <source>Step 2 - Select the curve the new
 points will belong to.</source>
         <translation>ステップ 2 - 対象の カーブ を選択します。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="46" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="48" />
         <source>Step 3 - Click on a typical point.
 The circle turns green when it
 contains what may be a point.</source>
@@ -6002,7 +6006,7 @@ contains what may be a point.</source>
 このとき、 ポイント として認識される可能性のあるところに マウス カーソル を合わせると、カーソル を囲む円の色が 緑色に変化します。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="50" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="52" />
         <source>Step 4 - Engauge will show a
 matched point with a yellow cross.
 Press the Right Arrow key to accept
@@ -6012,12 +6016,12 @@ until there are no more points.</source>
 この作業を全てのポイントについて繰り返します。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="59" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="61" />
         <source>Previous</source>
         <translation>前へ</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="65" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="67" />
         <source>Next</source>
         <translation>次へ</translation>
     </message>
@@ -6025,12 +6029,12 @@ until there are no more points.</source>
 <context>
     <name>TutorialStateSegmentFill</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="34" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="36" />
         <source>Segment Fill</source>
         <translation>セグメント フィル</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="37" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="39" />
         <source>Segment Fill mode places several
 points all along the line segments
 of a curve. Step 1 - Click on the
@@ -6039,13 +6043,13 @@ Segment Fill button.</source>
 ステップ 1 - セグメント フィル ボタン をクリックします。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="42" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="44" />
         <source>Step 2 - Select the curve the new
 points will belong to.</source>
         <translation>ステップ 2 - 対象の カーブ を選択します。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="45" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="47" />
         <source>Step 3 - Move the cursor over a line
 segment in the desired curve. If a
 green line appears, click on it once
@@ -6055,12 +6059,12 @@ to generate many points.</source>
 多くの ポイント が一度に生成されるはずです。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="53" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="55" />
         <source>Previous</source>
         <translation>前へ</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="59" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="61" />
         <source>Next</source>
         <translation>次へ</translation>
     </message>

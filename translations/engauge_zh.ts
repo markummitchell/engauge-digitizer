@@ -2915,165 +2915,165 @@ Drag the cursor over this area to see the effects of the current settings on the
 <context>
     <name>DlgSettingsExportFormat</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="55" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="58" />
         <source>Export Format</source>
         <translation>导出格式</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="84" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="87" />
         <source>Included</source>
         <translation>包含</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="87" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="90" />
         <source>Not included</source>
         <translation>包含</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="92" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="95" />
         <source>List of curves to be included in the exported file.
 
 The order of the curves here does not affect the order in the exported file. That order is determined by the Curves settings.</source>
         <translation>导出文件中包含的曲线列表.这里的曲线顺序不影响导出文件中的顺序。该顺序由曲线设置决定。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="101" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="104" />
         <source>List of curves to be excluded from the exported file</source>
         <translation>要从导出文件中排除的曲线列表</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="106" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="109" />
         <source>Include</source>
         <translation>包括</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="108" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="111" />
         <source>Move the currently selected curve(s) from the excluded list</source>
         <translation>从排除列表中移动当前选定的曲线</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="112" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="115" />
         <source>Exclude</source>
         <translation>排除</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="114" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="117" />
         <source>Move the currently selected curve(s) from the included list</source>
         <translation>从包含的列表中移动当前选定的曲线</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="125" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="128" />
         <source>Delimiters</source>
         <translation>分隔符</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="132" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="135" />
         <source>Exported file will have commas between adjacent values, unless overridden by tabs in TSV files.</source>
         <translation>导出的文件在相邻值之间会有逗号，除非被TSV文件中的选项卡覆盖。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="137" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="140" />
         <source>Exported file will have spaces between adjacent values, unless overridden by commas in CSV files, or tabs in TSV files.</source>
         <translation>导出的文件在相邻值之间将有空格，除非被CSV文件中的逗号或TSV文件中的选项卡覆盖。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="143" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="146" />
         <source>Exported file will have tabs between adjacent values, unless overridden by commas in CSV files.</source>
         <translation>导出的文件将在相邻值之间具有制表符，除非被CSV文件中的逗号覆盖。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="148" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="151" />
         <source>Exported file will have semicolons between adjacent values, unless overridden by commas in CSV files.</source>
         <translation>导出的文件将在相邻值之间有分号，除非被CSV文件中的逗号覆盖。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="152" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="155" />
         <source>Override in CSV/TSV files</source>
         <translation>覆盖CSV / TSV文件</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="153" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="156" />
         <source>Comma-separated value (CSV) files and tab-separated value (TSV) files will use commas and tabs respectively, unless this setting is selected. Selecting this setting will apply the delimiter setting to every file.</source>
         <translation>逗号分隔值（CSV）文件和制表符分隔值（TSV）文件将分别使用逗号和制表符，除非选择此设置。选择此设置将对每个文件应用分隔符设置。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="164" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="167" />
         <source>Layout</source>
         <translation>布局</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="170" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="173" />
         <source>All curves on each line</source>
         <translation>每条线上的所有曲线</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="171" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="174" />
         <source>Exported file will have, on each line, an X value, the Y value for the first curve, the Y value for the second curve,...</source>
         <translation>导出的文件将在每一行中包含一个X值，第一条曲线的Y值，第二条曲线的Y值......</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="176" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="179" />
         <source>One curve on each line</source>
         <translation>每条线上有一条曲线</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="177" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="180" />
         <source>Exported file will have all the points for the first curve, with one X-Y pair on each line, then the points for the second curve,...</source>
         <translation>导出的文件将包含第一条曲线的所有点，每条线上有一对X-Y对，然后是第二条曲线的点...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="187" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="190" />
         <source>Function Points Selection</source>
         <translation>功能点选择</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="201" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="204" />
         <source>Interpolate Ys at Xs from all curves</source>
         <translation>从所有曲线的Xs处插值Ys</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="202" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="205" />
         <source>Exported file will have values at every unique X value from every curve. Y values will be linearly interpolated if necessary</source>
         <translation>导出的文件将在每条曲线的每个唯一X值处具有值。 Y值将根据需要进行线性插值</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="208" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="211" />
         <source>Extrapolate outside endpoints</source>
         <translation>外推端點</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="212" />
         <source>Enable or disable extrapolation outside of endpoints of each curve. If disabled, only points between the endpoints of each curve are exported</source>
         <translation>啟用或禁用每條曲線端點之外的外推。如果禁用，則僅導出每條曲線的端點之間的點</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="214" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="217" />
         <source>Interpolate Ys at Xs from first curve</source>
         <translation>从第一条曲线插入Ys到Xs</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="215" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="218" />
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
         <translation>导出的文件将具有来自第一条曲线的每个唯一X值的值。 Y值将根据需要进行线性插值</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="220" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="223" />
         <source>Interpolate Ys at evenly spaced X values that are automatically selected</source>
         <translation>以自動選擇的均勻間隔X值插值Y.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="221" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="224" />
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
         <translation>导出的文件将具有均匀间隔X值的值，并以下面所选的间隔分隔。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="225" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="372" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="228" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
         <source>Interval</source>
         <translation>间隔：</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="233" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="236" />
         <source>Interval, in the units of X, between successive points in the X direction.
 
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
@@ -3082,7 +3082,7 @@ The X values will be automatically aligned along simple numbers. If the first an
         <translation>以X为单位的X方向连续点之间的间隔。如果比例是线性的，则将该间隔加到连续的X值上。如果比例是对数，那么这个间隔乘以连续的X值。X值将自动沿着简单的数字对齐。如果第一个和/或最后一个点不是沿着对齐的X值，则根据需要添加一个或两个附加点。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="243" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="246" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
@@ -3091,101 +3091,105 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
         <translation>间隔间隔的单位。当间距独立于X标尺时，像素单位是首选。即使X尺度是对数，间距在图中也是一致的。当间距取决于X尺度时，图形单元是首选。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="255" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="258" />
         <source>Interpolate Ys at evenly spaced X values on grid lines</source>
         <translation>在網格線上以均勻間隔的X值插值Ys</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="256" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="259" />
         <source>Exported file will have values at evenly spaced X values at the vertical grid lines.</source>
         <translation>導出的文件將在垂直網格線處具有均勻間隔的X值的值。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="260" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="398" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="263" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="414" />
         <source>Raw Xs and Ys</source>
         <translation>原始X和Ys</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="261" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="399" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="264" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="415" />
         <source>Exported file will have only original X and Y values</source>
         <translation>导出的文件将只有原始的X和Y值</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="272" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="275" />
         <source>Header</source>
         <translation>头</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="282" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="285" />
         <source>Exported file will have no header line</source>
         <translation>导出的文件将不包含标题行</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="287" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="290" />
         <source>Exported file will have simple header line</source>
         <translation>导出的文件将具有简单的标题行</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="292" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="295" />
         <source>Exported file will have gnuplot header line</source>
         <translation>导出的文件将有gnuplot标题行</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="304" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="307" />
         <source>Save As Default</source>
         <translation>保存为默认</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="305" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="308" />
         <source>Save the settings for use as future defaults.</source>
         <translation>保存设置以用作未来的默认设置。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="309" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="312" />
         <source>Load Default</source>
         <translation>加載默認值</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="310" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="313" />
         <source>Load the default settings.</source>
         <translation>加載默認設置。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="319" />
-        <source>Preview</source>
-        <translation>预览</translation>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="325" />
+        <source>File extension used for preview. The CSV and TSV file extensions normally use commas and tabs respectively, but that can be changed in this dialog.</source>
+        <translation>用於預覽的文件擴展名。 CSV和TSV文件擴展名通常分別使用逗號和製表符，但是可以在此對話框中更改。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="335" />
+        <source>Preview</source>
+        <translation type="vanished">预览</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351" />
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
         <translation>预览窗口显示当前设置如何影响导出的文件。函数（此处显示为蓝色）先输出，然后是关系（如图所示为绿色）（如果存在）。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="367" />
         <source>Relation Points Selection</source>
         <translation>关系点选择</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="365" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="381" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation>以均匀间隔插入X和Y.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="366" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="382" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation>导出的文件沿着每个关系具有均匀间隔的点，并以下面选择的间隔分隔。如果最后一个时间间隔没有在最后一个时间点结束，则会添加一个较短的最后时间间隔，该时间间隔会在最后一个点结束。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="380" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="396" />
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation>以均匀间隔（X，Y）坐标输出时的连续点之间的间隔。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="386" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="402" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -3194,41 +3198,41 @@ Graph units are usually preferred when the X and Y scales are identical.</source
         <translation>间距间隔的单位。当间距要独立于X和Y尺度时，像素单位是首选。即使比例尺是对数或X和Y比例不同，图中的间距也是一致的。当X和Y比例相同时，图形单位通常是首选。</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="442" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="458" />
         <source>Functions</source>
         <translation>功能</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="444" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="460" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
         <translation>函数TabControls用于指定导出期间函数的格式</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="450" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="466" />
         <source>Relations</source>
         <translation>关系</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="452" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="468" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
         <translation>关系TabControls用于指定导出期间关系的格式</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="471" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="487" />
         <source>X Label</source>
         <translation>X标签：</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="475" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="491" />
         <source>Label in the header for x values</source>
         <translation>为x值标记标题</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1214" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1247" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>在定义轴点之前预览不可用。</translation>
     </message>
@@ -4139,113 +4143,113 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="478" />
+        <location filename="../src/main/MainWindow.cpp" line="481" />
         <source>Unable to export to file</source>
         <translation>导出失败</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="512" />
+        <location filename="../src/main/MainWindow.cpp" line="515" />
         <source>Unable to extract image to file</source>
         <translation>無法將圖像提取到文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="587" />
-        <location filename="../src/main/MainWindow.cpp" line="747" />
-        <location filename="../src/main/MainWindow.cpp" line="926" />
+        <location filename="../src/main/MainWindow.cpp" line="590" />
+        <location filename="../src/main/MainWindow.cpp" line="760" />
+        <location filename="../src/main/MainWindow.cpp" line="939" />
         <source>Cannot read file</source>
         <translation>不能读取文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="589" />
-        <location filename="../src/main/MainWindow.cpp" line="749" />
-        <location filename="../src/main/MainWindow.cpp" line="928" />
+        <location filename="../src/main/MainWindow.cpp" line="592" />
+        <location filename="../src/main/MainWindow.cpp" line="762" />
+        <location filename="../src/main/MainWindow.cpp" line="941" />
         <source>from directory</source>
         <translation>从目录</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="663" />
+        <location filename="../src/main/MainWindow.cpp" line="676" />
         <source>Import Image</source>
         <translation>导入图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="903" />
+        <location filename="../src/main/MainWindow.cpp" line="916" />
         <source>File opened</source>
         <translation>文件打开</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="948" />
+        <location filename="../src/main/MainWindow.cpp" line="961" />
         <source>File not found</source>
         <translation>找不到文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="965" />
+        <location filename="../src/main/MainWindow.cpp" line="978" />
         <source>Error report opened</source>
         <translation>错误报告打开</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1020" />
-        <location filename="../src/main/MainWindow.cpp" line="1094" />
+        <location filename="../src/main/MainWindow.cpp" line="1033" />
+        <location filename="../src/main/MainWindow.cpp" line="1107" />
         <source>File imported</source>
         <translation>文件已导入</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1128" />
+        <location filename="../src/main/MainWindow.cpp" line="1141" />
         <source>Background image.</source>
         <translation>背景图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1129" />
+        <location filename="../src/main/MainWindow.cpp" line="1142" />
         <source>Currently selected curve.</source>
         <translation>当前选择的图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1130" />
+        <location filename="../src/main/MainWindow.cpp" line="1143" />
         <source>Point style for currently selected curve.</source>
         <translation>当前选定曲线的点样式。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1131" />
+        <location filename="../src/main/MainWindow.cpp" line="1144" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>段填充当前选定曲线的过滤器。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1179" />
+        <location filename="../src/main/MainWindow.cpp" line="1192" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>该文件已被修改。您是否要保存更改？</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1263" />
+        <location filename="../src/main/MainWindow.cpp" line="1249" />
         <source>Cannot write file</source>
         <translation>不能写入文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1311" />
+        <location filename="../src/main/MainWindow.cpp" line="1297" />
         <source>Save</source>
         <translation>文件保存</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2331" />
+        <location filename="../src/main/MainWindow.cpp" line="2330" />
         <source>Export</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2413" />
+        <location filename="../src/main/MainWindow.cpp" line="2412" />
         <source>Open Document</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3669" />
+        <location filename="../src/main/MainWindow.cpp" line="3668" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3670" />
+        <location filename="../src/main/MainWindow.cpp" line="3669" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3800" />
+        <location filename="../src/main/MainWindow.cpp" line="3799" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -4255,37 +4259,37 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="133" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="178" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="276" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="280" />
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
         <translation>新轴点不能与现有轴点位于同一个屏幕位置</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="186" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="285" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="289" />
         <source>New axis point cannot have the same graph coordinates as an existing axis point</source>
         <translation>新轴点不能具有与现有轴点相同的图坐标</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="192" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="291" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="194" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="297" />
         <source>No more than two axis points can lie along the same line on the screen</source>
         <translation>屏幕上同一条线上不能有两个以上的轴点</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="198" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="297" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="202" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="305" />
         <source>No more than two axis points can lie along the same line in graph coordinates</source>
         <translation>在图坐标中，同一条线上不能有两个以上的轴点
 
 </translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="251" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="255" />
         <source>Too many x axis points. There should only be two</source>
         <translation>太多的x轴点。应该只有两个</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="257" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="261" />
         <source>Too many y axis points. There should only be two</source>
         <translation>太多的y轴点。应该只有两个</translation>
     </message>
@@ -5006,7 +5010,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">上一步</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="597" />
+        <location filename="../src/main/MainWindow.cpp" line="600" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>该文件似乎具有来自多个语言字母的字符，这些字符在Windows命令行中不起作用</translation>
     </message>
@@ -5327,19 +5331,19 @@ Points can be more accurately placed by zooming in.</source>
 <context>
     <name>TutorialStateAxisPoints</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="33" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="35" />
         <source>Axis Points</source>
         <translation>轴点</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="36" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="38" />
         <source>Axis points are first defined to
 define the coordinates. Step 1 -
 Click on the Axis Points button</source>
         <translation>首先定义轴点以定义坐标。第1步 - 点击Axis Points按钮</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="40" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="42" />
         <source>Step 2 - Click on an axis or grid
 line with known coordinates. An axis
 point appears, with a dialog window
@@ -5348,7 +5352,7 @@ coordinates</source>
         <translation>第2步 - 单击具有已知坐标的轴或网格线。出现轴⏎点，带有一个对话窗口，用于输入轴点坐标</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="46" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="48" />
         <source>Step 3 - Enter the two coordinates
 of the axis point and then click Ok.
 Repeat steps 2 and 3 twice more
@@ -5356,12 +5360,12 @@ until three axis points are created</source>
         <translation>步骤3 - 输入轴点的两个坐标点，然后点击确定。twice重复步骤2和3两次，直到创建三个轴点</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="54" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="56" />
         <source>Previous</source>
         <translation>上一步</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="60" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="62" />
         <source>Next</source>
         <translation>下一步</translation>
     </message>
@@ -5369,12 +5373,12 @@ until three axis points are created</source>
 <context>
     <name>TutorialStateChecklistWizardAbstract</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="33" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="35" />
         <source>Checklist Wizard and Checklist Guide</source>
         <translation>清单向导和清单指南</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="36" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="38" />
         <source>For new Engauge users, a Checklist Wizard
 is available when importing an image file.
 This wizard produces a helpful checklist of
@@ -5382,13 +5386,13 @@ steps to follow to digitize the image file.</source>
         <translation>对于新的Engauge用户，在导入图像文件时可以使用Checklist向导.此向导会生成一个有用的步骤清单，用于跟踪数字化图像文件。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="41" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="43" />
         <source>Step 1 - Enable the menu option Help /
 Checklist Guide Wizard.</source>
         <translation>步骤1 - 启用菜单选项帮助/清单指南向导。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="44" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="46" />
         <source>Step 2 - Import the file using File /
 Import. The Checklist Wizard will appear
 and ask some simple questions to
@@ -5397,7 +5401,7 @@ digitized.</source>
         <translation>第2步 - 使用文件/导入导入文件。清单向导将出现，并询问一些简单的问题以确定图像如何被数字化。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="50" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="52" />
         <source>Additional options are available in
 the various Settings menus.
 
@@ -5405,7 +5409,7 @@ This ends the tutorial. Good luck!</source>
         <translation>其他选项可在各种设置菜单中使用。本教程结束。祝你好运！</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="57" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="59" />
         <source>Previous</source>
         <translation>上一步</translation>
     </message>
@@ -5413,12 +5417,12 @@ This ends the tutorial. Good luck!</source>
 <context>
     <name>TutorialStateColorFilter</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="35" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="37" />
         <source>Color Filter</source>
         <translation>颜色筛选</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="38" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="40" />
         <source>Each curve has Color Filter settings that
 are applied in Segment Fill mode. For
 black lines the defaults work well, but for
@@ -5426,26 +5430,26 @@ colored lines the settings can be improved.</source>
         <translation>每条曲线都有颜色过滤器设置，可以在分段填充模式下应用。对于黑线，默认值工作正常，但对于彩色线条，可以改进设置。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="43" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="45" />
         <source>Step 1 - Select the Settings / Color
 Filter menu option.</source>
         <translation>步骤1 - 选择Settings /ColorFilter菜单选项。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="46" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="48" />
         <source>Step 2 - Select the curve that will
 be given the new settings.</source>
         <translation>第2步 - 选择将给出新设置的曲线。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="49" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="51" />
         <source>Step 3 - Select the mode. Intensity is
 suggested for uncolored lines, and Hue
 is suggested for colored lines.</source>
         <translation>第3步 - 选择模式。对于无色线条，强烈建议，而Hueis建议用彩色线条。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="53" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="55" />
         <source>Step 4 - Adjust the included range by
 dragging the green handles, until the
 curve is clear in the preview window
@@ -5455,7 +5459,7 @@ Click Ok when finished.</source>
         <translation>第4步 - 通过拖动绿色手柄来调整所包含的范围，直到在下面的预览窗口中曲线清晰。该图显示了下面值的直方图分布。when完成后单击确定。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="63" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="65" />
         <source>Back</source>
         <translation>背部</translation>
     </message>
@@ -5463,7 +5467,7 @@ Click Ok when finished.</source>
 <context>
     <name>TutorialStateCurveSelection</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="40" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="42" />
         <source>After the axis points have been created, a
 curve is selected to receive curve points.
 Step 1 - click on Curve, Point Match, Color
@@ -5471,7 +5475,7 @@ Picker or Segment Fill buttons.</source>
         <translation>在创建轴点之后，选择曲线以接收曲线点。步骤1 - 单击曲线，点匹配，颜色拾取器或分段填充按钮。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="45" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="47" />
         <source>Step 2 - Select the desired curve name. If
 that curve name has not been created yet,
 use the menu option Settings / Curve Names
@@ -5479,7 +5483,7 @@ to create it.</source>
         <translation>第2步 - 选择所需的曲线名称。如果曲线名称尚未创建，请使用菜单选项设置/曲线名称来创建它。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="50" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="52" />
         <source>Step 3 - Change the background from the
 original image to the filtered image
 produced for the current curve, using the
@@ -5490,7 +5494,7 @@ the tutorial.</source>
         <translation>第3步 - 使用菜单选项“视图/背景/过滤”图像将背景从原始图像更改为为当前曲线生成的过滤图像。这种过滤可以实现本教程后面讨论的强大的自动算法。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="58" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="60" />
         <source>If the current curve is no longer visible
 in the filtered image, then change the
 current Color Filter settings. In the figure,
@@ -5498,17 +5502,17 @@ the orange points have disappeared.</source>
         <translation>如果当前曲线在过滤图像中不再可见，则更改当前的颜色过滤器设置。在图中，橙色点已经消失。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="66" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="68" />
         <source>Previous</source>
         <translation>上一步</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="72" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="74" />
         <source>Color Filter Settings</source>
         <translation>彩色滤光片设置</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="78" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="80" />
         <source>Next</source>
         <translation>下一步</translation>
     </message>
@@ -5516,18 +5520,18 @@ the orange points have disappeared.</source>
 <context>
     <name>TutorialStateCurveType</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="36" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="38" />
         <source>Curve Type</source>
         <translation>曲线类型</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="39" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="41" />
         <source>The next steps depend on how the curves
 are drawn, in terms of lines and points.</source>
         <translation>接下来的步骤取决于曲线如何绘制，就线条和点而言。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="42" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="44" />
         <source>If the curves are drawn
 with lines (with or without
 points) then click on
@@ -5535,7 +5539,7 @@ Next (Lines).</source>
         <translation>如果曲线用直线绘制（带或不带点），然后单击下一个（直线）。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="47" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="49" />
         <source>If the curves are drawn
 without lines and only
 with points, then click on
@@ -5543,17 +5547,17 @@ Next (Points).</source>
         <translation>如果绘制的曲线没有直线且只有点，则点击下一步（点）。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="55" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="57" />
         <source>Previous</source>
         <translation>上一步</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="61" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="63" />
         <source>Next (Lines)</source>
         <translation>下一个（行）</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="67" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="69" />
         <source>Next (Points)</source>
         <translation>下一步（点数）</translation>
     </message>
@@ -5561,30 +5565,30 @@ Next (Points).</source>
 <context>
     <name>TutorialStateIntroduction</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="33" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="35" />
         <source>Introduction</source>
         <translation>介绍</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="36" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="38" />
         <source>Engauge Digitizer starts with
 images of graphs and maps.</source>
         <translation>Engauge Digitizer从图形和地图的图像开始。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="39" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="41" />
         <source>You create (or digitize) points along
 the graph and map curves.</source>
         <translation>您可以沿着图形和地图曲线创建（或数字化）点。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="42" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="44" />
         <source>The digitized curve points can be
 exported, as numbers, to other software tools.</source>
         <translation>数字化曲线点可以作为数字输出到其他软件工具。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="48" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="50" />
         <source>Next</source>
         <translation>下一步</translation>
     </message>
@@ -5592,12 +5596,12 @@ exported, as numbers, to other software tools.</source>
 <context>
     <name>TutorialStatePointMatch</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="35" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="37" />
         <source>Point Match</source>
         <translation>点匹配</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="38" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="40" />
         <source>In Point Match mode, you pick
 one sample point, and Engauge
 then finds all matching points.
@@ -5606,20 +5610,20 @@ Step 1 - Click on Point Match mode.</source>
         <translation>在点匹配模式下，您选择一个样本点，然后Engauge找到所有匹配点。步骤1 - 单击点匹配模式。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="43" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="45" />
         <source>Step 2 - Select the curve the new
 points will belong to.</source>
         <translation>第2步-选择新点属于的曲线.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="46" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="48" />
         <source>Step 3 - Click on a typical point.
 The circle turns green when it
 contains what may be a point.</source>
         <translation>第3步 - 点击一个典型的点。when当它包含可能是一个点时，该圆圈变成绿色。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="50" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="52" />
         <source>Step 4 - Engauge will show a
 matched point with a yellow cross.
 Press the Right Arrow key to accept
@@ -5628,12 +5632,12 @@ until there are no more points.</source>
         <translation>步骤4 - Engauge将显示一个黄色十字的不匹配点。按右箭头键接受匹配点。重复此步骤，直到没有更多的点。</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="59" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="61" />
         <source>Previous</source>
         <translation>上一步</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="65" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="67" />
         <source>Next</source>
         <translation>下一步</translation>
     </message>
@@ -5641,12 +5645,12 @@ until there are no more points.</source>
 <context>
     <name>TutorialStateSegmentFill</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="34" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="36" />
         <source>Segment Fill</source>
         <translation>线段填充</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="37" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="39" />
         <source>Segment Fill mode places several
 points all along the line segments
 of a curve. Step 1 - Click on the
@@ -5654,13 +5658,13 @@ Segment Fill button.</source>
         <translation>线段填充模式在曲线的线段上放置多个点. 第1步-点击线段填充模式.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="42" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="44" />
         <source>Step 2 - Select the curve the new
 points will belong to.</source>
         <translation>第2步-选择新点属于的曲线.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="45" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="47" />
         <source>Step 3 - Move the cursor over a line
 segment in the desired curve. If a
 green line appears, click on it once
@@ -5670,12 +5674,12 @@ to generate many points.</source>
 </translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="53" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="55" />
         <source>Previous</source>
         <translation>上一步</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="59" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="61" />
         <source>Next</source>
         <translation>下一步</translation>
     </message>

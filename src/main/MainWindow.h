@@ -413,9 +413,6 @@ private:
   void loadInputFileForErrorReport(QDomDocument &domInputFile) const;
   void loadToolTips ();
   bool maybeSave();
-  DocumentModelExportFormat modelExportOverride (const DocumentModelExportFormat &modelExportFormatBefore,
-                                                 const ExportToFile &exportStrategy,
-                                                 const QString &selectedNameFilter) const;
   bool modeGraph () const; // True if document is loaded and it has all graphs
   void rebuildRecentFileListForCurrentFile(const QString &filePath);
   bool saveDocumentFile(const QString &fileName);

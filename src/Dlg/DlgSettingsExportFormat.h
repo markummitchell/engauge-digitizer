@@ -45,6 +45,7 @@ private slots:
   void slotDelimitersSpaces();
   void slotDelimitersTabs();
   void slotExclude();
+  void slotFileExtension(const QString &);
   void slotFunctionsExtrapolateOutsideEndpoints(int);
   void slotFunctionsLayoutAllCurves();
   void slotFunctionsLayoutOneCurve();
@@ -137,6 +138,8 @@ private:
   QLineEdit *m_editXLabel;
 
   QTextEdit *m_editPreview;
+
+  QComboBox *m_cmbFileExtension;
 
   QPushButton *m_btnSaveDefault;
   QPushButton *m_btnLoadDefault;

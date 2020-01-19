@@ -9,8 +9,11 @@
 #include "CmdSettingsExportFormat.h"
 #include "DocumentModelExportFormat.h"
 #include "DlgSettingsExportFormat.h"
+#include "ExportByFilename.h"
+#include "ExportFileExtension.h"
 #include "ExportFileFunctions.h"
 #include "ExportFileRelations.h"
+#include "ExportToFile.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "MainWindowModel.h"
@@ -316,8 +319,21 @@ void DlgSettingsExportFormat::createPreview(QGridLayout *layout, int &row)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::createPreview";
 
-  QLabel *label = new QLabel (tr ("Preview"));
-  layout->addWidget (label, row, 0, 1, 3);
+  // Be sure to let user know that future (=unpredictable) selection of CSV or TSV file extension
+  // during export may change the the format, by allowing them to specify a file extension here
+  m_cmbFileExtension = new QComboBox;
+  m_cmbFileExtension->setWhatsThis (tr ("File extension used for preview. The CSV and TSV file extensions "
+                                        "normally use commas and tabs respectively, but that can be changed "
+                                        "in this dialog."));
+  m_cmbFileExtension->addItem(exportFileExtensionToPreviewString (EXPORT_FILE_EXTENSION_CSV),
+                              QVariant (EXPORT_FILE_EXTENSION_CSV));
+  m_cmbFileExtension->addItem(exportFileExtensionToPreviewString (EXPORT_FILE_EXTENSION_TSV),
+                              QVariant (EXPORT_FILE_EXTENSION_TSV));
+  m_cmbFileExtension->addItem(exportFileExtensionToPreviewString (EXPORT_FILE_EXTENSION_NOT_CSV_TSV),
+                              QVariant (EXPORT_FILE_EXTENSION_NOT_CSV_TSV));
+  connect (m_cmbFileExtension, SIGNAL (activated (const QString &)),
+           this, SLOT (slotFileExtension (const QString &))); // activated() ignores code changes
+  layout->addWidget (m_cmbFileExtension, row, 0, 1, 1, Qt::AlignLeft);
 
   // Legend. Padding and margin in rich text do not work so &nbsp; is used for spacing
   QLabel *labelLegend = new QLabel;
@@ -328,7 +344,7 @@ void DlgSettingsExportFormat::createPreview(QGridLayout *layout, int &row)
       .arg (COLOR_FUNCTIONS)
       .arg (COLOR_RELATIONS);
   labelLegend->setText (legendHtml);
-  layout->addWidget (labelLegend, row++, 1, 1, 2, Qt::AlignRight);
+  layout->addWidget (labelLegend, row++, 2, 1, 1, Qt::AlignRight);
 
   m_editPreview = new QTextEdit;
   m_editPreview->setReadOnly (true);
@@ -644,6 +660,8 @@ void DlgSettingsExportFormat::load (CmdMediator &cmdMediator)
   m_cmbFunctionsPointsEvenlySpacingUnits->setCurrentIndex (indexFunctions);
   m_cmbRelationsPointsEvenlySpacingUnits->setCurrentIndex (indexRelations);
 
+  m_cmbFileExtension->setCurrentText (exportFileExtensionToPreviewString (EXPORT_FILE_EXTENSION_CSV));
+
   initializeIntervalConstraints ();
 
   updateControlsUponLoad (); // Before updateControls so m_haveFunction and m_haveRelation are set
@@ -727,6 +745,11 @@ void DlgSettingsExportFormat::slotExclude ()
 
   m_modelExportAfter->setCurveNamesNotExported(excluded);
   updateControls();
+  updatePreview();
+}
+
+void DlgSettingsExportFormat::slotFileExtension (const QString &)
+{
   updatePreview();
 }
 
@@ -1177,8 +1200,18 @@ void DlgSettingsExportFormat::updatePreview()
 
     unsigned int numWritesSoFar = 0;
 
+    // Cobble together enough of a filename, given the extension, to be parsable as a filename
+    ExportFileExtension exportFileExtension = static_cast<ExportFileExtension> (m_cmbFileExtension->currentData().toInt());
+    QString filename = exportFileExtensionToFilename (exportFileExtension);
+
+    ExportByFilename exportByFilename;
+    ExportToFile exportToFile;
+    DocumentModelExportFormat modelAfterWithFileExtension = exportByFilename.modelExportOverride(*m_modelExportAfter,
+                                                                                                 exportToFile,
+                                                                                                 filename);
+
     ExportFileFunctions exportStrategyFunctions;
-    exportStrategyFunctions.exportToFile (*m_modelExportAfter,
+    exportStrategyFunctions.exportToFile (modelAfterWithFileExtension,
                                           cmdMediator().document(),
                                           mainWindow().modelMainWindow(),
                                           mainWindow().transformation(),
@@ -1186,7 +1219,7 @@ void DlgSettingsExportFormat::updatePreview()
                                           numWritesSoFar);
 
     ExportFileRelations exportStrategyRelations;
-    exportStrategyRelations.exportToFile (*m_modelExportAfter,
+    exportStrategyRelations.exportToFile (modelAfterWithFileExtension,
                                           cmdMediator().document(),
                                           mainWindow().modelMainWindow(),
                                           mainWindow().transformation(),

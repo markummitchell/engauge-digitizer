@@ -2632,7 +2632,7 @@ Verdikomponenten kalles også lyshet.</translation>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="219" />
         <source>Date/Time</source>
-        <translation>Dato tid</translation>
+        <translation>Dato/Tid</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="229" />
@@ -3157,22 +3157,22 @@ Dra markøren over dette området for å se effekten av gjeldende innstillinger 
 <context>
     <name>DlgSettingsExportFormat</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="55" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="58" />
         <source>Export Format</source>
         <translation>Eksporter format</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="84" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="87" />
         <source>Included</source>
         <translation>Inkludert</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="87" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="90" />
         <source>Not included</source>
         <translation>Ikke inkludert</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="92" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="95" />
         <source>List of curves to be included in the exported file.
 
 The order of the curves here does not affect the order in the exported file. That order is determined by the Curves settings.</source>
@@ -3181,143 +3181,143 @@ The order of the curves here does not affect the order in the exported file. Tha
 Rekkefølgen på kurvene her påvirker ikke rekkefølgen i den eksporterte filen. Den rekkefølgen bestemmes av kurveinnstillingene.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="101" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="104" />
         <source>List of curves to be excluded from the exported file</source>
         <translation>Liste over kurver som skal ekskluderes fra den eksporterte filen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="106" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="109" />
         <source>Include</source>
         <translation>Inkludere</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="108" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="111" />
         <source>Move the currently selected curve(s) from the excluded list</source>
         <translation>Flytt de valgte kurver (er) fra listen som er ekskludert</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="112" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="115" />
         <source>Exclude</source>
         <translation>Utelukke</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="114" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="117" />
         <source>Move the currently selected curve(s) from the included list</source>
         <translation>Flytt de valgte kurver (er) fra listen som er inkludert</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="125" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="128" />
         <source>Delimiters</source>
         <translation>Skilletegn</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="132" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="135" />
         <source>Exported file will have commas between adjacent values, unless overridden by tabs in TSV files.</source>
         <translation>Eksportert fil vil ha komma mellom tilstøtende verdier, med mindre de overstyres av faner i TSV-filer.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="137" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="140" />
         <source>Exported file will have spaces between adjacent values, unless overridden by commas in CSV files, or tabs in TSV files.</source>
         <translation>Eksportert fil vil ha mellomrom mellom tilstøtende verdier, med mindre de overstyres av komma i CSV-filer, eller faner i TSV-filer.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="143" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="146" />
         <source>Exported file will have tabs between adjacent values, unless overridden by commas in CSV files.</source>
         <translation>Eksportert fil vil ha faner mellom tilstøtende verdier, med mindre de overstyres av komma i CSV-filer.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="148" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="151" />
         <source>Exported file will have semicolons between adjacent values, unless overridden by commas in CSV files.</source>
         <translation>Eksportert fil vil ha semikolon mellom tilstøtende verdier, med mindre de overstyres av komma i CSV-filer.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="152" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="155" />
         <source>Override in CSV/TSV files</source>
         <translation>Overstyr i CSV / TSV-filer</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="153" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="156" />
         <source>Comma-separated value (CSV) files and tab-separated value (TSV) files will use commas and tabs respectively, unless this setting is selected. Selecting this setting will apply the delimiter setting to every file.</source>
         <translation>CSV-filer med kommaseparerte verdier og TSV-filer vil bruke henholdsvis komma og faner, med mindre denne innstillingen er valgt. Valg av denne innstillingen vil angi avgrensningsinnstillingen på hver fil.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="164" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="167" />
         <source>Layout</source>
         <translation>Oppsett</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="170" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="173" />
         <source>All curves on each line</source>
         <translation>Alle kurver på hver linje</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="171" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="174" />
         <source>Exported file will have, on each line, an X value, the Y value for the first curve, the Y value for the second curve,...</source>
         <translation>Eksportert fil vil ha på hver linje en X-verdi, Y-verdien for den første kurven, Y-verdien for den andre kurven, ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="176" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="179" />
         <source>One curve on each line</source>
         <translation>En kurve på hver linje</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="177" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="180" />
         <source>Exported file will have all the points for the first curve, with one X-Y pair on each line, then the points for the second curve,...</source>
         <translation>Eksportert fil vil ha alle punktene for den første kurven, med ett X-Y-par på hver linje, deretter poengene for den andre kurven, ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="187" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="190" />
         <source>Function Points Selection</source>
         <translation>Valg av funksjonspunkter</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="201" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="204" />
         <source>Interpolate Ys at Xs from all curves</source>
         <translation>Interpolér Ys ved Xs fra alle kurver</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="202" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="205" />
         <source>Exported file will have values at every unique X value from every curve. Y values will be linearly interpolated if necessary</source>
         <translation>Eksportert fil vil ha verdier på hver unike X-verdi fra hver kurve. Y-verdiene blir interpolert lineært om nødvendig</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="208" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="211" />
         <source>Extrapolate outside endpoints</source>
         <translation>Ekstrapolere utenfor endepunkter</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="212" />
         <source>Enable or disable extrapolation outside of endpoints of each curve. If disabled, only points between the endpoints of each curve are exported</source>
         <translation>Aktiver eller deaktiver ekstrapolering utenfor endepunktene for hver kurve. Hvis den er deaktivert, eksporteres bare punkter mellom endepunktene for hver kurve</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="214" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="217" />
         <source>Interpolate Ys at Xs from first curve</source>
         <translation>Interpolere Ys ved Xs fra første kurve</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="215" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="218" />
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
         <translation>Eksportert fil vil ha verdier på hver unike X-verdi fra den første kurven. Y-verdiene blir interpolert lineært om nødvendig</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="220" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="223" />
         <source>Interpolate Ys at evenly spaced X values that are automatically selected</source>
         <translation>Interpolér Ys med jevnt fordelt X-verdier som automatisk blir valgt</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="221" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="224" />
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
         <translation>Eksportert fil vil ha verdier med jevnt fordelt X-verdier, atskilt med intervallet valgt nedenfor.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="225" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="372" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="228" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
         <source>Interval</source>
         <translation>Intervall</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="233" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="236" />
         <source>Interval, in the units of X, between successive points in the X direction.
 
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
@@ -3330,7 +3330,7 @@ Hvis skalaen er lineær, legges dette intervallet til påfølgende X-verdier. Hv
 X-verdiene blir automatisk justert langs enkle tall. Hvis de første og / eller siste punktene ikke er langs de justerte X-verdiene, legges ett eller to tilleggspunkter etter behov.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="243" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="246" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
@@ -3343,74 +3343,78 @@ Pixelenheter foretrekkes når avstanden skal være uavhengig av X-skalaen. Avsta
 Grafenheter foretrekkes når avstanden er avhengig av X-skalaen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="255" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="258" />
         <source>Interpolate Ys at evenly spaced X values on grid lines</source>
         <translation>Interpolér Ys med jevnt fordelt X-verdier på rutenettlinjer</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="256" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="259" />
         <source>Exported file will have values at evenly spaced X values at the vertical grid lines.</source>
         <translation>Eksportert fil vil ha verdier på jevnt fordelt X-verdier ved de vertikale rutenettlinjene.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="260" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="398" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="263" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="414" />
         <source>Raw Xs and Ys</source>
         <translation>Rå Xs og Ys</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="261" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="399" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="264" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="415" />
         <source>Exported file will have only original X and Y values</source>
         <translation>Eksportert fil vil bare ha originale X- og Y-verdier</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="272" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="275" />
         <source>Header</source>
         <translation>Overskrift</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="282" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="285" />
         <source>Exported file will have no header line</source>
         <translation>Eksportert fil har ingen overskriftslinje</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="287" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="290" />
         <source>Exported file will have simple header line</source>
         <translation>Eksportert fil vil ha enkel overskriftslinje</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="292" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="295" />
         <source>Exported file will have gnuplot header line</source>
         <translation>Eksportert fil vil ha gnuplot-topplinje</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="304" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="307" />
         <source>Save As Default</source>
         <translation>Lagre som standard</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="305" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="308" />
         <source>Save the settings for use as future defaults.</source>
         <translation>Lagre innstillingene for bruk som fremtidige standardinnstillinger.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="309" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="312" />
         <source>Load Default</source>
         <translation>Last inn standard</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="310" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="313" />
         <source>Load the default settings.</source>
         <translation>Last inn standardinnstillingene.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="319" />
-        <source>Preview</source>
-        <translation>Forhåndsvisning</translation>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="325" />
+        <source>File extension used for preview. The CSV and TSV file extensions normally use commas and tabs respectively, but that can be changed in this dialog.</source>
+        <translation>Filendelse brukt til forhåndsvisning. CSV- og TSV-filtypene bruker vanligvis henholdsvis komma og faner, men det kan endres i denne dialogboksen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="335" />
+        <source>Preview</source>
+        <translation type="vanished">Forhåndsvisning</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351" />
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
@@ -3419,27 +3423,27 @@ Functions (shown here in blue) are output first, followed by relations (shown he
 Funksjoner (vist her i blått) sendes ut først, etterfulgt av relasjoner (vist her i grønt) hvis det finnes noen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="367" />
         <source>Relation Points Selection</source>
         <translation>Valg av forholdspunkt</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="365" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="381" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation>Interpolér Xs og Ys med jevnt mellomrom.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="366" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="382" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation>Eksportert fil vil ha punkter jevnt fordelt langs hver relasjon, atskilt med intervallet valgt nedenfor. Hvis det siste intervallet ikke slutter på det siste punktet, legges det til et kortere siste intervall som slutter på det siste punktet.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="380" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="396" />
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation>Intervall mellom påfølgende punkter når du eksporterer med jevnt fordelt (X, Y) koordinater.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="386" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="402" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -3452,12 +3456,12 @@ Pixelenheter foretrekkes når avstanden skal være uavhengig av X- og Y-skalaene
 Grafenheter foretrekkes vanligvis når X- og Y-skalaene er identiske.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="442" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="458" />
         <source>Functions</source>
         <translation>Funksjoner</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="444" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="460" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
@@ -3466,12 +3470,12 @@ Controls for specifying the format of functions during export</source>
 Kontroller for å spesifisere formatet for funksjoner under eksport</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="450" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="466" />
         <source>Relations</source>
         <translation>Relasjoner</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="452" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="468" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
@@ -3480,17 +3484,17 @@ Controls for specifying the format of relations during export</source>
 Kontroller for å spesifisere formatet for forhold under eksport</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="471" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="487" />
         <source>X Label</source>
         <translation>X-etikett</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="475" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="491" />
         <source>Label in the header for x values</source>
         <translation>Merk i overskriften for x-verdier</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1214" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1247" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>Forhåndsvisning er ikke tilgjengelig til aksepunktene er definert.</translation>
     </message>
@@ -3918,56 +3922,60 @@ Stoppverdien kan ikke være mindre enn startverdien</translation>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="43" />
         <source>Main Window</source>
-        <translation type="unfinished" />
+        <translation>Hovedvindu</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="68" />
         <source>Initial zoom</source>
-        <translation type="unfinished" />
+        <translation>Første zoom</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="83" />
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
-        <translation type="unfinished" />
+        <translation>Innledende zoom
+
+Velg den første zoomfaktoren når et nytt dokument lastes inn. Enten kan forrige zoom holdes, eller den angitte zoomen kan brukes.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="89" />
         <source>Zoom control</source>
-        <translation type="unfinished" />
+        <translation>Zoomkontroll</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93" />
         <source>Menu only</source>
-        <translation type="unfinished" />
+        <translation>Bare meny</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="94" />
         <source>Menu and mouse wheel</source>
-        <translation type="unfinished" />
+        <translation>Meny og musehjul</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="95" />
         <source>Menu and +/- keys</source>
-        <translation type="unfinished" />
+        <translation>Meny og +/- tastene</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="96" />
         <source>Menu, mouse wheel and +/- keys</source>
-        <translation type="unfinished" />
+        <translation>Meny, musehjul og +/- taster</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="97" />
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
-        <translation type="unfinished" />
+        <translation>Zoomkontroll
+
+Velg hvilke innganger som skal brukes til å zoome inn og ut.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
         <source>Locale (requires restart)</source>
-        <translation type="unfinished" />
+        <translation>Lokalitet (krever omstart)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="107" />
@@ -3976,12 +3984,16 @@ Select which inputs are used to zoom in and out.</source>
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
 
 The locale determines how numbers are formatted. Specifically, either commas or periods will be used as group delimiters in each number entered by the user, displayed in the user interface, or exported to a file.</source>
-        <translation type="unfinished" />
+        <translation>Locale
+
+Velg språk som skal brukes i tall (umiddelbart), og språket i brukergrensesnittet (etter omstart).
+
+Lokaliteten bestemmer hvordan tallene skal formateres. Spesifikt vil enten komma eller perioder bli brukt som gruppeavgrensere i hvert nummer som er lagt inn av brukeren, vist i brukergrensesnittet, eller eksportert til en fil.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="127" />
         <source>Import cropping</source>
-        <translation type="unfinished" />
+        <translation>Importer beskjæring</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="131" />
@@ -3990,89 +4002,110 @@ The locale determines how numbers are formatted. Specifically, either commas or 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
 
 This setting only has an effect when Engauge has been built with support for pdf files.</source>
-        <translation type="unfinished" />
+        <translation>Importer beskjæring
+
+Aktiverer eller deaktiverer beskjæring av det importerte bildet når du importerer. Å beskjære bildet er nyttig for å fjerne uviktig informasjon rundt en graf, men mindre nyttig når grafen allerede fyller hele bildet.
+
+Denne innstillingen har bare effekt når Engauge er bygget med støtte for pdf-filer.
+ </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="144" />
         <source>Import PDF resolution (dots per inch)</source>
-        <translation type="unfinished" />
+        <translation>Importer PDF-oppløsning (prikker per tomme)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="148" />
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
-        <translation type="unfinished" />
+        <translation>Importer PDF-oppløsning
+
+Importerte Portable Document Format (PDF) filer blir konvertert til denne pikseloppløsningen i punkter per tomme (DPI), der hver piksel er en prikk. En høyere verdi øker bildeoppløsningen og kan også forbedre numerisk digitaliseringsnøyaktighet. Imidlertid kan en veldig høy verdi gjøre bildet så stort at Engauge vil sakte.
+ </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="163" />
         <source>Maximum grid lines</source>
-        <translation type="unfinished" />
+        <translation>Maksimale rutenettlinjer</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="168" />
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
-        <translation type="unfinished" />
+        <translation>Maksimale rutenettlinjer
+
+Maksimalt antall rutenettlinjer som skal behandles. Denne grensen brukes når trinnverdien er for liten for start- og stoppverdiene, noe som vil resultere i for mange rutenettlinjer visuelt og muligens ekstremt lang behandlingstid (siden hver rutenettlinje måtte behandles)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="175" />
         <source>Highlight opacity</source>
-        <translation type="unfinished" />
+        <translation>Uthev åpenhet</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="181" />
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
-        <translation type="unfinished" />
+        <translation>Uthev åpenhet
+
+Opasitet som skal brukes når markøren er over en kurve eller aksepunkt i Velg modus. Endringen i utseende viser når punktet kan velges.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
         <source>Recent file list</source>
-        <translation type="unfinished" />
+        <translation>Nyere filliste</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="190" />
         <source>Clear</source>
-        <translation type="unfinished" />
+        <translation>Klar</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="192" />
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
-        <translation type="unfinished" />
+        <translation>Nyere filliste klart
+
+Tøm den nylige fillisten i Fil-menyen.
+ </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="198" />
         <source>Include title bar path</source>
-        <translation type="unfinished" />
+        <translation>Ta med tittellinjebanen</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="203" />
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
-        <translation type="unfinished" />
+        <translation>Tittellinje Filnavn
+
+Inkluderer eller ekskluderer banen og filtypen fra filnavnet i tittellinjen.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="208" />
         <source>Allow small dialogs</source>
-        <translation type="unfinished" />
+        <translation>Tillat små dialoger</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="213" />
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
-        <translation type="unfinished" />
+        <translation>Tillat små dialoger
+
+Lar innstillingsdialogene gjøres veldig små, slik at de passer på små dataskjermer.
+ </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="218" />
         <source>Allow drag and drop export</source>
-        <translation type="unfinished" />
+        <translation>Tillat å dra og slippe eksport
+ </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="223" />
@@ -4081,31 +4114,40 @@ Allows settings dialogs to be made very small so they fit on small computer scre
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
 
 When drag and drop is disabled, a rectangular set of table cells can be selected using click and drag. When drag and drop is enabled, a rectangular set of table cells can be selected using Click then Shift+Click, since click and drag starts the drag operation.</source>
-        <translation type="unfinished" />
+        <translation>Tillat eksport av dra og slipp
+
+Gjør det mulig å dra og slippe eksport fra tabellene Curve Fitting Window and Geometry Window.
+
+Når dra og slipp er deaktivert, kan du velge et rektangulært sett med tabellceller ved å klikke og dra. Når dra og slipp er aktivert, kan du velge et rektangulært sett med tabellceller ved å bruke Click og deretter Shift + Click, siden klikk og dra starter draoperasjonen.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="231" />
         <source>Image replace renames document</source>
-        <translation type="unfinished" />
+        <translation>Bildet bytter navn på dokument</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
         <source>Image Replace Renames Document
 
 When an image is imported to replace the current image, the document will be renamed if this is true, otherwise the name will stay the same.</source>
-        <translation type="unfinished" />
+        <translation>Bildet bytter navn på dokument
+
+Når et bilde importeres for å erstatte det gjeldende bildet, vil dokumentet gi nytt navn hvis dette er sant, ellers forblir navnet det samme.</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242" />
         <source>Significant digits</source>
-        <translation type="unfinished" />
+        <translation>Betydelige siffer</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="247" />
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
-        <translation type="unfinished" />
+        <translation>Betydelige sifre
+
+Antall presisjon i flyttallstall. Denne verdien påvirker beregninger for kurvepasninger, siden mellomresultater som er mindre enn en terskel T indikerer at en polynomisk kurve med en spesifikk rekkefølge ikke kan tilpasses dataene. Terskelen T beregnes fra det maksimale matriseelementet M og signifikante siffer S som T = M / 10 ^ S.
+ </translation>
     </message>
 </context>
 <context>
@@ -4113,12 +4155,13 @@ Number of digits of precision in floating point numbers. This value affects calc
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="30" />
         <source>Point Match</source>
-        <translation type="unfinished" />
+        <translation>Poengkamp</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="83" />
         <source>Maximum point size (pixels)</source>
-        <translation type="unfinished" />
+        <translation>Maksimal punktstørrelse (piksler)
+ </translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="87" />
@@ -4129,37 +4172,43 @@ Sample match points must fit within a square box, around the cursor, having widt
 This size is also used to determine if a region of pixels that are on, in the processed image, should be ignored since that region is wider or taller than this limit.
 
 This value has a lower limit</source>
-        <translation type="unfinished" />
+        <translation>Velg en maksimal punktstørrelse i piksler.
+
+Eksempler på samsvarspunkt må passe inn i en firkantet boks rundt markøren, med bredde og høyde lik dette maksimum.
+
+Denne størrelsen brukes også til å bestemme om et område med piksler som er på, i det behandlede bildet, bør ignoreres siden det området er bredere eller høyere enn denne grensen.
+
+Denne verdien har en lavere grense</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="98" />
         <source>Accepted point color</source>
-        <translation type="unfinished" />
+        <translation>Akseptert punktfarge</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="102" />
         <source>Select a color for matched points that are accepted</source>
-        <translation type="unfinished" />
+        <translation>Velg en farge for matchede poeng som blir akseptert</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="107" />
         <source>Rejected point color</source>
-        <translation type="unfinished" />
+        <translation>Avvist punktfarge</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="111" />
         <source>Select a color for matched points that are rejected</source>
-        <translation type="unfinished" />
+        <translation>Velg en farge for matchede punkter som blir avvist</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="116" />
         <source>Candidate point color</source>
-        <translation type="unfinished" />
+        <translation>Kandidatpunktfarge</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="120" />
         <source>Select a color for the point being decided upon</source>
-        <translation type="unfinished" />
+        <translation>Velg en farge for det punktet du bestemmer deg for</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="135" />
@@ -4171,7 +4220,9 @@ This value has a lower limit</source>
         <source>Preview window shows how current settings affect point matching, and how the marked and candidate points are displayed.
 
 The points are separated by the point separation value, and the maximum point size is shown as a box in the center</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisningsvindu viser hvordan gjeldende innstillinger påvirker poengmatchingen, og hvordan de markerte og kandidatpunktene vises.
+
+Punktene skilles ut av poengseparasjonsverdien, og maksimal punktstørrelse vises som en boks i midten</translation>
     </message>
 </context>
 <context>
@@ -4179,12 +4230,12 @@ The points are separated by the point separation value, and the maximum point si
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="40" />
         <source>Segment Fill</source>
-        <translation type="unfinished" />
+        <translation>Segmentfyll</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="78" />
         <source>Minimum length (points)</source>
-        <translation type="unfinished" />
+        <translation>Minimum lengde (poeng)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="83" />
@@ -4193,12 +4244,16 @@ The points are separated by the point separation value, and the maximum point si
 Only segments with more points will be created.
 
 This value should be as large as possible to reduce memory usage. This value has a lower limit</source>
-        <translation type="unfinished" />
+        <translation>Velg et minimum antall poeng i et segment.
+
+Bare segmenter med flere poeng blir opprettet.
+
+Denne verdien skal være så stor som mulig for å redusere minnebruken. Denne verdien har en lavere grense</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="90" />
         <source>Point separation (pixels)</source>
-        <translation type="unfinished" />
+        <translation>Punkt separasjon (piksler)</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="95" />
@@ -4207,19 +4262,25 @@ This value should be as large as possible to reduce memory usage. This value has
 Successive points added to a segment will be separated by this number of pixels. If Fill Corners is enabled, then additional points will be inserted at corners so some points will be closer.
 
 This value has a lower limit</source>
-        <translation type="unfinished" />
+        <translation>Velg en punktseparering i piksler.
+
+Påfølgende punkter som er lagt til i et segment, vil bli separert med dette antall piksler. Hvis Fill Corners er aktivert, vil flere punkter settes inn i hjørnene, slik at noen punkter vil være nærmere.
+
+Denne verdien har en lavere grense</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="103" />
         <source>Fill corners</source>
-        <translation type="unfinished" />
+        <translation>Fyll hjørner</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="107" />
         <source>Fill corners.
 
 In addition to the points placed at regular intervals, this option causes a point to be placed at each corner. This option can capture important information in piecewise linear graphs, but gradually curving graphs may not benefit from the additional points</source>
-        <translation type="unfinished" />
+        <translation>Fyll hjørner.
+
+I tillegg til punktene som er plassert med jevne mellomrom, fører dette alternativet til at et punkt plasseres i hvert hjørne. Dette alternativet kan fange viktig informasjon i stykkevis lineære grafer, men gradvis kan kurve grafer kanskje ikke dra nytte av tilleggspunktene</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="114" />
@@ -4229,7 +4290,7 @@ In addition to the points placed at regular intervals, this option causes a poin
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="118" />
         <source>Select a size for the lines drawn along a segment</source>
-        <translation type="unfinished" />
+        <translation>Velg en størrelse for linjene tegnet langs et segment</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="123" />
@@ -4239,7 +4300,7 @@ In addition to the points placed at regular intervals, this option causes a poin
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="127" />
         <source>Select a color for the lines drawn along a segment</source>
-        <translation type="unfinished" />
+        <translation>Velg en farge for linjene tegnet langs et segment</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="142" />
@@ -4249,7 +4310,7 @@ In addition to the points placed at regular intervals, this option causes a poin
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="149" />
         <source>Preview window shows the shortest line that can be segment filled, and the effects of current settings on segments and points generated by segment fill</source>
-        <translation type="unfinished" />
+        <translation>Forhåndsvisningsvindu viser den korteste linjen som kan segmentfylles, og effekten av gjeldende innstillinger på segmenter og punkter generert av segmentfylling</translation>
     </message>
 </context>
 <context>
@@ -4267,57 +4328,61 @@ In addition to the points placed at regular intervals, this option causes a poin
 This window applies a curve fit to the currently selected curve.
 
 If drag-and-drop is disabled, a rectangular set of cells may be selected by clicking and dragging. Otherwise, if drag-and-drop is enabled, a rectangular set of cells may be selected using Click then Shift+Click, since click and drag starts the dragging operation. Drag-and-drop mode is set in the Main Window settings</source>
-        <translation type="unfinished" />
+        <translation>Vindu med kurvepassing
+
+Dette vinduet bruker en kurvetilpasning til den valgte kurven.
+
+Hvis dra og slipp er deaktivert, kan et rektangulært sett med celler velges ved å klikke og dra. Ellers, hvis dra og slipp er aktivert, kan et rektangulært sett med celler velges ved bruk av klikk og skift + klikk, siden klikk og dra starter draoperasjonen. Dra-og-slipp-modus er angitt i hovedvinduets innstillinger</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="128" />
         <source>Order</source>
-        <translation type="unfinished" />
+        <translation>Orden</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="153" />
         <source>Mean square error</source>
-        <translation type="unfinished" />
+        <translation>Gjennomsnittlig kvadratordre</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="158" />
         <source>Calculated mean square error statistic</source>
-        <translation type="unfinished" />
+        <translation>Beregnet gjennomsnittlig kvadratisk feilstatistikk</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="161" />
         <source>Root mean square</source>
-        <translation type="unfinished" />
+        <translation>Rot betyr kvadrat</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="166" />
         <source>Calculated root mean square statistic. This is calculated as the square root of the mean square error</source>
-        <translation type="unfinished" />
+        <translation>Beregnet rot middelkvadratstatistikk. Dette beregnes som kvadratroten til den gjennomsnittlige kvadratfeilen</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="169" />
         <source>R squared</source>
-        <translation type="unfinished" />
+        <translation>R kvadrat</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="174" />
         <source>Calculated R squared statistic</source>
-        <translation type="unfinished" />
+        <translation>Beregnet gjennomsnittlig kvadratisk feilstatistikk</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="228" />
         <source>log10(Y)=</source>
-        <translation type="unfinished" />
+        <translation>log10(Y)=</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="229" />
         <source>Y=</source>
-        <translation type="unfinished" />
+        <translation>Y=</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="234" />
         <source>log10(X)</source>
-        <translation type="unfinished" />
+        <translation>log10(X)</translation>
     </message>
     <message>
         <location filename="../src/Fitting/FittingWindow.cpp" line="235" />
@@ -4352,12 +4417,28 @@ Index = Point number
 Distance = Distance along the curve in forward or backward direction, in either graph units or as a percentage
 
 If drag-and-drop is disabled, a rectangular set of cells may be selected by clicking and dragging. Otherwise, if drag-and-drop is enabled, a rectangular set of cells may be selected using Click then Shift+Click, since click and drag starts the dragging operation. Drag-and-drop mode is set in the Main Window settings</source>
-        <translation type="unfinished" />
+        <translation>Geometri vindu
+
+Denne tabellen viser følgende geometri-data for den valgte kurven:
+
+Funksjonsområde = Område under kurven hvis det er en funksjon
+
+Polygonområde = Område innenfor kurven hvis det er en relasjon. Denne verdien er bare riktig hvis ingen av kurvelinjene skjærer hverandre
+
+X = X-koordinat for hvert punkt
+
+Y = Y-koordinat for hvert punkt
+
+Indeks = Punktnummer
+
+Distanse = Avstand langs kurven i retning fremover eller bakover, i enten grafenheter eller i prosent
+
+Hvis dra og slipp er deaktivert, kan et rektangulært sett med celler velges ved å klikke og dra. Ellers, hvis dra-og-slipp er aktivert, kan et rektangulært sett med celler velges ved bruk av Click og deretter Shift + Click, siden klikk og dra starter draoperasjonen. Dra-og-slipp-modus er angitt i hovedvinduets innstillinger</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="274" />
         <source>Highlighted segments may have unexpected values when exported due to overlaps. Adjust points or change Settings / Curve Properties / Connect As.</source>
-        <translation type="unfinished" />
+        <translation>Fremhevede segmenter kan ha uventede verdier når de eksporteres på grunn av overlapp. Juster punkter eller endre innstillinger / kurveegenskaper / koble til.</translation>
     </message>
 </context>
 <context>
@@ -4365,7 +4446,7 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
     <message>
         <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>
-        <translation type="unfinished" />
+        <translation>Funksjon har for tiden flere Y-verdier for en X-verdi. Juster poeng i nærheten, eller endre kurvetypen i kurveegenskaper</translation>
     </message>
 </context>
 <context>
@@ -4384,7 +4465,18 @@ Zooming the image in or out is performed using any of several methods:
 1) rotating the mouse wheel when the cursor is outside of the image
 2) pressing the minus or plus keys
 3) selecting a new zoom setting from the View/Zoom menu</source>
-        <translation type="unfinished" />
+        <translation>Hovedvindu
+
+Etter at en bildefil er importert, eller et Engauge-dokument åpnes, vises et bilde i dette området. Poeng legges til i bildet.
+
+Hvis bildet er en graf med to akser og en eller flere kurver, må det opprettes tre aksepunkter langs disse aksene. Bare legg to aksepunkter på den ene aksen og et tredje aksepunktet på den andre aksen, så langt fra hverandre som mulig for høyere nøyaktighet. Deretter kan kurvpunkter legges langs kurvene.
+
+Hvis bildet er et kart med en skala for å definere lengde, må det opprettes to aksepunkter i hver ende av skalaen. Da kan kurvpunkter legges til.
+
+Zooming av eller ut av bildet utføres ved hjelp av en av flere metoder:
+1) å rotere musehjulet når markøren er utenfor bildet
+2) trykk på minus- eller pluss-tastene
+3) velge en ny zoominnstilling fra Vis / zoom-menyen</translation>
     </message>
 </context>
 <context>
@@ -4392,12 +4484,12 @@ Zooming the image in or out is performed using any of several methods:
     <message>
         <location filename="../src/Help/HelpWindow.cpp" line="34" />
         <source>Contents</source>
-        <translation type="unfinished" />
+        <translation>Innhold</translation>
     </message>
     <message>
         <location filename="../src/Help/HelpWindow.cpp" line="36" />
         <source>Index</source>
-        <translation type="unfinished" />
+        <translation>Hovedsiden</translation>
     </message>
 </context>
 <context>
@@ -4405,124 +4497,125 @@ Zooming the image in or out is performed using any of several methods:
     <message>
         <location filename="../src/Load/LoadImageFromUrl.cpp" line="66" />
         <source>Unable to download image from</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke laste ned bilde fra</translation>
     </message>
     <message>
         <location filename="../src/Load/LoadImageFromUrl.cpp" line="98" />
         <source>Unable to load image from</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke laste inn bilde fra</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="478" />
+        <location filename="../src/main/MainWindow.cpp" line="481" />
         <source>Unable to export to file</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke eksportere til fil</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="512" />
+        <location filename="../src/main/MainWindow.cpp" line="515" />
         <source>Unable to extract image to file</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke trekke ut bilde til fil</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="587" />
-        <location filename="../src/main/MainWindow.cpp" line="747" />
-        <location filename="../src/main/MainWindow.cpp" line="926" />
+        <location filename="../src/main/MainWindow.cpp" line="590" />
+        <location filename="../src/main/MainWindow.cpp" line="760" />
+        <location filename="../src/main/MainWindow.cpp" line="939" />
         <source>Cannot read file</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese filen</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="589" />
-        <location filename="../src/main/MainWindow.cpp" line="749" />
-        <location filename="../src/main/MainWindow.cpp" line="928" />
+        <location filename="../src/main/MainWindow.cpp" line="592" />
+        <location filename="../src/main/MainWindow.cpp" line="762" />
+        <location filename="../src/main/MainWindow.cpp" line="941" />
         <source>from directory</source>
-        <translation type="unfinished" />
+        <translation>fra katalog</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="663" />
+        <location filename="../src/main/MainWindow.cpp" line="676" />
         <source>Import Image</source>
-        <translation type="unfinished" />
+        <translation>Importer bilde</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="903" />
+        <location filename="../src/main/MainWindow.cpp" line="916" />
         <source>File opened</source>
-        <translation type="unfinished" />
+        <translation>Filen ble åpnet</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="948" />
+        <location filename="../src/main/MainWindow.cpp" line="961" />
         <source>File not found</source>
-        <translation type="unfinished" />
+        <translation>Fil ikke funnet</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="965" />
+        <location filename="../src/main/MainWindow.cpp" line="978" />
         <source>Error report opened</source>
-        <translation type="unfinished" />
+        <translation>Feilrapport ble åpnet</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1020" />
-        <location filename="../src/main/MainWindow.cpp" line="1094" />
+        <location filename="../src/main/MainWindow.cpp" line="1033" />
+        <location filename="../src/main/MainWindow.cpp" line="1107" />
         <source>File imported</source>
-        <translation type="unfinished" />
+        <translation>Fil importert</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1128" />
+        <location filename="../src/main/MainWindow.cpp" line="1141" />
         <source>Background image.</source>
-        <translation type="unfinished" />
+        <translation>Bakgrunnsbilde.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1129" />
+        <location filename="../src/main/MainWindow.cpp" line="1142" />
         <source>Currently selected curve.</source>
-        <translation type="unfinished" />
+        <translation>For øyeblikket valgt kurve.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1130" />
+        <location filename="../src/main/MainWindow.cpp" line="1143" />
         <source>Point style for currently selected curve.</source>
-        <translation type="unfinished" />
+        <translation>Punktstil for valgt kurve.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1131" />
+        <location filename="../src/main/MainWindow.cpp" line="1144" />
         <source>Segment Fill filter for currently selected curve.</source>
-        <translation type="unfinished" />
+        <translation>Segmentfyllfilter for gjeldende valgt kurve.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1179" />
+        <location filename="../src/main/MainWindow.cpp" line="1192" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
-        <translation type="unfinished" />
+        <translation>Dokumentet er endret.
+Vil du lagre endringene dine?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1263" />
+        <location filename="../src/main/MainWindow.cpp" line="1249" />
         <source>Cannot write file</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke skrive fil</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1311" />
+        <location filename="../src/main/MainWindow.cpp" line="1297" />
         <source>Save</source>
         <translation>Lagre</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2331" />
+        <location filename="../src/main/MainWindow.cpp" line="2330" />
         <source>Export</source>
-        <translation type="unfinished" />
+        <translation>Eksport...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2413" />
+        <location filename="../src/main/MainWindow.cpp" line="2412" />
         <source>Open Document</source>
-        <translation type="unfinished" />
+        <translation>Åpne dokument</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="3668" />
+        <source>+</source>
+        <translation>+</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="3669" />
-        <source>+</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
-        <location filename="../src/main/MainWindow.cpp" line="3670" />
         <source>-</source>
-        <translation type="unfinished" />
+        <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3800" />
+        <location filename="../src/main/MainWindow.cpp" line="3799" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -4532,57 +4625,57 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="133" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="178" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="276" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="280" />
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
-        <translation type="unfinished" />
+        <translation>Nytt aksepunkt kan ikke være på samme skjermposisjon som et eksisterende aksepunkt</translation>
     </message>
     <message>
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="186" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="285" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="289" />
         <source>New axis point cannot have the same graph coordinates as an existing axis point</source>
-        <translation type="unfinished" />
+        <translation>Nytt aksepunkt kan ikke ha de samme grafkoordinatene som et eksisterende aksepunkt</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="192" />
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="291" />
-        <source>No more than two axis points can lie along the same line on the screen</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="198" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="194" />
         <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="297" />
+        <source>No more than two axis points can lie along the same line on the screen</source>
+        <translation>Ikke mer enn to aksepunkter kan ligge langs den samme linjen på skjermen</translation>
+    </message>
+    <message>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="202" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="305" />
         <source>No more than two axis points can lie along the same line in graph coordinates</source>
-        <translation type="unfinished" />
+        <translation>Ikke mer enn to aksepunkter kan ligge langs samme linje i grafkoordinater</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="251" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="255" />
         <source>Too many x axis points. There should only be two</source>
-        <translation type="unfinished" />
+        <translation>For mange x-aksepunkter. Det skal bare være to</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="257" />
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="261" />
         <source>Too many y axis points. There should only be two</source>
-        <translation type="unfinished" />
+        <translation>For mange y-aksepunkter. Det skal bare være to</translation>
     </message>
     <message>
         <location filename="../src/Checker/CheckerMode.cpp" line="16" />
         <source>Never</source>
-        <translation type="unfinished" />
+        <translation>Aldri</translation>
     </message>
     <message>
         <location filename="../src/Checker/CheckerMode.cpp" line="20" />
         <source>NSeconds</source>
-        <translation type="unfinished" />
+        <translation>N sekunder</translation>
     </message>
     <message>
         <location filename="../src/Checker/CheckerMode.cpp" line="24" />
         <source>Forever</source>
-        <translation type="unfinished" />
+        <translation>For alltid</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="69" />
         <source>Curves for coordinate system</source>
-        <translation type="unfinished" />
+        <translation>Kurver for koordinatsystem</translation>
     </message>
     <message>
         <location filename="../src/Cmd/CmdAddPointsGraph.cpp" line="51" />
@@ -4590,13 +4683,13 @@ Do you want to save your changes?</source>
         <location filename="../src/FileCmd/FileCmdImport.cpp" line="29" />
         <location filename="../src/FileCmd/FileCmdOpen.cpp" line="29" />
         <source>Missing attribute</source>
-        <translation type="unfinished" />
+        <translation>Mangler attributt</translation>
     </message>
     <message>
         <location filename="../src/Cmd/CmdAddPointsGraph.cpp" line="93" />
         <location filename="../src/Cmd/CmdEditPointGraph.cpp" line="105" />
         <source>Cannot read graph points</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese grafpoeng</translation>
     </message>
     <message>
         <location filename="../src/Cmd/CmdCopy.cpp" line="66" />
@@ -4605,7 +4698,7 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdEditPointGraph.cpp" line="60" />
         <location filename="../src/Cmd/CmdMoveBy.cpp" line="62" />
         <source>Missing attribute(s)</source>
-        <translation type="unfinished" />
+        <translation>Manglende attributt (er)</translation>
     </message>
     <message>
         <location filename="../src/Cmd/CmdCopy.cpp" line="69" />
@@ -4615,12 +4708,12 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdEditPointGraph.cpp" line="64" />
         <location filename="../src/Cmd/CmdMoveBy.cpp" line="64" />
         <source>and/or</source>
-        <translation type="unfinished" />
+        <translation>og / eller</translation>
     </message>
     <message>
         <location filename="../src/Cmd/CmdCut.cpp" line="67" />
         <source>Missing argument(s)</source>
-        <translation type="unfinished" />
+        <translation>Manglende argument (er)</translation>
     </message>
     <message>
         <location filename="../src/Cmd/CmdSettingsAxesChecker.cpp" line="50" />
@@ -4636,32 +4729,33 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdSettingsPointMatch.cpp" line="50" />
         <location filename="../src/Cmd/CmdSettingsSegments.cpp" line="50" />
         <source>Reached end of file before finding end element for</source>
-        <translation type="unfinished" />
+        <translation>Nådde slutten av filen før du finner sluttelementet for</translation>
     </message>
     <message>
         <location filename="../src/Color/ColorFilterMode.cpp" line="14" />
         <source>Foreground</source>
-        <translation type="unfinished" />
+        <translation>Forgrunnen
+</translation>
     </message>
     <message>
         <location filename="../src/Color/ColorFilterMode.cpp" line="17" />
         <source>Hue</source>
-        <translation type="unfinished" />
+        <translation>Hue</translation>
     </message>
     <message>
         <location filename="../src/Color/ColorFilterMode.cpp" line="20" />
         <source>Intensity</source>
-        <translation type="unfinished" />
+        <translation>Intensitet</translation>
     </message>
     <message>
         <location filename="../src/Color/ColorFilterMode.cpp" line="23" />
         <source>Saturation</source>
-        <translation type="unfinished" />
+        <translation>Metning</translation>
     </message>
     <message>
         <location filename="../src/Color/ColorFilterMode.cpp" line="26" />
         <source>Value</source>
-        <translation type="unfinished" />
+        <translation>Verdi</translation>
     </message>
     <message>
         <location filename="../src/Color/ColorFilterMode.cpp" line="29" />
@@ -4671,38 +4765,38 @@ Do you want to save your changes?</source>
         <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="65" />
         <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="32" />
         <source>Unknown</source>
-        <translation type="unfinished" />
+        <translation>Ukjent</translation>
     </message>
     <message>
         <location filename="../src/Color/ColorFilterSettings.cpp" line="221" />
         <source>Cannot read curve filter data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese kurved filterdata</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsDate.cpp" line="14" />
         <source>DD/MM/YYYY</source>
-        <translation type="unfinished" />
+        <translation>DD/MM/YYYY</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsDate.cpp" line="17" />
         <source>MM/DD/YYYY</source>
-        <translation type="unfinished" />
+        <translation>MM/DD/YYYY</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsDate.cpp" line="20" />
         <source>YYYY/MM/DD</source>
-        <translation type="unfinished" />
+        <translation>YYYY/MM/DD</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsDate.cpp" line="26" />
         <location filename="../src/Coord/CoordUnitsTime.cpp" line="23" />
         <source>unknown</source>
-        <translation type="unfinished" />
+        <translation>ukjent</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="16" />
         <source>Date Time</source>
-        <translation type="unfinished" />
+        <translation>Dato tid</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="19" />
@@ -4712,94 +4806,94 @@ Do you want to save your changes?</source>
         <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="21" />
         <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="24" />
         <source>Degrees</source>
-        <translation type="unfinished" />
+        <translation>Grader</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="25" />
         <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="46" />
         <source>Number</source>
-        <translation type="unfinished" />
+        <translation>Nummer</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="37" />
         <source>Date/Time</source>
-        <translation>Dato tid</translation>
+        <translation>Dato/Tid</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="27" />
         <source>Gradians</source>
-        <translation type="unfinished" />
+        <translation>Gradianer</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="30" />
         <source>Radians</source>
-        <translation type="unfinished" />
+        <translation>Radianer</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="33" />
         <source>Turns</source>
-        <translation type="unfinished" />
+        <translation>Turns</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsTime.cpp" line="14" />
         <source>HH:MM</source>
-        <translation type="unfinished" />
+        <translation>HH:MM</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsTime.cpp" line="17" />
         <source>HH:MM:SS</source>
-        <translation type="unfinished" />
+        <translation>HH:MM:SS</translation>
     </message>
     <message>
         <location filename="../src/CoordSystem/CoordSystem.cpp" line="611" />
         <source>Unexpected xml token</source>
-        <translation type="unfinished" />
+        <translation>Uventet xml-token</translation>
     </message>
     <message>
         <location filename="../src/Curve/Curve.cpp" line="367" />
         <location filename="../src/Curve/Curve.cpp" line="419" />
         <source>Cannot read curve data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese kurvedata</translation>
     </message>
     <message>
         <location filename="../src/Curve/CurveConnectAs.cpp" line="17" />
         <source>FunctionSmooth</source>
-        <translation type="unfinished" />
+        <translation>Funksjonen er glatt</translation>
     </message>
     <message>
         <location filename="../src/Curve/CurveConnectAs.cpp" line="21" />
         <source>FunctionStraight</source>
-        <translation type="unfinished" />
+        <translation>Funksjon rett</translation>
     </message>
     <message>
         <location filename="../src/Curve/CurveConnectAs.cpp" line="25" />
         <source>RelationSmooth</source>
-        <translation type="unfinished" />
+        <translation>Forholdet glatt</translation>
     </message>
     <message>
         <location filename="../src/Curve/CurveConnectAs.cpp" line="29" />
         <source>RelationStraight</source>
-        <translation type="unfinished" />
+        <translation>Forhold rett</translation>
     </message>
     <message>
         <location filename="../src/Curve/CurveConnectAs.cpp" line="33" />
         <source>ConnectSkipForAxisCurve</source>
-        <translation type="unfinished" />
+        <translation>Koble hopp for aksekurve</translation>
     </message>
     <message>
         <location filename="../src/Curve/CurveStyle.cpp" line="69" />
         <source>Cannot read curve style data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese kurvedriftdata</translation>
     </message>
     <message>
         <location filename="../src/Curve/CurvesGraphs.cpp" line="223" />
         <source>DUPLICATE</source>
-        <translation type="unfinished" />
+        <translation>DUPLISERE</translation>
     </message>
     <message>
         <location filename="../src/Curve/CurvesGraphs.cpp" line="237" />
         <source>Cannot read graph curves data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese grafkurvedata</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135" />
@@ -4812,270 +4906,270 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="136" />
         <source>Three axis points have been defined, and no more are needed or allowed.</source>
-        <translation type="unfinished" />
+        <translation>Tre aksepunkter er definert, og det er ikke behov for eller tillatt flere.</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="152" />
         <source>Color Picker</source>
-        <translation type="unfinished" />
+        <translation>Fargevelger</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="153" />
         <source>Sorry, but the color picker point must be near a non-background pixel. Please try again.</source>
-        <translation type="unfinished" />
+        <translation>Beklager, men fargevelgeren må være i nærheten av en ikke-bakgrunnspiksel. Vær så snill, prøv på nytt.</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="350" />
         <source>Point Match</source>
-        <translation type="unfinished" />
+        <translation>Poengkamp</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="351" />
         <source>There are no more matching points</source>
-        <translation type="unfinished" />
+        <translation>Det er ikke flere samsvarende poeng</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="174" />
         <source>The scale bar has been defined, and another is not needed or allowed.</source>
-        <translation type="unfinished" />
+        <translation>Skalaen er definert, og en annen er ikke nødvendig eller tillatt.</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateSelect.cpp" line="35" />
         <source>Move down</source>
-        <translation type="unfinished" />
+        <translation>Gå ned</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateSelect.cpp" line="36" />
         <source>Move left</source>
-        <translation type="unfinished" />
+        <translation>Gå til venstre</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateSelect.cpp" line="37" />
         <source>Move right</source>
-        <translation type="unfinished" />
+        <translation>Flytt til høyre</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateSelect.cpp" line="38" />
         <source>Move up</source>
-        <translation type="unfinished" />
+        <translation>Flytte opp</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="95" />
         <location filename="../src/Document/Document.cpp" line="137" />
         <source>Operating system says file is not readable</source>
-        <translation type="unfinished" />
+        <translation>Operativsystemet sier at fil ikke er lesbar</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="123" />
         <source>cannot read newer files from version</source>
-        <translation type="unfinished" />
+        <translation>kan ikke lese nyere filer fra versjonen</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="125" />
         <source>of</source>
-        <translation type="unfinished" />
+        <translation>av</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="144" />
         <location filename="../src/util/Xml.cpp" line="40" />
         <source>File</source>
-        <translation type="unfinished" />
+        <translation>Fil</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="146" />
         <source>was not found</source>
-        <translation type="unfinished" />
+        <translation>var ikke funnet</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="517" />
         <source>Cannot read image data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese bildedata</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelAxesChecker.cpp" line="96" />
         <source>Cannot read axes checker data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese akses checker data</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelColorFilter.cpp" line="205" />
         <source>Cannot read filter data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese filterdata</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelCoords.cpp" line="172" />
         <source>Cannot read coordinates data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese koordinatedata</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelDigitizeCurve.cpp" line="108" />
         <source>Cannot read digitize curve data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese digitaliserte kurvedata</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelExportFormat.cpp" line="225" />
         <source>Cannot read export data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese eksportdata</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelGeneral.cpp" line="93" />
         <source>Cannot read general data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese generelle data</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="155" />
         <source>Cannot read grid display data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese rutenettvisningsdata</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelGridRemoval.cpp" line="191" />
         <source>Cannot read grid removal data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese rutenettfjerningsdata</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelPointMatch.cpp" line="87" />
         <source>Cannot read point match data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese poengmatchdata</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelSegments.cpp" line="91" />
         <source>Cannot read segment data</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese segmentdata</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentScrub.cpp" line="40" />
         <source>Point identifier error encountered. Please notify the Engauge developers along with any comments about the country and language locale. The invalid point name was</source>
-        <translation type="unfinished" />
+        <translation>Punktidentifikasjonsfeil oppstått. Vennligst gi beskjed til Engauge-utviklerne sammen med eventuelle kommentarer om landet og språkområdet. Det ugyldige poengnavnet var</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="16" />
         <source>Commas</source>
-        <translation type="unfinished" />
+        <translation>Komma</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="20" />
         <source>Semicolons</source>
-        <translation type="unfinished" />
+        <translation>Semikolon</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="24" />
         <source>Spaces</source>
-        <translation type="unfinished" />
+        <translation>Spaces</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportDelimiter.cpp" line="28" />
         <source>Tabs</source>
-        <translation type="unfinished" />
+        <translation>Tabs</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportHeader.cpp" line="16" />
         <source>Gnuplot</source>
-        <translation type="unfinished" />
+        <translation>Gnuplot</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportHeader.cpp" line="20" />
         <source>None</source>
-        <translation type="unfinished" />
+        <translation>Ingen</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportHeader.cpp" line="24" />
         <source>Simple</source>
-        <translation type="unfinished" />
+        <translation>Enkel</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportImageForRegression.cpp" line="26" />
         <source>Export Image</source>
-        <translation type="unfinished" />
+        <translation>Eksporter bilde</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportImageForRegression.cpp" line="27" />
         <source>Cannot export file</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke eksportere filen</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportLayoutFunctions.cpp" line="16" />
         <source>AllPerLine</source>
-        <translation type="unfinished" />
+        <translation>Alt per linje</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportLayoutFunctions.cpp" line="20" />
         <source>OnePerLine</source>
-        <translation type="unfinished" />
+        <translation>Én per linje</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="16" />
         <source>Graph Units</source>
-        <translation type="unfinished" />
+        <translation>Grafiske enheter</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsIntervalUnits.cpp" line="20" />
         <source>Pixels</source>
-        <translation type="unfinished" />
+        <translation>Piksler</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="16" />
         <source>InterpolateAllCurves</source>
-        <translation type="unfinished" />
+        <translation>Interpolere alle kurver</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="20" />
         <source>InterpolateFirstCurve</source>
-        <translation type="unfinished" />
+        <translation>Interpolere første kurve</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="24" />
         <source>InterpolatePeriodic</source>
-        <translation type="unfinished" />
+        <translation>Interpolere periodisk</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsSelectionFunctions.cpp" line="28" />
         <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="20" />
         <source>Raw</source>
-        <translation type="unfinished" />
+        <translation>Rå</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportPointsSelectionRelations.cpp" line="16" />
         <source>Interpolate</source>
-        <translation type="unfinished" />
+        <translation>Interpolere</translation>
     </message>
     <message>
         <location filename="../src/FileCmd/FileCmdScript.cpp" line="35" />
         <source>Cannot read script file</source>
-        <translation type="unfinished" />
+        <translation>Kan ikke lese skriptfil</translation>
     </message>
     <message>
         <location filename="../src/FileCmd/FileCmdScript.cpp" line="37" />
         <source>from directory</source>
-        <translation type="unfinished" />
+        <translation>fra katalog</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="147" />
         <source>CurveName</source>
-        <translation type="unfinished" />
+        <translation>Navn på kurve</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="152" />
         <source>Distance</source>
-        <translation type="unfinished" />
+        <translation>Avstand</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="157" />
         <source>Percent</source>
-        <translation type="unfinished" />
+        <translation>Prosent</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="162" />
         <source>FunctionArea</source>
-        <translation type="unfinished" />
+        <translation>Funksjonsområde</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="167" />
         <source>Index</source>
-        <translation type="unfinished" />
+        <translation>Hovedsiden</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="172" />
         <source>PolygonArea</source>
-        <translation type="unfinished" />
+        <translation>Polygonområdet</translation>
     </message>
     <message>
         <location filename="../src/Geometry/GeometryWindow.cpp" line="177" />
@@ -5111,22 +5205,22 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Grid/GridLineFactory.cpp" line="67" />
         <source>Axes checker. If this does not align with the axes, then the axes points should be checked</source>
-        <translation type="unfinished" />
+        <translation>Aksjekontroller. Hvis dette ikke stemmer overens med aksene, bør aksepunktene kontrolleres</translation>
     </message>
     <message>
         <location filename="../src/Import/ImportCroppingUtilBase.cpp" line="22" />
         <source>No cropping</source>
-        <translation type="unfinished" />
+        <translation>Ingen beskjæring</translation>
     </message>
     <message>
         <location filename="../src/Import/ImportCroppingUtilBase.cpp" line="23" />
         <source>Crop pdf files with multiple pages</source>
-        <translation type="unfinished" />
+        <translation>Beskjær pdf-filer med flere sider</translation>
     </message>
     <message>
         <location filename="../src/Import/ImportCroppingUtilBase.cpp" line="24" />
         <source>Always crop</source>
-        <translation type="unfinished" />
+        <translation>Beskjær alltid</translation>
     </message>
     <message>
         <location filename="../src/Line/LineStyle.cpp" line="124" />
@@ -5209,7 +5303,7 @@ Do you want to save your changes?</source>
         <translation>Trenger flere aksepunkter</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="597" />
+        <location filename="../src/main/MainWindow.cpp" line="600" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>Filen ser ut til å ha tegn fra flere alfabeter, som ikke fungerer på Windows-kommandolinjen</translation>
     </message>
@@ -5237,112 +5331,112 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/main/main.cpp" line="374" />
         <source>Available styles</source>
-        <translation type="unfinished" />
+        <translation>Tilgjengelige stiler</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="400" />
         <source>Enables extra debug information. Used for debugging</source>
-        <translation type="unfinished" />
+        <translation>Aktiverer ekstra feilsøkingsinformasjon. Brukes til feilsøking</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="406" />
         <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
-        <translation type="unfinished" />
+        <translation>Indikerer at filer som er åpnet ved oppstart, er for å teste dra og slipp. Brukes til regresjonstesting</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="412" />
         <source>Specifies an error report file as input. Used for debugging and regression testing</source>
-        <translation type="unfinished" />
+        <translation>Angir en feilrapportfil som input. Brukes til feilsøking og regresjonstesting</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="418" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
-        <translation type="unfinished" />
+        <translation>Eksporter hver lastede oppstartsfil, som må ha alle aksepunktene definert, og stopp deretter</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="424" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
-        <translation type="unfinished" />
+        <translation>Pakk ut bildet i hver lastede oppstartsfil til en fil med den angitte utvidelsen, og stopp deretter</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="430" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
-        <translation type="unfinished" />
+        <translation>Spesifiserer en kommandoskriptfil som inndata. Brukes til feilsøking og testing</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="436" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
-        <translation type="unfinished" />
+        <translation>Diagnostiske gnuplot-inndatafiler. Brukes til feilsøking</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="442" />
         <source>Show this help information</source>
-        <translation type="unfinished" />
+        <translation>Vis denne hjelpeinformasjonen</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="448" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
-        <translation type="unfinished" />
+        <translation>Utfører feilrapportfilen eller filkommandoskriptet. Brukes til regresjonstesting</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="454" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
-        <translation type="unfinished" />
+        <translation>Fjerner alle lagrede innstillinger, inkludert vindusposisjoner. Brukes når vinduer starter på skjermen</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="461" />
         <source>Set the window style to one of the styles listed by the command line option</source>
-        <translation type="unfinished" />
+        <translation>Sett vindusstilen til en av stilene listet av kommandolinjealternativet</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="469" />
         <source>Show a list of available styles that can be used with the command line option</source>
-        <translation type="unfinished" />
+        <translation>Vis en liste over tilgjengelige stiler som kan brukes med kommandolinjealternativet</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="476" />
         <source>Upgrade files opened at startup to the most recent version</source>
-        <translation type="unfinished" />
+        <translation>Oppgrader filer som ble åpnet ved oppstart til den nyeste versjonen</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="482" />
         <source>File(s) to be imported or opened at startup</source>
-        <translation type="unfinished" />
+        <translation>Fil (er) som skal importeres eller åpnes ved oppstart</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="527" />
         <source>Could not write to</source>
-        <translation type="unfinished" />
+        <translation>Kunne ikke skrive til</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="540" />
         <source>Upgraded</source>
-        <translation type="unfinished" />
+        <translation>Oppgradert</translation>
     </message>
     <message>
         <location filename="../src/main/main.cpp" line="542" />
         <source>to</source>
-        <translation type="unfinished" />
+        <translation>til</translation>
     </message>
     <message>
         <location filename="../src/util/Xml.cpp" line="34" />
         <source>Start at line</source>
-        <translation type="unfinished" />
+        <translation>Start på linjen</translation>
     </message>
     <message>
         <location filename="../src/util/Xml.cpp" line="42" />
         <source>at line</source>
-        <translation type="unfinished" />
+        <translation>på linje</translation>
     </message>
     <message>
         <location filename="../src/util/Xml.cpp" line="51" />
         <source>Quitting</source>
-        <translation type="unfinished" />
+        <translation>Avslutte</translation>
     </message>
     <message>
         <location filename="../src/util/Xml.cpp" line="54" />
         <source>Error reading xml</source>
-        <translation type="unfinished" />
+        <translation>Feil ved lesing av xml</translation>
     </message>
 </context>
 <context>
@@ -5350,163 +5444,167 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="58" />
         <source>Select cursor coordinate values to display.</source>
-        <translation type="unfinished" />
+        <translation>Velg markørkoordinatverdier som skal vises.</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="59" />
         <source>Select Cursor Coordinate Values
 
 Values at cursor coordinates to display. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
-        <translation type="unfinished" />
+        <translation>Velg markørkoordinatverdier Verdier ved markørkoordinater som skal vises. Koordinater er på skjermen (piksler) eller grafenheter. Oppløsning (som er antall grafiske enheter per piksel) er i grafenheter. Grafikenheter er bare tilgjengelige etter at aksepunktene er definert.</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="72" />
         <source>Cursor coordinate values.</source>
-        <translation type="unfinished" />
+        <translation>Markørkoordinatverdier.</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="73" />
         <source>Cursor Coordinate Values
 
 Values at cursor coordinates. Coordinates are in screen (pixels) or graph units. Resolution (which is the number of graph units per pixel) is in graph units. Graph units are only available after axis points have been defined.</source>
-        <translation type="unfinished" />
+        <translation>Markørkoordinatverdier
+
+Verdier ved markørkoordinater. Koordinater er på skjermen (piksler) eller grafenheter. Oppløsning (som er antall grafiske enheter per piksel) er i grafenheter. Grafikenheter er bare tilgjengelige etter at aksepunktene er definert.</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="127" />
         <source>Select zoom.</source>
-        <translation type="unfinished" />
+        <translation>Velg zoom.</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="128" />
         <source>Select Zoom
 
 Points can be more accurately placed by zooming in.</source>
-        <translation type="unfinished" />
+        <translation>Velg Zoom
+
+Poeng kan plasseres mer nøyaktig ved å zoome inn.</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="138" />
         <source>16:1</source>
-        <translation type="unfinished" />
+        <translation>16:1</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="139" />
         <source>16:1 farther</source>
-        <translation type="unfinished" />
+        <translation>16:1 lenger</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="140" />
         <source>8:1 closer</source>
-        <translation type="unfinished" />
+        <translation>8:1 nærmere</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="141" />
         <source>8:1</source>
-        <translation type="unfinished" />
+        <translation>8:1</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="142" />
         <source>8:1 farther</source>
-        <translation type="unfinished" />
+        <translation>8:1 lenger</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="143" />
         <source>4:1 closer</source>
-        <translation type="unfinished" />
+        <translation>4:1 nærmere</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="144" />
         <source>4:1</source>
-        <translation type="unfinished" />
+        <translation>4:1</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="145" />
         <source>4:1 farther</source>
-        <translation type="unfinished" />
+        <translation>4:1 lenger</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="146" />
         <source>2:1 closer</source>
-        <translation type="unfinished" />
+        <translation>2:1 nærmere</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="147" />
         <source>2:1</source>
-        <translation type="unfinished" />
+        <translation>2:1</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="148" />
         <source>2:1 farther</source>
-        <translation type="unfinished" />
+        <translation>2:1 lenger</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="149" />
         <source>1:1 closer</source>
-        <translation type="unfinished" />
+        <translation>1:1 nærmere</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="150" />
         <source>1:1</source>
-        <translation type="unfinished" />
+        <translation>1:1</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="151" />
         <source>1:1 farther</source>
-        <translation type="unfinished" />
+        <translation>1:1 lenger</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="152" />
         <source>1:2 closer</source>
-        <translation type="unfinished" />
+        <translation>1:2 nærmere</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="153" />
         <source>1:2</source>
-        <translation type="unfinished" />
+        <translation>1:2</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="154" />
         <source>1:2 farther</source>
-        <translation type="unfinished" />
+        <translation>1:2 lenger</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="155" />
         <source>1:4 closer</source>
-        <translation type="unfinished" />
+        <translation>1:4 nærmere</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="156" />
         <source>1:4</source>
-        <translation type="unfinished" />
+        <translation>1:4</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="157" />
         <source>1:4 farther</source>
-        <translation type="unfinished" />
+        <translation>1:4 lenger</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="158" />
         <source>1:8 closer</source>
-        <translation type="unfinished" />
+        <translation>1:8 nærmere</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="159" />
         <source>1:8</source>
-        <translation type="unfinished" />
+        <translation>1:8</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="160" />
         <source>1:8 farther</source>
-        <translation type="unfinished" />
+        <translation>1:8 lenger</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="161" />
         <source>1:16 closer</source>
-        <translation type="unfinished" />
+        <translation>1:16 nærmere</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="162" />
         <source>1:16</source>
-        <translation type="unfinished" />
+        <translation>1:16</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="163" />
@@ -5516,166 +5614,200 @@ Points can be more accurately placed by zooming in.</source>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="164" />
         <source>Previous</source>
-        <translation type="unfinished" />
+        <translation>Tidligere</translation>
     </message>
 </context>
 <context>
     <name>TutorialStateAxisPoints</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="33" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="35" />
         <source>Axis Points</source>
-        <translation type="unfinished" />
+        <translation>Akselpoeng</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="36" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="38" />
         <source>Axis points are first defined to
 define the coordinates. Step 1 -
 Click on the Axis Points button</source>
-        <translation type="unfinished" />
+        <translation>Akselpunkter blir først definert til
+definere koordinatene. Trinn 1 -
+Klikk på Axis Points-knappen</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="40" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="42" />
         <source>Step 2 - Click on an axis or grid
 line with known coordinates. An axis
 point appears, with a dialog window
 for entering the axis point
 coordinates</source>
-        <translation type="unfinished" />
+        <translation>Trinn 2 - Klikk på en akse eller rutenett
+linje med kjente koordinater. En akse
+punkt vises, med et dialogvindu
+for å komme inn i aksepunktet
+koordinater</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="46" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="48" />
         <source>Step 3 - Enter the two coordinates
 of the axis point and then click Ok.
 Repeat steps 2 and 3 twice more
 until three axis points are created</source>
-        <translation type="unfinished" />
+        <translation>Trinn 3 - Angi de to koordinatene
+av aksepunktet, og klikk deretter OK.
+Gjenta trinn 2 og 3 to ganger til
+til tre aksepunkt er opprettet</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="54" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="56" />
         <source>Previous</source>
-        <translation type="unfinished" />
+        <translation>Tidligere</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="60" />
+        <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="62" />
         <source>Next</source>
-        <translation type="unfinished" />
+        <translation>Neste</translation>
     </message>
 </context>
 <context>
     <name>TutorialStateChecklistWizardAbstract</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="33" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="35" />
         <source>Checklist Wizard and Checklist Guide</source>
         <translation>Sjekklisteveiviser og sjekklisteveiledning</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="36" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="38" />
         <source>For new Engauge users, a Checklist Wizard
 is available when importing an image file.
 This wizard produces a helpful checklist of
 steps to follow to digitize the image file.</source>
-        <translation type="unfinished" />
+        <translation>For nye Engauge-brukere, en sjekklingsveiviser
+er tilgjengelig når du importerer en bildefil.
+Denne veiviseren produserer en nyttig sjekkliste over
+trinn for å følge for å digitalisere bildefilen.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="41" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="43" />
         <source>Step 1 - Enable the menu option Help /
 Checklist Guide Wizard.</source>
         <translation>Steg 1 - Aktiver menyalternativet Hjelp /
 Veiviser for sjekklisteveiledning</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="44" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="46" />
         <source>Step 2 - Import the file using File /
 Import. The Checklist Wizard will appear
 and ask some simple questions to
 determine how the image can be
 digitized.</source>
-        <translation type="unfinished" />
+        <translation>Trinn 2 - Importer filen ved å bruke File /
+Importere. Sjekklingsveiviseren vises
+og stille noen enkle spørsmål til
+bestemme hvordan bildet kan være
+digitalisert.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="50" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="52" />
         <source>Additional options are available in
 the various Settings menus.
 
 This ends the tutorial. Good luck!</source>
-        <translation type="unfinished" />
+        <translation>Flere alternativer er tilgjengelige i
+de forskjellige innstillingsmenyene.
+
+Dette avslutter opplæringen. Lykke til!</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="57" />
+        <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="59" />
         <source>Previous</source>
-        <translation type="unfinished" />
+        <translation>Tidligere</translation>
     </message>
 </context>
 <context>
     <name>TutorialStateColorFilter</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="35" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="37" />
         <source>Color Filter</source>
         <translation>Fargefilter</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="38" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="40" />
         <source>Each curve has Color Filter settings that
 are applied in Segment Fill mode. For
 black lines the defaults work well, but for
 colored lines the settings can be improved.</source>
-        <translation type="unfinished" />
+        <translation>Hver kurve har innstillinger for fargefilter
+brukes i segmentfyllingsmodus. Til
+svarte streker standardene fungerer bra, men for
+fargede linjer kan innstillingene forbedres.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="43" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="45" />
         <source>Step 1 - Select the Settings / Color
 Filter menu option.</source>
-        <translation type="unfinished" />
+        <translation>Trinn 1 - Velg Innstillinger / farge
+Alternativ for filtermeny.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="46" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="48" />
         <source>Step 2 - Select the curve that will
 be given the new settings.</source>
-        <translation type="unfinished" />
+        <translation>Trinn 2 - Velg kurven som vil
+få de nye innstillingene.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="49" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="51" />
         <source>Step 3 - Select the mode. Intensity is
 suggested for uncolored lines, and Hue
 is suggested for colored lines.</source>
-        <translation type="unfinished" />
+        <translation>Trinn 3 - Velg modus. Intensitet er
+foreslått for ufargede linjer, og fargetone
+foreslås for fargede linjer.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="53" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="55" />
         <source>Step 4 - Adjust the included range by
 dragging the green handles, until the
 curve is clear in the preview window
 below. The graph shows a histogram
 distribution of the values underneath.
 Click Ok when finished.</source>
-        <translation type="unfinished" />
+        <translation>Trinn 4 - Juster det inkluderte området etter
+dra de grønne håndtakene, til
+kurven er tydelig i forhåndsvisningsvinduet
+under. Grafen viser et histogram
+fordeling av verdiene under.
+Klikk på OK når du er ferdig.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="63" />
+        <location filename="../src/Tutorial/TutorialStateColorFilter.cpp" line="65" />
         <source>Back</source>
-        <translation type="unfinished" />
+        <translation>Tilbake</translation>
     </message>
 </context>
 <context>
     <name>TutorialStateCurveSelection</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="40" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="42" />
         <source>After the axis points have been created, a
 curve is selected to receive curve points.
 Step 1 - click on Curve, Point Match, Color
 Picker or Segment Fill buttons.</source>
-        <translation type="unfinished" />
+        <translation>Etter at aksepunktene er opprettet, a kurve er valgt for å motta kurvepunkter. Trinn 1 - klikk på Curve, Point Match, Color Velg- eller segmentfyllknapper.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="45" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="47" />
         <source>Step 2 - Select the desired curve name. If
 that curve name has not been created yet,
 use the menu option Settings / Curve Names
 to create it.</source>
-        <translation type="unfinished" />
+        <translation>Trinn 2 - Velg ønsket kurvenavn. Hvis
+at kurvenavnet ikke er opprettet ennå,
+bruk menyalternativet Innstillinger / kurvenavn
+å lage den.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="50" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="52" />
         <source>Step 3 - Change the background from the
 original image to the filtered image
 produced for the current curve, using the
@@ -5683,195 +5815,225 @@ menu option View / Background / Filtered
 Image. This filtering enables the powerful
 automated algorithms discussed later in
 the tutorial.</source>
-        <translation type="unfinished" />
+        <translation>Trinn 3 - Endre bakgrunnen fra originalbilde til det filtrerte bildet produsert for gjeldende kurve ved bruk av menyalternativ Vis / bakgrunn / filtrert Bilde. Denne filtreringen muliggjør kraftige automatiserte algoritmer omtalt senere i opplæringen.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="58" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="60" />
         <source>If the current curve is no longer visible
 in the filtered image, then change the
 current Color Filter settings. In the figure,
 the orange points have disappeared.</source>
-        <translation type="unfinished" />
+        <translation>Hvis gjeldende kurve ikke lenger er synlig
+i det filtrerte bildet, endre deretter
+gjeldende fargefilterinnstillinger. I figuren
+de oransje punktene har forsvunnet.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="66" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="68" />
         <source>Previous</source>
-        <translation type="unfinished" />
+        <translation>Tidligere</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="72" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="74" />
         <source>Color Filter Settings</source>
-        <translation type="unfinished" />
+        <translation>Innstillinger for fargefilter</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="78" />
+        <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="80" />
         <source>Next</source>
-        <translation type="unfinished" />
+        <translation>Neste</translation>
     </message>
 </context>
 <context>
     <name>TutorialStateCurveType</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="36" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="38" />
         <source>Curve Type</source>
-        <translation type="unfinished" />
+        <translation>Kurvetype</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="39" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="41" />
         <source>The next steps depend on how the curves
 are drawn, in terms of lines and points.</source>
-        <translation type="unfinished" />
+        <translation>De neste trinnene avhenger av hvordan kurvene
+tegnes, i form av linjer og punkter.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="42" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="44" />
         <source>If the curves are drawn
 with lines (with or without
 points) then click on
 Next (Lines).</source>
-        <translation type="unfinished" />
+        <translation>Hvis kurvene trekkes
+med linjer (med eller uten
+poeng) og klikk deretter på
+Neste (linjer).</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="47" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="49" />
         <source>If the curves are drawn
 without lines and only
 with points, then click on
 Next (Points).</source>
-        <translation type="unfinished" />
+        <translation>Hvis kurvene trekkes
+uten linjer og bare
+med poeng, og klikk deretter på
+Neste (poeng).</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="55" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="57" />
         <source>Previous</source>
-        <translation type="unfinished" />
+        <translation>Tidligere</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="61" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="63" />
         <source>Next (Lines)</source>
-        <translation type="unfinished" />
+        <translation>Neste (linjer)</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="67" />
+        <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="69" />
         <source>Next (Points)</source>
-        <translation type="unfinished" />
+        <translation>Neste (poeng)</translation>
     </message>
 </context>
 <context>
     <name>TutorialStateIntroduction</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="33" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="35" />
         <source>Introduction</source>
         <translation>Introduksjon</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="36" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="38" />
         <source>Engauge Digitizer starts with
 images of graphs and maps.</source>
-        <translation type="unfinished" />
+        <translation>Engauge Digitizer starter med
+bilder av grafer og kart.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="39" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="41" />
         <source>You create (or digitize) points along
 the graph and map curves.</source>
-        <translation type="unfinished" />
+        <translation>Du oppretter (eller digitaliserer) poeng langs
+grafen og kartkurvene.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="42" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="44" />
         <source>The digitized curve points can be
 exported, as numbers, to other software tools.</source>
-        <translation type="unfinished" />
+        <translation>De digitaliserte kurvepunktene kan være
+eksportert, som tall, til andre programvareverktøy.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="48" />
+        <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="50" />
         <source>Next</source>
-        <translation type="unfinished" />
+        <translation>Neste</translation>
     </message>
 </context>
 <context>
     <name>TutorialStatePointMatch</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="35" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="37" />
         <source>Point Match</source>
-        <translation type="unfinished" />
+        <translation>Poengkamp</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="38" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="40" />
         <source>In Point Match mode, you pick
 one sample point, and Engauge
 then finds all matching points.
 
 Step 1 - Click on Point Match mode.</source>
-        <translation type="unfinished" />
+        <translation>I poengmatch-modus velger du
+ett prøvepunkt, og Engauge
+finner deretter alle samsvarende poeng.
+
+Trinn 1 - Klikk på Point Match-modus.
+</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="43" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="45" />
         <source>Step 2 - Select the curve the new
 points will belong to.</source>
-        <translation type="unfinished" />
+        <translation>Trinn 2 - Velg kurven for den nye
+poeng vil høre til.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="46" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="48" />
         <source>Step 3 - Click on a typical point.
 The circle turns green when it
 contains what may be a point.</source>
-        <translation type="unfinished" />
+        <translation>Trinn 3 - Klikk på et typisk punkt. Sirkelen blir grønn når den inneholder det som kan være et poeng.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="50" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="52" />
         <source>Step 4 - Engauge will show a
 matched point with a yellow cross.
 Press the Right Arrow key to accept
 the matched point. Repeat this step
 until there are no more points.</source>
-        <translation type="unfinished" />
+        <translation>Trinn 4 - Engauge viser a
+matchet poeng med et gult kors.
+Trykk på høyre pil for å godta
+det matchede poenget. Gjenta dette trinnet
+til det ikke er flere poeng.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="59" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="61" />
         <source>Previous</source>
-        <translation type="unfinished" />
+        <translation>Tidligere</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="65" />
+        <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="67" />
         <source>Next</source>
-        <translation type="unfinished" />
+        <translation>Neste</translation>
     </message>
 </context>
 <context>
     <name>TutorialStateSegmentFill</name>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="34" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="36" />
         <source>Segment Fill</source>
-        <translation type="unfinished" />
+        <translation>Segmentfyll</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="37" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="39" />
         <source>Segment Fill mode places several
 points all along the line segments
 of a curve. Step 1 - Click on the
 Segment Fill button.</source>
-        <translation type="unfinished" />
+        <translation>Segmentfyllingsmodus plasserer flere
+peker langs linjesegmentene
+av en kurve. Trinn 1 - Klikk på
+Segmentfyllknapp.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="42" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="44" />
         <source>Step 2 - Select the curve the new
 points will belong to.</source>
-        <translation type="unfinished" />
+        <translation>Trinn 2 - Velg kurven for den nye
+poeng vil høre til.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="45" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="47" />
         <source>Step 3 - Move the cursor over a line
 segment in the desired curve. If a
 green line appears, click on it once
 to generate many points.</source>
-        <translation type="unfinished" />
+        <translation>Trinn 3 - Flytt markøren over en linje
+segment i ønsket kurve. Hvis en
+grønn linje vises, klikk på den en gang
+å generere mange poeng.</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="53" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="55" />
         <source>Previous</source>
-        <translation type="unfinished" />
+        <translation>Tidligere</translation>
     </message>
     <message>
-        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="59" />
+        <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="61" />
         <source>Next</source>
-        <translation type="unfinished" />
+        <translation>Neste</translation>
     </message>
 </context>
 </TS>
