@@ -3169,53 +3169,53 @@ Die hiesige Reihenfolge der Kurven bestimmt nicht die Reihenfolge in der exporti
         <translation>Funktionspunkte Auswahl</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="204" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="205" />
         <source>Interpolate Ys at Xs from all curves</source>
         <translation>Interpoliere Y und X von allen Kurven</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="205" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="206" />
         <source>Exported file will have values at every unique X value from every curve. Y values will be linearly interpolated if necessary</source>
         <translation>Die exportierte Datei bekommt für alle X-Werte aus allen Kurven einen Y-Wert, der erforderlichenfalls linear interpoliert wird.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="211" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="212" />
         <source>Extrapolate outside endpoints</source>
         <translation>Extrapolieren Sie externe Endpunkte</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="212" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="213" />
         <source>Enable or disable extrapolation outside of endpoints of each curve. If disabled, only points between the endpoints of each curve are exported</source>
         <translation>Aktivieren oder deaktivieren Sie die Extrapolation außerhalb der Endpunkte jeder Kurve. Bei Deaktivierung werden nur Punkte zwischen den Endpunkten jeder Kurve exportiert</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="217" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="218" />
         <source>Interpolate Ys at Xs from first curve</source>
         <translation>Interpoliere Y und X von erster Kurve</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="219" />
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
         <translation>Die exportierte Datei bekommt für jeden X-Wert der ersten Kurve einen Y-Wert, der erforderlichenfalls linear interpoliert wird.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="223" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="224" />
         <source>Interpolate Ys at evenly spaced X values that are automatically selected</source>
         <translation>Interpolieren Sie Ys mit gleichmäßig ausgewählten X-Werten, die automatisch ausgewählt werden</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="224" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="225" />
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
         <translation>Die exportierte Datei bekommt X-Werte in äquidistanten Abständen entsprechend dem unten eingestellten Intervall.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="228" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="229" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="395" />
         <source>Interval</source>
         <translation>Intervall</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="236" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="237" />
         <source>Interval, in the units of X, between successive points in the X direction.
 
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
@@ -3224,7 +3224,7 @@ The X values will be automatically aligned along simple numbers. If the first an
         <translation>Intervall in den Einheiten von X zwischen aufeinanderfolgenden Punkten in der X-Richtung. Wenn die Skala linear ist, wird dieses Intervall zu aufeinanderfolgenden X-Werten addiert. Wenn die Skala logarithmisch ist, wird dieses Intervall auf sukzessive X-Werte multipliziert. Die X-Werte werden automatisch auf einfache Zahlen ausgerichtet. Wenn die ersten und / oder letzten Punkte nicht mit den ausgerichteten X-Werten übereinstimmen, werden nach Bedarf ein oder zwei zusätzliche Punkte hinzugefügt.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="246" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="247" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
@@ -3235,69 +3235,81 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
 Pixeleinheiten werden bevorzugt, wenn der Abstand unabhängig von der X-Skala sein soll. Der Abstand wird über den Graphen hinweg konsistent sein, auch wenn die X-Skala logarithmisch ist. Die Grapheneinheiten werden bevorzugt, wenn der Abstand von der X-Skala abhängt.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="258" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="259" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="421" />
+        <source>Too many points</source>
+        <translation>Zu viele Punkte</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="261" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="423" />
+        <source>Warning that interval is too small. Adjust interval or increase point limit in Main Window settings</source>
+        <translation>Warnung, dass das Intervall zu klein ist. Passen Sie das Intervall an oder erhöhen Sie die Punktgrenze in den Einstellungen des Hauptfensters</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="264" />
         <source>Interpolate Ys at evenly spaced X values on grid lines</source>
         <translation>Interpoliere Ys bei gleichmäßig beabstandeten X-Werten auf Gitterlinien</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="259" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="265" />
         <source>Exported file will have values at evenly spaced X values at the vertical grid lines.</source>
         <translation>Die exportierte Datei weist Werte in gleichmäßig verteilten X-Werten an den vertikalen Gitterlinien auf.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="263" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="414" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="269" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="426" />
         <source>Raw Xs and Ys</source>
         <translation>Rohe X- und Y-Werte</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="264" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="415" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="270" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="427" />
         <source>Exported file will have only original X and Y values</source>
         <translation>Die exportierte Datei enthält nur die originalen Werte.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="275" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="281" />
         <source>Header</source>
         <translation>Kopfzeile</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="285" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="291" />
         <source>Exported file will have no header line</source>
         <translation>Die exportierte Datei wird keine Kopfzeile haben</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="290" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="296" />
         <source>Exported file will have simple header line</source>
         <translation>Die exportierte Datei wird eine einfache Kopfzeile haben</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="295" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="301" />
         <source>Exported file will have gnuplot header line</source>
         <translation>Die exportierte Datei wird eine gnuplot-Kopfzeile haben</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="307" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="313" />
         <source>Save As Default</source>
         <translation>Speichern als Standard</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="308" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="314" />
         <source>Save the settings for use as future defaults.</source>
         <translation>Sichern Sie die Einstellungen für die Verwendung als zukünftige Standardwerte.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="312" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="318" />
         <source>Load Default</source>
         <translation>Standard laden</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="313" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="319" />
         <source>Load the default settings.</source>
         <translation>Laden Sie die Standardeinstellungen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="325" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="331" />
         <source>File extension used for preview. The CSV and TSV file extensions normally use commas and tabs respectively, but that can be changed in this dialog.</source>
         <translation>Dateierweiterung für Vorschau. Die CSV- und TSV-Dateierweiterungen verwenden normalerweise Kommas bzw. Tabulatoren. Dies kann jedoch in diesem Dialogfeld geändert werden.</translation>
     </message>
@@ -3306,34 +3318,34 @@ Pixeleinheiten werden bevorzugt, wenn der Abstand unabhängig von der X-Skala se
         <translation type="vanished">Vorschau</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="357" />
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
         <translation>Das Vorschaufenster zeigt an, wie sich die aktuellen Einstellungen auf die exportierte Datei auswirken.Funktionen (hier blau dargestellt) werden zuerst ausgegeben, gefolgt von den Beziehungen (hier grün dargestellt), falls vorhanden.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="367" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="373" />
         <source>Relation Points Selection</source>
         <translation>Relationspunkte Auswahl</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="381" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation>Interpoliere X-Werte an äquidistanten Y Werten.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="382" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="389" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation>Die exportierte Datei hat Punkte, die gleichmäßig in jeder Relation beabstandet sind, getrennt durch das unten gewählte Intervall. Wenn das letzte Intervall nicht am letzten Punkt endet, wird ein kürzeres letztes Intervall hinzugefügt, das am letzten Punkt endet.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="396" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="403" />
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation>Intervall zwischen aufeinanderfolgenden Punkten beim Exportieren bei gleichmäßig beabstandeten (X, Y) Koordinaten.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="402" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="409" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -3342,12 +3354,12 @@ Graph units are usually preferred when the X and Y scales are identical.</source
         <translation>Einheiten für Abstandsintervalle.Pixeleinheiten werden bevorzugt, wenn der Abstand unabhängig von der X- und Y-Skala sein soll. Der Abstand wird über den Graphen hinweg konsistent sein, auch wenn eine Skala logarithmisch ist oder die X- und Y-Skalen unterschiedlich sind.Graph-Einheiten werden gewöhnlich bevorzugt, wenn die X- und Y-Skalen identisch sind.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="458" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="470" />
         <source>Functions</source>
         <translation>Funktionen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="460" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="472" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
@@ -3356,12 +3368,12 @@ Controls for specifying the format of functions during export</source>
 Controls zum Festlegen des Formats der Funktionen während des Exports</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="466" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="478" />
         <source>Relations</source>
         <translation>Relationen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="468" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="480" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
@@ -3370,17 +3382,17 @@ Controls for specifying the format of relations during export</source>
 Controls zur Angabe des Formats der Beziehungen beim Export</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="487" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="499" />
         <source>X Label</source>
         <translation>X Bezeichnung</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="491" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="503" />
         <source>Label in the header for x values</source>
         <translation>Bezeichnung in der Kopfzeile für X-Werte</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1247" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1280" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>Vorschau ist nicht verfügbar, bis Achsenpunkte definiert sind.</translation>
     </message>
@@ -3787,17 +3799,17 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsMainWindow</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="43" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="49" />
         <source>Main Window</source>
         <translation>Hauptfenster</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="68" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="74" />
         <source>Initial zoom</source>
         <translation>Ursprünglicher Zoom</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="83" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="89" />
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
@@ -3806,32 +3818,32 @@ Select the initial zoom factor when a new document is loaded. Either the previou
 Wählen Sie den ersten Zoomfaktor, wenn ein neues Dokument geladen ist. Entweder kann der vorherige Zoom beibehalten werden, oder der angegebene Zoom kann angewendet werden.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="89" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="95" />
         <source>Zoom control</source>
         <translation>Vergrößerungssteuerung</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Menu only</source>
         <translation>Nur Menü</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="94" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="100" />
         <source>Menu and mouse wheel</source>
         <translation>Menü und Mausrad</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="95" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="101" />
         <source>Menu and +/- keys</source>
         <translation>Menü und +/-Tasten</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="96" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
         <source>Menu, mouse wheel and +/- keys</source>
         <translation>Menü, Mausrad und +/-Tasten</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="97" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="103" />
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
@@ -3844,12 +3856,12 @@ legt fest, welches Eingabegerät die Vergrößerung verändert.</translation>
         <translation type="vanished">Sprache</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="108" />
         <source>Locale (requires restart)</source>
         <translation>Gebietsschema (Neustart erforderlich)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="107" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="113" />
         <source>Locale
 
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
@@ -3860,12 +3872,12 @@ The locale determines how numbers are formatted. Specifically, either commas or 
 Wählen Sie das Gebietsschema, das in Zahlen (sofort) verwendet wird, und die Sprache in der Benutzeroberfläche (nach dem Neustart). Das Gebietsschema bestimmt, wie die Zahlen formatiert sind. Speziell werden entweder Kommas oder Perioden als Gruppenbegrenzer in jeder vom Benutzer eingegebenen Nummer verwendet, in der Benutzeroberfläche angezeigt oder in eine Datei exportiert.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="127" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="133" />
         <source>Import cropping</source>
         <translation>Import Zuschneiden</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="131" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="137" />
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
@@ -3878,12 +3890,12 @@ Enables oder deaktiviert das Zuschneiden des importierten Bildes beim Importiere
 Diese Einstellung wirkt sich nur dann aus, wenn Engauge mit Unterstützung für PDF-Dateien erstellt wurde.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="144" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="150" />
         <source>Import PDF resolution (dots per inch)</source>
         <translation>PDF-Import Auflösung (Punkte pro Zoll)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="148" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="154" />
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
@@ -3892,12 +3904,12 @@ Imported Portable Document Format (PDF) files will be converted to this pixel re
 Impport Portable Document Format (PDF) Dateien werden in pixel Auflösung in Punkten pro Zoll (DPI) konvertiert, wobei jedes Pixel ein Punkt ist. Ein höherer Wert erhöht die Bildauflösung und kann auch die numerische Digitalisierungsgenauigkeit verbessern. Allerdings kann ein sehr hoher Wert das Bild so groß machen, dass Engauge sich verlangsamen wird.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="163" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="169" />
         <source>Maximum grid lines</source>
         <translation>Maximalzahl von Gitterlinien</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="168" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="174" />
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
@@ -3906,12 +3918,26 @@ Maximum number of grid lines to be processed. This limit is applied when the ste
 Maximale Anzahl der zu verarbeitenden Rasterlinien Diese Grenze wird angewendet, wenn der Schrittwert zu klein für die Start- und Stoppwerte ist, was zu zu viele Rasterlinien visuell und möglicherweise extrem lange Bearbeitungszeit führen würde (da jede Rasterlinie verarbeitet werden müsste)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="175" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="181" />
+        <source>Maximum exported points per curve</source>
+        <translation>Maximal exportierte Punkte pro Kurve</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
+        <source>Maximum Exported Points per Curve
+
+This is the maximum number of points allowed in each exported curve. No points are exported when this is exceeded. This limit prevents delays and overly large file sizes due to curves that have too many points.</source>
+        <translation>Maximal exportierte Punkte pro Kurve
+
+Dies ist die maximale Anzahl von Punkten, die in jeder exportierten Kurve zulässig sind. Bei Überschreitung werden keine Punkte exportiert. Diese Begrenzung verhindert Verzögerungen und zu große Dateigrößen aufgrund von Kurven mit zu vielen Punkten.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="194" />
         <source>Highlight opacity</source>
         <translation>Transparenz der Hervorhebung</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="181" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="200" />
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
@@ -3920,29 +3946,29 @@ Opacity to be applied when the cursor is over a curve or axis point in Select mo
 Opacity, wenn der Cursor über einen Kurven- oder Achspunkt im Select-Modus steht. Die Änderung des Aussehens zeigt, wann der Punkt ausgewählt werden kann.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="206" />
         <source>Recent file list</source>
         <translation>Kürzlich geöffnete Dateien</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="190" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="209" />
         <source>Clear</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="192" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="211" />
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
         <translation>Aktuelle Dateiliste ClearClear die aktuelle Datei-Liste im Menü Datei.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="198" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="217" />
         <source>Include title bar path</source>
         <translation>Geben Sie den Titelleistenpfad ein</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="203" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="222" />
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
@@ -3951,12 +3977,12 @@ Includes or excludes the path and file extension from the filename in the title 
 Includes oder schließt den Pfad und die Dateierweiterung aus dem Dateinamen in der Titelleiste aus.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="208" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="227" />
         <source>Allow small dialogs</source>
         <translation>Erlaube kleine Dialoge</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="213" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="232" />
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
@@ -3965,12 +3991,12 @@ Allows settings dialogs to be made very small so they fit on small computer scre
 Die Einstellungsdialoge sind sehr klein, so dass sie auf kleine Computerbildschirme passen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="237" />
         <source>Allow drag and drop export</source>
         <translation>Erlaube Drag&amp;Drop Export</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="223" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242" />
         <source>Allow Drag and Drop Export
 
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
@@ -3981,12 +4007,12 @@ When drag and drop is disabled, a rectangular set of table cells can be selected
 Allows per Drag &amp; Drop Export aus dem Curve Fitting Fenster und Geometrie Fenster Tabellen.Wenn Drag &amp; Drop deaktiviert ist, kann ein rechteckiger Satz von Tabellenzellen mit Klick und Ziehen ausgewählt werden. Wenn Drag &amp; Drop aktiviert ist, kann ein rechteckiger Satz von Tabellenzellen ausgewählt werden. Klicken Sie dann auf Shift + Click, da Klick und Drag die Drag-Operation starten.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="231" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="250" />
         <source>Image replace renames document</source>
         <translation>Das Bild, das ersetzt, benennt Dokument um</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="255" />
         <source>Image Replace Renames Document
 
 When an image is imported to replace the current image, the document will be renamed if this is true, otherwise the name will stay the same.</source>
@@ -3995,12 +4021,12 @@ When an image is imported to replace the current image, the document will be ren
 Wenn ein Bild als Ersatz für das aktuelle Bild importiert wird, wird das Dokument umbenannt, wenn dies zutrifft. Andernfalls bleibt der Name unverändert. </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="261" />
         <source>Significant digits</source>
         <translation>Wichtige Ziffer</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="247" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="266" />
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
@@ -4414,27 +4440,27 @@ Wollen Sie die Änderungen speichern?</translation>
         <translation>Datei speichern</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2329" />
+        <location filename="../src/main/MainWindow.cpp" line="2332" />
         <source>Export</source>
         <translation>Exportiere</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2411" />
+        <location filename="../src/main/MainWindow.cpp" line="2414" />
         <source>Open Document</source>
         <translation>Öffne Dokument</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3667" />
+        <location filename="../src/main/MainWindow.cpp" line="3670" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3668" />
+        <location filename="../src/main/MainWindow.cpp" line="3671" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3798" />
+        <location filename="../src/main/MainWindow.cpp" line="3801" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5198,7 +5224,7 @@ Wollen Sie die Änderungen speichern?</translation>
         <translation>Die Datei scheint Zeichen aus mehreren Sprachen-Alphabeten zu enthalten, was in der Windows-Befehlszeile nicht funktioniert</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="118" />
+        <location filename="../src/main/MainWindowModel.cpp" line="122" />
         <source>Cannot read main window data</source>
         <translation>Kann Daten für dasHauptfenster nicht lesen</translation>
     </message>
@@ -5343,18 +5369,30 @@ Wollen Sie die Änderungen speichern?</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportFileExtension.cpp" line="43" />
-        <source>Preview for CSV files:</source>
-        <translation>Vorschau für CSV-Dateien:</translation>
+        <source>Preview for CSV files</source>
+        <translation>Vorschau für CSV-Dateien</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportFileExtension.cpp" line="47" />
-        <source>Preview for files without CSV or TSV:</source>
-        <translation>Vorschau für Dateien ohne CSV oder TSV:</translation>
+        <source>Preview for files without CSV or TSV</source>
+        <translation>Vorschau für Dateien ohne CSV oder TSV</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportFileExtension.cpp" line="51" />
+        <source>Preview for TSV files</source>
+        <translation>Vorschau für TSV-Dateien</translation>
+    </message>
+    <message>
+        <source>Preview for CSV files:</source>
+        <translation type="vanished">Vorschau für CSV-Dateien:</translation>
+    </message>
+    <message>
+        <source>Preview for files without CSV or TSV:</source>
+        <translation type="vanished">Vorschau für Dateien ohne CSV oder TSV:</translation>
+    </message>
+    <message>
         <source>Preview for TSV files:</source>
-        <translation>Vorschau für TSV-Dateien:</translation>
+        <translation type="vanished">Vorschau für TSV-Dateien:</translation>
     </message>
 </context>
 <context>

@@ -3247,53 +3247,53 @@ The order of the curves here does not affect the order in the exported file. Tha
         <translation>समारोह चयन</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="204" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="205" />
         <source>Interpolate Ys at Xs from all curves</source>
         <translation>सभी घटता से Xs पर इंटरपोल करें</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="205" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="206" />
         <source>Exported file will have values at every unique X value from every curve. Y values will be linearly interpolated if necessary</source>
         <translation>निर्यात की गई फ़ाइल में प्रत्येक वक्र से प्रत्येक अनन्य X मान पर मान होंगे। यदि आवश्यक हो तो Y मान रैखिक रूप से प्रक्षेपित किया जाएगा</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="211" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="212" />
         <source>Extrapolate outside endpoints</source>
         <translation>बाहर के छोरों को बाहर निकालें</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="212" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="213" />
         <source>Enable or disable extrapolation outside of endpoints of each curve. If disabled, only points between the endpoints of each curve are exported</source>
         <translation>प्रत्येक वक्र के समापन बिंदु के बाहर एक्सट्रपलेशन को सक्षम या अक्षम करें। यदि अक्षम किया गया है, तो प्रत्येक वक्र के अंत बिंदुओं के बीच केवल अंक निर्यात किए जाते हैं</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="217" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="218" />
         <source>Interpolate Ys at Xs from first curve</source>
         <translation>पहले वक्र से Xs पर इंटरपोल करें</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="219" />
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
         <translation>निर्यात की गई फ़ाइल में पहले वक्र से प्रत्येक अनन्य X मान पर मान होंगे। यदि आवश्यक हो तो Y मान रैखिक रूप से प्रक्षेपित किया जाएगा</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="223" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="224" />
         <source>Interpolate Ys at evenly spaced X values that are automatically selected</source>
         <translation>समान रूप से अंतरित एक्स मानों को इंटरपोलेट करें जो स्वचालित रूप से चुने गए हैं</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="224" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="225" />
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
         <translation>निर्यात की गई फ़ाइल में समान रूप से अंतरित X मान के मान होंगे, जिन्हें नीचे दिए गए अंतराल से अलग किया गया है।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="228" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="229" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="395" />
         <source>Interval</source>
         <translation>मध्यान्तर</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="236" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="237" />
         <source>Interval, in the units of X, between successive points in the X direction.
 
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
@@ -3306,7 +3306,7 @@ The X values will be automatically aligned along simple numbers. If the first an
 X मान स्वचालित रूप से सरल संख्याओं के साथ संरेखित किया जाएगा। यदि पहले और / या अंतिम बिंदु संरेखित एक्स मानों के साथ नहीं हैं, तो आवश्यक के रूप में एक या दो अतिरिक्त अंक जोड़े जाते हैं।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="246" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="247" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
@@ -3319,74 +3319,86 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
 ग्राफ़ इकाइयाँ तब पसंद की जाती हैं जब स्पेसिंग X स्केल पर निर्भर होती है।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="258" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="259" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="421" />
+        <source>Too many points</source>
+        <translation>बहुत अधिक अंक</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="261" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="423" />
+        <source>Warning that interval is too small. Adjust interval or increase point limit in Main Window settings</source>
+        <translation>चेतावनी दी कि अंतराल बहुत छोटा है। मुख्य विंडो सेटिंग्स में अंतराल या वृद्धि बिंदु सीमा को समायोजित करें</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="264" />
         <source>Interpolate Ys at evenly spaced X values on grid lines</source>
         <translation>ग्रिड लाइनों पर समान रूप से एक्स मानों को इंटरपोलेट वाई</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="259" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="265" />
         <source>Exported file will have values at evenly spaced X values at the vertical grid lines.</source>
         <translation>निर्यात की गई फ़ाइल में ऊर्ध्वाधर ग्रिड लाइनों पर समान रूप से स्थानिक X मान के मान होंगे।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="263" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="414" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="269" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="426" />
         <source>Raw Xs and Ys</source>
         <translation>रॉ Xs और Ys</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="264" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="415" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="270" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="427" />
         <source>Exported file will have only original X and Y values</source>
         <translation>निर्यात की गई फ़ाइल में केवल मूल X और Y मान होंगे</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="275" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="281" />
         <source>Header</source>
         <translation>हैडर</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="285" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="291" />
         <source>Exported file will have no header line</source>
         <translation>निर्यात की गई फ़ाइल में कोई हेडर लाइन नहीं होगी</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="290" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="296" />
         <source>Exported file will have simple header line</source>
         <translation>निर्यात की गई फ़ाइल में सरल हेडर लाइन होगी</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="295" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="301" />
         <source>Exported file will have gnuplot header line</source>
         <translation>निर्यात की गई फ़ाइल में gnuplot हेडर लाइन होगी</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="307" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="313" />
         <source>Save As Default</source>
         <translation>डिफ़ॉल्ट के रूप में सुरक्षित करें</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="308" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="314" />
         <source>Save the settings for use as future defaults.</source>
         <translation>भविष्य की चूक के रूप में उपयोग के लिए सेटिंग्स को सहेजें।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="312" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="318" />
         <source>Load Default</source>
         <translation>डिफ़ॉल्ट लोड करें</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="313" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="319" />
         <source>Load the default settings.</source>
         <translation>डिफ़ॉल्ट सेटिंग्स लोड करें।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="325" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="331" />
         <source>File extension used for preview. The CSV and TSV file extensions normally use commas and tabs respectively, but that can be changed in this dialog.</source>
         <translation>फ़ाइल एक्सटेंशन पूर्वावलोकन के लिए उपयोग किया जाता है। CSV और TSV फ़ाइल एक्सटेंशन सामान्य रूप से क्रमशः कॉमा और टैब का उपयोग करते हैं, लेकिन इसे इस संवाद में बदला जा सकता है।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="357" />
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
@@ -3395,27 +3407,27 @@ Functions (shown here in blue) are output first, followed by relations (shown he
 फ़ंक्शंस (नीले रंग में यहां दिखाए गए) पहले आउटपुट होते हैं, इसके बाद संबंध (हरे रंग में यहां दिखाए गए) यदि कोई मौजूद है।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="367" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="373" />
         <source>Relation Points Selection</source>
         <translation>संबंध अंक चयन</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="381" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation>समान दूरी पर Xs और Y को इंटरपोल करें।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="382" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="389" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation>निर्यात की गई फ़ाइल में प्रत्येक संबंध के साथ समान रूप से स्थान होगा, नीचे चयनित अंतराल द्वारा अलग किया जाएगा। यदि अंतिम अंतराल अंतिम बिंदु पर समाप्त नहीं होता है, तो एक अंतिम अंतिम अंतराल जोड़ा जाता है जो अंतिम बिंदु पर समाप्त होता है।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="396" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="403" />
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation>क्रमिक बिंदुओं के बीच अंतराल जब समान दूरी पर निर्यात किया जाता है (X, Y) निर्देशांक।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="402" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="409" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -3428,12 +3440,12 @@ Graph units are usually preferred when the X and Y scales are identical.</source
 ग्राफ़ इकाइयाँ आमतौर पर पसंद की जाती हैं जब X और Y तराजू समान होते हैं।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="458" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="470" />
         <source>Functions</source>
         <translation>कार्य</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="460" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="472" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
@@ -3442,12 +3454,12 @@ Controls for specifying the format of functions during export</source>
 निर्यात के दौरान कार्यों के प्रारूप को निर्दिष्ट करने के लिए नियंत्रण</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="466" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="478" />
         <source>Relations</source>
         <translation>रिश्ते</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="468" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="480" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
@@ -3456,17 +3468,17 @@ Controls for specifying the format of relations during export</source>
 निर्यात के दौरान संबंधों के प्रारूप को निर्दिष्ट करने के लिए नियंत्रण</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="487" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="499" />
         <source>X Label</source>
         <translation>एक्स लेबल</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="491" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="503" />
         <source>Label in the header for x values</source>
         <translation>एक्स मानों के लिए हेडर में लेबल</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1247" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1280" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>अक्ष बिंदु परिभाषित होने तक पूर्वावलोकन अनुपलब्ध है।</translation>
     </message>
@@ -3891,17 +3903,17 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsMainWindow</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="43" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="49" />
         <source>Main Window</source>
         <translation>मुख्य खिड़की</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="68" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="74" />
         <source>Initial zoom</source>
         <translation>प्रारंभिक ज़ूम</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="83" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="89" />
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
@@ -3910,32 +3922,32 @@ Select the initial zoom factor when a new document is loaded. Either the previou
 नया दस्तावेज़ लोड होने पर प्रारंभिक ज़ूम फ़ैक्टर का चयन करें। या तो पिछले ज़ूम को रखा जा सकता है, या निर्दिष्ट ज़ूम को लागू किया जा सकता है।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="89" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="95" />
         <source>Zoom control</source>
         <translation>ज़ूम नियंत्रण</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Menu only</source>
         <translation>केवल मेनू</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="94" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="100" />
         <source>Menu and mouse wheel</source>
         <translation>मेनू और माउस व्हील</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="95" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="101" />
         <source>Menu and +/- keys</source>
         <translation>मेनू और +/- कुंजी</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="96" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
         <source>Menu, mouse wheel and +/- keys</source>
         <translation>मेनू, माउस व्हील और +/- कुंजियाँ</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="97" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="103" />
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
@@ -3944,12 +3956,12 @@ Select which inputs are used to zoom in and out.</source>
 चुनें कि कौन से इनपुट को ज़ूम इन और आउट करने के लिए उपयोग किया जाता है।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="108" />
         <source>Locale (requires restart)</source>
         <translation>लोकेल (पुनः आरंभ करने की आवश्यकता है)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="107" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="113" />
         <source>Locale
 
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
@@ -3962,12 +3974,12 @@ The locale determines how numbers are formatted. Specifically, either commas or 
 स्थान निर्धारित करता है कि संख्याएँ किस प्रकार स्वरूपित हैं। विशेष रूप से, या तो अल्पविराम या अवधि का उपयोग उपयोगकर्ता द्वारा दर्ज किए गए प्रत्येक नंबर में समूह परिसीमन के रूप में किया जाएगा, उपयोगकर्ता इंटरफ़ेस में प्रदर्शित किया जाएगा, या फ़ाइल में निर्यात किया जाएगा।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="127" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="133" />
         <source>Import cropping</source>
         <translation>इम्पोर्ट क्रॉपिंग</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="131" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="137" />
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
@@ -3980,12 +3992,12 @@ This setting only has an effect when Engauge has been built with support for pdf
 यह सेटिंग केवल तब प्रभाव डालती है जब Engauge को पीडीएफ फाइलों के लिए समर्थन के साथ बनाया गया है।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="144" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="150" />
         <source>Import PDF resolution (dots per inch)</source>
         <translation>पीडीएफ रिज़ॉल्यूशन आयात करें (प्रति इंच डॉट्स)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="148" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="154" />
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
@@ -3994,12 +4006,12 @@ Imported Portable Document Format (PDF) files will be converted to this pixel re
 आयातित पोर्टेबल डॉक्यूमेंट फॉर्मेट (PDF) फाइलें इस पिक्सेल रिज़ॉल्यूशन में डॉट्स प्रति इंच (DPI) में बदल जाएंगी, जहाँ प्रत्येक पिक्सेल एक डॉट है। एक उच्च मूल्य चित्र रिज़ॉल्यूशन को बढ़ाता है और संख्यात्मक अंकीयकरण सटीकता में भी सुधार कर सकता है। हालांकि, बहुत अधिक मूल्य छवि को इतना बड़ा बना सकता है कि एंगुइज़ धीमा हो जाएगा।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="163" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="169" />
         <source>Maximum grid lines</source>
         <translation>अधिकतम ग्रिड लाइनें</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="168" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="174" />
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
@@ -4008,12 +4020,26 @@ Maximum number of grid lines to be processed. This limit is applied when the ste
 अधिकतम संख्या में ग्रिड लाइनें संसाधित की जानी हैं। यह सीमा तब लागू की जाती है जब स्टेप वैल्यू स्टार्ट और स्टॉप वैल्यू के लिए बहुत छोटा होता है, जिसके परिणामस्वरूप बहुत अधिक ग्रिड लाइनें दिखाई देती हैं और संभवतः बेहद लंबी प्रोसेसिंग टाइम होती है (क्योंकि प्रत्येक ग्रिड लाइन को संसाधित करना होगा)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="175" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="181" />
+        <source>Maximum exported points per curve</source>
+        <translation>प्रति निर्यात अधिकतम निर्यात अंक</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
+        <source>Maximum Exported Points per Curve
+
+This is the maximum number of points allowed in each exported curve. No points are exported when this is exceeded. This limit prevents delays and overly large file sizes due to curves that have too many points.</source>
+        <translation>प्रति निर्यात अधिकतम निर्यात अंक
+
+यह प्रत्येक निर्यात किए गए वक्र में अनुमत अंकों की अधिकतम संख्या है। इससे अधिक होने पर कोई अंक निर्यात नहीं किया जाता है। यह सीमा बहुत अधिक बिंदुओं वाले घटता के कारण देरी और अधिक बड़े फ़ाइल आकार को रोकती है।</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="194" />
         <source>Highlight opacity</source>
         <translation>अपारदर्शिता को हाइलाइट करें</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="181" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="200" />
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
@@ -4022,17 +4048,17 @@ Opacity to be applied when the cursor is over a curve or axis point in Select mo
 जब कर्सर वक्र या अक्ष बिंदु सेलेक्ट मोड पर हो तो अप्लाई करने की क्षमता। उपस्थिति में परिवर्तन तब दिखाता है जब बिंदु का चयन किया जा सकता है।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="206" />
         <source>Recent file list</source>
         <translation>हाल की फ़ाइल सूची</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="190" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="209" />
         <source>Clear</source>
         <translation>स्पष्ट</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="192" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="211" />
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
@@ -4041,12 +4067,12 @@ Clear the recent file list in the File menu.</source>
 फ़ाइल मेनू में हाल की फ़ाइल सूची को साफ़ करें।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="198" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="217" />
         <source>Include title bar path</source>
         <translation>शीर्षक बार पथ शामिल करें</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="203" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="222" />
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
@@ -4055,12 +4081,12 @@ Includes or excludes the path and file extension from the filename in the title 
 शीर्षक बार में फ़ाइल नाम से पथ और फ़ाइल एक्सटेंशन शामिल या शामिल नहीं करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="208" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="227" />
         <source>Allow small dialogs</source>
         <translation>छोटे संवादों की अनुमति दें</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="213" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="232" />
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
@@ -4069,12 +4095,12 @@ Allows settings dialogs to be made very small so they fit on small computer scre
 सेटिंग्स संवाद को बहुत छोटा करने की अनुमति देता है ताकि वे छोटे कंप्यूटर स्क्रीन पर फिट हो सकें।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="237" />
         <source>Allow drag and drop export</source>
         <translation>खींचें और ड्रॉप निर्यात की अनुमति दें</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="223" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242" />
         <source>Allow Drag and Drop Export
 
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
@@ -4088,12 +4114,12 @@ When drag and drop is disabled, a rectangular set of table cells can be selected
 जब ड्रैग एंड ड्रॉप को डिसेबल किया जाता है, तो टेबल सेल्स का एक आयताकार सेट क्लिक और ड्रैग का उपयोग करके चुना जा सकता है। जब ड्रैग एंड ड्रॉप को सक्षम किया जाता है, तो टेबल सेल का एक आयताकार सेट क्लिक तब शिफ्ट + क्लिक का उपयोग करके चुना जा सकता है, चूंकि क्लिक और ड्रैग ऑपरेशन शुरू होता है।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="231" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="250" />
         <source>Image replace renames document</source>
         <translation>छवि का नाम बदलकर दस्तावेज़</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="255" />
         <source>Image Replace Renames Document
 
 When an image is imported to replace the current image, the document will be renamed if this is true, otherwise the name will stay the same.</source>
@@ -4102,12 +4128,12 @@ When an image is imported to replace the current image, the document will be ren
 जब एक छवि को वर्तमान छवि को बदलने के लिए आयात किया जाता है, तो यह सच होने पर दस्तावेज़ का नाम बदल दिया जाएगा, अन्यथा नाम वही रहेगा।</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="261" />
         <source>Significant digits</source>
         <translation>महत्वपूर्ण अंक</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="247" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="266" />
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
@@ -4560,27 +4586,27 @@ Do you want to save your changes?</source>
         <translation>बचाना</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2329" />
+        <location filename="../src/main/MainWindow.cpp" line="2332" />
         <source>Export</source>
         <translation>निर्यात</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2411" />
+        <location filename="../src/main/MainWindow.cpp" line="2414" />
         <source>Open Document</source>
         <translation>दस्तावेज़ खोलें</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3667" />
+        <location filename="../src/main/MainWindow.cpp" line="3670" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3668" />
+        <location filename="../src/main/MainWindow.cpp" line="3671" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3798" />
+        <location filename="../src/main/MainWindow.cpp" line="3801" />
         <source>Engauge Digitizer</source>
         <translation>संलग्नक डिजिटाइज़र</translation>
     </message>
@@ -5272,7 +5298,7 @@ Do you want to save your changes?</source>
         <translation>फ़ाइल कई भाषा वर्णमाला के वर्णों की प्रतीत होती है, जो विंडोज कमांड लाइन में काम नहीं करती है</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="118" />
+        <location filename="../src/main/MainWindowModel.cpp" line="122" />
         <source>Cannot read main window data</source>
         <translation>मुख्य विंडो डेटा नहीं पढ़ा जा सकता है</translation>
     </message>
@@ -5417,18 +5443,30 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../src/Export/ExportFileExtension.cpp" line="43" />
-        <source>Preview for CSV files:</source>
-        <translation>CSV फ़ाइलों के लिए पूर्वावलोकन:</translation>
+        <source>Preview for CSV files</source>
+        <translation>CSV फ़ाइलों के लिए पूर्वावलोकन करें</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportFileExtension.cpp" line="47" />
-        <source>Preview for files without CSV or TSV:</source>
-        <translation> CSV या TSV के बिना फ़ाइलों के लिए पूर्वावलोकन:</translation>
+        <source>Preview for files without CSV or TSV</source>
+        <translation>CSV या TSV के बिना फ़ाइलों के लिए पूर्वावलोकन करें</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportFileExtension.cpp" line="51" />
+        <source>Preview for TSV files</source>
+        <translation>TSV फ़ाइलों के लिए पूर्वावलोकन करें</translation>
+    </message>
+    <message>
+        <source>Preview for CSV files:</source>
+        <translation type="vanished">CSV फ़ाइलों के लिए पूर्वावलोकन:</translation>
+    </message>
+    <message>
+        <source>Preview for files without CSV or TSV:</source>
+        <translation type="vanished"> CSV या TSV के बिना फ़ाइलों के लिए पूर्वावलोकन:</translation>
+    </message>
+    <message>
         <source>Preview for TSV files:</source>
-        <translation>TSV फ़ाइलों के लिए पूर्वावलोकन:</translation>
+        <translation type="vanished">TSV फ़ाइलों के लिए पूर्वावलोकन:</translation>
     </message>
 </context>
 <context>

@@ -3223,53 +3223,53 @@ The order of the curves here does not affect the order in the exported file. Tha
         <translation>기능 점수 선택</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="204" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="205" />
         <source>Interpolate Ys at Xs from all curves</source>
         <translation>모든 곡선에서 Xs로 Ys를 보간합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="205" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="206" />
         <source>Exported file will have values at every unique X value from every curve. Y values will be linearly interpolated if necessary</source>
         <translation>내 보낸 파일에는 모든 곡선의 고유 X 값마다 값이 있습니다. 필요한 경우 Y 값이 선형 보간됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="211" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="212" />
         <source>Extrapolate outside endpoints</source>
         <translation>외부 끝점을 외삽</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="212" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="213" />
         <source>Enable or disable extrapolation outside of endpoints of each curve. If disabled, only points between the endpoints of each curve are exported</source>
         <translation>각 곡선의 끝점 외부에서 외삽을 활성화 또는 비활성화합니다. 비활성화 된 경우 각 곡선의 끝점 사이의 점만 내보내집니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="217" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="218" />
         <source>Interpolate Ys at Xs from first curve</source>
         <translation>첫 번째 곡선에서 Xs로 Ys 보간</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="219" />
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
         <translation>내 보낸 파일에는 첫 번째 곡선의 모든 고유 X 값에 값이 있습니다. 필요한 경우 Y 값이 선형 보간됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="223" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="224" />
         <source>Interpolate Ys at evenly spaced X values that are automatically selected</source>
         <translation>자동으로 선택된 균일하게 간격을 둔 X 값으로 Y를 보간합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="224" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="225" />
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
         <translation>내 보낸 파일은 균등하게 간격을 둔 X 값을 아래 선택한 간격으로 구분하여 표시합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="228" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="229" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="395" />
         <source>Interval</source>
         <translation>간격</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="236" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="237" />
         <source>Interval, in the units of X, between successive points in the X direction.
 
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
@@ -3282,7 +3282,7 @@ The X values will be automatically aligned along simple numbers. If the first an
 X 값은 간단한 숫자를 따라 자동으로 정렬됩니다. 첫 번째 및 / 또는 마지막 점이 정렬 된 X 값을 따르지 않으면 필요에 따라 하나 또는 두 개의 추가 점이 추가됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="246" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="247" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
@@ -3295,69 +3295,81 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
 그래프 단위는 간격이 X 축척에 의존 할 때 선호됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="258" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="259" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="421" />
+        <source>Too many points</source>
+        <translation>너무 많은 포인트</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="261" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="423" />
+        <source>Warning that interval is too small. Adjust interval or increase point limit in Main Window settings</source>
+        <translation>간격이 너무 작다는 경고. 메인 창 설정에서 간격 조정 또는 포인트 제한 증가</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="264" />
         <source>Interpolate Ys at evenly spaced X values on grid lines</source>
         <translation>그리드 선에서 균일하게 간격을 둔 X 값으로 Y를 보간합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="259" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="265" />
         <source>Exported file will have values at evenly spaced X values at the vertical grid lines.</source>
         <translation>내 보낸 파일은 수직 그리드 선에서 균일하게 간격을 둔 X 값에 값을 갖습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="263" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="414" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="269" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="426" />
         <source>Raw Xs and Ys</source>
         <translation>원시 X 및 Y</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="264" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="415" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="270" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="427" />
         <source>Exported file will have only original X and Y values</source>
         <translation>내 보낸 파일에는 원본 X 및 Y 값만 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="275" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="281" />
         <source>Header</source>
         <translation>머리글</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="285" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="291" />
         <source>Exported file will have no header line</source>
         <translation>내 보낸 파일에는 헤더 행이 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="290" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="296" />
         <source>Exported file will have simple header line</source>
         <translation>내 보낸 파일에는 간단한 헤더 행이 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="295" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="301" />
         <source>Exported file will have gnuplot header line</source>
         <translation>내 보낸 파일에는 gnuplot 헤더 행이 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="307" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="313" />
         <source>Save As Default</source>
         <translation>기본값으로 저장</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="308" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="314" />
         <source>Save the settings for use as future defaults.</source>
         <translation>향후 기본값으로 사용할 설정을 저장하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="312" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="318" />
         <source>Load Default</source>
         <translation>기본값로드</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="313" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="319" />
         <source>Load the default settings.</source>
         <translation>기본 설정을로드하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="325" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="331" />
         <source>File extension used for preview. The CSV and TSV file extensions normally use commas and tabs respectively, but that can be changed in this dialog.</source>
         <translation>미리보기에 사용되는 파일 확장자. CSV 및 TSV 파일 확장자는 일반적으로 각각 쉼표와 탭을 사용하지만이 대화 상자에서 변경할 수 있습니다.</translation>
     </message>
@@ -3366,7 +3378,7 @@ Graph units are preferred when the spacing is to depend on the X scale.</source>
         <translation type="vanished">시사</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="351" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="357" />
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
@@ -3375,27 +3387,27 @@ Functions (shown here in blue) are output first, followed by relations (shown he
 기능 (파란색으로 표시)이 먼저 출력되고 관계가있는 경우 여기에 녹색으로 표시됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="367" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="373" />
         <source>Relation Points Selection</source>
         <translation>관계 지점 선택</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="381" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation>균일 한 간격으로 X와 Y를 보간하십시오.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="382" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="389" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation>내 보낸 파일은 각 관계를 따라 균등하게 간격을두고 아래에서 선택한 간격으로 구분됩니다. 마지막 간격이 마지막 지점에서 끝나지 않으면 가장 짧은 마지막 간격이 추가되어 마지막 지점에서 끝납니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="396" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="403" />
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation>등 간격 (X, Y) 좌표로 내보낼 때 연속 점 사이의 간격입니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="402" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="409" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -3408,12 +3420,12 @@ Graph units are usually preferred when the X and Y scales are identical.</source
 그래프 단위는 일반적으로 X와 Y 축척이 동일 할 때 선호됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="458" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="470" />
         <source>Functions</source>
         <translation>기능들</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="460" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="472" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
@@ -3422,12 +3434,12 @@ Controls for specifying the format of functions during export</source>
 내보내기 중에 함수 형식을 지정하기위한 컨트롤</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="466" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="478" />
         <source>Relations</source>
         <translation>처지</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="468" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="480" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
@@ -3436,17 +3448,17 @@ Controls for specifying the format of relations during export</source>
 내보내기 도중 관계 형식 지정을위한 컨트롤</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="487" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="499" />
         <source>X Label</source>
         <translation>X 라벨</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="491" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="503" />
         <source>Label in the header for x values</source>
         <translation>x 값의 헤더에 레이블 지정</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1247" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1280" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>미리보기는 축 포인트가 정의 될 때까지 사용할 수 없습니다.</translation>
     </message>
@@ -3903,17 +3915,17 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsMainWindow</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="43" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="49" />
         <source>Main Window</source>
         <translation>메인 윈도우</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="68" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="74" />
         <source>Initial zoom</source>
         <translation>초기 확대 / 축소</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="83" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="89" />
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
@@ -3922,32 +3934,32 @@ Select the initial zoom factor when a new document is loaded. Either the previou
 새 문서가로드되면 초기 확대 / 축소 비율을 선택하십시오. 이전 확대 / 축소를 유지하거나 지정된 확대 / 축소를 적용 할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="89" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="95" />
         <source>Zoom control</source>
         <translation>줌 제어</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="93" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
         <source>Menu only</source>
         <translation>메뉴 만</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="94" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="100" />
         <source>Menu and mouse wheel</source>
         <translation>메뉴 및 마우스 휠</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="95" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="101" />
         <source>Menu and +/- keys</source>
         <translation>메뉴 및 +/- 키</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="96" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
         <source>Menu, mouse wheel and +/- keys</source>
         <translation>메뉴, 마우스 휠 및 +/- 키</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="97" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="103" />
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
@@ -3960,12 +3972,12 @@ Select which inputs are used to zoom in and out.</source>
         <translation type="vanished">장소</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="108" />
         <source>Locale (requires restart)</source>
         <translation>로켈 (다시 시작해야 함)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="107" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="113" />
         <source>Locale
 
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
@@ -3978,12 +3990,12 @@ The locale determines how numbers are formatted. Specifically, either commas or 
 로케일은 숫자의 형식을 지정합니다. 특히 쉼표 나 마침표는 사용자가 입력하거나 사용자 인터페이스에 표시되거나 파일로 내보내는 각 숫자에서 그룹 구분 기호로 사용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="127" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="133" />
         <source>Import cropping</source>
         <translation>자르기 가져 오기</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="131" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="137" />
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
@@ -3996,12 +4008,12 @@ This setting only has an effect when Engauge has been built with support for pdf
 이 설정은 Engauge가 PDF 파일을 지원하도록 빌드 된 경우에만 적용됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="144" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="150" />
         <source>Import PDF resolution (dots per inch)</source>
         <translation>PDF 해상도 가져 오기 (인치당 도트 수)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="148" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="154" />
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
@@ -4010,12 +4022,12 @@ Imported Portable Document Format (PDF) files will be converted to this pixel re
 가져온 PDF (Portable Document Format) 파일은 DPI (dots per inch)로이 픽셀 해상도로 변환되며 각 픽셀은 한 점입니다. 값이 높을수록 그림 해상도가 향상되고 수치 디지털화 정확도가 향상 될 수 있습니다. 그러나 매우 높은 값으로 설정하면 이미지가 너무 커져서 Engauge가 느려집니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="163" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="169" />
         <source>Maximum grid lines</source>
         <translation>최대 그리드 선</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="168" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="174" />
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
@@ -4024,12 +4036,26 @@ Maximum number of grid lines to be processed. This limit is applied when the ste
 처리 할 그리드 라인의 최대 수. 이 제한은 시작 값과 종료 값에 대해 단계 값이 너무 작 으면 시각적으로 그리드 선이 너무 많아지며 처리 시간이 매우 길어집니다 (각 그리드 선을 처리해야하기 때문에)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="175" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="181" />
+        <source>Maximum exported points per curve</source>
+        <translation>곡선 당 최대 내 보낸 점</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
+        <source>Maximum Exported Points per Curve
+
+This is the maximum number of points allowed in each exported curve. No points are exported when this is exceeded. This limit prevents delays and overly large file sizes due to curves that have too many points.</source>
+        <translation>곡선 당 최대 내 보낸 점
+
+이것은 내 보낸 각 곡선에 허용되는 최대 포인트 수입니다. 이를 초과하면 포인트가 내보내지지 않습니다. 이 제한은 점이 너무 많은 곡선으로 인해 지연 및 지나치게 큰 파일 크기를 방지합니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="194" />
         <source>Highlight opacity</source>
         <translation>불투명도 강조 표시</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="181" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="200" />
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
@@ -4038,17 +4064,17 @@ Opacity to be applied when the cursor is over a curve or axis point in Select mo
 선택 모드에서 커서가 곡선 또는 축 포인트 위에있을 때 적용 할 불투명도입니다. 모양의 변경은 포인트를 선택할 수있는 시점을 나타냅니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="206" />
         <source>Recent file list</source>
         <translation>최근 파일 목록</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="190" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="209" />
         <source>Clear</source>
         <translation>명확한</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="192" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="211" />
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
@@ -4057,12 +4083,12 @@ Clear the recent file list in the File menu.</source>
 파일 메뉴에서 최근 파일 목록을 지 웁니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="198" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="217" />
         <source>Include title bar path</source>
         <translation>제목 표시 줄 경로 포함</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="203" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="222" />
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
@@ -4071,12 +4097,12 @@ Includes or excludes the path and file extension from the filename in the title 
 제목 표시 줄에 파일 이름의 경로 및 파일 확장명을 포함하거나 제외합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="208" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="227" />
         <source>Allow small dialogs</source>
         <translation>작은 파일 창 허용</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="213" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="232" />
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
@@ -4085,12 +4111,12 @@ Allows settings dialogs to be made very small so they fit on small computer scre
 설정 대화 상자를 작게 만들어 소형 컴퓨터 화면에 맞출 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="237" />
         <source>Allow drag and drop export</source>
         <translation>드래그 앤 드롭 내보내기 허용</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="223" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242" />
         <source>Allow Drag and Drop Export
 
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
@@ -4103,12 +4129,12 @@ Curve Fitting Window 및 Geometry Window 테이블에서 끌어서 놓기를 내
 드래그 앤 드롭을 사용하지 않으면 클릭하고 끌기를 사용하여 사각형 셀 세트를 선택할 수 있습니다. 드래그 앤 드롭을 사용하면 클릭 한 다음 Shift 키를 누른 상태로 클릭하면 사각형 셀 집합을 선택할 수 있습니다. 클릭 및 드래그로 드래그 작업이 시작되기 때문입니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="231" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="250" />
         <source>Image replace renames document</source>
         <translation>이미지 대체 이름 바꾸기 문서</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="236" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="255" />
         <source>Image Replace Renames Document
 
 When an image is imported to replace the current image, the document will be renamed if this is true, otherwise the name will stay the same.</source>
@@ -4117,12 +4143,12 @@ When an image is imported to replace the current image, the document will be ren
 현재 이미지를 바꾸기 위해 이미지를 가져 오면이 경우 문서의 이름이 바뀌고, 그렇지 않으면 이름은 그대로 유지됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="261" />
         <source>Significant digits</source>
         <translation>유효 숫자</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="247" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="266" />
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
@@ -4575,27 +4601,27 @@ Do you want to save your changes?</source>
         <translation>구하다</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2329" />
+        <location filename="../src/main/MainWindow.cpp" line="2332" />
         <source>Export</source>
         <translation>수출</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2411" />
+        <location filename="../src/main/MainWindow.cpp" line="2414" />
         <source>Open Document</source>
         <translation>문서 열기</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3667" />
+        <location filename="../src/main/MainWindow.cpp" line="3670" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3668" />
+        <location filename="../src/main/MainWindow.cpp" line="3671" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3798" />
+        <location filename="../src/main/MainWindow.cpp" line="3801" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5359,7 +5385,7 @@ Do you want to save your changes?</source>
         <translation>파일이 Windows 명령 행에서 작동하지 않는 다국어 알파벳의 문자를 가지고있는 것으로 보입니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="118" />
+        <location filename="../src/main/MainWindowModel.cpp" line="122" />
         <source>Cannot read main window data</source>
         <translation>주 창 데이터를 읽을 수 없습니다.</translation>
     </message>
@@ -5504,18 +5530,30 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../src/Export/ExportFileExtension.cpp" line="43" />
-        <source>Preview for CSV files:</source>
-        <translation>CSV 파일 미리보기 :</translation>
+        <source>Preview for CSV files</source>
+        <translation>CSV 파일 미리보기</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportFileExtension.cpp" line="47" />
-        <source>Preview for files without CSV or TSV:</source>
-        <translation>CSV 또는 TSV가없는 파일 미리보기 :</translation>
+        <source>Preview for files without CSV or TSV</source>
+        <translation>CSV 또는 TSV가없는 파일 미리보기</translation>
     </message>
     <message>
         <location filename="../src/Export/ExportFileExtension.cpp" line="51" />
+        <source>Preview for TSV files</source>
+        <translation>TSV 파일 미리보기</translation>
+    </message>
+    <message>
+        <source>Preview for CSV files:</source>
+        <translation type="vanished">CSV 파일 미리보기 :</translation>
+    </message>
+    <message>
+        <source>Preview for files without CSV or TSV:</source>
+        <translation type="vanished">CSV 또는 TSV가없는 파일 미리보기 :</translation>
+    </message>
+    <message>
         <source>Preview for TSV files:</source>
-        <translation>TSV 파일 미리보기 :</translation>
+        <translation type="vanished">TSV 파일 미리보기 :</translation>
     </message>
 </context>
 <context>

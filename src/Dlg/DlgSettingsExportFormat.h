@@ -112,6 +112,7 @@ private:
   QLineEdit *m_editFunctionsPointsEvenlySpacing;
   QDoubleValidator *m_validatorFunctionsPointsEvenlySpacing;
   QComboBox *m_cmbFunctionsPointsEvenlySpacingUnits;
+  QLabel *m_lblOverflowFunctions;
   QRadioButton *m_btnFunctionsPointsGridLines;
   QRadioButton *m_btnFunctionsPointsRaw;
   QCheckBox *m_chkExtrapolateOutsideEndpoints;
@@ -123,6 +124,7 @@ private:
   QLineEdit *m_editRelationsPointsEvenlySpacing;
   QDoubleValidator *m_validatorRelationsPointsEvenlySpacing;
   QComboBox *m_cmbRelationsPointsEvenlySpacingUnits;
+  QLabel *m_lblOverflowRelations;
   QRadioButton *m_btnRelationsPointsRaw;
 
   QRadioButton *m_btnDelimitersCommas;

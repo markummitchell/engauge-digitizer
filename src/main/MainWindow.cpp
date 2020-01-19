@@ -1654,6 +1654,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                           QVariant (DEFAULT_SIGNIFICANT_DIGITS)).toInt ());
   m_modelMainWindow.setImageReplaceRenamesDocument (settings.value (SETTINGS_IMAGE_REPLACE_RENAMES_DOCUMENT,
                                                                     QVariant (DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT)).toBool ());
+  m_modelMainWindow.setMaximumExportedPointsPerCurve (settings.value (SETTINGS_MAXIMUM_EXPORTED_POINTS_PER_CURVE,
+                                                                      QVariant (DEFAULT_MAXIMUM_EXPORTED_POINTS_PER_CURVE)).toInt ());
 
   // MainDirectoryPersist starts with directories from last execution
   MainDirectoryPersist directoryPersist;
@@ -1727,6 +1729,7 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_MAIN_DIRECTORY_IMPORT_LOAD,
                      directoryPersist.getDirectoryImportOpen().absolutePath());
   settings.setValue (SETTINGS_MAIN_TITLE_BAR_FORMAT, m_modelMainWindow.mainTitleBarFormat());
+  settings.setValue (SETTINGS_MAXIMUM_EXPORTED_POINTS_PER_CURVE, m_modelMainWindow.maximumExportedPointsPerCurve());
   settings.setValue (SETTINGS_MAXIMUM_GRID_LINES, m_modelMainWindow.maximumGridLines());
   settings.setValue (SETTINGS_SMALL_DIALOGS, m_modelMainWindow.smallDialogs());
   settings.setValue (SETTINGS_VIEW_BACKGROUND_TOOLBAR, m_actionViewBackground->isChecked());

@@ -34,6 +34,7 @@ const QString SETTINGS_LOCALE_LANGUAGE ("language");
 const QString SETTINGS_MAIN_DIRECTORY_EXPORT_SAVE ("exportSave");
 const QString SETTINGS_MAIN_DIRECTORY_IMPORT_LOAD ("importLoad");
 const QString SETTINGS_MAIN_TITLE_BAR_FORMAT ("titleBarFormat");
+const QString SETTINGS_MAXIMUM_EXPORTED_POINTS_PER_CURVE ("maximumExportedPointsPerCurve");
 const QString SETTINGS_MAXIMUM_GRID_LINES ("maximumGridLines");
 const QString SETTINGS_POS ("pos");
 const QString SETTINGS_RECENT_FILE_LIST ("recentFileList");

@@ -39,6 +39,12 @@ const int MAX_GRID_LINES_MIN = 2;
 const int MAX_GRID_LINES_MAX = 1000;
 const int MINIMUM_DIALOG_WIDTH_MAIN_WINDOW = 550;
 
+// The limits for exported points must include DEFAULT_MAXIMUM_EXPORTED_POINTS_PER_CURVE. The max
+// is not very large since that would correspond to more points than pixels in the picture
+const int STEP_MAX_EXPORTED_POINTS_PER_CURVE = 100; // Min and max should probably both be a multiple of this step size
+const int MIN_MAX_EXPORTED_POINTS_PER_CURVE = STEP_MAX_EXPORTED_POINTS_PER_CURVE * 1;
+const int MAX_MAX_EXPORTED_POINTS_PER_CURVE = STEP_MAX_EXPORTED_POINTS_PER_CURVE * 50;
+
 DlgSettingsMainWindow::DlgSettingsMainWindow(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Main Window"),
                            "DlgSettingsMainWindow",
@@ -171,6 +177,19 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
                                             "possibly extremely long processing time (since each grid line would have to be processed)"));
   connect (m_spinMaximumGridLines, SIGNAL (valueChanged (int)), this, (SLOT (slotMaximumGridLines (int))));
   layout->addWidget (m_spinMaximumGridLines, row++, 2);
+
+  QLabel *labelExportedPoints = new QLabel (QString ("%1:").arg (tr ("Maximum exported points per curve")));
+  layout->addWidget (labelExportedPoints, row, 1);
+
+  m_spinMaximumExportedPointsPerCurve = new QSpinBox;
+  m_spinMaximumExportedPointsPerCurve->setRange (MIN_MAX_EXPORTED_POINTS_PER_CURVE, MAX_MAX_EXPORTED_POINTS_PER_CURVE);
+  m_spinMaximumExportedPointsPerCurve->setSingleStep (STEP_MAX_EXPORTED_POINTS_PER_CURVE);
+  m_spinMaximumExportedPointsPerCurve->setWhatsThis (tr ("Maximum Exported Points per Curve\n\n"
+                                                         "This is the maximum number of points allowed in each exported curve. No points are "
+                                                         "exported when this is exceeded. This limit prevents delays and overly large file sizes due "
+                                                         "to curves that have too many points."));
+  connect (m_spinMaximumExportedPointsPerCurve, SIGNAL (valueChanged (int)), this, SLOT (slotMaximumExportedPointsPerCurve (int)));
+  layout->addWidget (m_spinMaximumExportedPointsPerCurve, row++, 2);
 
   QLabel *labelHighlightOpacity = new QLabel (QString ("%1:").arg (tr ("Highlight opacity")));
   layout->addWidget (labelHighlightOpacity, row, 1);
@@ -345,6 +364,7 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   m_chkDragDropExport->setChecked (m_modelMainWindowAfter->dragDropExport());
   m_spinSignificantDigits->setValue (m_modelMainWindowAfter->significantDigits ());
   m_chkImageReplaceRenamesDocument->setChecked (m_modelMainWindowAfter->imageReplaceRenamesDocument());
+  m_spinMaximumExportedPointsPerCurve->setValue (m_modelMainWindowAfter->maximumExportedPointsPerCurve());
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
@@ -396,9 +416,17 @@ void DlgSettingsMainWindow::slotLocale (int index)
   updateControls();
 }
 
+void DlgSettingsMainWindow::slotMaximumExportedPointsPerCurve (int limit)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotMaximumExportedPointsPerCurve";
+
+  m_modelMainWindowAfter->setMaximumExportedPointsPerCurve (limit);
+  updateControls ();
+}
+
 void DlgSettingsMainWindow::slotMaximumGridLines (int limit)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWIndow::slotMaximumGridLines";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotMaximumGridLines";
 
   m_modelMainWindowAfter->setMaximumGridLines (limit);
   updateControls ();

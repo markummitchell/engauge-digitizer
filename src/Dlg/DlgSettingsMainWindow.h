@@ -45,6 +45,7 @@ private slots:
   void slotImageReplaceRenamesDocument (bool);
   void slotImportCropping (int index);
   void slotLocale (int index);
+  void slotMaximumExportedPointsPerCurve (int limit);
   void slotMaximumGridLines (int limit);
   void slotPdfResolution (const QString);
   void slotRecentFileClear ();
@@ -72,6 +73,7 @@ private:
   QCheckBox *m_chkTitleBarFormat;
   QComboBox *m_cmbPdfResolution;
   QSpinBox *m_spinMaximumGridLines;
+  QSpinBox *m_spinMaximumExportedPointsPerCurve;
   QDoubleSpinBox *m_spinHighlightOpacity;
   QCheckBox *m_chkSmallDialogs;
   QCheckBox *m_chkDragDropExport;

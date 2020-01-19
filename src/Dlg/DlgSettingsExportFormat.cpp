@@ -197,7 +197,8 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
   layoutPointsSelections->setColumnStretch (0, 0);
   layoutPointsSelections->setColumnStretch (1, 0);
   layoutPointsSelections->setColumnStretch (2, 0);
-  layoutPointsSelections->setColumnStretch (3, 1);
+  layoutPointsSelections->setColumnStretch (3, 0);
+  layoutPointsSelections->setColumnStretch (4, 1);
 
   int row = 0;
 
@@ -211,7 +212,7 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
   m_chkExtrapolateOutsideEndpoints = new QCheckBox (tr ("Extrapolate outside endpoints"));
   m_chkExtrapolateOutsideEndpoints->setWhatsThis (tr ("Enable or disable extrapolation outside of endpoints of each curve. If disabled, "
                                                       "only points between the endpoints of each curve are exported"));
-  layoutPointsSelections->addWidget (m_chkExtrapolateOutsideEndpoints, row++, 3, 1, 1, Qt::AlignRight);
+  layoutPointsSelections->addWidget (m_chkExtrapolateOutsideEndpoints, row++, 4, 1, 1, Qt::AlignRight);
   connect (m_chkExtrapolateOutsideEndpoints, SIGNAL (stateChanged (int)), this, SLOT (slotFunctionsExtrapolateOutsideEndpoints(int)));
 
   m_btnFunctionsPointsFirstCurve = new QRadioButton (tr ("Interpolate Ys at Xs from first curve"));
@@ -253,7 +254,12 @@ void DlgSettingsExportFormat::createFunctionsPointsSelection (QHBoxLayout *layou
                                                   QVariant (EXPORT_POINTS_INTERVAL_UNITS_SCREEN));
   connect (m_cmbFunctionsPointsEvenlySpacingUnits, SIGNAL (activated (const QString &)),
            this, SLOT (slotFunctionsPointsEvenlySpacedIntervalUnits (const QString &))); // activated() ignores code changes
-  layoutPointsSelections->addWidget (m_cmbFunctionsPointsEvenlySpacingUnits, row++, 3, 1, 1, Qt::AlignLeft);
+  layoutPointsSelections->addWidget (m_cmbFunctionsPointsEvenlySpacingUnits, row, 3, 1, 1, Qt::AlignLeft);
+
+  m_lblOverflowFunctions = new QLabel (tr ("Too many points"));
+  m_lblOverflowFunctions->setStyleSheet ("QLabel { color : red; }");
+  m_lblOverflowFunctions->setWhatsThis (tr ("Warning that interval is too small. Adjust interval or increase point limit in Main Window settings"));
+  layoutPointsSelections->addWidget (m_lblOverflowFunctions, row++, 4, 1, 1, Qt::AlignLeft);
 
   m_btnFunctionsPointsGridLines = new QRadioButton (tr ("Interpolate Ys at evenly spaced X values on grid lines"));
   m_btnFunctionsPointsGridLines->setWhatsThis (tr ("Exported file will have values at evenly spaced X values at the vertical grid lines."));
@@ -374,7 +380,8 @@ void DlgSettingsExportFormat::createRelationsPointsSelection (QHBoxLayout *layou
   layoutPointsSelections->setColumnStretch (0, 0);
   layoutPointsSelections->setColumnStretch (1, 0);
   layoutPointsSelections->setColumnStretch (2, 0);
-  layoutPointsSelections->setColumnStretch (3, 1);
+  layoutPointsSelections->setColumnStretch (3, 0);
+  layoutPointsSelections->setColumnStretch (4, 1);
 
   int row = 0;
 
@@ -409,7 +416,12 @@ void DlgSettingsExportFormat::createRelationsPointsSelection (QHBoxLayout *layou
                                                                                      QVariant (EXPORT_POINTS_INTERVAL_UNITS_SCREEN));
   connect (m_cmbRelationsPointsEvenlySpacingUnits, SIGNAL (activated (const QString &)),
            this, SLOT (slotRelationsPointsEvenlySpacedIntervalUnits (const QString &))); // activated() ignores code changes
-  layoutPointsSelections->addWidget (m_cmbRelationsPointsEvenlySpacingUnits, row++, 3, 1, 1, Qt::AlignLeft);
+  layoutPointsSelections->addWidget (m_cmbRelationsPointsEvenlySpacingUnits, row, 3, 1, 1, Qt::AlignLeft);
+
+  m_lblOverflowRelations = new QLabel (tr ("Too many points"));
+  m_lblOverflowRelations->setStyleSheet ("QLabel { color : red; }");
+  m_lblOverflowRelations->setWhatsThis (tr ("Warning that interval is too small. Adjust interval or increase point limit in Main Window settings"));
+  layoutPointsSelections->addWidget (m_lblOverflowRelations, row++, 4, 1, 1, Qt::AlignLeft);
 
   m_btnRelationsPointsRaw = new QRadioButton (tr ("Raw Xs and Ys"));
   m_btnRelationsPointsRaw->setWhatsThis (tr ("Exported file will have only original X and Y values"));
@@ -565,7 +577,7 @@ void DlgSettingsExportFormat::initializeIntervalConstraints ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::initializeIntervalConstraints";
 
-  const int MAX_POINTS_ACROSS_RANGE = 5000;
+  const int maxPointsAcrossRange = mainWindow().modelMainWindow().maximumExportedPointsPerCurve ();
 
   // Get min and max of graph and screen coordinates
   CallbackBoundingRects ftor (cmdMediator().document().documentAxesPointsRequired(),
@@ -581,8 +593,8 @@ void DlgSettingsExportFormat::initializeIntervalConstraints ()
   QPointF boundingRectGraphMax = ftor.boundingRectGraphMax (isEmpty);
   double maxSizeGraph = boundingRectGraphMax.x() - boundingRectGraphMin.x();
   double maxSizeScreen = ftor.boundingRectScreen(isEmpty).width();
-  m_minIntervalGraph = maxSizeGraph / MAX_POINTS_ACROSS_RANGE; // Should be unaffected by y range
-  m_minIntervalScreen = maxSizeScreen / MAX_POINTS_ACROSS_RANGE; // Should be unaffected by y range
+  m_minIntervalGraph = maxSizeGraph / maxPointsAcrossRange; // Should be unaffected by y range
+  m_minIntervalScreen = maxSizeScreen / maxPointsAcrossRange; // Should be unaffected by y range
 }
 
 void DlgSettingsExportFormat::load (CmdMediator &cmdMediator)
@@ -802,13 +814,21 @@ void DlgSettingsExportFormat::slotFunctionsPointsEvenlySpacedInterval(const QStr
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotFunctionsPointsEvenlySpacedInterval";
 
-  // Prevent infinite loop on empty and "-" values which get treated as zero interval
-  if (goodIntervalFunctions()) {
-    m_modelExportAfter->setPointsIntervalFunctions(m_editFunctionsPointsEvenlySpacing->text().toDouble());
-    updateControls();
-    updatePreview();
-  } else {
+  if (m_editFunctionsPointsEvenlySpacing->text().trimmed() == "") {
+    // Undefined value which is (1) not a problem and (2) an intermediate state
+    m_lblOverflowFunctions->hide ();
     m_editPreview->setText(EMPTY_PREVIEW);
+  } else {
+    // Prevent infinite loop on empty and "-" values which get treated as zero interval
+    if (goodIntervalFunctions()) {
+      m_lblOverflowFunctions->hide (); // State transition
+      m_modelExportAfter->setPointsIntervalFunctions(m_editFunctionsPointsEvenlySpacing->text().toDouble());
+      updateControls();
+      updatePreview();
+    } else {
+      m_lblOverflowFunctions->show (); // State transition
+      m_editPreview->setText(EMPTY_PREVIEW);
+    }
   }
 }
 
@@ -819,10 +839,17 @@ void DlgSettingsExportFormat::slotFunctionsPointsEvenlySpacedIntervalUnits(const
   int index = m_cmbFunctionsPointsEvenlySpacingUnits->currentIndex();
   ExportPointsIntervalUnits units = static_cast<ExportPointsIntervalUnits> (m_cmbFunctionsPointsEvenlySpacingUnits->itemData (index).toInt());
 
-  m_modelExportAfter->setPointsIntervalUnitsFunctions(units);
-  updateIntervalConstraints(); // Call this before updateControls so constraint checking is updated for ok button
-  updateControls();
-  updatePreview();
+  // Prevent infinite loop on certain values
+  if (goodIntervalFunctions()) {
+    m_lblOverflowFunctions->hide (); // State transition
+    m_modelExportAfter->setPointsIntervalUnitsFunctions(units);
+    updateIntervalConstraints(); // Call this before updateControls so constraint checking is updated for ok button
+    updateControls();
+    updatePreview();
+  } else {
+    m_lblOverflowFunctions->show (); // State transition
+    m_editPreview->setText(EMPTY_PREVIEW);
+  }
 }
 
 void DlgSettingsExportFormat::slotFunctionsPointsFirstCurve()
@@ -1005,9 +1032,21 @@ void DlgSettingsExportFormat::slotRelationsPointsEvenlySpacedInterval(const QStr
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotRelationsPointsEvenlySpacedInterval";
 
-  m_modelExportAfter->setPointsIntervalRelations(m_editRelationsPointsEvenlySpacing->text().toDouble());
-  updateControls();
-  updatePreview();
+  if (m_editRelationsPointsEvenlySpacing->text().trimmed() == "") {
+    // Undefined value which is (1) not a problem and (2) an intermediate state
+    m_lblOverflowRelations->hide ();
+    m_editPreview->setText(EMPTY_PREVIEW);
+  } else {
+    if (goodIntervalRelations()) {
+      m_lblOverflowRelations->hide (); // State transition
+      m_modelExportAfter->setPointsIntervalRelations(m_editRelationsPointsEvenlySpacing->text().toDouble());
+      updateControls();
+      updatePreview();
+    } else {
+      m_lblOverflowRelations->show (); // State transition
+      m_editPreview->setText(EMPTY_PREVIEW);
+    }
+  }
 }
 
 void DlgSettingsExportFormat::slotRelationsPointsEvenlySpacedIntervalUnits(const QString &)
@@ -1017,10 +1056,16 @@ void DlgSettingsExportFormat::slotRelationsPointsEvenlySpacedIntervalUnits(const
   int index = m_cmbRelationsPointsEvenlySpacingUnits->currentIndex();
   ExportPointsIntervalUnits units = static_cast<ExportPointsIntervalUnits> (m_cmbRelationsPointsEvenlySpacingUnits->itemData (index).toInt());
 
-  m_modelExportAfter->setPointsIntervalUnitsRelations(units);
-  updateIntervalConstraints(); // Call this before updateControls so constraint checking is updated for ok button
-  updateControls();
-  updatePreview();
+  if (goodIntervalRelations()) {
+    m_lblOverflowRelations->hide (); // State transition
+    m_modelExportAfter->setPointsIntervalUnitsRelations(units);
+    updateIntervalConstraints(); // Call this before updateControls so constraint checking is updated for ok button
+    updateControls();
+    updatePreview();
+  } else {
+    m_lblOverflowRelations->show (); // State transition
+    m_editPreview->setText(EMPTY_PREVIEW);
+  }
 }
 
 void DlgSettingsExportFormat::slotRelationsPointsRaw()

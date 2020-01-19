@@ -23,10 +23,11 @@
 // Prevent comma ambiguity with group separator commas and field delimiting commas
 const QLocale::NumberOption HIDE_GROUP_SEPARATOR = QLocale::OmitGroupSeparator;
 
-bool DEFAULT_DRAG_DROP_EXPORT = false; // False value allows intuitive copy-and-drag to select a rectangular set of table cells
-int DEFAULT_SIGNIFICANT_DIGITS = 7;
-bool DEFAULT_SMALL_DIALOGS = false;
-bool DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT = true; // Pre-version 11.3 behavior
+const bool DEFAULT_DRAG_DROP_EXPORT = false; // False value allows intuitive copy-and-drag to select a rectangular set of table cells
+const int DEFAULT_SIGNIFICANT_DIGITS = 7;
+const bool DEFAULT_SMALL_DIALOGS = false;
+const bool DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT = true; // Pre-version 11.3 behavior
+const int DEFAULT_MAXIMUM_EXPORTED_POINTS_PER_CURVE = 5000; // Moved 1/2020 from Export classes
 
 MainWindowModel::MainWindowModel() :
   m_zoomControl (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS),
@@ -39,7 +40,8 @@ MainWindowModel::MainWindowModel() :
   m_smallDialogs (DEFAULT_SMALL_DIALOGS),
   m_dragDropExport (DEFAULT_DRAG_DROP_EXPORT),
   m_significantDigits (DEFAULT_SIGNIFICANT_DIGITS),
-  m_imageReplaceRenamesDocument (DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT)
+  m_imageReplaceRenamesDocument (DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT),
+  m_maximumExportedPointsPerCurve (DEFAULT_MAXIMUM_EXPORTED_POINTS_PER_CURVE)
 {
   // Locale member variable m_locale is initialized to default locale when default constructor is called
 }
@@ -56,7 +58,8 @@ MainWindowModel::MainWindowModel(const MainWindowModel &other) :
   m_smallDialogs (other.smallDialogs()),
   m_dragDropExport (other.dragDropExport()),
   m_significantDigits (other.significantDigits()),
-  m_imageReplaceRenamesDocument (other.imageReplaceRenamesDocument())
+  m_imageReplaceRenamesDocument (other.imageReplaceRenamesDocument()),
+  m_maximumExportedPointsPerCurve (other.maximumExportedPointsPerCurve ())
 {
 }
 
@@ -74,6 +77,7 @@ MainWindowModel &MainWindowModel::operator=(const MainWindowModel &other)
   m_dragDropExport = other.dragDropExport();
   m_significantDigits = other.significantDigits();
   m_imageReplaceRenamesDocument = other.imageReplaceRenamesDocument();
+  m_maximumExportedPointsPerCurve = other.maximumExportedPointsPerCurve();
 
   return *this;
 }
@@ -129,6 +133,11 @@ MainTitleBarFormat MainWindowModel::mainTitleBarFormat() const
   return m_mainTitleBarFormat;
 }
 
+int MainWindowModel::maximumExportedPointsPerCurve() const
+{
+  return m_maximumExportedPointsPerCurve;
+}
+
 int MainWindowModel::maximumGridLines() const
 {
   return m_maximumGridLines;
@@ -160,6 +169,7 @@ void MainWindowModel::printStream(QString indentation,
   str << indentation << "dragDropExport=" << (m_dragDropExport ? "yes" : "no") << "\n";
   str << indentation << "significantDigits=" << m_significantDigits << "\n";
   str << indentation << "imageReplaceRenamesDocument=" << (m_imageReplaceRenamesDocument ? "yes" : "no") << "\n";
+  str << indentation << "maximumExportedPointsPerCurve=" << m_maximumExportedPointsPerCurve << "\n";
 }
 
 void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
@@ -209,6 +219,11 @@ void MainWindowModel::setLocale (const QLocale &locale)
 void MainWindowModel::setMainTitleBarFormat(MainTitleBarFormat mainTitleBarFormat)
 {
   m_mainTitleBarFormat = mainTitleBarFormat;
+}
+
+void MainWindowModel::setMaximumExportedPointsPerCurve(int maximumExportedPointsPerCurve)
+{
+  m_maximumExportedPointsPerCurve = maximumExportedPointsPerCurve;
 }
 
 void MainWindowModel::setMaximumGridLines(int maximumGridLines)

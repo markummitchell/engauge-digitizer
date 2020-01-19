@@ -18,10 +18,11 @@
 
 class QTextStream;
 
-extern bool DEFAULT_DRAG_DROP_EXPORT;
-extern int DEFAULT_SIGNIFICANT_DIGITS;
-extern bool DEFAULT_SMALL_DIALOGS;
-extern bool DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT;
+extern const bool DEFAULT_DRAG_DROP_EXPORT;
+extern const int DEFAULT_SIGNIFICANT_DIGITS;
+extern const bool DEFAULT_SMALL_DIALOGS;
+extern const bool DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT;
+extern const int DEFAULT_MAXIMUM_EXPORTED_POINTS_PER_CURVE;
 
 /// Model for DlgSettingsMainWindow. Unlike the other models (DocumentModel*) this data is not saved and 
 /// loaded within the document, so no xml or working with the Document class is involved. Also, there is
@@ -59,7 +60,10 @@ public:
   /// Get method for MainWindow titlebar filename format
   MainTitleBarFormat mainTitleBarFormat () const;
 
-  /// Maximum number of grid lines
+  /// Get method for maximum number of exported points per curve
+  int maximumExportedPointsPerCurve () const;
+
+  /// Get method for maximum number of grid lines
   int maximumGridLines () const;
 
   /// Get method for resolution of imported PDF files, in dots per inch
@@ -95,6 +99,9 @@ public:
 
   /// Set method for maximum number of grid lines
   void setMaximumGridLines (int maximumGridLines);
+
+  /// Set method for maximum number of exported points per curve
+  void setMaximumExportedPointsPerCurve (int maximumExportedPointsPerCurve);
 
   /// Set method for resolution of imported PDF files, in dots per inch
   void setPdfResolution (int resolution);
@@ -137,6 +144,7 @@ private:
   bool m_dragDropExport;
   int m_significantDigits;
   bool m_imageReplaceRenamesDocument;
+  int m_maximumExportedPointsPerCurve; // Too many points causes unacceptable delays so this is the limit
 };
 
 #endif // MAIN_WINDOW_MODEL_H
