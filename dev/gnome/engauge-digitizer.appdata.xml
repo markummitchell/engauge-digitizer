@@ -68,15 +68,10 @@
 		<content_attribute id="money-gambling">none</content_attribute>
 	</content_rating>
 	<releases>
-		<release date="2019-08-02" version="12.1">
+		<release date="2020-01-22" version="12.2">
 			<description>
 			  <ul>
-			    <li>Fix autorepeat with Segment Settings dialog</li>
-			    <li>Display Coordinate Toolbar after import</li>
-			    <li>Starting directory is saved and restored</li>
-			    <li>Fix log scale over very small ranges</li>
-			    <li>Fix tutorial page transition</li>
-			    <li>Add Farsi support</li>
+			    <li>Guidance for setting Export settings</li>
 			  </ul>
 			</description>
 		</release>

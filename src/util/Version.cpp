@@ -9,7 +9,7 @@
 // Every jump in the major version number will need:
 // 1) changes to Document class
 // 2) at least one version-specific test case in the test subdirectory
-const char *VERSION_NUMBER = "12.1";
+const char *VERSION_NUMBER = "12.2";
 
 QString engaugeWindowTitle()
 {
