@@ -413,6 +413,7 @@ private:
   void loadInputFileForErrorReport(QDomDocument &domInputFile) const;
   void loadToolTips ();
   bool maybeSave();
+  QString messageCannotReadFile (const QString &fileName) const;
   bool modeGraph () const; // True if document is loaded and it has all graphs
   void rebuildRecentFileListForCurrentFile(const QString &filePath);
   bool saveDocumentFile(const QString &fileName);

@@ -6,7 +6,6 @@
 
 #include "DlgImportCroppingNonPdf.h"
 #include "ImportCroppingUtilNonPdf.h"
-#include "Logger.h"
 #include "NonPdf.h"
 #include <QApplication>
 #include <QImage>
@@ -46,8 +45,6 @@ NonPdfReturn NonPdf::load (const QString &fileName,
 NonPdfReturn NonPdf::loadWithCropping (const QString &fileName,
                                        QImage &image) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "NonPdf::loadWithCropping fileName=" << fileName.toLatin1().data();
-  
   NonPdfReturn nonPdfReturn = NON_PDF_RETURN_FAILED;
 
   // Get page and extent. At this point it is always true that the image can be read
@@ -71,8 +68,6 @@ NonPdfReturn NonPdf::loadWithCropping (const QString &fileName,
 NonPdfReturn NonPdf::loadWithoutCropping (const QString &fileName,
                                           QImage &image) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "NonPdf::loadWithoutCropping fileName=" << fileName.toLatin1().data();
-
   NonPdfReturn nonPdfReturn = NON_PDF_RETURN_FAILED;
 
   if (image.load (fileName)) {

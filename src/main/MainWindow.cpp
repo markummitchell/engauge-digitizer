@@ -585,11 +585,16 @@ void MainWindow::fileImport (const QString &fileName,
   }
 
   if (!loaded) {
-    QString msg = QString("%1 %2 %3 %4.")
-                  .arg (tr ("Cannot read file"))
-                  .arg (fileName)
-                  .arg (tr ("from directory"))
-                  .arg (QDir::currentPath());
+    QString msg = messageCannotReadFile (fileName);
+
+#ifdef OSX_RELEASE
+    // Explain constraints due to osx sandbox. Third path below is a function of CFBundleIdentifier
+    msg = QString ("%1.\n\n%2.")
+      .arg (msg)
+      .arg (tr ("In OSX, files loaded at startup must be in the Downloads, Pictures or "
+                "Library/Containers/Digitizer/Data directories"));
+#endif    
+
 #ifdef WIN32
     if (fileName.contains ("???")) {
 
@@ -755,11 +760,7 @@ void MainWindow::filePaste (ImportType importType)
   if (!loaded) {
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
-                          QString("%1 %2 %3 %4.")
-                          .arg (tr ("Cannot read file"))
-                          .arg (fileName)
-                          .arg (tr ("from directory"))
-                          .arg (QDir::currentPath ()));
+                          messageCannotReadFile (fileName));
 
     // Reset
     m_originalFile = originalFileOld;
@@ -932,13 +933,11 @@ void MainWindow::loadDocumentFile (const QString &fileName)
 
     QApplication::restoreOverrideCursor();
 
+    QString msg = messageCannotReadFile (fileName);
     QMessageBox::warning (this,
                           engaugeWindowTitle(),
-                          QString("%1 %2 %3 %4:\n%5.")
-                          .arg (tr ("Cannot read file"))
-                          .arg (fileName)
-                          .arg (tr ("from directory"))
-                          .arg (QDir::currentPath ())
+                          QString("%1:\n%2.")
+                          .arg (msg)
                           .arg(cmdMediator->reasonForUnsuccessfulRead ()));
     delete cmdMediator;
 
@@ -1158,6 +1157,13 @@ void MainWindow::loadToolTips()
     m_viewSegmentFilter->setToolTip ("");
 
   }
+}
+
+QString MainWindow::messageCannotReadFile (const QString &fileName) const
+{    
+    return QString("%1 %2")
+            .arg (tr ("Cannot read file"))
+            .arg (fileName);
 }
 
 bool MainWindow::modeGraph () const

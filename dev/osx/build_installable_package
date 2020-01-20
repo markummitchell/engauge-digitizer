@@ -53,6 +53,7 @@ TARGETVER=`awk 'f{print;f=0} /LSMinimumSystemVersion/{f=1}' dev/osx/Info_valid.p
 echo "MinimumSystemVersion:   $TARGETVER"
 sw_vers | grep ProductVersion | sed 's/Product/BuildSystem/'
 read -p "Press any key to continue"
+echo "Continuing"
 
 # Remove old build. Need root privileges. Note that this step implicitly removes any leftover 
 # engauge.log file, which would other break the sandbox
@@ -93,6 +94,7 @@ echo '1. <editor> Engauge\ Digitizer.app/Contents/Info.plist'
 echo '2. append/add .1 to version number)'
 echo '3. save the file and exit)'
 read -p "Press any key to continue"
+echo "Continuing"
 
 # Insert Qt libraries. This step will output an error unless log4cpp.1.dylib has been copied to /usr/lib
 # so there is a check at the top of this script (before the length recompilation)
