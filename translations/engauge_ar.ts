@@ -3478,7 +3478,7 @@ Controls for specifying the format of relations during export</source>
         <translation>تسمية في رأس للقيم س</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1280" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1292" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>المعاينة غير متوفرة حتى يتم تعريف نقاط المحور.</translation>
     </message>
@@ -4552,104 +4552,104 @@ Zooming the image in or out is performed using any of several methods:
         <translation>غير قادر على استخراج الصورة إلى ملف</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="589" />
-        <location filename="../src/main/MainWindow.cpp" line="759" />
-        <location filename="../src/main/MainWindow.cpp" line="938" />
+        <location filename="../src/main/MainWindow.cpp" line="594" />
+        <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
+        <translation>في OSX ، يجب أن تكون الملفات التي تم تحميلها عند بدء التشغيل في دلائل التنزيلات أو الصور أو المكتبة / الحاويات / المحول الرقمي / البيانات</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="1165" />
         <source>Cannot read file</source>
         <translation>لا يمكن قراءة الملف</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="591" />
-        <location filename="../src/main/MainWindow.cpp" line="761" />
-        <location filename="../src/main/MainWindow.cpp" line="940" />
         <source>from directory</source>
-        <translation>من الدليل</translation>
+        <translation type="vanished">من الدليل</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="675" />
+        <location filename="../src/main/MainWindow.cpp" line="680" />
         <source>Import Image</source>
         <translation>استيراد صورة</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="915" />
+        <location filename="../src/main/MainWindow.cpp" line="916" />
         <source>File opened</source>
         <translation>تم فتح الملف</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="960" />
+        <location filename="../src/main/MainWindow.cpp" line="959" />
         <source>File not found</source>
         <translation>لم يتم العثور على الملف</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="977" />
+        <location filename="../src/main/MainWindow.cpp" line="976" />
         <source>Error report opened</source>
         <translation>افتتح تقرير الخطأ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1032" />
-        <location filename="../src/main/MainWindow.cpp" line="1106" />
+        <location filename="../src/main/MainWindow.cpp" line="1031" />
+        <location filename="../src/main/MainWindow.cpp" line="1105" />
         <source>File imported</source>
         <translation>ملف مستورد</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1140" />
+        <location filename="../src/main/MainWindow.cpp" line="1139" />
         <source>Background image.</source>
         <translation>الصورة الخلفية.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1141" />
+        <location filename="../src/main/MainWindow.cpp" line="1140" />
         <source>Currently selected curve.</source>
         <translation>المنحنى المحدد حاليًا.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1142" />
+        <location filename="../src/main/MainWindow.cpp" line="1141" />
         <source>Point style for currently selected curve.</source>
         <translation>نمط نقطة للمنحنى المحدد حاليًا.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1143" />
+        <location filename="../src/main/MainWindow.cpp" line="1142" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>مرشح ملء الشريحة للمنحنى المحدد حاليًا.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1191" />
+        <location filename="../src/main/MainWindow.cpp" line="1197" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>تم تعديل الوثيقة.
 هل تريد حفظ التغييرات؟</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1248" />
+        <location filename="../src/main/MainWindow.cpp" line="1254" />
         <source>Cannot write file</source>
         <translation>لا يمكن كتابة الملف</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1296" />
+        <location filename="../src/main/MainWindow.cpp" line="1302" />
         <source>Save</source>
         <translation>حفظ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2332" />
+        <location filename="../src/main/MainWindow.cpp" line="2338" />
         <source>Export</source>
         <translation>تصدير</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2414" />
+        <location filename="../src/main/MainWindow.cpp" line="2420" />
         <source>Open Document</source>
         <translation>افتح المستند</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3670" />
+        <location filename="../src/main/MainWindow.cpp" line="3676" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3671" />
+        <location filename="../src/main/MainWindow.cpp" line="3677" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3801" />
+        <location filename="../src/main/MainWindow.cpp" line="3807" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5410,7 +5410,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">السابق</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="599" />
+        <location filename="../src/main/MainWindow.cpp" line="604" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>يبدو أن الملف يحتوي على أحرف من أبجديات لغات متعددة ، والتي لا تعمل في سطر أوامر Windows</translation>
     </message>

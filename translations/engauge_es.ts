@@ -3466,7 +3466,7 @@ Controles para especificar el formato de las relaciones durante la exportación<
         <translation>Etiqueta en la cabecera de valores de x</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1280" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1292" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>La vista previa no está disponible hasta que se definan los puntos del eje.</translation>
     </message>
@@ -4531,104 +4531,104 @@ El zoom de la imagen dentro o fuera se realiza usando cualquiera de varios méto
         <translation>No se puede extraer la imagen al archivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="589" />
-        <location filename="../src/main/MainWindow.cpp" line="759" />
-        <location filename="../src/main/MainWindow.cpp" line="938" />
+        <location filename="../src/main/MainWindow.cpp" line="594" />
+        <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
+        <translation>En OSX, los archivos cargados al inicio deben estar en los directorios Descargas, Imágenes o Biblioteca / Contenedores / Digitalizador / Datos</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="1165" />
         <source>Cannot read file</source>
         <translation>No se puede leer el archivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="591" />
-        <location filename="../src/main/MainWindow.cpp" line="761" />
-        <location filename="../src/main/MainWindow.cpp" line="940" />
         <source>from directory</source>
-        <translation>del directorio</translation>
+        <translation type="vanished">del directorio</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="675" />
+        <location filename="../src/main/MainWindow.cpp" line="680" />
         <source>Import Image</source>
         <translation>Importación de imágenes</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="915" />
+        <location filename="../src/main/MainWindow.cpp" line="916" />
         <source>File opened</source>
         <translation>Archivo abierto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="960" />
+        <location filename="../src/main/MainWindow.cpp" line="959" />
         <source>File not found</source>
         <translation>Archivo no encontrado</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="977" />
+        <location filename="../src/main/MainWindow.cpp" line="976" />
         <source>Error report opened</source>
         <translation>Informe de error abierto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1032" />
-        <location filename="../src/main/MainWindow.cpp" line="1106" />
+        <location filename="../src/main/MainWindow.cpp" line="1031" />
+        <location filename="../src/main/MainWindow.cpp" line="1105" />
         <source>File imported</source>
         <translation>Archivo importado</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1140" />
+        <location filename="../src/main/MainWindow.cpp" line="1139" />
         <source>Background image.</source>
         <translation>Imagen de fondo.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1141" />
+        <location filename="../src/main/MainWindow.cpp" line="1140" />
         <source>Currently selected curve.</source>
         <translation>Actualmente seleccionado curva.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1142" />
+        <location filename="../src/main/MainWindow.cpp" line="1141" />
         <source>Point style for currently selected curve.</source>
         <translation>Estilo de punto de curvas seleccionada .</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1143" />
+        <location filename="../src/main/MainWindow.cpp" line="1142" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Filtro de relleno segmento de curvas seleccionada .</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1191" />
+        <location filename="../src/main/MainWindow.cpp" line="1197" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>El documento ha sido modificado .
 ¿Quieres guardar tus cambios?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1248" />
+        <location filename="../src/main/MainWindow.cpp" line="1254" />
         <source>Cannot write file</source>
         <translation>No se puede escribir el archivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1296" />
+        <location filename="../src/main/MainWindow.cpp" line="1302" />
         <source>Save</source>
         <translation>Salvar</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2332" />
+        <location filename="../src/main/MainWindow.cpp" line="2338" />
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2414" />
+        <location filename="../src/main/MainWindow.cpp" line="2420" />
         <source>Open Document</source>
         <translation>Abrir documento</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3670" />
+        <location filename="../src/main/MainWindow.cpp" line="3676" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3671" />
+        <location filename="../src/main/MainWindow.cpp" line="3677" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3801" />
+        <location filename="../src/main/MainWindow.cpp" line="3807" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5387,7 +5387,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Anterior</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="599" />
+        <location filename="../src/main/MainWindow.cpp" line="604" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>El archivo parece tener caracteres de varios alfabetos de idiomas, lo que no funciona en la línea de comandos de Windows</translation>
     </message>

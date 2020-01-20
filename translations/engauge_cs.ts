@@ -3433,7 +3433,7 @@ Prvky pro specifikaci formátu vztahů během exportu</translation>
         <translation>Název hlavičky pro hodnoty X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1280" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1292" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>Náhled není k dispozici, dokud nejsou definovány body osy.</translation>
     </message>
@@ -4503,104 +4503,104 @@ Zvětšení nebo zmenšení obrazu se provádí některým z několika způsobů
         <translation>Nelze extrahovat obraz do souboru</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="589" />
-        <location filename="../src/main/MainWindow.cpp" line="759" />
-        <location filename="../src/main/MainWindow.cpp" line="938" />
+        <location filename="../src/main/MainWindow.cpp" line="594" />
+        <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
+        <translation>V OSX musí být soubory načtené při spuštění v adresářích Stahování, Obrázky nebo Knihovna / Kontejnery / Digitizér / Data</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="1165" />
         <source>Cannot read file</source>
         <translation>Nelze číst soubor</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="591" />
-        <location filename="../src/main/MainWindow.cpp" line="761" />
-        <location filename="../src/main/MainWindow.cpp" line="940" />
         <source>from directory</source>
-        <translation>z adresáře</translation>
+        <translation type="vanished">z adresáře</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="675" />
+        <location filename="../src/main/MainWindow.cpp" line="680" />
         <source>Import Image</source>
         <translation>Importovat obrázek</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="915" />
+        <location filename="../src/main/MainWindow.cpp" line="916" />
         <source>File opened</source>
         <translation>Soubor byl otevřen</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="960" />
+        <location filename="../src/main/MainWindow.cpp" line="959" />
         <source>File not found</source>
         <translation>Soubor nenalezen</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="977" />
+        <location filename="../src/main/MainWindow.cpp" line="976" />
         <source>Error report opened</source>
         <translation>Otevření chybového hlášení</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1032" />
-        <location filename="../src/main/MainWindow.cpp" line="1106" />
+        <location filename="../src/main/MainWindow.cpp" line="1031" />
+        <location filename="../src/main/MainWindow.cpp" line="1105" />
         <source>File imported</source>
         <translation>Importovaný soubor</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1140" />
+        <location filename="../src/main/MainWindow.cpp" line="1139" />
         <source>Background image.</source>
         <translation>Obrázek na pozadí.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1141" />
+        <location filename="../src/main/MainWindow.cpp" line="1140" />
         <source>Currently selected curve.</source>
         <translation>Aktuálně zvolená křivka.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1142" />
+        <location filename="../src/main/MainWindow.cpp" line="1141" />
         <source>Point style for currently selected curve.</source>
         <translation>Bod stylu aktuálně vybrané křivky.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1143" />
+        <location filename="../src/main/MainWindow.cpp" line="1142" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Segmentový filtr pro aktuálně vybranou křivku.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1191" />
+        <location filename="../src/main/MainWindow.cpp" line="1197" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>Dokument byl změněn.
 Chcete změny uložit?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1248" />
+        <location filename="../src/main/MainWindow.cpp" line="1254" />
         <source>Cannot write file</source>
         <translation>Nelze psát soubor</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1296" />
+        <location filename="../src/main/MainWindow.cpp" line="1302" />
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2332" />
+        <location filename="../src/main/MainWindow.cpp" line="2338" />
         <source>Export</source>
         <translation>Vývozní</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2414" />
+        <location filename="../src/main/MainWindow.cpp" line="2420" />
         <source>Open Document</source>
         <translation>Otevřete dokument</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3670" />
+        <location filename="../src/main/MainWindow.cpp" line="3676" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3671" />
+        <location filename="../src/main/MainWindow.cpp" line="3677" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3801" />
+        <location filename="../src/main/MainWindow.cpp" line="3807" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5359,7 +5359,7 @@ Chcete změny uložit?</translation>
         <translation type="vanished">Předchozí</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="599" />
+        <location filename="../src/main/MainWindow.cpp" line="604" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>Zdá se, že soubor obsahuje znaky z více jazykových abeced, které nefungují v příkazovém řádku systému Windows</translation>
     </message>

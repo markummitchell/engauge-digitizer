@@ -3482,7 +3482,7 @@ Controls for specifying the format of relations during export</source>
         <translation>Үстіңгі деректемеде x мәндерін белгілеңіз</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1280" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1292" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>Алдын ала қарау білік нүктелері анықталғанша қол жетімді емес.</translation>
     </message>
@@ -4506,104 +4506,104 @@ Zooming the image in or out is performed using any of several methods:
         <translation>Файлға кескінді шығару мүмкін емес</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="589" />
-        <location filename="../src/main/MainWindow.cpp" line="759" />
-        <location filename="../src/main/MainWindow.cpp" line="938" />
+        <location filename="../src/main/MainWindow.cpp" line="594" />
+        <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
+        <translation>OSX-де іске қосу кезінде жүктелген файлдар Жүктемелер, Суреттер немесе Кітапхана / Контейнерлер / Digitizer / Деректер каталогында болуы керек.</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="1165" />
         <source>Cannot read file</source>
         <translation>Файлды оқу мүмкін емес</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="591" />
-        <location filename="../src/main/MainWindow.cpp" line="761" />
-        <location filename="../src/main/MainWindow.cpp" line="940" />
         <source>from directory</source>
-        <translation>анықтамалықтан</translation>
+        <translation type="vanished">анықтамалықтан</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="675" />
+        <location filename="../src/main/MainWindow.cpp" line="680" />
         <source>Import Image</source>
         <translation>Суретті импорттау</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="915" />
+        <location filename="../src/main/MainWindow.cpp" line="916" />
         <source>File opened</source>
         <translation>Файл ашылды</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="960" />
+        <location filename="../src/main/MainWindow.cpp" line="959" />
         <source>File not found</source>
         <translation>Файл табылмады</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="977" />
+        <location filename="../src/main/MainWindow.cpp" line="976" />
         <source>Error report opened</source>
         <translation>Қате туралы есеп ашылды</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1032" />
-        <location filename="../src/main/MainWindow.cpp" line="1106" />
+        <location filename="../src/main/MainWindow.cpp" line="1031" />
+        <location filename="../src/main/MainWindow.cpp" line="1105" />
         <source>File imported</source>
         <translation>Файл импортталды</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1140" />
+        <location filename="../src/main/MainWindow.cpp" line="1139" />
         <source>Background image.</source>
         <translation>Фондық сурет.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1141" />
+        <location filename="../src/main/MainWindow.cpp" line="1140" />
         <source>Currently selected curve.</source>
         <translation>Қазіргі уақытта таңдалған қисық сызық.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1142" />
+        <location filename="../src/main/MainWindow.cpp" line="1141" />
         <source>Point style for currently selected curve.</source>
         <translation>Ағымдағы таңдалған қисыққа арналған нүкте стилі.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1143" />
+        <location filename="../src/main/MainWindow.cpp" line="1142" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Сегментті толтыру сүзгісі қазір таңдалған қисық сызық үшін.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1191" />
+        <location filename="../src/main/MainWindow.cpp" line="1197" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>Құжат өзгертілген.
 Өзгерістерді сақтау керек пе?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1248" />
+        <location filename="../src/main/MainWindow.cpp" line="1254" />
         <source>Cannot write file</source>
         <translation>Файлды жазу мүмкін емес</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1296" />
+        <location filename="../src/main/MainWindow.cpp" line="1302" />
         <source>Save</source>
         <translation>Сақтау</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2332" />
+        <location filename="../src/main/MainWindow.cpp" line="2338" />
         <source>Export</source>
         <translation>Экспорттау</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2414" />
+        <location filename="../src/main/MainWindow.cpp" line="2420" />
         <source>Open Document</source>
         <translation>Құжатты ашыңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3670" />
+        <location filename="../src/main/MainWindow.cpp" line="3676" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3671" />
+        <location filename="../src/main/MainWindow.cpp" line="3677" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3801" />
+        <location filename="../src/main/MainWindow.cpp" line="3807" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5290,7 +5290,7 @@ Do you want to save your changes?</source>
         <translation>көп осі ұпай қажет</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="599" />
+        <location filename="../src/main/MainWindow.cpp" line="604" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>Файлда Windows пәрмен жолында жұмыс жасамайтын бірнеше тіл алфавитінің таңбалары бар сияқты</translation>
     </message>
