@@ -25,7 +25,7 @@ namespace log4cpp {
     inline Category &getCategory() const { return m_category; }
 
     /// Return useless value
-    inline Priority::Value getPriority () const throw() {
+    inline Priority::Value getPriority () {
       return m_priority;
     }
 

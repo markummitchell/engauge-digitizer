@@ -49,6 +49,7 @@ const int VERSION_9 = 9;
 const int VERSION_10 = 10;
 const int VERSION_11 = 11;
 const int VERSION_12 = 12;
+const int VERSION_13 = 13;
 
 Document::Document (const QImage &image) :
   m_name ("untitled"),
@@ -113,10 +114,12 @@ Document::Document (const QString &fileName) :
           case VERSION_10:
           case VERSION_11:
           case VERSION_12:
+          case VERSION_13:
             loadVersions7AndUp (file);
             break;
 
           default:
+            LOG4CPP_ERROR_S ((*mainCat)) << "Document::Document invalid version " << version;
             m_successfulRead = false;
             m_reasonForUnsuccessfulRead = QString ("Engauge %1 %2 %3 %4 Engauge")
                                           .arg (VERSION_NUMBER)
@@ -583,7 +586,7 @@ void Document::loadVersion6 (QFile *file)
       // Iterate to next StartElement
       if (tokenType == QXmlStreamReader::StartElement) {
 
-        // This is a StartElement, so process it
+        // This is a StartElement, so process it up to the corresonding EndElement
         QString tag = reader.name().toString();
         if (tag == DOCUMENT_SERIALIZE_IMAGE) {
           // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
@@ -739,6 +742,13 @@ DocumentModelGridRemoval Document::modelGridRemoval() const
   LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelGridRemoval";
 
   return m_coordSystemContext.modelGridRemoval();
+}
+
+DocumentModelGuidelines Document::modelGuidelines() const
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelGuidelines";
+
+  return m_coordSystemContext.modelGuidelines();
 }
 
 DocumentModelPointMatch Document::modelPointMatch() const
@@ -1031,6 +1041,13 @@ void Document::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemo
 
   m_coordSystemContext.setModelGridRemoval(modelGridRemoval);
 }
+
+void Document::setModelGuidelines(const DocumentModelGuidelines &modelGuidelines)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::setModelGuidelines";
+
+  m_coordSystemContext.setModelGuidelines(modelGuidelines);
+}  
 
 void Document::setModelPointMatch(const DocumentModelPointMatch &modelPointMatch)
 {

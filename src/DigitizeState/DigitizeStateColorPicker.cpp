@@ -47,6 +47,7 @@ void DigitizeStateColorPicker::begin (CmdMediator *cmdMediator,
   m_previousDigitizeState = previousState;
   m_previousBackground = context().mainWindow().selectOriginal(BACKGROUND_IMAGE_ORIGINAL); // Only makes sense to have original image with all its colors
 
+  context().mainWindow().handleGuidelinesActiveChange (false);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
 

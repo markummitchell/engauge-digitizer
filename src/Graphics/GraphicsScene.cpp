@@ -40,7 +40,7 @@ void GraphicsScene::addTemporaryPoint (const QString &identifier,
                                        GraphicsPoint *point)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::addTemporaryPoint"
-                              << " identifer=" << identifier.toLatin1().data();
+                              << " identifier=" << identifier.toLatin1().data();
 
   m_graphicsLinesForCurves.addPoint (AXIS_CURVE_NAME,
                                      identifier,

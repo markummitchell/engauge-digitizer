@@ -599,6 +599,8 @@ void CoordSystem::loadVersion6 (QXmlStreamReader &reader,
         m_modelGeneral.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
         m_modelGridRemoval.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_GUIDELINES) {
+        m_modelGuidelines.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
         ENGAUGE_ASSERT (false); // The image should have been read before this method was called
       } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
@@ -659,6 +661,8 @@ void CoordSystem::loadVersions7AndUp (QXmlStreamReader &reader)
         m_modelGridDisplay.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
         m_modelGridRemoval.loadXml (reader);
+      } else if (tag == DOCUMENT_SERIALIZE_GUIDELINES) {
+        m_modelGuidelines.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
         ENGAUGE_ASSERT (false); // The image should have been read before this method was called
       } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
@@ -725,6 +729,11 @@ DocumentModelGridDisplay CoordSystem::modelGridDisplay() const
 DocumentModelGridRemoval CoordSystem::modelGridRemoval() const
 {
   return m_modelGridRemoval;
+}
+
+DocumentModelGuidelines CoordSystem::modelGuidelines() const
+{
+  return m_modelGuidelines;
 }
 
 DocumentModelPointMatch CoordSystem::modelPointMatch() const
@@ -819,6 +828,8 @@ void CoordSystem::printStream (QString indentation,
                                   str);
   m_modelGridRemoval.printStream (indentation,
                                   str);
+  m_modelGuidelines.printStream (indentation,
+                                 str);
   m_modelPointMatch.printStream (indentation,
                                  str);
   m_modelSegments.printStream (indentation,
@@ -879,6 +890,7 @@ void CoordSystem::saveXml (QXmlStreamWriter &writer) const
   m_modelAxesChecker.saveXml (writer);
   m_modelGridDisplay.saveXml (writer);
   m_modelGridRemoval.saveXml (writer);
+  m_modelGuidelines.saveXml (writer);
   m_modelPointMatch.saveXml (writer);
   m_modelSegments.saveXml (writer);
   m_curveAxes->saveXml (writer);
@@ -973,6 +985,11 @@ void CoordSystem::setModelGridDisplay(const DocumentModelGridDisplay &modelGridD
 void CoordSystem::setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval)
 {
   m_modelGridRemoval = modelGridRemoval;
+}
+
+void CoordSystem::setModelGuidelines(const DocumentModelGuidelines &modelGuidelines)
+{
+  m_modelGuidelines = modelGuidelines;
 }
 
 void CoordSystem::setModelPointMatch(const DocumentModelPointMatch &modelPointMatch)

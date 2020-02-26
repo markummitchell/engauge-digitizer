@@ -20,6 +20,7 @@
 #include "DocumentModelGeneral.h"
 #include "DocumentModelGridDisplay.h"
 #include "DocumentModelGridRemoval.h"
+#include "DocumentModelGuidelines.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
 #include "PointStyle.h"
@@ -30,6 +31,7 @@
 
 class CoordSystem;
 class Curve;
+class DocumentModelGuidelines;
 class QByteArray;
 class QFile;
 class QImage;
@@ -84,7 +86,7 @@ public:
                                              QString &generatedIentifier,
                                              double ordinal);
 
-  /// Add a single graph point with the specified point identifer. Note that PointStyle is not applied to the point within the Document.
+  /// Add a single graph point with the specified point identifier. Note that PointStyle is not applied to the point within the Document.
   void addPointGraphWithSpecifiedIdentifier (const QString &curveName,
                                              const QPointF &posScreen,
                                              const QString &identifier,
@@ -162,6 +164,9 @@ public:
                        const QStringList &identifiers,
                        const Transformation &transformation);
 
+  /// Sync all Guideline instances from screen to Document
+  void guidelinesSyncScreenToDocument (const DocumentModelGuidelines &modelGuidelines);
+
   /// Initialize grid display. This is called immediately after the transformation has been defined for the first time
   void initializeGridDisplay (const Transformation &transformation);
 
@@ -214,6 +219,9 @@ public:
   /// Get method for DocumentModelGridRemoval.
   DocumentModelGridRemoval modelGridRemoval() const;
 
+  /// Get method for DocumentModelGuidelines.
+  DocumentModelGuidelines modelGuidelines() const;
+  
   /// Get method for DocumentModelPointMatch.
   DocumentModelPointMatch modelPointMatch() const;
 
@@ -301,6 +309,9 @@ public:
   /// Set method for DocumentModelGridRemoval.
   void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
 
+  /// Set method for DocumentModelGuidelines.
+  void setModelGuidelines(const DocumentModelGuidelines &modelGuidelines);
+  
   /// Set method for DocumentModelPointMatch.
   void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);
 

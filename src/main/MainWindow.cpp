@@ -12,6 +12,8 @@
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
+#include "CmdGuidelineAddXT.h"
+#include "CmdGuidelineAddYR.h"
 #include "CmdMediator.h"
 #include "CmdSelectCoordSystem.h"
 #include "CmdStackShadow.h"
@@ -37,6 +39,8 @@
 #include "DlgSettingsMainWindow.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
+#include "DocumentModelCoords.h"
+#include "DocumentModelGuidelines.h"
 #include "DocumentScrub.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
@@ -55,6 +59,8 @@
 #include "GraphicsView.h"
 #include "GridLineFactory.h"
 #include "GridLineLimiter.h"
+#include "GuidelineDragCommandFactory.h"
+#include "GuidelineOffset.h"
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
 #include "HelpWindow.h"
 #endif
@@ -163,6 +169,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_fileCmdScript (nullptr),
   m_isErrorReportRegressionTest (isRegressionTest),
   m_timerRegressionFileCmdScript(nullptr),
+  m_guidelines (*this),  
   m_fittingCurve (nullptr),
   m_isExportOnly (isExportOnly),
   m_isExtractImageOnly (isExtractImageOnly),
@@ -255,6 +262,7 @@ MainWindow::~MainWindow()
   delete m_dlgSettingsSegments;
   delete m_fileCmdScript;
   m_gridLines.clear ();
+  m_guidelines.clear ();  
 }
 
 void MainWindow::addDockWindow (QDockWidget *dockWidget,
@@ -830,6 +838,117 @@ void MainWindow::ghostsDestroy ()
   m_ghosts = nullptr;
 }
 
+void MainWindow::guidelineAddXT (const QString &identifier,
+                                 double xT)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineAddXT";
+
+  if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
+    m_guidelines.createGuidelineX (identifier,
+                                   xT);
+  } else {
+    m_guidelines.createGuidelineT (identifier,
+                                   xT);
+  }
+
+  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
+}
+
+void MainWindow::guidelineAddXTEnqueue (double xT)
+{
+  CmdGuidelineAddXT *cmd = new CmdGuidelineAddXT (*this,
+                                                  m_cmdMediator->document(),
+                                                  xT);
+
+  m_cmdMediator->push (cmd);
+}
+
+void MainWindow::guidelineAddYR (const QString &identifier,
+                                 double yR)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineAddYR";
+
+  if (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
+    m_guidelines.createGuidelineY (identifier,
+                                   yR);
+  } else {
+    m_guidelines.createGuidelineR (identifier,
+                                   yR);
+  }
+
+  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
+}
+
+void MainWindow::guidelineAddYREnqueue (double yR)
+{
+  CmdGuidelineAddYR *cmd = new CmdGuidelineAddYR (*this,
+                                                  m_cmdMediator->document(),
+                                                  yR);
+
+  m_cmdMediator->push (cmd);
+}
+
+void MainWindow::guidelineMoveXT (const QString &identifier,
+                                  double valueAfter)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineMoveXT";
+
+  m_guidelines.moveGuidelineXT (identifier,
+                                valueAfter);
+
+  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
+}
+
+void MainWindow::guidelineMoveYR (const QString &identifier,
+                                  double valueAfter)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineMoveYR";
+
+  m_guidelines.moveGuidelineYR (identifier,
+                                valueAfter);
+
+  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
+}
+
+void MainWindow::guidelineRemove (const QString &identifier)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemove";
+
+  m_guidelines.removeGuideline (identifier);
+  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
+}
+
+Guidelines &MainWindow::guidelines()
+{
+  return m_guidelines;
+}
+
+bool MainWindow::guidelinesAreVisible () const
+{
+  return (guidelinesVisibilityCanBeEnabled () &&
+          (m_actionViewGuidelinesEdit->isChecked() || m_actionViewGuidelinesLock->isChecked()));
+}
+
+bool MainWindow::guidelinesVisibilityCanBeEnabled () const
+{
+  // Rules
+  // 1) We want guidelines to be available as soon as possible since users would probably never know about them otherwise,
+  //    so action should be checked
+  // 2) We do not want to show guidelines until the transformation is working, since to show them earlier would probably mean
+  //    they are aligned along the screen axes - but then when the transformation is working it would be impossible to
+  //    meaningfully convert the old guidelines into the graph reference frame (unless the graph and screen axes happen
+  //    to be parallel which is rarely the case). Note that m_actionViewGuidelines is disabled when the transformation
+  //    is not defined
+  // 3) If transform is defined then file should also be, but we check to make sure
+  return (!m_currentFile.isEmpty() &&
+          transformIsDefined());
+}
+
+void MainWindow::handleGuidelinesActiveChange (bool active)
+{
+  m_guidelines.handleActiveChange (active);
+}
+
 void MainWindow::handlerFileExtractImage ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::handlerFileExtractImage";
@@ -842,6 +961,12 @@ void MainWindow::handlerFileExtractImage ()
     directoryPersist.setDirectoryExportSaveFromFilename(fileName);
     fileExtractImage(fileName);
   }
+}
+
+void MainWindow::handleGuidelineMode ()
+{
+  m_guidelines.handleGuidelineMode(guidelinesAreVisible (),
+                                   m_actionViewGuidelinesLock->isChecked());
 }
 
 QImage MainWindow::imageFiltered () const
@@ -981,6 +1106,14 @@ void MainWindow::loadErrorReportFile(const QString &errorReportFile)
   slotDigitizeSelect(); // Trigger transition so cursor gets updated immediately
 
   updateAfterCommand ();
+}
+
+void MainWindow::loadGuidelinesFromCmdMediator ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadGuidelinesFromCmdMediator";
+
+  m_guidelines.setModelGuidelines (m_cmdMediator->document().modelCoords().coordsType(),
+                                   m_cmdMediator->document().modelGuidelines());
 }
 
 bool MainWindow::loadImage (const QString &fileName,
@@ -1159,6 +1292,26 @@ void MainWindow::loadToolTips()
   }
 }
 
+bool MainWindow::maybeSave()
+{
+  if (m_cmdMediator != nullptr) {
+    if (m_cmdMediator->isModified()) {
+      QMessageBox::StandardButton ret = QMessageBox::warning (this,
+                                                              engaugeWindowTitle(),
+                                                              tr("The document has been modified.\n"
+                                                                 "Do you want to save your changes?"),
+                                                              QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+      if (ret == QMessageBox::Save) {
+        return slotFileSave();
+      } else if (ret == QMessageBox::Cancel) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
 QString MainWindow::messageCannotReadFile (const QString &fileName) const
 {    
     return QString("%1 %2")
@@ -1186,26 +1339,6 @@ bool MainWindow::modeMap () const
   }
 
   return success;
-}
-
-bool MainWindow::maybeSave()
-{
-  if (m_cmdMediator != nullptr) {
-    if (m_cmdMediator->isModified()) {
-      QMessageBox::StandardButton ret = QMessageBox::warning (this,
-                                                              engaugeWindowTitle(),
-                                                              tr("The document has been modified.\n"
-                                                                 "Do you want to save your changes?"),
-                                                              QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-      if (ret == QMessageBox::Save) {
-        return slotFileSave();
-      } else if (ret == QMessageBox::Cancel) {
-        return false;
-      }
-    }
-  }
-
-  return true;
 }
 
 MainWindowModel MainWindow::modelMainWindow () const
@@ -1460,6 +1593,13 @@ QString MainWindow::selectedGraphCurve () const
   return m_cmbCurve->currentText ();
 }
 
+void MainWindow::sendGong ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::sendGong";
+
+  emit signalGong ();
+}
+
 void MainWindow::setCurrentFile (const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::setCurrentFile";
@@ -1519,6 +1659,8 @@ void MainWindow::setPixmap (const QString &curveSelected,
                                        m_cmdMediator->document().modelColorFilter(),
                                        pixmap,
                                        curveSelected);
+
+  m_guidelines.initialize (*m_scene);
 }
 
 void MainWindow::settingsRead (bool isReset)
@@ -1832,6 +1974,9 @@ bool MainWindow::setupAfterLoadNewDocument (const QString &fileName,
 
   updateAfterCommand(); // Replace stale points by points in new Document
 
+  loadGuidelinesFromCmdMediator (); // After Transformation has been defined by updateAfterCommand so Guidelines can be drawn
+  handleGuidelineMode ();
+
   return true;
 }
 
@@ -1893,6 +2038,70 @@ void MainWindow::showEvent (QShowEvent *event)
 void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
 {
   m_statusBar->showTemporaryMessage (temporaryMessage);
+}
+
+void MainWindow::slotBtnGuidelineBottomCartesian ()
+{
+  GuidelineOffset guidelineOffset;
+  QPointF posGraph = guidelineOffset.bottom (*m_view,
+                                             m_transformation);
+  guidelineAddXTEnqueue (posGraph.x ());
+}
+
+void MainWindow::slotBtnGuidelineBottomPolar ()
+{
+  GuidelineOffset guidelineOffset;
+  QPointF posGraph = guidelineOffset.bottom (*m_view,
+                                             m_transformation);
+  guidelineAddXTEnqueue (posGraph.x ());
+}
+
+void MainWindow::slotBtnGuidelineLeftCartesian ()
+{
+  GuidelineOffset guidelineOffset;
+  QPointF posGraph = guidelineOffset.left (*m_view,
+                                           m_transformation);
+  guidelineAddYREnqueue (posGraph.y ());
+}
+
+void MainWindow::slotBtnGuidelineLeftPolar ()
+{
+  GuidelineOffset guidelineOffset;
+  QPointF posGraph = guidelineOffset.left (*m_view,
+                                           m_transformation);
+  guidelineAddYREnqueue (posGraph.y ());
+}
+
+void MainWindow::slotBtnGuidelineRightCartesian ()
+{
+  GuidelineOffset guidelineOffset;
+  QPointF posGraph = guidelineOffset.right (*m_view,
+                                            m_transformation);
+  guidelineAddYREnqueue (posGraph.y ());
+}
+
+void MainWindow::slotBtnGuidelineRightPolar ()
+{
+  GuidelineOffset guidelineOffset;
+  QPointF posGraph = guidelineOffset.right (*m_view,
+                                            m_transformation);
+  guidelineAddYREnqueue (posGraph.y ());
+}
+
+void MainWindow::slotBtnGuidelineTopCartesian ()
+{
+  GuidelineOffset guidelineOffset;
+  QPointF posGraph = guidelineOffset.top (*m_view,
+                                          m_transformation);
+  guidelineAddXTEnqueue (posGraph.x ());
+}
+
+void MainWindow::slotBtnGuidelineTopPolar ()
+{
+  GuidelineOffset guidelineOffset;
+  QPointF posGraph = guidelineOffset.top (*m_view,
+                                          m_transformation);
+  guidelineAddXTEnqueue (posGraph.x ());
 }
 
 void MainWindow::slotBtnPrintAll ()
@@ -2304,6 +2513,7 @@ void MainWindow::slotFileClose()
     setWindowTitle (engaugeWindowTitle ());
 
     m_gridLines.clear();
+    m_guidelines.clear();    
     updateControls();
   }
 }
@@ -2545,6 +2755,31 @@ void MainWindow::slotGeometryWindowClosed()
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotGeometryWindowClosed";
 
   m_actionViewGeometryWindow->setChecked (false);
+}
+
+void MainWindow::slotGuidelineDragged(QString identifierReplaced,
+                                      double newValue,
+                                      bool draggedOffscreen,
+                                      GuidelineState guidelineStateForReplacement)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotGuidelineDragged";
+
+  // Create replacement Guideline and register it with Guidelines instead of the original
+  m_guidelines.createReplacementGuideline (identifierReplaced,
+                                           newValue,
+                                           guidelineStateForReplacement);
+
+  // Create Cmd that will move the new Guideline
+  GuidelineDragCommandFactory cmdFactory;
+
+  CmdAbstract *cmd = cmdFactory.createAfterDrag (*this,
+                                                 m_cmdMediator->document(),
+                                                 newValue,
+                                                 m_cmdMediator->document().modelGuidelines (),
+                                                 identifierReplaced,
+                                                 draggedOffscreen);
+
+  m_cmdMediator->push (cmd);
 }
 
 void MainWindow::slotHelpAbout()
@@ -2932,6 +3167,14 @@ void MainWindow::slotViewGroupCurves(QAction * /* action */)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupCurves";
 
   updateViewedCurves ();
+}
+
+void MainWindow::slotViewGroupGuidelines (QAction * /* action */)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGroupGuidelines";
+
+  handleGuidelineMode ();
+  updateControls();
 }
 
 void MainWindow::slotViewGroupStatus(QAction *action)
@@ -3373,6 +3616,47 @@ void MainWindow::updateControls ()
   m_actionViewBackground->setEnabled (!m_currentFile.isEmpty());
   m_actionViewChecklistGuide->setEnabled (!m_dockChecklistGuide->browserIsEmpty());
   m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());
+  if (m_cmdMediator && m_transformation.transformIsDefined()) {
+
+    bool cartesian = (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN);
+    bool editable = (m_actionViewGuidelinesEdit->isChecked ());
+
+    m_btnGuidelineBottomCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
+    m_btnGuidelineBottomPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
+    m_btnGuidelineLeftCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
+    m_btnGuidelineLeftPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
+    m_btnGuidelineRightCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
+    m_btnGuidelineRightPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
+    m_btnGuidelineTopCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
+    m_btnGuidelineTopPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
+
+    m_btnGuidelineBottomCartesian->setEnabled (m_btnGuidelineBottomCartesian->isVisible());
+    m_btnGuidelineBottomPolar->setEnabled (m_btnGuidelineBottomPolar->isVisible());
+    m_btnGuidelineLeftCartesian->setEnabled (m_btnGuidelineLeftCartesian->isVisible());
+    m_btnGuidelineLeftPolar->setEnabled (m_btnGuidelineLeftPolar->isVisible());
+    m_btnGuidelineRightCartesian->setEnabled (m_btnGuidelineRightCartesian->isVisible());
+    m_btnGuidelineRightPolar->setEnabled (m_btnGuidelineRightPolar->isVisible());
+    m_btnGuidelineTopCartesian->setEnabled (m_btnGuidelineTopCartesian->isVisible());
+    m_btnGuidelineTopPolar->setEnabled (m_btnGuidelineTopPolar->isVisible());
+  } else {
+    m_btnGuidelineBottomCartesian->setVisible (false);
+    m_btnGuidelineBottomPolar->setVisible (false);
+    m_btnGuidelineLeftCartesian->setVisible (false);
+    m_btnGuidelineLeftPolar->setVisible (false);
+    m_btnGuidelineRightCartesian->setVisible (false);
+    m_btnGuidelineRightPolar->setVisible (false);
+    m_btnGuidelineTopCartesian->setVisible (false);
+    m_btnGuidelineTopPolar->setVisible (false);
+
+    m_btnGuidelineBottomCartesian->setEnabled (false);
+    m_btnGuidelineBottomPolar->setEnabled (false);
+    m_btnGuidelineLeftCartesian->setEnabled (false);
+    m_btnGuidelineLeftPolar->setEnabled (false);
+    m_btnGuidelineRightCartesian->setEnabled (false);
+    m_btnGuidelineRightPolar->setEnabled (false);
+    m_btnGuidelineTopCartesian->setEnabled (false);
+    m_btnGuidelineTopPolar->setEnabled (false);
+  }  
   m_actionViewSettingsViews->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionSettingsCoords->setEnabled (!m_currentFile.isEmpty ());
@@ -3390,6 +3674,7 @@ void MainWindow::updateControls ()
 
   m_groupBackground->setEnabled (!m_currentFile.isEmpty ());
   m_groupCurves->setEnabled (!m_currentFile.isEmpty ());
+  m_groupGuidelines->setEnabled (m_transformation.transformIsDefined());  
   m_groupZoom->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionZoomIn->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect
@@ -3687,6 +3972,7 @@ void MainWindow::updateSettingsMainWindow()
   updateWindowTitle();
   updateFittingWindow(); // Forward the drag and drop choice
   updateGeometryWindow(); // Forward the drag and drop choice
+  m_guidelines.updateColor ();  
 }
 
 void MainWindow::updateSettingsMainWindow(const MainWindowModel &modelMainWindow)
@@ -3745,6 +4031,8 @@ void MainWindow::updateTransformationAndItsDependencies()
   // Grid display is also affected by new transformation above, if there was a transition into defined state
   // in which case that transition triggered the initialization of the grid display parameters
   updateGridLines();
+
+  m_guidelines.updateWithLatestTransformation ();  
 }
 
 void MainWindow::updateViewedCurves ()

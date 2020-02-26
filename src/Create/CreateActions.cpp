@@ -519,6 +519,12 @@ void CreateActions::createView (MainWindow &mw)
                                                        "Filter preferences so unimportant information is hidden and important "
                                                        "information is emphasized"));
 
+  mw.m_groupBackground = new QActionGroup(&mw);
+  mw.m_groupBackground->addAction (mw.m_actionViewBackgroundNone);
+  mw.m_groupBackground->addAction (mw.m_actionViewBackgroundOriginal);
+  mw.m_groupBackground->addAction (mw.m_actionViewBackgroundFiltered);
+  connect (mw.m_groupBackground, SIGNAL(triggered (QAction*)), &mw, SLOT (slotViewGroupBackground(QAction*)));
+
   mw.m_actionViewCurvesNone = new QAction (tr ("Hide All Curves"), &mw);
   mw.m_actionViewCurvesNone->setCheckable (true);
   mw.m_actionViewCurvesNone->setStatusTip (tr ("Hide all digitized curves."));
@@ -538,17 +544,38 @@ void CreateActions::createView (MainWindow &mw)
   mw.m_actionViewCurvesAll->setWhatsThis (tr ("Show All Curves\n\n"
                                               "Show all digitized axis points and graph curves"));
 
-  mw.m_groupBackground = new QActionGroup(&mw);
-  mw.m_groupBackground->addAction (mw.m_actionViewBackgroundNone);
-  mw.m_groupBackground->addAction (mw.m_actionViewBackgroundOriginal);
-  mw.m_groupBackground->addAction (mw.m_actionViewBackgroundFiltered);
-  connect (mw.m_groupBackground, SIGNAL(triggered (QAction*)), &mw, SLOT (slotViewGroupBackground(QAction*)));
-
   mw.m_groupCurves = new QActionGroup(&mw);
   mw.m_groupCurves->addAction (mw.m_actionViewCurvesNone);
   mw.m_groupCurves->addAction (mw.m_actionViewCurvesSelected);
   mw.m_groupCurves->addAction (mw.m_actionViewCurvesAll);
   connect (mw.m_groupCurves, SIGNAL(triggered (QAction*)), &mw, SLOT (slotViewGroupCurves(QAction*)));
+
+  mw.m_actionViewGuidelinesHide = new QAction (tr ("Hide Guidelines"), &mw);
+  mw.m_actionViewGuidelinesHide->setCheckable (true);
+  mw.m_actionViewGuidelinesHide->setChecked (true);
+  mw.m_actionViewGuidelinesHide->setStatusTip (tr ("Hide guidelines."));
+  mw.m_actionViewGuidelinesHide->setWhatsThis (tr ("Hide Guidelines\n\n"
+                                                   "Guidelines are hidden to simplify the main window."));
+
+  mw.m_actionViewGuidelinesEdit = new QAction (tr ("Edit Guidelines"), &mw);
+  mw.m_actionViewGuidelinesEdit->setCheckable (true);
+  mw.m_actionViewGuidelinesEdit->setStatusTip (tr ("Edit guidelines."));
+  mw.m_actionViewGuidelinesEdit->setWhatsThis (tr ("Edit Guidelines\n\n"
+                                                   "Add new guidelines by clicking on the guidelines toolbar, move "
+                                                   "existing guidelines by dragging, or remove guidelines by dragging "
+                                                   "out of the main window."));
+
+  mw.m_actionViewGuidelinesLock = new QAction (tr ("Lock Guidelines"), &mw);
+  mw.m_actionViewGuidelinesLock->setCheckable (true);
+  mw.m_actionViewGuidelinesLock->setStatusTip (tr ("Lock guidelines."));
+  mw.m_actionViewGuidelinesLock->setWhatsThis (tr ("Lock Guidelines\n\n"
+                                                   "Lock the guidelines to prevent accidental movement or removal."));
+
+  mw.m_groupGuidelines = new QActionGroup(&mw);
+  mw.m_groupGuidelines->addAction (mw.m_actionViewGuidelinesHide);
+  mw.m_groupGuidelines->addAction (mw.m_actionViewGuidelinesEdit);
+  mw.m_groupGuidelines->addAction (mw.m_actionViewGuidelinesLock);
+  connect (mw.m_groupGuidelines, SIGNAL (triggered (QAction*)), &mw, SLOT (slotViewGroupGuidelines(QAction*)));
 
   mw.m_actionStatusNever = new QAction (tr ("Hide Always"), &mw);
   mw.m_actionStatusNever->setCheckable(true);

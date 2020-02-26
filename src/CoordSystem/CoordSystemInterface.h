@@ -18,6 +18,7 @@
 #include "DocumentModelGeneral.h"
 #include "DocumentModelGridDisplay.h"
 #include "DocumentModelGridRemoval.h"
+#include "DocumentModelGuidelines.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
 #include "functor.h"
@@ -71,7 +72,7 @@ public:
                                                      QString &generatedIentifier,
                                                      double ordinal) = 0;
 
-  /// Add a single graph point with the specified point identifer. Note that PointStyle is not applied to the point within the Graph.
+  /// Add a single graph point with the specified point identifier. Note that PointStyle is not applied to the point within the Graph.
   virtual void addPointGraphWithSpecifiedIdentifier (const QString &curveName,
                                                      const QPointF &posScreen,
                                                      const QString &identifier,
@@ -172,6 +173,9 @@ public:
   /// Get method for DocumentModelGridRemoval.
   virtual DocumentModelGridRemoval modelGridRemoval() const = 0;
 
+  /// Get method for DocumentModelGuidelines.
+  virtual DocumentModelGuidelines modelGuidelines() const = 0;  
+
   /// Get method for DocumentModelPointMatch.
   virtual DocumentModelPointMatch modelPointMatch() const = 0;
 
@@ -249,6 +253,9 @@ public:
   /// Set method for DocumentModelGridRemoval.
   virtual void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval) = 0;
 
+  /// Set method for DocumentModelGuidelines.
+  virtual void setModelGuidelines(const DocumentModelGuidelines &modelGuidelines) = 0;
+  
   /// Set method for DocumentModelPointMatch.
   virtual void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch) = 0;
 

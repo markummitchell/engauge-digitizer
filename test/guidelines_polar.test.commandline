@@ -1,0 +1,2 @@
+-errorreport ../test/guidelines_polar.xml -regression -reset
+

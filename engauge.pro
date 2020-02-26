@@ -118,6 +118,13 @@ HEADERS  += \
     src/Cmd/CmdEditPointAxis.h \
     src/Cmd/CmdEditPointGraph.h \
     src/Cmd/CmdFactory.h \
+    src/Cmd/CmdGong.h \
+    src/Cmd/CmdGuidelineAddXT.h \
+    src/Cmd/CmdGuidelineAddYR.h \
+    src/Cmd/CmdGuidelineMoveXT.h \
+    src/Cmd/CmdGuidelineMoveYR.h \
+    src/Cmd/CmdGuidelineRemoveXT.h \
+    src/Cmd/CmdGuidelineRemoveYR.h \
     src/Cmd/CmdMediator.h \
     src/Cmd/CmdMoveBy.h \
     src/Cmd/CmdPointChangeBase.h \
@@ -253,6 +260,7 @@ HEADERS  += \
     src/Document/DocumentModelGeneral.h \
     src/Document/DocumentModelGridDisplay.h \
     src/Document/DocumentModelGridRemoval.h \
+    src/Document/DocumentModelGuidelines.h \
     src/Document/DocumentModelPointMatch.h \
     src/Document/DocumentModelSegments.h \
     src/Document/DocumentScrub.h \
@@ -345,6 +353,56 @@ HEADERS  += \
     src/Grid/GridLog.h \
     src/Grid/GridRemoval.h \
     src/Grid/GridTriangleFill.h \
+    src/Guideline/GuidelineAbstract.h \
+    src/Guideline/GuidelineDragCommandFactory.h \
+    src/Guideline/GuidelineEllipse.h \
+    src/Guideline/GuidelineFactory.h \
+    src/Guideline/GuidelineFormat.h \
+    src/Guideline/GuidelineIdentifierGenerator.h \
+    src/Guideline/GuidelineLine.h \
+    src/Guideline/GuidelineOffset.h \
+    src/Guideline/GuidelineProjectorAbstract.h \
+    src/Guideline/GuidelineProjectorConstantR.h \
+    src/Guideline/GuidelineProjectorConstantT.h \
+    src/Guideline/GuidelineProjectorConstantX.h \
+    src/Guideline/GuidelineProjectorConstantY.h \
+    src/Guideline/Guidelines.h \
+    src/Guideline/GuidelineLine.h \
+    src/Guideline/GuidelineState.h \
+    src/Guideline/GuidelineStateAbstractBase.h \
+    src/Guideline/GuidelineStateContext.h \
+    src/Guideline/GuidelineStateDeployedAbstract.h \
+    src/Guideline/GuidelineStateDeployedConstantRAbstract.h \
+    src/Guideline/GuidelineStateDeployedConstantRActive.h \
+    src/Guideline/GuidelineStateDeployedConstantRAppearing.h \
+    src/Guideline/GuidelineStateDeployedConstantRHide.h \
+    src/Guideline/GuidelineStateDeployedConstantRHover.h \
+    src/Guideline/GuidelineStateDeployedConstantRLocked.h \
+    src/Guideline/GuidelineStateDeployedConstantTAbstract.h \
+    src/Guideline/GuidelineStateDeployedConstantTActive.h \
+    src/Guideline/GuidelineStateDeployedConstantTAppearing.h \
+    src/Guideline/GuidelineStateDeployedConstantTHide.h \
+    src/Guideline/GuidelineStateDeployedConstantTHover.h \
+    src/Guideline/GuidelineStateDeployedConstantTLocked.h \
+    src/Guideline/GuidelineStateDeployedConstantXAbstract.h \
+    src/Guideline/GuidelineStateDeployedConstantXActive.h \
+    src/Guideline/GuidelineStateDeployedConstantXAppearing.h \
+    src/Guideline/GuidelineStateDeployedConstantXHide.h \
+    src/Guideline/GuidelineStateDeployedConstantXHover.h \
+    src/Guideline/GuidelineStateDeployedConstantXLocked.h \
+    src/Guideline/GuidelineStateDeployedConstantYAbstract.h \
+    src/Guideline/GuidelineStateDeployedConstantYActive.h \
+    src/Guideline/GuidelineStateDeployedConstantYAppearing.h \
+    src/Guideline/GuidelineStateDeployedConstantYHide.h \
+    src/Guideline/GuidelineStateDeployedConstantYHover.h \
+    src/Guideline/GuidelineStateDeployedConstantYLocked.h \
+    src/Guideline/GuidelineStateDiscarded.h \
+    src/Guideline/GuidelineStateHandleAbstract.h \
+    src/Guideline/GuidelineStateHandleR.h \
+    src/Guideline/GuidelineStateHandleT.h \
+    src/Guideline/GuidelineStateHandleX.h \
+    src/Guideline/GuidelineStateHandleY.h \
+    src/Guideline/GuidelineValues.h \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
@@ -483,6 +541,13 @@ SOURCES += \
     src/Cmd/CmdEditPointAxis.cpp \
     src/Cmd/CmdEditPointGraph.cpp \
     src/Cmd/CmdFactory.cpp \
+    src/Cmd/CmdGong.cpp \
+    src/Cmd/CmdGuidelineAddXT.cpp \
+    src/Cmd/CmdGuidelineAddYR.cpp \
+    src/Cmd/CmdGuidelineMoveXT.cpp \
+    src/Cmd/CmdGuidelineMoveYR.cpp \
+    src/Cmd/CmdGuidelineRemoveXT.cpp \
+    src/Cmd/CmdGuidelineRemoveYR.cpp \
     src/Cmd/CmdMediator.cpp \
     src/Cmd/CmdMoveBy.cpp \
     src/Cmd/CmdRedoForTest.cpp \
@@ -611,6 +676,7 @@ SOURCES += \
     src/Document/DocumentModelGeneral.cpp \
     src/Document/DocumentModelGridDisplay.cpp \
     src/Document/DocumentModelGridRemoval.cpp \
+    src/Document/DocumentModelGuidelines.cpp \
     src/Document/DocumentModelPointMatch.cpp \
     src/Document/DocumentModelSegments.cpp \
     src/Document/DocumentScrub.cpp \
@@ -694,6 +760,54 @@ SOURCES += \
     src/Grid/GridLog.cpp \
     src/Grid/GridRemoval.cpp \
     src/Grid/GridTriangleFill.cpp \
+    src/Guideline/GuidelineAbstract.cpp \
+    src/Guideline/GuidelineDragCommandFactory.cpp \
+    src/Guideline/GuidelineEllipse.cpp \
+    src/Guideline/GuidelineFactory.cpp \
+    src/Guideline/GuidelineFormat.cpp \
+    src/Guideline/GuidelineIdentifierGenerator.cpp \
+    src/Guideline/GuidelineLine.cpp \
+    src/Guideline/GuidelineOffset.cpp \
+    src/Guideline/GuidelineProjectorAbstract.cpp \
+    src/Guideline/GuidelineProjectorConstantR.cpp \
+    src/Guideline/GuidelineProjectorConstantT.cpp \
+    src/Guideline/GuidelineProjectorConstantX.cpp \
+    src/Guideline/GuidelineProjectorConstantY.cpp \
+    src/Guideline/Guidelines.cpp \
+    src/Guideline/GuidelineState.cpp \
+    src/Guideline/GuidelineStateAbstractBase.cpp \
+    src/Guideline/GuidelineStateContext.cpp \
+    src/Guideline/GuidelineStateDeployedAbstract.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRAbstract.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRActive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRAppearing.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRHover.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRLocked.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTAbstract.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTActive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTAppearing.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTHover.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTLocked.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXAbstract.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXActive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXAppearing.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXHover.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXLocked.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYAbstract.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYActive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYAppearing.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYHover.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYLocked.cpp \
+    src/Guideline/GuidelineStateDiscarded.cpp \
+    src/Guideline/GuidelineStateHandleAbstract.cpp \
+    src/Guideline/GuidelineStateHandleR.cpp \
+    src/Guideline/GuidelineStateHandleT.cpp \
+    src/Guideline/GuidelineStateHandleX.cpp \
+    src/Guideline/GuidelineStateHandleY.cpp \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/Import/ImportImageExtensions.cpp \
@@ -883,6 +997,7 @@ INCLUDEPATH += src \
                src/Ghosts \
                src/Graphics \
                src/Grid \
+               src/Guideline \
                src/Help \
                src/img \
                src/Import \

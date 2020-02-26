@@ -28,6 +28,7 @@ const int DEFAULT_SIGNIFICANT_DIGITS = 7;
 const bool DEFAULT_SMALL_DIALOGS = false;
 const bool DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT = true; // Pre-version 11.3 behavior
 const int DEFAULT_MAXIMUM_EXPORTED_POINTS_PER_CURVE = 5000; // Moved 1/2020 from Export classes
+const ColorPalette DEFAULT_GUIDELINE_COLOR = COLOR_PALETTE_GREEN; // Bright so it gets noticed
 
 MainWindowModel::MainWindowModel() :
   m_zoomControl (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS),
@@ -41,7 +42,8 @@ MainWindowModel::MainWindowModel() :
   m_dragDropExport (DEFAULT_DRAG_DROP_EXPORT),
   m_significantDigits (DEFAULT_SIGNIFICANT_DIGITS),
   m_imageReplaceRenamesDocument (DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT),
-  m_maximumExportedPointsPerCurve (DEFAULT_MAXIMUM_EXPORTED_POINTS_PER_CURVE)
+  m_maximumExportedPointsPerCurve (DEFAULT_MAXIMUM_EXPORTED_POINTS_PER_CURVE),
+  m_guidelineColor (DEFAULT_GUIDELINE_COLOR)
 {
   // Locale member variable m_locale is initialized to default locale when default constructor is called
 }
@@ -59,7 +61,8 @@ MainWindowModel::MainWindowModel(const MainWindowModel &other) :
   m_dragDropExport (other.dragDropExport()),
   m_significantDigits (other.significantDigits()),
   m_imageReplaceRenamesDocument (other.imageReplaceRenamesDocument()),
-  m_maximumExportedPointsPerCurve (other.maximumExportedPointsPerCurve ())
+  m_maximumExportedPointsPerCurve (other.maximumExportedPointsPerCurve ()),
+  m_guidelineColor (other.guidelineColor ())  
 {
 }
 
@@ -78,13 +81,19 @@ MainWindowModel &MainWindowModel::operator=(const MainWindowModel &other)
   m_significantDigits = other.significantDigits();
   m_imageReplaceRenamesDocument = other.imageReplaceRenamesDocument();
   m_maximumExportedPointsPerCurve = other.maximumExportedPointsPerCurve();
-
+  m_guidelineColor = other.guidelineColor ();
+  
   return *this;
 }
 
 bool MainWindowModel::dragDropExport() const
 {
   return m_dragDropExport;
+}
+
+ColorPalette MainWindowModel::guidelineColor() const
+{
+  return m_guidelineColor;
 }
 
 double MainWindowModel::highlightOpacity() const
@@ -170,6 +179,7 @@ void MainWindowModel::printStream(QString indentation,
   str << indentation << "significantDigits=" << m_significantDigits << "\n";
   str << indentation << "imageReplaceRenamesDocument=" << (m_imageReplaceRenamesDocument ? "yes" : "no") << "\n";
   str << indentation << "maximumExportedPointsPerCurve=" << m_maximumExportedPointsPerCurve << "\n";
+  str << indentation << "guidelineColor=" << colorPaletteToString (m_guidelineColor).toLatin1().data() << "\n";
 }
 
 void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
@@ -183,6 +193,11 @@ void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
 void MainWindowModel::setDragDropExport(bool dragDropExport)
 {
   m_dragDropExport = dragDropExport;
+}
+
+void MainWindowModel::setGuidelineColor(ColorPalette guidelineColor)
+{
+  m_guidelineColor = guidelineColor;
 }
 
 void MainWindowModel::setHighlightOpacity(double highlightOpacity)

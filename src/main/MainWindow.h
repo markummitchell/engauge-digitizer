@@ -13,10 +13,12 @@
 #include "DocumentAxesPointsRequired.h"
 #include "FittingCurveCoefficients.h"
 #include "GridLines.h"
+#include "Guidelines.h"
 #include "MainWindowModel.h"
 #include <QCursor>
 #include <QMainWindow>
 #include <QMap>
+#include <QPointF>
 #include <QUrl>
 #include "Transformation.h"
 #include "ZoomControl.h"
@@ -71,6 +73,7 @@ class QCloseEvent;
 class QComboBox;
 class QDomDocument;
 class QGraphicsLineItem;
+class QGridLayout;
 class QMenu;
 class QPushButton;
 class QSettings;
@@ -78,7 +81,6 @@ class QSignalMapper;
 class QTextStream;
 class QTimer;
 class QToolBar;
-class QVBoxLayout;
 class StatusBar;
 class TransformationStateContext;
 class TutorialDlg;
@@ -113,6 +115,7 @@ class MainWindow : public QMainWindow
 
   /// For unit testing
   friend class TestExport;
+  friend class TestGuidelines;
   
 public:
   /// Single constructor.
@@ -160,6 +163,31 @@ public:
   /// Catch secret keypresses
   virtual bool eventFilter(QObject *, QEvent *);
   
+  /// Add a X/T Guideline
+  void guidelineAddXT (const QString &identifier,
+                       double xT);
+  
+  /// Add a Y/R Guideline
+  void guidelineAddYR (const QString &identifier,
+                       double yR);
+  
+  /// Move a X/T Guideline
+  void guidelineMoveXT (const QString &identifier,
+                        double xTAfter);
+  
+  /// Move a Y/R Guideline
+  void guidelineMoveYR (const QString &identifier,
+                        double yRAfter);
+  
+  /// Remove a X/T or Y/R Guideline
+  void guidelineRemove (const QString &identifier);
+  
+  /// True/false if guidelines are visible. Selectability is handled elsewhere
+  bool guidelinesAreVisible () const;
+
+  /// Handle Guidelines active status toggle
+  void handleGuidelinesActiveChange (bool active);
+
   /// Background image that has been filtered for the current curve. This asserts if a curve-specific image is not being shown
   QImage imageFiltered () const;
 
@@ -190,6 +218,9 @@ public:
 
   /// Curve name that is currently selected in m_cmbCurve.
   QString selectedGraphCurve () const;
+
+  /// Send signal to unit test framework indicating all commands have finished executing
+  void sendGong ();
 
   /// Processing performed after gui becomes available
   virtual void showEvent(QShowEvent *);
@@ -268,6 +299,14 @@ public:
   const GraphicsView &view () const;
 
 private slots:
+  void slotBtnGuidelineBottomCartesian ();
+  void slotBtnGuidelineBottomPolar ();  
+  void slotBtnGuidelineLeftCartesian ();
+  void slotBtnGuidelineLeftPolar ();  
+  void slotBtnGuidelineRightCartesian ();
+  void slotBtnGuidelineRightPolar ();  
+  void slotBtnGuidelineTopCartesian ();
+  void slotBtnGuidelineTopPolar ();    
   void slotBtnPrintAll();
   void slotBtnShowAllPressed();
   void slotBtnShowAllReleased();
@@ -310,6 +349,7 @@ private slots:
   void slotFittingWindowClosed();
   void slotFittingWindowCurveFit(FittingCurveCoefficients, double, double, bool, bool);
   void slotGeometryWindowClosed();
+  void slotGuidelineDragged(QString, double, bool, GuidelineState);
   void slotHelpAbout();
   void slotHelpTutorial();
   void slotKeyPress (Qt::Key, bool);
@@ -340,6 +380,7 @@ private slots:
   void slotViewGridLines ();
   void slotViewGroupBackground(QAction*);
   void slotViewGroupCurves(QAction*);
+  void slotViewGroupGuidelines(QAction*);  
   void slotViewGroupStatus(QAction*);
   void slotViewToolBarBackground ();
   void slotViewToolBarChecklistGuide ();
@@ -358,9 +399,13 @@ private slots:
   void slotViewZoomOutFromWheelEvent ();
 
 signals:
+
   /// Send drag and drop regression test url
   void signalDropRegression(QString);
 
+  /// Send wakeup signal to unit test framework when all other commands have finished executing
+  void signalGong ();
+  
   /// Send zoom selection, picked from menu or keystroke, to StatusBar.
   void signalZoom(int);
 
@@ -396,11 +441,23 @@ private:
   void filePaste (ImportType importType); /// Same steps as fileImport but with import from clipboard
   void ghostsCreate (); /// Create the ghosts for seeing all coordinate systems at once
   void ghostsDestroy (); /// Destroy the ghosts for seeing all coordinate systems at once
+  void guidelineAddXTEnqueue (double value);
+  void guidelineAddYREnqueue (double value);
+  void guidelineMoveXTEnqueue (double valueBefore,
+                               double valueAfter);
+  void guidelineMoveYREnqueue (double valueBefore,
+                               double valueAfter);
+  void guidelineRemoveXTEnqueue (double value);
+  void guidelineRemoveYREnqueue (double value);    
+  Guidelines &guidelines (); /// Return guidelines for unit testing
+  bool guidelinesVisibilityCanBeEnabled () const; /// True/false if guidelines can be activated by guidelines view action
+  void handleGuidelineMode();  
   void handlerFileExtractImage (); /// Analog to slotFileExport but for image extract. Maybe converted to slot in future
   void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
   void loadCurveListFromCmdMediator(); /// Update the combobox that has the curve names.
   void loadDocumentFile (const QString &fileName);
   void loadErrorReportFile(const QString &errorReportFile);
+  void loadGuidelinesFromCmdMediator();  
   bool loadImage (const QString &fileName,
                   const QImage &image,
                   ImportType ImportType);
@@ -518,6 +575,11 @@ private:
   QAction *m_actionViewCurvesNone;
   QAction *m_actionViewCurvesSelected;
   QAction *m_actionViewCurvesAll;
+  QMenu *m_menuViewGuidelines;
+  QActionGroup *m_groupGuidelines;
+  QAction *m_actionViewGuidelinesHide;
+  QAction *m_actionViewGuidelinesEdit;
+  QAction *m_actionViewGuidelinesLock;  
   QMenu *m_menuViewStatus;
   QActionGroup *m_groupStatus;
   QAction *m_actionStatusNever;
@@ -577,10 +639,19 @@ private:
   QAction *m_actionHelpTutorial;
   QAction *m_actionHelpWhatsThis;
 
-  QVBoxLayout *m_layout;
+  QGridLayout *m_layout;
   GraphicsScene *m_scene;
   GraphicsView *m_view;
 
+  QPushButton *m_btnGuidelineBottomCartesian;
+  QPushButton *m_btnGuidelineBottomPolar;  
+  QPushButton *m_btnGuidelineLeftCartesian;
+  QPushButton *m_btnGuidelineLeftPolar;  
+  QPushButton *m_btnGuidelineRightCartesian;
+  QPushButton *m_btnGuidelineRightPolar;  
+  QPushButton *m_btnGuidelineTopCartesian;
+  QPushButton *m_btnGuidelineTopPolar;
+  
   StatusBar *m_statusBar;
   Transformation m_transformation;
 
@@ -667,6 +738,10 @@ private:
   // Grid lines
   GridLines m_gridLines;
 
+  // Guidelines that are effectively invisible until cursor gets to outermost pixels in scene (and view if zoomed out
+  // enough that there is no scroll bar)
+  Guidelines m_guidelines;
+  
   // Map to/from/between zoom enumerations. These eliminate the need for switch statements
   QMap<ZoomFactorInitial, ZoomFactor> m_zoomMapFromInitial;
   QMap<ZoomFactor, QAction*> m_zoomMapToAction;

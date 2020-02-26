@@ -1294,51 +1294,51 @@ The filtered image is created from the original image according to the Filter pr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="522"/>
+        <location filename="../src/Create/CreateActions.cpp" line="528"/>
         <source>Hide All Curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="524"/>
+        <location filename="../src/Create/CreateActions.cpp" line="530"/>
         <source>Hide all digitized curves.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="525"/>
+        <location filename="../src/Create/CreateActions.cpp" line="531"/>
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="528"/>
+        <location filename="../src/Create/CreateActions.cpp" line="534"/>
         <source>Show Selected Curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="530"/>
+        <location filename="../src/Create/CreateActions.cpp" line="536"/>
         <source>Show only the currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="531"/>
+        <location filename="../src/Create/CreateActions.cpp" line="537"/>
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="534"/>
+        <location filename="../src/Create/CreateActions.cpp" line="540"/>
         <source>Show All Curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="537"/>
+        <location filename="../src/Create/CreateActions.cpp" line="543"/>
         <source>Show all curves.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="538"/>
+        <location filename="../src/Create/CreateActions.cpp" line="544"/>
         <source>Show All Curves
 
 Show all digitized axis points and graph curves</source>
@@ -1346,322 +1346,373 @@ Show all digitized axis points and graph curves</source>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="553"/>
-        <source>Hide Always</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Create/CreateActions.cpp" line="555"/>
-        <source>Always hide the status bar.</source>
+        <source>Hide Guidelines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="556"/>
-        <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
+        <source>Hide guidelines.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="558"/>
-        <source>Show Temporary Messages</source>
+        <location filename="../src/Create/CreateActions.cpp" line="557"/>
+        <source>Hide Guidelines
+
+Guidelines are hidden to simplify the main window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="560"/>
-        <source>Hide the status bar except when display temporary messages.</source>
+        <source>Edit Guidelines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="561"/>
-        <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
+        <location filename="../src/Create/CreateActions.cpp" line="562"/>
+        <source>Edit guidelines.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="563"/>
-        <source>Show Always</source>
+        <source>Edit Guidelines
+
+Add new guidelines by clicking on the guidelines toolbar, move existing guidelines by dragging, or remove guidelines by dragging out of the main window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="565"/>
-        <source>Always show the status bar.</source>
+        <location filename="../src/Create/CreateActions.cpp" line="568"/>
+        <source>Lock Guidelines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="566"/>
-        <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
+        <location filename="../src/Create/CreateActions.cpp" line="570"/>
+        <source>Lock guidelines.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="575"/>
-        <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Create/CreateActions.cpp" line="576"/>
-        <source>Zoom out</source>
+        <location filename="../src/Create/CreateActions.cpp" line="571"/>
+        <source>Lock Guidelines
+
+Lock the guidelines to prevent accidental movement or removal.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="580"/>
-        <source>Zoom In</source>
+        <source>Hide Always</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="581"/>
-        <source>Zoom in</source>
+        <location filename="../src/Create/CreateActions.cpp" line="582"/>
+        <source>Always hide the status bar.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="583"/>
+        <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="585"/>
+        <source>Show Temporary Messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="587"/>
+        <source>Hide the status bar except when display temporary messages.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="588"/>
-        <source>16:1 (1600%)</source>
+        <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="590"/>
-        <source>Zoom 16:1</source>
+        <source>Show Always</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="594"/>
-        <source>16:1 farther (1270%)</source>
+        <location filename="../src/Create/CreateActions.cpp" line="592"/>
+        <source>Always show the status bar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="596"/>
-        <source>Zoom 12.7:1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Create/CreateActions.cpp" line="600"/>
-        <source>8:1 closer (1008%)</source>
+        <location filename="../src/Create/CreateActions.cpp" line="593"/>
+        <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="602"/>
-        <source>Zoom 10.08:1</source>
+        <source>Zoom Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="606"/>
-        <source>8:1 (800%)</source>
+        <location filename="../src/Create/CreateActions.cpp" line="603"/>
+        <source>Zoom out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="607"/>
+        <source>Zoom In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="608"/>
+        <source>Zoom in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="615"/>
+        <source>16:1 (1600%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="617"/>
+        <source>Zoom 16:1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="621"/>
+        <source>16:1 farther (1270%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="623"/>
+        <source>Zoom 12.7:1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="627"/>
+        <source>8:1 closer (1008%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="629"/>
+        <source>Zoom 10.08:1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="633"/>
+        <source>8:1 (800%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="635"/>
         <source>Zoom 8:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="612"/>
+        <location filename="../src/Create/CreateActions.cpp" line="639"/>
         <source>8:1 farther (635%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="614"/>
+        <location filename="../src/Create/CreateActions.cpp" line="641"/>
         <source>Zoom 6.35:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="618"/>
+        <location filename="../src/Create/CreateActions.cpp" line="645"/>
         <source>4:1 closer (504%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="620"/>
+        <location filename="../src/Create/CreateActions.cpp" line="647"/>
         <source>Zoom 5.04:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="624"/>
+        <location filename="../src/Create/CreateActions.cpp" line="651"/>
         <source>4:1 (400%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="626"/>
+        <location filename="../src/Create/CreateActions.cpp" line="653"/>
         <source>Zoom 4:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="630"/>
+        <location filename="../src/Create/CreateActions.cpp" line="657"/>
         <source>4:1 farther (317%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="632"/>
+        <location filename="../src/Create/CreateActions.cpp" line="659"/>
         <source>Zoom 3.17:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="636"/>
+        <location filename="../src/Create/CreateActions.cpp" line="663"/>
         <source>2:1 closer (252%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="638"/>
+        <location filename="../src/Create/CreateActions.cpp" line="665"/>
         <source>Zoom 2.52:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="642"/>
+        <location filename="../src/Create/CreateActions.cpp" line="669"/>
         <source>2:1 (200%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="644"/>
+        <location filename="../src/Create/CreateActions.cpp" line="671"/>
         <source>Zoom 2:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="648"/>
+        <location filename="../src/Create/CreateActions.cpp" line="675"/>
         <source>2:1 farther (159%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="650"/>
+        <location filename="../src/Create/CreateActions.cpp" line="677"/>
         <source>Zoom 1.59:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="654"/>
+        <location filename="../src/Create/CreateActions.cpp" line="681"/>
         <source>1:1 closer (126%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="657"/>
+        <location filename="../src/Create/CreateActions.cpp" line="684"/>
         <source>Zoom 1.3:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="661"/>
+        <location filename="../src/Create/CreateActions.cpp" line="688"/>
         <source>1:1 (100%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="664"/>
+        <location filename="../src/Create/CreateActions.cpp" line="691"/>
         <source>Zoom 1:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="668"/>
+        <location filename="../src/Create/CreateActions.cpp" line="695"/>
         <source>1:1 farther (79%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="671"/>
+        <location filename="../src/Create/CreateActions.cpp" line="698"/>
         <source>Zoom 0.8:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="675"/>
+        <location filename="../src/Create/CreateActions.cpp" line="702"/>
         <source>1:2 closer (63%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="677"/>
+        <location filename="../src/Create/CreateActions.cpp" line="704"/>
         <source>Zoom 1.3:2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="681"/>
+        <location filename="../src/Create/CreateActions.cpp" line="708"/>
         <source>1:2 (50%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="683"/>
+        <location filename="../src/Create/CreateActions.cpp" line="710"/>
         <source>Zoom 1:2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="687"/>
+        <location filename="../src/Create/CreateActions.cpp" line="714"/>
         <source>1:2 farther (40%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="689"/>
+        <location filename="../src/Create/CreateActions.cpp" line="716"/>
         <source>Zoom 0.8:2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="693"/>
+        <location filename="../src/Create/CreateActions.cpp" line="720"/>
         <source>1:4 closer (31%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="695"/>
+        <location filename="../src/Create/CreateActions.cpp" line="722"/>
         <source>Zoom 1.3:4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="699"/>
+        <location filename="../src/Create/CreateActions.cpp" line="726"/>
         <source>1:4 (25%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="701"/>
+        <location filename="../src/Create/CreateActions.cpp" line="728"/>
         <source>Zoom 1:4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="705"/>
+        <location filename="../src/Create/CreateActions.cpp" line="732"/>
         <source>1:4 farther (20%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="707"/>
+        <location filename="../src/Create/CreateActions.cpp" line="734"/>
         <source>Zoom 0.8:4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="711"/>
+        <location filename="../src/Create/CreateActions.cpp" line="738"/>
         <source>1:8 closer (12.5%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="713"/>
-        <location filename="../src/Create/CreateActions.cpp" line="719"/>
+        <location filename="../src/Create/CreateActions.cpp" line="740"/>
+        <location filename="../src/Create/CreateActions.cpp" line="746"/>
         <source>Zoom 1:8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="717"/>
+        <location filename="../src/Create/CreateActions.cpp" line="744"/>
         <source>1:8 (12.5%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="723"/>
+        <location filename="../src/Create/CreateActions.cpp" line="750"/>
         <source>1:8 farther (10%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="725"/>
+        <location filename="../src/Create/CreateActions.cpp" line="752"/>
         <source>Zoom 0.8:8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="729"/>
+        <location filename="../src/Create/CreateActions.cpp" line="756"/>
         <source>1:16 closer (8%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="731"/>
+        <location filename="../src/Create/CreateActions.cpp" line="758"/>
         <source>Zoom 1.3:16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="735"/>
+        <location filename="../src/Create/CreateActions.cpp" line="762"/>
         <source>1:16 (6.25%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="737"/>
+        <location filename="../src/Create/CreateActions.cpp" line="764"/>
         <source>Zoom 1:16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="741"/>
+        <location filename="../src/Create/CreateActions.cpp" line="768"/>
         <source>Fill</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="743"/>
+        <location filename="../src/Create/CreateActions.cpp" line="770"/>
         <source>Zoom with stretching to fill window</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1705,22 +1756,78 @@ Show all digitized axis points and graph curves</source>
     </message>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="87"/>
-        <source>Status Bar</source>
+        <source>Guidelines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="92"/>
+        <source>Status Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateMenus.cpp" line="97"/>
         <source>Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="124"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="129"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="140"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="145"/>
         <source>&amp;Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CreateScene</name>
+    <message>
+        <location filename="../src/Create/CreateScene.cpp" line="28"/>
+        <source>Create an R (range) guideline.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateScene.cpp" line="29"/>
+        <source>Create a T (theta) guideline.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateScene.cpp" line="30"/>
+        <source>Create an X guideline.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateScene.cpp" line="31"/>
+        <source>Create a Y guideline.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateScene.cpp" line="33"/>
+        <source>Create an R (Range) guideline
+
+When pressed, a constant R (range) guideline is created. It can be moved by dragging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateScene.cpp" line="35"/>
+        <source>Create a T (Theta) guideline
+
+When pressed, a constant T (theta) guideline is created. It can be moved by dragging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateScene.cpp" line="37"/>
+        <source>Create an X guideline
+
+When pressed, a constant X guideline is created. It can be moved by dragging</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateScene.cpp" line="39"/>
+        <source>Create a Y guideline
+
+When pressed, a constant Y guideline is created. It can be moved by dragging</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3788,6 +3895,18 @@ When an image is imported to replace the current image, the document will be ren
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="275"/>
+        <source>Guideline color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="279"/>
+        <source>Guidelines Color
+
+Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DlgSettingsPointMatch</name>
@@ -4097,109 +4216,109 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="480"/>
+        <location filename="../src/main/MainWindow.cpp" line="488"/>
         <source>Unable to export to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="514"/>
+        <location filename="../src/main/MainWindow.cpp" line="522"/>
         <source>Unable to extract image to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="594"/>
+        <location filename="../src/main/MainWindow.cpp" line="602"/>
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1165"/>
+        <location filename="../src/main/MainWindow.cpp" line="1318"/>
         <source>Cannot read file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="680"/>
+        <location filename="../src/main/MainWindow.cpp" line="688"/>
         <source>Import Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="916"/>
+        <location filename="../src/main/MainWindow.cpp" line="1041"/>
         <source>File opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="959"/>
+        <location filename="../src/main/MainWindow.cpp" line="1084"/>
         <source>File not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="976"/>
+        <location filename="../src/main/MainWindow.cpp" line="1101"/>
         <source>Error report opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1031"/>
-        <location filename="../src/main/MainWindow.cpp" line="1105"/>
+        <location filename="../src/main/MainWindow.cpp" line="1164"/>
+        <location filename="../src/main/MainWindow.cpp" line="1238"/>
         <source>File imported</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1139"/>
+        <location filename="../src/main/MainWindow.cpp" line="1272"/>
         <source>Background image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1140"/>
+        <location filename="../src/main/MainWindow.cpp" line="1273"/>
         <source>Currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1141"/>
+        <location filename="../src/main/MainWindow.cpp" line="1274"/>
         <source>Point style for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1142"/>
+        <location filename="../src/main/MainWindow.cpp" line="1275"/>
         <source>Segment Fill filter for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1197"/>
+        <location filename="../src/main/MainWindow.cpp" line="1301"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1254"/>
+        <location filename="../src/main/MainWindow.cpp" line="1387"/>
         <source>Cannot write file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1302"/>
+        <location filename="../src/main/MainWindow.cpp" line="1435"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2338"/>
+        <location filename="../src/main/MainWindow.cpp" line="2548"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2420"/>
+        <location filename="../src/main/MainWindow.cpp" line="2630"/>
         <source>Open Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3676"/>
+        <location filename="../src/main/MainWindow.cpp" line="3961"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3677"/>
+        <location filename="../src/main/MainWindow.cpp" line="3962"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3807"/>
+        <location filename="../src/main/MainWindow.cpp" line="4095"/>
         <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4280,6 +4399,12 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdDelete.cpp" line="63"/>
         <location filename="../src/Cmd/CmdEditPointAxis.cpp" line="60"/>
         <location filename="../src/Cmd/CmdEditPointGraph.cpp" line="60"/>
+        <location filename="../src/Cmd/CmdGuidelineAddXT.cpp" line="45"/>
+        <location filename="../src/Cmd/CmdGuidelineAddYR.cpp" line="45"/>
+        <location filename="../src/Cmd/CmdGuidelineMoveXT.cpp" line="48"/>
+        <location filename="../src/Cmd/CmdGuidelineMoveYR.cpp" line="48"/>
+        <location filename="../src/Cmd/CmdGuidelineRemoveXT.cpp" line="45"/>
+        <location filename="../src/Cmd/CmdGuidelineRemoveYR.cpp" line="45"/>
         <location filename="../src/Cmd/CmdMoveBy.cpp" line="62"/>
         <source>Missing attribute(s)</source>
         <translation type="unfinished"></translation>
@@ -4290,6 +4415,12 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdDelete.cpp" line="66"/>
         <location filename="../src/Cmd/CmdEditPointAxis.cpp" line="66"/>
         <location filename="../src/Cmd/CmdEditPointGraph.cpp" line="64"/>
+        <location filename="../src/Cmd/CmdGuidelineAddXT.cpp" line="47"/>
+        <location filename="../src/Cmd/CmdGuidelineAddYR.cpp" line="47"/>
+        <location filename="../src/Cmd/CmdGuidelineMoveXT.cpp" line="52"/>
+        <location filename="../src/Cmd/CmdGuidelineMoveYR.cpp" line="52"/>
+        <location filename="../src/Cmd/CmdGuidelineRemoveXT.cpp" line="47"/>
+        <location filename="../src/Cmd/CmdGuidelineRemoveYR.cpp" line="47"/>
         <location filename="../src/Cmd/CmdMoveBy.cpp" line="64"/>
         <source>and/or</source>
         <translation type="unfinished"></translation>
@@ -4428,7 +4559,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoordSystem/CoordSystem.cpp" line="611"/>
+        <location filename="../src/CoordSystem/CoordSystem.cpp" line="613"/>
         <source>Unexpected xml token</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4479,40 +4610,40 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="135"/>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="176"/>
-        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="173"/>
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="136"/>
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="177"/>
+        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="174"/>
         <location filename="../src/main/main.cpp" line="365"/>
         <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="136"/>
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="137"/>
         <source>Three axis points have been defined, and no more are needed or allowed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="152"/>
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="153"/>
         <source>Color Picker</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="153"/>
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="154"/>
         <source>Sorry, but the color picker point must be near a non-background pixel. Please try again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="350"/>
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="351"/>
         <source>Point Match</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="351"/>
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="352"/>
         <source>There are no more matching points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="174"/>
+        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="175"/>
         <source>The scale bar has been defined, and another is not needed or allowed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4537,34 +4668,34 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="95"/>
-        <location filename="../src/Document/Document.cpp" line="137"/>
+        <location filename="../src/Document/Document.cpp" line="96"/>
+        <location filename="../src/Document/Document.cpp" line="140"/>
         <source>Operating system says file is not readable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="123"/>
+        <location filename="../src/Document/Document.cpp" line="126"/>
         <source>cannot read newer files from version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="125"/>
+        <location filename="../src/Document/Document.cpp" line="128"/>
         <source>of</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="144"/>
+        <location filename="../src/Document/Document.cpp" line="147"/>
         <location filename="../src/util/Xml.cpp" line="40"/>
         <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="146"/>
+        <location filename="../src/Document/Document.cpp" line="149"/>
         <source>was not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Document/Document.cpp" line="517"/>
+        <location filename="../src/Document/Document.cpp" line="520"/>
         <source>Cannot read image data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4600,6 +4731,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="155"/>
+        <location filename="../src/Document/DocumentModelGuidelines.cpp" line="84"/>
         <source>Cannot read grid display data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4886,12 +5018,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="604"/>
+        <location filename="../src/main/MainWindow.cpp" line="612"/>
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="122"/>
+        <location filename="../src/main/MainWindowModel.cpp" line="131"/>
         <source>Cannot read main window data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5039,6 +5171,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Export/ExportFileExtension.cpp" line="51"/>
         <source>Preview for TSV files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Cmd/CmdGuidelineMoveXT.cpp" line="50"/>
+        <location filename="../src/Cmd/CmdGuidelineMoveYR.cpp" line="50"/>
+        <source>,</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

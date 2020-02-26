@@ -112,7 +112,7 @@ public:
   /// Serialize to stream
   void saveXml(QXmlStreamWriter &writer) const;
 
-  /// Update the point identifer to match the specified curve name
+  /// Update the point identifier to match the specified curve name
   void setCurveName (const QString &curveName);
 
   /// Reset the current index while performing a Redo.
@@ -137,7 +137,7 @@ private:
 
   /// Version 10.7 was known to have unwanted underscores in points rather than the correct
   /// tabs, in issue #273
-  QString fixUnderscores (const QString &identifer) const;
+  QString fixUnderscores (const QString &identifier) const;
 
   /// Load from serialized xml
   void loadXml(QXmlStreamReader &reader);

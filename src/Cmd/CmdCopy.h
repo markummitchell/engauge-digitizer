@@ -14,7 +14,7 @@
 
 class QXmlStreamReader;
 
-/// Command for moving all selected Points by a specified translation.
+/// Command for copying all selected Points to the clipboard
 class CmdCopy : public CmdAbstract
 {
 public:

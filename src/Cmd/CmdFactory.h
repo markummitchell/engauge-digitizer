@@ -12,7 +12,7 @@ class Document;
 class MainWindow;
 class QXmlStreamReader;
 
-/// Factory for CmdAbstractBase objects
+/// Factory for CmdAbstractBase objects from xml. See also GuidelineDragCommandFactory
 class CmdFactory
 {
 public:

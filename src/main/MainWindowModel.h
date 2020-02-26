@@ -23,6 +23,7 @@ extern const int DEFAULT_SIGNIFICANT_DIGITS;
 extern const bool DEFAULT_SMALL_DIALOGS;
 extern const bool DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT;
 extern const int DEFAULT_MAXIMUM_EXPORTED_POINTS_PER_CURVE;
+extern const ColorPalette DEFAULT_GUIDELINE_COLOR;
 
 /// Model for DlgSettingsMainWindow. Unlike the other models (DocumentModel*) this data is not saved and 
 /// loaded within the document, so no xml or working with the Document class is involved. Also, there is
@@ -43,6 +44,9 @@ public:
   /// Get method for drag and drop export
   bool dragDropExport () const;
 
+  /// Get method for guideline color
+  ColorPalette guidelineColor () const;
+  
   /// Get method for highlight opacity
   double highlightOpacity() const;
 
@@ -78,6 +82,9 @@ public:
   /// Set method for drag and drop export
   void setDragDropExport (bool dragDropExport);
 
+  /// Set method for guideline color
+  void setGuidelineColor (ColorPalette guidelineColor);
+  
   /// Set method for highlight opacity
   void setHighlightOpacity (double highlightOpacity);
 
@@ -145,6 +152,7 @@ private:
   int m_significantDigits;
   bool m_imageReplaceRenamesDocument;
   int m_maximumExportedPointsPerCurve; // Too many points causes unacceptable delays so this is the limit
+  ColorPalette m_guidelineColor;
 };
 
 #endif // MAIN_WINDOW_MODEL_H
