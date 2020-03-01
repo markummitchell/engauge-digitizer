@@ -36,7 +36,7 @@
 	    <File Id='help'         Name='Qt5Help.dll'         DiskId='1' Source='Engauge Digitizer/Qt5Help.dll'         />
 	    <File Id='network'      Name='Qt5Network.dll'      DiskId='1' Source='Engauge Digitizer/Qt5Network.dll'      />
 	    <File Id='printsupport' Name='Qt5PrintSupport.dll' DiskId='1' Source='Engauge Digitizer/Qt5PrintSupport.dll' />
-	    <File Id='sql'          Name='Qt5Sql.dll'          DiskId='1' Source='Engauge Digitizer/Qt5Sql.dll'          />
+	    <File Id='sql'          Name='Qt5Sql.dll'          DiskId='1' Source='Engauge Digitizer/Qt5Sql.dll'          />	    
 	    <File Id='widgets'      Name='Qt5Widgets.dll'      DiskId='1' Source='Engauge Digitizer/Qt5Widgets.dll'      />
 	    <File Id='xml'          Name='Qt5Xml.dll'          DiskId='1' Source='Engauge Digitizer/Qt5Xml.dll'          />
 	  </Component>
@@ -85,29 +85,26 @@
 	  <Directory Id='sqldrivers' Name='sqldrivers'>
 	    <Component Id='sqldrivers' Guid='642778D3-ED5F-47CA-9978-671DF3B472D0' Win64='yes'>
 	      <File Id='qsqlite'    Name='qsqlite.dll'   DiskId='1' Source='Engauge Digitizer/sqldrivers/qsqlite.dll'   />
-	      <File Id='qsqlmysql'  Name='qsqlmysql.dll' DiskId='1' Source='Engauge Digitizer/sqldrivers/qsqlmysql.dll' />
-	      <File Id='qsqlodbc'   Name='qsqlodbc.dll'  DiskId='1' Source='Engauge Digitizer/sqldrivers/qsqlodbc.dll'  />
-	      <File Id='qsqlpsql'   Name='qsqlpsql.dll'  DiskId='1' Source='Engauge Digitizer/sqldrivers/qsqlpsql.dll'  />
 	    </Component>
 	  </Directory>
 	  <Directory Id='translations' Name='translations'>
 	    <Component Id='translations' Guid='A9AD2B5C-8B4F-48E5-819A-D38C4EA11153' Win64='yes'>
-	      <File Id='qt_ar'  Name='engauge_ar.qm'  DiskId='1' Source='Engauge Digitizer/engauge_ar.qm'  />
-	      <File Id='qt_cs'  Name='engauge_cs.qm'  DiskId='1' Source='Engauge Digitizer/engauge_cs.qm'  />
-	      <File Id='qt_de'  Name='engauge_de.qm'  DiskId='1' Source='Engauge Digitizer/engauge_de.qm'  />
-	      <File Id='qt_en'  Name='engauge_en.qm'  DiskId='1' Source='Engauge Digitizer/engauge_en.qm'  />
-	      <File Id='qt_es'  Name='engauge_es.qm'  DiskId='1' Source='Engauge Digitizer/engauge_es.qm'  />
-	      <File Id='qt_fa'  Name='engauge_fa_IR.qm'  DiskId='1' Source='Engauge Digitizer/engauge_fa_IR.qm'  />	      
-	      <File Id='qt_fr'  Name='engauge_fr.qm'  DiskId='1' Source='Engauge Digitizer/engauge_fr.qm'  />
-	      <File Id='qt_hi'  Name='engauge_hi.qm'  DiskId='1' Source='Engauge Digitizer/engauge_hi.qm'  />
-	      <File Id='qt_it'  Name='engauge_it.qm'  DiskId='1' Source='Engauge Digitizer/engauge_it.qm'  />
-	      <File Id='qt_ja'  Name='engauge_ja.qm'  DiskId='1' Source='Engauge Digitizer/engauge_ja.qm'  />
-	      <File Id='qt_kk'  Name='engauge_kk.qm'  DiskId='1' Source='Engauge Digitizer/engauge_kk.qm'  />
-	      <File Id='qt_ko'  Name='engauge_ko.qm'  DiskId='1' Source='Engauge Digitizer/engauge_ko.qm'  />
-	      <File Id='qt_nb'  Name='engauge_nb.qm'  DiskId='1' Source='Engauge Digitizer/engauge_nb.qm'  />	      
-	      <File Id='qt_pt'  Name='engauge_pt.qm'  DiskId='1' Source='Engauge Digitizer/engauge_pt.qm'  />
-	      <File Id='qt_ru'  Name='engauge_ru.qm'  DiskId='1' Source='Engauge Digitizer/engauge_ru.qm'  />
-	      <File Id='qt_zh'  Name='engauge_zh.qm'  DiskId='1' Source='Engauge Digitizer/engauge_zh.qm'  />
+	      <File Id='qt_ar'  Name='engauge_ar.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_ar.qm'  />
+	      <File Id='qt_cs'  Name='engauge_cs.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_cs.qm'  />
+	      <File Id='qt_de'  Name='engauge_de.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_de.qm'  />
+	      <File Id='qt_en'  Name='engauge_en.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_en.qm'  />
+	      <File Id='qt_es'  Name='engauge_es.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_es.qm'  />
+	      <File Id='qt_fa'  Name='engauge_fa_IR.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_fa_IR.qm'  />	      
+	      <File Id='qt_fr'  Name='engauge_fr.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_fr.qm'  />
+	      <File Id='qt_hi'  Name='engauge_hi.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_hi.qm'  />
+	      <File Id='qt_it'  Name='engauge_it.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_it.qm'  />
+	      <File Id='qt_ja'  Name='engauge_ja.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_ja.qm'  />
+	      <File Id='qt_kk'  Name='engauge_kk.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_kk.qm'  />
+	      <File Id='qt_ko'  Name='engauge_ko.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_ko.qm'  />
+	      <File Id='qt_nb'  Name='engauge_nb.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_nb.qm'  />	      
+	      <File Id='qt_pt'  Name='engauge_pt.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_pt.qm'  />
+	      <File Id='qt_ru'  Name='engauge_ru.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_ru.qm'  />
+	      <File Id='qt_zh'  Name='engauge_zh.qm'  DiskId='1' Source='Engauge Digitizer/translations/engauge_zh.qm'  />
 	    </Component>
 	  </Directory>
 	</Directory>

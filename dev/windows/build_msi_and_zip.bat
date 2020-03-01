@@ -52,7 +52,8 @@ echo Continuing...
 call vcvarsall.bat %ARCH%
 
 set QTDIRS=bearer iconengines imageformats platforms printsupport sqldrivers
-set QTLIBS=Qt5CLucene Qt5Core Qt5Gui Qt5Help Qt5Network Qt5PrintSupport Qt5Sql Qt5Widgets Qt5Xml
+rem Qt versions before 5.16 may require Qt5Lucene in QTLIBS
+set QTLIBS=Qt5Core Qt5Gui Qt5Help Qt5Network Qt5PrintSupport Qt5Sql Qt5Widgets Qt5Xml
 
 set SCRIPTDIR=%cd%
 rem Directory containing engauge.pro
@@ -183,6 +184,7 @@ if not exist bin/engauge.exe (
 
 cd "%APPVEYOR_BUILD_FOLDER%"
 if not exist "%RESULTDIR%"\documentation mkdir "%RESULTDIR%"\documentation
+if not exist "%RESULTDIR%"\translations  mkdir "%RESULTDIR%"\translations
 for %%I in (%QTDIRS%) do (
   if not exist "%RESULTDIR%\%%I" mkdir "%RESULTDIR%\%%I"
 )
@@ -208,7 +210,7 @@ copy "%POPPLER_LIB%\zlib.dll"         "%RESULTDIR%"
 copy "%FFTW_HOME%\lib\libfftw3-3.dll" "%RESULTDIR%"
 copy "%SYSTEM32_HOME%\*"              "%RESULTDIR%"
 
-copy "%APPVEYOR_BUILD_FOLDER%"\translations "%RESULTDIR%"
+copy "%APPVEYOR_BUILD_FOLDER%"\translations "%RESULTDIR%"\translations
 
 7z a "%RESULTDIR%.7z" "%RESULTDIR%"
 
