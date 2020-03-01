@@ -745,7 +745,7 @@ Closes the open document.</source>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="258"/>
         <source>&amp;Save</source>
-        <translation>Sparen</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="260"/>
