@@ -26,8 +26,6 @@ CmdStackShadow::CmdStackShadow() :
 
 bool CmdStackShadow::canRedo() const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdStackShadow::canRedo";
-
   bool canRedo = (m_cmdList.count () > 0);
 
   return canRedo;
