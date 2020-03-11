@@ -26,7 +26,7 @@ void GuidelineStateDeployedConstantYLocked::begin ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantYLocked::begin"
                               << " identifier=" << context().guideline().identifier().toLatin1().data();
 
-  beginCommon (GuidelineFormat::HOVER_ON,
+  beginCommon (GuidelineFormat::HOVER_OFF,
                true);
 }
 
@@ -61,7 +61,7 @@ void GuidelineStateDeployedConstantYLocked::handleHoverEnterEvent ()
 
 void GuidelineStateDeployedConstantYLocked::handleHoverLeaveEvent ()
 {
-  context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
+  // This event would have been handled by GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE
 }
 
 void GuidelineStateDeployedConstantYLocked::handleMousePress (const QPointF &posScene)
