@@ -33,6 +33,7 @@ Guidelines::Guidelines (MainWindow &mainWindow) :
 Guidelines::~Guidelines ()
 {
   clear ();
+  delete m_guidelineFactory;
 }
 
 void Guidelines::clear ()
