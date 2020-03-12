@@ -66,6 +66,8 @@ const QString DOCUMENT_SERIALIZE_COLOR_FILTER_VALUE_HIGH ("ValueHigh");
 const QString DOCUMENT_SERIALIZE_COLOR_FILTER_VALUE_LOW ("ValueLow");
 const QString DOCUMENT_SERIALIZE_COMMON ("Common"); // Superceded by DOCUMENT_SERIALIZE_GENERAL but kept so old documents can be loaded
 const QString DOCUMENT_SERIALIZE_COORD_SYSTEM ("CoordSystem");
+const QString DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_AFTER ("CoordSystemIndexAfter");
+const QString DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_BEFORE ("CoordSystemIndexBefore");
 const QString DOCUMENT_SERIALIZE_COORDS ("Coords");
 const QString DOCUMENT_SERIALIZE_COORDS_ORIGIN_RADIUS ("Coords");
 const QString DOCUMENT_SERIALIZE_COORDS_SCALE_X_THETA ("ScaleXTheta");

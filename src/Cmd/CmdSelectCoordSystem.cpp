@@ -16,6 +16,7 @@
 #include <QTextStream>
 #include "QtToString.h"
 #include <QXmlStreamReader>
+#include "Xml.h"
 
 const QString CMD_DESCRIPTION ("Select Coordinate System");
 
@@ -34,12 +35,27 @@ CmdSelectCoordSystem::CmdSelectCoordSystem(MainWindow &mainWindow,
 CmdSelectCoordSystem::CmdSelectCoordSystem (MainWindow &mainWindow,
                                             Document &document,
                                             const QString &cmdDescription,
-                                            QXmlStreamReader & /* reader */) :
+                                            QXmlStreamReader &reader) :
   CmdAbstract (mainWindow,
                document,
                cmdDescription)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSelectCoordSystem::CmdSelectCoordSystem";
+
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_AFTER) ||
+      !attributes.hasAttribute(DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_BEFORE)) {
+    xmlExitWithError (reader,
+                      QString ("%1 %2 %3 %4")
+                      .arg (QObject::tr ("Missing attribute(s)"))
+                      .arg (DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_AFTER)
+                      .arg (QObject::tr ("and/or"))
+                      .arg (DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_BEFORE));
+  }
+
+  m_coordSystemIndexAfter = attributes.value(DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_AFTER).toInt ();
+  m_coordSystemIndexBefore = attributes.value(DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_BEFORE).toInt ();
 }
 
 CmdSelectCoordSystem::~CmdSelectCoordSystem ()
@@ -69,5 +85,9 @@ void CmdSelectCoordSystem::cmdUndo ()
 void CmdSelectCoordSystem::saveXml (QXmlStreamWriter &writer) const
 {
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SELECT_COORD_SYSTEM);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_BEFORE, QString::number (m_coordSystemIndexBefore));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_AFTER, QString::number (m_coordSystemIndexAfter));
   writer.writeEndElement();
 }
