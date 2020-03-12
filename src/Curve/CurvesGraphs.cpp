@@ -128,6 +128,8 @@ void CurvesGraphs::iterateThroughCurvePoints (const QString &curveNameWanted,
     }
   }
 
+  LOG4CPP_ERROR_S ((*mainCat)) << "CurvesGraphs::iterateThroughCurvePoints encountered unexpected curve "
+                               << curveNameWanted.toLatin1().data();
   ENGAUGE_ASSERT (false);
 }
 
@@ -146,6 +148,8 @@ void CurvesGraphs::iterateThroughCurveSegments (const QString &curveNameWanted,
     }
   }
 
+  LOG4CPP_ERROR_S ((*mainCat)) << "CurvesGraphs::iterateThroughCurveSegments encountered unexpected curve "
+                               << curveNameWanted.toLatin1().data();  
   ENGAUGE_ASSERT (false);
 }
 

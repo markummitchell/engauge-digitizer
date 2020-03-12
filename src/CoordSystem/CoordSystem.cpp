@@ -602,6 +602,7 @@ void CoordSystem::loadVersion6 (QXmlStreamReader &reader,
       } else if (tag == DOCUMENT_SERIALIZE_GUIDELINES) {
         m_modelGuidelines.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
+        LOG4CPP_ERROR_S ((*mainCat)) << "CoordSystem::loadVersion6 encountered image out of order";
         ENGAUGE_ASSERT (false); // The image should have been read before this method was called
       } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
         m_modelPointMatch.loadXml (reader);
@@ -664,6 +665,7 @@ void CoordSystem::loadVersions7AndUp (QXmlStreamReader &reader)
       } else if (tag == DOCUMENT_SERIALIZE_GUIDELINES) {
         m_modelGuidelines.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
+        LOG4CPP_ERROR_S ((*mainCat)) << "CoordSystem::loadVersions7AndUp encountered image out of order";        
         ENGAUGE_ASSERT (false); // The image should have been read before this method was called
       } else if (tag == DOCUMENT_SERIALIZE_POINT_MATCH) {
         m_modelPointMatch.loadXml (reader);

@@ -329,7 +329,7 @@ void DlgSettingsMainWindow::handleOk ()
 
 void DlgSettingsMainWindow::load (CmdMediator & /* cmdMediator */)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::load";
+  LOG4CPP_ERROR_S ((*mainCat)) << "DlgSettingsMainWindow::load";
 
   ENGAUGE_ASSERT (false);
 }

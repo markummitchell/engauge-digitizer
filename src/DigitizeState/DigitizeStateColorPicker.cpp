@@ -337,6 +337,8 @@ void DigitizeStateColorPicker::saveLowerValueUpperValue (DocumentModelColorFilte
       break;
 
     default:
+      LOG4CPP_ERROR_S ((*mainCat)) << "DigitizeStateColorPicker::saveLowerValueUpperValue unexpected color filter mode "
+                                   << modelColorFilterAfter.colorFilterMode (curveName);
       ENGAUGE_ASSERT (false);
   }
 }

@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
+#include "Logger.h"
 #include "ViewProfileScale.h"
 #include <QPainter>
 
@@ -40,6 +41,7 @@ void ViewProfileScale::paintEvent (QPaintEvent *event)
       break;
 
     default:
+      LOG4CPP_ERROR_S ((*mainCat)) << "ViewProfileScale::paintEvent unexpected color filter mode " << m_colorFilterMode;
       ENGAUGE_ASSERT (false);
   }
 

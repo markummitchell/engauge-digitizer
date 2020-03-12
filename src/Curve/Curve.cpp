@@ -293,6 +293,8 @@ bool Curve::isXOnly(const QString &pointIdentifier) const
     }
   }
 
+  LOG4CPP_ERROR_S ((*mainCat)) << "Curve::isXOnly encountered unknown indentifier "
+                               << pointIdentifier.toLatin1().data();
   ENGAUGE_ASSERT (false);
 
   return false;
@@ -444,6 +446,8 @@ Point *Curve::pointForPointIdentifier (const QString pointIdentifier)
     }
   }
 
+  LOG4CPP_ERROR_S ((*mainCat)) << "Curve::pointForPointIdentifier encountered unknown indentifier "
+                               << pointIdentifier.toLatin1().data();  
   ENGAUGE_ASSERT (false);
   return nullptr;
 }
@@ -587,7 +591,7 @@ void Curve::updatePointOrdinals (const Transformation &transformation)
 
   } else {
 
-    LOG4CPP_ERROR_S ((*mainCat)) << "Curve::updatePointOrdinals";
+    LOG4CPP_ERROR_S ((*mainCat)) << "Curve::updatePointOrdinals encountered unexpected connection configuration";
     ENGAUGE_ASSERT (false);
 
   }

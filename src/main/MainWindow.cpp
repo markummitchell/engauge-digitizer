@@ -305,6 +305,7 @@ void MainWindow::applyZoomFactorAfterLoad()
   } else if (zoomFactorInitial == ZOOM_INITIAL_PREVIOUS) {
     zoomFactor = currentZoomFactor ();
   } else {
+    LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::applyZoomFactorAfterLoad unexpected zoom factor " << zoomFactorInitial;
     ENGAUGE_ASSERT (false);
     zoomFactor = currentZoomFactor();
   }
@@ -373,6 +374,7 @@ ZoomFactor MainWindow::currentZoomFactor () const
     }
   }
 
+  LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::currentZoomFactor encountered unexpected zoom control";
   ENGAUGE_ASSERT (false);
   return ZOOM_1_TO_1;
 }
@@ -3151,6 +3153,7 @@ void MainWindow::slotViewGroupBackground(QAction *action)
     indexBackground = m_cmbBackground->findData (QVariant (BACKGROUND_IMAGE_FILTERED));
     backgroundImage = BACKGROUND_IMAGE_FILTERED;
   } else {
+    LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::slotViewGroupBackground unexpected action";
     ENGAUGE_ASSERT (false);
 
     // Defaults if assert is disabled so execution continues
@@ -4052,6 +4055,7 @@ void MainWindow::updateViewedCurves ()
     m_scene->showCurves (false);
 
   } else {
+    LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::updateViewedCurves unexpected control";
     ENGAUGE_ASSERT (false);
   }
 }

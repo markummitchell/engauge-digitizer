@@ -25,7 +25,7 @@ ViewSegmentFilter::ViewSegmentFilter(QWidget *parent) :
   // Note the size is set externally by the layout engine
 }
 
-QColor ViewSegmentFilter::colorFromSetting (ColorFilterMode coloFilterMode,
+QColor ViewSegmentFilter::colorFromSetting (ColorFilterMode colorFilterMode,
                                             int foreground,
                                             int hue,
                                             int intensity,
@@ -34,7 +34,7 @@ QColor ViewSegmentFilter::colorFromSetting (ColorFilterMode coloFilterMode,
 {
   int r = 0, g = 0, b = 0;
 
-  switch (coloFilterMode)
+  switch (colorFilterMode)
   {
     case COLOR_FILTER_MODE_FOREGROUND:
       {
@@ -113,6 +113,7 @@ QColor ViewSegmentFilter::colorFromSetting (ColorFilterMode coloFilterMode,
       break;
 
     default:
+      LOG4CPP_ERROR_S ((*mainCat)) << "ViewSegmentFilter::colorFromSetting unexpected color filter mode " << colorFilterMode;
       ENGAUGE_ASSERT (false);
   }
 

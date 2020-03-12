@@ -6,6 +6,7 @@
 
 #include "CursorSize.h"
 #include "EngaugeAssert.h"
+#include "Logger.h"
 
 int CursorSizeToPixels (CursorSize cursorSize)
 {
@@ -28,6 +29,7 @@ int CursorSizeToPixels (CursorSize cursorSize)
     break;
   }
 
+  LOG4CPP_ERROR_S ((*mainCat)) << "CursorSizeToPixels encountered unexpected cursor size " << cursorSize;
   ENGAUGE_ASSERT (false);
   return 0;
 }
