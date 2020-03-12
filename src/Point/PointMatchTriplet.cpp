@@ -22,7 +22,7 @@ double PointMatchTriplet::correlation () const
 
 bool PointMatchTriplet::operator<(const PointMatchTriplet &other) const
 {
-  // qSort wants to sort by ascending correlation, but we want to sort by descending correlation. We
+  // Sorting algorithm wants to sort by ascending correlation, but we want to sort by descending correlation. We
   // compensate by comparing correlations numerically and flipping the result
 
   bool isLess = false;

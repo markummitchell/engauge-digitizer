@@ -12,7 +12,7 @@
 /// Comparator for sorting Point class
 struct PointComparator
 {
-  /// Comparison function used by qSort
+  /// Comparison function used by sorting algorithms
   bool operator()(const Point &a, const Point &b) const
   {
     return a.ordinal() < b.ordinal();

@@ -592,9 +592,9 @@ void Curve::updatePointOrdinals (const Transformation &transformation)
 
   }
 
-  qSort (m_points.begin(),
-         m_points.end(),
-         PointComparator());
+  std::sort (m_points.begin(),
+             m_points.end(),
+             PointComparator());
 }
 
 void Curve::updatePointOrdinalsFunctions (const Transformation &transformation)

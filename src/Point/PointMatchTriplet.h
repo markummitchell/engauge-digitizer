@@ -18,7 +18,7 @@ public:
                     int y,
                     double correlation);
 
-  /// Comparison operator for sorting lists of this class using qSort
+  /// Comparison operator for sorting lists of this class using sorting algorithm
   bool operator<(const PointMatchTriplet &other) const;
 
   /// Get method for correlation

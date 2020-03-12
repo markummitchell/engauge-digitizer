@@ -452,10 +452,10 @@ QString Guidelines::stateDump () const
     sortedYR << guideline->stateDump ();
   }
 
-  qSort (sortedXT.begin(),
-         sortedXT.end());
-  qSort (sortedYR.begin(),
-         sortedYR.end());
+  std::sort (sortedXT.begin(),
+             sortedXT.end());
+  std::sort (sortedYR.begin(),
+             sortedYR.end());
 
   // Convert entries to output text
   QString out;

@@ -283,7 +283,8 @@ QList<QPoint> PointMatchAlgorithm::findPoints (const QList<PointMatchPixel> &sam
                       listCreated,
                       width,
                       height);
-  qSort (listCreated);
+  std::sort (listCreated.begin(),
+             listCreated.end());
 
   // Copy sorted match points to output
   QList<QPoint> pointsCreated;
