@@ -1690,11 +1690,15 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
 {  
   settings.beginGroup(SETTINGS_GROUP_MAIN_WINDOW);
 
+  // Try to keep geometry inside typical 1920x1080 window, but big enough that unit tests can be mostly or totally seen
+  const int DEFAULT_MAIN_WINDOW_WIDTH = 800, DEFAULT_MAIN_WINDOW_HEIGHT = 800;
+  const int DEFAULT_MAIN_WINDOW_OFFSET_X = 100, DEFAULT_MAIN_WINDOW_OFFSET_Y = 100;
+
   // Main window geometry
   resize (settings.value (SETTINGS_SIZE,
-                          QSize (600, 600)).toSize ());
+                          QSize (DEFAULT_MAIN_WINDOW_WIDTH, DEFAULT_MAIN_WINDOW_HEIGHT)).toSize ());
   move (settings.value (SETTINGS_POS,
-                        QPoint (200, 200)).toPoint ());
+                        QPoint (DEFAULT_MAIN_WINDOW_OFFSET_X, DEFAULT_MAIN_WINDOW_OFFSET_Y)).toPoint ());
 
   // Help window geometry
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)
@@ -3695,6 +3699,7 @@ void MainWindow::updateCoordSystem(CoordSystemIndex coordSystemIndex)
 
   updateTransformationAndItsDependencies(); // Transformation state may have changed
   updateSettingsAxesChecker(m_cmdMediator->document().modelAxesChecker()); // Axes checker dependes on transformation state
+  loadGuidelinesFromCmdMediator();
 
   // Nice trick for showing that a new coordinate system is in effect is to show the axes checker
   m_transformationStateContext->updateAxesChecker (*m_cmdMediator,

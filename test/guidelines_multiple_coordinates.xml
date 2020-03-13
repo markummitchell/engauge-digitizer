@@ -179,41 +179,6 @@
      </Curve>
     </CurvesGraphs>
    </CoordSystem>
-   <CoordSystem>
-    <General ExtraPrecision="1" CursorSize="3"/>
-    <Coords UnitsRadiusString="Number" UnitsTheta="0" ScaleXThetaString="Linear" Type="0" UnitsThetaString="Degrees (DDD.DDDDD)" Coords="0" UnitsRadius="0" ScaleYRadiusString="Linear" UnitsDate="3" UnitsX="0" ScaleYRadius="0" UnitsXString="Number" ScaleXTheta="0" UnitsTime="2" UnitsTimeString="HH:MM:SS" TypeString="Cartesian" UnitsDateString="YYYY/MM/DD" UnitsYString="Number" UnitsY="0"/>
-    <DigitizeCurve CursorInnerRadius="5" CursorLineWidth="2" CursorSize="1" CursorStandardCross="True"/>
-    <Export PointsSelectionRelations="0" PointsIntervalUnitsRelations="1" DelimiterString="Commas" Delimiter="0" LayoutFunctions="0" ExtrapolateOutsideEndpoints="True" LayoutFunctionsString="AllPerLine" Header="1" PointsIntervalUnitsFunctions="1" OverrideCsvTsv="False" XLabel="x" PointsSelectionFunctions="0" PointsIntervalRelations="10" HeaderString="Simple" PointsSelectionRelationsString="Interpolate" PointsSelectionFunctionsString="InterpolateAllCurves" PointsIntervalFunctions="10">
-     <CurveNamesNotExported/>
-    </Export>
-    <AxesChecker Mode="1" LineColor="6" Seconds="3"/>
-    <GridDisplay Color="0" DisableY="0" CountY="2" StopY="1" StartY="0" Stable="False" StepY="1" StartX="0" CountX="2" DisableX="0" StopX="1" StepX="1" ColorString="Black"/>
-    <GridRemoval CoordDisableY="0" CountY="2" StopY="0" CloseDistance="10" StartY="0" Stable="False" CoordDisableX="0" StepY="0" DefinedGridLines="False" StartX="0" CoordDisableYString="Count" CountX="2" StopX="0" CoordDisableXString="Count" StepX="0"/>
-    <Guidelines>
-     <GuidelinesX/>
-     <GuidelinesY/>
-    </Guidelines>
-    <PointMatch ColorRejectedString="Red" ColorAccepted="4" PointSize="48" ColorAcceptedString="Green" ColorRejected="6" ColorCandidateString="Yellow" ColorCandidate="7"/>
-    <Segments MinLength="2" FillCorners="False" PointSeparation="25" LineColor="4" LineWidth="4" LineColorString="Green"/>
-    <Curve CurveName="Axes">
-     <ColorFilter ForegroundLow="0" IntensityHigh="50" IntensityLow="0" SaturationLow="50" Mode="2" HueHigh="360" ModeString="Intensity" ValueLow="0" ForegroundHigh="10" ValueHigh="50" HueLow="180" CurveName="Axes" SaturationHigh="100"/>
-     <CurveStyle CurveName="Axes">
-      <LineStyle Color="8" ConnectAs="4" Width="0" ConnectAsString="ConnectSkipForAxisCurve" ColorString="Transparent"/>
-      <PointStyle ShapeString="Cross" Color="6" Radius="10" LineWidth="1" ColorString="Red" Shape="1"/>
-     </CurveStyle>
-     <CurvePoints/>
-    </Curve>
-    <CurvesGraphs>
-     <Curve CurveName="Curve1">
-      <ColorFilter ForegroundLow="0" IntensityHigh="50" IntensityLow="0" SaturationLow="50" Mode="2" HueHigh="360" ModeString="Intensity" ValueLow="0" ForegroundHigh="10" ValueHigh="50" HueLow="180" CurveName="Curve1" SaturationHigh="100"/>
-      <CurveStyle CurveName="Curve1">
-       <LineStyle Color="1" ConnectAs="0" Width="1" ConnectAsString="FunctionSmooth" ColorString="Blue"/>
-       <PointStyle ShapeString="Cross" Color="1" Radius="10" LineWidth="1" ColorString="Blue" Shape="1"/>
-      </CurveStyle>
-      <CurvePoints/>
-     </Curve>
-    </CurvesGraphs>
-   </CoordSystem>
    <OperatingSystem WordSize="64" Endian="LittleEndian"/>
    <File Imported="True"/>
    <CmdMediator>
@@ -259,6 +224,10 @@
     <Cmd Identifier="guideline14" GraphAfter="-200.967" GraphBefore="-7.46023" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT"/>
     <Cmd Identifier="guideline16" GraphAfter="-7.46023" Type="CmdGuidelineAddXT" Description="GuidelineAddXT"/>
     <Cmd Identifier="guideline16" GraphAfter="197.929" GraphBefore="-7.46023" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT"/>
+    <Cmd CoordSystemIndexBefore="4" CoordSystemIndexAfter="3" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
+    <Cmd CoordSystemIndexBefore="3" CoordSystemIndexAfter="2" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
+    <Cmd CoordSystemIndexBefore="2" CoordSystemIndexAfter="1" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
+    <Cmd CoordSystemIndexBefore="1" CoordSystemIndexAfter="0" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>            
    </CmdMediator>
    <Error Comment="userTriggered" Context="Shift+Control+E" File="src/main/MainWindow.cpp" Line="393"/>
   </Document>
