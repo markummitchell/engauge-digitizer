@@ -951,6 +951,12 @@ void MainWindow::handleGuidelinesActiveChange (bool active)
   m_guidelines.handleActiveChange (active);
 }
 
+void MainWindow::handleGuidelineMode ()
+{
+  m_guidelines.handleGuidelineMode(guidelinesAreVisible (),
+                                   m_actionViewGuidelinesLock->isChecked());
+}
+
 void MainWindow::handlerFileExtractImage ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::handlerFileExtractImage";
@@ -963,12 +969,6 @@ void MainWindow::handlerFileExtractImage ()
     directoryPersist.setDirectoryExportSaveFromFilename(fileName);
     fileExtractImage(fileName);
   }
-}
-
-void MainWindow::handleGuidelineMode ()
-{
-  m_guidelines.handleGuidelineMode(guidelinesAreVisible (),
-                                   m_actionViewGuidelinesLock->isChecked());
 }
 
 QImage MainWindow::imageFiltered () const

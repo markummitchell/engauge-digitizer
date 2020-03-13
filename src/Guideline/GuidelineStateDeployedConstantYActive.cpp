@@ -47,7 +47,7 @@ void GuidelineStateDeployedConstantYActive::handleGuidelineMode (bool visible,
   if (!visible) {
     context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HIDE);
   } else if (locked) {
-    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED);
+    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED_ACTIVE);
   }
 }
 

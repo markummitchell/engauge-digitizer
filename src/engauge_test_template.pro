@@ -335,25 +335,29 @@ HEADERS  += \
     Guideline/GuidelineStateDeployedConstantRAppearing.h \
     Guideline/GuidelineStateDeployedConstantRHide.h \
     Guideline/GuidelineStateDeployedConstantRHover.h \
-    Guideline/GuidelineStateDeployedConstantRLocked.h \
+    Guideline/GuidelineStateDeployedConstantRLockedActive.h \
+    Guideline/GuidelineStateDeployedConstantRLockedInactive.h \
     Guideline/GuidelineStateDeployedConstantTAbstract.h \
     Guideline/GuidelineStateDeployedConstantTActive.h \
     Guideline/GuidelineStateDeployedConstantTAppearing.h \
     Guideline/GuidelineStateDeployedConstantTHide.h \
     Guideline/GuidelineStateDeployedConstantTHover.h \
-    Guideline/GuidelineStateDeployedConstantTLocked.h \
+    Guideline/GuidelineStateDeployedConstantTLockedActive.h \
+    Guideline/GuidelineStateDeployedConstantTLockedInactive.h \
     Guideline/GuidelineStateDeployedConstantXAbstract.h \
     Guideline/GuidelineStateDeployedConstantXActive.h \
     Guideline/GuidelineStateDeployedConstantXAppearing.h \
     Guideline/GuidelineStateDeployedConstantXHide.h \
     Guideline/GuidelineStateDeployedConstantXHover.h \
-    Guideline/GuidelineStateDeployedConstantXLocked.h \
+    Guideline/GuidelineStateDeployedConstantXLockedActive.h \
+    Guideline/GuidelineStateDeployedConstantXLockedInactive.h \
     Guideline/GuidelineStateDeployedConstantYAbstract.h \
     Guideline/GuidelineStateDeployedConstantYActive.h \
     Guideline/GuidelineStateDeployedConstantYAppearing.h \
     Guideline/GuidelineStateDeployedConstantYHide.h \
     Guideline/GuidelineStateDeployedConstantYHover.h \
-    Guideline/GuidelineStateDeployedConstantYLocked.h \
+    Guideline/GuidelineStateDeployedConstantYLockedActive.h \
+    Guideline/GuidelineStateDeployedConstantYLockedInactive.h \
     Guideline/GuidelineStateDiscarded.h \
     Guideline/GuidelineStateHandleAbstract.h \
     Guideline/GuidelineStateHandleR.h \
@@ -745,25 +749,29 @@ SOURCES += \
     Guideline/GuidelineStateDeployedConstantRAppearing.cpp \
     Guideline/GuidelineStateDeployedConstantRHide.cpp \
     Guideline/GuidelineStateDeployedConstantRHover.cpp \
-    Guideline/GuidelineStateDeployedConstantRLocked.cpp \
+    Guideline/GuidelineStateDeployedConstantRLockedActive.cpp \
+    Guideline/GuidelineStateDeployedConstantRLockedInactive.cpp \
     Guideline/GuidelineStateDeployedConstantTAbstract.cpp \
     Guideline/GuidelineStateDeployedConstantTActive.cpp \
     Guideline/GuidelineStateDeployedConstantTAppearing.cpp \
     Guideline/GuidelineStateDeployedConstantTHide.cpp \
     Guideline/GuidelineStateDeployedConstantTHover.cpp \
-    Guideline/GuidelineStateDeployedConstantTLocked.cpp \
+    Guideline/GuidelineStateDeployedConstantTLockedActive.cpp \
+    Guideline/GuidelineStateDeployedConstantTLockedInactive.cpp \
     Guideline/GuidelineStateDeployedConstantXAbstract.cpp \
     Guideline/GuidelineStateDeployedConstantXActive.cpp \
     Guideline/GuidelineStateDeployedConstantXAppearing.cpp \
     Guideline/GuidelineStateDeployedConstantXHide.cpp \
     Guideline/GuidelineStateDeployedConstantXHover.cpp \
-    Guideline/GuidelineStateDeployedConstantXLocked.cpp \
+    Guideline/GuidelineStateDeployedConstantXLockedActive.cpp \
+    Guideline/GuidelineStateDeployedConstantXLockedInactive.cpp \
     Guideline/GuidelineStateDeployedConstantYAbstract.cpp \
     Guideline/GuidelineStateDeployedConstantYActive.cpp \
     Guideline/GuidelineStateDeployedConstantYAppearing.cpp \
     Guideline/GuidelineStateDeployedConstantYHide.cpp \
     Guideline/GuidelineStateDeployedConstantYHover.cpp \
-    Guideline/GuidelineStateDeployedConstantYLocked.cpp \
+    Guideline/GuidelineStateDeployedConstantYLockedActive.cpp \
+    Guideline/GuidelineStateDeployedConstantYLockedInactive.cpp \
     Guideline/GuidelineStateDiscarded.cpp \
     Guideline/GuidelineStateHandleAbstract.cpp \
     Guideline/GuidelineStateHandleR.cpp \

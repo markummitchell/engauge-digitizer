@@ -290,11 +290,6 @@ void Guidelines::handleActiveChange (bool active)
   }
 }
 
-void Guidelines::initialize (GraphicsScene &scene)
-{
-  m_guidelineFactory = new GuidelineFactory (&scene);
-}
-
 void Guidelines::handleGuidelineMode (bool visible,
                                       bool isLocked)
 {
@@ -313,6 +308,11 @@ void Guidelines::handleGuidelineMode (bool visible,
     guideline->handleGuidelineMode (visible,
                                     isLocked);
   }
+}
+
+void Guidelines::initialize (GraphicsScene &scene)
+{
+  m_guidelineFactory = new GuidelineFactory (&scene);
 }
 
 DocumentModelGuidelines Guidelines::modelGuidelines () const

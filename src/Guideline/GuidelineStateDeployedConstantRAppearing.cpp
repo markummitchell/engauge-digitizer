@@ -63,7 +63,7 @@ void GuidelineStateDeployedConstantRAppearing::handleGuidelineMode (bool visible
   if (!visible) {
     context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE);
   } else if (locked) {
-    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED);
+    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED_ACTIVE);
   }
 }
 

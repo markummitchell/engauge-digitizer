@@ -13,22 +13,26 @@
 #include "GuidelineStateDeployedConstantRAppearing.h"
 #include "GuidelineStateDeployedConstantRHide.h"
 #include "GuidelineStateDeployedConstantRHover.h"
-#include "GuidelineStateDeployedConstantRLocked.h"
+#include "GuidelineStateDeployedConstantRLockedActive.h"
+#include "GuidelineStateDeployedConstantRLockedInactive.h"
 #include "GuidelineStateDeployedConstantTActive.h"
 #include "GuidelineStateDeployedConstantTAppearing.h"
 #include "GuidelineStateDeployedConstantTHide.h"
 #include "GuidelineStateDeployedConstantTHover.h"
-#include "GuidelineStateDeployedConstantTLocked.h"
+#include "GuidelineStateDeployedConstantTLockedActive.h"
+#include "GuidelineStateDeployedConstantTLockedInactive.h"
 #include "GuidelineStateDeployedConstantXActive.h"
 #include "GuidelineStateDeployedConstantXAppearing.h"
 #include "GuidelineStateDeployedConstantXHide.h"
 #include "GuidelineStateDeployedConstantXHover.h"
-#include "GuidelineStateDeployedConstantXLocked.h"
+#include "GuidelineStateDeployedConstantXLockedActive.h"
+#include "GuidelineStateDeployedConstantXLockedInactive.h"
 #include "GuidelineStateDeployedConstantYActive.h"
 #include "GuidelineStateDeployedConstantYAppearing.h"
 #include "GuidelineStateDeployedConstantYHide.h"
 #include "GuidelineStateDeployedConstantYHover.h"
-#include "GuidelineStateDeployedConstantYLocked.h"
+#include "GuidelineStateDeployedConstantYLockedActive.h"
+#include "GuidelineStateDeployedConstantYLockedInactive.h"
 #include "GuidelineStateDiscarded.h"
 #include "GuidelineStateHandleR.h"
 #include "GuidelineStateHandleT.h"
@@ -43,31 +47,35 @@ GuidelineStateContext::GuidelineStateContext (GuidelineAbstract &guideline,
   m_guideline (guideline),
   m_guidelines (guidelines)
 {
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE        , new GuidelineStateDeployedConstantRActive        (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_APPEARING     , new GuidelineStateDeployedConstantRAppearing     (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE          , new GuidelineStateDeployedConstantRHide          (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER         , new GuidelineStateDeployedConstantRHover         (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED        , new GuidelineStateDeployedConstantRLocked        (*this));  
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE        , new GuidelineStateDeployedConstantTActive        (*this));  
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_APPEARING     , new GuidelineStateDeployedConstantTAppearing     (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HIDE          , new GuidelineStateDeployedConstantTHide          (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HOVER         , new GuidelineStateDeployedConstantTHover         (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_LOCKED        , new GuidelineStateDeployedConstantTLocked        (*this));  
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE        , new GuidelineStateDeployedConstantXActive        (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_APPEARING     , new GuidelineStateDeployedConstantXAppearing     (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HIDE          , new GuidelineStateDeployedConstantXHide          (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HOVER         , new GuidelineStateDeployedConstantXHover         (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_LOCKED        , new GuidelineStateDeployedConstantXLocked        (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE        , new GuidelineStateDeployedConstantYActive        (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_APPEARING     , new GuidelineStateDeployedConstantYAppearing     (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HIDE          , new GuidelineStateDeployedConstantYHide          (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HOVER         , new GuidelineStateDeployedConstantYHover         (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED        , new GuidelineStateDeployedConstantYLocked        (*this));   
-  m_states.insert (GUIDELINE_STATE_DISCARDED                         , new GuidelineStateDiscarded                      (*this));
-  m_states.insert (GUIDELINE_STATE_HANDLE_R                          , new GuidelineStateHandleR                        (*this));
-  m_states.insert (GUIDELINE_STATE_HANDLE_T                          , new GuidelineStateHandleT                        (*this));
-  m_states.insert (GUIDELINE_STATE_HANDLE_X                          , new GuidelineStateHandleX                        (*this));
-  m_states.insert (GUIDELINE_STATE_HANDLE_Y                          , new GuidelineStateHandleY                        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE          , new GuidelineStateDeployedConstantRActive         (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_APPEARING       , new GuidelineStateDeployedConstantRAppearing      (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE            , new GuidelineStateDeployedConstantRHide           (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER           , new GuidelineStateDeployedConstantRHover          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED_ACTIVE   , new GuidelineStateDeployedConstantRLockedActive   (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED_INACTIVE , new GuidelineStateDeployedConstantRLockedInactive (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE          , new GuidelineStateDeployedConstantTActive         (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_APPEARING       , new GuidelineStateDeployedConstantTAppearing      (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HIDE            , new GuidelineStateDeployedConstantTHide           (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HOVER           , new GuidelineStateDeployedConstantTHover          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_LOCKED_ACTIVE   , new GuidelineStateDeployedConstantTLockedActive   (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_LOCKED_INACTIVE , new GuidelineStateDeployedConstantTLockedInactive (*this));    
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE          , new GuidelineStateDeployedConstantXActive         (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_APPEARING       , new GuidelineStateDeployedConstantXAppearing      (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HIDE            , new GuidelineStateDeployedConstantXHide           (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HOVER           , new GuidelineStateDeployedConstantXHover          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_LOCKED_ACTIVE   , new GuidelineStateDeployedConstantXLockedActive   (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_LOCKED_INACTIVE , new GuidelineStateDeployedConstantXLockedInactive (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE          , new GuidelineStateDeployedConstantYActive         (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_APPEARING       , new GuidelineStateDeployedConstantYAppearing      (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HIDE            , new GuidelineStateDeployedConstantYHide           (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HOVER           , new GuidelineStateDeployedConstantYHover          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED_ACTIVE   , new GuidelineStateDeployedConstantYLockedActive   (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED_INACTIVE , new GuidelineStateDeployedConstantYLockedInactive (*this));     
+  m_states.insert (GUIDELINE_STATE_DISCARDED                           , new GuidelineStateDiscarded                       (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE_R                            , new GuidelineStateHandleR                         (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE_T                            , new GuidelineStateHandleT                         (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE_X                            , new GuidelineStateHandleX                         (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE_Y                            , new GuidelineStateHandleY                         (*this));
   ENGAUGE_ASSERT (m_states.size () == NUM_GUIDELINE_STATES);
 
   m_currentState = NUM_GUIDELINE_STATES; // Value that forces a transition right away

@@ -4,22 +4,22 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GUIDELINE_STATE_DEPLOYED_CONSTANT_X_LOCKED_H
-#define GUIDELINE_STATE_DEPLOYED_CONSTANT_X_LOCKED_H
+#ifndef GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED_INACTIVE_H
+#define GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED_INACTIVE_H
 
-#include "GuidelineStateDeployedConstantXAbstract.h"
+#include "GuidelineStateDeployedConstantYAbstract.h"
 
-/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_CONSTANT_X
-class GuidelineStateDeployedConstantXLocked : public GuidelineStateDeployedConstantXAbstract
+/// Implements guideline behavior for GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED_INACTIVE
+class GuidelineStateDeployedConstantYLockedInactive : public GuidelineStateDeployedConstantYAbstract
 {
 public:
   /// Single constructor.
-  GuidelineStateDeployedConstantXLocked(GuidelineStateContext &context);
-  virtual ~GuidelineStateDeployedConstantXLocked();
+  GuidelineStateDeployedConstantYLockedInactive(GuidelineStateContext &context);
+  virtual ~GuidelineStateDeployedConstantYLockedInactive();
 
   virtual void begin ();
   virtual bool doPaint () const;
-  virtual void end ();
+  virtual void end ();  
   virtual void handleActiveChange (bool active);
   virtual void handleGuidelineMode (bool visible,
                                     bool locked);
@@ -29,8 +29,8 @@ public:
   virtual QString stateName () const;
 
 private:
-  GuidelineStateDeployedConstantXLocked();
+  GuidelineStateDeployedConstantYLockedInactive();
 
 };
 
-#endif // GUIDELINE_STATE_DEPLOYED_CONSTANT_X_LOCKED_H
+#endif // GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED_INACTIVE_H

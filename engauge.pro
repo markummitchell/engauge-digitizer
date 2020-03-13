@@ -377,25 +377,29 @@ HEADERS  += \
     src/Guideline/GuidelineStateDeployedConstantRAppearing.h \
     src/Guideline/GuidelineStateDeployedConstantRHide.h \
     src/Guideline/GuidelineStateDeployedConstantRHover.h \
-    src/Guideline/GuidelineStateDeployedConstantRLocked.h \
+    src/Guideline/GuidelineStateDeployedConstantRLockedActive.h \
+    src/Guideline/GuidelineStateDeployedConstantRLockedInactive.h \
     src/Guideline/GuidelineStateDeployedConstantTAbstract.h \
     src/Guideline/GuidelineStateDeployedConstantTActive.h \
     src/Guideline/GuidelineStateDeployedConstantTAppearing.h \
     src/Guideline/GuidelineStateDeployedConstantTHide.h \
     src/Guideline/GuidelineStateDeployedConstantTHover.h \
-    src/Guideline/GuidelineStateDeployedConstantTLocked.h \
+    src/Guideline/GuidelineStateDeployedConstantTLockedActive.h \
+    src/Guideline/GuidelineStateDeployedConstantTLockedInactive.h \
     src/Guideline/GuidelineStateDeployedConstantXAbstract.h \
     src/Guideline/GuidelineStateDeployedConstantXActive.h \
     src/Guideline/GuidelineStateDeployedConstantXAppearing.h \
     src/Guideline/GuidelineStateDeployedConstantXHide.h \
     src/Guideline/GuidelineStateDeployedConstantXHover.h \
-    src/Guideline/GuidelineStateDeployedConstantXLocked.h \
+    src/Guideline/GuidelineStateDeployedConstantXLockedActive.h \
+    src/Guideline/GuidelineStateDeployedConstantXLockedInactive.h \
     src/Guideline/GuidelineStateDeployedConstantYAbstract.h \
     src/Guideline/GuidelineStateDeployedConstantYActive.h \
     src/Guideline/GuidelineStateDeployedConstantYAppearing.h \
     src/Guideline/GuidelineStateDeployedConstantYHide.h \
     src/Guideline/GuidelineStateDeployedConstantYHover.h \
-    src/Guideline/GuidelineStateDeployedConstantYLocked.h \
+    src/Guideline/GuidelineStateDeployedConstantYLockedActive.h \
+    src/Guideline/GuidelineStateDeployedConstantYLockedInactive.h \
     src/Guideline/GuidelineStateDiscarded.h \
     src/Guideline/GuidelineStateHandleAbstract.h \
     src/Guideline/GuidelineStateHandleR.h \
@@ -783,25 +787,29 @@ SOURCES += \
     src/Guideline/GuidelineStateDeployedConstantRAppearing.cpp \
     src/Guideline/GuidelineStateDeployedConstantRHide.cpp \
     src/Guideline/GuidelineStateDeployedConstantRHover.cpp \
-    src/Guideline/GuidelineStateDeployedConstantRLocked.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRLockedActive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRLockedInactive.cpp \
     src/Guideline/GuidelineStateDeployedConstantTAbstract.cpp \
     src/Guideline/GuidelineStateDeployedConstantTActive.cpp \
     src/Guideline/GuidelineStateDeployedConstantTAppearing.cpp \
     src/Guideline/GuidelineStateDeployedConstantTHide.cpp \
     src/Guideline/GuidelineStateDeployedConstantTHover.cpp \
-    src/Guideline/GuidelineStateDeployedConstantTLocked.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTLockedActive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTLockedInactive.cpp \
     src/Guideline/GuidelineStateDeployedConstantXAbstract.cpp \
     src/Guideline/GuidelineStateDeployedConstantXActive.cpp \
     src/Guideline/GuidelineStateDeployedConstantXAppearing.cpp \
     src/Guideline/GuidelineStateDeployedConstantXHide.cpp \
     src/Guideline/GuidelineStateDeployedConstantXHover.cpp \
-    src/Guideline/GuidelineStateDeployedConstantXLocked.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXLockedActive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXLockedInactive.cpp \
     src/Guideline/GuidelineStateDeployedConstantYAbstract.cpp \
     src/Guideline/GuidelineStateDeployedConstantYActive.cpp \
     src/Guideline/GuidelineStateDeployedConstantYAppearing.cpp \
     src/Guideline/GuidelineStateDeployedConstantYHide.cpp \
     src/Guideline/GuidelineStateDeployedConstantYHover.cpp \
-    src/Guideline/GuidelineStateDeployedConstantYLocked.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYLockedActive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYLockedInactive.cpp \
     src/Guideline/GuidelineStateDiscarded.cpp \
     src/Guideline/GuidelineStateHandleAbstract.cpp \
     src/Guideline/GuidelineStateHandleR.cpp \
