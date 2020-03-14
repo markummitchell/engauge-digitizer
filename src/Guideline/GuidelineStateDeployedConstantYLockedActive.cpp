@@ -48,11 +48,13 @@ void GuidelineStateDeployedConstantYLockedActive::handleActiveChange (bool activ
 }
 
 void GuidelineStateDeployedConstantYLockedActive::handleGuidelineMode (bool visible,
-                                                                 bool /* locked */)
+                                                                       bool locked)
 {
   // Never transition from locked state to active state on mode change
   if (!visible) {
     context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HIDE);
+  } else if (locked) {
+    context().requestStateTransition(GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED_INACTIVE);
   }
 }
 

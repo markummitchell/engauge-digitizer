@@ -87,7 +87,7 @@ QLineF GuidelineStateDeployedConstantTAbstract::pointToLine (const QPointF &posS
 
 void GuidelineStateDeployedConstantTAbstract::updateWithLatestTransformation ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantTAbstract::updateWithLatestTransformation";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateDeployedConstantTAbstract::updateWithLatestTransformation";
 
   if (!context().transformation().transformIsDefined()) {
     // Discard this Guideline immediately if the transformation transitions to undefined

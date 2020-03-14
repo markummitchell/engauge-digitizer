@@ -70,7 +70,9 @@ class Transformation;
 ///   DeployedConstantRActive -> DeployedConstantRLockedInactive [label = EnterLockedMode];
 ///   DeployedConstantRLockedActive -> DeployedConstantRActive [label = EnterSelectMode];
 ///   DeployedConstantRLockedInactive -> DeployedConstantRActive [label = EnterEditMode];
-///
+///   DeployedConstantRLockedActive -> DeployedConstantRLockedInactive [label = EnterLockedMode];
+///   DeployedConstantRLockedInactive -> DeployedConstantRLockedActive [label = EnterEditMode];
+///   
 ///   DeployedConstantTHover -> DeployedConstantTActive [label = HoverLeave];
 ///   DeployedConstantTHover -> HandleT [label = MouseClick];
 ///   DeployedConstantTActive -> Discarded [label = DragOffscreen];
@@ -82,6 +84,8 @@ class Transformation;
 ///   DeployedConstantTActive -> DeployedConstantTLockedInactive [label = EnterLockedMode];
 ///   DeployedConstantTLockedActive -> DeployedConstantTActive [label = EnterSelectMode];
 ///   DeployedConstantTLockedInactive -> DeployedConstantTActive [label = EnterEditMode];
+///   DeployedConstantTLockedActive -> DeployedConstantTLockedInactive [label = EnterLockedMode];
+///   DeployedConstantTLockedInactive -> DeployedConstantTLockedActive [label = EnterEditMode];
 ///
 ///   DeployedConstantXHover -> DeployedConstantXActive [label = HoverLeave];
 ///   DeployedConstantXHover -> HandleX [label = MouseClick];
@@ -94,6 +98,8 @@ class Transformation;
 ///   DeployedConstantXActive -> DeployedConstantXLockedInactive [label = EnterLockedMode];
 ///   DeployedConstantXLockedActive -> DeployedConstantXActive [label = EnterSelectMode];
 ///   DeployedConstantXLockedInactive -> DeployedConstantXActive [label = EnterEditMode];
+///   DeployedConstantXLockedActive -> DeployedConstantXLockedInactive [label = EnterLockedMode];
+///   DeployedConstantXLockedInactive -> DeployedConstantXLockedActive [label = EnterEditMode];
 ///
 ///   DeployedConstantYHover -> DeployedConstantYActive [label = HoverLeave];
 ///   DeployedConstantYHover -> HandleY [label = MouseClick];
@@ -106,6 +112,8 @@ class Transformation;
 ///   DeployedConstantYActive -> DeployedConstantYLockedInactive [label = EnterLockedMode];
 ///   DeployedConstantYLockedActive -> DeployedConstantYActive [label = EnterSelectMode];
 ///   DeployedConstantYLockedInactive -> DeployedConstantYActive [label = EnterEditMode];
+///   DeployedConstantYLockedActive -> DeployedConstantYLockedInactive [label = EnterLockedMode];
+///   DeployedConstantYLockedInactive -> DeployedConstantYLockedActive [label = EnterEditMode];
 ///
 ///   HandleR -> Discarded [label = MouseRelease];
 ///   HandleT -> Discarded [label = MouseRelease];
