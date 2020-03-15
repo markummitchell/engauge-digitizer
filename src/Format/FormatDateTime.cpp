@@ -383,10 +383,14 @@ void FormatDateTime::loadFormatsParseIncomplete()
             << "\\d{4} [a-zA-Z]{1,12}"
             << "\\d{4} [a-zA-Z]{1,12} ";
   yearMonthDay << "\\d{4}/\\d{1,2}/\\d{1,2}"
+               << "\\d{4}/\\d{1,2}/\\d{1,2} "    
                << "\\d{4}/\\d{1,2}-\\d{1,2}"
+               << "\\d{4}/\\d{1,2}-\\d{1,2} "    
                << "\\d{4} \\d{1,2} \\d{1,2}"
                << "\\d{4}/[a-zA-Z]{1,12}/\\d{1,2}"
-               << "\\d{4}-[a-zA-Z]{1,12}-\\d{1,2}";
+               << "\\d{4}/[a-zA-Z]{1,12}/\\d{1,2} "    
+               << "\\d{4}-[a-zA-Z]{1,12}-\\d{1,2}"
+               << "\\d{4}-[a-zA-Z]{1,12}-\\d{1,2} ";    
 
   // For every entry, the possible states leading up to the Acceptable states in m_formatsDateParseIncomplete are all included.
   // Potential day-month ambiguity for COORD_UNITS_DATE_SKIP gets treated as month/day.
