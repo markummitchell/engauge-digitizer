@@ -62,8 +62,12 @@ GuidelineAbstract *GuidelineFactory::createGuideline (Guidelines &guidelines,
 void GuidelineFactory::createEllipseMap ()
 {
   // All other states get a line instead of an ellipse
-  m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE] = true;
-  m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_APPEARING] = true;
-  m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE] = true;
-  m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER] = true;
+  m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_EDIT] = true;
+  m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_EDIT_APPEARING] = true;
+  m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_EDIT_HOVER] = true;  
+  m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_HIDE] = true;
+  m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_LOCK] = true;
+  m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_UNSELECT_EDIT] = true;
+  m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_UNSELECT_HIDE] = true;
+  m_mapStatesWithEllipse [GUIDELINE_STATE_DEPLOYED_CONSTANT_R_UNSELECT_LOCK] = true;  
 }

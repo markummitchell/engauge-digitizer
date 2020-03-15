@@ -9,30 +9,38 @@
 #include "Guidelines.h"
 #include "GuidelineStateAbstractBase.h"
 #include "GuidelineStateContext.h"
-#include "GuidelineStateDeployedConstantRActive.h"
-#include "GuidelineStateDeployedConstantRAppearing.h"
-#include "GuidelineStateDeployedConstantRHide.h"
-#include "GuidelineStateDeployedConstantRHover.h"
-#include "GuidelineStateDeployedConstantRLockedActive.h"
-#include "GuidelineStateDeployedConstantRLockedInactive.h"
-#include "GuidelineStateDeployedConstantTActive.h"
-#include "GuidelineStateDeployedConstantTAppearing.h"
-#include "GuidelineStateDeployedConstantTHide.h"
-#include "GuidelineStateDeployedConstantTHover.h"
-#include "GuidelineStateDeployedConstantTLockedActive.h"
-#include "GuidelineStateDeployedConstantTLockedInactive.h"
-#include "GuidelineStateDeployedConstantXActive.h"
-#include "GuidelineStateDeployedConstantXAppearing.h"
-#include "GuidelineStateDeployedConstantXHide.h"
-#include "GuidelineStateDeployedConstantXHover.h"
-#include "GuidelineStateDeployedConstantXLockedActive.h"
-#include "GuidelineStateDeployedConstantXLockedInactive.h"
-#include "GuidelineStateDeployedConstantYActive.h"
-#include "GuidelineStateDeployedConstantYAppearing.h"
-#include "GuidelineStateDeployedConstantYHide.h"
-#include "GuidelineStateDeployedConstantYHover.h"
-#include "GuidelineStateDeployedConstantYLockedActive.h"
-#include "GuidelineStateDeployedConstantYLockedInactive.h"
+#include "GuidelineStateDeployedConstantRSelectEdit.h"
+#include "GuidelineStateDeployedConstantRSelectEditAppearing.h"
+#include "GuidelineStateDeployedConstantRSelectEditHover.h"
+#include "GuidelineStateDeployedConstantRSelectHide.h"
+#include "GuidelineStateDeployedConstantRSelectLock.h"
+#include "GuidelineStateDeployedConstantRUnselectEdit.h"
+#include "GuidelineStateDeployedConstantRUnselectHide.h"
+#include "GuidelineStateDeployedConstantRUnselectLock.h"
+#include "GuidelineStateDeployedConstantTSelectEdit.h"
+#include "GuidelineStateDeployedConstantTSelectEditAppearing.h"
+#include "GuidelineStateDeployedConstantTSelectEditHover.h"
+#include "GuidelineStateDeployedConstantTSelectHide.h"
+#include "GuidelineStateDeployedConstantTSelectLock.h"
+#include "GuidelineStateDeployedConstantTUnselectEdit.h"
+#include "GuidelineStateDeployedConstantTUnselectHide.h"
+#include "GuidelineStateDeployedConstantTUnselectLock.h"
+#include "GuidelineStateDeployedConstantXSelectEdit.h"
+#include "GuidelineStateDeployedConstantXSelectEditAppearing.h"
+#include "GuidelineStateDeployedConstantXSelectEditHover.h"
+#include "GuidelineStateDeployedConstantXSelectHide.h"
+#include "GuidelineStateDeployedConstantXSelectLock.h"
+#include "GuidelineStateDeployedConstantXUnselectEdit.h"
+#include "GuidelineStateDeployedConstantXUnselectHide.h"
+#include "GuidelineStateDeployedConstantXUnselectLock.h"
+#include "GuidelineStateDeployedConstantYSelectEdit.h"
+#include "GuidelineStateDeployedConstantYSelectEditAppearing.h"
+#include "GuidelineStateDeployedConstantYSelectEditHover.h"
+#include "GuidelineStateDeployedConstantYSelectHide.h"
+#include "GuidelineStateDeployedConstantYSelectLock.h"
+#include "GuidelineStateDeployedConstantYUnselectEdit.h"
+#include "GuidelineStateDeployedConstantYUnselectHide.h"
+#include "GuidelineStateDeployedConstantYUnselectLock.h"
 #include "GuidelineStateDiscarded.h"
 #include "GuidelineStateHandleR.h"
 #include "GuidelineStateHandleT.h"
@@ -47,35 +55,43 @@ GuidelineStateContext::GuidelineStateContext (GuidelineAbstract &guideline,
   m_guideline (guideline),
   m_guidelines (guidelines)
 {
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE          , new GuidelineStateDeployedConstantRActive         (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_APPEARING       , new GuidelineStateDeployedConstantRAppearing      (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HIDE            , new GuidelineStateDeployedConstantRHide           (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_HOVER           , new GuidelineStateDeployedConstantRHover          (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED_ACTIVE   , new GuidelineStateDeployedConstantRLockedActive   (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_LOCKED_INACTIVE , new GuidelineStateDeployedConstantRLockedInactive (*this));  
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE          , new GuidelineStateDeployedConstantTActive         (*this));  
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_APPEARING       , new GuidelineStateDeployedConstantTAppearing      (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HIDE            , new GuidelineStateDeployedConstantTHide           (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_HOVER           , new GuidelineStateDeployedConstantTHover          (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_LOCKED_ACTIVE   , new GuidelineStateDeployedConstantTLockedActive   (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_LOCKED_INACTIVE , new GuidelineStateDeployedConstantTLockedInactive (*this));    
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE          , new GuidelineStateDeployedConstantXActive         (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_APPEARING       , new GuidelineStateDeployedConstantXAppearing      (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HIDE            , new GuidelineStateDeployedConstantXHide           (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_HOVER           , new GuidelineStateDeployedConstantXHover          (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_LOCKED_ACTIVE   , new GuidelineStateDeployedConstantXLockedActive   (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_LOCKED_INACTIVE , new GuidelineStateDeployedConstantXLockedInactive (*this));  
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE          , new GuidelineStateDeployedConstantYActive         (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_APPEARING       , new GuidelineStateDeployedConstantYAppearing      (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HIDE            , new GuidelineStateDeployedConstantYHide           (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_HOVER           , new GuidelineStateDeployedConstantYHover          (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED_ACTIVE   , new GuidelineStateDeployedConstantYLockedActive   (*this));
-  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_LOCKED_INACTIVE , new GuidelineStateDeployedConstantYLockedInactive (*this));     
-  m_states.insert (GUIDELINE_STATE_DISCARDED                           , new GuidelineStateDiscarded                       (*this));
-  m_states.insert (GUIDELINE_STATE_HANDLE_R                            , new GuidelineStateHandleR                         (*this));
-  m_states.insert (GUIDELINE_STATE_HANDLE_T                            , new GuidelineStateHandleT                         (*this));
-  m_states.insert (GUIDELINE_STATE_HANDLE_X                            , new GuidelineStateHandleX                         (*this));
-  m_states.insert (GUIDELINE_STATE_HANDLE_Y                            , new GuidelineStateHandleY                         (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_EDIT          , new GuidelineStateDeployedConstantRSelectEdit          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_EDIT_APPEARING, new GuidelineStateDeployedConstantRSelectEditAppearing (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_EDIT_HOVER    , new GuidelineStateDeployedConstantRSelectEditHover     (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_HIDE          , new GuidelineStateDeployedConstantRSelectHide          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_LOCK          , new GuidelineStateDeployedConstantRSelectLock          (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_UNSELECT_EDIT        , new GuidelineStateDeployedConstantRUnselectEdit        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_UNSELECT_HIDE        , new GuidelineStateDeployedConstantRUnselectHide        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_UNSELECT_LOCK        , new GuidelineStateDeployedConstantRUnselectLock        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_SELECT_EDIT          , new GuidelineStateDeployedConstantTSelectEdit          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_SELECT_EDIT_APPEARING, new GuidelineStateDeployedConstantTSelectEditAppearing (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_SELECT_EDIT_HOVER    , new GuidelineStateDeployedConstantTSelectEditHover     (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_SELECT_HIDE          , new GuidelineStateDeployedConstantTSelectHide          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_SELECT_LOCK          , new GuidelineStateDeployedConstantTSelectLock          (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_UNSELECT_EDIT        , new GuidelineStateDeployedConstantTUnselectEdit        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_UNSELECT_HIDE        , new GuidelineStateDeployedConstantTUnselectHide        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_T_UNSELECT_LOCK        , new GuidelineStateDeployedConstantTUnselectLock        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_SELECT_EDIT          , new GuidelineStateDeployedConstantXSelectEdit          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_SELECT_EDIT_APPEARING, new GuidelineStateDeployedConstantXSelectEditAppearing (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_SELECT_EDIT_HOVER    , new GuidelineStateDeployedConstantXSelectEditHover     (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_SELECT_HIDE          , new GuidelineStateDeployedConstantXSelectHide          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_SELECT_LOCK          , new GuidelineStateDeployedConstantXSelectLock          (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_UNSELECT_EDIT        , new GuidelineStateDeployedConstantXUnselectEdit        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_UNSELECT_HIDE        , new GuidelineStateDeployedConstantXUnselectHide        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_X_UNSELECT_LOCK        , new GuidelineStateDeployedConstantXUnselectLock        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_SELECT_EDIT          , new GuidelineStateDeployedConstantYSelectEdit          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_SELECT_EDIT_APPEARING, new GuidelineStateDeployedConstantYSelectEditAppearing (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_SELECT_EDIT_HOVER    , new GuidelineStateDeployedConstantYSelectEditHover     (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_SELECT_HIDE          , new GuidelineStateDeployedConstantYSelectHide          (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_SELECT_LOCK          , new GuidelineStateDeployedConstantYSelectLock          (*this));  
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_UNSELECT_EDIT        , new GuidelineStateDeployedConstantYUnselectEdit        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_UNSELECT_HIDE        , new GuidelineStateDeployedConstantYUnselectHide        (*this));
+  m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_UNSELECT_LOCK        , new GuidelineStateDeployedConstantYUnselectLock        (*this));  
+  m_states.insert (GUIDELINE_STATE_DISCARDED                                , new GuidelineStateDiscarded                       (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE_R                                 , new GuidelineStateHandleR                         (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE_T                                 , new GuidelineStateHandleT                         (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE_X                                 , new GuidelineStateHandleX                         (*this));
+  m_states.insert (GUIDELINE_STATE_HANDLE_Y                                 , new GuidelineStateHandleY                         (*this));
   ENGAUGE_ASSERT (m_states.size () == NUM_GUIDELINE_STATES);
 
   m_currentState = NUM_GUIDELINE_STATES; // Value that forces a transition right away

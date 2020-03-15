@@ -331,33 +331,41 @@ HEADERS  += \
     Guideline/GuidelineStateContext.h \
     Guideline/GuidelineStateDeployedAbstract.h \
     Guideline/GuidelineStateDeployedConstantRAbstract.h \
-    Guideline/GuidelineStateDeployedConstantRActive.h \
-    Guideline/GuidelineStateDeployedConstantRAppearing.h \
-    Guideline/GuidelineStateDeployedConstantRHide.h \
-    Guideline/GuidelineStateDeployedConstantRHover.h \
-    Guideline/GuidelineStateDeployedConstantRLockedActive.h \
-    Guideline/GuidelineStateDeployedConstantRLockedInactive.h \
+    Guideline/GuidelineStateDeployedConstantRSelectEditAppearing.h \
+    Guideline/GuidelineStateDeployedConstantRSelectEdit.h \
+    Guideline/GuidelineStateDeployedConstantRSelectEditHover.h \
+    Guideline/GuidelineStateDeployedConstantRSelectHide.h \
+    Guideline/GuidelineStateDeployedConstantRSelectLock.h \
+    Guideline/GuidelineStateDeployedConstantRUnselectEdit.h \
+    Guideline/GuidelineStateDeployedConstantRUnselectHide.h \
+    Guideline/GuidelineStateDeployedConstantRUnselectLock.h \
     Guideline/GuidelineStateDeployedConstantTAbstract.h \
-    Guideline/GuidelineStateDeployedConstantTActive.h \
-    Guideline/GuidelineStateDeployedConstantTAppearing.h \
-    Guideline/GuidelineStateDeployedConstantTHide.h \
-    Guideline/GuidelineStateDeployedConstantTHover.h \
-    Guideline/GuidelineStateDeployedConstantTLockedActive.h \
-    Guideline/GuidelineStateDeployedConstantTLockedInactive.h \
+    Guideline/GuidelineStateDeployedConstantTSelectEditAppearing.h \
+    Guideline/GuidelineStateDeployedConstantTSelectEdit.h \
+    Guideline/GuidelineStateDeployedConstantTSelectEditHover.h \
+    Guideline/GuidelineStateDeployedConstantTSelectHide.h \
+    Guideline/GuidelineStateDeployedConstantTSelectLock.h \
+    Guideline/GuidelineStateDeployedConstantTUnselectEdit.h \
+    Guideline/GuidelineStateDeployedConstantTUnselectHide.h \
+    Guideline/GuidelineStateDeployedConstantTUnselectLock.h \
     Guideline/GuidelineStateDeployedConstantXAbstract.h \
-    Guideline/GuidelineStateDeployedConstantXActive.h \
-    Guideline/GuidelineStateDeployedConstantXAppearing.h \
-    Guideline/GuidelineStateDeployedConstantXHide.h \
-    Guideline/GuidelineStateDeployedConstantXHover.h \
-    Guideline/GuidelineStateDeployedConstantXLockedActive.h \
-    Guideline/GuidelineStateDeployedConstantXLockedInactive.h \
+    Guideline/GuidelineStateDeployedConstantXSelectEditAppearing.h \
+    Guideline/GuidelineStateDeployedConstantXSelectEdit.h \
+    Guideline/GuidelineStateDeployedConstantXSelectEditHover.h \
+    Guideline/GuidelineStateDeployedConstantXSelectHide.h \
+    Guideline/GuidelineStateDeployedConstantXSelectLock.h \
+    Guideline/GuidelineStateDeployedConstantXUnselectEdit.h \
+    Guideline/GuidelineStateDeployedConstantXUnselectHide.h \
+    Guideline/GuidelineStateDeployedConstantXUnselectLock.h \
     Guideline/GuidelineStateDeployedConstantYAbstract.h \
-    Guideline/GuidelineStateDeployedConstantYActive.h \
-    Guideline/GuidelineStateDeployedConstantYAppearing.h \
-    Guideline/GuidelineStateDeployedConstantYHide.h \
-    Guideline/GuidelineStateDeployedConstantYHover.h \
-    Guideline/GuidelineStateDeployedConstantYLockedActive.h \
-    Guideline/GuidelineStateDeployedConstantYLockedInactive.h \
+    Guideline/GuidelineStateDeployedConstantYSelectEditAppearing.h \
+    Guideline/GuidelineStateDeployedConstantYSelectEdit.h \
+    Guideline/GuidelineStateDeployedConstantYSelectEditHover.h \
+    Guideline/GuidelineStateDeployedConstantYSelectHide.h \
+    Guideline/GuidelineStateDeployedConstantYSelectLock.h \
+    Guideline/GuidelineStateDeployedConstantYUnselectEdit.h \
+    Guideline/GuidelineStateDeployedConstantYUnselectHide.h \
+    Guideline/GuidelineStateDeployedConstantYUnselectLock.h \
     Guideline/GuidelineStateDiscarded.h \
     Guideline/GuidelineStateHandleAbstract.h \
     Guideline/GuidelineStateHandleR.h \
@@ -745,33 +753,41 @@ SOURCES += \
     Guideline/GuidelineStateContext.cpp \
     Guideline/GuidelineStateDeployedAbstract.cpp \
     Guideline/GuidelineStateDeployedConstantRAbstract.cpp \
-    Guideline/GuidelineStateDeployedConstantRActive.cpp \
-    Guideline/GuidelineStateDeployedConstantRAppearing.cpp \
-    Guideline/GuidelineStateDeployedConstantRHide.cpp \
-    Guideline/GuidelineStateDeployedConstantRHover.cpp \
-    Guideline/GuidelineStateDeployedConstantRLockedActive.cpp \
-    Guideline/GuidelineStateDeployedConstantRLockedInactive.cpp \
+    Guideline/GuidelineStateDeployedConstantRSelectEditAppearing.cpp \
+    Guideline/GuidelineStateDeployedConstantRSelectEdit.cpp \
+    Guideline/GuidelineStateDeployedConstantRSelectEditHover.cpp \
+    Guideline/GuidelineStateDeployedConstantRSelectHide.cpp \
+    Guideline/GuidelineStateDeployedConstantRSelectLock.cpp \
+    Guideline/GuidelineStateDeployedConstantRUnselectEdit.cpp \
+    Guideline/GuidelineStateDeployedConstantRUnselectHide.cpp \
+    Guideline/GuidelineStateDeployedConstantRUnselectLock.cpp \
     Guideline/GuidelineStateDeployedConstantTAbstract.cpp \
-    Guideline/GuidelineStateDeployedConstantTActive.cpp \
-    Guideline/GuidelineStateDeployedConstantTAppearing.cpp \
-    Guideline/GuidelineStateDeployedConstantTHide.cpp \
-    Guideline/GuidelineStateDeployedConstantTHover.cpp \
-    Guideline/GuidelineStateDeployedConstantTLockedActive.cpp \
-    Guideline/GuidelineStateDeployedConstantTLockedInactive.cpp \
+    Guideline/GuidelineStateDeployedConstantTSelectEditAppearing.cpp \
+    Guideline/GuidelineStateDeployedConstantTSelectEdit.cpp \
+    Guideline/GuidelineStateDeployedConstantTSelectEditHover.cpp \
+    Guideline/GuidelineStateDeployedConstantTSelectHide.cpp \
+    Guideline/GuidelineStateDeployedConstantTSelectLock.cpp \
+    Guideline/GuidelineStateDeployedConstantTUnselectEdit.cpp \
+    Guideline/GuidelineStateDeployedConstantTUnselectHide.cpp \
+    Guideline/GuidelineStateDeployedConstantTUnselectLock.cpp \
     Guideline/GuidelineStateDeployedConstantXAbstract.cpp \
-    Guideline/GuidelineStateDeployedConstantXActive.cpp \
-    Guideline/GuidelineStateDeployedConstantXAppearing.cpp \
-    Guideline/GuidelineStateDeployedConstantXHide.cpp \
-    Guideline/GuidelineStateDeployedConstantXHover.cpp \
-    Guideline/GuidelineStateDeployedConstantXLockedActive.cpp \
-    Guideline/GuidelineStateDeployedConstantXLockedInactive.cpp \
+    Guideline/GuidelineStateDeployedConstantXSelectEditAppearing.cpp \
+    Guideline/GuidelineStateDeployedConstantXSelectEdit.cpp \
+    Guideline/GuidelineStateDeployedConstantXSelectEditHover.cpp \
+    Guideline/GuidelineStateDeployedConstantXSelectHide.cpp \
+    Guideline/GuidelineStateDeployedConstantXSelectLock.cpp \
+    Guideline/GuidelineStateDeployedConstantXUnselectEdit.cpp \
+    Guideline/GuidelineStateDeployedConstantXUnselectHide.cpp \
+    Guideline/GuidelineStateDeployedConstantXUnselectLock.cpp \
     Guideline/GuidelineStateDeployedConstantYAbstract.cpp \
-    Guideline/GuidelineStateDeployedConstantYActive.cpp \
-    Guideline/GuidelineStateDeployedConstantYAppearing.cpp \
-    Guideline/GuidelineStateDeployedConstantYHide.cpp \
-    Guideline/GuidelineStateDeployedConstantYHover.cpp \
-    Guideline/GuidelineStateDeployedConstantYLockedActive.cpp \
-    Guideline/GuidelineStateDeployedConstantYLockedInactive.cpp \
+    Guideline/GuidelineStateDeployedConstantYSelectEditAppearing.cpp \
+    Guideline/GuidelineStateDeployedConstantYSelectEdit.cpp \
+    Guideline/GuidelineStateDeployedConstantYSelectEditHover.cpp \
+    Guideline/GuidelineStateDeployedConstantYSelectHide.cpp \
+    Guideline/GuidelineStateDeployedConstantYSelectLock.cpp \
+    Guideline/GuidelineStateDeployedConstantYUnselectEdit.cpp \
+    Guideline/GuidelineStateDeployedConstantYUnselectHide.cpp \
+    Guideline/GuidelineStateDeployedConstantYUnselectLock.cpp \
     Guideline/GuidelineStateDiscarded.cpp \
     Guideline/GuidelineStateHandleAbstract.cpp \
     Guideline/GuidelineStateHandleR.cpp \

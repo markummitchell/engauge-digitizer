@@ -68,7 +68,7 @@ void GuidelineStateHandleY::handleMouseRelease (const QPointF &posScene)
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineStateHandleY::handleMouseRelease";
 
   context().guideline().sacrificeHandleAndVisibleGuidelines(posScene,
-                                                            GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE);
+                                                            GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_SELECT_EDIT);
   context().requestStateTransition (GUIDELINE_STATE_DISCARDED);
 }
 

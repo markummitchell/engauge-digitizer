@@ -99,7 +99,7 @@ void Guidelines::createGuidelineR (const QString &identifier,
                                    double r)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_R_APPEARING);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_EDIT_APPEARING);
   if (guideline) {
     guideline->updateGeometry (r);
   }
@@ -111,7 +111,7 @@ void Guidelines::createGuidelineR (const QString &identifier,
                                    const QPointF &posScreen)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_R_APPEARING);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_EDIT_APPEARING);
   if (guideline) {
     guideline->updateGeometry (posScreen);
   }
@@ -123,7 +123,7 @@ void Guidelines::createGuidelineT (const QString &identifier,
                                    double t)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_T_APPEARING);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_T_SELECT_EDIT_APPEARING);
   if (guideline) {
     guideline->updateGeometry (t);
   }
@@ -135,7 +135,7 @@ void Guidelines::createGuidelineT (const QString &identifier,
                                    const QPointF &posScreen)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_T_APPEARING);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_T_SELECT_EDIT_APPEARING);
   if (guideline) {
     guideline->updateGeometry (posScreen);
   }
@@ -147,7 +147,7 @@ void Guidelines::createGuidelineX (const QString &identifier,
                                    double x)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_X_APPEARING);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_X_SELECT_EDIT_APPEARING);
   if (guideline) {
     guideline->updateGeometry (x);
   }
@@ -159,7 +159,7 @@ void Guidelines::createGuidelineX (const QString &identifier,
                                    const QPointF &posScreen)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_X_APPEARING);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_X_SELECT_EDIT_APPEARING);
   if (guideline) {
     guideline->updateGeometry (posScreen);
   }
@@ -171,7 +171,7 @@ void Guidelines::createGuidelineY (const QString &identifier,
                                    double y)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_APPEARING);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_SELECT_EDIT_APPEARING);
   if (guideline) {
     guideline->updateGeometry (y);
   }
@@ -183,7 +183,7 @@ void Guidelines::createGuidelineY (const QString &identifier,
                                    const QPointF &posScreen)
 {
   GuidelineAbstract *guideline = createGuideline (identifier,
-                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_APPEARING);
+                                                  GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_SELECT_EDIT_APPEARING);
   if (guideline) {
     guideline->updateGeometry (posScreen);
   }
@@ -202,22 +202,22 @@ void Guidelines::createReplacementGuideline (const QString &identifierReplaced,
 
   // And in with the new
   switch (guidelineStateForReplacement) {
-  case GUIDELINE_STATE_DEPLOYED_CONSTANT_R_ACTIVE:
+  case GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_EDIT:
     createGuidelineR (identifierReplaced,
                       newValue);
     break;
 
-  case GUIDELINE_STATE_DEPLOYED_CONSTANT_T_ACTIVE:
+  case GUIDELINE_STATE_DEPLOYED_CONSTANT_T_SELECT_EDIT:
     createGuidelineT(identifierReplaced,
                      newValue);
     break;
 
-  case GUIDELINE_STATE_DEPLOYED_CONSTANT_X_ACTIVE:
+  case GUIDELINE_STATE_DEPLOYED_CONSTANT_X_SELECT_EDIT:
     createGuidelineX(identifierReplaced,
                      newValue);
     break;
 
-  case GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_ACTIVE:
+  case GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_SELECT_EDIT:
     createGuidelineY(identifierReplaced,
                      newValue);
     break;

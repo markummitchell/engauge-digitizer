@@ -373,33 +373,41 @@ HEADERS  += \
     src/Guideline/GuidelineStateContext.h \
     src/Guideline/GuidelineStateDeployedAbstract.h \
     src/Guideline/GuidelineStateDeployedConstantRAbstract.h \
-    src/Guideline/GuidelineStateDeployedConstantRActive.h \
-    src/Guideline/GuidelineStateDeployedConstantRAppearing.h \
-    src/Guideline/GuidelineStateDeployedConstantRHide.h \
-    src/Guideline/GuidelineStateDeployedConstantRHover.h \
-    src/Guideline/GuidelineStateDeployedConstantRLockedActive.h \
-    src/Guideline/GuidelineStateDeployedConstantRLockedInactive.h \
+    src/Guideline/GuidelineStateDeployedConstantRSelectEditAppearing.h \
+    src/Guideline/GuidelineStateDeployedConstantRSelectEdit.h \
+    src/Guideline/GuidelineStateDeployedConstantRSelectEditHover.h \
+    src/Guideline/GuidelineStateDeployedConstantRSelectHide.h \
+    src/Guideline/GuidelineStateDeployedConstantRSelectLock.h \
+    src/Guideline/GuidelineStateDeployedConstantRUnselectEdit.h \
+    src/Guideline/GuidelineStateDeployedConstantRUnselectHide.h \
+    src/Guideline/GuidelineStateDeployedConstantRUnselectLock.h \
     src/Guideline/GuidelineStateDeployedConstantTAbstract.h \
-    src/Guideline/GuidelineStateDeployedConstantTActive.h \
-    src/Guideline/GuidelineStateDeployedConstantTAppearing.h \
-    src/Guideline/GuidelineStateDeployedConstantTHide.h \
-    src/Guideline/GuidelineStateDeployedConstantTHover.h \
-    src/Guideline/GuidelineStateDeployedConstantTLockedActive.h \
-    src/Guideline/GuidelineStateDeployedConstantTLockedInactive.h \
+    src/Guideline/GuidelineStateDeployedConstantTSelectEditAppearing.h \
+    src/Guideline/GuidelineStateDeployedConstantTSelectEdit.h \
+    src/Guideline/GuidelineStateDeployedConstantTSelectEditHover.h \
+    src/Guideline/GuidelineStateDeployedConstantTSelectHide.h \
+    src/Guideline/GuidelineStateDeployedConstantTSelectLock.h \
+    src/Guideline/GuidelineStateDeployedConstantTUnselectEdit.h \
+    src/Guideline/GuidelineStateDeployedConstantTUnselectHide.h \
+    src/Guideline/GuidelineStateDeployedConstantTUnselectLock.h \
     src/Guideline/GuidelineStateDeployedConstantXAbstract.h \
-    src/Guideline/GuidelineStateDeployedConstantXActive.h \
-    src/Guideline/GuidelineStateDeployedConstantXAppearing.h \
-    src/Guideline/GuidelineStateDeployedConstantXHide.h \
-    src/Guideline/GuidelineStateDeployedConstantXHover.h \
-    src/Guideline/GuidelineStateDeployedConstantXLockedActive.h \
-    src/Guideline/GuidelineStateDeployedConstantXLockedInactive.h \
+    src/Guideline/GuidelineStateDeployedConstantXSelectEditAppearing.h \
+    src/Guideline/GuidelineStateDeployedConstantXSelectEdit.h \
+    src/Guideline/GuidelineStateDeployedConstantXSelectEditHover.h \
+    src/Guideline/GuidelineStateDeployedConstantXSelectHide.h \
+    src/Guideline/GuidelineStateDeployedConstantXSelectLock.h \
+    src/Guideline/GuidelineStateDeployedConstantXUnselectEdit.h \
+    src/Guideline/GuidelineStateDeployedConstantXUnselectHide.h \
+    src/Guideline/GuidelineStateDeployedConstantXUnselectLock.h \
     src/Guideline/GuidelineStateDeployedConstantYAbstract.h \
-    src/Guideline/GuidelineStateDeployedConstantYActive.h \
-    src/Guideline/GuidelineStateDeployedConstantYAppearing.h \
-    src/Guideline/GuidelineStateDeployedConstantYHide.h \
-    src/Guideline/GuidelineStateDeployedConstantYHover.h \
-    src/Guideline/GuidelineStateDeployedConstantYLockedActive.h \
-    src/Guideline/GuidelineStateDeployedConstantYLockedInactive.h \
+    src/Guideline/GuidelineStateDeployedConstantYSelectEditAppearing.h \
+    src/Guideline/GuidelineStateDeployedConstantYSelectEdit.h \
+    src/Guideline/GuidelineStateDeployedConstantYSelectEditHover.h \
+    src/Guideline/GuidelineStateDeployedConstantYSelectHide.h \
+    src/Guideline/GuidelineStateDeployedConstantYSelectLock.h \
+    src/Guideline/GuidelineStateDeployedConstantYUnselectEdit.h \
+    src/Guideline/GuidelineStateDeployedConstantYUnselectHide.h \
+    src/Guideline/GuidelineStateDeployedConstantYUnselectLock.h \
     src/Guideline/GuidelineStateDiscarded.h \
     src/Guideline/GuidelineStateHandleAbstract.h \
     src/Guideline/GuidelineStateHandleR.h \
@@ -783,33 +791,41 @@ SOURCES += \
     src/Guideline/GuidelineStateContext.cpp \
     src/Guideline/GuidelineStateDeployedAbstract.cpp \
     src/Guideline/GuidelineStateDeployedConstantRAbstract.cpp \
-    src/Guideline/GuidelineStateDeployedConstantRActive.cpp \
-    src/Guideline/GuidelineStateDeployedConstantRAppearing.cpp \
-    src/Guideline/GuidelineStateDeployedConstantRHide.cpp \
-    src/Guideline/GuidelineStateDeployedConstantRHover.cpp \
-    src/Guideline/GuidelineStateDeployedConstantRLockedActive.cpp \
-    src/Guideline/GuidelineStateDeployedConstantRLockedInactive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRSelectEditAppearing.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRSelectEdit.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRSelectEditHover.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRSelectHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRSelectLock.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRUnselectEdit.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRUnselectHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantRUnselectLock.cpp \
     src/Guideline/GuidelineStateDeployedConstantTAbstract.cpp \
-    src/Guideline/GuidelineStateDeployedConstantTActive.cpp \
-    src/Guideline/GuidelineStateDeployedConstantTAppearing.cpp \
-    src/Guideline/GuidelineStateDeployedConstantTHide.cpp \
-    src/Guideline/GuidelineStateDeployedConstantTHover.cpp \
-    src/Guideline/GuidelineStateDeployedConstantTLockedActive.cpp \
-    src/Guideline/GuidelineStateDeployedConstantTLockedInactive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTSelectEditAppearing.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTSelectEdit.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTSelectEditHover.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTSelectHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTSelectLock.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTUnselectEdit.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTUnselectHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantTUnselectLock.cpp \
     src/Guideline/GuidelineStateDeployedConstantXAbstract.cpp \
-    src/Guideline/GuidelineStateDeployedConstantXActive.cpp \
-    src/Guideline/GuidelineStateDeployedConstantXAppearing.cpp \
-    src/Guideline/GuidelineStateDeployedConstantXHide.cpp \
-    src/Guideline/GuidelineStateDeployedConstantXHover.cpp \
-    src/Guideline/GuidelineStateDeployedConstantXLockedActive.cpp \
-    src/Guideline/GuidelineStateDeployedConstantXLockedInactive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXSelectEditAppearing.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXSelectEdit.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXSelectEditHover.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXSelectHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXSelectLock.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXUnselectEdit.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXUnselectHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantXUnselectLock.cpp \
     src/Guideline/GuidelineStateDeployedConstantYAbstract.cpp \
-    src/Guideline/GuidelineStateDeployedConstantYActive.cpp \
-    src/Guideline/GuidelineStateDeployedConstantYAppearing.cpp \
-    src/Guideline/GuidelineStateDeployedConstantYHide.cpp \
-    src/Guideline/GuidelineStateDeployedConstantYHover.cpp \
-    src/Guideline/GuidelineStateDeployedConstantYLockedActive.cpp \
-    src/Guideline/GuidelineStateDeployedConstantYLockedInactive.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYSelectEditAppearing.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYSelectEdit.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYSelectEditHover.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYSelectHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYSelectLock.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYUnselectEdit.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYUnselectHide.cpp \
+    src/Guideline/GuidelineStateDeployedConstantYUnselectLock.cpp \
     src/Guideline/GuidelineStateDiscarded.cpp \
     src/Guideline/GuidelineStateHandleAbstract.cpp \
     src/Guideline/GuidelineStateHandleR.cpp \
