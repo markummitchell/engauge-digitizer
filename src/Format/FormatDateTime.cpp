@@ -320,7 +320,7 @@ void FormatDateTime::loadFormatsParseIncomplete()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::loadFormatsParseIncomplete";
 
-  QStringList skip, day, dayMonth, month, monthDay, monthDayYear, year, yearMonth, yearMonthDay;
+  QStringList skip, day, dayMonth, dayMonthYear, month, monthDay, monthDayYear, year, yearMonth, yearMonthDay;
 
   // COORD_UNITS_DATE_SKIP and COORD_UNITS_TIME_SKIP allow date/time respectively even when skipped,
   // although there can be ambiguity with between COORD_UNITS_DATE_MONTH_DAY_YEAR and COORD_UNITS_DATE_DAY_MONTH_YEAR
@@ -338,6 +338,10 @@ void FormatDateTime::loadFormatsParseIncomplete()
            << "\\d{1,2}/[a-zA-Z]{1,12}/"
            << "\\d{1,2}-[a-zA-Z]{1,12}-"
            << "\\d{1,2} [a-zA-Z]{1,12} ";
+  dayMonthYear << "\\d{1,2}/\\d{1,2}/\\d{1,4}"
+               << "\\d{1,2}/\\d{1,2}/\\d{1,4} "
+               << "\\d{1,2}-\\d{1,2}-\\d{1,4}"
+               << "\\d{1,2}-\\d{1,2}-\\d{1,4} ";
   month << "\\d{1,2}"
         << "\\d{1,2}/"
         << "[a-zA-Z]{1,12}"
@@ -388,7 +392,7 @@ void FormatDateTime::loadFormatsParseIncomplete()
   // Potential day-month ambiguity for COORD_UNITS_DATE_SKIP gets treated as month/day.
   m_formatsDateParseIncomplete [COORD_UNITS_DATE_SKIP] = skip + month + monthDay + monthDayYear + year + yearMonth + yearMonthDay;
   m_formatsDateParseIncomplete [COORD_UNITS_DATE_MONTH_DAY_YEAR] = skip + month + monthDay + monthDayYear + year + yearMonth + yearMonthDay;
-  m_formatsDateParseIncomplete [COORD_UNITS_DATE_DAY_MONTH_YEAR] = skip + day + dayMonth + year + yearMonth + yearMonthDay;
+  m_formatsDateParseIncomplete [COORD_UNITS_DATE_DAY_MONTH_YEAR] = skip + day + dayMonth + dayMonthYear + year + yearMonth + yearMonthDay;
   m_formatsDateParseIncomplete [COORD_UNITS_DATE_YEAR_MONTH_DAY] = skip + year + yearMonth + yearMonthDay;
 
   ENGAUGE_ASSERT (m_formatsDateParseIncomplete.count () == NUM_COORD_UNITS_DATE);
@@ -463,7 +467,7 @@ QValidator::State FormatDateTime::parseInput (CoordUnitsDate coordUnitsDate,
       
       // Not acceptable, but perhaps it is just incomplete
       dateTimeLookup (m_formatsDateParseIncomplete,
-                    m_formatsTimeParseIncomplete,
+                      m_formatsTimeParseIncomplete,
                       coordUnitsDate,
                       coordUnitsTime,
                       string,

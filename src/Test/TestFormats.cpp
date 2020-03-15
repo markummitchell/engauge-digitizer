@@ -58,6 +58,17 @@ bool TestFormats::stateDegreesMinutesSeconds (const QString &string, QValidator:
   return success;
 }
 
+bool TestFormats::stateMonthDayYearHourMinuteSecond (const QString &string, QValidator::State stateExpected)
+{
+  FormatDateTime format;
+  double value;
+  bool success = (stateExpected == format.parseInput (COORD_UNITS_DATE_MONTH_DAY_YEAR,
+                                                      COORD_UNITS_TIME_HOUR_MINUTE_SECOND,
+                                                      string,
+                                                      value));
+  return success;
+}
+
 bool TestFormats::stateYearMonthDayHourMinuteSecond (const QString &string, QValidator::State stateExpected)
 {
   FormatDateTime format;
@@ -69,119 +80,234 @@ bool TestFormats::stateYearMonthDayHourMinuteSecond (const QString &string, QVal
   return success;
 }
 
-void TestFormats::testDateTime ()
+void TestFormats::testDateTimeMdy ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy0 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("0", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01Slash ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01Slash0 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/0", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01Slash02 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02", QValidator::Acceptable));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash20 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/20", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash202 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/202", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2020 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2020", QValidator::Acceptable));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2020Space ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2020 ", QValidator::Acceptable));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2020Space0 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2020 0", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2020Space01 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2020 01", QValidator::Acceptable));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2020Space01Colon ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2020 01:", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2020Space01Colon0 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2020 01:0", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2020Space01Colon02 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2020 01:02", QValidator::Acceptable));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2020Space01Colon02Colon ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2020 01:02:", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2020Space01Colon02Colon0 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2020 01:02:0", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2020Space01Colon02Colon03 ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2020 01:02:03", QValidator::Acceptable));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2020Space01Colon02Colon03Space ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2020 01:02:03 ", QValidator::Acceptable));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2020Space01Colon02Colon03SpaceA ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2020 01:02:03 A", QValidator::Intermediate));
+}
+
+void TestFormats::testDateTimeMdy01Slash02Slash2020Space01Colon02Colon03SpaceAM ()
+{
+  QVERIFY (stateMonthDayYearHourMinuteSecond ("01/02/2020 01:02:03 AM", QValidator::Acceptable));
+}
+
+void TestFormats::testDateTimeYmd ()
 {
   QVERIFY (stateYearMonthDayHourMinuteSecond ("", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime2 ()
+void TestFormats::testDateTimeYmd2 ()
 {
   QVERIFY (stateYearMonthDayHourMinuteSecond ("2", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime20 ()
+void TestFormats::testDateTimeYmd20 ()
 {
   QVERIFY (stateYearMonthDayHourMinuteSecond ("20", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime201 ()
+void TestFormats::testDateTimeYmd202 ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("201", QValidator::Intermediate));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("202", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime2015 ()
+void TestFormats::testDateTimeYmd2020 ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015", QValidator::Intermediate));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime2015Slash ()
+void TestFormats::testDateTimeYmd2020Slash ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/", QValidator::Intermediate));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime2015Slash0 ()
+void TestFormats::testDateTimeYmd2020Slash0 ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/0", QValidator::Intermediate));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/0", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime2015Slash01 ()
+void TestFormats::testDateTimeYmd2020Slash01 ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01", QValidator::Acceptable));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01", QValidator::Acceptable));
 }
 
-void TestFormats::testDateTime2015Slash01Slash ()
+void TestFormats::testDateTimeYmd2020Slash01Slash ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/", QValidator::Intermediate));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime2015Slash01Slash0 ()
+void TestFormats::testDateTimeYmd2020Slash01Slash0 ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/0", QValidator::Intermediate));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/0", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime2015Slash01Slash02 ()
+void TestFormats::testDateTimeYmd2020Slash01Slash02 ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/02", QValidator::Acceptable));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/02", QValidator::Acceptable));
 }
 
-void TestFormats::testDateTime2015Slash01Slash02Space ()
+void TestFormats::testDateTimeYmd2020Slash01Slash02Space ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/02 ", QValidator::Acceptable));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/02 ", QValidator::Acceptable));
 }
 
-void TestFormats::testDateTime2015Slash01Slash02Space0 ()
+void TestFormats::testDateTimeYmd2020Slash01Slash02Space0 ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/02 0", QValidator::Intermediate));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/02 0", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime2015Slash01Slash02Space01 ()
+void TestFormats::testDateTimeYmd2020Slash01Slash02Space01 ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/02 01", QValidator::Acceptable));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/02 01", QValidator::Acceptable));
 }
 
-void TestFormats::testDateTime2015Slash01Slash02Space01Colon ()
+void TestFormats::testDateTimeYmd2020Slash01Slash02Space01Colon ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/02 01:", QValidator::Intermediate));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/02 01:", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime2015Slash01Slash02Space01Colon0 ()
+void TestFormats::testDateTimeYmd2020Slash01Slash02Space01Colon0 ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/02 01:0", QValidator::Intermediate));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/02 01:0", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime2015Slash01Slash02Space01Colon02 ()
+void TestFormats::testDateTimeYmd2020Slash01Slash02Space01Colon02 ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/02 01:02", QValidator::Acceptable));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/02 01:02", QValidator::Acceptable));
 }
 
-void TestFormats::testDateTime2015Slash01Slash02Space01Colon02Colon ()
+void TestFormats::testDateTimeYmd2020Slash01Slash02Space01Colon02Colon ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/02 01:02:", QValidator::Intermediate));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/02 01:02:", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime2015Slash01Slash02Space01Colon02Colon0 ()
+void TestFormats::testDateTimeYmd2020Slash01Slash02Space01Colon02Colon0 ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/02 01:02:0", QValidator::Intermediate));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/02 01:02:0", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime2015Slash01Slash02Space01Colon02Colon03 ()
+void TestFormats::testDateTimeYmd2020Slash01Slash02Space01Colon02Colon03 ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/02 01:02:03", QValidator::Acceptable));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/02 01:02:03", QValidator::Acceptable));
 }
 
-void TestFormats::testDateTime2015Slash01Slash02Space01Colon02Colon03Space ()
+void TestFormats::testDateTimeYmd2020Slash01Slash02Space01Colon02Colon03Space ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/02 01:02:03 ", QValidator::Acceptable));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/02 01:02:03 ", QValidator::Acceptable));
 }
 
-void TestFormats::testDateTime2015Slash01Slash02Space01Colon02Colon03SpaceA ()
+void TestFormats::testDateTimeYmd2020Slash01Slash02Space01Colon02Colon03SpaceA ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/02 01:02:03 A", QValidator::Intermediate));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/02 01:02:03 A", QValidator::Intermediate));
 }
 
-void TestFormats::testDateTime2015Slash01Slash02Space01Colon02Colon03SpaceAM ()
+void TestFormats::testDateTimeYmd2020Slash01Slash02Space01Colon02Colon03SpaceAM ()
 {
-  QVERIFY (stateYearMonthDayHourMinuteSecond ("2015/01/02 01:02:03 AM", QValidator::Acceptable));
+  QVERIFY (stateYearMonthDayHourMinuteSecond ("2020/01/02 01:02:03 AM", QValidator::Acceptable));
 }
 
 void TestFormats::testDegreesMinutesSeconds ()
