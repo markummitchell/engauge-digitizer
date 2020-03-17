@@ -100,6 +100,11 @@ void DigitizeStateContext::completeRequestedStateTransitionIfExists (CmdMediator
   }
 }
 
+bool DigitizeStateContext::guidelinesAreSelectable () const
+{
+  return m_states [m_currentState]->guidelinesAreSelectable();
+}
+
 void DigitizeStateContext::handleContextMenuEventAxis (CmdMediator *cmdMediator,
                                                        const QString &pointIdentifier)
 {

@@ -54,6 +54,11 @@ void DigitizeStateEmpty::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::end";
 }
 
+bool DigitizeStateEmpty::guidelinesAreSelectable () const
+{
+  return false;
+}
+
 void DigitizeStateEmpty::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
                                                      const QString &pointIdentifier)
 {

@@ -62,6 +62,9 @@ public:
   /// Method that is called at the exact moment a state is exited. Typically called just before begin for the next state
   virtual void end() = 0;
 
+  /// Enable/disable guidelines according to state
+  virtual bool guidelinesAreSelectable () const = 0;
+
   /// Handle a right click, on an axis point, that was intercepted earlier
   virtual void handleContextMenuEventAxis (CmdMediator *cmdMediator,
                                            const QString &pointIdentifier) = 0;

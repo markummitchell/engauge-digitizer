@@ -46,6 +46,9 @@ public:
   bool canPaste (const Transformation &transformation,
                  const QSize &viewSize) const;
 
+  /// Enable/disable guidelines according to state
+  bool guidelinesAreSelectable () const;
+
   /// See DigitizeStateAbstractBase::handleContextMenuEventAxis.
   void handleContextMenuEventAxis (CmdMediator *cmdMediator,
                                    const QString &pointIdentifier);

@@ -73,6 +73,11 @@ void DigitizeStateScale::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateScale::end";
 }
 
+bool DigitizeStateScale::guidelinesAreSelectable () const
+{
+  return false;
+}
+
 void DigitizeStateScale::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
                                                      const QString &pointIdentifier)
 {

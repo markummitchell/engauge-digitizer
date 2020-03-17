@@ -24,6 +24,7 @@ public:
                          const QSize &viewSize) const;
   virtual QCursor cursor (CmdMediator *cmdMediator) const;
   virtual void end();
+  virtual bool guidelinesAreSelectable () const;
   virtual void handleContextMenuEventAxis (CmdMediator *cmdMediator,
                                            const QString &pointIdentifier);
   virtual void handleContextMenuEventGraph (CmdMediator *cmdMediator,

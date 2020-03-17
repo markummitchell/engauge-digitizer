@@ -3627,6 +3627,9 @@ void MainWindow::updateControls ()
 
     bool cartesian = (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN);
     bool editable = (m_actionViewGuidelinesEdit->isChecked ());
+    bool selectable = (m_digitizeStateContext->guidelinesAreSelectable ());
+
+    m_actionViewGuidelinesEdit->setEnabled (selectable);
 
     m_btnGuidelineBottomCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
     m_btnGuidelineBottomPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
@@ -3637,15 +3640,17 @@ void MainWindow::updateControls ()
     m_btnGuidelineTopCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
     m_btnGuidelineTopPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
 
-    m_btnGuidelineBottomCartesian->setEnabled (m_btnGuidelineBottomCartesian->isVisible());
-    m_btnGuidelineBottomPolar->setEnabled (m_btnGuidelineBottomPolar->isVisible());
-    m_btnGuidelineLeftCartesian->setEnabled (m_btnGuidelineLeftCartesian->isVisible());
-    m_btnGuidelineLeftPolar->setEnabled (m_btnGuidelineLeftPolar->isVisible());
-    m_btnGuidelineRightCartesian->setEnabled (m_btnGuidelineRightCartesian->isVisible());
-    m_btnGuidelineRightPolar->setEnabled (m_btnGuidelineRightPolar->isVisible());
-    m_btnGuidelineTopCartesian->setEnabled (m_btnGuidelineTopCartesian->isVisible());
-    m_btnGuidelineTopPolar->setEnabled (m_btnGuidelineTopPolar->isVisible());
+    m_btnGuidelineBottomCartesian->setEnabled (m_btnGuidelineBottomCartesian->isVisible() && selectable);
+    m_btnGuidelineBottomPolar->setEnabled (m_btnGuidelineBottomPolar->isVisible() && selectable);
+    m_btnGuidelineLeftCartesian->setEnabled (m_btnGuidelineLeftCartesian->isVisible() && selectable);
+    m_btnGuidelineLeftPolar->setEnabled (m_btnGuidelineLeftPolar->isVisible() && selectable);
+    m_btnGuidelineRightCartesian->setEnabled (m_btnGuidelineRightCartesian->isVisible() && selectable);
+    m_btnGuidelineRightPolar->setEnabled (m_btnGuidelineRightPolar->isVisible() && selectable);
+    m_btnGuidelineTopCartesian->setEnabled (m_btnGuidelineTopCartesian->isVisible() && selectable);
+    m_btnGuidelineTopPolar->setEnabled (m_btnGuidelineTopPolar->isVisible() && selectable);
   } else {
+    m_actionViewGuidelinesEdit->setEnabled (false);
+
     m_btnGuidelineBottomCartesian->setVisible (false);
     m_btnGuidelineBottomPolar->setVisible (false);
     m_btnGuidelineLeftCartesian->setVisible (false);

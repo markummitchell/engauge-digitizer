@@ -65,6 +65,11 @@ void DigitizeStateCurve::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateCurve::end";
 }
 
+bool DigitizeStateCurve::guidelinesAreSelectable () const
+{
+  return false;
+}
+
 void DigitizeStateCurve::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
                                                      const QString &pointIdentifier)
 {

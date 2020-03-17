@@ -74,6 +74,11 @@ void DigitizeStateSegment::end ()
   segmentFactory.clearSegments(m_segments);
 }
 
+bool DigitizeStateSegment::guidelinesAreSelectable () const
+{
+  return false;
+}
+
 void DigitizeStateSegment::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
                                                        const QString &pointIdentifier)
 {

@@ -228,6 +228,11 @@ bool DigitizeStateColorPicker::findNearestNonBackgroundPixel (CmdMediator *cmdMe
   return false;
 }
 
+bool DigitizeStateColorPicker::guidelinesAreSelectable () const
+{
+  return false;
+}
+
 void DigitizeStateColorPicker::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
                                                            const QString &pointIdentifier)
 {

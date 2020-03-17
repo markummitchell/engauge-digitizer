@@ -100,6 +100,11 @@ void DigitizeStateSelect::end ()
   removeHoverHighlighting();
 }
 
+bool DigitizeStateSelect::guidelinesAreSelectable () const
+{
+  return true;
+}
+
 void DigitizeStateSelect::handleContextMenuEventAxis (CmdMediator *cmdMediator,
                                                       const QString &pointIdentifier)
 {

@@ -180,6 +180,11 @@ QList<PointMatchPixel> DigitizeStatePointMatch::extractSamplePointPixels (const 
   return samplePointPixels;
 }
 
+bool DigitizeStatePointMatch::guidelinesAreSelectable () const
+{
+  return false;
+}
+
 void DigitizeStatePointMatch::handleContextMenuEventAxis (CmdMediator * /* cmdMediator */,
                                                           const QString &pointIdentifier)
 {
