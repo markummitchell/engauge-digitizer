@@ -29,6 +29,8 @@ void GuidelineStateDeployedConstantXSelectEdit::begin ()
 
   beginCommon (GuidelineFormat::HOVER_OFF,
                false);
+
+  context().guideline().setGraphicsItemVisible (true); // Stop hover and painting (doPoint only stops painting)
 }
 
 bool GuidelineStateDeployedConstantXSelectEdit::doPaint () const

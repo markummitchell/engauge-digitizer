@@ -35,6 +35,8 @@ void GuidelineStateDeployedConstantYSelectEditAppearing::begin ()
   beginCommon (GuidelineFormat::HOVER_ON,
                false);
 
+  context().guideline().setGraphicsItemVisible (true); // Stop hover and painting (doPoint only stops painting)
+
   // (Re)connect to timer
   QObject::connect (m_timer, SIGNAL (timeout ()), &context(), SLOT (slotTimeout ()));
   m_timer->start (APPEARING_TIMEOUT);
@@ -96,4 +98,3 @@ QString GuidelineStateDeployedConstantYSelectEditAppearing::stateName () const
 {
   return guidelineStateAsString (GUIDELINE_STATE_DEPLOYED_CONSTANT_Y_SELECT_EDIT_APPEARING);
 }
-

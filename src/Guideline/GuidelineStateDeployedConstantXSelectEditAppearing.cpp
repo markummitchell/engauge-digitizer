@@ -35,6 +35,8 @@ void GuidelineStateDeployedConstantXSelectEditAppearing::begin ()
   beginCommon (GuidelineFormat::HOVER_ON,
                false);
 
+  context().guideline().setGraphicsItemVisible (true); // Stop hover and painting (doPoint only stops painting)
+
   // (Re)connect to timer
   QObject::connect (m_timer, SIGNAL (timeout ()), &context(), SLOT (slotTimeout ()));
   m_timer->start (APPEARING_TIMEOUT);

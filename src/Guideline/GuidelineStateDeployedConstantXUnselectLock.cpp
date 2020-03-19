@@ -28,6 +28,8 @@ void GuidelineStateDeployedConstantXUnselectLock::begin ()
 
   beginCommon (GuidelineFormat::HOVER_OFF,
                true);
+
+  context().guideline().setGraphicsItemVisible (true); // Stop hover and painting (doPoint only stops painting)
 }
 
 bool GuidelineStateDeployedConstantXUnselectLock::doPaint () const
