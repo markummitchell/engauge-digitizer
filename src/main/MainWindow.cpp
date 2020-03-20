@@ -3629,7 +3629,9 @@ void MainWindow::updateControls ()
     bool editable = (m_actionViewGuidelinesEdit->isChecked ());
     bool selectable = (m_digitizeStateContext->guidelinesAreSelectable ());
 
+    m_actionViewGuidelinesHide->setEnabled (true);
     m_actionViewGuidelinesEdit->setEnabled (selectable);
+    m_actionViewGuidelinesLock->setEnabled (true);
 
     m_btnGuidelineBottomCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
     m_btnGuidelineBottomPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
@@ -3648,8 +3650,12 @@ void MainWindow::updateControls ()
     m_btnGuidelineRightPolar->setEnabled (m_btnGuidelineRightPolar->isVisible() && selectable);
     m_btnGuidelineTopCartesian->setEnabled (m_btnGuidelineTopCartesian->isVisible() && selectable);
     m_btnGuidelineTopPolar->setEnabled (m_btnGuidelineTopPolar->isVisible() && selectable);
+
   } else {
+
+    m_actionViewGuidelinesHide->setEnabled (false);
     m_actionViewGuidelinesEdit->setEnabled (false);
+    m_actionViewGuidelinesLock->setEnabled (false);
 
     m_btnGuidelineBottomCartesian->setVisible (false);
     m_btnGuidelineBottomPolar->setVisible (false);
