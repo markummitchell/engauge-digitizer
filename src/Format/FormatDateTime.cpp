@@ -11,9 +11,6 @@
 #include <qmath.h>
 #include <QTimeZone>
 
-// Need a reference time zone so exported outputs do not exhibit unpredictable local/UTC hours differences
-const Qt::TimeSpec REFERENCE_TIME_ZONE (Qt::UTC);
-
 FormatDateTime::FormatDateTime()
 {
   loadFormatsFormat();
@@ -95,7 +92,7 @@ void FormatDateTime::dateTimeLookup (const FormatsDate &formatsDateAll,
                                                             string)) {
 
             success = true;
-            value = dt.toTimeSpec (REFERENCE_TIME_ZONE).toTime_t ();
+            value = dt.toLocalTime ().toTime_t (); // Convert using local time to prevent addition of utc offset
             iterating = false; // Stop iterating
 
             LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::dateTimeLookup"
@@ -141,7 +138,7 @@ QString FormatDateTime::formatOutput (CoordUnitsDate coordUnitsDate,
   // which is year 2038
   QDateTime dt = QDateTime::fromTime_t (unsigned (qFloor (value)));
 
-  return dt.toTimeSpec(REFERENCE_TIME_ZONE).toString (format);
+  return dt.toLocalTime ().toString (format); // Convert using local time to prevent addition of utc offset
 }
 
 void FormatDateTime::loadFormatsFormat()
