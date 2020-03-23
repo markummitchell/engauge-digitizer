@@ -1,0 +1,1 @@
+-errorreport ../test/time_scale_64bit.xml -regression -reset
