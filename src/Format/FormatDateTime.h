@@ -52,9 +52,11 @@ class FormatDateTime {
                        bool useQDateTimeElseQRegExp,
                        double &value, // Set only if useQDateTimeElseQRegExp=success=true
                        bool &success) const;
+  QDateTime fromSecsSinceEpoch (qint64 secs) const; // Emulate QDateTime::fromSecsSinceEpoch in Qt 5.8
   void loadFormatsFormat();
   void loadFormatsParseAcceptable();
   void loadFormatsParseIncomplete();
+  qint64 toSecsSinceEpoch(const QDateTime &dt) const; // Emulate QDateTime::toSecsSinceEpoch in Qt 5.8
 
   // For formatting output
   FormatDate m_formatsDateFormat;

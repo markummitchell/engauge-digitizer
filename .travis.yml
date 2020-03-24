@@ -1,4 +1,8 @@
-dist: trusty
+# https://docs.travis-ci.com/user/reference/overview/ gives distribution options:
+# ubuntu bionic 18.04 uses qt 5.9
+# ubuntu xenial 16.04 uses qt 5.5
+# ubuntu trusty 14.04 uses qt 5.2
+dist: xenial
 
 language: cpp
 

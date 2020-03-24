@@ -20,8 +20,8 @@ required by the Poppler library.
 
 1) Install the Visual Studio 2015 version of the Qt Open Source toolkit from http://www.qt.io. 
 
-   Qt Open Source 5.2.1, 5.5.1 and 5.8.0 have been tested with Engauge. Qt Versions 5.1 and older do not offer
-   features, that were added in version 5.2, that are required to build Engauge.
+   Qt Open Source 5.2 and newer have been tested with Engauge. Qt Versions 5.1 and older do not offer
+   features added in version 5.2 that are required to build Engauge.
 
 2) Download and build fftw from http://www.fftw.org. Version 3.3.4 was tested with Engauge.
    

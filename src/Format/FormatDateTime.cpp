@@ -95,7 +95,7 @@ void FormatDateTime::dateTimeLookup (const FormatsDate &formatsDateAll,
             // Convert using local time to prevent addition of utc offset. Number of seconds since 1970 epoch
             // is used with 64 bits resolution, versus time_t with only 32 bits resolution (and limites to 1970 to 2038).
             // Time value is negative for pre-epoch. Grep for fromSecsSinceEpoch in this same file
-            value = dt.toLocalTime ().toSecsSinceEpoch ();
+            value = toSecsSinceEpoch (dt.toLocalTime ());
             iterating = false; // Stop iterating
 
             LOG4CPP_INFO_S ((*mainCat)) << "FormatDateTime::dateTimeLookup"
@@ -141,12 +141,17 @@ QString FormatDateTime::formatOutput (CoordUnitsDate coordUnitsDate,
   // is therefore limited to 1970 to 2038). Time value is negative for pre-epoch. Grep for toSecsSinceEpoch in this same file
   QDateTime dt;
   if (value > 0) {
-    dt = QDateTime::fromSecsSinceEpoch ((unsigned long int) (value));
+    dt = fromSecsSinceEpoch ((unsigned long int) (value));
   } else {
-    dt = QDateTime::fromSecsSinceEpoch ((long int) (value));
+    dt = fromSecsSinceEpoch ((long int) (value));
   }
 
   return dt.toLocalTime ().toString (format); // Convert using local time to prevent addition of utc offset
+}
+
+QDateTime FormatDateTime::fromSecsSinceEpoch (qint64 secs) const
+{
+  return QDateTime::fromMSecsSinceEpoch (secs * 1000);
 }
 
 void FormatDateTime::loadFormatsFormat()
@@ -492,4 +497,9 @@ QValidator::State FormatDateTime::parseInput (CoordUnitsDate coordUnitsDate,
   }
 
   return state;
+}
+
+qint64 FormatDateTime::toSecsSinceEpoch (const QDateTime &dt) const
+{
+  return dt.toMSecsSinceEpoch () / 1000;
 }
