@@ -2527,8 +2527,8 @@ The Value component is also called the Lightness.</source>
     <name>DlgSettingsCoords</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="76"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="915"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="919"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="916"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="920"/>
         <source>Coordinates</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2563,7 +2563,7 @@ Setting the format to an empty value results in just the date portion appearing 
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="253"/>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="918"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="919"/>
         <source>R</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2664,13 +2664,13 @@ Normally the radius at the origin is 0, but a nonzero value may be applied in ot
         <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="673"/>
         <source>Numbers have the simplest and most general format.
 
-Date and time values have date and/or time components.
+Date and time values have date and/or time components, with dates between 1901 and 2105 on 64 bit operating systems.
 
 Degrees Minutes Seconds (DDD MM SS.S) format uses two integer number for degrees and minutes, and a real number for seconds. There are 60 seconds per minute. During input, spaces must be inserted between the three numbers.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="706"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="707"/>
         <source>Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.
 
 Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are 60 minutes per degree. During input, a space must be inserted between the two numbers.
@@ -2685,12 +2685,12 @@ Turns format uses a single real number. One complete revolution is one turn.</so
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="913"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="914"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="917"/>
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="918"/>
         <source>Y</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4216,109 +4216,109 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="488"/>
+        <location filename="../src/main/MainWindow.cpp" line="490"/>
         <source>Unable to export to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="522"/>
+        <location filename="../src/main/MainWindow.cpp" line="524"/>
         <source>Unable to extract image to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="602"/>
+        <location filename="../src/main/MainWindow.cpp" line="604"/>
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1318"/>
+        <location filename="../src/main/MainWindow.cpp" line="1320"/>
         <source>Cannot read file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="688"/>
+        <location filename="../src/main/MainWindow.cpp" line="690"/>
         <source>Import Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1041"/>
+        <location filename="../src/main/MainWindow.cpp" line="1043"/>
         <source>File opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1084"/>
+        <location filename="../src/main/MainWindow.cpp" line="1086"/>
         <source>File not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1101"/>
+        <location filename="../src/main/MainWindow.cpp" line="1103"/>
         <source>Error report opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1164"/>
-        <location filename="../src/main/MainWindow.cpp" line="1238"/>
+        <location filename="../src/main/MainWindow.cpp" line="1166"/>
+        <location filename="../src/main/MainWindow.cpp" line="1240"/>
         <source>File imported</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1272"/>
+        <location filename="../src/main/MainWindow.cpp" line="1274"/>
         <source>Background image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1273"/>
+        <location filename="../src/main/MainWindow.cpp" line="1275"/>
         <source>Currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1274"/>
+        <location filename="../src/main/MainWindow.cpp" line="1276"/>
         <source>Point style for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1275"/>
+        <location filename="../src/main/MainWindow.cpp" line="1277"/>
         <source>Segment Fill filter for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1301"/>
+        <location filename="../src/main/MainWindow.cpp" line="1303"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1387"/>
+        <location filename="../src/main/MainWindow.cpp" line="1389"/>
         <source>Cannot write file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1435"/>
+        <location filename="../src/main/MainWindow.cpp" line="1437"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2548"/>
+        <location filename="../src/main/MainWindow.cpp" line="2554"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2630"/>
+        <location filename="../src/main/MainWindow.cpp" line="2636"/>
         <source>Open Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3961"/>
+        <location filename="../src/main/MainWindow.cpp" line="3980"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3962"/>
+        <location filename="../src/main/MainWindow.cpp" line="3981"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4095"/>
+        <location filename="../src/main/MainWindow.cpp" line="4115"/>
         <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4406,6 +4406,7 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdGuidelineRemoveXT.cpp" line="45"/>
         <location filename="../src/Cmd/CmdGuidelineRemoveYR.cpp" line="45"/>
         <location filename="../src/Cmd/CmdMoveBy.cpp" line="62"/>
+        <location filename="../src/Cmd/CmdSelectCoordSystem.cpp" line="51"/>
         <source>Missing attribute(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4422,6 +4423,7 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdGuidelineRemoveXT.cpp" line="47"/>
         <location filename="../src/Cmd/CmdGuidelineRemoveYR.cpp" line="47"/>
         <location filename="../src/Cmd/CmdMoveBy.cpp" line="64"/>
+        <location filename="../src/Cmd/CmdSelectCoordSystem.cpp" line="53"/>
         <source>and/or</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4482,7 +4484,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Color/ColorFilterSettings.cpp" line="221"/>
+        <location filename="../src/Color/ColorFilterSettings.cpp" line="222"/>
         <source>Cannot read curve filter data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4559,13 +4561,13 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/CoordSystem/CoordSystem.cpp" line="613"/>
+        <location filename="../src/CoordSystem/CoordSystem.cpp" line="614"/>
         <source>Unexpected xml token</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Curve/Curve.cpp" line="367"/>
-        <location filename="../src/Curve/Curve.cpp" line="419"/>
+        <location filename="../src/Curve/Curve.cpp" line="369"/>
+        <location filename="../src/Curve/Curve.cpp" line="421"/>
         <source>Cannot read curve data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4600,25 +4602,25 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Curve/CurvesGraphs.cpp" line="223"/>
+        <location filename="../src/Curve/CurvesGraphs.cpp" line="227"/>
         <source>DUPLICATE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Curve/CurvesGraphs.cpp" line="237"/>
+        <location filename="../src/Curve/CurvesGraphs.cpp" line="241"/>
         <source>Cannot read graph curves data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="136"/>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="177"/>
-        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="174"/>
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="141"/>
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="182"/>
+        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="179"/>
         <location filename="../src/main/main.cpp" line="365"/>
         <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="137"/>
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="142"/>
         <source>Three axis points have been defined, and no more are needed or allowed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4633,17 +4635,17 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="351"/>
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="356"/>
         <source>Point Match</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="352"/>
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="357"/>
         <source>There are no more matching points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="175"/>
+        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="180"/>
         <source>The scale bar has been defined, and another is not needed or allowed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5018,7 +5020,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="612"/>
+        <location filename="../src/main/MainWindow.cpp" line="614"/>
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation type="unfinished"></translation>
     </message>

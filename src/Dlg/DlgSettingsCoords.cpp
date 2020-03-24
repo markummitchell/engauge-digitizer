@@ -70,7 +70,7 @@ const int FONT_SIZE = 6;
 const double POWER_FOR_LOG = 10.0; // Need a larger power (certainly more than e) to make log gradient obvious
 
 const int MINIMUM_DIALOG_WIDTH_COORDS = 800;
-const int MINIMUM_HEIGHT = 540;
+const int MINIMUM_HEIGHT = 640;
 
 DlgSettingsCoords::DlgSettingsCoords(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Coordinates"),
@@ -671,7 +671,8 @@ void DlgSettingsCoords::loadComboBoxUnitsNonPolar (QComboBox &cmb,
   ENGAUGE_ASSERT (cmb.count() == NUM_COORD_UNITS_NON_POLAR_THETA);
 
   cmb.setWhatsThis (QString (tr ("Numbers have the simplest and most general format.\n\n"
-                                 "Date and time values have date and/or time components.\n\n"
+                                 "Date and time values have date and/or time components, with dates between 1901 and 2105 on "
+                                 "64 bit operating systems.\n\n"
                                  "Degrees Minutes Seconds (DDD MM SS.S) format uses two integer number for degrees and minutes, and a real number for "
                                  "seconds. There are 60 seconds per minute. During input, spaces must be inserted between the three numbers.")));
 

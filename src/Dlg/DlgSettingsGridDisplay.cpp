@@ -25,7 +25,7 @@
 
 const int COUNT_MIN = 1;
 const int COUNT_DECIMALS = 0;
-const int MINIMUM_HEIGHT = 480;
+const int MINIMUM_HEIGHT = 540;
 
 DlgSettingsGridDisplay::DlgSettingsGridDisplay(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Grid Display"),
