@@ -1375,344 +1375,346 @@ Guidelines are hidden to simplify the main window.</source>
         <location filename="../src/Create/CreateActions.cpp" line="563"/>
         <source>Edit Guidelines
 
-Add new guidelines by clicking on the guidelines toolbar, move existing guidelines by dragging, or remove guidelines by dragging out of the main window.</source>
+Add new guidelines by clicking on the guidelines toolbar, move existing guidelines by dragging, or remove guidelines by dragging out of the main window.
+
+This option is available in Select mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="568"/>
+        <location filename="../src/Create/CreateActions.cpp" line="569"/>
         <source>Lock Guidelines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="570"/>
+        <location filename="../src/Create/CreateActions.cpp" line="571"/>
         <source>Lock guidelines.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="571"/>
+        <location filename="../src/Create/CreateActions.cpp" line="572"/>
         <source>Lock Guidelines
 
 Lock the guidelines to prevent accidental movement or removal.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="580"/>
+        <location filename="../src/Create/CreateActions.cpp" line="581"/>
         <source>Hide Always</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="582"/>
+        <location filename="../src/Create/CreateActions.cpp" line="583"/>
         <source>Always hide the status bar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="583"/>
+        <location filename="../src/Create/CreateActions.cpp" line="584"/>
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="585"/>
+        <location filename="../src/Create/CreateActions.cpp" line="586"/>
         <source>Show Temporary Messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="587"/>
+        <location filename="../src/Create/CreateActions.cpp" line="588"/>
         <source>Hide the status bar except when display temporary messages.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="588"/>
+        <location filename="../src/Create/CreateActions.cpp" line="589"/>
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="590"/>
+        <location filename="../src/Create/CreateActions.cpp" line="591"/>
         <source>Show Always</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="592"/>
+        <location filename="../src/Create/CreateActions.cpp" line="593"/>
         <source>Always show the status bar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="593"/>
+        <location filename="../src/Create/CreateActions.cpp" line="594"/>
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="602"/>
+        <location filename="../src/Create/CreateActions.cpp" line="603"/>
         <source>Zoom Out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="603"/>
+        <location filename="../src/Create/CreateActions.cpp" line="604"/>
         <source>Zoom out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="607"/>
+        <location filename="../src/Create/CreateActions.cpp" line="608"/>
         <source>Zoom In</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="608"/>
+        <location filename="../src/Create/CreateActions.cpp" line="609"/>
         <source>Zoom in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="615"/>
+        <location filename="../src/Create/CreateActions.cpp" line="616"/>
         <source>16:1 (1600%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="617"/>
+        <location filename="../src/Create/CreateActions.cpp" line="618"/>
         <source>Zoom 16:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="621"/>
+        <location filename="../src/Create/CreateActions.cpp" line="622"/>
         <source>16:1 farther (1270%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="623"/>
+        <location filename="../src/Create/CreateActions.cpp" line="624"/>
         <source>Zoom 12.7:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="627"/>
+        <location filename="../src/Create/CreateActions.cpp" line="628"/>
         <source>8:1 closer (1008%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="629"/>
+        <location filename="../src/Create/CreateActions.cpp" line="630"/>
         <source>Zoom 10.08:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="633"/>
+        <location filename="../src/Create/CreateActions.cpp" line="634"/>
         <source>8:1 (800%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="635"/>
+        <location filename="../src/Create/CreateActions.cpp" line="636"/>
         <source>Zoom 8:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="639"/>
+        <location filename="../src/Create/CreateActions.cpp" line="640"/>
         <source>8:1 farther (635%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="641"/>
+        <location filename="../src/Create/CreateActions.cpp" line="642"/>
         <source>Zoom 6.35:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="645"/>
+        <location filename="../src/Create/CreateActions.cpp" line="646"/>
         <source>4:1 closer (504%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="647"/>
+        <location filename="../src/Create/CreateActions.cpp" line="648"/>
         <source>Zoom 5.04:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="651"/>
+        <location filename="../src/Create/CreateActions.cpp" line="652"/>
         <source>4:1 (400%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="653"/>
+        <location filename="../src/Create/CreateActions.cpp" line="654"/>
         <source>Zoom 4:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="657"/>
+        <location filename="../src/Create/CreateActions.cpp" line="658"/>
         <source>4:1 farther (317%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="659"/>
+        <location filename="../src/Create/CreateActions.cpp" line="660"/>
         <source>Zoom 3.17:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="663"/>
+        <location filename="../src/Create/CreateActions.cpp" line="664"/>
         <source>2:1 closer (252%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="665"/>
+        <location filename="../src/Create/CreateActions.cpp" line="666"/>
         <source>Zoom 2.52:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="669"/>
+        <location filename="../src/Create/CreateActions.cpp" line="670"/>
         <source>2:1 (200%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="671"/>
+        <location filename="../src/Create/CreateActions.cpp" line="672"/>
         <source>Zoom 2:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="675"/>
+        <location filename="../src/Create/CreateActions.cpp" line="676"/>
         <source>2:1 farther (159%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="677"/>
+        <location filename="../src/Create/CreateActions.cpp" line="678"/>
         <source>Zoom 1.59:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="681"/>
+        <location filename="../src/Create/CreateActions.cpp" line="682"/>
         <source>1:1 closer (126%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="684"/>
+        <location filename="../src/Create/CreateActions.cpp" line="685"/>
         <source>Zoom 1.3:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="688"/>
+        <location filename="../src/Create/CreateActions.cpp" line="689"/>
         <source>1:1 (100%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="691"/>
+        <location filename="../src/Create/CreateActions.cpp" line="692"/>
         <source>Zoom 1:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="695"/>
+        <location filename="../src/Create/CreateActions.cpp" line="696"/>
         <source>1:1 farther (79%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="698"/>
+        <location filename="../src/Create/CreateActions.cpp" line="699"/>
         <source>Zoom 0.8:1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="702"/>
+        <location filename="../src/Create/CreateActions.cpp" line="703"/>
         <source>1:2 closer (63%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="704"/>
+        <location filename="../src/Create/CreateActions.cpp" line="705"/>
         <source>Zoom 1.3:2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="708"/>
+        <location filename="../src/Create/CreateActions.cpp" line="709"/>
         <source>1:2 (50%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="710"/>
+        <location filename="../src/Create/CreateActions.cpp" line="711"/>
         <source>Zoom 1:2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="714"/>
+        <location filename="../src/Create/CreateActions.cpp" line="715"/>
         <source>1:2 farther (40%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="716"/>
+        <location filename="../src/Create/CreateActions.cpp" line="717"/>
         <source>Zoom 0.8:2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="720"/>
+        <location filename="../src/Create/CreateActions.cpp" line="721"/>
         <source>1:4 closer (31%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="722"/>
+        <location filename="../src/Create/CreateActions.cpp" line="723"/>
         <source>Zoom 1.3:4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="726"/>
+        <location filename="../src/Create/CreateActions.cpp" line="727"/>
         <source>1:4 (25%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="728"/>
+        <location filename="../src/Create/CreateActions.cpp" line="729"/>
         <source>Zoom 1:4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="732"/>
+        <location filename="../src/Create/CreateActions.cpp" line="733"/>
         <source>1:4 farther (20%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="734"/>
+        <location filename="../src/Create/CreateActions.cpp" line="735"/>
         <source>Zoom 0.8:4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="738"/>
+        <location filename="../src/Create/CreateActions.cpp" line="739"/>
         <source>1:8 closer (12.5%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="740"/>
-        <location filename="../src/Create/CreateActions.cpp" line="746"/>
+        <location filename="../src/Create/CreateActions.cpp" line="741"/>
+        <location filename="../src/Create/CreateActions.cpp" line="747"/>
         <source>Zoom 1:8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="744"/>
+        <location filename="../src/Create/CreateActions.cpp" line="745"/>
         <source>1:8 (12.5%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="750"/>
+        <location filename="../src/Create/CreateActions.cpp" line="751"/>
         <source>1:8 farther (10%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="752"/>
+        <location filename="../src/Create/CreateActions.cpp" line="753"/>
         <source>Zoom 0.8:8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="756"/>
+        <location filename="../src/Create/CreateActions.cpp" line="757"/>
         <source>1:16 closer (8%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="758"/>
+        <location filename="../src/Create/CreateActions.cpp" line="759"/>
         <source>Zoom 1.3:16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="762"/>
+        <location filename="../src/Create/CreateActions.cpp" line="763"/>
         <source>1:16 (6.25%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="764"/>
+        <location filename="../src/Create/CreateActions.cpp" line="765"/>
         <source>Zoom 1:16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="768"/>
+        <location filename="../src/Create/CreateActions.cpp" line="769"/>
         <source>Fill</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="770"/>
+        <location filename="../src/Create/CreateActions.cpp" line="771"/>
         <source>Zoom with stretching to fill window</source>
         <translation type="unfinished"></translation>
     </message>

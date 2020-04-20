@@ -563,7 +563,8 @@ void CreateActions::createView (MainWindow &mw)
   mw.m_actionViewGuidelinesEdit->setWhatsThis (tr ("Edit Guidelines\n\n"
                                                    "Add new guidelines by clicking on the guidelines toolbar, move "
                                                    "existing guidelines by dragging, or remove guidelines by dragging "
-                                                   "out of the main window."));
+                                                   "out of the main window.\n\n"
+                                                   "This option is available in Select mode."));
 
   mw.m_actionViewGuidelinesLock = new QAction (tr ("Lock Guidelines"), &mw);
   mw.m_actionViewGuidelinesLock->setCheckable (true);
