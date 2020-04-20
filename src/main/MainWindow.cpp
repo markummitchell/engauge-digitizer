@@ -3703,6 +3703,11 @@ void MainWindow::updateCoordSystem(CoordSystemIndex coordSystemIndex)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateCoordSystem";
 
+  // If this is from undo/redo playback then combobox must be updated
+  if ((CoordSystemIndex) m_cmbCoordSystem->currentIndex() != coordSystemIndex) {
+    m_cmbCoordSystem->setCurrentIndex (coordSystemIndex);
+  }
+
   // Set current curve in the Document and in the MainWindow combobox together so they are in sync. Setting
   // the selected curve prevents a crash in updateTransformationAndItsDependencies
   m_cmdMediator->document().setCoordSystemIndex (coordSystemIndex);
