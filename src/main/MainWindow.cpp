@@ -14,6 +14,7 @@
 #include "CmdDelete.h"
 #include "CmdGuidelineAddXT.h"
 #include "CmdGuidelineAddYR.h"
+#include "CmdGuidelineViewState.h"
 #include "CmdMediator.h"
 #include "CmdSelectCoordSystem.h"
 #include "CmdStackShadow.h"
@@ -944,6 +945,28 @@ bool MainWindow::guidelinesVisibilityCanBeEnabled () const
   // 3) If transform is defined then file should also be, but we check to make sure
   return (!m_currentFile.isEmpty() &&
           transformIsDefined());
+}
+
+void MainWindow::guidelineViewState (GuidelineViewState state) const
+{
+  switch (state)
+  {
+  case GUIDELINE_VIEW_STATE_HIDE:
+    m_actionViewGuidelinesHide->setChecked (true);
+    break;
+
+  case GUIDELINE_VIEW_STATE_EDIT:
+    m_actionViewGuidelinesEdit->setChecked (true);
+    break;
+
+  case GUIDELINE_VIEW_STATE_LOCK:
+    m_actionViewGuidelinesLock->setChecked (true);
+    break;
+
+  case NUM_GUIDELINE_VIEW_STATES:
+    LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::guidelineViewState bad state";
+    break;
+  }
 }
 
 void MainWindow::handleGuidelinesActiveChange (bool active)
@@ -3180,6 +3203,26 @@ void MainWindow::slotViewGroupGuidelines (QAction * /* action */)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGroupGuidelines";
 
+  // States before and after
+  GuidelineViewState stateBefore = m_guidelineViewStateContext.state();  
+  GuidelineViewState stateAfter;
+  if (m_actionViewGuidelinesHide->isChecked ()) {
+    stateAfter = GUIDELINE_VIEW_STATE_HIDE;
+  } else if (m_actionViewGuidelinesEdit->isChecked ()) {
+    stateAfter = GUIDELINE_VIEW_STATE_EDIT;
+  } else {
+    stateAfter = GUIDELINE_VIEW_STATE_LOCK;
+  }    
+  m_guidelineViewStateContext.handleStateChange (stateAfter);
+
+  // Create Cmd that will change the state
+  CmdAbstract *cmd = new CmdGuidelineViewState (*this,
+                                                m_cmdMediator->document(),
+                                                stateBefore,
+                                                stateAfter);
+  m_cmdMediator->push (cmd);
+
+  // Updates
   handleGuidelineMode ();
   updateControls();
 }

@@ -14,6 +14,8 @@
 #include "FittingCurveCoefficients.h"
 #include "GridLines.h"
 #include "Guidelines.h"
+#include "GuidelineViewState.h"
+#include "GuidelineViewStateContext.h"
 #include "MainWindowModel.h"
 #include <QCursor>
 #include <QMainWindow>
@@ -185,6 +187,9 @@ public:
   /// True/false if guidelines are visible. Selectability is handled elsewhere
   bool guidelinesAreVisible () const;
 
+  /// Guideline view state in View menu
+  void guidelineViewState (GuidelineViewState state) const;
+  
   /// Handle Guidelines active status toggle
   void handleGuidelinesActiveChange (bool active);
 
@@ -741,6 +746,9 @@ private:
   // Guidelines that are effectively invisible until cursor gets to outermost pixels in scene (and view if zoomed out
   // enough that there is no scroll bar)
   Guidelines m_guidelines;
+
+  // Guideline view mode
+  GuidelineViewStateContext m_guidelineViewStateContext;
   
   // Map to/from/between zoom enumerations. These eliminate the need for switch statements
   QMap<ZoomFactorInitial, ZoomFactor> m_zoomMapFromInitial;

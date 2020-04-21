@@ -125,6 +125,7 @@ HEADERS  += \
     src/Cmd/CmdGuidelineMoveYR.h \
     src/Cmd/CmdGuidelineRemoveXT.h \
     src/Cmd/CmdGuidelineRemoveYR.h \
+    src/Cmd/CmdGuidelineViewState.h \
     src/Cmd/CmdMediator.h \
     src/Cmd/CmdMoveBy.h \
     src/Cmd/CmdPointChangeBase.h \
@@ -415,6 +416,12 @@ HEADERS  += \
     src/Guideline/GuidelineStateHandleX.h \
     src/Guideline/GuidelineStateHandleY.h \
     src/Guideline/GuidelineValues.h \
+    src/GuidelineView/GuidelineViewStateAbstractBase.h \
+    src/GuidelineView/GuidelineViewStateContext.h \
+    src/GuidelineView/GuidelineViewStateEdit.h \
+    src/GuidelineView/GuidelineViewState.h \
+    src/GuidelineView/GuidelineViewStateHide.h \
+    src/GuidelineView/GuidelineViewStateLock.h \
     src/Import/ImportCropping.h \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
@@ -560,6 +567,7 @@ SOURCES += \
     src/Cmd/CmdGuidelineMoveYR.cpp \
     src/Cmd/CmdGuidelineRemoveXT.cpp \
     src/Cmd/CmdGuidelineRemoveYR.cpp \
+    src/Cmd/CmdGuidelineViewState.cpp \
     src/Cmd/CmdMediator.cpp \
     src/Cmd/CmdMoveBy.cpp \
     src/Cmd/CmdRedoForTest.cpp \
@@ -832,6 +840,12 @@ SOURCES += \
     src/Guideline/GuidelineStateHandleT.cpp \
     src/Guideline/GuidelineStateHandleX.cpp \
     src/Guideline/GuidelineStateHandleY.cpp \
+    src/GuidelineView/GuidelineViewStateAbstractBase.cpp \
+    src/GuidelineView/GuidelineViewStateContext.cpp \
+    src/GuidelineView/GuidelineViewStateEdit.cpp \
+    src/GuidelineView/GuidelineViewState.cpp \    
+    src/GuidelineView/GuidelineViewStateHide.cpp \
+    src/GuidelineView/GuidelineViewStateLock.cpp \    
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/Import/ImportImageExtensions.cpp \
@@ -1022,6 +1036,7 @@ INCLUDEPATH += src \
                src/Graphics \
                src/Grid \
                src/Guideline \
+               src/GuidelineView \
                src/Help \
                src/img \
                src/Import \

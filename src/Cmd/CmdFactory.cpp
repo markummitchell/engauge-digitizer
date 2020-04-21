@@ -21,6 +21,7 @@
 #include "CmdGuidelineMoveYR.h"
 #include "CmdGuidelineRemoveXT.h"
 #include "CmdGuidelineRemoveYR.h"
+#include "CmdGuidelineViewState.h"
 #include "CmdMoveBy.h"
 #include "CmdRedoForTest.h"
 #include "CmdSelectCoordSystem.h"
@@ -142,7 +143,12 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
     cmd = new CmdGuidelineRemoveYR (mainWindow,
                                     document,
                                     cmdDescription,
-                                    reader);        
+                                    reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_GUIDELINE_VIEW_STATE) {
+    cmd = new CmdGuidelineViewState (mainWindow,
+                                     document,
+                                     cmdDescription,
+                                     reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_MOVE_BY) {
     cmd = new CmdMoveBy (mainWindow,
                          document,
