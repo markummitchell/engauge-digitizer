@@ -317,8 +317,8 @@ class ParseDig:
             sys.exit (0)
 
         # Create the upgrade from the old dig file. It will be removed after
-        callEngauge (["-upgrade",
-                      digFile])
+        self.callEngauge (["-upgrade",
+                           digFile])
 
         return digFileUpgraded
 
