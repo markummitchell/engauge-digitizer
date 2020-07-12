@@ -68,10 +68,12 @@
 		<content_attribute id="money-gambling">none</content_attribute>
 	</content_rating>
 	<releases>
-		<release date="2020-01-22" version="12.2">
+		<release date="2020-07-12" version="12.2">
 			<description>
 			  <ul>
-			    <li>Guidance for setting Export settings</li>
+			    <li>Guidelines for aligning points (#352)</li>
+			    <li>Larger date range (#374)</li>
+			    <li>Snap and flatpak upgrades (#385)</li>
 			  </ul>
 			</description>
 		</release>

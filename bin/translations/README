@@ -1,0 +1,2 @@
+The translations in this directory are checked in specifically for snap builds.
+Other release builds will just overwrite these files as part of their build processes.

@@ -16,9 +16,41 @@ parts:
     after: [help]
   help:
     plugin: dump
-    stage: [engauge, documentation/engauge.qch, documentation/engauge.qhc]
-    prime: [engauge, documentation/engauge.qch, documentation/engauge.qhc]
-    after: [desktop-file]
+    stage: [engauge, documentation/engauge.qch, documentation/engauge.qhc,
+    	   bin/translations/engauge_ar.qm,
+    	   bin/translations/engauge_cs.qm,
+    	   bin/translations/engauge_de.qm,
+    	   bin/translations/engauge_es.qm,
+    	   bin/translations/engauge_fa_IR.qm,
+    	   bin/translations/engauge_fr.qm,
+    	   bin/translations/engauge_hi.qm,
+    	   bin/translations/engauge_it.qm,
+    	   bin/translations/engauge_ja.qm,
+    	   bin/translations/engauge_kk.qm,
+    	   bin/translations/engauge_ko.qm,
+    	   bin/translations/engauge_nb.qm,
+    	   bin/translations/engauge_pt.qm,
+    	   bin/translations/engauge_ru.qm,
+      	   bin/translations/engauge_zh.qm,
+	   ]
+    prime: [engauge, documentation/engauge.qch, documentation/engauge.qhc,
+    	   bin/translations/engauge_ar.qm,
+    	   bin/translations/engauge_cs.qm,
+    	   bin/translations/engauge_de.qm,
+    	   bin/translations/engauge_es.qm,
+    	   bin/translations/engauge_fa_IR.qm,
+    	   bin/translations/engauge_fr.qm,
+    	   bin/translations/engauge_hi.qm,
+    	   bin/translations/engauge_it.qm,
+    	   bin/translations/engauge_ja.qm,
+    	   bin/translations/engauge_kk.qm,
+    	   bin/translations/engauge_ko.qm,
+    	   bin/translations/engauge_nb.qm,
+    	   bin/translations/engauge_pt.qm,
+    	   bin/translations/engauge_ru.qm,
+      	   bin/translations/engauge_zh.qm,
+	   ]
+  after: [desktop-file]
   desktop-file:
     source: desktop-file
     source-type: local
