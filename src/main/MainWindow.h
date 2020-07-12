@@ -162,6 +162,9 @@ public:
   /// Accessor for commands to process the Document.
   CmdMediator *cmdMediator();
 
+  /// Digitize state in View menu
+  void digitizeState (DigitizeState state) const;
+
   /// Catch secret keypresses
   virtual bool eventFilter(QObject *, QEvent *);
   

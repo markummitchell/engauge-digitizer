@@ -115,6 +115,7 @@ HEADERS  += \
     src/Cmd/CmdCopy.h \
     src/Cmd/CmdCut.h \
     src/Cmd/CmdDelete.h \
+    src/Cmd/CmdDigitizeState.h \
     src/Cmd/CmdEditPointAxis.h \
     src/Cmd/CmdEditPointGraph.h \
     src/Cmd/CmdFactory.h \
@@ -211,6 +212,7 @@ HEADERS  += \
     src/DigitizeState/DigitizeStateContext.h \
     src/DigitizeState/DigitizeStateCurve.h \
     src/DigitizeState/DigitizeStateEmpty.h \
+    src/DigitizeState/DigitizeState.h \
     src/DigitizeState/DigitizeStatePointMatch.h \
     src/DigitizeState/DigitizeStateScale.h \    
     src/DigitizeState/DigitizeStateSegment.h \
@@ -557,6 +559,7 @@ SOURCES += \
     src/Cmd/CmdCopy.cpp \
     src/Cmd/CmdCut.cpp \
     src/Cmd/CmdDelete.cpp \
+    src/Cmd/CmdDigitizeState.cpp \
     src/Cmd/CmdEditPointAxis.cpp \
     src/Cmd/CmdEditPointGraph.cpp \
     src/Cmd/CmdFactory.cpp \

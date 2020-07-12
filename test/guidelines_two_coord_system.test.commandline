@@ -1,0 +1,1 @@
+-errorreport ../test/guidelines_two_coord_system.xml -regression -reset

@@ -7,6 +7,7 @@
 #ifndef DIGITIZE_STATE_ABSTRACT_BASE_H
 #define DIGITIZE_STATE_ABSTRACT_BASE_H
 
+#include "DigitizeState.h"
 #include "PointStyle.h"
 #include <QCursor>
 #include <QPointF>
@@ -19,19 +20,6 @@ class QSize;
 class QString;
 class QStringList;
 class Transformation;
-
-/// Set of possible states of Digitize toolbar.
-enum DigitizeState {
-  DIGITIZE_STATE_AXIS,
-  DIGITIZE_STATE_COLOR_PICKER,
-  DIGITIZE_STATE_CURVE,
-  DIGITIZE_STATE_EMPTY,
-  DIGITIZE_STATE_POINT_MATCH,
-  DIGITIZE_STATE_SEGMENT,
-  DIGITIZE_STATE_SELECT,
-  DIGITIZE_STATE_SCALE, // Out of order for backwards compatibility with pre-version 10
-  NUM_DIGITIZE_STATES
-};
 
 /// Base class for all digitizing states. This serves as an interface to DigitizeStateContext
 class DigitizeStateAbstractBase

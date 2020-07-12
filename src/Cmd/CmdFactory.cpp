@@ -11,6 +11,7 @@
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
+#include "CmdDigitizeState.h"
 #include "CmdEditPointAxis.h"
 #include "CmdEditPointGraph.h"
 #include "CmdFactory.h"
@@ -99,6 +100,11 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
                          document,
                          cmdDescription,
                          reader);
+  } else if (cmdType == DOCUMENT_SERIALIZE_CMD_DIGITIZE_STATE) {
+    cmd = new CmdDigitizeState (mainWindow,
+                                document,
+                                cmdDescription,
+                                reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_EDIT_POINT_AXIS) {
     cmd = new CmdEditPointAxis (mainWindow,
                                 document,

@@ -106,8 +106,11 @@ public:
   void setImageIsLoaded (CmdMediator *cmdMediator,
                          bool imageIsLoaded);
 
+  /// State enum for serialization
+  DigitizeState state () const;
+
   /// State name for debugging
-  QString state() const;
+  QString stateName() const;  
 
   /// Update the graphics attributes
   void updateAfterPointAddition ();
