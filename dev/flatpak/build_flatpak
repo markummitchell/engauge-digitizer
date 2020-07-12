@@ -19,7 +19,7 @@
 # 3) sudo apt install flatpak-builder
 # 4) Install engauge-specific github repo
 #      cd $HOME
-#      git clone git@github.com:flathub/io.github.markummitchell.Engauge_Digitizer.git
+#      git clone git@github.com:flathub/io.github.markummitchell.Engauge_Digitizegit
 # 5) Running this script gives error about org.kde.Sdk/x86_64/5.11 not installed so
 #      flatpak install flathub org.kde.Sdk
 #    and pick the version option matching the error message
@@ -45,7 +45,8 @@
 #      + /usr/.../xdg-desktop-portal-kde &
 #      + /usr/.../xdg-desktop-portal &                        (this connects later flatpak apps to KDE)
 #      + flatpak run io.github.markummitchell.Engauge_Digitizer
-
+# 9) Got error 'Note that the directories .. are  not in the search path set by XDG_DATA_DIRS environment variable'
+#    fix: edit ~/.bashrc and do 'export XDG_DATA_DIRS=..:$XDG_DATA_DIRS' where .. are the missing directories
 if [[ -z $1 ]]; then
     echo "Usage: build_flathub <version>"
     exit
