@@ -13,31 +13,17 @@ parts:
     build-packages: [qttools5-dev, libqt5gui5, libqt5sql5-sqlite, libfftw3-double3, libpoppler-dev, libpoppler-qt5-dev]
     stage-packages: [qttools5-dev, libqt5gui5, libqt5sql5-sqlite, libfftw3-double3, libpoppler-dev, libpoppler-qt5-dev]
     project-files: [engauge.pro]
-    after: [help]
-  translations:
+    after: [translate, help]
+  translate:
     plugin: dump
-    source: translations
-    files:
-        - translations/engauge_ar.qm : bin/translations
-        - translations/engauge_cs.qm : bin/translations
-        - translations/engauge_de.qm : bin/translations
-        - translations/engauge_es.qm : bin/translations
-        - translations/engauge_fa_IR.qm : bin/translations
-        - translations/engauge_fr.qm : bin/translations
-        - translations/engauge_hi.qm : bin/translations
-        - translations/engauge_it.qm : bin/translations
-        - translations/engauge_ja.qm : bin/translations
-        - translations/engauge_kk.qm : bin/translations
-        - translations/engauge_ko.qm : bin/translations
-        - translations/engauge_nb.qm : bin/translations
-        - translations/engauge_pt.qm : bin/translations
-        - translations/engauge_ru.qm : bin/translations
-        - translations/engauge_zh.qm : bin/translations
+    stage: [translations/*qm ]
+    prime: [translations/*qm ]
+    after: [desktop-file]
   help:
     plugin: dump
     stage: [engauge, documentation/engauge.qch, documentation/engauge.qhc]
     prime: [engauge, documentation/engauge.qch, documentation/engauge.qhc]
-  after: [desktop-file]
+    after: [desktop-file]
   desktop-file:
     source: desktop-file
     source-type: local

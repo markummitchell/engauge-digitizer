@@ -36,13 +36,17 @@ cp ../snapcraft.yaml .
 cp ../../engauge-digitizer.desktop desktop-file
 cp ../../../src/img/digitizer-32.png meta/gui/icon.png
 cp -r ../../../help .
+cp -r ../../../translations .
 cp -r ../../../src .
+
+# Note we build into root versus bin directory, so translations go into root/translations
+lrelease engauge.pro
 
 export POPPLER_INCLUDE=/usr/include/poppler/qt5
 export POPPLER_LIB=/usr/lib/x86_64-linux-gnu
 qmake engauge.pro CONFIG+=log4cpp_null CONFIG+=pdf
 make clean
-make -j4
+make -j8
 
 cd help
 ./build.bash $BUILD/documentation
