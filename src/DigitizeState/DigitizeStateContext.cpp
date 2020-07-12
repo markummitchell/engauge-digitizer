@@ -231,12 +231,7 @@ void DigitizeStateContext::setImageIsLoaded(CmdMediator *cmdMediator,
   setCursor (cmdMediator);
 }
 
-DigitizeState DigitizeStateContext::state () const
-{
-  return m_currentState;
-}
-
-QString DigitizeStateContext::stateName() const
+QString DigitizeStateContext::state() const
 {
   ENGAUGE_ASSERT (m_currentState != NUM_DIGITIZE_STATES);
 

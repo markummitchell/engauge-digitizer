@@ -12,7 +12,6 @@
 #include "CmdCopy.h"
 #include "CmdCut.h"
 #include "CmdDelete.h"
-#include "CmdDigitizeState.h"
 #include "CmdGuidelineAddXT.h"
 #include "CmdGuidelineAddYR.h"
 #include "CmdGuidelineViewState.h"
@@ -379,48 +378,6 @@ ZoomFactor MainWindow::currentZoomFactor () const
   LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::currentZoomFactor encountered unexpected zoom control";
   ENGAUGE_ASSERT (false);
   return ZOOM_1_TO_1;
-}
-
-void MainWindow::digitizeState (DigitizeState state) const
-{
-  switch (state)
-  {
-  case DIGITIZE_STATE_AXIS:
-    m_actionDigitizeAxis->setChecked (true);
-    break;
-    
-  case DIGITIZE_STATE_COLOR_PICKER:
-    m_actionDigitizeColorPicker->setChecked (true);
-    break;
-    
-  case DIGITIZE_STATE_CURVE:
-    m_actionDigitizeCurve->setChecked (true);
-    break;
-
-  case DIGITIZE_STATE_EMPTY:
-    // Noop
-    break;    
-
-  case DIGITIZE_STATE_POINT_MATCH:
-    m_actionDigitizePointMatch->setChecked (true);
-    break;
-    
-  case DIGITIZE_STATE_SCALE:
-    m_actionDigitizeScale->setChecked (true);
-    break;
-
-  case DIGITIZE_STATE_SEGMENT:
-    m_actionDigitizeSegment->setChecked (true);
-    break;
-    
-  case DIGITIZE_STATE_SELECT:
-    m_actionDigitizeSelect->setChecked (true);
-    break;
-
-  case NUM_DIGITIZE_STATES:
-    LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::digitizeState bad state";
-    break;
-  }
 }
 
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
@@ -3814,60 +3771,48 @@ void MainWindow::updateDigitizeStateIfSoftwareTriggered (DigitizeState digitizeS
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateDigitizeStateIfSoftwareTriggered";
 
-  if (m_digitizeStateContext) {
+  switch (digitizeState) {
+    case DIGITIZE_STATE_AXIS:
+      m_actionDigitizeAxis->setChecked(true);
+      slotDigitizeAxis(); // Call the slot that the setChecked call fails to trigger
+      break;
 
-    DigitizeState digitizeStateBefore = m_digitizeStateContext->state ();
-    
-    switch (digitizeState) {
-      case DIGITIZE_STATE_AXIS:
-        m_actionDigitizeAxis->setChecked(true);
-        slotDigitizeAxis(); // Call the slot that the setChecked call fails to trigger
-        break;
+    case DIGITIZE_STATE_COLOR_PICKER:
+      m_actionDigitizeColorPicker->setChecked(true);
+      slotDigitizeColorPicker(); // Call the slot that the setChecked call fails to trigger
+      break;
 
-      case DIGITIZE_STATE_COLOR_PICKER:
-        m_actionDigitizeColorPicker->setChecked(true);
-        slotDigitizeColorPicker(); // Call the slot that the setChecked call fails to trigger
-        break;
+    case DIGITIZE_STATE_CURVE:
+      m_actionDigitizeCurve->setChecked(true);
+      slotDigitizeCurve(); // Call the slot that the setChecked call fails to trigger
+      break;
 
-      case DIGITIZE_STATE_CURVE:
-        m_actionDigitizeCurve->setChecked(true);
-        slotDigitizeCurve(); // Call the slot that the setChecked call fails to trigger
-        break;
+    case DIGITIZE_STATE_EMPTY:
+      break;
 
-      case DIGITIZE_STATE_EMPTY:
-        break;
+    case DIGITIZE_STATE_POINT_MATCH:
+      m_actionDigitizePointMatch->setChecked(true);
+      slotDigitizePointMatch(); // Call the slot that the setChecked call fails to trigger
+      break;
 
-      case DIGITIZE_STATE_POINT_MATCH:
-        m_actionDigitizePointMatch->setChecked(true);
-        slotDigitizePointMatch(); // Call the slot that the setChecked call fails to trigger
-        break;
+    case DIGITIZE_STATE_SCALE:
+      m_actionDigitizeScale->setChecked(true);
+      slotDigitizeScale(); // Call the slot that the setChecked call fails to trigger
+      break;
 
-      case DIGITIZE_STATE_SCALE:
-        m_actionDigitizeScale->setChecked(true);
-        slotDigitizeScale(); // Call the slot that the setChecked call fails to trigger
-        break;
+    case DIGITIZE_STATE_SEGMENT:
+      m_actionDigitizeSegment->setChecked(true);
+       slotDigitizeSegment(); // Call the slot that the setChecked call fails to trigger
+      break;
 
-      case DIGITIZE_STATE_SEGMENT:
-        m_actionDigitizeSegment->setChecked(true);
-        slotDigitizeSegment(); // Call the slot that the setChecked call fails to trigger
-        break;
+    case DIGITIZE_STATE_SELECT:
+      m_actionDigitizeSelect->setChecked(true);
+      slotDigitizeSelect(); // Call the slot that the setChecked call fails to trigger
+      break;
 
-      case DIGITIZE_STATE_SELECT:
-        m_actionDigitizeSelect->setChecked(true);
-        slotDigitizeSelect(); // Call the slot that the setChecked call fails to trigger
-        break;
-
-      default:
-        LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::updateDigitizeStateIfSoftwareTriggered";
-        break;
-    }
-
-    // Create Cmd that will change the state
-    CmdAbstract *cmd = new CmdDigitizeState (*this,
-                                             m_cmdMediator->document(),
-                                             digitizeStateBefore,
-                                             digitizeState);
-    m_cmdMediator->push (cmd);
+    default:
+      LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::updateDigitizeStateIfSoftwareTriggered";
+      break;
   }
 }
 
