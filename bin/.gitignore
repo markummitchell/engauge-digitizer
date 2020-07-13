@@ -1,5 +1,6 @@
 *.dll
 digitizer.ico
+documentation
 engauge
 engauge.exe
 engauge_error_report.xml
@@ -15,4 +16,4 @@ imageformats
 platforms
 printsupport
 sqldrivers
-
+translations
