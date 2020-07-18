@@ -18,7 +18,7 @@ const double DEFAULT_POINT_SEPARATION = 25;
 const double DEFAULT_MIN_LENGTH = 2;
 const double DEFAULT_LINE_WIDTH = 4;
 const ColorPalette DEFAULT_LINE_COLOR (COLOR_PALETTE_GREEN);
-const double DEFAULT_INACTIVE_OPACITY = INACTIVE_OPACITY_64;
+const InactiveOpacity DEFAULT_INACTIVE_OPACITY = INACTIVE_OPACITY_64;
 
 DocumentModelSegments::DocumentModelSegments() :
   m_pointSeparation (DEFAULT_POINT_SEPARATION),
@@ -67,7 +67,7 @@ bool DocumentModelSegments::fillCorners () const
   return m_fillCorners;
 }
 
-int DocumentModelSegments::inactiveOpacity() const
+InactiveOpacity DocumentModelSegments::inactiveOpacity() const
 {
   return m_inactiveOpacity;
 }
@@ -88,13 +88,37 @@ void DocumentModelSegments::loadXml(QXmlStreamReader &reader)
 
   bool success = true;
 
-  // Read until end of this subtree
-  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
-  (reader.name() != DOCUMENT_SERIALIZE_SEGMENTS)){
-    loadNextFromReader(reader);
-    if (reader.atEnd()) {
-      success = false;
-      break;
+  QXmlStreamAttributes attributes = reader.attributes ();
+
+  // DOCUMENT_SERIALIZE_SEGMENTS_INACTIVE_OPACITY was added in version 13 so we allow it to be missing in this test
+  if (attributes.hasAttribute(DOCUMENT_SERIALIZE_SEGMENTS_POINT_SEPARATION) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_SEGMENTS_MIN_LENGTH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_SEGMENTS_FILL_CORNERS) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH) &&
+      attributes.hasAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_COLOR)) {
+
+    // Boolean values
+    QString fillCorners = attributes.value(DOCUMENT_SERIALIZE_SEGMENTS_FILL_CORNERS).toString();
+
+    setPointSeparation (attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_POINT_SEPARATION).toDouble());
+    setMinLength (attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_MIN_LENGTH).toDouble());
+    setFillCorners (fillCorners == DOCUMENT_SERIALIZE_BOOL_TRUE);
+    setLineWidth (attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH).toDouble());
+    setLineColor (static_cast<ColorPalette> (attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_LINE_COLOR).toInt()));
+    if (attributes.hasAttribute (DOCUMENT_SERIALIZE_SEGMENTS_INACTIVE_OPACITY)) {
+      setInactiveOpacity (static_cast<InactiveOpacity>  (attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_INACTIVE_OPACITY).toInt ()));
+    } else{
+      setInactiveOpacity (DEFAULT_INACTIVE_OPACITY_ENUM);
+    }
+
+    // Read until end of this subtree
+    while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
+    (reader.name() != DOCUMENT_SERIALIZE_SEGMENTS)){
+      loadNextFromReader(reader);
+      if (reader.atEnd()) {
+        success = false;
+        break;
+      }
     }
   }
 
@@ -150,7 +174,7 @@ void DocumentModelSegments::setFillCorners (bool fillCorners)
   m_fillCorners = fillCorners;
 }
 
-void DocumentModelSegments::setInactiveOpacity (int inactiveOpacity)
+void DocumentModelSegments::setInactiveOpacity (InactiveOpacity inactiveOpacity)
 {
   m_inactiveOpacity = inactiveOpacity;
 }

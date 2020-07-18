@@ -23,7 +23,10 @@ class ViewPreview;
 
 typedef QList<GraphicsPoint*> GraphicsPoints;
 
-/// Dialog for editing Segments settings, for DigitizeStateSegment.
+/// Dialog for editing Segments settings, for DigitizeStateSegment. This uses a timer
+/// for the inactive opacity previewing so changing that settings results in preview
+/// window temporarily showing the inactive opacity color, then the regular color
+/// returns
 class DlgSettingsSegments : public DlgSettingsAbstractBase
 {
   Q_OBJECT;
@@ -51,12 +54,21 @@ protected:
 
 private:
 
-  void clearPoints();
+  enum HoverState {
+    HOVER_ACTIVE,
+    HOVER_INACTIVE
+  };
+
+  void clearPointsOneScene (GraphicsPoints &points);
   void createControls (QGridLayout *layout, int &row);
   void createPreview (QGridLayout *layout, int &row);
   QImage createPreviewImage () const;
   void updateControls();
   void updatePreview();
+  void updatePreviewOneScene (QGraphicsScene *scenePreview,
+                              QList<Segment*> &segments,
+                              GraphicsPoints &points,
+                              HoverState hoverState);
 
   QSpinBox *m_spinMinLength;
   QSpinBox *m_spinPointSeparation;
@@ -65,14 +77,18 @@ private:
   QComboBox *m_cmbLineColor;
   QComboBox *m_cmbInactiveOpacity;
 
-  QGraphicsScene *m_scenePreview;
-  ViewPreview *m_viewPreview;
+  QGraphicsScene *m_scenePreviewActive;
+  QGraphicsScene *m_scenePreviewInactive;
+  ViewPreview *m_viewPreviewActive;
+  ViewPreview *m_viewPreviewInactive;
 
   DocumentModelSegments *m_modelSegmentsBefore;
   DocumentModelSegments *m_modelSegmentsAfter;
 
-  QList<Segment*> m_segments; // Segments extracted from image
-  GraphicsPoints m_points; // Points spread along the segments
+  QList<Segment*> m_segmentsActive; // Segments extracted from image
+  QList<Segment*> m_segmentsInactive; // Segments extracted from image
+  GraphicsPoints m_pointsActive; // Points spread along the segments
+  GraphicsPoints m_pointsInactive; // Points spread along the segments
 
   bool m_loading; // Flag that prevents multiple preview updates during loading while controls get loaded
 };

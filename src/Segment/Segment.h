@@ -48,6 +48,9 @@ public:
   /// Get method for number of lines
   int lineCount() const;
 
+  /// Disable hover events. This is used only by DlgSettingsSegments to stop hover events in the preview window
+  void lockHoverState ();
+
   /// Try to compress a segment that was just completed, by folding together line from
   /// point i to point i+1, with the line from i+1 to i+2, then the line from i+2 to i+3,
   /// until one of the points is more than a half pixel from the folded line. this should

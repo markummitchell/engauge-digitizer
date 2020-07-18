@@ -7,6 +7,7 @@
 #include "DataKey.h"
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
+#include "InactiveOpacity.h"
 #include "Logger.h"
 #include <QGraphicsScene>
 #include <QPen>
@@ -83,7 +84,7 @@ void SegmentLine::setHover (bool hover)
     QColor colorSoft (colorOpaque.red (),
                       colorOpaque.green (),
                       colorOpaque.blue (),
-                      64);
+                      inactiveOpacityEnumToAlpha (m_modelSegments.inactiveOpacity()));
 
     setPen (QPen (QBrush (colorSoft),
                   m_modelSegments.lineWidth()));

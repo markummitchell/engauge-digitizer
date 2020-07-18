@@ -9,6 +9,7 @@
 
 #include "ColorPalette.h"
 #include "DocumentModelAbstractBase.h"
+#include "InactiveOpacity.h"
 
 class Document;
 class QTextStream;
@@ -33,7 +34,7 @@ public:
   bool fillCorners () const;
 
   /// Get method for inactive opacity
-  int inactiveOpacity () const;
+  InactiveOpacity inactiveOpacity () const;
 
   /// Get method for line color.
   ColorPalette lineColor() const;
@@ -59,7 +60,7 @@ public:
   void setFillCorners (bool fillCorners);
 
   /// Set method for inactive opacity.
-  void setInactiveOpacity (int inactiveOpacity);
+  void setInactiveOpacity (InactiveOpacity inactiveOpacity);
 
   /// Set method for line color.
   void setLineColor(ColorPalette lineColor);
@@ -80,7 +81,7 @@ private:
   bool m_fillCorners;
   double m_lineWidth;
   ColorPalette m_lineColor;
-  int m_inactiveOpacity;
+  InactiveOpacity m_inactiveOpacity;
 };
 
 #endif // DOCUMENT_MODEL_SEGMENTS_H

@@ -382,6 +382,16 @@ int Segment::lineCount() const
   return m_lines.count();
 }
 
+void Segment::lockHoverState()
+{
+  QList<SegmentLine*>::iterator itr;
+  for (itr = m_lines.begin(); itr != m_lines.end(); itr++) {
+
+    SegmentLine *line = *itr;
+    line->setAcceptHoverEvents (false);
+  }
+}
+
 bool Segment::pointIsCloseToLine(double xLeft,
                                  double yLeft,
                                  double xInt,
