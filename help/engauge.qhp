@@ -44,7 +44,8 @@
 	  <keyword name="Multiple coordinate systems" ref="answermultiplecoordsystems.html"/> 
 	  <keyword name="Point graph" ref="answerpointgraph.html"/> 
 	  <keyword name="Select mode" ref="answerselectmode.html"/> 
-	  <keyword name="Selecting" ref="answerselecting.html"/> 
+	  <keyword name="Selecting" ref="answerselecting.html"/>
+	  <keyword name="Timezone" ref="answertimezone.html"/> 	  
         </keywords>
         <files>
             <file>animation.png</file>
@@ -57,7 +58,8 @@
             <file>answerout.html</file>
             <file>answerpointgraph.html</file>
             <file>answerselecting.html</file>
-            <file>answerselectmode.html</file>
+	    <file>answerselectmode.html</file>
+            <file>answertimezone.html</file>	    
             <file>betteraccuracy.html</file>
             <file>commandlineoptions.html</file>
             <file>contextmenuwindows.html</file>
