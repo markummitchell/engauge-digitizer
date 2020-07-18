@@ -9,6 +9,7 @@
 #include "DlgSettingsSegments.h"
 #include "EngaugeAssert.h"
 #include "GeometryWindow.h"
+#include "InactiveOpacity.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "PointStyle.h"
@@ -126,8 +127,36 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   m_cmbLineColor = new QComboBox;
   m_cmbLineColor->setWhatsThis (tr ("Select a color for the lines drawn along a segment"));
   populateColorComboWithTransparent (*m_cmbLineColor);
-  connect (m_cmbLineColor, SIGNAL (activated (const QString &)), this, SLOT (slotLineColor (const QString &))); // activated() ignores code changes
+  connect (m_cmbLineColor, SIGNAL (activated (const QString &)),
+           this, SLOT (slotLineColor (const QString &))); // activated() ignores code changes
   layout->addWidget (m_cmbLineColor, row++, 2);
+
+  QLabel *labelInactiveOpacity = new QLabel(QString ("%1:").arg (tr ("Inactive opacity")));
+  layout->addWidget (labelInactiveOpacity, row, 1);
+
+  m_cmbInactiveOpacity = new QComboBox;
+  m_cmbInactiveOpacity->setWhatsThis (tr ("Select an opacity for the segments that are not under the cursor"));
+  m_cmbInactiveOpacity->addItem (inactiveOpacityEnumToQString (INACTIVE_OPACITY_0),
+                                QVariant (INACTIVE_OPACITY_0));
+  m_cmbInactiveOpacity->addItem (inactiveOpacityEnumToQString (INACTIVE_OPACITY_32),
+                                QVariant (INACTIVE_OPACITY_32));
+  m_cmbInactiveOpacity->addItem (inactiveOpacityEnumToQString (INACTIVE_OPACITY_64),
+                                QVariant (INACTIVE_OPACITY_64));
+  m_cmbInactiveOpacity->addItem (inactiveOpacityEnumToQString (INACTIVE_OPACITY_96),
+                                QVariant (INACTIVE_OPACITY_96));
+  m_cmbInactiveOpacity->addItem (inactiveOpacityEnumToQString (INACTIVE_OPACITY_128),
+                                QVariant (INACTIVE_OPACITY_128));
+  m_cmbInactiveOpacity->addItem (inactiveOpacityEnumToQString (INACTIVE_OPACITY_160),
+                                QVariant (INACTIVE_OPACITY_160));
+  m_cmbInactiveOpacity->addItem (inactiveOpacityEnumToQString (INACTIVE_OPACITY_192),
+                                QVariant (INACTIVE_OPACITY_192));
+  m_cmbInactiveOpacity->addItem (inactiveOpacityEnumToQString (INACTIVE_OPACITY_224),
+                                QVariant (INACTIVE_OPACITY_224));
+  m_cmbInactiveOpacity->addItem (inactiveOpacityEnumToQString (INACTIVE_OPACITY_256),
+                                QVariant (INACTIVE_OPACITY_256));
+  connect (m_cmbInactiveOpacity, SIGNAL (activated (const QString &)),
+           this, SLOT (slotInactiveOpacity (const QString &))); // activated() ignores code changes
+  layout->addWidget (m_cmbInactiveOpacity, row++, 2);
 }
 
 void DlgSettingsSegments::createOptionalSaveDefault (QHBoxLayout * /* layout */)
@@ -281,6 +310,10 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   ENGAUGE_ASSERT (indexLineColor >= 0);
   m_cmbLineColor->setCurrentIndex(indexLineColor);
 
+  int indexInactiveOpacity = m_cmbInactiveOpacity->findData (QVariant (m_modelSegmentsAfter->inactiveOpacity()));
+  ENGAUGE_ASSERT (indexInactiveOpacity >= 0);
+  m_cmbInactiveOpacity->setCurrentIndex (indexInactiveOpacity);
+
   // Loading finishes here
   m_loading = false;
 
@@ -301,6 +334,15 @@ void DlgSettingsSegments::slotFillCorners (int state)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotFillCorner";
 
   m_modelSegmentsAfter->setFillCorners(state == Qt::Checked);
+  updateControls();
+  updatePreview();
+}
+
+void DlgSettingsSegments::slotInactiveOpacity (const QString &)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotInactiveOpacity";
+
+  m_modelSegmentsAfter->setInactiveOpacity(inactiveOpacityEnumToAlpha (static_cast<InactiveOpacity> (m_cmbInactiveOpacity->currentData().toInt())));
   updateControls();
   updatePreview();
 }

@@ -40,6 +40,7 @@ public:
 
 private slots:
   void slotFillCorners (int state);
+  void slotInactiveOpacity (const QString &);
   void slotLineColor (const QString &);
   void slotLineWidth (int);
   void slotMinLength (const QString &);
@@ -62,6 +63,7 @@ private:
   QCheckBox *m_chkFillCorners;
   QSpinBox *m_spinLineWidth;
   QComboBox *m_cmbLineColor;
+  QComboBox *m_cmbInactiveOpacity;
 
   QGraphicsScene *m_scenePreview;
   ViewPreview *m_viewPreview;

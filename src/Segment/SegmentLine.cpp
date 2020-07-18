@@ -71,16 +71,22 @@ Segment *SegmentLine::segment() const
 
 void SegmentLine::setHover (bool hover)
 {
+  QColor colorOpaque (ColorPaletteToQColor (m_modelSegments.lineColor()));
+
   if (hover) {
 
-    QColor color (ColorPaletteToQColor (m_modelSegments.lineColor()));
-
-    setPen (QPen (QBrush (color),
+    setPen (QPen (QBrush (colorOpaque),
                   m_modelSegments.lineWidth()));
 
   } else {
 
-    setPen (QPen (Qt::transparent));
+    QColor colorSoft (colorOpaque.red (),
+                      colorOpaque.green (),
+                      colorOpaque.blue (),
+                      64);
+
+    setPen (QPen (QBrush (colorSoft),
+                  m_modelSegments.lineWidth()));
 
   }
 }

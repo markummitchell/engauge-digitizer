@@ -32,6 +32,9 @@ public:
   /// Get method for fill corners.
   bool fillCorners () const;
 
+  /// Get method for inactive opacity
+  int inactiveOpacity () const;
+
   /// Get method for line color.
   ColorPalette lineColor() const;
 
@@ -55,6 +58,9 @@ public:
   /// Set method for fill corners.
   void setFillCorners (bool fillCorners);
 
+  /// Set method for inactive opacity.
+  void setInactiveOpacity (int inactiveOpacity);
+
   /// Set method for line color.
   void setLineColor(ColorPalette lineColor);
 
@@ -74,6 +80,7 @@ private:
   bool m_fillCorners;
   double m_lineWidth;
   ColorPalette m_lineColor;
+  int m_inactiveOpacity;
 };
 
 #endif // DOCUMENT_MODEL_SEGMENTS_H

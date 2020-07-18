@@ -7,6 +7,7 @@
 #include "CmdMediator.h"
 #include "DocumentModelSegments.h"
 #include "DocumentSerialize.h"
+#include "InactiveOpacity.h"
 #include "Logger.h"
 #include <QObject>
 #include <QTextStream>
@@ -17,13 +18,15 @@ const double DEFAULT_POINT_SEPARATION = 25;
 const double DEFAULT_MIN_LENGTH = 2;
 const double DEFAULT_LINE_WIDTH = 4;
 const ColorPalette DEFAULT_LINE_COLOR (COLOR_PALETTE_GREEN);
+const double DEFAULT_INACTIVE_OPACITY = INACTIVE_OPACITY_64;
 
 DocumentModelSegments::DocumentModelSegments() :
   m_pointSeparation (DEFAULT_POINT_SEPARATION),
   m_minLength (DEFAULT_MIN_LENGTH),
   m_fillCorners (false),
   m_lineWidth (DEFAULT_LINE_WIDTH),
-  m_lineColor (DEFAULT_LINE_COLOR)
+  m_lineColor (DEFAULT_LINE_COLOR),
+  m_inactiveOpacity (DEFAULT_INACTIVE_OPACITY)
 {
 }
 
@@ -32,7 +35,8 @@ DocumentModelSegments::DocumentModelSegments(const Document &document) :
   m_minLength (document.modelSegments().minLength()),
   m_fillCorners (document.modelSegments().fillCorners()),
   m_lineWidth (document.modelSegments().lineWidth()),
-  m_lineColor (document.modelSegments().lineColor())
+  m_lineColor (document.modelSegments().lineColor()),
+  m_inactiveOpacity (document.modelSegments().inactiveOpacity())
 {
 }
 
@@ -41,7 +45,8 @@ DocumentModelSegments::DocumentModelSegments(const DocumentModelSegments &other)
   m_minLength (other.minLength()),
   m_fillCorners (other.fillCorners ()),
   m_lineWidth (other.lineWidth()),
-  m_lineColor (other.lineColor())
+  m_lineColor (other.lineColor()),
+  m_inactiveOpacity (other.inactiveOpacity())
 {
 }
 
@@ -52,6 +57,7 @@ DocumentModelSegments &DocumentModelSegments::operator=(const DocumentModelSegme
   m_fillCorners = other.fillCorners ();
   m_lineWidth = other.lineWidth();
   m_lineColor = other.lineColor();
+  m_inactiveOpacity = other.inactiveOpacity();
 
   return *this;
 }
@@ -59,6 +65,11 @@ DocumentModelSegments &DocumentModelSegments::operator=(const DocumentModelSegme
 bool DocumentModelSegments::fillCorners () const
 {
   return m_fillCorners;
+}
+
+int DocumentModelSegments::inactiveOpacity() const
+{
+  return m_inactiveOpacity;
 }
 
 ColorPalette DocumentModelSegments::lineColor() const
@@ -114,6 +125,7 @@ void DocumentModelSegments::printStream(QString indentation,
   str << indentation << "fillCorners=" << (m_fillCorners ? "true" : "false") << "\n";
   str << indentation << "lineWidth=" << m_lineWidth << "\n";
   str << indentation << "lineColor=" << colorPaletteToString (m_lineColor) << "\n";
+  str << indentation << "inactiveOpacity=" << m_inactiveOpacity << "\n";
 }
 
 void DocumentModelSegments::saveXml(QXmlStreamWriter &writer) const
@@ -129,12 +141,18 @@ void DocumentModelSegments::saveXml(QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH, QString::number (m_lineWidth));
   writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_COLOR, QString::number (m_lineColor));
   writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_COLOR_STRING, colorPaletteToString (m_lineColor));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_INACTIVE_OPACITY, QString::number (m_inactiveOpacity));
   writer.writeEndElement();
 }
 
 void DocumentModelSegments::setFillCorners (bool fillCorners)
 {
   m_fillCorners = fillCorners;
+}
+
+void DocumentModelSegments::setInactiveOpacity (int inactiveOpacity)
+{
+  m_inactiveOpacity = inactiveOpacity;
 }
 
 void DocumentModelSegments::setLineColor(ColorPalette lineColor)

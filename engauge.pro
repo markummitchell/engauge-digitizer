@@ -426,6 +426,7 @@ HEADERS  += \
     src/Import/ImportCroppingUtilBase.h \
     src/Import/ImportCroppingUtilNonPdf.h \
     src/Import/ImportImageExtensions.h \
+    src/util/InactiveOpacity.h \
     src/util/LinearToLog.h \
     src/Line/LineStyle.h \
     src/Load/LoadFileInfo.h \
@@ -849,6 +850,7 @@ SOURCES += \
     src/Import/ImportCroppingUtilBase.cpp \
     src/Import/ImportCroppingUtilNonPdf.cpp \
     src/Import/ImportImageExtensions.cpp \
+    src/util/InactiveOpacity.cpp \
     src/util/LinearToLog.cpp \
     src/Line/LineStyle.cpp \
     src/Load/LoadFileInfo.cpp \
