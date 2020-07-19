@@ -9,7 +9,6 @@
 #include "Logger.h"
 #include <QDateTime>
 #include <qmath.h>
-#include <QtGlobal>
 #include <QTimeZone>
 
 FormatDateTime::FormatDateTime()
@@ -498,9 +497,5 @@ QValidator::State FormatDateTime::parseInput (CoordUnitsDate coordUnitsDate,
 
 qint64 FormatDateTime::toSecsSinceEpoch (const QDateTime &dt) const
 {
-#ifdef QT_VERSION >= QT_VERSION_CHECK (5, 8, 0)
-  return dt.toSecsSinceEpoch ();
-#else
-  return dt.toMSecsSinceEpoch () / qint64(1000);
-#endif
+  return dt.toMSecsSinceEpoch () / static_cast<qint64> (1000);
 }
