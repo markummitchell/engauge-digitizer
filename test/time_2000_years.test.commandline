@@ -1,0 +1,1 @@
+-errorreport ../test/time_2000_years.dig -regression -reset
