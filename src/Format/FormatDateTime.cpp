@@ -9,6 +9,7 @@
 #include "Logger.h"
 #include <QDateTime>
 #include <qmath.h>
+#include <QtGlobal>
 #include <QTimeZone>
 
 FormatDateTime::FormatDateTime()
@@ -140,11 +141,7 @@ QString FormatDateTime::formatOutput (CoordUnitsDate coordUnitsDate,
   // We are using 64 bits resolution on seconds from epoch rather than time_t which has 32 bits resolution (and
   // is therefore limited to 1970 to 2038). Time value is negative for pre-epoch. Grep for toSecsSinceEpoch in this same file
   QDateTime dt;
-  if (value > 0) {
-    dt = fromSecsSinceEpoch ((unsigned long int) (value));
-  } else {
-    dt = fromSecsSinceEpoch ((long int) (value));
-  }
+  dt = fromSecsSinceEpoch (static_cast<qint64> (value));
 
   return dt.toLocalTime ().toString (format); // Convert using local time to prevent addition of utc offset
 }
@@ -501,5 +498,9 @@ QValidator::State FormatDateTime::parseInput (CoordUnitsDate coordUnitsDate,
 
 qint64 FormatDateTime::toSecsSinceEpoch (const QDateTime &dt) const
 {
-  return dt.toMSecsSinceEpoch () / 1000;
+#ifdef QT_VERSION >= QT_VERSION_CHECK (5, 8, 0)
+  return dt.toSecsSinceEpoch ();
+#else
+  return dt.toMSecsSinceEpoch () / qint64(1000);
+#endif
 }
