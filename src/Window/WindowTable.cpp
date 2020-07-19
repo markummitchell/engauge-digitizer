@@ -4,8 +4,13 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include <QApplication>
+#include <QClipboard>
 #include <qdebug.h>
+#include <QDrag>
+#include <QGuiApplication>
 #include <QHeaderView>
+#include <QMimeData>
 #include <QMouseEvent>
 #include <QStandardItemModel>
 #include "WindowModelBase.h"
@@ -42,6 +47,64 @@ WindowTable::~WindowTable()
 {
 }
 
+void WindowTable::doDragAndClipboardCopy ()
+{
+  // Drag operation
+  QDrag *drag = new QDrag (this);
+  QMimeData *mimeData = new QMimeData;
+
+  mimeData->setText (exportText ());
+  drag->setMimeData (mimeData);
+
+  drag->exec (Qt::CopyAction);
+
+  // Copy to clipboard. In linux the result can be checked using 'xclip c -o'
+  QGuiApplication::clipboard()->setText (exportText ());
+}
+
+QString WindowTable::exportText () const
+{
+  QString rtn;
+
+  QModelIndexList indexes = selectionModel ()->selection ().indexes ();
+  if (indexes.count () > 0) {
+
+    // Copy the rectangular region around the selected cells. Tab-separation
+    // seems to nicely copy to spreadsheets and other apps
+    int rowMin, rowMax, colMin, colMax;
+    for (int i = 0; i < indexes.count(); i++) {
+      QModelIndex index = indexes.at (i);
+      if (i == 0 || index.row() < rowMin) {
+        rowMin = index.row();
+      }
+      if (i == 0 || index.column() < colMin) {
+        colMin = index.column();
+      }
+      if (i == 0 || rowMax < index.row()) {
+        rowMax = index.row();
+      }
+      if (i == 0 || colMax < index.column()) {
+        colMax = index.column();
+      }
+    }
+
+    // Output table with tab separation
+    for (int row = rowMin; row <= rowMax; row++) {
+      for (int col = colMin; col <= colMax; col++) {
+        if (col > 0) {
+          rtn += QString ("\t");
+        }
+
+        rtn += model()->index (row, col).data().toString();
+      }
+
+      rtn += QString ("\n");
+    }
+  }
+
+  return rtn;
+}
+
 void WindowTable::focusInEvent (QFocusEvent *event)
 {
   QTableView::focusInEvent (event);
@@ -54,6 +117,33 @@ void WindowTable::focusOutEvent (QFocusEvent *event)
   QTableView::focusOutEvent (event);
 
   emit signalTableStatusChange ();
+}
+
+void WindowTable::mouseMoveEvent (QMouseEvent *event)
+{
+  // Only use left clicks
+  if (! (event->buttons() & Qt::LeftButton)) {
+    return;
+  }
+
+  // Ignore small moves
+  if ((event->pos() - m_pressPos).manhattanLength() < QApplication::startDragDistance ()) {
+    return;
+  }
+
+  doDragAndClipboardCopy ();
+
+  QTableView::mouseMoveEvent (event);
+}
+
+void WindowTable::mousePressEvent (QMouseEvent *event)
+{
+  // Only use left clicks
+  if (event->button() == Qt::LeftButton) {
+    m_pressPos = event->pos();
+  }
+
+  QTableView::mousePressEvent (event);
 }
 
 void WindowTable::selectionChanged(const QItemSelection &selected,
