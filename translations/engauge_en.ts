@@ -5075,87 +5075,102 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="400"/>
+        <location filename="../src/main/main.cpp" line="398"/>
+        <source>where</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="404"/>
         <source>Enables extra debug information. Used for debugging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="406"/>
+        <location filename="../src/main/main.cpp" line="410"/>
         <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="412"/>
+        <location filename="../src/main/main.cpp" line="416"/>
         <source>Specifies an error report file as input. Used for debugging and regression testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="418"/>
+        <location filename="../src/main/main.cpp" line="422"/>
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="424"/>
+        <location filename="../src/main/main.cpp" line="428"/>
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="430"/>
+        <location filename="../src/main/main.cpp" line="434"/>
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="436"/>
+        <location filename="../src/main/main.cpp" line="440"/>
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="442"/>
+        <location filename="../src/main/main.cpp" line="446"/>
         <source>Show this help information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="448"/>
+        <location filename="../src/main/main.cpp" line="452"/>
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="454"/>
+        <location filename="../src/main/main.cpp" line="458"/>
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="461"/>
+        <location filename="../src/main/main.cpp" line="465"/>
         <source>Set the window style to one of the styles listed by the command line option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="469"/>
+        <location filename="../src/main/main.cpp" line="473"/>
         <source>Show a list of available styles that can be used with the command line option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="476"/>
+        <location filename="../src/main/main.cpp" line="480"/>
         <source>Upgrade files opened at startup to the most recent version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="482"/>
+        <location filename="../src/main/main.cpp" line="486"/>
         <source>File(s) to be imported or opened at startup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="527"/>
+        <location filename="../src/main/main.cpp" line="494"/>
+        <source>Useful environment variables:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="499"/>
+        <source>Set timezone to add or subtract hours in time values. Timezone values are listed as TZ Database Names in Wikipedia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/main/main.cpp" line="543"/>
         <source>Could not write to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="540"/>
+        <location filename="../src/main/main.cpp" line="556"/>
         <source>Upgraded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="542"/>
+        <location filename="../src/main/main.cpp" line="558"/>
         <source>to</source>
         <translation type="unfinished"></translation>
     </message>

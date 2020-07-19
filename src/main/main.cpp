@@ -395,6 +395,10 @@ void showUsageAndQuit ()
       << "[&lt;load_file1&gt;] [&lt;load_file2&gt;] ..." << endl
       << "<table>"
       << "<tr>"
+      << "<td>" << QObject::tr ("where") << "</td>"
+      << "<td>&nbsp;</td>"
+      << "</tr>"
+      << "<tr>"
       << "<td>" << DASH_DEBUG.toLatin1().data() << "</td>"
       << "<td>"
       << QObject::tr ("Enables extra debug information. Used for debugging").toLatin1().data()
@@ -481,6 +485,18 @@ void showUsageAndQuit ()
       << "<td>"
       << QObject::tr ("File(s) to be imported or opened at startup").toLatin1().data()
       << "</td>"
+      << "</tr>"
+      << "<tr>"
+      << "<td>&nbsp;</td>"
+      << "<td>&nbsp;</td>"
+      << "</tr>"
+      << "<tr>"
+      << "<td>" << QObject::tr ("Useful environment variables:") << "</td>"
+      << "<td>&nbsp;</td>"
+      << "</tr>"
+      << "<tr>"
+      << "<td>TZ</td>" // Do not translate
+      << "<td>" << QObject::tr ("Set timezone to add or subtract hours in time values. Timezone values are listed as TZ Database Names in Wikipedia").toLatin1().data() << "</td>"
       << "</tr>"
       << "</table></html>";
 
