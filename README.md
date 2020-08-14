@@ -1,3 +1,5 @@
+| Are you an experienced software developer looking to make a difference? We are looking for somebody who is interested in leading the automation of Engauge. Options may include machine learning. See [issue 389](https://github.com/markummitchell/engauge-digitizer/issues/389). Have your name asociated with the next 230,000 github downloads and 18,000 snap runs.|
+
 Links                                                                            | Comments
 -------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 [Project](http://markummitchell.github.io/engauge-digitizer)                     | Explains what Engauge Digitizer does and how it is used                     |
