@@ -23,9 +23,9 @@ QTextStream &Compatibility::endl (QTextStream &str)
   //    and the performance gain from skipping the flush that end() adds is insignificant
   
 #if QT_VERSION < QT_VERSION_CHECK (5, 14, 0)
-  str << endl;
+  str << endl; // Function
 #else
-  str << Qt::endl;
+  str << Qt::endl; // Enum
 #endif
 
   return str;
@@ -35,9 +35,9 @@ QTextStream &Compatibility::flush (QTextStream &str)
 {
   
 #if QT_VERSION < QT_VERSION_CHECK (5, 14, 0)
-  str << std::flush;
+  str << flush; // Function
 #else
-  str << Qt::flush;
+  str << Qt::flush; // Enum
 #endif
 
   return str;
