@@ -18,6 +18,7 @@
 #include "CmdSelectCoordSystem.h"
 #include "CmdStackShadow.h"
 #include "ColorFilter.h"
+#include "Compatibility.h"
 #include "Crc32.h"
 #include "CreateFacade.h"
 #include "Curve.h"
@@ -515,7 +516,7 @@ void MainWindow::fileExtractImage (const QString &fileName)
       QFile csv (csvFile);
       if (csv.open (QIODevice::WriteOnly | QIODevice::Text)) {
           QTextStream str (&csv);
-          str << crcResult << Qt::endl;
+          str << crcResult << Compatibility::endl;
       }
     }
 

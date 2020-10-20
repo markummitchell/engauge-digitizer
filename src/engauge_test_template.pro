@@ -121,6 +121,7 @@ HEADERS  += \
     Color/ColorFilterStrategySaturation.h \
     Color/ColorFilterStrategyValue.h \
     Color/ColorPalette.h \
+    util/Compatibility.h \
     Coord/CoordScale.h \
     Coord/CoordsType.h \
     Coord/CoordSymbol.h \
@@ -566,6 +567,7 @@ SOURCES += \
     Color/ColorFilterStrategySaturation.cpp \
     Color/ColorFilterStrategyValue.cpp \
     Color/ColorPalette.cpp \
+    util/Compatibility.cpp \
     Coord/CoordScale.cpp \
     Coord/CoordsType.cpp \
     Coord/CoordSymbol.cpp \

@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "Compatibility.h"
 #include "CoordSymbol.h"
 #include "FormatDegreesMinutesSecondsBase.h"
 #include "Logger.h"
@@ -99,7 +100,7 @@ QValidator::State FormatDegreesMinutesSecondsBase::parseInput (const QString &st
 
   // Split on spaces
   QStringList fields = string.split (QRegExp ("\\s+"),
-                                     Qt::SkipEmptyParts);
+                                     Compatibility::SkipEmptyParts ());
 
   QString field0, field1, field2; // Degrees, minutes and seconds components
   if (fields.count() == 0) {

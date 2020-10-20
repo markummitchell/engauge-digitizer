@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "Compatibility.h"
 #include "DocumentModelSegments.h"
 #include "EngaugeAssert.h"
 #include "gnuplot.h"
@@ -198,7 +199,7 @@ void Segment::dumpToGnuplot (QTextStream &strDump,
     strDump << odd << "\n";
     strDump << "end\n";
     strDump << "pause -1 \"Hit Enter to continue\"\n";
-    strDump << Qt::flush;
+    strDump << Compatibility::flush;
   }
 }
 

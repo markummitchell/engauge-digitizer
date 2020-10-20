@@ -163,6 +163,7 @@ HEADERS  += \
     src/Color/ColorFilterStrategySaturation.h \
     src/Color/ColorFilterStrategyValue.h \
     src/Color/ColorPalette.h \
+    src/util/Compatibility.h \
     src/Coord/CoordScale.h \
     src/Coord/CoordsType.h \
     src/Coord/CoordSymbol.h \
@@ -604,6 +605,7 @@ SOURCES += \
     src/Color/ColorFilterStrategySaturation.cpp \
     src/Color/ColorFilterStrategyValue.cpp \
     src/Color/ColorPalette.cpp \
+    src/util/Compatibility.cpp \
     src/Coord/CoordScale.cpp \
     src/Coord/CoordsType.cpp \
     src/Coord/CoordSymbol.cpp \

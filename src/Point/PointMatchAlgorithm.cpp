@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "ColorFilter.h"
+#include "Compatibility.h"
 #include "DocumentModelPointMatch.h"
 #include "EngaugeAssert.h"
 #include "gnuplot.h"
@@ -196,19 +197,19 @@ void PointMatchAlgorithm::dumpToGnuplot (double* convolution,
 
     QTextStream str (&file);
 
-    str << "# Suggested gnuplot commands:" << Qt::endl;
-    str << "#       set hidden3d" << Qt::endl;
-    str << "#       splot \"" << filename << "\" u 1:2:3 with pm3d" << Qt::endl;
-    str << Qt::endl;
+    str << "# Suggested gnuplot commands:" << Compatibility::endl;
+    str << "#       set hidden3d" << Compatibility::endl;
+    str << "#       splot \"" << filename << "\" u 1:2:3 with pm3d" << Compatibility::endl;
+    str << Compatibility::endl;
 
-    str << "# I J Convolution" << Qt::endl;
+    str << "# I J Convolution" << Compatibility::endl;
     for (int i = 0; i < width; i++) {
       for (int j = 0; j < height; j++) {
 
         double convIJ = convolution[FOLD2DINDEX(i, j, height)];
-        str << i << " " << j << " " << convIJ << Qt::endl;
+        str << i << " " << j << " " << convIJ << Compatibility::endl;
       }
-      str << Qt::endl; // pm3d likes blank lines between rows
+      str << Compatibility::endl; // pm3d likes blank lines between rows
     }
   }
 
