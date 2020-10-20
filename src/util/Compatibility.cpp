@@ -5,7 +5,6 @@
  ******************************************************************************************************/
 
 #include "Compatibility.h"
-#include <ostream>
 #include <QTextStream>
 #include <QtGlobal>
 
@@ -24,7 +23,7 @@ QTextStream &Compatibility::endl (QTextStream &str)
   //    and the performance gain from skipping the flush that end() adds is insignificant
   
 #if QT_VERSION < QT_VERSION_CHECK (5, 14, 0)
-  str << std::endl;
+  str << QTextStream::endl;
 #else
   str << Qt::endl;
 #endif
