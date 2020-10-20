@@ -198,7 +198,7 @@ void Segment::dumpToGnuplot (QTextStream &strDump,
     strDump << odd << "\n";
     strDump << "end\n";
     strDump << "pause -1 \"Hit Enter to continue\"\n";
-    strDump << flush;
+    strDump << Qt::flush;
   }
 }
 

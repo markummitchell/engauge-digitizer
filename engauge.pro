@@ -125,7 +125,6 @@ HEADERS  += \
     src/Cmd/CmdGuidelineMoveYR.h \
     src/Cmd/CmdGuidelineRemoveXT.h \
     src/Cmd/CmdGuidelineRemoveYR.h \
-    src/Cmd/CmdGuidelineViewState.h \
     src/Cmd/CmdMediator.h \
     src/Cmd/CmdMoveBy.h \
     src/Cmd/CmdPointChangeBase.h \
@@ -176,6 +175,7 @@ HEADERS  += \
     src/Coord/CoordUnitsPolarTheta.h \
     src/Coord/CoordUnitsTime.h \
     src/Correlation/Correlation.h \
+    src/util/Crc32.h \
     src/Create/CreateActions.h \
     src/Create/CreateCentralWidget.h \
     src/Create/CreateCommandStackShadow.h \
@@ -568,7 +568,6 @@ SOURCES += \
     src/Cmd/CmdGuidelineMoveYR.cpp \
     src/Cmd/CmdGuidelineRemoveXT.cpp \
     src/Cmd/CmdGuidelineRemoveYR.cpp \
-    src/Cmd/CmdGuidelineViewState.cpp \
     src/Cmd/CmdMediator.cpp \
     src/Cmd/CmdMoveBy.cpp \
     src/Cmd/CmdRedoForTest.cpp \
@@ -616,6 +615,7 @@ SOURCES += \
     src/Coord/CoordUnitsPolarTheta.cpp \
     src/Coord/CoordUnitsTime.cpp \
     src/Correlation/Correlation.cpp \
+    src/util/Crc32.cpp \
     src/Create/CreateActions.cpp \
     src/Create/CreateCentralWidget.cpp \
     src/Create/CreateCommandStackShadow.cpp \

@@ -392,7 +392,7 @@ void showUsageAndQuit ()
       << "[" << DASH_RESET.toLatin1().data () << "] "
       << "[" << DASH_STYLE.toLatin1().data () << " &lt;style&gt;] "
       << "[" << DASH_STYLES.toLatin1().data () << "] "
-      << "[&lt;load_file1&gt;] [&lt;load_file2&gt;] ..." << endl
+      << "[&lt;load_file1&gt;] [&lt;load_file2&gt;] ..." << Qt::endl
       << "<table>"
       << "<tr>"
       << "<td>" << QObject::tr ("where") << "</td>"

@@ -5,11 +5,6 @@
  ******************************************************************************************************/
 
 #include "CreateIcons.h"
-#include "img/bannerapp_16.xpm"
-#include "img/bannerapp_32.xpm"
-#include "img/bannerapp_64.xpm"
-#include "img/bannerapp_128.xpm"
-#include "img/bannerapp_256.xpm"
 #include "Logger.h"
 #include "MainWindow.h"
 
@@ -22,11 +17,15 @@ void CreateIcons::create(MainWindow &mw)
   LOG4CPP_INFO_S ((*mainCat)) << "CreateIcons::create";
 
   QIcon icon;
-  QPixmap icon16 (bannerapp_16);
-  QPixmap icon32 (bannerapp_32);
-  QPixmap icon64 (bannerapp_64);
-  QPixmap icon128 (bannerapp_128);
-  QPixmap icon256 (bannerapp_256);
+
+  // We use png files here since Qt xpm import code gives gratuitous qWarning messages,
+  // but keep the original xpm files which are easy to work with. ImageMagick 'convert'
+  // converts xpm to png
+  QPixmap icon16 (":/engauge/img/bannerapp_16.png");
+  QPixmap icon32 (":/engauge/img/bannerapp_32.png");
+  QPixmap icon64 (":/engauge/img/bannerapp_64.png");
+  QPixmap icon128 (":/engauge/img/bannerapp_128.png");
+  QPixmap icon256 (":/engauge/img/bannerapp_256.png");
 
   icon.addPixmap (icon16);
   icon.addPixmap (icon32);

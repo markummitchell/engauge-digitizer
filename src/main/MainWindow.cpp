@@ -14,11 +14,11 @@
 #include "CmdDelete.h"
 #include "CmdGuidelineAddXT.h"
 #include "CmdGuidelineAddYR.h"
-#include "CmdGuidelineViewState.h"
 #include "CmdMediator.h"
 #include "CmdSelectCoordSystem.h"
 #include "CmdStackShadow.h"
 #include "ColorFilter.h"
+#include "Crc32.h"
 #include "CreateFacade.h"
 #include "Curve.h"
 #include "DataKey.h"
@@ -510,9 +510,13 @@ void MainWindow::fileExtractImage (const QString &fileName)
           .arg (exportRegressionFilenameFromInputFilename (m_regressionFile));
 
       // Generate csv file with only checksum. Since QProcess cannot handle pipes, we let shell execute it
-      QProcess process;
-      process.start ("bash -c \"cksum " + fileName + " | awk '{print $1}' > " + csvFile + "\"");
-      process.waitForFinished (-1);
+      Crc32 crc;
+      unsigned crcResult = crc.filecrc (fileName);
+      QFile csv (csvFile);
+      if (csv.open (QIODevice::WriteOnly | QIODevice::Text)) {
+          QTextStream str (&csv);
+          str << crcResult << Qt::endl;
+      }
     }
 
   } else {
@@ -3204,7 +3208,6 @@ void MainWindow::slotViewGroupGuidelines (QAction * /* action */)
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGroupGuidelines";
 
   // States before and after
-  GuidelineViewState stateBefore = m_guidelineViewStateContext.state();  
   GuidelineViewState stateAfter;
   if (m_actionViewGuidelinesHide->isChecked ()) {
     stateAfter = GUIDELINE_VIEW_STATE_HIDE;
@@ -3214,13 +3217,6 @@ void MainWindow::slotViewGroupGuidelines (QAction * /* action */)
     stateAfter = GUIDELINE_VIEW_STATE_LOCK;
   }    
   m_guidelineViewStateContext.handleStateChange (stateAfter);
-
-  // Create Cmd that will change the state
-  CmdAbstract *cmd = new CmdGuidelineViewState (*this,
-                                                m_cmdMediator->document(),
-                                                stateBefore,
-                                                stateAfter);
-  m_cmdMediator->push (cmd);
 
   // Updates
   handleGuidelineMode ();

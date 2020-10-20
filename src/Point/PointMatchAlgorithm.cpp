@@ -196,19 +196,19 @@ void PointMatchAlgorithm::dumpToGnuplot (double* convolution,
 
     QTextStream str (&file);
 
-    str << "# Suggested gnuplot commands:" << endl;
-    str << "#       set hidden3d" << endl;
-    str << "#       splot \"" << filename << "\" u 1:2:3 with pm3d" << endl;
-    str << endl;
+    str << "# Suggested gnuplot commands:" << Qt::endl;
+    str << "#       set hidden3d" << Qt::endl;
+    str << "#       splot \"" << filename << "\" u 1:2:3 with pm3d" << Qt::endl;
+    str << Qt::endl;
 
-    str << "# I J Convolution" << endl;
+    str << "# I J Convolution" << Qt::endl;
     for (int i = 0; i < width; i++) {
       for (int j = 0; j < height; j++) {
 
         double convIJ = convolution[FOLD2DINDEX(i, j, height)];
-        str << i << " " << j << " " << convIJ << endl;
+        str << i << " " << j << " " << convIJ << Qt::endl;
       }
-      str << endl; // pm3d likes blank lines between rows
+      str << Qt::endl; // pm3d likes blank lines between rows
     }
   }
 

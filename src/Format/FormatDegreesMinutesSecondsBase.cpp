@@ -99,7 +99,7 @@ QValidator::State FormatDegreesMinutesSecondsBase::parseInput (const QString &st
 
   // Split on spaces
   QStringList fields = string.split (QRegExp ("\\s+"),
-                                     QString::SkipEmptyParts);
+                                     Qt::SkipEmptyParts);
 
   QString field0, field1, field2; // Degrees, minutes and seconds components
   if (fields.count() == 0) {

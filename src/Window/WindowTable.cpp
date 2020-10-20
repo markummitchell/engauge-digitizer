@@ -71,7 +71,7 @@ QString WindowTable::exportText () const
 
     // Copy the rectangular region around the selected cells. Tab-separation
     // seems to nicely copy to spreadsheets and other apps
-    int rowMin, rowMax, colMin, colMax;
+    int rowMin = 0, rowMax = 0, colMin = 0, colMax = 0;
     for (int i = 0; i < indexes.count(); i++) {
       QModelIndex index = indexes.at (i);
       if (i == 0 || index.row() < rowMin) {

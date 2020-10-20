@@ -30,5 +30,10 @@
         <file>img/icon_guidelinest.png</file>
         <file>img/icon_guidelinesy.png</file>
         <file>img/icon_guidelinesx.png</file>
+        <file>img/bannerapp_16.png</file>
+        <file>img/bannerapp_32.png</file>
+        <file>img/bannerapp_64.png</file>
+        <file>img/bannerapp_128.png</file>
+        <file>img/bannerapp_256.png</file>
     </qresource>
 </RCC>

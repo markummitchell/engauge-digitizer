@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 function main {
     languages=(ar cs de en es fa_IR fr hi it ja kk ko nb pt ru zh)
