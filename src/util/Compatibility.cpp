@@ -5,7 +5,7 @@
  ******************************************************************************************************/
 
 #include "Compatibility.h"
-#include <iostream>
+#include <ostream>
 #include <QTextStream>
 #include <QtGlobal>
 
