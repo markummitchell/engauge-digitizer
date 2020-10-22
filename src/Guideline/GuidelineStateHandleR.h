@@ -9,6 +9,7 @@
 
 #include "GuidelineStateHandleAbstract.h"
 
+/// GuidelineStateHandleAbstract instantiated for radius R guideline
 class GuidelineStateHandleR : public GuidelineStateHandleAbstract
 {
 public:

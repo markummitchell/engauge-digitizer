@@ -9,6 +9,7 @@
 
 #include "GuidelineStateHandleAbstract.h"
 
+/// GuidelineStateHandleAbstract instantiated for coordinate X guideline
 class GuidelineStateHandleX : public GuidelineStateHandleAbstract
 {
 public:

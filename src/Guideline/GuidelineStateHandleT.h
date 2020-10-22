@@ -9,6 +9,7 @@
 
 #include "GuidelineStateHandleAbstract.h"
 
+/// GuidelineStateHandleAbstract instantiated for theta R guideline
 class GuidelineStateHandleT : public GuidelineStateHandleAbstract
 {
 public:
