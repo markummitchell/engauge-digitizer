@@ -11,6 +11,8 @@
 #include "GuidelineViewStateAbstractBase.h"
 #include <QVector>
 
+class MainWindow;
+
 /// Context class for state machine that tracks the View / Guidelines mode. This is needed to track before
 /// and after states for generating CmdGuidelineViewState
 class GuidelineViewStateContext
@@ -30,6 +32,10 @@ public:
   GuidelineViewState state () const;
 
 private:
+
+  /// For CmdAbstract constructor only, via MainWindow, we offer the state to friend class  MainWindow
+  friend class MainWindow;
+  GuidelineViewState guidelineViewState () const;
 
   /// Transition if requested
   void transitionIfRequested ();

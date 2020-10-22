@@ -122,7 +122,7 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
     cmd = new CmdGuidelineAddYR (mainWindow,
                                  document,
                                  cmdDescription,
-                                 reader);    
+                                 reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_GUIDELINE_MOVE_X_T) {
     cmd = new CmdGuidelineMoveXT (mainWindow,
                                   document,
@@ -132,7 +132,7 @@ CmdAbstract *CmdFactory::createCmd (MainWindow &mainWindow,
     cmd = new CmdGuidelineMoveYR (mainWindow,
                                   document,
                                   cmdDescription,
-                                  reader);    
+                                  reader);
   } else if (cmdType == DOCUMENT_SERIALIZE_CMD_GUIDELINE_REMOVE_X_T) {
     cmd = new CmdGuidelineRemoveXT (mainWindow,
                                     document,

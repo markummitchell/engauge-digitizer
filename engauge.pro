@@ -206,6 +206,7 @@ HEADERS  += \
     src/Curve/CurveStyle.h \
     src/Curve/CurveStyles.h \
     src/util/DataKey.h \
+    src/DigitizeState/DigitizeState.h \
     src/DigitizeState/DigitizeStateAbstractBase.h \
     src/DigitizeState/DigitizeStateAxis.h \
     src/DigitizeState/DigitizeStateColorPicker.h \

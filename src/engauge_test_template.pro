@@ -164,6 +164,7 @@ HEADERS  += \
     Curve/CurveStyle.h \
     Curve/CurveStyles.h \
     util/DataKey.h \
+    DigitizeState/DigitizeState.h \
     DigitizeState/DigitizeStateAbstractBase.h \
     DigitizeState/DigitizeStateAxis.h \
     DigitizeState/DigitizeStateColorPicker.h \

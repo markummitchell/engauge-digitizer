@@ -127,6 +127,10 @@ private:
 
   void completeRequestedStateTransitionIfExists (CmdMediator *cmdMediator);
 
+  /// For CmdAbstract constructor only, via MainWindow, we offer the state to friend class  MainWindow
+  friend class MainWindow;
+  DigitizeState digitizeState () const;
+
   MainWindow &m_mainWindow;
   QGraphicsView &m_view;
   bool m_imageIsLoaded; // Cursor and dragging can be affected by whether or not image is loaded

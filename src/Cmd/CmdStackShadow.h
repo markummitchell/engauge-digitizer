@@ -7,6 +7,8 @@
 #ifndef CMD_STACK_SHADOW_H
 #define CMD_STACK_SHADOW_H
 
+#include "DigitizeState.h"
+#include "GuidelineViewState.h"
 #include <QList>
 #include <QObject>
 

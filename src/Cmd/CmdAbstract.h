@@ -7,7 +7,9 @@
 #ifndef CMD_ABSTRACT_H
 #define CMD_ABSTRACT_H
 
+#include "DigitizeState.h"
 #include "DocumentHash.h"
+#include "GuidelineViewState.h"
 #include "PointIdentifiers.h"
 #include <QUndoCommand>
 
@@ -76,6 +78,11 @@ private:
   // Hash value that represents Document state before and after CmdAbstract::redo
   DocumentHash m_documentHashPost;
   DocumentHash m_documentHashPre;
+
+  // States that apply throughout the lifetime of the command. In either forward (=redo)
+  // or backward (=undo) direction they will be applied before the command is executed
+  DigitizeState m_digitizeState;
+  GuidelineViewState m_guidelineViewState;
 };
 
 #endif // CMD_ABSTRACT_H

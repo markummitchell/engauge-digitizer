@@ -14,6 +14,7 @@
 #include "GuidelineDragCommandFactory.h"
 #include "Guidelines.h"
 #include "Logger.h"
+#include "MainWindow.h"
 
 GuidelineDragCommandFactory::GuidelineDragCommandFactory ()
 {

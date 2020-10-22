@@ -28,6 +28,11 @@ GuidelineViewStateContext::~GuidelineViewStateContext ()
 {
 }
 
+GuidelineViewState GuidelineViewStateContext::guidelineViewState () const
+{
+  return m_currentState;
+}
+
 void GuidelineViewStateContext::handleStateChange (GuidelineViewState state)
 {
   ENGAUGE_ASSERT (m_currentState != NUM_GUIDELINE_VIEW_STATES);

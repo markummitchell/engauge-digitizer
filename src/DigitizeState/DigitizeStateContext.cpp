@@ -100,6 +100,11 @@ void DigitizeStateContext::completeRequestedStateTransitionIfExists (CmdMediator
   }
 }
 
+DigitizeState DigitizeStateContext::digitizeState () const
+{
+  return m_currentState;
+}
+
 bool DigitizeStateContext::guidelinesAreSelectable () const
 {
   return m_states [m_currentState]->guidelinesAreSelectable();

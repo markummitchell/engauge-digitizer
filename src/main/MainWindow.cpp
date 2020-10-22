@@ -381,6 +381,11 @@ ZoomFactor MainWindow::currentZoomFactor () const
   return ZOOM_1_TO_1;
 }
 
+DigitizeState MainWindow::digitizeState () const
+{
+  return m_digitizeStateContext->digitizeState ();
+}
+
 bool MainWindow::eventFilter(QObject *target, QEvent *event)
 {
   if (event->type () == QEvent::KeyPress) {
@@ -952,26 +957,9 @@ bool MainWindow::guidelinesVisibilityCanBeEnabled () const
           transformIsDefined());
 }
 
-void MainWindow::guidelineViewState (GuidelineViewState state) const
+GuidelineViewState MainWindow::guidelineViewState () const
 {
-  switch (state)
-  {
-  case GUIDELINE_VIEW_STATE_HIDE:
-    m_actionViewGuidelinesHide->setChecked (true);
-    break;
-
-  case GUIDELINE_VIEW_STATE_EDIT:
-    m_actionViewGuidelinesEdit->setChecked (true);
-    break;
-
-  case GUIDELINE_VIEW_STATE_LOCK:
-    m_actionViewGuidelinesLock->setChecked (true);
-    break;
-
-  case NUM_GUIDELINE_VIEW_STATES:
-    LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::guidelineViewState bad state";
-    break;
-  }
+  return m_guidelineViewStateContext.guidelineViewState ();
 }
 
 void MainWindow::handleGuidelinesActiveChange (bool active)
@@ -1661,6 +1649,28 @@ void MainWindow::setCurrentPathFromFile (const QString &fileName)
   } else {
 
     // File was a url so it is irrelevant to the current directory
+  }
+}
+
+void MainWindow::setGuidelineViewState (GuidelineViewState state) const
+{
+  switch (state)
+  {
+  case GUIDELINE_VIEW_STATE_HIDE:
+    m_actionViewGuidelinesHide->setChecked (true);
+    break;
+
+  case GUIDELINE_VIEW_STATE_EDIT:
+    m_actionViewGuidelinesEdit->setChecked (true);
+    break;
+
+  case GUIDELINE_VIEW_STATE_LOCK:
+    m_actionViewGuidelinesLock->setChecked (true);
+    break;
+
+  case NUM_GUIDELINE_VIEW_STATES:
+    LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::guidelineViewState bad state";
+    break;
   }
 }
 

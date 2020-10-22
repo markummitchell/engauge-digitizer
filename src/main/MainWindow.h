@@ -162,6 +162,9 @@ public:
   /// Accessor for commands to process the Document.
   CmdMediator *cmdMediator();
 
+  /// Get DigitizeState. This should only be used to populate arguments in CmdAbstract constructor!
+  DigitizeState digitizeState () const;
+
   /// Catch secret keypresses
   virtual bool eventFilter(QObject *, QEvent *);
   
@@ -187,8 +190,8 @@ public:
   /// True/false if guidelines are visible. Selectability is handled elsewhere
   bool guidelinesAreVisible () const;
 
-  /// Guideline view state in View menu
-  void guidelineViewState (GuidelineViewState state) const;
+  /// Get Guideline view state in View menu. This should only be used to populate arguments in CmdAbstract constructor!
+  GuidelineViewState guidelineViewState () const;
   
   /// Handle Guidelines active status toggle
   void handleGuidelinesActiveChange (bool active);
@@ -226,6 +229,9 @@ public:
 
   /// Send signal to unit test framework indicating all commands have finished executing
   void sendGong ();
+
+  /// Set Guideline view state in View menu
+  void setGuidelineViewState (GuidelineViewState state) const;
 
   /// Processing performed after gui becomes available
   virtual void showEvent(QShowEvent *);

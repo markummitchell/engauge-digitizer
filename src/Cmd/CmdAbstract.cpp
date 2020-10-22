@@ -23,7 +23,9 @@ CmdAbstract::CmdAbstract(MainWindow &mainWindow,
   QUndoCommand (cmdDescription),
   m_mainWindow (mainWindow),
   m_document (document),
-  m_isFirstRedo (true)
+  m_isFirstRedo (true),
+  m_digitizeState (mainWindow.digitizeState ()),
+  m_guidelineViewState (mainWindow.guidelineViewState ())
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::CmdAbstract";
 }
