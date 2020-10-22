@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "Compatibility.h"
+#include "Logger.h"
 #include <QTextStream>
 #include <QtGlobal>
 
@@ -16,6 +17,8 @@ Compatibility::Compatibility ()
 
 QTextStream &Compatibility::endl (QTextStream &str)
 {
+  LOG4CPP_INFO_S ((*mainCat)) <<  "Compatibility::endl";
+  
   // Comments:
   // 1) QTextStream in text mode uses \n\r for carriage return
   // 2) \n by itself does not flush
@@ -23,7 +26,7 @@ QTextStream &Compatibility::endl (QTextStream &str)
   //    and the performance gain from skipping the flush that end() adds is insignificant
   
 #if QT_VERSION < QT_VERSION_CHECK (5, 14, 0)
-  str << endl; // Function
+  str << "\n"; // std::endl will not compile
 #else
   str << Qt::endl; // Enum
 #endif
@@ -35,7 +38,7 @@ QTextStream &Compatibility::flush (QTextStream &str)
 {
   
 #if QT_VERSION < QT_VERSION_CHECK (5, 14, 0)
-  str << flush; // Function
+  // std::flush will not compile so we skip flushing
 #else
   str << Qt::flush; // Enum
 #endif

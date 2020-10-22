@@ -505,6 +505,7 @@ void MainWindow::fileExtractImage (const QString &fileName)
                               << " fileName=" << fileName.toLatin1().data();
 
   QFile file (fileName);
+  bool success = true;  
   if (file.open(QIODevice::WriteOnly)) {
 
     QPixmap pixmap = m_cmdMediator->pixmap();
@@ -522,11 +523,17 @@ void MainWindow::fileExtractImage (const QString &fileName)
       if (csv.open (QIODevice::WriteOnly | QIODevice::Text)) {
           QTextStream str (&csv);
           str << crcResult << Compatibility::endl;
+      } else {
+        success = false;
       }
     }
 
   } else {
+    success = false;
+  }
 
+  if (! success) {
+    
     LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::fileExtractImage"
                                  << " file=" << fileName.toLatin1().data()
                                  << " curDir=" << QDir::currentPath().toLatin1().data();

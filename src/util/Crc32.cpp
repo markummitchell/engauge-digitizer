@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "Crc32.h"
+#include "Logger.h"
 #include <QByteArray>
 #include <QFile>
 
@@ -67,6 +68,8 @@ Crc32::Crc32 ()
 
 unsigned Crc32::filecrc (const QString &filename) const
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Crc32::filecrc";
+  
   unsigned i, c, b = 0;
   
   QFile f (filename);
@@ -96,6 +99,8 @@ unsigned Crc32::filecrc (const QString &filename) const
 
 unsigned Crc32::memcrc (const unsigned char *b, unsigned int length) const
 {
+  LOG4CPP_INFO_S ((*mainCat)) << "Crc32::memcrc";
+  
   unsigned i, c, rtn = 0;
 
   for (i = length; i > 0; --i) {
