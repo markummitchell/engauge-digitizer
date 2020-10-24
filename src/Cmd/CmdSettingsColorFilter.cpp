@@ -82,6 +82,7 @@ void CmdSettingsColorFilter::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsColorFilter::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   mainWindow().updateSettingsColorFilter(m_modelColorFilterAfter);
   mainWindow().updateAfterCommand();
@@ -92,6 +93,7 @@ void CmdSettingsColorFilter::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsColorFilter::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   mainWindow().updateSettingsColorFilter(m_modelColorFilterBefore);
   mainWindow().updateAfterCommand();

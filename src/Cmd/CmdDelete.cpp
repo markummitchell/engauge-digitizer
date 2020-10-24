@@ -80,6 +80,7 @@ void CmdDelete::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdDelete::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   saveDocumentState (document ());
   document().removePointsInCurvesGraphs (m_curvesGraphsRemoved);
@@ -93,6 +94,7 @@ void CmdDelete::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdDelete::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   restoreDocumentState (document ());
   mainWindow().updateAfterCommand();

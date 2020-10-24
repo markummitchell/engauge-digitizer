@@ -83,6 +83,7 @@ void CmdSettingsExportFormat::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsExportFormat::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   mainWindow().updateSettingsExportFormat(m_modelExportAfter);
   mainWindow().updateAfterCommand();
@@ -93,6 +94,7 @@ void CmdSettingsExportFormat::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsExportFormat::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   mainWindow().updateSettingsExportFormat(m_modelExportBefore);
   mainWindow().updateAfterCommand();

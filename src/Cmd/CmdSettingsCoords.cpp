@@ -83,6 +83,7 @@ void CmdSettingsCoords::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCoords::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   mainWindow().updateSettingsCoords(m_modelCoordsAfter);
   mainWindow().updateAfterCommand();
@@ -93,6 +94,7 @@ void CmdSettingsCoords::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCoords::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   mainWindow().updateSettingsCoords(m_modelCoordsBefore);
   mainWindow().updateAfterCommand();

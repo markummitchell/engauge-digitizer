@@ -81,6 +81,7 @@ void CmdAddPointAxis::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointAxis::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   saveDocumentState (document ());
   document().addPointAxisWithGeneratedIdentifier (m_posScreen,
@@ -97,6 +98,7 @@ void CmdAddPointAxis::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointAxis::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   restoreDocumentState (document ());
   mainWindow().updateAfterCommand();

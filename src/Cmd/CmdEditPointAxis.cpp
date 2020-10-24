@@ -79,6 +79,7 @@ void CmdEditPointAxis::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdEditPointAxis::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   saveDocumentState (document ());
   document().editPointAxis (m_posGraphAfter,
@@ -92,6 +93,7 @@ void CmdEditPointAxis::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdEditPointAxis::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   restoreDocumentState (document ());
   mainWindow().updateAfterCommand();

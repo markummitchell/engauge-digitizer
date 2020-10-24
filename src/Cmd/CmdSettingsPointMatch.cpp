@@ -82,6 +82,7 @@ void CmdSettingsPointMatch::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsPointMatch::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   mainWindow().updateSettingsPointMatch(m_modelPointMatchAfter);
   mainWindow().updateAfterCommand();
@@ -92,6 +93,7 @@ void CmdSettingsPointMatch::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsPointMatch::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   mainWindow().updateSettingsPointMatch(m_modelPointMatchBefore);
   mainWindow().updateAfterCommand();

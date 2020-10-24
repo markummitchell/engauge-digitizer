@@ -82,6 +82,7 @@ void CmdSettingsGeneral::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsGeneral::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   mainWindow().updateSettingsGeneral(m_modelGeneralAfter);
   mainWindow().updateAfterCommand();
@@ -92,6 +93,7 @@ void CmdSettingsGeneral::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsGeneral::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   mainWindow().updateSettingsGeneral(m_modelGeneralBefore);
   mainWindow().updateAfterCommand();

@@ -82,6 +82,7 @@ void CmdSettingsSegments::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsSegments::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   mainWindow().updateSettingsSegments(m_modelSegmentsAfter);
   mainWindow().updateAfterCommand();
@@ -92,6 +93,7 @@ void CmdSettingsSegments::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsSegments::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   mainWindow().updateSettingsSegments(m_modelSegmentsBefore);
   mainWindow().updateAfterCommand();

@@ -83,6 +83,7 @@ void CmdCopy::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCopy::cmdRedo";
 
+  restoreState ();
   MimePointsExport *mimePointsExport;
   if (m_transformIsDefined) {
     mimePointsExport = new MimePointsExport (m_csv,
@@ -104,6 +105,7 @@ void CmdCopy::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCopy::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();

@@ -95,6 +95,7 @@ void CmdCut::cmdRedo ()
   QClipboard *clipboard = QApplication::clipboard();
   clipboard->setMimeData (mimePointsExport, QClipboard::Clipboard);
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   saveDocumentState (document ());
   document().removePointsInCurvesGraphs (m_curvesGraphsRemoved);
@@ -108,6 +109,7 @@ void CmdCut::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdCut::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   restoreDocumentState (document ());
   mainWindow().updateAfterCommand();

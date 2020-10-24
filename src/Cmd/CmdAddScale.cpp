@@ -85,6 +85,7 @@ void CmdAddScale::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddScale::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   saveDocumentState (document ());
   document().addScaleWithGeneratedIdentifier (m_posScreen0,
@@ -103,6 +104,7 @@ void CmdAddScale::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddScale::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   restoreDocumentState (document ());
   mainWindow().updateAfterCommand();

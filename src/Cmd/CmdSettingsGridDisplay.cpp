@@ -82,6 +82,7 @@ void CmdSettingsGridDisplay::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsGridDisplay::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   mainWindow().updateSettingsGridDisplay(m_modelGridDisplayAfter);
   mainWindow().updateAfterCommand();
@@ -92,6 +93,7 @@ void CmdSettingsGridDisplay::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsGridDisplay::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   mainWindow().updateSettingsGridDisplay(m_modelGridDisplayBefore);
   mainWindow().updateAfterCommand();

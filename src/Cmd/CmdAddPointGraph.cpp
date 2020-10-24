@@ -71,6 +71,7 @@ void CmdAddPointGraph::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointGraph::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   saveDocumentState (document ());
   document().addPointGraphWithGeneratedIdentifier (m_curveName,
@@ -86,6 +87,7 @@ void CmdAddPointGraph::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAddPointGraph::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   restoreDocumentState (document ());
   mainWindow().updateAfterCommand();

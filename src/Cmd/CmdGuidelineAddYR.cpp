@@ -59,6 +59,7 @@ void CmdGuidelineAddYR::cmdRedo ()
                               << " identifier=" << m_identifier.toLatin1().data()
                               << " value=" << m_value;
 
+  restoreState ();
   mainWindow().guidelineAddYR (m_identifier,
                                m_value);
 }
@@ -68,6 +69,7 @@ void CmdGuidelineAddYR::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineAddYR::cmdUndo"
                               << " identifier=" << m_identifier.toLatin1().data();
 
+  restoreState ();
   mainWindow().guidelineRemove (m_identifier);
 }
 

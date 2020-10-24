@@ -41,12 +41,15 @@ void CmdGong::cmdRedo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGong::cmdRedo";
 
   // No setup, teardown or other updates are required since this command only sends a signal
+  restoreState ();
   mainWindow().sendGong ();
 }
 
 void CmdGong::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGong::cmdUndo";
+
+  restoreState ();
 }
 
 void CmdGong::saveXml (QXmlStreamWriter & /* writer */) const

@@ -155,6 +155,14 @@ void CmdAbstract::resetSelection(const PointIdentifiers &pointIdentifiersToSelec
   }
 }
 
+void CmdAbstract::restoreState ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::restoreState";
+
+  m_mainWindow.updateDigitizeStateIfSoftwareTriggered (m_digitizeState);
+  m_mainWindow.setGuidelineViewState (m_guidelineViewState);
+}
+
 void CmdAbstract::saveOrCheckPostCommandDocumentStateHash (const Document &document)
 {
   // LOG4CPP_INFO_S is below

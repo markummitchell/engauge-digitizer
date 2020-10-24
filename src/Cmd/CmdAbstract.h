@@ -71,6 +71,10 @@ protected:
   /// lets the user move selected point(s) repeatedly using arrow keys. Also provides expected behavior when pasting
   void resetSelection(const PointIdentifiers &pointIdentifiersToSelect);
 
+  /// Before any other operations associated with a Cmd class are performed, this method is called to restore original
+  /// states to all relevant state machines
+  void restoreState ();
+
   /// Save, when called the first time, a hash value representing the state of the Document. Then on succeeding calls
   /// the hash is recomputed and compared to the original value to check for consistency. This "post" method is called
   /// immediately after the redo method of the subclass has done its processing. See also saveOrCheckPreCommandDocumentState

@@ -59,6 +59,7 @@ void CmdGuidelineAddXT::cmdRedo ()
                               << " identifier=" << m_identifier.toLatin1().data()
                               << " value=" << m_value;
 
+  restoreState ();
   mainWindow().guidelineAddXT (m_identifier,
                                m_value);
 }
@@ -68,6 +69,7 @@ void CmdGuidelineAddXT::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdGuidelineAddXT::cmdUndo"
                               << " identifier=" << m_identifier.toLatin1().data();
 
+  restoreState ();
   mainWindow().guidelineRemove (m_identifier);
 }
 

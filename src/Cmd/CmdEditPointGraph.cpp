@@ -109,6 +109,7 @@ void CmdEditPointGraph::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdEditPointGraph::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   saveDocumentState (document ());
   document().editPointGraph (m_isX,
@@ -126,6 +127,7 @@ void CmdEditPointGraph::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdEditPointGraph::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   restoreDocumentState (document ());
   mainWindow().updateAfterCommand();

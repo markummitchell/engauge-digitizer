@@ -64,6 +64,7 @@ void CmdSelectCoordSystem::cmdRedo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSelectCoordSystem::cmdRedo"
                               << " index=" << m_coordSystemIndexBefore << "->" << m_coordSystemIndexAfter;
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   mainWindow().updateCoordSystem (m_coordSystemIndexAfter);
   saveOrCheckPostCommandDocumentStateHash (document ());
@@ -74,6 +75,7 @@ void CmdSelectCoordSystem::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSelectCoordSystem::cmdUndo"
                               << " index=" << m_coordSystemIndexAfter << "->" << m_coordSystemIndexBefore;
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   mainWindow().updateCoordSystem (m_coordSystemIndexBefore);
   saveOrCheckPreCommandDocumentStateHash (document ());

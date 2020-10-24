@@ -44,6 +44,8 @@ void CmdUndoForTest::cmdRedo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdUndoForTest::cmdRedo";
 
   // Noop. Real Undo processing is performed externally on the command stack
+
+  restoreState ();
 }
 
 void CmdUndoForTest::cmdUndo ()
@@ -51,6 +53,8 @@ void CmdUndoForTest::cmdUndo ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdUndoForTest::cmdUndo";
 
   // Noop. Undo of an undo does not even make sense
+
+  restoreState ();
 }
 
 void CmdUndoForTest::saveXml (QXmlStreamWriter & /* writer */) const

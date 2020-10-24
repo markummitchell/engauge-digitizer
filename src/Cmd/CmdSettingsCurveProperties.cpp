@@ -83,6 +83,7 @@ void CmdSettingsCurveProperties::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveProperties::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateSettingsCurveStyles(m_modelCurveStylesAfter);
@@ -94,6 +95,7 @@ void CmdSettingsCurveProperties::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveProperties::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateSettingsCurveStyles(m_modelCurveStylesBefore);

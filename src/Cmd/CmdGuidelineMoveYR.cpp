@@ -63,6 +63,7 @@ void CmdGuidelineMoveYR::cmdRedo ()
                               << " identifier=" << m_identifier.toLatin1().data()
                               << " value=" << m_valueAfter;
 
+  restoreState ();
   mainWindow().guidelineMoveYR (m_identifier,
                                 m_valueAfter);
 }
@@ -73,6 +74,7 @@ void CmdGuidelineMoveYR::cmdUndo ()
                               << " identifier=" << m_identifier.toLatin1().data()
                               << " value=" << m_valueBefore;
 
+  restoreState ();
   mainWindow().guidelineMoveYR (m_identifier,
                                 m_valueBefore);
 }

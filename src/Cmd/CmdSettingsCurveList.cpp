@@ -111,6 +111,7 @@ void CmdSettingsCurveList::cmdRedo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveList::cmdRedo";
 
+  restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   mainWindow().updateSettingsCurveList(m_curvesGraphsAfter);
   mainWindow().updateAfterCommand();
@@ -121,6 +122,7 @@ void CmdSettingsCurveList::cmdUndo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdSettingsCurveList::cmdUndo";
 
+  restoreState ();
   saveOrCheckPostCommandDocumentStateHash (document ());
   mainWindow().updateSettingsCurveList(m_curvesGraphsBefore);
   mainWindow().updateAfterCommand();

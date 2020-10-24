@@ -63,6 +63,7 @@ void CmdGuidelineMoveXT::cmdRedo ()
                               << " identifier=" << m_identifier.toLatin1().data()
                               << " value=" << m_valueAfter;
 
+  restoreState ();
   mainWindow().guidelineMoveXT (m_identifier,
                                 m_valueAfter);
 }
@@ -73,6 +74,7 @@ void CmdGuidelineMoveXT::cmdUndo ()
                               << " identifier=" << m_identifier.toLatin1().data()
                               << " value=" << m_valueBefore;
 
+  restoreState ();
   mainWindow().guidelineMoveXT (m_identifier,
                                 m_valueBefore);
 }
