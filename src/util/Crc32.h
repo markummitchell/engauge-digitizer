@@ -4,6 +4,9 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#ifndef CRC32_H
+#define CRC32_H
+
 #include <QString>
 
 /// Compute crc checksum that linux cksum would produce for specified bytes. Based on IEEE Std 1003.1 - 2017
@@ -26,3 +29,5 @@ class Crc32
   /// G(x) = x^32 + x^26 + x^23 + x^22 + x^16 + x^12 +x^11 + x^10 + x^8 + x^6 + x^5 + x^4 + x^2 + x + 1
   static unsigned long m_crctab[];
 };
+
+#endif // CRC32_H

@@ -4,6 +4,9 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#ifndef COMPATIBILITY_H
+#define COMPATIBILITY_H
+
 #include <QString>
 #include <QtGlobal>
 
@@ -29,3 +32,5 @@ class Compatibility
   static Qt::SplitBehavior SkipEmptyParts ();  
 #endif
 };
+
+#endif // COMPATIBILITY_H
