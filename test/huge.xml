@@ -36,7 +36,7 @@
   <OperatingSystem WordSize="32" Endian="LittleEndian"/>
   <File Imported="True"/>
   <CmdMediator>
-   <Cmd Type="CmdSettingsCurveAddRemove" Description="Curve add/remove">
+   <Cmd Type="CmdSettingsCurveAddRemove" Description="Curve add/remove" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="1" GuidelineViewStateString="Hide">
     <CurvesGraphs>
      <Curve CurveName="Curve1">
       <ColorFilter Mode="2" HueHigh="360" CurveName="Curve1" ModeString="Intensity" IntensityLow="0" ForegroundHigh="10" SaturationLow="50" ValueHigh="50" ForegroundLow="0" SaturationHigh="100" ValueLow="0" IntensityHigh="50" HueLow="180"/>
@@ -74,10 +74,10 @@
      </Curve>
     </CurvesGraphs>
    </Cmd>
-   <Cmd Type="CmdAddPointAxis" IsXOnly="False" Identifier="Axes&#x9;point&#x9;1" Description="Add axis point" ScreenX="51.6351" ScreenY="1958.13" GraphX="0" GraphY="-10" Ordinal="1"/>
-   <Cmd Type="CmdAddPointAxis" IsXOnly="False" Identifier="Axes&#x9;point&#x9;3" Description="Add axis point" ScreenX="3969.02" ScreenY="1963.05" GraphX="10" GraphY="-10" Ordinal="2"/>
-   <Cmd Type="CmdAddPointAxis" IsXOnly="False" Identifier="Axes&#x9;point&#x9;5" Description="Add axis point" ScreenX="58.5198" ScreenY="19.7044" GraphX="0" GraphY="6" Ordinal="3"/>
-   <Cmd Type="CmdSettingsColorFilter" Description="Filter settings">
+   <Cmd Type="CmdAddPointAxis" IsXOnly="False" Identifier="Axes&#x9;point&#x9;1" Description="Add axis point" ScreenX="51.6351" ScreenY="1958.13" GraphX="0" GraphY="-10" Ordinal="1" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+   <Cmd Type="CmdAddPointAxis" IsXOnly="False" Identifier="Axes&#x9;point&#x9;3" Description="Add axis point" ScreenX="3969.02" ScreenY="1963.05" GraphX="10" GraphY="-10" Ordinal="2" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+   <Cmd Type="CmdAddPointAxis" IsXOnly="False" Identifier="Axes&#x9;point&#x9;5" Description="Add axis point" ScreenX="58.5198" ScreenY="19.7044" GraphX="0" GraphY="6" Ordinal="3" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+   <Cmd Type="CmdSettingsColorFilter" Description="Filter settings" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="1" GuidelineViewStateString="Hide">
     <Filter>
      <ColorFilter Mode="2" HueHigh="360" CurveName="red" ModeString="Intensity" IntensityLow="0" ForegroundHigh="10" SaturationLow="50" ValueHigh="50" ForegroundLow="0" SaturationHigh="100" ValueLow="0" IntensityHigh="50" HueLow="180"/>
      <ColorFilter Mode="2" HueHigh="360" CurveName="blue" ModeString="Intensity" IntensityLow="0" ForegroundHigh="10" SaturationLow="50" ValueHigh="50" ForegroundLow="0" SaturationHigh="100" ValueLow="0" IntensityHigh="50" HueLow="180"/>
@@ -91,7 +91,7 @@
      <ColorFilter Mode="2" HueHigh="360" CurveName="Axes" ModeString="Intensity" IntensityLow="0" ForegroundHigh="10" SaturationLow="50" ValueHigh="50" ForegroundLow="0" SaturationHigh="100" ValueLow="0" IntensityHigh="50" HueLow="180"/>
     </Filter>
    </Cmd>
-   <Cmd Type="CmdSettingsColorFilter" Description="Filter settings">
+   <Cmd Type="CmdSettingsColorFilter" Description="Filter settings" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="1" GuidelineViewStateString="Hide">
     <Filter>
      <ColorFilter Mode="1" HueHigh="3" CurveName="red" ModeString="Hue" IntensityLow="0" ForegroundHigh="10" SaturationLow="50" ValueHigh="50" ForegroundLow="0" SaturationHigh="100" ValueLow="0" IntensityHigh="50" HueLow="0"/>
      <ColorFilter Mode="2" HueHigh="360" CurveName="blue" ModeString="Intensity" IntensityLow="0" ForegroundHigh="10" SaturationLow="50" ValueHigh="50" ForegroundLow="0" SaturationHigh="100" ValueLow="0" IntensityHigh="50" HueLow="180"/>
@@ -105,7 +105,7 @@
      <ColorFilter Mode="2" HueHigh="360" CurveName="Axes" ModeString="Intensity" IntensityLow="0" ForegroundHigh="10" SaturationLow="50" ValueHigh="50" ForegroundLow="0" SaturationHigh="100" ValueLow="0" IntensityHigh="50" HueLow="180"/>
     </Filter>
    </Cmd>
-   <Cmd Type="CmdAddPointsGraph" CurveName="red" Description="Add graph points">
+   <Cmd Type="CmdAddPointsGraph" CurveName="red" Description="Add graph points" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="1" GuidelineViewStateString="Hide">
     <Point Identifier="red&#x9;point&#x9;6" ScreenX="95" ScreenY="1350" Ordinal="1"/>
     <Point Identifier="red&#x9;point&#x9;7" ScreenX="101" ScreenY="1326" Ordinal="1"/>
     <Point Identifier="red&#x9;point&#x9;8" ScreenX="107" ScreenY="1301" Ordinal="1"/>
@@ -160,7 +160,7 @@
     <Point Identifier="red&#x9;point&#x9;57" ScreenX="991" ScreenY="583" Ordinal="1"/>
     <Point Identifier="red&#x9;point&#x9;58" ScreenX="1014" ScreenY="577" Ordinal="1"/>
    </Cmd>
-   <Cmd Type="CmdAddPointsGraph" CurveName="red" Description="Add graph points">
+   <Cmd Type="CmdAddPointsGraph" CurveName="red" Description="Add graph points" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="1" GuidelineViewStateString="Hide">
     <Point Identifier="red&#x9;point&#x9;59" ScreenX="1212" ScreenY="532" Ordinal="53.5"/>
     <Point Identifier="red&#x9;point&#x9;60" ScreenX="1236" ScreenY="527" Ordinal="53.5"/>
     <Point Identifier="red&#x9;point&#x9;61" ScreenX="1260" ScreenY="522" Ordinal="53.5"/>
@@ -250,7 +250,7 @@
     <Point Identifier="red&#x9;point&#x9;145" ScreenX="3303" ScreenY="282" Ordinal="53.5"/>
     <Point Identifier="red&#x9;point&#x9;146" ScreenX="3328" ScreenY="280" Ordinal="53.5"/>
    </Cmd>
-   <Cmd Type="CmdAddPointsGraph" CurveName="red" Description="Add graph points">
+   <Cmd Type="CmdAddPointsGraph" CurveName="red" Description="Add graph points" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="1" GuidelineViewStateString="Hide">
     <Point Identifier="red&#x9;point&#x9;173" ScreenX="1033" ScreenY="573" Ordinal="53.5"/>
     <Point Identifier="red&#x9;point&#x9;174" ScreenX="1057" ScreenY="566" Ordinal="53.5"/>
     <Point Identifier="red&#x9;point&#x9;175" ScreenX="1081" ScreenY="560" Ordinal="53.5"/>
@@ -260,7 +260,7 @@
     <Point Identifier="red&#x9;point&#x9;179" ScreenX="1176" ScreenY="539" Ordinal="53.5"/>
     <Point Identifier="red&#x9;point&#x9;180" ScreenX="1199" ScreenY="534" Ordinal="53.5"/>
    </Cmd>
-   <Cmd Type="CmdSettingsColorFilter" Description="Filter settings">
+   <Cmd Type="CmdSettingsColorFilter" Description="Filter settings" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="1" GuidelineViewStateString="Hide">
     <Filter>
      <ColorFilter Mode="1" HueHigh="3" CurveName="red" ModeString="Hue" IntensityLow="0" ForegroundHigh="10" SaturationLow="50" ValueHigh="50" ForegroundLow="0" SaturationHigh="100" ValueLow="0" IntensityHigh="50" HueLow="0"/>
      <ColorFilter Mode="2" HueHigh="360" CurveName="blue" ModeString="Intensity" IntensityLow="0" ForegroundHigh="10" SaturationLow="50" ValueHigh="50" ForegroundLow="0" SaturationHigh="100" ValueLow="0" IntensityHigh="50" HueLow="180"/>
@@ -274,7 +274,7 @@
      <ColorFilter Mode="2" HueHigh="360" CurveName="Axes" ModeString="Intensity" IntensityLow="0" ForegroundHigh="10" SaturationLow="50" ValueHigh="50" ForegroundLow="0" SaturationHigh="100" ValueLow="0" IntensityHigh="50" HueLow="180"/>
     </Filter>
    </Cmd>
-   <Cmd Type="CmdAddPointsGraph" CurveName="green" Description="Add graph points">
+   <Cmd Type="CmdAddPointsGraph" CurveName="green" Description="Add graph points" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="1" GuidelineViewStateString="Hide">
     <Point Identifier="green&#x9;point&#x9;181" ScreenX="95" ScreenY="1737" Ordinal="1"/>
     <Point Identifier="green&#x9;point&#x9;182" ScreenX="100" ScreenY="1712" Ordinal="1"/>
     <Point Identifier="green&#x9;point&#x9;183" ScreenX="103" ScreenY="1688" Ordinal="1"/>
@@ -357,7 +357,7 @@
     <Point Identifier="green&#x9;point&#x9;260" ScreenX="1376" ScreenY="462" Ordinal="1"/>
     <Point Identifier="green&#x9;point&#x9;261" ScreenX="1399" ScreenY="456" Ordinal="1"/>
    </Cmd>
-   <Cmd Type="CmdAddPointsGraph" CurveName="green" Description="Add graph points">
+   <Cmd Type="CmdAddPointsGraph" CurveName="green" Description="Add graph points" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="1" GuidelineViewStateString="Hide">
     <Point Identifier="green&#x9;point&#x9;262" ScreenX="1436" ScreenY="446" Ordinal="81.5"/>
     <Point Identifier="green&#x9;point&#x9;263" ScreenX="1460" ScreenY="440" Ordinal="81.5"/>
     <Point Identifier="green&#x9;point&#x9;264" ScreenX="1484" ScreenY="434" Ordinal="81.5"/>
@@ -437,7 +437,7 @@
     <Point Identifier="green&#x9;point&#x9;338" ScreenX="3265" ScreenY="139" Ordinal="81.5"/>
     <Point Identifier="green&#x9;point&#x9;339" ScreenX="3290" ScreenY="137" Ordinal="81.5"/>
    </Cmd>
-   <Cmd Type="CmdSettingsColorFilter" Description="Filter settings">
+   <Cmd Type="CmdSettingsColorFilter" Description="Filter settings" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="1" GuidelineViewStateString="Hide">
     <Filter>
      <ColorFilter Mode="1" HueHigh="3" CurveName="red" ModeString="Hue" IntensityLow="0" ForegroundHigh="10" SaturationLow="50" ValueHigh="50" ForegroundLow="0" SaturationHigh="100" ValueLow="0" IntensityHigh="50" HueLow="0"/>
      <ColorFilter Mode="2" HueHigh="360" CurveName="blue" ModeString="Intensity" IntensityLow="0" ForegroundHigh="10" SaturationLow="50" ValueHigh="50" ForegroundLow="0" SaturationHigh="100" ValueLow="0" IntensityHigh="50" HueLow="180"/>
@@ -451,7 +451,7 @@
      <ColorFilter Mode="2" HueHigh="360" CurveName="Axes" ModeString="Intensity" IntensityLow="0" ForegroundHigh="10" SaturationLow="50" ValueHigh="50" ForegroundLow="0" SaturationHigh="100" ValueLow="0" IntensityHigh="50" HueLow="180"/>
     </Filter>
    </Cmd>
-   <Cmd Type="CmdAddPointsGraph" CurveName="blue" Description="Add graph points">
+   <Cmd Type="CmdAddPointsGraph" CurveName="blue" Description="Add graph points" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="1" GuidelineViewStateString="Hide">
     <Point Identifier="blue&#x9;point&#x9;368" ScreenX="119" ScreenY="1958" Ordinal="1"/>
     <Point Identifier="blue&#x9;point&#x9;369" ScreenX="123" ScreenY="1933" Ordinal="1"/>
     <Point Identifier="blue&#x9;point&#x9;370" ScreenX="126" ScreenY="1908" Ordinal="1"/>

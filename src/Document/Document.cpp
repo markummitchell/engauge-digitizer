@@ -94,6 +94,7 @@ Document::Document (const QString &fileName) :
 
         m_successfulRead = false;
         m_reasonForUnsuccessfulRead = QObject::tr ("Operating system says file is not readable");
+        LOG4CPP_ERROR_S ((*mainCat)) << "Document::loadVersion6 " << m_reasonForUnsuccessfulRead.toLatin1().data();
 
       }
     } else {
@@ -119,13 +120,13 @@ Document::Document (const QString &fileName) :
             break;
 
           default:
-            LOG4CPP_ERROR_S ((*mainCat)) << "Document::Document invalid version " << version;
             m_successfulRead = false;
             m_reasonForUnsuccessfulRead = QString ("Engauge %1 %2 %3 %4 Engauge")
                                           .arg (VERSION_NUMBER)
                                           .arg (QObject::tr ("cannot read newer files from version"))
                                           .arg (version)
-                                          .arg (QObject::tr ("of"));
+                                          .arg (QObject::tr ("of"));\
+            LOG4CPP_ERROR_S ((*mainCat)) << "Document::loadVersion6 " << m_reasonForUnsuccessfulRead.toLatin1().data();
             break;
         }
 
@@ -138,6 +139,7 @@ Document::Document (const QString &fileName) :
 
         m_successfulRead = false;
         m_reasonForUnsuccessfulRead = QObject::tr ("Operating system says file is not readable");
+        LOG4CPP_ERROR_S ((*mainCat)) << "Document::Document " << m_reasonForUnsuccessfulRead.toLatin1().data();
       }
     }
   } else {
@@ -147,6 +149,7 @@ Document::Document (const QString &fileName) :
                                   .arg (QObject::tr ("File"))
                                   .arg (fileName)
                                   .arg (QObject::tr ("was not found"));
+    LOG4CPP_ERROR_S ((*mainCat)) << "Document::Document " << m_reasonForUnsuccessfulRead.toLatin1().data();
   }
 }
 
@@ -602,10 +605,12 @@ void Document::loadVersion6 (QFile *file)
       }
     }
   }
+
   if (reader.hasError ()) {
 
     m_successfulRead = false;
     m_reasonForUnsuccessfulRead = reader.errorString();
+    LOG4CPP_ERROR_S ((*mainCat)) << "Document::loadVersion6 " << m_reasonForUnsuccessfulRead.toLatin1().data();
   }
 
   // There are already one axes curve and at least one graph curve so we do not need to add any more graph curves
@@ -672,10 +677,12 @@ void Document::loadVersions7AndUp (QFile *file)
       }
     }
   }
+
   if (reader.hasError ()) {
 
     m_successfulRead = false;
-    m_reasonForUnsuccessfulRead = reader.errorString();
+    m_reasonForUnsuccessfulRead = reader.errorString();\
+    LOG4CPP_ERROR_S ((*mainCat)) << "Document::loadVersions7AndUp " << m_reasonForUnsuccessfulRead.toLatin1().data();
   }
 
   // There are already one axes curve and at least one graph curve so we do not need to add any more graph curves

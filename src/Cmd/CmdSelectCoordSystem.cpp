@@ -44,15 +44,12 @@ CmdSelectCoordSystem::CmdSelectCoordSystem (MainWindow &mainWindow,
 
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_AFTER) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_BEFORE)) {
-    xmlExitWithError (reader,
-                      QString ("%1 %2 %3 %4")
-                      .arg (QObject::tr ("Missing attribute(s)"))
-                      .arg (DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_AFTER)
-                      .arg (QObject::tr ("and/or"))
-                      .arg (DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_BEFORE));
-  }
+  QStringList requiredAttributesLeaf;
+  requiredAttributesLeaf << DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_AFTER
+                         << DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_BEFORE;
+  leafAndBaseAttributes (attributes,
+                         requiredAttributesLeaf,
+                         reader);
 
   m_coordSystemIndexAfter = attributes.value(DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_AFTER).toInt ();
   m_coordSystemIndexBefore = attributes.value(DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_BEFORE).toInt ();
@@ -89,5 +86,6 @@ void CmdSelectCoordSystem::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   writer.writeAttribute(DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_BEFORE, QString::number (m_coordSystemIndexBefore));
   writer.writeAttribute(DOCUMENT_SERIALIZE_COORD_SYSTEM_INDEX_AFTER, QString::number (m_coordSystemIndexAfter));
+  baseAttributes (writer);
   writer.writeEndElement();
 }

@@ -45,19 +45,16 @@ CmdAddPointGraph::CmdAddPointGraph (MainWindow &mainWindow,
 
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_X) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_CURVE_NAME) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_ORDINAL) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER)) {
-    xmlExitWithError (reader,
-                      QString ("Missing attribute(s) %1, %2, %3, %4 and/or %5")
-                      .arg (DOCUMENT_SERIALIZE_SCREEN_X)
-                      .arg (DOCUMENT_SERIALIZE_SCREEN_Y)
-                      .arg (DOCUMENT_SERIALIZE_CURVE_NAME)
-                      .arg (DOCUMENT_SERIALIZE_ORDINAL)
-                      .arg (DOCUMENT_SERIALIZE_IDENTIFIER));
-  }
+  // Base attributes are handled by CmdPointChangeBase
+  QStringList requiredAttributesLeaf;
+  requiredAttributesLeaf << DOCUMENT_SERIALIZE_SCREEN_X
+                         << DOCUMENT_SERIALIZE_SCREEN_Y
+                         << DOCUMENT_SERIALIZE_CURVE_NAME
+                         << DOCUMENT_SERIALIZE_ORDINAL
+                         << DOCUMENT_SERIALIZE_IDENTIFIER;
+  leafAttributes (attributes,
+                  requiredAttributesLeaf,
+                  reader);
 
   m_posScreen.setX(attributes.value(DOCUMENT_SERIALIZE_SCREEN_X).toDouble());
   m_posScreen.setY(attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y).toDouble());
@@ -105,5 +102,6 @@ void CmdAddPointGraph::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_Y, QString::number (m_posScreen.y()));
   writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_identifierAdded);
   writer.writeAttribute(DOCUMENT_SERIALIZE_ORDINAL, QString::number (m_ordinal));
+  baseAttributes (writer);
   writer.writeEndElement();
 }

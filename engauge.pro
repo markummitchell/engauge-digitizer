@@ -646,6 +646,7 @@ SOURCES += \
     src/Curve/CurveStyle.cpp \
     src/Curve/CurveStyles.cpp \
     src/util/DataKey.cpp \
+    src/DigitizeState/DigitizeState.cpp \
     src/DigitizeState/DigitizeStateAbstractBase.cpp \
     src/DigitizeState/DigitizeStateAxis.cpp \
     src/DigitizeState/DigitizeStateColorPicker.cpp \

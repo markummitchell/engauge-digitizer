@@ -55,18 +55,15 @@ CmdDelete::CmdDelete (MainWindow &mainWindow,
 
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_CSV) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_HTML)) {
-    xmlExitWithError (reader,
-                      QString ("%1 %2, %3 %4 %5")
-                      .arg (QObject::tr ("Missing attribute(s)"))
-                      .arg (DOCUMENT_SERIALIZE_TRANSFORM_DEFINED)
-                      .arg (DOCUMENT_SERIALIZE_CSV)
-                      .arg (QObject::tr ("and/or"))
-                      .arg (DOCUMENT_SERIALIZE_HTML));
-  }
+  QStringList requiredAttributesLeaf;
+  requiredAttributesLeaf << DOCUMENT_SERIALIZE_TRANSFORM_DEFINED
+                         << DOCUMENT_SERIALIZE_CSV
+                         << DOCUMENT_SERIALIZE_HTML;
+  leafAndBaseAttributes (attributes,
+                         requiredAttributesLeaf,
+                         reader);
 
+  // Boolean values
   QString defined = attributes.value(DOCUMENT_SERIALIZE_TRANSFORM_DEFINED).toString();
 
   m_transformIsDefined = (defined == DOCUMENT_SERIALIZE_BOOL_TRUE);
@@ -112,5 +109,6 @@ void CmdDelete::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_CSV, m_csv);
   writer.writeAttribute(DOCUMENT_SERIALIZE_HTML, m_html);
   m_curvesGraphsRemoved.saveXml(writer);
+  baseAttributes (writer);
   writer.writeEndElement();
 }

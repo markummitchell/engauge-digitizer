@@ -6,16 +6,22 @@
 
 #include "CmdAbstract.h"
 #include "DataKey.h"
+#include "DigitizeState.h"
 #include "Document.h"
 #include "DocumentHashGenerator.h"
+#include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
+#include "GuidelineState.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include "Point.h"
 #include <QGraphicsItem>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
+#include "Xml.h"
 
 CmdAbstract::CmdAbstract(MainWindow &mainWindow,
                          Document &document,
@@ -34,6 +40,14 @@ CmdAbstract::~CmdAbstract()
 {
 }
 
+void CmdAbstract::baseAttributes (QXmlStreamWriter &writer) const
+{
+  writer.writeAttribute(DOCUMENT_SERIALIZE_DIGITIZE_STATE, QString::number (m_digitizeState));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_DIGITIZE_STATE_STRING, digitizeStateAsString (m_digitizeState));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_VIEW_STATE, QString::number (m_guidelineViewState));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_VIEW_STATE_STRING, guidelineViewStateAsString (m_guidelineViewState));  
+}
+
 Document &CmdAbstract::document ()
 {
   return m_document;
@@ -42,6 +56,46 @@ Document &CmdAbstract::document ()
 const Document &CmdAbstract::document () const
 {
   return m_document;
+}
+
+void CmdAbstract::leafAttributes (const QXmlStreamAttributes &attributes,
+                                  const QStringList &requiredAttributesLeaf,
+                                  QXmlStreamReader &reader)
+{
+  // Check for leaf class if called directly, or for base class if called indirectly through leafAndBaseAttributes
+  QStringList::const_iterator itr;
+  QStringList missingAttributes;
+  for (itr = requiredAttributesLeaf.begin (); itr != requiredAttributesLeaf.end (); itr++) {
+
+    QString attribute = *itr;
+    if (!attributes.hasAttribute (attribute)) {
+      missingAttributes << attribute;
+    }
+  }
+
+  if (missingAttributes.size () > 0) {
+    xmlExitWithError (reader,
+                      QString ("Missing attribute(s) %1"). arg (missingAttributes.join (", ")));
+  }
+}
+
+void CmdAbstract::leafAndBaseAttributes (const QXmlStreamAttributes &attributes,
+                                         const QStringList &requiredAttributesLeaf,
+                                         QXmlStreamReader &reader)
+{
+  // Aggregate attributes for leaf and this abstract class
+  QStringList requiredAttributes = requiredAttributesLeaf;
+  requiredAttributes << DOCUMENT_SERIALIZE_DIGITIZE_STATE;
+  requiredAttributes << DOCUMENT_SERIALIZE_GUIDELINE_VIEW_STATE;
+
+  // Check as if this base class was a leaf class
+  leafAttributes (attributes,
+                  requiredAttributes,
+                  reader);
+
+  // Extract parent class attributes
+  m_digitizeState = static_cast<DigitizeState> (attributes.value (DOCUMENT_SERIALIZE_DIGITIZE_STATE).toInt());
+  m_guidelineViewState = static_cast<GuidelineViewState> (attributes.value (DOCUMENT_SERIALIZE_GUIDELINE_VIEW_STATE).toInt());
 }
 
 MainWindow &CmdAbstract::mainWindow ()

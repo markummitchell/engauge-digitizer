@@ -55,15 +55,12 @@ CmdMoveBy::CmdMoveBy (MainWindow &mainWindow,
 
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_X_DELTA) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y_DELTA) ) {
-    xmlExitWithError (reader,
-                      QString ("%1 %2 %3 %4")
-                      .arg (QObject::tr ("Missing attribute(s)"))
-                      .arg (DOCUMENT_SERIALIZE_SCREEN_X_DELTA)
-                      .arg (QObject::tr ("and/or"))
-                      .arg (DOCUMENT_SERIALIZE_SCREEN_Y_DELTA));
-  }
+  QStringList requiredAttributesLeaf;
+  requiredAttributesLeaf << DOCUMENT_SERIALIZE_SCREEN_X_DELTA
+                         << DOCUMENT_SERIALIZE_SCREEN_Y_DELTA;
+  leafAndBaseAttributes (attributes,
+                         requiredAttributesLeaf,
+                         reader);
 
   m_deltaScreen.setX(attributes.value(DOCUMENT_SERIALIZE_SCREEN_X_DELTA).toDouble());
   m_deltaScreen.setY(attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y_DELTA).toDouble());
@@ -151,5 +148,6 @@ void CmdMoveBy::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_X_DELTA, QString::number (m_deltaScreen.x()));
   writer.writeAttribute(DOCUMENT_SERIALIZE_SCREEN_Y_DELTA, QString::number (m_deltaScreen.y()));
   m_movedPoints.saveXml (writer);
+  baseAttributes (writer);
   writer.writeEndElement();
 }

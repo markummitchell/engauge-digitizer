@@ -38,15 +38,12 @@ CmdGuidelineRemoveYR::CmdGuidelineRemoveYR (MainWindow &mainWindow,
 
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_BEFORE)) {
-    xmlExitWithError (reader,
-                      QString ("%1 %2 %3 %4")
-                      .arg (QObject::tr ("Missing attribute(s)"))
-                      .arg (DOCUMENT_SERIALIZE_IDENTIFIER)
-                      .arg (QObject::tr ("and/or"))
-                      .arg (DOCUMENT_SERIALIZE_GRAPH_BEFORE));
-  }
+  QStringList requiredAttributesLeaf;
+  requiredAttributesLeaf << DOCUMENT_SERIALIZE_IDENTIFIER
+                         << DOCUMENT_SERIALIZE_GRAPH_BEFORE;
+  leafAndBaseAttributes (attributes,
+                         requiredAttributesLeaf,
+                         reader);
 
   m_identifier = attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
   m_valueBefore = attributes.value(DOCUMENT_SERIALIZE_GRAPH_BEFORE).toDouble();
@@ -81,5 +78,6 @@ void CmdGuidelineRemoveYR::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_identifier);
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_BEFORE, QString::number (m_valueBefore));
+  baseAttributes (writer);
   writer.writeEndElement();
 }

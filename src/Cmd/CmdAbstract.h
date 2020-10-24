@@ -15,6 +15,7 @@
 
 class Document;
 class MainWindow;
+class QXmlStreamAttributes;
 class QXmlStreamWriter;
 
 /// Wrapper around QUndoCommand. This simplifies the more complicated feature set of QUndoCommand
@@ -38,14 +39,33 @@ public:
   virtual void saveXml (QXmlStreamWriter &writer) const = 0;
 
 protected:
+
+  /// After writing leaf class attributes, this writes the base class atributes
+  void baseAttributes (QXmlStreamWriter &writer) const;
+
   /// Return the Document that this command will modify during redo and undo.
   Document &document();
 
   /// Return a const copy of the Document for non redo/undo interaction.
   const Document &document() const;
 
+  /// Same as often-used leafAndBaseAttributes, except this is used in the special case where a class inherits from
+  /// another class (e.g. CmdPointChangeBase) that inherits from the base class. In the three level case, the lowest
+  /// class calls this method and the midlevel class calls leafAndBaseAttributes
+  void leafAttributes (const QXmlStreamAttributes &attributes,
+                       const QStringList &requiredAttributesLeaf,
+                       QXmlStreamReader &reader);
+
+  /// Before reading leaf class attributes, check all required attributes from leaf and this base class are included, then
+  /// extract the parent class attributes
+  void leafAndBaseAttributes (const QXmlStreamAttributes &attributes,
+                              const QStringList &requiredAttributesLeaf,
+                              QXmlStreamReader &reader);
+
   /// Return the MainWindow so it can be updated by this command as a last step.
   MainWindow &mainWindow ();
+
+  /// Call this (for consistency) after writing leaf class attributes, to write the base class attributes
 
   /// Since the set of selected points has probably changed, changed that set back to the specified set. This
   /// lets the user move selected point(s) repeatedly using arrow keys. Also provides expected behavior when pasting

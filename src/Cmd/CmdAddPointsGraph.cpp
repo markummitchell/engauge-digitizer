@@ -74,18 +74,21 @@ CmdAddPointsGraph::CmdAddPointsGraph (MainWindow &mainWindow,
       // This is an entry that we need to add
       QXmlStreamAttributes attributes = reader.attributes ();
 
-      if (attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) &&
-          attributes.hasAttribute(DOCUMENT_SERIALIZE_ORDINAL) &&
-          attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_X) &&
-          attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y)) {
+      QStringList requiredAttributesLeaf;
+      requiredAttributesLeaf << DOCUMENT_SERIALIZE_IDENTIFIER
+                             << DOCUMENT_SERIALIZE_ORDINAL
+                             << DOCUMENT_SERIALIZE_SCREEN_X
+                             << DOCUMENT_SERIALIZE_SCREEN_Y;
+      leafAttributes (attributes,
+                      requiredAttributesLeaf,
+                      reader);
 
-        m_identifiersAdded << attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
-        m_ordinals << attributes.value(DOCUMENT_SERIALIZE_ORDINAL).toDouble();
+      m_identifiersAdded << attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
+      m_ordinals << attributes.value(DOCUMENT_SERIALIZE_ORDINAL).toDouble();
 
-        QPoint point (attributes.value(DOCUMENT_SERIALIZE_SCREEN_X).toInt(),
-                      attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y).toInt());
-        m_points << point;
-      }
+      QPoint point (attributes.value(DOCUMENT_SERIALIZE_SCREEN_X).toInt(),
+                    attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y).toInt());
+      m_points << point;
     }
   }
 
@@ -151,5 +154,6 @@ void CmdAddPointsGraph::saveXml (QXmlStreamWriter &writer) const
     writer.writeAttribute(DOCUMENT_SERIALIZE_ORDINAL, QString::number (m_ordinals.at (index)));
     writer.writeEndElement();
   }
+  baseAttributes (writer);
   writer.writeEndElement();
 }

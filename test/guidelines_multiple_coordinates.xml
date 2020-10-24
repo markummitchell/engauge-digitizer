@@ -182,52 +182,52 @@
    <OperatingSystem WordSize="64" Endian="LittleEndian"/>
    <File Imported="True"/>
    <CmdMediator>
-    <Cmd Identifier="Axes&#x9;point&#x9;1" GraphY="0" IsXOnly="False" ScreenX="60.147" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="139.24" Ordinal="1"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;3" GraphY="0" IsXOnly="False" ScreenX="1123.55" Type="CmdAddPointAxis" Description="Add axis point" GraphX="200" ScreenY="139.24" Ordinal="2"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;5" GraphY="0.05" IsXOnly="False" ScreenX="60.147" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="19.3645" Ordinal="3"/>
-    <Cmd CoordSystemIndexBefore="0" CoordSystemIndexAfter="1" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;7" GraphY="0" IsXOnly="False" ScreenX="60.147" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="314.442" Ordinal="1"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;9" GraphY="0" IsXOnly="False" ScreenX="1123.55" Type="CmdAddPointAxis" Description="Add axis point" GraphX="200" ScreenY="314.442" Ordinal="2"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;11" GraphY="0.05" IsXOnly="False" ScreenX="60.147" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="195.489" Ordinal="3"/>
-    <Cmd CoordSystemIndexBefore="1" CoordSystemIndexAfter="2" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;13" GraphY="0" IsXOnly="False" ScreenX="59.345" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="490.567" Ordinal="1"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;15" GraphY="0" IsXOnly="False" ScreenX="1124.35" Type="CmdAddPointAxis" Description="Add axis point" GraphX="200" ScreenY="489.645" Ordinal="2"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;17" GraphY="0.05" IsXOnly="False" ScreenX="58.543" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="374.38" Ordinal="3"/>
-    <Cmd CoordSystemIndexBefore="2" CoordSystemIndexAfter="3" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;19" GraphY="0" IsXOnly="False" ScreenX="59.345" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="668.536" Ordinal="1"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;21" GraphY="0" IsXOnly="False" ScreenX="1125.15" Type="CmdAddPointAxis" Description="Add axis point" GraphX="200" ScreenY="666.692" Ordinal="2"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;23" GraphY="0.05" IsXOnly="False" ScreenX="60.147" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="550.505" Ordinal="3"/>
-    <Cmd CoordSystemIndexBefore="3" CoordSystemIndexAfter="4" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;25" GraphY="0" IsXOnly="False" ScreenX="59.345" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="844.66" Ordinal="1"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;27" GraphY="0" IsXOnly="False" ScreenX="1124.35" Type="CmdAddPointAxis" Description="Add axis point" GraphX="200" ScreenY="844.66" Ordinal="2"/>
-    <Cmd Identifier="Axes&#x9;point&#x9;29" GraphY="0.05" IsXOnly="False" ScreenX="60.9489" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="724.785" Ordinal="3"/>
-    <Cmd CoordSystemIndexBefore="4" CoordSystemIndexAfter="0" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
-    <Cmd Identifier="guideline0" GraphAfter="-7.46514" Type="CmdGuidelineAddXT" Description="GuidelineAddXT"/>
-    <Cmd Identifier="guideline0" GraphAfter="0.697696" GraphBefore="-7.46514" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT"/>
-    <Cmd CoordSystemIndexBefore="0" CoordSystemIndexAfter="1" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
-    <Cmd Identifier="guideline2" GraphAfter="-7.46514" Type="CmdGuidelineAddXT" Description="GuidelineAddXT"/>
-    <Cmd Identifier="guideline2" GraphAfter="-49.4486" GraphBefore="-7.46514" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT"/>
-    <Cmd Identifier="guideline4" GraphAfter="-7.46514" Type="CmdGuidelineAddXT" Description="GuidelineAddXT"/>
-    <Cmd Identifier="guideline4" GraphAfter="50.5325" GraphBefore="-7.46514" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT"/>
-    <Cmd CoordSystemIndexBefore="1" CoordSystemIndexAfter="2" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
-    <Cmd Identifier="guideline6" GraphAfter="-8.36973" Type="CmdGuidelineAddXT" Description="GuidelineAddXT"/>
-    <Cmd Identifier="guideline6" GraphAfter="-99.9102" GraphBefore="-8.36973" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT"/>
-    <Cmd Identifier="guideline8" GraphAfter="-8.36973" Type="CmdGuidelineAddXT" Description="GuidelineAddXT"/>
-    <Cmd Identifier="guideline8" GraphAfter="99.7401" GraphBefore="-8.36973" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT"/>
-    <Cmd CoordSystemIndexBefore="2" CoordSystemIndexAfter="3" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
-    <Cmd Identifier="guideline10" GraphAfter="-7.15061" Type="CmdGuidelineAddXT" Description="GuidelineAddXT"/>
-    <Cmd Identifier="guideline10" GraphAfter="-150.011" GraphBefore="-7.15061" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT"/>
-    <Cmd Identifier="guideline12" GraphAfter="-7.15061" Type="CmdGuidelineAddXT" Description="GuidelineAddXT"/>
-    <Cmd Identifier="guideline12" GraphAfter="149.774" GraphBefore="-7.15061" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT"/>
-    <Cmd CoordSystemIndexBefore="3" CoordSystemIndexAfter="4" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
-    <Cmd Identifier="guideline14" GraphAfter="-7.46023" Type="CmdGuidelineAddXT" Description="GuidelineAddXT"/>
-    <Cmd Identifier="guideline14" GraphAfter="-200.967" GraphBefore="-7.46023" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT"/>
-    <Cmd Identifier="guideline16" GraphAfter="-7.46023" Type="CmdGuidelineAddXT" Description="GuidelineAddXT"/>
-    <Cmd Identifier="guideline16" GraphAfter="197.929" GraphBefore="-7.46023" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT"/>
-    <Cmd CoordSystemIndexBefore="4" CoordSystemIndexAfter="3" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
-    <Cmd CoordSystemIndexBefore="3" CoordSystemIndexAfter="2" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
-    <Cmd CoordSystemIndexBefore="2" CoordSystemIndexAfter="1" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>
-    <Cmd CoordSystemIndexBefore="1" CoordSystemIndexAfter="0" Type="CmdSelectCoordSystem" Description="Select coordinate system"/>            
+    <Cmd Identifier="Axes&#x9;point&#x9;1" GraphY="0" IsXOnly="False" ScreenX="60.147" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="139.24" Ordinal="1" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;3" GraphY="0" IsXOnly="False" ScreenX="1123.55" Type="CmdAddPointAxis" Description="Add axis point" GraphX="200" ScreenY="139.24" Ordinal="2" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;5" GraphY="0.05" IsXOnly="False" ScreenX="60.147" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="19.3645" Ordinal="3" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd CoordSystemIndexBefore="0" CoordSystemIndexAfter="1" Type="CmdSelectCoordSystem" Description="Select coordinate system" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;7" GraphY="0" IsXOnly="False" ScreenX="60.147" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="314.442" Ordinal="1" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;9" GraphY="0" IsXOnly="False" ScreenX="1123.55" Type="CmdAddPointAxis" Description="Add axis point" GraphX="200" ScreenY="314.442" Ordinal="2" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;11" GraphY="0.05" IsXOnly="False" ScreenX="60.147" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="195.489" Ordinal="3" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd CoordSystemIndexBefore="1" CoordSystemIndexAfter="2" Type="CmdSelectCoordSystem" Description="Select coordinate system" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;13" GraphY="0" IsXOnly="False" ScreenX="59.345" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="490.567" Ordinal="1" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;15" GraphY="0" IsXOnly="False" ScreenX="1124.35" Type="CmdAddPointAxis" Description="Add axis point" GraphX="200" ScreenY="489.645" Ordinal="2" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;17" GraphY="0.05" IsXOnly="False" ScreenX="58.543" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="374.38" Ordinal="3" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd CoordSystemIndexBefore="2" CoordSystemIndexAfter="3" Type="CmdSelectCoordSystem" Description="Select coordinate system" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;19" GraphY="0" IsXOnly="False" ScreenX="59.345" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="668.536" Ordinal="1" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;21" GraphY="0" IsXOnly="False" ScreenX="1125.15" Type="CmdAddPointAxis" Description="Add axis point" GraphX="200" ScreenY="666.692" Ordinal="2" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;23" GraphY="0.05" IsXOnly="False" ScreenX="60.147" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="550.505" Ordinal="3" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd CoordSystemIndexBefore="3" CoordSystemIndexAfter="4" Type="CmdSelectCoordSystem" Description="Select coordinate system" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;25" GraphY="0" IsXOnly="False" ScreenX="59.345" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="844.66" Ordinal="1" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;27" GraphY="0" IsXOnly="False" ScreenX="1124.35" Type="CmdAddPointAxis" Description="Add axis point" GraphX="200" ScreenY="844.66" Ordinal="2" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="Axes&#x9;point&#x9;29" GraphY="0.05" IsXOnly="False" ScreenX="60.9489" Type="CmdAddPointAxis" Description="Add axis point" GraphX="-200" ScreenY="724.785" Ordinal="3" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd CoordSystemIndexBefore="4" CoordSystemIndexAfter="0" Type="CmdSelectCoordSystem" Description="Select coordinate system" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="guideline0" GraphAfter="-7.46514" Type="CmdGuidelineAddXT" Description="GuidelineAddXT" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="guideline0" GraphAfter="0.697696" GraphBefore="-7.46514" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd CoordSystemIndexBefore="0" CoordSystemIndexAfter="1" Type="CmdSelectCoordSystem" Description="Select coordinate system" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="guideline2" GraphAfter="-7.46514" Type="CmdGuidelineAddXT" Description="GuidelineAddXT" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="guideline2" GraphAfter="-49.4486" GraphBefore="-7.46514" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="guideline4" GraphAfter="-7.46514" Type="CmdGuidelineAddXT" Description="GuidelineAddXT" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="guideline4" GraphAfter="50.5325" GraphBefore="-7.46514" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd CoordSystemIndexBefore="1" CoordSystemIndexAfter="2" Type="CmdSelectCoordSystem" Description="Select coordinate system" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+    <Cmd Identifier="guideline6" GraphAfter="-8.36973" Type="CmdGuidelineAddXT" Description="GuidelineAddXT" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd Identifier="guideline6" GraphAfter="-99.9102" GraphBefore="-8.36973" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd Identifier="guideline8" GraphAfter="-8.36973" Type="CmdGuidelineAddXT" Description="GuidelineAddXT" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd Identifier="guideline8" GraphAfter="99.7401" GraphBefore="-8.36973" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd CoordSystemIndexBefore="2" CoordSystemIndexAfter="3" Type="CmdSelectCoordSystem" Description="Select coordinate system" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd Identifier="guideline10" GraphAfter="-7.15061" Type="CmdGuidelineAddXT" Description="GuidelineAddXT" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd Identifier="guideline10" GraphAfter="-150.011" GraphBefore="-7.15061" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd Identifier="guideline12" GraphAfter="-7.15061" Type="CmdGuidelineAddXT" Description="GuidelineAddXT" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd Identifier="guideline12" GraphAfter="149.774" GraphBefore="-7.15061" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd CoordSystemIndexBefore="3" CoordSystemIndexAfter="4" Type="CmdSelectCoordSystem" Description="Select coordinate system" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd Identifier="guideline14" GraphAfter="-7.46023" Type="CmdGuidelineAddXT" Description="GuidelineAddXT" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd Identifier="guideline14" GraphAfter="-200.967" GraphBefore="-7.46023" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd Identifier="guideline16" GraphAfter="-7.46023" Type="CmdGuidelineAddXT" Description="GuidelineAddXT" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd Identifier="guideline16" GraphAfter="197.929" GraphBefore="-7.46023" Type="CmdGuidelineMoveXT" Description="GuidelineMoveXT" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd CoordSystemIndexBefore="4" CoordSystemIndexAfter="3" Type="CmdSelectCoordSystem" Description="Select coordinate system" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd CoordSystemIndexBefore="3" CoordSystemIndexAfter="2" Type="CmdSelectCoordSystem" Description="Select coordinate system" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd CoordSystemIndexBefore="2" CoordSystemIndexAfter="1" Type="CmdSelectCoordSystem" Description="Select coordinate system" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
+    <Cmd CoordSystemIndexBefore="1" CoordSystemIndexAfter="0" Type="CmdSelectCoordSystem" Description="Select coordinate system" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="0" GuidelineViewStateString="Edit"/>
    </CmdMediator>
    <Error Comment="userTriggered" Context="Shift+Control+E" File="src/main/MainWindow.cpp" Line="393"/>
   </Document>

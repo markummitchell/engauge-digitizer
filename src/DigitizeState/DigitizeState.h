@@ -7,6 +7,8 @@
 #ifndef DIGITIZE_STATE_H
 #define DIGITIZE_STATE_H
 
+#include <QString>
+
 /// Set of possible states of Digitize toolbar.
 enum DigitizeState {
   DIGITIZE_STATE_AXIS,
@@ -19,5 +21,7 @@ enum DigitizeState {
   DIGITIZE_STATE_SCALE, // Out of order for backwards compatibility with pre-version 10
   NUM_DIGITIZE_STATES
 };
+
+extern QString digitizeStateAsString (DigitizeState state);
 
 #endif // DIGITIZE_STATE_H

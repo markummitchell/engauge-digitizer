@@ -38,15 +38,12 @@ CmdGuidelineAddXT::CmdGuidelineAddXT (MainWindow &mainWindow,
 
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_AFTER)) {
-    xmlExitWithError (reader,
-                      QString ("%1 %2 %3 %4")
-                      .arg (QObject::tr ("Missing attribute(s)"))
-                      .arg (DOCUMENT_SERIALIZE_IDENTIFIER)
-                      .arg (QObject::tr ("and/or"))
-                      .arg (DOCUMENT_SERIALIZE_GRAPH_AFTER));
-  }
+  QStringList requiredAttributesLeaf;
+  requiredAttributesLeaf << DOCUMENT_SERIALIZE_IDENTIFIER
+                         << DOCUMENT_SERIALIZE_GRAPH_AFTER;
+  leafAndBaseAttributes (attributes,
+                         requiredAttributesLeaf,
+                         reader);
 
   m_identifier = attributes.value(DOCUMENT_SERIALIZE_IDENTIFIER).toString();
   m_value = attributes.value(DOCUMENT_SERIALIZE_GRAPH_AFTER).toDouble();
@@ -81,5 +78,6 @@ void CmdGuidelineAddXT::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
   writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER, m_identifier);
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRAPH_AFTER, QString::number (m_value));
+  baseAttributes (writer);
   writer.writeEndElement();
 }

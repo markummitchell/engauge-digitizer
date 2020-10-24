@@ -49,23 +49,16 @@ CmdEditPointAxis::CmdEditPointAxis (MainWindow &mainWindow,
 
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_X_BEFORE) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_Y_BEFORE) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_X_AFTER) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_GRAPH_Y_AFTER) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY)) {
-    xmlExitWithError (reader,
-                      QString ("%1 %2, %3, %4, %5, %6 %7 %8")
-                      .arg (QObject::tr ("Missing attribute(s)"))
-                      .arg (DOCUMENT_SERIALIZE_GRAPH_X_BEFORE)
-                      .arg (DOCUMENT_SERIALIZE_GRAPH_Y_BEFORE)
-                      .arg (DOCUMENT_SERIALIZE_GRAPH_X_AFTER)
-                      .arg (DOCUMENT_SERIALIZE_GRAPH_Y_AFTER)
-                      .arg (DOCUMENT_SERIALIZE_IDENTIFIER)
-                      .arg (QObject::tr ("and/or"))
-                      .arg (DOCUMENT_SERIALIZE_POINT_IS_X_ONLY));
-  }
+  QStringList requiredAttributesLeaf;
+  requiredAttributesLeaf << DOCUMENT_SERIALIZE_GRAPH_X_BEFORE
+                         << DOCUMENT_SERIALIZE_GRAPH_Y_BEFORE
+                         << DOCUMENT_SERIALIZE_GRAPH_X_AFTER
+                         << DOCUMENT_SERIALIZE_GRAPH_Y_AFTER
+                         << DOCUMENT_SERIALIZE_IDENTIFIER
+                         << DOCUMENT_SERIALIZE_POINT_IS_X_ONLY;
+  leafAndBaseAttributes (attributes,
+                         requiredAttributesLeaf,
+                         reader);
 
   // Boolean values
   QString isXOnlyValue = attributes.value(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY).toString();
@@ -118,5 +111,6 @@ void CmdEditPointAxis::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_POINT_IS_X_ONLY, m_isXOnly ?
                           DOCUMENT_SERIALIZE_BOOL_TRUE :
                           DOCUMENT_SERIALIZE_BOOL_FALSE);
+  baseAttributes (writer);
   writer.writeEndElement();
 }

@@ -40,14 +40,14 @@
   <OperatingSystem Endian="LittleEndian" WordSize="64"/>
   <File Imported="True"/>
   <CmdMediator>
-   <Cmd Description="Coordinate settings" Type="CmdSettingsCoords">
+   <Cmd Description="Coordinate settings" Type="CmdSettingsCoords" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="1" GuidelineViewStateString="Hide">
     <Coords UnitsX="0" ScaleYRadius="0" ScaleXThetaString="Linear" Coords="0" UnitsRadiusString="Number" TypeString="Cartesian" UnitsTimeString="HH:MM:SS" ScaleXTheta="0" UnitsDate="3" UnitsY="0" UnitsYString="Number" UnitsXString="Number" UnitsRadius="0" UnitsTheta="0" Type="0" ScaleYRadiusString="Linear" UnitsTime="2" UnitsDateString="YYYY/MM/DD" UnitsThetaString="Degrees (DDD.DDDDD)"/>
     <Coords UnitsX="3" ScaleYRadius="0" ScaleXThetaString="Linear" Coords="0" UnitsRadiusString="Number" TypeString="Cartesian" UnitsTimeString="HH:MM:SS" ScaleXTheta="0" UnitsDate="3" UnitsY="0" UnitsYString="Number" UnitsXString="Date/Time" UnitsRadius="0" UnitsTheta="0" Type="0" ScaleYRadiusString="Linear" UnitsTime="2" UnitsDateString="YYYY/MM/DD" UnitsThetaString="Degrees (DDD.DDDDD)"/>
    </Cmd>
-   <Cmd Identifier="Axes&#x9;point&#x9;1" GraphY="-0.8" Description="Add axis point" Ordinal="1" Type="CmdAddPointAxis" ScreenY="782" ScreenX="123" GraphX="-315590400" IsXOnly="False"/>
-   <Cmd Identifier="Axes&#x9;point&#x9;3" GraphY="-0.8" Description="Add axis point" Ordinal="2" Type="CmdAddPointAxis" ScreenY="781" ScreenX="1154" GraphX="2209017600" IsXOnly="False"/>
-   <Cmd Identifier="Axes&#x9;point&#x9;5" GraphY="1" Description="Add axis point" Ordinal="3" Type="CmdAddPointAxis" ScreenY="5" ScreenX="121" GraphX="-315590400" IsXOnly="False"/>
-   <Cmd Description="Add graph points" Type="CmdAddPointsGraph" CurveName="Curve1">
+   <Cmd Identifier="Axes&#x9;point&#x9;1" GraphY="-0.8" Description="Add axis point" Ordinal="1" Type="CmdAddPointAxis" ScreenY="782" ScreenX="123" GraphX="-315590400" IsXOnly="False" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+   <Cmd Identifier="Axes&#x9;point&#x9;3" GraphY="-0.8" Description="Add axis point" Ordinal="2" Type="CmdAddPointAxis" ScreenY="781" ScreenX="1154" GraphX="2209017600" IsXOnly="False" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+   <Cmd Identifier="Axes&#x9;point&#x9;5" GraphY="1" Description="Add axis point" Ordinal="3" Type="CmdAddPointAxis" ScreenY="5" ScreenX="121" GraphX="-315590400" IsXOnly="False" DigitizeState="0" DigitizeStateString="DigitizeStateAxis" GuidelineViewState="1" GuidelineViewStateString="Hide"/>
+   <Cmd Description="Add graph points" Type="CmdAddPointsGraph" CurveName="Curve1" DigitizeState="2" DigitizeStateString="DigitizeStateCurve" GuidelineViewState="1" GuidelineViewStateString="Hide">
     <Point Identifier="Curve1&#x9;point&#x9;6" Ordinal="1" ScreenY="439" ScreenX="125"/>
     <Point Identifier="Curve1&#x9;point&#x9;7" Ordinal="1" ScreenY="457" ScreenX="142"/>
     <Point Identifier="Curve1&#x9;point&#x9;8" Ordinal="1" ScreenY="475" ScreenX="159"/>

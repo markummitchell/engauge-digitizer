@@ -52,27 +52,19 @@ CmdAddScale::CmdAddScale (MainWindow &mainWindow,
 
   QXmlStreamAttributes attributes = reader.attributes();
 
-  if (!attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_X) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_X1) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCREEN_Y1) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_SCALE_LENGTH) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_IDENTIFIER1) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_ORDINAL) ||
-      !attributes.hasAttribute(DOCUMENT_SERIALIZE_ORDINAL1)) {
-    xmlExitWithError (reader,
-                      QString ("Missing attribute(s) %1, %2, %3, %4, %5, %6, %7, %8 and/or %9")
-                      .arg (DOCUMENT_SERIALIZE_SCREEN_X)
-                      .arg (DOCUMENT_SERIALIZE_SCREEN_Y)
-                      .arg (DOCUMENT_SERIALIZE_SCREEN_X1)
-                      .arg (DOCUMENT_SERIALIZE_SCREEN_Y1)
-                      .arg (DOCUMENT_SERIALIZE_SCALE_LENGTH)
-                      .arg (DOCUMENT_SERIALIZE_IDENTIFIER)
-                      .arg (DOCUMENT_SERIALIZE_IDENTIFIER1)
-                      .arg (DOCUMENT_SERIALIZE_ORDINAL)
-                      .arg (DOCUMENT_SERIALIZE_ORDINAL1));
-  }
+  QStringList requiredAttributesLeaf;
+  requiredAttributesLeaf << DOCUMENT_SERIALIZE_SCREEN_X
+                         << DOCUMENT_SERIALIZE_SCREEN_Y
+                         << DOCUMENT_SERIALIZE_SCREEN_X1
+                         << DOCUMENT_SERIALIZE_SCREEN_Y1
+                         << DOCUMENT_SERIALIZE_SCALE_LENGTH
+                         << DOCUMENT_SERIALIZE_IDENTIFIER
+                         << DOCUMENT_SERIALIZE_IDENTIFIER1
+                         << DOCUMENT_SERIALIZE_ORDINAL
+                         << DOCUMENT_SERIALIZE_ORDINAL1;
+  leafAndBaseAttributes (attributes,
+                         requiredAttributesLeaf,
+                         reader);
 
   m_posScreen0.setX(attributes.value(DOCUMENT_SERIALIZE_SCREEN_X).toDouble());
   m_posScreen0.setY(attributes.value(DOCUMENT_SERIALIZE_SCREEN_Y).toDouble());
@@ -136,5 +128,6 @@ void CmdAddScale::saveXml (QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_IDENTIFIER1, m_identifierAdded1);
   writer.writeAttribute(DOCUMENT_SERIALIZE_ORDINAL, QString::number (m_ordinal0));
   writer.writeAttribute(DOCUMENT_SERIALIZE_ORDINAL1, QString::number (m_ordinal1));
+  baseAttributes (writer);
   writer.writeEndElement();
 }
