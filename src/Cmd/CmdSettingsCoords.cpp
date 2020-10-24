@@ -104,6 +104,7 @@ void CmdSettingsCoords::saveXml (QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_COORDS);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
+  baseAttributes (writer);
   m_modelCoordsBefore.saveXml(writer);
   m_modelCoordsAfter.saveXml(writer);
   writer.writeEndElement();

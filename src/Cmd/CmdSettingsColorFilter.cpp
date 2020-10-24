@@ -103,6 +103,7 @@ void CmdSettingsColorFilter::saveXml (QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_COLOR_FILTER);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
+  baseAttributes (writer);  
   m_modelColorFilterBefore.saveXml (writer);
   m_modelColorFilterAfter.saveXml(writer);
   writer.writeEndElement();

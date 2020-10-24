@@ -103,6 +103,7 @@ void CmdSettingsAxesChecker::saveXml (QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_AXES_CHECKER);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
+  baseAttributes (writer);  
   m_modelAxesCheckerBefore.saveXml(writer);
   m_modelAxesCheckerAfter.saveXml(writer);
   writer.writeEndElement();

@@ -103,6 +103,7 @@ void CmdSettingsDigitizeCurve::saveXml (QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_DIGITIZE_CURVE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
+  baseAttributes (writer);
   m_modelDigitizeCurveBefore.saveXml (writer);
   m_modelDigitizeCurveAfter.saveXml(writer);
   writer.writeEndElement();

@@ -103,6 +103,7 @@ void CmdSettingsGridDisplay::saveXml (QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_GRID_DISPLAY);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
+  baseAttributes (writer);
   m_modelGridDisplayBefore.saveXml (writer);
   m_modelGridDisplayAfter.saveXml(writer);
   writer.writeEndElement();

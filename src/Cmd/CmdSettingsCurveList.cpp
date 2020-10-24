@@ -132,6 +132,7 @@ void CmdSettingsCurveList::saveXml (QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_LIST);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
+  baseAttributes (writer);
   m_curvesGraphsBefore.saveXml(writer);
   m_curvesGraphsAfter.saveXml(writer);
   writer.writeEndElement();

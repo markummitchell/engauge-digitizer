@@ -103,6 +103,7 @@ void CmdSettingsSegments::saveXml (QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_SEGMENTS);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
+  baseAttributes (writer);
   m_modelSegmentsBefore.saveXml (writer);
   m_modelSegmentsAfter.saveXml(writer);
   writer.writeEndElement();

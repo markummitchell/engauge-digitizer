@@ -1,0 +1,1 @@
+-errorreport ../test/settings_axes_checker.xml -regression -reset

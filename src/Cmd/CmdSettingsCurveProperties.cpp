@@ -106,6 +106,7 @@ void CmdSettingsCurveProperties::saveXml (QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_CURVE_PROPERTIES);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
+  baseAttributes (writer);
   m_modelCurveStylesBefore.saveXml(writer);
   m_modelCurveStylesAfter.saveXml(writer);
   writer.writeEndElement();

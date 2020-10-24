@@ -103,6 +103,7 @@ void CmdSettingsGridRemoval::saveXml (QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_GRID_REMOVAL);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
+  baseAttributes (writer);
   m_modelGridRemovalBefore.saveXml (writer);
   m_modelGridRemovalAfter.saveXml(writer);
   writer.writeEndElement();

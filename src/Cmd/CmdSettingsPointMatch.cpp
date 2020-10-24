@@ -103,6 +103,7 @@ void CmdSettingsPointMatch::saveXml (QXmlStreamWriter &writer) const
   writer.writeStartElement(DOCUMENT_SERIALIZE_CMD);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_TYPE, DOCUMENT_SERIALIZE_CMD_SETTINGS_POINT_MATCH);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DESCRIPTION, QUndoCommand::text ());
+  baseAttributes (writer);
   m_modelPointMatchBefore.saveXml (writer);
   m_modelPointMatchAfter.saveXml(writer);
   writer.writeEndElement();
