@@ -116,7 +116,7 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   layout->addWidget (labelLineWidthActive, row, 1);
 
   m_spinLineWidthActive = new QSpinBox;
-  m_spinLineWidthActive->setWhatsThis (tr ("Select a size for the lines drawn along a segment when under the cursor"));
+  m_spinLineWidthActive->setWhatsThis (tr ("Select a size for the lines drawn along a segment when hovering over the segment"));
   m_spinLineWidthActive->setMinimum(1);
   connect (m_spinLineWidthActive, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidthActive (int)));
   layout->addWidget (m_spinLineWidthActive, row++, 2);
@@ -125,7 +125,7 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   layout->addWidget (labelLineWidthInactive, row, 1);
 
   m_spinLineWidthInactive = new QSpinBox;
-  m_spinLineWidthInactive->setWhatsThis (tr ("Select a size for the lines drawn along a segment when not under the cursor"));
+  m_spinLineWidthInactive->setWhatsThis (tr ("Select a size for the lines drawn along a segment when not hovering over the segment"));
   m_spinLineWidthInactive->setMinimum(1);
   connect (m_spinLineWidthInactive, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidthInactive (int)));
   layout->addWidget (m_spinLineWidthInactive, row++, 2);  
