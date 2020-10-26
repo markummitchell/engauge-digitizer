@@ -77,7 +77,7 @@ void SegmentLine::setHover (bool hover)
   if (hover) {
 
     setPen (QPen (QBrush (colorOpaque),
-                  m_modelSegments.lineWidth()));
+                  m_modelSegments.lineWidthActive()));
 
   } else {
 
@@ -87,7 +87,7 @@ void SegmentLine::setHover (bool hover)
                       inactiveOpacityEnumToAlpha (m_modelSegments.inactiveOpacity()));
 
     setPen (QPen (QBrush (colorSoft),
-                  m_modelSegments.lineWidth()));
+                  m_modelSegments.lineWidthInactive()));
 
   }
 }

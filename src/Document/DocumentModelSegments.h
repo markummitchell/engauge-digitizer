@@ -36,11 +36,14 @@ public:
   /// Get method for inactive opacity
   InactiveOpacity inactiveOpacity () const;
 
-  /// Get method for line color.
+  /// Get method for line color
   ColorPalette lineColor() const;
 
-  /// Get method for line width.
-  double lineWidth() const;
+  /// Get method for line width when active.
+  double lineWidthActive() const;
+
+  /// Get method for line width when inactive.
+  double lineWidthInactive() const;  
 
   virtual void loadXml(QXmlStreamReader &reader);
 
@@ -65,8 +68,11 @@ public:
   /// Set method for line color.
   void setLineColor(ColorPalette lineColor);
 
-  /// Set method for line width.
-  void setLineWidth (double lineWidth);
+  /// Set method for line width when active.
+  void setLineWidthActive (double lineWidth);
+
+  /// Set method for line width when inactive.
+  void setLineWidthInactive (double lineWidth);  
 
   /// Set method for min length.
   void setMinLength(double minLength);
@@ -79,7 +85,8 @@ private:
   double m_pointSeparation;
   double m_minLength;
   bool m_fillCorners;
-  double m_lineWidth;
+  double m_lineWidthActive;
+  double m_lineWidthInactive;  
   ColorPalette m_lineColor;
   InactiveOpacity m_inactiveOpacity;
 };

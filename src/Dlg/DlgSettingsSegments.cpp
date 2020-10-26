@@ -112,14 +112,23 @@ void DlgSettingsSegments::createControls (QGridLayout *layout,
   connect (m_chkFillCorners, SIGNAL (stateChanged (int)), this, SLOT (slotFillCorners (int)));
   layout->addWidget (m_chkFillCorners, row++, 2);
 
-  QLabel *labelLineWidth = new QLabel(QString ("%1:").arg (tr ("Line width")));
-  layout->addWidget (labelLineWidth, row, 1);
+  QLabel *labelLineWidthActive = new QLabel(QString ("%1:").arg (tr ("Active line width")));
+  layout->addWidget (labelLineWidthActive, row, 1);
 
-  m_spinLineWidth = new QSpinBox;
-  m_spinLineWidth->setWhatsThis (tr ("Select a size for the lines drawn along a segment"));
-  m_spinLineWidth->setMinimum(1);
-  connect (m_spinLineWidth, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidth (int)));
-  layout->addWidget (m_spinLineWidth, row++, 2);
+  m_spinLineWidthActive = new QSpinBox;
+  m_spinLineWidthActive->setWhatsThis (tr ("Select a size for the lines drawn along a segment when under the cursor"));
+  m_spinLineWidthActive->setMinimum(1);
+  connect (m_spinLineWidthActive, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidthActive (int)));
+  layout->addWidget (m_spinLineWidthActive, row++, 2);
+
+  QLabel *labelLineWidthInactive = new QLabel(QString ("%1:").arg (tr ("Inactive line width")));
+  layout->addWidget (labelLineWidthInactive, row, 1);
+
+  m_spinLineWidthInactive = new QSpinBox;
+  m_spinLineWidthInactive->setWhatsThis (tr ("Select a size for the lines drawn along a segment when not under the cursor"));
+  m_spinLineWidthInactive->setMinimum(1);
+  connect (m_spinLineWidthInactive, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidthInactive (int)));
+  layout->addWidget (m_spinLineWidthInactive, row++, 2);  
 
   QLabel *labelLineColor = new QLabel(QString ("%1:").arg (tr ("Line color")));
   layout->addWidget (labelLineColor, row, 1);
@@ -321,7 +330,8 @@ void DlgSettingsSegments::load (CmdMediator &cmdMediator)
   m_spinPointSeparation->setValue (qFloor (m_modelSegmentsAfter->pointSeparation()));
   m_spinMinLength->setValue (qFloor (m_modelSegmentsAfter->minLength()));
   m_chkFillCorners->setChecked (m_modelSegmentsAfter->fillCorners ());
-  m_spinLineWidth->setValue (qFloor (m_modelSegmentsAfter->lineWidth()));
+  m_spinLineWidthActive->setValue (qFloor (m_modelSegmentsAfter->lineWidthActive()));
+  m_spinLineWidthInactive->setValue (qFloor (m_modelSegmentsAfter->lineWidthInactive()));  
 
   int indexLineColor = m_cmbLineColor->findData(QVariant (m_modelSegmentsAfter->lineColor()));
   ENGAUGE_ASSERT (indexLineColor >= 0);
@@ -374,11 +384,20 @@ void DlgSettingsSegments::slotLineColor (const QString &)
   updatePreview();
 }
 
-void DlgSettingsSegments::slotLineWidth (int lineWidth)
+void DlgSettingsSegments::slotLineWidthActive (int lineWidthActive)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineWidth";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineWidthActive";
 
-  m_modelSegmentsAfter->setLineWidth(lineWidth);
+  m_modelSegmentsAfter->setLineWidthActive(lineWidthActive);
+  updateControls();
+  updatePreview();
+}
+
+void DlgSettingsSegments::slotLineWidthInactive (int lineWidthInactive)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsSegments::slotLineWidthInactive";
+
+  m_modelSegmentsAfter->setLineWidthInactive(lineWidthInactive);
   updateControls();
   updatePreview();
 }

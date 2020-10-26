@@ -501,7 +501,7 @@ void CoordSystem::loadPreVersion6 (QDataStream &str,
   str >> int32;
   m_modelSegments.setPointSeparation(int32);
   str >> int32;
-  m_modelSegments.setLineWidth(int32);
+  m_modelSegments.setLineWidthActive(int32);
   str >> int32;
   m_modelSegments.setLineColor(static_cast<ColorPalette> (int32));
 

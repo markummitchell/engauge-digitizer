@@ -16,15 +16,17 @@
 
 const double DEFAULT_POINT_SEPARATION = 25;
 const double DEFAULT_MIN_LENGTH = 2;
-const double DEFAULT_LINE_WIDTH = 4;
+const double DEFAULT_LINE_WIDTH_ACTIVE = 6; // Highlight is slightly bigger
+const double DEFAULT_LINE_WIDTH_INACTIVE = 4;
 const ColorPalette DEFAULT_LINE_COLOR (COLOR_PALETTE_GREEN);
-const InactiveOpacity DEFAULT_INACTIVE_OPACITY = INACTIVE_OPACITY_64;
+const InactiveOpacity DEFAULT_INACTIVE_OPACITY = INACTIVE_OPACITY_128; // Highlight is slightly brighter as INACTIVE_OPACITY_256
 
 DocumentModelSegments::DocumentModelSegments() :
   m_pointSeparation (DEFAULT_POINT_SEPARATION),
   m_minLength (DEFAULT_MIN_LENGTH),
   m_fillCorners (false),
-  m_lineWidth (DEFAULT_LINE_WIDTH),
+  m_lineWidthActive (DEFAULT_LINE_WIDTH_ACTIVE),
+  m_lineWidthInactive (DEFAULT_LINE_WIDTH_INACTIVE),  
   m_lineColor (DEFAULT_LINE_COLOR),
   m_inactiveOpacity (DEFAULT_INACTIVE_OPACITY)
 {
@@ -34,7 +36,8 @@ DocumentModelSegments::DocumentModelSegments(const Document &document) :
   m_pointSeparation (document.modelSegments().pointSeparation()),
   m_minLength (document.modelSegments().minLength()),
   m_fillCorners (document.modelSegments().fillCorners()),
-  m_lineWidth (document.modelSegments().lineWidth()),
+  m_lineWidthActive (document.modelSegments().lineWidthActive()),
+  m_lineWidthInactive (document.modelSegments().lineWidthInactive()),  
   m_lineColor (document.modelSegments().lineColor()),
   m_inactiveOpacity (document.modelSegments().inactiveOpacity())
 {
@@ -44,7 +47,8 @@ DocumentModelSegments::DocumentModelSegments(const DocumentModelSegments &other)
   m_pointSeparation (other.pointSeparation()),
   m_minLength (other.minLength()),
   m_fillCorners (other.fillCorners ()),
-  m_lineWidth (other.lineWidth()),
+  m_lineWidthActive (other.lineWidthActive()),
+  m_lineWidthInactive (other.lineWidthInactive()),  
   m_lineColor (other.lineColor()),
   m_inactiveOpacity (other.inactiveOpacity())
 {
@@ -55,7 +59,8 @@ DocumentModelSegments &DocumentModelSegments::operator=(const DocumentModelSegme
   m_pointSeparation = other.pointSeparation();
   m_minLength = other.minLength();
   m_fillCorners = other.fillCorners ();
-  m_lineWidth = other.lineWidth();
+  m_lineWidthActive = other.lineWidthActive();
+  m_lineWidthInactive = other.lineWidthInactive();  
   m_lineColor = other.lineColor();
   m_inactiveOpacity = other.inactiveOpacity();
 
@@ -77,9 +82,14 @@ ColorPalette DocumentModelSegments::lineColor() const
   return m_lineColor;
 }
 
-double DocumentModelSegments::lineWidth() const
+double DocumentModelSegments::lineWidthActive() const
 {
-  return m_lineWidth;
+  return m_lineWidthActive;
+}
+
+double DocumentModelSegments::lineWidthInactive() const
+{
+  return m_lineWidthInactive;
 }
 
 void DocumentModelSegments::loadXml(QXmlStreamReader &reader)
@@ -90,7 +100,14 @@ void DocumentModelSegments::loadXml(QXmlStreamReader &reader)
 
   QXmlStreamAttributes attributes = reader.attributes ();
 
-  // DOCUMENT_SERIALIZE_SEGMENTS_INACTIVE_OPACITY was added in version 13 so we allow it to be missing in this test
+  // Entries that are optional since they were removed in version 13
+  //   DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH
+  // Entries that are optional since they were added in version 13
+  //   DOCUMENT_SERIALIZE_SEGMENTS_INACTIVE_OPACITY
+  //   DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH_ACTIVE
+  //   DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH_ACTIVE_STRING
+  //   DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH_INACTIVE
+  //   DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH_INACTIVE_STRING
   if (attributes.hasAttribute(DOCUMENT_SERIALIZE_SEGMENTS_POINT_SEPARATION) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_SEGMENTS_MIN_LENGTH) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_SEGMENTS_FILL_CORNERS) &&
@@ -103,13 +120,28 @@ void DocumentModelSegments::loadXml(QXmlStreamReader &reader)
     setPointSeparation (attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_POINT_SEPARATION).toDouble());
     setMinLength (attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_MIN_LENGTH).toDouble());
     setFillCorners (fillCorners == DOCUMENT_SERIALIZE_BOOL_TRUE);
-    setLineWidth (attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH).toDouble());
     setLineColor (static_cast<ColorPalette> (attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_LINE_COLOR).toInt()));
+    
     if (attributes.hasAttribute (DOCUMENT_SERIALIZE_SEGMENTS_INACTIVE_OPACITY)) {
       setInactiveOpacity (static_cast<InactiveOpacity>  (attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_INACTIVE_OPACITY).toInt ()));
     } else{
-      setInactiveOpacity (DEFAULT_INACTIVE_OPACITY_ENUM);
+      setInactiveOpacity (DEFAULT_INACTIVE_OPACITY);
     }
+    
+    // For line widths, first look for single value (corresponding to versions before 13), then look
+    // for two values (corresponding to version 13+)
+    int lineWidthActive = DEFAULT_LINE_WIDTH_ACTIVE;
+    int lineWidthInactive = DEFAULT_LINE_WIDTH_INACTIVE;    
+    if (attributes.hasAttribute (DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH)) {
+      lineWidthActive = attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH).toInt ();
+      lineWidthInactive = attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH).toInt ();      
+    } else if (attributes.hasAttribute (DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH_ACTIVE) &&
+               attributes.hasAttribute (DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH_INACTIVE)) {
+      lineWidthActive = attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH_ACTIVE).toInt ();
+      lineWidthInactive = attributes.value (DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH_INACTIVE).toInt ();      
+    }
+    setLineWidthActive (lineWidthActive);
+    setLineWidthInactive (lineWidthInactive);
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
@@ -147,7 +179,8 @@ void DocumentModelSegments::printStream(QString indentation,
   str << indentation << "pointSeparation=" << m_pointSeparation << "\n";
   str << indentation << "minLength=" << m_minLength << "\n";
   str << indentation << "fillCorners=" << (m_fillCorners ? "true" : "false") << "\n";
-  str << indentation << "lineWidth=" << m_lineWidth << "\n";
+  str << indentation << "lineWidthActive=" << m_lineWidthActive << "\n";
+  str << indentation << "lineWidthInactive=" << m_lineWidthInactive << "\n";  
   str << indentation << "lineColor=" << colorPaletteToString (m_lineColor) << "\n";
   str << indentation << "inactiveOpacity=" << m_inactiveOpacity << "\n";
 }
@@ -162,7 +195,8 @@ void DocumentModelSegments::saveXml(QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_FILL_CORNERS, m_fillCorners ?
                           DOCUMENT_SERIALIZE_BOOL_TRUE :
                           DOCUMENT_SERIALIZE_BOOL_FALSE);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH, QString::number (m_lineWidth));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH_ACTIVE, QString::number (m_lineWidthActive));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_WIDTH_INACTIVE, QString::number (m_lineWidthInactive));  
   writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_COLOR, QString::number (m_lineColor));
   writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_LINE_COLOR_STRING, colorPaletteToString (m_lineColor));
   writer.writeAttribute(DOCUMENT_SERIALIZE_SEGMENTS_INACTIVE_OPACITY, QString::number (m_inactiveOpacity));
@@ -184,9 +218,14 @@ void DocumentModelSegments::setLineColor(ColorPalette lineColor)
   m_lineColor = lineColor;
 }
 
-void DocumentModelSegments::setLineWidth(double lineWidth)
+void DocumentModelSegments::setLineWidthActive(double lineWidthActive)
 {
-  m_lineWidth = lineWidth;
+  m_lineWidthActive = lineWidthActive;
+}
+
+void DocumentModelSegments::setLineWidthInactive(double lineWidthInactive)
+{
+  m_lineWidthInactive = lineWidthInactive;
 }
 
 void DocumentModelSegments::setMinLength(double minLength)

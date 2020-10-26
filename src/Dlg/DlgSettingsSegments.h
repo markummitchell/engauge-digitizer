@@ -45,7 +45,8 @@ private slots:
   void slotFillCorners (int state);
   void slotInactiveOpacity (const QString &);
   void slotLineColor (const QString &);
-  void slotLineWidth (int);
+  void slotLineWidthActive (int);
+  void slotLineWidthInactive (int);  
   void slotMinLength (const QString &);
   void slotPointSeparation (const QString &);
 
@@ -73,7 +74,8 @@ private:
   QSpinBox *m_spinMinLength;
   QSpinBox *m_spinPointSeparation;
   QCheckBox *m_chkFillCorners;
-  QSpinBox *m_spinLineWidth;
+  QSpinBox *m_spinLineWidthActive;
+  QSpinBox *m_spinLineWidthInactive;  
   QComboBox *m_cmbLineColor;
   QComboBox *m_cmbInactiveOpacity;
 
