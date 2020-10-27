@@ -10,6 +10,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include <QStringList>
 #include "QtToString.h"
 #include <QXmlStreamReader>
 #include "Xml.h"
@@ -91,6 +92,7 @@ void CmdAddPointAxis::cmdRedo ()
                                                   m_isXOnly);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  selectAddedPointForMoving (m_identifierAdded);
   saveOrCheckPostCommandDocumentStateHash (document ());
 }
 

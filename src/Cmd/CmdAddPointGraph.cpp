@@ -10,6 +10,7 @@
 #include "EngaugeAssert.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include <QStringList>
 #include "QtToString.h"
 #include <QXmlStreamReader>
 #include "Xml.h"
@@ -80,6 +81,7 @@ void CmdAddPointGraph::cmdRedo ()
                                                    m_ordinal);
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  selectAddedPointForMoving(m_identifierAdded);
   saveOrCheckPostCommandDocumentStateHash (document ());
 }
 

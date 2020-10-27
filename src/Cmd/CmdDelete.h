@@ -43,6 +43,7 @@ private:
   QString m_html;
 
   CurvesGraphs m_curvesGraphsRemoved;
+  QStringList m_deletedPointIdentifiers;
 };
 
 #endif // CMD_DELETE_H

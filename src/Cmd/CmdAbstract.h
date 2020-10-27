@@ -11,6 +11,8 @@
 #include "DocumentHash.h"
 #include "GuidelineViewState.h"
 #include "PointIdentifiers.h"
+#include <QString>
+#include <QStringList>
 #include <QUndoCommand>
 
 class Document;
@@ -84,6 +86,12 @@ protected:
   /// the hash is recomputed and compared to the original value to check for consistency. This "pre" method is called
   /// immediately after the redo method of the subclass has done its processing. See also saveOrCheckPostCommandDocumentState
   void saveOrCheckPreCommandDocumentStateHash (const Document &document);
+
+  /// Select point that was just added so it can be moved by the user next for convenience
+  void selectAddedPointForMoving (const QString &pointAdded);
+
+  /// Select points that were just added so they can be moved by the user next for convenience
+  void selectAddedPointsForMoving (const QStringList &pointsAdded);
 
 private:
   CmdAbstract();

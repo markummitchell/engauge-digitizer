@@ -20,8 +20,8 @@
 
 const int TEMPORARY_MESSAGE_LIFETIME = 5000; // Milliseconds. Two seconds is too fast even when the text is anticipated
 
-const int MIN_WIDTH_ZOOM = 110;
-const int MIN_WIDTH_COMBO_UNITS = 160;
+const int MIN_WIDTH_ZOOM = 200;
+const int MIN_WIDTH_COMBO_UNITS = 300;
 const int MIN_SIZE_EDIT_COORDS = 250; // Need lots of space in case date/time and degrees/minutes/seconds are used simultaneously
 const int MAX_HEIGHT_EDIT_COORDS = 24;
 

@@ -209,6 +209,26 @@ void CmdAbstract::saveOrCheckPreCommandDocumentStateHash (const Document &docume
 
 }
 
+void CmdAbstract::selectAddedPointForMoving (const QString &pointAdded)
+{
+  // Select added points so they can be moved
+  PointIdentifiers pointIdentifiers;
+  pointIdentifiers.setKeyValue (pointAdded, true);
+  resetSelection(pointIdentifiers);
+}
+
+void CmdAbstract::selectAddedPointsForMoving (const QStringList &pointsAdded)
+{
+  // Select added points so they can be moved
+  PointIdentifiers pointIdentifiers;
+  QStringList::const_iterator itr;
+  for (itr = pointsAdded.begin(); itr != pointsAdded.end(); itr++) {
+    QString pointAdded = *itr;
+    pointIdentifiers.setKeyValue (pointAdded, true);
+  }
+  resetSelection(pointIdentifiers);
+}
+
 void CmdAbstract::undo ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::undo identifierIndex=" << m_identifierIndexAfterRedo << "->"

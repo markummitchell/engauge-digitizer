@@ -11,6 +11,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <qdebug.h>
+#include <QStringList>
 #include "QtToString.h"
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
@@ -108,7 +109,9 @@ void CmdAddPointsGraph::cmdRedo ()
   restoreState ();
   saveOrCheckPreCommandDocumentStateHash (document ());
   saveDocumentState (document ());
-  for (int index = 0; index < m_points.count(); index++) {
+
+  int index;
+  for (index = 0; index < m_points.count(); index++) {
 
     QString identifierAdded;
     document().addPointGraphWithGeneratedIdentifier (m_curveName,
@@ -120,6 +123,7 @@ void CmdAddPointsGraph::cmdRedo ()
 
   document().updatePointOrdinals (mainWindow().transformation());
   mainWindow().updateAfterCommand();
+  selectAddedPointsForMoving(m_identifiersAdded);
   saveOrCheckPostCommandDocumentStateHash (document ());
 }
 

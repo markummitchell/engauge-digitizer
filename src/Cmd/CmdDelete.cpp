@@ -19,22 +19,23 @@
 #include <QXmlStreamReader>
 #include "Xml.h"
 
+const QString ADDED_DELIMITER (",");
 const QString CMD_DESCRIPTION ("Delete");
 
 CmdDelete::CmdDelete(MainWindow &mainWindow,
                      Document &document,
-                     const QStringList &selectedPointIdentifiers) :
+                     const QStringList &deletedPointIdentifiers) :
   CmdPointChangeBase (mainWindow,
                       document,
-                      CMD_DESCRIPTION)
+                      CMD_DESCRIPTION),
+  m_deletedPointIdentifiers (deletedPointIdentifiers)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CmdDelete::CmdDelete"
-                              << " selected=" << selectedPointIdentifiers.count ();
+  LOG4CPP_INFO_S ((*mainCat)) << "CmdDelete::CmdDelete";
 
   // Export to clipboard
   ExportToClipboard exportStrategy;
   QTextStream strCsv (&m_csv), strHtml (&m_html);
-  exportStrategy.exportToClipboard (selectedPointIdentifiers,
+  exportStrategy.exportToClipboard (deletedPointIdentifiers,
                                     mainWindow.transformation(),
                                     strCsv,
                                     strHtml,
@@ -58,7 +59,8 @@ CmdDelete::CmdDelete (MainWindow &mainWindow,
   QStringList requiredAttributesLeaf;
   requiredAttributesLeaf << DOCUMENT_SERIALIZE_TRANSFORM_DEFINED
                          << DOCUMENT_SERIALIZE_CSV
-                         << DOCUMENT_SERIALIZE_HTML;
+                         << DOCUMENT_SERIALIZE_HTML
+                         << DOCUMENT_SERIALIZE_CMD_DELETE_ADDED_POINTS;
   leafAndBaseAttributes (attributes,
                          requiredAttributesLeaf,
                          reader);
@@ -69,6 +71,7 @@ CmdDelete::CmdDelete (MainWindow &mainWindow,
   m_transformIsDefined = (defined == DOCUMENT_SERIALIZE_BOOL_TRUE);
   m_csv = attributes.value(DOCUMENT_SERIALIZE_CSV).toString();
   m_html = attributes.value(DOCUMENT_SERIALIZE_HTML).toString();
+  m_deletedPointIdentifiers = attributes.value(DOCUMENT_SERIALIZE_CMD_DELETE_ADDED_POINTS).toString().split(ADDED_DELIMITER);
   m_curvesGraphsRemoved.loadXml(reader);
 }
 
@@ -98,6 +101,7 @@ void CmdDelete::cmdUndo ()
   saveOrCheckPostCommandDocumentStateHash (document ());
   restoreDocumentState (document ());
   mainWindow().updateAfterCommand();
+  selectAddedPointsForMoving(m_deletedPointIdentifiers);
   saveOrCheckPreCommandDocumentStateHash (document ());
 }
 
@@ -110,6 +114,7 @@ void CmdDelete::saveXml (QXmlStreamWriter &writer) const
                         m_transformIsDefined ? DOCUMENT_SERIALIZE_BOOL_TRUE : DOCUMENT_SERIALIZE_BOOL_FALSE);
   writer.writeAttribute(DOCUMENT_SERIALIZE_CSV, m_csv);
   writer.writeAttribute(DOCUMENT_SERIALIZE_HTML, m_html);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_CMD_DELETE_ADDED_POINTS, m_deletedPointIdentifiers.join (ADDED_DELIMITER));
   m_curvesGraphsRemoved.saveXml(writer);
   baseAttributes (writer);
   writer.writeEndElement();
