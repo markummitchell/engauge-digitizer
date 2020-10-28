@@ -15,8 +15,6 @@
 #include "DlgEditPointAxis.h"
 #include "DlgEditPointGraph.h"
 #include "DlgEditScale.h"
-#include "EngaugeAssert.h"
-#include "GraphicsItemsExtractor.h"
 #include "GraphicsItemType.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -31,11 +29,6 @@
 #include <QtToString.h>
 #include "Transformation.h"
 #include "Version.h"
-
-const QString MOVE_TEXT_DOWN (QObject::tr ("Move down"));
-const QString MOVE_TEXT_LEFT (QObject::tr ("Move left"));
-const QString MOVE_TEXT_RIGHT (QObject::tr ("Move right"));
-const QString MOVE_TEXT_UP (QObject::tr ("Move up"));
 
 DigitizeStateSelect::DigitizeStateSelect (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context)
@@ -319,18 +312,9 @@ void DigitizeStateSelect::handleKeyPress (CmdMediator *cmdMediator,
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::handleKeyPress"
                               << " key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 
-  if (atLeastOneSelectedItem) {
-
-    if (key == Qt::Key_Down ||
-      key == Qt::Key_Up ||
-      key == Qt::Key_Left ||
-      key == Qt::Key_Right) {
-
-      keyPressArrow (cmdMediator,
-                     key);
-
-    }
-  }
+  handleKeyPressArrow (cmdMediator,
+                       key,
+                       atLeastOneSelectedItem);
 }
 
 void DigitizeStateSelect::handleMouseMove (CmdMediator * /* cmdMediator */,
@@ -385,48 +369,6 @@ void DigitizeStateSelect::handleMouseRelease (CmdMediator *cmdMediator,
   }
 }
 
-void DigitizeStateSelect::keyPressArrow (CmdMediator *cmdMediator,
-                                         Qt::Key key)
-{
-  QPointF deltaScreen;
-  QString moveText;
-  switch (key) {
-    case Qt::Key_Down:
-      deltaScreen = QPointF (0, zoomedToUnzoomedScreenY ());
-      moveText = MOVE_TEXT_DOWN;
-      break;
-
-    case Qt::Key_Left:
-      deltaScreen = QPointF (-1 * zoomedToUnzoomedScreenX (), 0);
-      moveText = MOVE_TEXT_LEFT;
-      break;
-
-    case Qt::Key_Right:
-      deltaScreen = QPointF (zoomedToUnzoomedScreenX (), 0);
-      moveText = MOVE_TEXT_RIGHT;
-      break;
-
-    case Qt::Key_Up:
-      deltaScreen = QPointF (0, -1 * zoomedToUnzoomedScreenY ());
-      moveText = MOVE_TEXT_UP;
-      break;
-
-    default:
-      ENGAUGE_ASSERT (false);
-  }
-
-  // Create command to move points
-  GraphicsItemsExtractor graphicsItemsExtractor;
-  const QList<QGraphicsItem*> &items  = context().mainWindow().scene ().selectedItems();
-  CmdMoveBy *cmd = new CmdMoveBy (context().mainWindow(),
-                                  cmdMediator->document(),
-                                  deltaScreen,
-                                  moveText,
-                                  graphicsItemsExtractor.selectedPointIdentifiers (items));
-  context().appendNewCmd (cmdMediator,
-                          cmd);
-}
-
 QString DigitizeStateSelect::moveTextFromDeltaScreen (const QPointF &deltaScreen)
 {
   QString moveText;
@@ -439,13 +381,13 @@ QString DigitizeStateSelect::moveTextFromDeltaScreen (const QPointF &deltaScreen
   bool downOrRight  = (deltaScreen.y () > -1.0 * deltaScreen.x ());
   bool upOrRight = (deltaScreen.y () < deltaScreen.x ());
   if (downOrRight && upOrRight) {
-    moveText = MOVE_TEXT_RIGHT;
+    moveText = moveTextRight();
   } else if (downOrRight && !upOrRight) {
-    moveText = MOVE_TEXT_DOWN;
+    moveText = moveTextDown();
   } else if (!downOrRight && upOrRight) {
-    moveText = MOVE_TEXT_UP;
+    moveText = moveTextUp();
   } else {
-    moveText = MOVE_TEXT_LEFT;
+    moveText = moveTextLeft();
   }
 
   return moveText;
@@ -550,16 +492,4 @@ void DigitizeStateSelect::updateModelDigitizeCurve (CmdMediator * /* cmdMediator
 void DigitizeStateSelect::updateModelSegments(const DocumentModelSegments & /* modelSegments */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::updateModelSegments";
-}
-
-double DigitizeStateSelect::zoomedToUnzoomedScreenX () const
-{
-  double m11 = context().mainWindow ().view ().transform().m11 ();
-  return 1.0 / m11;
-}
-
-double DigitizeStateSelect::zoomedToUnzoomedScreenY () const
-{
-  double m22 = context().mainWindow ().view ().transform().m22 ();
-  return 1.0 / m22;
 }

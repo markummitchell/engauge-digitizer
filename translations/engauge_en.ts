@@ -4413,7 +4413,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Cmd/CmdAddPointsGraph.cpp" line="51"/>
+        <location filename="../src/Cmd/CmdAddPointsGraph.cpp" line="52"/>
         <location filename="../src/FileCmd/FileCmdExport.cpp" line="29"/>
         <location filename="../src/FileCmd/FileCmdImport.cpp" line="29"/>
         <location filename="../src/FileCmd/FileCmdOpen.cpp" line="29"/>
@@ -4421,7 +4421,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Cmd/CmdAddPointsGraph.cpp" line="96"/>
+        <location filename="../src/Cmd/CmdAddPointsGraph.cpp" line="97"/>
         <location filename="../src/Cmd/CmdEditPointGraph.cpp" line="99"/>
         <source>Cannot read graph points</source>
         <translation type="unfinished"></translation>
@@ -4606,15 +4606,15 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="141"/>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="182"/>
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="145"/>
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="186"/>
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="179"/>
         <location filename="../src/main/main.cpp" line="366"/>
         <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="142"/>
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="146"/>
         <source>Three axis points have been defined, and no more are needed or allowed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4644,22 +4644,22 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateSelect.cpp" line="35"/>
+        <location filename="../src/DigitizeState/DigitizeStateAbstractBase.cpp" line="29"/>
         <source>Move down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateSelect.cpp" line="36"/>
+        <location filename="../src/DigitizeState/DigitizeStateAbstractBase.cpp" line="30"/>
         <source>Move left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateSelect.cpp" line="37"/>
+        <location filename="../src/DigitizeState/DigitizeStateAbstractBase.cpp" line="31"/>
         <source>Move right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateSelect.cpp" line="38"/>
+        <location filename="../src/DigitizeState/DigitizeStateAbstractBase.cpp" line="32"/>
         <source>Move up</source>
         <translation type="unfinished"></translation>
     </message>

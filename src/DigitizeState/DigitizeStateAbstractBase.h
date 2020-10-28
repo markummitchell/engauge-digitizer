@@ -105,8 +105,30 @@ protected:
   /// Returns the state-specific cursor shape.
   virtual QCursor cursor (CmdMediator *cmdMediator) const = 0;
 
+  /// If the key is an arrow (left, right, up, down) then move currently selected items
+  virtual void handleKeyPressArrow (CmdMediator *cmdMediator,
+                                    Qt::Key key,
+                                    bool atLeastOneSelectedItem);
+
+  /// Display text for down arrow
+  QString moveTextDown () const;
+
+  /// Display text for left arrow
+  QString moveTextLeft () const;
+
+  /// Display text for right arrow
+  QString moveTextRight () const;
+
+  /// Display text for up arrow
+  QString moveTextUp () const;
+
 private:
   DigitizeStateAbstractBase();
+
+  void keyPressArrow (CmdMediator *cmdMediator,
+                      Qt::Key key);
+  double zoomedToUnzoomedScreenX () const;
+  double zoomedToUnzoomedScreenY () const;
 
   DigitizeStateContext &m_context;
 
