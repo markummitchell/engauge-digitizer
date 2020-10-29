@@ -211,6 +211,10 @@ void DigitizeStatePointMatch::handleKeyPress (CmdMediator *cmdMediator,
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStatePointMatch::handleKeyPress"
                               << " key=" << QKeySequence (key).toString ().toLatin1 ().data ();
 
+  // Qt::Key_Right is reserved by this state for adding points so we cannot also call
+  // handleKeyPressArrow (which also uses Qt::Key_Right for a different purpose). So
+  // moving point match points around with the direction arrows is not possible
+
   // The selected key button has to be compatible with GraphicsView::keyPressEvent
   if (key == Qt::Key_Right) {
 

@@ -122,12 +122,16 @@ void DigitizeStateSegment::handleCurveChange(CmdMediator *cmdMediator)
   }
 }
 
-void DigitizeStateSegment::handleKeyPress (CmdMediator * /* cmdMediator */,
+void DigitizeStateSegment::handleKeyPress (CmdMediator *cmdMediator,
                                            Qt::Key key,
-                                           bool /* atLeastOneSelectedItem */)
+                                           bool atLeastOneSelectedItem)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSegment::handleKeyPress"
                               << " key=" << QKeySequence (key).toString ().toLatin1 ().data ();
+
+  handleKeyPressArrow (cmdMediator,
+                       key,
+                       atLeastOneSelectedItem);
 }
 
 void DigitizeStateSegment::handleMouseMove (CmdMediator * /* cmdMediator */,
