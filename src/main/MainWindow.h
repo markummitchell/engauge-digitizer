@@ -14,8 +14,6 @@
 #include "FittingCurveCoefficients.h"
 #include "GridLines.h"
 #include "Guidelines.h"
-#include "GuidelineViewState.h"
-#include "GuidelineViewStateContext.h"
 #include "MainWindowModel.h"
 #include <QCursor>
 #include <QMainWindow>
@@ -189,9 +187,6 @@ public:
   
   /// True/false if guidelines are visible. Selectability is handled elsewhere
   bool guidelinesAreVisible () const;
-
-  /// Get Guideline view state in View menu. This should only be used to populate arguments in CmdAbstract constructor!
-  GuidelineViewState guidelineViewState () const;
   
   /// Handle Guidelines active status toggle
   void handleGuidelinesActiveChange (bool active);
@@ -229,9 +224,6 @@ public:
 
   /// Send signal to unit test framework indicating all commands have finished executing
   void sendGong ();
-
-  /// Set Guideline view state in View menu
-  void setGuidelineViewState (GuidelineViewState state) const;
 
   /// Processing performed after gui becomes available
   virtual void showEvent(QShowEvent *);
@@ -310,8 +302,6 @@ public:
   const GraphicsView &view () const;
 
 private slots:
-  void slotBtnGuidelineXT ();
-  void slotBtnGuidelineYR ();
   void slotBtnPrintAll();
   void slotBtnShowAllPressed();
   void slotBtnShowAllReleased();
@@ -386,8 +376,8 @@ private slots:
   void slotViewGridLines ();
   void slotViewGroupBackground(QAction*);
   void slotViewGroupCurves(QAction*);
-  void slotViewGroupGuidelines(QAction*);  
   void slotViewGroupStatus(QAction*);
+  void slotViewGuidelines ();    
   void slotViewToolBarBackground ();
   void slotViewToolBarCoordSystem ();
   void slotViewToolBarDigitize ();
@@ -456,7 +446,6 @@ private:
   void guidelineRemoveXTEnqueue (double value);
   void guidelineRemoveYREnqueue (double value);    
   Guidelines &guidelines (); /// Return guidelines for unit testing
-  bool guidelinesVisibilityCanBeEnabled () const; /// True/false if guidelines can be activated by guidelines view action
   void handleGuidelineMode();  
   void handlerFileExtractImage (); /// Analog to slotFileExport but for image extract. Maybe converted to slot in future
   void loadCoordSystemListFromCmdMediator(); /// Update the combobox that has the CoordSystem list
@@ -572,6 +561,7 @@ private:
   QAction *m_actionViewSettingsViewsToolBar;
   QAction *m_actionViewToolTips;
   QAction *m_actionViewGridLines;
+  QAction *m_actionViewGuidelines;
   QMenu *m_menuViewBackground;
   QActionGroup *m_groupBackground;
   QAction *m_actionViewBackgroundNone;
@@ -583,10 +573,6 @@ private:
   QAction *m_actionViewCurvesSelected;
   QAction *m_actionViewCurvesAll;
   QMenu *m_menuViewGuidelines;
-  QActionGroup *m_groupGuidelines;
-  QAction *m_actionViewGuidelinesHide;
-  QAction *m_actionViewGuidelinesEdit;
-  QAction *m_actionViewGuidelinesLock;  
   QMenu *m_menuViewStatus;
   QActionGroup *m_groupStatus;
   QAction *m_actionStatusNever;
@@ -672,16 +658,6 @@ private:
   QPushButton *m_btnShowAll;
   QToolBar *m_toolCoordSystem;
 
-  QPushButton *m_btnGuidelineXTCartesian;
-  QPushButton *m_btnGuidelineXTPolar;
-  QPushButton *m_btnGuidelineYRCartesian;
-  QPushButton *m_btnGuidelineYRPolar;
-  QAction *m_actionGuidelineXTCartesian; // For setting visibility since QPushButton in toolbar ignores setVisibility
-  QAction *m_actionGuidelineXTPolar; // For setting visibility since QPushButton in toolbar ignores setVisibility
-  QAction *m_actionGuidelineYRCartesian; // For setting visibility since QPushButton in toolbar ignores setVisibility
-  QAction *m_actionGuidelineYRPolar; // For setting visibility since QPushButton in toolbar ignores setVisibility
-  QToolBar *m_toolGuidelines;
-
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)  
   HelpWindow *m_helpWindow;
 #endif
@@ -749,9 +725,6 @@ private:
   // Guidelines that are effectively invisible until cursor gets to outermost pixels in scene (and view if zoomed out
   // enough that there is no scroll bar)
   Guidelines m_guidelines;
-
-  // Guideline view mode
-  GuidelineViewStateContext m_guidelineViewStateContext;
   
   // Map to/from/between zoom enumerations. These eliminate the need for switch statements
   QMap<ZoomFactorInitial, ZoomFactor> m_zoomMapFromInitial;

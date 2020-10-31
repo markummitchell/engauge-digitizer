@@ -9,7 +9,6 @@
 
 #include "DigitizeState.h"
 #include "DocumentHash.h"
-#include "GuidelineViewState.h"
 #include "PointIdentifiers.h"
 #include <QString>
 #include <QStringList>
@@ -114,7 +113,6 @@ private:
   // States that apply throughout the lifetime of the command. In either forward (=redo)
   // or backward (=undo) direction they will be applied before the command is executed
   DigitizeState m_digitizeState;
-  GuidelineViewState m_guidelineViewState;
 };
 
 #endif // CMD_ABSTRACT_H

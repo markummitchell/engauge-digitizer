@@ -945,28 +945,7 @@ Guidelines &MainWindow::guidelines()
 
 bool MainWindow::guidelinesAreVisible () const
 {
-  return (guidelinesVisibilityCanBeEnabled () &&
-          (m_actionViewGuidelinesEdit->isChecked() || m_actionViewGuidelinesLock->isChecked()));
-}
-
-bool MainWindow::guidelinesVisibilityCanBeEnabled () const
-{
-  // Rules
-  // 1) We want guidelines to be available as soon as possible since users would probably never know about them otherwise,
-  //    so action should be checked
-  // 2) We do not want to show guidelines until the transformation is working, since to show them earlier would probably mean
-  //    they are aligned along the screen axes - but then when the transformation is working it would be impossible to
-  //    meaningfully convert the old guidelines into the graph reference frame (unless the graph and screen axes happen
-  //    to be parallel which is rarely the case). Note that m_actionViewGuidelines is disabled when the transformation
-  //    is not defined
-  // 3) If transform is defined then file should also be, but we check to make sure
-  return (!m_currentFile.isEmpty() &&
-          transformIsDefined());
-}
-
-GuidelineViewState MainWindow::guidelineViewState () const
-{
-  return m_guidelineViewStateContext.guidelineViewState ();
+  return transformIsDefined();
 }
 
 void MainWindow::handleGuidelinesActiveChange (bool active)
@@ -977,7 +956,7 @@ void MainWindow::handleGuidelinesActiveChange (bool active)
 void MainWindow::handleGuidelineMode ()
 {
   m_guidelines.handleGuidelineMode(guidelinesAreVisible (),
-                                   m_actionViewGuidelinesLock->isChecked());
+                                   !m_digitizeStateContext->guidelinesAreSelectable ());
 }
 
 void MainWindow::handlerFileExtractImage ()
@@ -1659,28 +1638,6 @@ void MainWindow::setCurrentPathFromFile (const QString &fileName)
   }
 }
 
-void MainWindow::setGuidelineViewState (GuidelineViewState state) const
-{
-  switch (state)
-  {
-  case GUIDELINE_VIEW_STATE_HIDE:
-    m_actionViewGuidelinesHide->setChecked (true);
-    break;
-
-  case GUIDELINE_VIEW_STATE_EDIT:
-    m_actionViewGuidelinesEdit->setChecked (true);
-    break;
-
-  case GUIDELINE_VIEW_STATE_LOCK:
-    m_actionViewGuidelinesLock->setChecked (true);
-    break;
-
-  case NUM_GUIDELINE_VIEW_STATES:
-    LOG4CPP_ERROR_S ((*mainCat)) << "MainWindow::guidelineViewState bad state";
-    break;
-  }
-}
-
 void MainWindow::setNonFillZoomFactor (ZoomFactor newZoomFactor)
 {
   ENGAUGE_ASSERT (newZoomFactor != ZOOM_FILL);
@@ -2089,24 +2046,6 @@ void MainWindow::showEvent (QShowEvent *event)
 void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
 {
   m_statusBar->showTemporaryMessage (temporaryMessage);
-}
-
-void MainWindow::slotBtnGuidelineXT ()
-{
-  GuidelineOffset guidelineOffset;
-  QPointF posGraph = guidelineOffset.XT (*m_view,
-                                         m_transformation);
-
-  guidelineAddXTEnqueue (posGraph.x ());
-}
-
-void MainWindow::slotBtnGuidelineYR ()
-{
-  GuidelineOffset guidelineOffset;
-  QPointF posGraph = guidelineOffset.YR (*m_view,
-                                         m_transformation);
-
-  guidelineAddYREnqueue (posGraph.y ());
 }
 
 void MainWindow::slotBtnPrintAll ()
@@ -3187,26 +3126,6 @@ void MainWindow::slotViewGroupCurves(QAction * /* action */)
   updateViewedCurves ();
 }
 
-void MainWindow::slotViewGroupGuidelines (QAction * /* action */)
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGroupGuidelines";
-
-  // States before and after
-  GuidelineViewState stateAfter;
-  if (m_actionViewGuidelinesHide->isChecked ()) {
-    stateAfter = GUIDELINE_VIEW_STATE_HIDE;
-  } else if (m_actionViewGuidelinesEdit->isChecked ()) {
-    stateAfter = GUIDELINE_VIEW_STATE_EDIT;
-  } else {
-    stateAfter = GUIDELINE_VIEW_STATE_LOCK;
-  }    
-  m_guidelineViewStateContext.handleStateChange (stateAfter);
-
-  // Updates
-  handleGuidelineMode ();
-  updateControls();
-}
-
 void MainWindow::slotViewGroupStatus(QAction *action)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewGroupStatus";
@@ -3220,6 +3139,11 @@ void MainWindow::slotViewGroupStatus(QAction *action)
   } else {
     m_statusBar->setStatusBarMode(STATUS_BAR_MODE_ALWAYS);
   }
+}
+
+void MainWindow::slotViewGuidelines ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGuidelines";
 }
 
 void MainWindow::slotViewToolBarBackground ()
@@ -3632,61 +3556,25 @@ void MainWindow::updateControls ()
 
   m_actionDigitizeAxis->setEnabled (modeGraph ());
   m_actionDigitizeScale->setEnabled (modeMap ());
-  m_actionDigitizeCurve ->setEnabled (!m_currentFile.isEmpty ());
+  m_actionDigitizeCurve->setEnabled (!m_currentFile.isEmpty ());
+  m_actionDigitizeGuideline->setEnabled (m_transformation.transformIsDefined ());
   m_actionDigitizePointMatch->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeColorPicker->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeSegment->setEnabled (!m_currentFile.isEmpty ());
   m_actionDigitizeSelect->setEnabled (!m_currentFile.isEmpty ());
   if (m_transformation.transformIsDefined()) {
     m_actionViewGridLines->setEnabled (true);
+    m_actionViewGuidelines->setEnabled (true);
   } else {
     m_actionViewGridLines->setEnabled (false);
     m_actionViewGridLines->setChecked (false);
+    m_actionViewGuidelines->setEnabled (false);
   }
   m_actionViewBackgroundToolBar->setEnabled (!m_currentFile.isEmpty());
   m_actionViewDigitizeToolBar->setEnabled (!m_currentFile.isEmpty ());
   m_actionViewSettingsViewsToolBar->setEnabled (!m_currentFile.isEmpty ());
   m_actionViewCoordSystemToolBar->setEnabled (!m_currentFile.isEmpty ());
   m_actionViewChecklistGuideWindow->setEnabled (!m_dockChecklistGuide->browserIsEmpty());
-
-  if (m_cmdMediator && m_transformation.transformIsDefined()) {
-
-    bool cartesian = (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN);
-    bool selectable = (m_digitizeStateContext->guidelinesAreSelectable ());
-
-    m_actionViewGuidelinesHide->setEnabled (true);
-    m_actionViewGuidelinesEdit->setEnabled (selectable);
-    m_actionViewGuidelinesLock->setEnabled (true);
-
-    // Set visibility and enabled on QActions since setting doing so on QPushButtons in QToolBar fails
-    m_actionGuidelineXTCartesian->setVisible (cartesian);
-    m_actionGuidelineXTPolar->setVisible (!cartesian);
-    m_actionGuidelineYRCartesian->setVisible (cartesian);
-    m_actionGuidelineYRPolar->setVisible (!cartesian);
-
-    m_btnGuidelineXTCartesian->setEnabled (cartesian);
-    m_btnGuidelineXTPolar->setEnabled (!cartesian);
-    m_btnGuidelineYRCartesian->setEnabled (cartesian);
-    m_btnGuidelineYRPolar->setEnabled (!cartesian);
-
-  } else {
-
-    m_actionViewGuidelinesHide->setEnabled (false);
-    m_actionViewGuidelinesEdit->setEnabled (false);
-    m_actionViewGuidelinesLock->setEnabled (false);
-
-    // Set visibility and enabled on QActions since setting doing so on QPushButtons in QToolBar fails
-    bool cartesian = true; // Since cartesian is more common than polar we pick cartesian as the default
-    m_actionGuidelineXTCartesian->setVisible (cartesian);
-    m_actionGuidelineXTPolar->setVisible (!cartesian);
-    m_actionGuidelineYRCartesian->setVisible (cartesian);
-    m_actionGuidelineYRPolar->setVisible (!cartesian);
-
-    m_btnGuidelineXTCartesian->setEnabled (false);
-    m_btnGuidelineXTPolar->setEnabled (false);
-    m_btnGuidelineYRCartesian->setEnabled (false);
-    m_btnGuidelineYRPolar->setEnabled (false);
-  }  
 
   m_actionSettingsCoords->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsCurveList->setEnabled (!m_currentFile.isEmpty ());
@@ -3703,7 +3591,6 @@ void MainWindow::updateControls ()
 
   m_groupBackground->setEnabled (!m_currentFile.isEmpty ());
   m_groupCurves->setEnabled (!m_currentFile.isEmpty ());
-  m_groupGuidelines->setEnabled (m_transformation.transformIsDefined());  
   m_groupZoom->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionZoomIn->setEnabled (!m_currentFile.isEmpty ()); // Disable at startup so shortcut has no effect

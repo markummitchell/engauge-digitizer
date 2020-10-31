@@ -145,45 +145,6 @@ void CreateToolBars::createToolbarGuidelines (MainWindow &mw)
   QString whatsThisY (tr ("Create a Y guideline\n\n"
                           "When pressed, a constant Y guideline is created. It can be moved by dragging, and "
                           "removed by dragging off screen"));
-
-  mw.m_btnGuidelineXTCartesian = new QPushButton (QIcon(":/engauge/img/icon_guidelinesx.png"), "");
-  mw.m_btnGuidelineXTCartesian->setSizePolicy (QSizePolicy::Maximum, QSizePolicy::Maximum);
-  mw.m_btnGuidelineXTCartesian->setAcceptDrops (false);
-  mw.m_btnGuidelineXTCartesian->setStatusTip (statusTipX);
-  mw.m_btnGuidelineXTCartesian->setToolTip (tr ("Create an X guideline"));
-  mw.m_btnGuidelineXTCartesian->setWhatsThis (whatsThisX);
-  connect (mw.m_btnGuidelineXTCartesian, SIGNAL (pressed ()), &mw, SLOT (slotBtnGuidelineXT ()));
-
-  mw.m_btnGuidelineXTPolar = new QPushButton (QIcon(":/engauge/img/icon_guidelinest.png"), "");
-  mw.m_btnGuidelineXTPolar->setSizePolicy (QSizePolicy::Maximum, QSizePolicy::Maximum);
-  mw.m_btnGuidelineXTPolar->setAcceptDrops (false);
-  mw.m_btnGuidelineXTPolar->setStatusTip (statusTipT);
-  mw.m_btnGuidelineXTPolar->setToolTip (tr ("Create a T (theta) guideline"));
-  mw.m_btnGuidelineXTPolar->setWhatsThis (whatsThisT);
-  connect (mw.m_btnGuidelineXTPolar, SIGNAL (pressed ()), &mw, SLOT (slotBtnGuidelineXT ()));
-
-  mw.m_btnGuidelineYRCartesian = new QPushButton (QIcon(":/engauge/img/icon_guidelinesy.png"), "");
-  mw.m_btnGuidelineYRCartesian->setSizePolicy (QSizePolicy::Maximum, QSizePolicy::Maximum);
-  mw.m_btnGuidelineYRCartesian->setAcceptDrops (false);
-  mw.m_btnGuidelineYRCartesian->setStatusTip (statusTipY);
-  mw.m_btnGuidelineYRCartesian->setToolTip (tr ("Create a Y guideline"));
-  mw.m_btnGuidelineYRCartesian->setWhatsThis (whatsThisY);
-  connect (mw.m_btnGuidelineYRCartesian, SIGNAL (pressed ()), &mw, SLOT (slotBtnGuidelineYR ()));
-
-  mw.m_btnGuidelineYRPolar = new QPushButton (QIcon(":/engauge/img/icon_guidelinesr.png"), "");
-  mw.m_btnGuidelineYRPolar->setSizePolicy (QSizePolicy::Maximum, QSizePolicy::Maximum);
-  mw.m_btnGuidelineYRPolar->setAcceptDrops (false);
-  mw.m_btnGuidelineYRPolar->setStatusTip (statusTipR);
-  mw.m_btnGuidelineYRPolar->setToolTip (tr ("Create an R (range) guideline"));
-  mw.m_btnGuidelineYRPolar->setWhatsThis (whatsThisR);
-  connect (mw.m_btnGuidelineYRPolar, SIGNAL (pressed ()), &mw, SLOT (slotBtnGuidelineYR ()));
-
-  mw.m_toolGuidelines = new QToolBar (tr ("Guidelines"), &mw);
-  mw.m_actionGuidelineXTCartesian = mw.m_toolGuidelines->addWidget (mw.m_btnGuidelineXTCartesian);
-  mw.m_actionGuidelineXTPolar = mw.m_toolGuidelines->addWidget (mw.m_btnGuidelineXTPolar);
-  mw.m_actionGuidelineYRCartesian = mw.m_toolGuidelines->addWidget (mw.m_btnGuidelineYRCartesian);
-  mw.m_actionGuidelineYRPolar = mw.m_toolGuidelines->addWidget (mw.m_btnGuidelineYRPolar);
-  mw.addToolBar (mw.m_toolGuidelines);
 }
 
 void CreateToolBars::createToolbarSettingsView (MainWindow &mw)

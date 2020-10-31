@@ -377,12 +377,6 @@ HEADERS  += \
     Guideline/GuidelineStateHandleX.h \
     Guideline/GuidelineStateHandleY.h \
     Guideline/GuidelineValues.h \
-    GuidelineView/GuidelineViewStateAbstractBase.h \
-    GuidelineView/GuidelineViewStateContext.h \
-    GuidelineView/GuidelineViewStateEdit.h \
-    GuidelineView/GuidelineViewState.h \
-    GuidelineView/GuidelineViewStateHide.h \
-    GuidelineView/GuidelineViewStateLock.h \
     Help/HelpBrowser.h \
     Help/HelpWindow.h \
     Import/ImportCropping.h \
@@ -809,12 +803,6 @@ SOURCES += \
     Guideline/GuidelineStateHandleT.cpp \
     Guideline/GuidelineStateHandleX.cpp \
     Guideline/GuidelineStateHandleY.cpp \
-    GuidelineView/GuidelineViewStateAbstractBase.cpp \
-    GuidelineView/GuidelineViewStateContext.cpp \
-    GuidelineView/GuidelineViewStateEdit.cpp \
-    GuidelineView/GuidelineViewState.cpp \
-    GuidelineView/GuidelineViewStateHide.cpp \
-    GuidelineView/GuidelineViewStateLock.cpp \
     Help/HelpBrowser.cpp \
     Help/HelpWindow.cpp \
     Import/ImportCroppingUtilBase.cpp \
@@ -938,7 +926,6 @@ INCLUDEPATH += Background \
                Graphics \
                Grid \
                Guideline \
-               GuidelineView \
                Help \
                img \
                Import \

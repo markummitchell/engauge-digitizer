@@ -192,8 +192,6 @@ const QString DOCUMENT_SERIALIZE_GUIDELINES ("Guidelines");
 const QString DOCUMENT_SERIALIZE_GUIDELINES_X ("GuidelinesX");
 const QString DOCUMENT_SERIALIZE_GUIDELINES_Y ("GuidelinesY");
 const QString DOCUMENT_SERIALIZE_GUIDELINE_VALUE ("GuidelineValue");
-const QString DOCUMENT_SERIALIZE_GUIDELINE_VIEW_STATE ("GuidelineViewState");
-const QString DOCUMENT_SERIALIZE_GUIDELINE_VIEW_STATE_STRING ("GuidelineViewStateString");
 const QString DOCUMENT_SERIALIZE_HTML ("Html");
 const QString DOCUMENT_SERIALIZE_IDENTIFIER ("Identifier");
 const QString DOCUMENT_SERIALIZE_IDENTIFIER1 ("Identifier1");

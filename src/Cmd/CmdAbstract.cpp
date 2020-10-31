@@ -30,8 +30,7 @@ CmdAbstract::CmdAbstract(MainWindow &mainWindow,
   m_mainWindow (mainWindow),
   m_document (document),
   m_isFirstRedo (true),
-  m_digitizeState (mainWindow.digitizeState ()),
-  m_guidelineViewState (mainWindow.guidelineViewState ())
+  m_digitizeState (mainWindow.digitizeState ())
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::CmdAbstract";
 }
@@ -44,8 +43,6 @@ void CmdAbstract::baseAttributes (QXmlStreamWriter &writer) const
 {
   writer.writeAttribute(DOCUMENT_SERIALIZE_DIGITIZE_STATE, QString::number (m_digitizeState));
   writer.writeAttribute(DOCUMENT_SERIALIZE_DIGITIZE_STATE_STRING, digitizeStateAsString (m_digitizeState));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_VIEW_STATE, QString::number (m_guidelineViewState));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_VIEW_STATE_STRING, guidelineViewStateAsString (m_guidelineViewState));  
 }
 
 Document &CmdAbstract::document ()
@@ -86,7 +83,6 @@ void CmdAbstract::leafAndBaseAttributes (const QXmlStreamAttributes &attributes,
   // Aggregate attributes for leaf and this abstract class
   QStringList requiredAttributes = requiredAttributesLeaf;
   requiredAttributes << DOCUMENT_SERIALIZE_DIGITIZE_STATE;
-  requiredAttributes << DOCUMENT_SERIALIZE_GUIDELINE_VIEW_STATE;
 
   // Check as if this base class was a leaf class
   leafAttributes (attributes,
@@ -95,7 +91,6 @@ void CmdAbstract::leafAndBaseAttributes (const QXmlStreamAttributes &attributes,
 
   // Extract parent class attributes
   m_digitizeState = static_cast<DigitizeState> (attributes.value (DOCUMENT_SERIALIZE_DIGITIZE_STATE).toInt());
-  m_guidelineViewState = static_cast<GuidelineViewState> (attributes.value (DOCUMENT_SERIALIZE_GUIDELINE_VIEW_STATE).toInt());
 }
 
 MainWindow &CmdAbstract::mainWindow ()
@@ -160,7 +155,6 @@ void CmdAbstract::restoreState ()
   LOG4CPP_INFO_S ((*mainCat)) << "CmdAbstract::restoreState";
 
   m_mainWindow.updateDigitizeStateIfSoftwareTriggered (m_digitizeState);
-  m_mainWindow.setGuidelineViewState (m_guidelineViewState);
 }
 
 void CmdAbstract::saveOrCheckPostCommandDocumentStateHash (const Document &document)

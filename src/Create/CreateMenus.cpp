@@ -75,6 +75,7 @@ void CreateMenus::create(MainWindow &mw)
   mw.m_menuView->insertSeparator (mw.m_actionViewToolTips);
   mw.m_menuView->addAction (mw.m_actionViewToolTips);
   mw.m_menuView->addAction (mw.m_actionViewGridLines);
+  mw.m_menuView->addAction (mw.m_actionViewGuidelines);  
   mw.m_menuView->insertSeparator (mw.m_actionViewBackgroundNone);
   mw.m_menuViewBackground = new QMenu (tr ("Background"));
   mw.m_menuViewBackground->addAction (mw.m_actionViewBackgroundNone);
@@ -86,11 +87,6 @@ void CreateMenus::create(MainWindow &mw)
   mw.m_menuViewCurves->addAction (mw.m_actionViewCurvesSelected);
   mw.m_menuViewCurves->addAction (mw.m_actionViewCurvesAll);
   mw.m_menuView->addMenu (mw.m_menuViewCurves);
-  mw.m_menuViewGuidelines = new QMenu (tr ("Guidelines"));
-  mw.m_menuViewGuidelines->addAction (mw.m_actionViewGuidelinesHide);
-  mw.m_menuViewGuidelines->addAction (mw.m_actionViewGuidelinesEdit);
-  mw.m_menuViewGuidelines->addAction (mw.m_actionViewGuidelinesLock);  
-  mw.m_menuView->addMenu (mw.m_menuViewGuidelines);
   mw.m_menuViewStatus = new QMenu (tr ("Status Bar"));
   mw.m_menuViewStatus->addAction (mw.m_actionStatusNever);
   mw.m_menuViewStatus->addAction (mw.m_actionStatusTemporary);
