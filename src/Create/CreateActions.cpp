@@ -419,21 +419,59 @@ void CreateActions::createView (MainWindow &mw)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "CreateActions::createView";
 
-  mw.m_actionViewBackground = new QAction (tr ("Background Toolbar"), &mw);
-  mw.m_actionViewBackground->setCheckable (true);
-  mw.m_actionViewBackground->setChecked (true);
-  mw.m_actionViewBackground->setStatusTip (tr ("Show or hide the background toolbar."));
-  mw.m_actionViewBackground->setWhatsThis (tr ("View Background ToolBar\n\n"
-                                               "Show or hide the background toolbar"));
-  connect (mw.m_actionViewBackground, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarBackground ()));
+  mw.m_actionViewBackgroundToolBar = new QAction (tr ("Background Toolbar"), &mw);
+  mw.m_actionViewBackgroundToolBar->setCheckable (true);
+  mw.m_actionViewBackgroundToolBar->setChecked (true);
+  mw.m_actionViewBackgroundToolBar->setStatusTip (tr ("Show or hide the background toolbar."));
+  mw.m_actionViewBackgroundToolBar->setWhatsThis (tr ("View Background ToolBar\n\n"
+                                                      "Show or hide the background toolbar"));
+  connect (mw.m_actionViewBackgroundToolBar, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarBackground ()));
 
-  mw.m_actionViewChecklistGuide = new QAction (tr ("Checklist Guide Toolbar"), &mw);
-  mw.m_actionViewChecklistGuide->setCheckable (true);
-  mw.m_actionViewChecklistGuide->setChecked (false);
-  mw.m_actionViewChecklistGuide->setStatusTip (tr ("Show or hide the checklist guide."));
-  mw.m_actionViewChecklistGuide->setWhatsThis (tr ("View Checklist Guide\n\n"
-                                                   "Show or hide the checklist guide"));
-  connect (mw.m_actionViewChecklistGuide, SIGNAL (changed ()), &mw, SLOT (slotViewToolBarChecklistGuide()));
+  mw.m_actionViewDigitizeToolBar = new QAction (tr ("Digitizing Tools Toolbar"), &mw);
+  mw.m_actionViewDigitizeToolBar->setCheckable (true);
+  mw.m_actionViewDigitizeToolBar->setChecked (true);
+  mw.m_actionViewDigitizeToolBar->setStatusTip (tr ("Show or hide the digitizing tools toolbar."));
+  mw.m_actionViewDigitizeToolBar->setWhatsThis (tr ("View Digitizing Tools ToolBar\n\n"
+                                                    "Show or hide the digitizing tools toolbar"));
+  connect (mw.m_actionViewDigitizeToolBar, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarDigitize()));
+
+  mw.m_actionViewSettingsViewsToolBar = new QAction (tr ("Settings Views Toolbar"), &mw);
+  mw.m_actionViewSettingsViewsToolBar->setCheckable (true);
+  mw.m_actionViewSettingsViewsToolBar->setChecked (true);
+  mw.m_actionViewSettingsViewsToolBar->setStatusTip (tr ("Show or hide the settings views toolbar."));
+  mw.m_actionViewSettingsViewsToolBar->setWhatsThis (tr ("View Settings Views ToolBar\n\n"
+                                                         "Show or hide the settings views toolbar. These views graphically show the "
+                                                         "most important settings."));
+  connect (mw.m_actionViewSettingsViewsToolBar, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarSettingsViews()));
+
+  mw.m_actionViewCoordSystemToolBar = new QAction (tr ("Coordinate System Toolbar"), &mw);
+  mw.m_actionViewCoordSystemToolBar->setCheckable (true);
+  mw.m_actionViewCoordSystemToolBar->setChecked (false);
+  mw.m_actionViewCoordSystemToolBar->setStatusTip (tr ("Show or hide the coordinate system toolbar."));
+  mw.m_actionViewCoordSystemToolBar->setWhatsThis (tr ("View Coordinate Systems ToolBar\n\n"
+                                                       "Show or hide the coordinate system selection toolbar. This toolbar is used "
+                                                       "to select the current coordinate system when the document has multiple "
+                                                       "coordinate systems. This toolbar is also used to view and print all coordinate "
+                                                       "systems.\n\n"
+                                                       "This toolbar is disabled when there is only one coordinate system."));
+  connect (mw.m_actionViewCoordSystemToolBar, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarCoordSystem()));
+
+  mw.m_actionViewGuidelinesToolBar = new QAction (tr ("Guidelines Toolbar"), &mw);
+  mw.m_actionViewGuidelinesToolBar->setCheckable (true);
+  mw.m_actionViewGuidelinesToolBar->setChecked (false);
+  mw.m_actionViewGuidelinesToolBar->setStatusTip (tr ("Show or hide the guidelines toolbar."));
+  mw.m_actionViewGuidelinesToolBar->setWhatsThis (tr ("Show or hide the guidelines toolbar. This toolbar is used "
+                                                      "to add X and Y guidelines to cartesian graphs, or T and R "
+                                                      "guidelines to polar graphs."));
+  connect (mw.m_actionViewGuidelinesToolBar, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarGuidelines ()));
+
+  mw.m_actionViewChecklistGuideWindow = new QAction (tr ("Checklist Guide Window"), &mw);
+  mw.m_actionViewChecklistGuideWindow->setCheckable (true);
+  mw.m_actionViewChecklistGuideWindow->setChecked (false);
+  mw.m_actionViewChecklistGuideWindow->setStatusTip (tr ("Show or hide the checklist guide."));
+  mw.m_actionViewChecklistGuideWindow->setWhatsThis (tr ("View Checklist Guide\n\n"
+                                                         "Show or hide the checklist guide"));
+  connect (mw.m_actionViewChecklistGuideWindow, SIGNAL (changed ()), &mw, SLOT (slotViewWindowChecklistGuide()));
 
   mw.m_actionViewFittingWindow = new QAction (tr ("Curve Fitting Window"), &mw);
   mw.m_actionViewFittingWindow->setCheckable (true);
@@ -441,7 +479,7 @@ void CreateActions::createView (MainWindow &mw)
   mw.m_actionViewFittingWindow->setStatusTip (tr ("Show or hide the curve fitting window."));
   mw.m_actionViewFittingWindow->setWhatsThis (tr ("View Curve Fitting Window\n\n"
                                                   "Show or hide the curve fitting window"));
-  connect (mw.m_actionViewFittingWindow, SIGNAL (changed ()), &mw, SLOT (slotViewToolBarFittingWindow()));
+  connect (mw.m_actionViewFittingWindow, SIGNAL (changed ()), &mw, SLOT (slotViewWindowFitting()));
 
   mw.m_actionViewGeometryWindow = new QAction (tr ("Geometry Window"), &mw);
   mw.m_actionViewGeometryWindow->setCheckable (true);
@@ -449,36 +487,7 @@ void CreateActions::createView (MainWindow &mw)
   mw.m_actionViewGeometryWindow->setStatusTip (tr ("Show or hide the geometry window."));
   mw.m_actionViewGeometryWindow->setWhatsThis (tr ("View Geometry Window\n\n"
                                                    "Show or hide the geometry window"));
-  connect (mw.m_actionViewGeometryWindow, SIGNAL (changed ()), &mw, SLOT (slotViewToolBarGeometryWindow()));
-
-  mw.m_actionViewDigitize = new QAction (tr ("Digitizing Tools Toolbar"), &mw);
-  mw.m_actionViewDigitize->setCheckable (true);
-  mw.m_actionViewDigitize->setChecked (true);
-  mw.m_actionViewDigitize->setStatusTip (tr ("Show or hide the digitizing tools toolbar."));
-  mw.m_actionViewDigitize->setWhatsThis (tr ("View Digitizing Tools ToolBar\n\n"
-                                             "Show or hide the digitizing tools toolbar"));
-  connect (mw.m_actionViewDigitize, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarDigitize()));
-
-  mw.m_actionViewSettingsViews = new QAction (tr ("Settings Views Toolbar"), &mw);
-  mw.m_actionViewSettingsViews->setCheckable (true);
-  mw.m_actionViewSettingsViews->setChecked (true);
-  mw.m_actionViewSettingsViews->setStatusTip (tr ("Show or hide the settings views toolbar."));
-  mw.m_actionViewSettingsViews->setWhatsThis (tr ("View Settings Views ToolBar\n\n"
-                                                  "Show or hide the settings views toolbar. These views graphically show the "
-                                                  "most important settings."));
-  connect (mw.m_actionViewSettingsViews, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarSettingsViews()));
-
-  mw.m_actionViewCoordSystem = new QAction (tr ("Coordinate System Toolbar"), &mw);
-  mw.m_actionViewCoordSystem->setCheckable (true);
-  mw.m_actionViewCoordSystem->setChecked (false);
-  mw.m_actionViewCoordSystem->setStatusTip (tr ("Show or hide the coordinate system toolbar."));
-  mw.m_actionViewCoordSystem->setWhatsThis (tr ("View Coordinate Systems ToolBar\n\n"
-                                                "Show or hide the coordinate system selection toolbar. This toolbar is used "
-                                                "to select the current coordinate system when the document has multiple "
-                                                "coordinate systems. This toolbar is also used to view and print all coordinate "
-                                                "systems.\n\n"
-                                                "This toolbar is disabled when there is only one coordinate system."));
-  connect (mw.m_actionViewCoordSystem, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarCoordSystem()));
+  connect (mw.m_actionViewGeometryWindow, SIGNAL (changed ()), &mw, SLOT (slotViewWindowGeometry()));
 
   mw.m_actionViewToolTips = new QAction (tr ("Tool Tips"), &mw);
   mw.m_actionViewToolTips->setCheckable (true);

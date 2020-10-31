@@ -63,13 +63,15 @@ void CreateMenus::create(MainWindow &mw)
   mw.m_menuDigitize->addAction (mw.m_actionDigitizeSegment);
 
   mw.m_menuView = mw.menuBar()->addMenu(tr("View"));
-  mw.m_menuView->addAction (mw.m_actionViewBackground);
-  mw.m_menuView->addAction (mw.m_actionViewDigitize);
-  mw.m_menuView->addAction (mw.m_actionViewChecklistGuide);
+  mw.m_menuView->addAction (mw.m_actionViewBackgroundToolBar);
+  mw.m_menuView->addAction (mw.m_actionViewDigitizeToolBar);
+  mw.m_menuView->addAction (mw.m_actionViewSettingsViewsToolBar);
+  mw.m_menuView->addAction (mw.m_actionViewCoordSystemToolBar);
+  mw.m_menuView->addAction (mw.m_actionViewGuidelinesToolBar);
+  mw.m_menuView->insertSeparator (  mw.m_actionViewChecklistGuideWindow);
+  mw.m_menuView->addAction (mw.m_actionViewChecklistGuideWindow);
   mw.m_menuView->addAction (mw.m_actionViewFittingWindow);
-  mw.m_menuView->addAction (mw.m_actionViewGeometryWindow);
-  mw.m_menuView->addAction (mw.m_actionViewSettingsViews);
-  mw.m_menuView->addAction (mw.m_actionViewCoordSystem);
+  mw.m_menuView->addAction (mw.m_actionViewGeometryWindow);  
   mw.m_menuView->insertSeparator (mw.m_actionViewToolTips);
   mw.m_menuView->addAction (mw.m_actionViewToolTips);
   mw.m_menuView->addAction (mw.m_actionViewGridLines);

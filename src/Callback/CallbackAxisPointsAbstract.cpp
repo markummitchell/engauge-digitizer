@@ -16,15 +16,10 @@
 const double ONE_PIXEL = 1.0; // Screen coordinates
 const double ZERO_EPSILON = 0.0; // Graph coordinates
 
-// For relatively simple affine transformations, two of the three elements in the bottom row are effectively arbitrary.
-// This is true since they are used to calculate the z value which gets ignored. Although the more elegant choice for
-// those elements is 0 (since 0 * xold + 0 * yold + 1 * zold gives znew = zold), some references use 1 for those elements.
-// Testing this code with either value shows no difference in the final results.
-//
-// The same elements are not arbitrary for homography transformations used to model keystone warping. That transformation
-// also uses the (affine's) arbitrary elements to compute x y and z, then computes xfinal = x / w and yfinal = y / w.
-// These comments about the  are NOT true for homography transformation 
-const double ARBITRARY_FOR_AFFINE = 0.0;
+// There is some confusion about the bottom transformation row. Some references have the vaules (other than the
+// last unity value) as 0 and others have it as 1. Using either value works with existing dig files, but import
+// fails with 0
+const double AFFINE_BOTTOM_ROW_NONUNITY = 1.0;
 
 CallbackAxisPointsAbstract::CallbackAxisPointsAbstract(const DocumentModelCoords &modelCoords,
                                                        DocumentAxesPointsRequired documentAxesPointsRequired) :
@@ -361,12 +356,12 @@ void CallbackAxisPointsAbstract::loadTransforms2 ()
   // Screen coordinates
   m_screenInputsTransform = QTransform (m_screenInputs.at(0).x(), m_screenInputs.at(1).x(), screenX2,
                                         m_screenInputs.at(0).y(), m_screenInputs.at(1).y(), screenY2,
-                                        ARBITRARY_FOR_AFFINE    , ARBITRARY_FOR_AFFINE    , 1.0     );
+                                        AFFINE_BOTTOM_ROW_NONUNITY    , AFFINE_BOTTOM_ROW_NONUNITY    , 1.0     );
 
   // Graph coordinates
   m_graphOutputsTransform = QTransform (m_graphOutputs.at(0).x(), m_graphOutputs.at(1).x(), graphX2,
                                         m_graphOutputs.at(0).y(), m_graphOutputs.at(1).y(), graphY2,
-                                        ARBITRARY_FOR_AFFINE    , ARBITRARY_FOR_AFFINE    , 1.0     );
+                                        AFFINE_BOTTOM_ROW_NONUNITY    , AFFINE_BOTTOM_ROW_NONUNITY    , 1.0     );
 }
 
 void CallbackAxisPointsAbstract::loadTransforms3 ()
@@ -374,12 +369,12 @@ void CallbackAxisPointsAbstract::loadTransforms3 ()
   // Screen coordinates
   m_screenInputsTransform = QTransform (m_screenInputs.at(0).x(), m_screenInputs.at(1).x(), m_screenInputs.at(2).x(),
                                         m_screenInputs.at(0).y(), m_screenInputs.at(1).y(), m_screenInputs.at(2).y(),
-                                        ARBITRARY_FOR_AFFINE    , ARBITRARY_FOR_AFFINE    , 1.0                     );
+                                        AFFINE_BOTTOM_ROW_NONUNITY    , AFFINE_BOTTOM_ROW_NONUNITY    , 1.0                     );
   
   // Graph coordinates
   m_graphOutputsTransform = QTransform (m_graphOutputs.at(0).x(), m_graphOutputs.at(1).x(), m_graphOutputs.at(2).x(),
                                         m_graphOutputs.at(0).y(), m_graphOutputs.at(1).y(), m_graphOutputs.at(2).y(),
-                                        ARBITRARY_FOR_AFFINE    , ARBITRARY_FOR_AFFINE    , 1.0                     );
+                                        AFFINE_BOTTOM_ROW_NONUNITY    , AFFINE_BOTTOM_ROW_NONUNITY    , 1.0                     );
 }
 
 void CallbackAxisPointsAbstract::loadTransforms4 ()
@@ -477,12 +472,12 @@ void CallbackAxisPointsAbstract::loadTransforms4 ()
   // Screen coordinates
   m_screenInputsTransform = QTransform (xIntScreen              , xFurthestXAxisScreen, xFurthestYAxisScreen,
                                         yIntScreen              , yFurthestXAxisScreen, yFurthestYAxisScreen,
-                                        ARBITRARY_FOR_AFFINE    , ARBITRARY_FOR_AFFINE, 1.0                 );
+                                        AFFINE_BOTTOM_ROW_NONUNITY    , AFFINE_BOTTOM_ROW_NONUNITY, 1.0                 );
 
   // Graph coordinates
   m_graphOutputsTransform = QTransform (xIntGraph, xFurthestXAxisGraph, xFurthestYAxisGraph,
                                         yIntGraph, yFurthestXAxisGraph, yFurthestYAxisGraph,
-                                        ARBITRARY_FOR_AFFINE    , ARBITRARY_FOR_AFFINE, 1.0                 );
+                                        AFFINE_BOTTOM_ROW_NONUNITY    , AFFINE_BOTTOM_ROW_NONUNITY, 1.0                 );
 }
 
 CallbackAxisPointsAbstract::LinearOrLog CallbackAxisPointsAbstract::logXGraph () const

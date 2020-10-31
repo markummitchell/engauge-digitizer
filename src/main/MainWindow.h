@@ -310,14 +310,8 @@ public:
   const GraphicsView &view () const;
 
 private slots:
-  void slotBtnGuidelineBottomCartesian ();
-  void slotBtnGuidelineBottomPolar ();  
-  void slotBtnGuidelineLeftCartesian ();
-  void slotBtnGuidelineLeftPolar ();  
-  void slotBtnGuidelineRightCartesian ();
-  void slotBtnGuidelineRightPolar ();  
-  void slotBtnGuidelineTopCartesian ();
-  void slotBtnGuidelineTopPolar ();    
+  void slotBtnGuidelineXT ();
+  void slotBtnGuidelineYR ();
   void slotBtnPrintAll();
   void slotBtnShowAllPressed();
   void slotBtnShowAllReleased();
@@ -394,11 +388,12 @@ private slots:
   void slotViewGroupGuidelines(QAction*);  
   void slotViewGroupStatus(QAction*);
   void slotViewToolBarBackground ();
-  void slotViewToolBarChecklistGuide ();
   void slotViewToolBarCoordSystem ();
   void slotViewToolBarDigitize ();
-  void slotViewToolBarFittingWindow ();
-  void slotViewToolBarGeometryWindow ();
+  void slotViewToolBarGuidelines ();
+  void slotViewWindowChecklistGuide ();
+  void slotViewWindowFitting ();
+  void slotViewWindowGeometry ();
   void slotViewToolBarSettingsViews ();
   void slotViewToolTips ();
   void slotViewZoomFactor (ZoomFactor);
@@ -567,13 +562,14 @@ private:
   QAction *m_actionDigitizeSegment;
 
   QMenu *m_menuView;
-  QAction *m_actionViewBackground;
-  QAction *m_actionViewChecklistGuide;
-  QAction *m_actionViewCoordSystem;
-  QAction *m_actionViewDigitize;
+  QAction *m_actionViewBackgroundToolBar;
+  QAction *m_actionViewChecklistGuideWindow;
+  QAction *m_actionViewCoordSystemToolBar;
+  QAction *m_actionViewDigitizeToolBar;
   QAction *m_actionViewFittingWindow;
   QAction *m_actionViewGeometryWindow;
-  QAction *m_actionViewSettingsViews;
+  QAction *m_actionViewGuidelinesToolBar;
+  QAction *m_actionViewSettingsViewsToolBar;
   QAction *m_actionViewToolTips;
   QAction *m_actionViewGridLines;
   QMenu *m_menuViewBackground;
@@ -654,15 +650,6 @@ private:
   GraphicsScene *m_scene;
   GraphicsView *m_view;
 
-  QPushButton *m_btnGuidelineBottomCartesian;
-  QPushButton *m_btnGuidelineBottomPolar;  
-  QPushButton *m_btnGuidelineLeftCartesian;
-  QPushButton *m_btnGuidelineLeftPolar;  
-  QPushButton *m_btnGuidelineRightCartesian;
-  QPushButton *m_btnGuidelineRightPolar;  
-  QPushButton *m_btnGuidelineTopCartesian;
-  QPushButton *m_btnGuidelineTopPolar;
-  
   StatusBar *m_statusBar;
   Transformation m_transformation;
 
@@ -684,6 +671,16 @@ private:
   QPushButton *m_btnPrintAll;
   QPushButton *m_btnShowAll;
   QToolBar *m_toolCoordSystem;
+
+  QPushButton *m_btnGuidelineXTCartesian;
+  QPushButton *m_btnGuidelineXTPolar;
+  QPushButton *m_btnGuidelineYRCartesian;
+  QPushButton *m_btnGuidelineYRPolar;
+  QAction *m_actionGuidelineXTCartesian; // For setting visibility since QPushButton in toolbar ignores setVisibility
+  QAction *m_actionGuidelineXTPolar; // For setting visibility since QPushButton in toolbar ignores setVisibility
+  QAction *m_actionGuidelineYRCartesian; // For setting visibility since QPushButton in toolbar ignores setVisibility
+  QAction *m_actionGuidelineYRPolar; // For setting visibility since QPushButton in toolbar ignores setVisibility
+  QToolBar *m_toolGuidelines;
 
 #if !defined(OSX_DEBUG) && !defined(OSX_RELEASE)  
   HelpWindow *m_helpWindow;

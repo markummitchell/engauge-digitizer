@@ -651,10 +651,10 @@ void MainWindow::fileImport (const QString &fileName,
 
       // Success
       if ((m_cmdMediator->document().coordSystemCount() > 1) &&
-          ! m_actionViewCoordSystem->isChecked ()) {
+          ! m_actionViewCoordSystemToolBar->isChecked ()) {
 
         // User is working with multiple coordinate systems so make the coordinate system toolbar visible
-        m_actionViewCoordSystem->trigger ();
+        m_actionViewCoordSystemToolBar->trigger ();
       }
 
     } else {
@@ -1214,7 +1214,7 @@ bool MainWindow::loadImageNewDocument (const QString &fileName,
         }
 
         // Unhide the checklist guide
-        m_actionViewChecklistGuide->setChecked (true);
+        m_actionViewChecklistGuideWindow->setChecked (true);
 
         // Update the curve dropdown
         loadCurveListFromCmdMediator();
@@ -1763,7 +1763,7 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   // Background toolbar visibility
   bool viewBackgroundToolBar = settings.value (SETTINGS_VIEW_BACKGROUND_TOOLBAR,
                                                true).toBool ();
-  m_actionViewBackground->setChecked (viewBackgroundToolBar);
+  m_actionViewBackgroundToolBar->setChecked (viewBackgroundToolBar);
   m_toolBackground->setVisible (viewBackgroundToolBar);
   BackgroundImage backgroundImage = static_cast<BackgroundImage> (settings.value (SETTINGS_BACKGROUND_IMAGE,
                                                                                   BACKGROUND_IMAGE_FILTERED).toInt ());
@@ -1773,20 +1773,26 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   // Digitize toolbar visibility
   bool viewDigitizeToolBar = settings.value (SETTINGS_VIEW_DIGITIZE_TOOLBAR,
                                              true).toBool ();
-  m_actionViewDigitize->setChecked (viewDigitizeToolBar);
+  m_actionViewDigitizeToolBar->setChecked (viewDigitizeToolBar);
   m_toolDigitize->setVisible (viewDigitizeToolBar);
 
   // Views toolbar visibility
   bool viewSettingsViewsToolBar = settings.value (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR,
                                                   true).toBool ();
-  m_actionViewSettingsViews->setChecked (viewSettingsViewsToolBar);
+  m_actionViewSettingsViewsToolBar->setChecked (viewSettingsViewsToolBar);
   m_toolSettingsViews->setVisible (viewSettingsViewsToolBar);
 
   // Coordinate system toolbar visibility
   bool viewCoordSystemToolbar = settings.value (SETTINGS_VIEW_COORD_SYSTEM_TOOLBAR,
                                                 false).toBool ();
-  m_actionViewCoordSystem->setChecked (viewCoordSystemToolbar);
+  m_actionViewCoordSystemToolBar->setChecked (viewCoordSystemToolbar);
   m_toolCoordSystem->setVisible (viewCoordSystemToolbar);
+
+  // Guidelines toolbar visibility
+  bool viewGuidelinesToolbar = settings.value (SETTINGS_VIEW_GUIDELINES_TOOLBAR,
+                                               false).toBool ();
+  m_actionViewGuidelinesToolBar->setChecked (viewGuidelinesToolbar);
+  m_toolGuidelines->setVisible (viewGuidelinesToolbar);
 
   // Tooltips visibility
   bool viewToolTips = settings.value (SETTINGS_VIEW_TOOL_TIPS,
@@ -1931,11 +1937,12 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_MAXIMUM_EXPORTED_POINTS_PER_CURVE, m_modelMainWindow.maximumExportedPointsPerCurve());
   settings.setValue (SETTINGS_MAXIMUM_GRID_LINES, m_modelMainWindow.maximumGridLines());
   settings.setValue (SETTINGS_SMALL_DIALOGS, m_modelMainWindow.smallDialogs());
-  settings.setValue (SETTINGS_VIEW_BACKGROUND_TOOLBAR, m_actionViewBackground->isChecked());
-  settings.setValue (SETTINGS_VIEW_DIGITIZE_TOOLBAR, m_actionViewDigitize->isChecked ());
+  settings.setValue (SETTINGS_VIEW_BACKGROUND_TOOLBAR, m_actionViewBackgroundToolBar->isChecked());
+  settings.setValue (SETTINGS_VIEW_DIGITIZE_TOOLBAR, m_actionViewDigitizeToolBar->isChecked ());
   settings.setValue (SETTINGS_VIEW_STATUS_BAR, m_statusBar->statusBarMode ());
-  settings.setValue (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR, m_actionViewSettingsViews->isChecked ());
-  settings.setValue (SETTINGS_VIEW_COORD_SYSTEM_TOOLBAR, m_actionViewCoordSystem->isChecked ());
+  settings.setValue (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR, m_actionViewSettingsViewsToolBar->isChecked ());
+  settings.setValue (SETTINGS_VIEW_COORD_SYSTEM_TOOLBAR, m_actionViewCoordSystemToolBar->isChecked ());
+  settings.setValue (SETTINGS_VIEW_GUIDELINES_TOOLBAR, m_actionViewGuidelinesToolBar->isChecked ());
   settings.setValue (SETTINGS_VIEW_TOOL_TIPS, m_actionViewToolTips->isChecked ());
   settings.setValue (SETTINGS_ZOOM_CONTROL, m_modelMainWindow.zoomControl());
   settings.setValue (SETTINGS_ZOOM_FACTOR, currentZoomFactor ());
@@ -2091,68 +2098,22 @@ void MainWindow::showTemporaryMessage (const QString &temporaryMessage)
   m_statusBar->showTemporaryMessage (temporaryMessage);
 }
 
-void MainWindow::slotBtnGuidelineBottomCartesian ()
+void MainWindow::slotBtnGuidelineXT ()
 {
   GuidelineOffset guidelineOffset;
-  QPointF posGraph = guidelineOffset.bottom (*m_view,
-                                             m_transformation);
+  QPointF posGraph = guidelineOffset.XT (*m_view,
+                                         m_transformation);
+
   guidelineAddXTEnqueue (posGraph.x ());
 }
 
-void MainWindow::slotBtnGuidelineBottomPolar ()
+void MainWindow::slotBtnGuidelineYR ()
 {
   GuidelineOffset guidelineOffset;
-  QPointF posGraph = guidelineOffset.bottom (*m_view,
-                                             m_transformation);
-  guidelineAddXTEnqueue (posGraph.x ());
-}
+  QPointF posGraph = guidelineOffset.YR (*m_view,
+                                         m_transformation);
 
-void MainWindow::slotBtnGuidelineLeftCartesian ()
-{
-  GuidelineOffset guidelineOffset;
-  QPointF posGraph = guidelineOffset.left (*m_view,
-                                           m_transformation);
   guidelineAddYREnqueue (posGraph.y ());
-}
-
-void MainWindow::slotBtnGuidelineLeftPolar ()
-{
-  GuidelineOffset guidelineOffset;
-  QPointF posGraph = guidelineOffset.left (*m_view,
-                                           m_transformation);
-  guidelineAddYREnqueue (posGraph.y ());
-}
-
-void MainWindow::slotBtnGuidelineRightCartesian ()
-{
-  GuidelineOffset guidelineOffset;
-  QPointF posGraph = guidelineOffset.right (*m_view,
-                                            m_transformation);
-  guidelineAddYREnqueue (posGraph.y ());
-}
-
-void MainWindow::slotBtnGuidelineRightPolar ()
-{
-  GuidelineOffset guidelineOffset;
-  QPointF posGraph = guidelineOffset.right (*m_view,
-                                            m_transformation);
-  guidelineAddYREnqueue (posGraph.y ());
-}
-
-void MainWindow::slotBtnGuidelineTopCartesian ()
-{
-  GuidelineOffset guidelineOffset;
-  QPointF posGraph = guidelineOffset.top (*m_view,
-                                          m_transformation);
-  guidelineAddXTEnqueue (posGraph.x ());
-}
-
-void MainWindow::slotBtnGuidelineTopPolar ()
-{
-  GuidelineOffset guidelineOffset;
-  QPointF posGraph = guidelineOffset.top (*m_view,
-                                          m_transformation);
-  guidelineAddXTEnqueue (posGraph.x ());
 }
 
 void MainWindow::slotBtnPrintAll ()
@@ -2206,7 +2167,7 @@ void MainWindow::slotChecklistClosed()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotChecklistClosed";
 
-  m_actionViewChecklistGuide->setChecked (false);
+  m_actionViewChecklistGuideWindow->setChecked (false);
 }
 
 void MainWindow::slotCleanChanged(bool clean)
@@ -3260,21 +3221,10 @@ void MainWindow::slotViewToolBarBackground ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarBackground";
 
-  if (m_actionViewBackground->isChecked ()) {
+  if (m_actionViewBackgroundToolBar->isChecked ()) {
     m_toolBackground->show();
   } else {
     m_toolBackground->hide();
-  }
-}
-
-void MainWindow::slotViewToolBarChecklistGuide ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarChecklistGuide";
-
-  if (m_actionViewChecklistGuide->isChecked ()) {
-    m_dockChecklistGuide->show();
-  } else {
-    m_dockChecklistGuide->hide();
   }
 }
 
@@ -3282,7 +3232,7 @@ void MainWindow::slotViewToolBarCoordSystem ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarCoordSystem";
 
-  if (m_actionViewCoordSystem->isChecked ()) {
+  if (m_actionViewCoordSystemToolBar->isChecked ()) {
     m_toolCoordSystem->show();
   } else {
     m_toolCoordSystem->hide();
@@ -3293,16 +3243,56 @@ void MainWindow::slotViewToolBarDigitize ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarDigitize";
 
-  if (m_actionViewDigitize->isChecked ()) {
+  if (m_actionViewDigitizeToolBar->isChecked ()) {
     m_toolDigitize->show();
   } else {
     m_toolDigitize->hide();
   }
 }
 
-void MainWindow::slotViewToolBarFittingWindow()
+void MainWindow::slotViewToolBarGuidelines ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarFittingWindow";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarGuidelines";
+
+  if (m_actionViewGuidelinesToolBar->isChecked ()) {
+    m_toolGuidelines->show();
+  } else {
+    m_toolGuidelines->hide();
+  }
+}
+
+void MainWindow::slotViewToolBarSettingsViews ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarSettingsViews";
+
+  if (m_actionViewSettingsViewsToolBar->isChecked ()) {
+    m_toolSettingsViews->show();
+  } else {
+    m_toolSettingsViews->hide();
+  }
+}
+
+void MainWindow::slotViewToolTips ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolTips";
+
+  loadToolTips();
+}
+
+void MainWindow::slotViewWindowChecklistGuide ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewWindowChecklistGuide";
+
+  if (m_actionViewChecklistGuideWindow->isChecked ()) {
+    m_dockChecklistGuide->show();
+  } else {
+    m_dockChecklistGuide->hide();
+  }
+}
+
+void MainWindow::slotViewWindowFitting()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewWindowFitting";
 
   if (m_actionViewFittingWindow->isChecked()) {
     m_dockFittingWindow->show ();
@@ -3317,33 +3307,15 @@ void MainWindow::slotViewToolBarFittingWindow()
   }
 }
 
-void MainWindow::slotViewToolBarGeometryWindow ()
+void MainWindow::slotViewWindowGeometry ()
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarGeometryWindow";
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewWindowGeometry";
 
   if (m_actionViewGeometryWindow->isChecked ()) {
     m_dockGeometryWindow->show();
   } else {
     m_dockGeometryWindow->hide();
   }
-}
-
-void MainWindow::slotViewToolBarSettingsViews ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarSettingsViews";
-
-  if (m_actionViewSettingsViews->isChecked ()) {
-    m_toolSettingsViews->show();
-  } else {
-    m_toolSettingsViews->hide();
-  }
-}
-
-void MainWindow::slotViewToolTips ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolTips";
-
-  loadToolTips();
 }
 
 void MainWindow::slotViewZoom (int zoom)
@@ -3677,9 +3649,13 @@ void MainWindow::updateControls ()
     m_actionViewGridLines->setEnabled (false);
     m_actionViewGridLines->setChecked (false);
   }
-  m_actionViewBackground->setEnabled (!m_currentFile.isEmpty());
-  m_actionViewChecklistGuide->setEnabled (!m_dockChecklistGuide->browserIsEmpty());
-  m_actionViewDigitize->setEnabled (!m_currentFile.isEmpty ());
+  m_actionViewBackgroundToolBar->setEnabled (!m_currentFile.isEmpty());
+  m_actionViewDigitizeToolBar->setEnabled (!m_currentFile.isEmpty ());
+  m_actionViewSettingsViewsToolBar->setEnabled (!m_currentFile.isEmpty ());
+  m_actionViewCoordSystemToolBar->setEnabled (!m_currentFile.isEmpty ());
+  m_actionViewGuidelinesToolBar->setEnabled (!m_currentFile.isEmpty ());
+  m_actionViewChecklistGuideWindow->setEnabled (!m_dockChecklistGuide->browserIsEmpty());
+
   if (m_cmdMediator && m_transformation.transformIsDefined()) {
 
     bool cartesian = (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN);
@@ -3690,23 +3666,16 @@ void MainWindow::updateControls ()
     m_actionViewGuidelinesEdit->setEnabled (selectable);
     m_actionViewGuidelinesLock->setEnabled (true);
 
-    m_btnGuidelineBottomCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
-    m_btnGuidelineBottomPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
-    m_btnGuidelineLeftCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
-    m_btnGuidelineLeftPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
-    m_btnGuidelineRightCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
-    m_btnGuidelineRightPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
-    m_btnGuidelineTopCartesian->setVisible (guidelinesAreVisible () && editable && cartesian);
-    m_btnGuidelineTopPolar->setVisible (guidelinesAreVisible () && editable && !cartesian);
+    // Set visibility and enabled on QActions since setting doing so on QPushButtons in QToolBar fails
+    m_actionGuidelineXTCartesian->setVisible (cartesian);
+    m_actionGuidelineXTPolar->setVisible (!cartesian);
+    m_actionGuidelineYRCartesian->setVisible (cartesian);
+    m_actionGuidelineYRPolar->setVisible (!cartesian);
 
-    m_btnGuidelineBottomCartesian->setEnabled (m_btnGuidelineBottomCartesian->isVisible() && selectable);
-    m_btnGuidelineBottomPolar->setEnabled (m_btnGuidelineBottomPolar->isVisible() && selectable);
-    m_btnGuidelineLeftCartesian->setEnabled (m_btnGuidelineLeftCartesian->isVisible() && selectable);
-    m_btnGuidelineLeftPolar->setEnabled (m_btnGuidelineLeftPolar->isVisible() && selectable);
-    m_btnGuidelineRightCartesian->setEnabled (m_btnGuidelineRightCartesian->isVisible() && selectable);
-    m_btnGuidelineRightPolar->setEnabled (m_btnGuidelineRightPolar->isVisible() && selectable);
-    m_btnGuidelineTopCartesian->setEnabled (m_btnGuidelineTopCartesian->isVisible() && selectable);
-    m_btnGuidelineTopPolar->setEnabled (m_btnGuidelineTopPolar->isVisible() && selectable);
+    m_btnGuidelineXTCartesian->setEnabled (cartesian);
+    m_btnGuidelineXTPolar->setEnabled (!cartesian);
+    m_btnGuidelineYRCartesian->setEnabled (cartesian);
+    m_btnGuidelineYRPolar->setEnabled (!cartesian);
 
   } else {
 
@@ -3714,25 +3683,18 @@ void MainWindow::updateControls ()
     m_actionViewGuidelinesEdit->setEnabled (false);
     m_actionViewGuidelinesLock->setEnabled (false);
 
-    m_btnGuidelineBottomCartesian->setVisible (false);
-    m_btnGuidelineBottomPolar->setVisible (false);
-    m_btnGuidelineLeftCartesian->setVisible (false);
-    m_btnGuidelineLeftPolar->setVisible (false);
-    m_btnGuidelineRightCartesian->setVisible (false);
-    m_btnGuidelineRightPolar->setVisible (false);
-    m_btnGuidelineTopCartesian->setVisible (false);
-    m_btnGuidelineTopPolar->setVisible (false);
+    // Set visibility and enabled on QActions since setting doing so on QPushButtons in QToolBar fails
+    bool cartesian = true; // Since cartesian is more common than polar we pick cartesian as the default
+    m_actionGuidelineXTCartesian->setVisible (cartesian);
+    m_actionGuidelineXTPolar->setVisible (!cartesian);
+    m_actionGuidelineYRCartesian->setVisible (cartesian);
+    m_actionGuidelineYRPolar->setVisible (!cartesian);
 
-    m_btnGuidelineBottomCartesian->setEnabled (false);
-    m_btnGuidelineBottomPolar->setEnabled (false);
-    m_btnGuidelineLeftCartesian->setEnabled (false);
-    m_btnGuidelineLeftPolar->setEnabled (false);
-    m_btnGuidelineRightCartesian->setEnabled (false);
-    m_btnGuidelineRightPolar->setEnabled (false);
-    m_btnGuidelineTopCartesian->setEnabled (false);
-    m_btnGuidelineTopPolar->setEnabled (false);
+    m_btnGuidelineXTCartesian->setEnabled (false);
+    m_btnGuidelineXTPolar->setEnabled (false);
+    m_btnGuidelineYRCartesian->setEnabled (false);
+    m_btnGuidelineYRPolar->setEnabled (false);
   }  
-  m_actionViewSettingsViews->setEnabled (!m_currentFile.isEmpty ());
 
   m_actionSettingsCoords->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsCurveList->setEnabled (!m_currentFile.isEmpty ());

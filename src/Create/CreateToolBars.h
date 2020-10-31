@@ -23,7 +23,11 @@ public:
 
   /// Create QToolbar toolbars
   void create (MainWindow &mw);
-
+  void createToolbarBackground (MainWindow &mw);
+  void createToolbarCoordinateSystem (MainWindow &mw);
+  void createToolbarDigitize (MainWindow &mw);
+  void createToolbarGuidelines (MainWindow &mw);
+  void createToolbarSettingsView (MainWindow &mw);
 };
 
 #endif // CREATE_TOOLBARS_H
