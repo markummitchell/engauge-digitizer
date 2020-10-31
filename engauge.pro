@@ -213,6 +213,7 @@ HEADERS  += \
     src/DigitizeState/DigitizeStateContext.h \
     src/DigitizeState/DigitizeStateCurve.h \
     src/DigitizeState/DigitizeStateEmpty.h \
+    src/DigitizeState/DigitizeStateGuideline.h \
     src/DigitizeState/DigitizeStatePointMatch.h \
     src/DigitizeState/DigitizeStateScale.h \    
     src/DigitizeState/DigitizeStateSegment.h \
@@ -653,6 +654,7 @@ SOURCES += \
     src/DigitizeState/DigitizeStateContext.cpp \
     src/DigitizeState/DigitizeStateCurve.cpp \
     src/DigitizeState/DigitizeStateEmpty.cpp \
+    src/DigitizeState/DigitizeStateGuideline.cpp \
     src/DigitizeState/DigitizeStatePointMatch.cpp \
     src/DigitizeState/DigitizeStateScale.cpp \        
     src/DigitizeState/DigitizeStateSegment.cpp \

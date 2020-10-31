@@ -61,13 +61,13 @@ void CreateMenus::create(MainWindow &mw)
   mw.m_menuDigitize->addAction (mw.m_actionDigitizePointMatch);
   mw.m_menuDigitize->addAction (mw.m_actionDigitizeColorPicker);
   mw.m_menuDigitize->addAction (mw.m_actionDigitizeSegment);
+  mw.m_menuDigitize->addAction (mw.m_actionDigitizeGuideline);
 
   mw.m_menuView = mw.menuBar()->addMenu(tr("View"));
   mw.m_menuView->addAction (mw.m_actionViewBackgroundToolBar);
   mw.m_menuView->addAction (mw.m_actionViewDigitizeToolBar);
   mw.m_menuView->addAction (mw.m_actionViewSettingsViewsToolBar);
   mw.m_menuView->addAction (mw.m_actionViewCoordSystemToolBar);
-  mw.m_menuView->addAction (mw.m_actionViewGuidelinesToolBar);
   mw.m_menuView->insertSeparator (  mw.m_actionViewChecklistGuideWindow);
   mw.m_menuView->addAction (mw.m_actionViewChecklistGuideWindow);
   mw.m_menuView->addAction (mw.m_actionViewFittingWindow);
@@ -139,7 +139,6 @@ void CreateMenus::create(MainWindow &mw)
   mw.m_menuSettings->addAction (mw.m_actionSettingsGridDisplay);
   mw.m_menuSettings->addAction (mw.m_actionSettingsGridRemoval);
   mw.m_menuSettings->addAction (mw.m_actionSettingsPointMatch);
-  mw.m_menuSettings->addAction (mw.m_actionSettingsSegments);
   mw.m_menuSettings->insertSeparator (mw.m_actionSettingsGeneral);
   mw.m_menuSettings->addAction (mw.m_actionSettingsGeneral);
   mw.m_menuSettings->addAction (mw.m_actionSettingsMainWindow);

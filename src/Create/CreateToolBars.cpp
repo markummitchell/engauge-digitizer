@@ -120,6 +120,7 @@ void CreateToolBars::createToolbarDigitize (MainWindow &mw)
   mw.m_toolDigitize->addAction (mw.m_actionDigitizePointMatch);
   mw.m_toolDigitize->addAction (mw.m_actionDigitizeColorPicker);
   mw.m_toolDigitize->addAction (mw.m_actionDigitizeSegment);
+  mw.m_toolDigitize->addAction (mw.m_actionDigitizeGuideline);
   mw.m_toolDigitize->addWidget (mw.m_cmbCurve);
   mw.addToolBar (mw.m_toolDigitize);
 }

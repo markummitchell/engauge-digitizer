@@ -1788,12 +1788,6 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   m_actionViewCoordSystemToolBar->setChecked (viewCoordSystemToolbar);
   m_toolCoordSystem->setVisible (viewCoordSystemToolbar);
 
-  // Guidelines toolbar visibility
-  bool viewGuidelinesToolbar = settings.value (SETTINGS_VIEW_GUIDELINES_TOOLBAR,
-                                               false).toBool ();
-  m_actionViewGuidelinesToolBar->setChecked (viewGuidelinesToolbar);
-  m_toolGuidelines->setVisible (viewGuidelinesToolbar);
-
   // Tooltips visibility
   bool viewToolTips = settings.value (SETTINGS_VIEW_TOOL_TIPS,
                                       true).toBool ();
@@ -1942,7 +1936,6 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_VIEW_STATUS_BAR, m_statusBar->statusBarMode ());
   settings.setValue (SETTINGS_VIEW_SETTINGS_VIEWS_TOOLBAR, m_actionViewSettingsViewsToolBar->isChecked ());
   settings.setValue (SETTINGS_VIEW_COORD_SYSTEM_TOOLBAR, m_actionViewCoordSystemToolBar->isChecked ());
-  settings.setValue (SETTINGS_VIEW_GUIDELINES_TOOLBAR, m_actionViewGuidelinesToolBar->isChecked ());
   settings.setValue (SETTINGS_VIEW_TOOL_TIPS, m_actionViewToolTips->isChecked ());
   settings.setValue (SETTINGS_ZOOM_CONTROL, m_modelMainWindow.zoomControl());
   settings.setValue (SETTINGS_ZOOM_FACTOR, currentZoomFactor ());
@@ -2282,6 +2275,18 @@ void MainWindow::slotDigitizeCurve ()
   m_cmbCurve->setEnabled (true);
   m_viewPointStyle->setEnabled (true);
   m_viewSegmentFilter->setEnabled (true);
+  updateControls (); // For Paste which is state dependent
+}
+
+void MainWindow::slotDigitizeGuidelines ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotDigitizeGuidelines";
+
+  m_digitizeStateContext->requestImmediateStateTransition (m_cmdMediator,
+                                                           DIGITIZE_STATE_GUIDELINE);
+  m_cmbCurve->setEnabled (false); // Graph curve is irrelevant in this mode
+  m_viewPointStyle->setEnabled (false); // Point style is irrelevant in this mode
+  m_viewSegmentFilter->setEnabled (false); // Filtering is irrelevant in this mode
   updateControls (); // For Paste which is state dependent
 }
 
@@ -3250,17 +3255,6 @@ void MainWindow::slotViewToolBarDigitize ()
   }
 }
 
-void MainWindow::slotViewToolBarGuidelines ()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarGuidelines";
-
-  if (m_actionViewGuidelinesToolBar->isChecked ()) {
-    m_toolGuidelines->show();
-  } else {
-    m_toolGuidelines->hide();
-  }
-}
-
 void MainWindow::slotViewToolBarSettingsViews ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotViewToolBarSettingsViews";
@@ -3653,13 +3647,11 @@ void MainWindow::updateControls ()
   m_actionViewDigitizeToolBar->setEnabled (!m_currentFile.isEmpty ());
   m_actionViewSettingsViewsToolBar->setEnabled (!m_currentFile.isEmpty ());
   m_actionViewCoordSystemToolBar->setEnabled (!m_currentFile.isEmpty ());
-  m_actionViewGuidelinesToolBar->setEnabled (!m_currentFile.isEmpty ());
   m_actionViewChecklistGuideWindow->setEnabled (!m_dockChecklistGuide->browserIsEmpty());
 
   if (m_cmdMediator && m_transformation.transformIsDefined()) {
 
     bool cartesian = (m_cmdMediator->document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN);
-    bool editable = (m_actionViewGuidelinesEdit->isChecked ());
     bool selectable = (m_digitizeStateContext->guidelinesAreSelectable ());
 
     m_actionViewGuidelinesHide->setEnabled (true);

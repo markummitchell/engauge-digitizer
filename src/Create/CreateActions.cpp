@@ -8,6 +8,7 @@
 #include "DigitAxis.xpm"
 #include "DigitColorPicker.xpm"
 #include "DigitCurve.xpm"
+#include "DigitGuideline.xpm"
 #include "DigitPointMatch.xpm"
 #include "DigitScale.xpm"
 #include "DigitSegment.xpm"
@@ -43,6 +44,7 @@ void CreateActions::createDigitize (MainWindow &mw)
   QPixmap pixmapAxis (DigitAxis_xpm);
   QPixmap pixmapCurve (DigitCurve_xpm);
   QPixmap pixmapColorPicker (DigitColorPicker_xpm);
+  QPixmap pixmapGuideline (DigitGuideline_xpm);
   QPixmap pixmapPointMatch (DigitPointMatch_xpm);
   QPixmap pixmapScale (DigitScale_xpm);
   QPixmap pixmapSegment (DigitSegment_xpm);
@@ -51,6 +53,7 @@ void CreateActions::createDigitize (MainWindow &mw)
   QIcon iconAxis (pixmapAxis);
   QIcon iconCurve (pixmapCurve);
   QIcon iconColorPicker (pixmapColorPicker);
+  QIcon iconGuideline (pixmapGuideline);
   QIcon iconPointMatch (pixmapPointMatch);
   QIcon iconScale (pixmapScale);
   QIcon iconSegment (pixmapSegment);
@@ -134,6 +137,16 @@ void CreateActions::createDigitize (MainWindow &mw)
                                                 "New points will be assigned to the currently selected curve."));
   connect (mw.m_actionDigitizeSegment, SIGNAL (triggered ()), &mw, SLOT (slotDigitizeSegment ()));
 
+  mw.m_actionDigitizeGuideline = new QAction (iconGuideline, tr ("Guidelines Tool"), &mw);
+  mw.m_actionDigitizeGuideline->setShortcut (QKeySequence (tr ("Shift+F8")));
+  mw.m_actionDigitizeGuideline->setCheckable (true);
+  mw.m_actionDigitizeGuideline->setStatusTip (tr ("Digitize guidelines along constant coordinate values for aligning new points"));
+  mw.m_actionDigitizeGuideline->setWhatsThis (tr ("Digitize guidelines along constant coordinate values\n\n"
+                                                  "Guidelines can be placed along constant X or Y coordinates in cartesian coordinates, "
+                                                  "and T (theta) or R (range) coordinates in polar coordinates. Guidelines can help "
+                                                  "with aligning new points"));
+  connect (mw.m_actionDigitizeGuideline, SIGNAL (triggered ()), &mw, SLOT (slotDigitizeGuidelines ()));
+
   mw.m_groupDigitize = new QActionGroup (&mw);
   mw.m_groupDigitize->addAction (mw.m_actionDigitizeSelect);
   mw.m_groupDigitize->addAction (mw.m_actionDigitizeAxis);
@@ -142,6 +155,7 @@ void CreateActions::createDigitize (MainWindow &mw)
   mw.m_groupDigitize->addAction (mw.m_actionDigitizePointMatch);
   mw.m_groupDigitize->addAction (mw.m_actionDigitizeColorPicker);
   mw.m_groupDigitize->addAction (mw.m_actionDigitizeSegment);
+  mw.m_groupDigitize->addAction (mw.m_actionDigitizeGuideline);  
 }
 
 void CreateActions::createEdit (MainWindow &mw)
@@ -455,15 +469,6 @@ void CreateActions::createView (MainWindow &mw)
                                                        "systems.\n\n"
                                                        "This toolbar is disabled when there is only one coordinate system."));
   connect (mw.m_actionViewCoordSystemToolBar, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarCoordSystem()));
-
-  mw.m_actionViewGuidelinesToolBar = new QAction (tr ("Guidelines Toolbar"), &mw);
-  mw.m_actionViewGuidelinesToolBar->setCheckable (true);
-  mw.m_actionViewGuidelinesToolBar->setChecked (false);
-  mw.m_actionViewGuidelinesToolBar->setStatusTip (tr ("Show or hide the guidelines toolbar."));
-  mw.m_actionViewGuidelinesToolBar->setWhatsThis (tr ("Show or hide the guidelines toolbar. This toolbar is used "
-                                                      "to add X and Y guidelines to cartesian graphs, or T and R "
-                                                      "guidelines to polar graphs."));
-  connect (mw.m_actionViewGuidelinesToolBar, SIGNAL (triggered ()), &mw, SLOT (slotViewToolBarGuidelines ()));
 
   mw.m_actionViewChecklistGuideWindow = new QAction (tr ("Checklist Guide Window"), &mw);
   mw.m_actionViewChecklistGuideWindow->setCheckable (true);

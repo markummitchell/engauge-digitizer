@@ -20,6 +20,7 @@ QString digitizeStateAsString (DigitizeState state)
     digitizeStateHash [DIGITIZE_STATE_COLOR_PICKER] = "DigitizeStateColorPicker";
     digitizeStateHash [DIGITIZE_STATE_CURVE] = "DigitizeStateCurve";
     digitizeStateHash [DIGITIZE_STATE_EMPTY] = "DigitizeStateEmpty";
+    digitizeStateHash [DIGITIZE_STATE_GUIDELINE] = "DigitizeStateGuideline";    
     digitizeStateHash [DIGITIZE_STATE_POINT_MATCH] = "DigitizeStatePointMatch";
     digitizeStateHash [DIGITIZE_STATE_SEGMENT] = "DigitizeStateSegment";
     digitizeStateHash [DIGITIZE_STATE_SELECT] = "DigitizeStateSelect";

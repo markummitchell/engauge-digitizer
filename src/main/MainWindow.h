@@ -327,6 +327,7 @@ private slots:
   void slotDigitizeAxis ();
   void slotDigitizeColorPicker ();
   void slotDigitizeCurve ();
+  void slotDigitizeGuidelines ();
   void slotDigitizePointMatch ();
   void slotDigitizeScale ();
   void slotDigitizeSegment ();
@@ -390,7 +391,6 @@ private slots:
   void slotViewToolBarBackground ();
   void slotViewToolBarCoordSystem ();
   void slotViewToolBarDigitize ();
-  void slotViewToolBarGuidelines ();
   void slotViewWindowChecklistGuide ();
   void slotViewWindowFitting ();
   void slotViewWindowGeometry ();
@@ -557,6 +557,7 @@ private:
   QAction *m_actionDigitizeAxis;
   QAction *m_actionDigitizeScale;
   QAction *m_actionDigitizeCurve;
+  QAction *m_actionDigitizeGuideline;  
   QAction *m_actionDigitizePointMatch;
   QAction *m_actionDigitizeColorPicker;
   QAction *m_actionDigitizeSegment;
@@ -568,7 +569,6 @@ private:
   QAction *m_actionViewDigitizeToolBar;
   QAction *m_actionViewFittingWindow;
   QAction *m_actionViewGeometryWindow;
-  QAction *m_actionViewGuidelinesToolBar;
   QAction *m_actionViewSettingsViewsToolBar;
   QAction *m_actionViewToolTips;
   QAction *m_actionViewGridLines;
