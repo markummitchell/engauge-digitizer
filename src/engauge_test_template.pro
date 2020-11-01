@@ -54,6 +54,12 @@ HEADERS  += \
     Callback/CallbackSceneUpdateAfterCommand.h \
     Callback/CallbackSearchReturn.h \
     Callback/CallbackUpdateTransform.h \
+    Centipede/CentipedePair.h \
+    Centipede/CentipedeSegmentAbstract.h \
+    Centipede/CentipedeSegmentConstantXTEllipse.h \
+    Centipede/CentipedeSegmentConstantXTLine.h \
+    Centipede/CentipedeSegmentConstantYREllipse.h \
+    Centipede/CentipedeSegmentConstantYRLine.h \
     Checker/Checker.h \
     Checker/CheckerMode.h \
     Checklist/ChecklistGuide.h \
@@ -498,6 +504,12 @@ SOURCES += \
     Callback/CallbackScaleBar.cpp \
     Callback/CallbackSceneUpdateAfterCommand.cpp \
     Callback/CallbackUpdateTransform.cpp \
+    Centipede/CentipedePair.cpp \
+    Centipede/CentipedeSegmentAbstract.cpp \
+    Centipede/CentipedeSegmentConstantXTEllipse.cpp \
+    Centipede/CentipedeSegmentConstantXTLine.cpp \
+    Centipede/CentipedeSegmentConstantYREllipse.cpp \
+    Centipede/CentipedeSegmentConstantYRLine.cpp \
     Checker/Checker.cpp \
     Checker/CheckerMode.cpp \
     Checklist/ChecklistGuide.cpp \
@@ -903,6 +915,7 @@ CONFIG += windows
 LIBS += -llog4cpp -lfftw3
 INCLUDEPATH += Background \
                Callback \
+               Centipede \
                Checker \
                Checklist \
                Cmd \

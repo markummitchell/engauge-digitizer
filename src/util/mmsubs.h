@@ -33,6 +33,9 @@ extern void ellipseFromParallelogram (double xTL,
                                       double &aAligned,
                                       double &bAligned);
 
+/// Norm of vector
+extern double magnitude (const QPointF &vec);
+
 /// Get pixel method for any bit depth
 extern QRgb pixelRGB (const QImage &image, int x, int y);
 

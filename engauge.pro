@@ -96,6 +96,12 @@ HEADERS  += \
     src/Callback/CallbackSceneUpdateAfterCommand.h \
     src/Callback/CallbackSearchReturn.h \
     src/Callback/CallbackUpdateTransform.h \
+    src/Centipede/CentipedePair.h \
+    src/Centipede/CentipedeSegmentAbstract.h \
+    src/Centipede/CentipedeSegmentConstantXTEllipse.h \
+    src/Centipede/CentipedeSegmentConstantXTLine.h \
+    src/Centipede/CentipedeSegmentConstantYREllipse.h \
+    src/Centipede/CentipedeSegmentConstantYRLine.h \
     src/Checker/Checker.h \
     src/Checker/CheckerMode.h \
     src/Checklist/ChecklistGuide.h \
@@ -536,6 +542,12 @@ SOURCES += \
     src/Callback/CallbackScaleBar.cpp \
     src/Callback/CallbackSceneUpdateAfterCommand.cpp \
     src/Callback/CallbackUpdateTransform.cpp \
+    src/Centipede/CentipedePair.cpp \
+    src/Centipede/CentipedeSegmentAbstract.cpp \
+    src/Centipede/CentipedeSegmentConstantXTEllipse.cpp \
+    src/Centipede/CentipedeSegmentConstantXTLine.cpp \
+    src/Centipede/CentipedeSegmentConstantYREllipse.cpp \
+    src/Centipede/CentipedeSegmentConstantYRLine.cpp \
     src/Checker/Checker.cpp \
     src/Checker/CheckerMode.cpp \
     src/Checklist/ChecklistGuide.cpp \
@@ -1009,6 +1021,7 @@ cygport {
 INCLUDEPATH += src \
                src/Background \
                src/Callback \
+               src/Centipede \
                src/Checker \
                src/Checklist \
                src/Cmd \

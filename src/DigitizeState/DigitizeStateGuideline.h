@@ -10,6 +10,7 @@
 #include "DigitizeStateAbstractBase.h"
 #include <QPoint>
 
+class CentipedePair;
 class DocumentModelPointMatch;
 class QGraphicsEllipseItem;
 class QGraphicsPixmapItem;
@@ -53,6 +54,9 @@ public:
   
 private:
   DigitizeStateGuideline();
+
+  // Temporary graphics object the user interacts with to specify the guideline as X/T or Y/R
+  CentipedePair *m_centipedePair;
 };
 
 #endif // DIGITIZE_STATE_GUIDELINE_H

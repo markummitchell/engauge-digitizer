@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "CentipedePair.h"
 #include "CmdGuidelineAddXT.h"
 #include "CmdGuidelineAddYR.h"
 #include "CmdGuidelineMoveXT.h"
@@ -48,8 +49,8 @@ void DigitizeStateGuideline::begin (CmdMediator * /* cmdMediator */,
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateGuideline::beginn";
 }
 
-bool DigitizeStateGuideline::canPaste (const Transformation &transformation,
-                                       const QSize &viewSize) const
+bool DigitizeStateGuideline::canPaste (const Transformation & /* transformation */,
+                                       const QSize & /* viewSize */) const
 {
   return false;
 }
@@ -89,24 +90,41 @@ void DigitizeStateGuideline::handleCurveChange(CmdMediator * /* cmdMediator */)
 {
 }
 
-void DigitizeStateGuideline::handleKeyPress (CmdMediator *cmdMediator,
-                                              Qt::Key key,
+void DigitizeStateGuideline::handleKeyPress (CmdMediator * /* cmdMediator */,
+                                              Qt::Key /* key */,
                                               bool /* atLeastOneSelectedItem */)
 {
 }
 
-void DigitizeStateGuideline::handleMouseMove (CmdMediator *cmdMediator,
-                                               QPointF posScreen)
+void DigitizeStateGuideline::handleMouseMove (CmdMediator * /* cmdMediator */,
+                                              QPointF posScreen)
 {
+  if (m_centipedePair) {
+    if (m_centipedePair->done (posScreen)) {
+
+      // Done so make a command and remove CentipedePair
+      delete m_centipedePair;
+      m_centipedePair = nullptr;
+
+    } else {
+
+      m_centipedePair->move (posScreen);
+    }
+
+    m_centipedePair->move (posScreen);
+  }
 }
 
 void DigitizeStateGuideline::handleMousePress (CmdMediator * /* cmdMediator */,
-                                                QPointF /* posScreen */)
+                                               QPointF posScreen)
 {
+  m_centipedePair = new CentipedePair (context().mainWindow().scene(),
+                                       context().mainWindow().transformation(),
+                                       posScreen);
 }
 
-void DigitizeStateGuideline::handleMouseRelease (CmdMediator *cmdMediator,
-                                                  QPointF posScreen)
+void DigitizeStateGuideline::handleMouseRelease (CmdMediator * /* cmdMediator */,
+                                                 QPointF /* posScreen */)
 {
 }
 

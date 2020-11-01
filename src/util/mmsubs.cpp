@@ -166,6 +166,11 @@ void ellipseFromParallelogram (double xTL,
   }
 }
 
+double magnitude (const QPointF &vec)
+{
+  return qSqrt (vec.x() * vec.x() + vec.y() * vec.y());
+}
+
 QRgb pixelRGB(const QImage &image, int x, int y)
 {
   switch (image.depth())
