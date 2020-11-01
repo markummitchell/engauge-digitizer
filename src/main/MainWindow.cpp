@@ -38,6 +38,7 @@
 #include "DlgSettingsGeneral.h"
 #include "DlgSettingsGridDisplay.h"
 #include "DlgSettingsGridRemoval.h"
+#include "DlgSettingsGuideline.h"
 #include "DlgSettingsMainWindow.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
@@ -259,6 +260,7 @@ MainWindow::~MainWindow()
   delete m_dlgSettingsGeneral;
   delete m_dlgSettingsGridDisplay;
   delete m_dlgSettingsGridRemoval;
+  delete m_dlgSettingsGuideline;  
   delete m_dlgSettingsMainWindow;
   delete m_dlgSettingsPointMatch;
   delete m_dlgSettingsSegments;
@@ -871,7 +873,9 @@ void MainWindow::guidelineAddXT (const QString &identifier,
                                    xT);
   }
 
-  m_cmdMediator->document().setModelGuideline (m_guidelines.modelGuideline ());
+  DocumentModelGuideline modelGuidelineOld = cmdMediator()->document().modelGuideline();
+  DocumentModelGuideline modelGuidelineNew = m_guidelines.updateValues (modelGuidelineOld);
+  m_cmdMediator->document().setModelGuideline (modelGuidelineNew);
 }
 
 void MainWindow::guidelineAddXTEnqueue (double xT)
@@ -896,7 +900,9 @@ void MainWindow::guidelineAddYR (const QString &identifier,
                                    yR);
   }
 
-  m_cmdMediator->document().setModelGuideline (m_guidelines.modelGuideline ());
+  DocumentModelGuideline modelGuidelineOld = cmdMediator()->document().modelGuideline();
+  DocumentModelGuideline modelGuidelineNew = m_guidelines.updateValues (modelGuidelineOld);
+  m_cmdMediator->document().setModelGuideline (modelGuidelineNew);
 }
 
 void MainWindow::guidelineAddYREnqueue (double yR)
@@ -916,7 +922,9 @@ void MainWindow::guidelineMoveXT (const QString &identifier,
   m_guidelines.moveGuidelineXT (identifier,
                                 valueAfter);
 
-  m_cmdMediator->document().setModelGuideline (m_guidelines.modelGuideline ());
+  DocumentModelGuideline modelGuidelineOld = cmdMediator()->document().modelGuideline();
+  DocumentModelGuideline modelGuidelineNew = m_guidelines.updateValues (modelGuidelineOld);
+  m_cmdMediator->document().setModelGuideline (modelGuidelineNew);
 }
 
 void MainWindow::guidelineMoveYR (const QString &identifier,
@@ -927,7 +935,9 @@ void MainWindow::guidelineMoveYR (const QString &identifier,
   m_guidelines.moveGuidelineYR (identifier,
                                 valueAfter);
 
-  m_cmdMediator->document().setModelGuideline (m_guidelines.modelGuideline ());
+  DocumentModelGuideline modelGuidelineOld = cmdMediator()->document().modelGuideline();
+  DocumentModelGuideline modelGuidelineNew = m_guidelines.updateValues (modelGuidelineOld);
+  m_cmdMediator->document().setModelGuideline (modelGuidelineNew);;
 }
 
 void MainWindow::guidelineRemove (const QString &identifier)
@@ -935,7 +945,10 @@ void MainWindow::guidelineRemove (const QString &identifier)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemove";
 
   m_guidelines.removeGuideline (identifier);
-  m_cmdMediator->document().setModelGuideline (m_guidelines.modelGuideline ());
+
+  DocumentModelGuideline modelGuidelineOld = cmdMediator()->document().modelGuideline();
+  DocumentModelGuideline modelGuidelineNew = m_guidelines.updateValues (modelGuidelineOld);
+  m_cmdMediator->document().setModelGuideline (modelGuidelineNew);
 }
 
 Guidelines &MainWindow::guidelines()
@@ -2976,6 +2989,14 @@ void MainWindow::slotSettingsGridRemoval ()
   m_dlgSettingsGridRemoval->show ();
 }
 
+void MainWindow::slotSettingsGuideline ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsGuideline";
+
+  m_dlgSettingsGuideline->load (*m_cmdMediator);
+  m_dlgSettingsGuideline->show ();
+}
+
 void MainWindow::slotSettingsPointMatch ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotSettingsPointMatch";
@@ -3891,6 +3912,7 @@ void MainWindow::updateSettingsGuideline (const DocumentModelGuideline &modelGui
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGuideline";
 
   m_cmdMediator->document().setModelGuideline (modelGuideline);
+  loadGuidelinesFromCmdMediator();
 }
 
 void MainWindow::updateSettingsMainWindow()
@@ -3958,6 +3980,7 @@ void MainWindow::updateSmallDialogs ()
   m_dlgSettingsGeneral->setSmallDialogs (m_modelMainWindow.smallDialogs ());
   m_dlgSettingsGridDisplay->setSmallDialogs (m_modelMainWindow.smallDialogs ());
   m_dlgSettingsGridRemoval->setSmallDialogs (m_modelMainWindow.smallDialogs ());
+  m_dlgSettingsGuideline->setSmallDialogs (m_modelMainWindow.smallDialogs ());  
   m_dlgSettingsMainWindow->setSmallDialogs (m_modelMainWindow.smallDialogs ());
   m_dlgSettingsPointMatch->setSmallDialogs (m_modelMainWindow.smallDialogs ());
   m_dlgSettingsSegments->setSmallDialogs (m_modelMainWindow.smallDialogs ());

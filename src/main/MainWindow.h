@@ -41,6 +41,7 @@ class DlgSettingsExportFormat;
 class DlgSettingsGeneral;
 class DlgSettingsGridDisplay;
 class DlgSettingsGridRemoval;
+class DlgSettingsGuideline;
 class DlgSettingsMainWindow;
 class DlgSettingsPointMatch;
 class DlgSettingsSegments;
@@ -369,6 +370,7 @@ private slots:
   void slotSettingsGeneral ();
   void slotSettingsGridDisplay ();
   void slotSettingsGridRemoval ();
+  void slotSettingsGuideline ();  
   void slotSettingsMainWindow ();
   void slotSettingsPointMatch ();
   void slotSettingsSegments ();
@@ -625,6 +627,7 @@ private:
   QAction *m_actionSettingsGeneral;
   QAction *m_actionSettingsGridDisplay;
   QAction *m_actionSettingsGridRemoval;
+  QAction *m_actionSettingsGuideline;
   QAction *m_actionSettingsMainWindow;
   QAction *m_actionSettingsPointMatch;
   QAction *m_actionSettingsSegments;
@@ -689,6 +692,7 @@ private:
   DlgSettingsGeneral *m_dlgSettingsGeneral;
   DlgSettingsGridDisplay *m_dlgSettingsGridDisplay;
   DlgSettingsGridRemoval *m_dlgSettingsGridRemoval;
+  DlgSettingsGuideline *m_dlgSettingsGuideline;  
   DlgSettingsMainWindow *m_dlgSettingsMainWindow;
   DlgSettingsPointMatch *m_dlgSettingsPointMatch;
   DlgSettingsSegments *m_dlgSettingsSegments;

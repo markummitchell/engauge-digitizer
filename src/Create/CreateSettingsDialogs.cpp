@@ -15,6 +15,7 @@
 #include "DlgSettingsGeneral.h"
 #include "DlgSettingsGridDisplay.h"
 #include "DlgSettingsGridRemoval.h"
+#include "DlgSettingsGuideline.h"
 #include "DlgSettingsMainWindow.h"
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
@@ -38,6 +39,7 @@ void CreateSettingsDialogs::create (MainWindow & mw)
   mw.m_dlgSettingsAxesChecker = new DlgSettingsAxesChecker (mw);
   mw.m_dlgSettingsGridDisplay = new DlgSettingsGridDisplay (mw);
   mw.m_dlgSettingsGridRemoval = new DlgSettingsGridRemoval (mw);
+  mw.m_dlgSettingsGuideline = new DlgSettingsGuideline (mw);  
   mw.m_dlgSettingsPointMatch = new DlgSettingsPointMatch (mw);
   mw.m_dlgSettingsSegments = new DlgSettingsSegments (mw);
   mw.m_dlgSettingsGeneral = new DlgSettingsGeneral (mw);
@@ -52,6 +54,7 @@ void CreateSettingsDialogs::create (MainWindow & mw)
   mw.m_dlgSettingsAxesChecker->setVisible (false);
   mw.m_dlgSettingsGridDisplay->setVisible (false);
   mw.m_dlgSettingsGridRemoval->setVisible (false);
+  mw.m_dlgSettingsGuideline->setVisible (false);
   mw.m_dlgSettingsPointMatch->setVisible (false);
   mw.m_dlgSettingsSegments->setVisible (false);
   mw.m_dlgSettingsGeneral->setVisible (false);

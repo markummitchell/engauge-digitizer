@@ -315,7 +315,7 @@ void Guidelines::initialize (GraphicsScene &scene)
   m_guidelineFactory = new GuidelineFactory (&scene);
 }
 
-DocumentModelGuideline Guidelines::modelGuideline () const
+DocumentModelGuideline Guidelines::updateValues (const DocumentModelGuideline &modelGuidelineOld) const
 {
   GuidelineValues valuesXT, valuesYR;
 
@@ -335,11 +335,12 @@ DocumentModelGuideline Guidelines::modelGuideline () const
     valuesYR [identifier] = value;
   }
   
-  DocumentModelGuideline modelGuidelineReturned;
-  modelGuidelineReturned.setValuesX (valuesXT);
-  modelGuidelineReturned.setValuesY (valuesYR);
+  // Returned model
+  DocumentModelGuideline modelGuidelineNew (modelGuidelineOld);
+  modelGuidelineNew.setValuesX (valuesXT);
+  modelGuidelineNew.setValuesY (valuesYR);
 
-  return modelGuidelineReturned;
+  return modelGuidelineNew;
 }
 
 void Guidelines::moveGuidelineXT (const QString &identifier,

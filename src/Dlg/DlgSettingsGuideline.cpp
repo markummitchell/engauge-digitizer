@@ -27,6 +27,7 @@
 #include "QtToString.h"
 #include "TranslatorContainer.h"
 
+const int MINIMUM_HEIGHT = 300;
 const int MINIMUM_DIALOG_WIDTH_GUIDELINES = 500;
 
 DlgSettingsGuideline::DlgSettingsGuideline(MainWindow &mainWindow) :
@@ -54,12 +55,12 @@ void DlgSettingsGuideline::createControls (QGridLayout *layout,
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::createControls";
   
   QLabel *labelPointRadius = new QLabel (QString ("%1:").arg (tr ("Creation circle radius")));
-  layout->addWidget (labelPointRadius, row, 0);
+  layout->addWidget (labelPointRadius, row, 1);
 
   m_spinCreationCircleRadius = new QSpinBox;
   m_spinCreationCircleRadius->setWhatsThis (tr ("Select a radius, in pixels, for the points"));
   m_spinCreationCircleRadius->setMinimum (1);
-  connect (m_spinCreationCircleRadius, SIGNAL (valueChanged (int)), this, SLOT (slotPointRadius (int)));
+  connect (m_spinCreationCircleRadius, SIGNAL (valueChanged (int)), this, SLOT (slotCreationCircleRadius (int)));
   layout->addWidget (m_spinCreationCircleRadius, row++, 2);
 
   QLabel *labelGuidelineColor = new QLabel (QString ("%1:").arg (tr ("Guideline color")));
@@ -70,7 +71,7 @@ void DlgSettingsGuideline::createControls (QGridLayout *layout,
                                          "Set the color of the guidelines that can be dragged from the edges of the scene, and used "
                                          "to align points"));
   populateColorComboWithoutTransparent (*m_lineColor);
-  connect (m_lineColor, SIGNAL (activated (const QString &)), this, SLOT (slotGuidelineColor (const QString &))); // activated() ignores code changes
+  connect (m_lineColor, SIGNAL (activated (const QString &)), this, SLOT (slotLineColor (const QString &))); // activated() ignores code changes
   layout->addWidget (m_lineColor, row++, 2);
 
   QLabel *labelLineWidth = new QLabel(QString ("%1:").arg (tr ("Line width")));
@@ -135,7 +136,7 @@ void DlgSettingsGuideline::load (CmdMediator &cmdMediator)
   m_modelGuidelineAfter = new DocumentModelGuideline (cmdMediator.document());
 
   // Populate controls
-
+  m_spinCreationCircleRadius->setValue (qFloor (m_modelGuidelineAfter->creationCircleRadius ()));
   int indexColor = m_lineColor->findData(QVariant(m_modelGuidelineAfter->lineColor()));
   ENGAUGE_ASSERT (indexColor >= 0);
   m_lineColor->setCurrentIndex(indexColor);
@@ -145,12 +146,29 @@ void DlgSettingsGuideline::load (CmdMediator &cmdMediator)
   enableOk (false); // Disable Ok button since there not yet any changes
 }
 
+void DlgSettingsGuideline::setSmallDialogs (bool smallDialogs)
+{
+  if (!smallDialogs) {
+    setMinimumHeight (MINIMUM_HEIGHT);
+  }
+}
+
+void DlgSettingsGuideline::slotCreationCircleRadius (int radius)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::slotCreationCircleRadius";
+
+  m_modelGuidelineAfter->setCreationCircleRadius (radius); 
+  updateControls();
+  updatePreview();
+}
+
 void DlgSettingsGuideline::slotLineColor (QString const &)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::slotLineColor";
 
   m_modelGuidelineAfter->setLineColor(static_cast<ColorPalette> (m_lineColor->currentData().toInt()));
   updateControls();
+  updatePreview();
 }
 
 void DlgSettingsGuideline::slotLineWidth (int lineWidth)

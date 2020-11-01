@@ -76,6 +76,17 @@ void DocumentModelGuideline::loadXml(QXmlStreamReader &reader)
 
   bool success = true;
 
+  QXmlStreamAttributes attributes = reader.attributes();
+
+  if (attributes.hasAttribute (DOCUMENT_SERIALIZE_GUIDELINE_CREATION_CIRCLE_RADIUS) &&
+      attributes.hasAttribute (DOCUMENT_SERIALIZE_GUIDELINE_LINE_COLOR) &&
+      attributes.hasAttribute (DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH)) {
+
+    setCreationCircleRadius (attributes.value (DOCUMENT_SERIALIZE_GUIDELINE_CREATION_CIRCLE_RADIUS).toInt ());
+    setLineColor (static_cast<ColorPalette> (attributes.value (DOCUMENT_SERIALIZE_GUIDELINE_LINE_COLOR).toInt ()));
+    setLineWidth (attributes.value (DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH).toInt ());
+  }
+
   // Read until end of this subtree
   while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
   (reader.name() != DOCUMENT_SERIALIZE_GUIDELINES)){
@@ -171,16 +182,16 @@ void DocumentModelGuideline::saveXml(QXmlStreamWriter &writer) const
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGuideline::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_GUIDELINES);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_CREATION_CIRCLE_RADIUS, QString::number (m_creationCircleRadius));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_COLOR, QString::number (m_lineColor));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_COLOR_STRING, colorPaletteToString (m_lineColor));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH, QString::number (m_lineWidth));
   saveXmlVector (writer,
                  DOCUMENT_SERIALIZE_GUIDELINES_X,
                  m_valuesX);
   saveXmlVector (writer,
                  DOCUMENT_SERIALIZE_GUIDELINES_Y,
                  m_valuesY);
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_CREATION_CIRCLE_RADIUS, QString::number (m_creationCircleRadius));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_COLOR, QString::number (m_lineColor));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_COLOR_STRING, colorPaletteToString (m_lineColor));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH, QString::number (m_lineWidth));
   writer.writeEndElement();
 }
  

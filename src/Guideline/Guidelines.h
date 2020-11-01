@@ -95,9 +95,6 @@ public:
   /// Initialize Guideline factory
   void initialize (GraphicsScene &scene);
 
-  /// Return complete set of guidelines information for Document
-  DocumentModelGuideline modelGuideline () const;
-
   /// Move an X/T guideline from one value to another. Closest value wins
   void moveGuidelineXT (const QString &identifier,
                         double valueAfter);
@@ -122,6 +119,9 @@ public:
 
   /// Force a color update
   void updateColor ();
+
+  /// Updates the guideline values for later storing in Document. Only the values are updated
+  DocumentModelGuideline updateValues (const DocumentModelGuideline &modelGuidelineOld) const;
 
   /// Update transformation. This is called after a command has been executed
   void updateWithLatestTransformation ();

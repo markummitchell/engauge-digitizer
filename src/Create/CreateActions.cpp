@@ -402,6 +402,12 @@ void CreateActions::createSettings (MainWindow &mw)
                                                     "Color Filtering is not able to separate grid lines from curve lines."));
   connect (mw.m_actionSettingsGridRemoval, SIGNAL (triggered ()), &mw, SLOT (slotSettingsGridRemoval ()));
 
+  mw.m_actionSettingsGuideline = new QAction (tr ("Guideline..."), &mw);
+  mw.m_actionSettingsGuideline->setStatusTip (tr ("Guideline Settings."));
+  mw.m_actionSettingsGuideline->setWhatsThis (tr ("Guideline Settings\n\n"
+                                                  "Guidelines displayed on the graph can help to align points along constant coordinate lines."));
+  connect (mw.m_actionSettingsGuideline, SIGNAL (triggered ()), &mw, SLOT (slotSettingsGuideline ()));
+
   mw.m_actionSettingsPointMatch = new QAction (tr ("Point Match..."), &mw);
   mw.m_actionSettingsPointMatch->setStatusTip (tr ("Edit Point Match settings."));
   mw.m_actionSettingsPointMatch->setWhatsThis (tr ("Point Match Settings\n\n"
