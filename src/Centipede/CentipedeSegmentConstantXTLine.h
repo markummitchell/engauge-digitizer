@@ -16,9 +16,9 @@ class CentipedeSegmentConstantXTLine : public CentipedeSegmentAbstract
 {
 public:
   /// Constructor with individual coordinates
-  CentipedeSegmentConstantXTLine(const Transformation &transformation,
-                                 const QPointF &posCenterScreen,
-                                 double initialRadius);
+  CentipedeSegmentConstantXTLine(const DocumentModelGuideline &modelGuideline,
+                                 const Transformation &transformation,
+                                 const QPointF &posCenterScreen);
   virtual ~CentipedeSegmentConstantXTLine();
 
   virtual double distanceToClosestEndpoint (const QPointF &posScreen) const;

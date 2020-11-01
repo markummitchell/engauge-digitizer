@@ -12,7 +12,7 @@
 
 class CmdAbstract;
 class Document;
-class DocumentModelGuidelines;
+class DocumentModelGuideline;
 class Guidelines;
 class MainWindow;
 
@@ -29,14 +29,14 @@ public:
   CmdAbstract *createAfterDrag (MainWindow &mainWindow,
                                 Document &document,
                                 double newValue,
-                                const DocumentModelGuidelines &modelGuidelinesDocument,
+                                const DocumentModelGuideline &modelGuidelineDocument,
                                 const QString &identifier,
                                 bool draggedOffscreen);
 
 private:
-  bool isXTForIdentifier (const DocumentModelGuidelines &modelGuidelines,
+  bool isXTForIdentifier (const DocumentModelGuideline &modelGuideline,
                           const QString &identifier) const;
-  double valueForIdentifier (const DocumentModelGuidelines &modelGuidelines,
+  double valueForIdentifier (const DocumentModelGuideline &modelGuideline,
                              const QString &identifier) const;  
 
 };

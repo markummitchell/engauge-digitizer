@@ -209,10 +209,13 @@ void GraphicsView::keyPressEvent (QKeyEvent *event)
 
   bool atLeastOneSelectedItem = (scene ()->selectedItems ().count () > 0);
 
+  // Arrow keys are for several states to move newly created points. Escape key is
+  // for DigitizeStateGuideline
   if (key == Qt::Key_Down ||
       key == Qt::Key_Left ||
       key == Qt::Key_Right ||
-      key == Qt::Key_Up) {
+      key == Qt::Key_Up ||
+      key == Qt::Key_Escape) {
 
     emit signalKeyPress (key, atLeastOneSelectedItem);
     event->accept();

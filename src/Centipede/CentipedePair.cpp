@@ -8,27 +8,35 @@
 #include "CentipedeSegmentAbstract.h"
 #include "CentipedeSegmentConstantXTLine.h"
 #include "CentipedeSegmentConstantYRLine.h"
+#include "DocumentModelGuideline.h"
 #include "GraphicsScene.h"
 #include "mmsubs.h"
 #include "Transformation.h"
 
-const int INITIAL_RADIUS_PIXELS = 20;
-
 CentipedePair::CentipedePair(GraphicsScene &scene,
                              const Transformation &transformation,
+                             const DocumentModelGuideline &modelGuideline,
                              const QPointF &posScreen) :
+  m_modelGuideline (modelGuideline),
   m_centipedeXT (nullptr),
   m_centipedeYR (nullptr),
-  m_posScreenStart (posScreen)
+  m_posScreenStart (posScreen),
+  m_selectedXTFinal (true),
+  m_valueFinal (0)
 {
-  m_centipedeXT = new CentipedeSegmentConstantXTLine (transformation,
-                                                      posScreen,
-                                                      INITIAL_RADIUS_PIXELS);
-  m_centipedeYR = new CentipedeSegmentConstantYRLine (transformation,
-                                                      posScreen,
-                                                      INITIAL_RADIUS_PIXELS);
+  // Create visible Centipede items
+  m_centipedeXT = new CentipedeSegmentConstantXTLine (modelGuideline,
+                                                      transformation,
+                                                      posScreen);
+  m_centipedeYR = new CentipedeSegmentConstantYRLine (modelGuideline,
+                                                      transformation,
+                                                      posScreen);
   scene.addItem (m_centipedeXT->graphicsItem ());
-  scene.addItem (m_centipedeYR->graphicsItem ());  
+  scene.addItem (m_centipedeYR->graphicsItem ());
+
+  // Save starting graph position
+  transformation.transformScreenToRawGraph(posScreen,
+                                           m_posGraphStart);
 }
 
 CentipedePair::~CentipedePair()
@@ -42,7 +50,7 @@ bool CentipedePair::done (const QPointF &posScreen)
   QPointF delta = posScreen - m_posScreenStart;
   double distanceFromCenter = magnitude (delta);
 
-  return (distanceFromCenter > INITIAL_RADIUS_PIXELS);
+  return (distanceFromCenter > m_modelGuideline.creationCircleRadius ());
 }
 
 void CentipedePair::move (const QPointF &posScreen)
@@ -50,19 +58,38 @@ void CentipedePair::move (const QPointF &posScreen)
   QPointF delta = posScreen - m_posScreenStart;
   double distanceFromCenter = magnitude (delta);
 
-  if (selectedXT (posScreen)) {
-    m_centipedeXT->updateRadius (INITIAL_RADIUS_PIXELS + distanceFromCenter);
-    m_centipedeYR->updateRadius (INITIAL_RADIUS_PIXELS - distanceFromCenter);
+  if (updateFinalValues (posScreen)) {
+    m_centipedeXT->updateRadius (m_modelGuideline.creationCircleRadius () + distanceFromCenter);
+    m_centipedeYR->updateRadius (m_modelGuideline.creationCircleRadius () - distanceFromCenter);
   } else {
-    m_centipedeXT->updateRadius (INITIAL_RADIUS_PIXELS - distanceFromCenter);
-    m_centipedeYR->updateRadius (INITIAL_RADIUS_PIXELS +distanceFromCenter);
+    m_centipedeXT->updateRadius (m_modelGuideline.creationCircleRadius () - distanceFromCenter);
+    m_centipedeYR->updateRadius (m_modelGuideline.creationCircleRadius () + distanceFromCenter);
   }
 }
 
-bool CentipedePair::selectedXT (const QPointF &posScreen) const
+bool CentipedePair::selectedXTFinal () const
 {
+  return m_selectedXTFinal;
+}
+
+bool CentipedePair::updateFinalValues (const QPointF &posScreen)
+{
+  // Update selection
   double distXT = m_centipedeXT->distanceToClosestEndpoint (posScreen);
   double distYR = m_centipedeYR->distanceToClosestEndpoint (posScreen);
+  m_selectedXTFinal = (distXT < distYR);
 
-  return (distXT < distYR);
+  // Update value
+  if (m_selectedXTFinal) {
+    m_valueFinal = m_posGraphStart.x();
+  } else {
+    m_valueFinal = m_posGraphStart.y();
+  }
+
+  return m_selectedXTFinal;
+}
+
+double CentipedePair::valueFinal () const
+{
+  return m_valueFinal;
 }

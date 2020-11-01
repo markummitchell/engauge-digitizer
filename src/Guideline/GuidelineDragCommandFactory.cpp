@@ -9,7 +9,7 @@
 #include "CmdGuidelineMoveYR.h"
 #include "CmdGuidelineRemoveXT.h"
 #include "CmdGuidelineRemoveYR.h"
-#include "DocumentModelGuidelines.h"
+#include "DocumentModelGuideline.h"
 #include "EngaugeAssert.h"
 #include "GuidelineDragCommandFactory.h"
 #include "Guidelines.h"
@@ -23,21 +23,21 @@ GuidelineDragCommandFactory::GuidelineDragCommandFactory ()
 CmdAbstract *GuidelineDragCommandFactory::createAfterDrag (MainWindow &mainWindow,
                                                            Document &document,
                                                            double valueAfter,
-                                                           const DocumentModelGuidelines &modelGuidelinesDocument,
+                                                           const DocumentModelGuideline &modelGuidelineDocument,
                                                            const QString &identifier,
                                                            bool draggedOffscreen)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineDragCommandFactory::GuidelineDragCommandFactory";
 
-  GuidelineValues valuesXDocument = modelGuidelinesDocument.valuesX ();
-  GuidelineValues valuesYDocument = modelGuidelinesDocument.valuesY ();
+  GuidelineValues valuesXDocument = modelGuidelineDocument.valuesX ();
+  GuidelineValues valuesYDocument = modelGuidelineDocument.valuesY ();
 
   // So which Guideline moved?
-  double valueBefore = valueForIdentifier (modelGuidelinesDocument,
+  double valueBefore = valueForIdentifier (modelGuidelineDocument,
                                            identifier);
 
   // What type was the Guideline?
-  bool isXT = isXTForIdentifier (modelGuidelinesDocument,
+  bool isXT = isXTForIdentifier (modelGuidelineDocument,
                                  identifier);
   
   CmdAbstract *cmd = nullptr;
@@ -77,12 +77,12 @@ CmdAbstract *GuidelineDragCommandFactory::createAfterDrag (MainWindow &mainWindo
   return cmd;
 }
 
-bool GuidelineDragCommandFactory::isXTForIdentifier (const DocumentModelGuidelines &modelGuidelines,
+bool GuidelineDragCommandFactory::isXTForIdentifier (const DocumentModelGuideline &modelGuideline,
                                                      const QString &identifierWanted) const
 {
   GuidelineValues::const_iterator itr;
 
-  const GuidelineValues &valuesX = modelGuidelines.valuesX();
+  const GuidelineValues &valuesX = modelGuideline.valuesX();
   for (itr = valuesX.begin(); itr != valuesX.end(); itr++) {
     QString identifierGot = itr.key();
     if (identifierWanted == identifierGot) {
@@ -93,12 +93,12 @@ bool GuidelineDragCommandFactory::isXTForIdentifier (const DocumentModelGuidelin
   return false;
 }
 
-double GuidelineDragCommandFactory::valueForIdentifier (const DocumentModelGuidelines &modelGuidelines,
+double GuidelineDragCommandFactory::valueForIdentifier (const DocumentModelGuideline &modelGuideline,
                                                         const QString &identifierWanted) const
 {
   GuidelineValues::const_iterator itr;
 
-  const GuidelineValues &valuesX = modelGuidelines.valuesX();
+  const GuidelineValues &valuesX = modelGuideline.valuesX();
   for (itr = valuesX.begin(); itr != valuesX.end(); itr++) {
     QString identifierGot = itr.key();
     if (identifierWanted == identifierGot) {
@@ -106,7 +106,7 @@ double GuidelineDragCommandFactory::valueForIdentifier (const DocumentModelGuide
     }
   }
 
-  const GuidelineValues &valuesY = modelGuidelines.valuesY();
+  const GuidelineValues &valuesY = modelGuideline.valuesY();
   for (itr = valuesY.begin(); itr != valuesY.end(); itr++) {
     QString identifierGot = itr.key();
     if (identifierWanted == identifierGot) {

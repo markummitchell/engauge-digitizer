@@ -38,7 +38,6 @@ void CreateToolBars::create (MainWindow &mw)
   createToolbarDigitize (mw);
   createToolbarSettingsView (mw);
   createToolbarCoordinateSystem (mw);
-  createToolbarGuidelines (mw);
 }
 
 void CreateToolBars::createToolbarBackground (MainWindow &mw)
@@ -123,28 +122,6 @@ void CreateToolBars::createToolbarDigitize (MainWindow &mw)
   mw.m_toolDigitize->addAction (mw.m_actionDigitizeGuideline);
   mw.m_toolDigitize->addWidget (mw.m_cmbCurve);
   mw.addToolBar (mw.m_toolDigitize);
-}
-
-void CreateToolBars::createToolbarGuidelines (MainWindow &mw)
-{
-
-  QString statusTipR (tr ("Create an R (range) guideline."));
-  QString statusTipT (tr ("Create a T (theta) guideline."));
-  QString statusTipX (tr ("Create an X guideline."));
-  QString statusTipY (tr ("Create a Y guideline."));
-
-  QString whatsThisR (tr ("Create an R (Range) guideline\n\n"
-                          "When pressed, a constant R (range) guideline is created. It can be moved by dragging, and "
-                          "removed by dragging off screen"));
-  QString whatsThisT (tr ("Create a T (Theta) guideline\n\n"
-                          "When pressed, a constant T (theta) guideline is created. It can be moved by dragging, and "
-                          "removed by dragging off screen"));
-  QString whatsThisX (tr ("Create an X guideline\n\n"
-                          "When pressed, a constant X guideline is created. It can be moved by dragging, and "
-                          "removed by dragging off screen"));
-  QString whatsThisY (tr ("Create a Y guideline\n\n"
-                          "When pressed, a constant Y guideline is created. It can be moved by dragging, and "
-                          "removed by dragging off screen"));
 }
 
 void CreateToolBars::createToolbarSettingsView (MainWindow &mw)

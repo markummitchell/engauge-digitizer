@@ -5,22 +5,29 @@
  ******************************************************************************************************/
 
 #include "CentipedeSegmentConstantXTLine.h"
+#include "EnumsToQt.h"
 #include "mmsubs.h"
 #include <qmath.h>
 #include <QGraphicsLineItem>
+#include <QPen>
 
-CentipedeSegmentConstantXTLine::CentipedeSegmentConstantXTLine(const Transformation &transformation,
-                                                               const QPointF &posCenterScreen,
-                                                               double initialRadius) :
-  CentipedeSegmentAbstract (transformation,
-                            posCenterScreen,
-                            initialRadius)
+CentipedeSegmentConstantXTLine::CentipedeSegmentConstantXTLine(const DocumentModelGuideline &modelGuideline,
+                                                               const Transformation &transformation,
+                                                               const QPointF &posCenterScreen) :
+  CentipedeSegmentAbstract (modelGuideline,
+                            transformation,
+                            posCenterScreen)
 {
-  QPointF posLow = posScreenConstantXTLowYR (initialRadius);
-  QPointF posHigh = posScreenConstantXTHighYR (initialRadius);
+  QPointF posLow = posScreenConstantXTLowYR (modelGuideline.creationCircleRadius ());
+  QPointF posHigh = posScreenConstantXTHighYR (modelGuideline.creationCircleRadius ());
 
   m_graphicsItem = new QGraphicsLineItem (QLineF (posLow,
                                                   posHigh));
+
+  QColor color (ColorPaletteToQColor (modelGuideline.lineColor()));
+
+  m_graphicsItem->setPen (QPen (color,
+                                modelGuideline.lineWidth()));
 }
 
 CentipedeSegmentConstantXTLine::~CentipedeSegmentConstantXTLine ()
@@ -30,8 +37,8 @@ CentipedeSegmentConstantXTLine::~CentipedeSegmentConstantXTLine ()
 
 double CentipedeSegmentConstantXTLine::distanceToClosestEndpoint (const QPointF &posScreen) const
 {
-  QPointF posLow = posScreenConstantXTLowYR (initialRadius ());
-  QPointF posHigh = posScreenConstantXTHighYR (initialRadius ());
+  QPointF posLow = posScreenConstantXTLowYR (modelGuideline().creationCircleRadius ());
+  QPointF posHigh = posScreenConstantXTHighYR (modelGuideline().creationCircleRadius ());
 
   double distanceLow = magnitude (posScreen - posLow);
   double distanceHigh = magnitude (posScreen - posHigh);

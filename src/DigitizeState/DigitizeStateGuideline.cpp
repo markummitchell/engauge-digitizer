@@ -30,7 +30,8 @@
 #include "Transformation.h"
 
 DigitizeStateGuideline::DigitizeStateGuideline (DigitizeStateContext &context) :
-  DigitizeStateAbstractBase (context)
+  DigitizeStateAbstractBase (context),
+  m_centipedePair (nullptr)
 {
 }
 
@@ -91,41 +92,65 @@ void DigitizeStateGuideline::handleCurveChange(CmdMediator * /* cmdMediator */)
 }
 
 void DigitizeStateGuideline::handleKeyPress (CmdMediator * /* cmdMediator */,
-                                              Qt::Key /* key */,
-                                              bool /* atLeastOneSelectedItem */)
+                                             Qt::Key key,
+                                             bool /* atLeastOneSelectedItem */)
 {
+  if (key == Qt::Key_Escape && m_centipedePair) {
+    killCentipede ();
+  }
 }
 
-void DigitizeStateGuideline::handleMouseMove (CmdMediator * /* cmdMediator */,
+void DigitizeStateGuideline::handleMouseMove (CmdMediator *cmdMediator,
                                               QPointF posScreen)
 {
   if (m_centipedePair) {
     if (m_centipedePair->done (posScreen)) {
 
       // Done so make a command and remove CentipedePair
-      delete m_centipedePair;
-      m_centipedePair = nullptr;
+      bool selectedXT = m_centipedePair->selectedXTFinal ();
+      double selectedValue = m_centipedePair->valueFinal ();
+      killCentipede ();
+
+      // Create command
+      CmdAbstract *cmd = nullptr;
+      if (selectedXT) {
+        cmd = new CmdGuidelineAddXT (context().mainWindow(),
+                                     cmdMediator->document(),
+                                     selectedValue);
+      } else {
+        cmd = new CmdGuidelineAddYR (context().mainWindow(),
+                                     cmdMediator->document(),
+                                     selectedValue);
+      }
+
+      context().appendNewCmd (cmdMediator,
+                              cmd);
 
     } else {
 
       m_centipedePair->move (posScreen);
     }
-
-    m_centipedePair->move (posScreen);
   }
 }
 
-void DigitizeStateGuideline::handleMousePress (CmdMediator * /* cmdMediator */,
+void DigitizeStateGuideline::handleMousePress (CmdMediator *cmdMediator,
                                                QPointF posScreen)
 {
   m_centipedePair = new CentipedePair (context().mainWindow().scene(),
                                        context().mainWindow().transformation(),
+                                       cmdMediator->document().modelGuideline(),
                                        posScreen);
 }
 
 void DigitizeStateGuideline::handleMouseRelease (CmdMediator * /* cmdMediator */,
                                                  QPointF /* posScreen */)
 {
+}
+
+void DigitizeStateGuideline::killCentipede ()
+{
+  delete m_centipedePair;
+  m_centipedePair = nullptr;
 }
 
 QString DigitizeStateGuideline::state() const

@@ -7,6 +7,7 @@
 #ifndef CENTIPEDE_SEGMENT_ABSTRACT_H
 #define CENTIPEDE_SEGMENT_ABSTRACT_H
 
+#include "DocumentModelGuideline.h"
 #include <QPointF>
 #include "Transformation.h"
 
@@ -18,9 +19,9 @@ class CentipedeSegmentAbstract
 {
 public:
   /// Constructor with individual coordinates
-  CentipedeSegmentAbstract(const Transformation &transformation,
-                           const QPointF &posCenterScreen,
-                           double initialRadius);
+  CentipedeSegmentAbstract(const DocumentModelGuideline &modelGuideline,
+                           const Transformation &transformation,
+                           const QPointF &posCenterScreen);
   virtual ~CentipedeSegmentAbstract ();
 
   /// Return distance to closest endpoint
@@ -34,8 +35,8 @@ public:
   
 protected:
 
-  /// Initial radius of circle
-  double initialRadius () const;
+  /// Settings
+  const DocumentModelGuideline &modelGuideline () const;
 
   /// Center of circle in screen coordinates
   QPointF posCenterScreen () const;
@@ -68,10 +69,10 @@ private:
   QPointF posScreenConstantYRForScaledXT (double radius,
                                           double scale) const;
 
+  DocumentModelGuideline m_modelGuideline;
   Transformation m_transformation;
   QPointF m_posCenterScreen;
-  double m_initialRadius;
-  
+
 };
 
 #endif // CENTIPEDE_SEGMENT_ABSTRACT_H

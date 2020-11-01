@@ -72,7 +72,7 @@ void Guidelines::clear ()
 
 ColorPalette Guidelines::color () const
 {
-  return m_mainWindow.modelMainWindow().guidelineColor();
+  return m_mainWindow.cmdMediator()->document().modelGuideline ().lineColor();
 }
 
 CoordsType Guidelines::coordsType () const
@@ -315,7 +315,7 @@ void Guidelines::initialize (GraphicsScene &scene)
   m_guidelineFactory = new GuidelineFactory (&scene);
 }
 
-DocumentModelGuidelines Guidelines::modelGuidelines () const
+DocumentModelGuideline Guidelines::modelGuideline () const
 {
   GuidelineValues valuesXT, valuesYR;
 
@@ -335,10 +335,11 @@ DocumentModelGuidelines Guidelines::modelGuidelines () const
     valuesYR [identifier] = value;
   }
   
-  DocumentModelGuidelines model (valuesXT,
-                                 valuesYR);
+  DocumentModelGuideline modelGuidelineReturned;
+  modelGuidelineReturned.setValuesX (valuesXT);
+  modelGuidelineReturned.setValuesY (valuesYR);
 
-  return model;
+  return modelGuidelineReturned;
 }
 
 void Guidelines::moveGuidelineXT (const QString &identifier,
@@ -399,13 +400,13 @@ void Guidelines::removeGuideline (const QString &identifier)
   }
 }
 
-void Guidelines::setModelGuidelines (CoordsType coordsType,
-                                     const DocumentModelGuidelines &modelGuidelines)
+void Guidelines::setModelGuideline (CoordsType coordsType,
+                                    const DocumentModelGuideline &modelGuideline)
 {
   clear ();
 
-  GuidelineValues valuesXT = modelGuidelines.valuesX();
-  GuidelineValues valuesYR = modelGuidelines.valuesY();
+  GuidelineValues valuesXT = modelGuideline.valuesX();
+  GuidelineValues valuesYR = modelGuideline.valuesY();
 
   GuidelineValues::const_iterator itr;
 

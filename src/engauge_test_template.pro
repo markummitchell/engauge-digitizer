@@ -104,6 +104,7 @@ HEADERS  += \
     Cmd/CmdSettingsGeneral.h \
     Cmd/CmdSettingsGridDisplay.h \
     Cmd/CmdSettingsGridRemoval.h \
+    Cmd/CmdSettingsGuideline.h \
     Cmd/CmdSettingsPointMatch.h \
     Cmd/CmdSettingsSegments.h \
     Cmd/CmdStackShadow.h \
@@ -206,6 +207,7 @@ HEADERS  += \
     Dlg/DlgSettingsGeneral.h \
     Dlg/DlgSettingsGridDisplay.h \
     Dlg/DlgSettingsGridRemoval.h \
+    Dlg/DlgSettingsGuideline.h \
     Dlg/DlgSettingsMainWindow.h \
     Dlg/DlgSettingsPointMatch.h \
     Dlg/DlgSettingsSegments.h \
@@ -228,7 +230,7 @@ HEADERS  += \
     Document/DocumentModelGeneral.h \
     Document/DocumentModelGridDisplay.h \
     Document/DocumentModelGridRemoval.h \
-    Document/DocumentModelGuidelines.h \    
+    Document/DocumentModelGuideline.h \    
     Document/DocumentModelPointMatch.h \
     Document/DocumentModelSegments.h \
     Document/DocumentScrub.h \
@@ -554,6 +556,7 @@ SOURCES += \
     Cmd/CmdSettingsGeneral.cpp \
     Cmd/CmdSettingsGridDisplay.cpp \
     Cmd/CmdSettingsGridRemoval.cpp \
+    Cmd/CmdSettingsGuideline.cpp \
     Cmd/CmdSettingsPointMatch.cpp \
     Cmd/CmdSettingsSegments.cpp \
     Cmd/CmdStackShadow.cpp \
@@ -651,6 +654,7 @@ SOURCES += \
     Dlg/DlgSettingsGeneral.cpp \
     Dlg/DlgSettingsGridDisplay.cpp \
     Dlg/DlgSettingsGridRemoval.cpp \
+    Dlg/DlgSettingsGuideline.cpp \
     Dlg/DlgSettingsMainWindow.cpp \
     Dlg/DlgSettingsPointMatch.cpp \
     Dlg/DlgSettingsSegments.cpp \
@@ -671,7 +675,7 @@ SOURCES += \
     Document/DocumentModelGeneral.cpp \
     Document/DocumentModelGridDisplay.cpp \
     Document/DocumentModelGridRemoval.cpp \
-    Document/DocumentModelGuidelines.cpp \
+    Document/DocumentModelGuideline.cpp \
     Document/DocumentModelPointMatch.cpp \
     Document/DocumentModelSegments.cpp \
     Document/DocumentScrub.cpp \

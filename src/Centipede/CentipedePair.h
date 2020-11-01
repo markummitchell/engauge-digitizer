@@ -7,6 +7,7 @@
 #ifndef CENTIPEDE_PAIR_H
 #define CENTIPEDE_PAIR_H
 
+#include "DocumentModelGuideline.h"
 #include <QPointF>
 
 class CentipedeSegmentAbstract;
@@ -65,6 +66,7 @@ public:
   /// Constructor with individual coordinates
   CentipedePair(GraphicsScene &scene,
                 const Transformation &transformation,
+                const DocumentModelGuideline &modelGuideline,
                 const QPointF &posScreen);
   virtual ~CentipedePair();
 
@@ -74,15 +76,27 @@ public:
   /// Follow cursor move
   void move (const QPointF &posScreen);
 
-  /// True if XT is currently selected, otherwise false if YR is selected
-  bool selectedXT (const QPointF &posScreen) const;
+  /// True if XT is final selection, otherwise false if YR is final selection
+  bool selectedXTFinal () const;
+
+  /// Final XT or YT (depending on selectedXTFinal) value
+  double valueFinal () const;
 
 private:
   CentipedePair();
 
+  /// Updates final values. Also returns updated m_selectedXTFinal for convenience
+  bool updateFinalValues (const QPointF &posScreen);
+
+  DocumentModelGuideline m_modelGuideline;
   CentipedeSegmentAbstract *m_centipedeXT;
   CentipedeSegmentAbstract *m_centipedeYR;
   QPointF m_posScreenStart;
+  QPointF m_posGraphStart;
+
+  // Final values
+  bool m_selectedXTFinal;
+  double m_valueFinal;
 };
 
 #endif // CENTIPEDE_PAIR_H

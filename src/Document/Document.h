@@ -20,7 +20,7 @@
 #include "DocumentModelGeneral.h"
 #include "DocumentModelGridDisplay.h"
 #include "DocumentModelGridRemoval.h"
-#include "DocumentModelGuidelines.h"
+#include "DocumentModelGuideline.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
 #include "PointStyle.h"
@@ -31,7 +31,7 @@
 
 class CoordSystem;
 class Curve;
-class DocumentModelGuidelines;
+class DocumentModelGuideline;
 class QByteArray;
 class QFile;
 class QImage;
@@ -165,7 +165,7 @@ public:
                        const Transformation &transformation);
 
   /// Sync all Guideline instances from screen to Document
-  void guidelinesSyncScreenToDocument (const DocumentModelGuidelines &modelGuidelines);
+  void guidelinesSyncScreenToDocument (const DocumentModelGuideline &modelGuideline);
 
   /// Initialize grid display. This is called immediately after the transformation has been defined for the first time
   void initializeGridDisplay (const Transformation &transformation);
@@ -219,8 +219,8 @@ public:
   /// Get method for DocumentModelGridRemoval.
   DocumentModelGridRemoval modelGridRemoval() const;
 
-  /// Get method for DocumentModelGuidelines.
-  DocumentModelGuidelines modelGuidelines() const;
+  /// Get method for DocumentModelGuideline.
+  DocumentModelGuideline modelGuideline() const;
   
   /// Get method for DocumentModelPointMatch.
   DocumentModelPointMatch modelPointMatch() const;
@@ -309,8 +309,8 @@ public:
   /// Set method for DocumentModelGridRemoval.
   void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
 
-  /// Set method for DocumentModelGuidelines.
-  void setModelGuidelines(const DocumentModelGuidelines &modelGuidelines);
+  /// Set method for DocumentModelGuideline.
+  void setModelGuideline(const DocumentModelGuideline &modelGuideline);
   
   /// Set method for DocumentModelPointMatch.
   void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);

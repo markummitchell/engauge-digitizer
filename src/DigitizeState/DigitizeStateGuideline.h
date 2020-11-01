@@ -55,6 +55,8 @@ public:
 private:
   DigitizeStateGuideline();
 
+  void killCentipede ();
+
   // Temporary graphics object the user interacts with to specify the guideline as X/T or Y/R
   CentipedePair *m_centipedePair;
 };

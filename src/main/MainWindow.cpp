@@ -42,7 +42,7 @@
 #include "DlgSettingsPointMatch.h"
 #include "DlgSettingsSegments.h"
 #include "DocumentModelCoords.h"
-#include "DocumentModelGuidelines.h"
+#include "DocumentModelGuideline.h"
 #include "DocumentScrub.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
@@ -871,7 +871,7 @@ void MainWindow::guidelineAddXT (const QString &identifier,
                                    xT);
   }
 
-  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
+  m_cmdMediator->document().setModelGuideline (m_guidelines.modelGuideline ());
 }
 
 void MainWindow::guidelineAddXTEnqueue (double xT)
@@ -896,7 +896,7 @@ void MainWindow::guidelineAddYR (const QString &identifier,
                                    yR);
   }
 
-  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
+  m_cmdMediator->document().setModelGuideline (m_guidelines.modelGuideline ());
 }
 
 void MainWindow::guidelineAddYREnqueue (double yR)
@@ -916,7 +916,7 @@ void MainWindow::guidelineMoveXT (const QString &identifier,
   m_guidelines.moveGuidelineXT (identifier,
                                 valueAfter);
 
-  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
+  m_cmdMediator->document().setModelGuideline (m_guidelines.modelGuideline ());
 }
 
 void MainWindow::guidelineMoveYR (const QString &identifier,
@@ -927,7 +927,7 @@ void MainWindow::guidelineMoveYR (const QString &identifier,
   m_guidelines.moveGuidelineYR (identifier,
                                 valueAfter);
 
-  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
+  m_cmdMediator->document().setModelGuideline (m_guidelines.modelGuideline ());
 }
 
 void MainWindow::guidelineRemove (const QString &identifier)
@@ -935,7 +935,7 @@ void MainWindow::guidelineRemove (const QString &identifier)
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::guidelineRemove";
 
   m_guidelines.removeGuideline (identifier);
-  m_cmdMediator->document().setModelGuidelines (m_guidelines.modelGuidelines ());
+  m_cmdMediator->document().setModelGuideline (m_guidelines.modelGuideline ());
 }
 
 Guidelines &MainWindow::guidelines()
@@ -1054,6 +1054,7 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     m_originalFileWasImported = false;
 
     updateGridLines ();
+    updateGuidelines ();
     updateAfterCommand (); // Enable Save button now that m_engaugeFile is set
 
     QApplication::restoreOverrideCursor();
@@ -1116,8 +1117,8 @@ void MainWindow::loadGuidelinesFromCmdMediator ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::loadGuidelinesFromCmdMediator";
 
-  m_guidelines.setModelGuidelines (m_cmdMediator->document().modelCoords().coordsType(),
-                                   m_cmdMediator->document().modelGuidelines());
+  m_guidelines.setModelGuideline (m_cmdMediator->document().modelCoords().coordsType(),
+                                  m_cmdMediator->document().modelGuideline());
 }
 
 bool MainWindow::loadImage (const QString &fileName,
@@ -2731,7 +2732,7 @@ void MainWindow::slotGuidelineDragged(QString identifierReplaced,
   CmdAbstract *cmd = cmdFactory.createAfterDrag (*this,
                                                  m_cmdMediator->document(),
                                                  newValue,
-                                                 m_cmdMediator->document().modelGuidelines (),
+                                                 m_cmdMediator->document().modelGuideline (),
                                                  identifierReplaced,
                                                  draggedOffscreen);
 
@@ -3144,6 +3145,8 @@ void MainWindow::slotViewGroupStatus(QAction *action)
 void MainWindow::slotViewGuidelines ()
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::slotViewGuidelines";
+
+  updateGuidelines();
 }
 
 void MainWindow::slotViewToolBarBackground ()
@@ -3728,6 +3731,21 @@ void MainWindow::updateGridLines ()
   m_gridLines.setVisible (m_actionViewGridLines->isChecked());
 }
 
+void MainWindow::updateGuidelines ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateGuidelines";
+
+  // Remove old guidelines
+  m_guidelines.clear ();
+
+  // Create new guidelines
+  m_guidelines.setModelGuideline (m_cmdMediator->document().modelCoords().coordsType(),
+                                  m_cmdMediator->document().modelGuideline());
+
+  m_guidelines.handleGuidelineMode (m_actionViewGuidelines->isChecked(),
+                                    !m_digitizeStateContext->guidelinesAreSelectable());
+}
+
 void MainWindow::updateHighlightOpacity ()
 {
   if (m_cmdMediator != nullptr) {
@@ -3866,6 +3884,13 @@ void MainWindow::updateSettingsGridRemoval(const DocumentModelGridRemoval &model
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGridRemoval";
 
   m_cmdMediator->document().setModelGridRemoval(modelGridRemoval);
+}
+
+void MainWindow::updateSettingsGuideline (const DocumentModelGuideline &modelGuideline)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsGuideline";
+
+  m_cmdMediator->document().setModelGuideline (modelGuideline);
 }
 
 void MainWindow::updateSettingsMainWindow()

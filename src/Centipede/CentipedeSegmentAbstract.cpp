@@ -12,12 +12,12 @@
 const int NUM_CIRCLE_POINTS = 2000; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
 const double PI = 3.1415926535;
 
-CentipedeSegmentAbstract::CentipedeSegmentAbstract(const Transformation &transformation,
-                                                   const QPointF &posCenterScreen,
-                                                   double initialRadius) :
+CentipedeSegmentAbstract::CentipedeSegmentAbstract(const DocumentModelGuideline &modelGuideline,
+                                                   const Transformation &transformation,
+                                                   const QPointF &posCenterScreen) :
+  m_modelGuideline (modelGuideline),
   m_transformation (transformation),
-  m_posCenterScreen (posCenterScreen),
-  m_initialRadius (initialRadius)
+  m_posCenterScreen (posCenterScreen)
 {
 }
 
@@ -42,9 +42,9 @@ void CentipedeSegmentAbstract::generatePreviousAndNextPoints (double radius,
                                               posGraphPrevious);
 }
 
-double CentipedeSegmentAbstract::initialRadius () const
+const DocumentModelGuideline &CentipedeSegmentAbstract::modelGuideline () const
 {
-  return m_initialRadius;
+  return m_modelGuideline;
 }
 
 QPointF CentipedeSegmentAbstract::posCenterScreen () const

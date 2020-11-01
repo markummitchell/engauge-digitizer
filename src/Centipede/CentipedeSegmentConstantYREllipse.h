@@ -16,9 +16,9 @@ class CentipedeSegmentConstantYREllipse : public CentipedeSegmentAbstract
 {
 public:
   /// Constructor with individual coordinates
-  CentipedeSegmentConstantYREllipse(const Transformation &transformation,
-                                    const QPointF &posCenterScreen,
-                                    double initialRadius);
+  CentipedeSegmentConstantYREllipse(const DocumentModelGuideline &modelGuideline,
+                                    const Transformation &transformation,
+                                    const QPointF &posCenterScreen);
   virtual ~CentipedeSegmentConstantYREllipse();
 
   virtual double distanceToClosestEndpoint (const QPointF &posScreen) const;

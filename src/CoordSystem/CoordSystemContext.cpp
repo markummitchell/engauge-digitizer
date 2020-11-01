@@ -365,11 +365,11 @@ DocumentModelGridRemoval CoordSystemContext::modelGridRemoval() const
   return m_coordSystems [signed (m_coordSystemIndex)]->modelGridRemoval();
 }
 
-DocumentModelGuidelines CoordSystemContext::modelGuidelines() const
+DocumentModelGuideline CoordSystemContext::modelGuideline() const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "CoordSystemContext::modelGuidelines";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "CoordSystemContext::modelGuideline";
 
-  return m_coordSystems [signed (m_coordSystemIndex)]->modelGuidelines();
+  return m_coordSystems [signed (m_coordSystemIndex)]->modelGuideline();
 }
 
 DocumentModelPointMatch CoordSystemContext::modelPointMatch() const
@@ -561,11 +561,11 @@ void CoordSystemContext::setModelGridRemoval(const DocumentModelGridRemoval &mod
   m_coordSystems [signed (m_coordSystemIndex)]->setModelGridRemoval(modelGridRemoval);
 }
 
-void CoordSystemContext::setModelGuidelines(const DocumentModelGuidelines &modelGuidelines)
+void CoordSystemContext::setModelGuideline(const DocumentModelGuideline &modelGuideline)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelGuidelines";
+  LOG4CPP_INFO_S ((*mainCat)) << "CoordSystemContext::setModelGuideline";
 
-  m_coordSystems [signed (m_coordSystemIndex)]->setModelGuidelines(modelGuidelines);
+  m_coordSystems [signed (m_coordSystemIndex)]->setModelGuideline(modelGuideline);
 }
 
 void CoordSystemContext::setModelPointMatch(const DocumentModelPointMatch &modelPointMatch)

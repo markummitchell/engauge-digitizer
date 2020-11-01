@@ -18,7 +18,7 @@
 #include "DocumentModelGeneral.h"
 #include "DocumentModelGridDisplay.h"
 #include "DocumentModelGridRemoval.h"
-#include "DocumentModelGuidelines.h"
+#include "DocumentModelGuideline.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
 #include "functor.h"
@@ -173,8 +173,8 @@ public:
   /// Get method for DocumentModelGridRemoval.
   virtual DocumentModelGridRemoval modelGridRemoval() const = 0;
 
-  /// Get method for DocumentModelGuidelines.
-  virtual DocumentModelGuidelines modelGuidelines() const = 0;  
+  /// Get method for DocumentModelGuideline.
+  virtual DocumentModelGuideline modelGuideline() const = 0;  
 
   /// Get method for DocumentModelPointMatch.
   virtual DocumentModelPointMatch modelPointMatch() const = 0;
@@ -253,8 +253,8 @@ public:
   /// Set method for DocumentModelGridRemoval.
   virtual void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval) = 0;
 
-  /// Set method for DocumentModelGuidelines.
-  virtual void setModelGuidelines(const DocumentModelGuidelines &modelGuidelines) = 0;
+  /// Set method for DocumentModelGuideline.
+  virtual void setModelGuideline(const DocumentModelGuideline &modelGuideline) = 0;
   
   /// Set method for DocumentModelPointMatch.
   virtual void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch) = 0;

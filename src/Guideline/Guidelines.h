@@ -14,7 +14,7 @@
 #include <QString>
 #include "Transformation.h"
 
-class DocumentModelGuidelines;
+class DocumentModelGuideline;
 class GraphicsScene;
 class GuidelineAbstract;
 class GuidelineFactory;
@@ -96,7 +96,7 @@ public:
   void initialize (GraphicsScene &scene);
 
   /// Return complete set of guidelines information for Document
-  DocumentModelGuidelines modelGuidelines () const;
+  DocumentModelGuideline modelGuideline () const;
 
   /// Move an X/T guideline from one value to another. Closest value wins
   void moveGuidelineXT (const QString &identifier,
@@ -111,8 +111,8 @@ public:
   void removeGuideline (const QString &identifier);
 
   /// Load Guidelines from Document
-  void setModelGuidelines (CoordsType coordsType,
-                           const DocumentModelGuidelines &modelGuidelines);
+  void setModelGuideline (CoordsType coordsType,
+                          const DocumentModelGuideline &modelGuideline);
 
   /// States listed as a string for debugging only
   QString stateDump () const;

@@ -5,7 +5,7 @@
  ******************************************************************************************************/
 
 #include "CmdMediator.h"
-#include "DocumentModelGuidelines.h"
+#include "DocumentModelGuideline.h"
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
@@ -15,40 +15,64 @@
 #include <QXmlStreamWriter>
 #include "Xml.h"
 
-DocumentModelGuidelines::DocumentModelGuidelines()
+const double DEFAULT_CREATION_CIRCLE_RADIUS = 20;
+const ColorPalette DEFAULT_LINE_COLOR (COLOR_PALETTE_MAGENTA); // Should be bright so it gets noticed
+const double DEFAULT_LINE_WIDTH = 2;
+
+DocumentModelGuideline::DocumentModelGuideline() :
+  m_creationCircleRadius (DEFAULT_CREATION_CIRCLE_RADIUS),
+  m_lineColor (  DEFAULT_LINE_COLOR),
+  m_lineWidth (DEFAULT_LINE_WIDTH)
 {
 }
 
-DocumentModelGuidelines::DocumentModelGuidelines(const Document &document) :
-  m_valuesX (document.modelGuidelines().valuesX ()),
-  m_valuesY (document.modelGuidelines().valuesY ())
+DocumentModelGuideline::DocumentModelGuideline(const Document &document) :
+  m_valuesX (document.modelGuideline().valuesX ()),
+  m_valuesY (document.modelGuideline().valuesY ()),
+  m_creationCircleRadius (document.modelGuideline().creationCircleRadius ()),
+  m_lineColor (document.modelGuideline().lineColor ()),
+  m_lineWidth (document.modelGuideline().lineWidth ())
 {
 }
 
-DocumentModelGuidelines::DocumentModelGuidelines(const DocumentModelGuidelines &other) :
+DocumentModelGuideline::DocumentModelGuideline(const DocumentModelGuideline &other) :
   m_valuesX (other.valuesX ()),
-  m_valuesY (other.valuesY ())
+  m_valuesY (other.valuesY ()),
+  m_creationCircleRadius (other.creationCircleRadius ()),
+  m_lineColor (other.lineColor ()),
+  m_lineWidth (other.lineWidth ())
 {
 }
 
-DocumentModelGuidelines &DocumentModelGuidelines::operator=(const DocumentModelGuidelines &other)
+DocumentModelGuideline &DocumentModelGuideline::operator=(const DocumentModelGuideline &other)
 {
   m_valuesX = other.valuesX ();
   m_valuesY = other.valuesY ();
-
+  m_creationCircleRadius = other.creationCircleRadius ();
+  m_lineColor = other.lineColor ();
+  m_lineWidth = other.lineWidth ();
+    
   return *this;
 }
 
-DocumentModelGuidelines::DocumentModelGuidelines(const GuidelineValues &valuesXT,
-                                                 const GuidelineValues &valuesYR) :
-  m_valuesX (valuesXT),
-  m_valuesY (valuesYR)
+double DocumentModelGuideline::creationCircleRadius () const
 {
+  return m_creationCircleRadius;
 }
 
-void DocumentModelGuidelines::loadXml(QXmlStreamReader &reader)
+ColorPalette DocumentModelGuideline::lineColor () const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGuidelines::loadXml";
+  return m_lineColor;
+}
+
+double DocumentModelGuideline::lineWidth () const
+{
+  return m_lineWidth;
+}
+
+void DocumentModelGuideline::loadXml(QXmlStreamReader &reader)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGuideline::loadXml";
 
   bool success = true;
 
@@ -85,11 +109,11 @@ void DocumentModelGuidelines::loadXml(QXmlStreamReader &reader)
   }
 }
 
-void DocumentModelGuidelines::loadXmlVector (QXmlStreamReader &reader,
+void DocumentModelGuideline::loadXmlVector (QXmlStreamReader &reader,
                                              const QString &tokenEnd,
                                              GuidelineValues &guidelineValues) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGuidelines::loadXmlVector";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGuideline::loadXmlVector";
 
   while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
   (reader.name() != tokenEnd)){
@@ -114,17 +138,37 @@ void DocumentModelGuidelines::loadXmlVector (QXmlStreamReader &reader,
   }
 }
 
-void DocumentModelGuidelines::printStream(QString indentation,
+void DocumentModelGuideline::printStream(QString indentation,
                                            QTextStream &str) const
 {
-  str << indentation << "DocumentModelGuidelines\n";
+  str << indentation << "DocumentModelGuideline\n";
 
   indentation += INDENTATION_DELTA;
+
+  QString valuesX, valuesY, delimiterX, delimiterY;
+  QTextStream strX (&valuesX), strY (&valuesY);
+  GuidelineValues::const_iterator itr;
+
+  for (itr = m_valuesX.constBegin(); itr != m_valuesX.constEnd(); itr++) {
+    strX << delimiterX << itr.value();
+    delimiterX = ", ";
+  }
+
+  for (itr = m_valuesY.constBegin(); itr != m_valuesY.constEnd(); itr++) {
+    strY << delimiterY << itr.value();
+    delimiterY = ", ";
+  }
+
+  str << indentation << "valuesX=" << valuesX << "\n";
+  str << indentation << "valuesY=" << valuesY << "\n";
+  str << indentation << "creationCircleRadius=" << m_creationCircleRadius << "\n";
+  str << indentation << "lineColor=" << colorPaletteToString (m_lineColor) << "\n";
+  str << indentation << "lineWidth=" << m_lineWidth << "\n";
 }
 
-void DocumentModelGuidelines::saveXml(QXmlStreamWriter &writer) const
+void DocumentModelGuideline::saveXml(QXmlStreamWriter &writer) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGuidelines::saveXml";
+  LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGuideline::saveXml";
 
   writer.writeStartElement(DOCUMENT_SERIALIZE_GUIDELINES);
   saveXmlVector (writer,
@@ -133,10 +177,14 @@ void DocumentModelGuidelines::saveXml(QXmlStreamWriter &writer) const
   saveXmlVector (writer,
                  DOCUMENT_SERIALIZE_GUIDELINES_Y,
                  m_valuesY);
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_CREATION_CIRCLE_RADIUS, QString::number (m_creationCircleRadius));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_COLOR, QString::number (m_lineColor));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_COLOR_STRING, colorPaletteToString (m_lineColor));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH, QString::number (m_lineWidth));
   writer.writeEndElement();
 }
-
-void DocumentModelGuidelines::saveXmlVector(QXmlStreamWriter &writer,
+ 
+void DocumentModelGuideline::saveXmlVector(QXmlStreamWriter &writer,
                                             const QString &tokenAll,
                                             const GuidelineValues &values) const
 {
@@ -156,22 +204,37 @@ void DocumentModelGuidelines::saveXmlVector(QXmlStreamWriter &writer,
   writer.writeEndElement();
 }
 
-void DocumentModelGuidelines::setValuesX (const GuidelineValues &valuesX)
+void DocumentModelGuideline::setCreationCircleRadius (double radius)
+{
+  m_creationCircleRadius = radius;
+}
+
+void DocumentModelGuideline::setLineColor (ColorPalette lineColor)
+{
+  m_lineColor = lineColor;
+}
+
+void DocumentModelGuideline::setLineWidth (double lineWidth)
+{
+  m_lineWidth = lineWidth;
+}
+
+void DocumentModelGuideline::setValuesX (const GuidelineValues &valuesX)
 {
   m_valuesX = valuesX;
 }
 
-void DocumentModelGuidelines::setValuesY (const GuidelineValues &valuesY)
+void DocumentModelGuideline::setValuesY (const GuidelineValues &valuesY)
 {
   m_valuesY = valuesY;
 }
 
-GuidelineValues DocumentModelGuidelines::valuesX () const
+GuidelineValues DocumentModelGuideline::valuesX () const
 {
   return m_valuesX;
 }
 
-GuidelineValues DocumentModelGuidelines::valuesY () const
+GuidelineValues DocumentModelGuideline::valuesY () const
 {
   return m_valuesY;
 }

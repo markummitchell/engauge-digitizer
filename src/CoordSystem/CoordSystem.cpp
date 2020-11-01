@@ -600,7 +600,7 @@ void CoordSystem::loadVersion6 (QXmlStreamReader &reader,
       } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
         m_modelGridRemoval.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_GUIDELINES) {
-        m_modelGuidelines.loadXml (reader);
+        m_modelGuideline.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
         LOG4CPP_ERROR_S ((*mainCat)) << "CoordSystem::loadVersion6 encountered image out of order";
         ENGAUGE_ASSERT (false); // The image should have been read before this method was called
@@ -663,7 +663,7 @@ void CoordSystem::loadVersions7AndUp (QXmlStreamReader &reader)
       } else if (tag == DOCUMENT_SERIALIZE_GRID_REMOVAL) {
         m_modelGridRemoval.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_GUIDELINES) {
-        m_modelGuidelines.loadXml (reader);
+        m_modelGuideline.loadXml (reader);
       } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
         LOG4CPP_ERROR_S ((*mainCat)) << "CoordSystem::loadVersions7AndUp encountered image out of order";        
         ENGAUGE_ASSERT (false); // The image should have been read before this method was called
@@ -733,9 +733,9 @@ DocumentModelGridRemoval CoordSystem::modelGridRemoval() const
   return m_modelGridRemoval;
 }
 
-DocumentModelGuidelines CoordSystem::modelGuidelines() const
+DocumentModelGuideline CoordSystem::modelGuideline() const
 {
-  return m_modelGuidelines;
+  return m_modelGuideline;
 }
 
 DocumentModelPointMatch CoordSystem::modelPointMatch() const
@@ -830,8 +830,8 @@ void CoordSystem::printStream (QString indentation,
                                   str);
   m_modelGridRemoval.printStream (indentation,
                                   str);
-  m_modelGuidelines.printStream (indentation,
-                                 str);
+  m_modelGuideline.printStream (indentation,
+                                str);
   m_modelPointMatch.printStream (indentation,
                                  str);
   m_modelSegments.printStream (indentation,
@@ -892,7 +892,7 @@ void CoordSystem::saveXml (QXmlStreamWriter &writer) const
   m_modelAxesChecker.saveXml (writer);
   m_modelGridDisplay.saveXml (writer);
   m_modelGridRemoval.saveXml (writer);
-  m_modelGuidelines.saveXml (writer);
+  m_modelGuideline.saveXml (writer);
   m_modelPointMatch.saveXml (writer);
   m_modelSegments.saveXml (writer);
   m_curveAxes->saveXml (writer);
@@ -989,9 +989,9 @@ void CoordSystem::setModelGridRemoval(const DocumentModelGridRemoval &modelGridR
   m_modelGridRemoval = modelGridRemoval;
 }
 
-void CoordSystem::setModelGuidelines(const DocumentModelGuidelines &modelGuidelines)
+void CoordSystem::setModelGuideline(const DocumentModelGuideline &modelGuideline)
 {
-  m_modelGuidelines = modelGuidelines;
+  m_modelGuideline = modelGuideline;
 }
 
 void CoordSystem::setModelPointMatch(const DocumentModelPointMatch &modelPointMatch)

@@ -283,6 +283,9 @@ public:
   /// Update with new grid removal properties.
   void updateSettingsGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
 
+  /// Update with new guideline properties.
+  void updateSettingsGuideline (const DocumentModelGuideline &modelGuideline);
+
   /// Update with new main window properties.
   void updateSettingsMainWindow(const MainWindowModel &modelMainWindow);
 
@@ -498,6 +501,7 @@ private:
   void updateFittingWindow ();
   void updateGeometryWindow ();
   void updateGridLines();
+  void updateGuidelines();
   void updateHighlightOpacity();
   void updateRecentFileList();
   void updateSettingsMainWindow();

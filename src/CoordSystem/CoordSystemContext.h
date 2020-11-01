@@ -120,7 +120,7 @@ class CoordSystemContext : public CoordSystemInterface
   virtual DocumentModelGeneral modelGeneral() const;
   virtual DocumentModelGridDisplay modelGridDisplay() const;
   virtual DocumentModelGridRemoval modelGridRemoval() const;
-  virtual DocumentModelGuidelines modelGuidelines() const;  
+  virtual DocumentModelGuideline modelGuideline() const;  
   virtual DocumentModelPointMatch modelPointMatch() const;
   virtual DocumentModelSegments modelSegments() const;
   virtual void movePoint (const QString &pointIdentifier,
@@ -152,7 +152,7 @@ class CoordSystemContext : public CoordSystemInterface
   virtual void setModelGeneral (const DocumentModelGeneral &modelGeneral);
   virtual void setModelGridDisplay(const DocumentModelGridDisplay &modelGridDisplay);
   virtual void setModelGridRemoval(const DocumentModelGridRemoval &modelGridRemoval);
-  virtual void setModelGuidelines(const DocumentModelGuidelines &modelGuidelines);  
+  virtual void setModelGuideline(const DocumentModelGuideline &modelGuideline);  
   void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);
   virtual void setModelSegments(const DocumentModelSegments &modelSegments);
   virtual void setSelectedCurveName(const QString &selectedCurveName);

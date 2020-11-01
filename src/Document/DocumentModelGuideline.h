@@ -4,9 +4,10 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef DOCUMENT_MODEL_GUIDELINES_H
-#define DOCUMENT_MODEL_GUIDELINES_H
+#ifndef DOCUMENT_MODEL_GUIDELINE_H
+#define DOCUMENT_MODEL_GUIDELINE_H
 
+#include "ColorPalette.h"
 #include "DocumentModelAbstractBase.h"
 #include "GuidelineValues.h"
 
@@ -17,25 +18,30 @@ class QTextStream;
 /// The strategy for transition between cartesian and polar reference
 /// frames is to discard the old Guideline values since there is no 
 /// intuitive mapping between the two sets
-class DocumentModelGuidelines : public DocumentModelAbstractBase
+class DocumentModelGuideline : public DocumentModelAbstractBase
 {
 public:
   /// Default constructor.
-  DocumentModelGuidelines();
+  DocumentModelGuideline();
 
   /// Initial constructor from Document.
-  DocumentModelGuidelines(const Document &document);
+  DocumentModelGuideline(const Document &document);
 
   /// Copy constructor.
-  DocumentModelGuidelines(const DocumentModelGuidelines &other);
+  DocumentModelGuideline(const DocumentModelGuideline &other);
 
   /// Assignment constructor.
-  DocumentModelGuidelines &operator=(const DocumentModelGuidelines &other);
+  DocumentModelGuideline &operator=(const DocumentModelGuideline &other);
 
-  /// Constructor used by Guidelines class to send guidelines to Document
-  DocumentModelGuidelines(const GuidelineValues &valuesXT,
-                          const GuidelineValues &valuesYR);
+  /// Get method for creation circle radius in pixels
+  double creationCircleRadius () const;
+  
+  /// Get method for line color
+  ColorPalette lineColor() const;
 
+  /// Get method for line width
+  double lineWidth () const;
+  
   virtual void loadXml(QXmlStreamReader &reader);
   
   /// Debugging method that supports print method of this class and printStream method of some other class(es)
@@ -44,6 +50,15 @@ public:
 
   virtual void saveXml(QXmlStreamWriter &writer) const;
 
+  /// Set method for creation circle radius in pixels
+  void setCreationCircleRadius (double radius);
+  
+  /// Set method for line color
+  void setLineColor (ColorPalette lineColor);
+
+  /// Set method for line width
+  void setLineWidth (double lineWidth);
+  
   /// Set method for x/t values
   void setValuesX (const GuidelineValues &valuesX);
 
@@ -66,7 +81,10 @@ private:
                       const GuidelineValues &values) const;
 
   GuidelineValues m_valuesX;
-  GuidelineValues m_valuesY;  
+  GuidelineValues m_valuesY;
+  double m_creationCircleRadius;
+  ColorPalette m_lineColor;
+  double m_lineWidth;
 };
 
-#endif // DOCUMENT_MODEL_GUIDELINES_H
+#endif // DOCUMENT_MODEL_GUIDELINE_H

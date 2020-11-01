@@ -26,7 +26,6 @@ public:
   void createToolbarBackground (MainWindow &mw);
   void createToolbarCoordinateSystem (MainWindow &mw);
   void createToolbarDigitize (MainWindow &mw);
-  void createToolbarGuidelines (MainWindow &mw);
   void createToolbarSettingsView (MainWindow &mw);
 };
 
