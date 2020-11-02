@@ -7,7 +7,6 @@
 #include "EngaugeAssert.h"
 #include "GraphicsScene.h"
 #include "GuidelineAbstract.h"
-#include "GuidelineFormat.h"
 #include "GuidelineProjectorConstantT.h"
 #include "GuidelineState.h"
 #include "GuidelineStateContext.h"

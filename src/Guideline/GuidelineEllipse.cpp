@@ -4,12 +4,14 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "CmdMediator.h"
 #include "DataKey.h"
+#include "Document.h"
+#include "DocumentModelGuideline.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "GuidelineEllipse.h"
-#include "GuidelineFormat.h"
 #include "Guidelines.h"
 #include "GuidelineStateContext.h"
 #include "Logger.h"
@@ -24,16 +26,19 @@
 #include "ZValues.h"
 
 GuidelineEllipse::GuidelineEllipse(QGraphicsScene &scene,
+                                   MainWindow &mainWindow,
                                    Guidelines &guidelines,
                                    GuidelineState guidelineStateInitial,
                                    const QString &identifier) :
-  GuidelineAbstract (scene)
+  GuidelineAbstract (scene),
+  m_mainWindow (mainWindow)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineEllipse::GuidelineEllipse identifier=" << identifier.toLatin1().data();
 
   // Create context after all virtual methods have been created. The transition
   // into the initial state will position the line if it was created by a button press
   setContext (new GuidelineStateContext (*this,
+                                         mainWindow,
                                          guidelines,
                                          guidelineStateInitial));
 
@@ -56,9 +61,7 @@ bool GuidelineEllipse::collidesWithPath (const QPainterPath &path,
   if (QGraphicsEllipseItem::collidesWithPath (path,
                                               mode)) {
 
-    // Slow test to not count interior region
-
-    GuidelineFormat guidelineFormat (context ()->color ());
+    // Slow (but fast enough) test to count interior regions
 
     // Bounding box of ellipse
     double a = rect().width() / 2.0;
@@ -90,7 +93,9 @@ bool GuidelineEllipse::collidesWithPath (const QPainterPath &path,
         double distance = qSqrt ((xProjected - xGot) * (xProjected - xGot) +
                                  (yProjected - yGot) * (yProjected - yGot));
 
-        if (distance < guidelineFormat.lineWidthHover()) {
+        int lineWidthHover = m_mainWindow.cmdMediator ()->document ().modelGuideline ().lineWidthActive ();
+        
+        if (distance < lineWidthHover) {
 
           // This will make the loop exit immediately for speed
           collides = true;

@@ -6,7 +6,6 @@
 
 #include "EngaugeAssert.h"
 #include "GuidelineAbstract.h"
-#include "GuidelineFormat.h"
 #include "GuidelineState.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedConstantXSelectEditAppearing.h"
@@ -32,7 +31,7 @@ void GuidelineStateDeployedConstantXSelectEditAppearing::begin ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantXSelectEditAppearing::begin"
                               << " identifier=" << context().guideline().identifier().toLatin1().data();
 
-  beginCommon (GuidelineFormat::HOVER_ON,
+  beginCommon (true,
                false);
 
   context().guideline().setGraphicsItemVisible (true); // Stop hover and painting (doPoint only stops painting)

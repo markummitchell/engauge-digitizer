@@ -27,7 +27,7 @@ CentipedeSegmentConstantYRLine::CentipedeSegmentConstantYRLine(const DocumentMod
   QColor color (ColorPaletteToQColor (modelGuideline.lineColor()));
 
   m_graphicsItem->setPen (QPen (color,
-                                modelGuideline.lineWidth()));
+                                modelGuideline.lineWidthActive ()));
 }
 
 CentipedeSegmentConstantYRLine::~CentipedeSegmentConstantYRLine ()

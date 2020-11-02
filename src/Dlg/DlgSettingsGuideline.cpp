@@ -74,14 +74,23 @@ void DlgSettingsGuideline::createControls (QGridLayout *layout,
   connect (m_lineColor, SIGNAL (activated (const QString &)), this, SLOT (slotLineColor (const QString &))); // activated() ignores code changes
   layout->addWidget (m_lineColor, row++, 2);
 
-  QLabel *labelLineWidth = new QLabel(QString ("%1:").arg (tr ("Line width")));
-  layout->addWidget (labelLineWidth, row, 1);
+  QLabel *labelLineWidthActive = new QLabel(QString ("%1:").arg (tr ("Active Line width")));
+  layout->addWidget (labelLineWidthActive, row, 1);
 
-  m_spinLineWidth = new QSpinBox;
-  m_spinLineWidth->setWhatsThis (tr ("Select a size for the guidelines"));
-  m_spinLineWidth->setMinimum(1);
-  connect (m_spinLineWidth, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidth (int)));
-  layout->addWidget (m_spinLineWidth, row++, 2);
+  m_spinLineWidthActive = new QSpinBox;
+  m_spinLineWidthActive->setWhatsThis (tr ("Select a size for the guidelines when active"));
+  m_spinLineWidthActive->setMinimum(1);
+  connect (m_spinLineWidthActive, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidthActive (int)));
+  layout->addWidget (m_spinLineWidthActive, row++, 2);
+
+  QLabel *labelLineWidthInactive = new QLabel(QString ("%1:").arg (tr ("Inactive Line width")));
+  layout->addWidget (labelLineWidthInactive, row, 1);
+
+  m_spinLineWidthInactive = new QSpinBox;
+  m_spinLineWidthInactive->setWhatsThis (tr ("Select a size for the guidelines when inactive"));
+  m_spinLineWidthInactive->setMinimum(1);
+  connect (m_spinLineWidthInactive, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidthInactive (int)));
+  layout->addWidget (m_spinLineWidthInactive, row++, 2);  
 }
 
 void DlgSettingsGuideline::createOptionalSaveDefault (QHBoxLayout * /* layout */)
@@ -140,7 +149,8 @@ void DlgSettingsGuideline::load (CmdMediator &cmdMediator)
   int indexColor = m_lineColor->findData(QVariant(m_modelGuidelineAfter->lineColor()));
   ENGAUGE_ASSERT (indexColor >= 0);
   m_lineColor->setCurrentIndex(indexColor);
-  m_spinLineWidth->setValue (qFloor (m_modelGuidelineAfter->lineWidth ()));
+  m_spinLineWidthActive->setValue (qFloor (m_modelGuidelineAfter->lineWidthActive ()));
+  m_spinLineWidthInactive->setValue (qFloor (m_modelGuidelineAfter->lineWidthInactive ()));  
   
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
@@ -171,11 +181,20 @@ void DlgSettingsGuideline::slotLineColor (QString const &)
   updatePreview();
 }
 
-void DlgSettingsGuideline::slotLineWidth (int lineWidth)
+void DlgSettingsGuideline::slotLineWidthActive (int lineWidth)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::slotLineWidth";
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::slotLineWidthActive";
 
-  m_modelGuidelineAfter->setLineWidth (lineWidth);
+  m_modelGuidelineAfter->setLineWidthActive (lineWidth);
+  updateControls();
+  updatePreview();
+}
+
+void DlgSettingsGuideline::slotLineWidthInactive (int lineWidth)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::slotLineWidthInactive";
+
+  m_modelGuidelineAfter->setLineWidthInactive (lineWidth);
   updateControls();
   updatePreview();
 }                               

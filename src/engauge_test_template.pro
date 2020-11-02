@@ -328,7 +328,6 @@ HEADERS  += \
     Guideline/GuidelineDragCommandFactory.h \
     Guideline/GuidelineEllipse.h \
     Guideline/GuidelineFactory.h \
-    Guideline/GuidelineFormat.h \
     Guideline/GuidelineIdentifierGenerator.h \
     Guideline/GuidelineLine.h \
     Guideline/GuidelineOffset.h \
@@ -763,7 +762,6 @@ SOURCES += \
     Guideline/GuidelineDragCommandFactory.cpp \
     Guideline/GuidelineEllipse.cpp \
     Guideline/GuidelineFactory.cpp \
-    Guideline/GuidelineFormat.cpp \
     Guideline/GuidelineIdentifierGenerator.cpp \
     Guideline/GuidelineLine.cpp \
     Guideline/GuidelineOffset.cpp \

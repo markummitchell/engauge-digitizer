@@ -26,7 +26,7 @@ void GuidelineStateDeployedConstantTSelectEditHover::begin ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantTSelectEditHover::begin"
                               << " identifier=" << context().guideline().identifier().toLatin1().data();
 
-  beginCommon (GuidelineFormat::HOVER_ON,
+  beginCommon (true,
                false);
 
   context().guideline().setGraphicsItemVisible (true); // Stop hover and painting (doPoint only stops painting)

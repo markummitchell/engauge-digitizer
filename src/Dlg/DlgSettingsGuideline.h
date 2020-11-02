@@ -35,7 +35,8 @@ public:
 private slots:
   void slotCreationCircleRadius (int radius);
   void slotLineColor (const QString &);
-  void slotLineWidth (int lineWidth);
+  void slotLineWidthActive (int lineWidth);
+  void slotLineWidthInactive (int lineWidth);  
 
 protected:
   virtual void handleOk ();
@@ -50,7 +51,8 @@ private:
 
   QSpinBox *m_spinCreationCircleRadius;
   QComboBox *m_lineColor;
-  QSpinBox *m_spinLineWidth;
+  QSpinBox *m_spinLineWidthActive;
+  QSpinBox *m_spinLineWidthInactive;  
 
   DocumentModelGuideline *m_modelGuidelineBefore;
   DocumentModelGuideline *m_modelGuidelineAfter;

@@ -7,7 +7,6 @@
 #ifndef GUIDELINE_STATE_DEPLOYED_ABSTRACT_H
 #define GUIDELINE_STATE_DEPLOYED_ABSTRACT_H
 
-#include "GuidelineFormat.h"
 #include "GuidelineStateAbstractBase.h"
 #include <QPointF>
 
@@ -26,7 +25,7 @@ public:
 protected:
 
   /// Initialization common to all states
-  void beginCommon (GuidelineFormat::HoverOption hoverOption,
+  void beginCommon (bool hovering,
                     bool locked);
 
 };

@@ -7,7 +7,6 @@
 #include "EngaugeAssert.h"
 #include "GraphicsScene.h"
 #include "GuidelineAbstract.h"
-#include "GuidelineFormat.h"
 #include "GuidelineState.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateHandleAbstract.h"
@@ -26,17 +25,14 @@ GuidelineStateHandleAbstract::~GuidelineStateHandleAbstract ()
 
 void GuidelineStateHandleAbstract::beginCommon ()
 {
-  // The pen color is irrelevant since doPaint=false below prevents pen/brush drawing
-  GuidelineFormat guidelineFormat (context().color());
-
   context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_HANDLE);
   context().guideline().setGraphicsItemVisible (true);
   // ItemIsSelectable is overkill, and in special cases adds ugly selected dashes
   context().guideline().setGraphicsItemFlags (QGraphicsItem::ItemIsFocusable |
                                               QGraphicsItem::ItemIsMovable);
   context().guideline().setGraphicsItemAcceptHoverEvents (false);
-  context().guideline().setGraphicsItemPen (guidelineFormat.colorHidden (),
-                                            guidelineFormat.lineWidthNonHover ());
+  context().guideline().setGraphicsItemPen (QColor (Qt::transparent),
+                                            context().modelGuideline ().lineWidthInactive ());
 }
 
 bool GuidelineStateHandleAbstract::doPaint () const

@@ -8,6 +8,7 @@
 #define GUIDELINE_STATE_CONTEXT_H
 
 #include "ColorPalette.h"
+#include "DocumentModelGuideline.h"
 #include "EllipseParameters.h"
 #include "GuidelineState.h"
 #include "GuidelineStateAbstractBase.h"
@@ -19,6 +20,7 @@
 
 class GuidelineAbstract;
 class Guidelines;
+class MainWindow;
 class Transformation;
 
 /// Context class for state machine that belongs to the Guideline class. The GuidelineAbstract
@@ -133,6 +135,7 @@ class GuidelineStateContext : public QObject
 public:
   /// Single constructor.
   GuidelineStateContext (GuidelineAbstract &guideline,
+                         MainWindow &mainWindow,
                          Guidelines &guidelines,
                          GuidelineState guidelineStateInitial);
   virtual ~GuidelineStateContext();
@@ -183,6 +186,9 @@ public:
   /// At the end of dragging, clone the Guideline that owns the state machine where these states live
   void handleMouseRelease (const QPointF &posScene);
 
+  /// Up-to-date guideline settings
+  DocumentModelGuideline modelGuideline () const;
+  
   /// Return ellipse representing constant range, that passes through the specified point
   EllipseParameters pointToEllipse (const QPointF &posScreen) const;
 
@@ -222,6 +228,8 @@ private:
   
   GuidelineAbstract &m_guideline;
   Guidelines &m_guidelines;
+
+  MainWindow &m_mainWindow;
 
   QVector<GuidelineStateAbstractBase*> m_states;
   GuidelineState m_currentState;

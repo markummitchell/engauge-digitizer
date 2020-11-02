@@ -27,7 +27,7 @@ CentipedeSegmentConstantXTLine::CentipedeSegmentConstantXTLine(const DocumentMod
   QColor color (ColorPaletteToQColor (modelGuideline.lineColor()));
 
   m_graphicsItem->setPen (QPen (color,
-                                modelGuideline.lineWidth()));
+                                modelGuideline.lineWidthActive ()));
 }
 
 CentipedeSegmentConstantXTLine::~CentipedeSegmentConstantXTLine ()

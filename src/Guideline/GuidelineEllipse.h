@@ -8,6 +8,7 @@
 #define GUIDELINE_ELLIPSE_H
 
 #include "GuidelineAbstract.h"
+#include "MainWindow.h"
 #include <QColor>
 #include <QGraphicsEllipseItem>
 
@@ -23,6 +24,7 @@ class GuidelineEllipse : public GuidelineAbstract, public QGraphicsEllipseItem
 public:
   /// Single constructor.
   GuidelineEllipse(QGraphicsScene &scene,
+                   MainWindow &mainWindow,
                    Guidelines &guidelines,
                    GuidelineState guidelineStateInitial,
                    const QString &identifier);
@@ -76,6 +78,8 @@ public:
 private:
   GuidelineEllipse();
 
+  MainWindow &m_mainWindow;
+  
   // Forces use of setPenColor instead of QGraphicsLineItem::setPen
   using QGraphicsEllipseItem::setPen;
 

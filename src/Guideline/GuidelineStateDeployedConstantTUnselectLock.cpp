@@ -26,7 +26,7 @@ void GuidelineStateDeployedConstantTUnselectLock::begin ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDeployedConstantTUnselectLock::begin"
                               << " identifier=" << context().guideline().identifier().toLatin1().data();
 
-  beginCommon (GuidelineFormat::HOVER_OFF,
+  beginCommon (false,
                true);
 
   context().guideline().setGraphicsItemVisible (true); // Stop hover and painting (doPoint only stops painting)

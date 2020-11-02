@@ -8,6 +8,7 @@
 #define GUIDELINE_LINE_H
 
 #include "GuidelineAbstract.h"
+#include "MainWindow.h"
 #include <QColor>
 #include <QGraphicsLineItem>
 
@@ -23,6 +24,7 @@ class GuidelineLine : public GuidelineAbstract, public QGraphicsLineItem
 public:
   /// Single constructor.
   GuidelineLine(QGraphicsScene &scene,
+                MainWindow &mainWindow,
                 Guidelines &guidelines,
                 GuidelineState guidelineStateInitial,
                 const QString &identifier);
@@ -74,6 +76,8 @@ public:
 private:
   GuidelineLine();
 
+  MainWindow &m_mainWindow;
+  
   // Forces use of setPenColor instead of QGraphicsLineItem::setPen
   using QGraphicsLineItem::setPen;
 

@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "CmdMediator.h"
 #include "EngaugeAssert.h"
 #include "GuidelineAbstract.h"
 #include "Guidelines.h"
@@ -46,14 +47,17 @@
 #include "GuidelineStateHandleT.h"
 #include "GuidelineStateHandleX.h"
 #include "GuidelineStateHandleY.h"
+#include "MainWindow.h"
 #include <QGraphicsScene>
 #include "Transformation.h"
 
 GuidelineStateContext::GuidelineStateContext (GuidelineAbstract &guideline,
+                                              MainWindow &mainWindow,
                                               Guidelines &guidelines,
                                               GuidelineState guidelineStateInitial) :
   m_guideline (guideline),
-  m_guidelines (guidelines)
+  m_guidelines (guidelines),
+  m_mainWindow (mainWindow)
 {
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_EDIT          , new GuidelineStateDeployedConstantRSelectEdit          (*this));
   m_states.insert (GUIDELINE_STATE_DEPLOYED_CONSTANT_R_SELECT_EDIT_APPEARING, new GuidelineStateDeployedConstantRSelectEditAppearing (*this));
@@ -200,6 +204,11 @@ void GuidelineStateContext::handleGuidelineMode (bool visible,
   m_states[m_currentState]->handleGuidelineMode (visible,
                                                  locked);
   transitionIfRequested ();
+}
+
+DocumentModelGuideline GuidelineStateContext::modelGuideline () const
+{
+  return m_mainWindow.cmdMediator ()->document ().modelGuideline ();
 }
 
 EllipseParameters GuidelineStateContext::pointToEllipse (const QPointF &posScreen) const

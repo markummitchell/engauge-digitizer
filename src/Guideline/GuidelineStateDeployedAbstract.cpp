@@ -5,9 +5,9 @@
  ******************************************************************************************************/
 
 #include "EngaugeAssert.h"
+#include "EnumsToQt.h"
 #include "GraphicsScene.h"
 #include "GuidelineAbstract.h"
-#include "GuidelineFormat.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDeployedAbstract.h"
 #include "Logger.h"
@@ -23,11 +23,9 @@ GuidelineStateDeployedAbstract::~GuidelineStateDeployedAbstract ()
 {
 }
 
-void GuidelineStateDeployedAbstract::beginCommon (GuidelineFormat::HoverOption hoverOption,
+void GuidelineStateDeployedAbstract::beginCommon (bool hovering,
                                                   bool locked)
 {
-  GuidelineFormat guidelineFormat (context().color());
-
   context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_DEPLOYED);
   context().guideline().setGraphicsItemVisible (true);
 
@@ -40,8 +38,10 @@ void GuidelineStateDeployedAbstract::beginCommon (GuidelineFormat::HoverOption h
     context().guideline().setGraphicsItemFlags (flags);
     context().guideline().setGraphicsItemAcceptHoverEvents (false);
 
-    context().guideline().setGraphicsItemPen (guidelineFormat.colorDeployedNonHover (),
-                                              guidelineFormat.lineWidthNonHover ());
+    const DocumentModelGuideline &modelGuideline = context ().modelGuideline ();
+    
+    context().guideline().setGraphicsItemPen (ColorPaletteToQColor (modelGuideline.lineColor ()),
+                                              modelGuideline.lineWidthInactive ());
 
   } else {
 
@@ -50,12 +50,10 @@ void GuidelineStateDeployedAbstract::beginCommon (GuidelineFormat::HoverOption h
                                                 QGraphicsItem::ItemIsMovable);
     context().guideline().setGraphicsItemAcceptHoverEvents (true);
 
-    context().guideline().setGraphicsItemPen (hoverOption == GuidelineFormat::HOVER_ON ?
-                                              guidelineFormat.colorDeployedHover () :
-                                              guidelineFormat.colorDeployedNonHover (),
-                                              hoverOption == GuidelineFormat::HOVER_ON ?
-                                              guidelineFormat.lineWidthHover () :
-                                              guidelineFormat.lineWidthNonHover ());
+    const DocumentModelGuideline &modelGuideline = context ().modelGuideline ();
+    
+    context().guideline().setGraphicsItemPen (ColorPaletteToQColor (modelGuideline.lineColor ()),
+                                              hovering ? modelGuideline.lineWidthActive () : modelGuideline.lineWidthInactive ());
   }
 }
 

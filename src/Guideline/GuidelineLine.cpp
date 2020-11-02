@@ -23,15 +23,18 @@
 #include "ZValues.h"
 
 GuidelineLine::GuidelineLine(QGraphicsScene &scene,
+                             MainWindow &mainWindow,
                              Guidelines &guidelines,
                              GuidelineState guidelineStateInitial,
                              const QString &identifier) :
-  GuidelineAbstract (scene)
+  GuidelineAbstract (scene),
+  m_mainWindow (mainWindow)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GuidelineLine::Guideline identifier=" << identifier.toLatin1().data();
 
   // Create context after all virtual methods have been created
   setContext (new GuidelineStateContext (*this,
+                                         mainWindow,
                                          guidelines,
                                          guidelineStateInitial));
 

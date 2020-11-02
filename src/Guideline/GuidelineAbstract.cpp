@@ -10,7 +10,6 @@
 #include "GraphicsItemType.h"
 #include "GuidelineAbstract.h"
 #include "GuidelineAbstract.h"
-#include "GuidelineFormat.h"
 #include "Guidelines.h"
 #include "GuidelineStateContext.h"
 #include "Logger.h"

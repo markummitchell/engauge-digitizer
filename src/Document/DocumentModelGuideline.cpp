@@ -17,12 +17,14 @@
 
 const double DEFAULT_CREATION_CIRCLE_RADIUS = 20;
 const ColorPalette DEFAULT_LINE_COLOR (COLOR_PALETTE_MAGENTA); // Should be bright so it gets noticed
-const double DEFAULT_LINE_WIDTH = 2;
+const double DEFAULT_LINE_WIDTH_ACTIVE = 2; // Wider to grab attention
+const double DEFAULT_LINE_WIDTH_INACTIVE = 1; // Narrower for better accuracy
 
 DocumentModelGuideline::DocumentModelGuideline() :
   m_creationCircleRadius (DEFAULT_CREATION_CIRCLE_RADIUS),
-  m_lineColor (  DEFAULT_LINE_COLOR),
-  m_lineWidth (DEFAULT_LINE_WIDTH)
+  m_lineColor (DEFAULT_LINE_COLOR),
+  m_lineWidthActive (DEFAULT_LINE_WIDTH_ACTIVE),
+  m_lineWidthInactive (DEFAULT_LINE_WIDTH_INACTIVE)
 {
 }
 
@@ -31,7 +33,8 @@ DocumentModelGuideline::DocumentModelGuideline(const Document &document) :
   m_valuesY (document.modelGuideline().valuesY ()),
   m_creationCircleRadius (document.modelGuideline().creationCircleRadius ()),
   m_lineColor (document.modelGuideline().lineColor ()),
-  m_lineWidth (document.modelGuideline().lineWidth ())
+  m_lineWidthActive (document.modelGuideline().lineWidthActive ()),
+  m_lineWidthInactive (document.modelGuideline().lineWidthInactive ())  
 {
 }
 
@@ -40,7 +43,8 @@ DocumentModelGuideline::DocumentModelGuideline(const DocumentModelGuideline &oth
   m_valuesY (other.valuesY ()),
   m_creationCircleRadius (other.creationCircleRadius ()),
   m_lineColor (other.lineColor ()),
-  m_lineWidth (other.lineWidth ())
+  m_lineWidthActive (other.lineWidthActive ()),
+  m_lineWidthInactive (other.lineWidthInactive ())  
 {
 }
 
@@ -50,7 +54,8 @@ DocumentModelGuideline &DocumentModelGuideline::operator=(const DocumentModelGui
   m_valuesY = other.valuesY ();
   m_creationCircleRadius = other.creationCircleRadius ();
   m_lineColor = other.lineColor ();
-  m_lineWidth = other.lineWidth ();
+  m_lineWidthActive = other.lineWidthActive ();
+  m_lineWidthInactive = other.lineWidthInactive ();  
     
   return *this;
 }
@@ -65,9 +70,14 @@ ColorPalette DocumentModelGuideline::lineColor () const
   return m_lineColor;
 }
 
-double DocumentModelGuideline::lineWidth () const
+double DocumentModelGuideline::lineWidthActive () const
 {
-  return m_lineWidth;
+  return m_lineWidthActive;
+}
+
+double DocumentModelGuideline::lineWidthInactive () const
+{
+  return m_lineWidthInactive;
 }
 
 void DocumentModelGuideline::loadXml(QXmlStreamReader &reader)
@@ -80,11 +90,13 @@ void DocumentModelGuideline::loadXml(QXmlStreamReader &reader)
 
   if (attributes.hasAttribute (DOCUMENT_SERIALIZE_GUIDELINE_CREATION_CIRCLE_RADIUS) &&
       attributes.hasAttribute (DOCUMENT_SERIALIZE_GUIDELINE_LINE_COLOR) &&
-      attributes.hasAttribute (DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH)) {
+      attributes.hasAttribute (DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH_ACTIVE) &&
+      attributes.hasAttribute (DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH_INACTIVE)) {
 
     setCreationCircleRadius (attributes.value (DOCUMENT_SERIALIZE_GUIDELINE_CREATION_CIRCLE_RADIUS).toInt ());
     setLineColor (static_cast<ColorPalette> (attributes.value (DOCUMENT_SERIALIZE_GUIDELINE_LINE_COLOR).toInt ()));
-    setLineWidth (attributes.value (DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH).toInt ());
+    setLineWidthActive (attributes.value (DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH_ACTIVE).toInt ());
+    setLineWidthInactive (attributes.value (DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH_INACTIVE).toInt ());    
   }
 
   // Read until end of this subtree
@@ -174,7 +186,8 @@ void DocumentModelGuideline::printStream(QString indentation,
   str << indentation << "valuesY=" << valuesY << "\n";
   str << indentation << "creationCircleRadius=" << m_creationCircleRadius << "\n";
   str << indentation << "lineColor=" << colorPaletteToString (m_lineColor) << "\n";
-  str << indentation << "lineWidth=" << m_lineWidth << "\n";
+  str << indentation << "lineWidthActive=" << m_lineWidthActive << "\n";
+  str << indentation << "lineWidthInactive=" << m_lineWidthInactive << "\n";  
 }
 
 void DocumentModelGuideline::saveXml(QXmlStreamWriter &writer) const
@@ -185,7 +198,8 @@ void DocumentModelGuideline::saveXml(QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_CREATION_CIRCLE_RADIUS, QString::number (m_creationCircleRadius));
   writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_COLOR, QString::number (m_lineColor));
   writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_COLOR_STRING, colorPaletteToString (m_lineColor));
-  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH, QString::number (m_lineWidth));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH_ACTIVE, QString::number (m_lineWidthActive));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GUIDELINE_LINE_WIDTH_INACTIVE, QString::number (m_lineWidthInactive));  
   saveXmlVector (writer,
                  DOCUMENT_SERIALIZE_GUIDELINES_X,
                  m_valuesX);
@@ -225,9 +239,14 @@ void DocumentModelGuideline::setLineColor (ColorPalette lineColor)
   m_lineColor = lineColor;
 }
 
-void DocumentModelGuideline::setLineWidth (double lineWidth)
+void DocumentModelGuideline::setLineWidthActive (double lineWidthActive)
 {
-  m_lineWidth = lineWidth;
+  m_lineWidthActive = lineWidthActive;
+}
+
+void DocumentModelGuideline::setLineWidthInactive (double lineWidthInactive)
+{
+  m_lineWidthInactive = lineWidthInactive;
 }
 
 void DocumentModelGuideline::setValuesX (const GuidelineValues &valuesX)

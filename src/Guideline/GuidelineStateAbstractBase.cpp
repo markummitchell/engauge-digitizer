@@ -8,7 +8,6 @@
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
 #include "GuidelineAbstract.h"
-#include "GuidelineFormat.h"
 #include "GuidelineIdentifierGenerator.h"
 #include "GuidelineStateAbstractBase.h"
 #include "GuidelineStateContext.h"
@@ -56,9 +55,10 @@ void GuidelineStateAbstractBase::handleMousePressCommon (const QPointF &posScene
   GuidelineAbstract *guidelineVisible = context().createGuideline (GuidelineIdentifierGenerator::next (),
                                                                    stateDeployed);
 
-  GuidelineFormat guidelineFormat (context().color());
-  guidelineVisible->setGraphicsItemPen (guidelineFormat.colorDeployedNonHover (),
-                                        guidelineFormat.lineWidthNonHover ());
+  DocumentModelGuideline modelGuideline = context ().modelGuideline ();
+  
+  guidelineVisible->setGraphicsItemPen (ColorPaletteToQColor (modelGuideline.lineColor ()),
+                                        modelGuideline.lineWidthInactive ());
 
   // Place new Guideline at cursor position
   guidelineVisible->updateGeometry (posScene);

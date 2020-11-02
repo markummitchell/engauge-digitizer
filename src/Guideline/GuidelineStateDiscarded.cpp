@@ -6,7 +6,6 @@
 
 #include "EngaugeAssert.h"
 #include "GuidelineAbstract.h"
-#include "GuidelineFormat.h"
 #include "GuidelineState.h"
 #include "GuidelineStateContext.h"
 #include "GuidelineStateDiscarded.h"
@@ -28,13 +27,11 @@ void GuidelineStateDiscarded::begin ()
   LOG4CPP_INFO_S ((*mainCat)) << "GuidelineStateDiscarded::begin"
                               << " identifier=" << context().guideline().identifier().toLatin1().data();
 
-  GuidelineFormat guidelineFormat (context().color());
-  
   context().guideline().setGraphicsItemZValue (Z_VALUE_GUIDELINE_DISCARDED);
   context().guideline().setGraphicsItemVisible (false); //
   context().guideline().setGraphicsItemAcceptHoverEvents (false);
-  context().guideline().setGraphicsItemPen (guidelineFormat.colorHidden (),
-                                            guidelineFormat.lineWidthNonHover ());
+  context().guideline().setGraphicsItemPen (QColor (Qt::transparent),
+                                            context ().modelGuideline ().lineWidthInactive ());
 }
 
 QPointF GuidelineStateDiscarded::convertGraphCoordinateToScreenPoint (double /* valueGraph */) const

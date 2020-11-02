@@ -41,6 +41,7 @@ GuidelineAbstract *GuidelineFactory::createGuideline (Guidelines &guidelines,
   if (m_mapStatesWithEllipse.contains (stateInitial)) {
 
     guideline = new GuidelineEllipse (*scene,
+                                      mainWindow,
                                       guidelines,
                                       stateInitial,
                                       identifier);
@@ -48,6 +49,7 @@ GuidelineAbstract *GuidelineFactory::createGuideline (Guidelines &guidelines,
   } else {
 
     guideline = new GuidelineLine (*scene,
+                                   mainWindow,                                   
                                    guidelines,
                                    stateInitial,
                                    identifier);
