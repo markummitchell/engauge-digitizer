@@ -21,7 +21,28 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
   QPointF posLow = posScreenConstantYRLowXT (modelGuideline.creationCircleRadius ());
   QPointF posHigh = posScreenConstantYRHighXT (modelGuideline.creationCircleRadius ());
 
-  m_graphicsItem = new QGraphicsEllipseItem ();
+  // Mirror posHigh through origin as posCenterScreen - (posHigh - posCenterScreen)
+  QPointF posHighMirror (2.0 * posCenterScreen.x() - posHigh.x(),
+                         2.0 * posCenterScreen.y() - posHigh.y());
+
+  double angle, a, b;
+  ellipseFromParallelogram (posLow.x(),
+                            posLow.y(),
+                            posHigh.x(),
+                            posHigh.y(),
+                            posHighMirror.x(),
+                            posHighMirror.y(),
+                            angle,
+                            a,
+                            b);
+
+  // Bounding rectangle before rotation
+  QRectF rectBounding (posCenterScreen + QPointF (-1.0 * a / 2.0,
+                                                  b / 2.0),
+                       posCenterScreen + QPointF (a / 2.0,
+                                                  -1.0 * b / 2.0));
+
+  m_graphicsItem = new QGraphicsEllipseItem (rectBounding);
 
   QColor color (ColorPaletteToQColor (modelGuideline.lineColor()));
 

@@ -11,6 +11,7 @@
 #include <QPointF>
 
 class CentipedeSegmentAbstract;
+class DocumentModelCoords;
 class GraphicsScene;
 class Transformation;
 
@@ -67,6 +68,7 @@ public:
   CentipedePair(GraphicsScene &scene,
                 const Transformation &transformation,
                 const DocumentModelGuideline &modelGuideline,
+                const DocumentModelCoords &modelCoords,
                 const QPointF &posScreen);
   virtual ~CentipedePair();
 

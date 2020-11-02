@@ -139,6 +139,7 @@ void DigitizeStateGuideline::handleMousePress (CmdMediator *cmdMediator,
   m_centipedePair = new CentipedePair (context().mainWindow().scene(),
                                        context().mainWindow().transformation(),
                                        cmdMediator->document().modelGuideline(),
+                                       cmdMediator->document().modelCoords(),
                                        posScreen);
 }
 

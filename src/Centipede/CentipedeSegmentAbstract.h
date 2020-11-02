@@ -62,12 +62,12 @@ private:
   void generatePreviousAndNextPoints (double radius,
                                       int i,
                                       QPointF &posGraphPrevious,
-                                      QPointF &posScreenPrevious,
-                                      QPointF &posScreenNext) const;
+                                      QPointF &posGraphNext,
+                                      QPointF &posScreen) const;
   QPointF posScreenConstantXTForScaledYR (double radius,
-                                          double scale) const;
+                                          bool wantHigh) const;
   QPointF posScreenConstantYRForScaledXT (double radius,
-                                          double scale) const;
+                                          bool wantHigh) const;
 
   DocumentModelGuideline m_modelGuideline;
   Transformation m_transformation;

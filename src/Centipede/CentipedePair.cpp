@@ -7,7 +7,9 @@
 #include "CentipedePair.h"
 #include "CentipedeSegmentAbstract.h"
 #include "CentipedeSegmentConstantXTLine.h"
+#include "CentipedeSegmentConstantYREllipse.h"
 #include "CentipedeSegmentConstantYRLine.h"
+#include "DocumentModelCoords.h"
 #include "DocumentModelGuideline.h"
 #include "GraphicsScene.h"
 #include "mmsubs.h"
@@ -16,6 +18,7 @@
 CentipedePair::CentipedePair(GraphicsScene &scene,
                              const Transformation &transformation,
                              const DocumentModelGuideline &modelGuideline,
+                             const DocumentModelCoords &modelCoords,
                              const QPointF &posScreen) :
   m_modelGuideline (modelGuideline),
   m_centipedeXT (nullptr),
@@ -25,12 +28,22 @@ CentipedePair::CentipedePair(GraphicsScene &scene,
   m_valueFinal (0)
 {
   // Create visible Centipede items
-  m_centipedeXT = new CentipedeSegmentConstantXTLine (modelGuideline,
-                                                      transformation,
-                                                      posScreen);
-  m_centipedeYR = new CentipedeSegmentConstantYRLine (modelGuideline,
-                                                      transformation,
-                                                      posScreen);
+  if (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
+    m_centipedeXT = new CentipedeSegmentConstantXTLine (modelGuideline,
+                                                        transformation,
+                                                        posScreen);
+    m_centipedeYR = new CentipedeSegmentConstantYRLine (modelGuideline,
+                                                        transformation,
+                                                        posScreen);
+  } else {
+    m_centipedeXT = new CentipedeSegmentConstantXTLine (modelGuideline,
+                                                        transformation,
+                                                        posScreen);
+    m_centipedeYR = new CentipedeSegmentConstantYREllipse (modelGuideline,
+                                                           transformation,
+                                                           posScreen);
+  }
+
   scene.addItem (m_centipedeXT->graphicsItem ());
   scene.addItem (m_centipedeYR->graphicsItem ());
 
