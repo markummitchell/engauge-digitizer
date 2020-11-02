@@ -64,10 +64,10 @@ private:
                                       QPointF &posGraphPrevious,
                                       QPointF &posGraphNext,
                                       QPointF &posScreen) const;
-  QPointF posScreenConstantXTForScaledYR (double radius,
-                                          bool wantHigh) const;
-  QPointF posScreenConstantYRForScaledXT (double radius,
-                                          bool wantHigh) const;
+  QPointF posScreenConstantXTForHighLowYR (double radius,
+                                           bool wantHigh) const;
+  QPointF posScreenConstantYRForHighLowXT (double radius,
+                                           bool wantHigh) const;
 
   DocumentModelGuideline m_modelGuideline;
   Transformation m_transformation;

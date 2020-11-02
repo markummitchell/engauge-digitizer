@@ -21,15 +21,20 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
   QPointF posLow = posScreenConstantYRLowXT (modelGuideline.creationCircleRadius ());
   QPointF posHigh = posScreenConstantYRHighXT (modelGuideline.creationCircleRadius ());
 
+  // Origin
+  QPointF posOriginScreen;
+  transformation.transformRawGraphToScreen (QPointF (0, 0),
+                                            posOriginScreen);
+
   // Mirror posHigh through origin as posCenterScreen - (posHigh - posCenterScreen)
-  QPointF posHighMirror (2.0 * posCenterScreen.x() - posHigh.x(),
-                         2.0 * posCenterScreen.y() - posHigh.y());
+  QPointF posHighMirror (2.0 * posOriginScreen.x() - posHigh.x(),
+                         2.0 * posOriginScreen.y() - posHigh.y());
 
   double angle, a, b;
-  ellipseFromParallelogram (posLow.x(),
-                            posLow.y(),
-                            posHigh.x(),
+  ellipseFromParallelogram (posHigh.x(),
                             posHigh.y(),
+                            posLow.x(),
+                            posLow.y(),
                             posHighMirror.x(),
                             posHighMirror.y(),
                             angle,
@@ -37,9 +42,9 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
                             b);
 
   // Bounding rectangle before rotation
-  QRectF rectBounding (posCenterScreen + QPointF (-1.0 * a / 2.0,
+  QRectF rectBounding (posOriginScreen + QPointF (-1.0 * a / 2.0,
                                                   b / 2.0),
-                       posCenterScreen + QPointF (a / 2.0,
+                       posOriginScreen + QPointF (a / 2.0,
                                                   -1.0 * b / 2.0));
 
   m_graphicsItem = new QGraphicsEllipseItem (rectBounding);

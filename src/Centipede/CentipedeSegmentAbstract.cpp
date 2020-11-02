@@ -56,18 +56,18 @@ QPointF CentipedeSegmentAbstract::posCenterScreen () const
 
 QPointF CentipedeSegmentAbstract::posScreenConstantXTHighYR (double radius) const
 {
-  return posScreenConstantXTForScaledYR (radius,
+  return posScreenConstantXTForHighLowYR (radius,
                                          true);
 }
 
 QPointF CentipedeSegmentAbstract::posScreenConstantXTLowYR (double radius) const
 {
-  return posScreenConstantXTForScaledYR (radius,
+  return posScreenConstantXTForHighLowYR (radius,
                                          false);
 }
 
-QPointF CentipedeSegmentAbstract::posScreenConstantXTForScaledYR (double radius,
-                                                                  bool wantHigh) const
+QPointF CentipedeSegmentAbstract::posScreenConstantXTForHighLowYR (double radius,
+                                                                   bool wantHigh) const
 {
   QPointF posScreenBest;
   double yRBest = 0;
@@ -76,7 +76,6 @@ QPointF CentipedeSegmentAbstract::posScreenConstantXTForScaledYR (double radius,
   m_transformation.transformScreenToRawGraph (m_posCenterScreen,
                                               posCenterGraph);
   double xCenter = posCenterGraph.x();
-  double yCenter = posCenterGraph.y();
 
   bool isFirst = true;
   for (int i = 0; i < NUM_CIRCLE_POINTS; i++) {
@@ -87,8 +86,12 @@ QPointF CentipedeSegmentAbstract::posScreenConstantXTForScaledYR (double radius,
                                    posGraphNext,
                                    posScreenPrevious);
 
-    bool transitionUp = (posGraphPrevious.x() <= xCenter) && (xCenter < posGraphNext.x());
-    bool transitionDown = (posGraphNext.x() <= xCenter) && (xCenter < posGraphPrevious.x());
+    double xGraphPrevious = posGraphPrevious.x();
+    double xGraphNext = posGraphNext.x();
+    double epsilon = qAbs (xGraphPrevious - xGraphNext) / 10.0; // Allow for roundoff
+
+    bool transitionUp = (xGraphPrevious - epsilon <= xCenter) && (xCenter < xGraphNext + epsilon);
+    bool transitionDown = (xGraphNext - epsilon <= xCenter) && (xCenter < xGraphPrevious + epsilon);
 
     if (transitionDown || transitionUp) {
 
@@ -106,36 +109,23 @@ QPointF CentipedeSegmentAbstract::posScreenConstantXTForScaledYR (double radius,
     }
   }
 
-  // Pathological case is where roundoff overlooked transition from last point back to first
-  if (isFirst ||
-      (wantHigh && yRBest < yCenter) ||
-      (!wantHigh && yRBest > yCenter)) {
-
-    QPointF posGraphPrevious, posGraphNext;
-    generatePreviousAndNextPoints (radius,
-                                   0,
-                                   posGraphPrevious,
-                                   posGraphNext,
-                                   posScreenBest);
-  }
-
   return posScreenBest;
 }
 
 QPointF CentipedeSegmentAbstract::posScreenConstantYRHighXT (double radius) const
 {
-  return posScreenConstantYRForScaledXT (radius,
+  return posScreenConstantYRForHighLowXT (radius,
                                          true);
 }
 
 QPointF CentipedeSegmentAbstract::posScreenConstantYRLowXT (double radius) const
 {
-  return posScreenConstantYRForScaledXT (radius,
+  return posScreenConstantYRForHighLowXT (radius,
                                          false);
 }
 
-QPointF CentipedeSegmentAbstract::posScreenConstantYRForScaledXT (double radius,
-                                                                  bool wantHigh) const
+QPointF CentipedeSegmentAbstract::posScreenConstantYRForHighLowXT (double radius,
+                                                                   bool wantHigh) const
 {
   QPointF posScreenBest;
   double xTBest = 0;
@@ -143,7 +133,6 @@ QPointF CentipedeSegmentAbstract::posScreenConstantYRForScaledXT (double radius,
   QPointF posCenterGraph;
   m_transformation.transformScreenToRawGraph (m_posCenterScreen,
                                               posCenterGraph);
-  double xCenter = posCenterGraph.x();
   double yCenter = posCenterGraph.y();
 
   bool isFirst = true;
@@ -155,8 +144,12 @@ QPointF CentipedeSegmentAbstract::posScreenConstantYRForScaledXT (double radius,
                                    posGraphNext,
                                    posScreenPrevious);
 
-    bool transitionUp = (posGraphPrevious.y() <= yCenter) && (yCenter < posGraphNext.y());
-    bool transitionDown = (posGraphNext.y() <= yCenter) && (yCenter < posGraphPrevious.y());
+    double yGraphPrevious = posGraphPrevious.y();
+    double yGraphNext = posGraphNext.y();
+    double epsilon = qAbs (yGraphPrevious - yGraphNext) / 10.0; // Allow for roundoff
+
+    bool transitionUp = (yGraphPrevious - epsilon <= yCenter) && (yCenter < yGraphNext + epsilon);
+    bool transitionDown = (yGraphNext - epsilon <= yCenter) && (yCenter < yGraphPrevious + epsilon);
 
     if (transitionDown || transitionUp) {
 
@@ -172,19 +165,6 @@ QPointF CentipedeSegmentAbstract::posScreenConstantYRForScaledXT (double radius,
         xTBest = x;
       }
     }
-  }
-
-  // Pathological case is where roundoff overlooked transition from last point back to first
-  if (isFirst ||
-      (wantHigh && xTBest < xCenter) ||
-      (!wantHigh && xTBest > xCenter)) {
-
-    QPointF posGraphPrevious, posGraphNext;
-    generatePreviousAndNextPoints (radius,
-                                   0,
-                                   posGraphPrevious,
-                                   posGraphNext,
-                                   posScreenBest);
   }
 
   return posScreenBest;
