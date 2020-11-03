@@ -56,7 +56,6 @@ HEADERS  += \
     Callback/CallbackUpdateTransform.h \
     Centipede/CentipedePair.h \
     Centipede/CentipedeSegmentAbstract.h \
-    Centipede/CentipedeSegmentConstantXTEllipse.h \
     Centipede/CentipedeSegmentConstantXTLine.h \
     Centipede/CentipedeSegmentConstantYREllipse.h \
     Centipede/CentipedeSegmentConstantYRLine.h \
@@ -507,7 +506,6 @@ SOURCES += \
     Callback/CallbackUpdateTransform.cpp \
     Centipede/CentipedePair.cpp \
     Centipede/CentipedeSegmentAbstract.cpp \
-    Centipede/CentipedeSegmentConstantXTEllipse.cpp \
     Centipede/CentipedeSegmentConstantXTLine.cpp \
     Centipede/CentipedeSegmentConstantYREllipse.cpp \
     Centipede/CentipedeSegmentConstantYRLine.cpp \

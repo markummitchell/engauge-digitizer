@@ -29,6 +29,18 @@ double angleBetweenVectors (const QPointF &v1,
   return angle;
 }
 
+extern double angleFromBasisVectors (double xBasisX,
+                                     double xBasisY,
+                                     double yBasisX,
+                                     double yBasisY,
+                                     double x,
+                                     double y)
+{
+  double dotX = xBasisX * x + yBasisY * y;
+  double dotY = yBasisX * x + yBasisY * y;
+  return qAtan2 (dotY, dotX);
+}
+
 double angleFromVectorToVector (const QPointF &vFrom,
                                 const QPointF &vTo)
 {

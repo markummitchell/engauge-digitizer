@@ -13,16 +13,16 @@
 
 CentipedeSegmentConstantXTLine::CentipedeSegmentConstantXTLine(const DocumentModelGuideline &modelGuideline,
                                                                const Transformation &transformation,
-                                                               const QPointF &posCenterScreen) :
+                                                               const QPointF &posClickScreen) :
   CentipedeSegmentAbstract (modelGuideline,
                             transformation,
-                            posCenterScreen)
+                            posClickScreen)
 {
-  QPointF posLow = posScreenConstantXTLowYR (modelGuideline.creationCircleRadius ());
-  QPointF posHigh = posScreenConstantXTHighYR (modelGuideline.creationCircleRadius ());
+  m_posLow = posScreenConstantXTForLowYR (modelGuideline.creationCircleRadius ());
+  m_posHigh = posScreenConstantXTForHighYR (modelGuideline.creationCircleRadius ());
 
-  m_graphicsItem = new QGraphicsLineItem (QLineF (posLow,
-                                                  posHigh));
+  m_graphicsItem = new QGraphicsLineItem (QLineF (m_posLow,
+                                                  m_posHigh));
 
   QColor color (ColorPaletteToQColor (modelGuideline.lineColor()));
 
@@ -37,11 +37,8 @@ CentipedeSegmentConstantXTLine::~CentipedeSegmentConstantXTLine ()
 
 double CentipedeSegmentConstantXTLine::distanceToClosestEndpoint (const QPointF &posScreen) const
 {
-  QPointF posLow = posScreenConstantXTLowYR (modelGuideline().creationCircleRadius ());
-  QPointF posHigh = posScreenConstantXTHighYR (modelGuideline().creationCircleRadius ());
-
-  double distanceLow = magnitude (posScreen - posLow);
-  double distanceHigh = magnitude (posScreen - posHigh);
+  double distanceLow = magnitude (posScreen - m_posLow);
+  double distanceHigh = magnitude (posScreen - m_posHigh);
 
   return qMin (distanceLow, distanceHigh);
 }
@@ -53,9 +50,13 @@ QGraphicsItem *CentipedeSegmentConstantXTLine::graphicsItem ()
 
 void CentipedeSegmentConstantXTLine::updateRadius (double radius)
 {
-  QPointF posLow = posScreenConstantXTLowYR (radius);
-  QPointF posHigh = posScreenConstantXTHighYR (radius);
-
+  // Scale up/down the line segment length, keeping it centered on the same center point
+  QPointF posCenter = (m_posHigh + m_posLow) / 2.0;
+  QPointF delta = m_posHigh - m_posLow;
+  double radiusInitial = magnitude (delta) / 2.0; // Convert from diameter to radius
+  double scaling = radius / radiusInitial;
+  QPointF posLow = posCenter - scaling / 2.0 * delta;
+  QPointF posHigh = posCenter + scaling / 2.0 * delta;
   m_graphicsItem->setLine (QLineF (posLow,
                                    posHigh));
 }

@@ -6,53 +6,73 @@
 
 #include "CentipedeSegmentConstantYREllipse.h"
 #include "EnumsToQt.h"
+#include "GraphicsArcItem.h"
 #include "mmsubs.h"
 #include <qmath.h>
-#include <QGraphicsEllipseItem>
 #include <QPen>
+
+const double TWO_PI = 2.0 * 3.1415926535;
+const int TICS_PER_CYCLE = 360 * 16;
+const double RADIANS_TO_TICS = TICS_PER_CYCLE / TWO_PI;
 
 CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const DocumentModelGuideline &modelGuideline,
                                                                      const Transformation &transformation,
-                                                                     const QPointF &posCenterScreen) :
+                                                                     const QPointF &posClickScreen) :
   CentipedeSegmentAbstract (modelGuideline,
                             transformation,
-                            posCenterScreen)
+                            posClickScreen)
 {
-  QPointF posLow = posScreenConstantYRLowXT (modelGuideline.creationCircleRadius ());
-  QPointF posHigh = posScreenConstantYRHighXT (modelGuideline.creationCircleRadius ());
+  m_posLow = posScreenConstantYRForLowXT (modelGuideline.creationCircleRadius ());
+  m_posHigh = posScreenConstantYRForHighXT (modelGuideline.creationCircleRadius ());
+  m_angleLow = angleScreenConstantYRLowAngle (modelGuideline.creationCircleRadius ());
+  m_angleCenter = angleScreenConstantYRCenterAngle (modelGuideline.creationCircleRadius ());
+  m_angleHigh = angleScreenConstantYRHighAngle (modelGuideline.creationCircleRadius ());
+
+  QPointF posClickGraph;
+  transformation.transformScreenToLinearCartesianGraph (posClickScreen,
+                                                        posClickGraph);
+  double rGraph = qSqrt (posClickGraph.x() * posClickGraph.x() + posClickGraph.y() * posClickGraph.y());
+
+  // Points at 45, 135, 225 and 315 degrees at range rGraph
+  QPointF posScreenCenter, posScreenTL, posScreenTR, posScreenBR; // No need for BL point
+  transformation.transformLinearCartesianGraphToScreen (QPointF (0, 0),
+                                                        posScreenCenter);
+  transformation.transformLinearCartesianGraphToScreen (QPointF (-rGraph, rGraph),
+                                                        posScreenTL);
+  transformation.transformLinearCartesianGraphToScreen (QPointF (rGraph, rGraph),
+                                                        posScreenTR);
+  transformation.transformLinearCartesianGraphToScreen (QPointF (rGraph, -rGraph),
+                                                        posScreenBR);
+
+  double angleRadians = 0, aAligned = 0, bAligned = 0;
+  ellipseFromParallelogram (posScreenTL.x() - posScreenCenter.x(),
+                            posScreenTL.y() - posScreenCenter.y(),
+                            posScreenTR.x() - posScreenCenter.x(),
+                            posScreenTR.y() - posScreenCenter.y(),
+                            posScreenBR.x() - posScreenCenter.x(),
+                            posScreenBR.y() - posScreenCenter.y(),
+                            angleRadians,
+                            aAligned,
+                            bAligned);
 
   // Origin
   QPointF posOriginScreen;
-  transformation.transformRawGraphToScreen (QPointF (0, 0),
-                                            posOriginScreen);
-
-  // Mirror posHigh through origin as posCenterScreen - (posHigh - posCenterScreen)
-  QPointF posHighMirror (2.0 * posOriginScreen.x() - posHigh.x(),
-                         2.0 * posOriginScreen.y() - posHigh.y());
-
-  double angle, a, b;
-  ellipseFromParallelogram (posHigh.x(),
-                            posHigh.y(),
-                            posLow.x(),
-                            posLow.y(),
-                            posHighMirror.x(),
-                            posHighMirror.y(),
-                            angle,
-                            a,
-                            b);
+  transformation.transformLinearCartesianGraphToScreen (QPointF (0, 0),
+                                                        posOriginScreen);
 
   // Bounding rectangle before rotation
-  QRectF rectBounding (posOriginScreen + QPointF (-1.0 * a / 2.0,
-                                                  b / 2.0),
-                       posOriginScreen + QPointF (a / 2.0,
-                                                  -1.0 * b / 2.0));
+  QRectF rectBounding (posOriginScreen + QPointF (-1.0 * aAligned,
+                                                  bAligned),
+                       posOriginScreen + QPointF (aAligned,
+                                                  -1.0 * bAligned));
 
-  m_graphicsItem = new QGraphicsEllipseItem (rectBounding);
+  m_graphicsItem = new GraphicsArcItem (rectBounding);
 
   QColor color (ColorPaletteToQColor (modelGuideline.lineColor()));
 
   m_graphicsItem->setPen (QPen (color,
                                 modelGuideline.lineWidthActive ()));
+  updateRadius (modelGuideline.creationCircleRadius());
 }
 
 CentipedeSegmentConstantYREllipse::~CentipedeSegmentConstantYREllipse ()
@@ -62,11 +82,8 @@ CentipedeSegmentConstantYREllipse::~CentipedeSegmentConstantYREllipse ()
 
 double CentipedeSegmentConstantYREllipse::distanceToClosestEndpoint (const QPointF &posScreen) const
 {
-  QPointF posLow = posScreenConstantYRLowXT (modelGuideline().creationCircleRadius ());
-  QPointF posHigh = posScreenConstantYRHighXT (modelGuideline().creationCircleRadius ());
-
-  double distanceLow = magnitude (posScreen - posLow);
-  double distanceHigh = magnitude (posScreen - posHigh);
+  double distanceLow = magnitude (posScreen - m_posLow);
+  double distanceHigh = magnitude (posScreen - m_posHigh);
 
   return qMin (distanceLow, distanceHigh);
 }
@@ -78,7 +95,17 @@ QGraphicsItem *CentipedeSegmentConstantYREllipse::graphicsItem ()
 
 void CentipedeSegmentConstantYREllipse::updateRadius (double radius)
 {
-  QPointF posLow = posScreenConstantYRLowXT (radius);
-  QPointF posHigh = posScreenConstantYRHighXT (radius);
+  // Scale up/down the angles, with them converging to center angle as radius goes to zero
+  double scaling = radius / modelGuideline().creationCircleRadius ();
+  int angleLow = (int) ((m_angleCenter + scaling * (m_angleLow - m_angleCenter)) * RADIANS_TO_TICS);
+  int angleHigh = (int) ((m_angleCenter + scaling * (m_angleHigh - m_angleCenter)) * RADIANS_TO_TICS);
+  while (angleLow < 0) {
+    angleLow += TICS_PER_CYCLE;
+  }
+  while (angleHigh < angleLow) {
+    angleHigh += TICS_PER_CYCLE;
+  }
+  m_graphicsItem->setStartAngle (angleLow);
+  m_graphicsItem->setSpanAngle (angleHigh - angleLow);
 }
 

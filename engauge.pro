@@ -98,7 +98,6 @@ HEADERS  += \
     src/Callback/CallbackUpdateTransform.h \
     src/Centipede/CentipedePair.h \
     src/Centipede/CentipedeSegmentAbstract.h \
-    src/Centipede/CentipedeSegmentConstantXTEllipse.h \
     src/Centipede/CentipedeSegmentConstantXTLine.h \
     src/Centipede/CentipedeSegmentConstantYREllipse.h \
     src/Centipede/CentipedeSegmentConstantYRLine.h \
@@ -545,7 +544,6 @@ SOURCES += \
     src/Callback/CallbackUpdateTransform.cpp \
     src/Centipede/CentipedePair.cpp \
     src/Centipede/CentipedeSegmentAbstract.cpp \
-    src/Centipede/CentipedeSegmentConstantXTEllipse.cpp \
     src/Centipede/CentipedeSegmentConstantXTLine.cpp \
     src/Centipede/CentipedeSegmentConstantYREllipse.cpp \
     src/Centipede/CentipedeSegmentConstantYRLine.cpp \

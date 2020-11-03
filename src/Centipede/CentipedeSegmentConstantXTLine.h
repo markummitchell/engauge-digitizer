@@ -18,7 +18,7 @@ public:
   /// Constructor with individual coordinates
   CentipedeSegmentConstantXTLine(const DocumentModelGuideline &modelGuideline,
                                  const Transformation &transformation,
-                                 const QPointF &posCenterScreen);
+                                 const QPointF &posClickScreen);
   virtual ~CentipedeSegmentConstantXTLine();
 
   virtual double distanceToClosestEndpoint (const QPointF &posScreen) const;
@@ -30,6 +30,10 @@ private:
 
   QGraphicsLineItem *m_graphicsItem;
   
+  // Two points where circle around click point intersects constant coordinate line. Due to symmetry about
+  // the click circle center (for affine transformation), we do not need the center
+  QPointF m_posLow;
+  QPointF m_posHigh;
 };
 
 #endif // CENTIPEDE_SEGMENT_CONSTANT_XT_LINE_H

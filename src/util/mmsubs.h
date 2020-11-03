@@ -16,6 +16,15 @@ class QPointF;
 extern double angleBetweenVectors (const QPointF &v1,
                                    const QPointF &v2);
 
+/// Four quadrant angle to specified vector, given two orthogonal basis vectors corresonding to +x and +y
+/// directions respectively. This assumes the measurements are performed at the origin
+extern double angleFromBasisVectors (double xBasis0,
+                                     double yBasis0,
+                                     double xBasis1,
+                                     double yBasis1,
+                                     double x,
+                                     double y);
+
 /// Angle between two vectors. Direction is positive when rotation is about +z vector, so result is betwen -pi to pi radians
 extern double angleFromVectorToVector (const QPointF &vFrom,
                                        const QPointF &vTo);

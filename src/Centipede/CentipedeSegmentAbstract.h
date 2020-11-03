@@ -13,6 +13,13 @@
 
 class QGraphicsItem;
 
+/// Intersect with one of the following XT or YT coordinates for constant YR or XT respectively
+enum IntersectionType {
+  INTERSECTION_LOW,    /// Intersection along circle perimeter with lowest value of XT or YR
+  INTERSECTION_CENTER, /// Intersection of circle center with XT or YR
+  INTERSECTION_HIGH    /// Intersection along circle perimeter with highest value of XT or YR
+};
+
 /// Line segment along one of the two coordinate directions (X/T or Y/R).
 /// Centipede instances are distinguished by coordinate direction, and implemented with either line or ellipse graphics item
 class CentipedeSegmentAbstract
@@ -21,7 +28,7 @@ public:
   /// Constructor with individual coordinates
   CentipedeSegmentAbstract(const DocumentModelGuideline &modelGuideline,
                            const Transformation &transformation,
-                           const QPointF &posCenterScreen);
+                           const QPointF &posClickScreen);
   virtual ~CentipedeSegmentAbstract ();
 
   /// Return distance to closest endpoint
@@ -35,23 +42,38 @@ public:
   
 protected:
 
+  /// Screen angle at origin from ellipse axis to circle-center/coordinate intersection. Works only for polar coordinates
+  double angleScreenConstantYRCenterAngle (double radius) const;
+
+  /// Screen angle at origin from ellipse axis to circle/coordinate intersection in the increasing angle direction. Works only for polar coordinates
+  double angleScreenConstantYRHighAngle (double radius) const;
+
+  /// Screen angle at origin from ellipse axis to circle/coordinate intersection in the decreasing angle direction. Works only for polar coordinates
+  double angleScreenConstantYRLowAngle (double radius) const;
+
   /// Settings
   const DocumentModelGuideline &modelGuideline () const;
 
   /// Center of circle in screen coordinates
-  QPointF posCenterScreen () const;
+  QPointF posClickScreen () const;
 
-  /// Screen point for XT value of center in the increasing YR direction
-  QPointF posScreenConstantXTHighYR (double radius) const;
+  /// Screen point for XT value of circle-center/coordinate intersection. Works for both cartesian and polar coordinates
+  QPointF posScreenConstantXTForCenterYR (double radius) const;
 
-  /// Screen point for XT value of center in the decreasing YR direction
-  QPointF posScreenConstantXTLowYR (double radius) const;
+  /// Screen point for XT value of circle/coordinate intersection in the increasing YR direction. Works for both cartesian and polar coordinates
+  QPointF posScreenConstantXTForHighYR (double radius) const;
 
-  /// Screen point for YR value of center in the increasing XT direction
-  QPointF posScreenConstantYRHighXT (double radius) const;
+  /// Screen point for XT value of circle/coordinate intersection in the decreasing YR direction. Works for both cartesian and polar coordinates
+  QPointF posScreenConstantXTForLowYR (double radius) const;
 
-  /// Screen point for YR value of center in the decreasing XT direction
-  QPointF posScreenConstantYRLowXT (double radius) const;
+  /// Screen point for YR value of circle-center/coordinate intersection. Works for both cartesian and polar coordinates
+  QPointF posScreenConstantYRForCenterXT (double radius) const;
+
+  /// Screen point for YR value of circle/coordinate intersection in the increasing XT direction. Works for both cartesian and polar coordinates
+  QPointF posScreenConstantYRForHighXT (double radius) const;
+
+  /// Screen point for YR value of circle/coordinate intersection in the decreasing XT direction. Works for both cartesian and polar coordinates
+  QPointF posScreenConstantYRForLowXT (double radius) const;
   
   /// Transformation which is static through the entire lifetime of the Centipede class instances
   Transformation transformation() const;
@@ -59,19 +81,21 @@ protected:
 private:
   CentipedeSegmentAbstract();
 
+  double angleScreenConstantYRCommon(double radius,
+                                     IntersectionType intersectionTypeh) const; /// Solves angleScreenConstantYRHighAngle and angleScreenConstantYRLowAngle
   void generatePreviousAndNextPoints (double radius,
                                       int i,
                                       QPointF &posGraphPrevious,
                                       QPointF &posGraphNext,
                                       QPointF &posScreen) const;
-  QPointF posScreenConstantXTForHighLowYR (double radius,
-                                           bool wantHigh) const;
-  QPointF posScreenConstantYRForHighLowXT (double radius,
-                                           bool wantHigh) const;
+  QPointF posScreenConstantXTCommon (double radius,
+                                     IntersectionType intersectionType) const; /// Solves posScreenConstantXTForHighYR and posScreenConstantXTForLowYR
+  QPointF posScreenConstantYRCommon (double radius,
+                                     IntersectionType intersectionType) const; /// Solves posScreenConstantYRHighXT and posScreenConstantYRLowXT
 
   DocumentModelGuideline m_modelGuideline;
   Transformation m_transformation;
-  QPointF m_posCenterScreen;
+  QPointF m_posClickScreen;
 
 };
 

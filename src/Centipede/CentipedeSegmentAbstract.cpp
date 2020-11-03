@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "CentipedeSegmentAbstract.h"
+#include "mmsubs.h"
 #include <qmath.h>
 #include <QPointF>
 #include "Transformation.h"
@@ -14,16 +15,129 @@ const double PI = 3.1415926535;
 
 CentipedeSegmentAbstract::CentipedeSegmentAbstract(const DocumentModelGuideline &modelGuideline,
                                                    const Transformation &transformation,
-                                                   const QPointF &posCenterScreen) :
+                                                   const QPointF &posClickScreen) :
   m_modelGuideline (modelGuideline),
   m_transformation (transformation),
-  m_posCenterScreen (posCenterScreen)
+  m_posClickScreen (posClickScreen)
 {
 }
 
 CentipedeSegmentAbstract::~CentipedeSegmentAbstract ()
 {
 }
+
+double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radius,
+                                                              IntersectionType intersectionType) const
+{
+  QPointF posScreenBest;
+  double xTBest = 0;
+  double angleBest = 0;
+
+  // Click point
+  QPointF posClickGraph;
+  m_transformation.transformScreenToRawGraph (m_posClickScreen,
+                                              posClickGraph);
+  double xClick = posClickGraph.x();
+  double yClick = posClickGraph.y();
+
+  // Origin and orthogonal basis vectors along 0 degrees and 90 degrees. A complicationi is that log
+  // coordinates may be in use so the dynamic range of one or both coordinates could be huge - to
+  // prevent roundoff issues we work in linear cartesian coordinates rather than raw graph coordinates.
+  //
+  // This also prevents issues with the origin being at range=zero and range having log scale.
+  //
+  // This also prevents issues with degrees versus radians versus gradians versus ...
+  QPointF posOriginScreen, posXDirectionScreen, posYDirectionScreen;
+  transformation().transformLinearCartesianGraphToScreen (QPointF (0,  0),
+                                                          posOriginScreen);
+  transformation().transformLinearCartesianGraphToScreen (QPointF (1, 0),
+                                                          posXDirectionScreen);
+  transformation().transformLinearCartesianGraphToScreen (QPointF (0, 1),
+                                                          posYDirectionScreen);
+  QPointF basisVectorX = (posXDirectionScreen - posOriginScreen) / magnitude (posXDirectionScreen - posOriginScreen);
+  QPointF basisVectorY = (posYDirectionScreen - posOriginScreen) / magnitude (posYDirectionScreen - posOriginScreen);
+
+  // Iterate points around the circle
+  bool isFirst = true;
+  for (int i = 0; i < NUM_CIRCLE_POINTS; i++) {
+    QPointF posGraphPrevious, posGraphNext, posScreenPrevious;
+    generatePreviousAndNextPoints (radius,
+                                   i,
+                                   posGraphPrevious,
+                                   posGraphNext,
+                                   posScreenPrevious);
+
+    double xGraphPrevious = posGraphPrevious.x();
+    double yGraphPrevious = posGraphPrevious.y();
+    double yGraphNext = posGraphNext.y();
+    double epsilon = qAbs (yGraphPrevious - yGraphNext) / 10.0; // Allow for roundoff
+
+    bool save = false;
+    if (intersectionType == INTERSECTION_CENTER) {
+
+      // INTERSECTION_CENTER
+      save = isFirst ||
+          (qAbs (xGraphPrevious - xClick) < qAbs (xTBest - xClick));
+
+    } else {
+
+      // INTERSECTION_HIGH or INTERSECTION_LOW
+      bool transitionUp = (yGraphPrevious - epsilon <= yClick) && (yClick < yGraphNext + epsilon);
+      bool transitionDown = (yGraphNext - epsilon <= yClick) && (yClick < yGraphPrevious + epsilon);
+
+      if (transitionDown || transitionUp) {
+
+        // Transition occurred so save if best so far
+        if (isFirst ||
+            (intersectionType == INTERSECTION_HIGH && xGraphPrevious > xTBest) ||
+            (intersectionType == INTERSECTION_LOW && xGraphPrevious < xTBest)) {
+
+          save = true;
+        }
+      }
+    }
+
+    if (save) {
+
+      // Best so far so save
+      isFirst = false;
+      posScreenBest = posScreenPrevious;
+      xTBest = xGraphPrevious;
+
+      // Calculate angle
+      QPointF delta = posScreenPrevious - posOriginScreen;
+      angleBest = angleFromBasisVectors (basisVectorX.x(),
+                                         basisVectorX.y(),
+                                         basisVectorY.x(),
+                                         basisVectorY.y(),
+                                         delta.x(),
+                                         delta.y());
+    }
+  }
+
+  return angleBest;
+}
+
+double CentipedeSegmentAbstract::angleScreenConstantYRCenterAngle (double radius) const
+{
+  return angleScreenConstantYRCommon (radius,
+                                      INTERSECTION_CENTER);
+}
+
+double CentipedeSegmentAbstract::angleScreenConstantYRHighAngle (double radius) const
+{
+  return angleScreenConstantYRCommon (radius,
+                                      INTERSECTION_HIGH);
+}
+
+double CentipedeSegmentAbstract::angleScreenConstantYRLowAngle (double radius) const
+{
+  return angleScreenConstantYRCommon (radius,
+                                      INTERSECTION_LOW);
+}
+
+double angleScreenConstantYRLowAngle (double radius);
+
 
 void CentipedeSegmentAbstract::generatePreviousAndNextPoints (double radius,
                                                               int i,
@@ -33,9 +147,9 @@ void CentipedeSegmentAbstract::generatePreviousAndNextPoints (double radius,
 {
   double angleBefore = 2.0 * PI * (double) i / (double) NUM_CIRCLE_POINTS;
   double angleAfter = 2.0 * PI * (double) (i + 1) / (double) NUM_CIRCLE_POINTS;
-  posScreenPrevious = m_posCenterScreen + QPointF (radius * cos (angleBefore),
+  posScreenPrevious = m_posClickScreen + QPointF (radius * cos (angleBefore),
                                                    radius * sin (angleBefore));
-  QPointF posScreenNext = m_posCenterScreen + QPointF (radius * cos (angleAfter),
+  QPointF posScreenNext = m_posClickScreen + QPointF (radius * cos (angleAfter),
                                                        radius * sin (angleAfter));
 
   m_transformation.transformScreenToRawGraph (posScreenPrevious,
@@ -49,34 +163,25 @@ const DocumentModelGuideline &CentipedeSegmentAbstract::modelGuideline () const
   return m_modelGuideline;
 }
 
-QPointF CentipedeSegmentAbstract::posCenterScreen () const
+QPointF CentipedeSegmentAbstract::posClickScreen () const
 {
-  return m_posCenterScreen;
+  return m_posClickScreen;
 }
 
-QPointF CentipedeSegmentAbstract::posScreenConstantXTHighYR (double radius) const
-{
-  return posScreenConstantXTForHighLowYR (radius,
-                                         true);
-}
-
-QPointF CentipedeSegmentAbstract::posScreenConstantXTLowYR (double radius) const
-{
-  return posScreenConstantXTForHighLowYR (radius,
-                                         false);
-}
-
-QPointF CentipedeSegmentAbstract::posScreenConstantXTForHighLowYR (double radius,
-                                                                   bool wantHigh) const
+QPointF CentipedeSegmentAbstract::posScreenConstantXTCommon (double radius,
+                                                             IntersectionType intersectionType) const
 {
   QPointF posScreenBest;
   double yRBest = 0;
 
-  QPointF posCenterGraph;
-  m_transformation.transformScreenToRawGraph (m_posCenterScreen,
-                                              posCenterGraph);
-  double xCenter = posCenterGraph.x();
+  // Click point
+  QPointF posClickGraph;
+  m_transformation.transformScreenToRawGraph (m_posClickScreen,
+                                              posClickGraph);
+  double xClick = posClickGraph.x();
+  double yClick = posClickGraph.y();
 
+  // Iterate points around the circle
   bool isFirst = true;
   for (int i = 0; i < NUM_CIRCLE_POINTS; i++) {
     QPointF posGraphPrevious, posGraphNext, posScreenPrevious;
@@ -87,54 +192,73 @@ QPointF CentipedeSegmentAbstract::posScreenConstantXTForHighLowYR (double radius
                                    posScreenPrevious);
 
     double xGraphPrevious = posGraphPrevious.x();
+    double yGraphPrevious = posGraphPrevious.y();
     double xGraphNext = posGraphNext.x();
     double epsilon = qAbs (xGraphPrevious - xGraphNext) / 10.0; // Allow for roundoff
 
-    bool transitionUp = (xGraphPrevious - epsilon <= xCenter) && (xCenter < xGraphNext + epsilon);
-    bool transitionDown = (xGraphNext - epsilon <= xCenter) && (xCenter < xGraphPrevious + epsilon);
+    bool save = false;
+    if (intersectionType == INTERSECTION_CENTER) {
 
-    if (transitionDown || transitionUp) {
+      // INTERSECTION_CENTER
+      save = isFirst ||
+          (qAbs (yGraphPrevious - yClick) < qAbs (yRBest - yClick));
 
-      // Transition occurred so save if best so far
-      double y = posGraphPrevious.y();
-      if (isFirst ||
-          (wantHigh && y > yRBest) ||
-          (!wantHigh && y < yRBest)) {
+    } else {
 
-        // Best so far so save
-        isFirst = false;
-        posScreenBest = posScreenPrevious;
-        yRBest = y;
+      // INTERSECTION_HIGH or INTERSECTION_LOW
+      bool transitionUp = (xGraphPrevious - epsilon <= xClick) && (xClick < xGraphNext + epsilon);
+      bool transitionDown = (xGraphNext - epsilon <= xClick) && (xClick < xGraphPrevious + epsilon);
+
+      if (transitionDown || transitionUp) {
+
+        // Transition occurred so save if best so far
+        if (isFirst ||
+            (intersectionType == INTERSECTION_HIGH && yGraphPrevious > yRBest) ||
+            (intersectionType == INTERSECTION_LOW && yGraphPrevious < yRBest)) {
+
+          save = true;
+        }
       }
+    }
+
+    if  (save) {
+
+      // Best so far so save
+      isFirst = false;
+      posScreenBest = posScreenPrevious;
+      yRBest = yGraphPrevious;
     }
   }
 
   return posScreenBest;
 }
 
-QPointF CentipedeSegmentAbstract::posScreenConstantYRHighXT (double radius) const
+QPointF CentipedeSegmentAbstract::posScreenConstantXTForHighYR (double radius) const
 {
-  return posScreenConstantYRForHighLowXT (radius,
-                                         true);
+  return posScreenConstantXTCommon (radius,
+                                    INTERSECTION_HIGH);
 }
 
-QPointF CentipedeSegmentAbstract::posScreenConstantYRLowXT (double radius) const
+QPointF CentipedeSegmentAbstract::posScreenConstantXTForLowYR (double radius) const
 {
-  return posScreenConstantYRForHighLowXT (radius,
-                                         false);
+  return posScreenConstantXTCommon (radius,
+                                    INTERSECTION_LOW);
 }
 
-QPointF CentipedeSegmentAbstract::posScreenConstantYRForHighLowXT (double radius,
-                                                                   bool wantHigh) const
+QPointF CentipedeSegmentAbstract::posScreenConstantYRCommon (double radius,
+                                                             IntersectionType intersectionType) const
 {
   QPointF posScreenBest;
   double xTBest = 0;
 
-  QPointF posCenterGraph;
-  m_transformation.transformScreenToRawGraph (m_posCenterScreen,
-                                              posCenterGraph);
-  double yCenter = posCenterGraph.y();
+  // Click point
+  QPointF posClickGraph;
+  m_transformation.transformScreenToRawGraph (m_posClickScreen,
+                                              posClickGraph);
+  double xClick = posClickGraph.x();
+  double yClick = posClickGraph.y();
 
+  // Iterate points around the circle
   bool isFirst = true;
   for (int i = 0; i < NUM_CIRCLE_POINTS; i++) {
     QPointF posGraphPrevious, posGraphNext, posScreenPrevious;
@@ -144,30 +268,64 @@ QPointF CentipedeSegmentAbstract::posScreenConstantYRForHighLowXT (double radius
                                    posGraphNext,
                                    posScreenPrevious);
 
+    double xGraphPrevious = posGraphPrevious.x();
     double yGraphPrevious = posGraphPrevious.y();
     double yGraphNext = posGraphNext.y();
     double epsilon = qAbs (yGraphPrevious - yGraphNext) / 10.0; // Allow for roundoff
 
-    bool transitionUp = (yGraphPrevious - epsilon <= yCenter) && (yCenter < yGraphNext + epsilon);
-    bool transitionDown = (yGraphNext - epsilon <= yCenter) && (yCenter < yGraphPrevious + epsilon);
+    bool save = false;
+    if (intersectionType == INTERSECTION_CENTER) {
 
-    if (transitionDown || transitionUp) {
+      // INTERSECTION_CENTER
+      save = isFirst ||
+          (qAbs (xGraphPrevious - xClick) < qAbs (xTBest - xClick));
 
-      // Transition occurred so save if best so far
-      double x = posGraphPrevious.x();
-      if (isFirst ||
-          (wantHigh && x > xTBest) ||
-          (!wantHigh && x < xTBest)) {
+    } else {
 
-        // Best so far so save
-        isFirst = false;
-        posScreenBest = posScreenPrevious;
-        xTBest = x;
+      // INTERSECTION_HIGH or INTERSECTION_LOW
+      bool transitionUp = (yGraphPrevious - epsilon <= yClick) && (yClick < yGraphNext + epsilon);
+      bool transitionDown = (yGraphNext - epsilon <= yClick) && (yClick < yGraphPrevious + epsilon);
+
+      if (transitionDown || transitionUp) {
+
+        // Transition occurred so save if best so far
+        if (isFirst ||
+            (intersectionType == INTERSECTION_HIGH && xGraphPrevious > xTBest) ||
+            (intersectionType == INTERSECTION_LOW && xGraphPrevious < xTBest)) {
+
+          save = true;
+        }
       }
+    }
+
+    if (save) {
+
+      // Best so far so save
+      isFirst = false;
+      posScreenBest = posScreenPrevious;
+      xTBest = xGraphPrevious;
     }
   }
 
   return posScreenBest;
+}
+
+QPointF CentipedeSegmentAbstract::posScreenConstantYRForCenterXT (double radius) const
+{
+  return posScreenConstantYRCommon (radius,
+                                    INTERSECTION_CENTER);
+}
+
+QPointF CentipedeSegmentAbstract::posScreenConstantYRForHighXT (double radius) const
+{
+  return posScreenConstantYRCommon (radius,
+                                    INTERSECTION_HIGH);
+}
+
+QPointF CentipedeSegmentAbstract::posScreenConstantYRForLowXT (double radius) const
+{
+  return posScreenConstantYRCommon (radius,
+                                    INTERSECTION_LOW);
 }
 
 Transformation CentipedeSegmentAbstract::transformation () const
