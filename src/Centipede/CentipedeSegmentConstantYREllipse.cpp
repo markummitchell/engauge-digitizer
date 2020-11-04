@@ -8,6 +8,7 @@
 #include "EnumsToQt.h"
 #include "GraphicsArcItem.h"
 #include "mmsubs.h"
+#include <qdebug.h>
 #include <qmath.h>
 #include <QPen>
 
@@ -105,6 +106,7 @@ void CentipedeSegmentConstantYREllipse::updateRadius (double radius)
   while (angleHigh < angleLow) {
     angleHigh += TICS_PER_CYCLE;
   }
+  qDebug () << "low=" << angleLow << " delta=" << angleHigh - angleLow;
   m_graphicsItem->setStartAngle (angleLow);
   m_graphicsItem->setSpanAngle (angleHigh - angleLow);
 }

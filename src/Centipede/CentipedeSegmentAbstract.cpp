@@ -7,10 +7,11 @@
 #include "CentipedeSegmentAbstract.h"
 #include "mmsubs.h"
 #include <qmath.h>
+#include <qdebug.h>
 #include <QPointF>
 #include "Transformation.h"
 
-const int NUM_CIRCLE_POINTS = 2000; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
+const int NUM_CIRCLE_POINTS = 100; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
 const double PI = 3.1415926535;
 
 CentipedeSegmentAbstract::CentipedeSegmentAbstract(const DocumentModelGuideline &modelGuideline,
@@ -86,7 +87,6 @@ double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radius,
       bool transitionDown = (yGraphNext - epsilon <= yClick) && (yClick < yGraphPrevious + epsilon);
 
       if (transitionDown || transitionUp) {
-
         // Transition occurred so save if best so far
         if (isFirst ||
             (intersectionType == INTERSECTION_HIGH && xGraphPrevious > xTBest) ||
@@ -94,7 +94,7 @@ double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radius,
 
           save = true;
         }
-      }
+      }    
     }
 
     if (save) {

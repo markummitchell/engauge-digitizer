@@ -36,7 +36,7 @@ extern double angleFromBasisVectors (double xBasisX,
                                      double x,
                                      double y)
 {
-  double dotX = xBasisX * x + yBasisY * y;
+  double dotX = xBasisX * x + xBasisY * y;
   double dotY = yBasisX * x + yBasisY * y;
   return qAtan2 (dotY, dotX);
 }
