@@ -136,6 +136,11 @@ void DigitizeStateGuideline::handleMouseMove (CmdMediator *cmdMediator,
 void DigitizeStateGuideline::handleMousePress (CmdMediator *cmdMediator,
                                                QPointF posScreen)
 {
+  if (m_centipedePair) {
+    // Remove previous instance
+    killCentipede();
+  }
+
   m_centipedePair = new CentipedePair (context().mainWindow().scene(),
                                        context().mainWindow().transformation(),
                                        cmdMediator->document().modelGuideline(),
