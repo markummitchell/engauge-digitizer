@@ -12,15 +12,19 @@
 #include "CmdMediator.h"
 #include "ColorFilter.h"
 #include "CurveStyles.h"
+#include "DataKey.h"
 #include "DigitizeStateContext.h"
 #include "DigitizeStateGuideline.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
+#include "GraphicsItemType.h"
+#include "GraphicsScene.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QApplication>
 #include <QCursor>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QImage>
 #include <qmath.h>
@@ -48,6 +52,8 @@ void DigitizeStateGuideline::begin (CmdMediator * /* cmdMediator */,
                                     DigitizeState /* previousState */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateGuideline::beginn";
+
+  nonGuidelinesActivation (false);
 }
 
 bool DigitizeStateGuideline::canPaste (const Transformation & /* transformation */,
@@ -66,6 +72,9 @@ QCursor DigitizeStateGuideline::cursor(CmdMediator * /* cmdMediator */) const
 void DigitizeStateGuideline::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateGuideline::end";
+
+  killCentipede();
+  nonGuidelinesActivation (true);
 }
 
 bool DigitizeStateGuideline::guidelinesAreSelectable () const
@@ -136,10 +145,7 @@ void DigitizeStateGuideline::handleMouseMove (CmdMediator *cmdMediator,
 void DigitizeStateGuideline::handleMousePress (CmdMediator *cmdMediator,
                                                QPointF posScreen)
 {
-  if (m_centipedePair) {
-    // Remove previous instance
-    killCentipede();
-  }
+  killCentipede(); // Remove previous instance if there is one so it does not get orphaned
 
   m_centipedePair = new CentipedePair (context().mainWindow().scene(),
                                        context().mainWindow().transformation(),
@@ -155,8 +161,25 @@ void DigitizeStateGuideline::handleMouseRelease (CmdMediator * /* cmdMediator */
 
 void DigitizeStateGuideline::killCentipede ()
 {
-  delete m_centipedePair;
-  m_centipedePair = nullptr;
+  if (m_centipedePair) {
+    delete m_centipedePair;
+    m_centipedePair = nullptr;
+  }
+}
+
+void DigitizeStateGuideline::nonGuidelinesActivation (bool nonGuidelinesAreActive)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateGuideline::nonGuidelinesActivation";
+
+  QList<QGraphicsItem*> items = context().mainWindow().scene().items();
+  QList<QGraphicsItem*>::iterator itr;
+  for (itr = items.begin (); itr != items.end (); itr++) {
+
+    QGraphicsItem *item = *itr;
+    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) != GRAPHICS_ITEM_TYPE_GUIDELINE) {
+       item->setFlag (QGraphicsItem::ItemIsSelectable, nonGuidelinesAreActive);
+    }
+  }
 }
 
 QString DigitizeStateGuideline::state() const
