@@ -6,7 +6,7 @@
 
 #include "CentipedeSegmentConstantYREllipse.h"
 #include "EnumsToQt.h"
-#include "GraphicsArcItem.h"
+#include "GraphicsArcAsPathItem.h"
 #include "mmsubs.h"
 #include <qdebug.h>
 #include <qmath.h>
@@ -67,7 +67,7 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
                        posOriginScreen + QPointF (aAligned,
                                                   -1.0 * bAligned));
 
-  m_graphicsItem = new GraphicsArcItem (rectBounding);
+  m_graphicsItem = new GraphicsArcAsPathItem (rectBounding);
 
   QColor color (ColorPaletteToQColor (modelGuideline.lineColor()));
 

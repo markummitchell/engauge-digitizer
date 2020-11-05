@@ -9,9 +9,10 @@
 
 #include "CentipedeSegmentAbstract.h"
 
-class GraphicsArcItem;
+class GraphicsArcAsPathItem;
 
-/// Centipede for constant YR using QGraphicsEllipseItem
+/// Centipede for constant YR using an implementation of QGraphicsEllipseItem
+/// for which QTBUG-80937 has been fixed so various artifacts are prevented
 class CentipedeSegmentConstantYREllipse : public CentipedeSegmentAbstract
 {
 public:
@@ -28,7 +29,7 @@ public:
 private:
   CentipedeSegmentConstantYREllipse();
 
-  GraphicsArcItem *m_graphicsItem;
+  GraphicsArcAsPathItem *m_graphicsItem;
 
   // Two points where circle around click point intersects constant coordinate line
   QPointF m_posLow;

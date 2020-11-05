@@ -11,6 +11,11 @@
 
 /// Draw an arc as an ellipse but without lines from the center to the start and end points
 ///
+/// Note that QGraphicsEllipseItem needs help when drawing with any span angle less than 360 degrees.
+/// Without help, there are artifacts left on the screen as the start and/or span angle get changed,
+/// the start and stop angles drawn are unrelated to the requested start and stop angles, and some pixels
+/// do not get drawn. See QTDEBUG-80937
+///
 /// Originally this class overrode QGraphicsEllipseItem::boundingRect and called QGraphicsScene::boundingRect.
 /// However, that led to an infinite loop since QGraphicsScene::boundingRect looped back around to
 /// QGraphicsEllipseItem::boundingRect
