@@ -321,22 +321,22 @@ Kiris koordïnattarın an</translation>
 <context>
     <name>CreateActions</name>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="59"/>
+        <location filename="../src/Create/CreateActions.cpp" line="62"/>
         <source>Select Tool</source>
         <translation>құралды таңдау</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="60"/>
+        <location filename="../src/Create/CreateActions.cpp" line="63"/>
         <source>Shift+F2</source>
         <translation>Shift+F2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="62"/>
+        <location filename="../src/Create/CreateActions.cpp" line="65"/>
         <source>Select points on screen.</source>
         <translation>Экрандағы нүктелерді таңдаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="63"/>
+        <location filename="../src/Create/CreateActions.cpp" line="66"/>
         <source>Select
 
 Select points on the screen.</source>
@@ -348,22 +348,22 @@ Tañdañız
 </translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="67"/>
+        <location filename="../src/Create/CreateActions.cpp" line="70"/>
         <source>Axis Point Tool</source>
         <translation>Ақ нүкте құралы</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="68"/>
+        <location filename="../src/Create/CreateActions.cpp" line="71"/>
         <source>Shift+F3</source>
         <translation>Shift+F3</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="70"/>
+        <location filename="../src/Create/CreateActions.cpp" line="73"/>
         <source>Digitize axis points for a graph.</source>
         <translation>Гистограмма үшін ось нүктелерін санау.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="71"/>
+        <location filename="../src/Create/CreateActions.cpp" line="74"/>
         <source>Digitize Axis Point
 
 Digitizes an axis point for a graph by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. After Import and Import (Advanced), three axis points with (X1,Y1) (X2,Y2) (X3,Y3) coordinates can be digitized to define the graph coordinates. Optionally, after Import (Advanced) four axis points with (X1) (X2) (Y3) (Y4) coordinates can be digitized to define the graph coordinates.
@@ -376,22 +376,23 @@ This tool is disabled when a complete set of axis points has been defined, or af
 Бұл құрал ось нүктелерінің толық жиынтығы анықталғанда немесе Scale Bar таңдалса, Import (Advanced) параметрінен кейін өшіріледі.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="82"/>
+        <location filename="../src/Create/CreateActions.cpp" line="85"/>
         <source>Scale Bar Tool</source>
         <translation>Масштабты құралы</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="83"/>
+        <location filename="../src/Create/CreateActions.cpp" line="86"/>
+        <location filename="../src/Create/CreateActions.cpp" line="141"/>
         <source>Shift+F8</source>
         <translation>Shift+F8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="85"/>
+        <location filename="../src/Create/CreateActions.cpp" line="88"/>
         <source>Digitize scale bar for a map. Requires Import (Advanced).</source>
         <translation>Картаға арналған масштабтағы жолақты сандық жолға салыңыз. Импорттауды талап етеді (қосымша).</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="86"/>
+        <location filename="../src/Create/CreateActions.cpp" line="89"/>
         <source>Digitize Scale Bar
 
 Digitize a scale bar for a map by clicking and dragging. The length of the scale bar is then entered. In a map, the two endpoints of the scale bar define the distances in graph coordinates.
@@ -410,22 +411,22 @@ This tool is disabled when a scale bar has been defined, or if axis points were 
 </translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="95"/>
+        <location filename="../src/Create/CreateActions.cpp" line="98"/>
         <source>Curve Point Tool</source>
         <translation>Қисық нүкте құралы</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="96"/>
+        <location filename="../src/Create/CreateActions.cpp" line="99"/>
         <source>Shift+F4</source>
         <translation>Shift+F4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="98"/>
+        <location filename="../src/Create/CreateActions.cpp" line="101"/>
         <source>Digitize curve points.</source>
         <translation>Қисық нүктелерді цифрлау.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="99"/>
+        <location filename="../src/Create/CreateActions.cpp" line="102"/>
         <source>Digitize Curve Point
 
 Digitizes a curve point by placing a new point at the cursor after a mouse click. Use this mode to digitize points along curves one by one.
@@ -438,22 +439,22 @@ New points will be assigned to the currently selected curve.</source>
 Жаңа нүктелер таңдалған қисығыға тағайындалады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="106"/>
+        <location filename="../src/Create/CreateActions.cpp" line="109"/>
         <source>Point Match Tool</source>
         <translation>Нүктелік сәйкестік құралы</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="107"/>
+        <location filename="../src/Create/CreateActions.cpp" line="110"/>
         <source>Shift+F5</source>
         <translation>Shift+F5</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="109"/>
+        <location filename="../src/Create/CreateActions.cpp" line="112"/>
         <source>Digitize curve points in a point plot by matching a point.</source>
         <translation>Нүктені сәйкестендіру арқылы нүкте схемасында қисық нүктелерін сандармен белгілеңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="110"/>
+        <location filename="../src/Create/CreateActions.cpp" line="113"/>
         <source>Digitize Curve Points by Point Matching
 
 Digitizes curve points in a point plot by finding points that match a sample point. The process starts by selecting a representative sample point.
@@ -466,22 +467,22 @@ New points will be assigned to the currently selected curve.</source>
 Жаңа нүктелер таңдалған қисығыға тағайындалады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="116"/>
+        <location filename="../src/Create/CreateActions.cpp" line="119"/>
         <source>Color Picker Tool</source>
         <translation>Түс таңдау құралы</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="117"/>
+        <location filename="../src/Create/CreateActions.cpp" line="120"/>
         <source>Shift+F6</source>
         <translation>Shift+F6</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="119"/>
+        <location filename="../src/Create/CreateActions.cpp" line="122"/>
         <source>Select color settings for filtering in Segment Fill mode.</source>
         <translation>Сегмент Толтыру режимінде сүзу үшін түс параметрлерін таңдаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="120"/>
+        <location filename="../src/Create/CreateActions.cpp" line="123"/>
         <source>Select color settings for Segment Fill filtering
 
 Select a pixel along the currently selected curve. That pixel and its neighbors will define the filter settings (color, brightness, and so on) of the currently selected curve while in Segment Fill mode.</source>
@@ -490,22 +491,22 @@ Select a pixel along the currently selected curve. That pixel and its neighbors 
 Таңдалған қисық сызық бойынша пиксельді таңдаңыз. Бұл пиксель және оның көршілері Segment Fill режимінде болған кезде таңдалған қисықтың сүзгі параметрлерін (түсі, жарықтығы және т.б.) анықтайды.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="126"/>
+        <location filename="../src/Create/CreateActions.cpp" line="129"/>
         <source>Segment Fill Tool</source>
         <translation>Сегментті толтыру құралы</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="127"/>
+        <location filename="../src/Create/CreateActions.cpp" line="130"/>
         <source>Shift+F7</source>
         <translation>Shift+F7</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="129"/>
+        <location filename="../src/Create/CreateActions.cpp" line="132"/>
         <source>Digitize curve points along a segment of a curve.</source>
         <translation>Қисық сегменттің қисық нүктелерін сандық кескіндеңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="130"/>
+        <location filename="../src/Create/CreateActions.cpp" line="133"/>
         <source>Digitize Curve Points With Segment Fill
 
 Digitizes curve points by placing new points along the highlighted segment under the cursor. Use this mode to quickly digitize multiple points along a curve with a single click.
@@ -518,17 +519,34 @@ New points will be assigned to the currently selected curve.</source>
 Жаңа нүктелер таңдалған қисығыға тағайындалады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="151"/>
+        <location filename="../src/Create/CreateActions.cpp" line="140"/>
+        <source>Guidelines Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="143"/>
+        <source>Digitize guidelines along constant coordinate values for aligning new points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="144"/>
+        <source>Digitize guidelines along constant coordinate values
+
+Guidelines can be placed along constant X or Y coordinates in cartesian coordinates, and T (theta) or R (range) coordinates in polar coordinates. Guidelines can help with aligning new points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="165"/>
         <source>&amp;Undo</source>
         <translation>Болдырмау</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="153"/>
+        <location filename="../src/Create/CreateActions.cpp" line="167"/>
         <source>Undo the last operation.</source>
         <translation>Соңғы әрекетті болдырмаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="154"/>
+        <location filename="../src/Create/CreateActions.cpp" line="168"/>
         <source>Undo
 
 Undo the last operation.</source>
@@ -537,17 +555,17 @@ Undo the last operation.</source>
 Соңғы әрекетті болдырмаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="158"/>
+        <location filename="../src/Create/CreateActions.cpp" line="172"/>
         <source>&amp;Redo</source>
         <translation>Қайталау</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="160"/>
+        <location filename="../src/Create/CreateActions.cpp" line="174"/>
         <source>Redo the last operation.</source>
         <translation>Соңғы әрекетті қайталаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="161"/>
+        <location filename="../src/Create/CreateActions.cpp" line="175"/>
         <source>Redo
 
 Redo the last operation.</source>
@@ -556,17 +574,17 @@ Redo the last operation.</source>
 Соңғы әрекетті қайталаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="165"/>
+        <location filename="../src/Create/CreateActions.cpp" line="179"/>
         <source>Cut</source>
         <translation>Кесу</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="167"/>
+        <location filename="../src/Create/CreateActions.cpp" line="181"/>
         <source>Cuts the selected points and copies them to the clipboard.</source>
         <translation>Таңдалған нүктелерді қиып алып, оларды аралық сақтағышқа көшіреді.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="168"/>
+        <location filename="../src/Create/CreateActions.cpp" line="182"/>
         <source>Cut
 
 Cuts the selected points and copies them to the clipboard.</source>
@@ -575,17 +593,17 @@ Cuts the selected points and copies them to the clipboard.</source>
 Таңдалған нүктелерді қиып алып, оларды аралық сақтағышқа көшіреді.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="172"/>
+        <location filename="../src/Create/CreateActions.cpp" line="186"/>
         <source>Copy</source>
         <translation>Көшіру</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="174"/>
+        <location filename="../src/Create/CreateActions.cpp" line="188"/>
         <source>Copies the selected points to the clipboard.</source>
         <translation>Таңдалған нүктелерді аралық сақтағышқа көшіреді.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="175"/>
+        <location filename="../src/Create/CreateActions.cpp" line="189"/>
         <source>Copy
 
 Copies the selected points to the clipboard.</source>
@@ -594,17 +612,17 @@ Copies the selected points to the clipboard.</source>
 Таңдалған нүктелерді аралық сақтағышқа көшіреді.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="179"/>
+        <location filename="../src/Create/CreateActions.cpp" line="193"/>
         <source>Paste</source>
         <translation>Қою</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="181"/>
+        <location filename="../src/Create/CreateActions.cpp" line="195"/>
         <source>Pastes the selected points from the clipboard.</source>
         <translation>Таңдалған нүктелерді аралық сақтағыштан өткізеді.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="182"/>
+        <location filename="../src/Create/CreateActions.cpp" line="196"/>
         <source>Paste
 
 Pastes the selected points from the clipboard. They will be assigned to the current curve.</source>
@@ -613,17 +631,17 @@ Pastes the selected points from the clipboard. They will be assigned to the curr
 Таңдалған нүктелерді аралық сақтағыштан өткізеді. Олар ағымдағы қисыққа тағайындалады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="186"/>
+        <location filename="../src/Create/CreateActions.cpp" line="200"/>
         <source>Delete</source>
         <translation>Жою</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="188"/>
+        <location filename="../src/Create/CreateActions.cpp" line="202"/>
         <source>Deletes the selected points, after copying them to the clipboard.</source>
         <translation>Таңдалған нүктелерді айырбастың буферіне көшіргеннен кейін жойылады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="189"/>
+        <location filename="../src/Create/CreateActions.cpp" line="203"/>
         <source>Delete
 
 Deletes the selected points, after copying them to the clipboard.</source>
@@ -632,17 +650,17 @@ Deletes the selected points, after copying them to the clipboard.</source>
 Таңдалған нүктелерді айырбастың буферіне көшіргеннен кейін жойылады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="193"/>
+        <location filename="../src/Create/CreateActions.cpp" line="207"/>
         <source>Paste As New</source>
         <translation>Жаңа ретінде қою</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="194"/>
+        <location filename="../src/Create/CreateActions.cpp" line="208"/>
         <source>Pastes an image from the clipboard.</source>
         <translation>Суретті аралық сақтағыштан өткізеді.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="195"/>
+        <location filename="../src/Create/CreateActions.cpp" line="209"/>
         <source>Paste as New
 
 Creates a new document by pasting an image from the clipboard.</source>
@@ -651,17 +669,17 @@ Creates a new document by pasting an image from the clipboard.</source>
 Суретті аралық сақтағыштан қою арқылы жаңа құжат жасайды.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="199"/>
+        <location filename="../src/Create/CreateActions.cpp" line="213"/>
         <source>Paste As New (Advanced)...</source>
         <translation>Жаңа (қосымша) ретінде қою ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="200"/>
+        <location filename="../src/Create/CreateActions.cpp" line="214"/>
         <source>Pastes an image from the clipboard, in advanced mode.</source>
         <translation>Суретті аралық сақтағыштан, озық режимде өткізеді.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="201"/>
+        <location filename="../src/Create/CreateActions.cpp" line="215"/>
         <source>Paste as New (Advanced)
 
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
@@ -670,22 +688,22 @@ Creates a new document by pasting an image from the clipboard, in advanced mode.
 Кескінді алмасу буферінен кеңейтілген режимде қою арқылы жаңа құжатты жасайды.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="210"/>
+        <location filename="../src/Create/CreateActions.cpp" line="224"/>
         <source>&amp;Import...</source>
         <translation>Импорт</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="211"/>
+        <location filename="../src/Create/CreateActions.cpp" line="225"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="212"/>
+        <location filename="../src/Create/CreateActions.cpp" line="226"/>
         <source>Creates a new document by importing a simple image.</source>
         <translation>Қарапайым кескінді импорттау арқылы жаңа құжатты жасайды.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="213"/>
+        <location filename="../src/Create/CreateActions.cpp" line="227"/>
         <source>Import Image
 
 Creates a new document by importing an image with a single coordinate system, and axes both coordinates known.
@@ -698,17 +716,17 @@ For more complicated images with multiple coordinate systems, and/or floating ax
 Көптеген координаттар жүйелері және / немесе өзгермелі осьтері бар күрделі кескіндер үшін, оның орнына Import (Advanced) пайдаланылады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="220"/>
+        <location filename="../src/Create/CreateActions.cpp" line="234"/>
         <source>Import (Advanced)...</source>
         <translation>Импорттау (қосымша) ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="221"/>
+        <location filename="../src/Create/CreateActions.cpp" line="235"/>
         <source>Creates a new document by importing an image with support for advanced feaures.</source>
         <translation>Қосымша бейнені қолдайтын кескінді импорттау арқылы жаңа құжатты жасайды.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="222"/>
+        <location filename="../src/Create/CreateActions.cpp" line="236"/>
         <source>Import (Advanced)
 
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
@@ -717,17 +735,17 @@ Creates a new document by importing an image with support for advanced feaures. 
 Қосымша бейнені қолдайтын кескінді импорттау арқылы жаңа құжатты жасайды. Кеңейтілген режимде көптеген координаталық жүйелер және / немесе өзгермелі осьтер болуы мүмкін.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="227"/>
+        <location filename="../src/Create/CreateActions.cpp" line="241"/>
         <source>Import (Image Replace)...</source>
         <translation>Импорттау (сурет ауыстыру) ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="228"/>
+        <location filename="../src/Create/CreateActions.cpp" line="242"/>
         <source>Imports a new image into the current document, replacing the existing image.</source>
         <translation>Қолданыстағы суретті ауыстырып, ағымдағы құжатқа жаңа суретті импорттайды.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="229"/>
+        <location filename="../src/Create/CreateActions.cpp" line="243"/>
         <source>Import (Image Replace)
 
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
@@ -736,17 +754,17 @@ Imports a new image into the current document. The existing image is replaced, a
 Ағымдағы құжатқа жаңа суретті импорттайды. Бұрыннан бар кескін ауыстырылады және құжаттың барлық қисықтары сақталады. Бұл операция ось нүктелерін және басқа параметрлерді қолданыстағы құжаттың басқа суретке қолдану үшін пайдалы.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="235"/>
+        <location filename="../src/Create/CreateActions.cpp" line="249"/>
         <source>&amp;Open...</source>
         <translation>Ашық</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="237"/>
+        <location filename="../src/Create/CreateActions.cpp" line="251"/>
         <source>Opens an existing document.</source>
         <translation> Бар құжатты ашады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="238"/>
+        <location filename="../src/Create/CreateActions.cpp" line="252"/>
         <source>Open Document
 
 Opens an existing document.</source>
@@ -755,17 +773,17 @@ Opens an existing document.</source>
 Бар құжатты ашады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="251"/>
+        <location filename="../src/Create/CreateActions.cpp" line="265"/>
         <source>&amp;Close</source>
         <translation>Жабық</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="253"/>
+        <location filename="../src/Create/CreateActions.cpp" line="267"/>
         <source>Closes the open document.</source>
         <translation>Ашық құжатты жабады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="254"/>
+        <location filename="../src/Create/CreateActions.cpp" line="268"/>
         <source>Close Document
 
 Closes the open document.</source>
@@ -774,17 +792,17 @@ Closes the open document.</source>
 Ашық құжатты жабады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="258"/>
+        <location filename="../src/Create/CreateActions.cpp" line="272"/>
         <source>&amp;Save</source>
         <translation>Сақтау</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="260"/>
+        <location filename="../src/Create/CreateActions.cpp" line="274"/>
         <source>Saves the current document.</source>
         <translation>Ағымдағы құжатты сақтайды.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="261"/>
+        <location filename="../src/Create/CreateActions.cpp" line="275"/>
         <source>Save Document
 
 Saves the current document.</source>
@@ -793,17 +811,17 @@ Saves the current document.</source>
 Ағымдағы құжатты сақтайды.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="265"/>
+        <location filename="../src/Create/CreateActions.cpp" line="279"/>
         <source>Save As...</source>
         <translation>Сақтау ретінде</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="267"/>
+        <location filename="../src/Create/CreateActions.cpp" line="281"/>
         <source>Saves the current document under a new filename.</source>
         <translation>Ағымдағы құжатты жаңа файл атауында сақтайды.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="268"/>
+        <location filename="../src/Create/CreateActions.cpp" line="282"/>
         <source>Save Document As
 
 Saves the current document under a new filename.</source>
@@ -812,22 +830,22 @@ Saves the current document under a new filename.</source>
 Ағымдағы құжатты жаңа файл атауында сақтайды.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="272"/>
+        <location filename="../src/Create/CreateActions.cpp" line="286"/>
         <source>Export...</source>
         <translation>Экспорт</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="273"/>
+        <location filename="../src/Create/CreateActions.cpp" line="287"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="274"/>
+        <location filename="../src/Create/CreateActions.cpp" line="288"/>
         <source>Exports the current document into a text file.</source>
         <translation>Ағымдағы құжатты мәтіндік файлға экспорттайды.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="275"/>
+        <location filename="../src/Create/CreateActions.cpp" line="289"/>
         <source>Export Document
 
 Exports the current document into a text file.</source>
@@ -836,17 +854,17 @@ Exports the current document into a text file.</source>
 Ағымдағы құжатты мәтіндік файлға экспорттайды.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="279"/>
+        <location filename="../src/Create/CreateActions.cpp" line="293"/>
         <source>&amp;Print...</source>
         <translation>Басып шығару</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="281"/>
+        <location filename="../src/Create/CreateActions.cpp" line="295"/>
         <source>Print the current document.</source>
         <translation> Ағымдағы құжатты басып шығарыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="282"/>
+        <location filename="../src/Create/CreateActions.cpp" line="296"/>
         <source>Print Document
 
 Print the current document to a printer or file.</source>
@@ -855,17 +873,17 @@ Print the current document to a printer or file.</source>
 Ағымдағы құжатты принтерге немесе файлға басып шығарыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="286"/>
+        <location filename="../src/Create/CreateActions.cpp" line="300"/>
         <source>&amp;Exit</source>
         <translation>Шығу</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="288"/>
+        <location filename="../src/Create/CreateActions.cpp" line="302"/>
         <source>Quits the application.</source>
         <translation>Бағдарламадан шығады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="289"/>
+        <location filename="../src/Create/CreateActions.cpp" line="303"/>
         <source>Exit
 
 Quits the application.</source>
@@ -874,17 +892,17 @@ Quits the application.</source>
 Бағдарламадан шығады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="298"/>
+        <location filename="../src/Create/CreateActions.cpp" line="312"/>
         <source>Checklist Guide Wizard</source>
         <translation>Тексеру тізімі нұсқаулығы шебері</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="300"/>
+        <location filename="../src/Create/CreateActions.cpp" line="314"/>
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
         <translation>Сандық белгілеу қадамдарын анықтау үшін импорттау кезінде тексеру парағы нұсқаулығының шеберін ашыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="301"/>
+        <location filename="../src/Create/CreateActions.cpp" line="315"/>
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
@@ -893,17 +911,17 @@ Use Checklist Guide Wizard during import to generate a checklist of steps for th
 Импорт кезінде бақылау тізімінің нұсқаушысы шебері импортталған құжаттың қадамдарының тізімін жасау үшін пайдаланыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="308"/>
+        <location filename="../src/Create/CreateActions.cpp" line="322"/>
         <source>Tutorial</source>
         <translation>Оқулық</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="309"/>
+        <location filename="../src/Create/CreateActions.cpp" line="323"/>
         <source>Play tutorial showing steps for digitizing curves</source>
         <translation>Оқулықта қисықтарды сандық өлшеу қадамдары көрсетілген</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="310"/>
+        <location filename="../src/Create/CreateActions.cpp" line="324"/>
         <source>Tutorial
 
 Play tutorial showing steps for digitizing points from curves drawn with lines and/or point</source>
@@ -912,17 +930,17 @@ Play tutorial showing steps for digitizing points from curves drawn with lines a
 Оқулықта сызықтармен және / немесе нүктелермен қисық сызықтардан нүктелерді сандық өлшеу қадамдары көрсетілген</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="316"/>
+        <location filename="../src/Create/CreateActions.cpp" line="330"/>
         <source>Help</source>
         <translation>Көмектесіңдер</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="318"/>
+        <location filename="../src/Create/CreateActions.cpp" line="332"/>
         <source>Help documentation</source>
         <translation>Анықтама құжаттамасы</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="319"/>
+        <location filename="../src/Create/CreateActions.cpp" line="333"/>
         <source>Help Documentation
 
 Searchable help documentation</source>
@@ -931,17 +949,17 @@ Searchable help documentation</source>
 Анықтамалық құжаттама</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="324"/>
+        <location filename="../src/Create/CreateActions.cpp" line="338"/>
         <source>About Engauge</source>
         <translation>Engauge туралы</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="325"/>
+        <location filename="../src/Create/CreateActions.cpp" line="339"/>
         <source>About the application.</source>
         <translation>Қолданба туралы.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="326"/>
+        <location filename="../src/Create/CreateActions.cpp" line="340"/>
         <source>About Engauge
 
 About the application.</source>
@@ -950,17 +968,17 @@ About the application.</source>
 Қолданба туралы.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="334"/>
+        <location filename="../src/Create/CreateActions.cpp" line="348"/>
         <source>Coordinates...</source>
         <translation>Координаттар ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="335"/>
+        <location filename="../src/Create/CreateActions.cpp" line="349"/>
         <source>Edit Coordinate settings.</source>
         <translation>Координатаның параметрлерін өзгертіңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="336"/>
+        <location filename="../src/Create/CreateActions.cpp" line="350"/>
         <source>Coordinate Settings
 
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
@@ -969,17 +987,17 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
 Координаталық параметрлер графикалық координаталардың кескіндегі пикселдермен қалай салыстырылатындығын анықтайды</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="340"/>
+        <location filename="../src/Create/CreateActions.cpp" line="354"/>
         <source>Curve List...</source>
         <translation>Қисық тізім...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="341"/>
+        <location filename="../src/Create/CreateActions.cpp" line="355"/>
         <source>Edit Curve List settings.</source>
         <translation>Қисық тізім параметрлерін өңдеу.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="342"/>
+        <location filename="../src/Create/CreateActions.cpp" line="356"/>
         <source>Curve List
 
 Curve list settings add, rename and/or remove curves in the current document</source>
@@ -988,17 +1006,17 @@ Curve list settings add, rename and/or remove curves in the current document</so
 Қисық тізім параметрлері ағымдағы құжатта қисықтарды қосу, атын өзгерту және / немесе жою</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="346"/>
+        <location filename="../src/Create/CreateActions.cpp" line="360"/>
         <source>Curve Properties...</source>
         <translation>Қисық сипаттар ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="347"/>
+        <location filename="../src/Create/CreateActions.cpp" line="361"/>
         <source>Edit Curve Properties settings.</source>
         <translation>Қисық қасиеттердің параметрлерін өңдеңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="348"/>
+        <location filename="../src/Create/CreateActions.cpp" line="362"/>
         <source>Curve Properties Settings
 
 Curves properties settings determine how each curve appears</source>
@@ -1007,17 +1025,17 @@ Curves properties settings determine how each curve appears</source>
 Қисық сипаттардың параметрлері әр қисықтың қалай пайда болатынын анықтайды</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="352"/>
+        <location filename="../src/Create/CreateActions.cpp" line="366"/>
         <source>Digitize Curve...</source>
         <translation>Қисықты санға айналдыру ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="353"/>
+        <location filename="../src/Create/CreateActions.cpp" line="367"/>
         <source>Edit Digitize Axis and Graph Curve settings.</source>
         <translation>Цифрландыру осі мен графиктің қисық параметрлерін өңдеңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="354"/>
+        <location filename="../src/Create/CreateActions.cpp" line="368"/>
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
@@ -1026,17 +1044,17 @@ Digitize Curve settings determine how points are digitized in Digitize Axis Poin
 Digitize Curve параметрлері нүктелер сандық санды қалай сандық жүйеге келтіретінін анықтайды</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="359"/>
+        <location filename="../src/Create/CreateActions.cpp" line="373"/>
         <source>Export Format...</source>
         <translation>Экспорттау пішімі ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="360"/>
+        <location filename="../src/Create/CreateActions.cpp" line="374"/>
         <source>Edit Export Format settings.</source>
         <translation>Экспорт форматының параметрлерін өңдеңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="361"/>
+        <location filename="../src/Create/CreateActions.cpp" line="375"/>
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
@@ -1045,17 +1063,17 @@ Export format settings affect how exported files are formatted</source>
 Экспорттау пішімі экспортталған файлдардың пішімделуіне әсер етеді</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="365"/>
+        <location filename="../src/Create/CreateActions.cpp" line="379"/>
         <source>Color Filter...</source>
         <translation>Түс сүзгісі ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="366"/>
+        <location filename="../src/Create/CreateActions.cpp" line="380"/>
         <source>Edit Color Filter settings.</source>
         <translation>Түс сүзгісінің параметрлерін өзгерту.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="367"/>
+        <location filename="../src/Create/CreateActions.cpp" line="381"/>
         <source>Color Filter Settings
 
 Color filtering simplifies the graphs for easier Point Matching and Segment Filling</source>
@@ -1064,17 +1082,17 @@ Color filtering simplifies the graphs for easier Point Matching and Segment Fill
 Түсті сүзу нүктелерді сәйкестендіру және сегментке толтыруды жеңілдету үшін графиктерді жеңілдетеді</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="371"/>
+        <location filename="../src/Create/CreateActions.cpp" line="385"/>
         <source>Axes Checker...</source>
         <translation>Біліктерді тексеру ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="372"/>
+        <location filename="../src/Create/CreateActions.cpp" line="386"/>
         <source>Edit Axes Checker settings.</source>
         <translation>Біліктерді тексеру параметрлерін өңдеңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="373"/>
+        <location filename="../src/Create/CreateActions.cpp" line="387"/>
         <source>Axes Checker Settings
 
 Axes checker can reveal any axis point mistakes, which are otherwise hard to find.</source>
@@ -1083,17 +1101,17 @@ Axes checker can reveal any axis point mistakes, which are otherwise hard to fin
 Біліктерді тексергіштің көмегімен кез келген қателіктерді табуға болады, оларды табу қиын.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="377"/>
+        <location filename="../src/Create/CreateActions.cpp" line="391"/>
         <source>Grid Line Display...</source>
         <translation>Тор сызығын көрсету ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="378"/>
+        <location filename="../src/Create/CreateActions.cpp" line="392"/>
         <source>Edit Grid Line Display settings.</source>
         <translation>Тор сызығының дисплей параметрлерін өңдеңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="379"/>
+        <location filename="../src/Create/CreateActions.cpp" line="393"/>
         <source>Grid Line Display Settings
 
 Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions.</source>
@@ -1102,17 +1120,17 @@ Grid lines displayed on the graph can provide more accuracy than the Axis Checke
 Графикте көрсетілген тор сызықтары бұрмаланған графиктер үшін Axis Checker-ге қарағанда дәлірек бола алады. Бұрмаланған графикте тор сызықтарын әртүрлі аймақтардағы дәлдікті дәлдеу үшін пайдалануға болады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="384"/>
+        <location filename="../src/Create/CreateActions.cpp" line="398"/>
         <source>Grid Line Removal...</source>
         <translation>Торды жою ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="385"/>
+        <location filename="../src/Create/CreateActions.cpp" line="399"/>
         <source>Edit Grid Line Removal settings.</source>
         <translation>Тор сызығын шығару параметрлерін өңдеңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="386"/>
+        <location filename="../src/Create/CreateActions.cpp" line="400"/>
         <source>Grid Line Removal Settings
 
 Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when Color Filtering is not able to separate grid lines from curve lines.</source>
@@ -1121,17 +1139,34 @@ Grid line removal isolates curve lines for easier Point Matching and Segment Fil
 Торды алып тастау қисық сызықтарды оңай сәйкестендіру үшін және бөлімді толтыру үшін бөледі, егер түстерді сүзу тор сызықтарын қисық сызықтардан бөле алмаса.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="391"/>
+        <location filename="../src/Create/CreateActions.cpp" line="405"/>
+        <source>Guideline...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="406"/>
+        <source>Guideline Settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="407"/>
+        <source>Guideline Settings
+
+Guidelines displayed on the graph can help to align points along constant coordinate lines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="411"/>
         <source>Point Match...</source>
         <translation>Нүктелік сәйкестік ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="392"/>
+        <location filename="../src/Create/CreateActions.cpp" line="412"/>
         <source>Edit Point Match settings.</source>
         <translation>Нүктелік сәйкестік параметрлерін өңдеңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="393"/>
+        <location filename="../src/Create/CreateActions.cpp" line="413"/>
         <source>Point Match Settings
 
 Point match settings determine how points are matched while in Point Match mode</source>
@@ -1140,17 +1175,17 @@ Point match settings determine how points are matched while in Point Match mode<
 Нүктелерді сәйкестендіру параметрлері Point Match режимінде ұпайлардың сәйкестігін анықтайды</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="397"/>
+        <location filename="../src/Create/CreateActions.cpp" line="417"/>
         <source>Segment Fill...</source>
         <translation>Сегментті толтыру ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="398"/>
+        <location filename="../src/Create/CreateActions.cpp" line="418"/>
         <source>Edit Segment Fill settings.</source>
         <translation>Сегментті толтыру параметрлерін өңдеңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="399"/>
+        <location filename="../src/Create/CreateActions.cpp" line="419"/>
         <source>Segment Fill Settings
 
 Segment fill settings determine how points are generated in the Segment Fill mode</source>
@@ -1159,17 +1194,17 @@ Segment fill settings determine how points are generated in the Segment Fill mod
 Сегментті толтыру параметрлері Segment толтыру режимінде нүктелер қалай құрылатындығын анықтайды</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="403"/>
+        <location filename="../src/Create/CreateActions.cpp" line="423"/>
         <source>General...</source>
         <translation>Жалпы ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="404"/>
+        <location filename="../src/Create/CreateActions.cpp" line="424"/>
         <source>Edit General settings.</source>
         <translation>Жалпы параметрлерді өңдеңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="405"/>
+        <location filename="../src/Create/CreateActions.cpp" line="425"/>
         <source>General Settings
 
 General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects both Color Picker and Point Match modes</source>
@@ -1178,17 +1213,17 @@ General settings are document-specific settings that affect multiple modes. For 
 Жалпы параметрлер - бұл бірнеше режимдерге әсер ететін құжатқа қатысты параметрлер. Мысалы, жүгіргі өлшемінің параметрі Color Picker және Point Match режимдеріне де әсер етеді</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="410"/>
+        <location filename="../src/Create/CreateActions.cpp" line="430"/>
         <source>Main Window...</source>
         <translation>Негізгі терезе ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="412"/>
+        <location filename="../src/Create/CreateActions.cpp" line="432"/>
         <source>Edit Main Window settings.</source>
         <translation>Негізгі терезе параметрлерін өзгерту.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="413"/>
+        <location filename="../src/Create/CreateActions.cpp" line="433"/>
         <source>Main Window Settings
 
 Main window settings affect the user interface and are not specific to any document</source>
@@ -1197,17 +1232,17 @@ Main window settings affect the user interface and are not specific to any docum
 Терезенің негізгі параметрлері пайдаланушы интерфейсіне әсер етеді және ешқандай құжатқа тән емес</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="422"/>
+        <location filename="../src/Create/CreateActions.cpp" line="442"/>
         <source>Background Toolbar</source>
         <translation>Негізгі құралдар тақтасы</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="425"/>
+        <location filename="../src/Create/CreateActions.cpp" line="445"/>
         <source>Show or hide the background toolbar.</source>
         <translation>Фонды құралдар тақтасын көрсету немесе жасыру.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="426"/>
+        <location filename="../src/Create/CreateActions.cpp" line="446"/>
         <source>View Background ToolBar
 
 Show or hide the background toolbar</source>
@@ -1216,17 +1251,16 @@ Show or hide the background toolbar</source>
 Өң құралдар тақтасын көрсету немесе жасыру</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="430"/>
         <source>Checklist Guide Toolbar</source>
-        <translation>Бақылау парағы құралдар тақтасы</translation>
+        <translation type="vanished">Бақылау тізіміндегі нұсқаулық құралдар тақтасы</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="433"/>
+        <location filename="../src/Create/CreateActions.cpp" line="482"/>
         <source>Show or hide the checklist guide.</source>
         <translation>Бақылау тізімінің нұсқаулығын көрсету немесе жасыру.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="434"/>
+        <location filename="../src/Create/CreateActions.cpp" line="483"/>
         <source>View Checklist Guide
 
 Show or hide the checklist guide</source>
@@ -1235,17 +1269,17 @@ Show or hide the checklist guide</source>
 Бақылау тізімінің нұсқаулығын көрсету немесе жасыру</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="438"/>
+        <location filename="../src/Create/CreateActions.cpp" line="487"/>
         <source>Curve Fitting Window</source>
         <translation>Қисық арматура терезесі</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="441"/>
+        <location filename="../src/Create/CreateActions.cpp" line="490"/>
         <source>Show or hide the curve fitting window.</source>
         <translation>Қисық сызғыш терезесін көрсетіңіз немесе жасырыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="442"/>
+        <location filename="../src/Create/CreateActions.cpp" line="491"/>
         <source>View Curve Fitting Window
 
 Show or hide the curve fitting window</source>
@@ -1254,17 +1288,17 @@ Show or hide the curve fitting window</source>
 Қисық арматуралық терезені көрсетіңіз немесе жасырыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="446"/>
+        <location filename="../src/Create/CreateActions.cpp" line="495"/>
         <source>Geometry Window</source>
         <translation>Геометрия терезесі</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="449"/>
+        <location filename="../src/Create/CreateActions.cpp" line="498"/>
         <source>Show or hide the geometry window.</source>
         <translation>Геометрия терезесін көрсету немесе жасыру.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="450"/>
+        <location filename="../src/Create/CreateActions.cpp" line="499"/>
         <source>View Geometry Window
 
 Show or hide the geometry window</source>
@@ -1273,17 +1307,17 @@ Show or hide the geometry window</source>
 Геометрия терезесін көрсету немесе жасыру</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="454"/>
+        <location filename="../src/Create/CreateActions.cpp" line="450"/>
         <source>Digitizing Tools Toolbar</source>
         <translation>Құралдар тақтасын цифрландыру</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="457"/>
+        <location filename="../src/Create/CreateActions.cpp" line="453"/>
         <source>Show or hide the digitizing tools toolbar.</source>
         <translation>Сандық құралдар құралдар тақтасын көрсету немесе жасыру.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="458"/>
+        <location filename="../src/Create/CreateActions.cpp" line="454"/>
         <source>View Digitizing Tools ToolBar
 
 Show or hide the digitizing tools toolbar</source>
@@ -1292,17 +1326,17 @@ Show or hide the digitizing tools toolbar</source>
 Сандық құралдар құралдар тақтасын көрсету немесе жасыру</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="462"/>
+        <location filename="../src/Create/CreateActions.cpp" line="458"/>
         <source>Settings Views Toolbar</source>
         <translation>Параметрлер көрінісі құралдар тақтасы</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="465"/>
+        <location filename="../src/Create/CreateActions.cpp" line="461"/>
         <source>Show or hide the settings views toolbar.</source>
         <translation>Параметрлер көріністерінің құралдар тақтасын көрсету немесе жасыру.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="466"/>
+        <location filename="../src/Create/CreateActions.cpp" line="462"/>
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
@@ -1311,17 +1345,17 @@ Show or hide the settings views toolbar. These views graphically show the most i
 Параметрлер көріністерінің құралдар тақтасын көрсету немесе жасыру. Бұл көріністер графикалық түрде ең маңызды параметрлерді көрсетеді.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="471"/>
+        <location filename="../src/Create/CreateActions.cpp" line="467"/>
         <source>Coordinate System Toolbar</source>
         <translation>Координаталар жүйесінің құралдар тақтасы</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="474"/>
+        <location filename="../src/Create/CreateActions.cpp" line="470"/>
         <source>Show or hide the coordinate system toolbar.</source>
         <translation>Координаталар жүйесінің құралдар тақтасын көрсету немесе жасыру.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="475"/>
+        <location filename="../src/Create/CreateActions.cpp" line="471"/>
         <source>View Coordinate Systems ToolBar
 
 Show or hide the coordinate system selection toolbar. This toolbar is used to select the current coordinate system when the document has multiple coordinate systems. This toolbar is also used to view and print all coordinate systems.
@@ -1334,17 +1368,22 @@ This toolbar is disabled when there is only one coordinate system.</source>
 Бұл құралдар тақтасы тек бір координат жүйесі болған кезде ажыратылады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="483"/>
+        <location filename="../src/Create/CreateActions.cpp" line="479"/>
+        <source>Checklist Guide Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="503"/>
         <source>Tool Tips</source>
         <translation>Құрал туралы кеңестер</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="486"/>
+        <location filename="../src/Create/CreateActions.cpp" line="506"/>
         <source>Show or hide the tool tips.</source>
         <translation>Құралға қатысты кеңестерді көрсетіңіз немесе жасырыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="487"/>
+        <location filename="../src/Create/CreateActions.cpp" line="507"/>
         <source>View Tool Tips
 
 Show or hide the tool tips</source>
@@ -1353,17 +1392,17 @@ Show or hide the tool tips</source>
 Құралға қатысты кеңестерді көрсетіңіз немесе жасырыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="491"/>
+        <location filename="../src/Create/CreateActions.cpp" line="511"/>
         <source>Grid Lines</source>
         <translation>Тор сызықтары</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="494"/>
+        <location filename="../src/Create/CreateActions.cpp" line="514"/>
         <source>Show or hide grid lines.</source>
         <translation>Тор сызықтарын көрсетіңіз немесе жасырыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="495"/>
+        <location filename="../src/Create/CreateActions.cpp" line="515"/>
         <source>View Grid Lines
 
 Show or hide grid lines that are added for accurate adjustments of the axes points, which can improve accuracy in distorted graphs</source>
@@ -1372,17 +1411,34 @@ Show or hide grid lines that are added for accurate adjustments of the axes poin
 Бұрылған графиктердің дәлдігін жақсартуға мүмкіндік беретін осьтердің нүктелерін дәл реттеу үшін қосылған тор сызықтарын көрсетіңіз немесе жасырыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="500"/>
+        <location filename="../src/Create/CreateActions.cpp" line="520"/>
+        <source>Guidelines</source>
+        <translation>Нұсқаулық</translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="523"/>
+        <source>Show or hide guidelines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="524"/>
+        <source>View Guidelines
+
+Show or hide guidelines that are added for accurate adjustments of the graph points, which can improve accuracy of points close to the guidelines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="529"/>
         <source>No Background</source>
         <translation>Фон жоқ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="502"/>
+        <location filename="../src/Create/CreateActions.cpp" line="531"/>
         <source>Do not show the image underneath the points.</source>
         <translation>Нүктелердің астындағы суретті көрсетпеңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="503"/>
+        <location filename="../src/Create/CreateActions.cpp" line="532"/>
         <source>No Background
 
 No image is shown so points are easier to see</source>
@@ -1391,17 +1447,17 @@ No image is shown so points are easier to see</source>
 Ешқандай сурет көрсетілмейді, сондықтан нүктелерді көру оңайырақ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="506"/>
+        <location filename="../src/Create/CreateActions.cpp" line="535"/>
         <source>Show Original Image</source>
         <translation>Түпнұсқа кескінді көрсету</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="508"/>
+        <location filename="../src/Create/CreateActions.cpp" line="537"/>
         <source>Show the original image underneath the points.</source>
         <translation>Түпнұсқа суретті нүктелердің астына көрсет.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="509"/>
+        <location filename="../src/Create/CreateActions.cpp" line="538"/>
         <source>Show Original Image
 
 Show the original image underneath the points</source>
@@ -1410,17 +1466,17 @@ Show the original image underneath the points</source>
 Түпнұсқа суретті нүктелердің астына көрсет</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="512"/>
+        <location filename="../src/Create/CreateActions.cpp" line="541"/>
         <source>Show Filtered Image</source>
         <translation>Сүзілген суретті көрсету</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="515"/>
+        <location filename="../src/Create/CreateActions.cpp" line="544"/>
         <source>Show the filtered image underneath the points.</source>
         <translation>Сүзілген суретті нүктелердің астына көрсет.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="516"/>
+        <location filename="../src/Create/CreateActions.cpp" line="545"/>
         <source>Show Filtered Image
 
 Show the filtered image underneath the points.
@@ -1433,17 +1489,17 @@ The filtered image is created from the original image according to the Filter pr
 Сүзілген сурет бастапқы кескіннен Сүзгі теңшелімдеріне сәйкес жасалады, сондықтан маңызды емес ақпарат жасырын болады және маңызды ақпарат баса көрсетіледі.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="528"/>
+        <location filename="../src/Create/CreateActions.cpp" line="557"/>
         <source>Hide All Curves</source>
         <translation>Барлық қисықтарды жасырыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="530"/>
+        <location filename="../src/Create/CreateActions.cpp" line="559"/>
         <source>Hide all digitized curves.</source>
         <translation>Барлық сандық қисықтарды жасырыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="531"/>
+        <location filename="../src/Create/CreateActions.cpp" line="560"/>
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
@@ -1452,17 +1508,17 @@ No axis points or digitized graph curves are shown so the image is easier to see
 Кескінді оңай көру үшін осьтік нүктелер немесе графикалық қисық сызықтар көрсетілмейді.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="534"/>
+        <location filename="../src/Create/CreateActions.cpp" line="563"/>
         <source>Show Selected Curve</source>
         <translation>Таңдалған қисық сызықты көрсету</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="536"/>
+        <location filename="../src/Create/CreateActions.cpp" line="565"/>
         <source>Show only the currently selected curve.</source>
         <translation>Тек қазір таңдалған қисықты көрсетіңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="537"/>
+        <location filename="../src/Create/CreateActions.cpp" line="566"/>
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
@@ -1471,17 +1527,17 @@ Show only the digitized points and line that belong to the currently selected cu
 Тек таңдалған қисыққа жататын цифрланған нүктелер мен сызықты көрсетіңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="540"/>
+        <location filename="../src/Create/CreateActions.cpp" line="569"/>
         <source>Show All Curves</source>
         <translation>Барлық қисықтарды көрсету</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="543"/>
+        <location filename="../src/Create/CreateActions.cpp" line="572"/>
         <source>Show all curves.</source>
         <translation>Барлық қисықтарды көрсету.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="544"/>
+        <location filename="../src/Create/CreateActions.cpp" line="573"/>
         <source>Show All Curves
 
 Show all digitized axis points and graph curves</source>
@@ -1490,46 +1546,40 @@ Show all digitized axis points and graph curves</source>
 Барлық цифрланған осьтер нүктелерін және графикалық қисықтарды көрсетіңіз</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="553"/>
         <source>Hide Guidelines</source>
-        <translation>Нұсқаулықтарды жасыру</translation>
+        <translation type="vanished">Нұсқаулықты жасыру</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="556"/>
         <source>Hide guidelines.</source>
-        <translation>Нұсқаулықтарды жасырыңыз.</translation>
+        <translation type="vanished">Нұсқаулықты жасыру</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="557"/>
         <source>Hide Guidelines
 
 Guidelines are hidden to simplify the main window.</source>
-        <translation>Нұсқаулықтарды жасыру
+        <translation type="vanished">Нұсқаулықты жасыру
 
-Негізгі терезені жеңілдету үшін нұсқаулар жасырылған.</translation>
+Негізгі терезені жеңілдету үшін нұсқаулық жасырылған.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="560"/>
         <source>Edit Guidelines</source>
-        <translation>Нұсқаулықтарды өңдеңіз</translation>
+        <translation type="vanished">Нұсқаулықтарды өңдеу</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="562"/>
         <source>Edit guidelines.</source>
-        <translation>Нұсқаулықтарды өңдеңіз</translation>
+        <translation type="vanished">Нұсқаулықтарды өңдеу</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="563"/>
         <source>Edit Guidelines
 
 Add new guidelines by clicking on the guidelines toolbar, move existing guidelines by dragging, or remove guidelines by dragging out of the main window.
 
 This option is available in Select mode.</source>
-        <translation>Нұсқаулықтарды өңдеңіз
+        <translation type="vanished">Нұсқаулықтарды өңдеу
 
-	Нұсқаулық құралдар тақтасын нұқу арқылы жаңа нұсқаулықтарды қосыңыз, сүйрету арқылы бар нұсқаулықтарды жылжытыңыз немесе негізгі терезеден сүйреп апарыңыз.
+Нұсқаулық құралдар тақтасын басу арқылы жаңа нұсқаулар қосыңыз, сүйреу арқылы бар нұсқауларды жылжытыңыз немесе негізгі терезеден сүйреп шығарыңыз.
 
-	Бұл опция Таңдау режимінде қол жетімді.</translation>
+Бұл опция Select режимінде қол жетімді.</translation>
     </message>
     <message>
         <source>Edit Guidelines
@@ -1540,342 +1590,339 @@ Add new guidelines by clicking on the guidelines toolbar, move existing guidelin
 Нұсқаулық құралдар тақтасын нұқу арқылы жаңа нұсқаулықтарды қосыңыз, сүйрету арқылы бар нұсқаулықтарды жылжытыңыз немесе негізгі терезеден сүйреп апарыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="569"/>
         <source>Lock Guidelines</source>
-        <translation>잠금 지침</translation>
+        <translation type="vanished">Нұсқаулықтарды құлыптаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="571"/>
         <source>Lock guidelines.</source>
-        <translation>잠금 지침</translation>
+        <translation type="vanished">Нұсқаулықтарды құлыптаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="572"/>
         <source>Lock Guidelines
 
 Lock the guidelines to prevent accidental movement or removal.</source>
-        <translation>잠금 지침
+        <translation type="vanished">Нұсқаулықтарды құлыптаңыз
 
-실수로 움직이거나 제거되지 않도록 지침을 잠급니다.</translation>
+Кездейсоқ қозғалудың немесе алынудың алдын алу үшін нұсқауларды құлыптаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="581"/>
+        <location filename="../src/Create/CreateActions.cpp" line="582"/>
         <source>Hide Always</source>
         <translation>Әрқашан жасыру</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="583"/>
+        <location filename="../src/Create/CreateActions.cpp" line="584"/>
         <source>Always hide the status bar.</source>
         <translation>Әрқашан күй жолағын жасырыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="584"/>
+        <location filename="../src/Create/CreateActions.cpp" line="585"/>
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
         <translation>Күй жолағын жасырыңыз. Уақытша күй немесе кері байланыс хабарламалары пайда болмайды.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="586"/>
+        <location filename="../src/Create/CreateActions.cpp" line="587"/>
         <source>Show Temporary Messages</source>
         <translation>Уақытша хабарларды көрсету</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="588"/>
+        <location filename="../src/Create/CreateActions.cpp" line="589"/>
         <source>Hide the status bar except when display temporary messages.</source>
         <translation>Уақытша хабарламалар көрсетілгеннен басқа кезде күй жолағын жасырыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="589"/>
+        <location filename="../src/Create/CreateActions.cpp" line="590"/>
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
         <translation>Күй жолағын жасырыңыз, тек уақытша күй және кері байланыс хабарламаларын көрсеткеннен басқа.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="591"/>
+        <location filename="../src/Create/CreateActions.cpp" line="592"/>
         <source>Show Always</source>
         <translation>Әрқашан көрсету</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="593"/>
+        <location filename="../src/Create/CreateActions.cpp" line="594"/>
         <source>Always show the status bar.</source>
         <translation>Әрқашан күй жолағын көрсетіңіз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="594"/>
+        <location filename="../src/Create/CreateActions.cpp" line="595"/>
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
         <translation>Күй жолағын көрсету. Уақытша күй туралы және кері байланыс туралы хабарламалардан басқа, күй тақтасы жүгіргі орны туралы ақпаратты көрсетеді.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="603"/>
+        <location filename="../src/Create/CreateActions.cpp" line="604"/>
         <source>Zoom Out</source>
         <translation>Кішірейту</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="604"/>
+        <location filename="../src/Create/CreateActions.cpp" line="605"/>
         <source>Zoom out</source>
         <translation>Кішірейту</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="608"/>
+        <location filename="../src/Create/CreateActions.cpp" line="609"/>
         <source>Zoom In</source>
         <translation>Үлкейту</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="609"/>
+        <location filename="../src/Create/CreateActions.cpp" line="610"/>
         <source>Zoom in</source>
         <translation>Үлкейту</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="616"/>
+        <location filename="../src/Create/CreateActions.cpp" line="617"/>
         <source>16:1 (1600%)</source>
         <translation>16:1 (1600%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="618"/>
+        <location filename="../src/Create/CreateActions.cpp" line="619"/>
         <source>Zoom 16:1</source>
         <translation>Масштабтау 16: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="622"/>
+        <location filename="../src/Create/CreateActions.cpp" line="623"/>
         <source>16:1 farther (1270%)</source>
         <translation>16: 1 алыс (1270%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="624"/>
+        <location filename="../src/Create/CreateActions.cpp" line="625"/>
         <source>Zoom 12.7:1</source>
         <translation>Масштабтау 12.7:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="628"/>
+        <location filename="../src/Create/CreateActions.cpp" line="629"/>
         <source>8:1 closer (1008%)</source>
         <translation>8: 1 жақын (1008%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="630"/>
+        <location filename="../src/Create/CreateActions.cpp" line="631"/>
         <source>Zoom 10.08:1</source>
         <translation>Масштабтау 10.08:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="634"/>
+        <location filename="../src/Create/CreateActions.cpp" line="635"/>
         <source>8:1 (800%)</source>
         <translation>8:1 (800%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="636"/>
+        <location filename="../src/Create/CreateActions.cpp" line="637"/>
         <source>Zoom 8:1</source>
         <translation>Масштабтау 8:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="640"/>
+        <location filename="../src/Create/CreateActions.cpp" line="641"/>
         <source>8:1 farther (635%)</source>
         <translation>8: 1 алыс (635%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="642"/>
+        <location filename="../src/Create/CreateActions.cpp" line="643"/>
         <source>Zoom 6.35:1</source>
         <translation>Масштабтау 6.35:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="646"/>
+        <location filename="../src/Create/CreateActions.cpp" line="647"/>
         <source>4:1 closer (504%)</source>
         <translation>4: 1 жақын (504%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="648"/>
+        <location filename="../src/Create/CreateActions.cpp" line="649"/>
         <source>Zoom 5.04:1</source>
         <translation>Масштабтау 5.04:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="652"/>
+        <location filename="../src/Create/CreateActions.cpp" line="653"/>
         <source>4:1 (400%)</source>
         <translation>4:1 (400%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="654"/>
+        <location filename="../src/Create/CreateActions.cpp" line="655"/>
         <source>Zoom 4:1</source>
         <translation>Масштабтау 4:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="658"/>
+        <location filename="../src/Create/CreateActions.cpp" line="659"/>
         <source>4:1 farther (317%)</source>
         <translation>4: 1 алыс (317%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="660"/>
+        <location filename="../src/Create/CreateActions.cpp" line="661"/>
         <source>Zoom 3.17:1</source>
         <translation>Масштабтау 3.17:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="664"/>
+        <location filename="../src/Create/CreateActions.cpp" line="665"/>
         <source>2:1 closer (252%)</source>
         <translation>2: 1 жақын (252%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="666"/>
+        <location filename="../src/Create/CreateActions.cpp" line="667"/>
         <source>Zoom 2.52:1</source>
         <translation>Масштабтау 2.52:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="670"/>
+        <location filename="../src/Create/CreateActions.cpp" line="671"/>
         <source>2:1 (200%)</source>
         <translation>2: 1 (200%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="672"/>
+        <location filename="../src/Create/CreateActions.cpp" line="673"/>
         <source>Zoom 2:1</source>
         <translation>Масштабтау 2:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="676"/>
+        <location filename="../src/Create/CreateActions.cpp" line="677"/>
         <source>2:1 farther (159%)</source>
         <translation>2: 1 алыс (159%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="678"/>
+        <location filename="../src/Create/CreateActions.cpp" line="679"/>
         <source>Zoom 1.59:1</source>
         <translation>Масштабтау 1.59:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="682"/>
+        <location filename="../src/Create/CreateActions.cpp" line="683"/>
         <source>1:1 closer (126%)</source>
         <translation>1: 1 жақын (126%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="685"/>
+        <location filename="../src/Create/CreateActions.cpp" line="686"/>
         <source>Zoom 1.3:1</source>
         <translation>Масштабтау 1.3:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="689"/>
+        <location filename="../src/Create/CreateActions.cpp" line="690"/>
         <source>1:1 (100%)</source>
         <translation>1: 1 (100%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="692"/>
+        <location filename="../src/Create/CreateActions.cpp" line="693"/>
         <source>Zoom 1:1</source>
         <translation>Масштабтау 1:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="696"/>
+        <location filename="../src/Create/CreateActions.cpp" line="697"/>
         <source>1:1 farther (79%)</source>
         <translation>1: 1 алыс (79%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="699"/>
+        <location filename="../src/Create/CreateActions.cpp" line="700"/>
         <source>Zoom 0.8:1</source>
         <translation>Масштабтау 0.8:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="703"/>
+        <location filename="../src/Create/CreateActions.cpp" line="704"/>
         <source>1:2 closer (63%)</source>
         <translation>1: 2 жақын (63%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="705"/>
+        <location filename="../src/Create/CreateActions.cpp" line="706"/>
         <source>Zoom 1.3:2</source>
         <translation>Масштабтау 1.3:2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="709"/>
+        <location filename="../src/Create/CreateActions.cpp" line="710"/>
         <source>1:2 (50%)</source>
         <translation>1: 2 (50%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="711"/>
+        <location filename="../src/Create/CreateActions.cpp" line="712"/>
         <source>Zoom 1:2</source>
         <translation>Масштабтау 1:2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="715"/>
+        <location filename="../src/Create/CreateActions.cpp" line="716"/>
         <source>1:2 farther (40%)</source>
         <translation>1: 2 алыс (40%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="717"/>
+        <location filename="../src/Create/CreateActions.cpp" line="718"/>
         <source>Zoom 0.8:2</source>
         <translation>Масштабтау 0.8:2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="721"/>
+        <location filename="../src/Create/CreateActions.cpp" line="722"/>
         <source>1:4 closer (31%)</source>
         <translation>1: 4 жақын (31%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="723"/>
+        <location filename="../src/Create/CreateActions.cpp" line="724"/>
         <source>Zoom 1.3:4</source>
         <translation>Масштабтау 1.3:4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="727"/>
+        <location filename="../src/Create/CreateActions.cpp" line="728"/>
         <source>1:4 (25%)</source>
         <translation>1: 4 (25%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="729"/>
+        <location filename="../src/Create/CreateActions.cpp" line="730"/>
         <source>Zoom 1:4</source>
         <translation>Масштабтау 1:4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="733"/>
+        <location filename="../src/Create/CreateActions.cpp" line="734"/>
         <source>1:4 farther (20%)</source>
         <translation>1: 4 алыс (20%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="735"/>
+        <location filename="../src/Create/CreateActions.cpp" line="736"/>
         <source>Zoom 0.8:4</source>
         <translation>Масштабтау 0.8:4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="739"/>
+        <location filename="../src/Create/CreateActions.cpp" line="740"/>
         <source>1:8 closer (12.5%)</source>
         <translation>1: 8 жақын (12.5%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="741"/>
-        <location filename="../src/Create/CreateActions.cpp" line="747"/>
+        <location filename="../src/Create/CreateActions.cpp" line="742"/>
+        <location filename="../src/Create/CreateActions.cpp" line="748"/>
         <source>Zoom 1:8</source>
         <translation>Масштабтау 1:8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="745"/>
+        <location filename="../src/Create/CreateActions.cpp" line="746"/>
         <source>1:8 (12.5%)</source>
         <translation>1: 8 (12.5%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="751"/>
+        <location filename="../src/Create/CreateActions.cpp" line="752"/>
         <source>1:8 farther (10%)</source>
         <translation>1: 8 алыс (10%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="753"/>
+        <location filename="../src/Create/CreateActions.cpp" line="754"/>
         <source>Zoom 0.8:8</source>
         <translation>Масштабтау 0.8:8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="757"/>
+        <location filename="../src/Create/CreateActions.cpp" line="758"/>
         <source>1:16 closer (8%)</source>
         <translation>1: 16 жақын (8%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="759"/>
+        <location filename="../src/Create/CreateActions.cpp" line="760"/>
         <source>Zoom 1.3:16</source>
         <translation>Масштабтау 1.3:16</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="763"/>
+        <location filename="../src/Create/CreateActions.cpp" line="764"/>
         <source>1:16 (6.25%)</source>
         <translation>1: 16 (6.25%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="765"/>
+        <location filename="../src/Create/CreateActions.cpp" line="766"/>
         <source>Zoom 1:16</source>
         <translation>Масштабтау 1:16</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="769"/>
+        <location filename="../src/Create/CreateActions.cpp" line="770"/>
         <source>Fill</source>
         <translation>Толтыру</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="771"/>
+        <location filename="../src/Create/CreateActions.cpp" line="772"/>
         <source>Zoom with stretching to fill window</source>
         <translation>Терезені толтыру үшін масштабтау</translation>
     </message>
@@ -1903,42 +1950,41 @@ Lock the guidelines to prevent accidental movement or removal.</source>
         <translation>Сандықтау</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="65"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="66"/>
         <source>View</source>
         <translation>Көру</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="77"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="80"/>
         <source>Background</source>
         <translation>Фон</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="82"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="85"/>
         <source>Curves</source>
         <translation>Қисықтар</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="87"/>
         <source>Guidelines</source>
-        <translation>Нұсқаулық</translation>
+        <translation type="vanished">Нұсқаулық</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="92"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="90"/>
         <source>Status Bar</source>
         <translation>Күй жолағы</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="97"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="95"/>
         <source>Zoom</source>
         <translation>Масштабтау</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="129"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="127"/>
         <source>Settings</source>
         <translation>Параметрлер</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="145"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="143"/>
         <source>&amp;Help</source>
         <translation>Көмектесіңдер</translation>
     </message>
@@ -1946,71 +1992,63 @@ Lock the guidelines to prevent accidental movement or removal.</source>
 <context>
     <name>CreateScene</name>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="28"/>
         <source>Create an R (range) guideline.</source>
-        <translation>R (ауқым) нұсқаулығын жасаңыз.</translation>
+        <translation type="vanished">R (диапазон) бойынша нұсқаулық жасаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="29"/>
         <source>Create a T (theta) guideline.</source>
-        <translation>T (theta) нұсқаулығын жасаңыз.</translation>
+        <translation type="vanished">T (theta) нұсқаулығын жасаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="30"/>
         <source>Create an X guideline.</source>
-        <translation>X нұсқаулығын жасаңыз.</translation>
+        <translation type="vanished">X нұсқауын жасаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="31"/>
         <source>Create a Y guideline.</source>
-        <translation>Y нұсқаулығын жасаңыз.</translation>
+        <translation type="vanished">Y нұсқаулығын жасаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="33"/>
         <source>Create an R (Range) guideline
 
 When pressed, a constant R (range) guideline is created. It can be moved by dragging</source>
-        <translation>R (Range) нұсқаулығын жасаңыз
+        <translation type="vanished">R (Range) нұсқаулығын жасаңыз
 
-Басқан кезде тұрақты R (ауқым) нұсқаулығы жасалады. Оны сүйрету арқылы жылжытуға болады</translation>
+Басқан кезде тұрақты R (диапазон) нұсқаулығы жасалады. Оны жылжыту арқылы жылжытуға болады</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="35"/>
         <source>Create a T (Theta) guideline
 
 When pressed, a constant T (theta) guideline is created. It can be moved by dragging</source>
-        <translation>T (Theta) нұсқаулығын жасаңыз
+        <translation type="vanished">T (Theta) нұсқаулығын жасаңыз
 
-Басқан кезде тұрақты T (тета) нұсқаулығы жасалады. Оны сүйрету арқылы жылжытуға болады</translation>
+Басқан кезде тұрақты T (theta) нұсқаулығы жасалады. Оны жылжыту арқылы жылжытуға болады</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="37"/>
         <source>Create an X guideline
 
 When pressed, a constant X guideline is created. It can be moved by dragging</source>
-        <translation>X нұсқаулығын жасаңыз
+        <translation type="vanished">X нұсқауын жасаңыз
 
-Басқан кезде тұрақты X нұсқаулық жасалады. Оны сүйрету арқылы жылжытуға болады</translation>
+Басқан кезде тұрақты X нұсқаулығы жасалады. Оны жылжыту арқылы жылжытуға болады</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="39"/>
         <source>Create a Y guideline
 
 When pressed, a constant Y guideline is created. It can be moved by dragging</source>
-        <translation>Y нұсқаулығын жасаңыз
+        <translation type="vanished">Y нұсқаулығын жасаңыз
 
-Басқан кезде тұрақты Y нұсқаулығы жасалады. Оны сүйрету арқылы жылжытуға болады</translation>
+Басқан кезде тұрақты Y нұсқаулығы жасалады. Оны жылжыту арқылы жылжытуға болады</translation>
     </message>
 </context>
 <context>
     <name>CreateToolBars</name>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="42"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="48"/>
         <source>Select background image</source>
         <translation>Фондық суретті таңдаңыз</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="43"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="49"/>
         <source>Selected Background
 
 Select background image:
@@ -2025,32 +2063,32 @@ Select background image:
 3) Маңызды мәліметтерді көрсететін фильтрленген сурет</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="48"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="54"/>
         <source>No background</source>
         <translation>Фоны жоқ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="49"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="55"/>
         <source>Original image</source>
         <translation>Түпнұсқа сурет</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="50"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="56"/>
         <source>Filtered image</source>
         <translation>Сүзілген сурет</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="55"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="61"/>
         <source>Background</source>
         <translation>Фон</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="63"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="106"/>
         <source>Select curve for new points.</source>
         <translation>Жаңа нүктелер үшін қисық сызықты таңдаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="64"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="107"/>
         <source>Selected Curve Name
 
 Select curve for any new points. Every point belongs to one curve.
@@ -2063,17 +2101,17 @@ This can be changed while in Curve Point, Point Match, Color Picker or Segment F
 Мұны қисық нүкте, нүкте сәйкестігі, түсті таңдау немесе сегментті толтыру режимінде өзгертуге болады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="70"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="112"/>
         <source>Drawing</source>
         <translation>Сурет салу</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="87"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="134"/>
         <source>Points style for the currently selected curve</source>
         <translation>Ағымдағы таңдалған қисық сызық үшін стиль</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="88"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="135"/>
         <source>Points Style
 
 Points style for the currently selected curve. The points style is only displayed in this toolbar. To change the points style, use the Curve Properties dialog.</source>
@@ -2082,12 +2120,12 @@ Points style for the currently selected curve. The points style is only displaye
 Ағымдағы таңдалған қисық сызық үшін стиль. Нүктелер стилі тек осы құралдар тақтасында көрсетіледі. Нүктелер мәнерін өзгерту үшін қисық сипаттар тілқатысу терезесін пайдаланыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="96"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="143"/>
         <source>View of filter for current curve in Segment Fill mode</source>
         <translation>Сегментті толтыру режиміндегі ағымдағы қисық үшін сүзгі көрінісі</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="97"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="144"/>
         <source>Segment Fill Filter
 
 View of filter for the current curve in Segment Fill mode. The filter settings are only displayed in this toolbar. To changed the filter settings, use the Color Picker mode or the Filter Settings dialog.</source>
@@ -2096,17 +2134,17 @@ View of filter for the current curve in Segment Fill mode. The filter settings a
 Сегментті толтыру режиміндегі ағымдағы қисықтың сүзгісін қарау. Сүзгі параметрлері тек осы құралдар тақтасында көрсетіледі. Сүзгі параметрлерін өзгерту үшін Түсті таңдау режимін немесе Сүзгі параметрлері тілқатысу терезесін пайдаланыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="103"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="149"/>
         <source>Views</source>
         <translation>Көріністер</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="112"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="71"/>
         <source>Currently selected coordinate system</source>
         <translation>Қазіргі уақытта таңдалған координаттар жүйесі</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="113"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="72"/>
         <source>Selected Coordinate System
 
 Currently selected coordinate system. This is used to switch between coordinate systems in documents with multiple coordinate systems</source>
@@ -2115,12 +2153,12 @@ Currently selected coordinate system. This is used to switch between coordinate 
 Қазіргі уақытта таңдалған координаттар жүйесі. Бұл бірнеше координат жүйелері бар құжаттардағы координаталық жүйелер арасында ауысу үшін қолданылады</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="121"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="80"/>
         <source>Show all coordinate systems</source>
         <translation>Барлық координаттар жүйесін көрсету</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="122"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="81"/>
         <source>Show All Coordinate Systems
 
 When pressed and held, this button shows all digitized points and lines for all coordinate systems.</source>
@@ -2129,12 +2167,12 @@ When pressed and held, this button shows all digitized points and lines for all 
 Басылған және ұстап тұрған кезде, бұл батырма барлық координаталық жүйелерге арналған цифрланған нүктелер мен сызықтарды көрсетеді.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="130"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="89"/>
         <source>Print all coordinate systems</source>
         <translation>Барлық координаттар жүйесін басып шығарыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="131"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="90"/>
         <source>Print All Coordinate Systems
 
 When pressed, this button Prints all digitized points and lines for all coordinate systems.</source>
@@ -2143,7 +2181,7 @@ When pressed, this button Prints all digitized points and lines for all coordina
 Бұл батырма басылған кезде барлық координаттар жүйелері үшін барлық цифрланған нүктелер мен сызықтарды басып шығарады.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="135"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="94"/>
         <source>Coordinate System</source>
         <translation>Координаталар жүйесі</translation>
     </message>
@@ -4051,6 +4089,58 @@ The stop value cannot be less than the start value</source>
     </message>
 </context>
 <context>
+    <name>DlgSettingsGuideline</name>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="34"/>
+        <source>Guidelines</source>
+        <translation>Нұсқаулық</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="57"/>
+        <source>Creation circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="61"/>
+        <source>Select a radius, in pixels, for the points</source>
+        <translation>Нүктелер үшін радиусты пикселмен таңдаңыз</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="66"/>
+        <source>Guideline color</source>
+        <translation>Нұсқаулық түсі</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="70"/>
+        <source>Guidelines Color
+
+Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
+        <translation>Нұсқаулықтар түсі
+
+Көріністің шетінен сүйрелетін және нүктелерді туралау үшін қолданылатын нұсқаулардың түсін орнатыңыз</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="77"/>
+        <source>Active Line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="81"/>
+        <source>Select a size for the guidelines when active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="86"/>
+        <source>Inactive Line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="90"/>
+        <source>Select a size for the guidelines when inactive</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DlgSettingsMainWindow</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="49"/>
@@ -4294,13 +4384,12 @@ Number of digits of precision in floating point numbers. This value affects calc
         <translation>Нұсқаулық түсі</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="279"/>
         <source>Guidelines Color
 
 Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
-        <translation>Нұсқаулықтың түсі
+        <translation type="vanished">Нұсқаулықтар түсі
 
-Сахнаның шетінен сүйреуге болатын және нүктелерді туралау үшін қолданылатын нұсқаулықтардың түсін орнатыңыз</translation>
+Көріністің шетінен сүйрелетін және нүктелерді туралау үшін қолданылатын нұсқаулардың түсін орнатыңыз</translation>
     </message>
 </context>
 <context>
@@ -4445,22 +4534,22 @@ In addition to the points placed at regular intervals, this option causes a poin
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="115"/>
         <source>Active line width</source>
-        <translation type="unfinished"></translation>
+        <translation>Белсенді жол ені</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="119"/>
         <source>Select a size for the lines drawn along a segment when hovering over the segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Сегмент бойымен қозғалғанда кесінді бойымен сызылған сызықтардың өлшемін таңдаңыз</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="124"/>
         <source>Inactive line width</source>
-        <translation type="unfinished"></translation>
+        <translation>Белсенді емес жол ені</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="128"/>
         <source>Select a size for the lines drawn along a segment when not hovering over the segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Сегменттің үстінде қозғалмаған кезде кесінді бойымен сызылған сызықтардың өлшемін таңдаңыз</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsSegments.cpp" line="133"/>
@@ -4702,22 +4791,22 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="497"/>
+        <location filename="../src/main/MainWindow.cpp" line="499"/>
         <source>Unable to export to file</source>
         <translation>Файлға экспорттау мүмкін болмады</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="542"/>
+        <location filename="../src/main/MainWindow.cpp" line="544"/>
         <source>Unable to extract image to file</source>
         <translation>Файлға кескінді шығару мүмкін емес</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="622"/>
+        <location filename="../src/main/MainWindow.cpp" line="624"/>
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation>OSX-де іске қосу кезінде жүктелген файлдар Жүктемелер, Суреттер немесе Кітапхана / Контейнерлер / Digitizer / Деректер каталогында болуы керек.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1343"/>
+        <location filename="../src/main/MainWindow.cpp" line="1336"/>
         <source>Cannot read file</source>
         <translation>Файлды оқу мүмкін емес</translation>
     </message>
@@ -4726,90 +4815,90 @@ Zooming the image in or out is performed using any of several methods:
         <translation type="vanished">анықтамалықтан</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="708"/>
+        <location filename="../src/main/MainWindow.cpp" line="710"/>
         <source>Import Image</source>
         <translation>Суретті импорттау</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1066"/>
+        <location filename="../src/main/MainWindow.cpp" line="1058"/>
         <source>File opened</source>
         <translation>Файл ашылды</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1109"/>
+        <location filename="../src/main/MainWindow.cpp" line="1102"/>
         <source>File not found</source>
         <translation>Файл табылмады</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1126"/>
+        <location filename="../src/main/MainWindow.cpp" line="1119"/>
         <source>Error report opened</source>
         <translation>Қате туралы есеп ашылды</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1189"/>
-        <location filename="../src/main/MainWindow.cpp" line="1263"/>
+        <location filename="../src/main/MainWindow.cpp" line="1182"/>
+        <location filename="../src/main/MainWindow.cpp" line="1256"/>
         <source>File imported</source>
         <translation>Файл импортталды</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1297"/>
+        <location filename="../src/main/MainWindow.cpp" line="1290"/>
         <source>Background image.</source>
         <translation>Фондық сурет.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1298"/>
+        <location filename="../src/main/MainWindow.cpp" line="1291"/>
         <source>Currently selected curve.</source>
         <translation>Қазіргі уақытта таңдалған қисық сызық.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1299"/>
+        <location filename="../src/main/MainWindow.cpp" line="1292"/>
         <source>Point style for currently selected curve.</source>
         <translation>Ағымдағы таңдалған қисыққа арналған нүкте стилі.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1300"/>
+        <location filename="../src/main/MainWindow.cpp" line="1293"/>
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Сегментті толтыру сүзгісі қазір таңдалған қисық сызық үшін.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1326"/>
+        <location filename="../src/main/MainWindow.cpp" line="1319"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>Құжат өзгертілген.
 Өзгерістерді сақтау керек пе?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1412"/>
+        <location filename="../src/main/MainWindow.cpp" line="1405"/>
         <source>Cannot write file</source>
         <translation>Файлды жазу мүмкін емес</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1460"/>
+        <location filename="../src/main/MainWindow.cpp" line="1453"/>
         <source>Save</source>
         <translation>Сақтау</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2599"/>
+        <location filename="../src/main/MainWindow.cpp" line="2518"/>
         <source>Export</source>
         <translation>Экспорттау</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2681"/>
+        <location filename="../src/main/MainWindow.cpp" line="2600"/>
         <source>Open Document</source>
         <translation>Құжатты ашыңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4042"/>
+        <location filename="../src/main/MainWindow.cpp" line="3930"/>
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4043"/>
+        <location filename="../src/main/MainWindow.cpp" line="3931"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4178"/>
+        <location filename="../src/main/MainWindow.cpp" line="4067"/>
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -4817,37 +4906,37 @@ Do you want to save your changes?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="133"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="178"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="280"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="138"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="183"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="285"/>
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
         <translation>Жаңа ось нүктесі экранның орнында бар ось нүктесімен бірдей болуы мүмкін емес</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="186"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="289"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="191"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="294"/>
         <source>New axis point cannot have the same graph coordinates as an existing axis point</source>
         <translation>Жаңа осьтік нүктеде қолданыстағы ось нүктесімен бірдей графикалық координаталар бола алмайды</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="194"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="297"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="199"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="302"/>
         <source>No more than two axis points can lie along the same line on the screen</source>
         <translation>Экранда бір сызық бойымен екіден көп нүкте бола алмайды</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="202"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="305"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="207"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="310"/>
         <source>No more than two axis points can lie along the same line in graph coordinates</source>
         <translation>Графикалық координаталарда бір сызық бойында екі осьтен көп нүкте бола алмайды</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="255"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="260"/>
         <source>Too many x axis points. There should only be two</source>
         <translation>Х осінің нүктелері өте көп. Тек екеуі болуы керек</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="261"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="266"/>
         <source>Too many y axis points. There should only be two</source>
         <translation>Y осінің нүктелері өте көп. Тек екеуі болуы керек</translation>
     </message>
@@ -4908,6 +4997,7 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdSettingsGeneral.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsGridDisplay.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsGridRemoval.cpp" line="50"/>
+        <location filename="../src/Cmd/CmdSettingsGuideline.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsPointMatch.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsSegments.cpp" line="50"/>
         <source>Reached end of file before finding end element for</source>
@@ -5100,12 +5190,12 @@ Do you want to save your changes?</source>
         <translation>Кешіріңіз, бірақ түс таңдау нүктесі фондық емес пиксельге жақын болуы керек. Әрекетті қайталаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="356"/>
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="360"/>
         <source>Point Match</source>
         <translation>Нүктелік сәйкестік</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="357"/>
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="361"/>
         <source>There are no more matching points</source>
         <translation>Енді сәйкес келетін нүктелер жоқ</translation>
     </message>
@@ -5198,7 +5288,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="155"/>
-        <location filename="../src/Document/DocumentModelGuidelines.cpp" line="84"/>
+        <location filename="../src/Document/DocumentModelGuideline.cpp" line="131"/>
         <source>Cannot read grid display data</source>
         <translation>Торды көрсету деректерін оқу мүмкін емес</translation>
     </message>
@@ -5485,12 +5575,12 @@ Do you want to save your changes?</source>
         <translation>көп осі ұпай қажет</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="632"/>
+        <location filename="../src/main/MainWindow.cpp" line="634"/>
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>Файлда Windows пәрмен жолында жұмыс жасамайтын бірнеше тіл алфавитінің таңбалары бар сияқты</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="131"/>
+        <location filename="../src/main/MainWindowModel.cpp" line="122"/>
         <source>Cannot read main window data</source>
         <translation>Негізгі терезе деректерін оқи алмайды</translation>
     </message>

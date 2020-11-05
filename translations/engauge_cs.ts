@@ -318,22 +318,22 @@ Ke spuštění průvodce kontrolním seznamem, pokud je již obrázek importová
 <context>
     <name>CreateActions</name>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="59"/>
+        <location filename="../src/Create/CreateActions.cpp" line="62"/>
         <source>Select Tool</source>
         <translation>Vyberte nástroj</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="60"/>
+        <location filename="../src/Create/CreateActions.cpp" line="63"/>
         <source>Shift+F2</source>
         <translation>Shift+F2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="62"/>
+        <location filename="../src/Create/CreateActions.cpp" line="65"/>
         <source>Select points on screen.</source>
         <translation>Vyberte body na obrazovce.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="63"/>
+        <location filename="../src/Create/CreateActions.cpp" line="66"/>
         <source>Select
 
 Select points on the screen.</source>
@@ -342,22 +342,22 @@ Select points on the screen.</source>
 Vyberte body na obrazovce.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="67"/>
+        <location filename="../src/Create/CreateActions.cpp" line="70"/>
         <source>Axis Point Tool</source>
         <translation>Nástroj bodové osy</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="68"/>
+        <location filename="../src/Create/CreateActions.cpp" line="71"/>
         <source>Shift+F3</source>
         <translation>Shift+F3</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="70"/>
+        <location filename="../src/Create/CreateActions.cpp" line="73"/>
         <source>Digitize axis points for a graph.</source>
         <translation>Digitalizujte body osy pro graf.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="71"/>
+        <location filename="../src/Create/CreateActions.cpp" line="74"/>
         <source>Digitize Axis Point
 
 Digitizes an axis point for a graph by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. After Import and Import (Advanced), three axis points with (X1,Y1) (X2,Y2) (X3,Y3) coordinates can be digitized to define the graph coordinates. Optionally, after Import (Advanced) four axis points with (X1) (X2) (Y3) (Y4) coordinates can be digitized to define the graph coordinates.
@@ -370,22 +370,23 @@ Digitalizuje osový bod grafu umístěním nového bodu na kurzor po kliknutí m
 Tento nástroj je zakázán, když je definována úplná sada osových bodů, nebo pokud je vybrána možnost Importovat (Upřesnit).</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="82"/>
+        <location filename="../src/Create/CreateActions.cpp" line="85"/>
         <source>Scale Bar Tool</source>
         <translation>Nástroj pro měřítko</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="83"/>
+        <location filename="../src/Create/CreateActions.cpp" line="86"/>
+        <location filename="../src/Create/CreateActions.cpp" line="141"/>
         <source>Shift+F8</source>
         <translation>Shift+F8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="85"/>
+        <location filename="../src/Create/CreateActions.cpp" line="88"/>
         <source>Digitize scale bar for a map. Requires Import (Advanced).</source>
         <translation>Digitalizujte měřítko pro mapu. Vyžaduje import (pokročilé).</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="86"/>
+        <location filename="../src/Create/CreateActions.cpp" line="89"/>
         <source>Digitize Scale Bar
 
 Digitize a scale bar for a map by clicking and dragging. The length of the scale bar is then entered. In a map, the two endpoints of the scale bar define the distances in graph coordinates.
@@ -402,22 +403,22 @@ Tento nástroj je povolen výběrem možnosti Měřítko v nástroji Import (Up�
 Tento nástroj je zakázán při definování měřítka nebo při výběru bodů osy.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="95"/>
+        <location filename="../src/Create/CreateActions.cpp" line="98"/>
         <source>Curve Point Tool</source>
         <translation>Nástroj křivky</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="96"/>
+        <location filename="../src/Create/CreateActions.cpp" line="99"/>
         <source>Shift+F4</source>
         <translation>Shift+F4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="98"/>
+        <location filename="../src/Create/CreateActions.cpp" line="101"/>
         <source>Digitize curve points.</source>
         <translation>Digitalizace křivek</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="99"/>
+        <location filename="../src/Create/CreateActions.cpp" line="102"/>
         <source>Digitize Curve Point
 
 Digitizes a curve point by placing a new point at the cursor after a mouse click. Use this mode to digitize points along curves one by one.
@@ -430,22 +431,22 @@ Digitalizuje bod zakřivení umístěním nového bodu na kurzor po klepnutí my
 Nové body budou přiřazeny aktuálně zvolené křivce.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="106"/>
+        <location filename="../src/Create/CreateActions.cpp" line="109"/>
         <source>Point Match Tool</source>
         <translation>Nástroj pro shodu bodů</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="107"/>
+        <location filename="../src/Create/CreateActions.cpp" line="110"/>
         <source>Shift+F5</source>
         <translation>Shift+F5</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="109"/>
+        <location filename="../src/Create/CreateActions.cpp" line="112"/>
         <source>Digitize curve points in a point plot by matching a point.</source>
         <translation>Digitalizujte křivkové body v bodovém grafu odpovídajícím bodem</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="110"/>
+        <location filename="../src/Create/CreateActions.cpp" line="113"/>
         <source>Digitize Curve Points by Point Matching
 
 Digitizes curve points in a point plot by finding points that match a sample point. The process starts by selecting a representative sample point.
@@ -458,22 +459,22 @@ Digitalizuje křivkové body v bodovém grafu tím, že najde body, které odpov
 Nové body budou přiřazeny aktuálně zvolené křivce.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="116"/>
+        <location filename="../src/Create/CreateActions.cpp" line="119"/>
         <source>Color Picker Tool</source>
         <translation>Nástroj pro výběr barev</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="117"/>
+        <location filename="../src/Create/CreateActions.cpp" line="120"/>
         <source>Shift+F6</source>
         <translation>Shift+F6</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="119"/>
+        <location filename="../src/Create/CreateActions.cpp" line="122"/>
         <source>Select color settings for filtering in Segment Fill mode.</source>
         <translation>Zvolte nastavení barev pro filtrování v režimu Segmentový výplň.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="120"/>
+        <location filename="../src/Create/CreateActions.cpp" line="123"/>
         <source>Select color settings for Segment Fill filtering
 
 Select a pixel along the currently selected curve. That pixel and its neighbors will define the filter settings (color, brightness, and so on) of the currently selected curve while in Segment Fill mode.</source>
@@ -482,22 +483,22 @@ Select a pixel along the currently selected curve. That pixel and its neighbors 
 Vyberte pixel podél aktuálně zvolené křivky. Tento pixel a jeho sousedé budou definovat nastavení filtru (barva, jas a podobně) aktuálně zvolené křivky v režimu Segmentová výplň.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="126"/>
+        <location filename="../src/Create/CreateActions.cpp" line="129"/>
         <source>Segment Fill Tool</source>
         <translation>Nástroj vyplňování segmentů</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="127"/>
+        <location filename="../src/Create/CreateActions.cpp" line="130"/>
         <source>Shift+F7</source>
         <translation>Shift+F7</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="129"/>
+        <location filename="../src/Create/CreateActions.cpp" line="132"/>
         <source>Digitize curve points along a segment of a curve.</source>
         <translation>Digitalizovat křivkové body v segmentu křivky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="130"/>
+        <location filename="../src/Create/CreateActions.cpp" line="133"/>
         <source>Digitize Curve Points With Segment Fill
 
 Digitizes curve points by placing new points along the highlighted segment under the cursor. Use this mode to quickly digitize multiple points along a curve with a single click.
@@ -510,158 +511,175 @@ Digitalizuje křivkové body umístěním nových bodů pod zvýrazněný segmen
 Nové body budou přiřazeny aktuálně zvolené křivce.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="151"/>
+        <location filename="../src/Create/CreateActions.cpp" line="140"/>
+        <source>Guidelines Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="143"/>
+        <source>Digitize guidelines along constant coordinate values for aligning new points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="144"/>
+        <source>Digitize guidelines along constant coordinate values
+
+Guidelines can be placed along constant X or Y coordinates in cartesian coordinates, and T (theta) or R (range) coordinates in polar coordinates. Guidelines can help with aligning new points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="165"/>
         <source>&amp;Undo</source>
         <translation>vrátit</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="153"/>
+        <location filename="../src/Create/CreateActions.cpp" line="167"/>
         <source>Undo the last operation.</source>
         <translation>Uvolněte poslední operaci.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="154"/>
+        <location filename="../src/Create/CreateActions.cpp" line="168"/>
         <source>Undo
 
 Undo the last operation.</source>
         <translation>Vraťte zpět poslední operaci.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="158"/>
+        <location filename="../src/Create/CreateActions.cpp" line="172"/>
         <source>&amp;Redo</source>
         <translation>Předělat</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="160"/>
+        <location filename="../src/Create/CreateActions.cpp" line="174"/>
         <source>Redo the last operation.</source>
         <translation>Zopakujte poslední operaci.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="161"/>
+        <location filename="../src/Create/CreateActions.cpp" line="175"/>
         <source>Redo
 
 Redo the last operation.</source>
         <translation>Opakovat poslední operaci.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="165"/>
+        <location filename="../src/Create/CreateActions.cpp" line="179"/>
         <source>Cut</source>
         <translation>Střih</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="167"/>
+        <location filename="../src/Create/CreateActions.cpp" line="181"/>
         <source>Cuts the selected points and copies them to the clipboard.</source>
         <translation>Ořízne vybrané body a zkopíruje je do schránky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="168"/>
+        <location filename="../src/Create/CreateActions.cpp" line="182"/>
         <source>Cut
 
 Cuts the selected points and copies them to the clipboard.</source>
         <translation>CutStačí vybrané body a zkopíruje je do schránky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="172"/>
+        <location filename="../src/Create/CreateActions.cpp" line="186"/>
         <source>Copy</source>
         <translation>kopírovat</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="174"/>
+        <location filename="../src/Create/CreateActions.cpp" line="188"/>
         <source>Copies the selected points to the clipboard.</source>
         <translation>Kopíruje vybrané body do schránky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="175"/>
+        <location filename="../src/Create/CreateActions.cpp" line="189"/>
         <source>Copy
 
 Copies the selected points to the clipboard.</source>
         <translation>Copy Kopíruje vybrané body do schránky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="179"/>
+        <location filename="../src/Create/CreateActions.cpp" line="193"/>
         <source>Paste</source>
         <translation>Vložit</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="181"/>
+        <location filename="../src/Create/CreateActions.cpp" line="195"/>
         <source>Pastes the selected points from the clipboard.</source>
         <translation>Vloží vybrané body ze schránky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="182"/>
+        <location filename="../src/Create/CreateActions.cpp" line="196"/>
         <source>Paste
 
 Pastes the selected points from the clipboard. They will be assigned to the current curve.</source>
         <translation>PastePasuje vybrané body ze schránky. Budou jim přidělena aktuální křivka.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="186"/>
+        <location filename="../src/Create/CreateActions.cpp" line="200"/>
         <source>Delete</source>
         <translation>Vymazat</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="188"/>
+        <location filename="../src/Create/CreateActions.cpp" line="202"/>
         <source>Deletes the selected points, after copying them to the clipboard.</source>
         <translation>Odstraní vybrané body po jejich kopírování do schránky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="189"/>
+        <location filename="../src/Create/CreateActions.cpp" line="203"/>
         <source>Delete
 
 Deletes the selected points, after copying them to the clipboard.</source>
         <translation>Odstranit (Delete) Odstraní vybrané body po jejich zkopírování do schránky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="193"/>
+        <location filename="../src/Create/CreateActions.cpp" line="207"/>
         <source>Paste As New</source>
         <translation>Vložit jako nové</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="194"/>
+        <location filename="../src/Create/CreateActions.cpp" line="208"/>
         <source>Pastes an image from the clipboard.</source>
         <translation>Vloží obrázek ze schránky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="195"/>
+        <location filename="../src/Create/CreateActions.cpp" line="209"/>
         <source>Paste as New
 
 Creates a new document by pasting an image from the clipboard.</source>
         <translation>Vložit jako Nový Vytvoří nový dokument vložením obrázku ze schránky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="199"/>
+        <location filename="../src/Create/CreateActions.cpp" line="213"/>
         <source>Paste As New (Advanced)...</source>
         <translation>Vložit jako nové (pokročilé) ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="200"/>
+        <location filename="../src/Create/CreateActions.cpp" line="214"/>
         <source>Pastes an image from the clipboard, in advanced mode.</source>
         <translation>Vloží obrázek ze schránky v rozšířeném režimu.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="201"/>
+        <location filename="../src/Create/CreateActions.cpp" line="215"/>
         <source>Paste as New (Advanced)
 
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
         <translation>Vložit jako nový (rozšířený) Vytvoří nový dokument vložením obrázku ze schránky v rozšířeném režimu.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="210"/>
+        <location filename="../src/Create/CreateActions.cpp" line="224"/>
         <source>&amp;Import...</source>
         <translation>&amp;Import...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="211"/>
+        <location filename="../src/Create/CreateActions.cpp" line="225"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="212"/>
+        <location filename="../src/Create/CreateActions.cpp" line="226"/>
         <source>Creates a new document by importing a simple image.</source>
         <translation>Vytvoří nový dokument importováním jednoduchého obrázku.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="213"/>
+        <location filename="../src/Create/CreateActions.cpp" line="227"/>
         <source>Import Image
 
 Creates a new document by importing an image with a single coordinate system, and axes both coordinates known.
@@ -670,175 +688,175 @@ For more complicated images with multiple coordinate systems, and/or floating ax
         <translation>Importovat obrázek Vytvoří nový dokument importováním obrázku s jediným souřadným systémem a osami jsou oba známé souřadnice. Pro složitější obrazy s více souřadnicovými systémy a / nebo pohyblivými osami se místo toho používá Import (Advanced).</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="220"/>
+        <location filename="../src/Create/CreateActions.cpp" line="234"/>
         <source>Import (Advanced)...</source>
         <translation>Import (rozšířené) ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="221"/>
+        <location filename="../src/Create/CreateActions.cpp" line="235"/>
         <source>Creates a new document by importing an image with support for advanced feaures.</source>
         <translation>Vytvoří nový dokument importováním obrázku s podporou pokročilých funkcí.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="222"/>
+        <location filename="../src/Create/CreateActions.cpp" line="236"/>
         <source>Import (Advanced)
 
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
         <translation>Import (rozšířené) Vytvoří nový dokument importováním obrázku s podporou pokročilých operací. V pokročilém režimu mohou existovat více souřadnicových systémů a / nebo pohyblivých os.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="227"/>
+        <location filename="../src/Create/CreateActions.cpp" line="241"/>
         <source>Import (Image Replace)...</source>
         <translation>Import (výměna obrázku) ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="228"/>
+        <location filename="../src/Create/CreateActions.cpp" line="242"/>
         <source>Imports a new image into the current document, replacing the existing image.</source>
         <translation>Importuje nový obrázek do aktuálního dokumentu a nahrazuje stávající obrázek.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="229"/>
+        <location filename="../src/Create/CreateActions.cpp" line="243"/>
         <source>Import (Image Replace)
 
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
         <translation>Import (výměna snímku) Vyvede nový obrázek do aktuálního dokumentu. Existující snímek je nahrazen a všechny křivky v dokumentu jsou zachovány. Tato operace je užitečná pro použití bodů os a dalších nastavení z existujícího dokumentu na jiný obrázek.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="235"/>
+        <location filename="../src/Create/CreateActions.cpp" line="249"/>
         <source>&amp;Open...</source>
         <translation>&amp;Otevřeno...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="237"/>
+        <location filename="../src/Create/CreateActions.cpp" line="251"/>
         <source>Opens an existing document.</source>
         <translation>Otevře existující dokument.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="238"/>
+        <location filename="../src/Create/CreateActions.cpp" line="252"/>
         <source>Open Document
 
 Opens an existing document.</source>
         <translation>Otevřít dokument ®Otevřuje existující dokument.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="251"/>
+        <location filename="../src/Create/CreateActions.cpp" line="265"/>
         <source>&amp;Close</source>
         <translation>&amp;Zavřít</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="253"/>
+        <location filename="../src/Create/CreateActions.cpp" line="267"/>
         <source>Closes the open document.</source>
         <translation>Zavře otevřený dokument.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="254"/>
+        <location filename="../src/Create/CreateActions.cpp" line="268"/>
         <source>Close Document
 
 Closes the open document.</source>
         <translation>Zavřít dokumentZavří otevřený dokument.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="258"/>
+        <location filename="../src/Create/CreateActions.cpp" line="272"/>
         <source>&amp;Save</source>
         <translation>&amp;Uložit</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="260"/>
+        <location filename="../src/Create/CreateActions.cpp" line="274"/>
         <source>Saves the current document.</source>
         <translation>Uloží aktuální dokument.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="261"/>
+        <location filename="../src/Create/CreateActions.cpp" line="275"/>
         <source>Save Document
 
 Saves the current document.</source>
         <translation>Uložit dokument ® Uloží aktuální dokument.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="265"/>
+        <location filename="../src/Create/CreateActions.cpp" line="279"/>
         <source>Save As...</source>
         <translation>Uložit jako...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="267"/>
+        <location filename="../src/Create/CreateActions.cpp" line="281"/>
         <source>Saves the current document under a new filename.</source>
         <translation>Uloží aktuální dokument pod novým názvem souboru.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="268"/>
+        <location filename="../src/Create/CreateActions.cpp" line="282"/>
         <source>Save Document As
 
 Saves the current document under a new filename.</source>
         <translation>Uložit dokument AsUpozorňuje aktuální dokument pod novým názvem souboru.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="272"/>
+        <location filename="../src/Create/CreateActions.cpp" line="286"/>
         <source>Export...</source>
         <translation>Exportovat...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="273"/>
+        <location filename="../src/Create/CreateActions.cpp" line="287"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="274"/>
+        <location filename="../src/Create/CreateActions.cpp" line="288"/>
         <source>Exports the current document into a text file.</source>
         <translation>Exportuje aktuální dokument do textového souboru.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="275"/>
+        <location filename="../src/Create/CreateActions.cpp" line="289"/>
         <source>Export Document
 
 Exports the current document into a text file.</source>
         <translation>Exportovat dokument Exportuje aktuální dokument do textového souboru.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="279"/>
+        <location filename="../src/Create/CreateActions.cpp" line="293"/>
         <source>&amp;Print...</source>
         <translation>Tisk...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="281"/>
+        <location filename="../src/Create/CreateActions.cpp" line="295"/>
         <source>Print the current document.</source>
         <translation>Vytiskněte aktuální dokument.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="282"/>
+        <location filename="../src/Create/CreateActions.cpp" line="296"/>
         <source>Print Document
 
 Print the current document to a printer or file.</source>
         <translation>Tisk dokumentuTlačte aktuální dokument do tiskárny nebo souboru.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="286"/>
+        <location filename="../src/Create/CreateActions.cpp" line="300"/>
         <source>&amp;Exit</source>
         <translation>Výstup</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="288"/>
+        <location filename="../src/Create/CreateActions.cpp" line="302"/>
         <source>Quits the application.</source>
         <translation>Ukončí aplikaci.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="289"/>
+        <location filename="../src/Create/CreateActions.cpp" line="303"/>
         <source>Exit
 
 Quits the application.</source>
         <translation>ExitPoužívá aplikaci.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="298"/>
+        <location filename="../src/Create/CreateActions.cpp" line="312"/>
         <source>Checklist Guide Wizard</source>
         <translation>Průvodce kontrolním seznamem</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="300"/>
+        <location filename="../src/Create/CreateActions.cpp" line="314"/>
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
         <translation>Při importu spustit průvodce kontrolním seznamem pro definování kroků digitalizace</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="301"/>
+        <location filename="../src/Create/CreateActions.cpp" line="315"/>
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
@@ -847,17 +865,17 @@ Use Checklist Guide Wizard during import to generate a checklist of steps for th
 Použijte průvodce kontrolním seznamem pro vytvoření kontrolního seznamu kroků importovaného dokumentu</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="308"/>
+        <location filename="../src/Create/CreateActions.cpp" line="322"/>
         <source>Tutorial</source>
         <translation>Tutorial</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="309"/>
+        <location filename="../src/Create/CreateActions.cpp" line="323"/>
         <source>Play tutorial showing steps for digitizing curves</source>
         <translation>Přehrát tutoriál zobrazující kroky pro digitalizaci křivek</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="310"/>
+        <location filename="../src/Create/CreateActions.cpp" line="324"/>
         <source>Tutorial
 
 Play tutorial showing steps for digitizing points from curves drawn with lines and/or point</source>
@@ -866,17 +884,17 @@ Play tutorial showing steps for digitizing points from curves drawn with lines a
 Přehrát návod, který ukazuje kroky pro digitalizaci bodů z křivek vykreslených čarami a / nebo bodem</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="316"/>
+        <location filename="../src/Create/CreateActions.cpp" line="330"/>
         <source>Help</source>
         <translation>Pomoc</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="318"/>
+        <location filename="../src/Create/CreateActions.cpp" line="332"/>
         <source>Help documentation</source>
         <translation>Dokumentace nápovědy</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="319"/>
+        <location filename="../src/Create/CreateActions.cpp" line="333"/>
         <source>Help Documentation
 
 Searchable help documentation</source>
@@ -885,17 +903,17 @@ Searchable help documentation</source>
 Dokumentace nápovědy prohledávatelné</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="324"/>
+        <location filename="../src/Create/CreateActions.cpp" line="338"/>
         <source>About Engauge</source>
         <translation>O Engauge</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="325"/>
+        <location filename="../src/Create/CreateActions.cpp" line="339"/>
         <source>About the application.</source>
         <translation>O aplikaci</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="326"/>
+        <location filename="../src/Create/CreateActions.cpp" line="340"/>
         <source>About Engauge
 
 About the application.</source>
@@ -904,17 +922,17 @@ About the application.</source>
 O aplikaci.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="334"/>
+        <location filename="../src/Create/CreateActions.cpp" line="348"/>
         <source>Coordinates...</source>
         <translation>Souřadnice</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="335"/>
+        <location filename="../src/Create/CreateActions.cpp" line="349"/>
         <source>Edit Coordinate settings.</source>
         <translation>Upravte nastavení souřadnic</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="336"/>
+        <location filename="../src/Create/CreateActions.cpp" line="350"/>
         <source>Coordinate Settings
 
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
@@ -923,17 +941,17 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
 Nastavení souřadnic určují způsob, jakým jsou souřadnice souřadnic mapovány na obrazové body v obraze</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="340"/>
+        <location filename="../src/Create/CreateActions.cpp" line="354"/>
         <source>Curve List...</source>
         <translation>Seznam krivek ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="341"/>
+        <location filename="../src/Create/CreateActions.cpp" line="355"/>
         <source>Edit Curve List settings.</source>
         <translation>Upravit nastavení seznamu křivek.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="342"/>
+        <location filename="../src/Create/CreateActions.cpp" line="356"/>
         <source>Curve List
 
 Curve list settings add, rename and/or remove curves in the current document</source>
@@ -942,17 +960,17 @@ Curve list settings add, rename and/or remove curves in the current document</so
 Nastavení seznamu křivek přidává, přejmenuje a / nebo odstraňuje křivky v aktuálním dokumentu</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="346"/>
+        <location filename="../src/Create/CreateActions.cpp" line="360"/>
         <source>Curve Properties...</source>
         <translation>Vlastnosti křivky...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="347"/>
+        <location filename="../src/Create/CreateActions.cpp" line="361"/>
         <source>Edit Curve Properties settings.</source>
         <translation>Upravit nastavení vlastností křivky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="348"/>
+        <location filename="../src/Create/CreateActions.cpp" line="362"/>
         <source>Curve Properties Settings
 
 Curves properties settings determine how each curve appears</source>
@@ -961,17 +979,17 @@ Curves properties settings determine how each curve appears</source>
 Nastavení vlastností křivek určuje, jak se zobrazí každá křivka</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="352"/>
+        <location filename="../src/Create/CreateActions.cpp" line="366"/>
         <source>Digitize Curve...</source>
         <translation>Digitalizujte křivku</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="353"/>
+        <location filename="../src/Create/CreateActions.cpp" line="367"/>
         <source>Edit Digitize Axis and Graph Curve settings.</source>
         <translation>Upravit nastavení digitální osy a křivky grafu.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="354"/>
+        <location filename="../src/Create/CreateActions.cpp" line="368"/>
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
@@ -980,17 +998,17 @@ Digitize Curve settings determine how points are digitized in Digitize Axis Poin
 Nastavení digitalizace křivky určuje, jak jsou body digitalizovány v režimech Digitalizace osy a Digitalizace grafu</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="359"/>
+        <location filename="../src/Create/CreateActions.cpp" line="373"/>
         <source>Export Format...</source>
         <translation>Formát exportu</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="360"/>
+        <location filename="../src/Create/CreateActions.cpp" line="374"/>
         <source>Edit Export Format settings.</source>
         <translation>Upravit nastavení formátu exportu.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="361"/>
+        <location filename="../src/Create/CreateActions.cpp" line="375"/>
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
@@ -999,17 +1017,17 @@ Export format settings affect how exported files are formatted</source>
 Nastavení exportního formátu ovlivňuje způsob formátování exportovaných souborů</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="365"/>
+        <location filename="../src/Create/CreateActions.cpp" line="379"/>
         <source>Color Filter...</source>
         <translation>Barevný filtr</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="366"/>
+        <location filename="../src/Create/CreateActions.cpp" line="380"/>
         <source>Edit Color Filter settings.</source>
         <translation>Upravit nastavení filtru barev.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="367"/>
+        <location filename="../src/Create/CreateActions.cpp" line="381"/>
         <source>Color Filter Settings
 
 Color filtering simplifies the graphs for easier Point Matching and Segment Filling</source>
@@ -1018,17 +1036,17 @@ Color filtering simplifies the graphs for easier Point Matching and Segment Fill
 Filtrování barev zjednodušuje grafy pro snadnější přizpůsobení bodů a plnění segmentů</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="371"/>
+        <location filename="../src/Create/CreateActions.cpp" line="385"/>
         <source>Axes Checker...</source>
         <translation>Kontrola os</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="372"/>
+        <location filename="../src/Create/CreateActions.cpp" line="386"/>
         <source>Edit Axes Checker settings.</source>
         <translation>Upravit nastavení Kontrola os.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="373"/>
+        <location filename="../src/Create/CreateActions.cpp" line="387"/>
         <source>Axes Checker Settings
 
 Axes checker can reveal any axis point mistakes, which are otherwise hard to find.</source>
@@ -1037,17 +1055,17 @@ Axes checker can reveal any axis point mistakes, which are otherwise hard to fin
 Kontrola os může odhalit všechny chyby v ose, které jsou jinak těžké najít.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="377"/>
+        <location filename="../src/Create/CreateActions.cpp" line="391"/>
         <source>Grid Line Display...</source>
         <translation>Zobrazení mřížky ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="378"/>
+        <location filename="../src/Create/CreateActions.cpp" line="392"/>
         <source>Edit Grid Line Display settings.</source>
         <translation>Upravit nastavení zobrazení mřížky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="379"/>
+        <location filename="../src/Create/CreateActions.cpp" line="393"/>
         <source>Grid Line Display Settings
 
 Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions.</source>
@@ -1056,17 +1074,17 @@ Grid lines displayed on the graph can provide more accuracy than the Axis Checke
 Řádkové čáry zobrazené na grafu mohou poskytnout větší přesnost než kontrola osy pro zkreslené grafy. V zkresleném grafu lze mřížkové čáry použít k úpravě bodů osy pro větší přesnost v různých oblastech.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="384"/>
+        <location filename="../src/Create/CreateActions.cpp" line="398"/>
         <source>Grid Line Removal...</source>
         <translation>Odebrání mřížky</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="385"/>
+        <location filename="../src/Create/CreateActions.cpp" line="399"/>
         <source>Edit Grid Line Removal settings.</source>
         <translation>Upravit nastavení pro odstranění mřížky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="386"/>
+        <location filename="../src/Create/CreateActions.cpp" line="400"/>
         <source>Grid Line Removal Settings
 
 Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when Color Filtering is not able to separate grid lines from curve lines.</source>
@@ -1075,17 +1093,34 @@ Grid line removal isolates curve lines for easier Point Matching and Segment Fil
 Odstranění síťové čáry izoluje křivkové čáry pro snazší přizpůsobování bodů a plnění segmentů, když filtrování barev neumožňuje oddělit čáry mřížky od čáry křivky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="391"/>
+        <location filename="../src/Create/CreateActions.cpp" line="405"/>
+        <source>Guideline...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="406"/>
+        <source>Guideline Settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="407"/>
+        <source>Guideline Settings
+
+Guidelines displayed on the graph can help to align points along constant coordinate lines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="411"/>
         <source>Point Match...</source>
         <translation>Bodová shoda...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="392"/>
+        <location filename="../src/Create/CreateActions.cpp" line="412"/>
         <source>Edit Point Match settings.</source>
         <translation>Upravit nastavení shody bodů.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="393"/>
+        <location filename="../src/Create/CreateActions.cpp" line="413"/>
         <source>Point Match Settings
 
 Point match settings determine how points are matched while in Point Match mode</source>
@@ -1094,17 +1129,17 @@ Point match settings determine how points are matched while in Point Match mode<
 Nastavení shody bodů určuje, jak jsou body přiřazovány v režimu shody bodů</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="397"/>
+        <location filename="../src/Create/CreateActions.cpp" line="417"/>
         <source>Segment Fill...</source>
         <translation>Vyplnění segmentů...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="398"/>
+        <location filename="../src/Create/CreateActions.cpp" line="418"/>
         <source>Edit Segment Fill settings.</source>
         <translation>Upravit nastavení vyplňovaní segmentů.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="399"/>
+        <location filename="../src/Create/CreateActions.cpp" line="419"/>
         <source>Segment Fill Settings
 
 Segment fill settings determine how points are generated in the Segment Fill mode</source>
@@ -1113,17 +1148,17 @@ Segment fill settings determine how points are generated in the Segment Fill mod
 Nastavení výplní segmentu určují způsob generování bodů v režimu segmentového plnění</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="403"/>
+        <location filename="../src/Create/CreateActions.cpp" line="423"/>
         <source>General...</source>
         <translation>Všeobecné...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="404"/>
+        <location filename="../src/Create/CreateActions.cpp" line="424"/>
         <source>Edit General settings.</source>
         <translation>Upravte obecná nastavení.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="405"/>
+        <location filename="../src/Create/CreateActions.cpp" line="425"/>
         <source>General Settings
 
 General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects both Color Picker and Point Match modes</source>
@@ -1132,17 +1167,17 @@ General settings are document-specific settings that affect multiple modes. For 
 General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects both Color Picker and Point Match modes</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="410"/>
+        <location filename="../src/Create/CreateActions.cpp" line="430"/>
         <source>Main Window...</source>
         <translation>Hlavní okno...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="412"/>
+        <location filename="../src/Create/CreateActions.cpp" line="432"/>
         <source>Edit Main Window settings.</source>
         <translation>Upravit nastavení hlavního okna.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="413"/>
+        <location filename="../src/Create/CreateActions.cpp" line="433"/>
         <source>Main Window Settings
 
 Main window settings affect the user interface and are not specific to any document</source>
@@ -1151,17 +1186,17 @@ Main window settings affect the user interface and are not specific to any docum
 Nastavení hlavního okna ovlivňují uživatelské rozhraní a nejsou specifické pro žádný dokument</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="422"/>
+        <location filename="../src/Create/CreateActions.cpp" line="442"/>
         <source>Background Toolbar</source>
         <translation>Panel nástrojů na pozadí</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="425"/>
+        <location filename="../src/Create/CreateActions.cpp" line="445"/>
         <source>Show or hide the background toolbar.</source>
         <translation>Zobrazit nebo skrýt panel nástrojů na pozadí.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="426"/>
+        <location filename="../src/Create/CreateActions.cpp" line="446"/>
         <source>View Background ToolBar
 
 Show or hide the background toolbar</source>
@@ -1170,17 +1205,16 @@ Show or hide the background toolbar</source>
 Zobrazit nebo skrýt panel nástrojů na pozadí</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="430"/>
         <source>Checklist Guide Toolbar</source>
-        <translation>Nástrojová lišta kontrolního seznamu</translation>
+        <translation type="vanished">Panel nástrojů Průvodce kontrolním seznamem</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="433"/>
+        <location filename="../src/Create/CreateActions.cpp" line="482"/>
         <source>Show or hide the checklist guide.</source>
         <translation>Zobrazit nebo skrýt kontrolní seznam.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="434"/>
+        <location filename="../src/Create/CreateActions.cpp" line="483"/>
         <source>View Checklist Guide
 
 Show or hide the checklist guide</source>
@@ -1189,17 +1223,17 @@ Show or hide the checklist guide</source>
 Zobrazí nebo skryje kontrolní seznam.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="438"/>
+        <location filename="../src/Create/CreateActions.cpp" line="487"/>
         <source>Curve Fitting Window</source>
         <translation>Okno pro nastavení křivky</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="441"/>
+        <location filename="../src/Create/CreateActions.cpp" line="490"/>
         <source>Show or hide the curve fitting window.</source>
         <translation>Zobrazte nebo skryjte okno pro nastavení křivky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="442"/>
+        <location filename="../src/Create/CreateActions.cpp" line="491"/>
         <source>View Curve Fitting Window
 
 Show or hide the curve fitting window</source>
@@ -1208,17 +1242,17 @@ Show or hide the curve fitting window</source>
 Zobrazte nebo skryjte okno pro nastavení křivky</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="446"/>
+        <location filename="../src/Create/CreateActions.cpp" line="495"/>
         <source>Geometry Window</source>
         <translation>Okno geometrie</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="449"/>
+        <location filename="../src/Create/CreateActions.cpp" line="498"/>
         <source>Show or hide the geometry window.</source>
         <translation>Zobrazit nebo skrýt okno geometrie.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="450"/>
+        <location filename="../src/Create/CreateActions.cpp" line="499"/>
         <source>View Geometry Window
 
 Show or hide the geometry window</source>
@@ -1227,17 +1261,17 @@ Show or hide the geometry window</source>
 Zobrazit nebo skrýt okno geometrie</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="454"/>
+        <location filename="../src/Create/CreateActions.cpp" line="450"/>
         <source>Digitizing Tools Toolbar</source>
         <translation>Panel nástrojů pro digitalizaci nástrojů</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="457"/>
+        <location filename="../src/Create/CreateActions.cpp" line="453"/>
         <source>Show or hide the digitizing tools toolbar.</source>
         <translation>Show or hide the digitizing tools toolbar.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="458"/>
+        <location filename="../src/Create/CreateActions.cpp" line="454"/>
         <source>View Digitizing Tools ToolBar
 
 Show or hide the digitizing tools toolbar</source>
@@ -1246,17 +1280,17 @@ Show or hide the digitizing tools toolbar</source>
 Zobrazte nebo skryjte panel nástrojů pro digitalizaci nástrojů</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="462"/>
+        <location filename="../src/Create/CreateActions.cpp" line="458"/>
         <source>Settings Views Toolbar</source>
         <translation>Panel nástrojů Nastavení zobrazení</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="465"/>
+        <location filename="../src/Create/CreateActions.cpp" line="461"/>
         <source>Show or hide the settings views toolbar.</source>
         <translation>Zobrazit nebo skrýt panel nástrojů zobrazení.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="466"/>
+        <location filename="../src/Create/CreateActions.cpp" line="462"/>
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
@@ -1265,17 +1299,17 @@ Show or hide the settings views toolbar. These views graphically show the most i
 Zobrazit nebo skrýt panel nástrojů zobrazení. Tyto pohledy zobrazují graficky nejdůležitější nastavení.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="471"/>
+        <location filename="../src/Create/CreateActions.cpp" line="467"/>
         <source>Coordinate System Toolbar</source>
         <translation>Panel nástrojů Koordinátor</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="474"/>
+        <location filename="../src/Create/CreateActions.cpp" line="470"/>
         <source>Show or hide the coordinate system toolbar.</source>
         <translation>Zobrazte nebo skryjte panel nástrojů souřadnicového systému.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="475"/>
+        <location filename="../src/Create/CreateActions.cpp" line="471"/>
         <source>View Coordinate Systems ToolBar
 
 Show or hide the coordinate system selection toolbar. This toolbar is used to select the current coordinate system when the document has multiple coordinate systems. This toolbar is also used to view and print all coordinate systems.
@@ -1288,17 +1322,22 @@ Zobrazit nebo skrýt panel nástrojů pro výběr souřadnicového systému. Ten
 Tento panel nástrojů je deaktivován, pokud existuje pouze jeden souřadný systém.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="483"/>
+        <location filename="../src/Create/CreateActions.cpp" line="479"/>
+        <source>Checklist Guide Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="503"/>
         <source>Tool Tips</source>
         <translation>Tipy pro nástroje</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="486"/>
+        <location filename="../src/Create/CreateActions.cpp" line="506"/>
         <source>Show or hide the tool tips.</source>
         <translation>Zobrazte nebo skryjte tipy pro nástroje.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="487"/>
+        <location filename="../src/Create/CreateActions.cpp" line="507"/>
         <source>View Tool Tips
 
 Show or hide the tool tips</source>
@@ -1307,17 +1346,17 @@ Show or hide the tool tips</source>
 Zobrazte nebo skryjte tipy pro nástroje</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="491"/>
+        <location filename="../src/Create/CreateActions.cpp" line="511"/>
         <source>Grid Lines</source>
         <translation>Čáry mřížky</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="494"/>
+        <location filename="../src/Create/CreateActions.cpp" line="514"/>
         <source>Show or hide grid lines.</source>
         <translation>Zobrazit nebo skrýt řádky mřížky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="495"/>
+        <location filename="../src/Create/CreateActions.cpp" line="515"/>
         <source>View Grid Lines
 
 Show or hide grid lines that are added for accurate adjustments of the axes points, which can improve accuracy in distorted graphs</source>
@@ -1326,17 +1365,34 @@ Show or hide grid lines that are added for accurate adjustments of the axes poin
 Zobrazte nebo skryjte čáry mřížky, které jsou přidány pro přesné úpravy bodů os, které mohou zlepšit přesnost zkreslených grafů</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="500"/>
+        <location filename="../src/Create/CreateActions.cpp" line="520"/>
+        <source>Guidelines</source>
+        <translation>Pokyny</translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="523"/>
+        <source>Show or hide guidelines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="524"/>
+        <source>View Guidelines
+
+Show or hide guidelines that are added for accurate adjustments of the graph points, which can improve accuracy of points close to the guidelines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="529"/>
         <source>No Background</source>
         <translation>Žádné pozadí</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="502"/>
+        <location filename="../src/Create/CreateActions.cpp" line="531"/>
         <source>Do not show the image underneath the points.</source>
         <translation>Nezobrazujte obrázek pod body.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="503"/>
+        <location filename="../src/Create/CreateActions.cpp" line="532"/>
         <source>No Background
 
 No image is shown so points are easier to see</source>
@@ -1345,17 +1401,17 @@ No image is shown so points are easier to see</source>
 Není zobrazen žádný obrázek, takže body jsou snadněji viditelné</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="506"/>
+        <location filename="../src/Create/CreateActions.cpp" line="535"/>
         <source>Show Original Image</source>
         <translation>Zobrazit originální obrázek</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="508"/>
+        <location filename="../src/Create/CreateActions.cpp" line="537"/>
         <source>Show the original image underneath the points.</source>
         <translation>Zobrazte původní obrázek pod body.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="509"/>
+        <location filename="../src/Create/CreateActions.cpp" line="538"/>
         <source>Show Original Image
 
 Show the original image underneath the points</source>
@@ -1364,17 +1420,17 @@ Show the original image underneath the points</source>
 Zobrazte původní obrázek pod body</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="512"/>
+        <location filename="../src/Create/CreateActions.cpp" line="541"/>
         <source>Show Filtered Image</source>
         <translation>Zobrazit filtrovaný obrázek</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="515"/>
+        <location filename="../src/Create/CreateActions.cpp" line="544"/>
         <source>Show the filtered image underneath the points.</source>
         <translation>Zobrazte filtrovaný obrázek pod těmito body.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="516"/>
+        <location filename="../src/Create/CreateActions.cpp" line="545"/>
         <source>Show Filtered Image
 
 Show the filtered image underneath the points.
@@ -1387,17 +1443,17 @@ Zobrazte filtrovaný obrázek pod těmito body.
 Filtrovaný obraz je vytvořen z původního obrazu podle předvolby filtru, takže jsou skryté nevýznamné informace a jsou zdůrazněny důležité informace</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="528"/>
+        <location filename="../src/Create/CreateActions.cpp" line="557"/>
         <source>Hide All Curves</source>
         <translation>Skrýt všechny křivky</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="530"/>
+        <location filename="../src/Create/CreateActions.cpp" line="559"/>
         <source>Hide all digitized curves.</source>
         <translation>Skryjte všechny digitalizované křivky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="531"/>
+        <location filename="../src/Create/CreateActions.cpp" line="560"/>
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
@@ -1406,17 +1462,17 @@ No axis points or digitized graph curves are shown so the image is easier to see
 Není zobrazena žádná osa nebo digitalizovaná grafová křivka, takže obraz je jednodušší.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="534"/>
+        <location filename="../src/Create/CreateActions.cpp" line="563"/>
         <source>Show Selected Curve</source>
         <translation>Zobrazit vybranou křivku</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="536"/>
+        <location filename="../src/Create/CreateActions.cpp" line="565"/>
         <source>Show only the currently selected curve.</source>
         <translation>Zobrazit pouze aktuálně vybranou křivku.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="537"/>
+        <location filename="../src/Create/CreateActions.cpp" line="566"/>
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
@@ -1425,17 +1481,17 @@ Show only the digitized points and line that belong to the currently selected cu
 Zobrazit pouze digitalizované body a čáry, které patří aktuálně zvolené křivce.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="540"/>
+        <location filename="../src/Create/CreateActions.cpp" line="569"/>
         <source>Show All Curves</source>
         <translation>Zobrazit všechny křivky</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="543"/>
+        <location filename="../src/Create/CreateActions.cpp" line="572"/>
         <source>Show all curves.</source>
         <translation>Zobrazit všechny křivky</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="544"/>
+        <location filename="../src/Create/CreateActions.cpp" line="573"/>
         <source>Show All Curves
 
 Show all digitized axis points and graph curves</source>
@@ -1444,46 +1500,40 @@ Show all digitized axis points and graph curves</source>
 Zobrazit všechny body digitalizovaných os a grafů</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="553"/>
         <source>Hide Guidelines</source>
-        <translation>Skrýt pokyny</translation>
+        <translation type="vanished">Skrýt pokyny</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="556"/>
         <source>Hide guidelines.</source>
-        <translation>Skrýt pokyny.</translation>
+        <translation type="vanished">Skrýt pokyny</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="557"/>
         <source>Hide Guidelines
 
 Guidelines are hidden to simplify the main window.</source>
-        <translation>Skrýt pokyny
+        <translation type="vanished">Skrýt pokyny
 
-Pokyny jsou skryté, aby se zjednodušilo hlavní okno.</translation>
+Pokyny jsou pro zjednodušení hlavního okna skryty.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="560"/>
         <source>Edit Guidelines</source>
-        <translation>Upravit pokyny</translation>
+        <translation type="vanished">Upravit pokyny</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="562"/>
         <source>Edit guidelines.</source>
-        <translation>Upravit pokyny</translation>
+        <translation type="vanished">Upravit pokyny</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="563"/>
         <source>Edit Guidelines
 
 Add new guidelines by clicking on the guidelines toolbar, move existing guidelines by dragging, or remove guidelines by dragging out of the main window.
 
 This option is available in Select mode.</source>
-        <translation>Upravit pokyny
+        <translation type="vanished">Upravit pokyny
 
-	Přidejte nové pokyny kliknutím na lištu nástrojů pro pokyny, přesuňte stávající pokyny přetažením nebo odeberte pokyny přetažením z hlavního okna.
+Přidejte nové pokyny kliknutím na panel nástrojů pokynů, přesuňte existující pokyny přetažením nebo odeberte pokyny přetažením z hlavního okna.
 
-	Tato možnost je k dispozici v režimu Výběr.</translation>
+Tato možnost je k dispozici v režimu Výběr.</translation>
     </message>
     <message>
         <source>Edit Guidelines
@@ -1494,342 +1544,339 @@ Add new guidelines by clicking on the guidelines toolbar, move existing guidelin
 Přidejte nové pokyny kliknutím na lištu nástrojů pro pokyny, přesuňte stávající pokyny přetažením nebo odeberte pokyny přetažením z hlavního okna.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="569"/>
         <source>Lock Guidelines</source>
-        <translation>Pokyny k uzamčení</translation>
+        <translation type="vanished">Pokyny pro zámek.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="571"/>
         <source>Lock guidelines.</source>
-        <translation>Pokyny k uzamčení</translation>
+        <translation type="vanished">Pokyny pro zámek.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="572"/>
         <source>Lock Guidelines
 
 Lock the guidelines to prevent accidental movement or removal.</source>
-        <translation>Pokyny k uzamčení
+        <translation type="vanished">Pokyny pro zámek
 
-Pokyny zamkněte, abyste zabránili náhodnému pohybu nebo odstranění.</translation>
+Zajistěte vodítka, abyste zabránili náhodnému pohybu nebo odstranění.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="581"/>
+        <location filename="../src/Create/CreateActions.cpp" line="582"/>
         <source>Hide Always</source>
         <translation>Skrýt vždy</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="583"/>
+        <location filename="../src/Create/CreateActions.cpp" line="584"/>
         <source>Always hide the status bar.</source>
         <translation>Vždy skrýt stavový řádek.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="584"/>
+        <location filename="../src/Create/CreateActions.cpp" line="585"/>
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
         <translation>Skrýt stavový řádek. Žádné přechodné stavy nebo pomocné zprávy se nezobrazí.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="586"/>
+        <location filename="../src/Create/CreateActions.cpp" line="587"/>
         <source>Show Temporary Messages</source>
         <translation>Zobrazovat dočasné zprávy.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="588"/>
+        <location filename="../src/Create/CreateActions.cpp" line="589"/>
         <source>Hide the status bar except when display temporary messages.</source>
         <translation>Skrýt stavový řádek vyjma v případech, když jsou ukazovány dočasné zprávy.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="589"/>
+        <location filename="../src/Create/CreateActions.cpp" line="590"/>
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
         <translation>Skrýt stavový řádek vyjma v případech, když jsou ukazovány pomocné zprávy a dočasný stav.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="591"/>
+        <location filename="../src/Create/CreateActions.cpp" line="592"/>
         <source>Show Always</source>
         <translation>Vždy zobrazit</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="593"/>
+        <location filename="../src/Create/CreateActions.cpp" line="594"/>
         <source>Always show the status bar.</source>
         <translation>Vždy zobrazit stavový řádek.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="594"/>
+        <location filename="../src/Create/CreateActions.cpp" line="595"/>
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
         <translation>Zobrazit stavový řádek. Navíc k zobrazovaní přechodného stavu a pomocných zpráv se také bude zobrazovat pozice kurzoru v liště stavu. </translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="603"/>
+        <location filename="../src/Create/CreateActions.cpp" line="604"/>
         <source>Zoom Out</source>
         <translation>Oddálit</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="604"/>
+        <location filename="../src/Create/CreateActions.cpp" line="605"/>
         <source>Zoom out</source>
         <translation>Oddálit</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="608"/>
+        <location filename="../src/Create/CreateActions.cpp" line="609"/>
         <source>Zoom In</source>
         <translation>Přiblížit</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="609"/>
+        <location filename="../src/Create/CreateActions.cpp" line="610"/>
         <source>Zoom in</source>
         <translation>Přiblížit</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="616"/>
+        <location filename="../src/Create/CreateActions.cpp" line="617"/>
         <source>16:1 (1600%)</source>
         <translation>16:1 (1600%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="618"/>
+        <location filename="../src/Create/CreateActions.cpp" line="619"/>
         <source>Zoom 16:1</source>
         <translation>Zvětšení 16: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="622"/>
+        <location filename="../src/Create/CreateActions.cpp" line="623"/>
         <source>16:1 farther (1270%)</source>
         <translation>16: 1 dále (1270%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="624"/>
+        <location filename="../src/Create/CreateActions.cpp" line="625"/>
         <source>Zoom 12.7:1</source>
         <translation>Zvětšení 12.7: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="628"/>
+        <location filename="../src/Create/CreateActions.cpp" line="629"/>
         <source>8:1 closer (1008%)</source>
         <translation>8: 1 bližší (1008%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="630"/>
+        <location filename="../src/Create/CreateActions.cpp" line="631"/>
         <source>Zoom 10.08:1</source>
         <translation>Zvětšení 10.08: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="634"/>
+        <location filename="../src/Create/CreateActions.cpp" line="635"/>
         <source>8:1 (800%)</source>
         <translation>8:1 (800%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="636"/>
+        <location filename="../src/Create/CreateActions.cpp" line="637"/>
         <source>Zoom 8:1</source>
         <translation>Zvětšení 8: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="640"/>
+        <location filename="../src/Create/CreateActions.cpp" line="641"/>
         <source>8:1 farther (635%)</source>
         <translation>8: 1 dále (635%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="642"/>
+        <location filename="../src/Create/CreateActions.cpp" line="643"/>
         <source>Zoom 6.35:1</source>
         <translation>Zvětšení 6.35: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="646"/>
+        <location filename="../src/Create/CreateActions.cpp" line="647"/>
         <source>4:1 closer (504%)</source>
         <translation>4: 1 bližší (504%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="648"/>
+        <location filename="../src/Create/CreateActions.cpp" line="649"/>
         <source>Zoom 5.04:1</source>
         <translation>Zvětšení 5.04: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="652"/>
+        <location filename="../src/Create/CreateActions.cpp" line="653"/>
         <source>4:1 (400%)</source>
         <translation>4:1 (400%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="654"/>
+        <location filename="../src/Create/CreateActions.cpp" line="655"/>
         <source>Zoom 4:1</source>
         <translation>Zvětšení 4: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="658"/>
+        <location filename="../src/Create/CreateActions.cpp" line="659"/>
         <source>4:1 farther (317%)</source>
         <translation>4: 1 dále (317%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="660"/>
+        <location filename="../src/Create/CreateActions.cpp" line="661"/>
         <source>Zoom 3.17:1</source>
         <translation>Zvětšení 3.17: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="664"/>
+        <location filename="../src/Create/CreateActions.cpp" line="665"/>
         <source>2:1 closer (252%)</source>
         <translation>2: 1 blíže (252%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="666"/>
+        <location filename="../src/Create/CreateActions.cpp" line="667"/>
         <source>Zoom 2.52:1</source>
         <translation>Zvětšení 2.52: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="670"/>
+        <location filename="../src/Create/CreateActions.cpp" line="671"/>
         <source>2:1 (200%)</source>
         <translation>2:1 (200%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="672"/>
+        <location filename="../src/Create/CreateActions.cpp" line="673"/>
         <source>Zoom 2:1</source>
         <translation>Zvětšení 2: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="676"/>
+        <location filename="../src/Create/CreateActions.cpp" line="677"/>
         <source>2:1 farther (159%)</source>
         <translation>2: 1 dále (159%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="678"/>
+        <location filename="../src/Create/CreateActions.cpp" line="679"/>
         <source>Zoom 1.59:1</source>
         <translation>Zvětšení 1.59: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="682"/>
+        <location filename="../src/Create/CreateActions.cpp" line="683"/>
         <source>1:1 closer (126%)</source>
         <translation>1: 1 blíž (126%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="685"/>
+        <location filename="../src/Create/CreateActions.cpp" line="686"/>
         <source>Zoom 1.3:1</source>
         <translation>Zvětšení 1.3: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="689"/>
+        <location filename="../src/Create/CreateActions.cpp" line="690"/>
         <source>1:1 (100%)</source>
         <translation>1:1 (100%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="692"/>
+        <location filename="../src/Create/CreateActions.cpp" line="693"/>
         <source>Zoom 1:1</source>
         <translation>Zvětšení 1: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="696"/>
+        <location filename="../src/Create/CreateActions.cpp" line="697"/>
         <source>1:1 farther (79%)</source>
         <translation>1: 1 dále (79%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="699"/>
+        <location filename="../src/Create/CreateActions.cpp" line="700"/>
         <source>Zoom 0.8:1</source>
         <translation>Zvětšení 0.8: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="703"/>
+        <location filename="../src/Create/CreateActions.cpp" line="704"/>
         <source>1:2 closer (63%)</source>
         <translation>1: 2 bližší (63%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="705"/>
+        <location filename="../src/Create/CreateActions.cpp" line="706"/>
         <source>Zoom 1.3:2</source>
         <translation>Zvětšení 1.3: 2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="709"/>
+        <location filename="../src/Create/CreateActions.cpp" line="710"/>
         <source>1:2 (50%)</source>
         <translation>1:2 (50%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="711"/>
+        <location filename="../src/Create/CreateActions.cpp" line="712"/>
         <source>Zoom 1:2</source>
         <translation>Zvětšení 1: 2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="715"/>
+        <location filename="../src/Create/CreateActions.cpp" line="716"/>
         <source>1:2 farther (40%)</source>
         <translation>1: 2 dále (40%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="717"/>
+        <location filename="../src/Create/CreateActions.cpp" line="718"/>
         <source>Zoom 0.8:2</source>
         <translation>Zvětšení 0.8: 2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="721"/>
+        <location filename="../src/Create/CreateActions.cpp" line="722"/>
         <source>1:4 closer (31%)</source>
         <translation>1: 4 bližší (31%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="723"/>
+        <location filename="../src/Create/CreateActions.cpp" line="724"/>
         <source>Zoom 1.3:4</source>
         <translation>Zvětšení 1.3: 4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="727"/>
+        <location filename="../src/Create/CreateActions.cpp" line="728"/>
         <source>1:4 (25%)</source>
         <translation>1:4 (25%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="729"/>
+        <location filename="../src/Create/CreateActions.cpp" line="730"/>
         <source>Zoom 1:4</source>
         <translation>Zvětšení 1: 4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="733"/>
+        <location filename="../src/Create/CreateActions.cpp" line="734"/>
         <source>1:4 farther (20%)</source>
         <translation>1: 4 dále (20%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="735"/>
+        <location filename="../src/Create/CreateActions.cpp" line="736"/>
         <source>Zoom 0.8:4</source>
         <translation>Zvětšení 0.8: 4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="739"/>
+        <location filename="../src/Create/CreateActions.cpp" line="740"/>
         <source>1:8 closer (12.5%)</source>
         <translation>1: 8 blíž (12,5%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="741"/>
-        <location filename="../src/Create/CreateActions.cpp" line="747"/>
+        <location filename="../src/Create/CreateActions.cpp" line="742"/>
+        <location filename="../src/Create/CreateActions.cpp" line="748"/>
         <source>Zoom 1:8</source>
         <translation>Zvětšení 1: 8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="745"/>
+        <location filename="../src/Create/CreateActions.cpp" line="746"/>
         <source>1:8 (12.5%)</source>
         <translation>1:8 (12,5%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="751"/>
+        <location filename="../src/Create/CreateActions.cpp" line="752"/>
         <source>1:8 farther (10%)</source>
         <translation>1: 8 dále (10%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="753"/>
+        <location filename="../src/Create/CreateActions.cpp" line="754"/>
         <source>Zoom 0.8:8</source>
         <translation>Zvětšení 0.8: 8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="757"/>
+        <location filename="../src/Create/CreateActions.cpp" line="758"/>
         <source>1:16 closer (8%)</source>
         <translation>1:16 blíž (8%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="759"/>
+        <location filename="../src/Create/CreateActions.cpp" line="760"/>
         <source>Zoom 1.3:16</source>
         <translation>Zvětšení 1.3: 16</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="763"/>
+        <location filename="../src/Create/CreateActions.cpp" line="764"/>
         <source>1:16 (6.25%)</source>
         <translation>1:16 (6,25%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="765"/>
+        <location filename="../src/Create/CreateActions.cpp" line="766"/>
         <source>Zoom 1:16</source>
         <translation>Zvětšení 1: 16</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="769"/>
+        <location filename="../src/Create/CreateActions.cpp" line="770"/>
         <source>Fill</source>
         <translation>填</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="771"/>
+        <location filename="../src/Create/CreateActions.cpp" line="772"/>
         <source>Zoom with stretching to fill window</source>
         <translation>Zvětšení s protahováním pro vyplnění okna</translation>
     </message>
@@ -1857,42 +1904,41 @@ Pokyny zamkněte, abyste zabránili náhodnému pohybu nebo odstranění.</trans
         <translation>Digitalizujte</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="65"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="66"/>
         <source>View</source>
         <translation>Pohled</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="77"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="80"/>
         <source>Background</source>
         <translation>Pozadí</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="82"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="85"/>
         <source>Curves</source>
         <translation>Křivky</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="87"/>
         <source>Guidelines</source>
-        <translation>Pokyny</translation>
+        <translation type="vanished">Pokyny</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="92"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="90"/>
         <source>Status Bar</source>
         <translation>Stavový řádek</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="97"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="95"/>
         <source>Zoom</source>
         <translation>Zvětšení</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="129"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="127"/>
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="145"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="143"/>
         <source>&amp;Help</source>
         <translation>Pomoc</translation>
     </message>
@@ -1900,71 +1946,63 @@ Pokyny zamkněte, abyste zabránili náhodnému pohybu nebo odstranění.</trans
 <context>
     <name>CreateScene</name>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="28"/>
         <source>Create an R (range) guideline.</source>
-        <translation>Vytvořte vodítko R (rozsah).</translation>
+        <translation type="vanished">قم بإنشاء دليل R (النطاق).</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="29"/>
         <source>Create a T (theta) guideline.</source>
-        <translation>Vytvořte vodítko T (theta).</translation>
+        <translation type="vanished">Vytvořte vodítko T (theta).</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="30"/>
         <source>Create an X guideline.</source>
-        <translation>Vytvořte vodítko X.</translation>
+        <translation type="vanished">Vytvořte vodítko X.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="31"/>
         <source>Create a Y guideline.</source>
-        <translation>Vytvořte vodítko Y.</translation>
+        <translation type="vanished">Vytvořte vodítko Y.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="33"/>
         <source>Create an R (Range) guideline
 
 When pressed, a constant R (range) guideline is created. It can be moved by dragging</source>
-        <translation>Vytvořte vodítko R (Range)
+        <translation type="vanished">Vytvořte vodítko R (Range)
 
-Po stisknutí se vytvoří konstantní vodítko R (rozsah). To lze přesunout přetažením</translation>
+Po stisknutí se vytvoří konstantní vodítko R (rozsah). Lze jej přesouvat přetažením</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="35"/>
         <source>Create a T (Theta) guideline
 
 When pressed, a constant T (theta) guideline is created. It can be moved by dragging</source>
-        <translation>Vytvořte vodítko T (Theta)
+        <translation type="vanished">Vytvořte vodítko T (Theta)
 
-Po stisknutí se vytvoří konstantní vodítko T (theta). To lze přesunout přetažením</translation>
+Po stisknutí se vytvoří konstantní vodítko T (theta). Lze jej přesouvat přetažením</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="37"/>
         <source>Create an X guideline
 
 When pressed, a constant X guideline is created. It can be moved by dragging</source>
-        <translation>Vytvořte vodítko X
+        <translation type="vanished">Vytvořte vodítko X.
 
-Po stisknutí se vytvoří konstantní vodítko X. To lze přesunout přetažením</translation>
+Po stisknutí se vytvoří konstantní vodítko X. Lze jej přesouvat přetažením</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="39"/>
         <source>Create a Y guideline
 
 When pressed, a constant Y guideline is created. It can be moved by dragging</source>
-        <translation>Vytvořte vodítko Y
+        <translation type="vanished">Vytvořte vodicí linii Y.
 
-Po stisknutí se vytvoří konstantní vodítko Y. To lze přesunout přetažením</translation>
+Po stisknutí se vytvoří konstantní vodítko Y. Lze jej přesouvat přetažením</translation>
     </message>
 </context>
 <context>
     <name>CreateToolBars</name>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="42"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="48"/>
         <source>Select background image</source>
         <translation>Vyberte obrázek na pozadí</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="43"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="49"/>
         <source>Selected Background
 
 Select background image:
@@ -1979,32 +2017,32 @@ Vyberte obrázek na pozadí:
 3) Filtrovaný obraz, který zdůrazňuje důležité detaily</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="48"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="54"/>
         <source>No background</source>
         <translation>Žádné pozadí</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="49"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="55"/>
         <source>Original image</source>
         <translation>Původní obrázek</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="50"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="56"/>
         <source>Filtered image</source>
         <translation>Filtrovaný obrázek</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="55"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="61"/>
         <source>Background</source>
         <translation>Pozadí</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="63"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="106"/>
         <source>Select curve for new points.</source>
         <translation>Zvolte křivku pro nové body.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="64"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="107"/>
         <source>Selected Curve Name
 
 Select curve for any new points. Every point belongs to one curve.
@@ -2017,17 +2055,17 @@ Zvolte křivku pro všechny nové body. Každý bod patří k jedné křivce.
 To lze měnit v režimu Křivka, bodová shoda, výběr barvy nebo segmentová výplň.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="70"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="112"/>
         <source>Drawing</source>
         <translation>Výkres</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="87"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="134"/>
         <source>Points style for the currently selected curve</source>
         <translation>Bod bodů pro aktuálně vybranou křivku</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="88"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="135"/>
         <source>Points Style
 
 Points style for the currently selected curve. The points style is only displayed in this toolbar. To change the points style, use the Curve Properties dialog.</source>
@@ -2036,12 +2074,12 @@ Points style for the currently selected curve. The points style is only displaye
 Bod bodů pro aktuálně vybranou křivku. Bod bodů se zobrazí pouze v tomto panelu nástrojů. Chcete-li změnit styl bodů, použijte dialog Vlastnosti křivky.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="96"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="143"/>
         <source>View of filter for current curve in Segment Fill mode</source>
         <translation>Pohled na filtr pro aktuální křivku v režimu segmentového plnění</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="97"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="144"/>
         <source>Segment Fill Filter
 
 View of filter for the current curve in Segment Fill mode. The filter settings are only displayed in this toolbar. To changed the filter settings, use the Color Picker mode or the Filter Settings dialog.</source>
@@ -2050,17 +2088,17 @@ View of filter for the current curve in Segment Fill mode. The filter settings a
 Pohled na filtr pro aktuální křivku v režimu segmentového plnění. Nastavení filtru se zobrazí pouze v tomto panelu nástrojů. Chcete-li změnit nastavení filtru, použijte režim Výběr barvy nebo dialogové okno Nastavení filtru.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="103"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="149"/>
         <source>Views</source>
         <translation>Zobrazení</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="112"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="71"/>
         <source>Currently selected coordinate system</source>
         <translation>V současnosti vybraný souřadný systém</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="113"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="72"/>
         <source>Selected Coordinate System
 
 Currently selected coordinate system. This is used to switch between coordinate systems in documents with multiple coordinate systems</source>
@@ -2069,12 +2107,12 @@ Currently selected coordinate system. This is used to switch between coordinate 
 V současnosti vybraný souřadný systém. Používá se k přepínání mezi souřadnicovými systémy v dokumentech s více souřadnicovými systémy</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="121"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="80"/>
         <source>Show all coordinate systems</source>
         <translation>Zobrazit všechny souřadnicové systémy</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="122"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="81"/>
         <source>Show All Coordinate Systems
 
 When pressed and held, this button shows all digitized points and lines for all coordinate systems.</source>
@@ -2083,12 +2121,12 @@ When pressed and held, this button shows all digitized points and lines for all 
 Po stisknutí a podržení toto tlačítko zobrazuje všechny digitalizované body a řádky pro všechny souřadnicové systémy.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="130"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="89"/>
         <source>Print all coordinate systems</source>
         <translation>Vytiskněte všechny souřadnicové systémy</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="131"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="90"/>
         <source>Print All Coordinate Systems
 
 When pressed, this button Prints all digitized points and lines for all coordinate systems.</source>
@@ -2097,7 +2135,7 @@ When pressed, this button Prints all digitized points and lines for all coordina
 Po stisknutí tohoto tlačítka vytiskne všechny digitalizované body a čáry pro všechny souřadnicové systémy.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="135"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="94"/>
         <source>Coordinate System</source>
         <translation>Souřadnicový systém</translation>
     </message>
@@ -4038,6 +4076,58 @@ Hodnota konce nesmí být nižší, než hodnota začátku</translation>
     </message>
 </context>
 <context>
+    <name>DlgSettingsGuideline</name>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="34"/>
+        <source>Guidelines</source>
+        <translation>Pokyny</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="57"/>
+        <source>Creation circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="61"/>
+        <source>Select a radius, in pixels, for the points</source>
+        <translation>Vyberte poloměr bodů, v pixelech.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="66"/>
+        <source>Guideline color</source>
+        <translation>Směrná barva</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="70"/>
+        <source>Guidelines Color
+
+Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
+        <translation>Pokyny Barva
+
+Nastavte barvu vodítek, které lze přetáhnout z okrajů scény a použít k zarovnání bodů</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="77"/>
+        <source>Active Line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="81"/>
+        <source>Select a size for the guidelines when active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="86"/>
+        <source>Inactive Line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="90"/>
+        <source>Select a size for the guidelines when inactive</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DlgSettingsMainWindow</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="49"/>
@@ -4287,13 +4377,12 @@ Počet číslic s přesností v číslech s plovoucí desetinnou čárkou. Tato 
         <translation>Směrná barva</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="279"/>
         <source>Guidelines Color
 
 Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
-        <translation>Pokyny Barva
+        <translation type="vanished">Pokyny Barva
 
-Nastavte barvu vodítek, které lze přetáhnout z okrajů scény, a použít k zarovnání bodů</translation>
+Nastavte barvu vodítek, které lze přetáhnout z okrajů scény a použít k zarovnání bodů</translation>
     </message>
 </context>
 <context>
@@ -4699,22 +4788,22 @@ Zvětšení nebo zmenšení obrazu se provádí některým z několika způsobů
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="497"/>
+        <location filename="../src/main/MainWindow.cpp" line="499"/>
         <source>Unable to export to file</source>
         <translation>Nelze exportovat do souboru</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="542"/>
+        <location filename="../src/main/MainWindow.cpp" line="544"/>
         <source>Unable to extract image to file</source>
         <translation>Nelze extrahovat obraz do souboru</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="622"/>
+        <location filename="../src/main/MainWindow.cpp" line="624"/>
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation>V OSX musí být soubory načtené při spuštění v adresářích Stahování, Obrázky nebo Knihovna / Kontejnery / Digitizér / Data</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1343"/>
+        <location filename="../src/main/MainWindow.cpp" line="1336"/>
         <source>Cannot read file</source>
         <translation>Nelze číst soubor</translation>
     </message>
@@ -4723,90 +4812,90 @@ Zvětšení nebo zmenšení obrazu se provádí některým z několika způsobů
         <translation type="vanished">z adresáře</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="708"/>
+        <location filename="../src/main/MainWindow.cpp" line="710"/>
         <source>Import Image</source>
         <translation>Importovat obrázek</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1066"/>
+        <location filename="../src/main/MainWindow.cpp" line="1058"/>
         <source>File opened</source>
         <translation>Soubor byl otevřen</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1109"/>
+        <location filename="../src/main/MainWindow.cpp" line="1102"/>
         <source>File not found</source>
         <translation>Soubor nenalezen</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1126"/>
+        <location filename="../src/main/MainWindow.cpp" line="1119"/>
         <source>Error report opened</source>
         <translation>Otevření chybového hlášení</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1189"/>
-        <location filename="../src/main/MainWindow.cpp" line="1263"/>
+        <location filename="../src/main/MainWindow.cpp" line="1182"/>
+        <location filename="../src/main/MainWindow.cpp" line="1256"/>
         <source>File imported</source>
         <translation>Importovaný soubor</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1297"/>
+        <location filename="../src/main/MainWindow.cpp" line="1290"/>
         <source>Background image.</source>
         <translation>Obrázek na pozadí.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1298"/>
+        <location filename="../src/main/MainWindow.cpp" line="1291"/>
         <source>Currently selected curve.</source>
         <translation>Aktuálně zvolená křivka.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1299"/>
+        <location filename="../src/main/MainWindow.cpp" line="1292"/>
         <source>Point style for currently selected curve.</source>
         <translation>Bod stylu aktuálně vybrané křivky.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1300"/>
+        <location filename="../src/main/MainWindow.cpp" line="1293"/>
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Segmentový filtr pro aktuálně vybranou křivku.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1326"/>
+        <location filename="../src/main/MainWindow.cpp" line="1319"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>Dokument byl změněn.
 Chcete změny uložit?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1412"/>
+        <location filename="../src/main/MainWindow.cpp" line="1405"/>
         <source>Cannot write file</source>
         <translation>Nelze psát soubor</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1460"/>
+        <location filename="../src/main/MainWindow.cpp" line="1453"/>
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2599"/>
+        <location filename="../src/main/MainWindow.cpp" line="2518"/>
         <source>Export</source>
         <translation>Vývozní</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2681"/>
+        <location filename="../src/main/MainWindow.cpp" line="2600"/>
         <source>Open Document</source>
         <translation>Otevřete dokument</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4042"/>
+        <location filename="../src/main/MainWindow.cpp" line="3930"/>
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4043"/>
+        <location filename="../src/main/MainWindow.cpp" line="3931"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4178"/>
+        <location filename="../src/main/MainWindow.cpp" line="4067"/>
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -4814,37 +4903,37 @@ Chcete změny uložit?</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="133"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="178"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="280"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="138"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="183"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="285"/>
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
         <translation>Nový bod osy nemůže být ve stejné pozici obrazovky jako existující bod osy</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="186"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="289"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="191"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="294"/>
         <source>New axis point cannot have the same graph coordinates as an existing axis point</source>
         <translation>Nový bod osy nemůže mít stejné souřadnice souřadnic jako existující bod osy</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="194"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="297"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="199"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="302"/>
         <source>No more than two axis points can lie along the same line on the screen</source>
         <translation>Na obrazovce se mohou nacházet více než dvě osové body podél stejné čáry</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="202"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="305"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="207"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="310"/>
         <source>No more than two axis points can lie along the same line in graph coordinates</source>
         <translation>Na souřadnicích grafů se mohou nacházet více než dvě osové body podél stejné čáry</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="255"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="260"/>
         <source>Too many x axis points. There should only be two</source>
         <translation>Příliš mnoho bodů osy x. Měly by existovat pouze dva</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="261"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="266"/>
         <source>Too many y axis points. There should only be two</source>
         <translation>Příliš mnoho bodů osy y. Měly by existovat pouze dva</translation>
     </message>
@@ -4905,6 +4994,7 @@ Chcete změny uložit?</translation>
         <location filename="../src/Cmd/CmdSettingsGeneral.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsGridDisplay.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsGridRemoval.cpp" line="50"/>
+        <location filename="../src/Cmd/CmdSettingsGuideline.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsPointMatch.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsSegments.cpp" line="50"/>
         <source>Reached end of file before finding end element for</source>
@@ -5097,12 +5187,12 @@ Chcete změny uložit?</translation>
         <translation>Je nám líto, ale bod pro výběr barev musí být v blízkosti pixelu bez pozadí. Prosím zkuste to znovu.</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="356"/>
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="360"/>
         <source>Point Match</source>
         <translation>Shoda bodů</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="357"/>
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="361"/>
         <source>There are no more matching points</source>
         <translation>Neexistují žádné odpovídající body</translation>
     </message>
@@ -5195,7 +5285,7 @@ Chcete změny uložit?</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="155"/>
-        <location filename="../src/Document/DocumentModelGuidelines.cpp" line="84"/>
+        <location filename="../src/Document/DocumentModelGuideline.cpp" line="131"/>
         <source>Cannot read grid display data</source>
         <translation>Nelze číst data zobrazení mřížky</translation>
     </message>
@@ -5554,12 +5644,12 @@ Chcete změny uložit?</translation>
         <translation type="vanished">Předchozí</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="632"/>
+        <location filename="../src/main/MainWindow.cpp" line="634"/>
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>Zdá se, že soubor obsahuje znaky z více jazykových abeced, které nefungují v příkazovém řádku systému Windows</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="131"/>
+        <location filename="../src/main/MainWindowModel.cpp" line="122"/>
         <source>Cannot read main window data</source>
         <translation>Nelze číst data hlavního okna</translation>
     </message>

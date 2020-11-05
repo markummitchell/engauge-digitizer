@@ -317,22 +317,22 @@ Why does the imported image look different?</translation>
 <context>
     <name>CreateActions</name>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="59"/>
+        <location filename="../src/Create/CreateActions.cpp" line="62"/>
         <source>Select Tool</source>
         <translation>选择工具</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="60"/>
+        <location filename="../src/Create/CreateActions.cpp" line="63"/>
         <source>Shift+F2</source>
         <translation>Shift+F2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="62"/>
+        <location filename="../src/Create/CreateActions.cpp" line="65"/>
         <source>Select points on screen.</source>
         <translation>选择屏幕上的点</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="63"/>
+        <location filename="../src/Create/CreateActions.cpp" line="66"/>
         <source>Select
 
 Select points on the screen.</source>
@@ -340,22 +340,22 @@ Select points on the screen.</source>
 选择屏幕上的点</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="67"/>
+        <location filename="../src/Create/CreateActions.cpp" line="70"/>
         <source>Axis Point Tool</source>
         <translation>坐标轴点工具</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="68"/>
+        <location filename="../src/Create/CreateActions.cpp" line="71"/>
         <source>Shift+F3</source>
         <translation>Shift+F3</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="70"/>
+        <location filename="../src/Create/CreateActions.cpp" line="73"/>
         <source>Digitize axis points for a graph.</source>
         <translation>为图形数字化轴点。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="71"/>
+        <location filename="../src/Create/CreateActions.cpp" line="74"/>
         <source>Digitize Axis Point
 
 Digitizes an axis point for a graph by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. After Import and Import (Advanced), three axis points with (X1,Y1) (X2,Y2) (X3,Y3) coordinates can be digitized to define the graph coordinates. Optionally, after Import (Advanced) four axis points with (X1) (X2) (Y3) (Y4) coordinates can be digitized to define the graph coordinates.
@@ -368,22 +368,23 @@ This tool is disabled when a complete set of axis points has been defined, or af
 如果已定義一組完整的軸點，或者在選擇了“縮放欄”後導入（高級），則禁用此工具。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="82"/>
+        <location filename="../src/Create/CreateActions.cpp" line="85"/>
         <source>Scale Bar Tool</source>
         <translation>比例尺工具</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="83"/>
+        <location filename="../src/Create/CreateActions.cpp" line="86"/>
+        <location filename="../src/Create/CreateActions.cpp" line="141"/>
         <source>Shift+F8</source>
         <translation>按住Shift + F8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="85"/>
+        <location filename="../src/Create/CreateActions.cpp" line="88"/>
         <source>Digitize scale bar for a map. Requires Import (Advanced).</source>
         <translation>數字化地圖的比例尺。需要導入（高級）。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="86"/>
+        <location filename="../src/Create/CreateActions.cpp" line="89"/>
         <source>Digitize Scale Bar
 
 Digitize a scale bar for a map by clicking and dragging. The length of the scale bar is then entered. In a map, the two endpoints of the scale bar define the distances in graph coordinates.
@@ -400,22 +401,22 @@ This tool is disabled when a scale bar has been defined, or if axis points were 
 如果已定義比例尺，或者在導入期間選擇了軸點，則會禁用此工具。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="95"/>
+        <location filename="../src/Create/CreateActions.cpp" line="98"/>
         <source>Curve Point Tool</source>
         <translation>曲线点工具</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="96"/>
+        <location filename="../src/Create/CreateActions.cpp" line="99"/>
         <source>Shift+F4</source>
         <translation>Shift+F4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="98"/>
+        <location filename="../src/Create/CreateActions.cpp" line="101"/>
         <source>Digitize curve points.</source>
         <translation>数字化曲线上的点</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="99"/>
+        <location filename="../src/Create/CreateActions.cpp" line="102"/>
         <source>Digitize Curve Point
 
 Digitizes a curve point by placing a new point at the cursor after a mouse click. Use this mode to digitize points along curves one by one.
@@ -424,22 +425,22 @@ New points will be assigned to the currently selected curve.</source>
         <translation>数字化曲线点点击鼠标后在光标处放置一个新点，使曲线点数字化。使用此模式逐个数字化曲线上的点。新点将分配给当前选定的曲线。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="106"/>
+        <location filename="../src/Create/CreateActions.cpp" line="109"/>
         <source>Point Match Tool</source>
         <translation>点匹配工具</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="107"/>
+        <location filename="../src/Create/CreateActions.cpp" line="110"/>
         <source>Shift+F5</source>
         <translation>Shift+F5</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="109"/>
+        <location filename="../src/Create/CreateActions.cpp" line="112"/>
         <source>Digitize curve points in a point plot by matching a point.</source>
         <translation>通过匹配点数字化点图中的曲线点。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="110"/>
+        <location filename="../src/Create/CreateActions.cpp" line="113"/>
         <source>Digitize Curve Points by Point Matching
 
 Digitizes curve points in a point plot by finding points that match a sample point. The process starts by selecting a representative sample point.
@@ -448,44 +449,44 @@ New points will be assigned to the currently selected curve.</source>
         <translation>通过点匹配对曲线点进行数字化通过查找与采样点相匹配的点来对点图中的曲线点进行数字化。该过程首先选择一个有代表性的采样点。新点将分配给当前选择的曲线。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="116"/>
+        <location filename="../src/Create/CreateActions.cpp" line="119"/>
         <source>Color Picker Tool</source>
         <translation>颜色拾取工具</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="117"/>
+        <location filename="../src/Create/CreateActions.cpp" line="120"/>
         <source>Shift+F6</source>
         <translation>Shift+F6</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="119"/>
+        <location filename="../src/Create/CreateActions.cpp" line="122"/>
         <source>Select color settings for filtering in Segment Fill mode.</source>
         <translation>线段填充模式下的筛选选择颜色设置</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="120"/>
+        <location filename="../src/Create/CreateActions.cpp" line="123"/>
         <source>Select color settings for Segment Fill filtering
 
 Select a pixel along the currently selected curve. That pixel and its neighbors will define the filter settings (color, brightness, and so on) of the currently selected curve while in Segment Fill mode.</source>
         <translation>选择Segment Fill滤镜的颜色设置沿着当前选择的曲线选择一个像素。该像素及其邻居将在分段填充模式下定义当前所选曲线的滤镜设置（颜色，亮度等）。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="126"/>
+        <location filename="../src/Create/CreateActions.cpp" line="129"/>
         <source>Segment Fill Tool</source>
         <translation>线段填充工具</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="127"/>
+        <location filename="../src/Create/CreateActions.cpp" line="130"/>
         <source>Shift+F7</source>
         <translation>Shift+F7</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="129"/>
+        <location filename="../src/Create/CreateActions.cpp" line="132"/>
         <source>Digitize curve points along a segment of a curve.</source>
         <translation>将一段曲线上的曲线点数字化</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="130"/>
+        <location filename="../src/Create/CreateActions.cpp" line="133"/>
         <source>Digitize Curve Points With Segment Fill
 
 Digitizes curve points by placing new points along the highlighted segment under the cursor. Use this mode to quickly digitize multiple points along a curve with a single click.
@@ -494,17 +495,34 @@ New points will be assigned to the currently selected curve.</source>
         <translation>使用分段填充对曲线点进行数字化by通过沿光标下高亮显示的段放置新点来使曲线点数字化。使用此模式，只需点击一次即可快速数字化曲线上的多个点。新点将分配给当前选定的曲线。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="151"/>
+        <location filename="../src/Create/CreateActions.cpp" line="140"/>
+        <source>Guidelines Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="143"/>
+        <source>Digitize guidelines along constant coordinate values for aligning new points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="144"/>
+        <source>Digitize guidelines along constant coordinate values
+
+Guidelines can be placed along constant X or Y coordinates in cartesian coordinates, and T (theta) or R (range) coordinates in polar coordinates. Guidelines can help with aligning new points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="165"/>
         <source>&amp;Undo</source>
         <translation>&amp;撤销</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="153"/>
+        <location filename="../src/Create/CreateActions.cpp" line="167"/>
         <source>Undo the last operation.</source>
         <translation>撤销上一操作</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="154"/>
+        <location filename="../src/Create/CreateActions.cpp" line="168"/>
         <source>Undo
 
 Undo the last operation.</source>
@@ -512,17 +530,17 @@ Undo the last operation.</source>
 撤销上一操作.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="158"/>
+        <location filename="../src/Create/CreateActions.cpp" line="172"/>
         <source>&amp;Redo</source>
         <translation>&amp;恢复</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="160"/>
+        <location filename="../src/Create/CreateActions.cpp" line="174"/>
         <source>Redo the last operation.</source>
         <translation>恢复上一操作</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="161"/>
+        <location filename="../src/Create/CreateActions.cpp" line="175"/>
         <source>Redo
 
 Redo the last operation.</source>
@@ -530,124 +548,124 @@ Redo the last operation.</source>
 恢复上一操作</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="165"/>
+        <location filename="../src/Create/CreateActions.cpp" line="179"/>
         <source>Cut</source>
         <translation>剪切</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="167"/>
+        <location filename="../src/Create/CreateActions.cpp" line="181"/>
         <source>Cuts the selected points and copies them to the clipboard.</source>
         <translation>剪切选中的点</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="168"/>
+        <location filename="../src/Create/CreateActions.cpp" line="182"/>
         <source>Cut
 
 Cuts the selected points and copies them to the clipboard.</source>
         <translation>剪切</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="172"/>
+        <location filename="../src/Create/CreateActions.cpp" line="186"/>
         <source>Copy</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="174"/>
+        <location filename="../src/Create/CreateActions.cpp" line="188"/>
         <source>Copies the selected points to the clipboard.</source>
         <translation>复制选中的点</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="175"/>
+        <location filename="../src/Create/CreateActions.cpp" line="189"/>
         <source>Copy
 
 Copies the selected points to the clipboard.</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="179"/>
+        <location filename="../src/Create/CreateActions.cpp" line="193"/>
         <source>Paste</source>
         <translation>粘贴</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="181"/>
+        <location filename="../src/Create/CreateActions.cpp" line="195"/>
         <source>Pastes the selected points from the clipboard.</source>
         <translation>粘贴选中的点</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="182"/>
+        <location filename="../src/Create/CreateActions.cpp" line="196"/>
         <source>Paste
 
 Pastes the selected points from the clipboard. They will be assigned to the current curve.</source>
         <translation>粘贴</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="186"/>
+        <location filename="../src/Create/CreateActions.cpp" line="200"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="188"/>
+        <location filename="../src/Create/CreateActions.cpp" line="202"/>
         <source>Deletes the selected points, after copying them to the clipboard.</source>
         <translation>复制选中的点入剪切板, 然后删除这些点</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="189"/>
+        <location filename="../src/Create/CreateActions.cpp" line="203"/>
         <source>Delete
 
 Deletes the selected points, after copying them to the clipboard.</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="193"/>
+        <location filename="../src/Create/CreateActions.cpp" line="207"/>
         <source>Paste As New</source>
         <translation>粘贴为新图像</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="194"/>
+        <location filename="../src/Create/CreateActions.cpp" line="208"/>
         <source>Pastes an image from the clipboard.</source>
         <translation>粘贴图像</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="195"/>
+        <location filename="../src/Create/CreateActions.cpp" line="209"/>
         <source>Paste as New
 
 Creates a new document by pasting an image from the clipboard.</source>
         <translation>粘贴为新图像</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="199"/>
+        <location filename="../src/Create/CreateActions.cpp" line="213"/>
         <source>Paste As New (Advanced)...</source>
         <translation>粘贴为新图像(高级)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="200"/>
+        <location filename="../src/Create/CreateActions.cpp" line="214"/>
         <source>Pastes an image from the clipboard, in advanced mode.</source>
         <translation>在高级模式下从剪贴板粘贴图像。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="201"/>
+        <location filename="../src/Create/CreateActions.cpp" line="215"/>
         <source>Paste as New (Advanced)
 
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
         <translation>粘贴为新建（高级）通过在高级模式下粘贴剪贴板中的图像来创建新文档。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="210"/>
+        <location filename="../src/Create/CreateActions.cpp" line="224"/>
         <source>&amp;Import...</source>
         <translation>&amp;导入</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="211"/>
+        <location filename="../src/Create/CreateActions.cpp" line="225"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="212"/>
+        <location filename="../src/Create/CreateActions.cpp" line="226"/>
         <source>Creates a new document by importing a simple image.</source>
         <translation>通过导入简单图像来创建新文档。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="213"/>
+        <location filename="../src/Create/CreateActions.cpp" line="227"/>
         <source>Import Image
 
 Creates a new document by importing an image with a single coordinate system, and axes both coordinates known.
@@ -656,51 +674,51 @@ For more complicated images with multiple coordinate systems, and/or floating ax
         <translation>导入图像by通过导入具有单个坐标系统的图像创建新文档，并使两个坐标轴都已知.对于具有多个坐标系和/或浮动轴的更复杂图像，将使用导入（高级）。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="220"/>
+        <location filename="../src/Create/CreateActions.cpp" line="234"/>
         <source>Import (Advanced)...</source>
         <translation>导入(高级)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="221"/>
+        <location filename="../src/Create/CreateActions.cpp" line="235"/>
         <source>Creates a new document by importing an image with support for advanced feaures.</source>
         <translation>通过导入支持高级功能的图像创建新文档。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="222"/>
+        <location filename="../src/Create/CreateActions.cpp" line="236"/>
         <source>Import (Advanced)
 
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
         <translation>导入（高级）通过导入支持高级功能的图像创建新文档。在高级模式下，可以有多个坐标系和/或浮动轴。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="227"/>
+        <location filename="../src/Create/CreateActions.cpp" line="241"/>
         <source>Import (Image Replace)...</source>
         <translation>导入（图片替换）...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="228"/>
+        <location filename="../src/Create/CreateActions.cpp" line="242"/>
         <source>Imports a new image into the current document, replacing the existing image.</source>
         <translation>将新图像导入当前文档，替换现有图像。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="229"/>
+        <location filename="../src/Create/CreateActions.cpp" line="243"/>
         <source>Import (Image Replace)
 
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
         <translation>导入（图像替换）将新图像导入当前文档。现有的图像被替换，文档中的所有曲线都被保留。此操作对于将轴点和其他设置从现有文档应用到不同图像很有用。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="235"/>
+        <location filename="../src/Create/CreateActions.cpp" line="249"/>
         <source>&amp;Open...</source>
         <translation>&amp;打开</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="237"/>
+        <location filename="../src/Create/CreateActions.cpp" line="251"/>
         <source>Opens an existing document.</source>
         <translation>打开现有文件</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="238"/>
+        <location filename="../src/Create/CreateActions.cpp" line="252"/>
         <source>Open Document
 
 Opens an existing document.</source>
@@ -708,17 +726,17 @@ Opens an existing document.</source>
 打开现有文件</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="251"/>
+        <location filename="../src/Create/CreateActions.cpp" line="265"/>
         <source>&amp;Close</source>
         <translation>&amp;关闭</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="253"/>
+        <location filename="../src/Create/CreateActions.cpp" line="267"/>
         <source>Closes the open document.</source>
         <translation>关闭打开的文件。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="254"/>
+        <location filename="../src/Create/CreateActions.cpp" line="268"/>
         <source>Close Document
 
 Closes the open document.</source>
@@ -726,17 +744,17 @@ Closes the open document.</source>
 关闭打开的文件</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="258"/>
+        <location filename="../src/Create/CreateActions.cpp" line="272"/>
         <source>&amp;Save</source>
         <translation>&amp;保存</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="260"/>
+        <location filename="../src/Create/CreateActions.cpp" line="274"/>
         <source>Saves the current document.</source>
         <translation>保存当前文件</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="261"/>
+        <location filename="../src/Create/CreateActions.cpp" line="275"/>
         <source>Save Document
 
 Saves the current document.</source>
@@ -744,175 +762,175 @@ Saves the current document.</source>
 保存当前文件</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="265"/>
+        <location filename="../src/Create/CreateActions.cpp" line="279"/>
         <source>Save As...</source>
         <translation>另存为</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="267"/>
+        <location filename="../src/Create/CreateActions.cpp" line="281"/>
         <source>Saves the current document under a new filename.</source>
         <translation>保存当前文件为新名的文件</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="268"/>
+        <location filename="../src/Create/CreateActions.cpp" line="282"/>
         <source>Save Document As
 
 Saves the current document under a new filename.</source>
         <translation>另存为</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="272"/>
+        <location filename="../src/Create/CreateActions.cpp" line="286"/>
         <source>Export...</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="273"/>
+        <location filename="../src/Create/CreateActions.cpp" line="287"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="274"/>
+        <location filename="../src/Create/CreateActions.cpp" line="288"/>
         <source>Exports the current document into a text file.</source>
         <translation>将当前文档导出为文本文件。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="275"/>
+        <location filename="../src/Create/CreateActions.cpp" line="289"/>
         <source>Export Document
 
 Exports the current document into a text file.</source>
         <translation>导出文档将当前文档导出为文本文件。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="279"/>
+        <location filename="../src/Create/CreateActions.cpp" line="293"/>
         <source>&amp;Print...</source>
         <translation>打印...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="281"/>
+        <location filename="../src/Create/CreateActions.cpp" line="295"/>
         <source>Print the current document.</source>
         <translation>打印当前文档。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="282"/>
+        <location filename="../src/Create/CreateActions.cpp" line="296"/>
         <source>Print Document
 
 Print the current document to a printer or file.</source>
         <translation>打印文档将当前文档打印到打印机或文件。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="286"/>
+        <location filename="../src/Create/CreateActions.cpp" line="300"/>
         <source>&amp;Exit</source>
         <translation>出口</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="288"/>
+        <location filename="../src/Create/CreateActions.cpp" line="302"/>
         <source>Quits the application.</source>
         <translation>退出应用程序。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="289"/>
+        <location filename="../src/Create/CreateActions.cpp" line="303"/>
         <source>Exit
 
 Quits the application.</source>
         <translation>退出退出应用程序</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="298"/>
+        <location filename="../src/Create/CreateActions.cpp" line="312"/>
         <source>Checklist Guide Wizard</source>
         <translation>清单指南向导</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="300"/>
+        <location filename="../src/Create/CreateActions.cpp" line="314"/>
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
         <translation>在导入期间打开清单向导向导以定义数字化步骤</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="301"/>
+        <location filename="../src/Create/CreateActions.cpp" line="315"/>
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
         <translation>清单向导向导在导入过程中使用清单向导向导生成导入文档的步骤清单</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="308"/>
+        <location filename="../src/Create/CreateActions.cpp" line="322"/>
         <source>Tutorial</source>
         <translation>教程</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="309"/>
+        <location filename="../src/Create/CreateActions.cpp" line="323"/>
         <source>Play tutorial showing steps for digitizing curves</source>
         <translation>播放教程，显示数字化曲线的步骤</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="310"/>
+        <location filename="../src/Create/CreateActions.cpp" line="324"/>
         <source>Tutorial
 
 Play tutorial showing steps for digitizing points from curves drawn with lines and/or point</source>
         <translation>教程播放教程，演示如何使用线和/或点绘制曲线中的点进行数字化</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="316"/>
+        <location filename="../src/Create/CreateActions.cpp" line="330"/>
         <source>Help</source>
         <translation>帮帮我</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="318"/>
+        <location filename="../src/Create/CreateActions.cpp" line="332"/>
         <source>Help documentation</source>
         <translation>帮助文档</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="319"/>
+        <location filename="../src/Create/CreateActions.cpp" line="333"/>
         <source>Help Documentation
 
 Searchable help documentation</source>
         <translation>帮助文档可分析的帮助文档</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="324"/>
+        <location filename="../src/Create/CreateActions.cpp" line="338"/>
         <source>About Engauge</source>
         <translation>关于 Engauge</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="325"/>
+        <location filename="../src/Create/CreateActions.cpp" line="339"/>
         <source>About the application.</source>
         <translation>关于应用程序。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="326"/>
+        <location filename="../src/Create/CreateActions.cpp" line="340"/>
         <source>About Engauge
 
 About the application.</source>
         <translation>关于Engauge关于申请。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="334"/>
+        <location filename="../src/Create/CreateActions.cpp" line="348"/>
         <source>Coordinates...</source>
         <translation>坐标...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="335"/>
+        <location filename="../src/Create/CreateActions.cpp" line="349"/>
         <source>Edit Coordinate settings.</source>
         <translation>编辑坐标设置。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="336"/>
+        <location filename="../src/Create/CreateActions.cpp" line="350"/>
         <source>Coordinate Settings
 
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
         <translation>“坐标设置”→“坐标”设置确定图形坐标如何映射到图像中的像素</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="340"/>
+        <location filename="../src/Create/CreateActions.cpp" line="354"/>
         <source>Curve List...</source>
         <translation>曲線列表...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="341"/>
+        <location filename="../src/Create/CreateActions.cpp" line="355"/>
         <source>Edit Curve List settings.</source>
         <translation>編輯曲線列表設置</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="342"/>
+        <location filename="../src/Create/CreateActions.cpp" line="356"/>
         <source>Curve List
 
 Curve list settings add, rename and/or remove curves in the current document</source>
@@ -921,306 +939,322 @@ Curve list settings add, rename and/or remove curves in the current document</so
 曲線列表設置添加，重命名和/或刪除當前文檔中的曲線</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="346"/>
+        <location filename="../src/Create/CreateActions.cpp" line="360"/>
         <source>Curve Properties...</source>
         <translation>曲线属性...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="347"/>
+        <location filename="../src/Create/CreateActions.cpp" line="361"/>
         <source>Edit Curve Properties settings.</source>
         <translation>编辑曲线属性设置。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="348"/>
+        <location filename="../src/Create/CreateActions.cpp" line="362"/>
         <source>Curve Properties Settings
 
 Curves properties settings determine how each curve appears</source>
         <translation>曲线属性设置曲线属性设置确定每条曲线的显示方式</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="352"/>
+        <location filename="../src/Create/CreateActions.cpp" line="366"/>
         <source>Digitize Curve...</source>
         <translation>数字化曲线...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="353"/>
+        <location filename="../src/Create/CreateActions.cpp" line="367"/>
         <source>Edit Digitize Axis and Graph Curve settings.</source>
         <translation>编辑数字化轴和曲线图设置。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="354"/>
+        <location filename="../src/Create/CreateActions.cpp" line="368"/>
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
         <translation>数字化轴和曲线图设置数字化曲线设置确定点在数字化轴点和数字化图点模式中的数字化方式</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="359"/>
+        <location filename="../src/Create/CreateActions.cpp" line="373"/>
         <source>Export Format...</source>
         <translation>导出格式...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="360"/>
+        <location filename="../src/Create/CreateActions.cpp" line="374"/>
         <source>Edit Export Format settings.</source>
         <translation>编辑导出格式设置。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="361"/>
+        <location filename="../src/Create/CreateActions.cpp" line="375"/>
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
         <translation>导出格式设置导出格式设置会影响导出文件的格式</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="365"/>
+        <location filename="../src/Create/CreateActions.cpp" line="379"/>
         <source>Color Filter...</source>
         <translation>彩色滤光片...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="366"/>
+        <location filename="../src/Create/CreateActions.cpp" line="380"/>
         <source>Edit Color Filter settings.</source>
         <translation>编辑颜色过滤器设置。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="367"/>
+        <location filename="../src/Create/CreateActions.cpp" line="381"/>
         <source>Color Filter Settings
 
 Color filtering simplifies the graphs for easier Point Matching and Segment Filling</source>
         <translation>色彩过滤器设置色彩过滤简化了图形，更便于点匹配和分段填充</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="371"/>
+        <location filename="../src/Create/CreateActions.cpp" line="385"/>
         <source>Axes Checker...</source>
         <translation>轴检查器...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="372"/>
+        <location filename="../src/Create/CreateActions.cpp" line="386"/>
         <source>Edit Axes Checker settings.</source>
         <translation>编辑轴检查器设置。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="373"/>
+        <location filename="../src/Create/CreateActions.cpp" line="387"/>
         <source>Axes Checker Settings
 
 Axes checker can reveal any axis point mistakes, which are otherwise hard to find.</source>
         <translation>轴检查设置轴检查器可以显示任何轴点错误，否则很难找到。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="377"/>
+        <location filename="../src/Create/CreateActions.cpp" line="391"/>
         <source>Grid Line Display...</source>
         <translation>网格线显示...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="378"/>
+        <location filename="../src/Create/CreateActions.cpp" line="392"/>
         <source>Edit Grid Line Display settings.</source>
         <translation>编辑网格线显示设置。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="379"/>
+        <location filename="../src/Create/CreateActions.cpp" line="393"/>
         <source>Grid Line Display Settings
 
 Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions.</source>
         <translation>网格线显示设置对曲线图显示的网格线可以提供比Axis Checker更高的精度。在扭曲图形中，网格线可用于调整轴点以在不同区域获得更高精度。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="384"/>
+        <location filename="../src/Create/CreateActions.cpp" line="398"/>
         <source>Grid Line Removal...</source>
         <translation>网格线删除...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="385"/>
+        <location filename="../src/Create/CreateActions.cpp" line="399"/>
         <source>Edit Grid Line Removal settings.</source>
         <translation>编辑网格线删除设置</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="386"/>
+        <location filename="../src/Create/CreateActions.cpp" line="400"/>
         <source>Grid Line Removal Settings
 
 Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when Color Filtering is not able to separate grid lines from curve lines.</source>
         <translation>网格线移除设置网格线移除可隔离曲线，以便在颜色过滤无法将网格线与曲线分离时进行点匹配和网格填充。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="391"/>
+        <location filename="../src/Create/CreateActions.cpp" line="405"/>
+        <source>Guideline...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="406"/>
+        <source>Guideline Settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="407"/>
+        <source>Guideline Settings
+
+Guidelines displayed on the graph can help to align points along constant coordinate lines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="411"/>
         <source>Point Match...</source>
         <translation>点匹配...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="392"/>
+        <location filename="../src/Create/CreateActions.cpp" line="412"/>
         <source>Edit Point Match settings.</source>
         <translation>编辑点匹配设置。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="393"/>
+        <location filename="../src/Create/CreateActions.cpp" line="413"/>
         <source>Point Match Settings
 
 Point match settings determine how points are matched while in Point Match mode</source>
         <translation>点匹配设置点匹配设置确定在点匹配模式下点的匹配方式</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="397"/>
+        <location filename="../src/Create/CreateActions.cpp" line="417"/>
         <source>Segment Fill...</source>
         <translation>分段填充...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="398"/>
+        <location filename="../src/Create/CreateActions.cpp" line="418"/>
         <source>Edit Segment Fill settings.</source>
         <translation>编辑分段填充设置。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="399"/>
+        <location filename="../src/Create/CreateActions.cpp" line="419"/>
         <source>Segment Fill Settings
 
 Segment fill settings determine how points are generated in the Segment Fill mode</source>
         <translation>分段填充设置分段填充设置确定在分段填充模式下如何生成点</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="403"/>
+        <location filename="../src/Create/CreateActions.cpp" line="423"/>
         <source>General...</source>
         <translation>一般...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="404"/>
+        <location filename="../src/Create/CreateActions.cpp" line="424"/>
         <source>Edit General settings.</source>
         <translation>编辑常规设置。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="405"/>
+        <location filename="../src/Create/CreateActions.cpp" line="425"/>
         <source>General Settings
 
 General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects both Color Picker and Point Match modes</source>
         <translation>常规设置常规设置是影响多种模式的文档特定设置。例如，光标大小设置影响拾色器和点匹配模式</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="410"/>
+        <location filename="../src/Create/CreateActions.cpp" line="430"/>
         <source>Main Window...</source>
         <translation>主窗口...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="412"/>
+        <location filename="../src/Create/CreateActions.cpp" line="432"/>
         <source>Edit Main Window settings.</source>
         <translation>编辑主窗口设置。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="413"/>
+        <location filename="../src/Create/CreateActions.cpp" line="433"/>
         <source>Main Window Settings
 
 Main window settings affect the user interface and are not specific to any document</source>
         <translation>主窗口设置主窗口设置影响用户界面，并非特定于任何文档</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="422"/>
+        <location filename="../src/Create/CreateActions.cpp" line="442"/>
         <source>Background Toolbar</source>
         <translation>背景工具栏</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="425"/>
+        <location filename="../src/Create/CreateActions.cpp" line="445"/>
         <source>Show or hide the background toolbar.</source>
         <translation>显示或隐藏背景工具栏。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="426"/>
+        <location filename="../src/Create/CreateActions.cpp" line="446"/>
         <source>View Background ToolBar
 
 Show or hide the background toolbar</source>
         <translation>查看背景工具栏显示或隐藏背景工具栏</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="430"/>
         <source>Checklist Guide Toolbar</source>
-        <translation>清单指南工具栏</translation>
+        <translation type="vanished">清單指南工具欄</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="433"/>
+        <location filename="../src/Create/CreateActions.cpp" line="482"/>
         <source>Show or hide the checklist guide.</source>
         <translation>显示或隐藏清单指南。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="434"/>
+        <location filename="../src/Create/CreateActions.cpp" line="483"/>
         <source>View Checklist Guide
 
 Show or hide the checklist guide</source>
         <translation>查看清单指南显示或隐藏清单指南</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="438"/>
+        <location filename="../src/Create/CreateActions.cpp" line="487"/>
         <source>Curve Fitting Window</source>
         <translation>曲线拟合窗口</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="441"/>
+        <location filename="../src/Create/CreateActions.cpp" line="490"/>
         <source>Show or hide the curve fitting window.</source>
         <translation>显示或隐藏曲线拟合窗口。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="442"/>
+        <location filename="../src/Create/CreateActions.cpp" line="491"/>
         <source>View Curve Fitting Window
 
 Show or hide the curve fitting window</source>
         <translation>查看曲线拟合窗口显示或隐藏曲线拟合窗口</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="446"/>
+        <location filename="../src/Create/CreateActions.cpp" line="495"/>
         <source>Geometry Window</source>
         <translation>几何窗口</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="449"/>
+        <location filename="../src/Create/CreateActions.cpp" line="498"/>
         <source>Show or hide the geometry window.</source>
         <translation>显示或隐藏几何窗口。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="450"/>
+        <location filename="../src/Create/CreateActions.cpp" line="499"/>
         <source>View Geometry Window
 
 Show or hide the geometry window</source>
         <translation>查看几何窗口显示或隐藏几何窗口</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="454"/>
+        <location filename="../src/Create/CreateActions.cpp" line="450"/>
         <source>Digitizing Tools Toolbar</source>
         <translation>数字化工具工具栏</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="457"/>
+        <location filename="../src/Create/CreateActions.cpp" line="453"/>
         <source>Show or hide the digitizing tools toolbar.</source>
         <translation>显示或隐藏数字化工具工具栏</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="458"/>
+        <location filename="../src/Create/CreateActions.cpp" line="454"/>
         <source>View Digitizing Tools ToolBar
 
 Show or hide the digitizing tools toolbar</source>
         <translation>查看数字化工具工具栏显示或隐藏数字化工具工具栏</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="462"/>
+        <location filename="../src/Create/CreateActions.cpp" line="458"/>
         <source>Settings Views Toolbar</source>
         <translation>设置视图工具栏</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="465"/>
+        <location filename="../src/Create/CreateActions.cpp" line="461"/>
         <source>Show or hide the settings views toolbar.</source>
         <translation>显示或隐藏设置视图工具栏。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="466"/>
+        <location filename="../src/Create/CreateActions.cpp" line="462"/>
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
         <translation>查看设置视图工具栏显示或隐藏设置视图工具栏。这些视图以图形方式显示最重要的设置。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="471"/>
+        <location filename="../src/Create/CreateActions.cpp" line="467"/>
         <source>Coordinate System Toolbar</source>
         <translation>坐标系统工具栏</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="474"/>
+        <location filename="../src/Create/CreateActions.cpp" line="470"/>
         <source>Show or hide the coordinate system toolbar.</source>
         <translation>显示或隐藏坐标系工具栏。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="475"/>
+        <location filename="../src/Create/CreateActions.cpp" line="471"/>
         <source>View Coordinate Systems ToolBar
 
 Show or hide the coordinate system selection toolbar. This toolbar is used to select the current coordinate system when the document has multiple coordinate systems. This toolbar is also used to view and print all coordinate systems.
@@ -1229,85 +1263,107 @@ This toolbar is disabled when there is only one coordinate system.</source>
         <translation>查看坐标系工具栏显示或隐藏坐标系选择工具栏。当文档具有多个坐标系时，该工具栏用于选择当前坐标系。此工具栏也用于查看和打印所有坐标系。when当只有一个坐标系时，此工具栏被禁用。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="483"/>
+        <location filename="../src/Create/CreateActions.cpp" line="479"/>
+        <source>Checklist Guide Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="503"/>
         <source>Tool Tips</source>
         <translation>工具提示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="486"/>
+        <location filename="../src/Create/CreateActions.cpp" line="506"/>
         <source>Show or hide the tool tips.</source>
         <translation>显示或隐藏工具提示。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="487"/>
+        <location filename="../src/Create/CreateActions.cpp" line="507"/>
         <source>View Tool Tips
 
 Show or hide the tool tips</source>
         <translation>查看工具提示显示或隐藏工具提示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="491"/>
+        <location filename="../src/Create/CreateActions.cpp" line="511"/>
         <source>Grid Lines</source>
         <translation>网格线</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="494"/>
+        <location filename="../src/Create/CreateActions.cpp" line="514"/>
         <source>Show or hide grid lines.</source>
         <translation>显示或隐藏网格线。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="495"/>
+        <location filename="../src/Create/CreateActions.cpp" line="515"/>
         <source>View Grid Lines
 
 Show or hide grid lines that are added for accurate adjustments of the axes points, which can improve accuracy in distorted graphs</source>
         <translation>查看网格线显示或隐藏为了精确调整轴点而添加的网格线，这可以提高扭曲图形的准确性</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="500"/>
+        <location filename="../src/Create/CreateActions.cpp" line="520"/>
+        <source>Guidelines</source>
+        <translation>指導方針</translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="523"/>
+        <source>Show or hide guidelines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="524"/>
+        <source>View Guidelines
+
+Show or hide guidelines that are added for accurate adjustments of the graph points, which can improve accuracy of points close to the guidelines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="529"/>
         <source>No Background</source>
         <translation>无背景</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="502"/>
+        <location filename="../src/Create/CreateActions.cpp" line="531"/>
         <source>Do not show the image underneath the points.</source>
         <translation>不显示图像下面的点</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="503"/>
+        <location filename="../src/Create/CreateActions.cpp" line="532"/>
         <source>No Background
 
 No image is shown so points are easier to see</source>
         <translation>没有背景没有显示图像，所以点更容易看到</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="506"/>
+        <location filename="../src/Create/CreateActions.cpp" line="535"/>
         <source>Show Original Image</source>
         <translation>显示原始图像</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="508"/>
+        <location filename="../src/Create/CreateActions.cpp" line="537"/>
         <source>Show the original image underneath the points.</source>
         <translation>显示图像下面的点</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="509"/>
+        <location filename="../src/Create/CreateActions.cpp" line="538"/>
         <source>Show Original Image
 
 Show the original image underneath the points</source>
         <translation>显示原始图像在点下方显示原始图像</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="512"/>
+        <location filename="../src/Create/CreateActions.cpp" line="541"/>
         <source>Show Filtered Image</source>
         <translation>显示筛选的图像</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="515"/>
+        <location filename="../src/Create/CreateActions.cpp" line="544"/>
         <source>Show the filtered image underneath the points.</source>
         <translation>在点下方显示已过滤的图像。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="516"/>
+        <location filename="../src/Create/CreateActions.cpp" line="545"/>
         <source>Show Filtered Image
 
 Show the filtered image underneath the points.
@@ -1316,97 +1372,91 @@ The filtered image is created from the original image according to the Filter pr
         <translation>显示已过滤的图像在点下方显示已过滤的图像。根据过滤器首选项从原始图像创建已过滤图像，因此隐藏不重要的信息并强调重要信息</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="528"/>
+        <location filename="../src/Create/CreateActions.cpp" line="557"/>
         <source>Hide All Curves</source>
         <translation>隐藏所有曲线</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="530"/>
+        <location filename="../src/Create/CreateActions.cpp" line="559"/>
         <source>Hide all digitized curves.</source>
         <translation>隐藏所有数字化的曲线</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="531"/>
+        <location filename="../src/Create/CreateActions.cpp" line="560"/>
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
         <translation>隐藏所有曲线shown显示没有轴点或数字化曲线图，因此图像更易于查看。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="534"/>
+        <location filename="../src/Create/CreateActions.cpp" line="563"/>
         <source>Show Selected Curve</source>
         <translation>显示选择的曲线</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="536"/>
+        <location filename="../src/Create/CreateActions.cpp" line="565"/>
         <source>Show only the currently selected curve.</source>
         <translation>只显示当前选择的曲线</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="537"/>
+        <location filename="../src/Create/CreateActions.cpp" line="566"/>
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
         <translation>显示选定曲线仅显示属于当前选定曲线的数字化点和线。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="540"/>
+        <location filename="../src/Create/CreateActions.cpp" line="569"/>
         <source>Show All Curves</source>
         <translation>显示所有曲线</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="543"/>
+        <location filename="../src/Create/CreateActions.cpp" line="572"/>
         <source>Show all curves.</source>
         <translation>显示所有曲线</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="544"/>
+        <location filename="../src/Create/CreateActions.cpp" line="573"/>
         <source>Show All Curves
 
 Show all digitized axis points and graph curves</source>
         <translation>显示所有曲线显示所有数字化的轴点和曲线图</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="553"/>
         <source>Hide Guidelines</source>
-        <translation> 隱藏準則</translation>
+        <translation type="vanished">隱藏準則</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="556"/>
         <source>Hide guidelines.</source>
-        <translation>隱藏準則。</translation>
+        <translation type="vanished">隱藏準則</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="557"/>
         <source>Hide Guidelines
 
 Guidelines are hidden to simplify the main window.</source>
-        <translation>隱藏準則
+        <translation type="vanished">隱藏準則
 
 隱藏準則以簡化主窗口。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="560"/>
         <source>Edit Guidelines</source>
-        <translation>編輯指南</translation>
+        <translation type="vanished">編輯指南</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="562"/>
         <source>Edit guidelines.</source>
-        <translation>編輯指南</translation>
+        <translation type="vanished">編輯指南</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="563"/>
         <source>Edit Guidelines
 
 Add new guidelines by clicking on the guidelines toolbar, move existing guidelines by dragging, or remove guidelines by dragging out of the main window.
 
 This option is available in Select mode.</source>
-        <translation>編輯指南
+        <translation type="vanished">編輯指南
 
-	通過單擊準則工具欄上的添加新準則，通過拖動來移動現有準則，或者通過從主窗口中移出來刪除準則。
+通過單擊準則工具欄來添加新準則，通過拖動來移動現有準則，或者通過拖出主窗口來移除準則。
 
-	此選項在選擇模式下可用。</translation>
+此選項在選擇模式下可用</translation>
     </message>
     <message>
         <source>Edit Guidelines
@@ -1417,342 +1467,339 @@ Add new guidelines by clicking on the guidelines toolbar, move existing guidelin
 通過單擊準則工具欄上的添加新準則，通過拖動來移動現有準則，或者通過從主窗口中移出來刪除準則。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="569"/>
         <source>Lock Guidelines</source>
-        <translation>鎖定準則</translation>
+        <translation type="vanished">鎖定準則</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="571"/>
         <source>Lock guidelines.</source>
-        <translation>鎖定準則</translation>
+        <translation type="vanished">鎖定準則。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="572"/>
         <source>Lock Guidelines
 
 Lock the guidelines to prevent accidental movement or removal.</source>
-        <translation>鎖定準則
+        <translation type="vanished">鎖定準則
 
 鎖定準則以防止意外移動或移除。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="581"/>
+        <location filename="../src/Create/CreateActions.cpp" line="582"/>
         <source>Hide Always</source>
         <translation>保持隐藏</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="583"/>
+        <location filename="../src/Create/CreateActions.cpp" line="584"/>
         <source>Always hide the status bar.</source>
         <translation>隐藏状态栏</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="584"/>
+        <location filename="../src/Create/CreateActions.cpp" line="585"/>
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
         <translation>隐藏状态栏. 将不再显示临时状态和反馈信息.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="586"/>
+        <location filename="../src/Create/CreateActions.cpp" line="587"/>
         <source>Show Temporary Messages</source>
         <translation>显示临时信息.</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="588"/>
+        <location filename="../src/Create/CreateActions.cpp" line="589"/>
         <source>Hide the status bar except when display temporary messages.</source>
         <translation>除了显示临时消息时，隐藏状态栏。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="589"/>
+        <location filename="../src/Create/CreateActions.cpp" line="590"/>
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
         <translation>隐藏状态栏，除了显示临时状态和反馈信息时。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="591"/>
+        <location filename="../src/Create/CreateActions.cpp" line="592"/>
         <source>Show Always</source>
         <translation>保持显示</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="593"/>
+        <location filename="../src/Create/CreateActions.cpp" line="594"/>
         <source>Always show the status bar.</source>
         <translation>总是显示状态栏</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="594"/>
+        <location filename="../src/Create/CreateActions.cpp" line="595"/>
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
         <translation>显示状态栏。除显示临时状态和反馈消息外，状态栏还显示有关光标位置的信息。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="603"/>
+        <location filename="../src/Create/CreateActions.cpp" line="604"/>
         <source>Zoom Out</source>
         <translation>缩小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="604"/>
+        <location filename="../src/Create/CreateActions.cpp" line="605"/>
         <source>Zoom out</source>
         <translation>缩小</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="608"/>
+        <location filename="../src/Create/CreateActions.cpp" line="609"/>
         <source>Zoom In</source>
         <translation>放大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="609"/>
+        <location filename="../src/Create/CreateActions.cpp" line="610"/>
         <source>Zoom in</source>
         <translation>放大</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="616"/>
+        <location filename="../src/Create/CreateActions.cpp" line="617"/>
         <source>16:1 (1600%)</source>
         <translation>16:1 (1600%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="618"/>
+        <location filename="../src/Create/CreateActions.cpp" line="619"/>
         <source>Zoom 16:1</source>
         <translation>缩放16:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="622"/>
+        <location filename="../src/Create/CreateActions.cpp" line="623"/>
         <source>16:1 farther (1270%)</source>
         <translation>16：1更远（1270％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="624"/>
+        <location filename="../src/Create/CreateActions.cpp" line="625"/>
         <source>Zoom 12.7:1</source>
         <translation>缩放12.7：1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="628"/>
+        <location filename="../src/Create/CreateActions.cpp" line="629"/>
         <source>8:1 closer (1008%)</source>
         <translation>8：1接近（1008％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="630"/>
+        <location filename="../src/Create/CreateActions.cpp" line="631"/>
         <source>Zoom 10.08:1</source>
         <translation>缩放10.08：1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="634"/>
+        <location filename="../src/Create/CreateActions.cpp" line="635"/>
         <source>8:1 (800%)</source>
         <translation>8:1 (800%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="636"/>
+        <location filename="../src/Create/CreateActions.cpp" line="637"/>
         <source>Zoom 8:1</source>
         <translation>缩放8:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="640"/>
+        <location filename="../src/Create/CreateActions.cpp" line="641"/>
         <source>8:1 farther (635%)</source>
         <translation>8：1更远（635％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="642"/>
+        <location filename="../src/Create/CreateActions.cpp" line="643"/>
         <source>Zoom 6.35:1</source>
         <translation>放大6.35：1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="646"/>
+        <location filename="../src/Create/CreateActions.cpp" line="647"/>
         <source>4:1 closer (504%)</source>
         <translation>4：1更接近（504％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="648"/>
+        <location filename="../src/Create/CreateActions.cpp" line="649"/>
         <source>Zoom 5.04:1</source>
         <translation>缩放5.04：1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="652"/>
+        <location filename="../src/Create/CreateActions.cpp" line="653"/>
         <source>4:1 (400%)</source>
         <translation>4:1 (400%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="654"/>
+        <location filename="../src/Create/CreateActions.cpp" line="655"/>
         <source>Zoom 4:1</source>
         <translation>缩放4:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="658"/>
+        <location filename="../src/Create/CreateActions.cpp" line="659"/>
         <source>4:1 farther (317%)</source>
         <translation>4：1更远（317％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="660"/>
+        <location filename="../src/Create/CreateActions.cpp" line="661"/>
         <source>Zoom 3.17:1</source>
         <translation>缩放3.17：1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="664"/>
+        <location filename="../src/Create/CreateActions.cpp" line="665"/>
         <source>2:1 closer (252%)</source>
         <translation>2：1更近（252％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="666"/>
+        <location filename="../src/Create/CreateActions.cpp" line="667"/>
         <source>Zoom 2.52:1</source>
         <translation>缩放2.52：1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="670"/>
+        <location filename="../src/Create/CreateActions.cpp" line="671"/>
         <source>2:1 (200%)</source>
         <translation>2:1 (200%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="672"/>
+        <location filename="../src/Create/CreateActions.cpp" line="673"/>
         <source>Zoom 2:1</source>
         <translation>缩放2:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="676"/>
+        <location filename="../src/Create/CreateActions.cpp" line="677"/>
         <source>2:1 farther (159%)</source>
         <translation>2：1更远（159％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="678"/>
+        <location filename="../src/Create/CreateActions.cpp" line="679"/>
         <source>Zoom 1.59:1</source>
         <translation>缩放1.59：1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="682"/>
+        <location filename="../src/Create/CreateActions.cpp" line="683"/>
         <source>1:1 closer (126%)</source>
         <translation>1：1更近（126％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="685"/>
+        <location filename="../src/Create/CreateActions.cpp" line="686"/>
         <source>Zoom 1.3:1</source>
         <translation>缩放1.3：1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="689"/>
+        <location filename="../src/Create/CreateActions.cpp" line="690"/>
         <source>1:1 (100%)</source>
         <translation>1:1 (100%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="692"/>
+        <location filename="../src/Create/CreateActions.cpp" line="693"/>
         <source>Zoom 1:1</source>
         <translation>缩放1:1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="696"/>
+        <location filename="../src/Create/CreateActions.cpp" line="697"/>
         <source>1:1 farther (79%)</source>
         <translation>1：1更远（79％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="699"/>
+        <location filename="../src/Create/CreateActions.cpp" line="700"/>
         <source>Zoom 0.8:1</source>
         <translation>缩放0.8：1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="703"/>
+        <location filename="../src/Create/CreateActions.cpp" line="704"/>
         <source>1:2 closer (63%)</source>
         <translation>1：2更近（63％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="705"/>
+        <location filename="../src/Create/CreateActions.cpp" line="706"/>
         <source>Zoom 1.3:2</source>
         <translation>缩放1.3：2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="709"/>
+        <location filename="../src/Create/CreateActions.cpp" line="710"/>
         <source>1:2 (50%)</source>
         <translation>1:2 (50%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="711"/>
+        <location filename="../src/Create/CreateActions.cpp" line="712"/>
         <source>Zoom 1:2</source>
         <translation>缩放1:2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="715"/>
+        <location filename="../src/Create/CreateActions.cpp" line="716"/>
         <source>1:2 farther (40%)</source>
         <translation>1：2更远（40％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="717"/>
+        <location filename="../src/Create/CreateActions.cpp" line="718"/>
         <source>Zoom 0.8:2</source>
         <translation>缩放0.8：2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="721"/>
+        <location filename="../src/Create/CreateActions.cpp" line="722"/>
         <source>1:4 closer (31%)</source>
         <translation>1：4更近（31％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="723"/>
+        <location filename="../src/Create/CreateActions.cpp" line="724"/>
         <source>Zoom 1.3:4</source>
         <translation>缩放1.3：4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="727"/>
+        <location filename="../src/Create/CreateActions.cpp" line="728"/>
         <source>1:4 (25%)</source>
         <translation>1:4 (25%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="729"/>
+        <location filename="../src/Create/CreateActions.cpp" line="730"/>
         <source>Zoom 1:4</source>
         <translation>缩放1:4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="733"/>
+        <location filename="../src/Create/CreateActions.cpp" line="734"/>
         <source>1:4 farther (20%)</source>
         <translation>1：4更远（20％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="735"/>
+        <location filename="../src/Create/CreateActions.cpp" line="736"/>
         <source>Zoom 0.8:4</source>
         <translation>缩放0.8：4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="739"/>
+        <location filename="../src/Create/CreateActions.cpp" line="740"/>
         <source>1:8 closer (12.5%)</source>
         <translation>1：8更接近（12.5％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="741"/>
-        <location filename="../src/Create/CreateActions.cpp" line="747"/>
+        <location filename="../src/Create/CreateActions.cpp" line="742"/>
+        <location filename="../src/Create/CreateActions.cpp" line="748"/>
         <source>Zoom 1:8</source>
         <translation>缩放1:8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="745"/>
+        <location filename="../src/Create/CreateActions.cpp" line="746"/>
         <source>1:8 (12.5%)</source>
         <translation>1:8 (12.5%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="751"/>
+        <location filename="../src/Create/CreateActions.cpp" line="752"/>
         <source>1:8 farther (10%)</source>
         <translation>1：8更远（10％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="753"/>
+        <location filename="../src/Create/CreateActions.cpp" line="754"/>
         <source>Zoom 0.8:8</source>
         <translation>缩放0.8：8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="757"/>
+        <location filename="../src/Create/CreateActions.cpp" line="758"/>
         <source>1:16 closer (8%)</source>
         <translation>1:16更近（8％）</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="759"/>
+        <location filename="../src/Create/CreateActions.cpp" line="760"/>
         <source>Zoom 1.3:16</source>
         <translation>缩放1.3：16</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="763"/>
+        <location filename="../src/Create/CreateActions.cpp" line="764"/>
         <source>1:16 (6.25%)</source>
         <translation>1:16 (6.25%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="765"/>
+        <location filename="../src/Create/CreateActions.cpp" line="766"/>
         <source>Zoom 1:16</source>
         <translation>缩放1:16</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="769"/>
+        <location filename="../src/Create/CreateActions.cpp" line="770"/>
         <source>Fill</source>
         <translation>填</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="771"/>
+        <location filename="../src/Create/CreateActions.cpp" line="772"/>
         <source>Zoom with stretching to fill window</source>
         <translation>拉伸以填充窗口放大</translation>
     </message>
@@ -1780,42 +1827,41 @@ Lock the guidelines to prevent accidental movement or removal.</source>
         <translation>数字化</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="65"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="66"/>
         <source>View</source>
         <translation>查看</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="77"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="80"/>
         <source>Background</source>
         <translation>背景</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="82"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="85"/>
         <source>Curves</source>
         <translation>曲线</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="87"/>
         <source>Guidelines</source>
-        <translation>指導方針</translation>
+        <translation type="vanished">指導方針</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="92"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="90"/>
         <source>Status Bar</source>
         <translation>状态栏</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="97"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="95"/>
         <source>Zoom</source>
         <translation>缩放</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="129"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="127"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="145"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="143"/>
         <source>&amp;Help</source>
         <translation>帮助</translation>
     </message>
@@ -1823,71 +1869,63 @@ Lock the guidelines to prevent accidental movement or removal.</source>
 <context>
     <name>CreateScene</name>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="28"/>
         <source>Create an R (range) guideline.</source>
-        <translation>創建一個R（範圍）準則。</translation>
+        <translation type="vanished">قم بإنشاء دليل R (النطاق).</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="29"/>
         <source>Create a T (theta) guideline.</source>
-        <translation>創建一個T（θ）準則。</translation>
+        <translation type="vanished">創建一個T（θ）準則。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="30"/>
         <source>Create an X guideline.</source>
-        <translation>創建一個X準則。</translation>
+        <translation type="vanished">創建一個X準則。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="31"/>
         <source>Create a Y guideline.</source>
-        <translation>創建一個Y準則。</translation>
+        <translation type="vanished">創建一個Y準則。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="33"/>
         <source>Create an R (Range) guideline
 
 When pressed, a constant R (range) guideline is created. It can be moved by dragging</source>
-        <translation>創建R（範圍）準則
+        <translation type="vanished">創建R（範圍）準則
 
-按下時，將創建恆定的R（範圍）準則。可以通過拖動來移動</translation>
+按下後，將創建恆定的R（範圍）準則。 可以通過拖動來移動</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="35"/>
         <source>Create a T (Theta) guideline
 
 When pressed, a constant T (theta) guideline is created. It can be moved by dragging</source>
-        <translation>創建T（Theta）準則
+        <translation type="vanished">創建T（Theta）準則
 
-按下後，將創建一個恆定的T（θ）準則。可以通過拖動來移動</translation>
+按下後，將創建一個恆定的T（θ）準則。 可以通過拖動來移動</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="37"/>
         <source>Create an X guideline
 
 When pressed, a constant X guideline is created. It can be moved by dragging</source>
-        <translation>創建X準則
+        <translation type="vanished">創建X準則
 
-按下後，將創建一個恆定的X準則。可以通過拖動來移動</translation>
+按下時，將創建一個恆定的X準則。 可以通過拖動來移動</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="39"/>
         <source>Create a Y guideline
 
 When pressed, a constant Y guideline is created. It can be moved by dragging</source>
-        <translation>創建Y準則
+        <translation type="vanished">創建Y準則
 
-按下時，將創建恆定的Y準則。可以通過拖動來移動</translation>
+按下時，將創建恆定的Y準則。 可以通過拖動來移動</translation>
     </message>
 </context>
 <context>
     <name>CreateToolBars</name>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="42"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="48"/>
         <source>Select background image</source>
         <translation>选择背景图像</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="43"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="49"/>
         <source>Selected Background
 
 Select background image:
@@ -1897,32 +1935,32 @@ Select background image:
         <translation>选择的背景选择背景图像：1）没有高亮点的背景2）显示所有内容的原始图像3）高亮显示重要细节的过滤图像</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="48"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="54"/>
         <source>No background</source>
         <translation>无背景</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="49"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="55"/>
         <source>Original image</source>
         <translation>原始图像</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="50"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="56"/>
         <source>Filtered image</source>
         <translation>筛选的图像</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="55"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="61"/>
         <source>Background</source>
         <translation>背景</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="63"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="106"/>
         <source>Select curve for new points.</source>
         <translation>选择新点的曲线。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="64"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="107"/>
         <source>Selected Curve Name
 
 Select curve for any new points. Every point belongs to one curve.
@@ -1931,77 +1969,77 @@ This can be changed while in Curve Point, Point Match, Color Picker or Segment F
         <translation>选择曲线名称选择任何新点的曲线。每个点都属于一条曲线。？可以在曲线点，点匹配，拾色器或分段填充模式下更改。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="70"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="112"/>
         <source>Drawing</source>
         <translation>绘画</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="87"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="134"/>
         <source>Points style for the currently selected curve</source>
         <translation>当前选定曲线的点样式</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="88"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="135"/>
         <source>Points Style
 
 Points style for the currently selected curve. The points style is only displayed in this toolbar. To change the points style, use the Curve Properties dialog.</source>
         <translation>点样式为当前选定曲线的点样式。点样式仅显示在此工具栏中。要更改点样式，请使用“曲线属性”对话框。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="96"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="143"/>
         <source>View of filter for current curve in Segment Fill mode</source>
         <translation>在段填充模式下查看当前曲线的过滤器</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="97"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="144"/>
         <source>Segment Fill Filter
 
 View of filter for the current curve in Segment Fill mode. The filter settings are only displayed in this toolbar. To changed the filter settings, use the Color Picker mode or the Filter Settings dialog.</source>
         <translation>分段填充过滤器Se在分段填充模式下查看当前曲线的过滤器。过滤器设置仅显示在此工具栏中。要更改滤镜设置，请使用拾色器模式或滤镜设置对话框。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="103"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="149"/>
         <source>Views</source>
         <translation>视图</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="112"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="71"/>
         <source>Currently selected coordinate system</source>
         <translation>当前选择的坐标系</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="113"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="72"/>
         <source>Selected Coordinate System
 
 Currently selected coordinate system. This is used to switch between coordinate systems in documents with multiple coordinate systems</source>
         <translation>选定的坐标系当前选定的坐标系。这用于在具有多个坐标系的文档中的坐标系之间切换</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="121"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="80"/>
         <source>Show all coordinate systems</source>
         <translation>显示所有坐标系</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="122"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="81"/>
         <source>Show All Coordinate Systems
 
 When pressed and held, this button shows all digitized points and lines for all coordinate systems.</source>
         <translation>显示所有坐标系当按住时，此按钮显示所有坐标系的所有数字化点和线。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="130"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="89"/>
         <source>Print all coordinate systems</source>
         <translation>打印所有坐标系</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="131"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="90"/>
         <source>Print All Coordinate Systems
 
 When pressed, this button Prints all digitized points and lines for all coordinate systems.</source>
         <translation>打印所有坐标系当按下此按钮时，打印所有坐标系的所有数字化点和线。</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="135"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="94"/>
         <source>Coordinate System</source>
         <translation>坐标系</translation>
     </message>
@@ -3793,6 +3831,58 @@ The stop value cannot be less than the start value</source>
     </message>
 </context>
 <context>
+    <name>DlgSettingsGuideline</name>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="34"/>
+        <source>Guidelines</source>
+        <translation>指導方針</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="57"/>
+        <source>Creation circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="61"/>
+        <source>Select a radius, in pixels, for the points</source>
+        <translation>为点选择一个以像素为单位的半径</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="66"/>
+        <source>Guideline color</source>
+        <translation> 指導色</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="70"/>
+        <source>Guidelines Color
+
+Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
+        <translation>指南顏色
+
+設置可以從場景邊緣拖動並用於對齊點的輔助線的顏色</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="77"/>
+        <source>Active Line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="81"/>
+        <source>Select a size for the guidelines when active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="86"/>
+        <source>Inactive Line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="90"/>
+        <source>Select a size for the guidelines when inactive</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DlgSettingsMainWindow</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="49"/>
@@ -4012,11 +4102,10 @@ Number of digits of precision in floating point numbers. This value affects calc
         <translation> 指導色</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="279"/>
         <source>Guidelines Color
 
 Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
-        <translation>指南顏色
+        <translation type="vanished">指南顏色
 
 設置可以從場景邊緣拖動並用於對齊點的輔助線的顏色</translation>
     </message>
@@ -4375,22 +4464,22 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="497"/>
+        <location filename="../src/main/MainWindow.cpp" line="499"/>
         <source>Unable to export to file</source>
         <translation>导出失败</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="542"/>
+        <location filename="../src/main/MainWindow.cpp" line="544"/>
         <source>Unable to extract image to file</source>
         <translation>無法將圖像提取到文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="622"/>
+        <location filename="../src/main/MainWindow.cpp" line="624"/>
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation>在OSX中，啟動時加載的文件必須位於“下載”，“圖片”或“庫/容器/數字化器/數據”目錄中</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1343"/>
+        <location filename="../src/main/MainWindow.cpp" line="1336"/>
         <source>Cannot read file</source>
         <translation>不能读取文件</translation>
     </message>
@@ -4399,89 +4488,89 @@ Zooming the image in or out is performed using any of several methods:
         <translation type="vanished">从目录</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="708"/>
+        <location filename="../src/main/MainWindow.cpp" line="710"/>
         <source>Import Image</source>
         <translation>导入图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1066"/>
+        <location filename="../src/main/MainWindow.cpp" line="1058"/>
         <source>File opened</source>
         <translation>文件打开</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1109"/>
+        <location filename="../src/main/MainWindow.cpp" line="1102"/>
         <source>File not found</source>
         <translation>找不到文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1126"/>
+        <location filename="../src/main/MainWindow.cpp" line="1119"/>
         <source>Error report opened</source>
         <translation>错误报告打开</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1189"/>
-        <location filename="../src/main/MainWindow.cpp" line="1263"/>
+        <location filename="../src/main/MainWindow.cpp" line="1182"/>
+        <location filename="../src/main/MainWindow.cpp" line="1256"/>
         <source>File imported</source>
         <translation>文件已导入</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1297"/>
+        <location filename="../src/main/MainWindow.cpp" line="1290"/>
         <source>Background image.</source>
         <translation>背景图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1298"/>
+        <location filename="../src/main/MainWindow.cpp" line="1291"/>
         <source>Currently selected curve.</source>
         <translation>当前选择的图像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1299"/>
+        <location filename="../src/main/MainWindow.cpp" line="1292"/>
         <source>Point style for currently selected curve.</source>
         <translation>当前选定曲线的点样式。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1300"/>
+        <location filename="../src/main/MainWindow.cpp" line="1293"/>
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>段填充当前选定曲线的过滤器。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1326"/>
+        <location filename="../src/main/MainWindow.cpp" line="1319"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>该文件已被修改。您是否要保存更改？</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1412"/>
+        <location filename="../src/main/MainWindow.cpp" line="1405"/>
         <source>Cannot write file</source>
         <translation>不能写入文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1460"/>
+        <location filename="../src/main/MainWindow.cpp" line="1453"/>
         <source>Save</source>
         <translation>文件保存</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2599"/>
+        <location filename="../src/main/MainWindow.cpp" line="2518"/>
         <source>Export</source>
         <translation>导出</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2681"/>
+        <location filename="../src/main/MainWindow.cpp" line="2600"/>
         <source>Open Document</source>
         <translation>打开文件</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4042"/>
+        <location filename="../src/main/MainWindow.cpp" line="3930"/>
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4043"/>
+        <location filename="../src/main/MainWindow.cpp" line="3931"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4178"/>
+        <location filename="../src/main/MainWindow.cpp" line="4067"/>
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -4489,39 +4578,39 @@ Do you want to save your changes?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="133"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="178"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="280"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="138"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="183"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="285"/>
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
         <translation>新轴点不能与现有轴点位于同一个屏幕位置</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="186"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="289"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="191"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="294"/>
         <source>New axis point cannot have the same graph coordinates as an existing axis point</source>
         <translation>新轴点不能具有与现有轴点相同的图坐标</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="194"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="297"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="199"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="302"/>
         <source>No more than two axis points can lie along the same line on the screen</source>
         <translation>屏幕上同一条线上不能有两个以上的轴点</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="202"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="305"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="207"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="310"/>
         <source>No more than two axis points can lie along the same line in graph coordinates</source>
         <translation>在图坐标中，同一条线上不能有两个以上的轴点
 
 </translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="255"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="260"/>
         <source>Too many x axis points. There should only be two</source>
         <translation>太多的x轴点。应该只有两个</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="261"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="266"/>
         <source>Too many y axis points. There should only be two</source>
         <translation>太多的y轴点。应该只有两个</translation>
     </message>
@@ -4582,6 +4671,7 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdSettingsGeneral.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsGridDisplay.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsGridRemoval.cpp" line="50"/>
+        <location filename="../src/Cmd/CmdSettingsGuideline.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsPointMatch.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsSegments.cpp" line="50"/>
         <source>Reached end of file before finding end element for</source>
@@ -4774,12 +4864,12 @@ Do you want to save your changes?</source>
         <translation>抱歉，颜色选择器点必须靠近非背景像素。请再试一次。</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="356"/>
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="360"/>
         <source>Point Match</source>
         <translation>点匹配</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="357"/>
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="361"/>
         <source>There are no more matching points</source>
         <translation>没有更多匹配点</translation>
     </message>
@@ -4872,7 +4962,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="155"/>
-        <location filename="../src/Document/DocumentModelGuidelines.cpp" line="84"/>
+        <location filename="../src/Document/DocumentModelGuideline.cpp" line="131"/>
         <source>Cannot read grid display data</source>
         <translation>无法读取网格显示数据</translation>
     </message>
@@ -5231,12 +5321,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">上一步</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="632"/>
+        <location filename="../src/main/MainWindow.cpp" line="634"/>
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>该文件似乎具有来自多个语言字母的字符，这些字符在Windows命令行中不起作用</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="131"/>
+        <location filename="../src/main/MainWindowModel.cpp" line="122"/>
         <source>Cannot read main window data</source>
         <translation>无法读取主窗口数据</translation>
     </message>

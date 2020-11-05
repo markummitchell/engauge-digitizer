@@ -313,22 +313,22 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
 <context>
     <name>CreateActions</name>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="59"/>
+        <location filename="../src/Create/CreateActions.cpp" line="62"/>
         <source>Select Tool</source>
         <translation>उपकरण चुनें</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="60"/>
+        <location filename="../src/Create/CreateActions.cpp" line="63"/>
         <source>Shift+F2</source>
         <translation>Shift+F2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="62"/>
+        <location filename="../src/Create/CreateActions.cpp" line="65"/>
         <source>Select points on screen.</source>
         <translation>स्क्रीन पर अंक चुनें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="63"/>
+        <location filename="../src/Create/CreateActions.cpp" line="66"/>
         <source>Select
 
 Select points on the screen.</source>
@@ -337,22 +337,22 @@ Select points on the screen.</source>
 स्क्रीन पर बिंदुओं का चयन करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="67"/>
+        <location filename="../src/Create/CreateActions.cpp" line="70"/>
         <source>Axis Point Tool</source>
         <translation>एक्सिस पॉइंट टूल</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="68"/>
+        <location filename="../src/Create/CreateActions.cpp" line="71"/>
         <source>Shift+F3</source>
         <translation>Shift+F3</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="70"/>
+        <location filename="../src/Create/CreateActions.cpp" line="73"/>
         <source>Digitize axis points for a graph.</source>
         <translation>एक ग्राफ के लिए डिजिटाइज़ अक्ष बिंदु।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="71"/>
+        <location filename="../src/Create/CreateActions.cpp" line="74"/>
         <source>Digitize Axis Point
 
 Digitizes an axis point for a graph by placing a new point at the cursor after a mouse click. The coordinates of the axis point are then entered. After Import and Import (Advanced), three axis points with (X1,Y1) (X2,Y2) (X3,Y3) coordinates can be digitized to define the graph coordinates. Optionally, after Import (Advanced) four axis points with (X1) (X2) (Y3) (Y4) coordinates can be digitized to define the graph coordinates.
@@ -365,22 +365,23 @@ This tool is disabled when a complete set of axis points has been defined, or af
 यह उपकरण तब अक्षम होता है जब अक्ष बिंदुओं का एक पूरा सेट परिभाषित किया गया है, या आयात (उन्नत) के बाद अगर स्केल बार चुना गया है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="82"/>
+        <location filename="../src/Create/CreateActions.cpp" line="85"/>
         <source>Scale Bar Tool</source>
         <translation>स्केल बार टूल</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="83"/>
+        <location filename="../src/Create/CreateActions.cpp" line="86"/>
+        <location filename="../src/Create/CreateActions.cpp" line="141"/>
         <source>Shift+F8</source>
         <translation>Shift+F8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="85"/>
+        <location filename="../src/Create/CreateActions.cpp" line="88"/>
         <source>Digitize scale bar for a map. Requires Import (Advanced).</source>
         <translation>मानचित्र के लिए स्केल बार डिजिटाइज़ करें। आयात (उन्नत) की आवश्यकता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="86"/>
+        <location filename="../src/Create/CreateActions.cpp" line="89"/>
         <source>Digitize Scale Bar
 
 Digitize a scale bar for a map by clicking and dragging. The length of the scale bar is then entered. In a map, the two endpoints of the scale bar define the distances in graph coordinates.
@@ -397,22 +398,22 @@ This tool is disabled when a scale bar has been defined, or if axis points were 
 जब स्केल बार परिभाषित किया गया है, या यदि आयात के दौरान अक्ष बिंदुओं को चुना गया था, तो यह उपकरण अक्षम है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="95"/>
+        <location filename="../src/Create/CreateActions.cpp" line="98"/>
         <source>Curve Point Tool</source>
         <translation>वक्र बिंदु उपकरण</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="96"/>
+        <location filename="../src/Create/CreateActions.cpp" line="99"/>
         <source>Shift+F4</source>
         <translation>Shift+F4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="98"/>
+        <location filename="../src/Create/CreateActions.cpp" line="101"/>
         <source>Digitize curve points.</source>
         <translation>वक्र अंक डिजिटाइज़ करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="99"/>
+        <location filename="../src/Create/CreateActions.cpp" line="102"/>
         <source>Digitize Curve Point
 
 Digitizes a curve point by placing a new point at the cursor after a mouse click. Use this mode to digitize points along curves one by one.
@@ -425,22 +426,22 @@ New points will be assigned to the currently selected curve.</source>
 नए अंक वर्तमान में चयनित वक्र को दिए जाएंगे।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="106"/>
+        <location filename="../src/Create/CreateActions.cpp" line="109"/>
         <source>Point Match Tool</source>
         <translation>प्वाइंट मैच टूल</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="107"/>
+        <location filename="../src/Create/CreateActions.cpp" line="110"/>
         <source>Shift+F5</source>
         <translation>Shift+F5</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="109"/>
+        <location filename="../src/Create/CreateActions.cpp" line="112"/>
         <source>Digitize curve points in a point plot by matching a point.</source>
         <translation>किसी बिंदु से मिलान करके बिंदु बिंदु में वक्र बिंदुओं को डिजिटाइज़ करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="110"/>
+        <location filename="../src/Create/CreateActions.cpp" line="113"/>
         <source>Digitize Curve Points by Point Matching
 
 Digitizes curve points in a point plot by finding points that match a sample point. The process starts by selecting a representative sample point.
@@ -453,22 +454,22 @@ New points will be assigned to the currently selected curve.</source>
 नए अंक वर्तमान में चयनित वक्र को दिए जाएंगे।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="116"/>
+        <location filename="../src/Create/CreateActions.cpp" line="119"/>
         <source>Color Picker Tool</source>
         <translation>रंग बीनने का उपकरण</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="117"/>
+        <location filename="../src/Create/CreateActions.cpp" line="120"/>
         <source>Shift+F6</source>
         <translation>Shift+F6</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="119"/>
+        <location filename="../src/Create/CreateActions.cpp" line="122"/>
         <source>Select color settings for filtering in Segment Fill mode.</source>
         <translation>सेगमेंट फिल मोड में फ़िल्टरिंग के लिए रंग सेटिंग्स चुनें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="120"/>
+        <location filename="../src/Create/CreateActions.cpp" line="123"/>
         <source>Select color settings for Segment Fill filtering
 
 Select a pixel along the currently selected curve. That pixel and its neighbors will define the filter settings (color, brightness, and so on) of the currently selected curve while in Segment Fill mode.</source>
@@ -477,22 +478,22 @@ Select a pixel along the currently selected curve. That pixel and its neighbors 
 वर्तमान में चयनित वक्र के साथ पिक्सेल का चयन करें। वह पिक्सेल और उसके पड़ोसी फ़िल् म फ़िल्टर्ड मोड में रहते हुए चयनित वक्र की फ़िल्टर सेटिंग्स (रंग, चमक, और इसी तरह) को परिभाषित करेंगे।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="126"/>
+        <location filename="../src/Create/CreateActions.cpp" line="129"/>
         <source>Segment Fill Tool</source>
         <translation>सेगमेंट फिल टूल</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="127"/>
+        <location filename="../src/Create/CreateActions.cpp" line="130"/>
         <source>Shift+F7</source>
         <translation>Shift+F7</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="129"/>
+        <location filename="../src/Create/CreateActions.cpp" line="132"/>
         <source>Digitize curve points along a segment of a curve.</source>
         <translation>एक वक्र के एक खंड के साथ वक्र बिंदुओं को डिजिटाइज़ करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="130"/>
+        <location filename="../src/Create/CreateActions.cpp" line="133"/>
         <source>Digitize Curve Points With Segment Fill
 
 Digitizes curve points by placing new points along the highlighted segment under the cursor. Use this mode to quickly digitize multiple points along a curve with a single click.
@@ -505,17 +506,34 @@ New points will be assigned to the currently selected curve.</source>
 नए अंक वर्तमान में चयनित वक्र को दिए जाएंगे।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="151"/>
+        <location filename="../src/Create/CreateActions.cpp" line="140"/>
+        <source>Guidelines Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="143"/>
+        <source>Digitize guidelines along constant coordinate values for aligning new points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="144"/>
+        <source>Digitize guidelines along constant coordinate values
+
+Guidelines can be placed along constant X or Y coordinates in cartesian coordinates, and T (theta) or R (range) coordinates in polar coordinates. Guidelines can help with aligning new points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="165"/>
         <source>&amp;Undo</source>
         <translation>पूर्ववत करें</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="153"/>
+        <location filename="../src/Create/CreateActions.cpp" line="167"/>
         <source>Undo the last operation.</source>
         <translation>अंतिम ऑपरेशन पूर्ववत करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="154"/>
+        <location filename="../src/Create/CreateActions.cpp" line="168"/>
         <source>Undo
 
 Undo the last operation.</source>
@@ -524,17 +542,17 @@ Undo the last operation.</source>
 अंतिम ऑपरेशन पूर्ववत करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="158"/>
+        <location filename="../src/Create/CreateActions.cpp" line="172"/>
         <source>&amp;Redo</source>
         <translation>फिर से करना</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="160"/>
+        <location filename="../src/Create/CreateActions.cpp" line="174"/>
         <source>Redo the last operation.</source>
         <translation>पिछले ऑपरेशन को फिर से करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="161"/>
+        <location filename="../src/Create/CreateActions.cpp" line="175"/>
         <source>Redo
 
 Redo the last operation.</source>
@@ -543,17 +561,17 @@ Redo the last operation.</source>
 पिछले ऑपरेशन को फिर से करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="165"/>
+        <location filename="../src/Create/CreateActions.cpp" line="179"/>
         <source>Cut</source>
         <translation>कट गया</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="167"/>
+        <location filename="../src/Create/CreateActions.cpp" line="181"/>
         <source>Cuts the selected points and copies them to the clipboard.</source>
         <translation>चयनित बिंदुओं को काटता है और उन्हें क्लिपबोर्ड पर कॉपी करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="168"/>
+        <location filename="../src/Create/CreateActions.cpp" line="182"/>
         <source>Cut
 
 Cuts the selected points and copies them to the clipboard.</source>
@@ -562,17 +580,17 @@ Cuts the selected points and copies them to the clipboard.</source>
 चयनित बिंदुओं को काटता है और उन्हें क्लिपबोर्ड पर कॉपी करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="172"/>
+        <location filename="../src/Create/CreateActions.cpp" line="186"/>
         <source>Copy</source>
         <translation>प्रतिलिपि</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="174"/>
+        <location filename="../src/Create/CreateActions.cpp" line="188"/>
         <source>Copies the selected points to the clipboard.</source>
         <translation>चयनित बिंदुओं को क्लिपबोर्ड पर कॉपी करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="175"/>
+        <location filename="../src/Create/CreateActions.cpp" line="189"/>
         <source>Copy
 
 Copies the selected points to the clipboard.</source>
@@ -581,17 +599,17 @@ Copies the selected points to the clipboard.</source>
 चयनित बिंदुओं को क्लिपबोर्ड पर कॉपी करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="179"/>
+        <location filename="../src/Create/CreateActions.cpp" line="193"/>
         <source>Paste</source>
         <translation>चिपकाएं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="181"/>
+        <location filename="../src/Create/CreateActions.cpp" line="195"/>
         <source>Pastes the selected points from the clipboard.</source>
         <translation>क्लिपबोर्ड से चयनित बिंदुओं को हल करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="182"/>
+        <location filename="../src/Create/CreateActions.cpp" line="196"/>
         <source>Paste
 
 Pastes the selected points from the clipboard. They will be assigned to the current curve.</source>
@@ -600,17 +618,17 @@ Pastes the selected points from the clipboard. They will be assigned to the curr
 क्लिपबोर्ड से चयनित बिंदुओं को हल करता है। उन्हें वर्तमान वक्र को सौंपा जाएगा।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="186"/>
+        <location filename="../src/Create/CreateActions.cpp" line="200"/>
         <source>Delete</source>
         <translation>हटाना</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="188"/>
+        <location filename="../src/Create/CreateActions.cpp" line="202"/>
         <source>Deletes the selected points, after copying them to the clipboard.</source>
         <translation>क्लिपबोर्ड पर कॉपी करने के बाद, चयनित बिंदुओं को हटाता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="189"/>
+        <location filename="../src/Create/CreateActions.cpp" line="203"/>
         <source>Delete
 
 Deletes the selected points, after copying them to the clipboard.</source>
@@ -619,17 +637,17 @@ Deletes the selected points, after copying them to the clipboard.</source>
 क्लिपबोर्ड पर कॉपी करने के बाद, चयनित बिंदुओं को हटाता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="193"/>
+        <location filename="../src/Create/CreateActions.cpp" line="207"/>
         <source>Paste As New</source>
         <translation>नई के रूप में चिपकाएँ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="194"/>
+        <location filename="../src/Create/CreateActions.cpp" line="208"/>
         <source>Pastes an image from the clipboard.</source>
         <translation>क्लिपबोर्ड से एक छवि बनाता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="195"/>
+        <location filename="../src/Create/CreateActions.cpp" line="209"/>
         <source>Paste as New
 
 Creates a new document by pasting an image from the clipboard.</source>
@@ -639,17 +657,17 @@ Creates a new document by pasting an image from the clipboard.</source>
 </translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="199"/>
+        <location filename="../src/Create/CreateActions.cpp" line="213"/>
         <source>Paste As New (Advanced)...</source>
         <translation>नई (उन्नत) के रूप में चिपकाएँ ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="200"/>
+        <location filename="../src/Create/CreateActions.cpp" line="214"/>
         <source>Pastes an image from the clipboard, in advanced mode.</source>
         <translation>क्लिपबोर्ड से एक छवि को उन्नत मोड में पेस्ट करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="201"/>
+        <location filename="../src/Create/CreateActions.cpp" line="215"/>
         <source>Paste as New (Advanced)
 
 Creates a new document by pasting an image from the clipboard, in advanced mode.</source>
@@ -659,22 +677,22 @@ Creates a new document by pasting an image from the clipboard, in advanced mode.
 क्लिपबोर्ड से एक छवि को उन्नत मोड में चिपकाकर एक नया दस्तावेज़ बनाता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="210"/>
+        <location filename="../src/Create/CreateActions.cpp" line="224"/>
         <source>&amp;Import...</source>
         <translation>आयात...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="211"/>
+        <location filename="../src/Create/CreateActions.cpp" line="225"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="212"/>
+        <location filename="../src/Create/CreateActions.cpp" line="226"/>
         <source>Creates a new document by importing a simple image.</source>
         <translation>एक साधारण छवि आयात करके एक नया दस्तावेज़ बनाता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="213"/>
+        <location filename="../src/Create/CreateActions.cpp" line="227"/>
         <source>Import Image
 
 Creates a new document by importing an image with a single coordinate system, and axes both coordinates known.
@@ -687,17 +705,17 @@ For more complicated images with multiple coordinate systems, and/or floating ax
 कई समन्वित प्रणालियों के साथ अधिक जटिल छवियों के लिए, और / या फ़्लोटिंग कुल्हाड़ियों के बजाय, आयात (उन्नत) का उपयोग किया जाता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="220"/>
+        <location filename="../src/Create/CreateActions.cpp" line="234"/>
         <source>Import (Advanced)...</source>
         <translation>आयात (उन्नत) ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="221"/>
+        <location filename="../src/Create/CreateActions.cpp" line="235"/>
         <source>Creates a new document by importing an image with support for advanced feaures.</source>
         <translation>उन्नत फ़्यूज़ के लिए समर्थन के साथ एक छवि आयात करके एक नया दस्तावेज़ बनाता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="222"/>
+        <location filename="../src/Create/CreateActions.cpp" line="236"/>
         <source>Import (Advanced)
 
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
@@ -706,17 +724,17 @@ Creates a new document by importing an image with support for advanced feaures. 
 उन्नत फ़्यूज़ के लिए समर्थन के साथ एक छवि आयात करके एक नया दस्तावेज़ बनाता है। उन्नत मोड में, कई समन्वय प्रणाली और / या फ्लोटिंग कुल्हाड़ी हो सकती हैं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="227"/>
+        <location filename="../src/Create/CreateActions.cpp" line="241"/>
         <source>Import (Image Replace)...</source>
         <translation>आयात (छवि बदलें) ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="228"/>
+        <location filename="../src/Create/CreateActions.cpp" line="242"/>
         <source>Imports a new image into the current document, replacing the existing image.</source>
         <translation>मौजूदा दस्तावेज़ में एक नई छवि पेश करता है, जो मौजूदा छवि की जगह लेती है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="229"/>
+        <location filename="../src/Create/CreateActions.cpp" line="243"/>
         <source>Import (Image Replace)
 
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
@@ -725,17 +743,17 @@ Imports a new image into the current document. The existing image is replaced, a
 वर्तमान दस्तावेज़ में एक नई छवि का आयात करता है। मौजूदा छवि को बदल दिया गया है, और दस्तावेज़ में सभी वक्र संरक्षित हैं। यह ऑपरेशन किसी मौजूदा दस्तावेज़ के अक्ष बिंदुओं और अन्य सेटिंग्स को एक अलग छवि पर लागू करने के लिए उपयोगी है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="235"/>
+        <location filename="../src/Create/CreateActions.cpp" line="249"/>
         <source>&amp;Open...</source>
         <translation>खुला...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="237"/>
+        <location filename="../src/Create/CreateActions.cpp" line="251"/>
         <source>Opens an existing document.</source>
         <translation>किसी मौजूदा दस्तावेज़ को खोलता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="238"/>
+        <location filename="../src/Create/CreateActions.cpp" line="252"/>
         <source>Open Document
 
 Opens an existing document.</source>
@@ -744,17 +762,17 @@ Opens an existing document.</source>
 किसी मौजूदा दस्तावेज़ को खोलता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="251"/>
+        <location filename="../src/Create/CreateActions.cpp" line="265"/>
         <source>&amp;Close</source>
         <translation>बंद करे</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="253"/>
+        <location filename="../src/Create/CreateActions.cpp" line="267"/>
         <source>Closes the open document.</source>
         <translation>खुला दस्तावेज़ बंद करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="254"/>
+        <location filename="../src/Create/CreateActions.cpp" line="268"/>
         <source>Close Document
 
 Closes the open document.</source>
@@ -763,17 +781,17 @@ Closes the open document.</source>
 खुला दस्तावेज़ बंद करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="258"/>
+        <location filename="../src/Create/CreateActions.cpp" line="272"/>
         <source>&amp;Save</source>
         <translation>बचाना</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="260"/>
+        <location filename="../src/Create/CreateActions.cpp" line="274"/>
         <source>Saves the current document.</source>
         <translation>वर्तमान दस्तावेज़ सहेजता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="261"/>
+        <location filename="../src/Create/CreateActions.cpp" line="275"/>
         <source>Save Document
 
 Saves the current document.</source>
@@ -782,17 +800,17 @@ Saves the current document.</source>
 वर्तमान दस्तावेज़ सहेजता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="265"/>
+        <location filename="../src/Create/CreateActions.cpp" line="279"/>
         <source>Save As...</source>
         <translation>के रूप रक्षित करें...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="267"/>
+        <location filename="../src/Create/CreateActions.cpp" line="281"/>
         <source>Saves the current document under a new filename.</source>
         <translation>एक नए फ़ाइल नाम के तहत वर्तमान दस्तावेज़ बचाता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="268"/>
+        <location filename="../src/Create/CreateActions.cpp" line="282"/>
         <source>Save Document As
 
 Saves the current document under a new filename.</source>
@@ -801,39 +819,39 @@ Saves the current document under a new filename.</source>
 एक नए फ़ाइल नाम के तहत वर्तमान दस्तावेज़ बचाता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="272"/>
+        <location filename="../src/Create/CreateActions.cpp" line="286"/>
         <source>Export...</source>
         <translation>निर्यात करें ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="273"/>
+        <location filename="../src/Create/CreateActions.cpp" line="287"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="274"/>
+        <location filename="../src/Create/CreateActions.cpp" line="288"/>
         <source>Exports the current document into a text file.</source>
         <translation>वर्तमान दस्तावेज़ को एक पाठ फ़ाइल में निर्यात करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="275"/>
+        <location filename="../src/Create/CreateActions.cpp" line="289"/>
         <source>Export Document
 
 Exports the current document into a text file.</source>
         <translation>वर्तमान दस्तावेज़ को एक पाठ फ़ाइल में निर्यात करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="279"/>
+        <location filename="../src/Create/CreateActions.cpp" line="293"/>
         <source>&amp;Print...</source>
         <translation>प्रिंट करें ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="281"/>
+        <location filename="../src/Create/CreateActions.cpp" line="295"/>
         <source>Print the current document.</source>
         <translation>वर्तमान दस्तावेज़ प्रिंट करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="282"/>
+        <location filename="../src/Create/CreateActions.cpp" line="296"/>
         <source>Print Document
 
 Print the current document to a printer or file.</source>
@@ -842,17 +860,17 @@ Print the current document to a printer or file.</source>
 वर्तमान दस्तावेज़ को प्रिंटर या फ़ाइल पर प्रिंट करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="286"/>
+        <location filename="../src/Create/CreateActions.cpp" line="300"/>
         <source>&amp;Exit</source>
         <translation>बाहर जाएं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="288"/>
+        <location filename="../src/Create/CreateActions.cpp" line="302"/>
         <source>Quits the application.</source>
         <translation>आवेदन छोड़ देता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="289"/>
+        <location filename="../src/Create/CreateActions.cpp" line="303"/>
         <source>Exit
 
 Quits the application.</source>
@@ -861,17 +879,17 @@ Quits the application.</source>
 आवेदन छोड़ देता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="298"/>
+        <location filename="../src/Create/CreateActions.cpp" line="312"/>
         <source>Checklist Guide Wizard</source>
         <translation>चेकलिस्ट गाइड विज़ार्ड</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="300"/>
+        <location filename="../src/Create/CreateActions.cpp" line="314"/>
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
         <translation>डिजीटल चरणों को परिभाषित करने के लिए आयात के दौरान चेकलिस्ट गाइड विज़ार्ड खोलें</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="301"/>
+        <location filename="../src/Create/CreateActions.cpp" line="315"/>
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
@@ -880,17 +898,17 @@ Use Checklist Guide Wizard during import to generate a checklist of steps for th
 आयात किए गए दस्तावेज़ के लिए चरणों की एक चेकलिस्ट उत्पन्न करने के लिए आयात के दौरान चेकलिस्ट गाइड विज़ार्ड का उपयोग करें</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="308"/>
+        <location filename="../src/Create/CreateActions.cpp" line="322"/>
         <source>Tutorial</source>
         <translation>ट्यूटोरियल</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="309"/>
+        <location filename="../src/Create/CreateActions.cpp" line="323"/>
         <source>Play tutorial showing steps for digitizing curves</source>
         <translation>कर्व को डिजिटाइज़ करने के लिए चरण दिखाते हुए ट्यूटोरियल चलायें</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="310"/>
+        <location filename="../src/Create/CreateActions.cpp" line="324"/>
         <source>Tutorial
 
 Play tutorial showing steps for digitizing points from curves drawn with lines and/or point</source>
@@ -899,17 +917,17 @@ Play tutorial showing steps for digitizing points from curves drawn with lines a
 रेखाओं और / या बिंदु के साथ खींची गई वक्रों से अंकों को अंजाम देने के लिए ट्यूटोरियल दिखाते हुए प्ले करें</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="316"/>
+        <location filename="../src/Create/CreateActions.cpp" line="330"/>
         <source>Help</source>
         <translation>मदद</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="318"/>
+        <location filename="../src/Create/CreateActions.cpp" line="332"/>
         <source>Help documentation</source>
         <translation>प्रलेखन में मदद करें</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="319"/>
+        <location filename="../src/Create/CreateActions.cpp" line="333"/>
         <source>Help Documentation
 
 Searchable help documentation</source>
@@ -918,17 +936,17 @@ Searchable help documentation</source>
 खोजे जाने योग्य सहायता दस्तावेज</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="324"/>
+        <location filename="../src/Create/CreateActions.cpp" line="338"/>
         <source>About Engauge</source>
         <translation>सगाई के बारे में</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="325"/>
+        <location filename="../src/Create/CreateActions.cpp" line="339"/>
         <source>About the application.</source>
         <translation>इस एप्लिकेशन के बारे में।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="326"/>
+        <location filename="../src/Create/CreateActions.cpp" line="340"/>
         <source>About Engauge
 
 About the application.</source>
@@ -937,17 +955,17 @@ About the application.</source>
 इस एप्लिकेशन के बारे में।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="334"/>
+        <location filename="../src/Create/CreateActions.cpp" line="348"/>
         <source>Coordinates...</source>
         <translation>निर्देशांक ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="335"/>
+        <location filename="../src/Create/CreateActions.cpp" line="349"/>
         <source>Edit Coordinate settings.</source>
         <translation>समन्वय सेटिंग्स संपादित करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="336"/>
+        <location filename="../src/Create/CreateActions.cpp" line="350"/>
         <source>Coordinate Settings
 
 Coordinate settings determine how the graph coordinates are mapped to the pixels in the image</source>
@@ -956,17 +974,17 @@ Coordinate settings determine how the graph coordinates are mapped to the pixels
 कोऑर्डिनेट सेटिंग्स यह निर्धारित करती हैं कि चित्र में ग्राफ़ के निर्देशांक पिक्सेल में कैसे मैप किए जाते हैं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="340"/>
+        <location filename="../src/Create/CreateActions.cpp" line="354"/>
         <source>Curve List...</source>
         <translation>वक्र सूची ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="341"/>
+        <location filename="../src/Create/CreateActions.cpp" line="355"/>
         <source>Edit Curve List settings.</source>
         <translation>वक्र सूची सेटिंग्स संपादित करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="342"/>
+        <location filename="../src/Create/CreateActions.cpp" line="356"/>
         <source>Curve List
 
 Curve list settings add, rename and/or remove curves in the current document</source>
@@ -975,17 +993,17 @@ Curve list settings add, rename and/or remove curves in the current document</so
 वक्र सूची सेटिंग्स वर्तमान दस्तावेज़ में वक्र को जोड़, नाम बदलें और / या हटा दें</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="346"/>
+        <location filename="../src/Create/CreateActions.cpp" line="360"/>
         <source>Curve Properties...</source>
         <translation>वक्र गुण ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="347"/>
+        <location filename="../src/Create/CreateActions.cpp" line="361"/>
         <source>Edit Curve Properties settings.</source>
         <translation>वक्र गुण सेटिंग्स संपादित करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="348"/>
+        <location filename="../src/Create/CreateActions.cpp" line="362"/>
         <source>Curve Properties Settings
 
 Curves properties settings determine how each curve appears</source>
@@ -994,17 +1012,17 @@ Curves properties settings determine how each curve appears</source>
 घटता गुण सेटिंग्स निर्धारित करते हैं कि प्रत्येक वक्र कैसे प्रकट होता है</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="352"/>
+        <location filename="../src/Create/CreateActions.cpp" line="366"/>
         <source>Digitize Curve...</source>
         <translation>डिजिटाइज़ कर्व ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="353"/>
+        <location filename="../src/Create/CreateActions.cpp" line="367"/>
         <source>Edit Digitize Axis and Graph Curve settings.</source>
         <translation>डिजिटाइज़ एक्सिस और ग्राफ वक्र सेटिंग्स संपादित करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="354"/>
+        <location filename="../src/Create/CreateActions.cpp" line="368"/>
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
@@ -1013,17 +1031,17 @@ Digitize Curve settings determine how points are digitized in Digitize Axis Poin
 डिजिटाइज़ कर्व सेटिंग्स यह निर्धारित करती हैं कि डिजिटाइज़ एक्सिस पॉइंट और डिजिटाइज़ ग्राफ़ पॉइंट मोड में अंकों को कैसे अंकित किया जाए</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="359"/>
+        <location filename="../src/Create/CreateActions.cpp" line="373"/>
         <source>Export Format...</source>
         <translation>निर्यात प्रारूप ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="360"/>
+        <location filename="../src/Create/CreateActions.cpp" line="374"/>
         <source>Edit Export Format settings.</source>
         <translation>निर्यात प्रारूप सेटिंग संपादित करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="361"/>
+        <location filename="../src/Create/CreateActions.cpp" line="375"/>
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
@@ -1032,17 +1050,17 @@ Export format settings affect how exported files are formatted</source>
 निर्यात प्रारूप सेटिंग्स प्रभावित करती हैं कि कैसे निर्यात की गई फ़ाइलें स्वरूपित हैं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="365"/>
+        <location filename="../src/Create/CreateActions.cpp" line="379"/>
         <source>Color Filter...</source>
         <translation>रंग फ़िल्टर ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="366"/>
+        <location filename="../src/Create/CreateActions.cpp" line="380"/>
         <source>Edit Color Filter settings.</source>
         <translation>रंग फ़िल्टर सेटिंग्स संपादित करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="367"/>
+        <location filename="../src/Create/CreateActions.cpp" line="381"/>
         <source>Color Filter Settings
 
 Color filtering simplifies the graphs for easier Point Matching and Segment Filling</source>
@@ -1051,17 +1069,17 @@ Color filtering simplifies the graphs for easier Point Matching and Segment Fill
 कलर फिल्टरिंग आसान प्वाइंट मैचिंग और सेगमेंट फिलिंग के लिए ग्राफ को सरल बनाता है</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="371"/>
+        <location filename="../src/Create/CreateActions.cpp" line="385"/>
         <source>Axes Checker...</source>
         <translation>एक्सिस चेकर ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="372"/>
+        <location filename="../src/Create/CreateActions.cpp" line="386"/>
         <source>Edit Axes Checker settings.</source>
         <translation>एक्सिस परीक्षक सेटिंग्स संपादित करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="373"/>
+        <location filename="../src/Create/CreateActions.cpp" line="387"/>
         <source>Axes Checker Settings
 
 Axes checker can reveal any axis point mistakes, which are otherwise hard to find.</source>
@@ -1070,17 +1088,17 @@ Axes checker can reveal any axis point mistakes, which are otherwise hard to fin
 एक्सिस चेकर किसी भी अक्ष बिंदु गलतियों को प्रकट कर सकता है, जो अन्यथा खोजना मुश्किल है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="377"/>
+        <location filename="../src/Create/CreateActions.cpp" line="391"/>
         <source>Grid Line Display...</source>
         <translation>ग्रिड लाइन प्रदर्शन ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="378"/>
+        <location filename="../src/Create/CreateActions.cpp" line="392"/>
         <source>Edit Grid Line Display settings.</source>
         <translation>ग्रिड लाइन प्रदर्शन सेटिंग्स संपादित करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="379"/>
+        <location filename="../src/Create/CreateActions.cpp" line="393"/>
         <source>Grid Line Display Settings
 
 Grid lines displayed on the graph can provide more accuracy than the Axis Checker, for distorted graphs. In a distorted graph, the grid lines can be used to adjust the axis points for more accuracy in different regions.</source>
@@ -1089,17 +1107,17 @@ Grid lines displayed on the graph can provide more accuracy than the Axis Checke
 ग्राफ पर प्रदर्शित ग्रिड लाइनें विकृत ग्राफ़ के लिए, एक्सिस चेकर की तुलना में अधिक सटीकता प्रदान कर सकती हैं। विकृत ग्राफ में, विभिन्न क्षेत्रों में अधिक सटीकता के लिए अक्ष बिंदुओं को समायोजित करने के लिए ग्रिड लाइनों का उपयोग किया जा सकता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="384"/>
+        <location filename="../src/Create/CreateActions.cpp" line="398"/>
         <source>Grid Line Removal...</source>
         <translation>ग्रिड लाइन हटाना ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="385"/>
+        <location filename="../src/Create/CreateActions.cpp" line="399"/>
         <source>Edit Grid Line Removal settings.</source>
         <translation>ग्रिड लाइन हटाने की सेटिंग संपादित करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="386"/>
+        <location filename="../src/Create/CreateActions.cpp" line="400"/>
         <source>Grid Line Removal Settings
 
 Grid line removal isolates curve lines for easier Point Matching and Segment Filling, when Color Filtering is not able to separate grid lines from curve lines.</source>
@@ -1108,17 +1126,34 @@ Grid line removal isolates curve lines for easier Point Matching and Segment Fil
 ग्रिड लाइन हटाने आसान प्वाइंट मिलान और सेगमेंट भरने के लिए वक्र लाइनों को अलग करता है, जब कलर फ़िल्टरिंग वक्र लाइनों के साथ ग्रिड लाइनों को अलग करने में सक्षम नहीं होता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="391"/>
+        <location filename="../src/Create/CreateActions.cpp" line="405"/>
+        <source>Guideline...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="406"/>
+        <source>Guideline Settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="407"/>
+        <source>Guideline Settings
+
+Guidelines displayed on the graph can help to align points along constant coordinate lines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="411"/>
         <source>Point Match...</source>
         <translation>प्वाइंट मैच ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="392"/>
+        <location filename="../src/Create/CreateActions.cpp" line="412"/>
         <source>Edit Point Match settings.</source>
         <translation>प्वाइंट मैच सेटिंग्स संपादित करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="393"/>
+        <location filename="../src/Create/CreateActions.cpp" line="413"/>
         <source>Point Match Settings
 
 Point match settings determine how points are matched while in Point Match mode</source>
@@ -1127,17 +1162,17 @@ Point match settings determine how points are matched while in Point Match mode<
 प्वाइंट मैच सेटिंग्स यह निर्धारित करती हैं कि प्वाइंट मैच मोड में रहते हुए पॉइंट्स का मिलान कैसे किया जाता है</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="397"/>
+        <location filename="../src/Create/CreateActions.cpp" line="417"/>
         <source>Segment Fill...</source>
         <translation>खंड भरें ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="398"/>
+        <location filename="../src/Create/CreateActions.cpp" line="418"/>
         <source>Edit Segment Fill settings.</source>
         <translation>सेगमेंट भरण सेटिंग संपादित करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="399"/>
+        <location filename="../src/Create/CreateActions.cpp" line="419"/>
         <source>Segment Fill Settings
 
 Segment fill settings determine how points are generated in the Segment Fill mode</source>
@@ -1146,17 +1181,17 @@ Segment fill settings determine how points are generated in the Segment Fill mod
 सेगमेंट भरण सेटिंग यह निर्धारित करती है कि सेगमेंट भरण मोड में अंक कैसे उत्पन्न होते हैं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="403"/>
+        <location filename="../src/Create/CreateActions.cpp" line="423"/>
         <source>General...</source>
         <translation>जनरल ...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="404"/>
+        <location filename="../src/Create/CreateActions.cpp" line="424"/>
         <source>Edit General settings.</source>
         <translation>सामान्य सेटिंग्स संपादित करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="405"/>
+        <location filename="../src/Create/CreateActions.cpp" line="425"/>
         <source>General Settings
 
 General settings are document-specific settings that affect multiple modes. For example, the cursor size setting affects both Color Picker and Point Match modes</source>
@@ -1165,17 +1200,17 @@ General settings are document-specific settings that affect multiple modes. For 
 सामान्य सेटिंग्स दस्तावेज़-विशिष्ट सेटिंग्स हैं जो कई मोड को प्रभावित करती हैं। उदाहरण के लिए, कर्सर आकार सेटिंग रंग बीनने और प्वाइंट मैच मोड दोनों को प्रभावित करती है</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="410"/>
+        <location filename="../src/Create/CreateActions.cpp" line="430"/>
         <source>Main Window...</source>
         <translation>मुख्य खिड़की...</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="412"/>
+        <location filename="../src/Create/CreateActions.cpp" line="432"/>
         <source>Edit Main Window settings.</source>
         <translation>मुख्य विंडो सेटिंग्स संपादित करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="413"/>
+        <location filename="../src/Create/CreateActions.cpp" line="433"/>
         <source>Main Window Settings
 
 Main window settings affect the user interface and are not specific to any document</source>
@@ -1184,17 +1219,17 @@ Main window settings affect the user interface and are not specific to any docum
 मुख्य विंडो सेटिंग्स उपयोगकर्ता इंटरफ़ेस को प्रभावित करती हैं और किसी भी दस्तावेज़ के लिए विशिष्ट नहीं हैं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="422"/>
+        <location filename="../src/Create/CreateActions.cpp" line="442"/>
         <source>Background Toolbar</source>
         <translation>बैकग्राउंड टूलबार</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="425"/>
+        <location filename="../src/Create/CreateActions.cpp" line="445"/>
         <source>Show or hide the background toolbar.</source>
         <translation>पृष्ठभूमि टूलबार दिखाएं या छिपाएँ।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="426"/>
+        <location filename="../src/Create/CreateActions.cpp" line="446"/>
         <source>View Background ToolBar
 
 Show or hide the background toolbar</source>
@@ -1203,17 +1238,16 @@ Show or hide the background toolbar</source>
 पृष्ठभूमि टूलबार दिखाएं या छिपाएँ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="430"/>
         <source>Checklist Guide Toolbar</source>
-        <translation>चेकलिस्ट गाइड टूलबार</translation>
+        <translation type="vanished">चेकलिस्ट गाइड टूलबार</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="433"/>
+        <location filename="../src/Create/CreateActions.cpp" line="482"/>
         <source>Show or hide the checklist guide.</source>
         <translation>चेकलिस्ट गाइड को दिखाएँ या छिपाएँ।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="434"/>
+        <location filename="../src/Create/CreateActions.cpp" line="483"/>
         <source>View Checklist Guide
 
 Show or hide the checklist guide</source>
@@ -1222,17 +1256,17 @@ Show or hide the checklist guide</source>
 चेकलिस्ट गाइड को दिखाएँ या छिपाएँ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="438"/>
+        <location filename="../src/Create/CreateActions.cpp" line="487"/>
         <source>Curve Fitting Window</source>
         <translation>वक्र फिटिंग खिड़की</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="441"/>
+        <location filename="../src/Create/CreateActions.cpp" line="490"/>
         <source>Show or hide the curve fitting window.</source>
         <translation>कर्व फिटिंग विंडो को दिखाना या छिपाना।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="442"/>
+        <location filename="../src/Create/CreateActions.cpp" line="491"/>
         <source>View Curve Fitting Window
 
 Show or hide the curve fitting window</source>
@@ -1241,17 +1275,17 @@ Show or hide the curve fitting window</source>
 कर्व फिटिंग विंडो को दिखाना या छिपाना</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="446"/>
+        <location filename="../src/Create/CreateActions.cpp" line="495"/>
         <source>Geometry Window</source>
         <translation>ज्यामिति खिड़की</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="449"/>
+        <location filename="../src/Create/CreateActions.cpp" line="498"/>
         <source>Show or hide the geometry window.</source>
         <translation>ज्योमेट्री विंडो को दिखाना या छिपाना।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="450"/>
+        <location filename="../src/Create/CreateActions.cpp" line="499"/>
         <source>View Geometry Window
 
 Show or hide the geometry window</source>
@@ -1260,17 +1294,17 @@ Show or hide the geometry window</source>
 ज्योमेट्री विंडो को दिखाना या छिपाना</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="454"/>
+        <location filename="../src/Create/CreateActions.cpp" line="450"/>
         <source>Digitizing Tools Toolbar</source>
         <translation>डिजिटाइज़िंग टूल टूलबार</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="457"/>
+        <location filename="../src/Create/CreateActions.cpp" line="453"/>
         <source>Show or hide the digitizing tools toolbar.</source>
         <translation>डिजिटाइज़िंग टूल टूलबार दिखाएं या छिपाएँ।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="458"/>
+        <location filename="../src/Create/CreateActions.cpp" line="454"/>
         <source>View Digitizing Tools ToolBar
 
 Show or hide the digitizing tools toolbar</source>
@@ -1279,17 +1313,17 @@ Show or hide the digitizing tools toolbar</source>
 डिजिटाइज़िंग टूल टूलबार दिखाएं या छिपाएँ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="462"/>
+        <location filename="../src/Create/CreateActions.cpp" line="458"/>
         <source>Settings Views Toolbar</source>
         <translation>सेटिंग्स दृश्य टूलबार</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="465"/>
+        <location filename="../src/Create/CreateActions.cpp" line="461"/>
         <source>Show or hide the settings views toolbar.</source>
         <translation>सेटिंग दृश्य टूलबार दिखाएं या छिपाएँ।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="466"/>
+        <location filename="../src/Create/CreateActions.cpp" line="462"/>
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
@@ -1298,17 +1332,17 @@ Show or hide the settings views toolbar. These views graphically show the most i
 सेटिंग दृश्य टूलबार दिखाएं या छिपाएँ। ये दृश्य रेखांकन सबसे महत्वपूर्ण सेटिंग्स दिखाते हैं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="471"/>
+        <location filename="../src/Create/CreateActions.cpp" line="467"/>
         <source>Coordinate System Toolbar</source>
         <translation>कोऑर्डिनेट सिस्टम टूलबार</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="474"/>
+        <location filename="../src/Create/CreateActions.cpp" line="470"/>
         <source>Show or hide the coordinate system toolbar.</source>
         <translation>समन्वय प्रणाली टूलबार दिखाएं या छिपाएँ।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="475"/>
+        <location filename="../src/Create/CreateActions.cpp" line="471"/>
         <source>View Coordinate Systems ToolBar
 
 Show or hide the coordinate system selection toolbar. This toolbar is used to select the current coordinate system when the document has multiple coordinate systems. This toolbar is also used to view and print all coordinate systems.
@@ -1319,17 +1353,22 @@ This toolbar is disabled when there is only one coordinate system.</source>
 समन्वय प्रणाली चयन टूलबार दिखाएं या छिपाएँ। इस टूलबार का उपयोग वर्तमान समन्वय प्रणाली का चयन करने के लिए किया जाता है जब दस्तावेज़ में कई समन्वय प्रणालियां होती हैं। इस टूलबार का उपयोग सभी समन्वय प्रणालियों को देखने और प्रिंट करने के लिए भी किया जाता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="483"/>
+        <location filename="../src/Create/CreateActions.cpp" line="479"/>
+        <source>Checklist Guide Window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="503"/>
         <source>Tool Tips</source>
         <translation>टूल टिप्स</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="486"/>
+        <location filename="../src/Create/CreateActions.cpp" line="506"/>
         <source>Show or hide the tool tips.</source>
         <translation>टूल युक्तियों को दिखाएं या छिपाएँ।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="487"/>
+        <location filename="../src/Create/CreateActions.cpp" line="507"/>
         <source>View Tool Tips
 
 Show or hide the tool tips</source>
@@ -1338,17 +1377,17 @@ Show or hide the tool tips</source>
 टूल युक्तियों को दिखाएं या छिपाएँ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="491"/>
+        <location filename="../src/Create/CreateActions.cpp" line="511"/>
         <source>Grid Lines</source>
         <translation>ग्रिड लाइन्स</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="494"/>
+        <location filename="../src/Create/CreateActions.cpp" line="514"/>
         <source>Show or hide grid lines.</source>
         <translation>ग्रिड लाइनों को दिखाएं या छिपाएँ।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="495"/>
+        <location filename="../src/Create/CreateActions.cpp" line="515"/>
         <source>View Grid Lines
 
 Show or hide grid lines that are added for accurate adjustments of the axes points, which can improve accuracy in distorted graphs</source>
@@ -1357,17 +1396,34 @@ Show or hide grid lines that are added for accurate adjustments of the axes poin
 कुल्हाड़ियों के बिंदुओं के सटीक समायोजन के लिए जोड़ी गई ग्रिड लाइनें दिखाएं या छिपाएं, जो विकृत ग्राफ़ में सटीकता में सुधार कर सकती हैं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="500"/>
+        <location filename="../src/Create/CreateActions.cpp" line="520"/>
+        <source>Guidelines</source>
+        <translation>दिशा-निर्देश</translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="523"/>
+        <source>Show or hide guidelines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="524"/>
+        <source>View Guidelines
+
+Show or hide guidelines that are added for accurate adjustments of the graph points, which can improve accuracy of points close to the guidelines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Create/CreateActions.cpp" line="529"/>
         <source>No Background</source>
         <translation>कोई पृष्ठभूमि नहीं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="502"/>
+        <location filename="../src/Create/CreateActions.cpp" line="531"/>
         <source>Do not show the image underneath the points.</source>
         <translation>बिंदुओं के नीचे की छवि न दिखाएं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="503"/>
+        <location filename="../src/Create/CreateActions.cpp" line="532"/>
         <source>No Background
 
 No image is shown so points are easier to see</source>
@@ -1376,17 +1432,17 @@ No image is shown so points are easier to see</source>
 कोई छवि नहीं दिखाई गई है, इसलिए अंक देखना आसान है</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="506"/>
+        <location filename="../src/Create/CreateActions.cpp" line="535"/>
         <source>Show Original Image</source>
         <translation>मूल छवि दिखाएं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="508"/>
+        <location filename="../src/Create/CreateActions.cpp" line="537"/>
         <source>Show the original image underneath the points.</source>
         <translation>अंक के नीचे मूल छवि दिखाएं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="509"/>
+        <location filename="../src/Create/CreateActions.cpp" line="538"/>
         <source>Show Original Image
 
 Show the original image underneath the points</source>
@@ -1395,17 +1451,17 @@ Show the original image underneath the points</source>
 अंक के नीचे मूल छवि दिखाएं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="512"/>
+        <location filename="../src/Create/CreateActions.cpp" line="541"/>
         <source>Show Filtered Image</source>
         <translation>फ़िल्टर की गई छवि दिखाएं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="515"/>
+        <location filename="../src/Create/CreateActions.cpp" line="544"/>
         <source>Show the filtered image underneath the points.</source>
         <translation>फ़िल्टर की गई छवि को बिंदुओं के नीचे दिखाएं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="516"/>
+        <location filename="../src/Create/CreateActions.cpp" line="545"/>
         <source>Show Filtered Image
 
 Show the filtered image underneath the points.
@@ -1418,17 +1474,17 @@ The filtered image is created from the original image according to the Filter pr
 फ़िल्टर की गई छवि फ़िल्टर प्राथमिकताओं के अनुसार मूल छवि से बनाई गई है, इसलिए महत्वहीन जानकारी छिपी हुई है और महत्वपूर्ण जानकारी पर जोर दिया गया है</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="528"/>
+        <location filename="../src/Create/CreateActions.cpp" line="557"/>
         <source>Hide All Curves</source>
         <translation>सभी वक्र छिपाएँ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="530"/>
+        <location filename="../src/Create/CreateActions.cpp" line="559"/>
         <source>Hide all digitized curves.</source>
         <translation>सभी डिजीटल कर्व छिपाएं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="531"/>
+        <location filename="../src/Create/CreateActions.cpp" line="560"/>
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
@@ -1437,17 +1493,17 @@ No axis points or digitized graph curves are shown so the image is easier to see
 कोई अक्ष बिंदु या डिजीटल ग्राफ़ घटता नहीं दिखाया गया है इसलिए छवि को देखना आसान है</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="534"/>
+        <location filename="../src/Create/CreateActions.cpp" line="563"/>
         <source>Show Selected Curve</source>
         <translation>चयनित वक्र दिखाएँ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="536"/>
+        <location filename="../src/Create/CreateActions.cpp" line="565"/>
         <source>Show only the currently selected curve.</source>
         <translation>केवल वर्तमान में चयनित वक्र दिखाएं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="537"/>
+        <location filename="../src/Create/CreateActions.cpp" line="566"/>
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
@@ -1456,17 +1512,17 @@ Show only the digitized points and line that belong to the currently selected cu
 केवल डिजीटल अंक और लाइन दिखाएं जो वर्तमान में चयनित वक्र के हैं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="540"/>
+        <location filename="../src/Create/CreateActions.cpp" line="569"/>
         <source>Show All Curves</source>
         <translation>सभी वक्र दिखाएँ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="543"/>
+        <location filename="../src/Create/CreateActions.cpp" line="572"/>
         <source>Show all curves.</source>
         <translation>सभी वक्र दिखाएं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="544"/>
+        <location filename="../src/Create/CreateActions.cpp" line="573"/>
         <source>Show All Curves
 
 Show all digitized axis points and graph curves</source>
@@ -1475,46 +1531,40 @@ Show all digitized axis points and graph curves</source>
 सभी डिजीटल अक्ष बिंदु और ग्राफ घटता दिखाएं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="553"/>
         <source>Hide Guidelines</source>
-        <translation>दिशानिर्देश छिपाएँ</translation>
+        <translation type="vanished">दिशानिर्देश छिपाएँ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="556"/>
         <source>Hide guidelines.</source>
-        <translation>दिशानिर्देश छिपाएं।</translation>
+        <translation type="vanished">दिशानिर्देश छिपाएँ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="557"/>
         <source>Hide Guidelines
 
 Guidelines are hidden to simplify the main window.</source>
-        <translation>दिशानिर्देश छिपाएँ
+        <translation type="vanished">दिशानिर्देश छिपाएँ
 
 मुख्य विंडो को सरल बनाने के लिए दिशानिर्देश छिपाए गए हैं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="560"/>
         <source>Edit Guidelines</source>
-        <translation>दिशानिर्देश संपादित करें</translation>
+        <translation type="vanished">दिशानिर्देश संपादित करें</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="562"/>
         <source>Edit guidelines.</source>
-        <translation>दिशानिर्देश संपादित करें</translation>
+        <translation type="vanished">दिशानिर्देश संपादित करें</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="563"/>
         <source>Edit Guidelines
 
 Add new guidelines by clicking on the guidelines toolbar, move existing guidelines by dragging, or remove guidelines by dragging out of the main window.
 
 This option is available in Select mode.</source>
-        <translation>&gt;दिशानिर्देश संपादित करें
+        <translation type="vanished">दिशानिर्देश संपादित करें
 
-	दिशानिर्देश टूलबार पर क्लिक करके नए दिशानिर्देशों को जोड़ें, मौजूदा दिशानिर्देशों को खींचकर ले जाएं, या मुख्य विंडो से बाहर खींचकर दिशानिर्देशों को हटा दें।
+दिशानिर्देश टूलबार पर क्लिक करके नए दिशानिर्देश जोड़ें, मौजूदा दिशानिर्देशों को खींचकर ले जाएं, या मुख्य विंडो से बाहर खींचकर दिशानिर्देशों को हटा दें।
 
-	यह विकल्प सेलेक्ट मोड में उपलब्ध है।</translation>
+यह विकल्प सेलेक्ट मोड में उपलब्ध है।</translation>
     </message>
     <message>
         <source>Edit Guidelines
@@ -1525,342 +1575,339 @@ Add new guidelines by clicking on the guidelines toolbar, move existing guidelin
 दिशानिर्देश टूलबार पर क्लिक करके नए दिशानिर्देशों को जोड़ें, मौजूदा दिशानिर्देशों को खींचकर ले जाएं, या मुख्य विंडो से बाहर खींचकर दिशानिर्देशों को हटा दें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="569"/>
         <source>Lock Guidelines</source>
-        <translation>दिशानिर्देशों को लॉक करें</translation>
+        <translation type="vanished">दिशा-निर्देश लॉक करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="571"/>
         <source>Lock guidelines.</source>
-        <translation>दिशानिर्देशों को लॉक करें</translation>
+        <translation type="vanished">दिशा-निर्देश लॉक करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="572"/>
         <source>Lock Guidelines
 
 Lock the guidelines to prevent accidental movement or removal.</source>
-        <translation>दिशानिर्देशों को लॉक करें
+        <translation type="vanished">दिशा-निर्देश लॉक करें
 
 आकस्मिक आंदोलन या निष्कासन को रोकने के लिए दिशानिर्देशों को लॉक करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="581"/>
+        <location filename="../src/Create/CreateActions.cpp" line="582"/>
         <source>Hide Always</source>
         <translation>हमेशा छिपाएँ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="583"/>
+        <location filename="../src/Create/CreateActions.cpp" line="584"/>
         <source>Always hide the status bar.</source>
         <translation>हमेशा स्टेटस बार को छिपाएं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="584"/>
+        <location filename="../src/Create/CreateActions.cpp" line="585"/>
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
         <translation>स्टेटस बार छुपाएं। कोई अस्थायी स्थिति या प्रतिक्रिया संदेश नहीं दिखाई देंगे।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="586"/>
+        <location filename="../src/Create/CreateActions.cpp" line="587"/>
         <source>Show Temporary Messages</source>
         <translation>अस्थायी संदेश दिखाएं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="588"/>
+        <location filename="../src/Create/CreateActions.cpp" line="589"/>
         <source>Hide the status bar except when display temporary messages.</source>
         <translation>अस्थायी संदेशों को प्रदर्शित करने के अलावा स्थिति पट्टी छुपाएं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="589"/>
+        <location filename="../src/Create/CreateActions.cpp" line="590"/>
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
         <translation>अस्थायी स्थिति और प्रतिक्रिया संदेशों को प्रदर्शित करने के अलावा, स्थिति बार छिपाएं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="591"/>
+        <location filename="../src/Create/CreateActions.cpp" line="592"/>
         <source>Show Always</source>
         <translation>हमेशा दिखाओ</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="593"/>
+        <location filename="../src/Create/CreateActions.cpp" line="594"/>
         <source>Always show the status bar.</source>
         <translation>हमेशा स्टेटस बार दिखाएं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="594"/>
+        <location filename="../src/Create/CreateActions.cpp" line="595"/>
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
         <translation>स्थिति पट्टी दिखाएं। अस्थायी स्थिति और प्रतिक्रिया संदेश प्रदर्शित करने के अलावा, स्थिति बार कर्सर स्थिति के बारे में जानकारी भी प्रदर्शित करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="603"/>
+        <location filename="../src/Create/CreateActions.cpp" line="604"/>
         <source>Zoom Out</source>
         <translation>ज़ूम आउट</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="604"/>
+        <location filename="../src/Create/CreateActions.cpp" line="605"/>
         <source>Zoom out</source>
         <translation>ज़ूम आउट</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="608"/>
+        <location filename="../src/Create/CreateActions.cpp" line="609"/>
         <source>Zoom In</source>
         <translation>ज़ूम इन</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="609"/>
+        <location filename="../src/Create/CreateActions.cpp" line="610"/>
         <source>Zoom in</source>
         <translation>ज़ूम इन</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="616"/>
+        <location filename="../src/Create/CreateActions.cpp" line="617"/>
         <source>16:1 (1600%)</source>
         <translation>16:1 (1600%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="618"/>
+        <location filename="../src/Create/CreateActions.cpp" line="619"/>
         <source>Zoom 16:1</source>
         <translation>ज़ूम 16: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="622"/>
+        <location filename="../src/Create/CreateActions.cpp" line="623"/>
         <source>16:1 farther (1270%)</source>
         <translation>16: 1 दूर (1270%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="624"/>
+        <location filename="../src/Create/CreateActions.cpp" line="625"/>
         <source>Zoom 12.7:1</source>
         <translation>ज़ूम 12.7: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="628"/>
+        <location filename="../src/Create/CreateActions.cpp" line="629"/>
         <source>8:1 closer (1008%)</source>
         <translation>8: 1 करीब (1008%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="630"/>
+        <location filename="../src/Create/CreateActions.cpp" line="631"/>
         <source>Zoom 10.08:1</source>
         <translation>ज़ूम 10.08: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="634"/>
+        <location filename="../src/Create/CreateActions.cpp" line="635"/>
         <source>8:1 (800%)</source>
         <translation>8:1 (800%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="636"/>
+        <location filename="../src/Create/CreateActions.cpp" line="637"/>
         <source>Zoom 8:1</source>
         <translation>ज़ूम 8: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="640"/>
+        <location filename="../src/Create/CreateActions.cpp" line="641"/>
         <source>8:1 farther (635%)</source>
         <translation>8: 1 दूर (635%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="642"/>
+        <location filename="../src/Create/CreateActions.cpp" line="643"/>
         <source>Zoom 6.35:1</source>
         <translation>ज़ूम 6.35: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="646"/>
+        <location filename="../src/Create/CreateActions.cpp" line="647"/>
         <source>4:1 closer (504%)</source>
         <translation>4: 1 करीब (504%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="648"/>
+        <location filename="../src/Create/CreateActions.cpp" line="649"/>
         <source>Zoom 5.04:1</source>
         <translation>ज़ूम 5.04: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="652"/>
+        <location filename="../src/Create/CreateActions.cpp" line="653"/>
         <source>4:1 (400%)</source>
         <translation>4:1 (400%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="654"/>
+        <location filename="../src/Create/CreateActions.cpp" line="655"/>
         <source>Zoom 4:1</source>
         <translation>ज़ूम 4: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="658"/>
+        <location filename="../src/Create/CreateActions.cpp" line="659"/>
         <source>4:1 farther (317%)</source>
         <translation>4: 1 दूर (317%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="660"/>
+        <location filename="../src/Create/CreateActions.cpp" line="661"/>
         <source>Zoom 3.17:1</source>
         <translation>ज़ूम 3.17: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="664"/>
+        <location filename="../src/Create/CreateActions.cpp" line="665"/>
         <source>2:1 closer (252%)</source>
         <translation>2: 1 करीब (252%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="666"/>
+        <location filename="../src/Create/CreateActions.cpp" line="667"/>
         <source>Zoom 2.52:1</source>
         <translation>ज़ूम 2.52: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="670"/>
+        <location filename="../src/Create/CreateActions.cpp" line="671"/>
         <source>2:1 (200%)</source>
         <translation>2:1 (200%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="672"/>
+        <location filename="../src/Create/CreateActions.cpp" line="673"/>
         <source>Zoom 2:1</source>
         <translation>ज़ूम 2: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="676"/>
+        <location filename="../src/Create/CreateActions.cpp" line="677"/>
         <source>2:1 farther (159%)</source>
         <translation>2: 1 दूर (159%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="678"/>
+        <location filename="../src/Create/CreateActions.cpp" line="679"/>
         <source>Zoom 1.59:1</source>
         <translation>ज़ूम 1.59: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="682"/>
+        <location filename="../src/Create/CreateActions.cpp" line="683"/>
         <source>1:1 closer (126%)</source>
         <translation>1: 1 करीब (126%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="685"/>
+        <location filename="../src/Create/CreateActions.cpp" line="686"/>
         <source>Zoom 1.3:1</source>
         <translation>ज़ूम 1.3: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="689"/>
+        <location filename="../src/Create/CreateActions.cpp" line="690"/>
         <source>1:1 (100%)</source>
         <translation>1:1 (100%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="692"/>
+        <location filename="../src/Create/CreateActions.cpp" line="693"/>
         <source>Zoom 1:1</source>
         <translation>ज़ूम 1: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="696"/>
+        <location filename="../src/Create/CreateActions.cpp" line="697"/>
         <source>1:1 farther (79%)</source>
         <translation>1: 1 दूर (79%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="699"/>
+        <location filename="../src/Create/CreateActions.cpp" line="700"/>
         <source>Zoom 0.8:1</source>
         <translation>ज़ूम 0.8: 1</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="703"/>
+        <location filename="../src/Create/CreateActions.cpp" line="704"/>
         <source>1:2 closer (63%)</source>
         <translation>1: 2 करीब (63%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="705"/>
+        <location filename="../src/Create/CreateActions.cpp" line="706"/>
         <source>Zoom 1.3:2</source>
         <translation>ज़ूम 1.3: 2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="709"/>
+        <location filename="../src/Create/CreateActions.cpp" line="710"/>
         <source>1:2 (50%)</source>
         <translation>1:2 (50%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="711"/>
+        <location filename="../src/Create/CreateActions.cpp" line="712"/>
         <source>Zoom 1:2</source>
         <translation>ज़ूम 1: 2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="715"/>
+        <location filename="../src/Create/CreateActions.cpp" line="716"/>
         <source>1:2 farther (40%)</source>
         <translation>1: 2 दूर (40%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="717"/>
+        <location filename="../src/Create/CreateActions.cpp" line="718"/>
         <source>Zoom 0.8:2</source>
         <translation>ज़ूम 0.8: 2</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="721"/>
+        <location filename="../src/Create/CreateActions.cpp" line="722"/>
         <source>1:4 closer (31%)</source>
         <translation>1: 4 करीब (31%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="723"/>
+        <location filename="../src/Create/CreateActions.cpp" line="724"/>
         <source>Zoom 1.3:4</source>
         <translation>ज़ूम 1.3: 4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="727"/>
+        <location filename="../src/Create/CreateActions.cpp" line="728"/>
         <source>1:4 (25%)</source>
         <translation>1:4 (25%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="729"/>
+        <location filename="../src/Create/CreateActions.cpp" line="730"/>
         <source>Zoom 1:4</source>
         <translation>ज़ूम 1: 4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="733"/>
+        <location filename="../src/Create/CreateActions.cpp" line="734"/>
         <source>1:4 farther (20%)</source>
         <translation>1: 4 दूर (20%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="735"/>
+        <location filename="../src/Create/CreateActions.cpp" line="736"/>
         <source>Zoom 0.8:4</source>
         <translation>ज़ूम 0.8: 4</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="739"/>
+        <location filename="../src/Create/CreateActions.cpp" line="740"/>
         <source>1:8 closer (12.5%)</source>
         <translation>1: 8 करीब (12.5%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="741"/>
-        <location filename="../src/Create/CreateActions.cpp" line="747"/>
+        <location filename="../src/Create/CreateActions.cpp" line="742"/>
+        <location filename="../src/Create/CreateActions.cpp" line="748"/>
         <source>Zoom 1:8</source>
         <translation>ज़ूम 1: 8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="745"/>
+        <location filename="../src/Create/CreateActions.cpp" line="746"/>
         <source>1:8 (12.5%)</source>
         <translation>1:8 (12.5%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="751"/>
+        <location filename="../src/Create/CreateActions.cpp" line="752"/>
         <source>1:8 farther (10%)</source>
         <translation>1: 8 दूर (10%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="753"/>
+        <location filename="../src/Create/CreateActions.cpp" line="754"/>
         <source>Zoom 0.8:8</source>
         <translation>ज़ूम 0.8: 8</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="757"/>
+        <location filename="../src/Create/CreateActions.cpp" line="758"/>
         <source>1:16 closer (8%)</source>
         <translation>1:16 करीब (8%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="759"/>
+        <location filename="../src/Create/CreateActions.cpp" line="760"/>
         <source>Zoom 1.3:16</source>
         <translation>ज़ूम 1.3: 16</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="763"/>
+        <location filename="../src/Create/CreateActions.cpp" line="764"/>
         <source>1:16 (6.25%)</source>
         <translation>1:16 (6.25%)</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="765"/>
+        <location filename="../src/Create/CreateActions.cpp" line="766"/>
         <source>Zoom 1:16</source>
         <translation>1:16 ज़ूम करें</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="769"/>
+        <location filename="../src/Create/CreateActions.cpp" line="770"/>
         <source>Fill</source>
         <translation>भरना</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateActions.cpp" line="771"/>
+        <location filename="../src/Create/CreateActions.cpp" line="772"/>
         <source>Zoom with stretching to fill window</source>
         <translation>विंडो भरने के लिए स्ट्रेचिंग के साथ ज़ूम करें</translation>
     </message>
@@ -1888,42 +1935,41 @@ Lock the guidelines to prevent accidental movement or removal.</source>
         <translation>डिजिटाइज़ करना</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="65"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="66"/>
         <source>View</source>
         <translation>राय</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="77"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="80"/>
         <source>Background</source>
         <translation>पृष्ठभूमि</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="82"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="85"/>
         <source>Curves</source>
         <translation>घटता</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="87"/>
         <source>Guidelines</source>
-        <translation>दिशा-निर्देश</translation>
+        <translation type="vanished">दिशा-निर्देश</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="92"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="90"/>
         <source>Status Bar</source>
         <translation>स्टेटस बार</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="97"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="95"/>
         <source>Zoom</source>
         <translation>ज़ूम</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="129"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="127"/>
         <source>Settings</source>
         <translation>सेटिंग्स</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="145"/>
+        <location filename="../src/Create/CreateMenus.cpp" line="143"/>
         <source>&amp;Help</source>
         <translation>मदद</translation>
     </message>
@@ -1931,58 +1977,50 @@ Lock the guidelines to prevent accidental movement or removal.</source>
 <context>
     <name>CreateScene</name>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="28"/>
         <source>Create an R (range) guideline.</source>
-        <translation>एक आर (रेंज) गाइडलाइन बनाएं।</translation>
+        <translation type="vanished">एक आर (रेंज) गाइडलाइन बनाएं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="29"/>
         <source>Create a T (theta) guideline.</source>
-        <translation>एक टी (थीटा) गाइडलाइन बनाएं।</translation>
+        <translation type="vanished">एक टी (थीटा) गाइडलाइन बनाएं।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="30"/>
         <source>Create an X guideline.</source>
-        <translation>एक एक्स दिशानिर्देश बनाएँ।</translation>
+        <translation type="vanished">एक एक्स दिशानिर्देश बनाएँ।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="31"/>
         <source>Create a Y guideline.</source>
-        <translation>एक Y दिशानिर्देश बनाएँ।</translation>
+        <translation type="vanished">एक Y दिशानिर्देश बनाएँ।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="33"/>
         <source>Create an R (Range) guideline
 
 When pressed, a constant R (range) guideline is created. It can be moved by dragging</source>
-        <translation>एक आर (रेंज) गाइडलाइन बनाएं
+        <translation type="vanished">एक आर (रेंज) गाइडलाइन बनाएं
 
 जब दबाया जाता है, तो एक निरंतर आर (रेंज) दिशानिर्देश बनाया जाता है। इसे खींचकर ले जाया जा सकता है</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="35"/>
         <source>Create a T (Theta) guideline
 
 When pressed, a constant T (theta) guideline is created. It can be moved by dragging</source>
-        <translation>एक टी (थीटा) गाइडलाइन बनाएं
+        <translation type="vanished">एक टी (थीटा) गाइडलाइन बनाएं
 
 जब दबाया जाता है, तो एक निरंतर टी (थीटा) दिशानिर्देश बनाया जाता है। इसे खींचकर ले जाया जा सकता है</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="37"/>
         <source>Create an X guideline
 
 When pressed, a constant X guideline is created. It can be moved by dragging</source>
-        <translation>एक एक्स दिशानिर्देश बनाएँ
+        <translation type="vanished">एक एक्स दिशानिर्देश बनाएँ
 
 जब दबाया जाता है, तो एक निरंतर एक्स दिशानिर्देश बनाया जाता है। इसे खींचकर ले जाया जा सकता है</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateScene.cpp" line="39"/>
         <source>Create a Y guideline
 
 When pressed, a constant Y guideline is created. It can be moved by dragging</source>
-        <translation>वाई गाइडलाइन बनाएं
+        <translation type="vanished">एक Y दिशानिर्देश बनाएँ
 
 जब दबाया जाता है, तो एक निरंतर वाई दिशानिर्देश बनाया जाता है। इसे खींचकर ले जाया जा सकता है</translation>
     </message>
@@ -1990,12 +2028,12 @@ When pressed, a constant Y guideline is created. It can be moved by dragging</so
 <context>
     <name>CreateToolBars</name>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="42"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="48"/>
         <source>Select background image</source>
         <translation>पृष्ठभूमि छवि का चयन करें</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="43"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="49"/>
         <source>Selected Background
 
 Select background image:
@@ -2010,32 +2048,32 @@ Select background image:
 3) फ़िल्टर की गई छवि जो महत्वपूर्ण विवरण को उजागर करती है</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="48"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="54"/>
         <source>No background</source>
         <translation>कोई पृष्ठभूमि नहीं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="49"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="55"/>
         <source>Original image</source>
         <translation>मूल छवि</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="50"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="56"/>
         <source>Filtered image</source>
         <translation>फ़िल्टर की गई छवि</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="55"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="61"/>
         <source>Background</source>
         <translation>पृष्ठभूमि</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="63"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="106"/>
         <source>Select curve for new points.</source>
         <translation>नए बिंदुओं के लिए वक्र चुनें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="64"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="107"/>
         <source>Selected Curve Name
 
 Select curve for any new points. Every point belongs to one curve.
@@ -2048,17 +2086,17 @@ This can be changed while in Curve Point, Point Match, Color Picker or Segment F
 इसे कर्व प्वाइंट, प्वाइंट मैच, कलर पिकर या सेगमेंट फिल मोड में बदला जा सकता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="70"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="112"/>
         <source>Drawing</source>
         <translation>चि त्र का री</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="87"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="134"/>
         <source>Points style for the currently selected curve</source>
         <translation>वर्तमान में चयनित वक्र के लिए अंक शैली</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="88"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="135"/>
         <source>Points Style
 
 Points style for the currently selected curve. The points style is only displayed in this toolbar. To change the points style, use the Curve Properties dialog.</source>
@@ -2067,12 +2105,12 @@ Points style for the currently selected curve. The points style is only displaye
 वर्तमान में चयनित वक्र के लिए अंक शैली। अंक शैली केवल इस टूलबार में प्रदर्शित होती है। अंक शैली को बदलने के लिए, वक्र गुण संवाद का उपयोग करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="96"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="143"/>
         <source>View of filter for current curve in Segment Fill mode</source>
         <translation>सेगमेंट फिल मोड में वर्तमान वक्र के लिए फ़िल्टर का दृश्य</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="97"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="144"/>
         <source>Segment Fill Filter
 
 View of filter for the current curve in Segment Fill mode. The filter settings are only displayed in this toolbar. To changed the filter settings, use the Color Picker mode or the Filter Settings dialog.</source>
@@ -2081,17 +2119,17 @@ View of filter for the current curve in Segment Fill mode. The filter settings a
 खंड भरण मोड में वर्तमान वक्र के लिए फ़िल्टर का दृश्य। फ़िल्टर सेटिंग्स केवल इस टूलबार में प्रदर्शित की जाती हैं। फ़िल्टर सेटिंग्स को बदलने के लिए, कलर पिकर मोड या फ़िल्टर सेटिंग्स डायलॉग का उपयोग करें।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="103"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="149"/>
         <source>Views</source>
         <translation>दृश्य</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="112"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="71"/>
         <source>Currently selected coordinate system</source>
         <translation>वर्तमान में चयनित समन्वय प्रणाली</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="113"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="72"/>
         <source>Selected Coordinate System
 
 Currently selected coordinate system. This is used to switch between coordinate systems in documents with multiple coordinate systems</source>
@@ -2100,12 +2138,12 @@ Currently selected coordinate system. This is used to switch between coordinate 
 वर्तमान में चयनित समन्वय प्रणाली। यह कई समन्वय प्रणालियों के साथ दस्तावेजों में समन्वय प्रणालियों के बीच स्विच करने के लिए उपयोग किया जाता है</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="121"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="80"/>
         <source>Show all coordinate systems</source>
         <translation>सभी समन्वय प्रणाली दिखाएं</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="122"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="81"/>
         <source>Show All Coordinate Systems
 
 When pressed and held, this button shows all digitized points and lines for all coordinate systems.</source>
@@ -2114,12 +2152,12 @@ When pressed and held, this button shows all digitized points and lines for all 
 जब दबाया और आयोजित किया जाता है, तो यह बटन सभी समन्वित प्रणालियों के लिए सभी डिजीटल अंक और रेखाएं दिखाता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="130"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="89"/>
         <source>Print all coordinate systems</source>
         <translation>सभी समन्वय प्रणालियों को प्रिंट करें</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="131"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="90"/>
         <source>Print All Coordinate Systems
 
 When pressed, this button Prints all digitized points and lines for all coordinate systems.</source>
@@ -2128,7 +2166,7 @@ When pressed, this button Prints all digitized points and lines for all coordina
 जब दबाया जाता है, तो यह बटन सभी समन्वित प्रणालियों के लिए सभी डिजीटल बिंदुओं और रेखाओं को प्रिंट करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateToolBars.cpp" line="135"/>
+        <location filename="../src/Create/CreateToolBars.cpp" line="94"/>
         <source>Coordinate System</source>
         <translation>समन्वय प्रणाली</translation>
     </message>
@@ -4047,6 +4085,58 @@ The stop value cannot be less than the start value</source>
     </message>
 </context>
 <context>
+    <name>DlgSettingsGuideline</name>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="34"/>
+        <source>Guidelines</source>
+        <translation>दिशा-निर्देश</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="57"/>
+        <source>Creation circle radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="61"/>
+        <source>Select a radius, in pixels, for the points</source>
+        <translation>अंकों के लिए, पिक्सेल में त्रिज्या का चयन करें</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="66"/>
+        <source>Guideline color</source>
+        <translation>गाइडलाइन का रंग</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="70"/>
+        <source>Guidelines Color
+
+Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
+        <translation>दिशानिर्देश रंग
+
+उन दिशा-निर्देशों का रंग सेट करें, जिन्हें दृश्य के किनारों से खींचा जा सकता है, और बिंदुओं को संरेखित करने के लिए उपयोग किया जाता है</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="77"/>
+        <source>Active Line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="81"/>
+        <source>Select a size for the guidelines when active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="86"/>
+        <source>Inactive Line width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="90"/>
+        <source>Select a size for the guidelines when inactive</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DlgSettingsMainWindow</name>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="49"/>
@@ -4293,11 +4383,10 @@ Number of digits of precision in floating point numbers. This value affects calc
         <translation>गाइडलाइन का रंग</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="279"/>
         <source>Guidelines Color
 
 Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
-        <translation>दिशानिर्देश रंग
+        <translation type="vanished">दिशानिर्देश रंग
 
 उन दिशा-निर्देशों का रंग सेट करें, जिन्हें दृश्य के किनारों से खींचा जा सकता है, और बिंदुओं को संरेखित करने के लिए उपयोग किया जाता है</translation>
     </message>
@@ -4705,22 +4794,22 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="497"/>
+        <location filename="../src/main/MainWindow.cpp" line="499"/>
         <source>Unable to export to file</source>
         <translation>फ़ाइल में निर्यात करने में असमर्थ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="542"/>
+        <location filename="../src/main/MainWindow.cpp" line="544"/>
         <source>Unable to extract image to file</source>
         <translation>फ़ाइल में छवि निकालने में असमर्थ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="622"/>
+        <location filename="../src/main/MainWindow.cpp" line="624"/>
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation>OSX में, स्टार्टअप पर भरी गई फाइलें डाउनलोड, पिक्चर्स या लाइब्रेरी / कंटेनर / डिजिटाइज़र / डेटा निर्देशिकाओं में होनी चाहिए</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1343"/>
+        <location filename="../src/main/MainWindow.cpp" line="1336"/>
         <source>Cannot read file</source>
         <translation>फ़ाइल नहीं पढ़ सकता</translation>
     </message>
@@ -4729,90 +4818,90 @@ Zooming the image in or out is performed using any of several methods:
         <translation type="vanished">निर्देशिका से</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="708"/>
+        <location filename="../src/main/MainWindow.cpp" line="710"/>
         <source>Import Image</source>
         <translation>आयात छवि</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1066"/>
+        <location filename="../src/main/MainWindow.cpp" line="1058"/>
         <source>File opened</source>
         <translation>फाइल खोली</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1109"/>
+        <location filename="../src/main/MainWindow.cpp" line="1102"/>
         <source>File not found</source>
         <translation>फाइल नहीं मिली</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1126"/>
+        <location filename="../src/main/MainWindow.cpp" line="1119"/>
         <source>Error report opened</source>
         <translation>त्रुटि रिपोर्ट खोली गई</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1189"/>
-        <location filename="../src/main/MainWindow.cpp" line="1263"/>
+        <location filename="../src/main/MainWindow.cpp" line="1182"/>
+        <location filename="../src/main/MainWindow.cpp" line="1256"/>
         <source>File imported</source>
         <translation>फ़ाइल आयात की गई</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1297"/>
+        <location filename="../src/main/MainWindow.cpp" line="1290"/>
         <source>Background image.</source>
         <translation>पृष्ठभूमि छवि।</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1298"/>
+        <location filename="../src/main/MainWindow.cpp" line="1291"/>
         <source>Currently selected curve.</source>
         <translation>वर्तमान में चयनित वक्र।</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1299"/>
+        <location filename="../src/main/MainWindow.cpp" line="1292"/>
         <source>Point style for currently selected curve.</source>
         <translation>वर्तमान में चयनित वक्र के लिए बिंदु शैली।</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1300"/>
+        <location filename="../src/main/MainWindow.cpp" line="1293"/>
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>वर्तमान में चयनित वक्र के लिए सेगमेंट फिल फ़िल्टर।</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1326"/>
+        <location filename="../src/main/MainWindow.cpp" line="1319"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>दस्तावेज़ को संशोधित किया गया है।
 क्या आप अपने परिवर्तनों को सहेजना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1412"/>
+        <location filename="../src/main/MainWindow.cpp" line="1405"/>
         <source>Cannot write file</source>
         <translation>फ़ाइल नहीं लिख सकते</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1460"/>
+        <location filename="../src/main/MainWindow.cpp" line="1453"/>
         <source>Save</source>
         <translation>बचाना</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2599"/>
+        <location filename="../src/main/MainWindow.cpp" line="2518"/>
         <source>Export</source>
         <translation>निर्यात</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2681"/>
+        <location filename="../src/main/MainWindow.cpp" line="2600"/>
         <source>Open Document</source>
         <translation>दस्तावेज़ खोलें</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4042"/>
+        <location filename="../src/main/MainWindow.cpp" line="3930"/>
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4043"/>
+        <location filename="../src/main/MainWindow.cpp" line="3931"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4178"/>
+        <location filename="../src/main/MainWindow.cpp" line="4067"/>
         <source>Engauge Digitizer</source>
         <translation>संलग्नक डिजिटाइज़र</translation>
     </message>
@@ -4820,37 +4909,37 @@ Do you want to save your changes?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="133"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="178"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="280"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="138"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="183"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="285"/>
         <source>New axis point cannot be at the same screen position as an existing axis point</source>
         <translation>नया अक्ष बिंदु मौजूदा अक्ष बिंदु के समान स्क्रीन स्थिति में नहीं हो सकता है</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="186"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="289"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="191"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="294"/>
         <source>New axis point cannot have the same graph coordinates as an existing axis point</source>
         <translation>नए अक्ष बिंदु में मौजूदा अक्ष बिंदु के समान ग्राफ निर्देशांक नहीं हो सकते</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="194"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="297"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="199"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="302"/>
         <source>No more than two axis points can lie along the same line on the screen</source>
         <translation>स्क्रीन पर एक ही पंक्ति में दो से अधिक अक्ष बिंदु नहीं हो सकते हैं</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="202"/>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="305"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="207"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="310"/>
         <source>No more than two axis points can lie along the same line in graph coordinates</source>
         <translation>ग्राफ निर्देशांक में दो से अधिक अक्ष बिंदु एक ही रेखा के साथ नहीं हो सकते हैं</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="255"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="260"/>
         <source>Too many x axis points. There should only be two</source>
         <translation>बहुत सारे एक्स अक्ष अंक। केवल दो होने चाहिए</translation>
     </message>
     <message>
-        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="261"/>
+        <location filename="../src/Callback/CallbackAxisPointsAbstract.cpp" line="266"/>
         <source>Too many y axis points. There should only be two</source>
         <translation>बहुत सारे y अक्ष बिंदु। केवल दो होने चाहिए</translation>
     </message>
@@ -4911,6 +5000,7 @@ Do you want to save your changes?</source>
         <location filename="../src/Cmd/CmdSettingsGeneral.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsGridDisplay.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsGridRemoval.cpp" line="50"/>
+        <location filename="../src/Cmd/CmdSettingsGuideline.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsPointMatch.cpp" line="50"/>
         <location filename="../src/Cmd/CmdSettingsSegments.cpp" line="50"/>
         <source>Reached end of file before finding end element for</source>
@@ -5103,12 +5193,12 @@ Do you want to save your changes?</source>
         <translation>क्षमा करें, लेकिन रंग बीनने वाला बिंदु एक गैर-पृष्ठभूमि पिक्सेल के पास होना चाहिए। कृपया पुन: प्रयास करें।</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="356"/>
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="360"/>
         <source>Point Match</source>
         <translation>प्वाइंट मैच</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="357"/>
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="361"/>
         <source>There are no more matching points</source>
         <translation>अधिक मिलान बिंदु नहीं हैं</translation>
     </message>
@@ -5201,7 +5291,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="155"/>
-        <location filename="../src/Document/DocumentModelGuidelines.cpp" line="84"/>
+        <location filename="../src/Document/DocumentModelGuideline.cpp" line="131"/>
         <source>Cannot read grid display data</source>
         <translation>ग्रिड प्रदर्शन डेटा नहीं पढ़ सकते</translation>
     </message>
@@ -5488,12 +5578,12 @@ Do you want to save your changes?</source>
         <translation>अधिक धुरी अंक की जरूरत है</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="632"/>
+        <location filename="../src/main/MainWindow.cpp" line="634"/>
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>फ़ाइल कई भाषा वर्णमाला के वर्णों की प्रतीत होती है, जो विंडोज कमांड लाइन में काम नहीं करती है</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="131"/>
+        <location filename="../src/main/MainWindowModel.cpp" line="122"/>
         <source>Cannot read main window data</source>
         <translation>मुख्य विंडो डेटा नहीं पढ़ा जा सकता है</translation>
     </message>

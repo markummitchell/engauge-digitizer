@@ -12,6 +12,10 @@
 #include <qmath.h>
 #include <QPen>
 
+const double TWO_PI = 2.0 * 3.1415926535;
+const int TICS_PER_CYCLE = 360 * 16;
+const double RADIANS_TO_TICS = TICS_PER_CYCLE / TWO_PI;
+
 CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const DocumentModelGuideline &modelGuideline,
                                                                      const Transformation &transformation,
                                                                      const QPointF &posClickScreen) :
@@ -21,6 +25,9 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
 {
   m_posLow = posScreenConstantYRForLowXT (modelGuideline.creationCircleRadius ());
   m_posHigh = posScreenConstantYRForHighXT (modelGuideline.creationCircleRadius ());
+  m_angleLow = angleScreenConstantYRLowAngle (modelGuideline.creationCircleRadius ());
+  m_angleCenter = angleScreenConstantYRCenterAngle (modelGuideline.creationCircleRadius ());
+  m_angleHigh = angleScreenConstantYRHighAngle (modelGuideline.creationCircleRadius ());
 
   QPointF posClickGraph;
   transformation.transformScreenToLinearCartesianGraph (posClickScreen,
@@ -89,8 +96,18 @@ QGraphicsItem *CentipedeSegmentConstantYREllipse::graphicsItem ()
 
 void CentipedeSegmentConstantYREllipse::updateRadius (double radius)
 {
-  // When this method had code to set QGraphicsEllipseItem::spanAngle and QGraphicsEllipseItem::startAngle, the correct curve segment
-  // often did not appear due to QTBUG-80937 as explained in the class documentation for CentipedeSegmentConstantYREllipse. Therefore
-  // for consistency the whole ellipse is drawn which always works correctly.
+  // Scale up/down the angles, with them converging to center angle as radius goes to zero
+  double scaling = radius / modelGuideline().creationCircleRadius ();
+  int angleLow = (int) ((m_angleCenter + scaling * (m_angleLow - m_angleCenter)) * RADIANS_TO_TICS);
+  int angleHigh = (int) ((m_angleCenter + scaling * (m_angleHigh - m_angleCenter)) * RADIANS_TO_TICS);
+  while (angleLow < 0) {
+    angleLow += TICS_PER_CYCLE;
+  }
+  while (angleHigh < angleLow) {
+    angleHigh += TICS_PER_CYCLE;
+  }
+
+  m_graphicsItem->setStartAngle (angleLow);
+  m_graphicsItem->setSpanAngle (angleHigh - angleLow);
 }
 

@@ -12,11 +12,6 @@
 class GraphicsArcItem;
 
 /// Centipede for constant YR using QGraphicsEllipseItem
-///
-/// Due to bug QTBUG-80937 at https://bugreports.qt.io/browse/QTBUG-80937, the elliptical
-/// segment is not always drawn correctly when the QGraphicsEllipseItem::scanAngle is less than
-/// 360 degrees (which we want for finite length Centipedes). For example, at 90 degrees the curve
-/// is much shorter than it should be. So a full ellipse is drawn
 class CentipedeSegmentConstantYREllipse : public CentipedeSegmentAbstract
 {
 public:
@@ -38,6 +33,15 @@ private:
   // Two points where circle around click point intersects constant coordinate line
   QPointF m_posLow;
   QPointF m_posHigh;
+
+  // Two angles where circle around click point intersects constant coordinate line. Angle is
+  // about the origin and starting around one (semiminor or semimajor) axes of the ellipe
+  //
+  // Due to asymmetry (angles between center-and-high and center-and-low are usually different),
+  // we know the angle to click point cannot be calculated as (m_angleLow + m_angleHigh) / 2
+  double m_angleLow;
+  double m_angleCenter;
+  double m_angleHigh;
 };
 
 #endif // CENTIPEDE_SEGMENT_CONSTANT_YR_ELLIPSE_H
