@@ -8,6 +8,7 @@
 #define GRAPHICS_ARC_AS_PATH_ITEM_H
 
 #include <QGraphicsPathItem>
+#include <QPointF>
 
 /// Draw an arc as an ellipse but without lines from the center to the start and end points
 ///
@@ -26,7 +27,10 @@ public:
 
   /// Constructor with coordinates specified as rectangle
   GraphicsArcAsPathItem(const QRectF &rect,
-                  QGraphicsItem *parent = 0);
+                        QGraphicsItem *parent = 0);
+
+  /// Emulate QGraphicsItem::setRotation
+  void setRotation (double angleDegrees);
 
   /// Emulate QGraphicsEllipseItem::setSpanAngle
   void setSpanAngle (int spanAngle);
@@ -37,6 +41,7 @@ public:
 private:
   GraphicsArcAsPathItem();
 
+  QPointF pointForAngle (int angle) const;
   void updateGeometry ();
 
   double m_x;
@@ -45,6 +50,7 @@ private:
   double m_height;
   int m_startAngle; // In tics
   int m_spanAngle; // In tics
+  double m_rotationAngle; // In degrees
 };
 
 #endif // GRAPHICS_ARC_AS_PATH_ITEM_H
