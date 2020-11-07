@@ -101,12 +101,14 @@ void DigitizeStateGuideline::handleCurveChange(CmdMediator * /* cmdMediator */)
 }
 
 void DigitizeStateGuideline::handleKeyPress (CmdMediator * /* cmdMediator */,
-                                             Qt::Key key,
+                                             Qt::Key /* key */,
                                              bool /* atLeastOneSelectedItem */)
 {
-  if (key == Qt::Key_Escape && m_centipedePair) {
-    killCentipede ();
-  }
+  // Only keys forwarded by GraphicsView::keyPressEvent  will get here. Originally this only
+  // killed the centipedes when Qt::Key_Escape was encountered, but other cases like Control-Z
+  // which requires the key AND the modifier) justified stopping for any keypress. Too confusing
+  // to undo the last CmdAbstract while leaving the partially completed guideline
+  killCentipede ();
 }
 
 void DigitizeStateGuideline::handleMouseMove (CmdMediator *cmdMediator,

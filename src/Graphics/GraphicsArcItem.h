@@ -4,21 +4,15 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GRAPHICS_ARCITEM_H
-#define GRAPHICS_ARCITEM_H
+#ifndef GRAPHICS_ARC_ITEM_H
+#define GRAPHICS_ARC_ITEM_H
 
 #include <QGraphicsEllipseItem>
 
 /// Draw an arc as an ellipse but without lines from the center to the start and end points
 ///
-/// Note that QGraphicsEllipseItem needs help when drawing with any span angle less than 360 degrees.
-/// Without help, there are artifacts left on the screen as the start and/or span angle get changed,
-/// the start and stop angles drawn are unrelated to the requested start and stop angles, and some pixels
-/// do not get drawn. See QTDEBUG-80937
-///
-/// Originally this class overrode QGraphicsEllipseItem::boundingRect and called QGraphicsScene::boundingRect.
-/// However, that led to an infinite loop since QGraphicsScene::boundingRect looped back around to
-/// QGraphicsEllipseItem::boundingRect
+/// Use within GraphicsArcItemRelay when there is a possibility that geometry updates
+/// would be done while an event handler is executing
 class GraphicsArcItem : public QGraphicsEllipseItem
 {
 public:

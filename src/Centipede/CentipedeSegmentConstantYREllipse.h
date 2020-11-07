@@ -9,12 +9,14 @@
 
 #include "CentipedeSegmentAbstract.h"
 
-class GraphicsArcAsPathItem;
+class GraphicsArcItem;
+class GraphicsArcItemRelay;
 
-/// Centipede for constant YR using an implementation of QGraphicsEllipseItem
-/// for which QTBUG-80937 has been fixed so various artifacts are prevented
+/// Centipede for constant YR
 class CentipedeSegmentConstantYREllipse : public CentipedeSegmentAbstract
 {
+  Q_OBJECT;
+
 public:
   /// Constructor with individual coordinates
   CentipedeSegmentConstantYREllipse(const DocumentModelGuideline &modelGuideline,
@@ -25,11 +27,17 @@ public:
   virtual double distanceToClosestEndpoint (const QPointF &posScreen) const;
   virtual QGraphicsItem *graphicsItem ();
   virtual void updateRadius (double radius);
+
+signals:
+  
+  /// Send new geometry for later updating
+  void signalUpdateAngles (double, double);
   
 private:
   CentipedeSegmentConstantYREllipse();
 
-  GraphicsArcAsPathItem *m_graphicsItem;
+  GraphicsArcItem *m_graphicsItem;
+  GraphicsArcItemRelay *m_graphicsItemRelay;  
 
   // Two points where circle around click point intersects constant coordinate line
   QPointF m_posLow;

@@ -8,6 +8,7 @@
 #define CENTIPEDE_SEGMENT_ABSTRACT_H
 
 #include "DocumentModelGuideline.h"
+#include <QObject>
 #include <QPointF>
 #include "Transformation.h"
 
@@ -22,8 +23,12 @@ enum IntersectionType {
 
 /// Line segment along one of the two coordinate directions (X/T or Y/R).
 /// Centipede instances are distinguished by coordinate direction, and implemented with either line or ellipse graphics item
-class CentipedeSegmentAbstract
+///
+/// This class inherits from QObject so its subclasses can send signals
+class CentipedeSegmentAbstract : public QObject
 {
+  Q_OBJECT;
+
 public:
   /// Constructor with individual coordinates
   CentipedeSegmentAbstract(const DocumentModelGuideline &modelGuideline,

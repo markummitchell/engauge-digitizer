@@ -6,7 +6,8 @@
 
 #include "CentipedeSegmentConstantYREllipse.h"
 #include "EnumsToQt.h"
-#include "GraphicsArcAsPathItem.h"
+#include "GraphicsArcItem.h"
+#include "GraphicsArcItemRelay.h"
 #include "mmsubs.h"
 #include <qdebug.h>
 #include <qmath.h>
@@ -29,6 +30,7 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
   m_angleCenter = angleScreenConstantYRCenterAngle (modelGuideline.creationCircleRadius ());
   m_angleHigh = angleScreenConstantYRHighAngle (modelGuideline.creationCircleRadius ());
 
+  qDebug() << "CentipedeSegmentConstantYREllipse " << m_angleLow*180./3.1416 << " " << m_angleCenter *180./3.1416 << " " << m_angleHigh*180./3.1416;
   QPointF posClickGraph;
   transformation.transformScreenToLinearCartesianGraph (posClickScreen,
                                                         posClickGraph);
@@ -67,7 +69,9 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
                        posOriginScreen + QPointF (aAligned,
                                                   -1.0 * bAligned));
 
-  m_graphicsItem = new GraphicsArcAsPathItem (rectBounding);
+  m_graphicsItem = new GraphicsArcItem (rectBounding);
+  m_graphicsItemRelay = new GraphicsArcItemRelay (this,
+                                                  m_graphicsItem);
 
   QColor color (ColorPaletteToQColor (modelGuideline.lineColor()));
 
@@ -79,6 +83,7 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
 CentipedeSegmentConstantYREllipse::~CentipedeSegmentConstantYREllipse ()
 {
   delete m_graphicsItem;
+  delete m_graphicsItemRelay;
 }
 
 double CentipedeSegmentConstantYREllipse::distanceToClosestEndpoint (const QPointF &posScreen) const
@@ -98,16 +103,23 @@ void CentipedeSegmentConstantYREllipse::updateRadius (double radius)
 {
   // Scale up/down the angles, with them converging to center angle as radius goes to zero
   double scaling = radius / modelGuideline().creationCircleRadius ();
-  int angleLow = (int) ((m_angleCenter + scaling * (m_angleLow - m_angleCenter)) * RADIANS_TO_TICS);
-  int angleHigh = (int) ((m_angleCenter + scaling * (m_angleHigh - m_angleCenter)) * RADIANS_TO_TICS);
-  while (angleLow < 0) {
-    angleLow += TICS_PER_CYCLE;
+
+  double angleLowRad = m_angleCenter + scaling * (m_angleLow - m_angleCenter);
+  double angleHighRad = m_angleCenter + scaling * (m_angleHigh - m_angleCenter);
+  int angleLowTics = (int) (angleLowRad * RADIANS_TO_TICS);
+  int angleHighTics = (int) (angleHighRad * RADIANS_TO_TICS);
+  while (angleLowTics < 0) {
+    angleLowTics += TICS_PER_CYCLE;
   }
-  while (angleHigh < angleLow) {
-    angleHigh += TICS_PER_CYCLE;
+  while (angleHighTics < angleLowTics) {
+    angleHighTics += TICS_PER_CYCLE;
   }
 
-  m_graphicsItem->setStartAngle (angleLow);
-  m_graphicsItem->setSpanAngle (angleHigh - angleLow);
+  // Update geoemtry but only after the event handler currently on the stack has disappeared.
+  // This means sending a signal instead of calling QGraphicsEllipseItem::setStartAngle and
+  // QGraphicsEllipseItem::setSpanAngle directlry
+  int angleDeltaTics = angleHighTics - angleLowTics;
+  emit signalUpdateAngles (angleLowTics,
+                           angleDeltaTics);
 }
 

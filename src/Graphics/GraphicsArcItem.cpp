@@ -20,6 +20,8 @@ GraphicsArcItem::GraphicsArcItem(double x,
                        height,
                        parent)
 {
+  setStartAngle (40*16);
+  setSpanAngle (50*16-40*16);
 }
 
 GraphicsArcItem::GraphicsArcItem(const QRectF &rect,
@@ -33,8 +35,11 @@ void GraphicsArcItem::paint (QPainter *painter,
                              const QStyleOptionGraphicsItem * /* option */,
                              QWidget * /* widget */)
 {
+  double start = startAngle ();
+  double span = spanAngle ();
+
   painter->setPen (pen ());
   painter->drawArc (rect(),
-                    startAngle (),
-                    spanAngle());
+                    start,
+                    span);
 }

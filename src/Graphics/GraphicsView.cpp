@@ -215,7 +215,8 @@ void GraphicsView::keyPressEvent (QKeyEvent *event)
       key == Qt::Key_Left ||
       key == Qt::Key_Right ||
       key == Qt::Key_Up ||
-      key == Qt::Key_Escape) {
+      key == Qt::Key_Escape ||
+      ((event->modifiers() & Qt::ControlModifier) && (key == Qt::Key_Z))) {
 
     emit signalKeyPress (key, atLeastOneSelectedItem);
     event->accept();
