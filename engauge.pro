@@ -53,6 +53,9 @@ SOURCES += src/Help/HelpBrowser.cpp \
            src/Help/HelpWindow.cpp
 }
 
+# https://doc.qt.io/qt-5/appicon.html
+RC_ICONS = src/img/digitizer.ico
+
 CONFIG(debug,debug|release){
   # Debug version:
 } else {
