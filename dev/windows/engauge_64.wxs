@@ -19,7 +19,7 @@
         </Component>
 	<Directory Id='MYAPPDIRPROPERTY' Name='Engauge Digitizer'>
 	  <Component Id='MainExecutable' Guid='5CE13C36-6B3D-4B6C-B183-C8DC80B70D1F' Win64='yes'>
-	    <File Id='engauge.exe' Name='engauge.exe' DiskId='1' Source='Engauge Digitizer/engauge.exe' KeyPath='yes'>
+	    <File Id='Engauge.exe' Name='Engauge Digitizer' DiskId='1' Source='Engauge Digitizer/Engauge.exe' KeyPath='yes'>
 	      <Shortcut Id='desktopshortcut' Directory='DesktopFolder' Name='Engauge Digitizer' WorkingDirectory='INSTALLDIR' Icon='engauge.ico' IconIndex='0' Advertise='yes' />
 	    </File>
 	    <File Id='freetype'     Name='freetype.dll'        DiskId='1' Source='Engauge Digitizer/freetype.dll'        />
@@ -119,7 +119,7 @@
       </Directory>
       <Directory Id='DesktopFolder' Name='Desktop'>
 	<Component Id='ApplicationShortcutDesktop' Guid="*" Win64='yes'>
-	  <Shortcut Id='ApplicationDesktopShortcut' Name='Engauge Digitizer' Description='Convert graph images to data' Target='[MYAPPDIRPROPERTY]engauge.exe' WorkingDirectory='MYAPPDIRPROPERTY' Icon='engauge.ico' />
+	  <Shortcut Id='ApplicationDesktopShortcut' Name='Engauge Digitizer' Description='Convert graph images to data' Target='[MYAPPDIRPROPERTY]Engauge.exe' WorkingDirectory='MYAPPDIRPROPERTY' Icon='engauge.ico' />
 	  <RemoveFolder Id='DesktopFolder' On='uninstall' />
 	  <RegistryValue Root='HKCU' Key='Software/EngaugeDigitizer' Name='installed' Type='integer' Value='1' KeyPath='yes' />
 	</Component>
@@ -148,7 +148,7 @@
 	       Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
     </UI>
     <Property Id='WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT' Value='Launch Engauge Digitizer' />
-    <Property Id="WixShellExecTarget" Value="[#engauge.exe]" />
+    <Property Id="WixShellExecTarget" Value="[#Engauge.exe]" />
     <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
   </Product>
 </Wix>
