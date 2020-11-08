@@ -966,7 +966,7 @@ macx-* {
 } else {
   CONFIG += qt warn_on thread
   TEMPLATE = app
-  TARGET = engauge
+  TARGET = Engauge
   DESTDIR = bin
 }
 
