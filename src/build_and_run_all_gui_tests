@@ -45,7 +45,7 @@ do
 	    echo " "
 	    echo "engauge $commandLineArgs"
 	fi
-	../bin/engauge $commandLineArgs 2>&1 | grep -v 'Failed to get selection owner'
+	../bin/Engauge $commandLineArgs 2>&1 | grep -v 'Failed to get selection owner'
 
 	# Compare actual and desired output files. There is one pair for each coordinate system
 	scriptfile=`basename $script`
