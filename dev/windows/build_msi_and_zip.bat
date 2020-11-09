@@ -177,7 +177,7 @@ rem jom is qt's faster dropin replacement for nmake, but jom sometimes froze up 
 nmake clean
 nmake release
 
-if not exist bin/engauge.exe (
+if not exist bin/Engauge.exe (
   echo Executable could not be built. Stopping
   exit /b 1
 )
@@ -193,7 +193,7 @@ for %%I in (%QTDIRS%) do copy "%QTDIR%\plugins\%%I\*.dll" "%RESULTDIR%\%%I"
 for %%I in (%QTLIBS%) do echo copy %QTDIR%\bin\%%I.dll
 for %%I in (%QTLIBS%) do copy "%QTDIR%\bin\%%I.dll" "%RESULTDIR%"
 if exist *d.dll del /S *d.dll
-copy bin\engauge.exe "%RESULTDIR%"
+copy bin\Engauge.exe "%RESULTDIR%"
 
 copy LICENSE "%RESULTDIR%"
 cd "%APPVEYOR_BUILD_FOLDER%"\help
