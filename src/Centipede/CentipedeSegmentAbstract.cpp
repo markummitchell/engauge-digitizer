@@ -27,7 +27,7 @@ CentipedeSegmentAbstract::~CentipedeSegmentAbstract ()
 {
 }
 
-double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radius,
+double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radiusAboutClick,
                                                               IntersectionType intersectionType) const
 {
   QPointF posScreenBest;
@@ -49,12 +49,12 @@ double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radius,
   //
   // This also prevents issues with degrees versus radians versus gradians versus ...
   QPointF posOriginScreen, posXDirectionScreen, posYDirectionScreen;
-  transformation().transformLinearCartesianGraphToScreen (QPointF (0,  0),
-                                                          posOriginScreen);
-  transformation().transformLinearCartesianGraphToScreen (QPointF (1, 0),
-                                                          posXDirectionScreen);
-  transformation().transformLinearCartesianGraphToScreen (QPointF (0, 1),
-                                                          posYDirectionScreen);
+  transformation().transformRawGraphToScreen (QPointF (0,  0),
+                                              posOriginScreen);
+  transformation().transformRawGraphToScreen (QPointF (0, yClick),
+                                              posXDirectionScreen);
+  transformation().transformRawGraphToScreen (QPointF (90, yClick),
+                                              posYDirectionScreen);
   QPointF basisVectorX = (posXDirectionScreen - posOriginScreen) / magnitude (posXDirectionScreen - posOriginScreen);
   QPointF basisVectorY = (posYDirectionScreen - posOriginScreen) / magnitude (posYDirectionScreen - posOriginScreen);
 
@@ -62,7 +62,7 @@ double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radius,
   bool isFirst = true;
   for (int i = 0; i < NUM_CIRCLE_POINTS; i++) {
     QPointF posGraphPrevious, posGraphNext, posScreenPrevious;
-    generatePreviousAndNextPoints (radius,
+    generatePreviousAndNextPoints (radiusAboutClick,
                                    i,
                                    posGraphPrevious,
                                    posGraphNext,
@@ -118,15 +118,15 @@ double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radius,
   return angleBest;
 }
 
-double CentipedeSegmentAbstract::angleScreenConstantYRCenterAngle (double radius) const
+double CentipedeSegmentAbstract::angleScreenConstantYRCenterAngle (double radiusAboutClick) const
 {
-  return angleScreenConstantYRCommon (radius,
+  return angleScreenConstantYRCommon (radiusAboutClick,
                                       INTERSECTION_CENTER);
 }
 
-double CentipedeSegmentAbstract::angleScreenConstantYRHighAngle (double radius) const
+double CentipedeSegmentAbstract::angleScreenConstantYRHighAngle (double radiusAboutClick) const
 {
-  return angleScreenConstantYRCommon (radius,
+  return angleScreenConstantYRCommon (radiusAboutClick,
                                       INTERSECTION_HIGH);
 }
 
@@ -139,7 +139,7 @@ double CentipedeSegmentAbstract::angleScreenConstantYRLowAngle (double radius) c
 double angleScreenConstantYRLowAngle (double radius);
 
 
-void CentipedeSegmentAbstract::generatePreviousAndNextPoints (double radius,
+void CentipedeSegmentAbstract::generatePreviousAndNextPoints (double radiusAboutClick,
                                                               int i,
                                                               QPointF &posGraphPrevious,
                                                               QPointF &posGraphNext,
@@ -147,10 +147,10 @@ void CentipedeSegmentAbstract::generatePreviousAndNextPoints (double radius,
 {
   double angleBefore = 2.0 * PI * (double) i / (double) NUM_CIRCLE_POINTS;
   double angleAfter = 2.0 * PI * (double) (i + 1) / (double) NUM_CIRCLE_POINTS;
-  posScreenPrevious = m_posClickScreen + QPointF (radius * cos (angleBefore),
-                                                   radius * sin (angleBefore));
-  QPointF posScreenNext = m_posClickScreen + QPointF (radius * cos (angleAfter),
-                                                       radius * sin (angleAfter));
+  posScreenPrevious = m_posClickScreen + QPointF (radiusAboutClick * cos (angleBefore),
+                                                  radiusAboutClick * sin (angleBefore));
+  QPointF posScreenNext = m_posClickScreen + QPointF (radiusAboutClick * cos (angleAfter),
+                                                      radiusAboutClick * sin (angleAfter));
 
   m_transformation.transformScreenToRawGraph (posScreenPrevious,
                                               posGraphPrevious);

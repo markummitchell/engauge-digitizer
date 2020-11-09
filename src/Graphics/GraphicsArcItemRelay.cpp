@@ -29,7 +29,6 @@ GraphicsArcItemRelay::~GraphicsArcItemRelay ()
 void GraphicsArcItemRelay::slotUpdateAngles (double startAngle,
                                              double spanAngle)
 {
-//  m_graphicsItem->setStartAngle (startAngle);
-  //m_graphicsItem->setSpanAngle (spanAngle);
- // qDebug() << "GraphicsArcItemRelay " << startAngle / 16 << " " << spanAngle / 16;
+  m_graphicsItem->setStartAngle (startAngle);
+  m_graphicsItem->setSpanAngle (spanAngle);
 }

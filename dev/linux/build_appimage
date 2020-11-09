@@ -135,12 +135,12 @@ sed -i 's/ -g / /g' Makefile
 make clean
 make
 
-if [ ! -e ./bin/engauge ]; then
-    echo "bin/engauge executable was not created relative to directory `pwd`"
+if [ ! -e ./bin/Engauge ]; then
+    echo "bin/Engauge executable was not created relative to directory `pwd`"
     exit 1
 fi
 
-cp ./bin/engauge $HOME/$APP/$APP.AppDir/usr/bin
+cp ./bin/Engauge $HOME/$APP/$APP.AppDir/usr/bin
 cp ./src/img/bannerapp_64.xpm $HOME/$APP/$APP.AppDir/engauge.xpm
 
 # Documentation and translation
@@ -207,7 +207,7 @@ cp -L $POPPLER_LIB/libpoppler-qt5.so usr/lib
 cp -L $POPPLER_LIB/libpoppler-qt5.so.1 usr/lib
  
 export LD_LIBRARY_PATH=./usr/lib/:../../5.5/gc*/lib/:$LD_LIBRARY_PATH
-ldd $HOME/$APP/engauge-digitizer/bin/engauge | grep "=>" | awk '{print $3}'  |  xargs -I '{}' cp -v '{}' ./usr/lib || true
+ldd $HOME/$APP/engauge-digitizer/bin/Engauge | grep "=>" | awk '{print $3}'  |  xargs -I '{}' cp -v '{}' ./usr/lib || true
 ldd usr/lib/qt5/plugins/platforms/libqxcb.so | grep "=>" | awk '{print $3}'  |  xargs -I '{}' cp -v '{}' ./usr/lib || true
 
 # Copy in the indirect dependencies

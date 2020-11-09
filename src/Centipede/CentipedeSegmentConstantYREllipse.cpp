@@ -30,22 +30,32 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
   m_angleCenter = angleScreenConstantYRCenterAngle (modelGuideline.creationCircleRadius ());
   m_angleHigh = angleScreenConstantYRHighAngle (modelGuideline.creationCircleRadius ());
 
-  qDebug() << "CentipedeSegmentConstantYREllipse " << m_angleLow*180./3.1416 << " " << m_angleCenter *180./3.1416 << " " << m_angleHigh*180./3.1416;
+  qDebug() << "CentipedeSegmentConstantYREllipse::ctor "
+           << (m_angleCenter - m_angleLow)*180./3.1416
+           << " " << m_angleCenter *180./3.1416
+           << " " << (m_angleHigh - m_angleCenter)*180./3.1416;
   QPointF posClickGraph;
-  transformation.transformScreenToLinearCartesianGraph (posClickScreen,
-                                                        posClickGraph);
-  double rGraph = qSqrt (posClickGraph.x() * posClickGraph.x() + posClickGraph.y() * posClickGraph.y());
+  transformation.transformScreenToRawGraph (posClickScreen,
+                                            posClickGraph);
+  double rGraph = posClickGraph.y();
 
-  // Points at 45, 135, 225 and 315 degrees at range rGraph
-  QPointF posScreenCenter, posScreenTL, posScreenTR, posScreenBR; // No need for BL point
-  transformation.transformLinearCartesianGraphToScreen (QPointF (0, 0),
-                                                        posScreenCenter);
-  transformation.transformLinearCartesianGraphToScreen (QPointF (-rGraph, rGraph),
-                                                        posScreenTL);
-  transformation.transformLinearCartesianGraphToScreen (QPointF (rGraph, rGraph),
-                                                        posScreenTR);
-  transformation.transformLinearCartesianGraphToScreen (QPointF (rGraph, -rGraph),
-                                                        posScreenBR);
+  // Points at origin, then 0  degrees at range rGraph
+  QPointF posScreenCenter, posScreen0, posScreen90, posScreen180;
+  transformation.transformRawGraphToScreen (QPointF (0, 0),
+                                            posScreenCenter);
+  transformation.transformRawGraphToScreen (QPointF (0, rGraph),
+                                            posScreen0);
+  transformation.transformRawGraphToScreen (QPointF (90.0, rGraph),
+                                            posScreen90);
+  transformation.transformRawGraphToScreen (QPointF (180.0, rGraph),
+                                            posScreen180);
+
+  QPointF centerTo90 = posScreen90 - posScreenCenter;
+
+  // Corners of parallelogram circumscribing the ellipse
+  QPointF posScreenTL = posScreen180 + centerTo90;
+  QPointF posScreenTR = posScreen0 + centerTo90;
+  QPointF posScreenBR = posScreen0 - centerTo90;
 
   double angleRadians = 0, aAligned = 0, bAligned = 0;
   ellipseFromParallelogram (posScreenTL.x() - posScreenCenter.x(),
@@ -119,6 +129,11 @@ void CentipedeSegmentConstantYREllipse::updateRadius (double radius)
   // This means sending a signal instead of calling QGraphicsEllipseItem::setStartAngle and
   // QGraphicsEllipseItem::setSpanAngle directlry
   int angleDeltaTics = angleHighTics - angleLowTics;
+  qDebug() << "CentipedeSegmentConstantYREllipse::updateRadius scaling: " << scaling << " inputAngles: "
+           << m_angleLow*180./3.1416 << " " << m_angleHigh*180./3.1416
+           << " outputAngles: "
+           << angleLowTics * 360 / TICS_PER_CYCLE << " "
+           << angleHighTics * 360 / TICS_PER_CYCLE;
   emit signalUpdateAngles (angleLowTics,
                            angleDeltaTics);
 }

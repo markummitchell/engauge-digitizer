@@ -48,13 +48,13 @@ public:
 protected:
 
   /// Screen angle at origin from ellipse axis to circle-center/coordinate intersection. Works only for polar coordinates
-  double angleScreenConstantYRCenterAngle (double radius) const;
+  double angleScreenConstantYRCenterAngle (double radiusAboutClick) const;
 
   /// Screen angle at origin from ellipse axis to circle/coordinate intersection in the increasing angle direction. Works only for polar coordinates
-  double angleScreenConstantYRHighAngle (double radius) const;
+  double angleScreenConstantYRHighAngle (double radiusAboutClick) const;
 
   /// Screen angle at origin from ellipse axis to circle/coordinate intersection in the decreasing angle direction. Works only for polar coordinates
-  double angleScreenConstantYRLowAngle (double radius) const;
+  double angleScreenConstantYRLowAngle (double radiusAboutClick) const;
 
   /// Settings
   const DocumentModelGuideline &modelGuideline () const;
