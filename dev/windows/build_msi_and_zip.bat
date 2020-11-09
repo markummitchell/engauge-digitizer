@@ -21,28 +21,30 @@ for /f "delims=" %%a in ('qmake -query QT_INSTALL_PREFIX') do @set QTDIR=%%a
 set "CONDITION="
 if not x%QTDIR:msvc2015_64=%==x%QTDIR% set CONDITION=1
 if not x%QTDIR:msvc2017_64=%==x%QTDIR% set CONDITION=1
+if not x%QTDIR:msvc2019_64=%==x%QTDIR% set CONDITION=1
 if defined CONDITION (
-  rem QTDIR includes msvc2015_64 or msvc2017_64 (for 64 bits)
+  rem QTDIR includes msvc2015_64, msvc2017_64 or msvc2019_64 (for 64 bits)
   set ARCH=x64
   set BITS=64
   set WXSFILE=engauge_64.wxs
   set WXSOBJFILE=engauge_64.wixobj
-  echo Building for Microsoft Visual Studio 2015 or 2017 with 64 bits
+  echo Building for Microsoft Visual Studio 2015, 2017 or 2019 with 64 bits
   set /p rtn=Press Enter to continue...
 ) else (
   set "CONDITION="
-  if not x%QTDIR:msvc2015=%==x%QTDIR% set CONDITION=1
+  if not x%QTDIR:msvc2015=%==x%QTDIR% set CONDITION=1  
   if not x%QTDIR:msvc2017=%==x%QTDIR% set CONDITION=1
+  if not x%QTDIR:msvc2019=%==x%QTDIR% set CONDITION=1  
   if defined CONDITION (
-    rem QTDIR includes msvc2015 or msvc2017 (for 32 bits)
+    rem QTDIR includes msvc2015, msvc2017 or msvc2019 (for 32 bits)
     set ARCH=x86
     set BITS=32
     set WXSFILE=engauge.wxs
     set WXSOBJFILE=engauge.wixobj
-    echo Building for Microsoft Visual Studio 2015 or 2017 with 32 bits
+    echo Building for Microsoft Visual Studio 2015, 2017 or 2019 with 32 bits
     set /p rtn=Press any key to continue...
   ) else (
-    echo Unknown build setup encountered. MSVC 2015 or 2017 with 32 or 64 bits expected according to 'qmake -query'. Quitting
+    echo Unknown build setup encountered. MSVC 2015, 2017 or 2019 with 32 or 64 bits expected according to 'qmake -query'. Quitting
     set /p rtn=Press any key to continue...
     exit /b
   )
@@ -132,6 +134,9 @@ echo "*** info_valid.plist ***"
 findStr "<string>1" ..\osx\info_valid.plist
 
 echo *************************************************************************
+echo * CAUTION - Include at least one period in the version numbers above and
+echo * below, like 13.0 versus 13
+echo *
 echo * Check the version numbers and Ids above. If they are not correct, enter
 echo * Control-C to exit. Otherwise, enter the version number below...
 echo *

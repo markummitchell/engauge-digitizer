@@ -5,7 +5,7 @@
 	   Id='5404AE92-DBF4-4B08-BBBF-6987BF9B96A5'
 	   UpgradeCode='00A6792B-65ED-4894-A48B-B95D63C62CC6'
 	   Language='1033' Codepage='1252' 
-           Version='13'>
+           Version='13.0'>
     <Package Id='*' Keywords='Installer' Description="Engauge Digitizer Installer"
 	     Comments='Engauge Digitizer is available from github.com' Manufacturer='Engauge Open Source Developers'
 	     InstallerVersion='300' Languages='1033' Compressed='yes' SummaryCodepage='1252' InstallScope='perMachine' Platform='x64' />
@@ -19,7 +19,7 @@
         </Component>
 	<Directory Id='MYAPPDIRPROPERTY' Name='Engauge Digitizer'>
 	  <Component Id='MainExecutable' Guid='5CE13C36-6B3D-4B6C-B183-C8DC80B70D1F' Win64='yes'>
-	    <File Id='Engauge.exe' Name='Engauge Digitizer' DiskId='1' Source='Engauge Digitizer/Engauge.exe' KeyPath='yes'>
+	    <File Id='Engauge' Name='Engauge.exe' DiskId='1' Source='Engauge Digitizer/Engauge.exe' KeyPath='yes'>
 	      <Shortcut Id='desktopshortcut' Directory='DesktopFolder' Name='Engauge Digitizer' WorkingDirectory='INSTALLDIR' Icon='engauge.ico' IconIndex='0' Advertise='yes' />
 	    </File>
 	    <File Id='freetype'     Name='freetype.dll'        DiskId='1' Source='Engauge Digitizer/freetype.dll'        />
@@ -148,7 +148,7 @@
 	       Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
     </UI>
     <Property Id='WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT' Value='Launch Engauge Digitizer' />
-    <Property Id="WixShellExecTarget" Value="[#Engauge.exe]" />
+    <Property Id="WixShellExecTarget" Value="[#Engauge]" />
     <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
   </Product>
 </Wix>
