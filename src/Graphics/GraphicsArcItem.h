@@ -13,6 +13,9 @@
 ///
 /// Use within GraphicsArcItemRelay when there is a possibility that geometry updates
 /// would be done while an event handler is executing
+///
+/// This class probably requires the circumscribed rectangle used to construct the ellipse
+/// to be normalized to prevent QTBUG-80937
 class GraphicsArcItem : public QGraphicsEllipseItem
 {
 public:

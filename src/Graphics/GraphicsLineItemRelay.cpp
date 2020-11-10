@@ -4,32 +4,33 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "GraphicsArcItem.h"
-#include "GraphicsArcItemRelay.h"
+#include "GraphicsLineItemRelay.h"
 #include <QDebug>
+#include <QGraphicsLineItem>
 #include <QGraphicsScene>
+#include <QLineF>
 #include <QObject>
 #include <QPainter>
 #include "QtToString.h"
 
-GraphicsArcItemRelay::GraphicsArcItemRelay (QObject *caller,
-                                            GraphicsArcItem *graphicsItem) :
+GraphicsLineItemRelay::GraphicsLineItemRelay (QObject *caller,
+                                              QGraphicsLineItem *graphicsItem) :
   m_graphicsItem (graphicsItem)
 {
   // Queue for later by including Qt::QueuedConnection
-  connect (caller, SIGNAL (signalUpdateAngles (int, int)),
-           this, SLOT (slotUpdateAngles (int, int)),
+  connect (caller, SIGNAL (signalUpdateEndpoints (QPointF, QPointF)),
+           this, SLOT (slotUpdateEndpoints (QPointF, QPointF)),
            Qt::QueuedConnection);
 }
 
-GraphicsArcItemRelay::~GraphicsArcItemRelay ()
+GraphicsLineItemRelay::~GraphicsLineItemRelay ()
 {
   // Calling code is responsible for deallocating graphics item
 }
                                  
-void GraphicsArcItemRelay::slotUpdateAngles (int startAngle,
-                                             int spanAngle)
+void GraphicsLineItemRelay::slotUpdateEndpoints (QPointF start,
+                                                 QPointF end)
 {
-  m_graphicsItem->setStartAngle (startAngle);
-  m_graphicsItem->setSpanAngle (spanAngle);
+  m_graphicsItem->setLine (QLineF (start,
+                                   end));
 }

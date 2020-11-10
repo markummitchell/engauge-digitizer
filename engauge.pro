@@ -344,6 +344,7 @@ HEADERS  += \
     src/Graphics/GraphicsArcItemRelay.h \
     src/Graphics/GraphicsItemsExtractor.h \
     src/Graphics/GraphicsItemType.h \
+    src/Graphics/GraphicsLineItemRelay.h \
     src/Graphics/GraphicsLinesForCurve.h \
     src/Graphics/GraphicsLinesForCurves.h \
     src/Graphics/GraphicsPoint.h \
@@ -777,6 +778,7 @@ SOURCES += \
     src/Graphics/GraphicsArcItem.cpp \
     src/Graphics/GraphicsArcItemRelay.cpp \
     src/Graphics/GraphicsItemsExtractor.cpp \
+    src/Graphics/GraphicsLineItemRelay.cpp \
     src/Graphics/GraphicsLinesForCurve.cpp \
     src/Graphics/GraphicsLinesForCurves.cpp \
     src/Graphics/GraphicsPoint.cpp \

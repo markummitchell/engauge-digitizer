@@ -4,40 +4,42 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef GRAPHICS_ARC_ITEM_RELAY_H
-#define GRAPHICS_ARC_ITEM_RELAY_H
+#ifndef GRAPHICS_LINE_ITEM_RELAY_H
+#define GRAPHICS_LINE_ITEM_RELAY_H
 
 #include <QObject>
+#include <QPointF>
 
-class GraphicsArcItem;
+class QGraphicsLineItem;
 
-/// Enable postponed geometry changes for GraphicsArcItem, using a signal to trigger this class to
-/// update its associated GraphicsArcItem instance.
+/// Enable postponed geometry changes for QGraphicsLineItem, using a signal to trigger this class to
+/// update its associated QGraphicsLineItem instance.
 ///
 /// By postponing geometry updates locally, this class simplifies the calling code which can invoked
 /// while an event handler is on the stack. Updating QGraphicsEllipseItem geometry while an event handler
 /// is on the stack is not good software design
-class GraphicsArcItemRelay : public QObject
+class GraphicsLineItemRelay : public QObject
 {
   Q_OBJECT;
   
 public:
   /// Single constructor with associated GraphicsArcItem
-  GraphicsArcItemRelay(QObject *caller,
-                       GraphicsArcItem *graphicsItem);
-  virtual ~GraphicsArcItemRelay();
+  GraphicsLineItemRelay(QObject *caller,
+                        QGraphicsLineItem *graphicsItem);
+  virtual ~GraphicsLineItemRelay();
 
 public slots:
 
   /// Slot equivalent of setStartAngle and setSpanAngle
-  void slotUpdateAngles (int startAngle,
-                         int spanAngle);
+  void slotUpdateEndpoints (QPointF start,
+                            QPointF end);
+                            
   
 private:
-  GraphicsArcItemRelay();
+  GraphicsLineItemRelay();
 
-  GraphicsArcItem *m_graphicsItem;
+  QGraphicsLineItem *m_graphicsItem;
   
 };
 
-#endif // GRAPHICS_ARC_ITEM_RELAY_H
+#endif // GRAPHICS_LINE_ITEM_RELAY_H

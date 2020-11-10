@@ -31,7 +31,7 @@ public:
 signals:
   
   /// Send new geometry for later updating
-  void signalUpdateAngles (double, double);
+  void signalUpdateAngles (int, int);
   
 private:
   CentipedeSegmentConstantYREllipse();

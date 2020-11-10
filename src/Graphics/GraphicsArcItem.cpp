@@ -20,8 +20,6 @@ GraphicsArcItem::GraphicsArcItem(double x,
                        height,
                        parent)
 {
-  setStartAngle (40*16);
-  setSpanAngle (50*16-40*16);
 }
 
 GraphicsArcItem::GraphicsArcItem(const QRectF &rect,

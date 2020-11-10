@@ -11,7 +11,7 @@
 #include <QPointF>
 #include "Transformation.h"
 
-const int NUM_CIRCLE_POINTS = 100; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
+const int NUM_CIRCLE_POINTS = 400; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
 const double PI = 3.1415926535;
 
 CentipedeSegmentAbstract::CentipedeSegmentAbstract(const DocumentModelGuideline &modelGuideline,
@@ -104,7 +104,8 @@ double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radiusAbout
       posScreenBest = posScreenPrevious;
       xTBest = xGraphPrevious;
 
-      // Calculate angle
+      // Calculate angle. Note that quadrant ambiguities are resolved at a higher level
+      // with knowledge of other angle(s)
       QPointF delta = posScreenPrevious - posOriginScreen;
       angleBest = angleFromBasisVectors (basisVectorX.x(),
                                          basisVectorX.y(),

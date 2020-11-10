@@ -6,6 +6,7 @@
 
 #include "CentipedeSegmentConstantYRLine.h"
 #include "EnumsToQt.h"
+#include "GraphicsLineItemRelay.h"
 #include "mmsubs.h"
 #include <qmath.h>
 #include <QGraphicsLineItem>
@@ -23,6 +24,8 @@ CentipedeSegmentConstantYRLine::CentipedeSegmentConstantYRLine(const DocumentMod
 
   m_graphicsItem = new QGraphicsLineItem (QLineF (m_posLow,
                                                   m_posHigh));
+  m_graphicsItemRelay = new GraphicsLineItemRelay (this,
+                                                   m_graphicsItem);
 
   QColor color (ColorPaletteToQColor (modelGuideline.lineColor()));
 
@@ -33,6 +36,7 @@ CentipedeSegmentConstantYRLine::CentipedeSegmentConstantYRLine(const DocumentMod
 CentipedeSegmentConstantYRLine::~CentipedeSegmentConstantYRLine ()
 {
   delete m_graphicsItem;
+  delete m_graphicsItemRelay;  
 }
 
 double CentipedeSegmentConstantYRLine::distanceToClosestEndpoint (const QPointF &posScreen) const
@@ -57,6 +61,9 @@ void CentipedeSegmentConstantYRLine::updateRadius (double radius)
   double scaling = radius / radiusInitial;
   QPointF posLow = posCenter - scaling / 2.0 * delta;
   QPointF posHigh = posCenter + scaling / 2.0 * delta;
-  m_graphicsItem->setLine (QLineF (posLow,
-                                   posHigh));
+
+  // Update geometry but only after the event handler currently on the stack has disappeared.
+  // This means sending a signal instead of calling QGraphicsLineItem::setLine directly
+  emit signalUpdateEndpoints (posLow,
+                              posHigh);
 }

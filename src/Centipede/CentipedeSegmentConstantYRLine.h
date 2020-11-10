@@ -9,11 +9,14 @@
 
 #include "CentipedeSegmentAbstract.h"
 
+class GraphicsLineItemRelay;
 class QGraphicsLineItem;
 
 /// Centipede for constant YR using QGraphicsLineItem
 class CentipedeSegmentConstantYRLine : public CentipedeSegmentAbstract
 {
+  Q_OBJECT;
+  
 public:
   /// Constructor with individual coordinates
   CentipedeSegmentConstantYRLine(const DocumentModelGuideline &modelGuideline,
@@ -24,12 +27,19 @@ public:
   virtual double distanceToClosestEndpoint (const QPointF &posScreen) const;
   virtual QGraphicsItem *graphicsItem ();
   virtual void updateRadius (double radius);
+
+signals:
+
+  /// Send new geometry for later updating
+  void signalUpdateEndpoints (QPointF start,
+                              QPointF end);
   
 private:
   CentipedeSegmentConstantYRLine();
 
   QGraphicsLineItem *m_graphicsItem;
-
+  GraphicsLineItemRelay *m_graphicsItemRelay;
+  
   // Two points where circle around click point intersects constant coordinate line. Due to symmetry about
   // the click circle center (for affine transformation), we do not need the center
   QPointF m_posLow;
