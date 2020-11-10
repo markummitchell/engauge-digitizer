@@ -172,7 +172,7 @@ void ellipseFromParallelogram (double xTL,
   bAligned = qSqrt (numerator / denominatorPlus);
   // Angle is from equation 1.3 in the arXiv reference
   if (qAbs (2.0 * C) > 10000.0 * qAbs (A - B)) {
-    angleRadians = 90.0;
+    angleRadians = PI / 2.0;
   } else {
     angleRadians = 0.5 * qAtan (2 * C / (A - B));
   }
