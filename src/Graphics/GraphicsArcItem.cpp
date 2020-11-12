@@ -20,6 +20,9 @@ GraphicsArcItem::GraphicsArcItem(double x,
                        height,
                        parent)
 {
+  // Rotations will be about center point rather than (0,0)
+  setTransformOriginPoint (x + width / 2.0,
+                           y + height / 2.0);
 }
 
 GraphicsArcItem::GraphicsArcItem(const QRectF &rect,
@@ -27,6 +30,8 @@ GraphicsArcItem::GraphicsArcItem(const QRectF &rect,
   QGraphicsEllipseItem (rect,
                         parent)
 {
+  // Rotations will be about center point rather than (0,0)
+  setTransformOriginPoint (rect.center());
 }
 
 void GraphicsArcItem::paint (QPainter *painter,

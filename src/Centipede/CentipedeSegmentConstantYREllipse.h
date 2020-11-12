@@ -31,7 +31,9 @@ public:
 signals:
   
   /// Send new geometry for later updating
-  void signalUpdateAngles (int, int);
+  void signalUpdateAngles (int startAngle,
+                           int spanAngle,
+                           double rotationAngle);
   
 private:
   CentipedeSegmentConstantYREllipse();
@@ -51,6 +53,7 @@ private:
   double m_angleLow;
   double m_angleCenter;
   double m_angleHigh;
+  double m_angleRotation;
 };
 
 #endif // CENTIPEDE_SEGMENT_CONSTANT_YR_ELLIPSE_H

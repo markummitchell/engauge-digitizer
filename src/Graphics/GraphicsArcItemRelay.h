@@ -29,9 +29,10 @@ public:
 
 public slots:
 
-  /// Slot equivalent of setStartAngle and setSpanAngle
+  /// Slot equivalent of setStartAngle and setSpanAngle (in tics) and setRotation (radians)
   void slotUpdateAngles (int startAngle,
-                         int spanAngle);
+                         int spanAngle,
+                         double rotationAngle);
   
 private:
   GraphicsArcItemRelay();

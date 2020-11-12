@@ -31,16 +31,22 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
   m_angleCenter = angleScreenConstantYRCenterAngle (modelGuideline.creationCircleRadius ());
   m_angleHigh = angleScreenConstantYRHighAngle (modelGuideline.creationCircleRadius ());
 
-  if (qAbs (m_angleHigh - m_angleLow) > PI) {
-    if (m_angleLow < m_angleHigh) {
-      // Case like low=20 and high=340 degrees
-      double temp = m_angleLow;
-      m_angleLow = m_angleHigh;
-      m_angleHigh = temp + TWO_PI;
-    } else {
-      // Case like low=340 and high=20 degrees
-      m_angleHigh += TWO_PI;
+  if (m_angleHigh > m_angleLow + PI) {
+
+    // Case like low=20 and high=340 degrees. Span angle will be negative and small
+    if (m_angleCenter > PI) {
+      m_angleCenter -= TWO_PI;
     }
+    m_angleHigh -= TWO_PI;
+
+  } else if (m_angleLow > m_angleHigh + PI) {
+
+    // Case like low=340 and high=20 degrees. Span angle will be positive and small
+    if (m_angleCenter < PI) {
+      m_angleCenter += TWO_PI;
+    }
+    m_angleHigh += TWO_PI;
+
   }
 
   QPointF posClickGraph;
@@ -66,16 +72,28 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
   QPointF posScreenTR = posScreen0 + centerTo90;
   QPointF posScreenBR = posScreen0 - centerTo90;
 
-  double angleRadians = 0, aAligned = 0, bAligned = 0;
+  double angleEllipseFromMajorAxis= 0, aAligned = 0, bAligned = 0;
   ellipseFromParallelogram (posScreenTL.x() - posScreenCenter.x(),
                             posScreenTL.y() - posScreenCenter.y(),
                             posScreenTR.x() - posScreenCenter.x(),
                             posScreenTR.y() - posScreenCenter.y(),
                             posScreenBR.x() - posScreenCenter.x(),
                             posScreenBR.y() - posScreenCenter.y(),
-                            angleRadians,
+                            angleEllipseFromMajorAxis,
                             aAligned,
                             bAligned);
+
+  // Angle between +x axis in screen and semimajor axis is computed in all four quadrants
+  // by projecting onto +x and +y screen axesangleEllipseFromScreenAxis
+  m_angleRotation = angleFromBasisVectors (1,
+                                           0,
+                                           0,
+                                           1,
+                                           posScreen0.x() - posScreenCenter.x(),
+                                           posScreen0.y() - posScreenCenter.y());
+
+  qDebug() << "CentipedeSegmentConstantYREllipse::ctor low=" << m_angleLow *180/3.1416 << " center=" << m_angleCenter*180/3.1416
+           << " high=" << m_angleHigh*180./3.1416 << " rotation=" << m_angleRotation*180/3.1416;
 
   // Origin
   QPointF posOriginScreen;
@@ -135,6 +153,7 @@ void CentipedeSegmentConstantYREllipse::updateRadius (double radius)
   int angleDeltaTics = angleHighTics - angleLowTics;
 
   emit signalUpdateAngles (angleLowTics,
-                           angleDeltaTics);
+                           angleDeltaTics,
+                           m_angleRotation);
 }
 
