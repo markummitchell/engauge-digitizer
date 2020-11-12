@@ -41,6 +41,7 @@ DigitizeStateGuideline::DigitizeStateGuideline (DigitizeStateContext &context) :
 
 DigitizeStateGuideline::~DigitizeStateGuideline ()
 {
+  delete m_centipedePair;  
 }
 
 QString DigitizeStateGuideline::activeCurve () const
