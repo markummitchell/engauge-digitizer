@@ -262,7 +262,7 @@ void GuidelineEllipse::updateGeometry (const QPointF &posScreen)
 
   // Rotate. Originally the rectangle was centered at posCenter, the rotation center
   // was set using setTransformOriginPoint to posCenter, but the resulting shape was not right
-  setRotation (qRadiansToDegrees (ellipseParameters.angleRadians()));
+  setRotation (-1.0 * qRadiansToDegrees (ellipseParameters.angleRadians()));
   setPos (posCenter);
 
   // Save the graph value for later

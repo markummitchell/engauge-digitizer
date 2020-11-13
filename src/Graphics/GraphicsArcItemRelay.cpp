@@ -35,5 +35,5 @@ void GraphicsArcItemRelay::slotUpdateAngles (int startAngle,
 {
   m_graphicsItem->setStartAngle (startAngle);
   m_graphicsItem->setSpanAngle (spanAngle);
-  m_graphicsItem->setRotation (4*rotationAngle * RADIANS_TO_DEGREES);
+  m_graphicsItem->setRotation (-1.0 * rotationAngle * RADIANS_TO_DEGREES);
 }

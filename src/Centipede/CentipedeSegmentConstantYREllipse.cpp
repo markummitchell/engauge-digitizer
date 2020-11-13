@@ -49,6 +49,13 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
 
   }
 
+  // Final check is to make sure center angle is between low and high. This fixes problems near +/-180
+  if (m_angleCenter > qMax (m_angleLow, m_angleHigh)) {
+    m_angleCenter -= TWO_PI;
+  } else if (m_angleCenter < qMin (m_angleLow, m_angleHigh)) {
+    m_angleCenter += TWO_PI;
+  }
+
   QPointF posClickGraph;
   transformation.transformScreenToRawGraph (posClickScreen,
                                             posClickGraph);
@@ -88,12 +95,9 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
   m_angleRotation = angleFromBasisVectors (1,
                                            0,
                                            0,
-                                           1,
+                                           -1,
                                            posScreen0.x() - posScreenCenter.x(),
                                            posScreen0.y() - posScreenCenter.y());
-
-  qDebug() << "CentipedeSegmentConstantYREllipse::ctor low=" << m_angleLow *180/3.1416 << " center=" << m_angleCenter*180/3.1416
-           << " high=" << m_angleHigh*180./3.1416 << " rotation=" << m_angleRotation*180/3.1416;
 
   // Origin
   QPointF posOriginScreen;
