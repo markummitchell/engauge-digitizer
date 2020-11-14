@@ -1209,7 +1209,8 @@ contains(DEFINES, NETWORKING) {
 #   ja = Japanese   Japan=_jp
 #   kk = Kazakh     Kazakhstan=_kz
 #   ko = Korean     SouthKorea=_kr
-#   nb = Norwegian  
+#   nb = Norwegian
+#   nl = Dutch
 #   pt = Portuguese Brazil=_br
 #   ru = Russian    Federation=_ru
 #   zh = Chinese    China=_cn
@@ -1224,14 +1225,15 @@ TRANSLATIONS = translations/engauge_ar.ts \
                translations/engauge_de.ts \
                translations/engauge_en.ts \
                translations/engauge_es.ts \
-               translations/engauge_fa_IR.ts \               
-               translations/engauge_fr.ts \               
-               translations/engauge_hi.ts \               
-               translations/engauge_it.ts \               
-               translations/engauge_ja.ts \               
+               translations/engauge_fa_IR.ts \
+               translations/engauge_fr.ts \
+               translations/engauge_hi.ts \
+               translations/engauge_it.ts \
+               translations/engauge_ja.ts \
                translations/engauge_kk.ts \
                translations/engauge_ko.ts \
-               translations/engauge_nb.ts \               
+               translations/engauge_nb.ts \
+               translations/engauge_nl.ts \
                translations/engauge_pt.ts \
                translations/engauge_ru.ts \
                translations/engauge_zh.ts
