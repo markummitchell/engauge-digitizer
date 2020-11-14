@@ -1266,29 +1266,31 @@ Toon of verberg de werkbalk van de tools voor digitalisering</translation>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="458" />
         <source>Settings Views Toolbar</source>
-        <translation type="unfinished" />
+        <translation>Instellingenweergaven werkbalk</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="461" />
         <source>Show or hide the settings views toolbar.</source>
-        <translation type="unfinished" />
+        <translation>Toon of verberg de werkbalk van de instellingenweergaven.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="462" />
         <source>View Settings Views ToolBar
 
 Show or hide the settings views toolbar. These views graphically show the most important settings.</source>
-        <translation type="unfinished" />
+        <translation>Bekijk Instellingen Weergaven ToolBar
+
+Toon of verberg de werkbalk van de instellingenweergaven. Deze weergaven tonen grafisch de belangrijkste instellingen.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="467" />
         <source>Coordinate System Toolbar</source>
-        <translation type="unfinished" />
+        <translation>Coördinatensysteem werkbalk</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="470" />
         <source>Show or hide the coordinate system toolbar.</source>
-        <translation type="unfinished" />
+        <translation>Toon of verberg de werkbalk van het coördinatensysteem.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="471" />
@@ -1297,12 +1299,16 @@ Show or hide the settings views toolbar. These views graphically show the most i
 Show or hide the coordinate system selection toolbar. This toolbar is used to select the current coordinate system when the document has multiple coordinate systems. This toolbar is also used to view and print all coordinate systems.
 
 This toolbar is disabled when there is only one coordinate system.</source>
-        <translation type="unfinished" />
+        <translation>Bekijk Coördinatensystemen ToolBar
+
+Toon of verberg de werkbalk voor het selecteren van het coördinatensysteem. Deze werkbalk wordt gebruikt om het huidige coördinatensysteem te selecteren wanneer het document meerdere coördinatensystemen heeft. Deze werkbalk wordt ook gebruikt om alle coördinatensystemen te bekijken en af ​​te drukken.
+
+Deze werkbalk is uitgeschakeld als er maar één coördinatensysteem is.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="479" />
         <source>Checklist Guide Window</source>
-        <translation type="unfinished" />
+        <translation>Checklist gidsvenster</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="482" />
@@ -1359,19 +1365,21 @@ Toon of verberg het geometrievenster</translation>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="503" />
         <source>Tool Tips</source>
-        <translation type="unfinished" />
+        <translation>Gereedschapstips</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="506" />
         <source>Show or hide the tool tips.</source>
-        <translation type="unfinished" />
+        <translation>Toon of verberg de tooltips.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="507" />
         <source>View Tool Tips
 
 Show or hide the tool tips</source>
-        <translation type="unfinished" />
+        <translation>Bekijk Tooltips
+
+Toon of verberg de tooltips</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="511" />
@@ -1381,14 +1389,16 @@ Show or hide the tool tips</source>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="514" />
         <source>Show or hide grid lines.</source>
-        <translation type="unfinished" />
+        <translation>Rasterlijnen weergeven of verbergen.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="515" />
         <source>View Grid Lines
 
 Show or hide grid lines that are added for accurate adjustments of the axes points, which can improve accuracy in distorted graphs</source>
-        <translation type="unfinished" />
+        <translation>Bekijk rasterlijnen
+
+Toon of verberg rasterlijnen die zijn toegevoegd voor nauwkeurige aanpassingen van de aspunten, wat de nauwkeurigheid in vervormde grafieken kan verbeteren</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="520" />
@@ -1398,58 +1408,64 @@ Show or hide grid lines that are added for accurate adjustments of the axes poin
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="523" />
         <source>Show or hide guidelines.</source>
-        <translation type="unfinished" />
+        <translation>Toon of verberg richtlijnen.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="524" />
         <source>View Guidelines
 
 Show or hide guidelines that are added for accurate adjustments of the graph points, which can improve accuracy of points close to the guidelines</source>
-        <translation type="unfinished" />
+        <translation>Bekijk richtlijnen
+
+Toon of verberg hulplijnen die zijn toegevoegd voor nauwkeurige aanpassingen van de grafiekpunten, waardoor de nauwkeurigheid van punten dicht bij de hulplijnen kan worden verbeterd</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="529" />
         <source>No Background</source>
-        <translation type="unfinished" />
+        <translation>Geen achtergrond</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="531" />
         <source>Do not show the image underneath the points.</source>
-        <translation type="unfinished" />
+        <translation>Laat de afbeelding onder de punten niet zien.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="532" />
         <source>No Background
 
 No image is shown so points are easier to see</source>
-        <translation type="unfinished" />
+        <translation>Geen achtergrond
+
+Er wordt geen afbeelding weergegeven, zodat punten gemakkelijker te zien zijn</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="535" />
         <source>Show Original Image</source>
-        <translation type="unfinished" />
+        <translation>Toon originele afbeelding</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="537" />
         <source>Show the original image underneath the points.</source>
-        <translation type="unfinished" />
+        <translation>Laat de originele afbeelding onder de punten zien.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="538" />
         <source>Show Original Image
 
 Show the original image underneath the points</source>
-        <translation type="unfinished" />
+        <translation>Toon originele afbeelding
+
+Laat de originele afbeelding onder de punten zien</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="541" />
         <source>Show Filtered Image</source>
-        <translation type="unfinished" />
+        <translation>Toon gefilterde afbeelding</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="544" />
         <source>Show the filtered image underneath the points.</source>
-        <translation type="unfinished" />
+        <translation>Toon de gefilterde afbeelding onder de punten.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="545" />
@@ -1458,379 +1474,389 @@ Show the original image underneath the points</source>
 Show the filtered image underneath the points.
 
 The filtered image is created from the original image according to the Filter preferences so unimportant information is hidden and important information is emphasized</source>
-        <translation type="unfinished" />
+        <translation>Toon gefilterde afbeelding
+
+Toon de gefilterde afbeelding onder de punten.
+
+De gefilterde afbeelding wordt gemaakt op basis van de originele afbeelding volgens de filtervoorkeuren, zodat onbelangrijke informatie wordt verborgen en belangrijke informatie wordt benadrukt</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="557" />
         <source>Hide All Curves</source>
-        <translation type="unfinished" />
+        <translation>Verberg alle curven</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="559" />
         <source>Hide all digitized curves.</source>
-        <translation type="unfinished" />
+        <translation>Verberg alle gedigitaliseerde curven.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="560" />
         <source>Hide All Curves
 
 No axis points or digitized graph curves are shown so the image is easier to see.</source>
-        <translation type="unfinished" />
+        <translation>Verberg alle curven
+
+Er worden geen aspunten of gedigitaliseerde grafiekcurven weergegeven, zodat de afbeelding gemakkelijker te zien is.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="563" />
         <source>Show Selected Curve</source>
-        <translation type="unfinished" />
+        <translation>Geselecteerde curve weergeven</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="565" />
         <source>Show only the currently selected curve.</source>
-        <translation type="unfinished" />
+        <translation>Toon alleen de momenteel geselecteerde curve.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="566" />
         <source>Show Selected Curve
 
 Show only the digitized points and line that belong to the currently selected curve.</source>
-        <translation type="unfinished" />
+        <translation>Geselecteerde curve weergeven
+
+Toon alleen de gedigitaliseerde punten en lijnen die bij de momenteel geselecteerde curve horen.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="569" />
         <source>Show All Curves</source>
-        <translation type="unfinished" />
+        <translation>Toon alle curven</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="572" />
         <source>Show all curves.</source>
-        <translation type="unfinished" />
+        <translation>Toon alle curven.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="573" />
         <source>Show All Curves
 
 Show all digitized axis points and graph curves</source>
-        <translation type="unfinished" />
+        <translation>Toon alle curven
+
+Toon alle gedigitaliseerde aspunten en grafiekcurven</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="582" />
         <source>Hide Always</source>
-        <translation type="unfinished" />
+        <translation>Verberg altijd</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="584" />
         <source>Always hide the status bar.</source>
-        <translation type="unfinished" />
+        <translation>Verberg altijd de statusbalk.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="585" />
         <source>Hide the status bar. No temporary status or feedback messages will appear.</source>
-        <translation type="unfinished" />
+        <translation>Verberg de statusbalk. Er verschijnen geen tijdelijke status- of feedbackberichten.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="587" />
         <source>Show Temporary Messages</source>
-        <translation type="unfinished" />
+        <translation>Tijdelijke berichten weergeven</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="589" />
         <source>Hide the status bar except when display temporary messages.</source>
-        <translation type="unfinished" />
+        <translation>Verberg de statusbalk behalve wanneer tijdelijke berichten worden weergegeven.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="590" />
         <source>Hide the status bar, except when displaying temporary status and feedback messages.</source>
-        <translation type="unfinished" />
+        <translation>Verberg de statusbalk, behalve bij het weergeven van tijdelijke status- en feedbackberichten.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="592" />
         <source>Show Always</source>
-        <translation type="unfinished" />
+        <translation>Altijd weergeven</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="594" />
         <source>Always show the status bar.</source>
-        <translation type="unfinished" />
+        <translation>Laat altijd de statusbalk zien.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="595" />
         <source>Show the status bar. Besides displaying temporary status and feedback messages, the status bar also displays information about the cursor position.</source>
-        <translation type="unfinished" />
+        <translation>Toon de statusbalk. Naast het weergeven van tijdelijke status- en feedbackberichten, geeft de statusbalk ook informatie over de cursorpositie weer.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="604" />
         <source>Zoom Out</source>
-        <translation type="unfinished" />
+        <translation>Uitzoomen</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="605" />
         <source>Zoom out</source>
-        <translation type="unfinished" />
+        <translation>Uitzoomen</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="609" />
         <source>Zoom In</source>
-        <translation type="unfinished" />
+        <translation>In zoomen</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="610" />
         <source>Zoom in</source>
-        <translation type="unfinished" />
+        <translation>In zoomen</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="617" />
         <source>16:1 (1600%)</source>
-        <translation type="unfinished" />
+        <translation>16:1 (1600%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="619" />
         <source>Zoom 16:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 16:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="623" />
         <source>16:1 farther (1270%)</source>
-        <translation type="unfinished" />
+        <translation>16: 1 verder (1270%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="625" />
         <source>Zoom 12.7:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 12.7:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="629" />
         <source>8:1 closer (1008%)</source>
-        <translation type="unfinished" />
+        <translation>8: 1 dichterbij (1008%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="631" />
         <source>Zoom 10.08:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 10.08:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="635" />
         <source>8:1 (800%)</source>
-        <translation type="unfinished" />
+        <translation>8:1 (800%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="637" />
         <source>Zoom 8:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 8:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="641" />
         <source>8:1 farther (635%)</source>
-        <translation type="unfinished" />
+        <translation>8: 1 verder (635%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="643" />
         <source>Zoom 6.35:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 6.35:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="647" />
         <source>4:1 closer (504%)</source>
-        <translation type="unfinished" />
+        <translation>4: 1 dichterbij (504%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="649" />
         <source>Zoom 5.04:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 5.04:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="653" />
         <source>4:1 (400%)</source>
-        <translation type="unfinished" />
+        <translation>4:1 (400%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="655" />
         <source>Zoom 4:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 4:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="659" />
         <source>4:1 farther (317%)</source>
-        <translation type="unfinished" />
+        <translation>4: 1 verder (317%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="661" />
         <source>Zoom 3.17:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 3.17:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="665" />
         <source>2:1 closer (252%)</source>
-        <translation type="unfinished" />
+        <translation>2: 1 dichterbij (252%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="667" />
         <source>Zoom 2.52:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 2.52:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="671" />
         <source>2:1 (200%)</source>
-        <translation type="unfinished" />
+        <translation>2:1 (200%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="673" />
         <source>Zoom 2:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 2:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="677" />
         <source>2:1 farther (159%)</source>
-        <translation type="unfinished" />
+        <translation>2: 1 verder (159%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="679" />
         <source>Zoom 1.59:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 1.59:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="683" />
         <source>1:1 closer (126%)</source>
-        <translation type="unfinished" />
+        <translation>1: 1 dichterbij (126%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="686" />
         <source>Zoom 1.3:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 1.3:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="690" />
         <source>1:1 (100%)</source>
-        <translation type="unfinished" />
+        <translation>1:1 (100%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="693" />
         <source>Zoom 1:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 1:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="697" />
         <source>1:1 farther (79%)</source>
-        <translation type="unfinished" />
+        <translation>1: 1 verder (79%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="700" />
         <source>Zoom 0.8:1</source>
-        <translation type="unfinished" />
+        <translation>Zoom 0.8:1</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="704" />
         <source>1:2 closer (63%)</source>
-        <translation type="unfinished" />
+        <translation>1: 2 dichterbij (63%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="706" />
         <source>Zoom 1.3:2</source>
-        <translation type="unfinished" />
+        <translation>Zoom 1.3:2</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="710" />
         <source>1:2 (50%)</source>
-        <translation type="unfinished" />
+        <translation>1:2 (50%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="712" />
         <source>Zoom 1:2</source>
-        <translation type="unfinished" />
+        <translation>Zoom 1:2</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="716" />
         <source>1:2 farther (40%)</source>
-        <translation type="unfinished" />
+        <translation>1: 2 verder (40%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="718" />
         <source>Zoom 0.8:2</source>
-        <translation type="unfinished" />
+        <translation>Zoom 0.8:2</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="722" />
         <source>1:4 closer (31%)</source>
-        <translation type="unfinished" />
+        <translation>1: 4 dichterbij (31%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="724" />
         <source>Zoom 1.3:4</source>
-        <translation type="unfinished" />
+        <translation>Zoom 1.3: 4</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="728" />
         <source>1:4 (25%)</source>
-        <translation type="unfinished" />
+        <translation>1:4 (25%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="730" />
         <source>Zoom 1:4</source>
-        <translation type="unfinished" />
+        <translation>Zoom 1:4</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="734" />
         <source>1:4 farther (20%)</source>
-        <translation type="unfinished" />
+        <translation> 1: 4 verder (20%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="736" />
         <source>Zoom 0.8:4</source>
-        <translation type="unfinished" />
+        <translation>Zoom 0.8:4</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="740" />
         <source>1:8 closer (12.5%)</source>
-        <translation type="unfinished" />
+        <translation>1: 8 dichterbij (12,5%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="742" />
         <location filename="../src/Create/CreateActions.cpp" line="748" />
         <source>Zoom 1:8</source>
-        <translation type="unfinished" />
+        <translation>Zoom 1:8</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="746" />
         <source>1:8 (12.5%)</source>
-        <translation type="unfinished" />
+        <translation>1:8 (12.5%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="752" />
         <source>1:8 farther (10%)</source>
-        <translation type="unfinished" />
+        <translation>1: 8 verder (10%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="754" />
         <source>Zoom 0.8:8</source>
-        <translation type="unfinished" />
+        <translation>Zoom 0.8:8</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="758" />
         <source>1:16 closer (8%)</source>
-        <translation type="unfinished" />
+        <translation>1:16 dichterbij (8%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="760" />
         <source>Zoom 1.3:16</source>
-        <translation type="unfinished" />
+        <translation>Zoom 1.3:16</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="764" />
         <source>1:16 (6.25%)</source>
-        <translation type="unfinished" />
+        <translation>1:16 (6.25%)</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="766" />
         <source>Zoom 1:16</source>
-        <translation type="unfinished" />
+        <translation>Zoom 1:16</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="770" />
         <source>Fill</source>
-        <translation type="unfinished" />
+        <translation>Vullen</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="772" />
         <source>Zoom with stretching to fill window</source>
-        <translation type="unfinished" />
+        <translation>Zoom met uitrekken om venster te vullen</translation>
     </message>
 </context>
 <context>
@@ -1838,32 +1864,32 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="21" />
         <source>&amp;File</source>
-        <translation type="unfinished" />
+        <translation>het dossier</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="27" />
         <source>Open &amp;Recent</source>
-        <translation type="unfinished" />
+        <translation>Recentelijk geopend</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="43" />
         <source>&amp;Edit</source>
-        <translation type="unfinished" />
+        <translation>Bewerk</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="56" />
         <source>Digitize</source>
-        <translation type="unfinished" />
+        <translation>Digitaliseer</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="66" />
         <source>View</source>
-        <translation type="unfinished" />
+        <translation>Visie</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="80" />
         <source>Background</source>
-        <translation type="unfinished" />
+        <translation>Achtergrond</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="85" />
@@ -1873,22 +1899,22 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="90" />
         <source>Status Bar</source>
-        <translation type="unfinished" />
+        <translation>Statusbalk</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="95" />
         <source>Zoom</source>
-        <translation type="unfinished" />
+        <translation>Zoom</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="127" />
         <source>Settings</source>
-        <translation type="unfinished" />
+        <translation>Instellingen</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateMenus.cpp" line="143" />
         <source>&amp;Help</source>
-        <translation type="unfinished" />
+        <translation>&amp;Helpen</translation>
     </message>
 </context>
 <context>
@@ -1896,7 +1922,7 @@ Show all digitized axis points and graph curves</source>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="48" />
         <source>Select background image</source>
-        <translation type="unfinished" />
+        <translation>Selecteer achtergrondafbeelding</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="49" />
@@ -1906,39 +1932,46 @@ Select background image:
 1) No background which highlights points
 2) Original image which shows everything
 3) Filtered image which highlights important details</source>
-        <translation type="unfinished" />
+        <translation>Geselecteerde achtergrond
+
+Selecteer achtergrondafbeelding:
+1) Geen achtergrond die punten benadrukt
+2) Originele afbeelding die alles laat zien
+3) Gefilterde afbeelding die belangrijke details benadrukt</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="54" />
         <source>No background</source>
-        <translation type="unfinished" />
+        <translation>Geen achtergrond</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="55" />
         <source>Original image</source>
-        <translation type="unfinished" />
+        <translation>Originele afbeelding</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="56" />
         <source>Filtered image</source>
-        <translation type="unfinished" />
+        <translation>Gefilterde afbeelding</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="61" />
         <source>Background</source>
-        <translation type="unfinished" />
+        <translation>Achtergrond</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="71" />
         <source>Currently selected coordinate system</source>
-        <translation type="unfinished" />
+        <translation>Momenteel geselecteerd coördinatensysteem</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="72" />
         <source>Selected Coordinate System
 
 Currently selected coordinate system. This is used to switch between coordinate systems in documents with multiple coordinate systems</source>
-        <translation type="unfinished" />
+        <translation>Geselecteerd coördinatensysteem
+
+Momenteel geselecteerd coördinatensysteem. Dit wordt gebruikt om te schakelen tussen coördinatensystemen in documenten met meerdere coördinatensystemen</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="80" />
@@ -1972,7 +2005,7 @@ When pressed, this button Prints all digitized points and lines for all coordina
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="106" />
         <source>Select curve for new points.</source>
-        <translation type="unfinished" />
+        <translation>Selecteer curve voor nieuwe punten.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="107" />
@@ -1981,41 +2014,47 @@ When pressed, this button Prints all digitized points and lines for all coordina
 Select curve for any new points. Every point belongs to one curve.
 
 This can be changed while in Curve Point, Point Match, Color Picker or Segment Fill mode.</source>
-        <translation type="unfinished" />
+        <translation>Geselecteerde curvenaam
+
+Selecteer een curve voor nieuwe punten. Elk punt behoort tot één curve.
+
+Dit kan worden gewijzigd in de modus Curve Point, Point Match, Color Picker of Segment Fill.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="112" />
         <source>Drawing</source>
-        <translation type="unfinished" />
+        <translation>Tekening</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="134" />
         <source>Points style for the currently selected curve</source>
-        <translation type="unfinished" />
+        <translation>Puntenstijl voor de momenteel geselecteerde curve</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="135" />
         <source>Points Style
 
 Points style for the currently selected curve. The points style is only displayed in this toolbar. To change the points style, use the Curve Properties dialog.</source>
-        <translation type="unfinished" />
+        <translation>Punten stijl Puntenstijl voor de momenteel geselecteerde curve. De puntenstijl wordt alleen in deze werkbalk weergegeven. Gebruik het dialoogvenster Curve-eigenschappen om de puntstijl te wijzigen.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="143" />
         <source>View of filter for current curve in Segment Fill mode</source>
-        <translation type="unfinished" />
+        <translation>Weergave van filter voor huidige curve in Segment Fill-modus</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="144" />
         <source>Segment Fill Filter
 
 View of filter for the current curve in Segment Fill mode. The filter settings are only displayed in this toolbar. To changed the filter settings, use the Color Picker mode or the Filter Settings dialog.</source>
-        <translation type="unfinished" />
+        <translation>Segmentvulfilter
+
+Weergave van filter voor de huidige curve in de modus Segment opvullen. De filterinstellingen worden alleen in deze werkbalk weergegeven. Gebruik de modus Kleurkiezer of het dialoogvenster Filterinstellingen om de filterinstellingen te wijzigen.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateToolBars.cpp" line="149" />
         <source>Views</source>
-        <translation type="unfinished" />
+        <translation>Keer bekeken</translation>
     </message>
 </context>
 <context>
@@ -5555,7 +5594,7 @@ Points can be more accurately placed by zooming in.</source>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="163" />
         <source>Fill</source>
-        <translation type="unfinished" />
+        <translation>Vullen</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="164" />
