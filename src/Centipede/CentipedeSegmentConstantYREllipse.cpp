@@ -23,7 +23,8 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
                                                                      const QPointF &posClickScreen) :
   CentipedeSegmentAbstract (modelGuideline,
                             transformation,
-                            posClickScreen)
+                            posClickScreen),
+  m_angleScreenToEllipseAxes (0)
 {
   m_posLow = posScreenConstantYRForLowXT (modelGuideline.creationCircleRadius ());
   m_posHigh = posScreenConstantYRForHighXT (modelGuideline.creationCircleRadius ());
@@ -146,8 +147,8 @@ void CentipedeSegmentConstantYREllipse::updateRadius (double radius)
   // Scale up/down the angles, with them converging to center angle as radius goes to zero
   double scaling = radius / modelGuideline().creationCircleRadius ();
 
-  double angleLowRad = m_angleCenter + scaling * (m_angleLow - m_angleCenter);
-  double angleHighRad = m_angleCenter + scaling * (m_angleHigh - m_angleCenter);
+  double angleLowRad = m_angleCenter + scaling * (m_angleLow - m_angleCenter) - m_angleScreenToEllipseAxes;
+  double angleHighRad = m_angleCenter + scaling * (m_angleHigh - m_angleCenter) - m_angleScreenToEllipseAxes;
   int angleLowTics = (int) (angleLowRad * RADIANS_TO_TICS);
   int angleHighTics = (int) (angleHighRad * RADIANS_TO_TICS);
 

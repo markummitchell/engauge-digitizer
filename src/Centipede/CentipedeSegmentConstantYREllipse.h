@@ -41,6 +41,8 @@ private:
   GraphicsArcItem *m_graphicsItem;
   GraphicsArcItemRelay *m_graphicsItemRelay;  
 
+  double m_angleScreenToEllipseAxes;
+
   // Two points where circle around click point intersects constant coordinate line
   QPointF m_posLow;
   QPointF m_posHigh;
