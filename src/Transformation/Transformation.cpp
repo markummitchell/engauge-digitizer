@@ -22,7 +22,6 @@ using namespace std;
 /// number of characters.
 const int PRECISION_DIGITS = 4;
 
-const double PI = 3.1415926535;
 const double ZERO_OFFSET_AFTER_LOG = 1; // Log of this value is zero
 
 Transformation::Transformation() :
@@ -94,11 +93,11 @@ QPointF Transformation::cartesianFromCartesianOrPolar (const DocumentModelCoords
       case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
       case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
       case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
-        angleRadians = posGraphIn.x () * PI / 180.0;
+        angleRadians = posGraphIn.x () * M_PI / 180.0;
         break;
 
       case COORD_UNITS_POLAR_THETA_GRADIANS:
-        angleRadians = posGraphIn.x () * PI / 200.0;
+        angleRadians = posGraphIn.x () * M_PI / 200.0;
         break;
 
       case COORD_UNITS_POLAR_THETA_RADIANS:
@@ -106,7 +105,7 @@ QPointF Transformation::cartesianFromCartesianOrPolar (const DocumentModelCoords
         break;
 
       case COORD_UNITS_POLAR_THETA_TURNS:
-        angleRadians = posGraphIn.x () * 2.0 * PI;
+        angleRadians = posGraphIn.x () * 2.0 * M_PI;
         break;
 
       default:
@@ -138,11 +137,11 @@ QPointF Transformation::cartesianOrPolarFromCartesian (const DocumentModelCoords
       case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES:
       case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS:
       case COORD_UNITS_POLAR_THETA_DEGREES_MINUTES_SECONDS_NSEW:
-        posGraphCartesianOrPolar.setX (angleRadians * 180.0 / PI);
+        posGraphCartesianOrPolar.setX (angleRadians * 180.0 / M_PI);
         break;
 
       case COORD_UNITS_POLAR_THETA_GRADIANS:
-        posGraphCartesianOrPolar.setX (angleRadians * 200.0 / PI);
+        posGraphCartesianOrPolar.setX (angleRadians * 200.0 / M_PI);
         break;
 
       case COORD_UNITS_POLAR_THETA_RADIANS:
@@ -150,7 +149,7 @@ QPointF Transformation::cartesianOrPolarFromCartesian (const DocumentModelCoords
         break;
 
       case COORD_UNITS_POLAR_THETA_TURNS:
-        posGraphCartesianOrPolar.setX (angleRadians / 2.0 / PI);
+        posGraphCartesianOrPolar.setX (angleRadians / (2.0 * M_PI));
         break;
 
       default:

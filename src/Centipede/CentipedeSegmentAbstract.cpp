@@ -12,7 +12,6 @@
 #include "Transformation.h"
 
 const int NUM_CIRCLE_POINTS = 400; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
-const double PI = 3.1415926535;
 
 CentipedeSegmentAbstract::CentipedeSegmentAbstract(const DocumentModelGuideline &modelGuideline,
                                                    const Transformation &transformation,
@@ -32,7 +31,6 @@ double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radiusAbout
 {
   QPointF posScreenBest;
   double xTBest = 0;
-  double angleBest = 0;
 
   // Click point
   QPointF posClickGraph;
@@ -40,23 +38,6 @@ double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radiusAbout
                                               posClickGraph);
   double xClick = posClickGraph.x();
   double yClick = posClickGraph.y();
-
-  // Origin and orthogonal basis vectors along 0 degrees and 90 degrees. A complicationi is that log
-  // coordinates may be in use so the dynamic range of one or both coordinates could be huge - to
-  // prevent roundoff issues we work in linear cartesian coordinates rather than raw graph coordinates.
-  //
-  // This also prevents issues with the origin being at range=zero and range having log scale.
-  //
-  // This also prevents issues with degrees versus radians versus gradians versus ...
-  QPointF posOriginScreen, posXDirectionScreen, posYDirectionScreen;
-  transformation().transformRawGraphToScreen (QPointF (0,  0),
-                                              posOriginScreen);
-  transformation().transformRawGraphToScreen (QPointF (0, yClick),
-                                              posXDirectionScreen);
-  transformation().transformRawGraphToScreen (QPointF (90, yClick),
-                                              posYDirectionScreen);
-  QPointF basisVectorX = (posXDirectionScreen - posOriginScreen) / magnitude (posXDirectionScreen - posOriginScreen);
-  QPointF basisVectorY = (posYDirectionScreen - posOriginScreen) / magnitude (posYDirectionScreen - posOriginScreen);
 
   // Iterate points around the circle
   bool isFirst = true;
@@ -103,20 +84,10 @@ double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radiusAbout
       isFirst = false;
       posScreenBest = posScreenPrevious;
       xTBest = xGraphPrevious;
-
-      // Calculate angle. Note that quadrant ambiguities are resolved at a higher level
-      // with knowledge of other angle(s)
-      QPointF delta = posScreenPrevious - posOriginScreen;
-      angleBest = angleFromBasisVectors (basisVectorX.x(),
-                                         basisVectorX.y(),
-                                         basisVectorY.x(),
-                                         basisVectorY.y(),
-                                         delta.x(),
-                                         delta.y());
     }
   }
 
-  return angleBest;
+  return qDegreesToRadians (xTBest);
 }
 
 double CentipedeSegmentAbstract::angleScreenConstantYRCenterAngle (double radiusAboutClick) const
@@ -146,8 +117,8 @@ void CentipedeSegmentAbstract::generatePreviousAndNextPoints (double radiusAbout
                                                               QPointF &posGraphNext,
                                                               QPointF &posScreenPrevious) const
 {
-  double angleBefore = 2.0 * PI * (double) i / (double) NUM_CIRCLE_POINTS;
-  double angleAfter = 2.0 * PI * (double) (i + 1) / (double) NUM_CIRCLE_POINTS;
+  double angleBefore = 2.0 * M_PI * (double) i / (double) NUM_CIRCLE_POINTS;
+  double angleAfter = 2.0 * M_PI * (double) (i + 1) / (double) NUM_CIRCLE_POINTS;
   posScreenPrevious = m_posClickScreen + QPointF (radiusAboutClick * cos (angleBefore),
                                                   radiusAboutClick * sin (angleBefore));
   QPointF posScreenNext = m_posClickScreen + QPointF (radiusAboutClick * cos (angleAfter),

@@ -23,8 +23,6 @@ const ColorPalette DEFAULT_POINT_COLOR_GRAPH = COLOR_PALETTE_BLUE;
 const int DEFAULT_POINT_LINE_WIDTH = 1;
 const int DEFAULT_POINT_RADIUS = 10;
 const PointShape DEFAULT_POINT_SHAPE_AXIS = POINT_SHAPE_CROSS;
-const double PI = 3.1415926535;
-const double TWO_PI = 2.0 * PI;
 
 PointStyle::PointStyle () :
   // Defaults that prevent address sanitizer warnings. Overwritten immediately
@@ -168,7 +166,7 @@ QPolygonF PointStyle::polygon () const
       {
         int xyWidth = signed (m_radius);
         for (int i = 0; i <= NUM_XY; i++) {
-          double angle = TWO_PI * double (i) / double (NUM_XY);
+          double angle = 2.0 * M_PI * double (i) / double (NUM_XY);
           double x = xyWidth * cos (angle);
           double y = xyWidth * sin (angle);
           points.append (QPointF (x, y));

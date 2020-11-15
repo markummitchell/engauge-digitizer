@@ -8,11 +8,10 @@
 #include "GraphicsArcItemRelay.h"
 #include <QDebug>
 #include <QGraphicsScene>
+#include <qmath.h>
 #include <QObject>
 #include <QPainter>
 #include "QtToString.h"
-
-const double RADIANS_TO_DEGREES = 180.0 / 3.1415926535;
 
 GraphicsArcItemRelay::GraphicsArcItemRelay (QObject *caller,
                                             GraphicsArcItem *graphicsItem) :
@@ -35,5 +34,5 @@ void GraphicsArcItemRelay::slotUpdateAngles (int startAngle,
 {
   m_graphicsItem->setStartAngle (startAngle);
   m_graphicsItem->setSpanAngle (spanAngle);
-  m_graphicsItem->setRotation (-1.0 * rotationAngle * RADIANS_TO_DEGREES);
+  m_graphicsItem->setRotation (-1.0 * qRadiansToDegrees (rotationAngle));
 }

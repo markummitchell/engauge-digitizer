@@ -33,8 +33,6 @@ const int POINT_SEPARATION_MAX = 10000;
 const int IMAGE_WIDTH = 200;
 const int IMAGE_HEIGHT = 350;
 
-const double TWOPI = 2.0 * 3.1415926535;
-
 const double BRUSH_WIDTH = 2.0;
 
 DlgSettingsSegments::DlgSettingsSegments(MainWindow &mainWindow) :
@@ -231,7 +229,7 @@ QImage DlgSettingsSegments::createPreviewImage () const
   int xStart = margin, xEnd = IMAGE_WIDTH / 2 - margin;
   for (x = xStart; x < xEnd; x++) {
     double s = double (x - xStart) / double (xEnd - xStart);
-    int y = qFloor (yCenter - yHeight * qSin (TWOPI * s));
+    int y = qFloor (yCenter - yHeight * qSin (2.0 * M_PI * s));
 
     if (!isFirst) {
       painter.drawLine (xLast, yLast, x, y);

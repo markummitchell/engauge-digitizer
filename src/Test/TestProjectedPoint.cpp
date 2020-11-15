@@ -11,9 +11,6 @@ QTEST_MAIN (TestProjectedPoint)
 
 using namespace std;
 
-const double PI = 3.1415926535;
-const double RADIANS_TO_DEGREES = 180.0 / PI;
-
 TestProjectedPoint::TestProjectedPoint(QObject *parent) :
   QObject(parent)
 {
@@ -71,13 +68,13 @@ void TestProjectedPoint::testProjectedPoints ()
   int angleStep = 13;
 
   // Critical angle in degrees
-  int angleCriticalRight = qFloor (0.5 + qAcos (radiusCircle / radiusProjection) * RADIANS_TO_DEGREES);
-  int angleCriticalUp = qFloor (0.5 + qAsin (radiusCircle / radiusProjection) * RADIANS_TO_DEGREES);
+  int angleCriticalRight = qFloor (0.5 + qRadiansToDegrees (qAcos (radiusCircle / radiusProjection)));
+  int angleCriticalUp = qFloor (0.5 + qRadiansToDegrees (qAsin (radiusCircle / radiusProjection)));
 
   for (int angle = 0; angle <= 360; angle += angleStep) {
 
-    double xStart = radiusCircle * cos (angle * PI / 180.0);
-    double yStart = radiusCircle * sin (angle * PI / 180.0);
+    double xStart = radiusCircle * cos (qDegreesToRadians ((double) angle));
+    double yStart = radiusCircle * sin (qDegreesToRadians ((double) angle));
     double xStop = -1.0 * xStart;
     double yStop = -1.0 * yStart;
 

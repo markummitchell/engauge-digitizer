@@ -27,10 +27,7 @@ const int Z_VALUE_IN_FRONT = 100;
 // To emphasize that the axis lines are still there, we make these checker somewhat transparent
 const double CHECKER_OPACITY = 0.6;
 
-const double PI = 3.1415926535;
-const double TWO_PI = 2.0 * PI;
-const double DEGREES_TO_RADIANS = PI / 180.0;
-const double RADIANS_TO_TICS = 5760 / TWO_PI;
+const double RADIANS_TO_TICS = 360 * 16 / (2.0 * M_PI);
 
 GridLineFactory::GridLineFactory(QGraphicsScene &scene,
                                  const DocumentModelCoords &modelCoords) :
@@ -292,10 +289,10 @@ QGraphicsItem *GridLineFactory::ellipseItem (const Transformation &transformatio
                                             posEndGraph);
 
   // Get the angles about the origin of the start and end points
-  double angleStart = posStartGraph.x() * DEGREES_TO_RADIANS;
-  double angleEnd = posEndGraph.x() * DEGREES_TO_RADIANS;
+  double angleStart = qDegreesToRadians (posStartGraph.x());
+  double angleEnd = qDegreesToRadians (posEndGraph.x());
   if (angleEnd < angleStart) {
-    angleEnd += TWO_PI;
+    angleEnd += 2.0 * M_PI;
   }
   double angleSpan = angleEnd - angleStart;
 
@@ -309,8 +306,8 @@ QGraphicsItem *GridLineFactory::ellipseItem (const Transformation &transformatio
                               << " posStartScreen=" << QPointFToString (posStartScreen).toLatin1().data()
                               << " posEndScreen=" << QPointFToString (posEndScreen).toLatin1().data()
                               << " posOriginScreen=" << QPointFToString (posOriginScreen).toLatin1().data()
-                              << " angleStart=" << angleStart / DEGREES_TO_RADIANS
-                              << " angleEnd=" << angleEnd / DEGREES_TO_RADIANS
+                              << " angleStart=" << qRadiansToDegrees (angleStart)
+                              << " angleEnd=" << qRadiansToDegrees (angleEnd)
                               << " transformation=" << transformation;
 
   // Compute rotate/shear transform that aligns linear cartesian graph coordinates with screen coordinates, and ellipse parameters.

@@ -11,14 +11,12 @@
 #include "DocumentSerialize.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
+#include <qmath.h>
 #include <QObject>
 #include <QTextStream>
 #include "QtToString.h"
 #include <QXmlStreamWriter>
 #include "Xml.h"
-
-const double PI = 3.1415926535;
-const double TWO_PI = 2.0 * PI;
 
 // Zero default for origin radius, which is usually wanted for COORD_SCALE_LINEAR, it is illegal
 // for COORD_SCALE_LOG (for which 1.0 is probably preferred as the default. Note linear is more common than log
@@ -287,7 +285,7 @@ double DocumentModelCoords::thetaPeriod () const
       return 400;
 
     case COORD_UNITS_POLAR_THETA_RADIANS:
-      return TWO_PI;
+      return 2.0 * M_PI;
 
     case COORD_UNITS_POLAR_THETA_TURNS:
       return 1;

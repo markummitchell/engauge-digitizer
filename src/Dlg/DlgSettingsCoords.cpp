@@ -62,9 +62,6 @@ const double YCENTER = (CARTESIAN_COORD_MIN + CARTESIAN_COORD_MAX) / 2.0;
 const double LINE_WIDTH_THIN = 0.0;
 const double LINE_WIDTH_THICK = 2.0;
 
-const double PI = 3.1415926535;
-const double DEG_2_RAD = PI / 180.0;
-
 const int FONT_SIZE = 6;
 
 const double POWER_FOR_LOG = 10.0; // Need a larger power (certainly more than e) to make log gradient obvious
@@ -525,8 +522,8 @@ void DlgSettingsCoords::drawPolarTheta ()
   bool isAxis = true;
   for (int step = 0; step < NUM_COORD_STEPS; step++) {
     double theta = POLAR_THETA_MIN + step * POLAR_THETA_STEP;
-    double x = POLAR_RADIUS * cos (theta * DEG_2_RAD);
-    double y = POLAR_RADIUS * sin (theta * DEG_2_RAD);
+    double x = POLAR_RADIUS * cos (qDegreesToRadians (theta));
+    double y = POLAR_RADIUS * sin (qDegreesToRadians (theta));
     QGraphicsLineItem *line = m_scenePreview->addLine (XCENTER, YCENTER, XCENTER + x, YCENTER + y);
     bool isHighlighted = (step % STEPS_PER_CYCLE == 0);
     line->setPen(QPen (QBrush (isHighlighted ? Qt::gray : Qt::lightGray),

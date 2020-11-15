@@ -10,8 +10,6 @@
 #include <qmath.h>
 #include <QTransform>
 
-const double PI = 3.1415926535;
-
 double angleBetweenVectors (const QPointF &v1,
                             const QPointF &v2)
 {
@@ -51,11 +49,11 @@ double angleFromVectorToVector (const QPointF &vFrom,
   // and angleTo-angleFrom is -pi to +pi radians
   double angleSeparation = angleTo - angleFrom;
 
-  while (angleSeparation < -1.0 * PI) {
-    angleSeparation += 2.0 * PI;
+  while (angleSeparation < -1.0 * M_PI) {
+    angleSeparation += 2.0 * M_PI;
   }
-  while (angleSeparation > PI) {
-    angleSeparation -= 2.0 * PI;
+  while (angleSeparation > M_PI) {
+    angleSeparation -= 2.0 * M_PI;
   }
 
   return angleSeparation;
@@ -172,7 +170,7 @@ void ellipseFromParallelogram (double xTL,
   bAligned = qSqrt (numerator / denominatorPlus);
   // Angle is from equation 1.3 in the arXiv reference
   if (qAbs (2.0 * C) > 10000.0 * qAbs (A - B)) {
-    angleRadians = PI / 2.0;
+    angleRadians = M_PI / 2.0;
   } else {
     angleRadians = 0.5 * qAtan (2 * C / (A - B));
   }

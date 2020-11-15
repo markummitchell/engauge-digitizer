@@ -13,10 +13,8 @@
 #include <qmath.h>
 #include <QPen>
 
-const double PI = 3.1415926535;
-const double TWO_PI = 2.0 * PI;
 const int TICS_PER_CYCLE = 360 * 16;
-const double RADIANS_TO_TICS = TICS_PER_CYCLE / TWO_PI;
+const double RADIANS_TO_TICS = TICS_PER_CYCLE / (2.0 * M_PI);
 
 CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const DocumentModelGuideline &modelGuideline,
                                                                      const Transformation &transformation,
@@ -32,29 +30,29 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
   m_angleCenter = angleScreenConstantYRCenterAngle (modelGuideline.creationCircleRadius ());
   m_angleHigh = angleScreenConstantYRHighAngle (modelGuideline.creationCircleRadius ());
 
-  if (m_angleHigh > m_angleLow + PI) {
+  if (m_angleHigh > m_angleLow + M_PI) {
 
     // Case like low=20 and high=340 degrees. Span angle will be negative and small
-    if (m_angleCenter > PI) {
-      m_angleCenter -= TWO_PI;
+    if (m_angleCenter > M_PI) {
+      m_angleCenter -= 2.0 * M_PI;
     }
-    m_angleHigh -= TWO_PI;
+    m_angleHigh -= 2.0 * M_PI;
 
-  } else if (m_angleLow > m_angleHigh + PI) {
+  } else if (m_angleLow > m_angleHigh + M_PI) {
 
     // Case like low=340 and high=20 degrees. Span angle will be positive and small
-    if (m_angleCenter < PI) {
-      m_angleCenter += TWO_PI;
+    if (m_angleCenter < M_PI) {
+      m_angleCenter += 2.0 * M_PI;
     }
-    m_angleHigh += TWO_PI;
+    m_angleHigh += 2.0 * M_PI;
 
   }
 
   // Final check is to make sure center angle is between low and high. This fixes problems near +/-180
   if (m_angleCenter > qMax (m_angleLow, m_angleHigh)) {
-    m_angleCenter -= TWO_PI;
+    m_angleCenter -= 2.0 * M_PI;
   } else if (m_angleCenter < qMin (m_angleLow, m_angleHigh)) {
-    m_angleCenter += TWO_PI;
+    m_angleCenter += 2.0 * M_PI;
   }
 
   QPointF posClickGraph;
