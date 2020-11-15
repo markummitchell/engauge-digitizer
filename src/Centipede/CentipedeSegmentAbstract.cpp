@@ -6,8 +6,8 @@
 
 #include "CentipedeSegmentAbstract.h"
 #include "mmsubs.h"
-#include <qmath.h>
 #include <qdebug.h>
+#include <qmath.h>
 #include <QPointF>
 #include "Transformation.h"
 
@@ -26,8 +26,7 @@ CentipedeSegmentAbstract::~CentipedeSegmentAbstract ()
 {
 }
 
-double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radiusAboutClick,
-                                                              IntersectionType intersectionType) const
+double CentipedeSegmentAbstract::angleScreenConstantYRCenterAngle (double radiusAboutClick) const
 {
   QPointF posScreenBest;
   double xTBest = 0;
@@ -37,9 +36,8 @@ double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radiusAbout
   m_transformation.transformScreenToRawGraph (m_posClickScreen,
                                               posClickGraph);
   double xClick = posClickGraph.x();
-  double yClick = posClickGraph.y();
 
-  // Iterate points around the circle
+  // Iterate points around the circle starting at an arbitrary point
   bool isFirst = true;
   for (int i = 0; i < NUM_CIRCLE_POINTS; i++) {
     QPointF posGraphPrevious, posGraphNext, posScreenPrevious;
@@ -50,35 +48,9 @@ double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radiusAbout
                                    posScreenPrevious);
 
     double xGraphPrevious = posGraphPrevious.x();
-    double yGraphPrevious = posGraphPrevious.y();
-    double yGraphNext = posGraphNext.y();
-    double epsilon = qAbs (yGraphPrevious - yGraphNext) / 10.0; // Allow for roundoff
 
-    bool save = false;
-    if (intersectionType == INTERSECTION_CENTER) {
-
-      // INTERSECTION_CENTER
-      save = isFirst ||
-          (qAbs (xGraphPrevious - xClick) < qAbs (xTBest - xClick));
-
-    } else {
-
-      // INTERSECTION_HIGH or INTERSECTION_LOW
-      bool transitionUp = (yGraphPrevious - epsilon <= yClick) && (yClick < yGraphNext + epsilon);
-      bool transitionDown = (yGraphNext - epsilon <= yClick) && (yClick < yGraphPrevious + epsilon);
-
-      if (transitionDown || transitionUp) {
-        // Transition occurred so save if best so far
-        if (isFirst ||
-            (intersectionType == INTERSECTION_HIGH && xGraphPrevious > xTBest) ||
-            (intersectionType == INTERSECTION_LOW && xGraphPrevious < xTBest)) {
-
-          save = true;
-        }
-      }    
-    }
-
-    if (save) {
+    if (isFirst ||
+        (qAbs (xGraphPrevious - xClick) < qAbs (xTBest - xClick))) {
 
       // Best so far so save
       isFirst = false;
@@ -90,35 +62,99 @@ double CentipedeSegmentAbstract::angleScreenConstantYRCommon (double radiusAbout
   return qDegreesToRadians (xTBest);
 }
 
-double CentipedeSegmentAbstract::angleScreenConstantYRCenterAngle (double radiusAboutClick) const
+void CentipedeSegmentAbstract::angleScreenConstantYRHighLowAngles (double radiusAboutClick,
+                                                                   double angleCenter,
+                                                                   double &angleLow,
+                                                                   double &angleHigh) const
 {
-  return angleScreenConstantYRCommon (radiusAboutClick,
-                                      INTERSECTION_CENTER);
+  // Click point
+  QPointF posClickGraph;
+  m_transformation.transformScreenToRawGraph (m_posClickScreen,
+                                              posClickGraph);
+  double yClick = posClickGraph.y();
+
+  // Iterate points around the circle starting at angleCenter, and going in two different
+  // directions (clockwise for angleHigh and counterclockwise for angleLow)
+  bool isFirstLow = true, isFirstHigh = true;
+  for (int i = 0; i < NUM_CIRCLE_POINTS; i++) {
+    QPointF posGraphPreviousLow, posGraphNextLow, posScreenPreviousLow;
+    QPointF posGraphPreviousHigh, posGraphNextHigh, posScreenPreviousHigh;
+    generatePreviousAndNextPoints (radiusAboutClick,
+                                   i,
+                                   posGraphPreviousLow,
+                                   posGraphNextLow,
+                                   posScreenPreviousLow,
+                                   angleCenter);
+    generatePreviousAndNextPoints (radiusAboutClick,
+                                   - i,
+                                   posGraphPreviousHigh,
+                                   posGraphNextHigh,
+                                   posScreenPreviousHigh,
+                                   angleCenter);
+
+    double epsilon = qAbs (posGraphPreviousLow.y() - posGraphNextLow.y()) / 10.0; // Allow for roundoff
+
+    bool transitionUpLow = (posGraphPreviousLow.y() - epsilon <= yClick) && (yClick < posGraphNextLow.y() + epsilon);
+    bool transitionDownLow = (posGraphNextLow.y() - epsilon <= yClick) && (yClick < posGraphPreviousLow.y() + epsilon);
+    bool transitionUpHigh = (posGraphPreviousHigh.y() - epsilon <= yClick) && (yClick < posGraphNextHigh.y() + epsilon);
+    bool transitionDownHigh = (posGraphNextHigh.y() - epsilon <= yClick) && (yClick < posGraphPreviousHigh.y() + epsilon);
+
+    if (isFirstLow  && (transitionDownLow || transitionUpLow)) {
+      // Found the first (=best) low value
+      isFirstLow = false;
+      angleLow = qDegreesToRadians ((posGraphPreviousLow.x() + posGraphNextLow.x()) / 2.0); // Average
+      if (!isFirstHigh) {
+        break; // Done
+      }
+    }
+
+    if (isFirstHigh && (transitionDownHigh || transitionUpHigh)) {
+      // Found the first (=best) high value
+      isFirstHigh = false;
+      angleHigh = qDegreesToRadians ((posGraphPreviousHigh.x() + posGraphNextHigh.x()) / 2.0); // Average
+      if (!isFirstLow) {
+        break; // Done
+      }
+    }
+  }
+
+  // Fix quadrant/cycle transition issues
+  angleLow = closestAngleToCentralAngle (angleCenter, angleLow);
+  angleHigh = closestAngleToCentralAngle (angleCenter, angleHigh);
+  while (angleHigh < angleLow) {
+    // Cycle issues have been addressed so remaining issue is just reordering
+    double temp = angleLow;
+    angleLow = angleHigh;
+    angleHigh = temp;
+  }
 }
 
-double CentipedeSegmentAbstract::angleScreenConstantYRHighAngle (double radiusAboutClick) const
+double CentipedeSegmentAbstract::closestAngleToCentralAngle (double angleCenter,
+                                                            double angleOld) const
 {
-  return angleScreenConstantYRCommon (radiusAboutClick,
-                                      INTERSECTION_HIGH);
+  // Loop to find closest angle to angleCenter
+  bool isFirst = true;
+  double angleNew = angleOld;
+  for (int delta = -360; delta <= 360; delta += 360) {
+    double angleNext = angleOld + qDegreesToRadians ((double) delta);
+    if (isFirst || (qAbs (angleNext - angleCenter) < qAbs (angleNew - angleCenter))) {
+      isFirst = false;
+      angleNew = angleNext;
+    }
+  }
+
+  return angleNew;
 }
-
-double CentipedeSegmentAbstract::angleScreenConstantYRLowAngle (double radius) const
-{
-  return angleScreenConstantYRCommon (radius,
-                                      INTERSECTION_LOW);
-}
-
-double angleScreenConstantYRLowAngle (double radius);
-
 
 void CentipedeSegmentAbstract::generatePreviousAndNextPoints (double radiusAboutClick,
                                                               int i,
                                                               QPointF &posGraphPrevious,
                                                               QPointF &posGraphNext,
-                                                              QPointF &posScreenPrevious) const
+                                                              QPointF &posScreenPrevious,
+                                                              double angleOffset) const
 {
-  double angleBefore = 2.0 * M_PI * (double) i / (double) NUM_CIRCLE_POINTS;
-  double angleAfter = 2.0 * M_PI * (double) (i + 1) / (double) NUM_CIRCLE_POINTS;
+  double angleBefore = angleOffset + 2.0 * M_PI * (double) i / (double) NUM_CIRCLE_POINTS;
+  double angleAfter = angleOffset + 2.0 * M_PI * (double) (i + 1) / (double) NUM_CIRCLE_POINTS;
   posScreenPrevious = m_posClickScreen + QPointF (radiusAboutClick * cos (angleBefore),
                                                   radiusAboutClick * sin (angleBefore));
   QPointF posScreenNext = m_posClickScreen + QPointF (radiusAboutClick * cos (angleAfter),

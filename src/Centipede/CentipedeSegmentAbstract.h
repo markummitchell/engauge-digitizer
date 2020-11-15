@@ -50,11 +50,12 @@ protected:
   /// Screen angle at origin from ellipse axis to circle-center/coordinate intersection. Works only for polar coordinates
   double angleScreenConstantYRCenterAngle (double radiusAboutClick) const;
 
-  /// Screen angle at origin from ellipse axis to circle/coordinate intersection in the increasing angle direction. Works only for polar coordinates
-  double angleScreenConstantYRHighAngle (double radiusAboutClick) const;
-
-  /// Screen angle at origin from ellipse axis to circle/coordinate intersection in the decreasing angle direction. Works only for polar coordinates
-  double angleScreenConstantYRLowAngle (double radiusAboutClick) const;
+  /// Screen angle at origin from ellipse axis to circle/coordinate intersection in the increasing angle direction (high)
+  /// or decreasing angle direction (low). Uses center angle from angleScreenConstantYRCenterAngle. Works only for polar coordinates
+  void angleScreenConstantYRHighLowAngles (double radiusAboutClick,
+                                           double angleCenter,
+                                           double &angleLow,
+                                           double &angleHigh) const;
 
   /// Settings
   const DocumentModelGuideline &modelGuideline () const;
@@ -86,13 +87,14 @@ protected:
 private:
   CentipedeSegmentAbstract();
 
-  double angleScreenConstantYRCommon(double radius,
-                                     IntersectionType intersectionTypeh) const; /// Solves angleScreenConstantYRHighAngle and angleScreenConstantYRLowAngle
+  double closestAngleToCentralAngle (double angleCenter,
+                                     double angleOld) const;
   void generatePreviousAndNextPoints (double radius,
                                       int i,
                                       QPointF &posGraphPrevious,
                                       QPointF &posGraphNext,
-                                      QPointF &posScreen) const;
+                                      QPointF &posScreen,
+                                      double angleOffset = 0) const;
   QPointF posScreenConstantXTCommon (double radius,
                                      IntersectionType intersectionType) const; /// Solves posScreenConstantXTForHighYR and posScreenConstantXTForLowYR
   QPointF posScreenConstantYRCommon (double radius,

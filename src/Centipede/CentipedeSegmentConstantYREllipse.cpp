@@ -26,34 +26,11 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
 {
   m_posLow = posScreenConstantYRForLowXT (modelGuideline.creationCircleRadius ());
   m_posHigh = posScreenConstantYRForHighXT (modelGuideline.creationCircleRadius ());
-  m_angleLow = angleScreenConstantYRLowAngle (modelGuideline.creationCircleRadius ());
   m_angleCenter = angleScreenConstantYRCenterAngle (modelGuideline.creationCircleRadius ());
-  m_angleHigh = angleScreenConstantYRHighAngle (modelGuideline.creationCircleRadius ());
-
-  if (m_angleHigh > m_angleLow + M_PI) {
-
-    // Case like low=20 and high=340 degrees. Span angle will be negative and small
-    if (m_angleCenter > M_PI) {
-      m_angleCenter -= 2.0 * M_PI;
-    }
-    m_angleHigh -= 2.0 * M_PI;
-
-  } else if (m_angleLow > m_angleHigh + M_PI) {
-
-    // Case like low=340 and high=20 degrees. Span angle will be positive and small
-    if (m_angleCenter < M_PI) {
-      m_angleCenter += 2.0 * M_PI;
-    }
-    m_angleHigh += 2.0 * M_PI;
-
-  }
-
-  // Final check is to make sure center angle is between low and high. This fixes problems near +/-180
-  if (m_angleCenter > qMax (m_angleLow, m_angleHigh)) {
-    m_angleCenter -= 2.0 * M_PI;
-  } else if (m_angleCenter < qMin (m_angleLow, m_angleHigh)) {
-    m_angleCenter += 2.0 * M_PI;
-  }
+  angleScreenConstantYRHighLowAngles (modelGuideline.creationCircleRadius (),
+                                      m_angleCenter,
+                                      m_angleLow,
+                                      m_angleHigh);
 
   QPointF posClickGraph;
   transformation.transformScreenToRawGraph (posClickScreen,
@@ -111,6 +88,7 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
   rectBounding = rectBounding.normalized();
 
   m_graphicsItem = new GraphicsArcItem (rectBounding);
+  m_graphicsItem->setSpanAngle (0); // Prevent flicker by display before span angle is changed from all-inclusive default
   m_graphicsItemRelay = new GraphicsArcItemRelay (this,
                                                   m_graphicsItem);
 
