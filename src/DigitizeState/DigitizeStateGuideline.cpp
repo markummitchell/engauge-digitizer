@@ -49,12 +49,14 @@ QString DigitizeStateGuideline::activeCurve () const
   return context().mainWindow().selectedGraphCurve();
 }
 
-void DigitizeStateGuideline::begin (CmdMediator * /* cmdMediator */,
+void DigitizeStateGuideline::begin (CmdMediator *cmdMediator,
                                     DigitizeState /* previousState */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateGuideline::beginn";
 
-  nonGuidelinesActivation (false);
+  setCursor(cmdMediator);
+  context().setDragMode(QGraphicsView::NoDrag);
+  lockNonGuidelines (true);
 }
 
 bool DigitizeStateGuideline::canPaste (const Transformation & /* transformation */,
@@ -75,7 +77,7 @@ void DigitizeStateGuideline::end ()
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateGuideline::end";
 
   killCentipede();
-  nonGuidelinesActivation (true);
+  lockNonGuidelines (false);
 }
 
 bool DigitizeStateGuideline::guidelinesAreSelectable () const
@@ -170,9 +172,9 @@ void DigitizeStateGuideline::killCentipede ()
   }
 }
 
-void DigitizeStateGuideline::nonGuidelinesActivation (bool nonGuidelinesAreActive)
+void DigitizeStateGuideline::lockNonGuidelines (bool lockdown)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateGuideline::nonGuidelinesActivation";
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateGuideline::lockNonGuidelines";
 
   QList<QGraphicsItem*> items = context().mainWindow().scene().items();
   QList<QGraphicsItem*>::iterator itr;
@@ -180,7 +182,8 @@ void DigitizeStateGuideline::nonGuidelinesActivation (bool nonGuidelinesAreActiv
 
     QGraphicsItem *item = *itr;
     if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) != GRAPHICS_ITEM_TYPE_GUIDELINE) {
-       item->setFlag (QGraphicsItem::ItemIsSelectable, nonGuidelinesAreActive);
+       item->setFlag (QGraphicsItem::ItemIsSelectable, !lockdown);
+       item->setFlag (QGraphicsItem::ItemIsMovable, !lockdown);
     }
   }
 }
