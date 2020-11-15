@@ -57,6 +57,7 @@ HEADERS  += \
     Centipede/CentipedePair.h \
     Centipede/CentipedeSegmentAbstract.h \
     Centipede/CentipedeSegmentConstantXTLine.h \
+    Centipede/CentipedeSegmentConstantXTRadial.h \
     Centipede/CentipedeSegmentConstantYREllipse.h \
     Centipede/CentipedeSegmentConstantYRLine.h \
     Checker/Checker.h \
@@ -509,6 +510,7 @@ SOURCES += \
     Centipede/CentipedePair.cpp \
     Centipede/CentipedeSegmentAbstract.cpp \
     Centipede/CentipedeSegmentConstantXTLine.cpp \
+    Centipede/CentipedeSegmentConstantXTRadial.cpp \
     Centipede/CentipedeSegmentConstantYREllipse.cpp \
     Centipede/CentipedeSegmentConstantYRLine.cpp \
     Checker/Checker.cpp \

@@ -180,7 +180,7 @@ QPointF CentipedeSegmentAbstract::posScreenConstantXTCommon (double radius,
                                                              IntersectionType intersectionType) const
 {
   QPointF posScreenBest;
-  double yRBest = 0;
+  double yRBest = (intersectionType == INTERSECTION_HIGH ? 999.9 : -999.9);
 
   // Click point
   QPointF posClickGraph;

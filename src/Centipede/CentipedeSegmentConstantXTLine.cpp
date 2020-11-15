@@ -22,6 +22,7 @@ CentipedeSegmentConstantXTLine::CentipedeSegmentConstantXTLine(const DocumentMod
   m_posLow = posScreenConstantXTForLowYR (modelGuideline.creationCircleRadius ());
   m_posHigh = posScreenConstantXTForHighYR (modelGuideline.creationCircleRadius ());
 
+  // Create graphics item and its relay
   m_graphicsItem = new QGraphicsLineItem (QLineF (m_posLow,
                                                   m_posHigh));
   m_graphicsItemRelay = new GraphicsLineItemRelay (this,

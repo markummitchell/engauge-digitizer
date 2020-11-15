@@ -7,6 +7,7 @@
 #include "CentipedePair.h"
 #include "CentipedeSegmentAbstract.h"
 #include "CentipedeSegmentConstantXTLine.h"
+#include "CentipedeSegmentConstantXTRadial.h"
 #include "CentipedeSegmentConstantYREllipse.h"
 #include "CentipedeSegmentConstantYRLine.h"
 #include "DocumentModelCoords.h"
@@ -36,9 +37,10 @@ CentipedePair::CentipedePair(GraphicsScene &scene,
                                                         transformation,
                                                         posScreen);
   } else {
-    m_centipedeXT = new CentipedeSegmentConstantXTLine (modelGuideline,
-                                                        transformation,
-                                                        posScreen);
+    m_centipedeXT = new CentipedeSegmentConstantXTRadial (modelGuideline,
+                                                          transformation,
+                                                          posScreen,
+                                                          scene);
     m_centipedeYR = new CentipedeSegmentConstantYREllipse (modelGuideline,
                                                            transformation,
                                                            posScreen);

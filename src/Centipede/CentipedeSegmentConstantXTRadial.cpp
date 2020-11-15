@@ -4,25 +4,36 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "CentipedeSegmentConstantYRLine.h"
+#include "CentipedeSegmentConstantXTRadial.h"
 #include "EnumsToQt.h"
 #include "GraphicsLineItemRelay.h"
+#include "GraphicsScene.h"
 #include "mmsubs.h"
 #include <qmath.h>
 #include <QGraphicsLineItem>
+#include <QGraphicsRectItem>
 #include <QPen>
 
-CentipedeSegmentConstantYRLine::CentipedeSegmentConstantYRLine(const DocumentModelGuideline &modelGuideline,
-                                                               const Transformation &transformation,
-                                                               const QPointF &posClickScreen) :
+CentipedeSegmentConstantXTRadial::CentipedeSegmentConstantXTRadial(const DocumentModelGuideline &modelGuideline,
+                                                                   const Transformation &transformation,
+                                                                   const QPointF &posClickScreen,
+                                                                   GraphicsScene &scene) :
   CentipedeSegmentAbstract (modelGuideline,
                             transformation,
                             posClickScreen)
 {
-  m_posLow = posScreenConstantYRForLowXT (modelGuideline.creationCircleRadius ());
-  m_posHigh = posScreenConstantYRForHighXT (modelGuideline.creationCircleRadius ());
+  m_posLow = posScreenConstantXTForLowYR (modelGuideline.creationCircleRadius ());
+  m_posHigh = posScreenConstantXTForHighYR (modelGuideline.creationCircleRadius ());
 
-  // Create graphics item and its relay
+  QGraphicsRectItem *itemLow = new QGraphicsRectItem (QRectF (m_posLow - QPointF (5, 5),
+                                                          m_posLow + QPointF (5, 5)));
+  QGraphicsRectItem *itemHigh = new QGraphicsRectItem (QRectF (m_posHigh - QPointF (5, 5),
+                                                           m_posHigh + QPointF (5, 5)));
+  itemLow->setBrush (QBrush (Qt::blue));
+  itemHigh->setBrush (QBrush (Qt::blue));
+  scene.addItem (itemLow);
+  scene.addItem (itemHigh);
+
   m_graphicsItem = new QGraphicsLineItem (QLineF (m_posLow,
                                                   m_posHigh));
   m_graphicsItemRelay = new GraphicsLineItemRelay (this,
@@ -34,13 +45,13 @@ CentipedeSegmentConstantYRLine::CentipedeSegmentConstantYRLine(const DocumentMod
                                 modelGuideline.lineWidthActive ()));
 }
 
-CentipedeSegmentConstantYRLine::~CentipedeSegmentConstantYRLine ()
+CentipedeSegmentConstantXTRadial::~CentipedeSegmentConstantXTRadial ()
 {
   delete m_graphicsItem;
-  delete m_graphicsItemRelay;  
+  delete m_graphicsItemRelay;
 }
 
-double CentipedeSegmentConstantYRLine::distanceToClosestEndpoint (const QPointF &posScreen) const
+double CentipedeSegmentConstantXTRadial::distanceToClosestEndpoint (const QPointF &posScreen) const
 {
   double distanceLow = magnitude (posScreen - m_posLow);
   double distanceHigh = magnitude (posScreen - m_posHigh);
@@ -48,12 +59,12 @@ double CentipedeSegmentConstantYRLine::distanceToClosestEndpoint (const QPointF 
   return qMin (distanceLow, distanceHigh);
 }
 
-QGraphicsItem *CentipedeSegmentConstantYRLine::graphicsItem ()
+QGraphicsItem *CentipedeSegmentConstantXTRadial::graphicsItem ()
 {
   return dynamic_cast<QGraphicsItem*> (m_graphicsItem);
 }
 
-void CentipedeSegmentConstantYRLine::updateRadius (double radius)
+void CentipedeSegmentConstantXTRadial::updateRadius (double radius)
 {
   // Scale up/down the line segment length, keeping it centered on the same center point
   QPointF posCenter = (m_posHigh + m_posLow) / 2.0;

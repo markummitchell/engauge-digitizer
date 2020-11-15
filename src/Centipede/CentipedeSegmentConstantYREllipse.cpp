@@ -85,8 +85,9 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
                                                   bAligned),
                        posOriginScreen + QPointF (aAligned,
                                                   -1.0 * bAligned));
-  rectBounding = rectBounding.normalized();
+  rectBounding = rectBounding.normalized(); // This seems to prevent some drawing artifacts
 
+  // Create graphics item and its relay
   m_graphicsItem = new GraphicsArcItem (rectBounding);
   m_graphicsItem->setSpanAngle (0); // Prevent flicker by display before span angle is changed from all-inclusive default
   m_graphicsItemRelay = new GraphicsArcItemRelay (this,
