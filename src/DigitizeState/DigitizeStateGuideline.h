@@ -55,6 +55,7 @@ public:
 private:
   DigitizeStateGuideline();
 
+  bool hitTestForGraphics (const QPointF &posScreen);
   void killCentipede ();
   void lockNonGuidelines (bool lockdown);
 

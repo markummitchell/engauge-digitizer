@@ -152,16 +152,60 @@ void DigitizeStateGuideline::handleMousePress (CmdMediator *cmdMediator,
 {
   killCentipede(); // Remove previous instance if there is one so it does not get orphaned
 
-  m_centipedePair = new CentipedePair (context().mainWindow().scene(),
-                                       context().mainWindow().transformation(),
-                                       cmdMediator->document().modelGuideline(),
-                                       cmdMediator->document().modelCoords(),
-                                       posScreen);
+  // If click is on an existing guideline then:
+  // 1) skip creating new CentipedePair which would then turn into new Guideline
+  // 2) let existing Guideline absort the mouse press event so it can be dragged
+  if (!hitTestForGraphics (posScreen)) {
+
+    // Click was on empty area, or on a locked axis point which does not count, so start a CentipedePair
+    m_centipedePair = new CentipedePair (context().mainWindow().scene(),
+                                         context().mainWindow().transformation(),
+                                         cmdMediator->document().modelGuideline(),
+                                         cmdMediator->document().modelCoords(),
+                                         posScreen);
+  }
 }
 
 void DigitizeStateGuideline::handleMouseRelease (CmdMediator * /* cmdMediator */,
                                                  QPointF /* posScreen */)
 {
+}
+
+bool DigitizeStateGuideline::hitTestForGraphics (const QPointF &posScreen)
+{
+  // Create temporary graphics item representing click
+  QGraphicsItem *itemClick = new QGraphicsRectItem (QRectF (posScreen - QPointF (2, 2),
+                                                            posScreen + QPointF (2, 2)));
+  itemClick->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
+  context().mainWindow().scene().addItem (itemClick);
+
+  // Iterate through existing graphics items
+
+  QList<QGraphicsItem*> items = context().mainWindow().scene().items();
+  QList<QGraphicsItem*>::iterator itr;
+
+  bool gotHit = false;
+
+  for (itr = items.begin (); itr != items.end (); itr++) {
+
+    QGraphicsItem *item = *itr;
+
+    // Object has to be a Guideline, visible, selectable and overlapping with itemClick to be applicable
+    if ((item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_GUIDELINE) &&
+        ((item->flags () & QGraphicsItem::ItemIsSelectable) != 0) &&
+        item->isVisible () &&
+        item->collidesWithItem (itemClick)) {
+
+      gotHit = true;
+      break;
+    }
+  }
+
+  // Remove temporary graphics item
+  context().mainWindow().scene().removeItem (itemClick);
+  delete itemClick;
+
+  return gotHit;
 }
 
 void DigitizeStateGuideline::killCentipede ()
