@@ -271,9 +271,6 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
                                              "element M and significant digits S as T = M / 10^S."));
   connect (m_spinSignificantDigits, SIGNAL (valueChanged (int)), this, SLOT (slotSignificantDigits (int)));
   layout->addWidget (m_spinSignificantDigits, row++, 2);
-  
-  QLabel *labelGuidelineColor = new QLabel (QString ("%1:").arg (tr ("Guideline color")));
-  layout->addWidget (labelGuidelineColor, row, 1);
 }
 
 void DlgSettingsMainWindow::createOptionalSaveDefault (QHBoxLayout * /* layout */)

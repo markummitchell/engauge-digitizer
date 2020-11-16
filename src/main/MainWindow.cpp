@@ -3609,6 +3609,7 @@ void MainWindow::updateControls ()
   m_actionSettingsAxesChecker->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsGridDisplay->setEnabled (!m_currentFile.isEmpty () && m_transformation.transformIsDefined());
   m_actionSettingsGridRemoval->setEnabled (!m_currentFile.isEmpty ());
+  m_actionSettingsGuideline->setEnabled (!m_currentFile.isEmpty () && m_transformation.transformIsDefined());
   m_actionSettingsPointMatch->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsSegments->setEnabled (!m_currentFile.isEmpty ());
   m_actionSettingsGeneral->setEnabled (!m_currentFile.isEmpty ());

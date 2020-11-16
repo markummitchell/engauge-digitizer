@@ -35,6 +35,12 @@ DlgSettingsAbstractBase::DlgSettingsAbstractBase(const QString &title,
 
   setWindowTitle (title);
   setModal (true);
+
+  // Microsoft documentation https://docs.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles?redirectedfrom=MSDN
+  // says help button cannot be used with minimize or maximize button
+  setWindowFlag (Qt::WindowContextHelpButtonHint, true);
+  setWindowFlag (Qt::WindowMinimizeButtonHint, false);
+  setWindowFlag (Qt::WindowMaximizeButtonHint, false);
 }
 
 DlgSettingsAbstractBase::~DlgSettingsAbstractBase()

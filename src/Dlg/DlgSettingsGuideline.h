@@ -13,9 +13,13 @@
 
 class DocumentModelGuideline;
 class QComboBox;
+class QGraphicsEllipseItem;
+class QGraphicsItem;
+class QGraphicsScene;
 class QGridLayout;
 class QPushButton;
 class QSpinBox;
+class ViewPreview;
 
 /// Dialog for editing guideline settings
 class DlgSettingsGuideline : public DlgSettingsAbstractBase
@@ -45,6 +49,7 @@ private:
 
   void createControls (QGridLayout *layout,
                        int &row);
+  void createPreview (QGridLayout *layout, int &row);
   void killCentipede ();
   void updateControls();
   void updatePreview();
@@ -53,6 +58,26 @@ private:
   QComboBox *m_lineColor;
   QSpinBox *m_spinLineWidthActive;
   QSpinBox *m_spinLineWidthInactive;  
+
+  QGraphicsScene *m_scenePreviewActive;
+  ViewPreview *m_viewPreviewActive;
+
+  QGraphicsScene *m_scenePreviewInactive;
+  ViewPreview *m_viewPreviewInactive;
+
+  // Drawn widgets for active
+  QGraphicsItem *m_itemGuidelineXTActive;
+  QGraphicsItem *m_itemGuidelineYRActive;
+  QGraphicsEllipseItem *m_itemCircleActive;
+  QGraphicsItem *m_itemCentipedeXTActive;
+  QGraphicsItem *m_itemCentipdedYRActive;
+
+  // Drawn widgets for inactive
+  QGraphicsItem *m_itemGuidelineXTInactive;
+  QGraphicsItem *m_itemGuidelineYRInactive;
+  QGraphicsEllipseItem *m_itemCircleInactive;
+  QGraphicsItem *m_itemCentipedeXTInactive;
+  QGraphicsItem *m_itemCentipdedYRInactive;
 
   DocumentModelGuideline *m_modelGuidelineBefore;
   DocumentModelGuideline *m_modelGuidelineAfter;

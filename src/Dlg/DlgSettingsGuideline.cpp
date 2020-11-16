@@ -6,17 +6,19 @@
 
 #include "CmdSettingsGuideline.h"
 #include "DlgSettingsGuideline.h"
+#include "DocumentModelGuideline.h"
 #include "EngaugeAssert.h"
+#include "GraphicsScene.h"
 #include "ImportCropping.h"
 #include "ImportCroppingUtilBase.h"
 #include "Logger.h"
 #include "MainWindow.h"
-#include "DocumentModelGuideline.h"
 #include <QApplication>
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDir>
 #include <QDoubleSpinBox>
+#include <QGraphicsLineItem>
 #include <QGraphicsScene>
 #include <QGridLayout>
 #include <QGroupBox>
@@ -26,14 +28,30 @@
 #include <QSpinBox>
 #include "QtToString.h"
 #include "TranslatorContainer.h"
+#include "ViewPreview.h"
 
 const int MINIMUM_HEIGHT = 300;
 const int MINIMUM_DIALOG_WIDTH_GUIDELINES = 500;
+const int MINIMUM_PREVIEW_WIDTH = 200;
 
 DlgSettingsGuideline::DlgSettingsGuideline(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Guidelines"),
                            "DlgSettingsGuideline",
                            mainWindow),
+  m_scenePreviewActive (nullptr),
+  m_viewPreviewActive (nullptr),
+  m_scenePreviewInactive (nullptr),
+  m_viewPreviewInactive (nullptr),
+  m_itemGuidelineXTActive (nullptr),
+  m_itemGuidelineYRActive (nullptr),
+  m_itemCircleActive (nullptr),
+  m_itemCentipedeXTActive (nullptr),
+  m_itemCentipdedYRActive (nullptr),
+  m_itemGuidelineXTInactive (nullptr),
+  m_itemGuidelineYRInactive (nullptr),
+  m_itemCircleInactive (nullptr),
+  m_itemCentipedeXTInactive (nullptr),
+  m_itemCentipdedYRInactive (nullptr),
   m_modelGuidelineBefore (nullptr),
   m_modelGuidelineAfter (nullptr)
 {
@@ -68,8 +86,8 @@ void DlgSettingsGuideline::createControls (QGridLayout *layout,
 
   m_lineColor = new QComboBox;
   m_lineColor->setWhatsThis (tr ("Guidelines Color\n\n"
-                                         "Set the color of the guidelines that can be dragged from the edges of the scene, and used "
-                                         "to align points"));
+                                  "Set the color of the guidelines that can be dragged from the edges of the scene, and used "
+                                  "to align points"));
   populateColorComboWithoutTransparent (*m_lineColor);
   connect (m_lineColor, SIGNAL (activated (const QString &)), this, SLOT (slotLineColor (const QString &))); // activated() ignores code changes
   layout->addWidget (m_lineColor, row++, 2);
@@ -98,6 +116,53 @@ void DlgSettingsGuideline::createOptionalSaveDefault (QHBoxLayout * /* layout */
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::createOptionalSaveDefault";
 }
 
+void DlgSettingsGuideline::createPreview (QGridLayout *layout, int &row)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::createPreview";
+
+  // Need local gridlayout to get nicely even 50/50 split
+  int row5050 = 0;
+  QGridLayout *layout5050 = new QGridLayout();
+  QWidget *widget = new QWidget();
+  widget->setLayout (layout5050);
+
+  // Preview panels
+
+  QLabel *labelPreviewActive = new QLabel (tr ("Active Preview"));
+  layout5050->addWidget (labelPreviewActive, row5050, 0, 1, 2);
+
+  QLabel *labelPreviewInactive = new QLabel (tr ("Inactive Preview"));
+  layout5050->addWidget (labelPreviewInactive, row5050++, 2, 1, 2);
+
+  m_scenePreviewActive = new QGraphicsScene (this);
+  m_viewPreviewActive = new ViewPreview (m_scenePreviewActive,
+                                         ViewPreview::VIEW_ASPECT_RATIO_VARIABLE,
+                                         this);
+  m_viewPreviewActive->setWhatsThis (tr ("Preview window that shows how current settings affect the active guidelines."));
+  m_viewPreviewActive->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  m_viewPreviewActive->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  m_viewPreviewActive->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
+  m_viewPreviewActive->setMinimumWidth(MINIMUM_PREVIEW_WIDTH);
+  m_viewPreviewActive->setRenderHint(QPainter::Antialiasing);
+
+  layout5050->addWidget (m_viewPreviewActive, row5050, 0, 1, 2);
+
+  m_scenePreviewInactive = new QGraphicsScene (this);
+  m_viewPreviewInactive = new ViewPreview (m_scenePreviewInactive,
+                                           ViewPreview::VIEW_ASPECT_RATIO_VARIABLE,
+                                           this);
+  m_viewPreviewInactive->setWhatsThis (tr ("Preview window that shows how current settings affect the inactive guidelines."));
+  m_viewPreviewInactive->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  m_viewPreviewInactive->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  m_viewPreviewInactive->setMinimumHeight (MINIMUM_PREVIEW_HEIGHT);
+  m_viewPreviewInactive->setMinimumWidth(MINIMUM_PREVIEW_WIDTH);
+  m_viewPreviewInactive->setRenderHint(QPainter::Antialiasing);
+
+  layout5050->addWidget (m_viewPreviewInactive, row5050++, 2, 1, 2);
+
+  layout->addWidget (widget, row++, 0, 1, 4);
+}
+
 QWidget *DlgSettingsGuideline::createSubPanel ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::createSubPanel";
@@ -113,7 +178,8 @@ QWidget *DlgSettingsGuideline::createSubPanel ()
 
   int row = 0;
   createControls (layout, row);
-
+  createPreview (layout, row);
+  
   return subPanel;
 }
 
@@ -151,7 +217,17 @@ void DlgSettingsGuideline::load (CmdMediator &cmdMediator)
   m_lineColor->setCurrentIndex(indexColor);
   m_spinLineWidthActive->setValue (qFloor (m_modelGuidelineAfter->lineWidthActive ()));
   m_spinLineWidthInactive->setValue (qFloor (m_modelGuidelineAfter->lineWidthInactive ()));  
-  
+
+  m_scenePreviewActive->clear();
+  QImage imagePreviewActive = cmdMediator.document().pixmap().toImage();
+  m_scenePreviewActive->addPixmap (QPixmap::fromImage (imagePreviewActive));
+
+  m_scenePreviewInactive->clear();
+  QImage imagePreviewInactive = cmdMediator.document().pixmap().toImage();
+  m_scenePreviewInactive->addPixmap (QPixmap::fromImage (imagePreviewInactive));
+
+  updatePreview();
+                             
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
 }
@@ -206,5 +282,64 @@ void DlgSettingsGuideline::updateControls ()
 
 void DlgSettingsGuideline::updatePreview()
 {
-  // Geometry parameters
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::updatePreview";
+
+  enableOk (true);
+
+  // Preview widgets
+  delete m_itemGuidelineXTActive;
+  delete m_itemGuidelineYRActive;
+  delete m_itemCircleActive;
+  delete m_itemCentipedeXTActive;
+  delete m_itemCentipdedYRActive;
+
+  // Screen bounds
+  int width = mainWindow().scene().width();
+  int height = mainWindow().scene().height();
+  QPointF posGraphTL, posGraphTR, posGraphBL, posGraphBR;
+  mainWindow().transformation().transformScreenToRawGraph (QPointF (0, 0),
+                                                           posGraphTL);
+  mainWindow().transformation().transformScreenToRawGraph(QPointF (width, 0),
+                                                          posGraphTR);
+  mainWindow().transformation().transformScreenToRawGraph (QPointF (0, height),
+                                                           posGraphBL);
+  mainWindow().transformation().transformScreenToRawGraph(QPointF (width, height),
+                                                          posGraphBR);
+
+  if (cmdMediator().document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
+
+    double xMin = qMin (qMin (qMin (posGraphTL.x(), posGraphTR.x()), posGraphBL.x()), posGraphBR.x());
+    double yMin = qMin (qMin (qMin (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
+    double xMax = qMax (qMax (qMax (posGraphTL.x(), posGraphTR.x()), posGraphBL.x()), posGraphBR.x());
+    double yMax = qMax (qMax (qMax (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
+    double xMid = (xMin + xMax) / 2.0;
+    double yMid = (yMin + yMax) / 2.0;
+
+    QPointF posLeft, posRight, posTop, posBottom;
+    mainWindow().transformation().transformRawGraphToScreen (QPointF (xMin, yMid),
+                                                             posLeft);
+    mainWindow().transformation().transformRawGraphToScreen (QPointF (xMax, yMid),
+                                                             posRight);
+    mainWindow().transformation().transformRawGraphToScreen (QPointF (xMid, yMin),
+                                                             posTop);
+    mainWindow().transformation().transformRawGraphToScreen (QPointF (xMid, yMax),
+                                                             posBottom);
+
+    m_itemGuidelineXTActive = new QGraphicsLineItem (QLineF (posBottom,
+                                                             posTop));
+    m_itemGuidelineYRActive = new QGraphicsLineItem (QLineF(posLeft,
+                                                            posRight));
+    m_itemGuidelineXTInactive = new QGraphicsLineItem (QLineF (posBottom,
+                                                               posTop));
+    m_itemGuidelineYRInactive = new QGraphicsLineItem (QLineF(posLeft,
+                                                              posRight));
+
+    m_scenePreviewActive->addItem (m_itemGuidelineXTActive);
+    m_scenePreviewActive->addItem (m_itemGuidelineYRActive);
+    m_scenePreviewInactive->addItem (m_itemGuidelineXTInactive);
+    m_scenePreviewInactive->addItem (m_itemGuidelineYRInactive);
+
+  } else {
+
+  }
 }
