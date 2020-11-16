@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "Checker.h"
 #include "CmdMediator.h"
 #include "CmdSettingsAxesChecker.h"
@@ -21,7 +22,9 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <qmath.h>
+#include <QPushButton>
 #include <QRadioButton>
+#include <QWhatsThis>
 #include "ViewPreview.h"
 
 const int AXIS_WIDTH = 4;
@@ -63,7 +66,12 @@ void DlgSettingsAxesChecker::createControls (QGridLayout *layout,
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAxesChecker::createControls";
 
   QGroupBox *groupBox = new QGroupBox (tr ("Axes Checker Lifetime"));
-  layout->addWidget (groupBox, row++, 1, 1, 2);
+  layout->addWidget (groupBox, row, 1, 1, 2);
+
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   3);
 
   QGridLayout *layoutLifetime = new QGridLayout;
   groupBox->setLayout (layoutLifetime);
@@ -81,6 +89,7 @@ void DlgSettingsAxesChecker::createControls (QGridLayout *layout,
   for (int seconds = 1; seconds <= 10; seconds++) {
     m_cmbSeconds->addItem (QString::number (seconds), QVariant (seconds));
   }
+  m_cmbSeconds->setWhatsThis (tr ("Number of seconds axes checker is displayed after axes points are changed"));
   layoutLifetime->addWidget (m_cmbSeconds, rowLifetime++, 1);
   connect (m_cmbSeconds, SIGNAL (activated (const QString &)), this, SLOT (slotSeconds (const QString &))); // activated() ignores code changes
 
@@ -274,6 +283,11 @@ void DlgSettingsAxesChecker::slotSeconds (const QString &)
 
   m_modelAxesCheckerAfter->setCheckerSeconds(m_cmbSeconds->currentData().toInt());
   updateControls();
+}
+
+void DlgSettingsAxesChecker::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
 }
 
 void DlgSettingsAxesChecker::updateControls ()

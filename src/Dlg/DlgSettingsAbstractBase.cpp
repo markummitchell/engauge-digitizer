@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "CmdMediator.h"
 #include "DlgSettingsAbstractBase.h"
 #include "EngaugeAssert.h"
@@ -11,6 +12,7 @@
 #include "MainWindow.h"
 #include <QColor>
 #include <QComboBox>
+#include <QGridLayout>
 #include <QPushButton>
 #include <QScrollArea>
 #include <QSettings>
@@ -36,11 +38,13 @@ DlgSettingsAbstractBase::DlgSettingsAbstractBase(const QString &title,
   setWindowTitle (title);
   setModal (true);
 
-  // Microsoft documentation https://docs.microsoft.com/en-us/windows/win32/winmsg/extended-window-styles?redirectedfrom=MSDN
-  // says help button cannot be used with minimize or maximize button
-  setWindowFlag (Qt::WindowContextHelpButtonHint, true);
-  setWindowFlag (Qt::WindowMinimizeButtonHint, false);
-  setWindowFlag (Qt::WindowMaximizeButtonHint, false);
+  // Linux Mint seems to not show help button
+  //setWindowFlag (Qt::Window, true);
+  //setWindowFlag (Qt::WindowContextHelpButtonHint, true);
+  //setWindowFlag (Qt::WindowCloseButtonHint, true);
+  //setWindowFlag (Qt::WindowMinimizeButtonHint, false);
+  //setWindowFlag (Qt::WindowMaximizeButtonHint, false);
+  setWindowFlags (Qt::Window | Qt::WindowContextHelpButtonHint | Qt::WindowCloseButtonHint);
 }
 
 DlgSettingsAbstractBase::~DlgSettingsAbstractBase()
@@ -54,6 +58,16 @@ CmdMediator &DlgSettingsAbstractBase::cmdMediator ()
   ENGAUGE_CHECK_PTR (m_cmdMediator);
 
   return *m_cmdMediator;
+}
+
+void DlgSettingsAbstractBase::createWhatsThis (QGridLayout *layout,
+                                               ButtonWhatsThis *button,
+                                               int row,
+                                               int column)
+{
+  button = new ButtonWhatsThis ();
+  connect (button, SIGNAL (clicked ()), this, SLOT (slotWhatsThis()));
+  layout->addWidget (button, row, column, 1, 1, Qt::AlignRight | Qt::AlignTop);
 }
 
 void DlgSettingsAbstractBase::enableOk (bool enable)

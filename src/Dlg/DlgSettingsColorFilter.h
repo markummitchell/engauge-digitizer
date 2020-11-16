@@ -13,6 +13,7 @@
 #include <QImage>
 #include <QPixmap>
 
+class ButtonWhatsThis;
 class DlgFilterThread;
 class DocumentModelColorFilter;
 class QComboBox;
@@ -60,7 +61,8 @@ private slots:
   void slotIntensity();
   void slotSaturation();
   void slotValue();
-
+  void slotWhatsThis();
+  
 protected:
   virtual void handleOk ();
 
@@ -77,6 +79,8 @@ private:
   void updateHistogram();
   void updatePreview();
 
+  ButtonWhatsThis *m_btnWhatsThis;
+  
   QComboBox *m_cmbCurveName;
 
   QRadioButton *m_btnIntensity;

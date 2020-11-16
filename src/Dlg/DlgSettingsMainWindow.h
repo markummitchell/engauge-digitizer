@@ -12,6 +12,7 @@
 #include <QString>
 #include <QStringList>
 
+class ButtonWhatsThis;
 class QCheckBox;
 class QComboBox;
 class QDoubleSpinBox;
@@ -52,6 +53,7 @@ private slots:
   void slotSignificantDigits (int);
   void slotSmallDialogs(bool);
   void slotTitleBarFormat(bool);
+  void slotWhatsThis();
   void slotZoomControl (const QString);
   void slotZoomFactor (const QString);
 
@@ -65,6 +67,8 @@ private:
   QStringList gatherQmFilenames () const;
   void updateControls();
 
+  ButtonWhatsThis *m_btnWhatsThis;
+  
   QComboBox *m_cmbZoomFactor;
   QComboBox *m_cmbZoomControl;
   QComboBox *m_cmbLocale;

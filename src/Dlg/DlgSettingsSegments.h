@@ -12,6 +12,7 @@
 #include <QImage>
 #include <QList>
 
+class ButtonWhatsThis;
 class DocumentModelSegments;
 class QCheckBox;
 class QComboBox;
@@ -49,7 +50,8 @@ private slots:
   void slotLineWidthInactive (int);  
   void slotMinLength (const QString &);
   void slotPointSeparation (const QString &);
-
+  void slotWhatsThis();
+  
 protected:
   virtual void handleOk ();
 
@@ -71,6 +73,7 @@ private:
                               GraphicsPoints &points,
                               HoverState hoverState);
 
+  ButtonWhatsThis *m_btnWhatsThis;
   QSpinBox *m_spinMinLength;
   QSpinBox *m_spinPointSeparation;
   QCheckBox *m_chkFillCorners;

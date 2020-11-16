@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "CmdSettingsGuideline.h"
 #include "DlgSettingsGuideline.h"
 #include "DocumentModelGuideline.h"
@@ -27,6 +28,7 @@
 #include <QPushButton>
 #include <QSpinBox>
 #include "QtToString.h"
+#include <QWhatsThis>
 #include "TranslatorContainer.h"
 #include "ViewPreview.h"
 
@@ -72,6 +74,11 @@ void DlgSettingsGuideline::createControls (QGridLayout *layout,
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::createControls";
   
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   3);
+
   QLabel *labelPointRadius = new QLabel (QString ("%1:").arg (tr ("Creation circle radius")));
   layout->addWidget (labelPointRadius, row, 1);
 
@@ -274,6 +281,11 @@ void DlgSettingsGuideline::slotLineWidthInactive (int lineWidth)
   updateControls();
   updatePreview();
 }                               
+
+void DlgSettingsGuideline::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
+}
 
 void DlgSettingsGuideline::updateControls ()
 {

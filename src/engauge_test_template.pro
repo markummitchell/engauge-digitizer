@@ -36,6 +36,7 @@ HEADERS  += \
     Background/BackgroundStateNone.h \
     Background/BackgroundStateOriginal.h \
     Background/BackgroundStateUnloaded.h \
+    util/ButtonWhatsThis.h \
     Callback/CallbackAddPointsInCurvesGraphs.h \
     Callback/CallbackAxesCheckerFromAxesPoints.h \
     Callback/CallbackAxisPointsAbstract.h \
@@ -490,6 +491,7 @@ SOURCES += \
     Background/BackgroundStateNone.cpp \
     Background/BackgroundStateOriginal.cpp \
     Background/BackgroundStateUnloaded.cpp \
+    util/ButtonWhatsThis.cpp \
     Callback/CallbackAddPointsInCurvesGraphs.cpp \
     Callback/CallbackAxesCheckerFromAxesPoints.cpp \
     Callback/CallbackAxisPointsAbstract.cpp \

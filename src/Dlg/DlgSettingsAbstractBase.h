@@ -10,9 +10,11 @@
 #include <QDialog>
 #include <QObject>
 
+class ButtonWhatsThis;
 class CmdMediator;
 class MainWindow;
 class QComboBox;
+class QGridLayout;
 class QHBoxLayout;
 class QScrollArea;
 
@@ -31,6 +33,12 @@ public:
 protected:
   /// Provide access to Document information wrapped inside CmdMediator.
   CmdMediator &cmdMediator ();
+
+  /// Create a WhatsThis button in a grid layout
+  void createWhatsThis (QGridLayout *layout,
+                        ButtonWhatsThis *button,
+                        int row,
+                        int column);
 
   /// Let subclass define an optional Save As Default button
   virtual void createOptionalSaveDefault (QHBoxLayout *layout) = 0;

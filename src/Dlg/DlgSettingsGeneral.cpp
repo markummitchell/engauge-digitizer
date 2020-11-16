@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "CmdMediator.h"
 #include "CmdSettingsGeneral.h"
 #include "DlgSettingsGeneral.h"
@@ -19,6 +20,7 @@
 #include <QPushButton>
 #include <QSettings>
 #include <QSpinBox>
+#include <QWhatsThis>
 #include "Settings.h"
 
 DlgSettingsGeneral::DlgSettingsGeneral(MainWindow &mainWindow) :
@@ -96,6 +98,12 @@ QWidget *DlgSettingsGeneral::createSubPanel ()
   layout->setColumnStretch(3, 1); // Empty first column
 
   int row = 0;
+
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   3);
+
   createControls (layout, row);
 
   return subPanel;
@@ -168,6 +176,11 @@ void DlgSettingsGeneral::slotSaveDefault()
   settings.setValue (SETTINGS_GENERAL_EXTRA_PRECISION,
                      m_modelGeneralAfter->extraPrecision());
   settings.endGroup ();
+}
+
+void DlgSettingsGeneral::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
 }
 
 void DlgSettingsGeneral::updateControls ()

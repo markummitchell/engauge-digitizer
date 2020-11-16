@@ -9,6 +9,7 @@
 
 #include "DlgSettingsAbstractBase.h"
 
+class ButtonWhatsThis;
 class DocumentModelAxesChecker;
 class DocumentModelCoords;
 class Checker;
@@ -17,6 +18,7 @@ class QButtonGroup;
 class QComboBox;
 class QGraphicsScene;
 class QGridLayout;
+class QPushButton;
 class QRadioButton;
 class ViewPreview;
 
@@ -39,6 +41,7 @@ private slots:
   void slotGroupMode (QAbstractButton*);
   void slotLineColor(const QString &);
   void slotSeconds (const QString &);
+  void slotWhatsThis ();
 
 protected:
   virtual void handleOk ();
@@ -51,6 +54,8 @@ private:
   void updateControls();
   void updatePreview();
 
+  ButtonWhatsThis *m_btnWhatsThis;
+  
   QButtonGroup *m_groupMode;
   QRadioButton *m_btnNever;
   QRadioButton *m_btnNSeconds;

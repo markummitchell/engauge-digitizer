@@ -10,6 +10,7 @@
 #include "CoordsType.h"
 #include "DlgSettingsAbstractBase.h"
 
+class ButtonWhatsThis;
 class DocumentModelPointMatch;
 class QComboBox;
 class QGraphicsEllipseItem;
@@ -41,7 +42,8 @@ private slots:
   void slotMaxPointSize (int);
   void slotMouseMove (QPointF pos);
   void slotRejectedPointColor (const QString &);
-
+  void slotWhatsThis();
+  
 protected:
   virtual void handleOk ();
 
@@ -58,6 +60,8 @@ private:
   void updateControls();
   void updatePreview();
 
+  ButtonWhatsThis *m_btnWhatsThis;
+  
   QSpinBox *m_spinMinPointSeparation;
   QSpinBox *m_spinPointSize;
   QComboBox *m_cmbAcceptedPointColor;

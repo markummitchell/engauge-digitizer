@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "DlgSettingsMainWindow.h"
 #include "EngaugeAssert.h"
 #include "ImportCropping.h"
@@ -24,6 +25,7 @@
 #include <QPushButton>
 #include <QSpinBox>
 #include "QtToString.h"
+#include <QWhatsThis>
 #include "TranslatorContainer.h"
 #include "ZoomControl.h"
 #include "ZoomFactorInitial.h"
@@ -292,6 +294,11 @@ QWidget *DlgSettingsMainWindow::createSubPanel ()
   layout->setColumnStretch(3, 1); // Empty first column
 
   int row = 0;
+
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   3);
   createControls (layout, row);
 
   return subPanel;
@@ -474,6 +481,11 @@ void DlgSettingsMainWindow::slotTitleBarFormat(bool)
                                                 MAIN_TITLE_BAR_FORMAT_PATH :
                                                 MAIN_TITLE_BAR_FORMAT_NO_PATH);
   updateControls();
+}
+
+void DlgSettingsMainWindow::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
 }
 
 void DlgSettingsMainWindow::slotZoomControl(const QString)

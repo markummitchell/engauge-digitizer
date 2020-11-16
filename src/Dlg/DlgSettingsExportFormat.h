@@ -9,6 +9,7 @@
 
 #include "DlgSettingsAbstractBase.h"
 
+class ButtonWhatsThis;
 class DocumentModelExportFormat;
 class QCheckBox;
 class QComboBox;
@@ -70,6 +71,7 @@ private slots:
   void slotRelationsPointsRaw();
   void slotSaveDefault();
   void slotTabChanged (int);
+  void slotWhatsThis();
   void slotXLabel (const QString &);
 
 protected:
@@ -98,6 +100,8 @@ private:
   void updateIntervalConstraints(); // Update constraints on intervals to prevent overflows downstream (especially when value is temporarily 0)
   void updatePreview();
 
+  ButtonWhatsThis *m_btnWhatsThis;
+  
   QTabWidget *m_tabWidget;
 
   QListWidget *m_listIncluded;

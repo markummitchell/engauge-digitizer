@@ -4,6 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
+#include "ButtonWhatsThis.h"
 #include "CmdMediator.h"
 #include "CmdSettingsDigitizeCurve.h"
 #include "CursorFactory.h"
@@ -24,6 +26,7 @@
 #include <qmath.h>
 #include <QRadioButton>
 #include <QSpinBox>
+#include <QWhatsThis>
 #include "Segment.h"
 #include "SegmentFactory.h"
 #include "ViewPreview.h"
@@ -63,8 +66,13 @@ void DlgSettingsDigitizeCurve::createControls (QGridLayout *layout,
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsDigitizeCurve::createControls";
 
   m_boxCursor = new QGroupBox (tr ("Cursor"));
-  layout->addWidget (m_boxCursor, row++, 1, 1, 2);
-
+  layout->addWidget (m_boxCursor, row, 1, 1, 2);
+  
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   3);
+  
   // Layout inside cursor group box
   QGridLayout *layoutCursor = new QGridLayout;
   m_boxCursor->setLayout (layoutCursor);
@@ -261,6 +269,11 @@ void DlgSettingsDigitizeCurve::slotCursorStandard (bool)
   m_modelDigitizeCurveAfter->setCursorStandardCross(true);
   updateControls();
   updatePreview();
+}
+
+void DlgSettingsDigitizeCurve::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
 }
 
 void DlgSettingsDigitizeCurve::updateControls()

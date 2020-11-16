@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "CallbackBoundingRects.h"
 #include "CmdMediator.h"
 #include "CmdSettingsCoords.h"
@@ -31,6 +32,7 @@
 #include <QRadioButton>
 #include <QStackedWidget>
 #include <QVBoxLayout>
+#include <QWhatsThis>
 #include "Transformation.h"
 #include "ViewPreview.h"
 
@@ -243,7 +245,12 @@ void DlgSettingsCoords::createGroupCoordsType (QGridLayout *layout,
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCoords::createGroupCoordsType";
 
   m_boxCoordsType = new QGroupBox(tr ("Coordinates Types"));
-  layout->addWidget (m_boxCoordsType, row++, 1, 1, 2);
+  layout->addWidget (m_boxCoordsType, row, 1, 1, 2);
+
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   3);
 
   QVBoxLayout *layoutGroup = new QVBoxLayout (m_boxCoordsType);
 
@@ -806,6 +813,11 @@ void DlgSettingsCoords::slotUnitsYRadius(const QString &)
   }
   updateControls ();
   updatePreview();
+}
+
+void DlgSettingsCoords::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
 }
 
 void DlgSettingsCoords::slotXThetaLinear()

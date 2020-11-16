@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "CmdMediator.h"
 #include "CmdSettingsGridDisplay.h"
 #include "DlgSettingsGridDisplay.h"
@@ -21,6 +22,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QWhatsThis>
 #include "ViewPreview.h"
 
 const int COUNT_MIN = 1;
@@ -284,6 +286,12 @@ QWidget *DlgSettingsGridDisplay::createSubPanel ()
   layout->setColumnStretch(4, 1); // Empty last column
 
   int row = 0;
+
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   4);
+
   createDisplayGridLinesX (layout, row);
   createDisplayGridLinesY (layout, row);
   createDisplayCommon (layout, row);
@@ -479,6 +487,11 @@ void DlgSettingsGridDisplay::slotStopY(const QString &stopY)
   updateDisplayedVariableY ();
   updateControls();
   updatePreview();
+}
+
+void DlgSettingsGridDisplay::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
 }
 
 bool DlgSettingsGridDisplay::textItemsAreValid () const

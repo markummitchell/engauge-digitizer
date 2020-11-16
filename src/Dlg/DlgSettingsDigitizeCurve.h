@@ -9,6 +9,7 @@
 
 #include "DlgSettingsAbstractBase.h"
 
+class ButtonWhatsThis;
 class DocumentModelDigitizeCurve;
 class QCheckBox;
 class QComboBox;
@@ -43,7 +44,8 @@ private slots:
   void slotCursorLineWidth (const QString &);
   void slotCursorSize (const QString &);
   void slotCursorStandard (bool);
-
+  void slotWhatsThis();
+  
 protected:
   virtual void handleOk ();
 
@@ -54,6 +56,8 @@ private:
   void updateControls();
   void updatePreview();
 
+  ButtonWhatsThis *m_btnWhatsThis;
+  
   QGroupBox *m_boxCursor;
   QRadioButton *m_btnStandard;
   QRadioButton *m_btnCustom;

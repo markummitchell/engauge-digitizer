@@ -9,6 +9,7 @@
 
 #include "DlgSettingsAbstractBase.h"
 
+class ButtonWhatsThis;
 class DocumentModelGeneral;
 class QGridLayout;
 class QPushButton;
@@ -33,7 +34,8 @@ private slots:
   void slotCursorSize (int);
   void slotExtraPrecision (int);
   void slotSaveDefault();
-
+  void slotWhatsThis();
+  
 protected:
   virtual void handleOk ();
 
@@ -43,6 +45,8 @@ private:
                        int &row);
   void updateControls();
 
+  ButtonWhatsThis *m_btnWhatsThis;
+  
   QSpinBox *m_spinCursorSize;
   QSpinBox *m_spinExtraPrecision;
 

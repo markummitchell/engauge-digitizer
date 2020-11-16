@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "CmdMediator.h"
 #include "CmdSettingsPointMatch.h"
 #include "DlgSettingsPointMatch.h"
@@ -20,6 +21,7 @@
 #include <qmath.h>
 #include <QPen>
 #include <QSpinBox>
+#include <QWhatsThis>
 #include "ViewPreview.h"
 
 const int MINIMUM_HEIGHT = 480;
@@ -164,6 +166,12 @@ QWidget *DlgSettingsPointMatch::createSubPanel ()
   layout->setColumnStretch(3, 1); // Empty column
 
   int row = 0;
+
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   3);
+
   createControls (layout, row);
   createPreview (layout, row);
   createTemplate ();
@@ -311,6 +319,11 @@ void DlgSettingsPointMatch::slotRejectedPointColor (const QString &)
   m_modelPointMatchAfter->setPaletteColorRejected(static_cast<ColorPalette> (m_cmbRejectedPointColor->currentData().toInt()));
   updateControls();
   updatePreview();
+}
+
+void DlgSettingsPointMatch::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
 }
 
 void DlgSettingsPointMatch::updateControls()

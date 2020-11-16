@@ -9,6 +9,7 @@
 
 #include "DlgSettingsAbstractBase.h"
 
+class ButtonWhatsThis;
 class DocumentModelGridRemoval;
 class QCheckBox;
 class QComboBox;
@@ -50,6 +51,8 @@ private slots:
   void slotStepY(const QString &);
   void slotStopY(const QString &);
 
+  void slotWhatsThis();
+  
 protected:
   virtual void handleOk ();
 
@@ -64,6 +67,8 @@ private:
   void updateDisplayedVariableY ();
   void updatePreview();
 
+  ButtonWhatsThis *m_btnWhatsThis;
+  
   QCheckBox *m_chkRemoveGridLines;
   QLineEdit *m_editCloseDistance;
   QDoubleValidator *m_validatorCloseDistance;

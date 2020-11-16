@@ -10,6 +10,7 @@
 #include "DlgSettingsAbstractBase.h"
 #include "GridLines.h"
 
+class ButtonWhatsThis;
 class DocumentModelGridDisplay;
 class QCheckBox;
 class QComboBox;
@@ -53,6 +54,8 @@ private slots:
   void slotStepY(const QString &);
   void slotStopY(const QString &);
 
+  void slotWhatsThis();
+  
 protected:
   virtual void handleOk ();
 
@@ -69,6 +72,8 @@ private:
   void updateDisplayedVariableY ();
   void updatePreview();
 
+  ButtonWhatsThis *m_btnWhatsThis;
+  
   QGroupBox *m_groupX;
   QComboBox *m_cmbDisableX;
   QLineEdit *m_editCountX;

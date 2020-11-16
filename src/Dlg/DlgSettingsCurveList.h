@@ -12,6 +12,7 @@
 #include <QModelIndex>
 #include <QString>
 
+class ButtonWhatsThis;
 class CurveNameList;
 class QGridLayout;
 class QListView;
@@ -38,7 +39,8 @@ public:
 public slots:
   /// Cleanup after rows have been removed in the model. We remove the corresponding rows in the QListView
   void slotRowsAboutToBeRemoved (const QModelIndex &parent, int rowFirst, int rowLast);
-
+  void slotWhatsThis();
+                                                                                      
 private slots:
   void slotDataChanged (const QModelIndex &topLeft,
                         const QModelIndex &bottomRight,
@@ -72,6 +74,8 @@ private:
   void selectCurveName (const QString &curveWanted);
   void updateControls ();
 
+  ButtonWhatsThis *m_btnWhatsThis;
+  
   CurveNameList *m_curveNameList; // Model for m_listCurves
 
   QListView *m_listCurves; // Use QListView instead of QListWidget so validators can be used

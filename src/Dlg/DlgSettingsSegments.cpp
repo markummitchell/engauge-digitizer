@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "CmdMediator.h"
 #include "CmdSettingsSegments.h"
 #include "DlgSettingsSegments.h"
@@ -20,6 +21,7 @@
 #include <QLabel>
 #include <qmath.h>
 #include <QSpinBox>
+#include <QWhatsThis>
 #include "Segment.h"
 #include "SegmentFactory.h"
 #include "ViewPreview.h"
@@ -278,6 +280,10 @@ QWidget *DlgSettingsSegments::createSubPanel ()
   layout->setColumnStretch (3, 1); // Empty last column
 
   int row = 0;
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   3);
   createControls(layout, row);
   createPreview (layout, row);
   QPixmap pixmap = QPixmap::fromImage (createPreviewImage());
@@ -416,6 +422,11 @@ void DlgSettingsSegments::slotPointSeparation (const QString &pointSeparation)
   m_modelSegmentsAfter->setPointSeparation(pointSeparation.toDouble());
   updateControls();
   updatePreview();
+}
+
+void DlgSettingsSegments::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
 }
 
 void DlgSettingsSegments::updateControls()

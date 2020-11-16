@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "CmdMediator.h"
 #include "CmdSettingsCurveList.h"
 #include "CurveNameList.h"
@@ -23,6 +24,7 @@
 #include <QTableView>
 #include <QTextStream>
 #include "QtToString.h"
+#include <QWhatsThis>
 #include "Settings.h"
 #include "SettingsForGraph.h"
 
@@ -103,7 +105,12 @@ void DlgSettingsCurveList::createListCurves (QGridLayout *layout,
   m_listCurves->setDragEnabled (true);
   m_listCurves->setDropIndicatorShown (true); // Visible confirmation that each row can be dragged and dropped to move
   m_listCurves->setDragDropMode (QAbstractItemView::InternalMove);
-  layout->addWidget (m_listCurves, row++, 1, 1, 2);
+  layout->addWidget (m_listCurves, row, 1, 1, 2);
+
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   3);
 
   m_curveNameList = new CurveNameList;
   connect (m_curveNameList, SIGNAL (rowsAboutToBeRemoved (const QModelIndex &, int, int)),
@@ -142,7 +149,7 @@ QWidget *DlgSettingsCurveList::createSubPanel ()
   QGridLayout *layout = new QGridLayout (subPanel);
   subPanel->setLayout (layout);
 
-  int row = 1;
+  int row = 0;
   createListCurves (layout, row);
   createButtons (layout, row);
 
@@ -458,18 +465,6 @@ void DlgSettingsCurveList::slotDataChanged (const QModelIndex &topLeft,
   updateControls ();
 }
 
-void DlgSettingsCurveList::slotRowsAboutToBeRemoved (const QModelIndex &parent,
-                                                     int rowFirst,
-                                                     int rowLast)
-{
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DlgSettingsCurveList::slotRowsAboutToBeRemoved"
-                               << " parentValid=" << (parent.isValid() ? "yes" : "no")
-                               << " rowFirst=" << rowFirst
-                               << " rowLast=" << rowLast;
-
-  updateControls ();
-}
-
 void DlgSettingsCurveList::slotNew ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveList::slotNew";
@@ -551,6 +546,18 @@ void DlgSettingsCurveList::slotResetDefault()
   }
 }
 
+void DlgSettingsCurveList::slotRowsAboutToBeRemoved (const QModelIndex &parent,
+                                                     int rowFirst,
+                                                     int rowLast)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DlgSettingsCurveList::slotRowsAboutToBeRemoved"
+                               << " parentValid=" << (parent.isValid() ? "yes" : "no")
+                               << " rowFirst=" << rowFirst
+                               << " rowLast=" << rowLast;
+
+  updateControls ();
+}
+
 void DlgSettingsCurveList::slotSaveDefault()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveList::slotSaveDefault";
@@ -573,6 +580,11 @@ void DlgSettingsCurveList::slotSaveDefault()
                        curveNameCurrent);
     settings.endGroup ();
   }
+}
+
+void DlgSettingsCurveList::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
 }
 
 void DlgSettingsCurveList::updateControls ()

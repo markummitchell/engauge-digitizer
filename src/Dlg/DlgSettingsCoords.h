@@ -11,6 +11,7 @@
 #include "CoordUnitsPolarTheta.h"
 #include "DlgSettingsAbstractBase.h"
 
+class ButtonWhatsThis;
 class DlgValidatorAbstract;
 class DocumentModelCoords;
 class QComboBox;
@@ -45,6 +46,7 @@ private slots:
   void slotTime (const QString &);
   void slotUnitsXTheta(const QString &);
   void slotUnitsYRadius(const QString &);
+  void slotWhatsThis();
   void slotXThetaLinear();
   void slotXThetaLog();
   void slotYRadiusLinear();
@@ -89,6 +91,8 @@ private:
   void updateCoordUnits();
   void updatePreview();
 
+  ButtonWhatsThis *m_btnWhatsThis;
+  
   QGroupBox *m_boxCoordsType;
   QRadioButton *m_btnCartesian;
   QRadioButton *m_btnPolar;

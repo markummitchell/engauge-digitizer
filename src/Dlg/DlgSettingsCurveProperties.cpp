@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "CmdMediator.h"
 #include "CmdSettingsCurveProperties.h"
 #include "ColorPalette.h"
@@ -33,6 +34,7 @@
 #include <QSpacerItem>
 #include <QSpinBox>
 #include <QTransform>
+#include <QWhatsThis>
 #include "Settings.h"
 #include "SettingsForGraph.h"
 #include "Spline.h"
@@ -87,12 +89,17 @@ void DlgSettingsCurveProperties::createCurveName (QGridLayout *layout,
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsCurveProperties::createCurveName";
 
   QLabel *labelCurveName = new QLabel (QString ("%1:").arg (tr ("Curve Name")));
-  layout->addWidget (labelCurveName, row, 1);
+  layout->addWidget (labelCurveName, row, 1, 1, 1);
 
   m_cmbCurveName = new QComboBox ();
   m_cmbCurveName->setWhatsThis (tr ("Name of the curve that is currently selected for editing"));
   connect (m_cmbCurveName, SIGNAL (activated (const QString &)), this, SLOT (slotCurveName (const QString &))); // activated() ignores code changes
-  layout->addWidget (m_cmbCurveName, row++, 2);
+  layout->addWidget (m_cmbCurveName, row, 2, 1, 1);
+
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   3);
 }
 
 void DlgSettingsCurveProperties::createLine (QGridLayout *layout,
@@ -607,6 +614,11 @@ void DlgSettingsCurveProperties::slotSaveDefault()
   settings.setValue (SETTINGS_CURVE_POINT_RADIUS,
                      m_modelCurveStylesAfter->pointRadius(curve));
   settings.endGroup ();
+}
+
+void DlgSettingsCurveProperties::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
 }
 
 void DlgSettingsCurveProperties::updateControls()

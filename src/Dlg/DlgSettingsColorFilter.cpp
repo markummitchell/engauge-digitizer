@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "CmdMediator.h"
 #include "CmdSettingsColorFilter.h"
 #include "ColorFilter.h"
@@ -25,6 +26,7 @@
 #include <QPixmap>
 #include <QRadioButton>
 #include <QRgb>
+#include <QWhatsThis>
 #include "ViewPreview.h"
 #include "ViewProfile.h"
 #include "ViewProfileDivider.h"
@@ -182,12 +184,18 @@ QWidget *DlgSettingsColorFilter::createSubPanel ()
   layout->setColumnStretch(3, 1); // Profile
   layout->setColumnMinimumWidth(4, EMPTY_COLUMN_WIDTH); // Empty column
   layout->setColumnStretch(4, 0);
+\
+  int row = 0;
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   4);
 
-  int rowLeft = 0, rowRight = 0;
+  int rowLeft = row, rowRight = row;
   createControls (layout, rowLeft);
   createProfileAndScale (layout, rowRight);
 
-  int row = qMax (rowLeft, rowRight);
+  row = qMax (rowLeft, rowRight);
   createPreview (layout, row);
 
   return subPanel;
@@ -390,6 +398,11 @@ void DlgSettingsColorFilter::slotValue ()
                                          COLOR_FILTER_MODE_VALUE);
   updateHistogram();
   updatePreview();
+}
+
+void DlgSettingsColorFilter::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
 }
 
 void DlgSettingsColorFilter::updateHistogram()

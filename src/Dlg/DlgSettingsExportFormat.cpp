@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "CallbackBoundingRects.h"
 #include "CmdMediator.h"
 #include "CmdSettingsExportFormat.h"
@@ -34,6 +35,7 @@
 #include <QTextEdit>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include <QWhatsThis>
 #include "Settings.h"
 #include "Transformation.h"
 
@@ -438,6 +440,12 @@ QWidget *DlgSettingsExportFormat::createSubPanel ()
   subPanel->setLayout (layout);
 
   int row = 0;
+
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   3);
+
   createCurveSelection (layout, row);
 
   createTabWidget (layout,
@@ -1119,6 +1127,11 @@ void DlgSettingsExportFormat::slotTabChanged (int)
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsExportFormat::slotTabChanged";
 
   updatePreview();
+}
+
+void DlgSettingsExportFormat::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
 }
 
 void DlgSettingsExportFormat::slotXLabel(const QString &)

@@ -11,6 +11,7 @@
 #include <QString>
 #include <QStringList>
 
+class ButtonWhatsThis;
 class DocumentModelGuideline;
 class QComboBox;
 class QGraphicsEllipseItem;
@@ -41,7 +42,8 @@ private slots:
   void slotLineColor (const QString &);
   void slotLineWidthActive (int lineWidth);
   void slotLineWidthInactive (int lineWidth);  
-
+  void slotWhatsThis();
+  
 protected:
   virtual void handleOk ();
 
@@ -54,6 +56,8 @@ private:
   void updateControls();
   void updatePreview();
 
+  ButtonWhatsThis *m_btnWhatsThis;
+  
   QSpinBox *m_spinCreationCircleRadius;
   QComboBox *m_lineColor;
   QSpinBox *m_spinLineWidthActive;

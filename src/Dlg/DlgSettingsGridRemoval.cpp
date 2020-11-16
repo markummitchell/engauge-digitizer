@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "ButtonWhatsThis.h"
 #include "CmdMediator.h"
 #include "CmdSettingsGridRemoval.h"
 #include "DlgSettingsGridRemoval.h"
@@ -22,6 +23,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPixmap>
+#include <QWhatsThis>
 #include "ViewPreview.h"
 
 const double CLOSE_DISTANCE_MAX = 64;
@@ -291,6 +293,12 @@ QWidget *DlgSettingsGridRemoval::createSubPanel ()
   layout->setColumnStretch(4, 1); // Empty last column
 
   int row = 0;
+
+  createWhatsThis (layout,
+                   m_btnWhatsThis,
+                   row++,
+                   4);
+
   createRemoveGridLines (layout, row);
   createPreview (layout, row);
 
@@ -482,6 +490,11 @@ void DlgSettingsGridRemoval::slotStopY(const QString &stopY)
   updateDisplayedVariableY ();
   updateControls();
   updatePreview();
+}
+
+void DlgSettingsGridRemoval::slotWhatsThis ()
+{
+  QWhatsThis::enterWhatsThisMode();
 }
 
 void DlgSettingsGridRemoval::updateControls ()

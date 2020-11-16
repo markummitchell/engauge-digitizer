@@ -11,6 +11,7 @@
 #include "DlgSettingsAbstractBase.h"
 #include "MainWindowModel.h"
 
+class ButtonWhatsThis;
 class GraphicsPoint;
 class QComboBox;
 class QGraphicsScene;
@@ -47,7 +48,8 @@ private slots:
   void slotPointRadius(int);
   void slotPointShape(const QString &);
   void slotSaveDefault();
-
+  void slotWhatsThis();
+  
 protected:
   virtual void handleOk ();
 
@@ -65,6 +67,8 @@ private:
   void updateControls();
   void updatePreview();
 
+  ButtonWhatsThis *m_btnWhatsThis;
+  
   MainWindowModel m_modelMainWindow;
 
   QComboBox *m_cmbCurveName;
