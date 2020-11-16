@@ -181,6 +181,17 @@ double magnitude (const QPointF &vec)
   return qSqrt (vec.x() * vec.x() + vec.y() * vec.y());
 }
 
+QPointF normalize (const QPointF &vec)
+{
+  double vecMag = magnitude (vec);
+  if (vecMag > 0) {
+    return QPointF (vec.x() / vecMag,
+                    vec.y() / vecMag);
+  } else {
+    return vec;
+  }
+}
+
 QRgb pixelRGB(const QImage &image, int x, int y)
 {
   switch (image.depth())

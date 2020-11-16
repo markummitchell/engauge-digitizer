@@ -38,6 +38,10 @@ signals:
 private:
   CentipedeSegmentConstantYREllipse();
 
+  void posScreenConstantYRForXTHighLowAngles (double radius,
+                                              const QPointF &posLow,
+                                              const QPointF &posHigh) const;
+
   GraphicsArcItem *m_graphicsItem;
   GraphicsArcItemRelay *m_graphicsItemRelay;  
 

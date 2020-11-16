@@ -39,8 +39,7 @@ CentipedePair::CentipedePair(GraphicsScene &scene,
   } else {
     m_centipedeXT = new CentipedeSegmentConstantXTRadial (modelGuideline,
                                                           transformation,
-                                                          posScreen,
-                                                          scene);
+                                                          posScreen);
     m_centipedeYR = new CentipedeSegmentConstantYREllipse (modelGuideline,
                                                            transformation,
                                                            posScreen);

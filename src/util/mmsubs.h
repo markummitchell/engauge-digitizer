@@ -29,6 +29,10 @@ extern double angleFromBasisVectors (double xBasis0,
 extern double angleFromVectorToVector (const QPointF &vFrom,
                                        const QPointF &vTo);
 
+/// Vector dot product
+extern double dot (const QPointF &vec1,
+                   const QPointF &vec2);
+
 /// Calculate ellipse parameters that is incribed in a parallelogram centered at the origin,
 /// given three successive corners of that parallelogram. By symmetry the other corner is
 /// not needed.
@@ -44,6 +48,9 @@ extern void ellipseFromParallelogram (double xTL,
 
 /// Norm of vector
 extern double magnitude (const QPointF &vec);
+
+/// Return normalized vector
+extern QPointF normalize (const QPointF &vec);
 
 /// Get pixel method for any bit depth
 extern QRgb pixelRGB (const QImage &image, int x, int y);
@@ -93,5 +100,5 @@ extern void setPixelRGB8 (QImage &image8Bit, int x, int y, QRgb q);
 
 /// Set pixel method for 32 bit depth
 extern void setPixelRGB32 (QImage &image32Bit, int x, int y, QRgb q);
-
+  
 #endif // MM_SUBS_H

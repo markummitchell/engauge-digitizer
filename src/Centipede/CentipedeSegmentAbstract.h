@@ -57,6 +57,14 @@ protected:
                                            double &angleLow,
                                            double &angleHigh) const;
 
+  /// Generate a pair of points next to each other along a screen circle with the specified radius, given the index
+  void generatePreviousAndNextPoints (double radius,
+                                      int i,
+                                      QPointF &posGraphPrevious,
+                                      QPointF &posGraphNext,
+                                      QPointF &posScreen,
+                                      double angleOffset = 0) const;
+
   /// Settings
   const DocumentModelGuideline &modelGuideline () const;
 
@@ -89,12 +97,6 @@ private:
 
   double closestAngleToCentralAngle (double angleCenter,
                                      double angleOld) const;
-  void generatePreviousAndNextPoints (double radius,
-                                      int i,
-                                      QPointF &posGraphPrevious,
-                                      QPointF &posGraphNext,
-                                      QPointF &posScreen,
-                                      double angleOffset = 0) const;
   QPointF posScreenConstantXTCommon (double radius,
                                      IntersectionType intersectionType) const; /// Solves posScreenConstantXTForHighYR and posScreenConstantXTForLowYR
   QPointF posScreenConstantYRCommon (double radius,

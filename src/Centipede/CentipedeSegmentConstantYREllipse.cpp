@@ -24,8 +24,8 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
                             posClickScreen),
   m_angleScreenToEllipseAxes (0)
 {
-  m_posLow = posScreenConstantYRForLowXT (modelGuideline.creationCircleRadius ());
-  m_posHigh = posScreenConstantYRForHighXT (modelGuideline.creationCircleRadius ());
+  m_posLow = posScreenConstantYRForLowXT (modelGuideline.creationCircleRadius());
+  m_posHigh = posScreenConstantYRForHighXT (modelGuideline.creationCircleRadius());
   m_angleCenter = angleScreenConstantYRCenterAngle (modelGuideline.creationCircleRadius ());
   angleScreenConstantYRHighLowAngles (modelGuideline.creationCircleRadius (),
                                       m_angleCenter,
