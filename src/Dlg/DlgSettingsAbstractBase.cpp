@@ -68,6 +68,9 @@ void DlgSettingsAbstractBase::createWhatsThis (QGridLayout *layout,
   button = new ButtonWhatsThis ();
   connect (button, SIGNAL (clicked ()), this, SLOT (slotWhatsThis()));
   layout->addWidget (button, row, column, 1, 1, Qt::AlignRight | Qt::AlignTop);
+
+  // Prevent huge space after row with this button, especially with DlgSettingsMainWindow
+  layout->setRowStretch (row, 0);
 }
 
 void DlgSettingsAbstractBase::enableOk (bool enable)
