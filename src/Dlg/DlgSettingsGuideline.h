@@ -16,6 +16,7 @@ class DocumentModelGuideline;
 class QComboBox;
 class QGraphicsEllipseItem;
 class QGraphicsItem;
+class QGraphicsLineItem;
 class QGraphicsScene;
 class QGridLayout;
 class QPushButton;
@@ -51,10 +52,15 @@ private:
 
   void createControls (QGridLayout *layout,
                        int &row);
+  void createLines();
   void createPreview (QGridLayout *layout, int &row);
   void killCentipede ();
+  void removeOldWidgetsActive();
+  void removeOldWidgetsInactive();
   void updateControls();
   void updatePreview();
+  void updatePreviewGeometry();
+  void updatePreviewStyle();
 
   ButtonWhatsThis *m_btnWhatsThis;
   
@@ -70,18 +76,22 @@ private:
   ViewPreview *m_viewPreviewInactive;
 
   // Drawn widgets for active
-  QGraphicsItem *m_itemGuidelineXTActive;
-  QGraphicsItem *m_itemGuidelineYRActive;
-  QGraphicsEllipseItem *m_itemCircleActive;
-  QGraphicsItem *m_itemCentipedeXTActive;
-  QGraphicsItem *m_itemCentipdedYRActive;
+  QGraphicsLineItem *m_itemGuidelineXTActive;
+  QGraphicsLineItem *m_itemGuidelineYActive;
+  QGraphicsEllipseItem *m_itemGuidelineRActive;
+  QGraphicsLineItem *m_itemCentipedeXTActive;
+  QGraphicsLineItem *m_itemCentipedeYActive;
+  QGraphicsEllipseItem *m_itemCentipedeRActive;
+  QGraphicsEllipseItem *m_itemCentipedeCircleActive;
 
   // Drawn widgets for inactive
-  QGraphicsItem *m_itemGuidelineXTInactive;
-  QGraphicsItem *m_itemGuidelineYRInactive;
-  QGraphicsEllipseItem *m_itemCircleInactive;
-  QGraphicsItem *m_itemCentipedeXTInactive;
-  QGraphicsItem *m_itemCentipdedYRInactive;
+  QGraphicsLineItem *m_itemGuidelineXTInactive;
+  QGraphicsLineItem *m_itemGuidelineYInactive;
+  QGraphicsEllipseItem *m_itemGuidelineRInactive;
+  QGraphicsLineItem *m_itemCentipedeXTInactive;
+  QGraphicsLineItem *m_itemCentipedeYInactive;
+  QGraphicsEllipseItem *m_itemCentipedeRInactive;
+  QGraphicsEllipseItem *m_itemCentipedeCircleInactive;
 
   DocumentModelGuideline *m_modelGuidelineBefore;
   DocumentModelGuideline *m_modelGuidelineAfter;

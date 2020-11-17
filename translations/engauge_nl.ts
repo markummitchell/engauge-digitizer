@@ -6,7 +6,7 @@
         <location filename="../src/Checklist/ChecklistGuide.cpp" line="20" />
         <location filename="../src/Checklist/ChecklistGuide.cpp" line="21" />
         <source>Checklist Guide</source>
-        <translation>Checklist-gids</translation>
+        <translation>Checklistgids</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuide.cpp" line="22" />
@@ -27,7 +27,7 @@ Om de Checklist Guide Wizard uit te voeren wanneer een afbeeldingsbestand is ge�
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="11" />
         <source>Conclusion</source>
-        <translation>Gevolgtrekking</translation>
+        <translation>Besluit</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="19" />
@@ -50,7 +50,7 @@ Om de Checklist Guide Wizard uit te voeren wanneer een afbeeldingsbestand is ge�
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="21" />
         <source>Curve name. Empty if unused.</source>
-        <translation>Curve naam. Leeg indien ongebruikt.</translation>
+        <translation>Naam van de curve. Leeg indien ongebruikt.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="22" />
@@ -93,12 +93,12 @@ Om de Checklist Guide Wizard uit te voeren wanneer een afbeeldingsbestand is ge�
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="18" />
         <source>Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines to define the coordinates.</source>
-        <translation>Engauge converteert een afbeelding van een grafiek of kaart in getallen, zolang de afbeelding assen en / of rasterlijnen heeft om de coördinaten te definiëren.</translation>
+        <translation>Engauge converteert een afbeelding van een grafiek of kaart in getallen, zolang de afbeelding assen en/of rasterlijnen heeft om de coördinaten te definiëren.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="20" />
         <source>This wizard creates a checklist of steps that can serve as a helpful guide. By following those steps, you can obtain digitized data points in an exported file. This wizard also provides a quick summary of the most useful features of Engauge.</source>
-        <translation>Deze wizard maakt een checklist met stappen die als handige gids kunnen dienen. Door deze stappen te volgen, kunt u gedigitaliseerde datapunten verkrijgen in een geëxporteerd bestand. Deze wizard biedt ook een korte samenvatting van de handigste functies van Engauge.</translation>
+        <translation>Deze wizard maakt een checklist met stappen die als handige gids kunnen dienen. Door die stappen te volgen kunt u gedigitaliseerde datapunten verkrijgen in een geëxporteerd bestand. Deze wizard biedt ook een korte samenvatting van de handigste functies van Engauge.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="23" />
@@ -111,7 +111,7 @@ Om de Checklist Guide Wizard uit te voeren wanneer een afbeeldingsbestand is ge�
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="27" />
         <source>Checklist Guide</source>
-        <translation>Checklist-gids</translation>
+        <translation>Checklistgids</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="29" />
@@ -2504,12 +2504,12 @@ In totaal zijn er twee punten op de x-as als (x1) en (x2), en twee punten op de 
 <context>
     <name>DlgSettingsAbstractBase</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="100" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="123" />
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="108" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="131" />
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
@@ -2517,62 +2517,67 @@ In totaal zijn er twee punten op de x-as als (x1) en (x2), en twee punten op de 
 <context>
     <name>DlgSettingsAxesChecker</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="39" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="42" />
         <source>Axes Checker</source>
         <translation>Assen Checker</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="65" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="68" />
         <source>Axes Checker Lifetime</source>
         <translation>Axes Checker Levensduur</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="72" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="80" />
         <source>Do not show</source>
         <translation>Niet laten zien</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="73" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="81" />
         <source>Never show axes checker.</source>
         <translation>Nooit assen checker weergeven.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="76" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="84" />
         <source>Show for a number of seconds</source>
         <translation>Laat een aantal seconden zien</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="77" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="85" />
         <source>Show axes checker for a number of seconds after changing axes points.</source>
         <translation>Toon assen checker voor een aantal seconden na het wisselen van aspunten.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="87" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="92" />
+        <source>Number of seconds axes checker is displayed after axes points are changed</source>
+        <translation>Het aantal seconden assencontrole wordt weergegeven nadat de aspunten zijn gewijzigd </translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="96" />
         <source>Show always</source>
         <translation>Altijd laten zien</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="88" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="97" />
         <source>Always show axes checker.</source>
         <translation>Toon altijd assen checker.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="97" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="106" />
         <source>Line color</source>
         <translation>Lijnkleur</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="101" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="110" />
         <source>Select a color for the highlight lines drawn at each axis point</source>
         <translation>Selecteer een kleur voor de markeringslijnen die op elk aspunt zijn getekend</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="155" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="164" />
         <source>Preview</source>
         <translation>Voorbeeld</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="162" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="171" />
         <source>Preview window that shows how current settings affect the displayed axes checker</source>
         <translation>Voorbeeldvenster dat laat zien hoe de huidige instellingen de weergegeven assencontrole beïnvloeden</translation>
     </message>
@@ -2580,27 +2585,27 @@ In totaal zijn er twee punten op de x-as als (x1) en (x2), en twee punten op de 
 <context>
     <name>DlgSettingsColorFilter</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="37" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="39" />
         <source>Color Filter</source>
         <translation>Kleurfilter</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="64" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="66" />
         <source>Curve Name</source>
         <translation>Curve naam</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="68" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="70" />
         <source>Name of the curve that is currently selected for editing</source>
         <translation>Naam van de curve die momenteel is geselecteerd om te bewerken</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="72" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="74" />
         <source>Filter mode</source>
         <translation>Filtermodus</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="76" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="78" />
         <source>Filter the original image into black and white pixels using the Intensity parameter, to hide unimportant information and emphasize important information.
 
 The Intensity value of a pixel is computed from the red, green and blue components as I = squareroot (R * R + G * G + B * B)</source>
@@ -2609,7 +2614,7 @@ The Intensity value of a pixel is computed from the red, green and blue componen
 De intensiteitswaarde van een pixel wordt berekend uit de rode, groene en blauwe componenten als I = squareroot (R * R + G * G + B * B)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="84" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="86" />
         <source>Filter the original image into black and white pixels by isolating the foreground from the background, to hide unimportant information and emphasize important information.
 
 The background color is shown on the left side of the scale bar.
@@ -2622,17 +2627,17 @@ De achtergrondkleur wordt aan de linkerkant van de schaalbalk weergegeven.
 De afstand van een kleur (R, G, B) tot de achtergrondkleur (Rb, Gb, Bb) wordt berekend als F = squareroot ((R - Rb) * (R - Rb) + (G - Gb) * (G - Gb) + (B - Bb)). Aan de linkerkant van de schaal is de waarde van de voorgrondafstand nul, en deze neemt lineair toe tot het maximum helemaal rechts.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="94" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="96" />
         <source>Filter the original image into black and white pixels using the Hue component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.</source>
         <translation>Filter de originele afbeelding in zwart-witte pixels met behulp van de Hue-component van de Hue, Saturation and Value (HSV) -kleurcomponenten om onbelangrijke informatie te verbergen en belangrijke informatie te benadrukken.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="101" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="103" />
         <source>Filter the original image into black and white pixels using the Saturation component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.</source>
         <translation>Filter de originele afbeelding in zwart-witte pixels met behulp van de verzadigingscomponent van de kleurcomponenten Tint, Verzadiging en Waarde (HSV) om onbelangrijke informatie te verbergen en belangrijke informatie te benadrukken.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="108" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="110" />
         <source>Filter the original image into black and white pixels using the Value component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.
 
 The Value component is also called the Lightness.</source>
@@ -2641,27 +2646,27 @@ The Value component is also called the Lightness.</source>
 De waardecomponent wordt ook wel de lichtheid genoemd.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="124" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="126" />
         <source>Preview</source>
         <translation>Voorbeeld</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="131" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="133" />
         <source>Preview window that shows how current settings affect the filtering of the original image.</source>
         <translation>Voorbeeldvenster dat laat zien hoe de huidige instellingen het filteren van de originele afbeelding beïnvloeden.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="146" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="148" />
         <source>Filter Parameter Histogram Profile</source>
         <translation>Filterparameter Histogramprofiel</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="154" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="156" />
         <source>Histogram profile of the selected filter parameter. The two Dividers can be moved back and forth to adjust the range of filter parameter values that will be included in the filtered image. The clear portion will be included, and the shaded portion will be excluded.</source>
         <translation>Histogramprofiel van de geselecteerde filterparameter. De twee verdelers kunnen heen en weer worden bewogen om het bereik van de filterparameterwaarden aan te passen dat in het gefilterde beeld wordt opgenomen. Het heldere gedeelte wordt opgenomen en het gearceerde gedeelte wordt uitgesloten.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="161" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="163" />
         <source>This read-only box displays a graphical representation of the horizontal axis in the histogram profile above.</source>
         <translation>Dit alleen-lezenvak toont een grafische weergave van de horizontale as in het bovenstaande histogramprofiel.</translation>
     </message>
@@ -2669,19 +2674,19 @@ De waardecomponent wordt ook wel de lichtheid genoemd.</translation>
 <context>
     <name>DlgSettingsCoords</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="76" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="916" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="920" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="75" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="925" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="929" />
         <source>Coordinates</source>
         <translation>Coördinaten</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="219" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="218" />
         <source>Date/Time</source>
         <translation>Datum/Tijd</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="229" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="228" />
         <source>Date format to be used for date values, and date portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the time portion appearing in output.</source>
@@ -2690,7 +2695,7 @@ Setting the format to an empty value results in just the time portion appearing 
 Als u het formaat instelt op een lege waarde, wordt alleen het tijdgedeelte in de uitvoer weergegeven.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="236" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="235" />
         <source>Time format to be used for time values, and time portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the date portion appearing in output.</source>
@@ -2699,28 +2704,28 @@ Setting the format to an empty value results in just the date portion appearing 
 Als u het formaat instelt op een lege waarde, wordt alleen het datumgedeelte in de uitvoer weergegeven.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="248" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="247" />
         <source>Coordinates Types</source>
         <translation>Coördinaten typen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="253" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="257" />
         <source>Polar</source>
         <translation>Polair</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="253" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="919" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="257" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="928" />
         <source>R</source>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="255" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="259" />
         <source>Cartesian (X, Y)</source>
         <translation>Cartesiaans (X, Y)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="256" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="260" />
         <source>Select cartesian coordinates.
 
 The X and Y coordinates will be used</source>
@@ -2729,7 +2734,7 @@ The X and Y coordinates will be used</source>
 De X- en Y-coördinaten worden gebruikt</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="262" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="266" />
         <source>Select polar coordinates.
 
 The Theta and R coordinates will be used.
@@ -2742,30 +2747,30 @@ De Theta- en R-coördinaten worden gebruikt.
 Poolcoördinaten zijn niet toegestaan ​​met logschaal voor Theta</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="281" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="316" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="285" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="320" />
         <source>Scale</source>
         <translation>Schaal</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="284" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="319" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="288" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="323" />
         <source>Linear</source>
         <translation>Lineair</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="285" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="289" />
         <source>Specifies linear scale for the X or Theta coordinate</source>
         <translation>Specificeert de lineaire schaal voor de X- of Theta-coördinaat</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="289" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="327" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="293" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="331" />
         <source>Log</source>
         <translation>Logaritme</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="290" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="294" />
         <source>Specifies logarithmic scale for the X or Theta coordinate.
 
 Log scale is not allowed if there are negative coordinates.
@@ -2778,23 +2783,23 @@ Logschaal is niet toegestaan ​​als er negatieve coördinaten zijn.
 Logschaal is niet toegestaan ​​voor de Theta-coördinaat.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="296" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="341" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="300" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="345" />
         <source>Units</source>
         <translation>Unit</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="320" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="324" />
         <source>Specifies linear scale for the Y or R coordinate</source>
         <translation>Specificeert de lineaire schaal voor de Y- of R-coördinaat</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="324" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="328" />
         <source>Origin radius value</source>
         <translation>Oorsprong radius waarde</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="328" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="332" />
         <source>Specifies logarithmic scale for the Y or R coordinate
 
 Log scale is not allowed if there are negative coordinates.</source>
@@ -2803,7 +2808,7 @@ Log scale is not allowed if there are negative coordinates.</source>
 Logschaal is niet toegestaan ​​als er negatieve coördinaten zijn.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="335" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="339" />
         <source>Specify radius value at origin.
 
 Normally the radius at the origin is 0, but a nonzero value may be applied in other cases (like when the radial units are decibels).</source>
@@ -2812,17 +2817,17 @@ Normally the radius at the origin is 0, but a nonzero value may be applied in ot
 Normaal gesproken is de straal aan de oorsprong 0, maar in andere gevallen kan een niet-nulwaarde worden toegepast (bijvoorbeeld wanneer de radiale eenheden decibel zijn).</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="358" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="362" />
         <source>Preview</source>
         <translation>Voorbeeld</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="365" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="369" />
         <source>Preview window that shows how current settings affect the coordinate system.</source>
         <translation>Voorbeeldvenster dat laat zien hoe de huidige instellingen het coördinatensysteem beïnvloeden.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="673" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="677" />
         <source>Numbers have the simplest and most general format.
 
 Date and time values have date and/or time components, with dates between 1901 and 2105 on 64 bit operating systems.
@@ -2835,7 +2840,7 @@ Datum- en tijdwaarden hebben datum- en / of tijdcomponenten, met datums tussen 1
 De indeling Degrees Minutes Seconds (DDD MM SS.S) gebruikt twee gehele getallen voor graden en minuten en een reëel getal voor seconden. Er zijn 60 seconden per minuut. Tijdens het invoeren moeten spaties tussen de drie cijfers worden ingevoegd.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="707" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="711" />
         <source>Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.
 
 Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are 60 minutes per degree. During input, a space must be inserted between the two numbers.
@@ -2860,12 +2865,12 @@ Het formaat Radialen gebruikt een enkel reëel getal. Een complete revolutie is 
 Turns-formaat gebruikt een enkel reëel getal. Een complete revolutie is een beurt.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="914" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="923" />
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="918" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="927" />
         <source>Y</source>
         <translation>Y</translation>
     </message>
@@ -2873,17 +2878,17 @@ Turns-formaat gebruikt een enkel reëel getal. Een complete revolutie is een beu
 <context>
     <name>DlgSettingsCurveList</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="32" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="34" />
         <source>Curve List</source>
         <translation>Curve lijst</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="69" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="71" />
         <source>Add...</source>
         <translation>Toevoegen...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="70" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="72" />
         <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
 
 Every curve name must be unique</source>
@@ -2892,12 +2897,12 @@ Every curve name must be unique</source>
 Elke curvenaam moet uniek zijn</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="76" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="78" />
         <source>Remove</source>
         <translation>Verwijderen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="77" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="79" />
         <source>Removes the currently selected curve from the curve list.
 
 There must always be at least one curve</source>
@@ -2906,12 +2911,12 @@ There must always be at least one curve</source>
 Er moet altijd minimaal één bocht zijn</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="89" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="91" />
         <source>Curve Names</source>
         <translation>Curve Namen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="94" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="96" />
         <source>List of the curves belonging to this document.
 
 Click on a curve name to edit it. Each curve name must be unique.
@@ -2924,43 +2929,43 @@ Klik op een curvenaam om deze te bewerken. Elke curvenaam moet uniek zijn.
 Herschik curven door ze te slepen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="121" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="128" />
         <source>Save As Default</source>
         <translation>Opslaan als standaard</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="122" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="129" />
         <source>Save the curve names for use as defaults for future graph curves.</source>
         <translation>Bewaar de curvenamen voor gebruik als standaardwaarden voor toekomstige grafiekcurven.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="126" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="133" />
         <source>Reset Default</source>
         <translation>Terug naar basis instellingen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="127" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="134" />
         <source>Reset the defaults for future graph curves to the original settings.</source>
         <translation>Zet de standaardinstellingen voor toekomstige grafiekcurven terug op de oorspronkelijke instellingen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="507" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="502" />
         <source>Removing this curve will also remove</source>
         <translation>Als u deze curve verwijdert, wordt ook verwijderd</translation>
     </message>
     <message>
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="504" />
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="509" />
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="514" />
         <source>points. Continue?</source>
         <translation>punten. Doorgaan met?</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="512" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="507" />
         <source>Removing these curves will also remove</source>
         <translation>Als u deze curven verwijdert, wordt ook verwijderd</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="518" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="513" />
         <source>Curves With Points</source>
         <translation>Curven met punten</translation>
     </message>
@@ -2968,32 +2973,32 @@ Herschik curven door ze te slepen.</translation>
 <context>
     <name>DlgSettingsCurveProperties</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="62" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="64" />
         <source>Curve Properties</source>
         <translation>Curve-eigenschappen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="89" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="91" />
         <source>Curve Name</source>
         <translation>Curve naam</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="93" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="95" />
         <source>Name of the curve that is currently selected for editing</source>
         <translation>Naam van de curve die momenteel is geselecteerd om te bewerken</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="103" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="110" />
         <source>Line</source>
         <translation>Lijn</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="109" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="116" />
         <source>Width</source>
         <translation>Breedte</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="113" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="120" />
         <source>Select a width for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
@@ -3002,13 +3007,13 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
 Dit is alleen van toepassing op grafiekkrommen. Er worden nooit lijnen tussen aspunten getekend.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="119" />
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="126" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="216" />
         <source>Color</source>
         <translation>Kleur</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="123" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="130" />
         <source>Select a color for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
@@ -3017,12 +3022,12 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
 Dit is alleen van toepassing op grafiekkrommen. Er worden nooit lijnen tussen aspunten getekend.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="129" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136" />
         <source>Connect as</source>
         <translation>Maak verbinding als</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="137" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="144" />
         <source>Select rule for connecting points with lines.
 
 If the curve is connected as a single-valued function then the points are ordered by increasing value of the independent variable.
@@ -3047,37 +3052,37 @@ Rechte bochten worden getekend met rechte lijnen tussen opeenvolgende punten. Vl
 Dit is alleen van toepassing op grafiekkrommen. Er worden nooit lijnen tussen aspunten getekend.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="158" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="165" />
         <source>Point</source>
         <translation>Punt</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="164" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="171" />
         <source>Shape</source>
         <translation>Vorm</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="168" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="175" />
         <source>Select a shape for the points</source>
         <translation>Selecteer een vorm voor de punten</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="188" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="195" />
         <source>Radius</source>
         <translation>Straal</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="192" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="199" />
         <source>Select a radius, in pixels, for the points</source>
         <translation>Selecteer een straal, in pixels, voor de punten</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="197" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="204" />
         <source>Line width</source>
         <translation>Lijnbreedte</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="201" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="208" />
         <source>Select a line width, in pixels, for the points.
 
 A larger width results in a thicker line, with the exception of a value of zero which always results in a line that is one pixel wide (which is easy to see even when zoomed far out)</source>
@@ -3086,12 +3091,12 @@ A larger width results in a thicker line, with the exception of a value of zero 
 Een grotere breedte resulteert in een dikkere lijn, met uitzondering van een waarde van nul die altijd resulteert in een lijn die één pixel breed is (wat gemakkelijk te zien is, zelfs wanneer ver uitgezoomd)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="213" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="220" />
         <source>Select a color for the line used to draw the point shapes</source>
         <translation>Selecteer een kleur voor de lijn die wordt gebruikt om de puntvormen te tekenen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="224" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="231" />
         <source>Save the visible curve settings for use as future defaults, according to the curve name selection.
 
 If the visible settings are for the axes curve, then they will be used for future axes curves, until new settings are saved as the defaults.
@@ -3104,12 +3109,12 @@ Als de zichtbare instellingen voor de ascurve zijn, zullen ze worden gebruikt vo
 Als de zichtbare instellingen voor de N-de grafiekcurve in de curvenlijst zijn, dan worden ze gebruikt voor toekomstige grafiekcurven die ook de N-de grafiekcurve in hun curvenlijst zijn, totdat nieuwe instellingen worden opgeslagen als de standaardinstellingen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="238" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="245" />
         <source>Preview</source>
         <translation>Voorbeeld</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="245" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="252" />
         <source>Preview window that shows how current settings affect the points and line of the selected curve.
 
 The X coordinate is in the horizontal direction, and the Y coordinate is in the vertical direction. A function can have only one Y value, at most, for any X value, but a relation can have multiple Y values for one X value.</source>
@@ -3121,77 +3126,77 @@ De X-coördinaat is in horizontale richting en de Y-coördinaat in de verticale 
 <context>
     <name>DlgSettingsDigitizeCurve</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="41" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="44" />
         <source>Digitize Curve</source>
         <translation>Digitaliseer Curve</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="65" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="68" />
         <source>Cursor</source>
         <translation>Cursor</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="73" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="81" />
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="76" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="84" />
         <source>Standard cross</source>
         <translation>Standaard kruis</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="77" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="85" />
         <source>Selects the standard cross cursor</source>
         <translation>Selecteert de standaard kruiscursor</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="81" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="89" />
         <source>Custom cross</source>
         <translation>Aangepast kruis</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="82" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="90" />
         <source>Selects a custom cursor based on the settings selected below</source>
         <translation>Selecteert een aangepaste cursor op basis van de hieronder geselecteerde instellingen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="86" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="94" />
         <source>Size (pixels)</source>
         <translation>Grootte (pixels)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="95" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="103" />
         <source>Horizontal and vertical size of the cursor in pixels</source>
         <translation>Horizontale en verticale grootte van de cursor in pixels</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="99" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="107" />
         <source>Inner radius (pixels)</source>
         <translation>Binnenradius (pixels)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="104" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="112" />
         <source>Radius of circle at the center of the cursor that will remain empty</source>
         <translation>Straal van cirkel in het midden van de cursor die leeg blijft</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="108" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="116" />
         <source>Line width (pixels)</source>
         <translation>Lijnbreedte (pixels)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="113" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="121" />
         <source>Width of each arm of the cross of the cursor</source>
         <translation>Breedte van elke arm van het kruis van de cursor</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="127" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="135" />
         <source>Preview</source>
         <translation>Voorbeeld</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="139" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="147" />
         <source>Preview window showing the currently selected cursor.
 
 Drag the cursor over this area to see the effects of the current settings on the cursor shape.</source>
@@ -3203,22 +3208,22 @@ Drag the cursor over this area to see the effects of the current settings on the
 <context>
     <name>DlgSettingsExportFormat</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="58" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="60" />
         <source>Export Format</source>
         <translation>Exportformaat</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="87" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="89" />
         <source>Included</source>
         <translation>Inbegrepen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="90" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="92" />
         <source>Not included</source>
         <translation>Niet inbegrepen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="95" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="97" />
         <source>List of curves to be included in the exported file.
 
 The order of the curves here does not affect the order in the exported file. That order is determined by the Curves settings.</source>
@@ -3227,143 +3232,143 @@ The order of the curves here does not affect the order in the exported file. Tha
 De volgorde van de curven hier heeft geen invloed op de volgorde in het geëxporteerde bestand. Die volgorde wordt bepaald door de Curves-instellingen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="104" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="106" />
         <source>List of curves to be excluded from the exported file</source>
         <translation>Lijst met curven die moeten worden uitgesloten van het geëxporteerde bestand</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="109" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="111" />
         <source>Include</source>
         <translation>Inclusief</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="111" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="113" />
         <source>Move the currently selected curve(s) from the excluded list</source>
         <translation>Verplaats de momenteel geselecteerde curve (s) uit de uitgesloten lijst</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="115" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="117" />
         <source>Exclude</source>
         <translation>Uitsluiten</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="117" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="119" />
         <source>Move the currently selected curve(s) from the included list</source>
         <translation>Verplaats de momenteel geselecteerde curve (s) uit de opgenomen lijst</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="128" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="130" />
         <source>Delimiters</source>
         <translation>Scheidingstekens</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="135" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="137" />
         <source>Exported file will have commas between adjacent values, unless overridden by tabs in TSV files.</source>
         <translation>Het geëxporteerde bestand heeft komma's tussen aangrenzende waarden, tenzij overschreven door tabbladen in TSV-bestanden.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="140" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="142" />
         <source>Exported file will have spaces between adjacent values, unless overridden by commas in CSV files, or tabs in TSV files.</source>
         <translation>Het geëxporteerde bestand heeft spaties tussen aangrenzende waarden, tenzij overschreven door komma's in CSV-bestanden of tabbladen in TSV-bestanden.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="146" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="148" />
         <source>Exported file will have tabs between adjacent values, unless overridden by commas in CSV files.</source>
         <translation>Het geëxporteerde bestand heeft tabs tussen aangrenzende waarden, tenzij overschreven door komma's in CSV-bestanden.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="151" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="153" />
         <source>Exported file will have semicolons between adjacent values, unless overridden by commas in CSV files.</source>
         <translation>Het geëxporteerde bestand heeft puntkomma's tussen aangrenzende waarden, tenzij overschreven door komma's in CSV-bestanden.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="155" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="157" />
         <source>Override in CSV/TSV files</source>
         <translation>Overschrijven in CSV / TSV-bestanden</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="156" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="158" />
         <source>Comma-separated value (CSV) files and tab-separated value (TSV) files will use commas and tabs respectively, unless this setting is selected. Selecting this setting will apply the delimiter setting to every file.</source>
         <translation>Bestanden met door komma's gescheiden waarden (CSV) en bestanden met door tabs gescheiden waarden (TSV) gebruiken respectievelijk komma's en tabbladen, tenzij deze instelling is geselecteerd. Als u deze instelling selecteert, wordt de instelling voor scheidingstekens op elk bestand toegepast.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="167" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="169" />
         <source>Layout</source>
         <translation>Indeling</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="173" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="175" />
         <source>All curves on each line</source>
         <translation>Alle curven op elke lijn</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="174" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="176" />
         <source>Exported file will have, on each line, an X value, the Y value for the first curve, the Y value for the second curve,...</source>
         <translation>Het geëxporteerde bestand heeft op elke regel een X-waarde, de Y-waarde voor de eerste curve, de Y-waarde voor de tweede curve, ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="179" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="181" />
         <source>One curve on each line</source>
         <translation>Een bocht op elke lijn</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="180" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="182" />
         <source>Exported file will have all the points for the first curve, with one X-Y pair on each line, then the points for the second curve,...</source>
         <translation>Het geëxporteerde bestand bevat alle punten voor de eerste curve, met één X-Y-paar op elke lijn, dan de punten voor de tweede curve, ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="190" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="192" />
         <source>Function Points Selection</source>
         <translation>Selectie van functiepunten</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="205" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="207" />
         <source>Interpolate Ys at Xs from all curves</source>
         <translation>Interpoleer Ys bij Xs vanuit alle curven</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="206" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="208" />
         <source>Exported file will have values at every unique X value from every curve. Y values will be linearly interpolated if necessary</source>
         <translation>Het geëxporteerde bestand heeft waarden voor elke unieke X-waarde van elke curve. Y-waarden worden indien nodig lineair geïnterpoleerd</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="212" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="214" />
         <source>Extrapolate outside endpoints</source>
         <translation>Extrapoleer externe eindpunten</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="213" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="215" />
         <source>Enable or disable extrapolation outside of endpoints of each curve. If disabled, only points between the endpoints of each curve are exported</source>
         <translation>Schakel extrapolatie buiten de eindpunten van elke curve in of uit. Indien uitgeschakeld, worden alleen punten tussen de eindpunten van elke curve geëxporteerd</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="220" />
         <source>Interpolate Ys at Xs from first curve</source>
         <translation>Interpoleer Ys bij Xs vanaf de eerste curve</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="219" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="221" />
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
         <translation>Het geëxporteerde bestand heeft waarden voor elke unieke X-waarde vanaf de eerste curve. Y-waarden worden indien nodig lineair geïnterpoleerd</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="224" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="226" />
         <source>Interpolate Ys at evenly spaced X values that are automatically selected</source>
         <translation>Interpoleer Ys met gelijkmatig verdeelde X-waarden die automatisch worden geselecteerd</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="225" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="227" />
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
         <translation>Het geëxporteerde bestand heeft waarden met gelijkmatig verdeelde X-waarden, gescheiden door het hieronder geselecteerde interval.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="229" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="395" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="231" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="397" />
         <source>Interval</source>
         <translation>Interval</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="237" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="239" />
         <source>Interval, in the units of X, between successive points in the X direction.
 
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
@@ -3376,7 +3381,7 @@ Als de schaal lineair is, wordt dit interval opgeteld bij opeenvolgende X-waarde
 De X-waarden worden automatisch uitgelijnd langs eenvoudige getallen. Als de eerste en / of laatste punten niet langs de uitgelijnde X-waarden liggen, worden indien nodig een of twee extra punten toegevoegd.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="247" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="249" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
@@ -3389,86 +3394,86 @@ Pixeleenheden hebben de voorkeur wanneer de afstand onafhankelijk moet zijn van 
 Grafiekeenheden hebben de voorkeur wanneer de afstand afhangt van de X-schaal.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="259" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="421" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="261" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="423" />
         <source>Too many points</source>
         <translation>Te veel punten</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="261" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="423" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="263" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="425" />
         <source>Warning that interval is too small. Adjust interval or increase point limit in Main Window settings</source>
         <translation>Waarschuwing dat interval te klein is. Pas het interval aan of verhoog de puntlimiet in de instellingen van het hoofdvenster</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="264" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="266" />
         <source>Interpolate Ys at evenly spaced X values on grid lines</source>
         <translation>Interpoleer Ys op gelijkmatig verdeelde X-waarden op rasterlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="265" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="267" />
         <source>Exported file will have values at evenly spaced X values at the vertical grid lines.</source>
         <translation>Het geëxporteerde bestand heeft waarden met gelijkmatig verdeelde X-waarden op de verticale rasterlijnen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="269" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="426" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="271" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="428" />
         <source>Raw Xs and Ys</source>
         <translation>Raw Xs en Ys</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="270" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="427" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="272" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="429" />
         <source>Exported file will have only original X and Y values</source>
         <translation>Het geëxporteerde bestand heeft alleen originele X- en Y-waarden</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="281" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="283" />
         <source>Header</source>
         <translation>Header</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="291" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="293" />
         <source>Exported file will have no header line</source>
         <translation>Het geëxporteerde bestand heeft geen kopregel</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="296" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="298" />
         <source>Exported file will have simple header line</source>
         <translation>Het geëxporteerde bestand heeft een eenvoudige koptekstregel</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="301" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="303" />
         <source>Exported file will have gnuplot header line</source>
         <translation>Het geëxporteerde bestand heeft een gnuplot-koptekstregel</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="313" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="315" />
         <source>Save As Default</source>
         <translation>Opslaan als standaard</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="314" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="316" />
         <source>Save the settings for use as future defaults.</source>
         <translation>Bewaar de instellingen voor gebruik als toekomstige standaardinstellingen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="318" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="320" />
         <source>Load Default</source>
         <translation>Laad standaard</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="319" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="321" />
         <source>Load the default settings.</source>
         <translation>Laad de standaardinstellingen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="331" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="333" />
         <source>File extension used for preview. The CSV and TSV file extensions normally use commas and tabs respectively, but that can be changed in this dialog.</source>
         <translation>Bestandsextensie gebruikt voor voorbeeldweergave. De CSV- en TSV-bestandsextensies gebruiken normaal gesproken respectievelijk komma's en tabbladen, maar dat kan in dit dialoogvenster worden gewijzigd.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="357" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="359" />
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
@@ -3477,27 +3482,27 @@ Functions (shown here in blue) are output first, followed by relations (shown he
 Functies (hier in blauw weergegeven) worden eerst uitgevoerd, gevolgd door relaties (hier in groen weergegeven) indien aanwezig.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="373" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="375" />
         <source>Relation Points Selection</source>
         <translation>Selectie van relatiepunten</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="390" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation>Interpoleer Xs en Ys met gelijkmatig verdeelde intervallen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="389" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="391" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation>Het geëxporteerde bestand heeft punten gelijkmatig verdeeld over elke relatie, gescheiden door het hieronder geselecteerde interval. Als het laatste interval niet op het laatste punt eindigt, wordt een korter laatste interval toegevoegd dat eindigt op het laatste punt.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="403" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="405" />
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation>Interval tussen opeenvolgende punten bij exporteren op gelijkmatig verdeelde (X, Y) coördinaten.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="409" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="411" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -3510,12 +3515,12 @@ Pixeleenheden hebben de voorkeur wanneer de afstand onafhankelijk moet zijn van 
 Grafiekeenheden hebben meestal de voorkeur als de X- en Y-schalen identiek zijn.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="470" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="478" />
         <source>Functions</source>
         <translation>Functies</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="472" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="480" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
@@ -3524,12 +3529,12 @@ Controls for specifying the format of functions during export</source>
 Besturingselementen voor het specificeren van het formaat van functies tijdens het exporteren</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="478" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="486" />
         <source>Relations</source>
         <translation>Relaties</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="480" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="488" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
@@ -3538,17 +3543,17 @@ Controls for specifying the format of relations during export</source>
 Besturingselementen voor het specificeren van het formaat van relaties tijdens het exporteren</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="499" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="507" />
         <source>X Label</source>
         <translation>X-label</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="503" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="511" />
         <source>Label in the header for x values</source>
         <translation>Label in de koptekst voor x-waarden</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1292" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1305" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>Voorbeeld is pas beschikbaar als aspunten zijn gedefinieerd.</translation>
     </message>
@@ -3556,17 +3561,17 @@ Besturingselementen voor het specificeren van het formaat van relaties tijdens h
 <context>
     <name>DlgSettingsGeneral</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="25" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="27" />
         <source>General</source>
         <translation>Algemeen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="47" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="49" />
         <source>Effective cursor size (pixels)</source>
         <translation>Effectieve cursorgrootte (pixels)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="52" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="54" />
         <source>Effective Cursor Size
 
 This is the effective width and height of the cursor when clicking on a pixel that is not part of the background.
@@ -3579,12 +3584,12 @@ Dit is de effectieve breedte en hoogte van de cursor bij het klikken op een pixe
 Deze parameter wordt gebruikt in de modi Color Picker en Point Match</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="59" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="61" />
         <source>Extra precision (digits)</source>
         <translation>Extra precisie (cijfers)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="64" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="66" />
         <source>Extra Digits of Precision
 
 This is the number of additional digits of precision appended after the significant digits determined by the digitization accuracy at that point. The digitization accuracy at any point equals the change in graph coordinates from moving one pixel in each direction. Appending extra digits does not improve the accuracy of the numbers. More information can be found in discussions of accuracy versus precision.
@@ -3597,12 +3602,12 @@ Dit is het aantal extra precisiecijfers toegevoegd na de significante cijfers be
 Deze parameter wordt gebruikt op de coördinaten in de statusbalk en tijdens het exporteren</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="79" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="81" />
         <source>Save As Default</source>
         <translation>Opslaan als standaard</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="80" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="82" />
         <source>Save the settings for use as future defaults, according to the curve name selection.</source>
         <translation>Sla de instellingen op voor gebruik als toekomstige standaardinstellingen, volgens de geselecteerde curvenaam.</translation>
     </message>
@@ -3610,28 +3615,28 @@ Deze parameter wordt gebruikt op de coördinaten in de statusbalk en tijdens het
 <context>
     <name>DlgSettingsGridDisplay</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="31" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="33" />
         <source>Grid Display</source>
         <translation>Rasterweergave</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="82" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="84" />
         <source>Color</source>
         <translation>Kleur</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="86" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="88" />
         <source>Select a color for the lines</source>
         <translation>Kies een kleur voor de lijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="108" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="184" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="110" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="186" />
         <source>Disable</source>
         <translation>Uitschakelen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="112" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="114" />
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -3640,13 +3645,13 @@ The X grid lines are specified using only three values at a time. For flexibilit
 De X-rasterlijnen worden gespecificeerd met slechts drie waarden tegelijk. Voor flexibiliteit worden vier waarden aangeboden, dus u moet kiezen welke waarde is uitgeschakeld. Eenmaal uitgeschakeld, wordt die waarde gewoon bijgewerkt als de andere waarden veranderen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="127" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="203" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="129" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="205" />
         <source>Count</source>
         <translation>Aantal</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="131" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="133" />
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
@@ -3655,13 +3660,13 @@ The number of X grid lines must be entered as an integer greater than zero</sour
 Het aantal X-rasterlijnen moet worden ingevoerd als een geheel getal groter dan nul</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="140" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="216" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="142" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="218" />
         <source>Start</source>
         <translation>Begin</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="144" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="146" />
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -3670,13 +3675,13 @@ The start value cannot be greater than the stop value</source>
 De startwaarde kan niet groter zijn dan de stopwaarde</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="151" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="227" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="153" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="229" />
         <source>Step</source>
         <translation>Stap</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="157" />
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3685,13 +3690,13 @@ The step value must be greater than zero (linear) or one (log)</source>
 De stapwaarde moet groter zijn dan nul (lineair) of één (logboek)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="162" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="238" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="164" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="240" />
         <source>Stop</source>
         <translation>Hou op</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="166" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="168" />
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
@@ -3700,7 +3705,7 @@ The stop value cannot be less than the start value</source>
 De stopwaarde mag niet lager zijn dan de startwaarde</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="188" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="190" />
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -3709,7 +3714,7 @@ The Y grid lines are specified using only three values at a time. For flexibilit
 De Y-rasterlijnen worden gespecificeerd met slechts drie waarden tegelijk. Voor flexibiliteit worden vier waarden aangeboden, dus u moet kiezen welke waarde is uitgeschakeld. Eenmaal uitgeschakeld, wordt die waarde gewoon bijgewerkt als de andere waarden veranderen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="207" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="209" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
@@ -3718,7 +3723,7 @@ The number of Y grid lines must be entered as an integer greater than zero</sour
 Het aantal Y-rasterlijnen moet worden ingevoerd als een geheel getal groter dan nul</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="220" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="222" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -3727,7 +3732,7 @@ The start value cannot be greater than the stop value</source>
 De startwaarde kan niet groter zijn dan de stopwaarde</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="233" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3736,7 +3741,7 @@ The step value must be greater than zero (linear) or one (log)</source>
 De stapwaarde moet groter zijn dan nul (lineair) of één (logboek)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="242" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="244" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
@@ -3745,37 +3750,37 @@ The stop value cannot be less than the start value</source>
 De stopwaarde mag niet lager zijn dan de startwaarde</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="258" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="260" />
         <source>Preview</source>
         <translation>Voorbeeld</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="265" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="267" />
         <source>Preview window that shows how current settings affect grid display</source>
         <translation>Voorbeeldvenster dat laat zien hoe de huidige instellingen de rasterweergave beïnvloeden</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="322" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="330" />
         <source>X Grid Lines</source>
         <translation>X rasterlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="324" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="332" />
         <source>Grid Lines</source>
         <translation>Rasterlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="328" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="336" />
         <source>Y Grid Lines</source>
         <translation>Y rasterlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="330" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="338" />
         <source>Radius Grid Lines</source>
         <translation>Radius rasterlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="588" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="601" />
         <source>Grid line count exceeds limit set by Settings / Main Window.</source>
         <translation>Het aantal netlijnen overschrijdt de limiet die is ingesteld via Instellingen / Hoofdvenster.</translation>
     </message>
@@ -3783,27 +3788,27 @@ De stopwaarde mag niet lager zijn dan de startwaarde</translation>
 <context>
     <name>DlgSettingsGridRemoval</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="36" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="38" />
         <source>Grid Removal</source>
         <translation>Grid verwijderen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="82" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="84" />
         <source>Preview</source>
         <translation>Voorbeeld</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="89" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="91" />
         <source>Preview window that shows how current settings affect grid removal</source>
         <translation>Voorbeeldvenster dat laat zien hoe de huidige instellingen het verwijderen van het raster beïnvloeden</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="100" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="102" />
         <source>Remove pixels close to defined grid lines</source>
         <translation>Verwijder pixels dichtbij gedefinieerde rasterlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="101" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="103" />
         <source>Check this box to have pixels close to regularly spaced gridlines removed.
 
 This option is only available when the axis points have all been defined.</source>
@@ -3812,12 +3817,12 @@ This option is only available when the axis points have all been defined.</sourc
 Deze optie is alleen beschikbaar als alle aspunten zijn gedefinieerd.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="106" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="108" />
         <source>Close distance (pixels)</source>
         <translation>Korte afstand (pixels)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="110" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="112" />
         <source>Set closeness distance in pixels.
 
 Pixels that are closer to the regularly spaced gridlines, than this distance, will be removed.
@@ -3830,23 +3835,23 @@ Pixels die dichter bij de rasterlijnen met regelmatige tussenafstanden liggen, w
 Deze waarde mag niet negatief zijn. Een nulwaarde schakelt deze functie uit. Decimale waarden zijn toegestaan</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="127" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="129" />
         <source>X Grid Lines</source>
         <translation>X rasterlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="129" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="131" />
         <source>Grid Lines</source>
         <translation>Rasterlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="137" />
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="215" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="139" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="217" />
         <source>Disable</source>
         <translation>Uitschakelen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="141" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="143" />
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -3855,13 +3860,13 @@ The X grid lines are specified using only three values at a time. For flexibilit
 De X-rasterlijnen worden gespecificeerd met slechts drie waarden tegelijk. Voor flexibiliteit worden vier waarden aangeboden, dus u moet kiezen welke waarde is uitgeschakeld. Eenmaal uitgeschakeld, wordt die waarde gewoon bijgewerkt als de andere waarden veranderen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="156" />
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="234" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="158" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="236" />
         <source>Count</source>
         <translation>Aantal</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="160" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="162" />
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
@@ -3870,13 +3875,13 @@ The number of X grid lines must be entered as an integer greater than zero</sour
 Het aantal X-rasterlijnen moet worden ingevoerd als een geheel getal groter dan nul</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="167" />
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="245" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="169" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="247" />
         <source>Start</source>
         <translation>Begin</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="171" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="173" />
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -3885,13 +3890,13 @@ The start value cannot be greater than the stop value</source>
 De startwaarde kan niet groter zijn dan de stopwaarde</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="178" />
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="256" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="180" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="258" />
         <source>Step</source>
         <translation>Stap</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="184" />
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3900,13 +3905,13 @@ The step value must be greater than zero (linear) or one (log)</source>
 De stapwaarde moet groter zijn dan nul (lineair) of één (logboek)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="189" />
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="267" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="191" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="269" />
         <source>Stop</source>
         <translation>Hou op</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="193" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="195" />
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
@@ -3915,17 +3920,17 @@ The stop value cannot be less than the start value</source>
 De stopwaarde mag niet lager zijn dan de startwaarde</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="205" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="207" />
         <source>Y Grid Lines</source>
         <translation>Y rasterlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="207" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="209" />
         <source>R Grid Lines</source>
         <translation>R Rasterlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="219" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="221" />
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -3934,7 +3939,7 @@ The Y grid lines are specified using only three values at a time. For flexibilit
 De Y-rasterlijnen worden gespecificeerd met slechts drie waarden tegelijk. Voor flexibiliteit worden vier waarden aangeboden, dus u moet kiezen welke waarde is uitgeschakeld. Eenmaal uitgeschakeld, wordt die waarde gewoon bijgewerkt als de andere waarden veranderen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="238" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="240" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
@@ -3943,7 +3948,7 @@ The number of Y grid lines must be entered as an integer greater than zero</sour
 Het aantal Y-rasterlijnen moet worden ingevoerd als een geheel getal groter dan nul</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="249" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="251" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -3952,7 +3957,7 @@ The start value cannot be greater than the stop value</source>
 De startwaarde kan niet groter zijn dan de stopwaarde</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="262" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3961,7 +3966,7 @@ The step value must be greater than zero (linear) or one (log)</source>
 De stapwaarde moet groter zijn dan nul (lineair) of één (logboek)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="271" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="273" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
@@ -3973,27 +3978,27 @@ De stopwaarde mag niet lager zijn dan de startwaarde</translation>
 <context>
     <name>DlgSettingsGuideline</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="34" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="44" />
         <source>Guidelines</source>
         <translation>Richtlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="57" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="90" />
         <source>Creation circle radius</source>
         <translation>Creatie cirkelradius</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="61" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="94" />
         <source>Select a radius, in pixels, for the points</source>
         <translation>Selecteer een straal, in pixels, voor de punten</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="66" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="99" />
         <source>Guideline color</source>
         <translation>Richtlijn kleur</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="70" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="103" />
         <source>Guidelines Color
 
 Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
@@ -4002,40 +4007,60 @@ Set the color of the guidelines that can be dragged from the edges of the scene,
 Stel de kleur in van de hulplijnen die van de randen van de scène kunnen worden gesleept en gebruikt om punten uit te lijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="77" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="110" />
         <source>Active Line width</source>
         <translation>Actieve lijnbreedte</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="81" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="114" />
         <source>Select a size for the guidelines when active</source>
         <translation>Selecteer een maat voor de richtlijnen indien actief</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="86" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="119" />
         <source>Inactive Line width</source>
         <translation>Inactieve Lijnbreedte</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="90" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="123" />
         <source>Select a size for the guidelines when inactive</source>
         <translation>Selecteer een maat voor de richtlijnen wanneer deze inactief zijn</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="181" />
+        <source>Active Preview</source>
+        <translation>Actief voorbeeld</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="184" />
+        <source>Inactive Preview</source>
+        <translation>Inactief voorbeeld</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="191" />
+        <source>Preview window that shows how current settings affect the active guidelines.</source>
+        <translation>Voorbeeldvenster dat laat zien hoe de huidige instellingen de actieve hulplijnen beïnvloeden.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="204" />
+        <source>Preview window that shows how current settings affect the inactive guidelines.</source>
+        <translation>Voorbeeldvenster dat laat zien hoe de huidige instellingen de inactieve hulplijnen beïnvloeden.</translation>
     </message>
 </context>
 <context>
     <name>DlgSettingsMainWindow</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="49" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="51" />
         <source>Main Window</source>
         <translation>Hoofd venster</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="74" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="76" />
         <source>Initial zoom</source>
         <translation>Initiële zoom</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="89" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91" />
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
@@ -4044,32 +4069,32 @@ Select the initial zoom factor when a new document is loaded. Either the previou
 Selecteer de initiële zoomfactor wanneer een nieuw document wordt geladen. De vorige zoom kan worden behouden of de opgegeven zoom kan worden toegepast.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="95" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="97" />
         <source>Zoom control</source>
         <translation>Zoomregeling</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="101" />
         <source>Menu only</source>
         <translation>Alleen menu</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="100" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
         <source>Menu and mouse wheel</source>
         <translation>Menu en muiswiel</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="101" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="103" />
         <source>Menu and +/- keys</source>
         <translation>Menu en +/- toetsen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />
         <source>Menu, mouse wheel and +/- keys</source>
         <translation>Menu, muiswiel en +/- toetsen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="103" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="105" />
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
@@ -4078,12 +4103,12 @@ Select which inputs are used to zoom in and out.</source>
 Selecteer welke ingangen worden gebruikt om in en uit te zoomen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="108" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="110" />
         <source>Locale (requires restart)</source>
         <translation>Landinstelling (opnieuw opstarten vereist)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="113" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="115" />
         <source>Locale
 
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
@@ -4096,12 +4121,12 @@ Selecteer de landinstelling die in cijfers zal worden gebruikt (onmiddellijk) en
 De landinstelling bepaalt hoe getallen worden opgemaakt. In het bijzonder worden komma's of punten gebruikt als groepscheidingstekens in elk nummer dat door de gebruiker wordt ingevoerd, weergegeven in de gebruikersinterface of geëxporteerd naar een bestand.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="133" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="135" />
         <source>Import cropping</source>
         <translation>Bijsnijden importeren</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="137" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="139" />
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
@@ -4114,12 +4139,12 @@ Schakelt het bijsnijden van de geïmporteerde afbeelding tijdens het importeren 
 Deze instelling heeft alleen effect als Engauge is gebouwd met ondersteuning voor pdf-bestanden.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="150" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="152" />
         <source>Import PDF resolution (dots per inch)</source>
         <translation>PDF-resolutie importeren (dots per inch)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="154" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="156" />
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
@@ -4128,12 +4153,12 @@ Imported Portable Document Format (PDF) files will be converted to this pixel re
 Geïmporteerde PDF-bestanden (Portable Document Format) worden geconverteerd naar deze pixelresolutie in dots per inch (DPI), waarbij elke pixel één punt is. Een hogere waarde verhoogt de beeldresolutie en kan ook de nauwkeurigheid van de numerieke digitalisering verbeteren. Een zeer hoge waarde kan de afbeelding echter zo groot maken dat Engauge langzamer gaat werken.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="169" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="171" />
         <source>Maximum grid lines</source>
         <translation>Maximale rasterlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="174" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="176" />
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
@@ -4142,12 +4167,12 @@ Maximum number of grid lines to be processed. This limit is applied when the ste
 Maximaal aantal te verwerken rasterlijnen. Deze limiet wordt toegepast wanneer de stapwaarde te klein is voor de start- en stopwaarden, wat zou resulteren in te veel rasterlijnen visueel en mogelijk extreem lange verwerkingstijd (aangezien elke rasterlijn zou moeten worden verwerkt)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="181" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="183" />
         <source>Maximum exported points per curve</source>
         <translation>Maximaal geëxporteerde punten per curve</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="189" />
         <source>Maximum Exported Points per Curve
 
 This is the maximum number of points allowed in each exported curve. No points are exported when this is exceeded. This limit prevents delays and overly large file sizes due to curves that have too many points.</source>
@@ -4156,12 +4181,12 @@ This is the maximum number of points allowed in each exported curve. No points a
 Dit is het maximale aantal toegestane punten in elke geëxporteerde curve. Bij overschrijding hiervan worden geen punten geëxporteerd. Deze limiet voorkomt vertragingen en te grote bestanden als gevolg van curves met te veel punten.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="194" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="196" />
         <source>Highlight opacity</source>
         <translation>Markeer dekking</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="200" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="202" />
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
@@ -4170,17 +4195,17 @@ Opacity to be applied when the cursor is over a curve or axis point in Select mo
 Ondoorzichtigheid die moet worden toegepast wanneer de cursor zich in de modus Selecteren boven een curve of aspunt bevindt. De verandering in uiterlijk laat zien wanneer het punt kan worden geselecteerd.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="206" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="208" />
         <source>Recent file list</source>
         <translation>Lijst met recente bestanden</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="211" />
         <source>Clear</source>
         <translation>Ontruimen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="211" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="213" />
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
@@ -4189,12 +4214,12 @@ Clear the recent file list in the File menu.</source>
 Wis de lijst met recente bestanden in het menu Bestand.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="217" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="219" />
         <source>Include title bar path</source>
         <translation>Voeg titelbalkpad toe</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="222" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="224" />
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
@@ -4203,12 +4228,12 @@ Includes or excludes the path and file extension from the filename in the title 
 Omvat of sluit het pad en de bestandsextensie uit van de bestandsnaam in de titelbalk.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="227" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="229" />
         <source>Allow small dialogs</source>
         <translation>Kleine dialoogvensters toestaan</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="232" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="234" />
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
@@ -4217,12 +4242,12 @@ Allows settings dialogs to be made very small so they fit on small computer scre
 Hiermee kunnen instellingendialogen erg klein worden gemaakt, zodat ze op kleine computerschermen passen.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="237" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="239" />
         <source>Allow drag and drop export</source>
         <translation>Export via slepen en neerzetten toestaan</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="244" />
         <source>Allow Drag and Drop Export
 
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
@@ -4235,12 +4260,12 @@ Maakt export via slepen en neerzetten mogelijk vanuit de tabellen Curve Fitting 
 Als slepen en neerzetten is uitgeschakeld, kan een rechthoekige set tabelcellen worden geselecteerd met klikken en slepen. Wanneer slepen en neerzetten is ingeschakeld, kan een rechthoekige set tabelcellen worden geselecteerd met behulp van klikken en vervolgens Shift + klikken, aangezien klikken en slepen het slepen start.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="250" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="252" />
         <source>Image replace renames document</source>
         <translation>Afbeelding vervangen hernoemt document</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="255" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="257" />
         <source>Image Replace Renames Document
 
 When an image is imported to replace the current image, the document will be renamed if this is true, otherwise the name will stay the same.</source>
@@ -4249,12 +4274,12 @@ When an image is imported to replace the current image, the document will be ren
 Wanneer een afbeelding wordt geïmporteerd om de huidige afbeelding te vervangen, wordt de naam van het document gewijzigd als dit waar is, anders blijft de naam hetzelfde.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="261" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="263" />
         <source>Significant digits</source>
         <translation>Significante cijfers</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="266" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="268" />
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
@@ -4263,25 +4288,24 @@ Number of digits of precision in floating point numbers. This value affects calc
 Precisie-aantal cijfers in getallen met drijvende komma. Deze waarde is van invloed op berekeningen voor curve-aanpassingen, aangezien tussenresultaten kleiner dan een drempelwaarde T aangeven dat een polynoomcurve met een specifieke volgorde niet aan de gegevens kan worden aangepast. De drempel T wordt berekend uit het maximale matrixelement M en significante cijfers S als T = M / 10 ^ S.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="275" />
         <source>Guideline color</source>
-        <translation>Richtlijn kleur</translation>
+        <translation type="vanished">Richtlijn kleur</translation>
     </message>
 </context>
 <context>
     <name>DlgSettingsPointMatch</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="30" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="32" />
         <source>Point Match</source>
         <translation>Puntmatch</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="83" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="85" />
         <source>Maximum point size (pixels)</source>
         <translation>Maximale puntgrootte (pixels)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="87" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="89" />
         <source>Select a maximum point size in pixels.
 
 Sample match points must fit within a square box, around the cursor, having width and height equal to this maximum.
@@ -4298,42 +4322,42 @@ Deze grootte wordt ook gebruikt om te bepalen of een gebied met pixels die aan s
 Deze waarde heeft een ondergrens</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="98" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="100" />
         <source>Accepted point color</source>
         <translation>Geaccepteerde puntkleur</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="102" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="104" />
         <source>Select a color for matched points that are accepted</source>
         <translation>Geaccepteerde puntkleur Selecteer een kleur voor overeenkomende punten die worden geaccepteerd</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="107" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="109" />
         <source>Rejected point color</source>
         <translation>Afgewezen puntkleur</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="111" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="113" />
         <source>Select a color for matched points that are rejected</source>
         <translation>Selecteer een kleur voor overeenkomende punten die worden afgewezen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="116" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="118" />
         <source>Candidate point color</source>
         <translation>Puntkleur van de kandidaat</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="120" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="122" />
         <source>Select a color for the point being decided upon</source>
         <translation>Kies een kleur voor het punt waarover wordt beslist</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="135" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="137" />
         <source>Preview</source>
         <translation>Voorbeeld</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="142" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="144" />
         <source>Preview window shows how current settings affect point matching, and how the marked and candidate points are displayed.
 
 The points are separated by the point separation value, and the maximum point size is shown as a box in the center</source>
@@ -4748,17 +4772,17 @@ Wil je je wijzigingen opslaan?</translation>
         <translation>Open document</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3930" />
+        <location filename="../src/main/MainWindow.cpp" line="3931" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3931" />
+        <location filename="../src/main/MainWindow.cpp" line="3932" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4067" />
+        <location filename="../src/main/MainWindow.cpp" line="4068" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5115,7 +5139,7 @@ Wil je je wijzigingen opslaan?</translation>
         <translation>Kan filtergegevens niet lezen</translation>
     </message>
     <message>
-        <location filename="../src/Document/DocumentModelCoords.cpp" line="172" />
+        <location filename="../src/Document/DocumentModelCoords.cpp" line="170" />
         <source>Cannot read coordinates data</source>
         <translation>Kan coördinaatgegevens niet lezen</translation>
     </message>
@@ -5343,7 +5367,7 @@ Wil je je wijzigingen opslaan?</translation>
         <translation>Hou op</translation>
     </message>
     <message>
-        <location filename="../src/Grid/GridLineFactory.cpp" line="67" />
+        <location filename="../src/Grid/GridLineFactory.cpp" line="64" />
         <source>Axes checker. If this does not align with the axes, then the axes points should be checked</source>
         <translation>Assen checker. Als dit niet overeenkomt met de assen, moeten de aspunten worden gecontroleerd</translation>
     </message>
@@ -5413,7 +5437,7 @@ Wil je je wijzigingen opslaan?</translation>
         <translation>Driehoek2</translation>
     </message>
     <message>
-        <location filename="../src/Point/PointStyle.cpp" line="151" />
+        <location filename="../src/Point/PointStyle.cpp" line="149" />
         <source>Cannot read point style data</source>
         <translation>Kan puntstijlgegevens niet lezen</translation>
     </message>
@@ -5433,12 +5457,12 @@ Wil je je wijzigingen opslaan?</translation>
         <translation>Resolutie (grafiek)</translation>
     </message>
     <message>
-        <location filename="../src/Transformation/Transformation.cpp" line="178" />
+        <location filename="../src/Transformation/Transformation.cpp" line="177" />
         <source>Need scale bar</source>
         <translation>Schaalbalk nodig</translation>
     </message>
     <message>
-        <location filename="../src/Transformation/Transformation.cpp" line="179" />
+        <location filename="../src/Transformation/Transformation.cpp" line="178" />
         <source>Need more axis points</source>
         <translation>Meer aspunten nodig</translation>
     </message>
@@ -5822,7 +5846,7 @@ totdat er drie aspunten zijn gemaakt</translation>
     <message>
         <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="62" />
         <source>Next</source>
-        <translation>De volgende</translation>
+        <translation>Volgende</translation>
     </message>
 </context>
 <context>
@@ -6007,7 +6031,7 @@ de oranje punten zijn verdwenen.</translation>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="80" />
         <source>Next</source>
-        <translation>De volgende</translation>
+        <translation>Volgende</translation>
     </message>
 </context>
 <context>
@@ -6093,7 +6117,7 @@ geëxporteerd, als nummers, naar andere softwaretools.</translation>
     <message>
         <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="50" />
         <source>Next</source>
-        <translation>De volgende</translation>
+        <translation>Volgende</translation>
     </message>
 </context>
 <context>
@@ -6153,7 +6177,7 @@ totdat er geen punten meer zijn.</translation>
     <message>
         <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="67" />
         <source>Next</source>
-        <translation>De volgende</translation>
+        <translation>Volgende</translation>
     </message>
 </context>
 <context>
@@ -6200,7 +6224,7 @@ om veel punten te genereren.</translation>
     <message>
         <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="61" />
         <source>Next</source>
-        <translation>De volgende</translation>
+        <translation>Volgende</translation>
     </message>
 </context>
 </TS>

@@ -2580,12 +2580,12 @@ Celkově je potřeba zadat dva body na ose X (X1) a (X2) a dva body na ose Y (Y1
 <context>
     <name>DlgSettingsAbstractBase</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="100" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="123" />
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="108" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="131" />
         <source>Cancel</source>
         <translation>Zrušit</translation>
     </message>
@@ -2593,62 +2593,67 @@ Celkově je potřeba zadat dva body na ose X (X1) a (X2) a dva body na ose Y (Y1
 <context>
     <name>DlgSettingsAxesChecker</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="39" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="42" />
         <source>Axes Checker</source>
         <translation>Kontrola os</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="65" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="68" />
         <source>Axes Checker Lifetime</source>
         <translation>Kontrola životnosti os</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="72" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="80" />
         <source>Do not show</source>
         <translation>Nezobrazovat</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="73" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="81" />
         <source>Never show axes checker.</source>
         <translation>Nikdy nezobrazovat kontrolu os.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="76" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="84" />
         <source>Show for a number of seconds</source>
         <translation>Zobrazit na několik vteřin</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="77" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="85" />
         <source>Show axes checker for a number of seconds after changing axes points.</source>
         <translation>Zobrazit kontrolu os na několik vteřin po změně osových bodů</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="87" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="92" />
+        <source>Number of seconds axes checker is displayed after axes points are changed</source>
+        <translation>Po změně bodů os se zobrazí kontrola počtu sekund os</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="96" />
         <source>Show always</source>
         <translation>Zobrazovat vždy</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="88" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="97" />
         <source>Always show axes checker.</source>
         <translation>Vždy zobrazovat kontrolu os.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="97" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="106" />
         <source>Line color</source>
         <translation>Barva úsečky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="101" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="110" />
         <source>Select a color for the highlight lines drawn at each axis point</source>
         <translation>Zvolte barvu zvýrazněných čar kreslených v jednotlivých osových bodech</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="155" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="164" />
         <source>Preview</source>
         <translation>Náhled</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="162" />
+        <location filename="../src/Dlg/DlgSettingsAxesChecker.cpp" line="171" />
         <source>Preview window that shows how current settings affect the displayed axes checker</source>
         <translation>Okno náhledu, které zobrazuje, jak aktuální nastavení ovlivňuje kontrolu os.</translation>
     </message>
@@ -2656,27 +2661,27 @@ Celkově je potřeba zadat dva body na ose X (X1) a (X2) a dva body na ose Y (Y1
 <context>
     <name>DlgSettingsColorFilter</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="37" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="39" />
         <source>Color Filter</source>
         <translation>Barevný filtr</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="64" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="66" />
         <source>Curve Name</source>
         <translation>Název křivky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="68" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="70" />
         <source>Name of the curve that is currently selected for editing</source>
         <translation>Název křivky, která je aktuálně vybrána pro úpravy</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="72" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="74" />
         <source>Filter mode</source>
         <translation>Mód filtrace</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="76" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="78" />
         <source>Filter the original image into black and white pixels using the Intensity parameter, to hide unimportant information and emphasize important information.
 
 The Intensity value of a pixel is computed from the red, green and blue components as I = squareroot (R * R + G * G + B * B)</source>
@@ -2685,7 +2690,7 @@ The Intensity value of a pixel is computed from the red, green and blue componen
 Hodnota Intenzity je počítána z hodnot červené, zelené a modré komponenty jako odmocnina z (Č x Č + Z x Z + M x M)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="84" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="86" />
         <source>Filter the original image into black and white pixels by isolating the foreground from the background, to hide unimportant information and emphasize important information.
 
 The background color is shown on the left side of the scale bar.
@@ -2698,17 +2703,17 @@ Barva pozadí je zobrazena na levé straně měřítka.
 Vzdálenost F (R, G, B) od barvy pozadí (Rb, Gb, Bb) se vypočítá jako F = squareroot (R - Rb) * (R - Rb) - Gb) + (B-Bb)). Na levém konci měřítka je hodnota vzdálenosti v popředí nula a zvyšuje se lineárně až na maximum vpravo.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="94" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="96" />
         <source>Filter the original image into black and white pixels using the Hue component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.</source>
         <translation>Filtrování původního obrazu do černobílých pixelů pomocí komponenty Hue pro barevné komponenty Hue, Saturation a Value (HSV) pro skrytí nedůležitých informací a zdůraznění důležitých informací.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="101" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="103" />
         <source>Filter the original image into black and white pixels using the Saturation component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.</source>
         <translation>Filtrovejte původní obrázek do černobílých pixelů pomocí komponenty Saturation (Sytost) barevných komponent Hue, Saturation a Value (HSV), abyste skryli nedůležité informace a zdůraznili důležité informace.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="108" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="110" />
         <source>Filter the original image into black and white pixels using the Value component of the Hue, Saturation and Value (HSV) color components, to hide unimportant information and emphasize important information.
 
 The Value component is also called the Lightness.</source>
@@ -2717,27 +2722,27 @@ The Value component is also called the Lightness.</source>
 Součást Value se také nazývá Lightness.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="124" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="126" />
         <source>Preview</source>
         <translation>Náhled</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="131" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="133" />
         <source>Preview window that shows how current settings affect the filtering of the original image.</source>
         <translation>Okno náhledu, které zobrazuje, jak aktuální nastavení ovlivňuje originální obrázek.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="146" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="148" />
         <source>Filter Parameter Histogram Profile</source>
         <translation>Histogram filtrovacího parametru</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="154" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="156" />
         <source>Histogram profile of the selected filter parameter. The two Dividers can be moved back and forth to adjust the range of filter parameter values that will be included in the filtered image. The clear portion will be included, and the shaded portion will be excluded.</source>
         <translation>Profil histogramu vybraného parametru filtru. Dvě děliče lze přesunout dopředu a dozadu a nastavit rozsah hodnot parametrů filtru, které budou zahrnuty do filtrovaného obrazu. Čistá část bude zahrnuta a stínovaná část bude vyloučena.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="161" />
+        <location filename="../src/Dlg/DlgSettingsColorFilter.cpp" line="163" />
         <source>This read-only box displays a graphical representation of the horizontal axis in the histogram profile above.</source>
         <translation>Toto pole pouze pro čtení zobrazuje grafické znázornění horizontální osy v profilu histogramu výše.</translation>
     </message>
@@ -2745,19 +2750,19 @@ Součást Value se také nazývá Lightness.</translation>
 <context>
     <name>DlgSettingsCoords</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="76" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="916" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="920" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="75" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="925" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="929" />
         <source>Coordinates</source>
         <translation>Souřadnice</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="219" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="218" />
         <source>Date/Time</source>
         <translation>Datum/Čas</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="229" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="228" />
         <source>Date format to be used for date values, and date portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the time portion appearing in output.</source>
@@ -2766,7 +2771,7 @@ Setting the format to an empty value results in just the time portion appearing 
 Nastavení formátu na prázdnou hodnotu má za následek pouze časovou část, která se objeví na výstupu.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="236" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="235" />
         <source>Time format to be used for time values, and time portion of mixed date/time values, during input and output.
 
 Setting the format to an empty value results in just the date portion appearing in output.</source>
@@ -2775,28 +2780,28 @@ Setting the format to an empty value results in just the date portion appearing 
 Nastavení formátu na prázdnou hodnotu má za následek pouze část data, která se objevuje ve výstupu.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="248" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="247" />
         <source>Coordinates Types</source>
         <translation>Typ souřadného systému</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="253" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="257" />
         <source>Polar</source>
         <translation>Polární</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="253" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="919" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="257" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="928" />
         <source>R</source>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="255" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="259" />
         <source>Cartesian (X, Y)</source>
         <translation>Kartézský (X, Y)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="256" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="260" />
         <source>Select cartesian coordinates.
 
 The X and Y coordinates will be used</source>
@@ -2805,7 +2810,7 @@ The X and Y coordinates will be used</source>
 Budou použity X a Y souřadnice</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="262" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="266" />
         <source>Select polar coordinates.
 
 The Theta and R coordinates will be used.
@@ -2818,30 +2823,30 @@ Budou použity honoty R a Theta.
 U polárních souřadnic není povolenou použití logaritmického měřítka pro Thetu</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="281" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="316" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="285" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="320" />
         <source>Scale</source>
         <translation>Měřítko</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="284" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="319" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="288" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="323" />
         <source>Linear</source>
         <translation>Lineární</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="285" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="289" />
         <source>Specifies linear scale for the X or Theta coordinate</source>
         <translation>Definuje lineární měřítko pro hodnotu X nebo Theta</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="289" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="327" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="293" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="331" />
         <source>Log</source>
         <translation>Logaritmické</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="290" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="294" />
         <source>Specifies logarithmic scale for the X or Theta coordinate.
 
 Log scale is not allowed if there are negative coordinates.
@@ -2854,23 +2859,23 @@ Logaritmické měřítko není povolené pro záporné hodnoty
 Logaritmické měřítko není povolené pro hodnoty Theta</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="296" />
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="341" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="300" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="345" />
         <source>Units</source>
         <translation>Jednotky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="320" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="324" />
         <source>Specifies linear scale for the Y or R coordinate</source>
         <translation>Definuje lineární měřítko pro hodnotu Y nebo R</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="324" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="328" />
         <source>Origin radius value</source>
         <translation>Hodnota počátku poloměru</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="328" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="332" />
         <source>Specifies logarithmic scale for the Y or R coordinate
 
 Log scale is not allowed if there are negative coordinates.</source>
@@ -2879,7 +2884,7 @@ Log scale is not allowed if there are negative coordinates.</source>
 Logaritmické měřítko není povolené pro záporné hodnoty</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="335" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="339" />
         <source>Specify radius value at origin.
 
 Normally the radius at the origin is 0, but a nonzero value may be applied in other cases (like when the radial units are decibels).</source>
@@ -2888,17 +2893,17 @@ Normally the radius at the origin is 0, but a nonzero value may be applied in ot
 Běžně je tato hodnota rovna 0, ale v některých případech může být použita nenulová hodnota (např. když se radiální jednotku tvoří decibely)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="358" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="362" />
         <source>Preview</source>
         <translation>Náhled</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="365" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="369" />
         <source>Preview window that shows how current settings affect the coordinate system.</source>
         <translation>Okno náhledu, které zobrazuje, jak aktuální nastavení ovlivňuje souřadný systém.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="673" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="677" />
         <source>Numbers have the simplest and most general format.
 
 Date and time values have date and/or time components, with dates between 1901 and 2105 on 64 bit operating systems.
@@ -2923,7 +2928,7 @@ Hodnoty data a času mají součásti data a / nebo času.
 Formát minut sekund (DDD MM SS.S) používá dvě celé číslo pro stupně a minuty a reálné číslo na sekundy. K dispozici je 60 sekund za minutu. Během vstupu musí být mezery mezi třemi čísly vloženy.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="707" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="711" />
         <source>Degrees (DDD.DDDDD) format uses a single real number. One complete revolution is 360 degrees.
 
 Degrees Minutes (DDD MM.MMM) format uses one integer number for degrees, and a real number for minutes. There are 60 minutes per degree. During input, a space must be inserted between the two numbers.
@@ -2948,12 +2953,12 @@ Formát radian používá jedno reálné číslo. Jedna úplná revoluce je 2 * 
 Formát obrácení používá jediné reálné číslo. Jedna úplná revoluce je jediná.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="914" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="923" />
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="918" />
+        <location filename="../src/Dlg/DlgSettingsCoords.cpp" line="927" />
         <source>Y</source>
         <translation>Y</translation>
     </message>
@@ -2961,41 +2966,41 @@ Formát obrácení používá jediné reálné číslo. Jedna úplná revoluce j
 <context>
     <name>DlgSettingsCurveList</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="32" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="34" />
         <source>Curve List</source>
         <translation>Seznam krivek</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="69" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="71" />
         <source>Add...</source>
         <translation>Přidat...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="70" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="72" />
         <source>Adds a new curve to the curve list. The curve name can be edited in the curve name list.
 
 Every curve name must be unique</source>
         <translation>Přidá novou křivku do seznamu křivek. Název křivky lze upravit v seznamu názvů křivek. Každé jméno křivky musí být jedinečné</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="76" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="78" />
         <source>Remove</source>
         <translation>Odstranit</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="77" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="79" />
         <source>Removes the currently selected curve from the curve list.
 
 There must always be at least one curve</source>
         <translation>Odstraní aktuálně vybranou křivku ze seznamu křivek. Vždy musí existovat alespoň jedna křivka</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="89" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="91" />
         <source>Curve Names</source>
         <translation>Názvy křivek</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="94" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="96" />
         <source>List of the curves belonging to this document.
 
 Click on a curve name to edit it. Each curve name must be unique.
@@ -3004,43 +3009,43 @@ Reorder curves by dragging them around.</source>
         <translation>Seznam křivek tohoto dokumentu.Kliknutím na název křivky jej upravte. Každý název křivky musí být jedinečný. Obnovit křivky přetažením.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="121" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="128" />
         <source>Save As Default</source>
         <translation>Uložit jako výchozí</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="122" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="129" />
         <source>Save the curve names for use as defaults for future graph curves.</source>
         <translation>Uložte názvy křivek pro použití jako výchozí pro budoucí grafové křivky.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="126" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="133" />
         <source>Reset Default</source>
         <translation>Resetovat výchozí</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="127" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="134" />
         <source>Reset the defaults for future graph curves to the original settings.</source>
         <translation>Obnovte výchozí hodnoty pro budoucí grafové křivky na původní nastavení.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="507" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="502" />
         <source>Removing this curve will also remove</source>
         <translation>Odstraní se i tato křivka</translation>
     </message>
     <message>
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="504" />
         <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="509" />
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="514" />
         <source>points. Continue?</source>
         <translation>bodů. Pokračovat?</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="512" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="507" />
         <source>Removing these curves will also remove</source>
         <translation>Odstranění těchto křivek se také odstraní</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="518" />
+        <location filename="../src/Dlg/DlgSettingsCurveList.cpp" line="513" />
         <source>Curves With Points</source>
         <translation>Křivky s body</translation>
     </message>
@@ -3048,32 +3053,32 @@ Reorder curves by dragging them around.</source>
 <context>
     <name>DlgSettingsCurveProperties</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="62" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="64" />
         <source>Curve Properties</source>
         <translation>Vlastnosti křivek</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="89" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="91" />
         <source>Curve Name</source>
         <translation>Název křivky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="93" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="95" />
         <source>Name of the curve that is currently selected for editing</source>
         <translation>Název křivky, která je aktuálně vybrána pro úpravy</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="103" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="110" />
         <source>Line</source>
         <translation>Úsečka</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="109" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="116" />
         <source>Width</source>
         <translation>Délka</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="113" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="120" />
         <source>Select a width for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
@@ -3082,13 +3087,13 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
 Toto lze aplikovat pouze na křivky grafu. Úsečky mezi osovými body se nikdy nevykreslují.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="119" />
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="126" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="216" />
         <source>Color</source>
         <translation>Barva</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="123" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="130" />
         <source>Select a color for the lines drawn between points.
 
 This applies only to graph curves. No lines are ever drawn between axis points.</source>
@@ -3097,12 +3102,12 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
 Toto lze aplikovat pouze na křivky grafu. Úsečky mezi osovými body se nikdy nevykreslují.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="129" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="136" />
         <source>Connect as</source>
         <translation>Spojit jako</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="137" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="144" />
         <source>Select rule for connecting points with lines.
 
 If the curve is connected as a single-valued function then the points are ordered by increasing value of the independent variable.
@@ -3117,37 +3122,37 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
         <translation>Zvolte pravidlo pro připojení bodů s čarami. • Pokud je křivka připojena jako funkce s jednou hodnotou, pak jsou body seřazeny podle zvýšené hodnoty nezávislé proměnné. • Pokud je křivka spojena jako uzavřený obrys, pak jsou body seřazeno podle věku, s výjimkou bodů umístěných podél existující linky. Jakýkoli bod umístěný na horní část existující čáry se vloží mezi dva koncové body této čáry - jako by byl věk mezi věkem dvou koncových bodů. Linky jsou kresleny mezi postupně uspořádanými body. Straightové křivky jsou kresleny přímým mezi jednotlivými body. Hladké křivky jsou kresleny hladkými čarami mezi po sobě jdoucími body, přičemž se používají přírodní kubické drážky dvojic (x, y) versus skalární ordinal (t). To platí pouze pro grafové křivky. Mezi body os.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="158" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="165" />
         <source>Point</source>
         <translation>Bod</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="164" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="171" />
         <source>Shape</source>
         <translation>Tvar</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="168" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="175" />
         <source>Select a shape for the points</source>
         <translation>Vyberte tvar bodů</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="188" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="195" />
         <source>Radius</source>
         <translation>Poloměr</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="192" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="199" />
         <source>Select a radius, in pixels, for the points</source>
         <translation>Vyberte pro body poloměr v pixelech</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="197" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="204" />
         <source>Line width</source>
         <translation>Délka úsečky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="201" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="208" />
         <source>Select a line width, in pixels, for the points.
 
 A larger width results in a thicker line, with the exception of a value of zero which always results in a line that is one pixel wide (which is easy to see even when zoomed far out)</source>
@@ -3156,12 +3161,12 @@ A larger width results in a thicker line, with the exception of a value of zero 
 Větší šířka má za následek silnější čáru, s výjimkou hodnoty nuly, která vždy vede k přímce o šířce jednoho pixelu (což je snadné vidět i při zoomování daleko)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="213" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="220" />
         <source>Select a color for the line used to draw the point shapes</source>
         <translation>Zvolte barvu čar použitých k vykreslení bodu</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="224" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="231" />
         <source>Save the visible curve settings for use as future defaults, according to the curve name selection.
 
 If the visible settings are for the axes curve, then they will be used for future axes curves, until new settings are saved as the defaults.
@@ -3174,12 +3179,12 @@ Pokud jsou viditelná nastavení pro křivku os, použijí se pro křivky budouc
 Pokud jsou viditelná nastavení pro křivku Nth grafu v seznamu křivek, použijí se pro budoucí křivky grafů, které jsou také v grafu Nth grafu, dokud nejsou nová nastavení uložena jako výchozí.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="238" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="245" />
         <source>Preview</source>
         <translation>Náhled</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="245" />
+        <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="252" />
         <source>Preview window that shows how current settings affect the points and line of the selected curve.
 
 The X coordinate is in the horizontal direction, and the Y coordinate is in the vertical direction. A function can have only one Y value, at most, for any X value, but a relation can have multiple Y values for one X value.</source>
@@ -3191,77 +3196,77 @@ X souřadnice reprezentuje horizontální směr a Y vertikálná. Funkce může 
 <context>
     <name>DlgSettingsDigitizeCurve</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="41" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="44" />
         <source>Digitize Curve</source>
         <translation>Digitalizovat křivku</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="65" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="68" />
         <source>Cursor</source>
         <translation>Kurzor</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="73" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="81" />
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="76" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="84" />
         <source>Standard cross</source>
         <translation>Standardní kříž</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="77" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="85" />
         <source>Selects the standard cross cursor</source>
         <translation>Vyberte kurzor standardního kříže</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="81" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="89" />
         <source>Custom cross</source>
         <translation>Vlastní kříž</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="82" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="90" />
         <source>Selects a custom cursor based on the settings selected below</source>
         <translation>Zvolí vlastní kříž dle nastavení vybraných níže</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="86" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="94" />
         <source>Size (pixels)</source>
         <translation>Velikost (pixely)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="95" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="103" />
         <source>Horizontal and vertical size of the cursor in pixels</source>
         <translation>Horizontální a vertikální velikost kurzoru v pixelech</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="99" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="107" />
         <source>Inner radius (pixels)</source>
         <translation>Vnitřní poloměr (pixely)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="104" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="112" />
         <source>Radius of circle at the center of the cursor that will remain empty</source>
         <translation>Poloměr prázdného kruhu uprostřed kurzoru</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="108" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="116" />
         <source>Line width (pixels)</source>
         <translation>Délka úsečky (pixely)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="113" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="121" />
         <source>Width of each arm of the cross of the cursor</source>
         <translation>Délka ramene kříže</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="127" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="135" />
         <source>Preview</source>
         <translation>Náhled</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="139" />
+        <location filename="../src/Dlg/DlgSettingsDigitizeCurve.cpp" line="147" />
         <source>Preview window showing the currently selected cursor.
 
 Drag the cursor over this area to see the effects of the current settings on the cursor shape.</source>
@@ -3273,22 +3278,22 @@ Pohybujte kurzorem po této ploše, aby jste viděli vliv aktuálního nastaven�
 <context>
     <name>DlgSettingsExportFormat</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="58" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="60" />
         <source>Export Format</source>
         <translation>Formát exportu</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="87" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="89" />
         <source>Included</source>
         <translation>Zahrnuto</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="90" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="92" />
         <source>Not included</source>
         <translation>Nezahrnuto</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="95" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="97" />
         <source>List of curves to be included in the exported file.
 
 The order of the curves here does not affect the order in the exported file. That order is determined by the Curves settings.</source>
@@ -3297,143 +3302,143 @@ The order of the curves here does not affect the order in the exported file. Tha
 Pořadí křivek zde neovlivňuje pořadí v exportovaném souboru. Toto pořadí je odvozeno s nastavení křivek.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="104" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="106" />
         <source>List of curves to be excluded from the exported file</source>
         <translation>Seznam křivek, které nebudou zahrnuty v exportovaném souboru</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="109" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="111" />
         <source>Include</source>
         <translation>Zahrnout</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="111" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="113" />
         <source>Move the currently selected curve(s) from the excluded list</source>
         <translation>Přesunout vybrané křivky ze seznamu nezahrnutých</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="115" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="117" />
         <source>Exclude</source>
         <translation>Vyloučit</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="117" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="119" />
         <source>Move the currently selected curve(s) from the included list</source>
         <translation>Přesunout vybrané křivky ze seznamu zahrnutých</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="128" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="130" />
         <source>Delimiters</source>
         <translation>Oddělovače</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="135" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="137" />
         <source>Exported file will have commas between adjacent values, unless overridden by tabs in TSV files.</source>
         <translation>Exportovaný soubor použije čárky mezi hodnotami, pokud nejsou přepsány tabelátory v TSV souborech.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="140" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="142" />
         <source>Exported file will have spaces between adjacent values, unless overridden by commas in CSV files, or tabs in TSV files.</source>
         <translation>Exportovaný soubor použije mezery mezi hodnotami, pokud nejsou přepsány čárkami v CSV nebo tabelátory v TSV souborech.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="146" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="148" />
         <source>Exported file will have tabs between adjacent values, unless overridden by commas in CSV files.</source>
         <translation>Exportovaný soubor použije tabelátory mezi hodnotami, pokud nejsou přepsány čárkami v CSV souborech.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="151" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="153" />
         <source>Exported file will have semicolons between adjacent values, unless overridden by commas in CSV files.</source>
         <translation>Exportovaný soubor použije středníky mezi hodnotami, pokud nejsou přepsány čárkami v CSV souborech.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="155" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="157" />
         <source>Override in CSV/TSV files</source>
         <translation>Přepsat v CSV/TSV souborech</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="156" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="158" />
         <source>Comma-separated value (CSV) files and tab-separated value (TSV) files will use commas and tabs respectively, unless this setting is selected. Selecting this setting will apply the delimiter setting to every file.</source>
         <translation>CSV(čárkami oddělené hodnoty) a TSV(tabelátory oddělené hodnoty) soubory požívají čárky a tabelátory, dokud není zvoleno toto nastavení. Volbou tohoto nastavení dochází k úpravě oddělovače u obout typů souboru.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="167" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="169" />
         <source>Layout</source>
         <translation>Rozložení</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="173" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="175" />
         <source>All curves on each line</source>
         <translation>Všechny křivky v jednom řádku</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="174" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="176" />
         <source>Exported file will have, on each line, an X value, the Y value for the first curve, the Y value for the second curve,...</source>
         <translation>Exportovaný soubor bude mít na každém řádku hodnotu X, hodnotu Y první křivky, hodnotu Y druhé křivky, ...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="179" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="181" />
         <source>One curve on each line</source>
         <translation>Jedna křivka na řádek</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="180" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="182" />
         <source>Exported file will have all the points for the first curve, with one X-Y pair on each line, then the points for the second curve,...</source>
         <translation>Exportovaný soubor bude mít po řádcích páry X-Y první křivky, poté druhé křivky,...</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="190" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="192" />
         <source>Function Points Selection</source>
         <translation>Výběr funkčních bodů</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="205" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="207" />
         <source>Interpolate Ys at Xs from all curves</source>
         <translation>Interpolovat Y a X ze všech křivek</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="206" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="208" />
         <source>Exported file will have values at every unique X value from every curve. Y values will be linearly interpolated if necessary</source>
         <translation>Exportovaný soubor použije unikátní hodnoty X z každé křivky. Y-ové hodnoty budou následně dle potřeby lineárně interpolovány</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="212" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="214" />
         <source>Extrapolate outside endpoints</source>
         <translation>Extrapolovat vnější koncové body</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="213" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="215" />
         <source>Enable or disable extrapolation outside of endpoints of each curve. If disabled, only points between the endpoints of each curve are exported</source>
         <translation>Povolí nebo zakáže extrapolaci mimo koncové body každé křivky. Pokud je zakázáno, exportují se pouze body mezi koncovými body každé křivky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="220" />
         <source>Interpolate Ys at Xs from first curve</source>
         <translation>Interpolovat Y a X z první křivky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="219" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="221" />
         <source>Exported file will have values at every unique X value from the first curve. Y values will be linearly interpolated if necessary</source>
         <translation>Exportovaný soubor použije unikátní hodnoty X z první křivky. Y-ové hodnoty budou následně dle potřeby lineárně interpolovány</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="224" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="226" />
         <source>Interpolate Ys at evenly spaced X values that are automatically selected</source>
         <translation>Interpolovat Ys při rovnoměrně rozložených hodnotách X, které jsou automaticky vybrány</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="225" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="227" />
         <source>Exported file will have values at evenly spaced X values, separated by the interval selected below.</source>
         <translation>Exportovaný soubor bude mít rovnoměrně rozložené hodnoty X pomocí intervalu zadaného níže.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="229" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="395" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="231" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="397" />
         <source>Interval</source>
         <translation>Interval</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="237" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="239" />
         <source>Interval, in the units of X, between successive points in the X direction.
 
 If the scale is linear, then this interval is added to successive X values. If the scale is logarithmic, then this interval is multiplied to successive X values.
@@ -3446,7 +3451,7 @@ Je-li váha lineární, pak se tento interval přidává k po sobě následujíc
 Hodnoty X budou automaticky zarovnány podle jednoduchých čísel. Pokud první a / nebo poslední body nejsou podél zarovnaných hodnot X, přidá se podle potřeby jeden nebo dva další body.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="247" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="249" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X scale. The spacing will be consistent across the graph, even if the X scale is logarithmic.
@@ -3459,81 +3464,81 @@ Jednotky pixelů jsou upřednostňovány, když je rozteč nezávislý na měř�
 Jednotky grafu jsou upřednostňovány, když rozteč závisí na stupnici X.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="259" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="421" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="261" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="423" />
         <source>Too many points</source>
         <translation>Příliš mnoho bodů</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="261" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="423" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="263" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="425" />
         <source>Warning that interval is too small. Adjust interval or increase point limit in Main Window settings</source>
         <translation>Varování, že interval je příliš malý. Upravte interval nebo zvyšte limit bodů v nastavení hlavního okna</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="264" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="266" />
         <source>Interpolate Ys at evenly spaced X values on grid lines</source>
         <translation>Interpolovat Ys na rovnoměrně rozložených hodnotách X na řádcích mřížky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="265" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="267" />
         <source>Exported file will have values at evenly spaced X values at the vertical grid lines.</source>
         <translation>Exportovaný soubor bude mít hodnoty na rovnoměrně rozložených hodnotách X na svislých čarách mřížky.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="269" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="426" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="271" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="428" />
         <source>Raw Xs and Ys</source>
         <translation>Surové X a Y</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="270" />
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="427" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="272" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="429" />
         <source>Exported file will have only original X and Y values</source>
         <translation>Exportovaný soubor bude mít pouze výchozí hodnoty X a Y</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="281" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="283" />
         <source>Header</source>
         <translation>Hlavička</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="291" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="293" />
         <source>Exported file will have no header line</source>
         <translation>Exportovaný soubor nebude mít hlavičku</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="296" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="298" />
         <source>Exported file will have simple header line</source>
         <translation>Exportovaný soubor bude mít jednoduchou hlavičku</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="301" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="303" />
         <source>Exported file will have gnuplot header line</source>
         <translation>Exportovaný soubor bude mít "gnuplot" hlavičku</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="313" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="315" />
         <source>Save As Default</source>
         <translation>Uložit jako výchozí</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="314" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="316" />
         <source>Save the settings for use as future defaults.</source>
         <translation>Uloží nastavení pro příští použití.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="318" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="320" />
         <source>Load Default</source>
         <translation>Načíst výchozí</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="319" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="321" />
         <source>Load the default settings.</source>
         <translation>Načtěte výchozí nastavení.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="331" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="333" />
         <source>File extension used for preview. The CSV and TSV file extensions normally use commas and tabs respectively, but that can be changed in this dialog.</source>
         <translation>Přípona souboru použitá pro náhled. Přípony souborů CSV a TSV obvykle používají čárky a záložky, ale v tomto dialogu je lze změnit.</translation>
     </message>
@@ -3542,7 +3547,7 @@ Jednotky grafu jsou upřednostňovány, když rozteč závisí na stupnici X.</t
         <translation type="vanished">Náhled</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="357" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="359" />
         <source>Preview window shows how current settings affect the exported file.
 
 Functions (shown here in blue) are output first, followed by relations (shown here in green) if any exist.</source>
@@ -3551,27 +3556,27 @@ Functions (shown here in blue) are output first, followed by relations (shown he
 Funkce (zde zobrazené modře) jsou nejprve vyvedeny a následně vztahy (zde zelené), pokud existují.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="373" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="375" />
         <source>Relation Points Selection</source>
         <translation>Výběr vztažných bodů</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="388" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="390" />
         <source>Interpolate Xs and Ys at evenly spaced intervals.</source>
         <translation>Interpolovat X a Y v rovnoměrném rozložení.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="389" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="391" />
         <source>Exported file will have points evenly spaced along each relation, separated by the interval selected below. If the last interval does not end at the last point, then a shorter last interval is added that ends on the last point.</source>
         <translation>Exportovaný soubor bude mít body rovnoměrně rozmístěné podél každého vztahu, odděleny zvoleným intervalem. Pokud poslední interval nekončí v posledním bodě, přidá se kratší poslední interval, který končí posledním bodem.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="403" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="405" />
         <source>Interval between successive points when exporting at evenly spaced (X,Y) coordinates.</source>
         <translation>Interval mezi po sobě jdoucími body při exportu na rovnoměrně rozložených souřadnicích (X, Y).</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="409" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="411" />
         <source>Units for spacing interval.
 
 Pixel units are preferred when the spacing is to be independent of the X and Y scales. The spacing will be consistent across the graph, even if a scale is logarithmic or the X and Y scales are different.
@@ -3584,12 +3589,12 @@ Jednotky pixelů jsou upřednostňovány, když je rozteč nezávislý na váhy 
 Jednotky grafu jsou obvykle výhodné, když jsou stupnice X a Y stejné.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="470" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="478" />
         <source>Functions</source>
         <translation>Funkce</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="472" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="480" />
         <source>Functions Tab
 
 Controls for specifying the format of functions during export</source>
@@ -3598,12 +3603,12 @@ Controls for specifying the format of functions during export</source>
 Prvky pro specifikaci formátu funkcí během exportu</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="478" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="486" />
         <source>Relations</source>
         <translation>Vztahy</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="480" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="488" />
         <source>Relations Tab
 
 Controls for specifying the format of relations during export</source>
@@ -3612,17 +3617,17 @@ Controls for specifying the format of relations during export</source>
 Prvky pro specifikaci formátu vztahů během exportu</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="499" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="507" />
         <source>X Label</source>
         <translation>Popis X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="503" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="511" />
         <source>Label in the header for x values</source>
         <translation>Název hlavičky pro hodnoty X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1292" />
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1305" />
         <source>Preview is unavailable until axis points are defined.</source>
         <translation>Náhled není k dispozici, dokud nejsou definovány body osy.</translation>
     </message>
@@ -3630,17 +3635,17 @@ Prvky pro specifikaci formátu vztahů během exportu</translation>
 <context>
     <name>DlgSettingsGeneral</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="25" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="27" />
         <source>General</source>
         <translation>Obecné</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="47" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="49" />
         <source>Effective cursor size (pixels)</source>
         <translation>Efektivní velikost kurzoru (pixely)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="52" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="54" />
         <source>Effective Cursor Size
 
 This is the effective width and height of the cursor when clicking on a pixel that is not part of the background.
@@ -3653,12 +3658,12 @@ Toto je hodnota šířky a výšky kurzoru během klikání na bod, který není
 Tento parametr se používá při výběru barvy a sjednocování bodů</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="59" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="61" />
         <source>Extra precision (digits)</source>
         <translation>Přesnost navíc (číslice)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="64" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="66" />
         <source>Extra Digits of Precision
 
 This is the number of additional digits of precision appended after the significant digits determined by the digitization accuracy at that point. The digitization accuracy at any point equals the change in graph coordinates from moving one pixel in each direction. Appending extra digits does not improve the accuracy of the numbers. More information can be found in discussions of accuracy versus precision.
@@ -3671,12 +3676,12 @@ Jde o počet číslic za desetinným oddělovačem odvozených od správnosti di
 Tento parametr je použit na souřadnice ve stavovém řádku a během exportu</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="79" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="81" />
         <source>Save As Default</source>
         <translation>Uložit jako výchozí</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="80" />
+        <location filename="../src/Dlg/DlgSettingsGeneral.cpp" line="82" />
         <source>Save the settings for use as future defaults, according to the curve name selection.</source>
         <translation>Uloží nastavení pro příští použití v závislosti na výběru názvu křivky.</translation>
     </message>
@@ -3684,28 +3689,28 @@ Tento parametr je použit na souřadnice ve stavovém řádku a během exportu</
 <context>
     <name>DlgSettingsGridDisplay</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="31" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="33" />
         <source>Grid Display</source>
         <translation>Zobrazení mřížky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="82" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="84" />
         <source>Color</source>
         <translation>Barva</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="86" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="88" />
         <source>Select a color for the lines</source>
         <translation>Vyberte barvu čar</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="108" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="184" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="110" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="186" />
         <source>Disable</source>
         <translation>Zakázat</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="112" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="114" />
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -3714,13 +3719,13 @@ The X grid lines are specified using only three values at a time. For flexibilit
 Čáry X-ové mřížky jsou definovány pouze třemi body. Pro flexibilitu jsou poskytnuty čtyři body, ze kterých je potřeba jeden vybrat a zakázat. Jakmile je zakázán, hodnota se stále aktualizuje s tím, jak se mění ostatní hodnoty</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="127" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="203" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="129" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="205" />
         <source>Count</source>
         <translation>Počet</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="131" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="133" />
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
@@ -3729,13 +3734,13 @@ The number of X grid lines must be entered as an integer greater than zero</sour
 Počet čar mřížky na ose X musí být větší než nula</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="140" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="216" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="142" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="218" />
         <source>Start</source>
         <translation>Začátek</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="144" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="146" />
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -3744,13 +3749,13 @@ The start value cannot be greater than the stop value</source>
 Hodnota začátku nesmí být vyšší, než hodnota konce</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="151" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="227" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="153" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="229" />
         <source>Step</source>
         <translation>Krok</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="155" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="157" />
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3759,7 +3764,7 @@ The step value must be greater than zero (linear) or one (log)</source>
 Hodnota kroku musí být větší než nula (lineární) nebo jedna (logaritmická)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="231" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="233" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3777,13 +3782,13 @@ The step value must be greater than zero</source>
 Hodnota kroku musí být větší než nula</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="162" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="238" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="164" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="240" />
         <source>Stop</source>
         <translation>Konec</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="166" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="168" />
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
@@ -3792,7 +3797,7 @@ The stop value cannot be less than the start value</source>
 Hodnota konce nesmí být nižší, než hodnota začátku</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="188" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="190" />
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -3801,7 +3806,7 @@ The Y grid lines are specified using only three values at a time. For flexibilit
 Čáry Y-ové mřížky jsou definovány pouze třemi body. Pro flexibilitu jsou poskytnuty čtyři body, ze kterých je potřeba jeden vybrat a zakázat. Jakmile je zakázán, hodnota se stále aktualizuje s tím, jak se mění ostatní hodnoty</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="207" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="209" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
@@ -3810,7 +3815,7 @@ The number of Y grid lines must be entered as an integer greater than zero</sour
 Počet čar mřížky na ose Y musí být větší než nula</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="220" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="222" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -3828,7 +3833,7 @@ The step value must be greater than zero</source>
 Hodnota kroku musí být větší než nula</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="242" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="244" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
@@ -3837,37 +3842,37 @@ The stop value cannot be less than the start value</source>
 Hodnota konce nesmí být nižší, než hodnota začátku</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="258" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="260" />
         <source>Preview</source>
         <translation>Náhled</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="265" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="267" />
         <source>Preview window that shows how current settings affect grid display</source>
         <translation>Okno náhledu, které zobrazuje, jak aktuální nastavení ovlivňuje mřížkové zobrazení.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="322" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="330" />
         <source>X Grid Lines</source>
         <translation>Čáry mřížky na ose X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="324" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="332" />
         <source>Grid Lines</source>
         <translation>Čáry mřížky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="328" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="336" />
         <source>Y Grid Lines</source>
         <translation>Čáry mřížky na ose Y</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="330" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="338" />
         <source>Radius Grid Lines</source>
         <translation>Čáry mřížky na poloměru</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="588" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="601" />
         <source>Grid line count exceeds limit set by Settings / Main Window.</source>
         <translation>Počet mřížkových linek překračuje limit nastavený v Nastavení / Hlavní okno.</translation>
     </message>
@@ -3875,27 +3880,27 @@ Hodnota konce nesmí být nižší, než hodnota začátku</translation>
 <context>
     <name>DlgSettingsGridRemoval</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="36" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="38" />
         <source>Grid Removal</source>
         <translation>Odebrání mřížky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="82" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="84" />
         <source>Preview</source>
         <translation>Náhled</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="89" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="91" />
         <source>Preview window that shows how current settings affect grid removal</source>
         <translation>Okno náhledu, které zobrazuje, jak aktuální nastavení ovlivňuje odstranění mřížky.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="100" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="102" />
         <source>Remove pixels close to defined grid lines</source>
         <translation>Odstraňte pixely v blízkosti definovaných řádků mřížky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="101" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="103" />
         <source>Check this box to have pixels close to regularly spaced gridlines removed.
 
 This option is only available when the axis points have all been defined.</source>
@@ -3904,12 +3909,12 @@ This option is only available when the axis points have all been defined.</sourc
 Tato volba je k dispozici pouze tehdy, jsou-li všechny body osy definovány.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="106" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="108" />
         <source>Close distance (pixels)</source>
         <translation>Zblízka vzdálenosti (pixely)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="110" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="112" />
         <source>Set closeness distance in pixels.
 
 Pixels that are closer to the regularly spaced gridlines, than this distance, will be removed.
@@ -3922,23 +3927,23 @@ Pixely, které jsou blíže k pravidelně rozmístěným mřížkovým liniím, 
 Tato hodnota nemůže být záporná. Nulová hodnota zakazuje tuto funkci. Desetinné hodnoty jsou povoleny</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="127" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="129" />
         <source>X Grid Lines</source>
         <translation>Čáry mřížky na ose X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="129" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="131" />
         <source>Grid Lines</source>
         <translation>Čáry mřížky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="137" />
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="215" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="139" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="217" />
         <source>Disable</source>
         <translation>Zakázat</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="141" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="143" />
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -3947,13 +3952,13 @@ The X grid lines are specified using only three values at a time. For flexibilit
 Čáry X-ové mřížky jsou definovány pouze třemi body. Pro flexibilitu jsou poskytnuty čtyři body, ze kterých je potřeba jeden vybrat a zakázat. Jakmile je zakázán, hodnota se stále aktualizuje s tím, jak se mění ostatní hodnoty</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="156" />
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="234" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="158" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="236" />
         <source>Count</source>
         <translation>Počet</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="160" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="162" />
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
@@ -3962,13 +3967,13 @@ The number of X grid lines must be entered as an integer greater than zero</sour
 Počet čar mřížky na ose X musí být větší než nula</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="167" />
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="245" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="169" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="247" />
         <source>Start</source>
         <translation>Začátek</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="171" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="173" />
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -3977,13 +3982,13 @@ The start value cannot be greater than the stop value</source>
 Hodnota začátku nesmí být vyšší, než hodnota konce</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="178" />
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="256" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="180" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="258" />
         <source>Step</source>
         <translation>Krok</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="182" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="184" />
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3992,7 +3997,7 @@ The step value must be greater than zero (linear) or one (log)</source>
 Hodnota kroku musí být větší než nula (lineární) nebo jedna (logaritmická)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="260" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="262" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -4010,13 +4015,13 @@ The step value must be greater than zero</source>
 Hodnota kroku musí být větší než nula</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="189" />
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="267" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="191" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="269" />
         <source>Stop</source>
         <translation>Konec</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="193" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="195" />
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
@@ -4025,17 +4030,17 @@ The stop value cannot be less than the start value</source>
 Hodnota konce nesmí být nižší, než hodnota začátku</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="205" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="207" />
         <source>Y Grid Lines</source>
         <translation>Čáry mřížky na ose Y</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="207" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="209" />
         <source>R Grid Lines</source>
         <translation>Čáry mřížky na poloměru</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="219" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="221" />
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -4044,7 +4049,7 @@ The Y grid lines are specified using only three values at a time. For flexibilit
 Čáry Y-ové mřížky jsou definovány pouze třemi body. Pro flexibilitu jsou poskytnuty čtyři body, ze kterých je potřeba jeden vybrat a zakázat. Jakmile je zakázán, hodnota se stále aktualizuje s tím, jak se mění ostatní hodnoty</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="238" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="240" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
@@ -4053,7 +4058,7 @@ The number of Y grid lines must be entered as an integer greater than zero</sour
 Počet čar mřížky na ose Y musí být větší než nula</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="249" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="251" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -4071,7 +4076,7 @@ The step value must be greater than zero</source>
 Hodnota kroku musí být větší než nula</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="271" />
+        <location filename="../src/Dlg/DlgSettingsGridRemoval.cpp" line="273" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
@@ -4083,27 +4088,27 @@ Hodnota konce nesmí být nižší, než hodnota začátku</translation>
 <context>
     <name>DlgSettingsGuideline</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="34" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="44" />
         <source>Guidelines</source>
         <translation>Pokyny</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="57" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="90" />
         <source>Creation circle radius</source>
         <translation>Poloměr vytvoření kruhu</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="61" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="94" />
         <source>Select a radius, in pixels, for the points</source>
         <translation>Vyberte pro body poloměr v pixelech</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="66" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="99" />
         <source>Guideline color</source>
-        <translation>Směrná barva</translation>
+        <translation>Předepsaná barva</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="70" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="103" />
         <source>Guidelines Color
 
 Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
@@ -4112,40 +4117,60 @@ Set the color of the guidelines that can be dragged from the edges of the scene,
 Nastavte barvu vodítek, které lze přetáhnout z okrajů scény a použít k zarovnání bodů</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="77" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="110" />
         <source>Active Line width</source>
         <translation>Aktivní šířka čáry</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="81" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="114" />
         <source>Select a size for the guidelines when active</source>
         <translation>Je-li aktivní, vyberte velikost pokynů</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="86" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="119" />
         <source>Inactive Line width</source>
         <translation>Neaktivní šířka čáry</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="90" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="123" />
         <source>Select a size for the guidelines when inactive</source>
         <translation>Pokud není aktivní, vyberte velikost pokynů</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="181" />
+        <source>Active Preview</source>
+        <translation>Aktivní náhled</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="184" />
+        <source>Inactive Preview</source>
+        <translation>Neaktivní náhled</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="191" />
+        <source>Preview window that shows how current settings affect the active guidelines.</source>
+        <translation>Okno náhledu, které ukazuje, jak aktuální nastavení ovlivňuje aktivní vodítka.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="204" />
+        <source>Preview window that shows how current settings affect the inactive guidelines.</source>
+        <translation>Okno náhledu, které ukazuje, jak aktuální nastavení ovlivňuje neaktivní pokyny.</translation>
     </message>
 </context>
 <context>
     <name>DlgSettingsMainWindow</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="49" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="51" />
         <source>Main Window</source>
         <translation>Hlavní okno</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="74" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="76" />
         <source>Initial zoom</source>
         <translation>Počáteční přiblížení</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="89" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91" />
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
@@ -4154,32 +4179,32 @@ Select the initial zoom factor when a new document is loaded. Either the previou
 Vyberte počáteční přiblížení pro nově otevřené dokumenty. Buď může být zachováno předchozí přiblížení nebo může být specifikováno nové.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="95" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="97" />
         <source>Zoom control</source>
         <translation>Ovládání přiblížení</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="99" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="101" />
         <source>Menu only</source>
         <translation>Pouze menu</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="100" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
         <source>Menu and mouse wheel</source>
         <translation>Pouze menu a kolečko myši</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="101" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="103" />
         <source>Menu and +/- keys</source>
         <translation>Menu a klávesy +/-</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104" />
         <source>Menu, mouse wheel and +/- keys</source>
         <translation>Menu, kolečko myši a klávesy +/-</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="103" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="105" />
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
@@ -4192,12 +4217,12 @@ Zvolte, jakými vstupy bude přiblížení ovládáno</translation>
         <translation type="vanished">Národnostní nastavení</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="108" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="110" />
         <source>Locale (requires restart)</source>
         <translation>Národní prostředí (vyžaduje restart)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="113" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="115" />
         <source>Locale
 
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
@@ -4210,12 +4235,12 @@ Vyberte nastavení používaných čísel (změna se projeví okamžitě) a jazy
 Nastavení definuje, jak budou čísla formátovány. Konkrétně zda budou v číslech použity čárky nebo tečky - pro zobrazení v aplikace a při exportu.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="133" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="135" />
         <source>Import cropping</source>
         <translation>Oříznutí importu</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="137" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="139" />
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
@@ -4228,12 +4253,12 @@ Povoluje nebo zakazuje oříznutí importovaného obrázku při importu. Ořízn
 Toto nastavení má pouze účinek, když byl Engauge vybudován s podporou souborů PDF.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="150" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="152" />
         <source>Import PDF resolution (dots per inch)</source>
         <translation>Rozlišení importovaného PDF (body na palec)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="154" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="156" />
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
@@ -4242,12 +4267,12 @@ Imported Portable Document Format (PDF) files will be converted to this pixel re
 Importované PDF bude převedeno do tohoto rozlišení na body na palec, kde každy pixel je jeden bod. Vyšší hodnota zvyšuje rozlišení obrázku a taktéž může zlepšit správnost digitalizace. Naopak příliš velké rozlišení může způsobit zpomalení aplikace.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="169" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="171" />
         <source>Maximum grid lines</source>
         <translation>Maximální počet čar mřížky</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="174" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="176" />
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
@@ -4256,12 +4281,12 @@ Maximum number of grid lines to be processed. This limit is applied when the ste
 Maximální počet čar mřížky, které budou zpracovány. Tento limit je aplikován pro hodnoty počátku a konce, pokud je hodnota kroku příliš malá, což by mohlo vést  k příliš vysokému počtu čar, nepřehlednosti a příliš dlouhému zpracování (protože každá čára musí být zpracována)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="181" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="183" />
         <source>Maximum exported points per curve</source>
         <translation>Maximální exportované body na křivku</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="187" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="189" />
         <source>Maximum Exported Points per Curve
 
 This is the maximum number of points allowed in each exported curve. No points are exported when this is exceeded. This limit prevents delays and overly large file sizes due to curves that have too many points.</source>
@@ -4270,12 +4295,12 @@ This is the maximum number of points allowed in each exported curve. No points a
 Toto je maximální počet bodů povolených v každé exportované křivce. Po překročení této hodnoty se nevyexportují žádné body. Toto omezení zabraňuje zpoždění a příliš velkým velikostem souborů v důsledku křivek, které mají příliš mnoho bodů.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="194" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="196" />
         <source>Highlight opacity</source>
         <translation>Průhlednost zvýraznění</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="200" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="202" />
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
@@ -4284,17 +4309,17 @@ Opacity to be applied when the cursor is over a curve or axis point in Select mo
 Opacita, která se použije, když je kurzor v režimu výběru přes křivku nebo bod osy. Změna vzhledu ukazuje, kdy lze vybrat bod.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="206" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="208" />
         <source>Recent file list</source>
         <translation>Poslední soubory</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="211" />
         <source>Clear</source>
         <translation>Vyčistit</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="211" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="213" />
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
@@ -4303,12 +4328,12 @@ Clear the recent file list in the File menu.</source>
 Smaže seznam posledních souborů v menu Soubor</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="217" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="219" />
         <source>Include title bar path</source>
         <translation>Zahrnout cestu k hlavnímu panelu</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="222" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="224" />
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
@@ -4317,12 +4342,12 @@ Includes or excludes the path and file extension from the filename in the title 
 Zahrnuje nebo vylučuje cestu a příponu souboru z názvu souboru v záhlaví.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="227" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="229" />
         <source>Allow small dialogs</source>
         <translation>Povolit malé dialogy</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="232" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="234" />
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
@@ -4331,12 +4356,12 @@ Allows settings dialogs to be made very small so they fit on small computer scre
 Umožňuje nastavit velmi malé dialogy nastavení, aby se vešly na obrazovky malých počítačů.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="237" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="239" />
         <source>Allow drag and drop export</source>
         <translation>Povolit export drag and drop</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="244" />
         <source>Allow Drag and Drop Export
 
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
@@ -4349,12 +4374,12 @@ Umožňuje přetahování a přetažení exportu z tabulek Window Fitting Window
 Pokud je přetažením deaktivováno, lze pomocí klepnutí a přetažení vybrat obdélníkovou množinu buněk tabulky. Pokud je povoleno přetahování, je možné vybrat obdélníkovou množinu buněk tabulky pomocí klávesových zkratek a kliknutí, protože klepnutím a tažením spustíte operaci přetažení.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="250" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="252" />
         <source>Image replace renames document</source>
         <translation>Obrázek nahrazuje dokument přejmenování</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="255" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="257" />
         <source>Image Replace Renames Document
 
 When an image is imported to replace the current image, the document will be renamed if this is true, otherwise the name will stay the same.</source>
@@ -4363,12 +4388,12 @@ When an image is imported to replace the current image, the document will be ren
 Když je obrázek importován, aby nahradil aktuální obrázek, bude dokument přejmenován, pokud je to pravda, jinak zůstane název stejný.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="261" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="263" />
         <source>Significant digits</source>
         <translation>Významné číslice</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="266" />
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="268" />
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
@@ -4377,9 +4402,8 @@ Number of digits of precision in floating point numbers. This value affects calc
 Počet číslic s přesností v číslech s plovoucí desetinnou čárkou. Tato hodnota ovlivňuje výpočty pro křivky, jelikož mezilehlé výsledky menší než prahové hodnoty T naznačují, že k datům nelze připojit polynomiální křivku se specifickým pořadím. Prah T se vypočítává z maximálního maticového prvku M a významných číslic S jako T = M / 10 ^ S.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="275" />
         <source>Guideline color</source>
-        <translation>Směrná barva</translation>
+        <translation type="vanished">Předepsaná barva</translation>
     </message>
     <message>
         <source>Guidelines Color
@@ -4393,17 +4417,17 @@ Nastavte barvu vodítek, které lze přetáhnout z okrajů scény a použít k z
 <context>
     <name>DlgSettingsPointMatch</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="30" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="32" />
         <source>Point Match</source>
         <translation>Shoda bodů</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="83" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="85" />
         <source>Maximum point size (pixels)</source>
         <translation>Maximální velikost bodu (pixely)</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="87" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="89" />
         <source>Select a maximum point size in pixels.
 
 Sample match points must fit within a square box, around the cursor, having width and height equal to this maximum.
@@ -4420,42 +4444,42 @@ Tato velikost se také používá k určení, zda je oblast obrácených obrazov
 Tato hodnota má nižší limit</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="98" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="100" />
         <source>Accepted point color</source>
         <translation>Akceptovaná barva bodů</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="102" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="104" />
         <source>Select a color for matched points that are accepted</source>
         <translation>Vyberte barvu pro přiřazené body, které jsou akceptovány</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="107" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="109" />
         <source>Rejected point color</source>
         <translation>Odmítnutá barva bodů</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="111" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="113" />
         <source>Select a color for matched points that are rejected</source>
         <translation>Vyberte barvu pro shodné body, které jsou odmítnuty</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="116" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="118" />
         <source>Candidate point color</source>
         <translation>Barva kandidátů</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="120" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="122" />
         <source>Select a color for the point being decided upon</source>
         <translation>Vyberte barvu bodu rozhodování</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="135" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="137" />
         <source>Preview</source>
         <translation>Náhled</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="142" />
+        <location filename="../src/Dlg/DlgSettingsPointMatch.cpp" line="144" />
         <source>Preview window shows how current settings affect point matching, and how the marked and candidate points are displayed.
 
 The points are separated by the point separation value, and the maximum point size is shown as a box in the center</source>
@@ -4890,17 +4914,17 @@ Chcete změny uložit?</translation>
         <translation>Otevřete dokument</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3930" />
+        <location filename="../src/main/MainWindow.cpp" line="3931" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3931" />
+        <location filename="../src/main/MainWindow.cpp" line="3932" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4067" />
+        <location filename="../src/main/MainWindow.cpp" line="4068" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5269,7 +5293,7 @@ Chcete změny uložit?</translation>
         <translation>Nelze číst data filtru</translation>
     </message>
     <message>
-        <location filename="../src/Document/DocumentModelCoords.cpp" line="172" />
+        <location filename="../src/Document/DocumentModelCoords.cpp" line="170" />
         <source>Cannot read coordinates data</source>
         <translation>Nelze číst data souřadnic</translation>
     </message>
@@ -5477,7 +5501,7 @@ Chcete změny uložit?</translation>
         <translation>Konec</translation>
     </message>
     <message>
-        <location filename="../src/Grid/GridLineFactory.cpp" line="67" />
+        <location filename="../src/Grid/GridLineFactory.cpp" line="64" />
         <source>Axes checker. If this does not align with the axes, then the axes points should be checked</source>
         <translation>Kontrola os. Pokud to není v souladu s osami, měly by být zkontrolovány body os</translation>
     </message>
@@ -5547,7 +5571,7 @@ Chcete změny uložit?</translation>
         <translation>Trojúhelník2</translation>
     </message>
     <message>
-        <location filename="../src/Point/PointStyle.cpp" line="151" />
+        <location filename="../src/Point/PointStyle.cpp" line="149" />
         <source>Cannot read point style data</source>
         <translation>Nelze číst data stylu bodů</translation>
     </message>
@@ -5567,12 +5591,12 @@ Chcete změny uložit?</translation>
         <translation>Rozlišení grafu</translation>
     </message>
     <message>
-        <location filename="../src/Transformation/Transformation.cpp" line="178" />
+        <location filename="../src/Transformation/Transformation.cpp" line="177" />
         <source>Need scale bar</source>
         <translation>Potřebujete měřítko</translation>
     </message>
     <message>
-        <location filename="../src/Transformation/Transformation.cpp" line="179" />
+        <location filename="../src/Transformation/Transformation.cpp" line="178" />
         <source>Need more axis points</source>
         <translation>Potřebujeme více os bodů</translation>
     </message>

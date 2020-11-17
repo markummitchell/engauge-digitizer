@@ -9,6 +9,7 @@
 #include "DlgSettingsGuideline.h"
 #include "DocumentModelGuideline.h"
 #include "EngaugeAssert.h"
+#include "EnumsToQt.h"
 #include "GraphicsScene.h"
 #include "ImportCropping.h"
 #include "ImportCroppingUtilBase.h"
@@ -17,6 +18,7 @@
 #include <QApplication>
 #include <QCheckBox>
 #include <QComboBox>
+#include <qdebug.h>
 #include <QDir>
 #include <QDoubleSpinBox>
 #include <QGraphicsLineItem>
@@ -25,8 +27,10 @@
 #include <QGroupBox>
 #include <QLabel>
 #include <qmath.h>
+#include <QPen>
 #include <QPushButton>
 #include <QSpinBox>
+#include <QtGui>
 #include "QtToString.h"
 #include <QWhatsThis>
 #include "TranslatorContainer.h"
@@ -45,15 +49,19 @@ DlgSettingsGuideline::DlgSettingsGuideline(MainWindow &mainWindow) :
   m_scenePreviewInactive (nullptr),
   m_viewPreviewInactive (nullptr),
   m_itemGuidelineXTActive (nullptr),
-  m_itemGuidelineYRActive (nullptr),
-  m_itemCircleActive (nullptr),
+  m_itemGuidelineYActive (nullptr),
+  m_itemGuidelineRActive (nullptr),
   m_itemCentipedeXTActive (nullptr),
-  m_itemCentipdedYRActive (nullptr),
+  m_itemCentipedeYActive (nullptr),
+  m_itemCentipedeRActive (nullptr),
+  m_itemCentipedeCircleActive (nullptr),
   m_itemGuidelineXTInactive (nullptr),
-  m_itemGuidelineYRInactive (nullptr),
-  m_itemCircleInactive (nullptr),
+  m_itemGuidelineYInactive (nullptr),
+  m_itemGuidelineRInactive (nullptr),
   m_itemCentipedeXTInactive (nullptr),
-  m_itemCentipdedYRInactive (nullptr),
+  m_itemCentipedeYInactive (nullptr),
+  m_itemCentipedeRInactive (nullptr),
+  m_itemCentipedeCircleInactive (nullptr),
   m_modelGuidelineBefore (nullptr),
   m_modelGuidelineAfter (nullptr)
 {
@@ -116,6 +124,41 @@ void DlgSettingsGuideline::createControls (QGridLayout *layout,
   m_spinLineWidthInactive->setMinimum(1);
   connect (m_spinLineWidthInactive, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidthInactive (int)));
   layout->addWidget (m_spinLineWidthInactive, row++, 2);  
+}
+
+void DlgSettingsGuideline::createLines ()
+{
+  // Centipedes circles which are same for both cartesian and polar coordinates.
+  // These are created first so they are underneath the other items
+  m_itemCentipedeCircleActive =  new QGraphicsEllipseItem ();
+  m_itemCentipedeCircleInactive = new QGraphicsEllipseItem ();
+
+  m_itemCentipedeCircleActive->setPen (QPen (Qt::black, 1, Qt::DotLine));
+  m_itemCentipedeCircleInactive->setPen (QPen (Qt::black, 1, Qt::DotLine));
+
+  m_scenePreviewActive->addItem (m_itemCentipedeCircleActive);
+  m_scenePreviewInactive->addItem (m_itemCentipedeCircleInactive);
+
+  if (cmdMediator().document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
+
+    m_itemGuidelineXTActive = new QGraphicsLineItem ();
+    m_itemGuidelineYActive = new QGraphicsLineItem ();
+    m_itemGuidelineXTInactive = new QGraphicsLineItem ();
+    m_itemGuidelineYInactive = new QGraphicsLineItem ();
+
+    m_scenePreviewActive->addItem (m_itemGuidelineXTActive);
+    m_scenePreviewActive->addItem (m_itemGuidelineYActive);
+    m_scenePreviewInactive->addItem (m_itemGuidelineXTInactive);
+    m_scenePreviewInactive->addItem (m_itemGuidelineYInactive);
+
+  } else {
+
+    m_itemGuidelineXTActive = new QGraphicsLineItem ();
+    m_itemGuidelineRActive = new QGraphicsEllipseItem ();
+    m_itemGuidelineXTInactive = new QGraphicsLineItem ();
+    m_itemGuidelineRInactive = new QGraphicsEllipseItem ();
+
+  }
 }
 
 void DlgSettingsGuideline::createOptionalSaveDefault (QHBoxLayout * /* layout */)
@@ -205,8 +248,8 @@ void DlgSettingsGuideline::handleOk ()
 
 void DlgSettingsGuideline::load (CmdMediator &cmdMediator)
 {
-  LOG4CPP_ERROR_S ((*mainCat)) << "DlgSettingsGuideline::load";
-  
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::load";
+
   setCmdMediator (cmdMediator);
 
   // Flush old data
@@ -225,18 +268,56 @@ void DlgSettingsGuideline::load (CmdMediator &cmdMediator)
   m_spinLineWidthActive->setValue (qFloor (m_modelGuidelineAfter->lineWidthActive ()));
   m_spinLineWidthInactive->setValue (qFloor (m_modelGuidelineAfter->lineWidthInactive ()));  
 
-  m_scenePreviewActive->clear();
   QImage imagePreviewActive = cmdMediator.document().pixmap().toImage();
   m_scenePreviewActive->addPixmap (QPixmap::fromImage (imagePreviewActive));
 
-  m_scenePreviewInactive->clear();
   QImage imagePreviewInactive = cmdMediator.document().pixmap().toImage();
   m_scenePreviewInactive->addPixmap (QPixmap::fromImage (imagePreviewInactive));
 
-  updatePreview();
-                             
+  removeOldWidgetsActive();
+  removeOldWidgetsInactive();
+  createLines();
+  updatePreview();             
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
+}
+
+void DlgSettingsGuideline::removeOldWidgetsActive ()
+{
+  delete m_itemGuidelineXTActive;
+  delete m_itemGuidelineYActive;
+  delete m_itemGuidelineRActive;
+  delete m_itemCentipedeXTActive;
+  delete m_itemCentipedeYActive;
+  delete m_itemCentipedeRActive;
+  delete m_itemCentipedeCircleActive;
+
+  m_itemGuidelineXTActive = nullptr;
+  m_itemGuidelineYActive = nullptr;
+  m_itemGuidelineRActive = nullptr;
+  m_itemCentipedeXTActive = nullptr;
+  m_itemCentipedeYActive = nullptr;
+  m_itemCentipedeRActive = nullptr;
+  m_itemCentipedeCircleActive = nullptr;
+}
+
+void DlgSettingsGuideline::removeOldWidgetsInactive ()
+{
+  delete m_itemGuidelineXTInactive;
+  delete m_itemGuidelineYInactive;
+  delete m_itemGuidelineRInactive;
+  delete m_itemCentipedeXTInactive;
+  delete m_itemCentipedeYInactive;
+  delete m_itemCentipedeRInactive;
+  delete m_itemCentipedeCircleInactive;
+
+  m_itemGuidelineXTInactive = nullptr;
+  m_itemGuidelineYInactive = nullptr;
+  m_itemGuidelineRInactive = nullptr;
+  m_itemCentipedeXTInactive = nullptr;
+  m_itemCentipedeYInactive = nullptr;
+  m_itemCentipedeRInactive = nullptr;
+  m_itemCentipedeCircleInactive = nullptr;
 }
 
 void DlgSettingsGuideline::setSmallDialogs (bool smallDialogs)
@@ -297,15 +378,13 @@ void DlgSettingsGuideline::updatePreview()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::updatePreview";
 
   enableOk (true);
+  updatePreviewGeometry ();
+  updatePreviewStyle ();
+}
 
-  // Preview widgets
-  delete m_itemGuidelineXTActive;
-  delete m_itemGuidelineYRActive;
-  delete m_itemCircleActive;
-  delete m_itemCentipedeXTActive;
-  delete m_itemCentipdedYRActive;
-
-  // Screen bounds
+void DlgSettingsGuideline::updatePreviewGeometry()
+{
+  // Screen bounds use main QGraphicsScene since that is synchronized with the main transformation used below
   int width = mainWindow().scene().width();
   int height = mainWindow().scene().height();
   QPointF posGraphTL, posGraphTR, posGraphBL, posGraphBR;
@@ -318,12 +397,31 @@ void DlgSettingsGuideline::updatePreview()
   mainWindow().transformation().transformScreenToRawGraph(QPointF (width, height),
                                                           posGraphBR);
 
+  double xMin = qMin (qMin (qMin (posGraphTL.x(), posGraphTR.x()), posGraphBL.x()), posGraphBR.x());
+  double yMin = qMin (qMin (qMin (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
+  double xMax = qMax (qMax (qMax (posGraphTL.x(), posGraphTR.x()), posGraphBL.x()), posGraphBR.x());
+  double yMax = qMax (qMax (qMax (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
+
+  // Arbitrarily put virtual click in first quadrant
+  QPointF posClick (0.25 * 0 + 0.75 * width,
+                    0.75 * 0 + 0.25 * height);
+
+  if (m_itemCentipedeCircleActive) {
+    m_itemCentipedeCircleActive->setRect (posClick.x() - m_modelGuidelineAfter->creationCircleRadius(),
+                                          posClick.y() - m_modelGuidelineAfter->creationCircleRadius(),
+                                          2 * m_modelGuidelineAfter->creationCircleRadius(),
+                                          2 * m_modelGuidelineAfter->creationCircleRadius());
+  }
+  if (m_itemCentipedeCircleInactive) {
+    m_itemCentipedeCircleInactive->setRect (posClick.x() - m_modelGuidelineAfter->creationCircleRadius(),
+                                            posClick.y() - m_modelGuidelineAfter->creationCircleRadius(),
+                                            2 * m_modelGuidelineAfter->creationCircleRadius(),
+                                            2 * m_modelGuidelineAfter->creationCircleRadius());
+  }
+
   if (cmdMediator().document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
 
-    double xMin = qMin (qMin (qMin (posGraphTL.x(), posGraphTR.x()), posGraphBL.x()), posGraphBR.x());
-    double yMin = qMin (qMin (qMin (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
-    double xMax = qMax (qMax (qMax (posGraphTL.x(), posGraphTR.x()), posGraphBL.x()), posGraphBR.x());
-    double yMax = qMax (qMax (qMax (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
+    // Guidelines
     double xMid = (xMin + xMax) / 2.0;
     double yMid = (yMin + yMax) / 2.0;
 
@@ -337,21 +435,48 @@ void DlgSettingsGuideline::updatePreview()
     mainWindow().transformation().transformRawGraphToScreen (QPointF (xMid, yMax),
                                                              posBottom);
 
-    m_itemGuidelineXTActive = new QGraphicsLineItem (QLineF (posBottom,
-                                                             posTop));
-    m_itemGuidelineYRActive = new QGraphicsLineItem (QLineF(posLeft,
-                                                            posRight));
-    m_itemGuidelineXTInactive = new QGraphicsLineItem (QLineF (posBottom,
-                                                               posTop));
-    m_itemGuidelineYRInactive = new QGraphicsLineItem (QLineF(posLeft,
-                                                              posRight));
-
-    m_scenePreviewActive->addItem (m_itemGuidelineXTActive);
-    m_scenePreviewActive->addItem (m_itemGuidelineYRActive);
-    m_scenePreviewInactive->addItem (m_itemGuidelineXTInactive);
-    m_scenePreviewInactive->addItem (m_itemGuidelineYRInactive);
+    if (m_itemGuidelineXTActive) {
+      m_itemGuidelineXTActive->setLine (QLineF (posBottom,
+                                                posTop));
+    }
+    if (m_itemGuidelineYActive) {
+       m_itemGuidelineYActive->setLine (QLineF(posLeft,
+                                               posRight));
+    }
+    if (m_itemGuidelineXTInactive) {
+      m_itemGuidelineXTInactive->setLine (QLineF (posBottom,
+                                                  posTop));
+    }
+    if (m_itemGuidelineYInactive) {
+        m_itemGuidelineYInactive->setLine (QLineF (posLeft,
+                                                   posRight));
+    }
 
   } else {
 
+    // Add polar items
+
+  }
+}
+
+void DlgSettingsGuideline::updatePreviewStyle ()
+{
+  // Skip calls during initialization before graphics items have been created
+  if (m_itemGuidelineXTActive) {
+    m_itemGuidelineXTActive->setPen (QPen (QBrush (ColorPaletteToQColor (m_modelGuidelineAfter->lineColor())),
+                                           m_modelGuidelineAfter->lineWidthActive()));
+  }
+  if (m_itemGuidelineYActive) {
+    m_itemGuidelineYActive->setPen (QPen (QBrush (ColorPaletteToQColor (m_modelGuidelineAfter->lineColor())),
+                                          m_modelGuidelineAfter->lineWidthActive()));
+  }
+
+  if (m_itemGuidelineXTInactive) {
+    m_itemGuidelineXTInactive->setPen (QPen (QBrush (ColorPaletteToQColor (m_modelGuidelineAfter->lineColor())),
+                                             m_modelGuidelineAfter->lineWidthInactive()));
+  }
+  if (m_itemGuidelineYInactive) {
+    m_itemGuidelineYInactive->setPen (QPen (QBrush (ColorPaletteToQColor (m_modelGuidelineAfter->lineColor())),
+                                            m_modelGuidelineAfter->lineWidthInactive()));
   }
 }
