@@ -53,13 +53,40 @@ private:
   void createControls (QGridLayout *layout,
                        int &row);
   void createLines();
+  void createLinesCartesian();
+  void createLinesPolar();
   void createPreview (QGridLayout *layout, int &row);
   void killCentipede ();
   void removeOldWidgetsActive();
   void removeOldWidgetsInactive();
+  void safeSetLine (QGraphicsLineItem *item,
+                    const QPointF &posStart,
+                    const QPointF &posStop) const;
+  void safeSetLineStyle (QGraphicsLineItem *line,
+                          double width);
   void updateControls();
   void updatePreview();
   void updatePreviewGeometry();
+  void updatePreviewGeometryCentipedeCartesian (const QPointF &posClickScreen,
+                                                double xMin,
+                                                double xMax,
+                                                double yMin,
+                                                double yMax);
+  void updatePreviewGeometryCentipedePolar (const QPointF &posClickScreen,
+                                            double xMin,
+                                            double xMax,
+                                            double yMin,
+                                            double yMax);
+  void updatePreviewGeometryGuidelineCartesian (const QPointF &posClickScreen,
+                                                double xMin,
+                                                double xMax,
+                                                double yMin,
+                                                double yMax);
+  void updatePreviewGeometryGuidelinePolar (const QPointF &posClickScreen,
+                                            double xMin,
+                                            double xMax,
+                                            double yMin,
+                                            double yMax);
   void updatePreviewStyle();
 
   ButtonWhatsThis *m_btnWhatsThis;
@@ -84,15 +111,10 @@ private:
   QGraphicsEllipseItem *m_itemCentipedeRActive;
   QGraphicsEllipseItem *m_itemCentipedeCircleActive;
 
-  // Drawn widgets for inactive
+  // Drawn widgets for inactive. Note that a centipede can never be inactive
   QGraphicsLineItem *m_itemGuidelineXTInactive;
   QGraphicsLineItem *m_itemGuidelineYInactive;
   QGraphicsEllipseItem *m_itemGuidelineRInactive;
-  QGraphicsLineItem *m_itemCentipedeXTInactive;
-  QGraphicsLineItem *m_itemCentipedeYInactive;
-  QGraphicsEllipseItem *m_itemCentipedeRInactive;
-  QGraphicsEllipseItem *m_itemCentipedeCircleInactive;
-
   DocumentModelGuideline *m_modelGuidelineBefore;
   DocumentModelGuideline *m_modelGuidelineAfter;
 };

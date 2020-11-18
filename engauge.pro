@@ -100,6 +100,10 @@ HEADERS  += \
     src/Callback/CallbackSceneUpdateAfterCommand.h \
     src/Callback/CallbackSearchReturn.h \
     src/Callback/CallbackUpdateTransform.h \
+    src/Centipede/CentipedeEndpointsAbstract.h \
+    src/Centipede/CentipedeEndpointsCartesian.h \
+    src/Centipede/CentipedeEndpointsPolar.h \
+    src/Centipede/CentipedeIntersectionType.h \
     src/Centipede/CentipedePair.h \
     src/Centipede/CentipedeSegmentAbstract.h \
     src/Centipede/CentipedeSegmentConstantXTLine.h \
@@ -550,6 +554,9 @@ SOURCES += \
     src/Callback/CallbackScaleBar.cpp \
     src/Callback/CallbackSceneUpdateAfterCommand.cpp \
     src/Callback/CallbackUpdateTransform.cpp \
+    src/Centipede/CentipedeEndpointsAbstract.cpp \
+    src/Centipede/CentipedeEndpointsCartesian.cpp \
+    src/Centipede/CentipedeEndpointsPolar.cpp \
     src/Centipede/CentipedePair.cpp \
     src/Centipede/CentipedeSegmentAbstract.cpp \
     src/Centipede/CentipedeSegmentConstantXTLine.cpp \

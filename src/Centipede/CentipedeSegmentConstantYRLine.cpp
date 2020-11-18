@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "CentipedeEndpointsCartesian.h"
 #include "CentipedeSegmentConstantYRLine.h"
 #include "EnumsToQt.h"
 #include "GraphicsLineItemRelay.h"
@@ -19,8 +20,12 @@ CentipedeSegmentConstantYRLine::CentipedeSegmentConstantYRLine(const DocumentMod
                             transformation,
                             posClickScreen)
 {
-  m_posLow = posScreenConstantYRForLowXT (modelGuideline.creationCircleRadius ());
-  m_posHigh = posScreenConstantYRForHighXT (modelGuideline.creationCircleRadius ());
+  CentipedeEndpointsCartesian endpoints (modelGuideline,
+                                         transformation,
+                                         posClickScreen);
+
+  m_posLow = endpoints.posScreenConstantYRForLowXT (modelGuideline.creationCircleRadius ());
+  m_posHigh = endpoints.posScreenConstantYRForHighXT (modelGuideline.creationCircleRadius ());
 
   // Create graphics item and its relay
   m_graphicsItem = new QGraphicsLineItem (QLineF (m_posLow,

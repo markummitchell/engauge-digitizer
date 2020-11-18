@@ -47,60 +47,21 @@ public:
   
 protected:
 
-  /// Screen angle at origin from ellipse axis to circle-center/coordinate intersection. Works only for polar coordinates
-  double angleScreenConstantYRCenterAngle (double radiusAboutClick) const;
-
-  /// Screen angle at origin from ellipse axis to circle/coordinate intersection in the increasing angle direction (high)
-  /// or decreasing angle direction (low). Uses center angle from angleScreenConstantYRCenterAngle. Works only for polar coordinates
-  void angleScreenConstantYRHighLowAngles (double radiusAboutClick,
-                                           double angleCenter,
-                                           double &angleLow,
-                                           double &angleHigh) const;
-
-  /// Generate a pair of points next to each other along a screen circle with the specified radius, given the index
-  void generatePreviousAndNextPoints (double radius,
-                                      int i,
-                                      QPointF &posGraphPrevious,
-                                      QPointF &posGraphNext,
-                                      QPointF &posScreen,
-                                      double angleOffset = 0) const;
+  /// Loop to find closest angle to angleCenter
+  double closestAngleToCentralAngle (double angleCenter,
+                                     double angleOld) const;
 
   /// Settings
   const DocumentModelGuideline &modelGuideline () const;
 
   /// Center of circle in screen coordinates
   QPointF posClickScreen () const;
-
-  /// Screen point for XT value of circle-center/coordinate intersection. Works for both cartesian and polar coordinates
-  QPointF posScreenConstantXTForCenterYR (double radius) const;
-
-  /// Screen point for XT value of circle/coordinate intersection in the increasing YR direction. Works for both cartesian and polar coordinates
-  QPointF posScreenConstantXTForHighYR (double radius) const;
-
-  /// Screen point for XT value of circle/coordinate intersection in the decreasing YR direction. Works for both cartesian and polar coordinates
-  QPointF posScreenConstantXTForLowYR (double radius) const;
-
-  /// Screen point for YR value of circle-center/coordinate intersection. Works for both cartesian and polar coordinates
-  QPointF posScreenConstantYRForCenterXT (double radius) const;
-
-  /// Screen point for YR value of circle/coordinate intersection in the increasing XT direction. Works for both cartesian and polar coordinates
-  QPointF posScreenConstantYRForHighXT (double radius) const;
-
-  /// Screen point for YR value of circle/coordinate intersection in the decreasing XT direction. Works for both cartesian and polar coordinates
-  QPointF posScreenConstantYRForLowXT (double radius) const;
   
   /// Transformation which is static through the entire lifetime of the Centipede class instances
   Transformation transformation() const;
   
 private:
   CentipedeSegmentAbstract();
-
-  double closestAngleToCentralAngle (double angleCenter,
-                                     double angleOld) const;
-  QPointF posScreenConstantXTCommon (double radius,
-                                     IntersectionType intersectionType) const; /// Solves posScreenConstantXTForHighYR and posScreenConstantXTForLowYR
-  QPointF posScreenConstantYRCommon (double radius,
-                                     IntersectionType intersectionType) const; /// Solves posScreenConstantYRHighXT and posScreenConstantYRLowXT
 
   DocumentModelGuideline m_modelGuideline;
   Transformation m_transformation;

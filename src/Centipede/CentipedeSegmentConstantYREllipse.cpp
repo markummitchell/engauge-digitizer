@@ -4,6 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "CentipedeEndpointsCartesian.h"
+#include "CentipedeEndpointsPolar.h"
 #include "CentipedeSegmentConstantYREllipse.h"
 #include "EnumsToQt.h"
 #include "GraphicsArcItem.h"
@@ -24,13 +26,20 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
                             posClickScreen),
   m_angleScreenToEllipseAxes (0)
 {
-  m_posLow = posScreenConstantYRForLowXT (modelGuideline.creationCircleRadius());
-  m_posHigh = posScreenConstantYRForHighXT (modelGuideline.creationCircleRadius());
-  m_angleCenter = angleScreenConstantYRCenterAngle (modelGuideline.creationCircleRadius ());
-  angleScreenConstantYRHighLowAngles (modelGuideline.creationCircleRadius (),
-                                      m_angleCenter,
-                                      m_angleLow,
-                                      m_angleHigh);
+  CentipedeEndpointsCartesian endpointsCartesian (modelGuideline,
+                                                  transformation,
+                                                  posClickScreen);
+  CentipedeEndpointsPolar endpointsPolar (modelGuideline,
+                                          transformation,
+                                          posClickScreen);
+  
+  m_posLow = endpointsCartesian.posScreenConstantYRForLowXT (modelGuideline.creationCircleRadius());
+  m_posHigh = endpointsCartesian.posScreenConstantYRForHighXT (modelGuideline.creationCircleRadius());
+  m_angleCenter = endpointsPolar.angleScreenConstantYRCenterAngle (modelGuideline.creationCircleRadius ());
+  endpointsPolar.angleScreenConstantYRHighLowAngles (modelGuideline.creationCircleRadius (),
+                                                     m_angleCenter,
+                                                     m_angleLow,
+                                                     m_angleHigh);
 
   QPointF posClickGraph;
   transformation.transformScreenToRawGraph (posClickScreen,
