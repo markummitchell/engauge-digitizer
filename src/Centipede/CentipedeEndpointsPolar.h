@@ -33,14 +33,20 @@ public:
                                           double &angleLow,
                                           double &angleHigh) const;
 
+  /// Ellipse for R value of circle/coordinate intersection. Start/span angles are calculated separately
+  void ellipseScreenConstantRForTHighLowAngles (const Transformation &transformation,
+                                                const QPointF &posClickScreen,
+                                                double &angleRotation,
+                                                QRectF &rectBounding);
+  
   /// Screen point for R value of circle/coordinate intersection in the increasing T direction
   QPointF posScreenConstantRForHighT (double radius) const;
 
   /// Screen point for R value of circle/coordinate intersection in the decreasing T direction
   QPointF posScreenConstantRForLowT (double radius) const;
  
-  /// Endpoints for radial line in polar coordinates
-  void posScreenConstantRForTHighLowAngles (double radius,
+  /// Endpoints for radial line segmentin polar coordinates
+  void posScreenConstantTForRHighLow (double radius,
                                             QPointF &posLow,
                                             QPointF &posHigh) const;
   

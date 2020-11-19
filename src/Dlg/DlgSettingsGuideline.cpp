@@ -79,6 +79,15 @@ DlgSettingsGuideline::~DlgSettingsGuideline()
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGuideline::~DlgSettingsGuideline";
 }
 
+void DlgSettingsGuideline::createCircle ()
+{
+  m_itemCentipedeCircleActive =  new QGraphicsEllipseItem ();
+
+  m_itemCentipedeCircleActive->setPen (QPen (Qt::black, 1, Qt::DotLine));
+
+  m_scenePreviewActive->addItem (m_itemCentipedeCircleActive);
+
+}
 void DlgSettingsGuideline::createControls (QGridLayout *layout,
                                             int &row)
 {
@@ -130,13 +139,9 @@ void DlgSettingsGuideline::createControls (QGridLayout *layout,
 
 void DlgSettingsGuideline::createLines ()
 {
-  // Centipedes circles which are same for both cartesian and polar coordinates.
-  // These are created first so they are underneath the other items
-  m_itemCentipedeCircleActive =  new QGraphicsEllipseItem ();
-
-  m_itemCentipedeCircleActive->setPen (QPen (Qt::black, 1, Qt::DotLine));
-
-  m_scenePreviewActive->addItem (m_itemCentipedeCircleActive);
+  // Centipedes circle (for active only) which is the same for both cartesian and polar coordinates.
+  // This is created first so it is underneath the other items
+  createCircle ();
 
   if (cmdMediator().document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
     createLinesCartesian();
@@ -560,9 +565,9 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &p
                                      posClickScreen);
 
   QPointF posLow, posHigh;
-  endpoints.posScreenConstantRForTHighLowAngles (m_modelGuidelineAfter->creationCircleRadius(),
-                                                 posLow,
-                                                 posHigh);
+  endpoints.posScreenConstantTForRHighLow (m_modelGuidelineAfter->creationCircleRadius(),
+                                           posLow,
+                                           posHigh);
 
   safeSetLine (m_itemCentipedeXTActive,
                posLow,

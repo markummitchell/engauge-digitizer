@@ -25,9 +25,9 @@ CentipedeSegmentConstantTRadial::CentipedeSegmentConstantTRadial(const DocumentM
                                      transformation,
                                      posClickScreen);
   
-  endpoints.posScreenConstantRForTHighLowAngles (modelGuideline.creationCircleRadius(),
-                                                 m_posLow,
-                                                 m_posHigh);
+  endpoints.posScreenConstantTForRHighLow (modelGuideline.creationCircleRadius(),
+                                           m_posLow,
+                                           m_posHigh);
 
   m_graphicsItem = new QGraphicsLineItem (QLineF (m_posLow,
                                                   m_posHigh));

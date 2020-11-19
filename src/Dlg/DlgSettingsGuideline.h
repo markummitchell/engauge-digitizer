@@ -50,6 +50,7 @@ protected:
 
 private:
 
+  void createCircle ();
   void createControls (QGridLayout *layout,
                        int &row);
   void createLines();

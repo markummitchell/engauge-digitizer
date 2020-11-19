@@ -147,6 +147,67 @@ double CentipedeEndpointsPolar::closestAngleToCentralAngle (double angleCenter,
   return angleNew;
 }
 
+void CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles (const Transformation &transformation,
+                                                                       const QPointF &posClickScreen,
+                                                                       double &angleRotation,
+                                                                       QRectF &rectBounding)
+{
+  QPointF posClickGraph;
+  transformation.transformScreenToRawGraph (posClickScreen,
+                                            posClickGraph);
+  double rGraph = posClickGraph.y();
+
+  // Points at origin, then 0  degrees at range rGraph
+  QPointF posScreenCenter, posScreen0, posScreen90, posScreen180;
+  transformation.transformRawGraphToScreen (QPointF (0, 0),
+                                            posScreenCenter);
+  transformation.transformRawGraphToScreen (QPointF (0, rGraph),
+                                            posScreen0);
+  transformation.transformRawGraphToScreen (QPointF (90.0, rGraph),
+                                            posScreen90);
+  transformation.transformRawGraphToScreen (QPointF (180.0, rGraph),
+                                            posScreen180);
+
+  QPointF centerTo90 = posScreen90 - posScreenCenter;
+
+  // Corners of parallelogram circumscribing the ellipse
+  QPointF posScreenTL = posScreen180 + centerTo90;
+  QPointF posScreenTR = posScreen0 + centerTo90;
+  QPointF posScreenBR = posScreen0 - centerTo90;
+
+  double angleEllipseFromMajorAxis= 0, aAligned = 0, bAligned = 0;
+  ellipseFromParallelogram (posScreenTL.x() - posScreenCenter.x(),
+                            posScreenTL.y() - posScreenCenter.y(),
+                            posScreenTR.x() - posScreenCenter.x(),
+                            posScreenTR.y() - posScreenCenter.y(),
+                            posScreenBR.x() - posScreenCenter.x(),
+                            posScreenBR.y() - posScreenCenter.y(),
+                            angleEllipseFromMajorAxis,
+                            aAligned,
+                            bAligned);
+
+  // Angle between +x axis in screen and semimajor axis is computed in all four quadrants
+  // by projecting onto +x and +y screen axesangleEllipseFromScreenAxis
+  angleRotation = angleFromBasisVectors (1,
+                                         0,
+                                         0,
+                                         -1,
+                                         posScreen0.x() - posScreenCenter.x(),
+                                         posScreen0.y() - posScreenCenter.y());
+
+  // Origin
+  QPointF posOriginScreen;
+  transformation.transformLinearCartesianGraphToScreen (QPointF (0, 0),
+                                                        posOriginScreen);
+
+  // Bounding rectangle before rotation
+  rectBounding = QRectF (posOriginScreen + QPointF (-1.0 * aAligned,
+                                                    bAligned),
+                         posOriginScreen + QPointF (aAligned,
+                                                    -1.0 * bAligned));
+  rectBounding = rectBounding.normalized(); // This seems to prevent some drawing artifacts
+}
+
 QPointF CentipedeEndpointsPolar::posScreenConstantRCommon (double radius,
                                                            CentipedeIntersectionType intersectionType) const
 {
@@ -224,10 +285,9 @@ QPointF CentipedeEndpointsPolar::posScreenConstantRForLowT (double radius) const
                                    CENTIPEDE_INTERSECTION_LOW);
 }
 
-//void CentipedeEndpointsPolar::ellipseScreenConstantYRForXTHighLowAngles (double radius,
-void CentipedeEndpointsPolar::posScreenConstantRForTHighLowAngles (double radius,
-                                                                   QPointF &posLow,
-                                                                   QPointF &posHigh) const
+void CentipedeEndpointsPolar::posScreenConstantTForRHighLow (double radius,
+                                                             QPointF &posLow,
+                                                             QPointF &posHigh) const
 {
   // This replaces CentipedeSegmentAbstract::posScreenConstantXTCommon since the polar coordinate radial vector
   // can be on the other side of the origin if the ellipse center is within radius of the origin. This routine
