@@ -57,13 +57,25 @@ private:
   void createLinesPolar();
   void createPreview (QGridLayout *layout, int &row);
   void killCentipede ();
+  double radiusOfClosestSide (const QPointF &posLeft,
+                              const QPointF &posRight,
+                              const QPointF &posTop,
+                              const QPointF &posBottom) const;
   void removeOldWidgetsActive();
   void removeOldWidgetsInactive();
+  void safeSetEllipseStyle (QGraphicsEllipseItem *ellipse,
+                            double width);
   void safeSetLine (QGraphicsLineItem *item,
                     const QPointF &posStart,
                     const QPointF &posStop) const;
   void safeSetLineStyle (QGraphicsLineItem *line,
                           double width);
+  void safeSetPos (QGraphicsEllipseItem *ellipse,
+                   const QPointF &pos);
+  void safeSetRect (QGraphicsEllipseItem *ellipse,
+                    const QRectF &rect);
+  void safeSetRotation (QGraphicsEllipseItem *ellipse,
+                        double angle);
   void updateControls();
   void updatePreview();
   void updatePreviewGeometry();
@@ -77,16 +89,17 @@ private:
                                             double xMax,
                                             double yMin,
                                             double yMax);
-  void updatePreviewGeometryGuidelineCartesian (const QPointF &posClickScreen,
+  void updatePreviewGeometryCirclePolar (const QPointF &posClickScreen);
+  void updatePreviewGeometryGuidelineCartesian (double width,
+                                                double height,
+                                                QPointF &posClickScreen,
                                                 double xMin,
                                                 double xMax,
                                                 double yMin,
                                                 double yMax);
-  void updatePreviewGeometryGuidelinePolar (const QPointF &posClickScreen,
-                                            double xMin,
-                                            double xMax,
-                                            double yMin,
-                                            double yMax);
+  void updatePreviewGeometryGuidelinePolar (double width,
+                                            double height,
+                                            QPointF &posClickScreen);
   void updatePreviewStyle();
 
   ButtonWhatsThis *m_btnWhatsThis;

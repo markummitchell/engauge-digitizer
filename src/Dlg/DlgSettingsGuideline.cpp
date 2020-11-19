@@ -13,10 +13,13 @@
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "GraphicsScene.h"
+#include "GuidelineProjectorConstantR.h"
+#include "GuidelineProjectorConstantT.h"
 #include "ImportCropping.h"
 #include "ImportCroppingUtilBase.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "mmsubs.h"
 #include <QApplication>
 #include <QCheckBox>
 #include <QComboBox>
@@ -41,6 +44,7 @@
 const int MINIMUM_HEIGHT = 300;
 const int MINIMUM_DIALOG_WIDTH_GUIDELINES = 500;
 const int MINIMUM_PREVIEW_WIDTH = 200;
+const double T_REFERENCE = 0;
 
 DlgSettingsGuideline::DlgSettingsGuideline(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Guidelines"),
@@ -169,8 +173,8 @@ void DlgSettingsGuideline::createLinesPolar ()
 
   m_scenePreviewActive->addItem (m_itemGuidelineXTActive);
   m_scenePreviewActive->addItem (m_itemGuidelineRActive);
-  m_scenePreviewActive->addItem (m_itemGuidelineXTInactive);
-  m_scenePreviewActive->addItem (m_itemGuidelineRInactive);
+  m_scenePreviewInactive->addItem (m_itemGuidelineXTInactive);
+  m_scenePreviewInactive->addItem (m_itemGuidelineRInactive);
 }
 
 void DlgSettingsGuideline::createOptionalSaveDefault (QHBoxLayout * /* layout */)
@@ -294,6 +298,25 @@ void DlgSettingsGuideline::load (CmdMediator &cmdMediator)
   enableOk (false); // Disable Ok button since there not yet any changes
 }
 
+double DlgSettingsGuideline::radiusOfClosestSide (const QPointF &posLeft,
+                                                  const QPointF &posRight,
+                                                  const QPointF &posTop,
+                                                  const QPointF &posBottom) const
+{
+  // Convert incoming screen coordinates to graph coordinates
+  QPointF posLeftGraph, posRightGraph, posTopGraph, posBottomGraph;
+  mainWindow().transformation().transformScreenToRawGraph (posLeft,
+                                                           posLeftGraph);
+  mainWindow().transformation().transformScreenToRawGraph (posRight,
+                                                           posRightGraph);
+  mainWindow().transformation().transformScreenToRawGraph (posTop,
+                                                           posTopGraph);
+  mainWindow().transformation().transformScreenToRawGraph (posBottom,
+                                                           posBottomGraph);
+
+  return qMin (qMin (qMin (posLeftGraph.y(), posRightGraph.y()), posTopGraph.y()), posBottomGraph.y());
+}
+
 void DlgSettingsGuideline::removeOldWidgetsActive ()
 {
   delete m_itemGuidelineXTActive;
@@ -331,6 +354,15 @@ void DlgSettingsGuideline::setSmallDialogs (bool smallDialogs)
   }
 }
 
+void DlgSettingsGuideline::safeSetEllipseStyle (QGraphicsEllipseItem *ellipse,
+                                                double width)
+{
+  if (ellipse) {
+    ellipse->setPen (QPen (QBrush (ColorPaletteToQColor (m_modelGuidelineAfter->lineColor())),
+                           width));
+  }
+}
+
 void DlgSettingsGuideline::safeSetLine (QGraphicsLineItem *item,
                                         const QPointF &posStart,
                                         const QPointF &posStop) const
@@ -347,6 +379,30 @@ void DlgSettingsGuideline::safeSetLineStyle (QGraphicsLineItem *line,
   if (line) {
     line->setPen (QPen (QBrush (ColorPaletteToQColor (m_modelGuidelineAfter->lineColor())),
                         width));
+  }
+}
+
+void DlgSettingsGuideline::safeSetPos (QGraphicsEllipseItem *ellipse,
+                                       const QPointF &pos)
+{
+  if (ellipse) {
+    ellipse->setPos (pos);
+  }
+}
+
+void DlgSettingsGuideline::safeSetRect (QGraphicsEllipseItem *ellipse,
+                                        const QRectF &rect)
+{
+  if (ellipse) {
+    ellipse->setRect (rect);
+  }
+}
+
+void DlgSettingsGuideline::safeSetRotation (QGraphicsEllipseItem *ellipse,
+                                            double angle)
+{
+  if (ellipse) {
+    ellipse->setRotation (angle);
   }
 }
 
@@ -425,21 +481,13 @@ void DlgSettingsGuideline::updatePreviewGeometry()
   double xMax = qMax (qMax (qMax (posGraphTL.x(), posGraphTR.x()), posGraphBL.x()), posGraphBR.x());
   double yMax = qMax (qMax (qMax (posGraphTL.y(), posGraphTR.y()), posGraphBL.y()), posGraphBR.y());
 
-  // Arbitrarily put virtual click in first quadrant but near origin
-  QPointF posClickScreen (0.7 * width,
-                          0.3 * height);
-
-  if (m_itemCentipedeCircleActive) {
-    m_itemCentipedeCircleActive->setRect (posClickScreen.x() - m_modelGuidelineAfter->creationCircleRadius(),
-                                          posClickScreen.y() - m_modelGuidelineAfter->creationCircleRadius(),
-                                          2 * m_modelGuidelineAfter->creationCircleRadius(),
-                                          2 * m_modelGuidelineAfter->creationCircleRadius());
-  }
-
   if (cmdMediator().document().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
 
     // Update cartesian items
-    updatePreviewGeometryGuidelineCartesian (posClickScreen,
+    QPointF posClickScreen;
+    updatePreviewGeometryGuidelineCartesian (width,
+                                             height,
+                                             posClickScreen,
                                              xMin,
                                              xMax,
                                              yMin,
@@ -453,16 +501,16 @@ void DlgSettingsGuideline::updatePreviewGeometry()
   } else {
 
     // Update polar items
-    updatePreviewGeometryGuidelinePolar (posClickScreen,
-                                         xMin,
-                                         xMax,
-                                         yMin,
-                                         yMax);
+    QPointF posClickScreen;
+    updatePreviewGeometryGuidelinePolar (width,
+                                         height,
+                                         posClickScreen);
     updatePreviewGeometryCentipedePolar (posClickScreen,
                                          xMin,
                                          xMax,
                                          yMin,
                                          yMax);
+    updatePreviewGeometryCirclePolar (posClickScreen);
 
   }
 }
@@ -498,12 +546,29 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF & 
 {
 }
 
-void DlgSettingsGuideline::updatePreviewGeometryGuidelineCartesian (const QPointF & /* posClickScreen */,
+void DlgSettingsGuideline::updatePreviewGeometryCirclePolar (const QPointF &posClickScreen)
+{
+  if (m_itemCentipedeCircleActive) {
+    m_itemCentipedeCircleActive->setRect (posClickScreen.x() - m_modelGuidelineAfter->creationCircleRadius(),
+                                          posClickScreen.y() - m_modelGuidelineAfter->creationCircleRadius(),
+                                          2 * m_modelGuidelineAfter->creationCircleRadius(),
+                                          2 * m_modelGuidelineAfter->creationCircleRadius());
+  }
+}
+
+void DlgSettingsGuideline::updatePreviewGeometryGuidelineCartesian (double width,
+                                                                    double height,
+                                                                    QPointF &posClickScreen,
                                                                     double xMin,
                                                                     double xMax,
                                                                     double yMin,
                                                                     double yMax)
 {
+  // Arbitrarily put virtual click in first quadrant. Since lines are horizontal
+  // and vertical through center there should be no overlap
+  posClickScreen = QPointF (0.75 * width,
+                            0.25 * height);
+
   // Show one vertical line and one horizontal line with both approximately through center of screen
   double xMid = (xMin + xMax) / 2.0;
   double yMid = (yMin + yMax) / 2.0;
@@ -532,35 +597,60 @@ void DlgSettingsGuideline::updatePreviewGeometryGuidelineCartesian (const QPoint
                posRight);
 }
 
-void DlgSettingsGuideline::updatePreviewGeometryGuidelinePolar (const QPointF &posClickScreen,
-                                                                double /* xMin */,
-                                                                double /* xMax */,
-                                                                double /* yMin */,
-                                                                double yMax)
+void DlgSettingsGuideline::updatePreviewGeometryGuidelinePolar (double width,
+                                                                double height,
+                                                                QPointF &posClickScreen)
 {
   // Show horizontal line and circle/ellipse
 
-  QPointF posCenter, posRight;
+  // Compute ellipse parameters first so we can plae posClickScreen away from the theta guideline
+  QPointF posCenter, posLeft (0, height / 2), posRight (width, height / 2), posTop (width / 2, 0), posBottom (width / 2, height);
   mainWindow().transformation().transformRawGraphToScreen (QPointF (0, 0),
                                                            posCenter);
-  mainWindow().transformation().transformRawGraphToScreen (QPointF (0, 2.0 * yMax),
-                                                           posRight);
 
-  CentipedeEndpointsPolar endpoints (*m_modelGuidelineAfter,
-                                     mainWindow().transformation(),
-                                     posClickScreen);
+  double rReference = radiusOfClosestSide (posLeft,
+                                           posRight,
+                                           posTop,
+                                           posBottom); // Use a little less than the distance from origin to closest side
 
-  double angleCenter = endpoints.angleScreenConstantYRCenterAngle (m_modelGuidelineAfter->creationCircleRadius());
-  double angleLow = 0, angleHigh = 0;
-  endpoints.angleScreenConstantYRHighLowAngles (m_modelGuidelineAfter->creationCircleRadius(),
-                                                angleCenter,
-                                                angleLow,
-                                                angleHigh);
+  GuidelineProjectorConstantT projectorT;
+  GuidelineProjectorConstantR projectorR;
+  QLineF line = projectorT.fromCoordinateT (mainWindow().transformation(),
+                                            m_viewPreviewActive->sceneRect(),
+                                            T_REFERENCE);
+  EllipseParameters ellipseParameters = projectorR.fromCoordinateR (mainWindow().transformation(),
+                                                                    m_viewPreviewActive->sceneRect (),
+                                                                    rReference);
 
-  //m_itemGuidelineXTActive = new QGraphicsLineItem ();
-  //m_itemGuidelineRActive = new QGraphicsEllipseItem ();
-  //m_itemGuidelineXTInactive = new QGraphicsLineItem ();
-  //m_itemGuidelineRInactive = new QGraphicsEllipseItem ();
+  double a = ellipseParameters.a();
+  double b = ellipseParameters.b();
+
+  // Compute posClickScreen
+  double angleClickScreen = M_PI;
+  mainWindow().transformation().transformRawGraphToScreen (QPointF (qRadiansToDegrees (angleClickScreen),
+                                                                    rReference / 2.0),
+                                                           posClickScreen);
+
+  safeSetLine (m_itemGuidelineXTActive,
+               line.p1(),
+               line.p2());
+  safeSetRect (m_itemGuidelineRActive,
+               QRectF (- QPointF (a, b),
+                       + QPointF (a, b)));
+  safeSetRotation (m_itemGuidelineRActive,
+                   -1.0 * qRadiansToDegrees (angleClickScreen));
+  safeSetPos (m_itemGuidelineRActive,
+              posCenter);
+  safeSetLine (m_itemGuidelineXTInactive,
+               line.p1(),
+               line.p2());
+  safeSetRect (m_itemGuidelineRInactive,
+               QRectF (- QPointF (a, b),
+                       + QPointF (a, b)));
+  safeSetRotation (m_itemGuidelineRInactive,
+                   -1.0 * qRadiansToDegrees (angleClickScreen));
+  safeSetPos (m_itemGuidelineRInactive,
+              posCenter);
 }
 
 void DlgSettingsGuideline::updatePreviewStyle ()
@@ -570,10 +660,14 @@ void DlgSettingsGuideline::updatePreviewStyle ()
                     m_modelGuidelineAfter->lineWidthActive());
   safeSetLineStyle (m_itemGuidelineYActive,
                     m_modelGuidelineAfter->lineWidthActive());
+  safeSetEllipseStyle (m_itemGuidelineRActive,
+                       m_modelGuidelineAfter->lineWidthActive());
   safeSetLineStyle (m_itemGuidelineXTInactive,
                     m_modelGuidelineAfter->lineWidthInactive());
   safeSetLineStyle (m_itemGuidelineYInactive,
                     m_modelGuidelineAfter->lineWidthInactive());
+  safeSetEllipseStyle (m_itemGuidelineRInactive,
+                       m_modelGuidelineAfter->lineWidthInactive());
 
   safeSetLineStyle (m_itemCentipedeXTActive,
                     m_modelGuidelineAfter->lineWidthActive());
