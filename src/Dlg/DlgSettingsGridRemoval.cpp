@@ -623,5 +623,6 @@ void DlgSettingsGridRemoval::updatePreview ()
                                        cmdMediator ().document().pixmap().toImage());
 
   m_scenePreview->clear();
-  m_scenePreview->addPixmap (pixmap);
+  addPixmap (*m_scenePreview,
+             pixmap);
 }

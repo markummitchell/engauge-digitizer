@@ -287,9 +287,11 @@ QWidget *DlgSettingsSegments::createSubPanel ()
   createControls(layout, row);
   createPreview (layout, row);
   QPixmap pixmap = QPixmap::fromImage (createPreviewImage());
-  m_scenePreviewActive->addPixmap (pixmap);
+  addPixmap (*m_scenePreviewActive,
+             pixmap);
   pixmap = QPixmap::fromImage (createPreviewImage());
-  m_scenePreviewInactive->addPixmap (pixmap);
+  addPixmap (*m_scenePreviewInactive,
+             pixmap);
 
   return subPanel;
 }

@@ -32,6 +32,11 @@ public:
                                            double &angleLow,
                                            double &angleHigh) const;
 
+  /// Endpoints for radial line in polar coordinates
+  void posScreenConstantYRForXTHighLowAngles (double radius,
+                                              QPointF &posLow,
+                                              QPointF &posHigh) const;
+  
 private:
   CentipedeEndpointsPolar();
 

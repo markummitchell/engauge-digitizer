@@ -12,6 +12,7 @@
 #include "MainWindow.h"
 #include <QColor>
 #include <QComboBox>
+#include <QGraphicsScene>
 #include <QGridLayout>
 #include <QPushButton>
 #include <QScrollArea>
@@ -51,6 +52,16 @@ DlgSettingsAbstractBase::~DlgSettingsAbstractBase()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsAbstractBase::~DlgSettingsAbstractBase"
                               << " name=" << m_dialogName.toLatin1().data();
+}
+
+void DlgSettingsAbstractBase::addPixmap (QGraphicsScene &scene,
+                                         const QPixmap &pixmap)
+{
+  scene.addPixmap (pixmap);
+  scene.setSceneRect (0,
+                      0,
+                      pixmap.width(),
+                      pixmap.height());
 }
 
 CmdMediator &DlgSettingsAbstractBase::cmdMediator ()

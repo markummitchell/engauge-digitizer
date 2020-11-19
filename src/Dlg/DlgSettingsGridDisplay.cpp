@@ -364,7 +364,8 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
   ENGAUGE_ASSERT (indexColor >= 0);
   m_cmbColor->setCurrentIndex(indexColor);
 
-  m_scenePreview->addPixmap (cmdMediator.document().pixmap());
+  addPixmap (*m_scenePreview,
+             cmdMediator.document().pixmap());
 
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes

@@ -287,7 +287,8 @@ void DlgSettingsColorFilter::loadForCurveName()
 
     m_scenePreview->clear();
     m_imagePreview = cmdMediator().document().pixmap().toImage();
-    m_scenePreview->addPixmap (QPixmap::fromImage (m_imagePreview));
+    addPixmap (*m_scenePreview,
+               QPixmap::fromImage (m_imagePreview));
 
     QRgb rgbBackground = createThread ();
     m_scale->setBackgroundColor (rgbBackground);
@@ -387,7 +388,8 @@ void DlgSettingsColorFilter::slotTransferPiece (int xLeft,
   delete itemPixmap;
 
   // Save new pixmap. Only visible change should be the area covered by the pixels in image
-  m_scenePreview->addPixmap (QPixmap::fromImage (m_imagePreview));
+  addPixmap (*m_scenePreview,
+             QPixmap::fromImage (m_imagePreview));
 }
 
 void DlgSettingsColorFilter::slotValue ()

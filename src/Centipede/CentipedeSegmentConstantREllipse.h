@@ -4,25 +4,25 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef CENTIPEDE_SEGMENT_CONSTANT_YR_ELLIPSE_H
-#define CENTIPEDE_SEGMENT_CONSTANT_YR_ELLIPSE_H
+#ifndef CENTIPEDE_SEGMENT_CONSTANT_R_ELLIPSE_H
+#define CENTIPEDE_SEGMENT_CONSTANT_R_ELLIPSE_H
 
 #include "CentipedeSegmentAbstract.h"
 
 class GraphicsArcItem;
 class GraphicsArcItemRelay;
 
-/// Centipede for constant YR
-class CentipedeSegmentConstantYREllipse : public CentipedeSegmentAbstract
+/// Centipede for constant R
+class CentipedeSegmentConstantREllipse : public CentipedeSegmentAbstract
 {
   Q_OBJECT;
 
 public:
   /// Constructor with individual coordinates
-  CentipedeSegmentConstantYREllipse(const DocumentModelGuideline &modelGuideline,
-                                    const Transformation &transformation,
-                                    const QPointF &posClickScreen);
-  virtual ~CentipedeSegmentConstantYREllipse();
+  CentipedeSegmentConstantREllipse(const DocumentModelGuideline &modelGuideline,
+                                   const Transformation &transformation,
+                                   const QPointF &posClickScreen);
+  virtual ~CentipedeSegmentConstantREllipse();
 
   virtual double distanceToClosestEndpoint (const QPointF &posScreen) const;
   virtual QGraphicsItem *graphicsItem ();
@@ -36,11 +36,11 @@ signals:
                            double rotationAngle);
   
 private:
-  CentipedeSegmentConstantYREllipse();
+  CentipedeSegmentConstantREllipse();
 
-  void posScreenConstantYRForXTHighLowAngles (double radius,
-                                              const QPointF &posLow,
-                                              const QPointF &posHigh) const;
+  void posScreenConstantRForXTHighLowAngles (double radius,
+                                             const QPointF &posLow,
+                                             const QPointF &posHigh) const;
 
   GraphicsArcItem *m_graphicsItem;
   GraphicsArcItemRelay *m_graphicsItemRelay;  
@@ -62,4 +62,4 @@ private:
   double m_angleRotation;
 };
 
-#endif // CENTIPEDE_SEGMENT_CONSTANT_YR_ELLIPSE_H
+#endif // CENTIPEDE_SEGMENT_CONSTANT_R_ELLIPSE_H

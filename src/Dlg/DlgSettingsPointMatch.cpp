@@ -254,7 +254,8 @@ void DlgSettingsPointMatch::load (CmdMediator &cmdMediator)
                                                                 cmdMediator.document().pixmap().height ()));
   boundary->setVisible (false);
 
-  m_scenePreview->addPixmap (cmdMediator.document().pixmap());
+  addPixmap (*m_scenePreview,
+             cmdMediator.document().pixmap());
 
   updateControls();
   enableOk (false); // Disable Ok button since there not yet any changes

@@ -175,6 +175,12 @@ void DlgSettingsGuideline::createLinesPolar ()
   m_scenePreviewActive->addItem (m_itemGuidelineRActive);
   m_scenePreviewInactive->addItem (m_itemGuidelineXTInactive);
   m_scenePreviewInactive->addItem (m_itemGuidelineRInactive);
+
+  m_itemCentipedeXTActive = new QGraphicsLineItem();
+  m_itemCentipedeRActive = new QGraphicsEllipseItem();
+
+  m_scenePreviewActive->addItem (m_itemCentipedeXTActive);
+  m_scenePreviewActive->addItem (m_itemCentipedeRActive);
 }
 
 void DlgSettingsGuideline::createOptionalSaveDefault (QHBoxLayout * /* layout */)
@@ -284,18 +290,30 @@ void DlgSettingsGuideline::load (CmdMediator &cmdMediator)
   m_spinLineWidthActive->setValue (qFloor (m_modelGuidelineAfter->lineWidthActive ()));
   m_spinLineWidthInactive->setValue (qFloor (m_modelGuidelineAfter->lineWidthInactive ()));  
 
-  QImage imagePreviewActive = cmdMediator.document().pixmap().toImage();
-  m_scenePreviewActive->addPixmap (QPixmap::fromImage (imagePreviewActive));
-
-  QImage imagePreviewInactive = cmdMediator.document().pixmap().toImage();
-  m_scenePreviewInactive->addPixmap (QPixmap::fromImage (imagePreviewInactive));
-
   removeOldWidgetsActive();
   removeOldWidgetsInactive();
+  loadImages (cmdMediator);
   createLines();
   updatePreview();             
   updateControls ();
   enableOk (false); // Disable Ok button since there not yet any changes
+}
+
+void DlgSettingsGuideline::loadImages (CmdMediator &cmdMediator)
+{
+
+  // At this point, but not earlier, it is safe to clear the scene to remove the old images if there
+  // are any. Those images could reappear if the new image is smaller than the old one
+  m_scenePreviewActive->clear();
+  m_scenePreviewInactive->clear();
+
+  QImage imagePreviewActive = cmdMediator.document().pixmap().toImage();
+  addPixmap (*m_scenePreviewActive,
+             QPixmap::fromImage (imagePreviewActive));
+
+  QImage imagePreviewInactive = cmdMediator.document().pixmap().toImage();
+  addPixmap (*m_scenePreviewInactive,
+             QPixmap::fromImage (imagePreviewInactive));
 }
 
 double DlgSettingsGuideline::radiusOfClosestSide (const QPointF &posLeft,
@@ -492,6 +510,7 @@ void DlgSettingsGuideline::updatePreviewGeometry()
                                              xMax,
                                              yMin,
                                              yMax);
+    updatePreviewGeometryCirclePolar (posClickScreen);
     updatePreviewGeometryCentipedeCartesian (posClickScreen,
                                              xMin,
                                              xMax,
@@ -505,12 +524,8 @@ void DlgSettingsGuideline::updatePreviewGeometry()
     updatePreviewGeometryGuidelinePolar (width,
                                          height,
                                          posClickScreen);
-    updatePreviewGeometryCentipedePolar (posClickScreen,
-                                         xMin,
-                                         xMax,
-                                         yMin,
-                                         yMax);
     updatePreviewGeometryCirclePolar (posClickScreen);
+    updatePreviewGeometryCentipedePolar (posClickScreen);
 
   }
 }
@@ -538,22 +553,29 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedeCartesian (const QPoint
                posStopY);
 }
 
-void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF & /* posClickScreen */,
-                                                                double /* xMin */,
-                                                                double /* xMax */,
-                                                                double /* yMin */,
-                                                                double /* yMax */)
+void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &posClickScreen)
 {
+  CentipedeEndpointsPolar endpoints (*m_modelGuidelineAfter,
+                                     mainWindow().transformation(),
+                                     posClickScreen);
+
+  QPointF posLow, posHigh;
+  endpoints.posScreenConstantYRForXTHighLowAngles (m_modelGuidelineAfter->creationCircleRadius(),
+                                                   posLow,
+                                                   posHigh);
+
+  safeSetLine (m_itemCentipedeXTActive,
+               posLow,
+               posHigh);
 }
 
 void DlgSettingsGuideline::updatePreviewGeometryCirclePolar (const QPointF &posClickScreen)
 {
-  if (m_itemCentipedeCircleActive) {
-    m_itemCentipedeCircleActive->setRect (posClickScreen.x() - m_modelGuidelineAfter->creationCircleRadius(),
-                                          posClickScreen.y() - m_modelGuidelineAfter->creationCircleRadius(),
-                                          2 * m_modelGuidelineAfter->creationCircleRadius(),
-                                          2 * m_modelGuidelineAfter->creationCircleRadius());
-  }
+  safeSetRect (m_itemCentipedeCircleActive,
+               QRectF (posClickScreen.x() - m_modelGuidelineAfter->creationCircleRadius(),
+                       posClickScreen.y() - m_modelGuidelineAfter->creationCircleRadius(),
+                       2 * m_modelGuidelineAfter->creationCircleRadius(),
+                       2 * m_modelGuidelineAfter->creationCircleRadius()));
 }
 
 void DlgSettingsGuideline::updatePreviewGeometryGuidelineCartesian (double width,
@@ -625,8 +647,8 @@ void DlgSettingsGuideline::updatePreviewGeometryGuidelinePolar (double width,
   double a = ellipseParameters.a();
   double b = ellipseParameters.b();
 
-  // Compute posClickScreen
-  double angleClickScreen = M_PI;
+  // Compute posClickScreen. Arbitrariliy pick 90 degrees off from guideline along 0 degrees, to distinguish the two radial lines
+  double angleClickScreen = M_PI / 2.0;
   mainWindow().transformation().transformRawGraphToScreen (QPointF (qRadiansToDegrees (angleClickScreen),
                                                                     rReference / 2.0),
                                                            posClickScreen);

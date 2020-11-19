@@ -6,7 +6,7 @@
 
 #include "CentipedeEndpointsCartesian.h"
 #include "CentipedeEndpointsPolar.h"
-#include "CentipedeSegmentConstantYREllipse.h"
+#include "CentipedeSegmentConstantREllipse.h"
 #include "EnumsToQt.h"
 #include "GraphicsArcItem.h"
 #include "GraphicsArcItemRelay.h"
@@ -18,9 +18,9 @@
 const int TICS_PER_CYCLE = 360 * 16;
 const double RADIANS_TO_TICS = TICS_PER_CYCLE / (2.0 * M_PI);
 
-CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const DocumentModelGuideline &modelGuideline,
-                                                                     const Transformation &transformation,
-                                                                     const QPointF &posClickScreen) :
+CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(const DocumentModelGuideline &modelGuideline,
+                                                                   const Transformation &transformation,
+                                                                   const QPointF &posClickScreen) :
   CentipedeSegmentAbstract (modelGuideline,
                             transformation,
                             posClickScreen),
@@ -109,13 +109,13 @@ CentipedeSegmentConstantYREllipse::CentipedeSegmentConstantYREllipse(const Docum
   updateRadius (modelGuideline.creationCircleRadius());
 }
 
-CentipedeSegmentConstantYREllipse::~CentipedeSegmentConstantYREllipse ()
+CentipedeSegmentConstantREllipse::~CentipedeSegmentConstantREllipse ()
 {
   delete m_graphicsItem;
   delete m_graphicsItemRelay;
 }
 
-double CentipedeSegmentConstantYREllipse::distanceToClosestEndpoint (const QPointF &posScreen) const
+double CentipedeSegmentConstantREllipse::distanceToClosestEndpoint (const QPointF &posScreen) const
 {
   double distanceLow = magnitude (posScreen - m_posLow);
   double distanceHigh = magnitude (posScreen - m_posHigh);
@@ -123,12 +123,12 @@ double CentipedeSegmentConstantYREllipse::distanceToClosestEndpoint (const QPoin
   return qMin (distanceLow, distanceHigh);
 }
 
-QGraphicsItem *CentipedeSegmentConstantYREllipse::graphicsItem ()
+QGraphicsItem *CentipedeSegmentConstantREllipse::graphicsItem ()
 {
   return dynamic_cast<QGraphicsItem*> (m_graphicsItem);
 }
 
-void CentipedeSegmentConstantYREllipse::updateRadius (double radius)
+void CentipedeSegmentConstantREllipse::updateRadius (double radius)
 {
   // Scale up/down the angles, with them converging to center angle as radius goes to zero
   double scaling = radius / modelGuideline().creationCircleRadius ();

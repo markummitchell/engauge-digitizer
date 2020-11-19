@@ -12,6 +12,7 @@
 #include "Transformation.h"
 
 const int NUM_CIRCLE_POINTS = 400; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
+const int NUM_LINE_POINTS = 400; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
 
 CentipedeEndpointsPolar::CentipedeEndpointsPolar(const DocumentModelGuideline &modelGuideline,
                                                  const Transformation &transformation,
@@ -144,4 +145,52 @@ double CentipedeEndpointsPolar::closestAngleToCentralAngle (double angleCenter,
   }
 
   return angleNew;
+}
+
+void CentipedeEndpointsPolar::posScreenConstantYRForXTHighLowAngles (double radius,
+                                                                     QPointF &posLow,
+                                                                     QPointF &posHigh) const
+{
+  // This replaces CentipedeSegmentAbstract::posScreenConstantXTCommon since the polar coordinate radial vector
+  // can be on the other side of the origin if the ellipse center is within radius of the origin. This routine
+  // uses an unusual strategy of iterating on a line rather than a circle (since circle has tough issues with quadrants
+  // and 360 rollover)
+
+  // Origin and screen vector to center
+  QPointF posOriginScreen;
+  transformation().transformRawGraphToScreen (QPointF (0, 0),
+                                              posOriginScreen);
+  QPointF vecCenter = posClickScreen() - posOriginScreen;
+
+  // Number of solutions found
+  int numberFound = 0;
+
+  // Iterate points along the line from -2*vecCenterMagnitude to +2*vecCenterMagnitude
+  const double DOUBLE_PLUS_EXTRA = 2.1;
+  double maxRadius = DOUBLE_PLUS_EXTRA * (magnitude (vecCenter) + radius);
+  QPointF posStart = posOriginScreen - 2 * maxRadius * normalize (vecCenter);
+  QPointF posStop = posOriginScreen + 2 * maxRadius * normalize (vecCenter);
+  for (int i = 0; i < NUM_LINE_POINTS; i++) {
+    double sPrevious = (double) i / (double) NUM_LINE_POINTS;
+    double sNext = (double) (i + 1) / (double) NUM_LINE_POINTS;
+
+    QPointF posPrevious = (1.0 - sPrevious) * posStart + sPrevious * posStop;
+    QPointF posNext = (1.0 - sNext) * posStart + sNext * posStop;
+
+    double distancePrevious = magnitude (posPrevious - posClickScreen());
+    double distanceNext = magnitude (posNext - posClickScreen());
+
+    if ((distancePrevious < radius && radius <= distanceNext) ||
+        (distancePrevious > radius && radius >= distanceNext)) {
+
+      if (numberFound == 0) {
+        posLow = (posPrevious + posNext) / 2.0; // Average for accuracy
+      } else if (numberFound == 1) {
+        posHigh = (posPrevious + posNext) / 2.0; // Average for accuracy
+        break; // Done
+      }
+
+      ++numberFound;
+    }
+  }
 }

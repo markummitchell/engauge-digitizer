@@ -4,25 +4,25 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef CENTIPEDE_SEGMENT_CONSTANT_XT_RADIAL_H
-#define CENTIPEDE_SEGMENT_CONSTANT_XT_RADIAL_H
+#ifndef CENTIPEDE_SEGMENT_CONSTANT_T_RADIAL_H
+#define CENTIPEDE_SEGMENT_CONSTANT_T_RADIAL_H
 
 #include "CentipedeSegmentAbstract.h"
 
 class GraphicsLineItemRelay;
 class QGraphicsLineItem;
 
-/// Centipede for constant XT using QGraphicsLineItem
-class CentipedeSegmentConstantXTRadial : public CentipedeSegmentAbstract
+/// Centipede for constant T radial using QGraphicsLineItem
+class CentipedeSegmentConstantTRadial : public CentipedeSegmentAbstract
 {
   Q_OBJECT;
   
 public:
   /// Constructor with individual coordinates
-  CentipedeSegmentConstantXTRadial(const DocumentModelGuideline &modelGuideline,
-                                   const Transformation &transformation,
-                                   const QPointF &posClickScreen);
-  virtual ~CentipedeSegmentConstantXTRadial();
+  CentipedeSegmentConstantTRadial(const DocumentModelGuideline &modelGuideline,
+                                  const Transformation &transformation,
+                                  const QPointF &posClickScreen);
+  virtual ~CentipedeSegmentConstantTRadial();
 
   virtual double distanceToClosestEndpoint (const QPointF &posScreen) const;
   virtual QGraphicsItem *graphicsItem ();
@@ -35,13 +35,7 @@ signals:
                               QPointF end);
   
 private:
-  CentipedeSegmentConstantXTRadial();
-
-  void posScreenConstantYRForXTHighLowAngles (const Transformation &transformation,
-                                              const QPointF &posClickScreen,
-                                              double radius,
-                                              QPointF &posLow,
-                                              QPointF &posHigh) const;
+  CentipedeSegmentConstantTRadial();
 
   QGraphicsLineItem *m_graphicsItem;
   GraphicsLineItemRelay *m_graphicsItemRelay;
@@ -52,4 +46,4 @@ private:
   QPointF m_posHigh;
 };
 
-#endif // CENTIPEDE_SEGMENT_CONSTANT_XT_RADIAL_H
+#endif // CENTIPEDE_SEGMENT_CONSTANT_T_RADIAL_H

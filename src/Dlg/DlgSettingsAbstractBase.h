@@ -14,8 +14,10 @@ class ButtonWhatsThis;
 class CmdMediator;
 class MainWindow;
 class QComboBox;
+class QGraphicsScene;
 class QGridLayout;
 class QHBoxLayout;
+class QPixmap;
 class QScrollArea;
 
 /// Abstract base class for all Settings dialogs.
@@ -34,6 +36,11 @@ protected:
   /// Provide access to Document information wrapped inside CmdMediator.
   CmdMediator &cmdMediator ();
 
+  /// Adds pixmap to the scene. The scene is resized so when a larger image is followed by
+  /// a smaller image, none of the old image appears around the smaller new image
+  void addPixmap (QGraphicsScene &scene,
+                  const QPixmap &pixmap);
+  
   /// Create a WhatsThis button in a grid layout
   void createWhatsThis (QGridLayout *layout,
                         ButtonWhatsThis *button,

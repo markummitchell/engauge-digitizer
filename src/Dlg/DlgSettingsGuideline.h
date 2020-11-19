@@ -57,6 +57,7 @@ private:
   void createLinesPolar();
   void createPreview (QGridLayout *layout, int &row);
   void killCentipede ();
+  void loadImages (CmdMediator &cmdMediator);
   double radiusOfClosestSide (const QPointF &posLeft,
                               const QPointF &posRight,
                               const QPointF &posTop,
@@ -84,11 +85,7 @@ private:
                                                 double xMax,
                                                 double yMin,
                                                 double yMax);
-  void updatePreviewGeometryCentipedePolar (const QPointF &posClickScreen,
-                                            double xMin,
-                                            double xMax,
-                                            double yMin,
-                                            double yMax);
+  void updatePreviewGeometryCentipedePolar (const QPointF &posClickScreen);
   void updatePreviewGeometryCirclePolar (const QPointF &posClickScreen);
   void updatePreviewGeometryGuidelineCartesian (double width,
                                                 double height,
