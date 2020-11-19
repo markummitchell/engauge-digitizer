@@ -26,11 +26,11 @@ CentipedeEndpointsCartesian::~CentipedeEndpointsCartesian ()
 {
 }
 
-QPointF CentipedeEndpointsCartesian::posScreenConstantXTCommon (double radius,
-                                                                CentipedeIntersectionType intersectionType) const
+QPointF CentipedeEndpointsCartesian::posScreenConstantXCommon (double radius,
+                                                               CentipedeIntersectionType intersectionType) const
 {
   QPointF posScreenBest;
-  double yRBest = (intersectionType == CENTIPEDE_INTERSECTION_HIGH ? 999.9 : -999.9);
+  double yBest = (intersectionType == CENTIPEDE_INTERSECTION_HIGH ? 999.9 : -999.9);
 
   // Click point
   QPointF posClickGraph;
@@ -59,7 +59,7 @@ QPointF CentipedeEndpointsCartesian::posScreenConstantXTCommon (double radius,
 
       // CENTIPEDE_INTERSECTION_CENTER
       save = isFirst ||
-          (qAbs (yGraphPrevious - yClick) < qAbs (yRBest - yClick));
+          (qAbs (yGraphPrevious - yClick) < qAbs (yBest - yClick));
 
     } else {
 
@@ -71,8 +71,8 @@ QPointF CentipedeEndpointsCartesian::posScreenConstantXTCommon (double radius,
 
         // Transition occurred so save if best so far
         if (isFirst ||
-            (intersectionType == CENTIPEDE_INTERSECTION_HIGH && yGraphPrevious > yRBest) ||
-            (intersectionType == CENTIPEDE_INTERSECTION_LOW && yGraphPrevious < yRBest)) {
+            (intersectionType == CENTIPEDE_INTERSECTION_HIGH && yGraphPrevious > yBest) ||
+            (intersectionType == CENTIPEDE_INTERSECTION_LOW && yGraphPrevious < yBest)) {
 
           save = true;
         }
@@ -84,30 +84,30 @@ QPointF CentipedeEndpointsCartesian::posScreenConstantXTCommon (double radius,
       // Best so far so save
       isFirst = false;
       posScreenBest = posScreenPrevious;
-      yRBest = yGraphPrevious;
+      yBest = yGraphPrevious;
     }
   }
 
   return posScreenBest;
 }
 
-QPointF CentipedeEndpointsCartesian::posScreenConstantXTForHighYR (double radius) const
+QPointF CentipedeEndpointsCartesian::posScreenConstantXForHighY (double radius) const
 {
-  return posScreenConstantXTCommon (radius,
-                                    CENTIPEDE_INTERSECTION_HIGH);
+  return posScreenConstantXCommon (radius,
+                                   CENTIPEDE_INTERSECTION_HIGH);
 }
 
-QPointF CentipedeEndpointsCartesian::posScreenConstantXTForLowYR (double radius) const
+QPointF CentipedeEndpointsCartesian::posScreenConstantXForLowY (double radius) const
 {
-  return posScreenConstantXTCommon (radius,
-                                    CENTIPEDE_INTERSECTION_LOW);
+  return posScreenConstantXCommon (radius,
+                                   CENTIPEDE_INTERSECTION_LOW);
 }
 
-QPointF CentipedeEndpointsCartesian::posScreenConstantYRCommon (double radius,
-                                                                CentipedeIntersectionType intersectionType) const
+QPointF CentipedeEndpointsCartesian::posScreenConstantYCommon (double radius,
+                                                               CentipedeIntersectionType intersectionType) const
 {
   QPointF posScreenBest;
-  double xTBest = 0;
+  double xBest = 0;
 
   // Click point
   QPointF posClickGraph;
@@ -136,7 +136,7 @@ QPointF CentipedeEndpointsCartesian::posScreenConstantYRCommon (double radius,
 
       // CENTIPEDE_INTERSECTION_CENTER
       save = isFirst ||
-          (qAbs (xGraphPrevious - xClick) < qAbs (xTBest - xClick));
+          (qAbs (xGraphPrevious - xClick) < qAbs (xBest - xClick));
 
     } else {
 
@@ -148,8 +148,8 @@ QPointF CentipedeEndpointsCartesian::posScreenConstantYRCommon (double radius,
 
         // Transition occurred so save if best so far
         if (isFirst ||
-            (intersectionType == CENTIPEDE_INTERSECTION_HIGH && xGraphPrevious > xTBest) ||
-            (intersectionType == CENTIPEDE_INTERSECTION_LOW && xGraphPrevious < xTBest)) {
+            (intersectionType == CENTIPEDE_INTERSECTION_HIGH && xGraphPrevious > xBest) ||
+            (intersectionType == CENTIPEDE_INTERSECTION_LOW && xGraphPrevious < xBest)) {
 
           save = true;
         }
@@ -161,27 +161,27 @@ QPointF CentipedeEndpointsCartesian::posScreenConstantYRCommon (double radius,
       // Best so far so save
       isFirst = false;
       posScreenBest = posScreenPrevious;
-      xTBest = xGraphPrevious;
+      xBest = xGraphPrevious;
     }
   }
 
   return posScreenBest;
 }
 
-QPointF CentipedeEndpointsCartesian::posScreenConstantYRForCenterXT (double radius) const
+QPointF CentipedeEndpointsCartesian::posScreenConstantYForCenterX (double radius) const
 {
-  return posScreenConstantYRCommon (radius,
-                                    CENTIPEDE_INTERSECTION_CENTER);
+  return posScreenConstantYCommon (radius,
+                                   CENTIPEDE_INTERSECTION_CENTER);
 }
 
-QPointF CentipedeEndpointsCartesian::posScreenConstantYRForHighXT (double radius) const
+QPointF CentipedeEndpointsCartesian::posScreenConstantYForHighX (double radius) const
 {
-  return posScreenConstantYRCommon (radius,
+  return posScreenConstantYCommon (radius,
                                     CENTIPEDE_INTERSECTION_HIGH);
 }
 
-QPointF CentipedeEndpointsCartesian::posScreenConstantYRForLowXT (double radius) const
+QPointF CentipedeEndpointsCartesian::posScreenConstantYForLowX (double radius) const
 {
-  return posScreenConstantYRCommon (radius,
-                                    CENTIPEDE_INTERSECTION_LOW);
+  return posScreenConstantYCommon (radius,
+                                   CENTIPEDE_INTERSECTION_LOW);
 }

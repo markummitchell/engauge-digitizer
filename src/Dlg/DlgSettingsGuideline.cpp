@@ -540,10 +540,10 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedeCartesian (const QPoint
                                          mainWindow().transformation (),
                                          posClickScreen);
 
-  QPointF posStartX = endpoints.posScreenConstantXTForLowYR (m_modelGuidelineAfter->creationCircleRadius());
-  QPointF posStopX = endpoints.posScreenConstantXTForHighYR (m_modelGuidelineAfter->creationCircleRadius());
-  QPointF posStartY = endpoints.posScreenConstantYRForLowXT (m_modelGuidelineAfter->creationCircleRadius());
-  QPointF posStopY = endpoints.posScreenConstantYRForHighXT (m_modelGuidelineAfter->creationCircleRadius());
+  QPointF posStartX = endpoints.posScreenConstantXForLowY (m_modelGuidelineAfter->creationCircleRadius());
+  QPointF posStopX = endpoints.posScreenConstantXForHighY (m_modelGuidelineAfter->creationCircleRadius());
+  QPointF posStartY = endpoints.posScreenConstantYForLowX (m_modelGuidelineAfter->creationCircleRadius());
+  QPointF posStopY = endpoints.posScreenConstantYForHighX (m_modelGuidelineAfter->creationCircleRadius());
 
   safeSetLine (m_itemCentipedeXTActive,
                posStartX,
@@ -560,9 +560,9 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &p
                                      posClickScreen);
 
   QPointF posLow, posHigh;
-  endpoints.posScreenConstantYRForXTHighLowAngles (m_modelGuidelineAfter->creationCircleRadius(),
-                                                   posLow,
-                                                   posHigh);
+  endpoints.posScreenConstantRForTHighLowAngles (m_modelGuidelineAfter->creationCircleRadius(),
+                                                 posLow,
+                                                 posHigh);
 
   safeSetLine (m_itemCentipedeXTActive,
                posLow,

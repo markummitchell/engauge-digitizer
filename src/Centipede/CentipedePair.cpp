@@ -8,8 +8,8 @@
 #include "CentipedeSegmentAbstract.h"
 #include "CentipedeSegmentConstantREllipse.h"
 #include "CentipedeSegmentConstantTRadial.h"
-#include "CentipedeSegmentConstantXTLine.h"
-#include "CentipedeSegmentConstantYRLine.h"
+#include "CentipedeSegmentConstantXLine.h"
+#include "CentipedeSegmentConstantYLine.h"
 #include "DocumentModelCoords.h"
 #include "DocumentModelGuideline.h"
 #include "GraphicsScene.h"
@@ -30,12 +30,12 @@ CentipedePair::CentipedePair(GraphicsScene &scene,
 {
   // Create visible Centipede items
   if (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
-    m_centipedeXT = new CentipedeSegmentConstantXTLine (modelGuideline,
-                                                        transformation,
-                                                        posScreen);
-    m_centipedeYR = new CentipedeSegmentConstantYRLine (modelGuideline,
-                                                        transformation,
-                                                        posScreen);
+    m_centipedeXT = new CentipedeSegmentConstantXLine (modelGuideline,
+                                                       transformation,
+                                                       posScreen);
+    m_centipedeYR = new CentipedeSegmentConstantYLine (modelGuideline,
+                                                       transformation,
+                                                       posScreen);
   } else {
     m_centipedeXT = new CentipedeSegmentConstantTRadial (modelGuideline,
                                                          transformation,

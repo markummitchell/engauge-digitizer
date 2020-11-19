@@ -23,34 +23,34 @@ public:
                               const QPointF &posClickScreen);
   virtual ~CentipedeEndpointsCartesian ();
 
-  /// Screen point for XT value of circle-center/coordinate intersection. Works for both cartesian and polar coordinates
-  QPointF posScreenConstantXTForCenterYR (double radius) const;
+  /// Screen point for X value of circle-center/coordinate intersection
+  QPointF posScreenConstantXForCenterY (double radius) const;
 
-  /// Screen point for XT value of circle/coordinate intersection in the increasing YR direction. Works for both cartesian and polar coordinates
-  QPointF posScreenConstantXTForHighYR (double radius) const;
+  /// Screen point for X value of circle/coordinate intersection in the increasing Y direction
+  QPointF posScreenConstantXForHighY (double radius) const;
 
-  /// Screen point for XT value of circle/coordinate intersection in the decreasing YR direction. Works for both cartesian and polar coordinates
-  QPointF posScreenConstantXTForLowYR (double radius) const;
+  /// Screen point for X value of circle/coordinate intersection in the decreasing Y direction
+  QPointF posScreenConstantXForLowY (double radius) const;
 
-  /// Screen point for YR value of circle-center/coordinate intersection. Works for both cartesian and polar coordinates
-  QPointF posScreenConstantYRForCenterXT (double radius) const;
+  /// Screen point for Y value of circle-center/coordinate intersection
+  QPointF posScreenConstantYForCenterX (double radius) const;
 
-  /// Screen point for YR value of circle/coordinate intersection in the increasing XT direction. Works for both cartesian and polar coordinates
-  QPointF posScreenConstantYRForHighXT (double radius) const;
+  /// Screen point for Y value of circle/coordinate intersection in the increasing X direction
+  QPointF posScreenConstantYForHighX (double radius) const;
 
-  /// Screen point for YR value of circle/coordinate intersection in the decreasing XT direction. Works for both cartesian and polar coordinates
-  QPointF posScreenConstantYRForLowXT (double radius) const;
+  /// Screen point for Y value of circle/coordinate intersection in the decreasing X direction
+  QPointF posScreenConstantYForLowX (double radius) const;
   
 private:
   CentipedeEndpointsCartesian();
 
-  /// Solves posScreenConstantXTForHighYR and posScreenConstantXTForLowYR  
-  QPointF posScreenConstantXTCommon (double radius,
-                                     CentipedeIntersectionType intersectionType) const;
+  /// Solves posScreenConstantXForHighY and posScreenConstantXForLowY  
+  QPointF posScreenConstantXCommon (double radius,
+                                    CentipedeIntersectionType intersectionType) const;
 
-  /// Solves posScreenConstantYRHighXT and posScreenConstantYRLowXT  
-  QPointF posScreenConstantYRCommon (double radius,
-                                     CentipedeIntersectionType intersectionType) const;
+  /// Solves posScreenConstantYHighX and posScreenConstantYLowX  
+  QPointF posScreenConstantYCommon (double radius,
+                                    CentipedeIntersectionType intersectionType) const;
 
 };
 

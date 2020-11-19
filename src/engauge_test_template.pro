@@ -63,8 +63,8 @@ HEADERS  += \
     Centipede/CentipedeSegmentAbstract.h \
     Centipede/CentipedeSegmentConstantREllipse.h \
     Centipede/CentipedeSegmentConstantTRadial.h \
-    Centipede/CentipedeSegmentConstantXTLine.h \
-    Centipede/CentipedeSegmentConstantYRLine.h \
+    Centipede/CentipedeSegmentConstantXLine.h \
+    Centipede/CentipedeSegmentConstantYLine.h \
     Checker/Checker.h \
     Checker/CheckerMode.h \
     Checklist/ChecklistGuide.h \
@@ -520,8 +520,8 @@ SOURCES += \
     Centipede/CentipedeSegmentAbstract.cpp \
     Centipede/CentipedeSegmentConstantREllipse.cpp \
     Centipede/CentipedeSegmentConstantTRadial.cpp \
-    Centipede/CentipedeSegmentConstantXTLine.cpp \
-    Centipede/CentipedeSegmentConstantYRLine.cpp \
+    Centipede/CentipedeSegmentConstantXLine.cpp \
+    Centipede/CentipedeSegmentConstantYLine.cpp \
     Checker/Checker.cpp \
     Checker/CheckerMode.cpp \
     Checklist/ChecklistGuide.cpp \

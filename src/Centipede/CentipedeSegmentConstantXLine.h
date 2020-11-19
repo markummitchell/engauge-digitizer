@@ -4,8 +4,8 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef CENTIPEDE_SEGMENT_CONSTANT_XT_LINE_H
-#define CENTIPEDE_SEGMENT_CONSTANT_XT_LINE_H
+#ifndef CENTIPEDE_SEGMENT_CONSTANTX_LINE_H
+#define CENTIPEDE_SEGMENT_CONSTANTX_LINE_H
 
 #include "CentipedeSegmentAbstract.h"
 
@@ -13,16 +13,16 @@ class GraphicsLineItemRelay;
 class QGraphicsLineItem;
 
 /// Centipede for constant XT using QGraphicsLineItem
-class CentipedeSegmentConstantXTLine : public CentipedeSegmentAbstract
+class CentipedeSegmentConstantXLine : public CentipedeSegmentAbstract
 {
   Q_OBJECT;
   
 public:
   /// Constructor with individual coordinates
-  CentipedeSegmentConstantXTLine(const DocumentModelGuideline &modelGuideline,
-                                 const Transformation &transformation,
-                                 const QPointF &posClickScreen);
-  virtual ~CentipedeSegmentConstantXTLine();
+  CentipedeSegmentConstantXLine(const DocumentModelGuideline &modelGuideline,
+                                const Transformation &transformation,
+                                const QPointF &posClickScreen);
+  virtual ~CentipedeSegmentConstantXLine();
 
   virtual double distanceToClosestEndpoint (const QPointF &posScreen) const;
   virtual QGraphicsItem *graphicsItem ();
@@ -35,7 +35,7 @@ signals:
                               QPointF end);
   
 private:
-  CentipedeSegmentConstantXTLine();
+  CentipedeSegmentConstantXLine();
 
   QGraphicsLineItem *m_graphicsItem;
   GraphicsLineItemRelay *m_graphicsItemRelay;
@@ -46,4 +46,4 @@ private:
   QPointF m_posHigh;
 };
 
-#endif // CENTIPEDE_SEGMENT_CONSTANT_XT_LINE_H
+#endif // CENTIPEDE_SEGMENT_CONSTANTX_LINE_H

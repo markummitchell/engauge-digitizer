@@ -5,7 +5,7 @@
  ******************************************************************************************************/
 
 #include "CentipedeEndpointsCartesian.h"
-#include "CentipedeSegmentConstantXTLine.h"
+#include "CentipedeSegmentConstantXLine.h"
 #include "EnumsToQt.h"
 #include "GraphicsLineItemRelay.h"
 #include "mmsubs.h"
@@ -13,9 +13,9 @@
 #include <QGraphicsLineItem>
 #include <QPen>
 
-CentipedeSegmentConstantXTLine::CentipedeSegmentConstantXTLine(const DocumentModelGuideline &modelGuideline,
-                                                               const Transformation &transformation,
-                                                               const QPointF &posClickScreen) :
+CentipedeSegmentConstantXLine::CentipedeSegmentConstantXLine(const DocumentModelGuideline &modelGuideline,
+                                                             const Transformation &transformation,
+                                                             const QPointF &posClickScreen) :
   CentipedeSegmentAbstract (modelGuideline,
                             transformation,
                             posClickScreen)
@@ -24,8 +24,9 @@ CentipedeSegmentConstantXTLine::CentipedeSegmentConstantXTLine(const DocumentMod
                                          transformation,
                                          posClickScreen);
   
-  m_posLow = endpoints.posScreenConstantXTForLowYR (modelGuideline.creationCircleRadius ());
-  m_posHigh = endpoints.posScreenConstantXTForHighYR (modelGuideline.creationCircleRadius ());
+  m_posLow = endpoints.posScreenConstantXForLowY (modelGuideline.creationCircleRadius ());
+
+  m_posHigh = endpoints.posScreenConstantXForHighY (modelGuideline.creationCircleRadius ());
 
   // Create graphics item and its relay
   m_graphicsItem = new QGraphicsLineItem (QLineF (m_posLow,
@@ -39,13 +40,13 @@ CentipedeSegmentConstantXTLine::CentipedeSegmentConstantXTLine(const DocumentMod
                                 modelGuideline.lineWidthActive ()));
 }
 
-CentipedeSegmentConstantXTLine::~CentipedeSegmentConstantXTLine ()
+CentipedeSegmentConstantXLine::~CentipedeSegmentConstantXLine ()
 {
   delete m_graphicsItem;
   delete m_graphicsItemRelay;
 }
 
-double CentipedeSegmentConstantXTLine::distanceToClosestEndpoint (const QPointF &posScreen) const
+double CentipedeSegmentConstantXLine::distanceToClosestEndpoint (const QPointF &posScreen) const
 {
   double distanceLow = magnitude (posScreen - m_posLow);
   double distanceHigh = magnitude (posScreen - m_posHigh);
@@ -53,12 +54,12 @@ double CentipedeSegmentConstantXTLine::distanceToClosestEndpoint (const QPointF 
   return qMin (distanceLow, distanceHigh);
 }
 
-QGraphicsItem *CentipedeSegmentConstantXTLine::graphicsItem ()
+QGraphicsItem *CentipedeSegmentConstantXLine::graphicsItem ()
 {
   return dynamic_cast<QGraphicsItem*> (m_graphicsItem);
 }
 
-void CentipedeSegmentConstantXTLine::updateRadius (double radius)
+void CentipedeSegmentConstantXLine::updateRadius (double radius)
 {
   // Scale up/down the line segment length, keeping it centered on the same center point
   QPointF posCenter = (m_posHigh + m_posLow) / 2.0;

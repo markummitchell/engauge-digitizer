@@ -5,7 +5,7 @@
  ******************************************************************************************************/
 
 #include "CentipedeEndpointsCartesian.h"
-#include "CentipedeSegmentConstantYRLine.h"
+#include "CentipedeSegmentConstantYLine.h"
 #include "EnumsToQt.h"
 #include "GraphicsLineItemRelay.h"
 #include "mmsubs.h"
@@ -13,9 +13,9 @@
 #include <QGraphicsLineItem>
 #include <QPen>
 
-CentipedeSegmentConstantYRLine::CentipedeSegmentConstantYRLine(const DocumentModelGuideline &modelGuideline,
-                                                               const Transformation &transformation,
-                                                               const QPointF &posClickScreen) :
+CentipedeSegmentConstantYLine::CentipedeSegmentConstantYLine(const DocumentModelGuideline &modelGuideline,
+                                                             const Transformation &transformation,
+                                                             const QPointF &posClickScreen) :
   CentipedeSegmentAbstract (modelGuideline,
                             transformation,
                             posClickScreen)
@@ -24,8 +24,8 @@ CentipedeSegmentConstantYRLine::CentipedeSegmentConstantYRLine(const DocumentMod
                                          transformation,
                                          posClickScreen);
 
-  m_posLow = endpoints.posScreenConstantYRForLowXT (modelGuideline.creationCircleRadius ());
-  m_posHigh = endpoints.posScreenConstantYRForHighXT (modelGuideline.creationCircleRadius ());
+  m_posLow = endpoints.posScreenConstantYForLowX (modelGuideline.creationCircleRadius ());
+  m_posHigh = endpoints.posScreenConstantYForHighX (modelGuideline.creationCircleRadius ());
 
   // Create graphics item and its relay
   m_graphicsItem = new QGraphicsLineItem (QLineF (m_posLow,
@@ -39,13 +39,13 @@ CentipedeSegmentConstantYRLine::CentipedeSegmentConstantYRLine(const DocumentMod
                                 modelGuideline.lineWidthActive ()));
 }
 
-CentipedeSegmentConstantYRLine::~CentipedeSegmentConstantYRLine ()
+CentipedeSegmentConstantYLine::~CentipedeSegmentConstantYLine ()
 {
   delete m_graphicsItem;
   delete m_graphicsItemRelay;  
 }
 
-double CentipedeSegmentConstantYRLine::distanceToClosestEndpoint (const QPointF &posScreen) const
+double CentipedeSegmentConstantYLine::distanceToClosestEndpoint (const QPointF &posScreen) const
 {
   double distanceLow = magnitude (posScreen - m_posLow);
   double distanceHigh = magnitude (posScreen - m_posHigh);
@@ -53,12 +53,12 @@ double CentipedeSegmentConstantYRLine::distanceToClosestEndpoint (const QPointF 
   return qMin (distanceLow, distanceHigh);
 }
 
-QGraphicsItem *CentipedeSegmentConstantYRLine::graphicsItem ()
+QGraphicsItem *CentipedeSegmentConstantYLine::graphicsItem ()
 {
   return dynamic_cast<QGraphicsItem*> (m_graphicsItem);
 }
 
-void CentipedeSegmentConstantYRLine::updateRadius (double radius)
+void CentipedeSegmentConstantYLine::updateRadius (double radius)
 {
   // Scale up/down the line segment length, keeping it centered on the same center point
   QPointF posCenter = (m_posHigh + m_posLow) / 2.0;

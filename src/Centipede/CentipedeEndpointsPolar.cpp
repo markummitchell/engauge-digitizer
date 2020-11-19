@@ -27,7 +27,7 @@ CentipedeEndpointsPolar::~CentipedeEndpointsPolar ()
 {
 }
 
-double CentipedeEndpointsPolar::angleScreenConstantYRCenterAngle (double radiusAboutClick) const
+double CentipedeEndpointsPolar::angleScreenConstantRCenterAngle (double radiusAboutClick) const
 {
   QPointF posScreenBest;
   double xTBest = 0;
@@ -63,10 +63,10 @@ double CentipedeEndpointsPolar::angleScreenConstantYRCenterAngle (double radiusA
   return qDegreesToRadians (xTBest);
 }
 
-void CentipedeEndpointsPolar::angleScreenConstantYRHighLowAngles (double radiusAboutClick,
-                                                                   double angleCenter,
-                                                                   double &angleLow,
-                                                                   double &angleHigh) const
+void CentipedeEndpointsPolar::angleScreenConstantRHighLowAngles (double radiusAboutClick,
+                                                                 double angleCenter,
+                                                                 double &angleLow,
+                                                                 double &angleHigh) const
 {
   // Click point
   QPointF posClickGraph;
@@ -147,13 +147,91 @@ double CentipedeEndpointsPolar::closestAngleToCentralAngle (double angleCenter,
   return angleNew;
 }
 
-void CentipedeEndpointsPolar::posScreenConstantYRForXTHighLowAngles (double radius,
-                                                                     QPointF &posLow,
-                                                                     QPointF &posHigh) const
+QPointF CentipedeEndpointsPolar::posScreenConstantRCommon (double radius,
+                                                           CentipedeIntersectionType intersectionType) const
+{
+  QPointF posScreenBest;
+  double xBest = 0;
+
+  // Click point
+  QPointF posClickGraph;
+  transformation().transformScreenToRawGraph (posClickScreen (),
+                                              posClickGraph);
+  double xClick = posClickGraph.x();
+  double yClick = posClickGraph.y();
+
+  // Iterate points around the circle
+  bool isFirst = true;
+  for (int i = 0; i < NUM_CIRCLE_POINTS; i++) {
+    QPointF posGraphPrevious, posGraphNext, posScreenPrevious;
+    generatePreviousAndNextPoints (radius,
+                                   i,
+                                   posGraphPrevious,
+                                   posGraphNext,
+                                   posScreenPrevious);
+
+    double xGraphPrevious = posGraphPrevious.x();
+    double yGraphPrevious = posGraphPrevious.y();
+    double yGraphNext = posGraphNext.y();
+    double epsilon = qAbs (yGraphPrevious - yGraphNext) / 10.0; // Allow for roundoff
+
+    bool save = false;
+    if (intersectionType == CENTIPEDE_INTERSECTION_CENTER) {
+
+      // CENTIPEDE_INTERSECTION_CENTER
+      save = isFirst ||
+          (qAbs (xGraphPrevious - xClick) < qAbs (xBest - xClick));
+
+    } else {
+
+      // CENTIPEDE_INTERSECTION_HIGH or CENTIPEDE_INTERSECTION_LOW
+      bool transitionUp = (yGraphPrevious - epsilon <= yClick) && (yClick < yGraphNext + epsilon);
+      bool transitionDown = (yGraphNext - epsilon <= yClick) && (yClick < yGraphPrevious + epsilon);
+
+      if (transitionDown || transitionUp) {
+
+        // Transition occurred so save if best so far
+        if (isFirst ||
+            (intersectionType == CENTIPEDE_INTERSECTION_HIGH && xGraphPrevious > xBest) ||
+            (intersectionType == CENTIPEDE_INTERSECTION_LOW && xGraphPrevious < xBest)) {
+
+          save = true;
+        }
+      }
+    }
+
+    if (save) {
+
+      // Best so far so save
+      isFirst = false;
+      posScreenBest = posScreenPrevious;
+      xBest = xGraphPrevious;
+    }
+  }
+
+  return posScreenBest;
+}
+
+QPointF CentipedeEndpointsPolar::posScreenConstantRForHighT (double radius) const
+{
+  return posScreenConstantRCommon (radius,
+                                    CENTIPEDE_INTERSECTION_HIGH);
+}
+
+QPointF CentipedeEndpointsPolar::posScreenConstantRForLowT (double radius) const
+{
+  return posScreenConstantRCommon (radius,
+                                   CENTIPEDE_INTERSECTION_LOW);
+}
+
+//void CentipedeEndpointsPolar::ellipseScreenConstantYRForXTHighLowAngles (double radius,
+void CentipedeEndpointsPolar::posScreenConstantRForTHighLowAngles (double radius,
+                                                                   QPointF &posLow,
+                                                                   QPointF &posHigh) const
 {
   // This replaces CentipedeSegmentAbstract::posScreenConstantXTCommon since the polar coordinate radial vector
   // can be on the other side of the origin if the ellipse center is within radius of the origin. This routine
-  // uses an unusual strategy of iterating on a line rather than a circle (since circle has tough issues with quadrants
+  // uses a different strategy of iterating on a line rather than a circle (since circle has tough issues with quadrants
   // and 360 rollover)
 
   // Origin and screen vector to center
