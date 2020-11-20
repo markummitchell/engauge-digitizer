@@ -2,6 +2,8 @@
 # ubuntu bionic 18.04 uses qt 5.9
 # ubuntu xenial 16.04 uses qt 5.5 (but breaks /etc/init.d/xvfb step below)
 # ubuntu trusty 14.04 uses qt 5.2
+#
+# xcode versions newer than ancient 9.4.1 are upgraded using osx_image ( https://docs.travis-ci.com/user/reference/osx)
 dist: trusty
 
 language: cpp
@@ -12,6 +14,7 @@ matrix:
     - os: linux
       env: BUILD_DEBUG="1"
     - os: osx
+      osx_image: xcode12.2
       env: ARCH="x86_64"
       compiler: "clang"
     - os: osx
