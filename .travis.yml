@@ -9,7 +9,6 @@
 
 dist: bionic
 language: cpp
-osx_image: xcode12
 
 matrix:
   include:
