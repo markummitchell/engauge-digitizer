@@ -9,6 +9,11 @@
 #include <QPainter>
 #include <QGraphicsScene>
 
+GraphicsArcItem::GraphicsArcItem() :
+  QGraphicsEllipseItem ()
+{
+}
+
 GraphicsArcItem::GraphicsArcItem(double x,
                                  double y,
                                  double width,
@@ -45,4 +50,24 @@ void GraphicsArcItem::paint (QPainter *painter,
   painter->drawArc (rect(),
                     start,
                     span);
+}
+
+void GraphicsArcItem::setRect (const QRectF &rect)
+{
+  QGraphicsEllipseItem::setRect (rect);
+  setTransformOriginPoint (rect.x() + rect.width() / 2.0,
+                           rect.y() + rect.height() / 2.0);
+}
+
+void GraphicsArcItem::setRect (double x,
+                               double y,
+                               double width,
+                               double height)
+{
+  QGraphicsEllipseItem::setRect (x,
+                                 y,
+                                 width,
+                                 height);
+  setTransformOriginPoint (x + width / 2,
+                           y + height / 2);
 }

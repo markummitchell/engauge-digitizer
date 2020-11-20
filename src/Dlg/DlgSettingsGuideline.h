@@ -65,6 +65,11 @@ private:
                               const QPointF &posBottom) const;
   void removeOldWidgetsActive();
   void removeOldWidgetsInactive();
+  void safeSetEllipseGeometry (QGraphicsEllipseItem *ellipse,
+                               const QRectF &rectBounding,
+                               double angleRotation,
+                               double angleLow,
+                               double angleHigh);
   void safeSetEllipseStyle (QGraphicsEllipseItem *ellipse,
                             double width);
   void safeSetLine (QGraphicsLineItem *item,

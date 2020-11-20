@@ -12,6 +12,7 @@
 #include "DocumentModelGuideline.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
+#include "GraphicsArcItem.h"
 #include "GraphicsScene.h"
 #include "GuidelineProjectorConstantR.h"
 #include "GuidelineProjectorConstantT.h"
@@ -45,6 +46,7 @@ const int MINIMUM_HEIGHT = 300;
 const int MINIMUM_DIALOG_WIDTH_GUIDELINES = 500;
 const int MINIMUM_PREVIEW_WIDTH = 200;
 const double T_REFERENCE = 0;
+const double RADIANS_TO_TICS = (180 * 16) / M_PI;
 
 DlgSettingsGuideline::DlgSettingsGuideline(MainWindow &mainWindow) :
   DlgSettingsAbstractBase (tr ("Guidelines"),
@@ -182,7 +184,7 @@ void DlgSettingsGuideline::createLinesPolar ()
   m_scenePreviewInactive->addItem (m_itemGuidelineRInactive);
 
   m_itemCentipedeXTActive = new QGraphicsLineItem();
-  m_itemCentipedeRActive = new QGraphicsEllipseItem();
+  m_itemCentipedeRActive = new GraphicsArcItem ();
 
   m_scenePreviewActive->addItem (m_itemCentipedeXTActive);
   m_scenePreviewActive->addItem (m_itemCentipedeRActive);
@@ -374,6 +376,22 @@ void DlgSettingsGuideline::setSmallDialogs (bool smallDialogs)
 {
   if (!smallDialogs) {
     setMinimumHeight (MINIMUM_HEIGHT);
+  }
+}
+
+void DlgSettingsGuideline::safeSetEllipseGeometry (QGraphicsEllipseItem *ellipse,
+                                                   const QRectF &rectBounding,
+                                                   double angleRotation,
+                                                   double angleLow,
+                                                   double angleHigh)
+{
+  if (ellipse) {
+    ellipse->setRect (rectBounding);
+    ellipse->setStartAngle (angleLow * RADIANS_TO_TICS);
+    ellipse->setSpanAngle ((angleHigh - angleLow) * RADIANS_TO_TICS);
+    ellipse->setRotation (-1.0 * qRadiansToDegrees (angleRotation));
+    ellipse->setTransformOriginPoint (rectBounding.x() + rectBounding.width() / 2.0,
+                                      rectBounding.y() + rectBounding.height() / 2.0);
   }
 }
 
@@ -569,9 +587,29 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &p
                                            posLow,
                                            posHigh);
 
+  double angleCenter = endpoints.angleScreenConstantRCenterAngle (m_modelGuidelineAfter->creationCircleRadius());
+  double angleLow, angleHigh;
+  endpoints.angleScreenConstantRHighLowAngles (m_modelGuidelineAfter->creationCircleRadius(),
+                                               angleCenter,
+                                               angleLow,
+                                               angleHigh);
+
+  double angleRotation;
+  QRectF rectBounding;
+  endpoints.ellipseScreenConstantRForTHighLowAngles (mainWindow().transformation(),
+                                                     posClickScreen,
+                                                     angleRotation,
+                                                     rectBounding);
+
+
   safeSetLine (m_itemCentipedeXTActive,
                posLow,
                posHigh);
+  safeSetEllipseGeometry (m_itemCentipedeRActive,
+                          rectBounding,
+                          angleRotation,
+                          angleLow,
+                          angleHigh);
 }
 
 void DlgSettingsGuideline::updatePreviewGeometryCirclePolar (const QPointF &posClickScreen)
@@ -700,4 +738,6 @@ void DlgSettingsGuideline::updatePreviewStyle ()
                     m_modelGuidelineAfter->lineWidthActive());
   safeSetLineStyle (m_itemCentipedeYActive,
                     m_modelGuidelineAfter->lineWidthActive());
+  safeSetEllipseStyle (m_itemCentipedeRActive,
+                       m_modelGuidelineAfter->lineWidthActive());
 }

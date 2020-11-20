@@ -19,7 +19,10 @@
 class GraphicsArcItem : public QGraphicsEllipseItem
 {
 public:
-  /// Constructor with individual coordinates
+  /// Default constructor. This needs, at a minimum, a later call to setRect
+  GraphicsArcItem();
+
+  /// Constructor with individual coordinates. Also sets transform origin point
   GraphicsArcItem(double x,
                   double y,
                   double width,
@@ -35,8 +38,14 @@ public:
                       const QStyleOptionGraphicsItem *option,
                       QWidget *widget);
 
-private:
-  GraphicsArcItem();
+  /// Set bounding rectangle. Updates transform origin point
+  virtual void setRect (const QRectF &rect);
+
+  /// Set bounding rectangle. Updates transform origin point
+  virtual void setRect (double x,
+                        double y,
+                        double width,
+                        double height);
 
 };
 
