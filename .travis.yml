@@ -1,14 +1,16 @@
-# https://docs.travis-ci.com/user/reference/overview/ gives distribution options, with qt versions from
+# https://docs.travis-ci.com/user/reference/overview/ gives distribution options
 # google searches on 'ubuntu focal 20.04' for example:
 #   ubuntu focal 20.04 uses qt 5.12
 #   ubuntu bionic 18.04 uses qt 5.9 
 #   ubuntu xenial 16.04 uses qt 5.5 (but breaks /etc/init.d/xvfb step below)
 #   ubuntu trusty 14.04 uses qt 5.2 and xcode 9.4.1
-#
-# xcode versions newer than ancient 9.4.1 are upgraded using osx_image ( https://docs.travis-ci.com/user/reference/osx).
 dist: focal
 
 language: cpp
+
+# xcode versions are set here (https://docs.travis-ci.com/user/reference/osx and
+# https://www.raywenderlich.com/1618-travis-ci-tutorial-getting-started)
+osx_image: xcode 12.2
 
 matrix:
   include:
