@@ -4,13 +4,11 @@
 #   ubuntu bionic 18.04 uses qt 5.9 
 #   ubuntu xenial 16.04 uses qt 5.5 (but breaks /etc/init.d/xvfb step below)
 #   ubuntu trusty 14.04 uses qt 5.2 and xcode 9.4.1
-dist: focal
-
-language: cpp
-
+#dist: focal
 # xcode versions are set here (https://docs.travis-ci.com/user/reference/osx and
 # https://www.raywenderlich.com/1618-travis-ci-tutorial-getting-started)
-osx_image: xcode12.2
+language: cpp
+osx_image: xcode12
 
 matrix:
   include:
