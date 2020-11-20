@@ -10,7 +10,7 @@ language: cpp
 
 # xcode versions are set here (https://docs.travis-ci.com/user/reference/osx and
 # https://www.raywenderlich.com/1618-travis-ci-tutorial-getting-started)
-osx_image: xcode 12.2
+osx_image: xcode12.2
 
 matrix:
   include:
