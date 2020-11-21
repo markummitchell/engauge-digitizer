@@ -10,7 +10,6 @@
 /// Intersect with one of the following XT or YT coordinates for constant YR or XT respectively
 enum CentipedeIntersectionType {
   CENTIPEDE_INTERSECTION_LOW,    /// Intersection along circle perimeter with lowest value of XT or YR
-  CENTIPEDE_INTERSECTION_CENTER, /// Intersection of circle center with XT or YR
   CENTIPEDE_INTERSECTION_HIGH    /// Intersection along circle perimeter with highest value of XT or YR
 };
 

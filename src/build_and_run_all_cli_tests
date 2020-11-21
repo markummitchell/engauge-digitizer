@@ -10,6 +10,7 @@
 
 # Test names. Specify a single test to run just that test
 testsAvailable=( \
+    TestCentipedeEndpoints \
     TestCorrelation  \
     TestCrc32 \
     TestExport \

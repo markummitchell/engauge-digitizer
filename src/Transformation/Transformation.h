@@ -31,6 +31,7 @@
 class Transformation
 {
   // For unit testing
+  friend class TestCentipedeEndpoints;
   friend class TestExport;
   friend class TestSplineDrawer;
   friend class TestTransformation;

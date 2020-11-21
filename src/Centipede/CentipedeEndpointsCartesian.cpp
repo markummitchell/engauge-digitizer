@@ -37,7 +37,6 @@ QPointF CentipedeEndpointsCartesian::posScreenConstantXCommon (double radius,
   transformation().transformScreenToRawGraph (posClickScreen (),
                                               posClickGraph);
   double xClick = posClickGraph.x();
-  double yClick = posClickGraph.y();
 
   // Iterate points around the circle
   bool isFirst = true;
@@ -55,27 +54,19 @@ QPointF CentipedeEndpointsCartesian::posScreenConstantXCommon (double radius,
     double epsilon = qAbs (xGraphPrevious - xGraphNext) / 10.0; // Allow for roundoff
 
     bool save = false;
-    if (intersectionType == CENTIPEDE_INTERSECTION_CENTER) {
 
-      // CENTIPEDE_INTERSECTION_CENTER
-      save = isFirst ||
-          (qAbs (yGraphPrevious - yClick) < qAbs (yBest - yClick));
+    // CENTIPEDE_INTERSECTION_HIGH or CENTIPEDE_INTERSECTION_LOW
+    bool transitionUp = (xGraphPrevious - epsilon <= xClick) && (xClick < xGraphNext + epsilon);
+    bool transitionDown = (xGraphNext - epsilon <= xClick) && (xClick < xGraphPrevious + epsilon);
 
-    } else {
+    if (transitionDown || transitionUp) {
 
-      // CENTIPEDE_INTERSECTION_HIGH or CENTIPEDE_INTERSECTION_LOW
-      bool transitionUp = (xGraphPrevious - epsilon <= xClick) && (xClick < xGraphNext + epsilon);
-      bool transitionDown = (xGraphNext - epsilon <= xClick) && (xClick < xGraphPrevious + epsilon);
+      // Transition occurred so save if best so far
+      if (isFirst ||
+          (intersectionType == CENTIPEDE_INTERSECTION_HIGH && yGraphPrevious > yBest) ||
+          (intersectionType == CENTIPEDE_INTERSECTION_LOW && yGraphPrevious < yBest)) {
 
-      if (transitionDown || transitionUp) {
-
-        // Transition occurred so save if best so far
-        if (isFirst ||
-            (intersectionType == CENTIPEDE_INTERSECTION_HIGH && yGraphPrevious > yBest) ||
-            (intersectionType == CENTIPEDE_INTERSECTION_LOW && yGraphPrevious < yBest)) {
-
-          save = true;
-        }
+        save = true;
       }
     }
 
@@ -113,7 +104,6 @@ QPointF CentipedeEndpointsCartesian::posScreenConstantYCommon (double radius,
   QPointF posClickGraph;
   transformation().transformScreenToRawGraph (posClickScreen (),
                                               posClickGraph);
-  double xClick = posClickGraph.x();
   double yClick = posClickGraph.y();
 
   // Iterate points around the circle
@@ -132,27 +122,19 @@ QPointF CentipedeEndpointsCartesian::posScreenConstantYCommon (double radius,
     double epsilon = qAbs (yGraphPrevious - yGraphNext) / 10.0; // Allow for roundoff
 
     bool save = false;
-    if (intersectionType == CENTIPEDE_INTERSECTION_CENTER) {
 
-      // CENTIPEDE_INTERSECTION_CENTER
-      save = isFirst ||
-          (qAbs (xGraphPrevious - xClick) < qAbs (xBest - xClick));
+    // CENTIPEDE_INTERSECTION_HIGH or CENTIPEDE_INTERSECTION_LOW
+    bool transitionUp = (yGraphPrevious - epsilon <= yClick) && (yClick < yGraphNext + epsilon);
+    bool transitionDown = (yGraphNext - epsilon <= yClick) && (yClick < yGraphPrevious + epsilon);
 
-    } else {
+    if (transitionDown || transitionUp) {
 
-      // CENTIPEDE_INTERSECTION_HIGH or CENTIPEDE_INTERSECTION_LOW
-      bool transitionUp = (yGraphPrevious - epsilon <= yClick) && (yClick < yGraphNext + epsilon);
-      bool transitionDown = (yGraphNext - epsilon <= yClick) && (yClick < yGraphPrevious + epsilon);
+      // Transition occurred so save if best so far
+      if (isFirst ||
+          (intersectionType == CENTIPEDE_INTERSECTION_HIGH && xGraphPrevious > xBest) ||
+          (intersectionType == CENTIPEDE_INTERSECTION_LOW && xGraphPrevious < xBest)) {
 
-      if (transitionDown || transitionUp) {
-
-        // Transition occurred so save if best so far
-        if (isFirst ||
-            (intersectionType == CENTIPEDE_INTERSECTION_HIGH && xGraphPrevious > xBest) ||
-            (intersectionType == CENTIPEDE_INTERSECTION_LOW && xGraphPrevious < xBest)) {
-
-          save = true;
-        }
+        save = true;
       }
     }
 
@@ -168,16 +150,10 @@ QPointF CentipedeEndpointsCartesian::posScreenConstantYCommon (double radius,
   return posScreenBest;
 }
 
-QPointF CentipedeEndpointsCartesian::posScreenConstantYForCenterX (double radius) const
-{
-  return posScreenConstantYCommon (radius,
-                                   CENTIPEDE_INTERSECTION_CENTER);
-}
-
 QPointF CentipedeEndpointsCartesian::posScreenConstantYForHighX (double radius) const
 {
   return posScreenConstantYCommon (radius,
-                                    CENTIPEDE_INTERSECTION_HIGH);
+                                   CENTIPEDE_INTERSECTION_HIGH);
 }
 
 QPointF CentipedeEndpointsCartesian::posScreenConstantYForLowX (double radius) const

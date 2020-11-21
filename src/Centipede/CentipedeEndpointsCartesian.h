@@ -23,17 +23,11 @@ public:
                               const QPointF &posClickScreen);
   virtual ~CentipedeEndpointsCartesian ();
 
-  /// Screen point for X value of circle-center/coordinate intersection
-  QPointF posScreenConstantXForCenterY (double radius) const;
-
   /// Screen point for X value of circle/coordinate intersection in the increasing Y direction
   QPointF posScreenConstantXForHighY (double radius) const;
 
   /// Screen point for X value of circle/coordinate intersection in the decreasing Y direction
   QPointF posScreenConstantXForLowY (double radius) const;
-
-  /// Screen point for Y value of circle-center/coordinate intersection
-  QPointF posScreenConstantYForCenterX (double radius) const;
 
   /// Screen point for Y value of circle/coordinate intersection in the increasing X direction
   QPointF posScreenConstantYForHighX (double radius) const;

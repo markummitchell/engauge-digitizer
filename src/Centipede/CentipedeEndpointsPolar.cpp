@@ -240,27 +240,19 @@ QPointF CentipedeEndpointsPolar::posScreenConstantRCommon (double radius,
     double epsilon = qAbs (yGraphPrevious - yGraphNext) / 10.0; // Allow for roundoff
 
     bool save = false;
-    if (intersectionType == CENTIPEDE_INTERSECTION_CENTER) {
 
-      // CENTIPEDE_INTERSECTION_CENTER
-      save = isFirst ||
-          (qAbs (xGraphPrevious - xClick) < qAbs (xBest - xClick));
+    // CENTIPEDE_INTERSECTION_HIGH or CENTIPEDE_INTERSECTION_LOW
+    bool transitionUp = (yGraphPrevious - epsilon <= yClick) && (yClick < yGraphNext + epsilon);
+    bool transitionDown = (yGraphNext - epsilon <= yClick) && (yClick < yGraphPrevious + epsilon);
 
-    } else {
+    if (transitionDown || transitionUp) {
 
-      // CENTIPEDE_INTERSECTION_HIGH or CENTIPEDE_INTERSECTION_LOW
-      bool transitionUp = (yGraphPrevious - epsilon <= yClick) && (yClick < yGraphNext + epsilon);
-      bool transitionDown = (yGraphNext - epsilon <= yClick) && (yClick < yGraphPrevious + epsilon);
+      // Transition occurred so save if best so far
+      if (isFirst ||
+          (intersectionType == CENTIPEDE_INTERSECTION_HIGH && xGraphPrevious > xBest) ||
+          (intersectionType == CENTIPEDE_INTERSECTION_LOW && xGraphPrevious < xBest)) {
 
-      if (transitionDown || transitionUp) {
-
-        // Transition occurred so save if best so far
-        if (isFirst ||
-            (intersectionType == CENTIPEDE_INTERSECTION_HIGH && xGraphPrevious > xBest) ||
-            (intersectionType == CENTIPEDE_INTERSECTION_LOW && xGraphPrevious < xBest)) {
-
-          save = true;
-        }
+        save = true;
       }
     }
 
