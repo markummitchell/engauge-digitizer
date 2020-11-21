@@ -17,8 +17,8 @@ class CentipedeEndpointsAbstract
 public:
   /// Constructor with individual coordinates
   CentipedeEndpointsAbstract(const DocumentModelGuideline &modelGuideline,
-                           const Transformation &transformation,
-                           const QPointF &posClickScreen);
+                             const Transformation &transformation,
+                             const QPointF &posClickScreen);
   virtual ~CentipedeEndpointsAbstract ();
   
 protected:

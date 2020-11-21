@@ -6,6 +6,7 @@
 
 #include "CentipedeEndpointsPolar.h"
 #include "CentipedeSegmentConstantREllipse.h"
+#include "DocumentModelCoords.h"
 #include "EnumsToQt.h"
 #include "GraphicsArcItem.h"
 #include "GraphicsArcItemRelay.h"
@@ -17,7 +18,8 @@
 const int TICS_PER_CYCLE = 360 * 16;
 const double RADIANS_TO_TICS = TICS_PER_CYCLE / (2.0 * M_PI);
 
-CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(const DocumentModelGuideline &modelGuideline,
+CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(const DocumentModelCoords &modelCoords,
+                                                                   const DocumentModelGuideline &modelGuideline,
                                                                    const Transformation &transformation,
                                                                    const QPointF &posClickScreen) :
   CentipedeSegmentAbstract (modelGuideline,
@@ -25,7 +27,8 @@ CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(const Documen
                             posClickScreen),
   m_angleScreenToEllipseAxes (0)
 {
-  CentipedeEndpointsPolar endpointsPolar (modelGuideline,
+  CentipedeEndpointsPolar endpointsPolar (modelCoords,
+                                          modelGuideline,
                                           transformation,
                                           posClickScreen);
   

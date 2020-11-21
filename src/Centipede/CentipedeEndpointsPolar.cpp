@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "CentipedeEndpointsPolar.h"
+#include "CoordsType.h"
 #include "mmsubs.h"
 #include <qdebug.h>
 #include <qmath.h>
@@ -14,12 +15,14 @@
 const int NUM_CIRCLE_POINTS = 400; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
 const int NUM_LINE_POINTS = 400; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
 
-CentipedeEndpointsPolar::CentipedeEndpointsPolar(const DocumentModelGuideline &modelGuideline,
+CentipedeEndpointsPolar::CentipedeEndpointsPolar(const DocumentModelCoords &modelCoords,
+                                                 const DocumentModelGuideline &modelGuideline,
                                                  const Transformation &transformation,
                                                  const QPointF &posClickScreen) :
   CentipedeEndpointsAbstract (modelGuideline,
                               transformation,
-                              posClickScreen)
+                              posClickScreen),
+  m_modelCoords (modelCoords)
 {
 }
 
@@ -159,7 +162,7 @@ void CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles (const Tra
 
   // Points at origin, then 0  degrees at range rGraph
   QPointF posScreenCenter, posScreen0, posScreen90, posScreen180;
-  transformation.transformRawGraphToScreen (QPointF (0, 0),
+  transformation.transformRawGraphToScreen (QPointF (tAtOrigin (), rAtOrigin ()),
                                             posScreenCenter);
   transformation.transformRawGraphToScreen (QPointF (0, rGraph),
                                             posScreen0);
@@ -197,7 +200,7 @@ void CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles (const Tra
 
   // Origin
   QPointF posOriginScreen;
-  transformation.transformLinearCartesianGraphToScreen (QPointF (0, 0),
+  transformation.transformLinearCartesianGraphToScreen (QPointF (tAtOrigin (), rAtOrigin ()),
                                                         posOriginScreen);
 
   // Bounding rectangle before rotation
@@ -296,7 +299,7 @@ void CentipedeEndpointsPolar::posScreenConstantTForRHighLow (double radius,
 
   // Origin and screen vector to center
   QPointF posOriginScreen;
-  transformation().transformRawGraphToScreen (QPointF (0, 0),
+  transformation().transformRawGraphToScreen (QPointF (tAtOrigin (), rAtOrigin ()),
                                               posOriginScreen);
   QPointF vecCenter = posClickScreen() - posOriginScreen;
 
@@ -331,4 +334,20 @@ void CentipedeEndpointsPolar::posScreenConstantTForRHighLow (double radius,
       ++numberFound;
     }
   }
+}
+
+double CentipedeEndpointsPolar::rAtOrigin () const
+{
+  // Values that work for both linear and log
+  if (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
+    return m_modelCoords.originRadius();
+  } else {
+    return 0;
+  }
+}
+
+double CentipedeEndpointsPolar::tAtOrigin () const
+{
+  // Value that works for all units (radians, degrees, gradians)
+  return 0.0;
 }

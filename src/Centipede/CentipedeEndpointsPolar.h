@@ -9,6 +9,7 @@
 
 #include "CentipedeEndpointsAbstract.h"
 #include "CentipedeIntersectionType.h"
+#include "DocumentModelCoords.h"
 #include "DocumentModelGuideline.h"
 #include <QPointF>
 #include "Transformation.h"
@@ -18,7 +19,8 @@ class CentipedeEndpointsPolar : public CentipedeEndpointsAbstract
 {
 public:
   /// Constructor with individual coordinates
-  CentipedeEndpointsPolar(const DocumentModelGuideline &modelGuideline,
+  CentipedeEndpointsPolar(const DocumentModelCoords &modelCoords,
+                          const DocumentModelGuideline &modelGuideline,
                           const Transformation &transformation,
                           const QPointF &posClickScreen);
   virtual ~CentipedeEndpointsPolar ();
@@ -59,6 +61,12 @@ private:
   /// Solves posScreenConstantRHighT and posScreenConstantRLowT  
   QPointF posScreenConstantRCommon (double radius,
                                     CentipedeIntersectionType intersectionType) const;
+
+  double rAtOrigin () const;
+  double tAtOrigin () const;
+
+  DocumentModelCoords m_modelCoords;
+
 };
 
 #endif // CENTIPEDE_ENDPOINTS_POLAR_H

@@ -578,7 +578,8 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedeCartesian (const QPoint
 
 void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &posClickScreen)
 {
-  CentipedeEndpointsPolar endpoints (*m_modelGuidelineAfter,
+  CentipedeEndpointsPolar endpoints (cmdMediator().document().modelCoords(),
+                                     *m_modelGuidelineAfter,
                                      mainWindow().transformation(),
                                      posClickScreen);
 

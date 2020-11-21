@@ -14,14 +14,16 @@
 #include <QGraphicsRectItem>
 #include <QPen>
 
-CentipedeSegmentConstantTRadial::CentipedeSegmentConstantTRadial(const DocumentModelGuideline &modelGuideline,
+CentipedeSegmentConstantTRadial::CentipedeSegmentConstantTRadial(const DocumentModelCoords &modelCoords,
+                                                                 const DocumentModelGuideline &modelGuideline,
                                                                  const Transformation &transformation,
                                                                  const QPointF &posClickScreen) :
   CentipedeSegmentAbstract (modelGuideline,
                             transformation,
                             posClickScreen)
 {
-  CentipedeEndpointsPolar endpoints (modelGuideline,
+  CentipedeEndpointsPolar endpoints (modelCoords,
+                                     modelGuideline,
                                      transformation,
                                      posClickScreen);
   

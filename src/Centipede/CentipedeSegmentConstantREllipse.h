@@ -9,6 +9,7 @@
 
 #include "CentipedeSegmentAbstract.h"
 
+class DocumentModelCoords;
 class GraphicsArcItem;
 class GraphicsArcItemRelay;
 
@@ -19,7 +20,8 @@ class CentipedeSegmentConstantREllipse : public CentipedeSegmentAbstract
 
 public:
   /// Constructor with individual coordinates
-  CentipedeSegmentConstantREllipse(const DocumentModelGuideline &modelGuideline,
+  CentipedeSegmentConstantREllipse(const DocumentModelCoords &modelCoords,
+                                   const DocumentModelGuideline &modelGuideline,
                                    const Transformation &transformation,
                                    const QPointF &posClickScreen);
   virtual ~CentipedeSegmentConstantREllipse();

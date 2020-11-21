@@ -8,6 +8,7 @@
 #define CENTIPEDE_SEGMENT_CONSTANT_T_RADIAL_H
 
 #include "CentipedeSegmentAbstract.h"
+#include "DocumentModelCoords.h"
 
 class GraphicsLineItemRelay;
 class QGraphicsLineItem;
@@ -19,7 +20,8 @@ class CentipedeSegmentConstantTRadial : public CentipedeSegmentAbstract
   
 public:
   /// Constructor with individual coordinates
-  CentipedeSegmentConstantTRadial(const DocumentModelGuideline &modelGuideline,
+  CentipedeSegmentConstantTRadial(const DocumentModelCoords &modelCoords,
+                                  const DocumentModelGuideline &modelGuideline,
                                   const Transformation &transformation,
                                   const QPointF &posClickScreen);
   virtual ~CentipedeSegmentConstantTRadial();

@@ -7,7 +7,7 @@
 # osx_image: affects macos
 # xcode versions are set using osx_image (https://docs.travis-ci.com/user/reference/osx and
 
-dist: bionic
+dist: trusty
 language: cpp
 
 matrix:

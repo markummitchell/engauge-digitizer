@@ -37,10 +37,12 @@ CentipedePair::CentipedePair(GraphicsScene &scene,
                                                        transformation,
                                                        posScreen);
   } else {
-    m_centipedeXT = new CentipedeSegmentConstantTRadial (modelGuideline,
+    m_centipedeXT = new CentipedeSegmentConstantTRadial (modelCoords,
+                                                         modelGuideline,
                                                          transformation,
                                                          posScreen);
-    m_centipedeYR = new CentipedeSegmentConstantREllipse (modelGuideline,
+    m_centipedeYR = new CentipedeSegmentConstantREllipse (modelCoords,
+                                                          modelGuideline,
                                                           transformation,
                                                           posScreen);
   }
