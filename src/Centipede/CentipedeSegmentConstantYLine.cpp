@@ -8,12 +8,14 @@
 #include "CentipedeSegmentConstantYLine.h"
 #include "EnumsToQt.h"
 #include "GraphicsLineItemRelay.h"
+#include "GraphicsScene.h"
 #include "mmsubs.h"
 #include <qmath.h>
 #include <QGraphicsLineItem>
 #include <QPen>
 
-CentipedeSegmentConstantYLine::CentipedeSegmentConstantYLine(const DocumentModelGuideline &modelGuideline,
+CentipedeSegmentConstantYLine::CentipedeSegmentConstantYLine(GraphicsScene &scene,
+                                                             const DocumentModelGuideline &modelGuideline,
                                                              const Transformation &transformation,
                                                              const QPointF &posClickScreen) :
   CentipedeSegmentAbstract (modelGuideline,
@@ -37,6 +39,8 @@ CentipedeSegmentConstantYLine::CentipedeSegmentConstantYLine(const DocumentModel
 
   m_graphicsItem->setPen (QPen (color,
                                 modelGuideline.lineWidthActive ()));
+
+  scene.addItem (m_graphicsItem);
 }
 
 CentipedeSegmentConstantYLine::~CentipedeSegmentConstantYLine ()
@@ -51,11 +55,6 @@ double CentipedeSegmentConstantYLine::distanceToClosestEndpoint (const QPointF &
   double distanceHigh = magnitude (posScreen - m_posHigh);
 
   return qMin (distanceLow, distanceHigh);
-}
-
-QGraphicsItem *CentipedeSegmentConstantYLine::graphicsItem ()
-{
-  return dynamic_cast<QGraphicsItem*> (m_graphicsItem);
 }
 
 void CentipedeSegmentConstantYLine::updateRadius (double radius)

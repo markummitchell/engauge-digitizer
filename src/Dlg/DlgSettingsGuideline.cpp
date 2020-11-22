@@ -5,6 +5,7 @@
  ******************************************************************************************************/
 
 #include "ButtonWhatsThis.h"
+#include "CentipedeDebugPolar.h"
 #include "CentipedeEndpointsCartesian.h"
 #include "CentipedeEndpointsPolar.h"
 #include "CmdSettingsGuideline.h"
@@ -597,11 +598,16 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &p
 
   double angleRotation;
   QRectF rectBounding;
+  CentipedeDebugPolar debugPolar;
   endpoints.ellipseScreenConstantRForTHighLowAngles (mainWindow().transformation(),
                                                      posClickScreen,
                                                      angleRotation,
-                                                     rectBounding);
+                                                     rectBounding,
+                                                     debugPolar);
 
+  debugPolar.display (*m_scenePreviewActive,
+                      cmdMediator().document().modelCoords(),
+                      mainWindow().transformation());
 
   safeSetLine (m_itemCentipedeXTActive,
                posLow,

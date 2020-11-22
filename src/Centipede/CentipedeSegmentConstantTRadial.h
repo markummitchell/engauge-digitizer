@@ -11,6 +11,7 @@
 #include "DocumentModelCoords.h"
 
 class GraphicsLineItemRelay;
+class GraphicsScene;
 class QGraphicsLineItem;
 
 /// Centipede for constant T radial using QGraphicsLineItem
@@ -20,14 +21,14 @@ class CentipedeSegmentConstantTRadial : public CentipedeSegmentAbstract
   
 public:
   /// Constructor with individual coordinates
-  CentipedeSegmentConstantTRadial(const DocumentModelCoords &modelCoords,
+  CentipedeSegmentConstantTRadial(GraphicsScene &scene,
+                                  const DocumentModelCoords &modelCoords,
                                   const DocumentModelGuideline &modelGuideline,
                                   const Transformation &transformation,
                                   const QPointF &posClickScreen);
   virtual ~CentipedeSegmentConstantTRadial();
 
   virtual double distanceToClosestEndpoint (const QPointF &posScreen) const;
-  virtual QGraphicsItem *graphicsItem ();
   virtual void updateRadius (double radius);
 
 signals:

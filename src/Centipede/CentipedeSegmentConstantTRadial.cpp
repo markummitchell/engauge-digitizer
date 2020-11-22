@@ -8,13 +8,15 @@
 #include "CentipedeSegmentConstantTRadial.h"
 #include "EnumsToQt.h"
 #include "GraphicsLineItemRelay.h"
+#include "GraphicsScene.h"
 #include "mmsubs.h"
 #include <qmath.h>
 #include <QGraphicsLineItem>
 #include <QGraphicsRectItem>
 #include <QPen>
 
-CentipedeSegmentConstantTRadial::CentipedeSegmentConstantTRadial(const DocumentModelCoords &modelCoords,
+CentipedeSegmentConstantTRadial::CentipedeSegmentConstantTRadial(GraphicsScene &scene,
+                                                                 const DocumentModelCoords &modelCoords,
                                                                  const DocumentModelGuideline &modelGuideline,
                                                                  const Transformation &transformation,
                                                                  const QPointF &posClickScreen) :
@@ -40,6 +42,8 @@ CentipedeSegmentConstantTRadial::CentipedeSegmentConstantTRadial(const DocumentM
 
   m_graphicsItem->setPen (QPen (color,
                                 modelGuideline.lineWidthActive ()));
+
+  scene.addItem (m_graphicsItem);
 }
 
 CentipedeSegmentConstantTRadial::~CentipedeSegmentConstantTRadial ()
@@ -54,11 +58,6 @@ double CentipedeSegmentConstantTRadial::distanceToClosestEndpoint (const QPointF
   double distanceHigh = magnitude (posScreen - m_posHigh);
 
   return qMin (distanceLow, distanceHigh);
-}
-
-QGraphicsItem *CentipedeSegmentConstantTRadial::graphicsItem ()
-{
-  return dynamic_cast<QGraphicsItem*> (m_graphicsItem);
 }
 
 void CentipedeSegmentConstantTRadial::updateRadius (double radius)

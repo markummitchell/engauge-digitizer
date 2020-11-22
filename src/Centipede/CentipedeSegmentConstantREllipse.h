@@ -7,11 +7,13 @@
 #ifndef CENTIPEDE_SEGMENT_CONSTANT_R_ELLIPSE_H
 #define CENTIPEDE_SEGMENT_CONSTANT_R_ELLIPSE_H
 
+#include "CentipedeDebugPolar.h"
 #include "CentipedeSegmentAbstract.h"
 
 class DocumentModelCoords;
 class GraphicsArcItem;
 class GraphicsArcItemRelay;
+class GraphicsScene;
 
 /// Centipede for constant R
 class CentipedeSegmentConstantREllipse : public CentipedeSegmentAbstract
@@ -20,22 +22,21 @@ class CentipedeSegmentConstantREllipse : public CentipedeSegmentAbstract
 
 public:
   /// Constructor with individual coordinates
-  CentipedeSegmentConstantREllipse(const DocumentModelCoords &modelCoords,
+  CentipedeSegmentConstantREllipse(GraphicsScene &scene,
+                                   const DocumentModelCoords &modelCoords,
                                    const DocumentModelGuideline &modelGuideline,
                                    const Transformation &transformation,
                                    const QPointF &posClickScreen);
   virtual ~CentipedeSegmentConstantREllipse();
 
   virtual double distanceToClosestEndpoint (const QPointF &posScreen) const;
-  virtual QGraphicsItem *graphicsItem ();
   virtual void updateRadius (double radius);
 
 signals:
   
   /// Send new geometry for later updating
   void signalUpdateAngles (int startAngle,
-                           int spanAngle,
-                           double rotationAngle);
+                           int spanAngle);
   
 private:
   CentipedeSegmentConstantREllipse();
@@ -62,6 +63,9 @@ private:
   double m_angleCenter;
   double m_angleHigh;
   double m_angleRotation;
+
+  /// Debugging
+  CentipedeDebugPolar m_debugPolar;
 };
 
 #endif // CENTIPEDE_SEGMENT_CONSTANT_R_ELLIPSE_H

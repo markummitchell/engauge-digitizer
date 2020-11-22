@@ -14,6 +14,8 @@
 #include <QPointF>
 #include "Transformation.h"
 
+class CentipedeDebugPolar;
+
 /// Compute endpoints for polar centipedes
 class CentipedeEndpointsPolar : public CentipedeEndpointsAbstract
 {
@@ -39,7 +41,8 @@ public:
   void ellipseScreenConstantRForTHighLowAngles (const Transformation &transformation,
                                                 const QPointF &posClickScreen,
                                                 double &angleRotation,
-                                                QRectF &rectBounding);
+                                                QRectF &rectBounding,
+                                                CentipedeDebugPolar &DebugPolar);
   
   /// Screen point for R value of circle/coordinate intersection in the increasing T direction
   QPointF posScreenConstantRForHighT (double radius) const;

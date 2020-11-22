@@ -55,6 +55,7 @@ HEADERS  += \
     Callback/CallbackSceneUpdateAfterCommand.h \
     Callback/CallbackSearchReturn.h \
     Callback/CallbackUpdateTransform.h \
+    Centipede/CentipedeDebugPolar.h \
     Centipede/CentipedeEndpointsAbstract.h \
     Centipede/CentipedeEndpointsCartesian.h \
     Centipede/CentipedeEndpointsPolar.h \
@@ -513,6 +514,7 @@ SOURCES += \
     Callback/CallbackScaleBar.cpp \
     Callback/CallbackSceneUpdateAfterCommand.cpp \
     Callback/CallbackUpdateTransform.cpp \
+    Centipede/CentipedeDebugPolar.cpp \
     Centipede/CentipedeEndpointsAbstract.cpp \
     Centipede/CentipedeEndpointsCartesian.cpp \
     Centipede/CentipedeEndpointsPolar.cpp \

@@ -10,6 +10,7 @@
 #include "CentipedeSegmentAbstract.h"
 
 class GraphicsLineItemRelay;
+class GraphicsScene;
 class QGraphicsLineItem;
 
 /// Centipede for constant XT using QGraphicsLineItem
@@ -19,13 +20,13 @@ class CentipedeSegmentConstantXLine : public CentipedeSegmentAbstract
   
 public:
   /// Constructor with individual coordinates
-  CentipedeSegmentConstantXLine(const DocumentModelGuideline &modelGuideline,
+  CentipedeSegmentConstantXLine(GraphicsScene &scene,
+                                const DocumentModelGuideline &modelGuideline,
                                 const Transformation &transformation,
                                 const QPointF &posClickScreen);
   virtual ~CentipedeSegmentConstantXLine();
 
   virtual double distanceToClosestEndpoint (const QPointF &posScreen) const;
-  virtual QGraphicsItem *graphicsItem ();
   virtual void updateRadius (double radius);
 
 signals:

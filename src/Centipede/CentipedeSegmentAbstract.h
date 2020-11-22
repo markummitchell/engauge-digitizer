@@ -39,9 +39,6 @@ public:
   /// Return distance to closest endpoint
   virtual double distanceToClosestEndpoint (const QPointF &posScreen) const = 0;
 
-  /// Expose graphics item for registering with scene
-  virtual QGraphicsItem *graphicsItem () = 0;
-
   /// Update geometry to reflect cursor movement
   virtual void updateRadius (double radius) = 0;
   

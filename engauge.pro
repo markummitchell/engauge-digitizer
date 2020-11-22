@@ -100,6 +100,7 @@ HEADERS  += \
     src/Callback/CallbackSceneUpdateAfterCommand.h \
     src/Callback/CallbackSearchReturn.h \
     src/Callback/CallbackUpdateTransform.h \
+    src/Centipede/CentipedeDebugPolar.h \
     src/Centipede/CentipedeEndpointsAbstract.h \
     src/Centipede/CentipedeEndpointsCartesian.h \
     src/Centipede/CentipedeEndpointsPolar.h \
@@ -554,6 +555,7 @@ SOURCES += \
     src/Callback/CallbackScaleBar.cpp \
     src/Callback/CallbackSceneUpdateAfterCommand.cpp \
     src/Callback/CallbackUpdateTransform.cpp \
+    src/Centipede/CentipedeDebugPolar.cpp \
     src/Centipede/CentipedeEndpointsAbstract.cpp \
     src/Centipede/CentipedeEndpointsCartesian.cpp \
     src/Centipede/CentipedeEndpointsPolar.cpp \

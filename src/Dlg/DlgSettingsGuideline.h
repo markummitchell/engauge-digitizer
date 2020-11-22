@@ -12,6 +12,7 @@
 #include <QStringList>
 
 class ButtonWhatsThis;
+class CentipedeDebugPolarData;
 class DocumentModelGuideline;
 class QComboBox;
 class QGraphicsEllipseItem;
@@ -57,6 +58,7 @@ private:
   void createLinesCartesian();
   void createLinesPolar();
   void createPreview (QGridLayout *layout, int &row);
+  void displayDebugPolarData (const CentipedeDebugPolarData &debugPolarData);
   void killCentipede ();
   void loadImages (CmdMediator &cmdMediator);
   double radiusOfClosestSide (const QPointF &posLeft,

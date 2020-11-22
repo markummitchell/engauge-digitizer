@@ -154,8 +154,9 @@ void DigitizeStateGuideline::handleMousePress (CmdMediator *cmdMediator,
 
   // If click is on an existing guideline then:
   // 1) skip creating new CentipedePair which would then turn into new Guideline
-  // 2) let existing Guideline absort the mouse press event so it can be dragged
-  if (!hitTestForGraphics (posScreen)) {
+  // 2) let existing Guideline absorb the mouse press event so it can be dragged
+  if (!hitTestForGraphics (posScreen) &&
+      context().mainWindow().scene().sceneRect().contains (posScreen)) {
 
     // Click was on empty area, or on a locked axis point which does not count, so start a CentipedePair
     m_centipedePair = new CentipedePair (context().mainWindow().scene(),

@@ -18,8 +18,8 @@ GraphicsArcItemRelay::GraphicsArcItemRelay (QObject *caller,
   m_graphicsItem (graphicsItem)
 {
   // Queue for later by including Qt::QueuedConnection
-  connect (caller, SIGNAL (signalUpdateAngles (int, int, double)),
-           this, SLOT (slotUpdateAngles (int, int, double)),
+  connect (caller, SIGNAL (signalUpdateAngles (int, int)),
+           this, SLOT (slotUpdateAngles (int, int)),
            Qt::QueuedConnection);
 }
 
@@ -29,10 +29,8 @@ GraphicsArcItemRelay::~GraphicsArcItemRelay ()
 }
                                  
 void GraphicsArcItemRelay::slotUpdateAngles (int startAngle,
-                                             int spanAngle,
-                                             double rotationAngle)
+                                             int spanAngle)
 {
   m_graphicsItem->setStartAngle (startAngle);
   m_graphicsItem->setSpanAngle (spanAngle);
-  m_graphicsItem->setRotation (-1.0 * qRadiansToDegrees (rotationAngle));
 }

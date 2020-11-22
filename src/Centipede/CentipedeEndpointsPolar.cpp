@@ -5,11 +5,14 @@
  ******************************************************************************************************/
 
 #include "CentipedeEndpointsPolar.h"
+#include "CentipedeDebugPolar.h"
 #include "CoordsType.h"
+#include "Logger.h"
 #include "mmsubs.h"
 #include <qdebug.h>
 #include <qmath.h>
 #include <QPointF>
+#include "QtToString.h"
 #include "Transformation.h"
 
 const int NUM_CIRCLE_POINTS = 400; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
@@ -71,11 +74,16 @@ void CentipedeEndpointsPolar::angleScreenConstantRHighLowAngles (double radiusAb
                                                                  double &angleLow,
                                                                  double &angleHigh) const
 {
+  // LOG4CPP is below
+
   // Click point
   QPointF posClickGraph;
   transformation().transformScreenToRawGraph (posClickScreen(),
                                               posClickGraph);
   double yClick = posClickGraph.y();
+
+  // For logging
+  QPointF posLowBest, posHighBest;
 
   // Iterate points around the circle starting at angleCenter, and going in two different
   // directions (clockwise for angleHigh and counterclockwise for angleLow)
@@ -106,7 +114,8 @@ void CentipedeEndpointsPolar::angleScreenConstantRHighLowAngles (double radiusAb
     if (isFirstLow  && (transitionDownLow || transitionUpLow)) {
       // Found the first (=best) low value
       isFirstLow = false;
-      angleLow = qDegreesToRadians ((posGraphPreviousLow.x() + posGraphNextLow.x()) / 2.0); // Average
+      posLowBest = (posGraphPreviousLow + posGraphNextLow) / 2.0; // Average
+      angleLow = qDegreesToRadians (posLowBest.x()); // Average
       if (!isFirstHigh) {
         break; // Done
       }
@@ -115,7 +124,8 @@ void CentipedeEndpointsPolar::angleScreenConstantRHighLowAngles (double radiusAb
     if (isFirstHigh && (transitionDownHigh || transitionUpHigh)) {
       // Found the first (=best) high value
       isFirstHigh = false;
-      angleHigh = qDegreesToRadians ((posGraphPreviousHigh.x() + posGraphNextHigh.x()) / 2.0); // Average
+      posHighBest = (posGraphPreviousHigh + posGraphNextHigh) / 2.0;
+      angleHigh = qDegreesToRadians (posHighBest.x()); // Average
       if (!isFirstLow) {
         break; // Done
       }
@@ -131,6 +141,12 @@ void CentipedeEndpointsPolar::angleScreenConstantRHighLowAngles (double radiusAb
     angleLow = angleHigh;
     angleHigh = temp;
   }
+
+  LOG4CPP_INFO_S ((*mainCat)) << "CentipedeEndpointsPolar::angleScreenConstantRHighLowAngles posLow="
+                              << QPointFToString (posLowBest).toLatin1().data() << " angleLow="
+                              << qRadiansToDegrees (angleLow) << " posHigh="
+                              << QPointFToString (posHighBest).toLatin1().data() << " angleHigh="
+                              << qRadiansToDegrees (angleHigh);
 }
 
 double CentipedeEndpointsPolar::closestAngleToCentralAngle (double angleCenter,
@@ -153,8 +169,11 @@ double CentipedeEndpointsPolar::closestAngleToCentralAngle (double angleCenter,
 void CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles (const Transformation &transformation,
                                                                        const QPointF &posClickScreen,
                                                                        double &angleRotation,
-                                                                       QRectF &rectBounding)
+                                                                       QRectF &rectBounding,
+                                                                       CentipedeDebugPolar &debugPolar)
 {
+  //  LOG4CPP is below
+
   QPointF posClickGraph;
   transformation.transformScreenToRawGraph (posClickScreen,
                                             posClickGraph);
@@ -176,6 +195,7 @@ void CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles (const Tra
   // Corners of parallelogram circumscribing the ellipse
   QPointF posScreenTL = posScreen180 + centerTo90;
   QPointF posScreenTR = posScreen0 + centerTo90;
+  QPointF posScreenBL = posScreen180 - centerTo90;
   QPointF posScreenBR = posScreen0 - centerTo90;
 
   double angleEllipseFromMajorAxis= 0, aAligned = 0, bAligned = 0;
@@ -189,6 +209,18 @@ void CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles (const Tra
                             aAligned,
                             bAligned);
 
+  double angleGraphAxisFromScreenAxis = qAtan2 (posScreen0.y() - posScreenCenter.y(),
+                                                posScreen0.x() - posScreenCenter.x());
+
+  debugPolar = CentipedeDebugPolar (posScreenTL,
+                                    posScreenTR,
+                                    posScreenBL,
+                                    posScreenBR,
+                                    angleGraphAxisFromScreenAxis,
+                                    angleEllipseFromMajorAxis,
+                                    aAligned,
+                                    bAligned);
+
   // Angle between +x axis in screen and semimajor axis is computed in all four quadrants
   // by projecting onto +x and +y screen axesangleEllipseFromScreenAxis
   angleRotation = angleFromBasisVectors (1,
@@ -198,17 +230,18 @@ void CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles (const Tra
                                          posScreen0.x() - posScreenCenter.x(),
                                          posScreen0.y() - posScreenCenter.y());
 
-  // Origin
-  QPointF posOriginScreen;
-  transformation.transformLinearCartesianGraphToScreen (QPointF (tAtOrigin (), rAtOrigin ()),
-                                                        posOriginScreen);
+  // Bounding rectangle before rotation. We make sure the rectangle is normalized which at one point
+  // seemed to prevent drawing artifacts
+  rectBounding = QRectF (posScreenCenter.x() - aAligned,
+                         posScreenCenter.y() - bAligned,
+                         2.0 * aAligned,
+                         2.0 * bAligned);
 
-  // Bounding rectangle before rotation
-  rectBounding = QRectF (posOriginScreen + QPointF (-1.0 * aAligned,
-                                                    bAligned),
-                         posOriginScreen + QPointF (aAligned,
-                                                    -1.0 * bAligned));
-  rectBounding = rectBounding.normalized(); // This seems to prevent some drawing artifacts
+  LOG4CPP_INFO_S ((*mainCat)) << "CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles angleRotation="
+                              << qRadiansToDegrees (angleRotation) << " posScreen0=" << QPointFToString (posScreen0).toLatin1().data()
+                              << " posScreen90=" << QPointFToString (posScreen90).toLatin1().data()
+                              << " a=" << aAligned
+                              << " b=" << bAligned;
 }
 
 QPointF CentipedeEndpointsPolar::posScreenConstantRCommon (double radius,
@@ -221,7 +254,6 @@ QPointF CentipedeEndpointsPolar::posScreenConstantRCommon (double radius,
   QPointF posClickGraph;
   transformation().transformScreenToRawGraph (posClickScreen (),
                                               posClickGraph);
-  double xClick = posClickGraph.x();
   double yClick = posClickGraph.y();
 
   // Iterate points around the circle

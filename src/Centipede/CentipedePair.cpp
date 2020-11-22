@@ -30,25 +30,26 @@ CentipedePair::CentipedePair(GraphicsScene &scene,
 {
   // Create visible Centipede items
   if (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
-    m_centipedeXT = new CentipedeSegmentConstantXLine (modelGuideline,
+    m_centipedeXT = new CentipedeSegmentConstantXLine (scene,
+                                                       modelGuideline,
                                                        transformation,
                                                        posScreen);
-    m_centipedeYR = new CentipedeSegmentConstantYLine (modelGuideline,
+    m_centipedeYR = new CentipedeSegmentConstantYLine (scene,
+                                                       modelGuideline,
                                                        transformation,
                                                        posScreen);
   } else {
-    m_centipedeXT = new CentipedeSegmentConstantTRadial (modelCoords,
+    m_centipedeXT = new CentipedeSegmentConstantTRadial (scene,
+                                                         modelCoords,
                                                          modelGuideline,
                                                          transformation,
                                                          posScreen);
-    m_centipedeYR = new CentipedeSegmentConstantREllipse (modelCoords,
+    m_centipedeYR = new CentipedeSegmentConstantREllipse (scene,
+                                                          modelCoords,
                                                           modelGuideline,
                                                           transformation,
                                                           posScreen);
   }
-
-  scene.addItem (m_centipedeXT->graphicsItem ());
-  scene.addItem (m_centipedeYR->graphicsItem ());
 
   // Save starting graph position
   transformation.transformScreenToRawGraph(posScreen,

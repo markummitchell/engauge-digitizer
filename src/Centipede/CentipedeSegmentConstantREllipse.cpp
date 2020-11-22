@@ -4,21 +4,25 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "CentipedeDebugPolar.h"
 #include "CentipedeEndpointsPolar.h"
 #include "CentipedeSegmentConstantREllipse.h"
 #include "DocumentModelCoords.h"
 #include "EnumsToQt.h"
 #include "GraphicsArcItem.h"
 #include "GraphicsArcItemRelay.h"
+#include "GraphicsScene.h"
 #include "mmsubs.h"
 #include <qdebug.h>
 #include <qmath.h>
 #include <QPen>
+#include "QtToString.h"
 
 const int TICS_PER_CYCLE = 360 * 16;
 const double RADIANS_TO_TICS = TICS_PER_CYCLE / (2.0 * M_PI);
 
-CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(const DocumentModelCoords &modelCoords,
+CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(GraphicsScene &scene,
+                                                                   const DocumentModelCoords &modelCoords,
                                                                    const DocumentModelGuideline &modelGuideline,
                                                                    const Transformation &transformation,
                                                                    const QPointF &posClickScreen) :
@@ -41,14 +45,29 @@ CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(const Documen
                                                     m_angleHigh);
 
   QRectF rectBounding;
+  CentipedeDebugPolar debugPolar;
   endpointsPolar.ellipseScreenConstantRForTHighLowAngles (transformation,
                                                           posClickScreen,
                                                           m_angleRotation,
-                                                          rectBounding);
+                                                          rectBounding,
+                                                          debugPolar);;
+
+  debugPolar.display (scene,
+                      modelCoords,
+                      transformation);
+
+  QPointF posCenterGraph (0, 0), posCenterScreen;
+  if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
+    posCenterGraph = QPointF (0, modelCoords.originRadius());
+  }
+  transformation.transformRawGraphToScreen (posCenterGraph,
+                                            posCenterScreen);
 
   // Create graphics item and its relay
   m_graphicsItem = new GraphicsArcItem (rectBounding);
-  m_graphicsItem->setSpanAngle (0); // Prevent flicker by display before span angle is changed from all-inclusive default
+  //test m_graphicsItem->setSpanAngle (0); // Prevent flicker by display before span angle is changed from all-inclusive default
+  m_graphicsItem->setTransformOriginPoint (posCenterScreen);
+  m_graphicsItem->setRotation (-1.0 * qRadiansToDegrees (m_angleRotation));
   m_graphicsItemRelay = new GraphicsArcItemRelay (this,
                                                   m_graphicsItem);
 
@@ -57,6 +76,8 @@ CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(const Documen
   m_graphicsItem->setPen (QPen (color,
                                 modelGuideline.lineWidthActive ()));
   updateRadius (modelGuideline.creationCircleRadius());
+
+  scene.addItem (m_graphicsItem);
 }
 
 CentipedeSegmentConstantREllipse::~CentipedeSegmentConstantREllipse ()
@@ -71,11 +92,6 @@ double CentipedeSegmentConstantREllipse::distanceToClosestEndpoint (const QPoint
   double distanceHigh = magnitude (posScreen - m_posHigh);
 
   return qMin (distanceLow, distanceHigh);
-}
-
-QGraphicsItem *CentipedeSegmentConstantREllipse::graphicsItem ()
-{
-  return dynamic_cast<QGraphicsItem*> (m_graphicsItem);
 }
 
 void CentipedeSegmentConstantREllipse::updateRadius (double radius)
@@ -94,7 +110,5 @@ void CentipedeSegmentConstantREllipse::updateRadius (double radius)
   int angleDeltaTics = angleHighTics - angleLowTics;
 
   emit signalUpdateAngles (angleLowTics,
-                           angleDeltaTics,
-                           m_angleRotation);
+                           angleDeltaTics);
 }
-
