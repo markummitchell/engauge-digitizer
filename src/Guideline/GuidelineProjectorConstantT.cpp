@@ -172,10 +172,16 @@ QLineF GuidelineProjectorConstantT::intersect (const Transformation &transformat
     x = slopeInverse * y;
   }
 
+  QPointF posGraphCenter (0, 0);
+  if (transformation.modelCoords().coordScaleYRadius() == COORD_SCALE_LOG) {
+    posGraphCenter = QPointF (0,
+                              transformation.modelCoords().originRadius());
+  }
+
   // Convert graph coordinate points into screen coordinate line
   QPointF posSceneCenter, posSceneOther;
-  transformation.transformLinearCartesianGraphToScreen (QPointF (0, 0),
-                                                        posSceneCenter);
+  transformation.transformRawGraphToScreen (posGraphCenter,
+                                            posSceneCenter);
   transformation.transformLinearCartesianGraphToScreen (QPointF (x, y),
                                                         posSceneOther);
 

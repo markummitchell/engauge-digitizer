@@ -26,16 +26,29 @@ EllipseParameters GuidelineProjectorConstantR::fromCoordinateR (const Transforma
                                                                 const QRectF & /* sceneRect */,
                                                                 double rGraph)
 {
+  QPointF posGraphCenter (0, 0);
+  if (transformation.modelCoords().coordScaleYRadius() == COORD_SCALE_LOG) {
+    posGraphCenter = QPointF (0,
+                              transformation.modelCoords().originRadius());
+  }
+
   // Points at 45, 135, 225 and 315 degrees at range rGraph
-  QPointF posScreenCenter, posScreenTL, posScreenTR, posScreenBR; // No need for BL point
-  transformation.transformLinearCartesianGraphToScreen (QPointF (0, 0),
-                                                        posScreenCenter);
-  transformation.transformLinearCartesianGraphToScreen (QPointF (-rGraph, rGraph),
-                                                        posScreenTL);
-  transformation.transformLinearCartesianGraphToScreen (QPointF (rGraph, rGraph),
-                                                        posScreenTR);
-  transformation.transformLinearCartesianGraphToScreen (QPointF (rGraph, -rGraph),
-                                                        posScreenBR);
+  QPointF posScreenCenter, posScreen0, posScreen90, posScreen180;
+  transformation.transformRawGraphToScreen (posGraphCenter,
+                                            posScreenCenter);
+  transformation.transformRawGraphToScreen (QPointF (0, rGraph),
+                                            posScreen0);
+  transformation.transformRawGraphToScreen (QPointF (90, rGraph),
+                                            posScreen90);
+  transformation.transformRawGraphToScreen (QPointF (180, rGraph),
+                                            posScreen180);
+
+  QPointF centerTo90 = posScreen90 - posScreenCenter;
+
+  // Corners of parallelogram circumscribing the ellipse
+  QPointF posScreenTL = posScreen180 + centerTo90;
+  QPointF posScreenTR = posScreen0 + centerTo90;
+  QPointF posScreenBR = posScreen0 - centerTo90;
 
   double angleRadians = 0, aAligned = 0, bAligned = 0;
   ellipseFromParallelogram (posScreenTL.x() - posScreenCenter.x(),
@@ -63,18 +76,12 @@ EllipseParameters GuidelineProjectorConstantR::fromPosScreen (const Transformati
 
   double rGraph = posGraph.y();
 
-  if (transformation.modelCoords().coordScaleYRadius() == COORD_SCALE_LOG) {
-    if (rGraph <= 0) {
+  if ((transformation.modelCoords().coordScaleYRadius() == COORD_SCALE_LOG) &&
+      (rGraph <= 0)) {
 
       // Range enforcement on the range values with log scale should have prevented this branch
       LOG4CPP_ERROR_S ((*mainCat)) << "GuidelineProjectorConstantR::fromPosScreen out of bounds range " << rGraph;
 
-    } else {
-
-      // Adjust radius from log to linear so, after conversion to cartesian, we have linear x and y
-      rGraph = qLn (rGraph);
-
-    }
   }
 
   return fromCoordinateR (transformation,
