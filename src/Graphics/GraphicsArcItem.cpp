@@ -25,9 +25,6 @@ GraphicsArcItem::GraphicsArcItem(double x,
                        height,
                        parent)
 {
-  // Rotations will be about center point rather than (0,0)
-  setTransformOriginPoint (x + width / 2.0,
-                           y + height / 2.0);
 }
 
 GraphicsArcItem::GraphicsArcItem(const QRectF &rect,
@@ -35,8 +32,6 @@ GraphicsArcItem::GraphicsArcItem(const QRectF &rect,
   QGraphicsEllipseItem (rect,
                         parent)
 {
-  // Rotations will be about center point rather than (0,0)
-  setTransformOriginPoint (rect.center());
 }
 
 void GraphicsArcItem::paint (QPainter *painter,
@@ -52,22 +47,3 @@ void GraphicsArcItem::paint (QPainter *painter,
                     span);
 }
 
-void GraphicsArcItem::setRect (const QRectF &rect)
-{
-  QGraphicsEllipseItem::setRect (rect);
-  setTransformOriginPoint (rect.x() + rect.width() / 2.0,
-                           rect.y() + rect.height() / 2.0);
-}
-
-void GraphicsArcItem::setRect (double x,
-                               double y,
-                               double width,
-                               double height)
-{
-  QGraphicsEllipseItem::setRect (x,
-                                 y,
-                                 width,
-                                 height);
-  setTransformOriginPoint (x + width / 2,
-                           y + height / 2);
-}

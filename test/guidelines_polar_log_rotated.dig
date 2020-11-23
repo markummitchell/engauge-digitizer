@@ -11,8 +11,8 @@
         </Export>
         <AxesChecker Mode="1" Seconds="3" LineColor="6"/>
         <GridDisplay Stable="True" DisableX="0" CountX="12" StartX="0" StepX="30" StopX="360" DisableY="0" CountY="5" StartY="1" StepY="10" StopY="105119" Color="0" ColorString="Black"/>
-        <GridRemoval Stable="False" DefinedGridLines="False" CloseDistance="10" CoordDisableX="0" CoordDisableXString="Count" CountX="5" StartX="90" StepX="45" StopX="270" CoordDisableY="0" CoordDisableYString="Count" CountY="2" StartY="939.55" StepY="26091.7" StopY="27031.2"/>
-        <Guidelines CreationCircleRadius="20" LineColor="5" LineColorString="Magenta" LineWidthActive="2" LineWidthInactive="1">
+        <GridRemoval Stable="False" DefinedGridLines="False" CloseDistance="10" CoordDisableX="0" CoordDisableXString="Count" CountX="5" StartX="90" StepX="45" StopX="270" CoordDisableY="0" CoordDisableYString="Count" CountY="2" StartY="939.543" StepY="26091.5" StopY="27031.1"/>
+        <Guidelines CreationCircleRadius="20" LineColor="5" LineColorString="Magenta" LineWidthActive="10" LineWidthInactive="5">
             <GuidelinesX/>
             <GuidelinesY/>
         </Guidelines>

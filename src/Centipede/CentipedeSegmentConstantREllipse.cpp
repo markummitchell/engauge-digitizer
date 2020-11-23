@@ -31,6 +31,11 @@ CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(GraphicsScene
                             posClickScreen),
   m_angleScreenToEllipseAxes (0)
 {
+  QPointF posClickGraph;
+  transformation.transformScreenToRawGraph (posClickScreen,
+                                            posClickGraph);
+  double rGraph = posClickGraph.y();
+
   CentipedeEndpointsPolar endpointsPolar (modelCoords,
                                           modelGuideline,
                                           transformation,
@@ -60,19 +65,23 @@ CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(GraphicsScene
   if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
     posCenterGraph = QPointF (0, modelCoords.originRadius());
   }
+
+  QPointF posScreen0;
   transformation.transformRawGraphToScreen (posCenterGraph,
                                             posCenterScreen);
+  transformation.transformRawGraphToScreen (QPointF (0, rGraph),
+                                            posScreen0);
 
-  // Create graphics item and its relay
+  // Create graphics item and its relay. As explained in GuidelineEllipse::updateGeometry, the correct sequence
+  // of graphical operations is very tricky, and less successful if setTransformOriginPoint is used (e.g. works for
+  // non-shear cases but not shear cases)
   m_graphicsItem = new GraphicsArcItem (rectBounding);
-  //test m_graphicsItem->setSpanAngle (0); // Prevent flicker by display before span angle is changed from all-inclusive default
-  m_graphicsItem->setTransformOriginPoint (posCenterScreen);
-  m_graphicsItem->setRotation (-1.0 * qRadiansToDegrees (m_angleRotation));
+  m_graphicsItem->setSpanAngle (0); // Prevent flicker by display before span angle is changed from all-inclusive default
+  m_graphicsItem->setRotation (qRadiansToDegrees (m_angleRotation));
+  m_graphicsItem->setPos (posCenterScreen);
   m_graphicsItemRelay = new GraphicsArcItemRelay (this,
                                                   m_graphicsItem);
-
   QColor color (ColorPaletteToQColor (modelGuideline.lineColor()));
-
   m_graphicsItem->setPen (QPen (color,
                                 modelGuideline.lineWidthActive ()));
   updateRadius (modelGuideline.creationCircleRadius());
@@ -99,8 +108,8 @@ void CentipedeSegmentConstantREllipse::updateRadius (double radius)
   // Scale up/down the angles, with them converging to center angle as radius goes to zero
   double scaling = radius / modelGuideline().creationCircleRadius ();
 
-  double angleLowRad = m_angleCenter + scaling * (m_angleLow - m_angleCenter) - m_angleScreenToEllipseAxes;
-  double angleHighRad = m_angleCenter + scaling * (m_angleHigh - m_angleCenter) - m_angleScreenToEllipseAxes;
+  double angleLowRad = m_angleCenter + scaling * (m_angleLow - m_angleCenter) + m_angleRotation;
+  double angleHighRad = m_angleCenter + scaling * (m_angleHigh - m_angleCenter) + m_angleRotation;
   int angleLowTics = (int) (angleLowRad * RADIANS_TO_TICS);
   int angleHighTics = (int) (angleHighRad * RADIANS_TO_TICS);
 
@@ -111,4 +120,8 @@ void CentipedeSegmentConstantREllipse::updateRadius (double radius)
 
   emit signalUpdateAngles (angleLowTics,
                            angleDeltaTics);
+
+  CentipedeDebugPolar debugPolar;
+  debugPolar.dumpEllipseGraphicsItem ("CentipedeSegmentConstantREllipse::updateRadius",
+                                      m_graphicsItem);
 }

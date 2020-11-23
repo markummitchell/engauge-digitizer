@@ -38,15 +38,6 @@ public:
                       const QStyleOptionGraphicsItem *option,
                       QWidget *widget);
 
-  /// Set bounding rectangle. Updates transform origin point
-  virtual void setRect (const QRectF &rect);
-
-  /// Set bounding rectangle. Updates transform origin point
-  virtual void setRect (double x,
-                        double y,
-                        double width,
-                        double height);
-
 };
 
 #endif // GRAPHICS_ARCITEM_H

@@ -10,6 +10,7 @@
 #include <QPointF>
 
 class DocumentModelCoords;
+class QGraphicsEllipseItem;
 class QGraphicsScene;
 class Transformation;
 
@@ -55,6 +56,13 @@ public:
   void display (QGraphicsScene &scene,
                 const DocumentModelCoords &modelCoords,
                 const Transformation &transformation) const;
+
+  /// Dump ellipse grahics item. This is expected to be called just after all geometry settings for a
+  /// QGraphicsEllipseItem have been completed in the Centipede code, and later in the Guideline code,
+  /// so they can be compared when there is a problem. The broken code is adjusted to produce the values
+  /// of the good ellipse (assuming there  is one)
+  void dumpEllipseGraphicsItem (const QString &callerMethod,
+                                const QGraphicsEllipseItem *ellipse) const;
 
   /// Get method for bottom left corner of rectangle  
   QPointF posScreenParallelogramBL () const;

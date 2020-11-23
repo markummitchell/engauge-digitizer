@@ -49,9 +49,6 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY),
   m_geometryWindow (geometryWindow)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint"
-                               << " identifier=" << identifier.toLatin1 ().data ();
-
   createPointEllipse (radius);
 }
 
@@ -76,16 +73,11 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY),
   m_geometryWindow (geometryWindow)
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::GraphicsPoint "
-                               << " identifier=" << identifier.toLatin1 ().data ();
-
   createPointPolygon (polygon);
 }
 
 GraphicsPoint::~GraphicsPoint()
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::~GraphicsPoint";
-
   if (m_graphicsItemEllipse == nullptr) {
 
     QGraphicsScene *scene = m_graphicsItemPolygon->scene();

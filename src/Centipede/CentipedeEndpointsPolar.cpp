@@ -198,14 +198,14 @@ void CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles (const Tra
   QPointF posScreenBL = posScreen180 - centerTo90;
   QPointF posScreenBR = posScreen0 - centerTo90;
 
-  double angleEllipseFromMajorAxis= 0, aAligned = 0, bAligned = 0;
+  double aAligned = 0, bAligned = 0;
   ellipseFromParallelogram (posScreenTL.x() - posScreenCenter.x(),
                             posScreenTL.y() - posScreenCenter.y(),
                             posScreenTR.x() - posScreenCenter.x(),
                             posScreenTR.y() - posScreenCenter.y(),
                             posScreenBR.x() - posScreenCenter.x(),
                             posScreenBR.y() - posScreenCenter.y(),
-                            angleEllipseFromMajorAxis,
+                            angleRotation,
                             aAligned,
                             bAligned);
 
@@ -217,23 +217,14 @@ void CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles (const Tra
                                     posScreenBL,
                                     posScreenBR,
                                     angleGraphAxisFromScreenAxis,
-                                    angleEllipseFromMajorAxis,
+                                    angleRotation,
                                     aAligned,
                                     bAligned);
 
-  // Angle between +x axis in screen and semimajor axis is computed in all four quadrants
-  // by projecting onto +x and +y screen axesangleEllipseFromScreenAxis
-  angleRotation = angleFromBasisVectors (1,
-                                         0,
-                                         0,
-                                         -1,
-                                         posScreen0.x() - posScreenCenter.x(),
-                                         posScreen0.y() - posScreenCenter.y());
-
   // Bounding rectangle before rotation. We make sure the rectangle is normalized which at one point
   // seemed to prevent drawing artifacts
-  rectBounding = QRectF (posScreenCenter.x() - aAligned,
-                         posScreenCenter.y() - bAligned,
+  rectBounding = QRectF (-1.0 * aAligned,
+                         -1.0 * bAligned,
                          2.0 * aAligned,
                          2.0 * bAligned);
 

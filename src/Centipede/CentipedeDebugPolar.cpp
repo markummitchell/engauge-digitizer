@@ -8,6 +8,7 @@
 #include "DocumentModelCoords.h"
 #include "Logger.h"
 #include <qdebug.h>
+#include <QGraphicsEllipseItem>
 #include <QGraphicsPolygonItem>
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
@@ -142,6 +143,45 @@ void CentipedeDebugPolar::display (QGraphicsScene &scene,
     ellipse->setRotation (qRadiansToDegrees (m_angleEllipseFromMajorAxis));
     ellipse->setPen (QPen (Qt::red));
     scene.addItem (ellipse);
+
+    // Show regularly spaced (in graph coordinates) radial lines. In graph coordinates
+    // the ellipse is a circle. We get a rough radius by pretending the semimajor axis is
+    // along the +x screen direction. This is good enough for an axis that is always big enough to see
+    QPointF posHorizontalScene = posCenterScene + QPointF (0, m_aAligned);
+    QPointF posHorizontalGraph;
+    transformation.transformScreenToRawGraph (posHorizontalScene,
+                                              posHorizontalGraph);
+
+    // the ellipse is x^2/a^2+y^2/b^2=1 and x=r*cos(theta) and y=r*sin(theta) we can solve
+    // to get r=sqrt(1/(cos(theta)^2/a^2+sin(theta)^2/b^2)
+    for (int degrees = 0; degrees < 360; degrees += 10) {
+
+      QPointF posEllipseGraph (degrees,
+                               posHorizontalGraph.y());
+      QPointF posEllipseScene;
+      transformation.transformRawGraphToScreen (posEllipseGraph,
+                                                posEllipseScene);
+      QGraphicsLineItem *radial = new QGraphicsLineItem (QLineF (posCenterScene,
+                                                                 posEllipseScene));
+      radial->setPen (QPen (Qt::red));
+      scene.addItem (radial);
+    }
+  }
+}
+
+void CentipedeDebugPolar::dumpEllipseGraphicsItem (const QString &callerMethod,
+                                                   const QGraphicsEllipseItem *ellipse) const
+{
+  if (mainCat->getPriority () == log4cpp::Priority::DEBUG) {
+
+    LOG4CPP_DEBUG_S ((*mainCat)) << "CentipedeDebugPolar::dumpEllipseGraphicsItem dump from "
+                                 << callerMethod.toLatin1().data();
+    LOG4CPP_DEBUG_S ((*mainCat)) << "    rect=" << QRectFToString (ellipse->rect()).toLatin1().data();
+    LOG4CPP_DEBUG_S ((*mainCat)) << "    rotation=" << ellipse->rotation();
+    LOG4CPP_DEBUG_S ((*mainCat)) << "    start=" << (ellipse->startAngle() / 16.0);
+    LOG4CPP_DEBUG_S ((*mainCat)) << "    span=" << (ellipse->spanAngle() / 16.0);
+    LOG4CPP_DEBUG_S ((*mainCat)) << "    transformOrigin=" << QPointFToString (ellipse->transformOriginPoint()).toLatin1().data();
+    LOG4CPP_DEBUG_S ((*mainCat)) << "    pos=" << QPointFToString (ellipse->pos ()).toLatin1().data();
   }
 }
 

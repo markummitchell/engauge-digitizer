@@ -4,6 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
+#include "CentipedeDebugPolar.h"
 #include "CmdMediator.h"
 #include "DataKey.h"
 #include "Document.h"
@@ -270,4 +271,8 @@ void GuidelineEllipse::updateGeometry (const QPointF &posScreen)
   context()->transformation().transformScreenToRawGraph (posScreen,
                                                          posGraph);
   context()->setPosCursorGraph (posGraph);
+
+  CentipedeDebugPolar debugPolar;
+  debugPolar.dumpEllipseGraphicsItem ("GuidelineEllipse::updateGeometry",
+                                      this);
 }

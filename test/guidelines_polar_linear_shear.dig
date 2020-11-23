@@ -12,7 +12,7 @@
         <AxesChecker Mode="1" Seconds="3" LineColor="6"/>
         <GridDisplay Stable="True" DisableX="0" CountX="12" StartX="0" StepX="30" StopX="360" DisableY="0" CountY="570" StartY="0" StepY="0.25" StopY="142.54" Color="0" ColorString="Black"/>
         <GridRemoval Stable="False" DefinedGridLines="False" CloseDistance="10" CoordDisableX="0" CoordDisableXString="Count" CountX="4" StartX="90.4277" StepX="89.6945" StopX="359.511" CoordDisableY="0" CoordDisableYString="Count" CountY="3" StartY="0.330849" StepY="0.333444" StopY="0.997736"/>
-        <Guidelines CreationCircleRadius="20" LineColor="5" LineColorString="Magenta" LineWidthActive="2" LineWidthInactive="1">
+        <Guidelines CreationCircleRadius="20" LineColor="5" LineColorString="Magenta" LineWidthActive="8" LineWidthInactive="4">
             <GuidelinesX/>
             <GuidelinesY/>
         </Guidelines>

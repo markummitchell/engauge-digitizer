@@ -18,7 +18,6 @@ const bool IS_NOT_X_THETA = false;
 
 FormatCoordsUnits::FormatCoordsUnits()
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnits::FormatCoordsUnits";
 }
 
 void FormatCoordsUnits::formattedToUnformatted (const QString &xThetaFormatted,
@@ -28,8 +27,6 @@ void FormatCoordsUnits::formattedToUnformatted (const QString &xThetaFormatted,
                                                 double &xThetaUnformatted,
                                                 double &yRadiusUnformatted) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnits::formattedToUnformatted";
-
   FormatCoordsUnitsStrategyNonPolarTheta formatNonPolarTheta;
   FormatCoordsUnitsStrategyPolarTheta formatPolarTheta;
 
@@ -69,8 +66,6 @@ void FormatCoordsUnits::unformattedToFormatted (double xThetaUnformatted,
                                                 QString &yRadiusFormatted,
                                                 const Transformation &transformation) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "FormatCoordsUnits::unformattedToFormatted";
-
   FormatCoordsUnitsStrategyNonPolarTheta formatNonPolarTheta;
   FormatCoordsUnitsStrategyPolarTheta formatPolarTheta;
 
