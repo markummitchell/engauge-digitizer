@@ -219,7 +219,8 @@ void CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles (const Tra
                                     angleGraphAxisFromScreenAxis,
                                     angleRotation,
                                     aAligned,
-                                    bAligned);
+                                    bAligned,
+                                    rGraph);
 
   // Bounding rectangle before rotation. We make sure the rectangle is normalized which at one point
   // seemed to prevent drawing artifacts

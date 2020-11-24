@@ -7,6 +7,7 @@
 #include "CentipedeDebugPolar.h"
 #include "DocumentModelCoords.h"
 #include "Logger.h"
+#include "mmsubs.h"
 #include <qdebug.h>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsPolygonItem>
@@ -24,7 +25,8 @@ CentipedeDebugPolar::CentipedeDebugPolar() :
   m_angleGraphAxisFromScreenAxis (0),
   m_angleEllipseFromMajorAxis (0),
   m_aAligned (0),
-  m_bAligned (0)
+  m_bAligned (0),
+  m_radius (0)
 {
 }
 
@@ -35,7 +37,8 @@ CentipedeDebugPolar::CentipedeDebugPolar(const QPointF &posScreenParallelogramTL
                                          double angleGraphAxisFromScreenAxis,
                                          double angleEllipseFromMajorAxis,
                                          double aAligned,
-                                         double bAligned) :
+                                         double bAligned,
+                                         double radius) :
   m_posScreenParallelogramTL (posScreenParallelogramTL),
   m_posScreenParallelogramTR (posScreenParallelogramTR),
   m_posScreenParallelogramBL (posScreenParallelogramBL),
@@ -43,7 +46,8 @@ CentipedeDebugPolar::CentipedeDebugPolar(const QPointF &posScreenParallelogramTL
   m_angleGraphAxisFromScreenAxis (angleGraphAxisFromScreenAxis),
   m_angleEllipseFromMajorAxis (angleEllipseFromMajorAxis),
   m_aAligned (aAligned),
-  m_bAligned (bAligned)
+  m_bAligned (bAligned),
+  m_radius (radius)
 {
 }
 
@@ -55,7 +59,8 @@ CentipedeDebugPolar::CentipedeDebugPolar (const CentipedeDebugPolar &other) :
   m_angleGraphAxisFromScreenAxis (other.angleGraphAxisFromScreenAxis ()),
   m_angleEllipseFromMajorAxis (other.angleEllipseFromMajorAxis ()),
   m_aAligned (other.aAligned ()),
-  m_bAligned (other.bAligned ())
+  m_bAligned (other.bAligned ()),
+  m_radius (other.radius ())
 {
 }
 
@@ -69,6 +74,7 @@ CentipedeDebugPolar &CentipedeDebugPolar::operator= (const CentipedeDebugPolar &
   m_angleEllipseFromMajorAxis = other.angleEllipseFromMajorAxis ();
   m_aAligned = other.aAligned ();
   m_bAligned = other.bAligned ();
+  m_radius = other.radius ();
 
   return *this;
 }
@@ -100,16 +106,18 @@ void CentipedeDebugPolar::display (QGraphicsScene &scene,
                                    const DocumentModelCoords &modelCoords,
                                    const Transformation &transformation) const
 {
+  // LOG4CPP is below
+
   if (mainCat->getPriority() == log4cpp::Priority::DEBUG) {
 
     // Center
-    QPointF posCenterGraph (0, 0), posCenterScene;
+    QPointF posCenterGraph (0, 0), posCenterScreen;
     if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
       posCenterGraph = QPointF (0,
                                 modelCoords.originRadius());
     }
     transformation.transformRawGraphToScreen (posCenterGraph,
-                                              posCenterScene);
+                                              posCenterScreen);
 
     // Circumscribing parallelogram
     QVector<QPointF> points;
@@ -123,49 +131,77 @@ void CentipedeDebugPolar::display (QGraphicsScene &scene,
     scene.addItem (parallelogram);
 
     // Right-angled rectangle
-    QRectF rect (posCenterScene.x() - m_aAligned,
-                 posCenterScene.y() - m_bAligned,
+    QRectF rect (posCenterScreen.x() - m_aAligned,
+                 posCenterScreen.y() - m_bAligned,
                  2 * m_aAligned,
                  2 * m_bAligned);
-    rect.setLeft (posCenterScene.x() - m_aAligned);
-    rect.setTop (posCenterScene.y() - m_bAligned);
+    rect.setLeft (posCenterScreen.x() - m_aAligned);
+    rect.setTop (posCenterScreen.y() - m_bAligned);
 
     // Circumscribing rectangle
     QGraphicsRectItem *rectItem = new QGraphicsRectItem (rect);
-    rectItem->setTransformOriginPoint(posCenterScene);
+    rectItem->setTransformOriginPoint(posCenterScreen);
     rectItem->setRotation (qRadiansToDegrees (m_angleEllipseFromMajorAxis));
     rectItem->setPen (QPen (Qt::red));
     scene.addItem (rectItem);
 
     // Put an ellipse in the circumscribing rectangle to see if they line up
     QGraphicsEllipseItem *ellipse = new QGraphicsEllipseItem (rect);
-    ellipse->setTransformOriginPoint (posCenterScene);
+    ellipse->setTransformOriginPoint (posCenterScreen);
     ellipse->setRotation (qRadiansToDegrees (m_angleEllipseFromMajorAxis));
     ellipse->setPen (QPen (Qt::red));
     scene.addItem (ellipse);
 
-    // Show regularly spaced (in graph coordinates) radial lines. In graph coordinates
-    // the ellipse is a circle. We get a rough radius by pretending the semimajor axis is
-    // along the +x screen direction. This is good enough for an axis that is always big enough to see
-    QPointF posHorizontalScene = posCenterScene + QPointF (0, m_aAligned);
-    QPointF posHorizontalGraph;
-    transformation.transformScreenToRawGraph (posHorizontalScene,
-                                              posHorizontalGraph);
+    // A and B axes
+    QPointF posAAxisGraph (0, m_radius), posBAxisGraph (90, m_radius);
+    QPointF posAAxisScreen, posBAxisScreen;
+    transformation.transformRawGraphToScreen (posAAxisGraph,
+                                              posAAxisScreen);
+    transformation.transformRawGraphToScreen (posBAxisGraph,
+                                              posBAxisScreen);
 
-    // the ellipse is x^2/a^2+y^2/b^2=1 and x=r*cos(theta) and y=r*sin(theta) we can solve
-    // to get r=sqrt(1/(cos(theta)^2/a^2+sin(theta)^2/b^2)
-    for (int degrees = 0; degrees < 360; degrees += 10) {
+    // Show one inner set of radial tic lines and one outer set of radial tic lines
+    double cosOffset = qCos (m_angleEllipseFromMajorAxis);
+    double sinOffset = qSin (m_angleEllipseFromMajorAxis);
+    for (int degrees = 0; degrees < 360; degrees++) {
 
-      QPointF posEllipseGraph (degrees,
-                               posHorizontalGraph.y());
-      QPointF posEllipseScene;
-      transformation.transformRawGraphToScreen (posEllipseGraph,
-                                                posEllipseScene);
-      QGraphicsLineItem *radial = new QGraphicsLineItem (QLineF (posCenterScene,
-                                                                 posEllipseScene));
-      radial->setPen (QPen (Qt::red));
-      scene.addItem (radial);
+      // Inner set of radial tic lines is regularly spaced in screen coordinates. We solve x=r*cosT, y=r*sinT,
+      // x^2/a^2 + y^2/b^2 = 1. Ellipse points are then rotated
+      double radians = qDegreesToRadians ((double) degrees);
+      double cosLoop = qCos(radians);
+      double sinLoop = qSin(radians);
+      double denominator = cosLoop * cosLoop / m_aAligned / m_aAligned  + sinLoop * sinLoop / m_bAligned / m_bAligned;
+      double radius = qSqrt (1.0 / denominator);
+      double x = radius * cosLoop;
+      double y = radius * sinLoop;
+      double xRotated = cosOffset * x - sinOffset * y;
+      double yRotated = sinOffset * x + cosOffset * y;
+      QPointF posRadial (xRotated,
+                         yRotated);
+
+      QGraphicsLineItem *radialFirst = new QGraphicsLineItem (portionOfLineLast (QLineF (posCenterScreen,
+                                                                                         posCenterScreen + posRadial),
+                                                                                 degrees));
+      radialFirst->setPen (QPen (Qt::black));
+      scene.addItem (radialFirst);
+
+      // Second set of radial tic lines is regularly spaced in graph coordinates
+      transformation.transformRawGraphToScreen (QPointF (degrees,
+                                                         m_radius),
+                                                posRadial);
+      QGraphicsLineItem *radialSecond = new QGraphicsLineItem (portionOfLineNext (QLineF (posCenterScreen,
+                                                                                          posRadial),
+                                                                                  degrees));
+      radialSecond->setPen (QPen (Qt::red));
+      scene.addItem (radialSecond);
     }
+
+    // Finish up with details in log stream
+    LOG4CPP_DEBUG_S ((*mainCat)) << "CentipedeDebugPolar::displa"
+                                 << " angleFromAxis=" << qDegreesToRadians (m_angleEllipseFromMajorAxis)
+                                 << " angleFromScreen=" << qDegreesToRadians (m_angleGraphAxisFromScreenAxis)
+                                 << " lambdaX=" << lambdaX (posAAxisScreen,
+                                                            posBAxisScreen);
   }
 }
 
@@ -182,7 +218,53 @@ void CentipedeDebugPolar::dumpEllipseGraphicsItem (const QString &callerMethod,
     LOG4CPP_DEBUG_S ((*mainCat)) << "    span=" << (ellipse->spanAngle() / 16.0);
     LOG4CPP_DEBUG_S ((*mainCat)) << "    transformOrigin=" << QPointFToString (ellipse->transformOriginPoint()).toLatin1().data();
     LOG4CPP_DEBUG_S ((*mainCat)) << "    pos=" << QPointFToString (ellipse->pos ()).toLatin1().data();
+    LOG4CPP_DEBUG_S ((*mainCat)) << "    radius=" << m_radius;
   }
+}
+
+double CentipedeDebugPolar::lambdaX (const QPointF &posAAxisScreen,
+                                     const QPointF &posBAxisScreen) const
+{
+  // If there waS no shear then these vectors would be 90 degrees apart. From this diagram we have
+  // tan (theta) = -lambdaX * y / (-y) = lambdaX
+  //
+  //           -lambdaX * y
+  //          |-------------*
+  //          |            *
+  //          |           *
+  //          |          *
+  //          |         *
+  //      -y  |        *
+  //          |       *
+  //          |      *
+  //          |     *
+  //          |--- *  theta
+  //          |   *
+  //          |  *
+  //          | *
+  //          ============================ +x
+  double thetaComplement = angleBetweenVectors(posAAxisScreen,
+                                               posBAxisScreen);
+  double theta = M_PI / 2.0 - thetaComplement;
+  return qTan (theta);
+}
+
+QLineF CentipedeDebugPolar::portionOfLineLast (const QLineF &line,
+                                               int degrees) const
+{
+  double s = (degrees % 10 ? 0.975 : 0.9);
+  QPointF posNewStart = (1.0 - s) * line.p1() + s * line.p2 ();
+  return QLineF(posNewStart,
+                line.p2());
+}
+
+QLineF CentipedeDebugPolar::portionOfLineNext (const QLineF &line,
+                                               int degrees) const
+{
+  double s = (degrees % 10 ? 1.025 : 1.1);
+  QPointF posNewStart = (1.0 - s) * line.p1() + s * line.p2 ();
+  return QLineF(posNewStart,
+                line.p2());
 }
 
 QPointF CentipedeDebugPolar::posScreenParallelogramBL () const
@@ -203,4 +285,9 @@ QPointF CentipedeDebugPolar::posScreenParallelogramTL () const
 QPointF CentipedeDebugPolar::posScreenParallelogramTR () const
 {
   return m_posScreenParallelogramTR;
+}
+
+double CentipedeDebugPolar::radius () const
+{
+  return m_radius;
 }

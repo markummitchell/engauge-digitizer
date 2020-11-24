@@ -12,6 +12,7 @@
 class DocumentModelCoords;
 class QGraphicsEllipseItem;
 class QGraphicsScene;
+class QLineF;
 class Transformation;
 
 /// Class for collecting and then displaying debug information computed during constant R ellipse calculations
@@ -30,7 +31,8 @@ public:
                       double angleGraphAxisFromScreenAxis,
                       double angleEllipseFromMajorAxis,
                       double aAligned,
-                      double bAligned);
+                      double bAligned,
+                      double radius);
 
   /// Copy constructor
   CentipedeDebugPolar (const CentipedeDebugPolar &other);
@@ -76,7 +78,22 @@ public:
   /// Get method for top right corner of rectangle  
   QPointF posScreenParallelogramTR () const;
   
+  /// Get method for radius
+  double radius () const;
+
 private:
+
+  /// lambda x from https://en.wikipedia.org/wiki/Shear_matrix
+  double lambdaX (const QPointF &posAAxisScreen,
+                  const QPointF &posBAxisScreen) const;
+
+  /// Convert a radial line into a (much shorter) tic mark using the last part of the given line
+  QLineF portionOfLineLast (const QLineF &line,
+                            int degrees) const;
+
+  /// Convert a radial line into a (much shorter) tic mark using the next part of the given line when extended
+  QLineF portionOfLineNext (const QLineF &line,
+                            int degrees) const;
 
   QPointF m_posScreenParallelogramTL;
   QPointF m_posScreenParallelogramTR;
@@ -86,6 +103,7 @@ private:
   double m_angleEllipseFromMajorAxis;
   double m_aAligned;
   double m_bAligned;
+  double m_radius;
 };
 
 #endif // CENTIPEDE_DEBUG_POLAR_H
