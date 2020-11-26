@@ -60,6 +60,13 @@ double angleFromVectorToVector (const QPointF &vFrom,
   return angleSeparation;
 }
 
+double dot (const QPointF &vec1,
+            const QPointF &vec2)
+{
+  return vec1.x() * vec2.x() +
+         vec1.y() * vec2.y();
+}
+
 void ellipseFromParallelogram (double xTL,
                                double yTL,
                                double xTR,

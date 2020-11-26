@@ -11,10 +11,12 @@
         </Export>
         <AxesChecker Mode="1" Seconds="3" LineColor="6"/>
         <GridDisplay Stable="True" DisableX="0" CountX="12" StartX="0" StepX="30" StopX="360" DisableY="0" CountY="570" StartY="0" StepY="0.25" StopY="142.54" Color="0" ColorString="Black"/>
-        <GridRemoval Stable="False" DefinedGridLines="False" CloseDistance="10" CoordDisableX="0" CoordDisableXString="Count" CountX="4" StartX="90.4277" StepX="89.6945" StopX="359.511" CoordDisableY="0" CoordDisableYString="Count" CountY="3" StartY="0.330849" StepY="0.333444" StopY="0.997736"/>
+        <GridRemoval Stable="False" DefinedGridLines="False" CloseDistance="10" CoordDisableX="0" CoordDisableXString="Count" CountX="8" StartX="44.9695" StepX="44.9695" StopX="359.756" CoordDisableY="0" CoordDisableYString="Count" CountY="3" StartY="0.335955" StepY="0.332064" StopY="1.00008"/>
         <Guidelines CreationCircleRadius="20" LineColor="5" LineColorString="Magenta" LineWidthActive="8" LineWidthInactive="4">
             <GuidelinesX/>
-            <GuidelinesY/>
+            <GuidelinesY>
+                <Guideline GuidelineIdentifier="guideline0" GuidelineValue="0.999712"/>
+            </GuidelinesY>
         </Guidelines>
         <PointMatch PointSize="48" ColorAccepted="4" ColorAcceptedString="Green" ColorCandidate="7" ColorCandidateString="Yellow" ColorRejected="6" ColorRejectedString="Red"/>
         <Segments PointSeparation="25" MinLength="2" FillCorners="False" LineWidthActive="6" LineWidthInactive="4" LineColor="4" LineColorString="Green" InactiveOpacity="4"/>
@@ -26,15 +28,15 @@
             </CurveStyle>
             <CurvePoints>
                 <Point Identifier="Axes&#9;point&#9;1" Ordinal="1" IsAxisPoint="True" IsXOnly="False" Index="21">
-                    <PositionScreen X="729" Y="586"/>
+                    <PositionScreen X="727.813" Y="586"/>
                     <PositionGraph X="0" Y="0"/>
                 </Point>
                 <Point Identifier="Axes&#9;point&#9;3" Ordinal="2" IsAxisPoint="True" IsXOnly="False" Index="21">
-                    <PositionScreen X="1412" Y="586"/>
+                    <PositionScreen X="1411.41" Y="586"/>
                     <PositionGraph X="0" Y="1"/>
                 </Point>
                 <Point Identifier="Axes&#9;point&#9;5" Ordinal="3" IsAxisPoint="True" IsXOnly="False" Index="21">
-                    <PositionScreen X="993" Y="82"/>
+                    <PositionScreen X="991.22" Y="83.7585"/>
                     <PositionGraph X="90" Y="1"/>
                 </Point>
             </CurvePoints>
@@ -48,7 +50,7 @@
                 </CurveStyle>
                 <CurvePoints>
                     <Point Identifier="Curve1&#9;point&#9;20" Ordinal="0" IsAxisPoint="False" IsXOnly="False" Index="21">
-                        <PositionScreen X="1011" Y="561"/>
+                        <PositionScreen X="1009.81" Y="562.759"/>
                     </Point>
                     <Point Identifier="Curve1&#9;point&#9;19" Ordinal="1" IsAxisPoint="False" IsXOnly="False" Index="21">
                         <PositionScreen X="1025" Y="519"/>

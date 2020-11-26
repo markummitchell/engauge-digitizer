@@ -8,6 +8,7 @@
 #include "DocumentModelCoords.h"
 #include "Logger.h"
 #include "mmsubs.h"
+#include <QColor>
 #include <qdebug.h>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsPolygonItem>
@@ -15,6 +16,7 @@
 #include <QGraphicsScene>
 #include <qmath.h>
 #include "QtToString.h"
+#include "Shear.h"
 #include "Transformation.h"
 
 CentipedeDebugPolar::CentipedeDebugPolar() :
@@ -78,6 +80,7 @@ CentipedeDebugPolar &CentipedeDebugPolar::operator= (const CentipedeDebugPolar &
 
   return *this;
 }
+
 CentipedeDebugPolar::~CentipedeDebugPolar()
 {
 }
@@ -152,7 +155,7 @@ void CentipedeDebugPolar::display (QGraphicsScene &scene,
     ellipse->setPen (QPen (Qt::red));
     scene.addItem (ellipse);
 
-    // A and B axes
+    // A and B axes. These are NOT orthogonal when there is shear
     QPointF posAAxisGraph (0, m_radius), posBAxisGraph (90, m_radius);
     QPointF posAAxisScreen, posBAxisScreen;
     transformation.transformRawGraphToScreen (posAAxisGraph,
@@ -160,48 +163,124 @@ void CentipedeDebugPolar::display (QGraphicsScene &scene,
     transformation.transformRawGraphToScreen (posBAxisGraph,
                                               posBAxisScreen);
 
-    // Show one inner set of radial tic lines and one outer set of radial tic lines
-    double cosOffset = qCos (m_angleEllipseFromMajorAxis);
-    double sinOffset = qSin (m_angleEllipseFromMajorAxis);
-    for (int degrees = 0; degrees < 360; degrees++) {
+    Shear shear;
+    double lambdaX = shear.lambdaX (posAAxisScreen - posCenterScreen,
+                                    posBAxisScreen - posCenterScreen);
 
-      // Inner set of radial tic lines is regularly spaced in screen coordinates. We solve x=r*cosT, y=r*sinT,
-      // x^2/a^2 + y^2/b^2 = 1. Ellipse points are then rotated
-      double radians = qDegreesToRadians ((double) degrees);
-      double cosLoop = qCos(radians);
-      double sinLoop = qSin(radians);
-      double denominator = cosLoop * cosLoop / m_aAligned / m_aAligned  + sinLoop * sinLoop / m_bAligned / m_bAligned;
-      double radius = qSqrt (1.0 / denominator);
-      double x = radius * cosLoop;
-      double y = radius * sinLoop;
-      double xRotated = cosOffset * x - sinOffset * y;
-      double yRotated = sinOffset * x + cosOffset * y;
-      QPointF posRadial (xRotated,
-                         yRotated);
-
-      QGraphicsLineItem *radialFirst = new QGraphicsLineItem (portionOfLineLast (QLineF (posCenterScreen,
-                                                                                         posCenterScreen + posRadial),
-                                                                                 degrees));
-      radialFirst->setPen (QPen (Qt::black));
-      scene.addItem (radialFirst);
-
-      // Second set of radial tic lines is regularly spaced in graph coordinates
-      transformation.transformRawGraphToScreen (QPointF (degrees,
-                                                         m_radius),
-                                                posRadial);
-      QGraphicsLineItem *radialSecond = new QGraphicsLineItem (portionOfLineNext (QLineF (posCenterScreen,
-                                                                                          posRadial),
-                                                                                  degrees));
-      radialSecond->setPen (QPen (Qt::red));
-      scene.addItem (radialSecond);
-    }
+    displayTics (0.0,
+                 scene,
+                 transformation,
+                 posCenterScreen,
+                 posAAxisScreen,
+                 QColor (255, 0, 0),
+                 QColor (255, 150, 150));
+    displayTics (lambdaX,
+                 scene,
+                 transformation,
+                 posCenterScreen,
+                 posAAxisScreen,
+                 QColor (0, 255, 0),
+                 QColor (100, 205, 100));
 
     // Finish up with details in log stream
-    LOG4CPP_DEBUG_S ((*mainCat)) << "CentipedeDebugPolar::displa"
+    LOG4CPP_DEBUG_S ((*mainCat)) << "CentipedeDebugPolar::displayTics"
                                  << " angleFromAxis=" << qDegreesToRadians (m_angleEllipseFromMajorAxis)
                                  << " angleFromScreen=" << qDegreesToRadians (m_angleGraphAxisFromScreenAxis)
-                                 << " lambdaX=" << lambdaX (posAAxisScreen,
-                                                            posBAxisScreen);
+                                 << " lambdaX=" << lambdaX;
+  }
+}
+
+void CentipedeDebugPolar::displayTics (double lambdaX,
+                                       QGraphicsScene &scene,
+                                       const Transformation &transformation,
+                                       const QPointF &posCenterScreen,
+                                       const QPointF &posAAxisScreen,
+                                       const QColor &colorGraphCoordinates,
+                                       const QColor &colorScreenCoordinates) const
+{
+  static int legendYPos = 0;
+  const int LEGEND_X_POS = 5, LEGEND_Y_STEP = 20, DEGREES_BETWEEN_HIGHLIGHTS = 10;
+  Shear shear;
+
+  // Legend
+  QGraphicsTextItem *itemGraphCoords = new QGraphicsTextItem ("Graphics Coords");
+  itemGraphCoords->setPos (QPointF (LEGEND_X_POS, LEGEND_Y_STEP * (legendYPos++)));
+  itemGraphCoords->setDefaultTextColor (colorGraphCoordinates);
+  scene.addItem (itemGraphCoords);
+
+  QGraphicsTextItem *itemScreenCoords = new QGraphicsTextItem ("Screen Coords");
+  itemScreenCoords->setPos (QPointF (LEGEND_X_POS, LEGEND_Y_STEP * (legendYPos++)));
+  itemScreenCoords->setDefaultTextColor (colorScreenCoordinates);
+  scene.addItem (itemScreenCoords);
+
+  // Orthogonal basis vectors aligned to orthognal axes of ellipse, in screen coordinates
+  QPointF basisX = (posAAxisScreen - posCenterScreen) / magnitude (posAAxisScreen - posCenterScreen);
+  QPointF basisY (basisX.y(),
+                  -1.0 * basisX.x());
+
+  // Show one inner set of radial tic lines and one outer set of radial tic lines
+  double cosOffset = qCos (m_angleEllipseFromMajorAxis);
+  double sinOffset = qSin (m_angleEllipseFromMajorAxis);
+  for (int degrees = 0; degrees < 360; degrees++) {
+
+    // Inner set of radial tic lines is regularly spaced in screen coordinates. We solve x=r*cosT, y=r*sinT,
+    // x^2/a^2 + y^2/b^2 = 1. Ellipse points are then rotated
+    double radians = qDegreesToRadians ((double) degrees);
+    double cosLoop = qCos(-1.0 * radians - m_angleEllipseFromMajorAxis);
+    double sinLoop = qSin(-1.0 * radians - m_angleEllipseFromMajorAxis); // Sign here must be synced with Shear::unshear sign on labmdaX and basisY
+    double denominator = cosLoop * cosLoop / m_aAligned / m_aAligned  + sinLoop * sinLoop / m_bAligned / m_bAligned;
+    double radius = qSqrt (1.0 / denominator);
+    double x = radius * cosLoop;
+    double y = radius * sinLoop;
+    double xRotated = cosOffset * x - sinOffset * y;
+    double yRotated = sinOffset * x + cosOffset * y;
+    QPointF posRadial (xRotated,
+                       yRotated);
+
+    posRadial = shear.unshear (lambdaX,
+                               posRadial,
+                               basisX,
+                               basisY);
+
+    QLineF linePortion = portionOfLineLast (QLineF (posCenterScreen,
+                                                    posCenterScreen + posRadial),
+                                            degrees,
+                                            DEGREES_BETWEEN_HIGHLIGHTS);
+    QGraphicsLineItem *radialFirst = new QGraphicsLineItem (linePortion);
+    radialFirst->setPen (QPen (colorScreenCoordinates));
+    scene.addItem (radialFirst);
+
+    if (degrees % DEGREES_BETWEEN_HIGHLIGHTS == 0) {
+      QGraphicsTextItem *labelFirst = new QGraphicsTextItem (QString::number (degrees));
+      labelFirst->setPos (linePortion.p1());
+      labelFirst->setDefaultTextColor (colorScreenCoordinates);
+      scene.addItem (labelFirst);
+    }
+
+    // Second set of radial tic lines is regularly spaced in graph coordinates
+    transformation.transformRawGraphToScreen (QPointF (degrees,
+                                                       m_radius),
+                                              posRadial);
+
+    posRadial = posCenterScreen + shear.unshear (lambdaX,
+                                                 posRadial - posCenterScreen,
+                                                 basisX,
+                                                 basisY);
+
+    linePortion = portionOfLineNext (QLineF (posCenterScreen,
+                                             posRadial),
+                                     degrees,
+                                     DEGREES_BETWEEN_HIGHLIGHTS);
+    QGraphicsLineItem *radialSecond = new QGraphicsLineItem (linePortion);
+    radialSecond->setPen (QPen (colorGraphCoordinates));
+    scene.addItem (radialSecond);
+
+    if (degrees % DEGREES_BETWEEN_HIGHLIGHTS == 0) {
+      QGraphicsTextItem *labelSecond = new QGraphicsTextItem (QString::number (degrees));
+      labelSecond->setPos (linePortion.p1());
+      labelSecond->setDefaultTextColor (colorGraphCoordinates);
+      scene.addItem (labelSecond);
+    }
   }
 }
 
@@ -222,46 +301,21 @@ void CentipedeDebugPolar::dumpEllipseGraphicsItem (const QString &callerMethod,
   }
 }
 
-double CentipedeDebugPolar::lambdaX (const QPointF &posAAxisScreen,
-                                     const QPointF &posBAxisScreen) const
-{
-  // If there waS no shear then these vectors would be 90 degrees apart. From this diagram we have
-  // tan (theta) = -lambdaX * y / (-y) = lambdaX
-  //
-  //           -lambdaX * y
-  //          |-------------*
-  //          |            *
-  //          |           *
-  //          |          *
-  //          |         *
-  //      -y  |        *
-  //          |       *
-  //          |      *
-  //          |     *
-  //          |--- *  theta
-  //          |   *
-  //          |  *
-  //          | *
-  //          ============================ +x
-  double thetaComplement = angleBetweenVectors(posAAxisScreen,
-                                               posBAxisScreen);
-  double theta = M_PI / 2.0 - thetaComplement;
-  return qTan (theta);
-}
-
 QLineF CentipedeDebugPolar::portionOfLineLast (const QLineF &line,
-                                               int degrees) const
+                                               int degrees,
+                                               int degreesBetweenHighlights) const
 {
-  double s = (degrees % 10 ? 0.975 : 0.9);
+  double s = (degrees % degreesBetweenHighlights == 0 ? 0.9 : 0.975);
   QPointF posNewStart = (1.0 - s) * line.p1() + s * line.p2 ();
   return QLineF(posNewStart,
                 line.p2());
 }
 
 QLineF CentipedeDebugPolar::portionOfLineNext (const QLineF &line,
-                                               int degrees) const
+                                               int degrees,
+                                               int degreesBetweenHighlights) const
 {
-  double s = (degrees % 10 ? 1.025 : 1.1);
+  double s = (degrees % degreesBetweenHighlights == 0 ? 1.1 : 1.025);
   QPointF posNewStart = (1.0 - s) * line.p1() + s * line.p2 ();
   return QLineF(posNewStart,
                 line.p2());

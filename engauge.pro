@@ -481,6 +481,7 @@ HEADERS  += \
     src/Segment/SegmentLine.h \
     src/Settings/Settings.h \
     src/Settings/SettingsForGraph.h \
+    src/util/Shear.h \
     src/Spline/Spline.h \
     src/Spline/SplineCoeff.h \
     src/Spline/SplineDrawer.h \
@@ -913,6 +914,7 @@ SOURCES += \
     src/Segment/SegmentLine.cpp \
     src/Settings/Settings.cpp \
     src/Settings/SettingsForGraph.cpp \
+    src/util/Shear.cpp \
     src/Spline/Spline.cpp \
     src/Spline/SplineCoeff.cpp \
     src/Spline/SplineDrawer.cpp \

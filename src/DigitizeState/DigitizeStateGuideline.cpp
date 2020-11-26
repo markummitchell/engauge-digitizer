@@ -226,7 +226,11 @@ void DigitizeStateGuideline::lockNonGuidelines (bool lockdown)
   for (itr = items.begin (); itr != items.end (); itr++) {
 
     QGraphicsItem *item = *itr;
-    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) != GRAPHICS_ITEM_TYPE_GUIDELINE) {
+    GraphicsItemType type = static_cast<GraphicsItemType> (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt());
+    if (type == GRAPHICS_ITEM_TYPE_LINE ||
+        type == GRAPHICS_ITEM_TYPE_POINT ||
+        type == GRAPHICS_ITEM_TYPE_SCALE_BAR ||
+        type == GRAPHICS_ITEM_TYPE_SEGMENT) {
        item->setFlag (QGraphicsItem::ItemIsSelectable, !lockdown);
        item->setFlag (QGraphicsItem::ItemIsMovable, !lockdown);
     }
