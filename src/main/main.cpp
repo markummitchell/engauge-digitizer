@@ -10,6 +10,7 @@
 #include "ImportImageExtensions.h"
 #include "Logger.h"
 #include "MainWindow.h"
+#include "MainWindowMsg.h"
 #include <QApplication>
 #include <QCoreApplication>
 #include <QDebug>
@@ -361,11 +362,12 @@ void sanityCheckValue (bool requiredCondition,
 
 void showMessageAndQuit (const QString &msg)
 {
-  // Show message in QMessageBox instead of cout or cerr since console output is disabled in Microsoft Windows
-  QMessageBox::critical (nullptr,
-                         QObject::tr ("Engauge Digitizer"),
-                         msg);
-  exit (0);
+  MainWindowMsg w (msg);
+  w.show ();
+
+  qApp->exec();
+
+  // Execution never reaches this point since MainWindowMsg shuts everything down
 }
 
 void showStylesAndQuit ()
@@ -393,7 +395,7 @@ void showUsageAndQuit ()
       << "[" << DASH_RESET.toLatin1().data () << "] "
       << "[" << DASH_STYLE.toLatin1().data () << " &lt;style&gt;] "
       << "[" << DASH_STYLES.toLatin1().data () << "] "
-      << "[&lt;load_file1&gt;] [&lt;load_file2&gt;] ..." << Compatibility::endl
+      << "[&lt;load_file1&gt;] [&lt;load_file2&gt;] ..." << "\n"
       << "<table>"
       << "<tr>"
       << "<td>" << QObject::tr ("where") << "</td>"

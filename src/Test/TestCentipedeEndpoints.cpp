@@ -103,9 +103,9 @@ void TestCentipedeEndpoints::initTestCasePolarLog ()
   QTransform matrixScene (posScreen0.x(), posScreen1.x(), posScreen2.x(),
                           posScreen0.y(), posScreen1.y(), posScreen2.y(),
                                        1,              1,              1);
-  QTransform matrixGraph (                   0, qLn (LOG_RADIUS_MAX),                    0,
-                          qLn (LOG_RADIUS_MIN),                    0, qLn (LOG_RADIUS_MAX),
-                                             1,                    1,                   1);
+  QTransform matrixGraph (             0,             90,              0,
+                          LOG_RADIUS_MIN, LOG_RADIUS_MAX, LOG_RADIUS_MAX,
+                                       1,              1,              1);
   m_transformationPolarLog.updateTransformFromMatrices (matrixScene,
                                                         matrixGraph);
   m_transformationPolarLog.setModelCoords (m_modelCoordsPolarLog,
@@ -163,8 +163,8 @@ void TestCentipedeEndpoints::testPolarRPosition ()
                                            posLow,
                                            posHigh);
 
-  QVERIFY (magnitude (posLow - QPointF (135.695, 64.305)) < EPSILON);
-  QVERIFY (magnitude (posHigh - QPointF (163.982, 36.018)) < EPSILON);
+  QVERIFY (magnitude (posLow - QPointF (135.616, 64.6746)) < EPSILON);
+  QVERIFY (magnitude (posHigh - QPointF (163.840, 35.880)) < EPSILON);
 }
 
 void TestCentipedeEndpoints::testPolarTAngle ()
@@ -178,17 +178,27 @@ void TestCentipedeEndpoints::testPolarTAngle ()
                                      m_transformationPolarLog,
                                      m_posClickScreen);
 
-  double angleCenter = endpoints.angleScreenConstantRCenterAngle (modelGuideline.creationCircleRadius());
+  QPointF posOriginScreen (100, 100), posScreen0 (150, 100), posScreen90 (100, 50);
+  double angleCenter = endpoints.angleScreenConstantRCenterAngle (modelGuideline.creationCircleRadius(),
+                                                                  posOriginScreen,
+                                                                  posScreen0,
+                                                                  posScreen90);
   double angleLow, angleHigh;
-  endpoints.angleScreenConstantRCenterAngle (modelGuideline.creationCircleRadius());
+  endpoints.angleScreenConstantRCenterAngle (modelGuideline.creationCircleRadius(),
+                                             posOriginScreen,
+                                             posScreen0,
+                                             posScreen90);
   endpoints.angleScreenConstantRHighLowAngles (modelGuideline.creationCircleRadius(),
+                                               posOriginScreen,
+                                               posScreen0,
+                                               posScreen90,
                                                angleCenter,
                                                angleLow,
                                                angleHigh);
 
-  QVERIFY (qAbs (angleCenter - qDegreesToRadians(45.00)) < EPSILON);
-  QVERIFY (qAbs (angleLow - qDegreesToRadians (28.76)) < EPSILON);
-  QVERIFY (qAbs (angleHigh - qDegreesToRadians (61.24)) < EPSILON);
+  QVERIFY (qAbs (angleCenter - qDegreesToRadians(62.3227)) < EPSILON);
+  QVERIFY (qAbs (angleLow - qDegreesToRadians (59.81564)) < EPSILON);
+  QVERIFY (qAbs (angleHigh - qDegreesToRadians (71.760328)) < EPSILON);
 }
 
 void TestCentipedeEndpoints::testPolarTPosition ()
@@ -205,6 +215,6 @@ void TestCentipedeEndpoints::testPolarTPosition ()
   QPointF posLow = endpoints.posScreenConstantRForLowT (modelGuideline.creationCircleRadius());
   QPointF posHigh = endpoints.posScreenConstantRForHighT (modelGuideline.creationCircleRadius());
 
-  QVERIFY (magnitude (posLow - QPointF (162.01, 65.99)) < EPSILON);
-  QVERIFY (magnitude (posHigh - QPointF (133.82, 38.24)) < EPSILON);
+  QVERIFY (magnitude (posLow - QPointF (161.500, 66.363)) < EPSILON);
+  QVERIFY (magnitude (posHigh - QPointF (137.992, 34.006)) < EPSILON);
 }

@@ -88,7 +88,7 @@ private:
   void displayTics (double lambdaX,
                     QGraphicsScene &scene,
                     const Transformation &transformation,
-                    const QPointF &posCenterScreen,
+                    const QPointF &posOriginScreen,
                     const QPointF &posAAxisScreen,
                     const QColor &colorGraphCoordinates,
                     const QColor &colorScreenCoordinates) const;

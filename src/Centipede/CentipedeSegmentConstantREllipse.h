@@ -48,8 +48,6 @@ private:
   GraphicsArcItem *m_graphicsItem;
   GraphicsArcItemRelay *m_graphicsItemRelay;  
 
-  double m_angleScreenToEllipseAxes;
-
   // Two points where circle around click point intersects constant coordinate line
   QPointF m_posLow;
   QPointF m_posHigh;
@@ -62,7 +60,6 @@ private:
   double m_angleLow;
   double m_angleCenter;
   double m_angleHigh;
-  double m_angleRotation;
 
   /// Debugging
   CentipedeDebugPolar m_debugPolar;

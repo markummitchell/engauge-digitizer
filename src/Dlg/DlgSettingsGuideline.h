@@ -93,7 +93,8 @@ private:
                                                 double xMax,
                                                 double yMin,
                                                 double yMax);
-  void updatePreviewGeometryCentipedePolar (const QPointF &posClickScreen);
+  void updatePreviewGeometryCentipedePolar (const QPointF &posOriginScreen,
+                                            const QPointF &posClickScreen);
   void updatePreviewGeometryCirclePolar (const QPointF &posClickScreen);
   void updatePreviewGeometryGuidelineCartesian (double width,
                                                 double height,
@@ -102,9 +103,9 @@ private:
                                                 double xMax,
                                                 double yMin,
                                                 double yMax);
-  void updatePreviewGeometryGuidelinePolar (double width,
-                                            double height,
-                                            QPointF &posClickScreen);
+  QPointF updatePreviewGeometryGuidelinePolar (double width,
+                                               double height,
+                                               QPointF &posClickScreen);
   void updatePreviewStyle();
 
   ButtonWhatsThis *m_btnWhatsThis;

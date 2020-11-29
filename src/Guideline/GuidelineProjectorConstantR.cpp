@@ -33,9 +33,9 @@ EllipseParameters GuidelineProjectorConstantR::fromCoordinateR (const Transforma
   }
 
   // Points at 45, 135, 225 and 315 degrees at range rGraph
-  QPointF posScreenCenter, posScreen0, posScreen90, posScreen180;
+  QPointF posScreenOrigin, posScreen0, posScreen90, posScreen180;
   transformation.transformRawGraphToScreen (posGraphCenter,
-                                            posScreenCenter);
+                                            posScreenOrigin);
   transformation.transformRawGraphToScreen (QPointF (0, rGraph),
                                             posScreen0);
   transformation.transformRawGraphToScreen (QPointF (90, rGraph),
@@ -43,7 +43,7 @@ EllipseParameters GuidelineProjectorConstantR::fromCoordinateR (const Transforma
   transformation.transformRawGraphToScreen (QPointF (180, rGraph),
                                             posScreen180);
 
-  QPointF centerTo90 = posScreen90 - posScreenCenter;
+  QPointF centerTo90 = posScreen90 - posScreenOrigin;
 
   // Corners of parallelogram circumscribing the ellipse
   QPointF posScreenTL = posScreen180 + centerTo90;
@@ -51,17 +51,17 @@ EllipseParameters GuidelineProjectorConstantR::fromCoordinateR (const Transforma
   QPointF posScreenBR = posScreen0 - centerTo90;
 
   double angleRadians = 0, aAligned = 0, bAligned = 0;
-  ellipseFromParallelogram (posScreenTL.x() - posScreenCenter.x(),
-                            posScreenTL.y() - posScreenCenter.y(),
-                            posScreenTR.x() - posScreenCenter.x(),
-                            posScreenTR.y() - posScreenCenter.y(),
-                            posScreenBR.x() - posScreenCenter.x(),
-                            posScreenBR.y() - posScreenCenter.y(),
+  ellipseFromParallelogram (posScreenTL.x() - posScreenOrigin.x(),
+                            posScreenTL.y() - posScreenOrigin.y(),
+                            posScreenTR.x() - posScreenOrigin.x(),
+                            posScreenTR.y() - posScreenOrigin.y(),
+                            posScreenBR.x() - posScreenOrigin.x(),
+                            posScreenBR.y() - posScreenOrigin.y(),
                             angleRadians,
                             aAligned,
                             bAligned);
 
-  return EllipseParameters (posScreenCenter,
+  return EllipseParameters (posScreenOrigin,
                             angleRadians,
                             aAligned,
                             bAligned);

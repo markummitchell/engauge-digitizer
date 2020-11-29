@@ -545,11 +545,12 @@ void DlgSettingsGuideline::updatePreviewGeometry()
 
     // Update polar items
     QPointF posClickScreen;
-    updatePreviewGeometryGuidelinePolar (width,
-                                         height,
-                                         posClickScreen);
+    QPointF posOriginScreen = updatePreviewGeometryGuidelinePolar (width,
+                                                                   height,
+                                                                   posClickScreen);
     updatePreviewGeometryCirclePolar (posClickScreen);
-    updatePreviewGeometryCentipedePolar (posClickScreen);
+    updatePreviewGeometryCentipedePolar (posOriginScreen,
+                                         posClickScreen);
 
   }
 }
@@ -577,7 +578,8 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedeCartesian (const QPoint
                posStopY);
 }
 
-void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &posClickScreen)
+void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &posOriginScreen,
+                                                                const QPointF &posClickScreen)
 {
   CentipedeEndpointsPolar endpoints (cmdMediator().document().modelCoords(),
                                      *m_modelGuidelineAfter,
@@ -589,13 +591,20 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &p
                                            posLow,
                                            posHigh);
 
-  double angleCenter = endpoints.angleScreenConstantRCenterAngle (m_modelGuidelineAfter->creationCircleRadius());
-  double angleLow, angleHigh;
-  endpoints.angleScreenConstantRHighLowAngles (m_modelGuidelineAfter->creationCircleRadius(),
-                                               angleCenter,
-                                               angleLow,
-                                               angleHigh);
+  // Get radius that is in same rangea as screen
+  QPointF posClickGraph;
+  mainWindow().transformation().transformScreenToRawGraph (posClickScreen,
+                                                           posClickGraph);
+  double rGraph = posClickGraph.y();
 
+  // Get basis vectors in graph coordinates
+  QPointF posScreen0, posScreen90;
+  mainWindow().transformation().transformRawGraphToScreen (QPointF (0, rGraph),
+                                                           posScreen0);
+  mainWindow().transformation().transformRawGraphToScreen (QPointF (90, rGraph),
+                                                           posScreen90);
+
+  // Ellipse
   double angleRotation;
   QRectF rectBounding;
   CentipedeDebugPolar debugPolar;
@@ -604,6 +613,22 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &p
                                                      angleRotation,
                                                      rectBounding,
                                                      debugPolar);
+
+  // Get center angle
+  double angleCenter = endpoints.angleScreenConstantRCenterAngle (m_modelGuidelineAfter->creationCircleRadius(),
+                                                                  posOriginScreen,
+                                                                  posScreen0,
+                                                                  posScreen90);
+
+  // Get low and high angles
+  double angleLow, angleHigh;
+  endpoints.angleScreenConstantRHighLowAngles (m_modelGuidelineAfter->creationCircleRadius(),
+                                               posOriginScreen,
+                                               posScreen0,
+                                               posScreen90,
+                                               angleCenter,
+                                               angleLow,
+                                               angleHigh);
 
   debugPolar.display (*m_scenePreviewActive,
                       cmdMediator().document().modelCoords(),
@@ -669,9 +694,9 @@ void DlgSettingsGuideline::updatePreviewGeometryGuidelineCartesian (double width
                posRight);
 }
 
-void DlgSettingsGuideline::updatePreviewGeometryGuidelinePolar (double width,
-                                                                double height,
-                                                                QPointF &posClickScreen)
+QPointF DlgSettingsGuideline::updatePreviewGeometryGuidelinePolar (double width,
+                                                                   double height,
+                                                                   QPointF &posClickScreen)
 {
   // Show horizontal line and circle/ellipse
 
@@ -723,6 +748,8 @@ void DlgSettingsGuideline::updatePreviewGeometryGuidelinePolar (double width,
                    -1.0 * qRadiansToDegrees (angleClickScreen));
   safeSetPos (m_itemGuidelineRInactive,
               posCenter);
+
+  return posCenter;
 }
 
 void DlgSettingsGuideline::updatePreviewStyle ()

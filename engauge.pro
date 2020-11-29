@@ -452,6 +452,7 @@ HEADERS  += \
     src/main/MainTitleBarFormat.h \
     src/main/MainWindow.h \
     src/main/MainWindowModel.h \
+    src/main/MainWindowMsg.h \
     src/Matrix/Matrix.h \
     src/util/MigrateToVersion6.h \
     src/Mime/MimePointsDetector.h \
@@ -888,6 +889,7 @@ SOURCES += \
     src/main/MainDirectoryPersist.cpp \
     src/main/MainWindow.cpp \
     src/main/MainWindowModel.cpp \
+    src/main/MainWindowMsg.cpp \
     src/Matrix/Matrix.cpp \
     src/util/MigrateToVersion6.cpp \
     src/Mime/MimePointsDetector.cpp \

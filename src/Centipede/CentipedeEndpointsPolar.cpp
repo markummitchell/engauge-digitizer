@@ -13,6 +13,7 @@
 #include <qmath.h>
 #include <QPointF>
 #include "QtToString.h"
+#include "Shear.h"
 #include "Transformation.h"
 
 const int NUM_CIRCLE_POINTS = 400; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
@@ -33,7 +34,10 @@ CentipedeEndpointsPolar::~CentipedeEndpointsPolar ()
 {
 }
 
-double CentipedeEndpointsPolar::angleScreenConstantRCenterAngle (double radiusAboutClick) const
+double CentipedeEndpointsPolar::angleScreenConstantRCenterAngle (double radiusAboutClick,
+                                                                 const QPointF &posOriginScreen,
+                                                                 const QPointF &posScreen0,
+                                                                 const QPointF &posScreen90) const
 {
   QPointF posScreenBest;
   double xTBest = 0;
@@ -62,20 +66,27 @@ double CentipedeEndpointsPolar::angleScreenConstantRCenterAngle (double radiusAb
       // Best so far so save
       isFirst = false;
       posScreenBest = posScreenPrevious;
-      xTBest = xGraphPrevious;
+      xTBest = qDegreesToRadians (xGraphPrevious);
     }
   }
 
-  return qDegreesToRadians (xTBest);
+  // Compensate for shear distortion. If there is no shear (lambdaX = 0) then this has no effect
+  Shear shear;
+  return shear.convertAngleGraphToAngleScreenWithShear(xTBest,
+                                                       posScreenBest.y(),
+                                                       posOriginScreen,
+                                                       posScreen0,
+                                                       posScreen90);
 }
 
 void CentipedeEndpointsPolar::angleScreenConstantRHighLowAngles (double radiusAboutClick,
+                                                                 const QPointF &posOriginScreen,
+                                                                 const QPointF &posScreen0,
+                                                                 const QPointF &posScreen90,
                                                                  double angleCenter,
                                                                  double &angleLow,
                                                                  double &angleHigh) const
 {
-  // LOG4CPP is below
-
   // Click point
   QPointF posClickGraph;
   transformation().transformScreenToRawGraph (posClickScreen(),
@@ -142,11 +153,18 @@ void CentipedeEndpointsPolar::angleScreenConstantRHighLowAngles (double radiusAb
     angleHigh = temp;
   }
 
-  LOG4CPP_INFO_S ((*mainCat)) << "CentipedeEndpointsPolar::angleScreenConstantRHighLowAngles posLow="
-                              << QPointFToString (posLowBest).toLatin1().data() << " angleLow="
-                              << qRadiansToDegrees (angleLow) << " posHigh="
-                              << QPointFToString (posHighBest).toLatin1().data() << " angleHigh="
-                              << qRadiansToDegrees (angleHigh);
+  // Compensate for shear distortion. If there is no shear (lambdaX = 0) then this has no effect
+  Shear shear;
+  angleLow = shear.convertAngleGraphToAngleScreenWithShear (angleLow,
+                                                            yClick,
+                                                            posOriginScreen,
+                                                            posScreen0,
+                                                            posScreen90);
+  angleHigh = shear.convertAngleGraphToAngleScreenWithShear (angleHigh,
+                                                             yClick,
+                                                             posOriginScreen,
+                                                             posScreen0,
+                                                             posScreen90);
 }
 
 double CentipedeEndpointsPolar::closestAngleToCentralAngle (double angleCenter,
@@ -180,9 +198,9 @@ void CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles (const Tra
   double rGraph = posClickGraph.y();
 
   // Points at origin, then 0  degrees at range rGraph
-  QPointF posScreenCenter, posScreen0, posScreen90, posScreen180;
+  QPointF posScreenOrigin, posScreen0, posScreen90, posScreen180;
   transformation.transformRawGraphToScreen (QPointF (tAtOrigin (), rAtOrigin ()),
-                                            posScreenCenter);
+                                            posScreenOrigin);
   transformation.transformRawGraphToScreen (QPointF (0, rGraph),
                                             posScreen0);
   transformation.transformRawGraphToScreen (QPointF (90.0, rGraph),
@@ -190,7 +208,7 @@ void CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles (const Tra
   transformation.transformRawGraphToScreen (QPointF (180.0, rGraph),
                                             posScreen180);
 
-  QPointF centerTo90 = posScreen90 - posScreenCenter;
+  QPointF centerTo90 = posScreen90 - posScreenOrigin;
 
   // Corners of parallelogram circumscribing the ellipse
   QPointF posScreenTL = posScreen180 + centerTo90;
@@ -199,18 +217,18 @@ void CentipedeEndpointsPolar::ellipseScreenConstantRForTHighLowAngles (const Tra
   QPointF posScreenBR = posScreen0 - centerTo90;
 
   double aAligned = 0, bAligned = 0;
-  ellipseFromParallelogram (posScreenTL.x() - posScreenCenter.x(),
-                            posScreenTL.y() - posScreenCenter.y(),
-                            posScreenTR.x() - posScreenCenter.x(),
-                            posScreenTR.y() - posScreenCenter.y(),
-                            posScreenBR.x() - posScreenCenter.x(),
-                            posScreenBR.y() - posScreenCenter.y(),
+  ellipseFromParallelogram (posScreenTL.x() - posScreenOrigin.x(),
+                            posScreenTL.y() - posScreenOrigin.y(),
+                            posScreenTR.x() - posScreenOrigin.x(),
+                            posScreenTR.y() - posScreenOrigin.y(),
+                            posScreenBR.x() - posScreenOrigin.x(),
+                            posScreenBR.y() - posScreenOrigin.y(),
                             angleRotation,
                             aAligned,
                             bAligned);
 
-  double angleGraphAxisFromScreenAxis = qAtan2 (posScreen0.y() - posScreenCenter.y(),
-                                                posScreen0.x() - posScreenCenter.x());
+  double angleGraphAxisFromScreenAxis = qAtan2 (posScreen0.y() - posScreenOrigin.y(),
+                                                posScreen0.x() - posScreenOrigin.x());
 
   debugPolar = CentipedeDebugPolar (posScreenTL,
                                     posScreenTR,

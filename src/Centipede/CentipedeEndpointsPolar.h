@@ -28,11 +28,17 @@ public:
   virtual ~CentipedeEndpointsPolar ();
   
   /// Screen angle at origin from ellipse axis to circle-center/coordinate intersection. Works only for polar coordinates
-  double angleScreenConstantRCenterAngle (double radiusAboutClick) const;
+  double angleScreenConstantRCenterAngle (double radiusAboutClick,
+                                          const QPointF &posOriginScreen,
+                                          const QPointF &posScreen0,
+                                          const QPointF &posScreen90) const;
 
   /// Screen angle at origin from ellipse axis to circle/coordinate intersection in the increasing angle direction (high)
   /// or decreasing angle direction (low). Uses center angle from angleScreenConstantYRCenterAngle. Works only for polar coordinates
   void angleScreenConstantRHighLowAngles (double radiusAboutClick,
+                                          const QPointF &posOriginScreen,
+                                          const QPointF &posScreen0,
+                                          const QPointF &posScreen90,
                                           double angleCenter,
                                           double &angleLow,
                                           double &angleHigh) const;

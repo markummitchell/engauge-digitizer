@@ -114,13 +114,13 @@ void CentipedeDebugPolar::display (QGraphicsScene &scene,
   if (mainCat->getPriority() == log4cpp::Priority::DEBUG) {
 
     // Center
-    QPointF posCenterGraph (0, 0), posCenterScreen;
+    QPointF posOriginGraph (0, 0), posOriginScreen;
     if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
-      posCenterGraph = QPointF (0,
+      posOriginGraph = QPointF (0,
                                 modelCoords.originRadius());
     }
-    transformation.transformRawGraphToScreen (posCenterGraph,
-                                              posCenterScreen);
+    transformation.transformRawGraphToScreen (posOriginGraph,
+                                              posOriginScreen);
 
     // Circumscribing parallelogram
     QVector<QPointF> points;
@@ -134,23 +134,23 @@ void CentipedeDebugPolar::display (QGraphicsScene &scene,
     scene.addItem (parallelogram);
 
     // Right-angled rectangle
-    QRectF rect (posCenterScreen.x() - m_aAligned,
-                 posCenterScreen.y() - m_bAligned,
+    QRectF rect (posOriginScreen.x() - m_aAligned,
+                 posOriginScreen.y() - m_bAligned,
                  2 * m_aAligned,
                  2 * m_bAligned);
-    rect.setLeft (posCenterScreen.x() - m_aAligned);
-    rect.setTop (posCenterScreen.y() - m_bAligned);
+    rect.setLeft (posOriginScreen.x() - m_aAligned);
+    rect.setTop (posOriginScreen.y() - m_bAligned);
 
     // Circumscribing rectangle
     QGraphicsRectItem *rectItem = new QGraphicsRectItem (rect);
-    rectItem->setTransformOriginPoint(posCenterScreen);
+    rectItem->setTransformOriginPoint(posOriginScreen);
     rectItem->setRotation (qRadiansToDegrees (m_angleEllipseFromMajorAxis));
     rectItem->setPen (QPen (Qt::red));
     scene.addItem (rectItem);
 
     // Put an ellipse in the circumscribing rectangle to see if they line up
     QGraphicsEllipseItem *ellipse = new QGraphicsEllipseItem (rect);
-    ellipse->setTransformOriginPoint (posCenterScreen);
+    ellipse->setTransformOriginPoint (posOriginScreen);
     ellipse->setRotation (qRadiansToDegrees (m_angleEllipseFromMajorAxis));
     ellipse->setPen (QPen (Qt::red));
     scene.addItem (ellipse);
@@ -164,20 +164,20 @@ void CentipedeDebugPolar::display (QGraphicsScene &scene,
                                               posBAxisScreen);
 
     Shear shear;
-    double lambdaX = shear.lambdaX (posAAxisScreen - posCenterScreen,
-                                    posBAxisScreen - posCenterScreen);
+    double lambdaX = shear.lambdaX (posAAxisScreen - posOriginScreen,
+                                    posBAxisScreen - posOriginScreen);
 
     displayTics (0.0,
                  scene,
                  transformation,
-                 posCenterScreen,
+                 posOriginScreen,
                  posAAxisScreen,
                  QColor (255, 0, 0),
                  QColor (255, 150, 150));
     displayTics (lambdaX,
                  scene,
                  transformation,
-                 posCenterScreen,
+                 posOriginScreen,
                  posAAxisScreen,
                  QColor (0, 255, 0),
                  QColor (100, 205, 100));
@@ -193,7 +193,7 @@ void CentipedeDebugPolar::display (QGraphicsScene &scene,
 void CentipedeDebugPolar::displayTics (double lambdaX,
                                        QGraphicsScene &scene,
                                        const Transformation &transformation,
-                                       const QPointF &posCenterScreen,
+                                       const QPointF &posOriginScreen,
                                        const QPointF &posAAxisScreen,
                                        const QColor &colorGraphCoordinates,
                                        const QColor &colorScreenCoordinates) const
@@ -214,7 +214,7 @@ void CentipedeDebugPolar::displayTics (double lambdaX,
   scene.addItem (itemScreenCoords);
 
   // Orthogonal basis vectors aligned to orthognal axes of ellipse, in screen coordinates
-  QPointF basisX = (posAAxisScreen - posCenterScreen) / magnitude (posAAxisScreen - posCenterScreen);
+  QPointF basisX = (posAAxisScreen - posOriginScreen) / magnitude (posAAxisScreen - posOriginScreen);
   QPointF basisY (basisX.y(),
                   -1.0 * basisX.x());
 
@@ -242,8 +242,8 @@ void CentipedeDebugPolar::displayTics (double lambdaX,
                                basisX,
                                basisY);
 
-    QLineF linePortion = portionOfLineLast (QLineF (posCenterScreen,
-                                                    posCenterScreen + posRadial),
+    QLineF linePortion = portionOfLineLast (QLineF (posOriginScreen,
+                                                    posOriginScreen + posRadial),
                                             degrees,
                                             DEGREES_BETWEEN_HIGHLIGHTS);
     QGraphicsLineItem *radialFirst = new QGraphicsLineItem (linePortion);
@@ -262,12 +262,12 @@ void CentipedeDebugPolar::displayTics (double lambdaX,
                                                        m_radius),
                                               posRadial);
 
-    posRadial = posCenterScreen + shear.unshear (lambdaX,
-                                                 posRadial - posCenterScreen,
+    posRadial = posOriginScreen + shear.unshear (lambdaX,
+                                                 posRadial - posOriginScreen,
                                                  basisX,
                                                  basisY);
 
-    linePortion = portionOfLineNext (QLineF (posCenterScreen,
+    linePortion = portionOfLineNext (QLineF (posOriginScreen,
                                              posRadial),
                                      degrees,
                                      DEGREES_BETWEEN_HIGHLIGHTS);
