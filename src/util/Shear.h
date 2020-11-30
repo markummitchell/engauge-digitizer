@@ -35,6 +35,7 @@ class Shear
   /// along posScreen0 or its orthogonal vector
   double convertAngleGraphToAngleScreenWithShear (double angleSheared,
                                                   double radiusSheared,
+                                                  double angleRotation,
                                                   const QPointF &posOriginScreen,
                                                   const QPointF &posScreen0,
                                                   const QPointF &posScreen90) const;
@@ -42,6 +43,13 @@ class Shear
   /// Return lambdaX in the shear transformation
   double lambdaX (const QPointF &posAAxisScreen,
                   const QPointF &posBAxisScreen) const;
+
+  /// General case projection of vector onto orthogonal or non orthogonal basis vectors. Usually
+  /// the basis vectors are orthogonal, but when there is shear they will be non orthogonal and
+  /// the computations are more complicated
+  QPointF projectOntoBasisVectors (const QPointF &basis0,
+                                   const QPointF &basis1,
+                                   const QPointF &unprojected) const;
 
   /// Remove shear from the posRadial position by applying a shear transform with magnitude
   /// specified by lambdaX. This should have no effect when lambdaX = 0

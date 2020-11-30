@@ -9,8 +9,8 @@
 #        <Test#>  = specifies a selected test. If none are selected then all are run
 
 # Test names. Specify a single test to run just that test
+#    TestCentipedeEndpoints \
 testsAvailable=( \
-    TestCentipedeEndpoints \
     TestCorrelation  \
     TestCrc32 \
     TestExport \
@@ -23,6 +23,7 @@ testsAvailable=( \
     TestMatrix \
     TestProjectedPoint \
     TestSegmentFill \
+    TestShear \
     TestSpline \
     TestSplineDrawer \
     TestTransformation \

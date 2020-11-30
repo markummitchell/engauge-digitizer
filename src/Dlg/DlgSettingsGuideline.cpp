@@ -616,6 +616,7 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &p
 
   // Get center angle
   double angleCenter = endpoints.angleScreenConstantRCenterAngle (m_modelGuidelineAfter->creationCircleRadius(),
+                                                                  angleRotation,
                                                                   posOriginScreen,
                                                                   posScreen0,
                                                                   posScreen90);
@@ -623,6 +624,7 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &p
   // Get low and high angles
   double angleLow, angleHigh;
   endpoints.angleScreenConstantRHighLowAngles (m_modelGuidelineAfter->creationCircleRadius(),
+                                               angleRotation,
                                                posOriginScreen,
                                                posScreen0,
                                                posScreen90,

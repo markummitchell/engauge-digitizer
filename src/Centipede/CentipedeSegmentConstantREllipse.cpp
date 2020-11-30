@@ -73,10 +73,12 @@ CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(GraphicsScene
   m_posLow = endpointsPolar.posScreenConstantRForLowT (modelGuideline.creationCircleRadius());
   m_posHigh = endpointsPolar.posScreenConstantRForHighT (modelGuideline.creationCircleRadius());
   m_angleCenter = endpointsPolar.angleScreenConstantRCenterAngle (modelGuideline.creationCircleRadius (),
+                                                                  angleRotation,
                                                                   posOriginScreen,
                                                                   posScreen0,
                                                                   posScreen90);
   endpointsPolar.angleScreenConstantRHighLowAngles (modelGuideline.creationCircleRadius (),
+                                                    angleRotation,
                                                     posOriginScreen,
                                                     posScreen0,
                                                     posScreen90,

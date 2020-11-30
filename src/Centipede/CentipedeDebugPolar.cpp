@@ -163,35 +163,21 @@ void CentipedeDebugPolar::display (QGraphicsScene &scene,
     transformation.transformRawGraphToScreen (posBAxisGraph,
                                               posBAxisScreen);
 
-    Shear shear;
-    double lambdaX = shear.lambdaX (posAAxisScreen - posOriginScreen,
-                                    posBAxisScreen - posOriginScreen);
-
-    displayTics (0.0,
-                 scene,
+    displayTics (scene,
                  transformation,
                  posOriginScreen,
                  posAAxisScreen,
                  QColor (255, 0, 0),
                  QColor (255, 150, 150));
-    displayTics (lambdaX,
-                 scene,
-                 transformation,
-                 posOriginScreen,
-                 posAAxisScreen,
-                 QColor (0, 255, 0),
-                 QColor (100, 205, 100));
 
     // Finish up with details in log stream
     LOG4CPP_DEBUG_S ((*mainCat)) << "CentipedeDebugPolar::displayTics"
                                  << " angleFromAxis=" << qDegreesToRadians (m_angleEllipseFromMajorAxis)
-                                 << " angleFromScreen=" << qDegreesToRadians (m_angleGraphAxisFromScreenAxis)
-                                 << " lambdaX=" << lambdaX;
+                                 << " angleFromScreen=" << qDegreesToRadians (m_angleGraphAxisFromScreenAxis);
   }
 }
 
-void CentipedeDebugPolar::displayTics (double lambdaX,
-                                       QGraphicsScene &scene,
+void CentipedeDebugPolar::displayTics (QGraphicsScene &scene,
                                        const Transformation &transformation,
                                        const QPointF &posOriginScreen,
                                        const QPointF &posAAxisScreen,
@@ -200,7 +186,6 @@ void CentipedeDebugPolar::displayTics (double lambdaX,
 {
   static int legendYPos = 0;
   const int LEGEND_X_POS = 5, LEGEND_Y_STEP = 20, DEGREES_BETWEEN_HIGHLIGHTS = 10;
-  Shear shear;
 
   // Legend
   QGraphicsTextItem *itemGraphCoords = new QGraphicsTextItem ("Graphics Coords");
@@ -223,11 +208,15 @@ void CentipedeDebugPolar::displayTics (double lambdaX,
   double sinOffset = qSin (m_angleEllipseFromMajorAxis);
   for (int degrees = 0; degrees < 360; degrees++) {
 
+    QString degreesMinus180ToPlus180 = QString::number (degrees > 180 ?
+                                                          degrees - 360 :
+                                                          degrees);
+
     // Inner set of radial tic lines is regularly spaced in screen coordinates. We solve x=r*cosT, y=r*sinT,
     // x^2/a^2 + y^2/b^2 = 1. Ellipse points are then rotated
-    double radians = qDegreesToRadians ((double) degrees);
+    double radians = qDegreesToRadians ((double) degrees) - m_angleEllipseFromMajorAxis;
     double cosLoop = qCos(-1.0 * radians - m_angleEllipseFromMajorAxis);
-    double sinLoop = qSin(-1.0 * radians - m_angleEllipseFromMajorAxis); // Sign here must be synced with Shear::unshear sign on labmdaX and basisY
+    double sinLoop = qSin(-1.0 * radians - m_angleEllipseFromMajorAxis);
     double denominator = cosLoop * cosLoop / m_aAligned / m_aAligned  + sinLoop * sinLoop / m_bAligned / m_bAligned;
     double radius = qSqrt (1.0 / denominator);
     double x = radius * cosLoop;
@@ -236,11 +225,6 @@ void CentipedeDebugPolar::displayTics (double lambdaX,
     double yRotated = sinOffset * x + cosOffset * y;
     QPointF posRadial (xRotated,
                        yRotated);
-
-    posRadial = shear.unshear (lambdaX,
-                               posRadial,
-                               basisX,
-                               basisY);
 
     QLineF linePortion = portionOfLineLast (QLineF (posOriginScreen,
                                                     posOriginScreen + posRadial),
@@ -251,7 +235,7 @@ void CentipedeDebugPolar::displayTics (double lambdaX,
     scene.addItem (radialFirst);
 
     if (degrees % DEGREES_BETWEEN_HIGHLIGHTS == 0) {
-      QGraphicsTextItem *labelFirst = new QGraphicsTextItem (QString::number (degrees));
+      QGraphicsTextItem *labelFirst = new QGraphicsTextItem (degreesMinus180ToPlus180);
       labelFirst->setPos (linePortion.p1());
       labelFirst->setDefaultTextColor (colorScreenCoordinates);
       scene.addItem (labelFirst);
@@ -262,11 +246,6 @@ void CentipedeDebugPolar::displayTics (double lambdaX,
                                                        m_radius),
                                               posRadial);
 
-    posRadial = posOriginScreen + shear.unshear (lambdaX,
-                                                 posRadial - posOriginScreen,
-                                                 basisX,
-                                                 basisY);
-
     linePortion = portionOfLineNext (QLineF (posOriginScreen,
                                              posRadial),
                                      degrees,
@@ -276,7 +255,7 @@ void CentipedeDebugPolar::displayTics (double lambdaX,
     scene.addItem (radialSecond);
 
     if (degrees % DEGREES_BETWEEN_HIGHLIGHTS == 0) {
-      QGraphicsTextItem *labelSecond = new QGraphicsTextItem (QString::number (degrees));
+      QGraphicsTextItem *labelSecond = new QGraphicsTextItem (degreesMinus180ToPlus180);
       labelSecond->setPos (linePortion.p1());
       labelSecond->setDefaultTextColor (colorGraphCoordinates);
       scene.addItem (labelSecond);

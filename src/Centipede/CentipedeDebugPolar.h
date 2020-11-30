@@ -85,8 +85,7 @@ public:
 private:
 
   /// Display a full circle or ellipse of tics on the circumference
-  void displayTics (double lambdaX,
-                    QGraphicsScene &scene,
+  void displayTics (QGraphicsScene &scene,
                     const Transformation &transformation,
                     const QPointF &posOriginScreen,
                     const QPointF &posAAxisScreen,

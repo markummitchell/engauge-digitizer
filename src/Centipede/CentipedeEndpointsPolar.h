@@ -29,6 +29,7 @@ public:
   
   /// Screen angle at origin from ellipse axis to circle-center/coordinate intersection. Works only for polar coordinates
   double angleScreenConstantRCenterAngle (double radiusAboutClick,
+                                          double angleRotation,
                                           const QPointF &posOriginScreen,
                                           const QPointF &posScreen0,
                                           const QPointF &posScreen90) const;
@@ -36,6 +37,7 @@ public:
   /// Screen angle at origin from ellipse axis to circle/coordinate intersection in the increasing angle direction (high)
   /// or decreasing angle direction (low). Uses center angle from angleScreenConstantYRCenterAngle. Works only for polar coordinates
   void angleScreenConstantRHighLowAngles (double radiusAboutClick,
+                                          double angleRotation,
                                           const QPointF &posOriginScreen,
                                           const QPointF &posScreen0,
                                           const QPointF &posScreen90,
@@ -70,6 +72,10 @@ private:
   /// Solves posScreenConstantRHighT and posScreenConstantRLowT  
   QPointF posScreenConstantRCommon (double radius,
                                     CentipedeIntersectionType intersectionType) const;
+
+  double posScreenToEllipseAngle (const QPointF &posScreen,
+                                  const QPointF &posScreenOrigin,
+                                  double angleRotation) const;
 
   double rAtOrigin () const;
   double tAtOrigin () const;
