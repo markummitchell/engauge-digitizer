@@ -30,11 +30,10 @@ void CentipedeEndpointsAbstract::generatePreviousAndNextPoints (double radiusAbo
                                                                 int i,
                                                                 QPointF &posGraphPrevious,
                                                                 QPointF &posGraphNext,
-                                                                QPointF &posScreenPrevious,
-                                                                double angleOffset) const
+                                                                QPointF &posScreenPrevious) const
 {
-  double angleBefore = angleOffset + 2.0 * M_PI * (double) i / (double) NUM_CIRCLE_POINTS;
-  double angleAfter = angleOffset + 2.0 * M_PI * (double) (i + 1) / (double) NUM_CIRCLE_POINTS;
+  double angleBefore = 2.0 * M_PI * (double) i / (double) NUM_CIRCLE_POINTS;
+  double angleAfter = 2.0 * M_PI * (double) (i + 1) / (double) NUM_CIRCLE_POINTS;
   posScreenPrevious = m_posClickScreen + QPointF (radiusAboutClick * cos (angleBefore),
                                                   radiusAboutClick * sin (angleBefore));
   QPointF posScreenNext = m_posClickScreen + QPointF (radiusAboutClick * cos (angleAfter),

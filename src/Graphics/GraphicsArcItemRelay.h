@@ -8,6 +8,7 @@
 #define GRAPHICS_ARC_ITEM_RELAY_H
 
 #include <QObject>
+#include <QPointF>
 
 class GraphicsArcItem;
 
@@ -29,9 +30,11 @@ public:
 
 public slots:
 
-  /// Slot equivalent of setStartAngle and setSpanAngle (in tics) and setRotation (radians)
-  void slotUpdateAngles (int startAngle,
-                         int spanAngle);
+  /// Slot inputs to QGraphicsEllipseItem::setStartAngle and ::setSpanAngle
+  void slotUpdateAngles (QPointF posTangentialLow,
+                         QPointF posTangentialCenter,
+                         QPointF posTangentialHigh,
+                         double scaling);
   
 private:
   GraphicsArcItemRelay();

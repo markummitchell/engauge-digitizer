@@ -18,9 +18,6 @@
 #include <QPen>
 #include "QtToString.h"
 
-const int TICS_PER_CYCLE = 360 * 16;
-const double RADIANS_TO_TICS = TICS_PER_CYCLE / (2.0 * M_PI);
-
 CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(GraphicsScene &scene,
                                                                    const DocumentModelCoords &modelCoords,
                                                                    const DocumentModelGuideline &modelGuideline,
@@ -70,21 +67,14 @@ CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(GraphicsScene
                       transformation);
 
   // Compute position and angle values
-  m_posLow = endpointsPolar.posScreenConstantRForLowT (modelGuideline.creationCircleRadius());
-  m_posHigh = endpointsPolar.posScreenConstantRForHighT (modelGuideline.creationCircleRadius());
-  m_angleCenter = endpointsPolar.angleScreenConstantRCenterAngle (modelGuideline.creationCircleRadius (),
-                                                                  angleRotation,
-                                                                  posOriginScreen,
-                                                                  posScreen0,
-                                                                  posScreen90);
-  endpointsPolar.angleScreenConstantRHighLowAngles (modelGuideline.creationCircleRadius (),
-                                                    angleRotation,
-                                                    posOriginScreen,
-                                                    posScreen0,
-                                                    posScreen90,
-                                                    m_angleCenter,
-                                                    m_angleLow,
-                                                    m_angleHigh);
+  m_posRadialLow = endpointsPolar.posScreenConstantRForLowT (modelGuideline.creationCircleRadius());
+  m_posRadialHigh = endpointsPolar.posScreenConstantRForHighT (modelGuideline.creationCircleRadius());
+  endpointsPolar.posScreenConstantRHighLow (modelGuideline.creationCircleRadius (),
+                                            posOriginScreen,
+                                            posScreen0,
+                                            posScreen90,
+                                            m_posTangentialLow,
+                                            m_posTangentialHigh);
 
   // Create graphics item and its relay. As explained in GuidelineEllipse::updateGeometry, the correct sequence
   // of graphical operations is very tricky, and less successful if setTransformOriginPoint is used (e.g. works for
@@ -111,8 +101,8 @@ CentipedeSegmentConstantREllipse::~CentipedeSegmentConstantREllipse ()
 
 double CentipedeSegmentConstantREllipse::distanceToClosestEndpoint (const QPointF &posScreen) const
 {
-  double distanceLow = magnitude (posScreen - m_posLow);
-  double distanceHigh = magnitude (posScreen - m_posHigh);
+  double distanceLow = magnitude (posScreen - m_posRadialLow);
+  double distanceHigh = magnitude (posScreen - m_posRadialHigh);
 
   return qMin (distanceLow, distanceHigh);
 }
@@ -122,20 +112,8 @@ void CentipedeSegmentConstantREllipse::updateRadius (double radius)
   // Scale up/down the angles, with them converging to center angle as radius goes to zero
   double scaling = radius / modelGuideline().creationCircleRadius ();
 
-  double angleLowRad = m_angleCenter + scaling * (m_angleLow - m_angleCenter);
-  double angleHighRad = m_angleCenter + scaling * (m_angleHigh - m_angleCenter);
-  int angleLowTics = (int) (angleLowRad * RADIANS_TO_TICS);
-  int angleHighTics = (int) (angleHighRad * RADIANS_TO_TICS);
-
-  // Update geometry but only after the event handler currently on the stack has disappeared.
-  // This means sending a signal instead of calling QGraphicsEllipseItem::setStartAngle and
-  // QGraphicsEllipseItem::setSpanAngle directly
-  int angleDeltaTics = angleHighTics - angleLowTics;
-
-  emit signalUpdateAngles (angleLowTics,
-                           angleDeltaTics);
-
-  CentipedeDebugPolar debugPolar;
-  debugPolar.dumpEllipseGraphicsItem ("CentipedeSegmentConstantREllipse::updateRadius",
-                                      m_graphicsItem);
+  emit signalUpdateAngles (m_posTangentialLow,
+                           posClickScreen (),
+                           m_posTangentialHigh,
+                           scaling);
 }

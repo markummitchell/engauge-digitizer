@@ -25,6 +25,9 @@ double Shear::convertAngleGraphToAngleScreenWithShear (double angleSheared,
   double lambda = lambdaX (posScreen0 - posOriginScreen,
                            posScreen90 - posOriginScreen);
 
+  // test
+  lambda = 0.0;
+
   // Orthogonal basis vectors of ellipse with x basis along major axis and y basis
   // at right angles (ignoring shear)
   QPointF basis0 = (posScreen0 - posOriginScreen) / magnitude (posScreen0 - posOriginScreen);
@@ -91,30 +94,47 @@ QPointF Shear::projectOntoBasisVectors (const QPointF &basis0,
   // If basis vectors are orthogonal then this method effectively just takes the dot product
   // to get the components.
   //
-  // If basis vectors are non-orthogonal then the components are coupled. We will compute new 
-  // vector W with its a0 and a1 components
-  //    V = a0 * basis0 + a1 * basis1
-  // Taking dot product of V with basis0 and basis1 we get
-  //    V dot basis0 = a0 + a1 * (basis1 dot basis0)
-  //    V dot basis1 = a0 * (basis0 dot basis1) + a1
-  // But all three dot products can be computed with the initial geometry, turning
-  // this into 2 equations 2 unknowns
+  // If basis vectors are non-orthogonal then the math gets more complicated - we assume we
+  // have shear. Specifically y axis has been rotated about the origin. All constant-x
+  // lines are also assume to be rotated about their intersections with the x axis by a similar
+  // amount. NOTE some sources
+  // (https://math.stackexchange.com/questions/148199/equation-for-non-orthogonal-projection-of-a-point-onto-two-vectors-representing)
+  // do NOT make the same assumptions so be careful when reading other sources. Unlike those
+  // other sources, this code gives the result that any point along the x axis will still be
+  // along the x axis (i.e. y is zero) - which we need since zero angle is implicitly along old/new a axis
 
+  // Normalize for safety
   QPointF basis0Norm = basis0 / magnitude (basis0);
   QPointF basis1Norm = basis1 / magnitude (basis1);
-  
-  double vDotB0 = dot (vector, basis0Norm);
-  double vDotB1 = dot (vector, basis1Norm);
-  double b0DotB1 = dot (basis0Norm, basis1Norm);
 
-  // Kramers Rule with (vDotB0) = (1  b0DotB1) (a0)
-  //                   (vDotB1) = (b0DotB1  1) (a1)
-  double a0Numerator = vDotB0 * 1 - b0DotB1 * vDotB1;
-  double a1Numerator = 1 * vDotB1 - vDotB1 * b0DotB1;
-  double denominator = 1 - b0DotB1 * b0DotB1;
+  // Compute orthogonal second basis vector
+  QPointF basis1Orthogonal (basis0Norm.y(),
+                            -1.0 * basis0Norm.x());
 
-  return QPointF (a0Numerator / denominator,
-                  a1Numerator / denominator);
+  // Compensate for shear. This has no effect if there is no shear (=basis vectors are orthogonal). From
+  // the geoemetry diagram with just basis vectors below we have b1 endpoint at (xB1, yB1) and (lambda * yB1, yB1)
+  //
+  // b1Normal
+  // |
+  // |---b1
+  // |  /
+  // | /
+  // |/
+  // O------b0
+
+  double xB1 = dot (basis1Norm, basis0Norm);
+  double yB1 = dot (basis1Norm, basis1Orthogonal);
+
+  double lambda = xB1 / yB1;
+
+  // Now apply to vector. For the shear case drawn above we have lambda<0 and y<0. We multiply lambda*y by
+  // another negative so x gets reduced a y goes upward
+  double x = dot (vector, basis0Norm);
+  double y = dot (vector, basis1Orthogonal);
+  QPointF posProjected (x - lambda * y,
+                        y);
+
+  return posProjected;
 }
 
 QPointF Shear::unshear (double lambdaX,

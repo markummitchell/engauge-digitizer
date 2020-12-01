@@ -35,8 +35,10 @@ public:
 signals:
   
   /// Send new geometry for later updating
-  void signalUpdateAngles (int startAngle,
-                           int spanAngle);
+  void signalUpdateAngles (QPointF posTangentialLow,
+                           QPointF posTangentialCenter,
+                           QPointF posTangentialHigh,
+                           double scaling);
   
 private:
   CentipedeSegmentConstantREllipse();
@@ -48,18 +50,13 @@ private:
   GraphicsArcItem *m_graphicsItem;
   GraphicsArcItemRelay *m_graphicsItemRelay;  
 
-  // Two points where circle around click point intersects constant coordinate line
-  QPointF m_posLow;
-  QPointF m_posHigh;
+  // Two points where circle around click point intersects constant theta coordinate line
+  QPointF m_posRadialLow;
+  QPointF m_posRadialHigh;
 
-  // Two angles where circle around click point intersects constant coordinate line. Angle is
-  // about the origin and starting around one (semiminor or semimajor) axes of the ellipe
-  //
-  // Due to asymmetry (angles between center-and-high and center-and-low are usually different),
-  // we know the angle to click point cannot be calculated as (m_angleLow + m_angleHigh) / 2
-  double m_angleLow;
-  double m_angleCenter;
-  double m_angleHigh;
+  // Two points where circle around click points intersects constant radius coordinate line
+  QPointF m_posTangentialLow;
+  QPointF m_posTangentialHigh;
 
   /// Debugging
   CentipedeDebugPolar m_debugPolar;

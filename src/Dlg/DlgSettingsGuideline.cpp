@@ -586,10 +586,11 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &p
                                      mainWindow().transformation(),
                                      posClickScreen);
 
-  QPointF posLow, posHigh;
+  // Get low and high constant theta points
+  QPointF posRadialLow, posRadialHigh;
   endpoints.posScreenConstantTForRHighLow (m_modelGuidelineAfter->creationCircleRadius(),
-                                           posLow,
-                                           posHigh);
+                                           posRadialLow,
+                                           posRadialHigh);
 
   // Get radius that is in same rangea as screen
   QPointF posClickGraph;
@@ -614,36 +615,27 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &p
                                                      rectBounding,
                                                      debugPolar);
 
-  // Get center angle
-  double angleCenter = endpoints.angleScreenConstantRCenterAngle (m_modelGuidelineAfter->creationCircleRadius(),
-                                                                  angleRotation,
-                                                                  posOriginScreen,
-                                                                  posScreen0,
-                                                                  posScreen90);
-
-  // Get low and high angles
-  double angleLow, angleHigh;
-  endpoints.angleScreenConstantRHighLowAngles (m_modelGuidelineAfter->creationCircleRadius(),
-                                               angleRotation,
-                                               posOriginScreen,
-                                               posScreen0,
-                                               posScreen90,
-                                               angleCenter,
-                                               angleLow,
-                                               angleHigh);
+  // Get low and high constant radius points
+  QPointF posTangentialLow, posTangentialHigh;
+  endpoints.posScreenConstantRHighLow (m_modelGuidelineAfter->creationCircleRadius(),
+                                       posOriginScreen,
+                                       posScreen0,
+                                       posScreen90,
+                                       posTangentialLow,
+                                       posTangentialHigh);
 
   debugPolar.display (*m_scenePreviewActive,
                       cmdMediator().document().modelCoords(),
                       mainWindow().transformation());
 
-  safeSetLine (m_itemCentipedeXTActive,
-               posLow,
-               posHigh);
-  safeSetEllipseGeometry (m_itemCentipedeRActive,
-                          rectBounding,
-                          angleRotation,
-                          angleLow,
-                          angleHigh);
+  //safeSetLine (m_itemCentipedeXTActive,
+  //             posRadialLow,
+  //             posRadialHigh);
+  //safeSetEllipseGeometry (m_itemCentipedeRActive,
+  //                        rectBounding,
+  //                        angleRotation,
+  //                        angleLow,
+  //                        angleHigh);
 }
 
 void DlgSettingsGuideline::updatePreviewGeometryCirclePolar (const QPointF &posClickScreen)

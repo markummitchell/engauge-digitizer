@@ -28,8 +28,7 @@ protected:
                                       int i,
                                       QPointF &posGraphPrevious,
                                       QPointF &posGraphNext,
-                                      QPointF &posScreen,
-                                      double angleOffset = 0) const;
+                                      QPointF &posScreen) const;
 
   /// Settings
   const DocumentModelGuideline &modelGuideline () const;
