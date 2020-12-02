@@ -584,7 +584,8 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &p
   CentipedeEndpointsPolar endpoints (cmdMediator().document().modelCoords(),
                                      *m_modelGuidelineAfter,
                                      mainWindow().transformation(),
-                                     posClickScreen);
+                                     posClickScreen,
+                                     posOriginScreen);
 
   // Get low and high constant theta points
   QPointF posRadialLow, posRadialHigh;
@@ -618,9 +619,6 @@ void DlgSettingsGuideline::updatePreviewGeometryCentipedePolar (const QPointF &p
   // Get low and high constant radius points
   QPointF posTangentialLow, posTangentialHigh;
   endpoints.posScreenConstantRHighLow (m_modelGuidelineAfter->creationCircleRadius(),
-                                       posOriginScreen,
-                                       posScreen0,
-                                       posScreen90,
                                        posTangentialLow,
                                        posTangentialHigh);
 

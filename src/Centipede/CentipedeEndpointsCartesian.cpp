@@ -26,6 +26,26 @@ CentipedeEndpointsCartesian::~CentipedeEndpointsCartesian ()
 {
 }
 
+void CentipedeEndpointsCartesian::generatePreviousAndNextPoints (double radiusAboutClick,
+                                                                 int i,
+                                                                 QPointF &posGraphPrevious,
+                                                                 QPointF &posGraphNext,
+                                                                 QPointF &posScreenPrevious) const
+{
+  double angleBefore = 2.0 * M_PI * (double) i / (double) NUM_CIRCLE_POINTS;
+  double angleAfter = 2.0 * M_PI * (double) (i + 1) / (double) NUM_CIRCLE_POINTS;
+
+  posScreenPrevious = posClickScreen () + QPointF (radiusAboutClick * qCos (angleBefore),
+                                                   radiusAboutClick * qSin (angleBefore));
+  QPointF posScreenNext = posClickScreen () + QPointF (radiusAboutClick * qCos (angleAfter),
+                                                       radiusAboutClick * qSin (angleAfter));
+
+  transformation().transformScreenToRawGraph (posScreenPrevious,
+                                              posGraphPrevious);
+  transformation().transformScreenToRawGraph (posScreenNext,
+                                              posGraphNext);
+}
+
 QPointF CentipedeEndpointsCartesian::posScreenConstantXCommon (double radius,
                                                                CentipedeIntersectionType intersectionType) const
 {

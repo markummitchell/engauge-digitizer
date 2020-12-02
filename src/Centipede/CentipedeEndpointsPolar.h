@@ -24,7 +24,8 @@ public:
   CentipedeEndpointsPolar(const DocumentModelCoords &modelCoords,
                           const DocumentModelGuideline &modelGuideline,
                           const Transformation &transformation,
-                          const QPointF &posClickScreen);
+                          const QPointF &posClickScreen,
+                          const QPointF &posOriginScreen);
   virtual ~CentipedeEndpointsPolar ();
 
   /// Ellipse for R value of circle/coordinate intersection. Start/span angles are calculated separately
@@ -33,6 +34,7 @@ public:
                                                 double &angleRotation,
                                                 QRectF &rectBounding,
                                                 CentipedeDebugPolar &DebugPolar);
+
 
   /// Screen point for R value of circle/coordinate intersection in the increasing T direction
   QPointF posScreenConstantRForHighT (double radius) const;
@@ -43,9 +45,6 @@ public:
   /// Return two points (posLow and posHigh) where circle around posClickScreen intersects
   /// constant-radiusAboutClick ellipse
   void posScreenConstantRHighLow (double radiusAboutClick,
-                                  const QPointF &posOriginScreen,
-                                  const QPointF &posScreen0,
-                                  const QPointF &posScreen90,
                                   QPointF &posLow,
                                   QPointF &posHigh) const;
 
@@ -60,6 +59,14 @@ private:
   double closestAngleToCentralAngle (double angleCenter,
                                      double angleOld) const;
 
+  /// Generate a pair of points next to each other along a screen circle with the specified radius, given the index
+  void generatePreviousAndNextPointsConstantR (double radius,
+                                               int iPrevious,
+                                               int iNext,
+                                               QPointF &posGraphPrevious,
+                                               QPointF &posGraphNext,
+                                               QPointF &posScreen) const;
+
   /// Solves posScreenConstantRHighT and posScreenConstantRLowT  
   QPointF posScreenConstantRCommon (double radius,
                                     CentipedeIntersectionType intersectionType) const;
@@ -73,7 +80,7 @@ private:
   double tAtOrigin () const;
 
   DocumentModelCoords m_modelCoords;
-
+  QPointF m_posOriginScreen;
 };
 
 #endif // CENTIPEDE_ENDPOINTS_POLAR_H

@@ -39,9 +39,9 @@ CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(GraphicsScene
     posOriginGraph = QPointF (0, modelCoords.originRadius());
   }
 
-  QPointF posOriginScreen, posScreen0, posScreen90;
+  QPointF posScreen0, posScreen90;
   transformation.transformRawGraphToScreen (posOriginGraph,
-                                            posOriginScreen);
+                                            m_posOriginScreen);
   transformation.transformRawGraphToScreen (QPointF (0, rGraph),
                                             posScreen0);
   transformation.transformRawGraphToScreen (QPointF (90, rGraph),
@@ -51,7 +51,8 @@ CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(GraphicsScene
   CentipedeEndpointsPolar endpointsPolar (modelCoords,
                                           modelGuideline,
                                           transformation,
-                                          posClickScreen);
+                                          posClickScreen,
+                                          m_posOriginScreen);
 
   QRectF rectBounding;
   CentipedeDebugPolar debugPolar;
@@ -70,9 +71,6 @@ CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(GraphicsScene
   m_posRadialLow = endpointsPolar.posScreenConstantRForLowT (modelGuideline.creationCircleRadius());
   m_posRadialHigh = endpointsPolar.posScreenConstantRForHighT (modelGuideline.creationCircleRadius());
   endpointsPolar.posScreenConstantRHighLow (modelGuideline.creationCircleRadius (),
-                                            posOriginScreen,
-                                            posScreen0,
-                                            posScreen90,
                                             m_posTangentialLow,
                                             m_posTangentialHigh);
 
@@ -82,7 +80,7 @@ CentipedeSegmentConstantREllipse::CentipedeSegmentConstantREllipse(GraphicsScene
   m_graphicsItem = new GraphicsArcItem (rectBounding);
   m_graphicsItem->setSpanAngle (0); // Prevent flicker by display before span angle is changed from all-inclusive default
   m_graphicsItem->setRotation (qRadiansToDegrees (angleRotation));
-  m_graphicsItem->setPos (posOriginScreen);
+  m_graphicsItem->setPos (m_posOriginScreen);
   m_graphicsItemRelay = new GraphicsArcItemRelay (this,
                                                   m_graphicsItem);
   QColor color (ColorPaletteToQColor (modelGuideline.lineColor()));
@@ -112,8 +110,8 @@ void CentipedeSegmentConstantREllipse::updateRadius (double radius)
   // Scale up/down the angles, with them converging to center angle as radius goes to zero
   double scaling = radius / modelGuideline().creationCircleRadius ();
 
-  emit signalUpdateAngles (m_posTangentialLow,
-                           posClickScreen (),
-                           m_posTangentialHigh,
+  emit signalUpdateAngles (m_posTangentialLow - m_posOriginScreen,
+                           posClickScreen () - m_posOriginScreen,
+                           m_posTangentialHigh - m_posOriginScreen,
                            scaling);
 }

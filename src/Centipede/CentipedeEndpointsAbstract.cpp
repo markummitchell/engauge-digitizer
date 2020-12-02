@@ -11,8 +11,6 @@
 #include <QPointF>
 #include "Transformation.h"
 
-const int NUM_CIRCLE_POINTS = 400; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
-
 CentipedeEndpointsAbstract::CentipedeEndpointsAbstract(const DocumentModelGuideline &modelGuideline,
                                                        const Transformation &transformation,
                                                        const QPointF &posClickScreen) :
@@ -24,25 +22,6 @@ CentipedeEndpointsAbstract::CentipedeEndpointsAbstract(const DocumentModelGuidel
 
 CentipedeEndpointsAbstract::~CentipedeEndpointsAbstract ()
 {
-}
-
-void CentipedeEndpointsAbstract::generatePreviousAndNextPoints (double radiusAboutClick,
-                                                                int i,
-                                                                QPointF &posGraphPrevious,
-                                                                QPointF &posGraphNext,
-                                                                QPointF &posScreenPrevious) const
-{
-  double angleBefore = 2.0 * M_PI * (double) i / (double) NUM_CIRCLE_POINTS;
-  double angleAfter = 2.0 * M_PI * (double) (i + 1) / (double) NUM_CIRCLE_POINTS;
-  posScreenPrevious = m_posClickScreen + QPointF (radiusAboutClick * cos (angleBefore),
-                                                  radiusAboutClick * sin (angleBefore));
-  QPointF posScreenNext = m_posClickScreen + QPointF (radiusAboutClick * cos (angleAfter),
-                                                      radiusAboutClick * sin (angleAfter));
-
-  m_transformation.transformScreenToRawGraph (posScreenPrevious,
-                                              posGraphPrevious);
-  m_transformation.transformScreenToRawGraph (posScreenNext,
-                                              posGraphNext);
 }
 
 const DocumentModelGuideline &CentipedeEndpointsAbstract::modelGuideline () const

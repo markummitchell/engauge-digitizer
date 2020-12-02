@@ -24,10 +24,21 @@ CentipedeSegmentConstantTRadial::CentipedeSegmentConstantTRadial(GraphicsScene &
                             transformation,
                             posClickScreen)
 {
+  // Compute basis vectors that are used here and when by any callback(s)
+  QPointF posOriginGraph (0, 0);
+  if (modelCoords.coordScaleYRadius() == COORD_SCALE_LOG) {
+    posOriginGraph = QPointF (0, modelCoords.originRadius());
+  }
+
+  QPointF posOriginScreen;
+  transformation.transformRawGraphToScreen (posOriginGraph,
+                                            posOriginScreen);
+
   CentipedeEndpointsPolar endpoints (modelCoords,
                                      modelGuideline,
                                      transformation,
-                                     posClickScreen);
+                                     posClickScreen,
+                                     posOriginScreen);
   
   endpoints.posScreenConstantTForRHighLow (modelGuideline.creationCircleRadius(),
                                            m_posLow,

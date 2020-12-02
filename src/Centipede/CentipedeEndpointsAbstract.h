@@ -23,13 +23,6 @@ public:
   
 protected:
 
-  /// Generate a pair of points next to each other along a screen circle with the specified radius, given the index
-  void generatePreviousAndNextPoints (double radius,
-                                      int i,
-                                      QPointF &posGraphPrevious,
-                                      QPointF &posGraphNext,
-                                      QPointF &posScreen) const;
-
   /// Settings
   const DocumentModelGuideline &modelGuideline () const;
 

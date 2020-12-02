@@ -58,7 +58,10 @@ private:
   QPointF m_posTangentialLow;
   QPointF m_posTangentialHigh;
 
-  /// Debugging
+  // Origin
+  QPointF m_posOriginScreen;
+
+  // Debugging
   CentipedeDebugPolar m_debugPolar;
 };
 
