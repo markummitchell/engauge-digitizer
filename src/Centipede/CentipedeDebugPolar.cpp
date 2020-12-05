@@ -28,7 +28,8 @@ CentipedeDebugPolar::CentipedeDebugPolar() :
   m_angleEllipseFromMajorAxis (0),
   m_aAligned (0),
   m_bAligned (0),
-  m_radius (0)
+  m_radius (0),
+  m_legendYPos (0)
 {
 }
 
@@ -49,7 +50,8 @@ CentipedeDebugPolar::CentipedeDebugPolar(const QPointF &posScreenParallelogramTL
   m_angleEllipseFromMajorAxis (angleEllipseFromMajorAxis),
   m_aAligned (aAligned),
   m_bAligned (bAligned),
-  m_radius (radius)
+  m_radius (radius),
+  m_legendYPos (0)
 {
 }
 
@@ -62,7 +64,8 @@ CentipedeDebugPolar::CentipedeDebugPolar (const CentipedeDebugPolar &other) :
   m_angleEllipseFromMajorAxis (other.angleEllipseFromMajorAxis ()),
   m_aAligned (other.aAligned ()),
   m_bAligned (other.bAligned ()),
-  m_radius (other.radius ())
+  m_radius (other.radius ()),
+  m_legendYPos (0)
 {
 }
 
@@ -77,6 +80,7 @@ CentipedeDebugPolar &CentipedeDebugPolar::operator= (const CentipedeDebugPolar &
   m_aAligned = other.aAligned ();
   m_bAligned = other.bAligned ();
   m_radius = other.radius ();
+  m_legendYPos = 0;
 
   return *this;
 }
@@ -88,6 +92,18 @@ CentipedeDebugPolar::~CentipedeDebugPolar()
 double CentipedeDebugPolar::aAligned () const
 {
   return m_aAligned;
+}
+
+void CentipedeDebugPolar::addToLegend (QGraphicsScene &scene,
+                                       const QString &entry,
+                                       const QColor &color)
+{
+  const int LEGEND_X_POS = 5, LEGEND_Y_STEP = 20;
+
+  QGraphicsTextItem *itemGraphCoords = new QGraphicsTextItem (entry);
+  itemGraphCoords->setPos (QPointF (LEGEND_X_POS, LEGEND_Y_STEP * (m_legendYPos++)));
+  itemGraphCoords->setDefaultTextColor (color);
+  scene.addItem (itemGraphCoords);
 }
 
 double CentipedeDebugPolar::angleEllipseFromMajorAxis () const
@@ -107,7 +123,7 @@ double CentipedeDebugPolar::bAligned () const
 
 void CentipedeDebugPolar::display (QGraphicsScene &scene,
                                    const DocumentModelCoords &modelCoords,
-                                   const Transformation &transformation) const
+                                   const Transformation &transformation)
 {
   // LOG4CPP is below
 
@@ -130,8 +146,29 @@ void CentipedeDebugPolar::display (QGraphicsScene &scene,
     points << m_posScreenParallelogramBR;
     points << m_posScreenParallelogramBL;
     QGraphicsPolygonItem *parallelogram = new QGraphicsPolygonItem (points);
-    parallelogram->setPen (QPen (Qt::red));
+    parallelogram->setPen (QPen (Qt::green));
+    addToLegend (scene,
+                 QString ("Parallelogram a=%1 b=%2").arg (m_aAligned).arg (m_bAligned),
+                 Qt::green);
     scene.addItem (parallelogram);
+
+    // X axis in circumscribing parallelogram
+    QPointF posAbsolute0 = (m_posScreenParallelogramTR + m_posScreenParallelogramBR) / 2.0;
+    QLineF xAxisLine0 (posOriginScreen,
+                       posAbsolute0);
+    QPointF posRelative0 = posAbsolute0 - posOriginScreen;
+    double ang = qDegreesToRadians (45.0);
+    double ca = qCos (ang);
+    double sa = qSin (ang);
+    QLineF xAxisLine45 (posOriginScreen,
+                        posOriginScreen + QPointF (ca * posRelative0.x() + sa * posRelative0.y(),
+                                                   -1.0 * sa * posRelative0.x() + ca * posRelative0.y()));
+    QGraphicsLineItem *xAxisParallelogram0 = new QGraphicsLineItem (xAxisLine0);
+    QGraphicsLineItem *xAxisParallelogram45 = new QGraphicsLineItem (xAxisLine45);
+    xAxisParallelogram0->setPen (QPen (Qt::green));
+    xAxisParallelogram45->setPen (QPen (Qt::green));
+    scene.addItem (xAxisParallelogram0);
+    scene.addItem (xAxisParallelogram45);
 
     // Right-angled rectangle
     QRectF rect (posOriginScreen.x() - m_aAligned,
@@ -145,13 +182,25 @@ void CentipedeDebugPolar::display (QGraphicsScene &scene,
     QGraphicsRectItem *rectItem = new QGraphicsRectItem (rect);
     rectItem->setTransformOriginPoint(posOriginScreen);
     rectItem->setRotation (qRadiansToDegrees (m_angleEllipseFromMajorAxis));
-    rectItem->setPen (QPen (Qt::red));
+    rectItem->setPen (QPen (Qt::cyan));
+    addToLegend (scene,
+                 QString ("Rectangle rotation=%1").arg (qRadiansToDegrees (m_angleEllipseFromMajorAxis)),
+                 Qt::cyan);
     scene.addItem (rectItem);
+
+    // X axis in circumscribing rectangle. Without screen-to-ellipse rotation this would be horizontal
+    QLineF xAxisRectangle (posOriginScreen,
+                           (rect.topRight() + rect.bottomRight()) / 2.0);
+    QGraphicsLineItem *xAxisRect = new QGraphicsLineItem (xAxisRectangle);
+    xAxisRect->setTransformOriginPoint (posOriginScreen);
+    xAxisRect->setRotation (m_angleGraphAxisFromScreenAxis);
+    xAxisRect->setPen (QPen (Qt::cyan));
+    scene.addItem (xAxisRect);
 
     // Put an ellipse in the circumscribing rectangle to see if they line up
     QGraphicsEllipseItem *ellipse = new QGraphicsEllipseItem (rect);
     ellipse->setTransformOriginPoint (posOriginScreen);
-    ellipse->setRotation (qRadiansToDegrees (m_angleEllipseFromMajorAxis));
+    ellipse->setRotation (qRadiansToDegrees (m_angleGraphAxisFromScreenAxis));
     ellipse->setPen (QPen (Qt::red));
     scene.addItem (ellipse);
 
@@ -182,21 +231,17 @@ void CentipedeDebugPolar::displayTics (QGraphicsScene &scene,
                                        const QPointF &posOriginScreen,
                                        const QPointF &posAAxisScreen,
                                        const QColor &colorGraphCoordinates,
-                                       const QColor &colorScreenCoordinates) const
+                                       const QColor &colorScreenCoordinates)
 {
-  static int legendYPos = 0;
-  const int LEGEND_X_POS = 5, LEGEND_Y_STEP = 20, DEGREES_BETWEEN_HIGHLIGHTS = 10;
+  const int DEGREES_BETWEEN_HIGHLIGHTS = 10;
 
   // Legend
-  QGraphicsTextItem *itemGraphCoords = new QGraphicsTextItem ("Graphics Coords");
-  itemGraphCoords->setPos (QPointF (LEGEND_X_POS, LEGEND_Y_STEP * (legendYPos++)));
-  itemGraphCoords->setDefaultTextColor (colorGraphCoordinates);
-  scene.addItem (itemGraphCoords);
-
-  QGraphicsTextItem *itemScreenCoords = new QGraphicsTextItem ("Screen Coords");
-  itemScreenCoords->setPos (QPointF (LEGEND_X_POS, LEGEND_Y_STEP * (legendYPos++)));
-  itemScreenCoords->setDefaultTextColor (colorScreenCoordinates);
-  scene.addItem (itemScreenCoords);
+  addToLegend (scene,
+               "Graphics Coords",
+               colorGraphCoordinates);
+  addToLegend (scene,
+               "Screen Coords",
+               colorScreenCoordinates);
 
   // Orthogonal basis vectors aligned to orthognal axes of ellipse, in screen coordinates
   QPointF basisX = (posAAxisScreen - posOriginScreen) / magnitude (posAAxisScreen - posOriginScreen);
@@ -204,8 +249,8 @@ void CentipedeDebugPolar::displayTics (QGraphicsScene &scene,
                   -1.0 * basisX.x());
 
   // Show one inner set of radial tic lines and one outer set of radial tic lines
-  double cosOffset = qCos (m_angleEllipseFromMajorAxis);
-  double sinOffset = qSin (m_angleEllipseFromMajorAxis);
+  double cosOffset = qCos (m_angleGraphAxisFromScreenAxis);
+  double sinOffset = qSin (m_angleGraphAxisFromScreenAxis);
   for (int degrees = 0; degrees < 360; degrees++) {
 
     QString degreesMinus180ToPlus180 = QString::number (degrees > 180 ?

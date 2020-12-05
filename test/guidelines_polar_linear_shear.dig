@@ -14,10 +14,7 @@
         <GridRemoval Stable="False" DefinedGridLines="False" CloseDistance="10" CoordDisableX="0" CoordDisableXString="Count" CountX="8" StartX="45.2138" StepX="44.9695" StopX="360" CoordDisableY="0" CoordDisableYString="Count" CountY="3" StartY="0.330935" StepY="0.334828" StopY="1.00059"/>
         <Guidelines CreationCircleRadius="20" LineColor="5" LineColorString="Magenta" LineWidthActive="8" LineWidthInactive="4">
             <GuidelinesX/>
-            <GuidelinesY>
-                <Guideline GuidelineIdentifier="guideline0" GuidelineValue="0.999712"/>
-                <Guideline GuidelineIdentifier="guideline2" GuidelineValue="0.661955"/>
-            </GuidelinesY>
+            <GuidelinesY/>
         </Guidelines>
         <PointMatch PointSize="48" ColorAccepted="4" ColorAcceptedString="Green" ColorCandidate="7" ColorCandidateString="Yellow" ColorRejected="6" ColorRejectedString="Red"/>
         <Segments PointSeparation="25" MinLength="2" FillCorners="False" LineWidthActive="6" LineWidthInactive="4" LineColor="4" LineColorString="Green" InactiveOpacity="4"/>

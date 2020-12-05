@@ -21,8 +21,8 @@ GraphicsArcItemRelay::GraphicsArcItemRelay (QObject *caller,
   m_graphicsItem (graphicsItem)
 {
   // Queue for later by including Qt::QueuedConnection
-  connect (caller, SIGNAL (signalUpdateAngles (QPointF, QPointF, QPointF, double)),
-           this, SLOT (slotUpdateAngles (QPointF, QPointF, QPointF, double)),
+  connect (caller, SIGNAL (signalUpdateAngles (QPointF, QPointF, QPointF, double, double)),
+           this, SLOT (slotUpdateAngles (QPointF, QPointF, QPointF, double, double)),
            Qt::QueuedConnection);
 }
 
@@ -34,27 +34,30 @@ GraphicsArcItemRelay::~GraphicsArcItemRelay ()
 void GraphicsArcItemRelay::slotUpdateAngles (QPointF posTangentialLow,
                                              QPointF posTangentialCenter,
                                              QPointF posTangentialHigh,
+                                             double widthToHeight,
                                              double scaling)
 {
-  // Convert to ellipse reference frame. This transform step replaces
-  // a huge amount of complicated math, which is especially complicated
-  // with nonzero shear since angles are no longer evenly spaced and
-  // basis vectors are nonorthogonal
+  // Rotate into ellipse reference frame (where x and y axis are aligned with
+  // semimajor/semiminor axes. The QTransform supplied by m_graphicsItem is
+  // just the identity transform and therefore not useful
+  double angleRotation = -1.0 * m_graphicsItem->rotation();
+  QTransform rotateTransform;
+  rotateTransform.rotate (angleRotation);
+  QPointF posLowInEllipseFrame = rotateTransform.map (posTangentialLow);
+  QPointF posCenterInEllipseFrame = rotateTransform.map (posTangentialCenter);
+  QPointF posHighInEllipseFrame = rotateTransform.map (posTangentialHigh);
 
-  QPointF posProjectedLow = m_graphicsItem->transform().map (posTangentialLow);
-  QPointF posProjectedCenter = m_graphicsItem->transform().map (posTangentialCenter);
-  QPointF posProjectedHigh = m_graphicsItem->transform().map (posTangentialHigh);
-
-  double angleLow = qAtan2 (posProjectedLow.y(),
-                            posProjectedLow.x());
-  double angleCenter = qAtan2 (posProjectedCenter.y(),
-                               posProjectedCenter.x());
-  double angleHigh = qAtan2 (posProjectedHigh.y(),
-                             posProjectedHigh.x());  
+  // Compensate for y scale being different than x scale using widthToHeight
+  double angleLow = -1.0 * qAtan2 (posLowInEllipseFrame.y() * widthToHeight,
+                                   posLowInEllipseFrame.x());
+  double angleCenter = -1.0 * qAtan2 (posCenterInEllipseFrame.y() * widthToHeight,
+                                      posCenterInEllipseFrame.x());
+  double angleHigh = -1.0 * qAtan2 (posHighInEllipseFrame.y() * widthToHeight,
+                                    posHighInEllipseFrame.x());
 
   int lowTics = (int) (RADIANS_TO_TICS * (angleCenter + scaling * (angleLow - angleCenter)));
   int highTics = (int) (RADIANS_TO_TICS * (angleCenter + scaling * (angleHigh - angleCenter)));
-  
+
   m_graphicsItem->setStartAngle (lowTics);
   m_graphicsItem->setSpanAngle (highTics - lowTics);
 }

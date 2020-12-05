@@ -58,7 +58,7 @@ public:
   /// Display member variable values on scene
   void display (QGraphicsScene &scene,
                 const DocumentModelCoords &modelCoords,
-                const Transformation &transformation) const;
+                const Transformation &transformation);
 
   /// Dump ellipse grahics item. This is expected to be called just after all geometry settings for a
   /// QGraphicsEllipseItem have been completed in the Centipede code, and later in the Guideline code,
@@ -84,13 +84,18 @@ public:
 
 private:
 
+  /// Append new entry to legend
+  void addToLegend (QGraphicsScene &scene,
+                    const QString &entry,
+                    const QColor &color);
+
   /// Display a full circle or ellipse of tics on the circumference
   void displayTics (QGraphicsScene &scene,
                     const Transformation &transformation,
                     const QPointF &posOriginScreen,
                     const QPointF &posAAxisScreen,
                     const QColor &colorGraphCoordinates,
-                    const QColor &colorScreenCoordinates) const;
+                    const QColor &colorScreenCoordinates);
 
   /// Convert a radial line into a (much shorter) tic mark using the last part of the given line
   QLineF portionOfLineLast (const QLineF &line,
@@ -111,6 +116,7 @@ private:
   double m_aAligned;
   double m_bAligned;
   double m_radius;
+  int m_legendYPos; // Positions legend entries
 };
 
 #endif // CENTIPEDE_DEBUG_POLAR_H

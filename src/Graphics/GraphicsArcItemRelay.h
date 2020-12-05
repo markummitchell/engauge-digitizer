@@ -34,6 +34,7 @@ public slots:
   void slotUpdateAngles (QPointF posTangentialLow,
                          QPointF posTangentialCenter,
                          QPointF posTangentialHigh,
+                         double widthToHeight,
                          double scaling);
   
 private:

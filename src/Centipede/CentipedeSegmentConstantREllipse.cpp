@@ -113,5 +113,6 @@ void CentipedeSegmentConstantREllipse::updateRadius (double radius)
   emit signalUpdateAngles (m_posTangentialLow - m_posOriginScreen,
                            posClickScreen () - m_posOriginScreen,
                            m_posTangentialHigh - m_posOriginScreen,
+                           m_graphicsItem->rect().width () / m_graphicsItem->rect().height(),
                            scaling);
 }

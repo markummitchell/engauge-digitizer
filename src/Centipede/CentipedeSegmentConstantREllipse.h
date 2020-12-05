@@ -38,6 +38,7 @@ signals:
   void signalUpdateAngles (QPointF posTangentialLow,
                            QPointF posTangentialCenter,
                            QPointF posTangentialHigh,
+                           double widthToHeight,
                            double scaling);
   
 private:
