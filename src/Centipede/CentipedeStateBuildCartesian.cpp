@@ -5,7 +5,6 @@
  ******************************************************************************************************/
 
 #include "CentipedeStateBuildCartesian.h"
-#include "CmdMediator.h"
 #include "Logger.h"
 
 CentipedeStateBuildCartesian::CentipedeStateBuildCartesian (CentipedeStateContext &context) :
@@ -27,23 +26,19 @@ void CentipedeStateBuildCartesian::end ()
   LOG4CPP_DEBUG_S ((*mainCat)) << "CentipedeStateBuildCartesian::end";
 }
 
-void CentipedeStateBuildCartesian::handleKeyPress (CmdMediator &cmdMediator,
-                                                   Qt::Key key,
+void CentipedeStateBuildCartesian::handleKeyPress (Qt::Key key,
                                                    bool atLeastOneSelectedItem)
 {
 }
 
-void CentipedeStateBuildCartesian::handleMouseMove (CmdMediator *cmdMediator,
-                                                    QPointF posScreen)
+void CentipedeStateBuildCartesian::handleMouseMove (QPointF posScreen)
 {
 }
   
-void CentipedeStateBuildCartesian::handleMousePress (CmdMediator *cmdMediator,
-                                                     QPointF posScreen)
+void CentipedeStateBuildCartesian::handleMousePress (QPointF posScreen)
 {
 }
 
-void CentipedeStateBuildCartesian::handleMouseRelease (CmdMediator *cmdMediator,
-                                                       QPointF posScreen)
+void CentipedeStateBuildCartesian::handleMouseRelease (QPointF posScreen)
 {
 }

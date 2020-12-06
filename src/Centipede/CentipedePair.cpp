@@ -16,8 +16,7 @@
 #include "mmsubs.h"
 #include "Transformation.h"
 
-CentipedePair::CentipedePair(CmdMediator &cmdMediator,
-                             GraphicsScene &scene,
+CentipedePair::CentipedePair(GraphicsScene &scene,
                              const Transformation &transformation,
                              const DocumentModelGuideline &modelGuideline,
                              const DocumentModelCoords &modelCoords,
@@ -27,8 +26,7 @@ CentipedePair::CentipedePair(CmdMediator &cmdMediator,
   m_centipedeYR (nullptr),
   m_posScreenStart (posScreen),
   m_selectedXTFinal (true),
-  m_valueFinal (0),
-  m_context (cmdMediator)
+  m_valueFinal (0)
 {
   // Create visible Centipede items
   if (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
@@ -72,34 +70,26 @@ bool CentipedePair::done (const QPointF &posScreen)
   return (distanceFromCenter > m_modelGuideline.creationCircleRadius ());
 }
 
-void CentipedePair::handleKeyPress (CmdMediator &cmdMediator,
-                                    Qt::Key key,
+void CentipedePair::handleKeyPress (Qt::Key key,
                                     bool atLeastOneSelectedItem)
 {
-  m_context.handleKeyPress (cmdMediator,
-                            key,
+  m_context.handleKeyPress (key,
                             atLeastOneSelectedItem);
 }
 
-void CentipedePair::handleMouseMove (CmdMediator *cmdMediator,
-                                     QPointF posScreen)
+void CentipedePair::handleMouseMove (QPointF posScreen)
 {
-  m_context.handleMouseMove (cmdMediator,
-                             posScreen);
+  m_context.handleMouseMove (posScreen);
 }
 
-void CentipedePair::handleMousePress (CmdMediator *cmdMediator,
-                                      QPointF posScreen)
+void CentipedePair::handleMousePress (QPointF posScreen)
 {
-  m_context.handleMousePress (cmdMediator,
-                              posScreen);
+  m_context.handleMousePress (posScreen);
 }
 
-void CentipedePair::handleMouseRelease (CmdMediator *cmdMediator,
-                                        QPointF posScreen)
+void CentipedePair::handleMouseRelease (QPointF posScreen)
 {
-  m_context.handleMouseRelease (cmdMediator,
-                                posScreen);
+  m_context.handleMouseRelease (posScreen);
 }
 
 void CentipedePair::move (const QPointF &posScreen)

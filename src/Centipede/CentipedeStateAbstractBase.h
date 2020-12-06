@@ -11,7 +11,6 @@
 #include <QPointF>
 
 class CentipedeStateContext;
-class CmdMediator;
 
 /// Base class for CentipedePair states
 class CentipedeStateAbstractBase
@@ -31,21 +30,17 @@ public:
   virtual void end() = 0;
 
   /// Handle key press event
-  virtual void handleKeyPress (CmdMediator &cmdMediator,
-                               Qt::Key key,
+  virtual void handleKeyPress (Qt::Key key,
                                bool atLeastOneSelectedItem) = 0;
 
   /// Handle mouse move event
-  virtual void handleMouseMove (CmdMediator *cmdMediator,
-                                QPointF posScreen) = 0;
+  virtual void handleMouseMove (QPointF posScreen) = 0;
   
   /// Handle mouse press event
-  virtual void handleMousePress (CmdMediator *cmdMediator,
-                                 QPointF posScreen) = 0;
+  virtual void handleMousePress (QPointF posScreen) = 0;
 
   /// Handle mouse release event
-  virtual void handleMouseRelease (CmdMediator *cmdMediator,
-                                   QPointF posScreen) = 0;
+  virtual void handleMouseRelease (QPointF posScreen) = 0;
 
 private:
   CentipedeStateAbstractBase();

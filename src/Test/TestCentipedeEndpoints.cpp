@@ -152,11 +152,13 @@ void TestCentipedeEndpoints::testPolarRPosition ()
   const double EPSILON = 0.001;
 
   DocumentModelGuideline modelGuideline;
-  
+
+  QPointF posOriginScreen (100, 100);
   CentipedeEndpointsPolar endpoints (m_modelCoordsPolarLog,
                                      modelGuideline,
                                      m_transformationPolarLog,
-                                     m_posClickScreen);
+                                     m_posClickScreen,
+                                     posOriginScreen);
 
   QPointF posLow, posHigh;
   endpoints.posScreenConstantTForRHighLow (modelGuideline.creationCircleRadius(),
@@ -167,54 +169,22 @@ void TestCentipedeEndpoints::testPolarRPosition ()
   QVERIFY (magnitude (posHigh - QPointF (163.840, 35.880)) < EPSILON);
 }
 
-void TestCentipedeEndpoints::testPolarTAngle ()
+void TestCentipedeEndpoints::testPolarTPosition ()
 {
   const double EPSILON = 0.001;
 
   DocumentModelGuideline modelGuideline;
-  
+
+  QPointF posOriginScreen (100, 100);
   CentipedeEndpointsPolar endpoints (m_modelCoordsPolarLog,
                                      modelGuideline,
                                      m_transformationPolarLog,
-                                     m_posClickScreen);
-
-  QPointF posOriginScreen (100, 100), posScreen0 (150, 100), posScreen90 (100, 50);
-  double angleCenter = endpoints.angleScreenConstantRCenterAngle (modelGuideline.creationCircleRadius(),
-                                                                  posOriginScreen,
-                                                                  posScreen0,
-                                                                  posScreen90);
-  double angleLow, angleHigh;
-  endpoints.angleScreenConstantRCenterAngle (modelGuideline.creationCircleRadius(),
-                                             posOriginScreen,
-                                             posScreen0,
-                                             posScreen90);
-  endpoints.angleScreenConstantRHighLowAngles (modelGuideline.creationCircleRadius(),
-                                               posOriginScreen,
-                                               posScreen0,
-                                               posScreen90,
-                                               angleCenter,
-                                               angleLow,
-                                               angleHigh);
-
-  QVERIFY (qAbs (angleCenter - qDegreesToRadians(62.3227)) < EPSILON);
-  QVERIFY (qAbs (angleLow - qDegreesToRadians (59.81564)) < EPSILON);
-  QVERIFY (qAbs (angleHigh - qDegreesToRadians (71.760328)) < EPSILON);
-}
-
-void TestCentipedeEndpoints::testPolarTPosition ()
-{
-  const double EPSILON = 0.01;
-
-  DocumentModelGuideline modelGuideline;
-  
-  CentipedeEndpointsPolar endpoints (m_modelCoordsPolarLog,
-                                     modelGuideline,
-                                     m_transformationPolarLog,
-                                     m_posClickScreen);
+                                     m_posClickScreen,
+                                     posOriginScreen);
 
   QPointF posLow = endpoints.posScreenConstantRForLowT (modelGuideline.creationCircleRadius());
-  QPointF posHigh = endpoints.posScreenConstantRForHighT (modelGuideline.creationCircleRadius());
+  QPointF posHigh = endpoints.posScreenConstantRForHighT (modelGuideline.creationCircleRadius());  
 
-  QVERIFY (magnitude (posLow - QPointF (161.500, 66.363)) < EPSILON);
-  QVERIFY (magnitude (posHigh - QPointF (137.992, 34.006)) < EPSILON);
+  QVERIFY (magnitude (posLow - QPointF (161.2417, 66.5416)) < EPSILON);
+  QVERIFY (magnitude (posHigh - QPointF (138.2443, 33.8197)) < EPSILON);
 }

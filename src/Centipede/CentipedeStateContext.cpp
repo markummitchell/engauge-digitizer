@@ -9,12 +9,10 @@
 #include "CentipedeStateBuildPolar.h"
 #include "CentipedeStateContext.h"
 #include "CentipedeStatePrebuild.h"
-#include "CmdMediator.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
 
-CentipedeStateContext::CentipedeStateContext (CmdMediator &cmdMediator) :
-  m_cmdMediator (cmdMediator)
+CentipedeStateContext::CentipedeStateContext ()
 {
   // These states follow the same order as the CentipedeState enumeration
   m_states.insert (CENTIPEDE_STATE_BUILD_CARTESIAN, new CentipedeStateBuildCartesian (*this));
@@ -23,20 +21,14 @@ CentipedeStateContext::CentipedeStateContext (CmdMediator &cmdMediator) :
   ENGAUGE_ASSERT (m_states.size () == NUM_CENTIPEDE_STATES);
 
   m_currentState = NUM_CENTIPEDE_STATES; // Value that forces a transition right away
-  requestImmediateStateTransition (&cmdMediator,
-                                   CENTIPEDE_STATE_PREBUILD);
+  requestImmediateStateTransition (CENTIPEDE_STATE_PREBUILD);
 }
 
 CentipedeStateContext::~CentipedeStateContext()
 {
 }
 
-CmdMediator &CentipedeStateContext::cmdMediator ()
-{
-  return m_cmdMediator;
-}
-
-void CentipedeStateContext::completeRequestedStateTransitionIfExists (CmdMediator *cmdMediator)
+void CentipedeStateContext::completeRequestedStateTransitionIfExists ()
 {
   if (m_currentState != m_requestedState) {
 
@@ -54,45 +46,37 @@ void CentipedeStateContext::completeRequestedStateTransitionIfExists (CmdMediato
   }
 }
 
-void CentipedeStateContext::handleKeyPress (CmdMediator &cmdMediator,
-                                            Qt::Key key,
+void CentipedeStateContext::handleKeyPress (Qt::Key key,
                                             bool atLeastOneSelectedItem)
 {
-  m_states [m_currentState]->handleKeyPress (cmdMediator,
-                                             key,
+  m_states [m_currentState]->handleKeyPress (key,
                                              atLeastOneSelectedItem);
 
-  completeRequestedStateTransitionIfExists(&cmdMediator);
+  completeRequestedStateTransitionIfExists();
 
 }
 
-void CentipedeStateContext::handleMouseMove (CmdMediator *cmdMediator,
-                                             QPointF pos)
+void CentipedeStateContext::handleMouseMove (QPointF pos)
 {
-  m_states [m_currentState]->handleMouseMove (cmdMediator,
-                                              pos);
+  m_states [m_currentState]->handleMouseMove (pos);
 
-  completeRequestedStateTransitionIfExists(cmdMediator);
+  completeRequestedStateTransitionIfExists();
 
 }
 
-void CentipedeStateContext::handleMousePress (CmdMediator *cmdMediator,
-                                              QPointF pos)
+void CentipedeStateContext::handleMousePress (QPointF pos)
 {
-  m_states [m_currentState]->handleMousePress (cmdMediator,
-                                               pos);
+  m_states [m_currentState]->handleMousePress (pos);
 
-  completeRequestedStateTransitionIfExists(cmdMediator);
+  completeRequestedStateTransitionIfExists();
 
 }
 
-void CentipedeStateContext::handleMouseRelease (CmdMediator *cmdMediator,
-                                                QPointF pos)
+void CentipedeStateContext::handleMouseRelease (QPointF pos)
 {
-  m_states [m_currentState]->handleMouseRelease (cmdMediator,
-                                                 pos);
+  m_states [m_currentState]->handleMouseRelease (pos);
 
-  completeRequestedStateTransitionIfExists(cmdMediator);
+  completeRequestedStateTransitionIfExists();
 }
 
 void CentipedeStateContext::requestDelayedStateTransition (CentipedeState centipedeState)
@@ -100,9 +84,8 @@ void CentipedeStateContext::requestDelayedStateTransition (CentipedeState centip
   m_requestedState = centipedeState;
 }
 
-void CentipedeStateContext::requestImmediateStateTransition (CmdMediator *cmdMediator,
-                                                             CentipedeState centipedeState)
+void CentipedeStateContext::requestImmediateStateTransition (CentipedeState centipedeState)
 {
   m_requestedState = centipedeState;
-  completeRequestedStateTransitionIfExists(cmdMediator);
+  completeRequestedStateTransitionIfExists();
 }

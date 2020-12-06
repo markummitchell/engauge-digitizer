@@ -19,15 +19,11 @@ public:
 
   virtual void begin();
   virtual void end();
-  virtual void handleKeyPress (CmdMediator &cmdMediator,
-                               Qt::Key key,
+  virtual void handleKeyPress (Qt::Key key,
                                bool atLeastOneSelectedItem);
-  virtual void handleMouseMove (CmdMediator *cmdMediator,
-                                QPointF posScreen);
-  virtual void handleMousePress (CmdMediator *cmdMediator,
-                                 QPointF posScreen);
-  virtual void handleMouseRelease (CmdMediator *cmdMediator,
-                                  QPointF posScreen);  
+  virtual void handleMouseMove (QPointF posScreen);
+  virtual void handleMousePress (QPointF posScreen);
+  virtual void handleMouseRelease (QPointF posScreen);  
 
 private:
   CentipedeStateBuildPolar();

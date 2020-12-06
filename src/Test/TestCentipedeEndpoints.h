@@ -25,7 +25,6 @@ private slots:
   void testCartesianXPosition ();
   void testCartesianYPosition ();
   void testPolarRPosition ();
-  void testPolarTAngle ();
   void testPolarTPosition ();
   
 private:

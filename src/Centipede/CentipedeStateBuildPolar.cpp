@@ -5,7 +5,6 @@
  ******************************************************************************************************/
 
 #include "CentipedeStateBuildPolar.h"
-#include "CmdMediator.h"
 #include "Logger.h"
 
 CentipedeStateBuildPolar::CentipedeStateBuildPolar (CentipedeStateContext &context) :
@@ -27,23 +26,19 @@ void CentipedeStateBuildPolar::end ()
   LOG4CPP_DEBUG_S ((*mainCat)) << "CentipedeStateBuildPolar::end";
 }
 
-void CentipedeStateBuildPolar::handleKeyPress (CmdMediator &cmdMediator,
-                                               Qt::Key key,
+void CentipedeStateBuildPolar::handleKeyPress (Qt::Key key,
                                                bool atLeastOneSelectedItem)
 {
 }
 
-void CentipedeStateBuildPolar::handleMouseMove (CmdMediator *cmdMediator,
-                                                QPointF posScreen)
+void CentipedeStateBuildPolar::handleMouseMove (QPointF posScreen)
 {
 }
   
-void CentipedeStateBuildPolar::handleMousePress (CmdMediator *cmdMediator,
-                                                 QPointF posScreen)
+void CentipedeStateBuildPolar::handleMousePress (QPointF posScreen)
 {
 }
 
-void CentipedeStateBuildPolar::handleMouseRelease (CmdMediator *cmdMediator,
-                                                   QPointF posScreen)
+void CentipedeStateBuildPolar::handleMouseRelease (QPointF posScreen)
 {
 }

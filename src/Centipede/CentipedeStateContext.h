@@ -12,7 +12,6 @@
 #include <QVector>
 
 class CentipedeStateAbstractBase;
-class CmdMediator;
 
 /// State context class for tracking the steps involved in creating centipedes in preparation
 /// for creating a guideline
@@ -20,36 +19,25 @@ class CentipedeStateContext
 {
 public:
   /// Single constructor
-  CentipedeStateContext (CmdMediator &cmdMediator);
+  CentipedeStateContext ();
   virtual ~CentipedeStateContext ();
 
-  virtual void handleKeyPress (CmdMediator &cmdMediator,
-                               Qt::Key key,
+  virtual void handleKeyPress (Qt::Key key,
                                bool atLeastOneSelectedItem);
-  virtual void handleMouseMove (CmdMediator *cmdMediator,
-                                QPointF posScreen);
-  virtual void handleMousePress (CmdMediator *cmdMediator,
-                                 QPointF posScreen);
-  virtual void handleMouseRelease (CmdMediator *cmdMediator,
-                                   QPointF posScreen);
-
-  /// CmdMediator for receiving commands
-  CmdMediator &cmdMediator ();
+  virtual void handleMouseMove (QPointF posScreen);
+  virtual void handleMousePress (QPointF posScreen);
+  virtual void handleMouseRelease (QPointF posScreen);
 
   /// Initiate state transition to be performed later, when CentipedeState is off the stack
   void requestDelayedStateTransition (CentipedeState centipedeState);
   
   /// Perform immediate state transition for immediate action. Called when states are off the stack
-  void requestImmediateStateTransition (CmdMediator *cmdMediator,
-                                        CentipedeState centipedeState);
+  void requestImmediateStateTransition (CentipedeState centipedeState);
   
 private:
-  CentipedeStateContext ();
 
-  void completeRequestedStateTransitionIfExists (CmdMediator *cmdMediator);
+  void completeRequestedStateTransitionIfExists ();
 
-  CmdMediator &m_cmdMediator;
-  
   QVector<CentipedeStateAbstractBase*> m_states;
   CentipedeState m_currentState;
   CentipedeState m_requestedState; // Same as m_currentState until requestDelayedStateTransition is called

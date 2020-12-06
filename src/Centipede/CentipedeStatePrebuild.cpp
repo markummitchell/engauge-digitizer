@@ -5,7 +5,6 @@
  ******************************************************************************************************/
 
 #include "CentipedeStatePrebuild.h"
-#include "CmdMediator.h"
 #include "Logger.h"
 
 CentipedeStatePrebuild::CentipedeStatePrebuild (CentipedeStateContext &context) :
@@ -27,23 +26,19 @@ void CentipedeStatePrebuild::end ()
   LOG4CPP_DEBUG_S ((*mainCat)) << "CentipedeStatePrebuild::end";
 }
 
-void CentipedeStatePrebuild::handleKeyPress (CmdMediator &cmdMediator,
-                                             Qt::Key key,
+void CentipedeStatePrebuild::handleKeyPress (Qt::Key key,
                                              bool atLeastOneSelectedItem)
 {
 }
 
-void CentipedeStatePrebuild::handleMouseMove (CmdMediator *cmdMediator,
-                                              QPointF posScreen)
+void CentipedeStatePrebuild::handleMouseMove (QPointF posScreen)
 {
 }
   
-void CentipedeStatePrebuild::handleMousePress (CmdMediator *cmdMediator,
-                                               QPointF posScreen)
+void CentipedeStatePrebuild::handleMousePress (QPointF posScreen)
 {
 }
 
-void CentipedeStatePrebuild::handleMouseRelease (CmdMediator *cmdMediator,
-                                                 QPointF posScreen)
+void CentipedeStatePrebuild::handleMouseRelease (QPointF posScreen)
 {
 }

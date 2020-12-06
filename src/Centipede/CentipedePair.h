@@ -12,7 +12,6 @@
 #include <QPointF>
 
 class CentipedeSegmentAbstract;
-class CmdMediator;
 class DocumentModelCoords;
 class GraphicsScene;
 class Transformation;
@@ -67,8 +66,7 @@ class CentipedePair
 {
 public:
   /// Constructor with individual coordinates
-  CentipedePair(CmdMediator &cmdMediator,
-                GraphicsScene &scene,
+  CentipedePair(GraphicsScene &scene,
                 const Transformation &transformation,
                 const DocumentModelGuideline &modelGuideline,
                 const DocumentModelCoords &modelCoords,
@@ -79,21 +77,17 @@ public:
   bool done (const QPointF &posScreen);
 
   /// Handle key press event
-  void handleKeyPress (CmdMediator &cmdMediator,
-                       Qt::Key key,
+  void handleKeyPress (Qt::Key key,
                        bool atLeastOneSelectedItem);
 
   /// Handle mouse move event
-  void handleMouseMove (CmdMediator *cmdMediator,
-                        QPointF posScreen);
+  void handleMouseMove (QPointF posScreen);
   
   /// Handle mouse press event
-  void handleMousePress (CmdMediator *cmdMediator,
-                         QPointF posScreen);
+  void handleMousePress (QPointF posScreen);
 
   /// Handle mouse release event
-  void handleMouseRelease (CmdMediator *cmdMediator,
-                           QPointF posScreen);
+  void handleMouseRelease (QPointF posScreen);
   
   /// Follow cursor move
   void move (const QPointF &posScreen);  
