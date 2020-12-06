@@ -7,10 +7,12 @@
 #ifndef CENTIPEDE_PAIR_H
 #define CENTIPEDE_PAIR_H
 
+#include "CentipedeStateContext.h"
 #include "DocumentModelGuideline.h"
 #include <QPointF>
 
 class CentipedeSegmentAbstract;
+class CmdMediator;
 class DocumentModelCoords;
 class GraphicsScene;
 class Transformation;
@@ -65,7 +67,8 @@ class CentipedePair
 {
 public:
   /// Constructor with individual coordinates
-  CentipedePair(GraphicsScene &scene,
+  CentipedePair(CmdMediator &cmdMediator,
+                GraphicsScene &scene,
                 const Transformation &transformation,
                 const DocumentModelGuideline &modelGuideline,
                 const DocumentModelCoords &modelCoords,
@@ -75,8 +78,25 @@ public:
   /// True if cursor has moved far enough that the CentipedePair has finished and should be removed
   bool done (const QPointF &posScreen);
 
+  /// Handle key press event
+  void handleKeyPress (CmdMediator &cmdMediator,
+                       Qt::Key key,
+                       bool atLeastOneSelectedItem);
+
+  /// Handle mouse move event
+  void handleMouseMove (CmdMediator *cmdMediator,
+                        QPointF posScreen);
+  
+  /// Handle mouse press event
+  void handleMousePress (CmdMediator *cmdMediator,
+                         QPointF posScreen);
+
+  /// Handle mouse release event
+  void handleMouseRelease (CmdMediator *cmdMediator,
+                           QPointF posScreen);
+  
   /// Follow cursor move
-  void move (const QPointF &posScreen);
+  void move (const QPointF &posScreen);  
 
   /// True if XT is final selection, otherwise false if YR is final selection
   bool selectedXTFinal () const;
@@ -99,6 +119,9 @@ private:
   // Final values
   bool m_selectedXTFinal;
   double m_valueFinal;
+
+  // State machine
+  CentipedeStateContext m_context;
 };
 
 #endif // CENTIPEDE_PAIR_H

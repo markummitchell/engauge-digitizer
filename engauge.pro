@@ -111,6 +111,12 @@ HEADERS  += \
     src/Centipede/CentipedeSegmentConstantTRadial.h \
     src/Centipede/CentipedeSegmentConstantXLine.h \
     src/Centipede/CentipedeSegmentConstantYLine.h \
+    src/Centipede/CentipedeState.h \
+    src/Centipede/CentipedeStateAbstractBase.h \
+    src/Centipede/CentipedeStateBuildCartesian.h \
+    src/Centipede/CentipedeStateBuildPolar.h \
+    src/Centipede/CentipedeStateContext.h \
+    src/Centipede/CentipedeStatePrebuild.h \
     src/Checker/Checker.h \
     src/Checker/CheckerMode.h \
     src/Checklist/ChecklistGuide.h \
@@ -482,7 +488,6 @@ HEADERS  += \
     src/Segment/SegmentLine.h \
     src/Settings/Settings.h \
     src/Settings/SettingsForGraph.h \
-    src/util/Shear.h \
     src/Spline/Spline.h \
     src/Spline/SplineCoeff.h \
     src/Spline/SplineDrawer.h \
@@ -567,6 +572,12 @@ SOURCES += \
     src/Centipede/CentipedeSegmentConstantTRadial.cpp \
     src/Centipede/CentipedeSegmentConstantXLine.cpp \
     src/Centipede/CentipedeSegmentConstantYLine.cpp \
+    src/Centipede/CentipedeState.cpp \
+    src/Centipede/CentipedeStateAbstractBase.cpp \
+    src/Centipede/CentipedeStateBuildCartesian.cpp \
+    src/Centipede/CentipedeStateBuildPolar.cpp \
+    src/Centipede/CentipedeStateContext.cpp \
+    src/Centipede/CentipedeStatePrebuild.cpp \
     src/Checker/Checker.cpp \
     src/Checker/CheckerMode.cpp \
     src/Checklist/ChecklistGuide.cpp \
@@ -916,7 +927,6 @@ SOURCES += \
     src/Segment/SegmentLine.cpp \
     src/Settings/Settings.cpp \
     src/Settings/SettingsForGraph.cpp \
-    src/util/Shear.cpp \
     src/Spline/Spline.cpp \
     src/Spline/SplineCoeff.cpp \
     src/Spline/SplineDrawer.cpp \

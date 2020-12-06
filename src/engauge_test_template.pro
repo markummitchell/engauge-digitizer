@@ -66,6 +66,12 @@ HEADERS  += \
     Centipede/CentipedeSegmentConstantTRadial.h \
     Centipede/CentipedeSegmentConstantXLine.h \
     Centipede/CentipedeSegmentConstantYLine.h \
+    Centipede/CentipedeState.h \
+    Centipede/CentipedeStateAbstractBase.h \
+    Centipede/CentipedeStateBuildCartesian.h \
+    Centipede/CentipedeStateBuildPolar.h \
+    Centipede/CentipedeStateContext.h \
+    Centipede/CentipedeStatePrebuild.h \
     Checker/Checker.h \
     Checker/CheckerMode.h \
     Checklist/ChecklistGuide.h \
@@ -440,7 +446,6 @@ HEADERS  += \
     Segment/SegmentLine.h \
     Settings/Settings.h \
     Settings/SettingsForGraph.h \
-    util/Shear.h \
     Spline/Spline.h \
     Spline/SplineCoeff.h \
     Spline/SplineDrawer.h \
@@ -526,6 +531,12 @@ SOURCES += \
     Centipede/CentipedeSegmentConstantTRadial.cpp \
     Centipede/CentipedeSegmentConstantXLine.cpp \
     Centipede/CentipedeSegmentConstantYLine.cpp \
+    Centipede/CentipedeState.cpp \
+    Centipede/CentipedeStateAbstractBase.cpp \
+    Centipede/CentipedeStateBuildCartesian.cpp \
+    Centipede/CentipedeStateBuildPolar.cpp \
+    Centipede/CentipedeStateContext.cpp \
+    Centipede/CentipedeStatePrebuild.cpp \
     Checker/Checker.cpp \
     Checker/CheckerMode.cpp \
     Checklist/ChecklistGuide.cpp \
@@ -877,7 +888,6 @@ SOURCES += \
     Segment/SegmentLine.cpp \
     Settings/Settings.cpp \
     Settings/SettingsForGraph.cpp \
-    util/Shear.cpp \
     Spline/Spline.cpp \
     Spline/SplineCoeff.cpp \
     Spline/SplineDrawer.cpp \

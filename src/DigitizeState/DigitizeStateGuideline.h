@@ -17,6 +17,19 @@ class QGraphicsPixmapItem;
 class QImage;
 
 /// Digitizing state for creating, moving and removing guidelines
+///
+/// A challenge for creating guidelines was reconciling the multistep nature of
+/// creating a guideline (click, move, move, ..., move done) with control-z. Initially
+/// the control-z was grabbed by the command stack which would remove the previous
+/// command while leaving the partially-complete guideline. Very confusing.
+/// Three options were studied for reconciling the command stack and the guideline steps:
+/// - Create a new command for each operation (mouse press, mouse move, and key press to
+///   catch Escape key). Then use QUndoGroup to lump multiple commands into one big command.
+///   This added multiple command and much complexity
+/// - Use QUndoStack's beginMacro and endMacro which had same issues as first option
+/// - Turn off QUndoStack and just have single stack command when finished. This option
+///   was selected since the complexity is kept within DigitizeStateGuideline. This
+///   calls QUndoStack::setActive to enable/disable the command stack
 class DigitizeStateGuideline : public DigitizeStateAbstractBase
 {
 public:

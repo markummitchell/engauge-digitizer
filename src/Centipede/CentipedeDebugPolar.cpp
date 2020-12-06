@@ -16,7 +16,6 @@
 #include <QGraphicsScene>
 #include <qmath.h>
 #include "QtToString.h"
-#include "Shear.h"
 #include "Transformation.h"
 
 CentipedeDebugPolar::CentipedeDebugPolar() :

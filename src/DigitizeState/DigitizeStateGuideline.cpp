@@ -159,7 +159,8 @@ void DigitizeStateGuideline::handleMousePress (CmdMediator *cmdMediator,
       context().mainWindow().scene().sceneRect().contains (posScreen)) {
 
     // Click was on empty area, or on a locked axis point which does not count, so start a CentipedePair
-    m_centipedePair = new CentipedePair (context().mainWindow().scene(),
+    m_centipedePair = new CentipedePair (*cmdMediator,
+                                         context().mainWindow().scene(),
                                          context().mainWindow().transformation(),
                                          cmdMediator->document().modelGuideline(),
                                          cmdMediator->document().modelCoords(),

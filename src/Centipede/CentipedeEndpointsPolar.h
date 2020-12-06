@@ -71,11 +71,6 @@ private:
   QPointF posScreenConstantRCommon (double radius,
                                     CentipedeIntersectionType intersectionType) const;
 
-  double posScreenToEllipseAngle (const QPointF &posScreen,
-                                  const QPointF &posScreenOrigin,
-                                  const QPointF &posScreen0,
-                                  const QPointF &posScreen90) const;
-
   double rAtOrigin () const;
   double tAtOrigin () const;
 

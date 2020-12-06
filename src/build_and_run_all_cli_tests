@@ -10,7 +10,6 @@
 
 # Test names. Specify a single test to run just that test
 #    TestCentipedeEndpoints \
-#    TestShear \    
 testsAvailable=( \
     TestCorrelation  \
     TestCrc32 \

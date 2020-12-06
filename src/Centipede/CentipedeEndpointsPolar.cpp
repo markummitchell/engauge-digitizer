@@ -13,7 +13,6 @@
 #include <qmath.h>
 #include <QPointF>
 #include "QtToString.h"
-#include "Shear.h"
 #include "Transformation.h"
 
 const int NUM_CIRCLE_POINTS = 400; // Use many points so complicated (linear, log, high dynamic range) interpolation is not needed
@@ -331,21 +330,6 @@ void CentipedeEndpointsPolar::posScreenConstantTForRHighLow (double radius,
       ++numberFound;
     }
   }
-}
-
-double CentipedeEndpointsPolar::posScreenToEllipseAngle (const QPointF &posScreen,
-                                                         const QPointF &posScreenOrigin,
-                                                         const QPointF &posScreen0,
-                                                         const QPointF &posScreen90) const
-{
-  Shear shear;
-
-  QPointF posProjected = shear.projectOntoBasisVectors (posScreen0 - posScreenOrigin,
-                                                        posScreen90 - posScreenOrigin,
-                                                        posScreen - posScreenOrigin);
-
-  return qAtan2 (posProjected.y(),
-                 posProjected.x());
 }
 
 double CentipedeEndpointsPolar::rAtOrigin () const
