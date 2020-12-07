@@ -13,6 +13,7 @@
 #include <QPoint>
 
 class DocumentModelPointMatch;
+class MainWindow;
 class QGraphicsEllipseItem;
 class QGraphicsPixmapItem;
 class QImage;

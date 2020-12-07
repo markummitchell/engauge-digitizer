@@ -9,6 +9,8 @@
 
 #include "CentipedeStateAbstractBase.h"
 
+class CentipedePairCartesian;
+
 /// Class for period while building cartesian centipedes
 class CentipedeStateBuildCartesian : public CentipedeStateAbstractBase
 {
@@ -28,6 +30,7 @@ public:
 private:
   CentipedeStateBuildCartesian();
 
+  CentipedePairCartesian *m_centipedePair;
 };
 
 #endif // CENTIPEDE_STATE_BUILD_CARTESIAN_H

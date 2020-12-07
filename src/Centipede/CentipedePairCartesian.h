@@ -4,10 +4,9 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#ifndef CENTIPEDE_PAIR_H
-#define CENTIPEDE_PAIR_H
+#ifndef CENTIPEDE_PAIR_CARTESIAN_H
+#define CENTIPEDE_PAIR_CARTESIAN_H
 
-#include "CentipedeStateContext.h"
 #include "DocumentModelGuideline.h"
 #include <QPointF>
 
@@ -16,7 +15,7 @@ class DocumentModelCoords;
 class GraphicsScene;
 class Transformation;
 
-/// Show two Centipede graphics items that the user interacts with by moving the cursor. This unique approach
+/// Show two cartesian Centipede graphics items that the user interacts with by moving the cursor. This unique approach
 /// was chosen over conventional approaches for the following reasons:
 /// - Does not require a hard-to-find button to toggle between X/T and Y/R guideline options
 /// - Does not require two system states, with one state for creating X/T guidelines and another state for creating
@@ -62,33 +61,20 @@ class Transformation;
 ///
 /// [At least one blank comment line is required after the final indented section so it is recognized as a
 /// code snippet like the code snippets before it]
-class CentipedePair
+class CentipedePairCartesian
 {
 public:
   /// Constructor with individual coordinates
-  CentipedePair(GraphicsScene &scene,
-                const Transformation &transformation,
-                const DocumentModelGuideline &modelGuideline,
-                const DocumentModelCoords &modelCoords,
-                const QPointF &posScreen);
-  virtual ~CentipedePair();
+  CentipedePairCartesian(GraphicsScene &scene,
+                         const Transformation &transformation,
+                         const DocumentModelGuideline &modelGuideline,
+                         const DocumentModelCoords &modelCoords,
+                         const QPointF &posScreen);
+  virtual ~CentipedePairCartesian();
 
-  /// True if cursor has moved far enough that the CentipedePair has finished and should be removed
+  /// True if cursor has moved far enough that the CentipedePairCartesian has finished and should be removed
   bool done (const QPointF &posScreen);
 
-  /// Handle key press event
-  void handleKeyPress (Qt::Key key,
-                       bool atLeastOneSelectedItem);
-
-  /// Handle mouse move event
-  void handleMouseMove (QPointF posScreen);
-  
-  /// Handle mouse press event
-  void handleMousePress (QPointF posScreen);
-
-  /// Handle mouse release event
-  void handleMouseRelease (QPointF posScreen);
-  
   /// Follow cursor move
   void move (const QPointF &posScreen);  
 
@@ -99,7 +85,7 @@ public:
   double valueFinal () const;
 
 private:
-  CentipedePair();
+  CentipedePairCartesian();
 
   /// Updates final values. Also returns updated m_selectedXTFinal for convenience
   bool updateFinalValues (const QPointF &posScreen);
@@ -113,9 +99,6 @@ private:
   // Final values
   bool m_selectedXTFinal;
   double m_valueFinal;
-
-  // State machine
-  CentipedeStateContext m_context;
 };
 
-#endif // CENTIPEDE_PAIR_H
+#endif // CENTIPEDE_PAIR_CARTESIAN_H

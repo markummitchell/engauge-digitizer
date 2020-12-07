@@ -11,6 +11,7 @@
 #include <QObject>
 
 class GraphicsPoint;
+class MainWindow;
 class QGraphicsLineItem;
 class QPointF;
 

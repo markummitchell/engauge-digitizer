@@ -9,6 +9,8 @@
 
 #include "DigitizeStateAbstractBase.h"
 
+class MainWindow;
+
 /// Digitizing state for selecting one or more Points in the Document.
 ///
 /// Originally this class set the cursor for each QGraphicsItem at the beginning of the state, but that

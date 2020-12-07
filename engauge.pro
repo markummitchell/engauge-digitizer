@@ -105,7 +105,8 @@ HEADERS  += \
     src/Centipede/CentipedeEndpointsCartesian.h \
     src/Centipede/CentipedeEndpointsPolar.h \
     src/Centipede/CentipedeIntersectionType.h \
-    src/Centipede/CentipedePair.h \
+    src/Centipede/CentipedePairCartesian.h \
+    src/Centipede/CentipedePairPolar.h \
     src/Centipede/CentipedeSegmentAbstract.h \
     src/Centipede/CentipedeSegmentConstantREllipse.h \
     src/Centipede/CentipedeSegmentConstantTRadial.h \
@@ -566,7 +567,8 @@ SOURCES += \
     src/Centipede/CentipedeEndpointsAbstract.cpp \
     src/Centipede/CentipedeEndpointsCartesian.cpp \
     src/Centipede/CentipedeEndpointsPolar.cpp \
-    src/Centipede/CentipedePair.cpp \
+    src/Centipede/CentipedePairCartesian.cpp \
+    src/Centipede/CentipedePairPolar.cpp \
     src/Centipede/CentipedeSegmentAbstract.cpp \
     src/Centipede/CentipedeSegmentConstantREllipse.cpp \
     src/Centipede/CentipedeSegmentConstantTRadial.cpp \

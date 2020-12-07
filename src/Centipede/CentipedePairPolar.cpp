@@ -4,7 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "CentipedePair.h"
+#include "CentipedePairPolar.h"
 #include "CentipedeSegmentAbstract.h"
 #include "CentipedeSegmentConstantREllipse.h"
 #include "CentipedeSegmentConstantTRadial.h"
@@ -16,11 +16,11 @@
 #include "mmsubs.h"
 #include "Transformation.h"
 
-CentipedePair::CentipedePair(GraphicsScene &scene,
-                             const Transformation &transformation,
-                             const DocumentModelGuideline &modelGuideline,
-                             const DocumentModelCoords &modelCoords,
-                             const QPointF &posScreen) :
+CentipedePairPolar::CentipedePairPolar(GraphicsScene &scene,
+                                       const Transformation &transformation,
+                                       const DocumentModelGuideline &modelGuideline,
+                                       const DocumentModelCoords &modelCoords,
+                                       const QPointF &posScreen) :
   m_modelGuideline (modelGuideline),
   m_centipedeXT (nullptr),
   m_centipedeYR (nullptr),
@@ -29,40 +29,29 @@ CentipedePair::CentipedePair(GraphicsScene &scene,
   m_valueFinal (0)
 {
   // Create visible Centipede items
-  if (modelCoords.coordsType() == COORDS_TYPE_CARTESIAN) {
-    m_centipedeXT = new CentipedeSegmentConstantXLine (scene,
+  m_centipedeXT = new CentipedeSegmentConstantTRadial (scene,
+                                                       modelCoords,
                                                        modelGuideline,
                                                        transformation,
                                                        posScreen);
-    m_centipedeYR = new CentipedeSegmentConstantYLine (scene,
-                                                       modelGuideline,
-                                                       transformation,
-                                                       posScreen);
-  } else {
-    m_centipedeXT = new CentipedeSegmentConstantTRadial (scene,
-                                                         modelCoords,
-                                                         modelGuideline,
-                                                         transformation,
-                                                         posScreen);
-    m_centipedeYR = new CentipedeSegmentConstantREllipse (scene,
-                                                          modelCoords,
-                                                          modelGuideline,
-                                                          transformation,
-                                                          posScreen);
-  }
+  m_centipedeYR = new CentipedeSegmentConstantREllipse (scene,
+                                                        modelCoords,
+                                                        modelGuideline,
+                                                        transformation,
+                                                        posScreen);
 
   // Save starting graph position
   transformation.transformScreenToRawGraph(posScreen,
                                            m_posGraphStart);
 }
 
-CentipedePair::~CentipedePair()
+CentipedePairPolar::~CentipedePairPolar()
 {
   delete m_centipedeXT;
   delete m_centipedeYR;
 }
 
-bool CentipedePair::done (const QPointF &posScreen)
+bool CentipedePairPolar::done (const QPointF &posScreen)
 {
   QPointF delta = posScreen - m_posScreenStart;
   double distanceFromCenter = magnitude (delta);
@@ -70,29 +59,7 @@ bool CentipedePair::done (const QPointF &posScreen)
   return (distanceFromCenter > m_modelGuideline.creationCircleRadius ());
 }
 
-void CentipedePair::handleKeyPress (Qt::Key key,
-                                    bool atLeastOneSelectedItem)
-{
-  m_context.handleKeyPress (key,
-                            atLeastOneSelectedItem);
-}
-
-void CentipedePair::handleMouseMove (QPointF posScreen)
-{
-  m_context.handleMouseMove (posScreen);
-}
-
-void CentipedePair::handleMousePress (QPointF posScreen)
-{
-  m_context.handleMousePress (posScreen);
-}
-
-void CentipedePair::handleMouseRelease (QPointF posScreen)
-{
-  m_context.handleMouseRelease (posScreen);
-}
-
-void CentipedePair::move (const QPointF &posScreen)
+void CentipedePairPolar::move (const QPointF &posScreen)
 {
   QPointF delta = posScreen - m_posScreenStart;
   double distanceFromCenter = magnitude (delta);
@@ -106,12 +73,12 @@ void CentipedePair::move (const QPointF &posScreen)
   }
 }
 
-bool CentipedePair::selectedXTFinal () const
+bool CentipedePairPolar::selectedXTFinal () const
 {
   return m_selectedXTFinal;
 }
 
-bool CentipedePair::updateFinalValues (const QPointF &posScreen)
+bool CentipedePairPolar::updateFinalValues (const QPointF &posScreen)
 {
   // Update selection
   double distXT = m_centipedeXT->distanceToClosestEndpoint (posScreen);
@@ -128,7 +95,7 @@ bool CentipedePair::updateFinalValues (const QPointF &posScreen)
   return m_selectedXTFinal;
 }
 
-double CentipedePair::valueFinal () const
+double CentipedePairPolar::valueFinal () const
 {
   return m_valueFinal;
 }

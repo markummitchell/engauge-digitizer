@@ -11,6 +11,7 @@
 #include <QList>
 #include <QObject>
 
+class MainWindow;
 class Segment;
 
 /// Digitizing state for creating multiple Points along a highlighted segment.

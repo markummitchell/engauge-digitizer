@@ -9,10 +9,19 @@
 #include "CentipedeStateBuildPolar.h"
 #include "CentipedeStateContext.h"
 #include "CentipedeStatePrebuild.h"
+#include "CmdGuidelineAddXT.h"
+#include "CmdGuidelineAddYR.h"
+#include "DigitizeStateGuideline.h"
 #include "EngaugeAssert.h"
 #include "Logger.h"
+#include "MainWindow.h"
+#include <QObject>
+#include "Transformation.h"
 
-CentipedeStateContext::CentipedeStateContext ()
+CentipedeStateContext::CentipedeStateContext (DigitizeStateGuideline &stateGuideline) :
+  m_stateGuideline (stateGuideline),
+  m_scene (nullptr),
+  m_transformation (nullptr)
 {
   // These states follow the same order as the CentipedeState enumeration
   m_states.insert (CENTIPEDE_STATE_BUILD_CARTESIAN, new CentipedeStateBuildCartesian (*this));
@@ -26,6 +35,14 @@ CentipedeStateContext::CentipedeStateContext ()
 
 CentipedeStateContext::~CentipedeStateContext()
 {
+  // Remove states, one of which may have incomplete in-work graphics items
+  QVector<CentipedeStateAbstractBase*>::iterator itr;
+  for (itr = m_states.begin (); itr != m_states.end (); itr++) {
+    CentipedeStateAbstractBase *state = *itr;
+    delete state;
+  }
+
+  m_states.clear();
 }
 
 void CentipedeStateContext::completeRequestedStateTransitionIfExists ()
@@ -46,6 +63,13 @@ void CentipedeStateContext::completeRequestedStateTransitionIfExists ()
   }
 }
 
+void CentipedeStateContext::createGuidelineCommand (bool selectedXT,
+                                                    double selectedValue)
+{
+  m_stateGuideline.createGuidelineCommand (selectedXT,
+                                           selectedValue);
+}
+
 void CentipedeStateContext::handleKeyPress (Qt::Key key,
                                             bool atLeastOneSelectedItem)
 {
@@ -64,12 +88,28 @@ void CentipedeStateContext::handleMouseMove (QPointF pos)
 
 }
 
-void CentipedeStateContext::handleMousePress (QPointF pos)
+void CentipedeStateContext::handleMousePress (GraphicsScene *scene,
+                                              const Transformation &transformation,
+                                              const DocumentModelGuideline &modelGuideline,
+                                              const DocumentModelCoords &modelCoords,
+                                              QPointF pos,
+                                              bool clickedOnItem)
 {
-  m_states [m_currentState]->handleMousePress (pos);
+  // If a graphics item can be, or was, selected then do not create a new CentipedePair (by
+  // skipping the state transition
+  if (!clickedOnItem) {
 
-  completeRequestedStateTransitionIfExists();
+    // Forward context variables
+    m_scene = scene;
+    m_transformation = new Transformation (transformation);
+    m_modelGuideline = modelGuideline;
+    m_modelCoords = modelCoords;
+    m_posClickScreen = pos;
+  
+    m_states [m_currentState]->handleMousePress (pos);
 
+    completeRequestedStateTransitionIfExists();
+  }
 }
 
 void CentipedeStateContext::handleMouseRelease (QPointF pos)
@@ -77,6 +117,21 @@ void CentipedeStateContext::handleMouseRelease (QPointF pos)
   m_states [m_currentState]->handleMouseRelease (pos);
 
   completeRequestedStateTransitionIfExists();
+}
+
+DocumentModelCoords CentipedeStateContext::modelCoords () const
+{
+  return m_modelCoords;
+}
+
+DocumentModelGuideline CentipedeStateContext::modelGuideline () const
+{
+  return m_modelGuideline;
+}
+
+QPointF  CentipedeStateContext::posClickScreen () const
+{
+  return m_posClickScreen;
 }
 
 void CentipedeStateContext::requestDelayedStateTransition (CentipedeState centipedeState)
@@ -88,4 +143,14 @@ void CentipedeStateContext::requestImmediateStateTransition (CentipedeState cent
 {
   m_requestedState = centipedeState;
   completeRequestedStateTransitionIfExists();
+}
+
+GraphicsScene &CentipedeStateContext::scene () const
+{
+  return *m_scene;
+}
+
+Transformation CentipedeStateContext::transformation () const
+{
+  return *m_transformation;
 }

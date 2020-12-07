@@ -9,6 +9,8 @@
 
 #include "CentipedeStateAbstractBase.h"
 
+class CentipedePairPolar;
+
 /// Class for period while building polar centipedes
 class CentipedeStateBuildPolar : public CentipedeStateAbstractBase
 {
@@ -28,6 +30,7 @@ public:
 private:
   CentipedeStateBuildPolar();
 
+  CentipedePairPolar *m_centipedePair;
 };
 
 #endif // CENTIPEDE_STATE_BUILD_POLAR_H

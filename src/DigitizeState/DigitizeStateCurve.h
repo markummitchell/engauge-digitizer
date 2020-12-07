@@ -9,6 +9,8 @@
 
 #include "DigitizeStateAbstractBase.h"
 
+class MainWindow;
+
 /// Digitizing state for creating Curve Points, one at a time.
 class DigitizeStateCurve : public DigitizeStateAbstractBase
 {

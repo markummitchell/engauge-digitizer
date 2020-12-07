@@ -4,7 +4,7 @@
  * LICENSE or go to gnu.org/licenses for details. Distribution requires prior written permission.     *
  ******************************************************************************************************/
 
-#include "CentipedePair.h"
+#include "CentipedeStateContext.h"
 #include "CmdGuidelineAddXT.h"
 #include "CmdGuidelineAddYR.h"
 #include "CmdGuidelineMoveXT.h"
@@ -15,6 +15,7 @@
 #include "DataKey.h"
 #include "DigitizeStateContext.h"
 #include "DigitizeStateGuideline.h"
+#include "Document.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
 #include "GraphicsItemType.h"
@@ -35,13 +36,13 @@
 
 DigitizeStateGuideline::DigitizeStateGuideline (DigitizeStateContext &context) :
   DigitizeStateAbstractBase (context),
-  m_centipedePair (nullptr)
+  m_context (new CentipedeStateContext (*this))
 {
 }
 
 DigitizeStateGuideline::~DigitizeStateGuideline ()
 {
-  delete m_centipedePair;  
+  delete m_context;
 }
 
 QString DigitizeStateGuideline::activeCurve () const
@@ -56,13 +57,33 @@ void DigitizeStateGuideline::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
-  lockNonGuidelines (true);
+  lockNonGuidelinesAndUnlockGuidelines (true);
 }
 
 bool DigitizeStateGuideline::canPaste (const Transformation & /* transformation */,
                                        const QSize & /* viewSize */) const
 {
   return false;
+}
+
+void DigitizeStateGuideline::createGuidelineCommand (bool selectedXT,
+                                                     double valueSelected)
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateGuideline::createGuidelineCommand";
+
+  CmdAbstract *cmd = nullptr;
+  if (selectedXT) {
+    cmd = new CmdGuidelineAddXT (context().mainWindow(),
+                                 context().mainWindow().cmdMediator()->document(),
+                                 valueSelected);
+  } else {
+    cmd = new CmdGuidelineAddYR (context().mainWindow(),
+                                 context().mainWindow().cmdMediator()->document(),
+                                 valueSelected);
+  }
+
+  context().appendNewCmd (context().mainWindow().cmdMediator(),
+                          cmd);
 }
 
 QCursor DigitizeStateGuideline::cursor(CmdMediator * /* cmdMediator */) const
@@ -76,8 +97,7 @@ void DigitizeStateGuideline::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateGuideline::end";
 
-  killCentipede();
-  lockNonGuidelines (false);
+  lockNonGuidelinesAndUnlockGuidelines (false);
 }
 
 bool DigitizeStateGuideline::guidelinesAreSelectable () const
@@ -104,72 +124,34 @@ void DigitizeStateGuideline::handleCurveChange(CmdMediator * /* cmdMediator */)
 }
 
 void DigitizeStateGuideline::handleKeyPress (CmdMediator * /* cmdMediator */,
-                                             Qt::Key /* key */,
-                                             bool /* atLeastOneSelectedItem */)
+                                             Qt::Key key,
+                                             bool atLeastOneSelectedItem)
 {
-  // Only keys forwarded by GraphicsView::keyPressEvent  will get here. Originally this only
-  // killed the centipedes when Qt::Key_Escape was encountered, but other cases like Control-Z
-  // which requires the key AND the modifier) justified stopping for any keypress. Too confusing
-  // to undo the last CmdAbstract while leaving the partially completed guideline
-  killCentipede ();
+  m_context->handleKeyPress (key,
+                             atLeastOneSelectedItem);
 }
 
-void DigitizeStateGuideline::handleMouseMove (CmdMediator *cmdMediator,
+void DigitizeStateGuideline::handleMouseMove (CmdMediator * /* cmdMediator */,
                                               QPointF posScreen)
 {
-  if (m_centipedePair) {
-    if (m_centipedePair->done (posScreen)) {
-
-      // Done so make a command and remove CentipedePair
-      bool selectedXT = m_centipedePair->selectedXTFinal ();
-      double selectedValue = m_centipedePair->valueFinal ();
-      killCentipede ();
-
-      // Create command
-      CmdAbstract *cmd = nullptr;
-      if (selectedXT) {
-        cmd = new CmdGuidelineAddXT (context().mainWindow(),
-                                     cmdMediator->document(),
-                                     selectedValue);
-      } else {
-        cmd = new CmdGuidelineAddYR (context().mainWindow(),
-                                     cmdMediator->document(),
-                                     selectedValue);
-      }
-
-      context().appendNewCmd (cmdMediator,
-                              cmd);
-
-    } else {
-
-      m_centipedePair->move (posScreen);
-    }
-  }
+  m_context->handleMouseMove (posScreen);
 }
 
 void DigitizeStateGuideline::handleMousePress (CmdMediator *cmdMediator,
                                                QPointF posScreen)
 {
-  killCentipede(); // Remove previous instance if there is one so it does not get orphaned
-
-  // If click is on an existing guideline then:
-  // 1) skip creating new CentipedePair which would then turn into new Guideline
-  // 2) let existing Guideline absorb the mouse press event so it can be dragged
-  if (!hitTestForGraphics (posScreen) &&
-      context().mainWindow().scene().sceneRect().contains (posScreen)) {
-
-    // Click was on empty area, or on a locked axis point which does not count, so start a CentipedePair
-    m_centipedePair = new CentipedePair (context().mainWindow().scene(),
-                                         context().mainWindow().transformation(),
-                                         cmdMediator->document().modelGuideline(),
-                                         cmdMediator->document().modelCoords(),
-                                         posScreen);
-  }
+  m_context->handleMousePress (&context().mainWindow ().scene (),
+                               context().mainWindow ().transformation (),
+                               cmdMediator->document ().modelGuideline (),
+                               cmdMediator->document ().modelCoords (),
+                               posScreen,
+                               hitTestForGraphics (posScreen));
 }
 
 void DigitizeStateGuideline::handleMouseRelease (CmdMediator * /* cmdMediator */,
-                                                 QPointF /* posScreen */)
+                                                 QPointF posScreen)
 {
+  m_context->handleMouseRelease (posScreen);
 }
 
 bool DigitizeStateGuideline::hitTestForGraphics (const QPointF &posScreen)
@@ -192,11 +174,10 @@ bool DigitizeStateGuideline::hitTestForGraphics (const QPointF &posScreen)
     QGraphicsItem *item = *itr;
 
     // Object has to be a Guideline, visible, selectable and overlapping with itemClick to be applicable
-    if ((item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_GUIDELINE) &&
-        ((item->flags () & QGraphicsItem::ItemIsSelectable) != 0) &&
-        item->isVisible () &&
-        item->collidesWithItem (itemClick)) {
-
+    bool isGuideline = (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_GUIDELINE);
+    bool isVisible = item->isVisible();
+    bool isCollision = item->collidesWithItem (itemClick);
+    if (isGuideline && isVisible && isCollision) {
       gotHit = true;
       break;
     }
@@ -209,17 +190,9 @@ bool DigitizeStateGuideline::hitTestForGraphics (const QPointF &posScreen)
   return gotHit;
 }
 
-void DigitizeStateGuideline::killCentipede ()
+void DigitizeStateGuideline::lockNonGuidelinesAndUnlockGuidelines (bool lockdown)
 {
-  if (m_centipedePair) {
-    delete m_centipedePair;
-    m_centipedePair = nullptr;
-  }
-}
-
-void DigitizeStateGuideline::lockNonGuidelines (bool lockdown)
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateGuideline::lockNonGuidelines";
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateGuideline::lockNonGuidelinesAndUnlockGuidelines";
 
   QList<QGraphicsItem*> items = context().mainWindow().scene().items();
   QList<QGraphicsItem*>::iterator itr;
@@ -231,8 +204,19 @@ void DigitizeStateGuideline::lockNonGuidelines (bool lockdown)
         type == GRAPHICS_ITEM_TYPE_POINT ||
         type == GRAPHICS_ITEM_TYPE_SCALE_BAR ||
         type == GRAPHICS_ITEM_TYPE_SEGMENT) {
-       item->setFlag (QGraphicsItem::ItemIsSelectable, !lockdown);
-       item->setFlag (QGraphicsItem::ItemIsMovable, !lockdown);
+
+      item->setFlag (QGraphicsItem::ItemIsSelectable, !lockdown);
+      item->setFlag (QGraphicsItem::ItemIsMovable, !lockdown);
+      item->setFlag (QGraphicsItem::ItemIsFocusable, !lockdown);
+
+    } else if (type == GRAPHICS_ITEM_TYPE_GUIDELINE) {
+
+      item->setFlag (QGraphicsItem::ItemIsSelectable, lockdown);
+      item->setFlag (QGraphicsItem::ItemIsMovable, lockdown);
+      item->setFlag (QGraphicsItem::ItemIsFocusable, lockdown);
+      item->setAcceptHoverEvents (lockdown);
+      item->setVisible (true);
+
     }
   }
 }

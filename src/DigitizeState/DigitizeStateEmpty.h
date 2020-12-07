@@ -9,6 +9,8 @@
 
 #include "DigitizeStateAbstractBase.h"
 
+class MainWindow;
+
 /// Digitizing state before a Document has been created. In this state, the cursor is Qt::ArrowCursor.
 class DigitizeStateEmpty : public DigitizeStateAbstractBase
 {

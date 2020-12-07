@@ -42,6 +42,11 @@ public:
   /// Handle mouse release event
   virtual void handleMouseRelease (QPointF posScreen) = 0;
 
+protected:
+
+  /// Method called by subclasses to send signalUndoActve
+  void enableUndoStack (bool enable);
+
 private:
   CentipedeStateAbstractBase();
 

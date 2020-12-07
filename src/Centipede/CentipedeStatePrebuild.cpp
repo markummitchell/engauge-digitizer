@@ -5,7 +5,12 @@
  ******************************************************************************************************/
 
 #include "CentipedeStatePrebuild.h"
+#include "CentipedeStateContext.h"
+#include "DocumentModelCoords.h"
+#include "DocumentModelGuideline.h"
+#include "GraphicsScene.h"
 #include "Logger.h"
+#include "Transformation.h"
 
 CentipedeStatePrebuild::CentipedeStatePrebuild (CentipedeStateContext &context) :
   CentipedeStateAbstractBase (context)
@@ -26,19 +31,27 @@ void CentipedeStatePrebuild::end ()
   LOG4CPP_DEBUG_S ((*mainCat)) << "CentipedeStatePrebuild::end";
 }
 
-void CentipedeStatePrebuild::handleKeyPress (Qt::Key key,
-                                             bool atLeastOneSelectedItem)
+void CentipedeStatePrebuild::handleKeyPress (Qt::Key /* key */,
+                                             bool /* atLeastOneSelectedItem */)
 {
+  // Noop
 }
 
-void CentipedeStatePrebuild::handleMouseMove (QPointF posScreen)
+void CentipedeStatePrebuild::handleMouseMove (QPointF /* posScreen */)
 {
+  // Noop
 }
   
-void CentipedeStatePrebuild::handleMousePress (QPointF posScreen)
+void CentipedeStatePrebuild::handleMousePress (QPointF /* posScreen */)
 {
+  if (context().modelCoords().coordsType() == COORDS_TYPE_CARTESIAN) {
+    context().requestDelayedStateTransition (CENTIPEDE_STATE_BUILD_CARTESIAN);
+  } else {
+    context().requestDelayedStateTransition (CENTIPEDE_STATE_BUILD_POLAR);
+  }
 }
 
-void CentipedeStatePrebuild::handleMouseRelease (QPointF posScreen)
+void CentipedeStatePrebuild::handleMouseRelease (QPointF /* posScreen */)
 {
+  // Noop
 }

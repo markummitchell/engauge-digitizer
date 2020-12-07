@@ -9,6 +9,8 @@
 
 #include "DigitizeStateAbstractBase.h"
 
+class MainWindow;
+
 /// Digitizing state for digitizing one axis point at a time. Once three axis points are defined,
 /// those points define an affine transformation from pixel screen coordinates to graph coordinates.
 class DigitizeStateAxis : public DigitizeStateAbstractBase

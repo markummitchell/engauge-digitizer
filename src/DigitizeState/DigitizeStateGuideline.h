@@ -10,8 +10,9 @@
 #include "DigitizeStateAbstractBase.h"
 #include <QPoint>
 
-class CentipedePair;
+class CentipedeStateContext;
 class DocumentModelPointMatch;
+class MainWindow;
 class QGraphicsEllipseItem;
 class QGraphicsPixmapItem;
 class QImage;
@@ -42,6 +43,11 @@ public:
                      DigitizeState previousState);
   virtual bool canPaste (const Transformation &transformation,
                          const QSize &viewSize) const;
+
+  /// Create command to add Guideline for CentipedeStateContext
+  void createGuidelineCommand (bool selectedXT,
+                               double valueSelected);
+
   virtual QCursor cursor (CmdMediator *cmdMediator) const;
   virtual void end();
   virtual bool guidelinesAreSelectable () const;
@@ -69,11 +75,11 @@ private:
   DigitizeStateGuideline();
 
   bool hitTestForGraphics (const QPointF &posScreen);
-  void killCentipede ();
-  void lockNonGuidelines (bool lockdown);
+  void lockNonGuidelinesAndUnlockGuidelines (bool lockdown);
 
-  // Temporary graphics object the user interacts with to specify the guideline as X/T or Y/R
-  CentipedePair *m_centipedePair;
+  // State machine wrapping the temporary graphics items the user interacts with
+  // to specify the guideline as X/T or Y/R
+  CentipedeStateContext *m_context;
 };
 
 #endif // DIGITIZE_STATE_GUIDELINE_H

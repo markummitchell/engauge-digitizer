@@ -15,6 +15,8 @@ class QColor;
 class QImage;
 class QPointF;
 
+class MainWindow;
+
 /// Digitizing state for selecting a color for DigitizeStateSegment. The basic strategy is that this
 /// class acts like a special case of DlgSettingsFilter. Specifically, the pixel just selected by a
 /// mouse click is used to change the segment filter for the currently specified curve

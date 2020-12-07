@@ -60,7 +60,8 @@ HEADERS  += \
     Centipede/CentipedeEndpointsCartesian.h \
     Centipede/CentipedeEndpointsPolar.h \
     Centipede/CentipedeIntersectionType.h \
-    Centipede/CentipedePair.h \
+    Centipede/CentipedePairCartesian.h \
+    Centipede/CentipedePairPolar.h \
     Centipede/CentipedeSegmentAbstract.h \
     Centipede/CentipedeSegmentConstantREllipse.h \
     Centipede/CentipedeSegmentConstantTRadial.h \
@@ -525,7 +526,8 @@ SOURCES += \
     Centipede/CentipedeEndpointsAbstract.cpp \
     Centipede/CentipedeEndpointsCartesian.cpp \
     Centipede/CentipedeEndpointsPolar.cpp \
-    Centipede/CentipedePair.cpp \
+    Centipede/CentipedePairCartesian.cpp \
+    Centipede/CentipedePairPolar.cpp \
     Centipede/CentipedeSegmentAbstract.cpp \
     Centipede/CentipedeSegmentConstantREllipse.cpp \
     Centipede/CentipedeSegmentConstantTRadial.cpp \
