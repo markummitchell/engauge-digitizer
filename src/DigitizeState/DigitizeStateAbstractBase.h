@@ -16,6 +16,7 @@ class CmdMediator;
 class DigitizeStateContext;
 class DocumentModelDigitizeCurve;
 class DocumentModelSegments;
+class QGraphicsItem;
 class QSize;
 class QString;
 class QStringList;
@@ -122,6 +123,19 @@ protected:
   /// Display text for up arrow
   QString moveTextUp () const;
 
+  /// Loop through every QGraphicsItem and set their flags
+  void setGraphicsItemsFlags ();
+
+  /// Initialize QGraphicsItem flags on entry to state or when create in state. When in state these values
+  /// can be skipped in relatively complex situations (e.g. Guidelines). From QGraphicsItem documentation:
+  /// - enabled = turns event handling on/off
+  /// - focusable = accept keyboard input focus
+  /// - movable = offer click and drag
+  /// - selectable  (1) enable code call to setSelected() method but that is not used
+  ///               (2) enable code call to QGraphicsScene::setSelectionArea() but that is not used
+  ///               (3) enable rubber band selection but that is not offered (too ambiguous)
+  virtual void setGraphicsItemFlags (QGraphicsItem *item) const = 0;
+  
 private:
   DigitizeStateAbstractBase();
 

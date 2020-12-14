@@ -7,11 +7,13 @@
 #include "CmdAddScale.h"
 #include "CmdMediator.h"
 #include "CursorFactory.h"
+#include "DataKey.h"
 #include "DigitizeStateScale.h"
 #include "DigitizeStateContext.h"
 #include "DlgEditScale.h"
 #include "Document.h"
 #include "EngaugeAssert.h"
+#include "GraphicsItemType.h"
 #include "GraphicsPoint.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -19,6 +21,7 @@
 #include "MainWindow.h"
 #include "PointStyle.h"
 #include <QCursor>
+#include <QGraphicsItem>
 #include <QGraphicsLineItem>
 #include <QMessageBox>
 #include "QtToString.h"
@@ -48,6 +51,7 @@ void DigitizeStateScale::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
+  setGraphicsItemsFlags ();
   context().mainWindow().handleGuidelinesActiveChange (false);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
@@ -228,6 +232,20 @@ void DigitizeStateScale::removeTemporaryPointsAndLine ()
   m_temporaryPoint0 = nullptr;
   m_temporaryPoint1 = nullptr;
   m_line = nullptr;
+}
+
+void DigitizeStateScale::setGraphicsItemFlags (QGraphicsItem *item) const
+{
+  GraphicsItemType type = static_cast<GraphicsItemType> (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt());
+  if (type == GRAPHICS_ITEM_TYPE_SEGMENT) {
+    item->setEnabled (true);
+    item->setFlag (QGraphicsItem::ItemIsMovable, true);
+    item->setVisible (true); // Overrides View menu setting so user can see the guidelines
+  } else {
+    item->setEnabled (false);
+    item->setFlag (QGraphicsItem::ItemIsMovable, false);
+    // Visibility of non-Guidelines is left unchanged
+  }
 }
 
 QString DigitizeStateScale::state() const

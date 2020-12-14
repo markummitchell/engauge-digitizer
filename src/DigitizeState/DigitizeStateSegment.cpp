@@ -43,6 +43,7 @@ void DigitizeStateSegment::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
+  setGraphicsItemsFlags ();
   context().mainWindow().handleGuidelinesActiveChange (false);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 
@@ -170,6 +171,11 @@ Segment *DigitizeStateSegment::segmentFromSegmentStart (const QPointF &posSegmen
   LOG4CPP_ERROR_S ((*mainCat)) << "DigitizeStateSegment::segmentFromSegmentStart";
   ENGAUGE_ASSERT (false);
   return nullptr;
+}
+
+void DigitizeStateSegment::setGraphicsItemFlags (QGraphicsItem *item) const
+{
+  item->setEnabled (false);
 }
 
 void DigitizeStateSegment::slotMouseClickOnSegment(QPointF posSegmentStart)

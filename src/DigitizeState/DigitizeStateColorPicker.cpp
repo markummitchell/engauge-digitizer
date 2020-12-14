@@ -15,6 +15,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QBitmap>
+#include <QGraphicsItem>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QImage>
@@ -42,6 +43,7 @@ void DigitizeStateColorPicker::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
+  setGraphicsItemsFlags ();
 
   // Save current state stuff so it can be restored afterwards
   m_previousDigitizeState = previousState;
@@ -346,6 +348,11 @@ void DigitizeStateColorPicker::saveLowerValueUpperValue (DocumentModelColorFilte
                                    << modelColorFilterAfter.colorFilterMode (curveName);
       ENGAUGE_ASSERT (false);
   }
+}
+
+void DigitizeStateColorPicker::setGraphicsItemFlags (QGraphicsItem *item) const
+{
+  item->setEnabled (false);
 }
 
 QString DigitizeStateColorPicker::state() const

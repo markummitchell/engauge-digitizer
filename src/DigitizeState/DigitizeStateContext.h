@@ -102,6 +102,9 @@ public:
   /// Set QGraphicsView drag mode (in m_view). Called from DigitizeStateAbstractBase subclasses
   void setDragMode (QGraphicsView::DragMode dragMode);
 
+  /// See DigitizeStateAbstractBase::setGraphicsItemFlags
+  void setGraphicsItemFlags (QGraphicsItem *item) const;
+
   /// Set the image so QGraphicsView cursor and drag mode are accessible
   void setImageIsLoaded (CmdMediator *cmdMediator,
                          bool imageIsLoaded);

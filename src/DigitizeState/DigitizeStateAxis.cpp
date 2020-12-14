@@ -17,6 +17,7 @@
 #include "MainWindow.h"
 #include "PointStyle.h"
 #include <QCursor>
+#include <QGraphicsItem>
 #include <QImage>
 #include <QMessageBox>
 #include <QTimer>
@@ -42,6 +43,7 @@ void DigitizeStateAxis::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
+  setGraphicsItemsFlags ();
   context().mainWindow().handleGuidelinesActiveChange (false);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
@@ -201,6 +203,11 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
       }
     }
   }
+}
+
+void DigitizeStateAxis::setGraphicsItemFlags (QGraphicsItem *item) const
+{
+  item->setEnabled (false);
 }
 
 QString DigitizeStateAxis::state() const

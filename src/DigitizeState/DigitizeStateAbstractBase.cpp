@@ -150,6 +150,17 @@ void DigitizeStateAbstractBase::setCursor(CmdMediator *cmdMediator)
   m_context.view ().setCursor (cursor (cmdMediator));
 }
 
+void DigitizeStateAbstractBase::setGraphicsItemsFlags ()
+{
+  QList<QGraphicsItem*> items = context().mainWindow().scene().items();
+  QList<QGraphicsItem*>::iterator itr;
+  for (itr = items.begin (); itr != items.end (); itr++) {
+
+    QGraphicsItem *item = *itr;
+    setGraphicsItemFlags (item);
+  }
+}
+
 double DigitizeStateAbstractBase::zoomedToUnzoomedScreenX () const
 {
   double m11 = context().mainWindow ().view ().transform().m11 ();

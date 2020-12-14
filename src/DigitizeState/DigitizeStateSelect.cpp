@@ -44,22 +44,6 @@ QString DigitizeStateSelect::activeCurve () const
   return context().mainWindow().selectedGraphCurve();
 }
 
-void DigitizeStateSelect::addHoverHighlighting()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::addHoverHighlighting";
-
-  QList<QGraphicsItem*> items = context().mainWindow().scene().items();
-  QList<QGraphicsItem*>::iterator itr;
-  for (itr = items.begin (); itr != items.end (); itr++) {
-
-    QGraphicsItem *item = *itr;
-    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_POINT ||
-        item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_GUIDELINE) {
-       item->setAcceptHoverEvents(true);
-    }
-  }
-}
-
 void DigitizeStateSelect::begin (CmdMediator *cmdMediator,
                                  DigitizeState /* previousState */)
 {
@@ -67,8 +51,8 @@ void DigitizeStateSelect::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::RubberBandDrag);
+  setGraphicsItemsFlags ();
 
-  addHoverHighlighting();
   context().mainWindow().handleGuidelinesActiveChange (true);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
@@ -89,8 +73,6 @@ QCursor DigitizeStateSelect::cursor(CmdMediator * /* cmdMediator */) const
 void DigitizeStateSelect::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::end";
-
-  removeHoverHighlighting();
 }
 
 bool DigitizeStateSelect::guidelinesAreSelectable () const
@@ -393,22 +375,6 @@ QString DigitizeStateSelect::moveTextFromDeltaScreen (const QPointF &deltaScreen
   return moveText;
 }
 
-void DigitizeStateSelect::removeHoverHighlighting()
-{
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::removeHoverHighlighting";
-
-  QList<QGraphicsItem*> items = context().mainWindow().scene().items();
-  QList<QGraphicsItem*>::iterator itr;
-  for (itr = items.begin (); itr != items.end (); itr++) {
-
-    QGraphicsItem *item = *itr;
-    if (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_POINT ||
-        item->data (DATA_KEY_GRAPHICS_ITEM_TYPE) == GRAPHICS_ITEM_TYPE_GUIDELINE) {
-       item->setAcceptHoverEvents(false);
-    }
-  }
-}
-
 double DigitizeStateSelect::scaleBarLength (CmdMediator *cmdMediator) const
 {
   CallbackScaleBar ftor;
@@ -431,9 +397,26 @@ QString DigitizeStateSelect::scaleBarPointIdentifier (CmdMediator *cmdMediator) 
   return ftor.scaleBarPointIdentifier();
 }
 
+void DigitizeStateSelect::setGraphicsItemFlags (QGraphicsItem *item) const
+{
+  // At a minimum this needs to setAcceptHoverEvents(true) for GRAPHICS_ITEM_TYPE_POINT
+
+  GraphicsItemType type = static_cast<GraphicsItemType> (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt());
+  if (type == GRAPHICS_ITEM_TYPE_POINT) {
+    item->setEnabled (true);
+    item->setAcceptHoverEvents (true);
+    item->setFlag (QGraphicsItem::ItemIsMovable, true);
+    item->setVisible (true); // Overrides View menu setting so user can see the guidelines
+  } else {
+    item->setEnabled (false);
+    item->setFlag (QGraphicsItem::ItemIsMovable, false);
+    // Visibility of non-Guidelines is left unchanged
+  }
+}
+
 void DigitizeStateSelect::setHoverHighlighting(const MainWindowModel &modelMainWindow)
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::addHoverHighlighting";
+  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::setHoverHighlighting";
 
   // Set the opacity for all points. It should be already set for pre-existing points
   QList<QGraphicsItem*> items = context().mainWindow().scene().items();
@@ -480,7 +463,7 @@ void DigitizeStateSelect::updateAfterPointAddition ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::updateAfterPointAddition";
 
-  addHoverHighlighting ();
+  setGraphicsItemsFlags ();
 }
 
 void DigitizeStateSelect::updateModelDigitizeCurve (CmdMediator * /* cmdMediator */,

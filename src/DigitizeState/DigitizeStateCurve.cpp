@@ -13,6 +13,7 @@
 #include "MainWindow.h"
 #include "OrdinalGenerator.h"
 #include <QCursor>
+#include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QImage>
 #include <QSize>
@@ -39,6 +40,7 @@ void DigitizeStateCurve::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
+  setGraphicsItemsFlags ();
   context().mainWindow().handleGuidelinesActiveChange (false);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
@@ -132,6 +134,11 @@ void DigitizeStateCurve::handleMouseRelease (CmdMediator *cmdMediator,
                                                                                        activeCurve ()));
   context().appendNewCmd(cmdMediator,
                          cmd);
+}
+
+void DigitizeStateCurve::setGraphicsItemFlags (QGraphicsItem *item) const
+{
+  item->setEnabled (false);
 }
 
 QString DigitizeStateCurve::state() const

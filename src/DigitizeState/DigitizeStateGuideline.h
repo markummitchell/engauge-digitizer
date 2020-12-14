@@ -65,6 +65,7 @@ public:
                                  QPointF posScreen);
   virtual void handleMouseRelease (CmdMediator *cmdMediator,
                                    QPointF posScreen);
+  virtual void setGraphicsItemFlags (QGraphicsItem *item) const;
   virtual QString state() const;
   virtual void updateAfterPointAddition();
   virtual void updateModelDigitizeCurve (CmdMediator *cmdMediator,
@@ -75,7 +76,6 @@ private:
   DigitizeStateGuideline();
 
   bool hitTestForGraphics (const QPointF &posScreen);
-  void lockNonGuidelinesAndUnlockGuidelines (bool lockdown);
 
   // State machine wrapping the temporary graphics items the user interacts with
   // to specify the guideline as X/T or Y/R

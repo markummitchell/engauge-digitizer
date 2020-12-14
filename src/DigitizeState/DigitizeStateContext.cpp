@@ -22,6 +22,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QCursor>
+#include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QSize>

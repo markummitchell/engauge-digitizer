@@ -12,6 +12,7 @@
 #include "DigitizeStatePointMatch.h"
 #include "EngaugeAssert.h"
 #include "EnumsToQt.h"
+#include "GraphicsItemType.h"
 #include "GraphicsPoint.h"
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
@@ -23,6 +24,7 @@
 #include <QApplication>
 #include <QCursor>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QImage>
 #include <qmath.h>
@@ -56,6 +58,7 @@ void DigitizeStatePointMatch::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
+  setGraphicsItemsFlags ();
   context().mainWindow().handleGuidelinesActiveChange (false);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 
@@ -367,6 +370,11 @@ void DigitizeStatePointMatch::promoteCandidatePointToPermanentPoint(CmdMediator 
 {
   createPermanentPoint (cmdMediator,
                         m_posCandidatePoint);
+}
+
+void DigitizeStatePointMatch::setGraphicsItemFlags (QGraphicsItem *item) const
+{
+  item->setEnabled (false);
 }
 
 QString DigitizeStatePointMatch::state() const

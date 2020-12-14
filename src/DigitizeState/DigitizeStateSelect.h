@@ -47,6 +47,7 @@ public:
                                  QPointF posScreen);
   virtual void handleMouseRelease (CmdMediator *cmdMediator,
                                    QPointF posScreen);
+  virtual void setGraphicsItemFlags (QGraphicsItem *item) const;
   virtual QString state() const;
   virtual void updateAfterPointAddition ();
   virtual void updateModelDigitizeCurve (CmdMediator *cmdMediator,
@@ -56,12 +57,10 @@ public:
 private:
   DigitizeStateSelect();
 
-  void addHoverHighlighting();
   void handleContextMenuEventAxis2 (CmdMediator *cmdMediator);
   void handleContextMenuEventAxis34 (CmdMediator *cmdMediator,
                                      const QString &pointIdentifier);
   QString moveTextFromDeltaScreen (const QPointF &deltaScreen);
-  void removeHoverHighlighting();
   double scaleBarLength (CmdMediator *cmdMediator) const;
   QString scaleBarPointIdentifier (CmdMediator *cmdMediator) const;
   void setHoverHighlighting(const MainWindowModel &modelMainWindow);

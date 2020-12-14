@@ -57,7 +57,7 @@ void DigitizeStateGuideline::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
-  lockNonGuidelinesAndUnlockGuidelines (true);
+  setGraphicsItemsFlags ();
 }
 
 bool DigitizeStateGuideline::canPaste (const Transformation & /* transformation */,
@@ -96,8 +96,6 @@ QCursor DigitizeStateGuideline::cursor(CmdMediator * /* cmdMediator */) const
 void DigitizeStateGuideline::end ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateGuideline::end";
-
-  lockNonGuidelinesAndUnlockGuidelines (false);
 }
 
 bool DigitizeStateGuideline::guidelinesAreSelectable () const
@@ -190,34 +188,17 @@ bool DigitizeStateGuideline::hitTestForGraphics (const QPointF &posScreen)
   return gotHit;
 }
 
-void DigitizeStateGuideline::lockNonGuidelinesAndUnlockGuidelines (bool lockdown)
+void DigitizeStateGuideline::setGraphicsItemFlags (QGraphicsItem *item) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateGuideline::lockNonGuidelinesAndUnlockGuidelines";
-
-  QList<QGraphicsItem*> items = context().mainWindow().scene().items();
-  QList<QGraphicsItem*>::iterator itr;
-  for (itr = items.begin (); itr != items.end (); itr++) {
-
-    QGraphicsItem *item = *itr;
-    GraphicsItemType type = static_cast<GraphicsItemType> (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt());
-    if (type == GRAPHICS_ITEM_TYPE_LINE ||
-        type == GRAPHICS_ITEM_TYPE_POINT ||
-        type == GRAPHICS_ITEM_TYPE_SCALE_BAR ||
-        type == GRAPHICS_ITEM_TYPE_SEGMENT) {
-
-      item->setFlag (QGraphicsItem::ItemIsSelectable, !lockdown);
-      item->setFlag (QGraphicsItem::ItemIsMovable, !lockdown);
-      item->setFlag (QGraphicsItem::ItemIsFocusable, !lockdown);
-
-    } else if (type == GRAPHICS_ITEM_TYPE_GUIDELINE) {
-
-      item->setFlag (QGraphicsItem::ItemIsSelectable, lockdown);
-      item->setFlag (QGraphicsItem::ItemIsMovable, lockdown);
-      item->setFlag (QGraphicsItem::ItemIsFocusable, lockdown);
-      item->setAcceptHoverEvents (lockdown);
-      item->setVisible (true);
-
-    }
+  GraphicsItemType type = static_cast<GraphicsItemType> (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt());
+  if (type == GRAPHICS_ITEM_TYPE_GUIDELINE) {
+    item->setEnabled (true);
+    item->setFlag (QGraphicsItem::ItemIsMovable, true);
+    item->setVisible (true); // Overrides View menu setting so user can see the guidelines
+  } else {
+    item->setEnabled (false);
+    item->setFlag (QGraphicsItem::ItemIsMovable, false);
+    // Visibility of non-Guidelines is left unchanged
   }
 }
 

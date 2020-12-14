@@ -9,6 +9,7 @@
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QCursor>
+#include <QGraphicsItem>
 #include <QSize>
 #include "Transformation.h"
 
@@ -32,6 +33,7 @@ void DigitizeStateEmpty::begin (CmdMediator *cmdMediator,
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::begin";
 
   setCursor(cmdMediator);
+  setGraphicsItemsFlags ();
   context().mainWindow().handleGuidelinesActiveChange (false);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
@@ -102,6 +104,10 @@ void DigitizeStateEmpty::handleMouseRelease (CmdMediator * /* cmdMediator */,
                                              QPointF /* posScreen */)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleMouseRelease";
+}
+
+void DigitizeStateEmpty::setGraphicsItemFlags (QGraphicsItem * /* item */) const
+{
 }
 
 QString DigitizeStateEmpty::state() const
