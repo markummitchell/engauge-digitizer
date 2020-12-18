@@ -57,7 +57,8 @@ public:
                              const QString &pointIdentifier1);
 
   /// Create one QGraphicsItem-based object that represents one Point. It is NOT added to m_graphicsLinesForCurves (see addPoint)
-  GraphicsPoint *createPoint (const QString &identifier,
+  GraphicsPoint *createPoint (const MainWindow &mainWindow,
+                              const QString &identifier,
                               const PointStyle &pointStyle,
                               const QPointF &posScreen,
                               GeometryWindow *geometryWindow);
@@ -96,12 +97,14 @@ public:
   /// Update the Points and their Curves after executing a command. After a mouse drag, the lines are already updated and
   /// updating would be done on out of date information (since that would be brought up to date by the NEXT command)
   void updateAfterCommand (CmdMediator &cmdMediator,
+                           const MainWindow &mainWindow,
                            double highlightOpacity,
                            GeometryWindow *geometryWindow,
                            const Transformation &transformation);
 
   /// Update curve styles after settings changed.
-  void updateCurveStyles(const CurveStyles &modelCurveStyles);
+  void updateCurveStyles(const MainWindow &mainWindow,
+                         const CurveStyles &modelCurveStyles);
 
   /// A mouse move has just occurred so move the selected points, since they were dragged. The transformation is needed
   /// so the screen coordinates can be converted to graph coordinates when updating point ordinals
@@ -124,6 +127,7 @@ private:
 
   /// Update Points using a multi-pass algorithm.
   void updatePointMembership (CmdMediator &cmdMediator,
+                              const MainWindow &mainWindow,
                               GeometryWindow *geometryWindow,
                               const Transformation &transformation);
 

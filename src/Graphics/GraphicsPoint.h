@@ -19,6 +19,7 @@ class CurveStyle;
 class GeometryWindow;
 class GraphicsPointEllipse;
 class GraphicsPointPolygon;
+class MainWindow;
 class PointStyle;
 class QColor;
 class QGraphicsScene;
@@ -45,6 +46,7 @@ class GraphicsPoint : public GraphicsPointAbstractBase
 public:
   /// Constructor of circular point.
   GraphicsPoint(QGraphicsScene &scene,
+                const MainWindow &mainWindow,
                 const QString &identifier,
                 const QPointF &posScreen,
                 const QColor &color,
@@ -54,6 +56,7 @@ public:
 
   /// Constructor of polygon point.
   GraphicsPoint(QGraphicsScene &scene,
+                const MainWindow &mainWindow,
                 const QString &identifier,
                 const QPointF &posScreen,
                 const QColor &color,
@@ -91,7 +94,8 @@ public:
   void setHighlightOpacity (double highlightOpacity);
 
   /// Update the point style
-  void setPointStyle (const PointStyle &pointStyle);
+  void setPointStyle (const MainWindow &mainWindow,
+                      const PointStyle &pointStyle);
 
   /// Update the position
   void setPos (const QPointF pos);
@@ -103,7 +107,8 @@ public:
   void setWanted ();
 
   /// Update point and line styles that comprise the curve style
-  void updateCurveStyle (const CurveStyle &curveStyle);
+  void updateCurveStyle (const MainWindow &mainWindow,
+                         const CurveStyle &curveStyle);
 
   /// Identify point as wanted//unwanted
   bool wanted () const;
@@ -111,8 +116,10 @@ public:
 private:
   GraphicsPoint();
 
-  void createPointEllipse (unsigned int radius); // Attributes shared by circle and polygon points are passed through member variables
-  void createPointPolygon (const QPolygonF &polygon); // Attributes shared by circle and polygon points are passed through member variables
+  void createPointEllipse (const MainWindow &mainWindow,
+                           unsigned int radius); // Attributes shared by circle and polygon points are passed through member variables
+  void createPointPolygon (const MainWindow &mainWindow,
+                           const QPolygonF &polygon); // Attributes shared by circle and polygon points are passed through member variables
 
   QGraphicsScene &m_scene;
 

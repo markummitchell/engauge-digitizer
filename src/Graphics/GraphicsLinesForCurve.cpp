@@ -14,6 +14,7 @@
 #include "GraphicsScene.h"
 #include "LineStyle.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include "Point.h"
 #include "PointStyle.h"
 #include <QGraphicsItem>
@@ -364,6 +365,7 @@ void GraphicsLinesForCurve::renumberOrdinals ()
 }
 
 void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
+                                                const MainWindow &mainWindow,
                                                 const PointStyle &pointStyle,
                                                 const Point &point,
                                                 GeometryWindow *geometryWindow)
@@ -387,7 +389,8 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
   } else {
 
     // Point does not exist in scene so create it
-    graphicsPoint = scene.createPoint (point.identifier (),
+    graphicsPoint = scene.createPoint (mainWindow,
+                                       point.identifier (),
                                        pointStyle,
                                        point.posScreen(),
                                        geometryWindow);
@@ -400,7 +403,8 @@ void GraphicsLinesForCurve::updateAfterCommand (GraphicsScene &scene,
   graphicsPoint->setWanted ();
 }
 
-void GraphicsLinesForCurve::updateCurveStyle (const CurveStyle &curveStyle)
+void GraphicsLinesForCurve::updateCurveStyle (const MainWindow &mainWindow,
+                                              const CurveStyle &curveStyle)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurve::updateCurveStyle";
 
@@ -408,7 +412,8 @@ void GraphicsLinesForCurve::updateCurveStyle (const CurveStyle &curveStyle)
   for (itr = m_graphicsPoints.begin(); itr != m_graphicsPoints.end(); itr++) {
 
      GraphicsPoint *point = itr.value();
-     point->updateCurveStyle (curveStyle);
+     point->updateCurveStyle (mainWindow,
+                              curveStyle);
   }
 }
 

@@ -73,6 +73,7 @@ class QActionGroup;
 class QCloseEvent;
 class QComboBox;
 class QDomDocument;
+class QGraphicsItem;
 class QGraphicsLineItem;
 class QGridLayout;
 class QMenu;
@@ -225,6 +226,9 @@ public:
 
   /// Send signal to unit test framework indicating all commands have finished executing
   void sendGong ();
+
+  /// Set graphics item flags depending on DigitizeState
+  void setGraphicsItemFlags (QGraphicsItem *item) const;
 
   /// Processing performed after gui becomes available
   virtual void showEvent(QShowEvent *);

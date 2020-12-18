@@ -136,11 +136,13 @@ void DigitizeStateScale::handleMousePress (CmdMediator *cmdMediator,
   PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
   m_pointIdentifier0 = Point::temporaryPointIdentifier();
   m_pointIdentifier1 = m_pointIdentifier0 + "b";
-  m_temporaryPoint0 = context().mainWindow().scene().createPoint(m_pointIdentifier0,
+  m_temporaryPoint0 = context().mainWindow().scene().createPoint(context().mainWindow(),
+                                                                 m_pointIdentifier0,
                                                                  pointStyleAxes,
                                                                  posScreen,
                                                                  NULL_GEOMETRY_WINDOW);
-  m_temporaryPoint1 = context().mainWindow().scene().createPoint(m_pointIdentifier1,
+  m_temporaryPoint1 = context().mainWindow().scene().createPoint(context().mainWindow(),
+                                                                 m_pointIdentifier1,
                                                                  pointStyleAxes,
                                                                  posScreen,
                                                                  NULL_GEOMETRY_WINDOW);

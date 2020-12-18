@@ -11,15 +11,18 @@
 #include "GeometryWindow.h"
 #include "GraphicsLinesForCurves.h"
 #include "GraphicsScene.h"
+#include "MainWindow.h"
 #include "Point.h"
 #include <QGraphicsItem>
 
 CallbackSceneUpdateAfterCommand::CallbackSceneUpdateAfterCommand(GraphicsLinesForCurves &graphicsLinesForCurves,
                                                                  GraphicsScene &scene,
+                                                                 const MainWindow &mainWindow,
                                                                  const Document &document,
                                                                  GeometryWindow *geometryWindow) :
   m_graphicsLinesForCurves (graphicsLinesForCurves),
   m_scene (scene),
+  m_mainWindow (mainWindow),
   m_document (document),
   m_geometryWindow (geometryWindow)
 {
@@ -31,6 +34,7 @@ CallbackSearchReturn CallbackSceneUpdateAfterCommand::callback (const QString &c
   CallbackSearchReturn rtn = CALLBACK_SEARCH_RETURN_CONTINUE;
 
   m_graphicsLinesForCurves.updateAfterCommand (m_scene,
+                                               m_mainWindow,
                                                m_document.modelCurveStyles (),
                                                curveName,
                                                point,

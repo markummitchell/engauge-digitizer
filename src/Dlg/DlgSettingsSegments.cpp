@@ -498,6 +498,7 @@ void DlgSettingsSegments::updatePreviewOneScene (QGraphicsScene *scenePreview,
     for (itrP = pointsFill.begin(); itrP != pointsFill.end(); itrP++) {
       QPoint pos = *itrP;
       GraphicsPoint *graphicsPoint = new GraphicsPoint (*scenePreview,
+                                                        mainWindow(),
                                                         ARBITRARY_IDENTIFIER,
                                                         pos,
                                                         COLOR,

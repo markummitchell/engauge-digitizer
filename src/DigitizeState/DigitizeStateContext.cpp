@@ -230,6 +230,14 @@ void DigitizeStateContext::setDragMode (QGraphicsView::DragMode dragMode)
   }
 }
 
+void DigitizeStateContext::setGraphicsItemFlags (QGraphicsItem *item) const
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateContext::setGraphicsItemFlags";
+  
+  // Items can only be added by clicking
+  item->setEnabled (false);
+}
+
 void DigitizeStateContext::setImageIsLoaded(CmdMediator *cmdMediator,
                                             bool imageIsLoaded)
 {

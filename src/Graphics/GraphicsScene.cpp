@@ -67,7 +67,8 @@ void GraphicsScene::addTemporaryScaleBar (GraphicsPoint *point0,
                                      *point1);
 }
 
-GraphicsPoint *GraphicsScene::createPoint (const QString &identifier,
+GraphicsPoint *GraphicsScene::createPoint (const MainWindow &mainWindow,
+                                           const QString &identifier,
                                            const PointStyle &pointStyle,
                                            const QPointF &posScreen,
                                            GeometryWindow *geometryWindow)
@@ -81,6 +82,7 @@ GraphicsPoint *GraphicsScene::createPoint (const QString &identifier,
   // This is an N-squared algorithm and may be worth replacing later
   GraphicsPointFactory pointFactory;
   GraphicsPoint *point = pointFactory.createPoint (*this,
+                                                   mainWindow,
                                                    identifier,
                                                    posScreen,
                                                    pointStyle,
@@ -274,6 +276,7 @@ void GraphicsScene::showCurves (bool show,
 }
 
 void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
+                                        const MainWindow &mainWindow,
                                         double highlightOpacity,
                                         GeometryWindow *geometryWindow,
                                         const Transformation &transformation)
@@ -286,6 +289,7 @@ void GraphicsScene::updateAfterCommand (CmdMediator &cmdMediator,
 
   // Update the points
   updatePointMembership (cmdMediator,
+                         mainWindow,
                          geometryWindow,
                          transformation);
 }
@@ -303,11 +307,13 @@ void GraphicsScene::updateCurves (CmdMediator &cmdMediator)
                                             curveNames);
 }
 
-void GraphicsScene::updateCurveStyles (const CurveStyles &modelCurveStyles)
+void GraphicsScene::updateCurveStyles (const MainWindow &mainWindow,
+                                       const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsScene::updateCurveStyles";
 
-  m_graphicsLinesForCurves.updateCurveStyles (modelCurveStyles);
+  m_graphicsLinesForCurves.updateCurveStyles (mainWindow,
+                                              modelCurveStyles);
 }
 
 void GraphicsScene::updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles,
@@ -353,6 +359,7 @@ void GraphicsScene::updatePathItemMultiValued (const QPainterPath &pathMultiValu
 }
 
 void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator,
+                                           const MainWindow &mainWindow,
                                            GeometryWindow *geometryWindow,
                                            const Transformation &transformation)
 {
@@ -360,6 +367,7 @@ void GraphicsScene::updatePointMembership (CmdMediator &cmdMediator,
 
   CallbackSceneUpdateAfterCommand ftor (m_graphicsLinesForCurves,
                                         *this,
+                                        mainWindow,
                                         cmdMediator.document (),
                                         geometryWindow);
   Functor2wRet<const QString &, const Point &, CallbackSearchReturn> ftorWithCallback = functor_ret (ftor,

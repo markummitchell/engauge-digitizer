@@ -97,6 +97,7 @@
 #include <QDomDocument>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QGraphicsItem>
 #include <QImageReader>
 #include <QKeyEvent>
 #include <QKeySequence>
@@ -1650,6 +1651,11 @@ void MainWindow::setCurrentPathFromFile (const QString &fileName)
 
     // File was a url so it is irrelevant to the current directory
   }
+}
+
+void MainWindow::setGraphicsItemFlags (QGraphicsItem *item) const
+{
+  m_digitizeStateContext->setGraphicsItemFlags (item);
 }
 
 void MainWindow::setNonFillZoomFactor (ZoomFactor newZoomFactor)
@@ -3775,6 +3781,7 @@ void MainWindow::updateHighlightOpacity ()
     // Update the QGraphicsScene with the populated Curves. This requires the points in the Document to be already updated
     // by updateAfterCommandStatusBarCoords
     m_scene->updateAfterCommand (*m_cmdMediator,
+                                 *this,
                                  m_modelMainWindow.highlightOpacity(),
                                  m_dockGeometryWindow,
                                  m_transformation);
@@ -3865,7 +3872,8 @@ void MainWindow::updateSettingsCurveStyles(const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::updateSettingsCurveStyles";
 
-  m_scene->updateCurveStyles(modelCurveStyles);
+  m_scene->updateCurveStyles(*this,
+                             modelCurveStyles);
   m_cmdMediator->document().setModelCurveStyles(modelCurveStyles);
   updateViewsOfSettings();
 }
@@ -3935,7 +3943,8 @@ void MainWindow::updateSettingsMainWindow()
 
   if ((m_scene != nullptr) &&
       (m_cmdMediator != nullptr)) {
-    m_scene->updateCurveStyles(m_cmdMediator->document().modelCurveStyles());
+    m_scene->updateCurveStyles(*this,
+                               m_cmdMediator->document().modelCurveStyles());
   }
 
   updateHighlightOpacity();

@@ -64,7 +64,8 @@ void DigitizeStateAxis::createTemporaryPoint (CmdMediator *cmdMediator,
   // Temporary point that user can see while DlgEditPointAxis is active
   const Curve &curveAxes = cmdMediator->curveAxes();
   PointStyle pointStyleAxes = curveAxes.curveStyle().pointStyle();
-  GraphicsPoint *point = context().mainWindow().scene().createPoint(Point::temporaryPointIdentifier (),
+  GraphicsPoint *point = context().mainWindow().scene().createPoint(context().mainWindow(),
+                                                                    Point::temporaryPointIdentifier (),
                                                                     pointStyleAxes,
                                                                     posScreen,
                                                                     NULL_GEOMETRY_WINDOW);
@@ -207,6 +208,7 @@ void DigitizeStateAxis::handleMouseRelease (CmdMediator *cmdMediator,
 
 void DigitizeStateAxis::setGraphicsItemFlags (QGraphicsItem *item) const
 {
+  // Items can only be added by clicking
   item->setEnabled (false);
 }
 

@@ -16,6 +16,7 @@ class GeometryWindow;
 class GraphicsPoint;
 class GraphicsScene;
 class LineStyle;
+class MainWindow;
 class PointStyle;
 class QPainterPath;
 class QTestStream;
@@ -64,12 +65,14 @@ public:
 
   /// Update the GraphicsScene with the specified Point from the Document. If it does not exist yet in the scene, we add it
   void updateAfterCommand (GraphicsScene &scene,
+                           const MainWindow &mainWindow,
                            const PointStyle &pointStyle,
                            const Point &point,
                            GeometryWindow *geometryWindow);
 
   /// Update the curve style for this curve
-  void updateCurveStyle (const CurveStyle &curveStyle);
+  void updateCurveStyle (const MainWindow &mainWindow,
+                         const CurveStyle &curveStyle);
 
   /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
   void updateGraphicsLinesToMatchGraphicsPoints (const LineStyle &lineStyle,

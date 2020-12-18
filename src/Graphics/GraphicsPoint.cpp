@@ -13,6 +13,7 @@
 #include "GraphicsPointEllipse.h"
 #include "GraphicsPointPolygon.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include "PointStyle.h"
 #include <QGraphicsEllipseItem>
 #include <QGraphicsPolygonItem>
@@ -29,6 +30,7 @@ const double MAX_OPACITY = 1.0;
 const double ZERO_WIDTH = 0.0;
 
 GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
+                             const MainWindow &mainWindow,
                              const QString &identifier,
                              const QPointF &posScreen,
                              const QColor &color,
@@ -49,10 +51,12 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY),
   m_geometryWindow (geometryWindow)
 {
-  createPointEllipse (radius);
+  createPointEllipse (mainWindow,
+                      radius);
 }
 
 GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
+                             const MainWindow &mainWindow,
                              const QString &identifier,
                              const QPointF &posScreen,
                              const QColor &color,
@@ -73,7 +77,8 @@ GraphicsPoint::GraphicsPoint(QGraphicsScene &scene,
   m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY),
   m_geometryWindow (geometryWindow)
 {
-  createPointPolygon (polygon);
+  createPointPolygon (mainWindow,
+                      polygon);
 }
 
 GraphicsPoint::~GraphicsPoint()
@@ -111,7 +116,8 @@ QRectF GraphicsPoint::boundingRect () const
   }
 }
 
-void GraphicsPoint::createPointEllipse (unsigned int radius)
+void GraphicsPoint::createPointEllipse (const MainWindow &mainWindow,
+                                        unsigned int radius)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::createPointEllipse";
 
@@ -129,11 +135,8 @@ void GraphicsPoint::createPointEllipse (unsigned int radius)
   m_graphicsItemEllipse->setPos (m_posScreen.x (),
                                  m_posScreen.y ());
   m_graphicsItemEllipse->setPen (QPen (QBrush (m_color), m_lineWidth));
-  m_graphicsItemEllipse->setEnabled (true);
-  m_graphicsItemEllipse->setFlags (QGraphicsItem::ItemIsSelectable |
-                                   QGraphicsItem::ItemIsMovable |
-                                   QGraphicsItem::ItemSendsGeometryChanges);
   m_graphicsItemEllipse->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
+  mainWindow.setGraphicsItemFlags (m_graphicsItemEllipse); // After set DATA_KEY_GRAPHICS_ITEM_TYPE
   if (m_geometryWindow != nullptr) {
     QObject::connect (m_graphicsItemEllipse, SIGNAL (signalPointHoverEnter (QString)), m_geometryWindow, SLOT (slotPointHoverEnter (QString)));
     QObject::connect (m_graphicsItemEllipse, SIGNAL (signalPointHoverLeave (QString)), m_geometryWindow, SLOT (slotPointHoverLeave (QString)));
@@ -154,7 +157,8 @@ void GraphicsPoint::createPointEllipse (unsigned int radius)
   m_graphicsItemEllipse->setShadow (m_shadowZeroWidthEllipse);
 }
 
-void GraphicsPoint::createPointPolygon (const QPolygonF &polygon)
+void GraphicsPoint::createPointPolygon (const MainWindow &mainWindow,
+                                        const QPolygonF &polygon)
 {
   LOG4CPP_DEBUG_S ((*mainCat)) << "GraphicsPoint::createPointPolygon";
 
@@ -168,11 +172,8 @@ void GraphicsPoint::createPointPolygon (const QPolygonF &polygon)
   m_graphicsItemPolygon->setPos (m_posScreen.x (),
                                  m_posScreen.y ());
   m_graphicsItemPolygon->setPen (QPen (QBrush (m_color), m_lineWidth));
-  m_graphicsItemPolygon->setEnabled (true);
-  m_graphicsItemPolygon->setFlags (QGraphicsItem::ItemIsSelectable |
-                                   QGraphicsItem::ItemIsMovable |
-                                   QGraphicsItem::ItemSendsGeometryChanges);
   m_graphicsItemPolygon->setData (DATA_KEY_GRAPHICS_ITEM_TYPE, GRAPHICS_ITEM_TYPE_POINT);
+  mainWindow.setGraphicsItemFlags (m_graphicsItemPolygon); // After set DATA_KEY_GRAPHICS_ITEM_TYPE
   if (m_geometryWindow != nullptr) {
     QObject::connect (m_graphicsItemPolygon, SIGNAL (signalPointHoverEnter (QString)), m_geometryWindow, SLOT (slotPointHoverEnter (QString)));
     QObject::connect (m_graphicsItemPolygon, SIGNAL (signalPointHoverLeave (QString)), m_geometryWindow, SLOT (slotPointHoverLeave (QString)));
@@ -283,7 +284,8 @@ void GraphicsPoint::setPassive ()
   }
 }
 
-void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
+void GraphicsPoint::setPointStyle(const MainWindow &mainWindow,
+                                  const PointStyle &pointStyle)
 {
   // Setting pen and radius of parent graphics items below also affects the child shadows
   // (m_shadowItemPolygon and m_shadowItemEllipse)
@@ -295,7 +297,8 @@ void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
       m_graphicsItemPolygon = nullptr;
       m_shadowZeroWidthPolygon = nullptr;
 
-      createPointEllipse (unsigned (pointStyle.radius()));
+      createPointEllipse (mainWindow,
+                          unsigned (pointStyle.radius()));
 
     } else {
 
@@ -316,7 +319,8 @@ void GraphicsPoint::setPointStyle(const PointStyle &pointStyle)
       m_graphicsItemEllipse = nullptr;
       m_shadowZeroWidthEllipse = nullptr;
 
-      createPointPolygon (pointStyle.polygon());
+      createPointPolygon (mainWindow,
+                          pointStyle.polygon());
 
     } else {
 
@@ -345,9 +349,11 @@ void GraphicsPoint::setWanted ()
   m_wanted = true;
 }
 
-void GraphicsPoint::updateCurveStyle (const CurveStyle &curveStyle)
+void GraphicsPoint::updateCurveStyle (const MainWindow &mainWindow,
+                                      const CurveStyle &curveStyle)
 {
-  setPointStyle (curveStyle.pointStyle()); // This point
+  setPointStyle (mainWindow,
+                 curveStyle.pointStyle()); // This point
 }
 
 bool GraphicsPoint::wanted () const

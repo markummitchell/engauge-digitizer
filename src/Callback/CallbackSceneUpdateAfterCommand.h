@@ -14,6 +14,7 @@ class Document;
 class GeometryWindow;
 class GraphicsLinesForCurves;
 class GraphicsScene;
+class MainWindow;
 class Point;
 
 /// Callback for updating the QGraphicsItems in the scene after a command may have modified Points in Curves.
@@ -23,6 +24,7 @@ public:
   /// Single constructor.
   CallbackSceneUpdateAfterCommand(GraphicsLinesForCurves &graphicsLinesForCurves,
                                   GraphicsScene &scene,
+                                  const MainWindow &mainWindow,
                                   const Document &document,
                                   GeometryWindow *geometryWindow);
 
@@ -35,6 +37,7 @@ private:
 
   GraphicsLinesForCurves &m_graphicsLinesForCurves;
   GraphicsScene &m_scene;
+  const MainWindow &m_mainWindow;
   const Document &m_document;
   GeometryWindow *m_geometryWindow;
 };

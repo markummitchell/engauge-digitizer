@@ -16,6 +16,7 @@
 #include <iostream>
 #include "LineStyle.h"
 #include "Logger.h"
+#include "MainWindow.h"
 #include "Point.h"
 #include <QGraphicsItem>
 #include <QPainterPath>
@@ -178,6 +179,7 @@ void GraphicsLinesForCurves::resetOnLoad()
 }
 
 void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,
+                                                 const MainWindow &mainWindow,
                                                  const CurveStyles &curveStyles,
                                                  const QString &curveName,
                                                  const Point &point,
@@ -189,12 +191,14 @@ void GraphicsLinesForCurves::updateAfterCommand (GraphicsScene &scene,
 
   ENGAUGE_ASSERT (m_graphicsLinesForCurve.contains (curveName));
   m_graphicsLinesForCurve [curveName]->updateAfterCommand (scene,
+                                                           mainWindow,
                                                            curveStyles.pointStyle(curveName),
                                                            point,
                                                            geometryWindow);
 }
 
-void GraphicsLinesForCurves::updateCurveStyles (const CurveStyles &modelCurveStyles)
+void GraphicsLinesForCurves::updateCurveStyles (const MainWindow &mainWindow,
+                                                const CurveStyles &modelCurveStyles)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "GraphicsLinesForCurves::updateCurveStyles";
 
@@ -203,7 +207,8 @@ void GraphicsLinesForCurves::updateCurveStyles (const CurveStyles &modelCurveSty
 
     QString curveName = itr.key();
 
-    m_graphicsLinesForCurve [curveName]->updateCurveStyle (modelCurveStyles.curveStyle (curveName));
+    m_graphicsLinesForCurve [curveName]->updateCurveStyle (mainWindow,
+                                                           modelCurveStyles.curveStyle (curveName));
   }
 }
 

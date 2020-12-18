@@ -112,7 +112,8 @@ void DigitizeStatePointMatch::createTemporaryPoint (CmdMediator *cmdMediator,
   pointStyle.setPaletteColor (modelPointMatch.paletteColorCandidate());
 
   // Temporary point that user can see while DlgEditPoint is active
-  GraphicsPoint *point = context().mainWindow().scene().createPoint(Point::temporaryPointIdentifier (),
+  GraphicsPoint *point = context().mainWindow().scene().createPoint(context().mainWindow(),
+                                                                    Point::temporaryPointIdentifier (),
                                                                     pointStyle,
                                                                     posScreen,
                                                                     NULL_GEOMETRY_WINDOW);

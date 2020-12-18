@@ -138,6 +138,7 @@ void DigitizeStateCurve::handleMouseRelease (CmdMediator *cmdMediator,
 
 void DigitizeStateCurve::setGraphicsItemFlags (QGraphicsItem *item) const
 {
+  // Items can only be added by clicking
   item->setEnabled (false);
 }
 

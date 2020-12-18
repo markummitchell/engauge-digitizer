@@ -10,6 +10,7 @@
 #include "GraphicsItemType.h"
 #include "GraphicsPoint.h"
 #include "GraphicsPointFactory.h"
+#include "MainWindow.h"
 #include "PointStyle.h"
 #include <QColor>
 #include <QGraphicsScene>
@@ -21,6 +22,7 @@ GraphicsPointFactory::GraphicsPointFactory()
 }
 
 GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
+                                                  const MainWindow &mainWindow,
                                                   const QString &identifier,
                                                   const QPointF &posScreen,
                                                   const PointStyle &pointStyle,
@@ -33,6 +35,7 @@ GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
     case POINT_SHAPE_CIRCLE:
       {
         item = new GraphicsPoint (scene,
+                                  mainWindow,
                                   identifier,
                                   posScreen,
                                   ColorPaletteToQColor (pointStyle.paletteColor ()),
@@ -45,6 +48,7 @@ GraphicsPoint *GraphicsPointFactory::createPoint (QGraphicsScene &scene,
     default:
       {
         item = new GraphicsPoint (scene,
+                                  mainWindow,
                                   identifier,
                                   posScreen,
                                   ColorPaletteToQColor (pointStyle.paletteColor ()),

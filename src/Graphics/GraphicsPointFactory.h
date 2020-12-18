@@ -11,6 +11,7 @@
 
 class GeometryWindow;
 class GraphicsPoint;
+class MainWindow;
 class PointStyle;
 class QGraphicsScene;
 class QPointF;
@@ -22,8 +23,10 @@ public:
   /// Single constructor.
   GraphicsPointFactory();
 
-  /// Create circle or polygon point according to the PointStyle.
+  /// Create circle or polygon point according to the PointStyle. MainWindow just provides
+  /// DigitizeStateContext
   GraphicsPoint *createPoint (QGraphicsScene &scene,
+                              const MainWindow &mainWindow,
                               const QString &identifier,
                               const QPointF &posScreen,
                               const PointStyle &pointStyle,

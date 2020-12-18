@@ -15,6 +15,7 @@ class GraphicsLinesForCurve;
 class GraphicsPoint;
 class GraphicsScene;
 class LineStyle;
+class MainWindow;
 class Point;
 class QGraphicsItem;
 class QPainterPath;
@@ -71,13 +72,15 @@ public:
 
   /// Update the GraphicsScene with the specified Point from the Document. If it does not exist yet in the scene, we add it
   void updateAfterCommand (GraphicsScene &scene,
+                           const MainWindow &mainWindow,
                            const CurveStyles &curveStyles,
                            const QString &curveName,
                            const Point &point,
                            GeometryWindow *geometryWindow);
 
   /// Update the curve style for every curve
-  void updateCurveStyles (const CurveStyles &modelCurveStyles);
+  void updateCurveStyles (const MainWindow &mainWindow,
+                          const CurveStyles &modelCurveStyles);
 
   /// Calls to moveLinesWithDraggedPoint have finished so update the lines correspondingly
   void updateGraphicsLinesToMatchGraphicsPoints (const CurveStyles &curveStyles,
