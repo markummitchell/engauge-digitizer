@@ -43,7 +43,7 @@ void DigitizeStateSegment::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
-  setGraphicsItemsFlags ();
+  setGraphicsItemsFlagsDuringStateEntry ();
   context().mainWindow().handleGuidelinesActiveChange (false);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 
@@ -173,7 +173,11 @@ Segment *DigitizeStateSegment::segmentFromSegmentStart (const QPointF &posSegmen
   return nullptr;
 }
 
-void DigitizeStateSegment::setGraphicsItemFlags (QGraphicsItem *item) const
+void DigitizeStateSegment::setGraphicsItemFlagsAfterStateEntry (QGraphicsItem * /* item */) const
+{
+}
+
+void DigitizeStateSegment::setGraphicsItemFlagsDuringStateEntry (QGraphicsItem *item) const
 {
   item->setEnabled (false);
 }

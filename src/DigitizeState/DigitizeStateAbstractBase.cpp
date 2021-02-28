@@ -150,14 +150,14 @@ void DigitizeStateAbstractBase::setCursor(CmdMediator *cmdMediator)
   m_context.view ().setCursor (cursor (cmdMediator));
 }
 
-void DigitizeStateAbstractBase::setGraphicsItemsFlags ()
+void DigitizeStateAbstractBase::setGraphicsItemsFlagsDuringStateEntry ()
 {
   QList<QGraphicsItem*> items = context().mainWindow().scene().items();
   QList<QGraphicsItem*>::iterator itr;
   for (itr = items.begin (); itr != items.end (); itr++) {
 
     QGraphicsItem *item = *itr;
-    setGraphicsItemFlags (item);
+    setGraphicsItemFlagsDuringStateEntry (item);
   }
 }
 

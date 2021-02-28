@@ -2615,12 +2615,12 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgSettingsAbstractBase</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="123" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="134" />
         <source>Ok</source>
         <translation>موافق</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="131" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="142" />
         <source>Cancel</source>
         <translation>إلغاء</translation>
     </message>
@@ -3917,7 +3917,7 @@ The stop value cannot be less than the start value</source>
         <translation>خطوط الشبكة الشعاع</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="601" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="602" />
         <source>Grid line count exceeds limit set by Settings / Main Window.</source>
         <translation>عدد خطوط الشبكة يتجاوز الحد المحدد بواسطة الإعدادات / النافذة الرئيسية.</translation>
     </message>
@@ -4133,27 +4133,27 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsGuideline</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="44" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="53" />
         <source>Guidelines</source>
         <translation>القواعد الارشادية</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="90" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="104" />
         <source>Creation circle radius</source>
         <translation>دائرة الخلق نصف قطرها</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="94" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="108" />
         <source>Select a radius, in pixels, for the points</source>
         <translation>حدد نصف قطر بالبكسل للنقاط</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="99" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="113" />
         <source>Guideline color</source>
         <translation>اللون الإرشادي</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="103" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="117" />
         <source>Guidelines Color
 
 Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
@@ -4162,42 +4162,42 @@ Set the color of the guidelines that can be dragged from the edges of the scene,
 اضبط لون الخطوط التوجيهية التي يمكن سحبها من حواف المشهد ، واستخدامها لمحاذاة النقاط</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="110" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="124" />
         <source>Active Line width</source>
         <translation>عرض الخط النشط</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="114" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="128" />
         <source>Select a size for the guidelines when active</source>
         <translation>حدد حجمًا للإرشادات عندما تكون نشطًا</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="119" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="133" />
         <source>Inactive Line width</source>
         <translation>عرض الخط غير النشط</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="123" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="137" />
         <source>Select a size for the guidelines when inactive</source>
         <translation>حدد حجمًا للإرشادات عند عدم النشاط</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="181" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="211" />
         <source>Active Preview</source>
         <translation>معاينة نشطة</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="184" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="214" />
         <source>Inactive Preview</source>
         <translation>معاينة غير نشطة</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="191" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="221" />
         <source>Preview window that shows how current settings affect the active guidelines.</source>
         <translation>نافذة المعاينة التي توضح كيفية تأثير الإعدادات الحالية على الإرشادات النشطة.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="204" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="234" />
         <source>Preview window that shows how current settings affect the inactive guidelines.</source>
         <translation>نافذة المعاينة التي توضح كيفية تأثير الإعدادات الحالية على الإرشادات غير النشطة.</translation>
     </message>
@@ -4802,7 +4802,7 @@ Y = Y إحداثيات كل نقطة
 <context>
     <name>GraphicsScene</name>
     <message>
-        <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
+        <location filename="../src/Graphics/GraphicsScene.cpp" line="357" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>
         <translation>تحتوي الدالة حاليًا على قيم Y متعددة لقيمة X واحدة. يرجى ضبط النقاط القريبة ، أو تغيير نوع المنحنى في خصائص المنحنى</translation>
     </message>
@@ -4866,22 +4866,22 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="499" />
+        <location filename="../src/main/MainWindow.cpp" line="500" />
         <source>Unable to export to file</source>
         <translation>غير قادر على التصدير إلى ملف</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="544" />
+        <location filename="../src/main/MainWindow.cpp" line="545" />
         <source>Unable to extract image to file</source>
         <translation>غير قادر على استخراج الصورة إلى ملف</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="624" />
+        <location filename="../src/main/MainWindow.cpp" line="625" />
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation>في OSX ، يجب أن تكون الملفات التي تم تحميلها عند بدء التشغيل في دلائل التنزيلات أو الصور أو المكتبة / الحاويات / المحول الرقمي / البيانات</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1336" />
+        <location filename="../src/main/MainWindow.cpp" line="1337" />
         <source>Cannot read file</source>
         <translation>لا يمكن قراءة الملف</translation>
     </message>
@@ -4890,90 +4890,95 @@ Zooming the image in or out is performed using any of several methods:
         <translation type="vanished">من الدليل</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="710" />
+        <location filename="../src/main/MainWindow.cpp" line="491" />
+        <source>File saved</source>
+        <translation>تم حفظ الملف</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="711" />
         <source>Import Image</source>
         <translation>استيراد صورة</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1058" />
+        <location filename="../src/main/MainWindow.cpp" line="1059" />
         <source>File opened</source>
         <translation>تم فتح الملف</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1102" />
+        <location filename="../src/main/MainWindow.cpp" line="1103" />
         <source>File not found</source>
         <translation>لم يتم العثور على الملف</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1119" />
+        <location filename="../src/main/MainWindow.cpp" line="1120" />
         <source>Error report opened</source>
         <translation>افتتح تقرير الخطأ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1182" />
-        <location filename="../src/main/MainWindow.cpp" line="1256" />
+        <location filename="../src/main/MainWindow.cpp" line="1183" />
+        <location filename="../src/main/MainWindow.cpp" line="1257" />
         <source>File imported</source>
         <translation>ملف مستورد</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1290" />
+        <location filename="../src/main/MainWindow.cpp" line="1291" />
         <source>Background image.</source>
         <translation>الصورة الخلفية.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1291" />
+        <location filename="../src/main/MainWindow.cpp" line="1292" />
         <source>Currently selected curve.</source>
         <translation>المنحنى المحدد حاليًا.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1292" />
+        <location filename="../src/main/MainWindow.cpp" line="1293" />
         <source>Point style for currently selected curve.</source>
         <translation>نمط نقطة للمنحنى المحدد حاليًا.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293" />
+        <location filename="../src/main/MainWindow.cpp" line="1294" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>مرشح ملء الشريحة للمنحنى المحدد حاليًا.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1319" />
+        <location filename="../src/main/MainWindow.cpp" line="1320" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>تم تعديل الوثيقة.
 هل تريد حفظ التغييرات؟</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1405" />
+        <location filename="../src/main/MainWindow.cpp" line="1406" />
         <source>Cannot write file</source>
         <translation>لا يمكن كتابة الملف</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1453" />
+        <location filename="../src/main/MainWindow.cpp" line="1454" />
         <source>Save</source>
         <translation>حفظ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2518" />
+        <location filename="../src/main/MainWindow.cpp" line="2524" />
         <source>Export</source>
         <translation>تصدير</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2600" />
+        <location filename="../src/main/MainWindow.cpp" line="2606" />
         <source>Open Document</source>
         <translation>افتح المستند</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3931" />
+        <location filename="../src/main/MainWindow.cpp" line="3939" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3932" />
+        <location filename="../src/main/MainWindow.cpp" line="3940" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4068" />
+        <location filename="../src/main/MainWindow.cpp" line="4077" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5242,40 +5247,40 @@ Do you want to save your changes?</source>
         <translation>لا يمكن قراءة بيانات منحنيات الرسم البياني</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="145" />
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="186" />
-        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="179" />
-        <location filename="../src/main/main.cpp" line="366" />
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="148" />
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="189" />
+        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="185" />
+        <location filename="../src/main/MainWindowMsg.cpp" line="25" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="146" />
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="149" />
         <source>Three axis points have been defined, and no more are needed or allowed.</source>
         <translation>تم تحديد ثلاثة محاور ، ولم تعد هناك حاجة إلى أو السماح.</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="153" />
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="155" />
         <source>Color Picker</source>
         <translation>لون المنتقى</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="154" />
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="156" />
         <source>Sorry, but the color picker point must be near a non-background pixel. Please try again.</source>
         <translation>عذرًا ، ولكن يجب أن تكون نقطة منتقي الألوان بالقرب من بكسل بخلاف الخلفية. حاول مرة اخرى.</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="360" />
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="364" />
         <source>Point Match</source>
         <translation>مطابقة النقطة</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="361" />
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="365" />
         <source>There are no more matching points</source>
         <translation>لا توجد المزيد من النقاط المطابقة</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="180" />
+        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="186" />
         <source>The scale bar has been defined, and another is not needed or allowed.</source>
         <translation>تم تحديد شريط المقياس ، وهناك حاجة إلى شريط آخر أو غير مسموح به.</translation>
     </message>
@@ -5724,7 +5729,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">السابق</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="634" />
+        <location filename="../src/main/MainWindow.cpp" line="635" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>يبدو أن الملف يحتوي على أحرف من أبجديات لغات متعددة ، والتي لا تعمل في سطر أوامر Windows</translation>
     </message>
@@ -5734,33 +5739,33 @@ Do you want to save your changes?</source>
         <translation>لا يمكن قراءة بيانات النافذة الرئيسية</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="245" />
-        <location filename="../src/main/main.cpp" line="257" />
+        <location filename="../src/main/main.cpp" line="246" />
+        <location filename="../src/main/main.cpp" line="258" />
         <source>is not a valid file name</source>
         <translation>ليس اسم ملف صالح</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="251" />
+        <location filename="../src/main/main.cpp" line="252" />
         <source>is not a valid image file extension</source>
         <translation>ليس امتداد ملف صورة صالح</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="343" />
+        <location filename="../src/main/main.cpp" line="344" />
         <source>is used only with one or more load files</source>
         <translation>يستخدم فقط مع واحد أو أكثر من ملفات التحميل</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="375" />
+        <location filename="../src/main/main.cpp" line="377" />
         <source>Available styles</source>
         <translation>الأنماط المتاحة</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="399" />
+        <location filename="../src/main/main.cpp" line="401" />
         <source>where</source>
         <translation>أين</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="405" />
+        <location filename="../src/main/main.cpp" line="407" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>لتمكين معلومات التصحيح الإضافية. تستخدم لتصحيح الأخطاء</translation>
     </message>
@@ -5769,64 +5774,64 @@ Do you want to save your changes?</source>
         <translation type="vanished">يحدد ملف تقرير الخطأ كمدخل. تستخدم لتصحيح الأخطاء والاختبار</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="411" />
+        <location filename="../src/main/main.cpp" line="413" />
         <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
         <translation>يشير إلى أن الملفات المفتوحة عند بدء التشغيل هي لاختبار السحب والإفلات. تستخدم لاختبار الانحدار</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="417" />
+        <location filename="../src/main/main.cpp" line="419" />
         <source>Specifies an error report file as input. Used for debugging and regression testing</source>
         <translation>يحدد ملف تقرير الخطأ كمدخلات. يستخدم للتصحيح واختبار الانحدار</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="423" />
+        <location filename="../src/main/main.cpp" line="425" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>قم بتصدير كل ملف بدء تشغيل تم تحميله ، والذي يجب أن يحتوي على جميع نقاط المحور المحددة ، ثم قم بإيقافها</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="429" />
+        <location filename="../src/main/main.cpp" line="431" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>قم باستخراج الصورة في كل ملف بدء تشغيل تم تحميله إلى ملف بالملحق المحدد ، ثم قم بإيقافه</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="435" />
+        <location filename="../src/main/main.cpp" line="437" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>يحدد ملف البرنامج النصي لأمر الملف كمدخل. تستخدم لتصحيح الأخطاء والاختبار</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="441" />
+        <location filename="../src/main/main.cpp" line="443" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>إخراج ملفات التشخيص gnuplot الإدخال. تستخدم لتصحيح الأخطاء</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="447" />
+        <location filename="../src/main/main.cpp" line="449" />
         <source>Show this help information</source>
         <translation>عرض معلومات المساعدة هذه</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="453" />
+        <location filename="../src/main/main.cpp" line="455" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>ينفذ ملف تقرير الخطأ أو البرنامج النصي لأمر الملف. تستخدم لاختبار الانحدار</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="459" />
+        <location filename="../src/main/main.cpp" line="461" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>يزيل كل الإعدادات المخزنة ، بما في ذلك أوضاع النوافذ. تستخدم عند تشغيل النوافذ خارج الشاشة</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="466" />
+        <location filename="../src/main/main.cpp" line="468" />
         <source>Set the window style to one of the styles listed by the command line option</source>
         <translation>قم بتعيين نمط الإطار على أحد الأنماط المدرجة بواسطة خيار سطر الأوامر
  
 </translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="474" />
+        <location filename="../src/main/main.cpp" line="476" />
         <source>Show a list of available styles that can be used with the command line option</source>
         <translation>عرض قائمة من الأنماط المتاحة التي يمكن استخدامها مع خيار سطر الأوامر</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="500" />
+        <location filename="../src/main/main.cpp" line="502" />
         <source>Set timezone to add or subtract hours in time values. Timezone values are listed as TZ Database Names in Wikipedia</source>
         <translation>قم بتعيين المنطقة الزمنية لإضافة أو طرح ساعات في قيم الوقت. يتم سرد قيم المنطقة الزمنية كأسماء قاعدة بيانات TZ في ويكيبيديا</translation>
     </message>
@@ -5835,32 +5840,32 @@ Do you want to save your changes?</source>
         <translation type="vanished">إظهار قائمة بالأنماط المتوفرة التي يمكن استخدامها مع الأمر -style</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="481" />
+        <location filename="../src/main/main.cpp" line="483" />
         <source>Upgrade files opened at startup to the most recent version</source>
         <translation>ترقية الملفات المفتوحة عند بدء التشغيل إلى الإصدار الأحدث</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="487" />
+        <location filename="../src/main/main.cpp" line="489" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>ملف (ملفات) ليتم استيراده أو فتحه عند بدء التشغيل</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="495" />
+        <location filename="../src/main/main.cpp" line="497" />
         <source>Useful environment variables:</source>
         <translation>متغيرات البيئة المفيدة:</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="544" />
+        <location filename="../src/main/main.cpp" line="546" />
         <source>Could not write to</source>
         <translation>لا يمكن الكتابة إلى</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="557" />
+        <location filename="../src/main/main.cpp" line="559" />
         <source>Upgraded</source>
         <translation>ترقية</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="559" />
+        <location filename="../src/main/main.cpp" line="561" />
         <source>to</source>
         <translation>إلى</translation>
     </message>
@@ -5919,6 +5924,11 @@ Do you want to save your changes?</source>
     <message>
         <source>,</source>
         <translation type="vanished">,</translation>
+    </message>
+    <message>
+        <location filename="../src/Centipede/CentipedeStateContext.cpp" line="104" />
+        <source>Click and drag to create a guideline</source>
+        <translation>انقر واسحب لإنشاء دليل </translation>
     </message>
 </context>
 <context>

@@ -230,12 +230,13 @@ void DigitizeStateContext::setDragMode (QGraphicsView::DragMode dragMode)
   }
 }
 
-void DigitizeStateContext::setGraphicsItemFlags (QGraphicsItem *item) const
+void DigitizeStateContext::setGraphicsItemFlagsAfterStateEntry (QGraphicsItem *item) const
 {
-  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateContext::setGraphicsItemFlags";
+  LOG4CPP_DEBUG_S ((*mainCat)) << "DigitizeStateContext::setGraphicsItemFlagsAfterStateEntry";
   
-  // Items can only be added by clicking
-  item->setEnabled (false);
+  ENGAUGE_ASSERT(m_currentState < m_states.count());
+
+  m_states [m_currentState]->setGraphicsItemFlagsAfterStateEntry (item);
 }
 
 void DigitizeStateContext::setImageIsLoaded(CmdMediator *cmdMediator,

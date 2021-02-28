@@ -22,7 +22,8 @@
                 <section title="How do I get better accuracy in the numbers from Engauge?" ref="betteraccuracy.html"></section>
                 <section title="How can I add Engauge Digitizer to the Windows Explorer context menu?" ref="contextmenuwindows.html"></section>
                 <section title="How can I work with multiple coordinate systems in the same graph?" ref="answermultiplecoordsystems.html"></section>
-                <section title="How can I work with floating axes, which have one unknown coordinate?" ref="answerfloatingaxes.html"></section>
+		<section title="How can I work with floating axes, which have one unknown coordinate?" ref="answerfloatingaxes.html"></section>
+		<section title="How can I add a guideline along a constant coordinate value?" ref="answerguideline.html"></section>
                 <section title="What are the command line options?" ref="commandlineoptions.html"></section>
                 <section title="What other help options are available?" ref="answerother.html"></section>
             </section>
@@ -50,7 +51,8 @@
         <files>
             <file>animation.png</file>
             <file>answerdiscretizing.html</file>
-            <file>answerfloatingaxes.html</file>
+	    <file>answerfloatingaxes.html</file>
+            <file>answerguideline.html</file>	    
             <file>answerlinegraph.html</file>
             <file>answermeasuring.html</file>
             <file>answermultiplecoordsystems.html</file>

@@ -2504,12 +2504,12 @@ In totaal zijn er twee punten op de x-as als (x1) en (x2), en twee punten op de 
 <context>
     <name>DlgSettingsAbstractBase</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="123" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="134" />
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="131" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="142" />
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
@@ -3780,7 +3780,7 @@ De stopwaarde mag niet lager zijn dan de startwaarde</translation>
         <translation>Radius rasterlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="601" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="602" />
         <source>Grid line count exceeds limit set by Settings / Main Window.</source>
         <translation>Het aantal netlijnen overschrijdt de limiet die is ingesteld via Instellingen / Hoofdvenster.</translation>
     </message>
@@ -3978,27 +3978,27 @@ De stopwaarde mag niet lager zijn dan de startwaarde</translation>
 <context>
     <name>DlgSettingsGuideline</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="44" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="53" />
         <source>Guidelines</source>
         <translation>Richtlijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="90" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="104" />
         <source>Creation circle radius</source>
         <translation>Creatie cirkelradius</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="94" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="108" />
         <source>Select a radius, in pixels, for the points</source>
         <translation>Selecteer een straal, in pixels, voor de punten</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="99" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="113" />
         <source>Guideline color</source>
         <translation>Richtlijn kleur</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="103" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="117" />
         <source>Guidelines Color
 
 Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
@@ -4007,42 +4007,42 @@ Set the color of the guidelines that can be dragged from the edges of the scene,
 Stel de kleur in van de hulplijnen die van de randen van de scène kunnen worden gesleept en gebruikt om punten uit te lijnen</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="110" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="124" />
         <source>Active Line width</source>
         <translation>Actieve lijnbreedte</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="114" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="128" />
         <source>Select a size for the guidelines when active</source>
         <translation>Selecteer een maat voor de richtlijnen indien actief</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="119" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="133" />
         <source>Inactive Line width</source>
         <translation>Inactieve Lijnbreedte</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="123" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="137" />
         <source>Select a size for the guidelines when inactive</source>
         <translation>Selecteer een maat voor de richtlijnen wanneer deze inactief zijn</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="181" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="211" />
         <source>Active Preview</source>
         <translation>Actief voorbeeld</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="184" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="214" />
         <source>Inactive Preview</source>
         <translation>Inactief voorbeeld</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="191" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="221" />
         <source>Preview window that shows how current settings affect the active guidelines.</source>
         <translation>Voorbeeldvenster dat laat zien hoe de huidige instellingen de actieve hulplijnen beïnvloeden.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="204" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="234" />
         <source>Preview window that shows how current settings affect the inactive guidelines.</source>
         <translation>Voorbeeldvenster dat laat zien hoe de huidige instellingen de inactieve hulplijnen beïnvloeden.</translation>
     </message>
@@ -4615,7 +4615,7 @@ Als slepen en neerzetten is uitgeschakeld, kan een rechthoekige set cellen worde
 <context>
     <name>GraphicsScene</name>
     <message>
-        <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
+        <location filename="../src/Graphics/GraphicsScene.cpp" line="357" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>
         <translation>Functie heeft momenteel meerdere Y-waarden voor één X-waarde. Pas punten in de buurt aan of verander het curvetype in Curve-eigenschappen</translation>
     </message>
@@ -4679,110 +4679,115 @@ U kunt op verschillende manieren in- of uitzoomen op de afbeelding:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="499" />
+        <location filename="../src/main/MainWindow.cpp" line="491" />
+        <source>File saved</source>
+        <translation>Bestand opgeslagen</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="500" />
         <source>Unable to export to file</source>
         <translation>Kan niet naar bestand exporteren</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="544" />
+        <location filename="../src/main/MainWindow.cpp" line="545" />
         <source>Unable to extract image to file</source>
         <translation>Kan afbeelding niet uitpakken naar bestand</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="624" />
+        <location filename="../src/main/MainWindow.cpp" line="625" />
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation>In OSX moeten bestanden die bij het opstarten worden geladen zich in de mappen Downloads, Afbeeldingen of Bibliotheek / Containers / Digitizer / Data bevinden</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="710" />
+        <location filename="../src/main/MainWindow.cpp" line="711" />
         <source>Import Image</source>
         <translation>Afbeelding importeren</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1058" />
+        <location filename="../src/main/MainWindow.cpp" line="1059" />
         <source>File opened</source>
         <translation>Bestand geopend</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1102" />
+        <location filename="../src/main/MainWindow.cpp" line="1103" />
         <source>File not found</source>
         <translation>Bestand niet gevonden</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1119" />
+        <location filename="../src/main/MainWindow.cpp" line="1120" />
         <source>Error report opened</source>
         <translation>Foutenrapport geopend</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1182" />
-        <location filename="../src/main/MainWindow.cpp" line="1256" />
+        <location filename="../src/main/MainWindow.cpp" line="1183" />
+        <location filename="../src/main/MainWindow.cpp" line="1257" />
         <source>File imported</source>
         <translation> Bestand geïmporteerd</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1290" />
+        <location filename="../src/main/MainWindow.cpp" line="1291" />
         <source>Background image.</source>
         <translation>Achtergrond afbeelding.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1291" />
+        <location filename="../src/main/MainWindow.cpp" line="1292" />
         <source>Currently selected curve.</source>
         <translation>Momenteel geselecteerde curve.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1292" />
+        <location filename="../src/main/MainWindow.cpp" line="1293" />
         <source>Point style for currently selected curve.</source>
         <translation>Puntstijl voor de momenteel geselecteerde curve.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293" />
+        <location filename="../src/main/MainWindow.cpp" line="1294" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Segmentvulfilter voor de momenteel geselecteerde curve.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1319" />
+        <location filename="../src/main/MainWindow.cpp" line="1320" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>Het document is gewijzigd.
 Wil je je wijzigingen opslaan?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1336" />
+        <location filename="../src/main/MainWindow.cpp" line="1337" />
         <source>Cannot read file</source>
         <translation>Kan bestand niet lezen</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1405" />
+        <location filename="../src/main/MainWindow.cpp" line="1406" />
         <source>Cannot write file</source>
         <translation>Kan bestand niet schrijven</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1453" />
+        <location filename="../src/main/MainWindow.cpp" line="1454" />
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2518" />
+        <location filename="../src/main/MainWindow.cpp" line="2524" />
         <source>Export</source>
         <translation>Exporteren</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2600" />
+        <location filename="../src/main/MainWindow.cpp" line="2606" />
         <source>Open Document</source>
         <translation>Open document</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3931" />
+        <location filename="../src/main/MainWindow.cpp" line="3939" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3932" />
+        <location filename="../src/main/MainWindow.cpp" line="3940" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4068" />
+        <location filename="../src/main/MainWindow.cpp" line="4077" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5059,40 +5064,40 @@ Wil je je wijzigingen opslaan?</translation>
         <translation>Ga naar boven</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="145" />
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="186" />
-        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="179" />
-        <location filename="../src/main/main.cpp" line="366" />
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="148" />
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="189" />
+        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="185" />
+        <location filename="../src/main/MainWindowMsg.cpp" line="25" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="146" />
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="149" />
         <source>Three axis points have been defined, and no more are needed or allowed.</source>
         <translation>Er zijn drie aspunten gedefinieerd en er zijn er niet meer nodig of toegestaan.</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="153" />
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="155" />
         <source>Color Picker</source>
         <translation>Kleur kiezer</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="154" />
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="156" />
         <source>Sorry, but the color picker point must be near a non-background pixel. Please try again.</source>
         <translation>Sorry, maar het kleurkiezerpunt moet zich in de buurt van een niet-achtergrondpixel bevinden. Probeer het a.u.b. opnieuw.</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="360" />
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="364" />
         <source>Point Match</source>
         <translation>Puntmatch</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="361" />
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="365" />
         <source>There are no more matching points</source>
         <translation>Er zijn geen matchpunten meer</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="180" />
+        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="186" />
         <source>The scale bar has been defined, and another is not needed or allowed.</source>
         <translation>De schaalbalk is gedefinieerd en een andere is niet nodig of toegestaan.</translation>
     </message>
@@ -5467,7 +5472,7 @@ Wil je je wijzigingen opslaan?</translation>
         <translation>Meer aspunten nodig</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="634" />
+        <location filename="../src/main/MainWindow.cpp" line="635" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>Het bestand lijkt tekens te bevatten uit alfabetten in meerdere talen, wat niet werkt op de Windows-opdrachtregel</translation>
     </message>
@@ -5477,123 +5482,123 @@ Wil je je wijzigingen opslaan?</translation>
         <translation>Kan gegevens van hoofdvenster niet lezen</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="245" />
-        <location filename="../src/main/main.cpp" line="257" />
+        <location filename="../src/main/main.cpp" line="246" />
+        <location filename="../src/main/main.cpp" line="258" />
         <source>is not a valid file name</source>
         <translation>is geen geldige bestandsnaam</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="251" />
+        <location filename="../src/main/main.cpp" line="252" />
         <source>is not a valid image file extension</source>
         <translation>is geen geldige extensie voor het afbeeldingsbestand</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="343" />
+        <location filename="../src/main/main.cpp" line="344" />
         <source>is used only with one or more load files</source>
         <translation>wordt alleen gebruikt met een of meer laadbestanden</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="375" />
+        <location filename="../src/main/main.cpp" line="377" />
         <source>Available styles</source>
         <translation>Beschikbare stijlen</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="399" />
+        <location filename="../src/main/main.cpp" line="401" />
         <source>where</source>
         <translation>waar</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="405" />
+        <location filename="../src/main/main.cpp" line="407" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>Maakt extra foutopsporingsinformatie mogelijk. Wordt gebruikt voor foutopsporing</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="411" />
+        <location filename="../src/main/main.cpp" line="413" />
         <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
         <translation>Geeft aan dat bestanden die bij het opstarten worden geopend, bedoeld zijn om slepen en neerzetten te testen. Gebruikt voor regressietesten</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="417" />
+        <location filename="../src/main/main.cpp" line="419" />
         <source>Specifies an error report file as input. Used for debugging and regression testing</source>
         <translation>Specificeert een foutenrapportbestand als invoer. Wordt gebruikt voor foutopsporing en regressietests</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="423" />
+        <location filename="../src/main/main.cpp" line="425" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>Exporteer elk geladen opstartbestand, waarin alle aspunten gedefinieerd moeten zijn, en stop dan</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="429" />
+        <location filename="../src/main/main.cpp" line="431" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>Extraheer de afbeelding in elk geladen opstartbestand naar een bestand met de opgegeven extensie en stop</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="435" />
+        <location filename="../src/main/main.cpp" line="437" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>Specificeert een bestand met opdrachtscriptbestand als invoer. Wordt gebruikt voor foutopsporing en testen</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="441" />
+        <location filename="../src/main/main.cpp" line="443" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>Voer diagnostische gnuplot-invoerbestanden uit. Wordt gebruikt voor foutopsporing</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="447" />
+        <location filename="../src/main/main.cpp" line="449" />
         <source>Show this help information</source>
         <translation>Laat deze helpinformatie zien</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="453" />
+        <location filename="../src/main/main.cpp" line="455" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>Voert het foutenrapportbestand of het bestandsopdrachtscript uit. Gebruikt voor regressietesten</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="459" />
+        <location filename="../src/main/main.cpp" line="461" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>Verwijdert alle opgeslagen instellingen, inclusief vensterposities. Wordt gebruikt wanneer vensters buiten het scherm opstarten</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="466" />
+        <location filename="../src/main/main.cpp" line="468" />
         <source>Set the window style to one of the styles listed by the command line option</source>
         <translation>Stel de vensterstijl in op een van de stijlen die worden vermeld bij de opdrachtregeloptie</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="474" />
+        <location filename="../src/main/main.cpp" line="476" />
         <source>Show a list of available styles that can be used with the command line option</source>
         <translation>Toon een lijst met beschikbare stijlen die kunnen worden gebruikt met de opdrachtregeloptie</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="481" />
+        <location filename="../src/main/main.cpp" line="483" />
         <source>Upgrade files opened at startup to the most recent version</source>
         <translation>Upgradebestanden die bij het opstarten zijn geopend naar de meest recente versie</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="487" />
+        <location filename="../src/main/main.cpp" line="489" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>Bestand (en) die bij het opstarten moeten worden geïmporteerd of geopend</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="495" />
+        <location filename="../src/main/main.cpp" line="497" />
         <source>Useful environment variables:</source>
         <translation>Handige omgevingsvariabelen:</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="500" />
+        <location filename="../src/main/main.cpp" line="502" />
         <source>Set timezone to add or subtract hours in time values. Timezone values are listed as TZ Database Names in Wikipedia</source>
         <translation>Stel de tijdzone in om uren aan tijdwaarden toe te voegen of af te trekken. Tijdzonewaarden worden vermeld als TZ-databasenamen in Wikipedia</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="544" />
+        <location filename="../src/main/main.cpp" line="546" />
         <source>Could not write to</source>
         <translation>Kan niet schrijven naar</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="557" />
+        <location filename="../src/main/main.cpp" line="559" />
         <source>Upgraded</source>
         <translation>Opgewaardeerd</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="559" />
+        <location filename="../src/main/main.cpp" line="561" />
         <source>to</source>
         <translation>naar</translation>
     </message>
@@ -5616,6 +5621,11 @@ Wil je je wijzigingen opslaan?</translation>
         <location filename="../src/util/Xml.cpp" line="54" />
         <source>Error reading xml</source>
         <translation>Fout bij het lezen van xml</translation>
+    </message>
+    <message>
+        <location filename="../src/Centipede/CentipedeStateContext.cpp" line="104" />
+        <source>Click and drag to create a guideline</source>
+        <translation>Klik en sleep om een richtlijn te maken </translation>
     </message>
 </context>
 <context>

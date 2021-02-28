@@ -488,7 +488,7 @@ void MainWindow::fileExport(const QString &fileName,
     m_isDocumentExported = true; // Remember that export was performed
 
     updateChecklistGuide ();
-    m_statusBar->showTemporaryMessage("File saved");
+    m_statusBar->showTemporaryMessage(tr ("File saved"));
 
   } else {
 
@@ -1655,7 +1655,7 @@ void MainWindow::setCurrentPathFromFile (const QString &fileName)
 
 void MainWindow::setGraphicsItemFlags (QGraphicsItem *item) const
 {
-  m_digitizeStateContext->setGraphicsItemFlags (item);
+  m_digitizeStateContext->setGraphicsItemFlagsAfterStateEntry (item);
 }
 
 void MainWindow::setNonFillZoomFactor (ZoomFactor newZoomFactor)

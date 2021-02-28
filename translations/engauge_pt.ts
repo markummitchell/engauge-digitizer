@@ -2616,12 +2616,12 @@ No total , haverá dois pontos no eixo X como (x1) e (x2) , e dois pontos no eix
 <context>
     <name>DlgSettingsAbstractBase</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="123" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="134" />
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="131" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="142" />
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -3906,7 +3906,7 @@ O valor parada não pode ser inferior ao valor inicial</translation>
         <translation>Linhas de grade radius</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="601" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="602" />
         <source>Grid line count exceeds limit set by Settings / Main Window.</source>
         <translation>A contagem da linha de grade excede o limite definido pelas Configurações / Janela principal.</translation>
     </message>
@@ -4120,27 +4120,27 @@ O valor parada não pode ser inferior ao valor inicial</translation>
 <context>
     <name>DlgSettingsGuideline</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="44" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="53" />
         <source>Guidelines</source>
         <translation>Diretrizes</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="90" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="104" />
         <source>Creation circle radius</source>
         <translation>Raio do círculo de criação</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="94" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="108" />
         <source>Select a radius, in pixels, for the points</source>
         <translation>Selecione um raio, em pixels, para os pontos</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="99" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="113" />
         <source>Guideline color</source>
         <translation>Cor de orientação</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="103" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="117" />
         <source>Guidelines Color
 
 Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
@@ -4149,43 +4149,43 @@ Set the color of the guidelines that can be dragged from the edges of the scene,
 Defina a cor das linhas-guia que podem ser arrastadas das bordas da cena e usadas para alinhar os pontos</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="110" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="124" />
         <source>Active Line width</source>
         <translation>Largura da linha ativa</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="114" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="128" />
         <source>Select a size for the guidelines when active</source>
         <translation>Selecione um tamanho para as diretrizes quando ativas</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="119" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="133" />
         <source>Inactive Line width</source>
         <translation>Largura da linha inativa</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="123" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="137" />
         <source>Select a size for the guidelines when inactive</source>
         <translation>Selecione um tamanho para as diretrizes quando inativas</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="181" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="211" />
         <source>Active Preview</source>
         <translation>Antevisão Ativa</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="184" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="214" />
         <source>Inactive Preview</source>
         <translation>Visualização inativa
  </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="191" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="221" />
         <source>Preview window that shows how current settings affect the active guidelines.</source>
         <translation>Janela de visualização que mostra como as configurações atuais afetam as diretrizes ativas.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="204" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="234" />
         <source>Preview window that shows how current settings affect the inactive guidelines.</source>
         <translation>Janela de visualização que mostra como as configurações atuais afetam as diretrizes inativas. </translation>
     </message>
@@ -4788,7 +4788,7 @@ Se drag-and-drop é desativado, um conjunto retangular de células podem ser sel
 <context>
     <name>GraphicsScene</name>
     <message>
-        <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
+        <location filename="../src/Graphics/GraphicsScene.cpp" line="357" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>
         <translation>A função atualmente possui vários valores Y para um valor X. Ajuste os pontos próximos ou altere o tipo de curva em Propriedades da curva</translation>
     </message>
@@ -4852,22 +4852,22 @@ Ampliando a imagem dentro ou para fora é realizada usando qualquer um de vário
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="499" />
+        <location filename="../src/main/MainWindow.cpp" line="500" />
         <source>Unable to export to file</source>
         <translation>Não é possível exportar para o arquivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="544" />
+        <location filename="../src/main/MainWindow.cpp" line="545" />
         <source>Unable to extract image to file</source>
         <translation>Não é possível extrair a imagem para o arquivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="624" />
+        <location filename="../src/main/MainWindow.cpp" line="625" />
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation>No OSX, os arquivos carregados na inicialização devem estar nos diretórios Downloads, Imagens ou Biblioteca / Contêineres / Digitalizador / Dados</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1336" />
+        <location filename="../src/main/MainWindow.cpp" line="1337" />
         <source>Cannot read file</source>
         <translation>Não é possível ler o arquivo</translation>
     </message>
@@ -4876,90 +4876,95 @@ Ampliando a imagem dentro ou para fora é realizada usando qualquer um de vário
         <translation type="vanished">do diretório</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="710" />
+        <location filename="../src/main/MainWindow.cpp" line="491" />
+        <source>File saved</source>
+        <translation>Arquivo salvo</translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="711" />
         <source>Import Image</source>
         <translation>Importar imagem</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1058" />
+        <location filename="../src/main/MainWindow.cpp" line="1059" />
         <source>File opened</source>
         <translation>Arquivo aberto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1102" />
+        <location filename="../src/main/MainWindow.cpp" line="1103" />
         <source>File not found</source>
         <translation>Arquivo não encontrado</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1119" />
+        <location filename="../src/main/MainWindow.cpp" line="1120" />
         <source>Error report opened</source>
         <translation>Relatório de erro aberto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1182" />
-        <location filename="../src/main/MainWindow.cpp" line="1256" />
+        <location filename="../src/main/MainWindow.cpp" line="1183" />
+        <location filename="../src/main/MainWindow.cpp" line="1257" />
         <source>File imported</source>
         <translation>Arquivo importado</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1290" />
+        <location filename="../src/main/MainWindow.cpp" line="1291" />
         <source>Background image.</source>
         <translation>Imagem de fundo.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1291" />
+        <location filename="../src/main/MainWindow.cpp" line="1292" />
         <source>Currently selected curve.</source>
         <translation>Atualmente selecionado curva.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1292" />
+        <location filename="../src/main/MainWindow.cpp" line="1293" />
         <source>Point style for currently selected curve.</source>
         <translation>Estilo de ponto para a curva atualmente selecionada.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293" />
+        <location filename="../src/main/MainWindow.cpp" line="1294" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Filtro de preenchimento segmento de curva atualmente selecionada.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1319" />
+        <location filename="../src/main/MainWindow.cpp" line="1320" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>O documento foi modificado.
 Você deseja salvar as alterações?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1405" />
+        <location filename="../src/main/MainWindow.cpp" line="1406" />
         <source>Cannot write file</source>
         <translation>Não é possível gravar arquivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1453" />
+        <location filename="../src/main/MainWindow.cpp" line="1454" />
         <source>Save</source>
         <translation>Salve</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2518" />
+        <location filename="../src/main/MainWindow.cpp" line="2524" />
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2600" />
+        <location filename="../src/main/MainWindow.cpp" line="2606" />
         <source>Open Document</source>
         <translation>Documento aberto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3931" />
+        <location filename="../src/main/MainWindow.cpp" line="3939" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3932" />
+        <location filename="../src/main/MainWindow.cpp" line="3940" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4068" />
+        <location filename="../src/main/MainWindow.cpp" line="4077" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitalizador</translation>
     </message>
@@ -5228,40 +5233,40 @@ Você deseja salvar as alterações?</translation>
         <translation>Não é possível ler dados curvas do gráfico</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="145" />
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="186" />
-        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="179" />
-        <location filename="../src/main/main.cpp" line="366" />
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="148" />
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="189" />
+        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="185" />
+        <location filename="../src/main/MainWindowMsg.cpp" line="25" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitalizador</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="146" />
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="149" />
         <source>Three axis points have been defined, and no more are needed or allowed.</source>
         <translation>Três pontos do eixo foram definidas, e não mais são necessários ou permitidos.</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="153" />
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="155" />
         <source>Color Picker</source>
         <translation>Seletor de cores</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="154" />
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="156" />
         <source>Sorry, but the color picker point must be near a non-background pixel. Please try again.</source>
         <translation>Desculpe, mas o ponto seletor de cores devem estar perto de um pixel não-fundo. Por favor, tente novamente.</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="360" />
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="364" />
         <source>Point Match</source>
         <translation>Match Point</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="361" />
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="365" />
         <source>There are no more matching points</source>
         <translation>Não há mais pontos de correspondência</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="180" />
+        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="186" />
         <source>The scale bar has been defined, and another is not needed or allowed.</source>
         <translation>A barra de escala foi definida e outra não é necessária ou permitida.</translation>
     </message>
@@ -5708,7 +5713,7 @@ Você deseja salvar as alterações?</translation>
         <translation type="vanished">Anterior</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="634" />
+        <location filename="../src/main/MainWindow.cpp" line="635" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>O arquivo parece ter caracteres de vários alfabetos de idioma, o que não funciona na linha de comando do Windows</translation>
     </message>
@@ -5718,33 +5723,33 @@ Você deseja salvar as alterações?</translation>
         <translation>Não é possível ler dados janela principal</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="245" />
-        <location filename="../src/main/main.cpp" line="257" />
+        <location filename="../src/main/main.cpp" line="246" />
+        <location filename="../src/main/main.cpp" line="258" />
         <source>is not a valid file name</source>
         <translation>não é um nome de arquivo válido</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="251" />
+        <location filename="../src/main/main.cpp" line="252" />
         <source>is not a valid image file extension</source>
         <translation>não é uma extensão de arquivo de imagem válida</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="343" />
+        <location filename="../src/main/main.cpp" line="344" />
         <source>is used only with one or more load files</source>
         <translation>é usado apenas com um ou mais arquivos de carregamento</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="375" />
+        <location filename="../src/main/main.cpp" line="377" />
         <source>Available styles</source>
         <translation>Estilos disponíveis</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="399" />
+        <location filename="../src/main/main.cpp" line="401" />
         <source>where</source>
         <translation>Onde</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="405" />
+        <location filename="../src/main/main.cpp" line="407" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>Permite que as informações de depuração extra. Usado para depuração</translation>
     </message>
@@ -5753,63 +5758,63 @@ Você deseja salvar as alterações?</translation>
         <translation type="vanished">Especifica um arquivo de relatório de erro como entrada. Usado para depuração e teste</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="411" />
+        <location filename="../src/main/main.cpp" line="413" />
         <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
         <translation>Indica que arquivos abertos na inicialização são para teste de arrastar e soltar. Usado para teste de regressão</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="417" />
+        <location filename="../src/main/main.cpp" line="419" />
         <source>Specifies an error report file as input. Used for debugging and regression testing</source>
         <translation>Especifica um arquivo de relatório de erros como entrada. Usado para depuração e teste de regressão</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="423" />
+        <location filename="../src/main/main.cpp" line="425" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>Exportar cada arquivo de inicialização carregado, que deve ter todos os pontos do eixo definidos e, em seguida, parar</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="429" />
+        <location filename="../src/main/main.cpp" line="431" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>Extraia a imagem em cada arquivo de inicialização carregado para um arquivo com a extensão especificada e, em seguida, pare</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="435" />
+        <location filename="../src/main/main.cpp" line="437" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>
 Especifica um arquivo de script de comando arquivo como entrada. Usado para depuração e teste</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="441" />
+        <location filename="../src/main/main.cpp" line="443" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>arquivos de entrada gnuplot diagnóstico de saída. Usado para depuração</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="447" />
+        <location filename="../src/main/main.cpp" line="449" />
         <source>Show this help information</source>
         <translation>Mostrar esta informação ajuda</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="453" />
+        <location filename="../src/main/main.cpp" line="455" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>Executa o script de comando arquivo de relatório de erro ou arquivo. Usado para testes de regressão</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="459" />
+        <location filename="../src/main/main.cpp" line="461" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>Remove todas as configurações armazenadas, incluindo posições de janela. Usado quando o Windows iniciar-se fora da tela</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="466" />
+        <location filename="../src/main/main.cpp" line="468" />
         <source>Set the window style to one of the styles listed by the command line option</source>
         <translation>Definir o estilo da janela para um dos estilos listados pela opção de linha de comando</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="474" />
+        <location filename="../src/main/main.cpp" line="476" />
         <source>Show a list of available styles that can be used with the command line option</source>
         <translation>Mostrar uma lista de estilos disponíveis que podem ser usados ​​com a opção de linha de comando</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="500" />
+        <location filename="../src/main/main.cpp" line="502" />
         <source>Set timezone to add or subtract hours in time values. Timezone values are listed as TZ Database Names in Wikipedia</source>
         <translation>Defina o fuso horário para adicionar ou subtrair horas em valores de tempo. Os valores do fuso horário estão listados como nomes de banco de dados TZ na Wikipedia</translation>
     </message>
@@ -5818,32 +5823,32 @@ Especifica um arquivo de script de comando arquivo como entrada. Usado para depu
         <translation type="vanished">Mostra uma lista de estilos disponíveis que pode ser utilizado com o comando de estilo</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="481" />
+        <location filename="../src/main/main.cpp" line="483" />
         <source>Upgrade files opened at startup to the most recent version</source>
         <translation>Atualizar arquivos abertos na inicialização para a versão mais recente</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="487" />
+        <location filename="../src/main/main.cpp" line="489" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>Arquivo (s) a ser importado ou aberto na inicialização</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="495" />
+        <location filename="../src/main/main.cpp" line="497" />
         <source>Useful environment variables:</source>
         <translation>Variáveis ​​de ambiente úteis:</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="544" />
+        <location filename="../src/main/main.cpp" line="546" />
         <source>Could not write to</source>
         <translation>Não foi possível escrever para</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="557" />
+        <location filename="../src/main/main.cpp" line="559" />
         <source>Upgraded</source>
         <translation>Atualizado</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="559" />
+        <location filename="../src/main/main.cpp" line="561" />
         <source>to</source>
         <translation>para</translation>
     </message>
@@ -5902,6 +5907,11 @@ Especifica um arquivo de script de comando arquivo como entrada. Usado para depu
     <message>
         <source>,</source>
         <translation type="vanished">,</translation>
+    </message>
+    <message>
+        <location filename="../src/Centipede/CentipedeStateContext.cpp" line="104" />
+        <source>Click and drag to create a guideline</source>
+        <translation>Clique e arraste para criar uma diretriz </translation>
     </message>
 </context>
 <context>

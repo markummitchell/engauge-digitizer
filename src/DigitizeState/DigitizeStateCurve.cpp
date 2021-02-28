@@ -40,7 +40,7 @@ void DigitizeStateCurve::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
-  setGraphicsItemsFlags ();
+  setGraphicsItemsFlagsDuringStateEntry ();
   context().mainWindow().handleGuidelinesActiveChange (false);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
@@ -136,9 +136,18 @@ void DigitizeStateCurve::handleMouseRelease (CmdMediator *cmdMediator,
                          cmd);
 }
 
-void DigitizeStateCurve::setGraphicsItemFlags (QGraphicsItem *item) const
+void DigitizeStateCurve::setGraphicsItemFlagsAfterStateEntry (QGraphicsItem *item) const
 {
-  // Items can only be added by clicking
+  // Items can only be added by clicking. New point is left selected so arrow keys can move it around
+  item->setEnabled (true);
+  item->setSelected (true);
+  item->setFlags (QGraphicsItem::ItemIsSelectable |
+                  QGraphicsItem::ItemIsMovable |
+                  QGraphicsItem::ItemSendsGeometryChanges);
+}
+
+void DigitizeStateCurve::setGraphicsItemFlagsDuringStateEntry (QGraphicsItem *item) const
+{
   item->setEnabled (false);
 }
 

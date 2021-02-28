@@ -89,6 +89,7 @@ void CentipedeStateContext::handleMouseMove (QPointF pos)
 }
 
 void CentipedeStateContext::handleMousePress (GraphicsScene *scene,
+                                              MainWindow &mainWindow,
                                               const Transformation &transformation,
                                               const DocumentModelGuideline &modelGuideline,
                                               const DocumentModelCoords &modelCoords,
@@ -99,6 +100,8 @@ void CentipedeStateContext::handleMousePress (GraphicsScene *scene,
   // skipping the state transition
   if (!clickedOnItem) {
 
+    // Help user understand how to complete the guideline creation
+    mainWindow.showTemporaryMessage(QObject::tr ("Click and drag to create a guideline"));
     // Forward context variables
     m_scene = scene;
     m_transformation = new Transformation (transformation);

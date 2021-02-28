@@ -51,7 +51,7 @@ void DigitizeStateScale::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
-  setGraphicsItemsFlags ();
+  setGraphicsItemsFlagsDuringStateEntry ();
   context().mainWindow().handleGuidelinesActiveChange (false);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
@@ -236,7 +236,11 @@ void DigitizeStateScale::removeTemporaryPointsAndLine ()
   m_line = nullptr;
 }
 
-void DigitizeStateScale::setGraphicsItemFlags (QGraphicsItem *item) const
+void DigitizeStateScale::setGraphicsItemFlagsAfterStateEntry (QGraphicsItem * /* item */) const
+{
+}
+
+void DigitizeStateScale::setGraphicsItemFlagsDuringStateEntry (QGraphicsItem *item) const
 {
   GraphicsItemType type = static_cast<GraphicsItemType> (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt());
   if (type == GRAPHICS_ITEM_TYPE_SEGMENT) {

@@ -40,6 +40,7 @@ public:
                                bool atLeastOneSelectedItem);
   virtual void handleMouseMove (QPointF posScreen);
   virtual void handleMousePress (GraphicsScene *scene,
+                                 MainWindow &mainWindow,
                                  const Transformation &transformation,
                                  const DocumentModelGuideline &modelGuideline,
                                  const DocumentModelCoords &modelCoords,

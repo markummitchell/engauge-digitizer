@@ -85,6 +85,9 @@ public:
   /// Update the cursor according to the current state.
   void setCursor(CmdMediator *cmdMediator);
 
+  /// Save as setGraphicsItemFlagsDuringStateEntry but after state entry
+  virtual void setGraphicsItemFlagsAfterStateEntry (QGraphicsItem *item) const = 0;
+
   /// State name for debugging
   virtual QString state() const = 0;
 
@@ -123,9 +126,6 @@ protected:
   /// Display text for up arrow
   QString moveTextUp () const;
 
-  /// Loop through every QGraphicsItem and set their flags
-  void setGraphicsItemsFlags ();
-
   /// Initialize QGraphicsItem flags on entry to state or when create in state. When in state these values
   /// can be skipped in relatively complex situations (e.g. Guidelines). From QGraphicsItem documentation:
   /// - enabled = turns event handling on/off
@@ -134,7 +134,10 @@ protected:
   /// - selectable  (1) enable code call to setSelected() method but that is not used
   ///               (2) enable code call to QGraphicsScene::setSelectionArea() but that is not used
   ///               (3) enable rubber band selection but that is not offered (too ambiguous)
-  virtual void setGraphicsItemFlags (QGraphicsItem *item) const = 0;
+  virtual void setGraphicsItemFlagsDuringStateEntry (QGraphicsItem *item) const = 0;
+
+  /// Loop through every QGraphicsItem and set their flags
+  void setGraphicsItemsFlagsDuringStateEntry ();
   
 private:
   DigitizeStateAbstractBase();

@@ -51,7 +51,7 @@ void DigitizeStateSelect::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::RubberBandDrag);
-  setGraphicsItemsFlags ();
+  setGraphicsItemsFlagsDuringStateEntry ();
 
   context().mainWindow().handleGuidelinesActiveChange (true);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
@@ -397,7 +397,11 @@ QString DigitizeStateSelect::scaleBarPointIdentifier (CmdMediator *cmdMediator) 
   return ftor.scaleBarPointIdentifier();
 }
 
-void DigitizeStateSelect::setGraphicsItemFlags (QGraphicsItem *item) const
+void DigitizeStateSelect::setGraphicsItemFlagsAfterStateEntry (QGraphicsItem * /* item */) const
+{
+}
+
+void DigitizeStateSelect::setGraphicsItemFlagsDuringStateEntry (QGraphicsItem *item) const
 {
   // At a minimum this needs to setAcceptHoverEvents(true) for GRAPHICS_ITEM_TYPE_POINT
 
@@ -463,7 +467,7 @@ void DigitizeStateSelect::updateAfterPointAddition ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateSelect::updateAfterPointAddition";
 
-  setGraphicsItemsFlags ();
+  setGraphicsItemsFlagsDuringStateEntry ();
 }
 
 void DigitizeStateSelect::updateModelDigitizeCurve (CmdMediator * /* cmdMediator */,

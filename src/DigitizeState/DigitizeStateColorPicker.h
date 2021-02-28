@@ -49,7 +49,8 @@ public:
                                  QPointF posScreen);
   virtual void handleMouseRelease (CmdMediator *cmdMediator,
                                    QPointF posScreen);
-  virtual void setGraphicsItemFlags (QGraphicsItem *item) const;
+  virtual void setGraphicsItemFlagsAfterStateEntry (QGraphicsItem *item) const;
+  virtual void setGraphicsItemFlagsDuringStateEntry (QGraphicsItem *item) const;
   virtual QString state() const;
   virtual void updateAfterPointAddition ();
   virtual void updateModelDigitizeCurve (CmdMediator *cmdMediator,

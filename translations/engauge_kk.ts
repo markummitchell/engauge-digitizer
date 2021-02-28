@@ -2624,12 +2624,12 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgSettingsAbstractBase</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="123" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="134" />
         <source>Ok</source>
         <translation>Жарайды ма</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="131" />
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="142" />
         <source>Cancel</source>
         <translation>Болдырмау</translation>
     </message>
@@ -3903,7 +3903,7 @@ The stop value cannot be less than the start value</source>
         <translation>Радиус торлары</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="601" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="602" />
         <source>Grid line count exceeds limit set by Settings / Main Window.</source>
         <translation>Тор сызықтары саны Параметрлер / Негізгі терезе арқылы орнатылған шектен асып кетеді.</translation>
     </message>
@@ -4101,27 +4101,27 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsGuideline</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="44" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="53" />
         <source>Guidelines</source>
         <translation>Нұсқаулық</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="90" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="104" />
         <source>Creation circle radius</source>
         <translation>Құрылу шеңберінің радиусы</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="94" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="108" />
         <source>Select a radius, in pixels, for the points</source>
         <translation>Нүктелер үшін радиусты пиксельмен таңдаңыз</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="99" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="113" />
         <source>Guideline color</source>
         <translation>Нұсқаулық түсі</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="103" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="117" />
         <source>Guidelines Color
 
 Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
@@ -4130,42 +4130,42 @@ Set the color of the guidelines that can be dragged from the edges of the scene,
 Көріністің шетінен сүйрелетін және нүктелерді туралау үшін қолданылатын нұсқаулардың түсін орнатыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="110" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="124" />
         <source>Active Line width</source>
         <translation>Белсенді сызық ені</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="114" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="128" />
         <source>Select a size for the guidelines when active</source>
         <translation>Белсенді болған кезде нұсқаулықтың өлшемін таңдаңыз</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="119" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="133" />
         <source>Inactive Line width</source>
         <translation>Белсенді емес ені</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="123" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="137" />
         <source>Select a size for the guidelines when inactive</source>
         <translation>Белсенді емес кезде нұсқаулықтың өлшемін таңдаңыз</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="181" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="211" />
         <source>Active Preview</source>
         <translation>Белсенді алдын ала қарау</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="184" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="214" />
         <source>Inactive Preview</source>
         <translation>Белсенді емес қарау</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="191" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="221" />
         <source>Preview window that shows how current settings affect the active guidelines.</source>
         <translation>Ағымдағы параметрлердің белсенді нұсқауларға қалай әсер ететінін көрсететін алдын ала қарау терезесі.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="204" />
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="234" />
         <source>Preview window that shows how current settings affect the inactive guidelines.</source>
         <translation>Ағымдағы параметрлердің белсенді емес нұсқаулыққа қалай әсер ететінін көрсететін алдын ала қарау терезесі.</translation>
     </message>
@@ -4756,7 +4756,7 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
 <context>
     <name>GraphicsScene</name>
     <message>
-        <location filename="../src/Graphics/GraphicsScene.cpp" line="351" />
+        <location filename="../src/Graphics/GraphicsScene.cpp" line="357" />
         <source>Function currently has multiple Y values for one X value. Please adjust nearby points, or change the curve type in Curve Properties</source>
         <translation>Қазіргі уақытта функцияда бір X мәні үшін бірнеше Y мәні бар. Маңайдағы нүктелерді реттеңіз немесе қисық сипаттардағы қисық түрін өзгертіңіз</translation>
     </message>
@@ -4820,22 +4820,22 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="499" />
+        <location filename="../src/main/MainWindow.cpp" line="500" />
         <source>Unable to export to file</source>
         <translation>Файлға экспорттау мүмкін болмады</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="544" />
+        <location filename="../src/main/MainWindow.cpp" line="545" />
         <source>Unable to extract image to file</source>
         <translation>Файлға кескінді шығару мүмкін емес</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="624" />
+        <location filename="../src/main/MainWindow.cpp" line="625" />
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation>OSX-де іске қосу кезінде жүктелген файлдар Жүктемелер, Суреттер немесе Кітапхана / Контейнерлер / Digitizer / Деректер каталогында болуы керек.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1336" />
+        <location filename="../src/main/MainWindow.cpp" line="1337" />
         <source>Cannot read file</source>
         <translation>Файлды оқу мүмкін емес</translation>
     </message>
@@ -4844,90 +4844,95 @@ Zooming the image in or out is performed using any of several methods:
         <translation type="vanished">анықтамалықтан</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="710" />
+        <location filename="../src/main/MainWindow.cpp" line="491" />
+        <source>File saved</source>
+        <translation>Файл сақталды </translation>
+    </message>
+    <message>
+        <location filename="../src/main/MainWindow.cpp" line="711" />
         <source>Import Image</source>
         <translation>Суретті импорттау</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1058" />
+        <location filename="../src/main/MainWindow.cpp" line="1059" />
         <source>File opened</source>
         <translation>Файл ашылды</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1102" />
+        <location filename="../src/main/MainWindow.cpp" line="1103" />
         <source>File not found</source>
         <translation>Файл табылмады</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1119" />
+        <location filename="../src/main/MainWindow.cpp" line="1120" />
         <source>Error report opened</source>
         <translation>Қате туралы есеп ашылды</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1182" />
-        <location filename="../src/main/MainWindow.cpp" line="1256" />
+        <location filename="../src/main/MainWindow.cpp" line="1183" />
+        <location filename="../src/main/MainWindow.cpp" line="1257" />
         <source>File imported</source>
         <translation>Файл импортталды</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1290" />
+        <location filename="../src/main/MainWindow.cpp" line="1291" />
         <source>Background image.</source>
         <translation>Фондық сурет.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1291" />
+        <location filename="../src/main/MainWindow.cpp" line="1292" />
         <source>Currently selected curve.</source>
         <translation>Қазіргі уақытта таңдалған қисық сызық.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1292" />
+        <location filename="../src/main/MainWindow.cpp" line="1293" />
         <source>Point style for currently selected curve.</source>
         <translation>Ағымдағы таңдалған қисыққа арналған нүкте стилі.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293" />
+        <location filename="../src/main/MainWindow.cpp" line="1294" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Сегментті толтыру сүзгісі қазір таңдалған қисық сызық үшін.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1319" />
+        <location filename="../src/main/MainWindow.cpp" line="1320" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>Құжат өзгертілген.
 Өзгерістерді сақтау керек пе?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1405" />
+        <location filename="../src/main/MainWindow.cpp" line="1406" />
         <source>Cannot write file</source>
         <translation>Файлды жазу мүмкін емес</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1453" />
+        <location filename="../src/main/MainWindow.cpp" line="1454" />
         <source>Save</source>
         <translation>Сақтау</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2518" />
+        <location filename="../src/main/MainWindow.cpp" line="2524" />
         <source>Export</source>
         <translation>Экспорттау</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2600" />
+        <location filename="../src/main/MainWindow.cpp" line="2606" />
         <source>Open Document</source>
         <translation>Құжатты ашыңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3931" />
+        <location filename="../src/main/MainWindow.cpp" line="3939" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3932" />
+        <location filename="../src/main/MainWindow.cpp" line="3940" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4068" />
+        <location filename="../src/main/MainWindow.cpp" line="4077" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5196,40 +5201,40 @@ Do you want to save your changes?</source>
         <translation>Графикалық қисықтар туралы мәліметтерді оқу мүмкін емес</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="145" />
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="186" />
-        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="179" />
-        <location filename="../src/main/main.cpp" line="366" />
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="148" />
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="189" />
+        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="185" />
+        <location filename="../src/main/MainWindowMsg.cpp" line="25" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="146" />
+        <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="149" />
         <source>Three axis points have been defined, and no more are needed or allowed.</source>
         <translation>Үш ось нүктесі анықталды, енді қажеті жоқ немесе рұқсат етілмейді.</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="153" />
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="155" />
         <source>Color Picker</source>
         <translation>Түсті таңдау құралы</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="154" />
+        <location filename="../src/DigitizeState/DigitizeStateColorPicker.cpp" line="156" />
         <source>Sorry, but the color picker point must be near a non-background pixel. Please try again.</source>
         <translation>Кешіріңіз, бірақ түс таңдау нүктесі фондық емес пиксельге жақын болуы керек. Әрекетті қайталаңыз.</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="360" />
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="364" />
         <source>Point Match</source>
         <translation>Нүктелік сәйкестік</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="361" />
+        <location filename="../src/DigitizeState/DigitizeStatePointMatch.cpp" line="365" />
         <source>There are no more matching points</source>
         <translation>Енді сәйкес келетін нүктелер жоқ</translation>
     </message>
     <message>
-        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="180" />
+        <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="186" />
         <source>The scale bar has been defined, and another is not needed or allowed.</source>
         <translation>Масштаб жолағы анықталды, ал басқасы қажет емес немесе рұқсат етілмеген.</translation>
     </message>
@@ -5604,7 +5609,7 @@ Do you want to save your changes?</source>
         <translation>көп осі ұпай қажет</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="634" />
+        <location filename="../src/main/MainWindow.cpp" line="635" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>Файлда Windows пәрмен жолында жұмыс жасамайтын бірнеше тіл алфавитінің таңбалары бар сияқты</translation>
     </message>
@@ -5614,33 +5619,33 @@ Do you want to save your changes?</source>
         <translation>Негізгі терезе деректерін оқи алмайды</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="245" />
-        <location filename="../src/main/main.cpp" line="257" />
+        <location filename="../src/main/main.cpp" line="246" />
+        <location filename="../src/main/main.cpp" line="258" />
         <source>is not a valid file name</source>
         <translation>файлдың жарамды атауы емес</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="251" />
+        <location filename="../src/main/main.cpp" line="252" />
         <source>is not a valid image file extension</source>
         <translation>жарамды бейне файл кеңейтімі емес</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="343" />
+        <location filename="../src/main/main.cpp" line="344" />
         <source>is used only with one or more load files</source>
         <translation>бір немесе бірнеше жүктеме файлдарымен ғана пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="375" />
+        <location filename="../src/main/main.cpp" line="377" />
         <source>Available styles</source>
         <translation>Қол жетімді стильдер</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="399" />
+        <location filename="../src/main/main.cpp" line="401" />
         <source>where</source>
         <translation>қайда</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="405" />
+        <location filename="../src/main/main.cpp" line="407" />
         <source>Enables extra debug information. Used for debugging</source>
         <translation>Қосымша отладтау туралы ақпаратты қосады. Отладка үшін пайдаланылады</translation>
     </message>
@@ -5649,62 +5654,62 @@ Do you want to save your changes?</source>
         <translation type="vanished">Қате туралы есеп файлын енгізу ретінде анықтайды. Отладка және тестілеу үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="411" />
+        <location filename="../src/main/main.cpp" line="413" />
         <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
         <translation>Іске қосу барысында ашылған файлдарды апарып тастауды және тастауды тексеру үшін көрсетеді. Регрессиялық тестілеу үшін қолданылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="417" />
+        <location filename="../src/main/main.cpp" line="419" />
         <source>Specifies an error report file as input. Used for debugging and regression testing</source>
         <translation>Қате туралы есеп файлын енгізу ретінде анықтайды. Отладка және регрессиялық тестілеу үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="423" />
+        <location filename="../src/main/main.cpp" line="425" />
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation>Белгіленген барлық ось нүктелері болуы керек жүктелген әрбір іске қосу файлын экспорттап, тоқтаңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="429" />
+        <location filename="../src/main/main.cpp" line="431" />
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation>Әр жүктелген іске қосу файлында көрсетілген кеңейтілімдегі файлға суретті шығарыңыз, содан кейін тоқтаңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="435" />
+        <location filename="../src/main/main.cpp" line="437" />
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation>Файлдың пәрмен сценарий файлын енгізу ретінде анықтайды. Отладка және тестілеу үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="441" />
+        <location filename="../src/main/main.cpp" line="443" />
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation>Шығу диагностикалық gnuplot кіріс файлдары. Отладка үшін пайдаланылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="447" />
+        <location filename="../src/main/main.cpp" line="449" />
         <source>Show this help information</source>
         <translation>Бұл анықтама ақпаратын көрсетіңіз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="453" />
+        <location filename="../src/main/main.cpp" line="455" />
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation>Қате туралы есеп файлын немесе файл пәрмен сценарийін орындайды. Регрессиялық тестілеу үшін қолданылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="459" />
+        <location filename="../src/main/main.cpp" line="461" />
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation>Барлық сақталған параметрлерді, соның ішінде терезе орындарын жояды. Терезелер экраннан бастағанда қолданылады</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="466" />
+        <location filename="../src/main/main.cpp" line="468" />
         <source>Set the window style to one of the styles listed by the command line option</source>
         <translation>Терезе стилін пәрмен жолы параметрімен тізімделген мәнерлердің біріне орнатыңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="474" />
+        <location filename="../src/main/main.cpp" line="476" />
         <source>Show a list of available styles that can be used with the command line option</source>
         <translation>Пәрмен жолы параметрімен пайдалануға болатын қол жетімді мәнерлер тізімін көрсетіңіз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="500" />
+        <location filename="../src/main/main.cpp" line="502" />
         <source>Set timezone to add or subtract hours in time values. Timezone values are listed as TZ Database Names in Wikipedia</source>
         <translation>Уақыт белдеуін уақыт мәндеріне сағатты қосу немесе азайту үшін орнатыңыз. Уақыт белдеуінің мәні Википедияда TZ дерекқорының атаулары ретінде берілген</translation>
     </message>
@@ -5713,32 +5718,32 @@ Do you want to save your changes?</source>
         <translation type="vanished">-Style командасымен пайдалануға болатын қол жетімді стильдердің тізімін көрсетіңіз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="481" />
+        <location filename="../src/main/main.cpp" line="483" />
         <source>Upgrade files opened at startup to the most recent version</source>
         <translation>Іске қосу кезінде ашылған файлдарды ең соңғы нұсқаға жаңартыңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="487" />
+        <location filename="../src/main/main.cpp" line="489" />
         <source>File(s) to be imported or opened at startup</source>
         <translation>Импортталатын немесе іске қосылған кезде ашылатын файл (дар)</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="495" />
+        <location filename="../src/main/main.cpp" line="497" />
         <source>Useful environment variables:</source>
         <translation>Пайдалы орта айнымалылары:</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="544" />
+        <location filename="../src/main/main.cpp" line="546" />
         <source>Could not write to</source>
         <translation>Келесіге жаза алмадым</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="557" />
+        <location filename="../src/main/main.cpp" line="559" />
         <source>Upgraded</source>
         <translation>Жаңартылған</translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="559" />
+        <location filename="../src/main/main.cpp" line="561" />
         <source>to</source>
         <translation>дейін</translation>
     </message>
@@ -5797,6 +5802,11 @@ Do you want to save your changes?</source>
     <message>
         <source>,</source>
         <translation type="vanished">,</translation>
+    </message>
+    <message>
+        <location filename="../src/Centipede/CentipedeStateContext.cpp" line="104" />
+        <source>Click and drag to create a guideline</source>
+        <translation>Нұсқаулық жасау үшін нұқыңыз және сүйреңіз</translation>
     </message>
 </context>
 <context>

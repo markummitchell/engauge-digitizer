@@ -58,7 +58,7 @@ void DigitizeStatePointMatch::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
-  setGraphicsItemsFlags ();
+  setGraphicsItemsFlagsDuringStateEntry ();
   context().mainWindow().handleGuidelinesActiveChange (false);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 
@@ -373,7 +373,12 @@ void DigitizeStatePointMatch::promoteCandidatePointToPermanentPoint(CmdMediator 
                         m_posCandidatePoint);
 }
 
-void DigitizeStatePointMatch::setGraphicsItemFlags (QGraphicsItem *item) const
+void DigitizeStatePointMatch::setGraphicsItemFlagsAfterStateEntry (QGraphicsItem *item) const
+{
+  item->setEnabled (false);
+}
+
+void DigitizeStatePointMatch::setGraphicsItemFlagsDuringStateEntry (QGraphicsItem *item) const
 {
   item->setEnabled (false);
 }

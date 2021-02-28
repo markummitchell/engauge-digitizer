@@ -33,7 +33,7 @@ void DigitizeStateEmpty::begin (CmdMediator *cmdMediator,
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::begin";
 
   setCursor(cmdMediator);
-  setGraphicsItemsFlags ();
+  setGraphicsItemsFlagsDuringStateEntry ();
   context().mainWindow().handleGuidelinesActiveChange (false);
   context().mainWindow().updateViewsOfSettings(activeCurve ());
 }
@@ -106,8 +106,14 @@ void DigitizeStateEmpty::handleMouseRelease (CmdMediator * /* cmdMediator */,
   LOG4CPP_INFO_S ((*mainCat)) << "DigitizeStateEmpty::handleMouseRelease";
 }
 
-void DigitizeStateEmpty::setGraphicsItemFlags (QGraphicsItem * /* item */) const
+void DigitizeStateEmpty::setGraphicsItemFlagsAfterStateEntry (QGraphicsItem *item) const
 {
+  item->setEnabled (false);
+}
+
+void DigitizeStateEmpty::setGraphicsItemFlagsDuringStateEntry (QGraphicsItem *item) const
+{
+  item->setEnabled (false);
 }
 
 QString DigitizeStateEmpty::state() const

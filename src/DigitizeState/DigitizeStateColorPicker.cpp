@@ -43,7 +43,7 @@ void DigitizeStateColorPicker::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
-  setGraphicsItemsFlags ();
+  setGraphicsItemsFlagsDuringStateEntry ();
 
   // Save current state stuff so it can be restored afterwards
   m_previousDigitizeState = previousState;
@@ -350,7 +350,12 @@ void DigitizeStateColorPicker::saveLowerValueUpperValue (DocumentModelColorFilte
   }
 }
 
-void DigitizeStateColorPicker::setGraphicsItemFlags (QGraphicsItem *item) const
+void DigitizeStateColorPicker::setGraphicsItemFlagsAfterStateEntry (QGraphicsItem *item) const
+{
+  item->setEnabled (false);
+}
+
+void DigitizeStateColorPicker::setGraphicsItemFlagsDuringStateEntry (QGraphicsItem *item) const
 {
   item->setEnabled (false);
 }

@@ -57,7 +57,7 @@ void DigitizeStateGuideline::begin (CmdMediator *cmdMediator,
 
   setCursor(cmdMediator);
   context().setDragMode(QGraphicsView::NoDrag);
-  setGraphicsItemsFlags ();
+  setGraphicsItemsFlagsDuringStateEntry ();
 }
 
 bool DigitizeStateGuideline::canPaste (const Transformation & /* transformation */,
@@ -139,6 +139,7 @@ void DigitizeStateGuideline::handleMousePress (CmdMediator *cmdMediator,
                                                QPointF posScreen)
 {
   m_context->handleMousePress (&context().mainWindow ().scene (),
+                               context().mainWindow (),
                                context().mainWindow ().transformation (),
                                cmdMediator->document ().modelGuideline (),
                                cmdMediator->document ().modelCoords (),
@@ -188,7 +189,11 @@ bool DigitizeStateGuideline::hitTestForGraphics (const QPointF &posScreen)
   return gotHit;
 }
 
-void DigitizeStateGuideline::setGraphicsItemFlags (QGraphicsItem *item) const
+void DigitizeStateGuideline::setGraphicsItemFlagsAfterStateEntry (QGraphicsItem * /* item */) const
+{
+}
+
+void DigitizeStateGuideline::setGraphicsItemFlagsDuringStateEntry (QGraphicsItem *item) const
 {
   GraphicsItemType type = static_cast<GraphicsItemType> (item->data (DATA_KEY_GRAPHICS_ITEM_TYPE).toInt());
   if (type == GRAPHICS_ITEM_TYPE_GUIDELINE) {
