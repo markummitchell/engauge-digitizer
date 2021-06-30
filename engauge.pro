@@ -378,6 +378,7 @@ HEADERS  += \
     src/Grid/GridLine.h \
     src/Grid/GridLineFactory.h \
     src/Grid/GridLineLimiter.h \
+    src/Grid/GridLineNormalize.h \
     src/Grid/GridLines.h \
     src/Grid/GridLineStyle.h \
     src/Grid/GridLog.h \
@@ -825,6 +826,7 @@ SOURCES += \
     src/Grid/GridLine.cpp \
     src/Grid/GridLineFactory.cpp \
     src/Grid/GridLineLimiter.cpp \
+    src/Grid/GridLineNormalize.cpp \
     src/Grid/GridLines.cpp \
     src/Grid/GridLog.cpp \
     src/Grid/GridRemoval.cpp \

@@ -334,6 +334,7 @@ HEADERS  += \
     Grid/GridLine.h \
     Grid/GridLineFactory.h \
     Grid/GridLineLimiter.h \
+    Grid/GridLineNormalize.h \
     Grid/GridLines.h \
     Grid/GridLineStyle.h \
     Grid/GridLog.h \
@@ -784,6 +785,7 @@ SOURCES += \
     Grid/GridLine.cpp \
     Grid/GridLineFactory.cpp \
     Grid/GridLineLimiter.cpp \
+    Grid/GridLineNormalize.cpp \
     Grid/GridLines.cpp \
     Grid/GridLog.cpp \
     Grid/GridRemoval.cpp \

@@ -12,6 +12,7 @@
 #include "GraphicsArcItem.h"
 #include "GridLineFactory.h"
 #include "GridLineLimiter.h"
+#include "GridLineNormalize.h"
 #include "GridLines.h"
 #include "GridLineStyle.h"
 #include "Logger.h"
@@ -167,6 +168,26 @@ void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGri
     double stepY  = modelGridDisplay.stepY  ();
     double stopX  = modelGridDisplay.stopX  ();
     double stopY  = modelGridDisplay.stopY  ();
+    unsigned int numX = modelGridDisplay.countX ();
+    unsigned int numY = modelGridDisplay.countY ();
+
+    // Linear or log?
+    bool isLinearX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR);
+    bool isLinearY = (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR);
+
+    GridLineNormalize normalize (modelMainWindow);
+    normalize.normalize (isLinearX,
+                         modelGridDisplay.disableX(),
+                         startX,
+                         stepX,
+                         stopX,
+                         numX);
+    normalize.normalize (isLinearY,
+                         modelGridDisplay.disableY(),
+                         startY,
+                         stepY,
+                         stopY,
+                         numY);
 
     // Limit the number of grid lines. This is a noop if the limit is not exceeded
     GridLineLimiter gridLineLimiter;
@@ -174,22 +195,20 @@ void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGri
                                     transformation,
                                     m_modelCoords,
                                     modelMainWindow,
-                                    modelGridDisplay,
                                     startX,
                                     stepX,
-                                    stopX);
+                                    stopX,
+                                    numX);
     gridLineLimiter.limitForYRadius (document,
                                      transformation,
                                      m_modelCoords,
                                      modelMainWindow,
-                                     modelGridDisplay,
                                      startY,
                                      stepY,
-                                     stopY);
+                                     stopY,
+                                     numY);
 
     // Apply if possible
-    bool isLinearX = (m_modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR);
-    bool isLinearY = (m_modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR);
     if (stepX > (isLinearX ? 0 : 1) &&
         stepY > (isLinearY ? 0 : 1) &&
         (isLinearX || (startX > 0)) &&

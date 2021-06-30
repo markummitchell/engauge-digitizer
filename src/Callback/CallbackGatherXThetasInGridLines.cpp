@@ -45,14 +45,15 @@ void CallbackGatherXThetasInGridLines::addGridLines (const MainWindowModel &mode
   double startX = document.modelGridDisplay().startX();
   double stepX = document.modelGridDisplay().stepX();
   double stopX = document.modelGridDisplay().stopX();
+  unsigned int numX = document.modelGridDisplay().countX();
   gridLineLimiter.limitForXTheta (document,
                                   transformation,
                                   document.modelCoords(),
                                   modelMainWindow,
-                                  document.modelGridDisplay(),
                                   startX,
                                   stepX,
-                                  stopX);
+                                  stopX,
+                                  numX);
   if (document.modelCoords().coordScaleXTheta() == COORD_SCALE_LINEAR) {
     // Linear
     int countX = qFloor (0.5 + 1 + (stopX - startX) / stepX);

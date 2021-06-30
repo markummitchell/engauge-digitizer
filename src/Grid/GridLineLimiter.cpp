@@ -43,17 +43,12 @@ void GridLineLimiter::limitForXTheta (const Document &document,
                                       const Transformation &transformation,
                                       const DocumentModelCoords &modelCoords,
                                       const MainWindowModel &modelMainWindow,
-                                      const DocumentModelGridDisplay &modelGrid,
                                       double &startX,
                                       double &stepX,
-                                      double &stopX) const
+                                      double &stopX,
+                                      unsigned int countX) const
 {
-  startX = modelGrid.startX();
-  stopX = modelGrid.stopX();
-  stepX = modelGrid.stepX();
-  int countX = signed (modelGrid.countX());
-
-  bool needReduction = (countX > modelMainWindow.maximumGridLines());
+  bool needReduction = (countX > (unsigned int) modelMainWindow.maximumGridLines());
 
   if (modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR) {
 
@@ -64,7 +59,7 @@ void GridLineLimiter::limitForXTheta (const Document &document,
         needReduction = true;
       } else {
         countX = qFloor (1.0 + (stopX - startX) / stepX);
-        needReduction = (countX > modelMainWindow.maximumGridLines());
+        needReduction = (countX > (unsigned int) modelMainWindow.maximumGridLines());
       }
     }
 
@@ -94,7 +89,7 @@ void GridLineLimiter::limitForXTheta (const Document &document,
         needReduction = true;        
       } else {
         countX = qFloor (1.0 + (qLn (stopX) - qLn (startX)) / qLn (stepX));
-        needReduction = (countX > modelMainWindow.maximumGridLines());
+        needReduction = (countX > (unsigned int) modelMainWindow.maximumGridLines());
       }
     }
 
@@ -108,17 +103,12 @@ void GridLineLimiter::limitForYRadius (const Document &document,
                                        const Transformation &transformation,
                                        const DocumentModelCoords &modelCoords,
                                        const MainWindowModel &modelMainWindow,
-                                       const DocumentModelGridDisplay &modelGrid,
                                        double &startY,
                                        double &stepY,
-                                       double &stopY) const
+                                       double &stopY,
+                                       unsigned int countY) const
 {
-  startY = modelGrid.startY();
-  stopY = modelGrid.stopY();
-  stepY = modelGrid.stepY();
-  int countY = signed (modelGrid.countY());
-
-  bool needReduction = (countY > modelMainWindow.maximumGridLines());
+  bool needReduction = (countY > (unsigned int) modelMainWindow.maximumGridLines());
 
   if (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR) {
 
@@ -129,7 +119,7 @@ void GridLineLimiter::limitForYRadius (const Document &document,
         needReduction = true;        
       } else {
         countY = qFloor (1.0 + (stopY - startY) / stepY);
-        needReduction = (countY > modelMainWindow.maximumGridLines());
+        needReduction = (countY > (unsigned int) modelMainWindow.maximumGridLines());
       }
     }
 
@@ -159,7 +149,7 @@ void GridLineLimiter::limitForYRadius (const Document &document,
         needReduction = true;        
       } else {
         countY = qFloor (1.0 + (qLn (stopY) - qLn (startY)) / qLn (stepY));
-        needReduction = (countY > modelMainWindow.maximumGridLines());
+        needReduction = (countY > (unsigned int) modelMainWindow.maximumGridLines());
       }
     }
 

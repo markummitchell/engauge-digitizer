@@ -14,6 +14,9 @@ class Document;
 class QTextStream;
 
 /// Model for DlgSettingsGridRemoval and CmdSettingsGridRemoval. The settings are unstable until the user approves
+///
+/// External code is responsible for calculating the value of the disabled parameter using the values
+/// of the other non-disabled parameters, instead of using the current value of the disabled parameter
 class DocumentModelGridRemoval : public DocumentModelAbstractBase
 {
 public:

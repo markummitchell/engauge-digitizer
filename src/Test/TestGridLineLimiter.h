@@ -28,24 +28,28 @@ private:
   bool testLinearX (double start,
                     double step,
                     double stop,
+                    unsigned int num,
                     double x1, double y1,
                     double x2, double y2,
                     double x3, double y3);
   bool testLinearY (double start,
                     double step,
                     double stop,
+                    unsigned int num,
                     double x1, double y1,
                     double x2, double y2,
                     double x3, double y3);
   bool testLogX (double start,
                  double step,
                  double stop,
+                 unsigned int num,
                  double x1, double y1,
                  double x2, double y2,
                  double x3, double y3);
   bool testLogY (double start,
                  double step,
                  double stop,
+                 unsigned int num,
                  double x1, double y1,
                  double x2, double y2,
                  double x3, double y3);

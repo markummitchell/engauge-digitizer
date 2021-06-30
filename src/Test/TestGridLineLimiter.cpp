@@ -1,5 +1,4 @@
 #include "DocumentModelCoords.h"
-#include "DocumentModelGridDisplay.h"
 #include "GridLineLimiter.h"
 #include "Logger.h"
 #include "MainWindow.h"
@@ -60,6 +59,7 @@ void TestGridLineLimiter::testBadStepLinearX ()
   bool success = testLinearX (0,
                               0, // Bad
                               100,
+                              10,
                               0.001, 0.001,
                               1000, 0.001,
                               0.001, 1000);
@@ -72,6 +72,7 @@ void TestGridLineLimiter::testBadStepLinearY ()
   bool success = testLinearY (0,
                               0, // Bad
                               100,
+                              10,
                               0.001, 0.001,
                               1000, 0.001,
                               0.001, 1000);
@@ -84,6 +85,7 @@ void TestGridLineLimiter::testBadStepLogX ()
   bool success = testLogX (0, // Bad
                            1, // Bad
                            100,
+                           10,
                            0.001, 0.001,
                            1000, 0.001,
                            0.001, 1000);
@@ -96,6 +98,7 @@ void TestGridLineLimiter::testBadStepLogY ()
   bool success = testLogY (0, // Bad
                            1, // Bad
                            100,
+                           10,
                            0.001, 0.001,
                            1000, 0.001,
                            0.001, 1000);
@@ -106,6 +109,7 @@ void TestGridLineLimiter::testBadStepLogY ()
 bool TestGridLineLimiter::testLinearX (double start,
                                        double step,
                                        double stop,
+                                       unsigned int num,
                                        double x1, double y1,
                                        double x2, double y2,
                                        double x3, double y3)
@@ -115,14 +119,9 @@ bool TestGridLineLimiter::testLinearX (double start,
   Document document (image);
   DocumentModelCoords modelCoords;
   MainWindowModel modelMainWindow;
-  DocumentModelGridDisplay modelGrid;
   Transformation transformation;
-  double startX, stepX, stopX; // Outputs from GridLineLimiter
 
   modelCoords.setCoordScaleXTheta (COORD_SCALE_LINEAR);
-  modelGrid.setStartX (start);
-  modelGrid.setStepX (step);
-  modelGrid.setStopX (stop);
   modelMainWindow.setMaximumGridLines (5);
   document.addPointAxisWithSpecifiedIdentifier (QPointF (0  ,   0), QPointF (x1, y1), QString ("axis1"), 0.0, false);
   document.addPointAxisWithSpecifiedIdentifier (QPointF (100,   0), QPointF (x2, y2), QString ("axis2"), 0.0, false);
@@ -132,21 +131,21 @@ bool TestGridLineLimiter::testLinearX (double start,
                           transformation,
                           modelCoords,
                           modelMainWindow,
-                          modelGrid,
-                          startX,
-                          stepX,
-                          stopX);
+                          start,
+                          step,
+                          stop,
+                          num);
 
   bool success = true;
 
-  if (stepX > 0) {
+  if (step > 0) {
 
-    int gridLineCount = 1 + (stopX - startX) / stepX;
+    int gridLineCount = 1 + (stop - start) / step;
     success = (gridLineCount <= 20);
 
   } else {
 
-    success = (startX == stopX);
+    success = (start == stop);
 
   }
 
@@ -156,6 +155,7 @@ bool TestGridLineLimiter::testLinearX (double start,
 bool TestGridLineLimiter::testLinearY (double start,
                                        double step,
                                        double stop,
+                                       unsigned int num,
                                        double x1, double y1,
                                        double x2, double y2,
                                        double x3, double y3)
@@ -165,14 +165,9 @@ bool TestGridLineLimiter::testLinearY (double start,
   Document document (image);
   DocumentModelCoords modelCoords;
   MainWindowModel modelMainWindow;
-  DocumentModelGridDisplay modelGrid;
   Transformation transformation;
-  double startY, stepY, stopY; // Outputs from GridLineLimiter
 
   modelCoords.setCoordScaleXTheta (COORD_SCALE_LINEAR);
-  modelGrid.setStartY (start);
-  modelGrid.setStepY (step);
-  modelGrid.setStopY (stop);
   modelMainWindow.setMaximumGridLines (5);
   document.addPointAxisWithSpecifiedIdentifier (QPointF (0  ,   0), QPointF (x1, y1), QString ("axis1"), 0.0, false);
   document.addPointAxisWithSpecifiedIdentifier (QPointF (100,   0), QPointF (x2, y2), QString ("axis2"), 0.0, false);
@@ -182,21 +177,21 @@ bool TestGridLineLimiter::testLinearY (double start,
                            transformation,
                            modelCoords,
                            modelMainWindow,
-                           modelGrid,
-                           startY,
-                           stepY,
-                           stopY);
+                           start,
+                           step,
+                           stop,
+                           num);
 
   bool success = true;
 
-  if (stepY > 0) {
+  if (step > 0) {
 
-    int gridLineCount = 1 + (stopY - startY) / stepY;
+    int gridLineCount = 1 + (stop - start) / step;
     success = (gridLineCount <= 20);
 
   } else {
 
-    success = (startY == stopY);
+    success = (start == stop);
 
   }
 
@@ -206,6 +201,7 @@ bool TestGridLineLimiter::testLinearY (double start,
 bool TestGridLineLimiter::testLogX (double start,
                                     double step,
                                     double stop,
+                                    unsigned int num,
                                     double x1, double y1,
                                     double x2, double y2,
                                     double x3, double y3)
@@ -215,14 +211,9 @@ bool TestGridLineLimiter::testLogX (double start,
   Document document (image);
   DocumentModelCoords modelCoords;
   MainWindowModel modelMainWindow;
-  DocumentModelGridDisplay modelGrid;
   Transformation transformation;
-  double startX, stepX, stopX; // Outputs from GridLineLimiter
 
   modelCoords.setCoordScaleXTheta (COORD_SCALE_LOG);
-  modelGrid.setStartX (start);
-  modelGrid.setStepX (step);
-  modelGrid.setStopX (stop);
   modelMainWindow.setMaximumGridLines (5);
   document.addPointAxisWithSpecifiedIdentifier (QPointF (0  ,   0), QPointF (x1, y1), QString ("axis1"), 0.0, false);
   document.addPointAxisWithSpecifiedIdentifier (QPointF (100,   0), QPointF (x2, y2), QString ("axis2"), 0.0, false);
@@ -232,16 +223,16 @@ bool TestGridLineLimiter::testLogX (double start,
                           transformation,
                           modelCoords,
                           modelMainWindow,
-                          modelGrid,
-                          startX,
-                          stepX,
-                          stopX);
+                          start,
+                          step,
+                          stop,
+                          num);
 
-  bool success = (startX > 0) && (stepX > 0);
+  bool success = (start > 0) && (step > 0);
 
   if (success) {
 
-    int gridLineCount = 1 + (qLn (stopX) - qLn (startX)) / qLn (stepX);
+    int gridLineCount = 1 + (qLn (stop) - qLn (start)) / qLn (step);
     success = (gridLineCount <= 20);
 
   }
@@ -252,6 +243,7 @@ bool TestGridLineLimiter::testLogX (double start,
 bool TestGridLineLimiter::testLogY (double start,
                                     double step,
                                     double stop,
+                                    unsigned int num,
                                     double x1, double y1,
                                     double x2, double y2,
                                     double x3, double y3)
@@ -261,14 +253,9 @@ bool TestGridLineLimiter::testLogY (double start,
   Document document (image);
   DocumentModelCoords modelCoords;
   MainWindowModel modelMainWindow;
-  DocumentModelGridDisplay modelGrid;
   Transformation transformation;
-  double startY, stepY, stopY; // Outputs from GridLineLimiter
 
   modelCoords.setCoordScaleYRadius (COORD_SCALE_LOG);
-  modelGrid.setStartY (start);
-  modelGrid.setStepY (step);
-  modelGrid.setStopY (stop);
   modelMainWindow.setMaximumGridLines (5);
   document.addPointAxisWithSpecifiedIdentifier (QPointF (0  ,   0), QPointF (x1, y1), QString ("axis1"), 0.0, false);
   document.addPointAxisWithSpecifiedIdentifier (QPointF (100,   0), QPointF (x2, y2), QString ("axis2"), 0.0, false);
@@ -278,16 +265,16 @@ bool TestGridLineLimiter::testLogY (double start,
                            transformation,
                            modelCoords,
                            modelMainWindow,
-                           modelGrid,
-                           startY,
-                           stepY,
-                           stopY);
+                           start,
+                           step,
+                           stop,
+                           num);
 
-  bool success = (startY > 0) && (stepY > 0);
+  bool success = (start > 0) && (step > 0);
 
   if (success) {
 
-    int gridLineCount = 1 + (qLn (stopY) - qLn (startY)) / qLn (stepY);
+    int gridLineCount = 1 + (qLn (stop) - qLn (start)) / qLn (step);
     success = (gridLineCount <= 20);
 
   }
@@ -300,6 +287,7 @@ void TestGridLineLimiter::testTransitionLinearToLogX ()
   bool success = testLogX (0,
                            250,
                            1000,
+                           10,
                            0.001, 0.001,
                            1000, 0.001,
                            0.001, 1000);
@@ -312,6 +300,7 @@ void TestGridLineLimiter::testTransitionLinearToLogY ()
   bool success = testLogY (0,
                            250,
                            1000,
+                           10,                           
                            0.001, 0.001,
                            1000, 0.001,
                            0.001, 1000);

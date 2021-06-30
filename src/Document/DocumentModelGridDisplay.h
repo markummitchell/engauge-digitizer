@@ -15,6 +15,9 @@ class Document;
 class QTextStream;
 
 /// Model for DlgSettingsGridDisplay and CmdSettingsGridDisplay.
+///
+/// External code is responsible for calculating the value of the disabled parameter using the values
+/// of the other non-disabled parameters, instead of using the current value of the disabled parameter
 class DocumentModelGridDisplay : public DocumentModelAbstractBase
 {
 public:
