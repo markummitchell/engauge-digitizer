@@ -30,7 +30,7 @@ public:
 
 public slots:
 
-  /// Slot inputs to QGraphicsEllipseItem::setStartAngle and ::setSpanAngle
+  /// Slot inputs to QGraphicsEllipseItem::setStartAngle and QGraphicsEllipseItem::setSpanAngle
   void slotUpdateAngles (QPointF posTangentialLow,
                          QPointF posTangentialCenter,
                          QPointF posTangentialHigh,

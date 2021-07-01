@@ -23,7 +23,7 @@ const int TEMPORARY_MESSAGE_LIFETIME = 5000; // Milliseconds. Two seconds is too
 const int MIN_WIDTH_ZOOM = 200;
 const int MIN_WIDTH_COMBO_UNITS = 300;
 const int MIN_SIZE_EDIT_COORDS = 250; // Need lots of space in case date/time and degrees/minutes/seconds are used simultaneously
-const int MAX_HEIGHT_EDIT_COORDS = 24;
+const int MAX_HEIGHT_EDIT_COORDS = 32;
 
 StatusBar::StatusBar(QStatusBar &statusBar) :
   m_statusBar (statusBar),
