@@ -17,12 +17,24 @@
 using namespace std;
 
 ExportXThetaValuesMergedFunctions::ExportXThetaValuesMergedFunctions(const DocumentModelExportFormat &modelExport,
+                                                                     const MainWindowModel &modelMainWindow,
                                                                      const ValuesVectorXOrY &xThetaValuesRaw,
                                                                      const Transformation &transformation) :
   m_modelExport (modelExport),
+  m_modelMainWindow (modelMainWindow),
   m_xThetaValuesRaw (xThetaValuesRaw),
   m_transformation (transformation)
 {
+}
+
+bool ExportXThetaValuesMergedFunctions::breakForPointOverrun (unsigned int curveSize,
+                                                              bool &isOverrun) const
+{
+  // Break if we will overrun the maximum point limit. As per issue #401 a change of scale
+  // can result in a huge (new) range with a small (old) delta - resulting in so many values
+  // that this loop effectively hangs. Set flag if overrun occurred
+  isOverrun = (curveSize > (unsigned int) m_modelMainWindow.maximumExportedPointsPerCurve ());
+  return isOverrun;
 }
 
 void ExportXThetaValuesMergedFunctions::firstSimplestNumberLinear (double &xThetaFirstSimplestNumber,
@@ -59,7 +71,7 @@ void ExportXThetaValuesMergedFunctions::firstSimplestNumberLog (double &xThetaFi
   xThetaFirstSimplestNumber = alignLog.firstSimplestNumber();
 }
 
-ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLinear() const
+ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLinear(bool &isOverrun) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportXThetaValuesMergedFunctions::periodicLinear";
 
@@ -75,10 +87,12 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLinear() const
     if (m_modelExport.pointsIntervalUnitsFunctions() == EXPORT_POINTS_INTERVAL_UNITS_GRAPH) {
       return periodicLinearGraph(xThetaFirstSimplestNumber,
                                  xThetaMin,
-                                 xThetaMax);
+                                 xThetaMax,
+                                 isOverrun);
     } else {
       return periodicLinearScreen(xThetaMin,
-                                  xThetaMax);
+                                  xThetaMax,
+                                  isOverrun);
     }
   } else {
 
@@ -89,7 +103,8 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLinear() const
 
 ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLinearGraph(double xThetaFirstSimplestNumber,
                                                                         double xThetaMin,
-                                                                        double xThetaMax) const
+                                                                        double xThetaMax,
+                                                                        bool &isOverrun) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportXThetaValuesMergedFunctions::periodicLinearGraph";
 
@@ -105,8 +120,14 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLinearGraph(double x
 
   xTheta += m_modelExport.pointsIntervalFunctions();
   while (xTheta <= xThetaMax) {
+
     values [xTheta] = true;
     xTheta += m_modelExport.pointsIntervalFunctions(); // Insert point at a simple number
+
+    if (breakForPointOverrun (values.count(),
+                              isOverrun)) {
+      break;
+    }
   }
 
   if (xTheta > xThetaMax) {
@@ -117,7 +138,8 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLinearGraph(double x
 }
 
 ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLinearScreen (double xThetaMin,
-                                                                          double xThetaMax) const
+                                                                          double xThetaMax,
+                                                                          bool &isOverrun) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportXThetaValuesMergedFunctions::periodicLinearScreen";
 
@@ -154,14 +176,18 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLinearScreen (double
   while (xTheta <= xThetaMax) {
 
     values [xTheta] = true;
-
     xTheta += delta;
+
+    if (breakForPointOverrun (values.count(),
+                              isOverrun)) {
+      break;
+    }
   }
 
   return values.keys();
 }
 
-ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLog() const
+ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLog(bool &isOverrun) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportXThetaValuesMergedFunctions::periodicLog";
 
@@ -175,16 +201,19 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLog() const
   if (m_modelExport.pointsIntervalUnitsFunctions() == EXPORT_POINTS_INTERVAL_UNITS_GRAPH) {
     return periodicLogGraph(xThetaFirstSimplestNumber,
                             xThetaMin,
-                            xThetaMax);
+                            xThetaMax,
+                            isOverrun);
   } else {
     return periodicLogScreen(xThetaMin,
-                             xThetaMax);
+                             xThetaMax,
+                             isOverrun);
   }
 }
 
 ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLogGraph (double xThetaFirstSimplestNumber,
                                                                       double xThetaMin,
-                                                                      double xThetaMax) const
+                                                                      double xThetaMax,
+                                                                      bool &isOverrun) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportXThetaValuesMergedFunctions::periodicLogGraph";
 
@@ -203,8 +232,14 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLogGraph (double xTh
   if (m_modelExport.pointsIntervalFunctions() > 1) { // Safe to iterate
     xTheta *= m_modelExport.pointsIntervalFunctions();
     while (xTheta <= xThetaMax) {
+
       values [xTheta] = true;
       xTheta *= m_modelExport.pointsIntervalFunctions(); // Insert point at a simple number
+
+      if (breakForPointOverrun (values.count(),
+                                isOverrun)) {
+        break;
+      }
     }
   }
 
@@ -216,7 +251,8 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLogGraph (double xTh
 }
 
 ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLogScreen (double xThetaMin,
-                                                                       double xThetaMax) const
+                                                                       double xThetaMax,
+                                                                       bool &isOverrun) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportXThetaValuesMergedFunctions::periodicLogScreen";
 
@@ -253,34 +289,50 @@ ExportValuesXOrY ExportXThetaValuesMergedFunctions::periodicLogScreen (double xT
   while (xTheta <= xThetaMax) {
 
     values [xTheta] = true;
-
     xTheta *= scale;
+
+    if (breakForPointOverrun (values.count(),
+                              isOverrun)) {
+      break;
+    }
   }
 
   return values.keys();
 }
 
-ExportValuesXOrY ExportXThetaValuesMergedFunctions::xThetaValues () const
+ExportValuesXOrY ExportXThetaValuesMergedFunctions::xThetaValues (bool &isOverrun) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportXThetaValuesMergedFunctions::xThetaValues";
 
   if (m_modelExport.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_INTERPOLATE_PERIODIC) {
 
+    ExportValuesXOrY values;
+
     // Special case that occurs when there are no points
     if (qAbs (m_modelExport.pointsIntervalFunctions()) <= 0) {
 
-      ExportValuesXOrY empty;
-      return empty;
+      // Return empty array
 
     } else {
 
       bool isLinear =  (m_transformation.modelCoords().coordScaleXTheta() == COORD_SCALE_LINEAR);
+
       if (isLinear) {
-        return periodicLinear ();
+        values = periodicLinear (isOverrun);
       } else {
-        return periodicLog ();
+        values = periodicLog (isOverrun);
+      }
+
+      if (isOverrun) {
+
+        // Empty out the array since it is, in the case of overrun, incomplete and therefore confusing at best
+        values.clear();
+
       }
     }
+
+    return values;
+
   } else {
 
     // Return the gathered values

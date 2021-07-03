@@ -39,7 +39,8 @@ public:
                      const MainWindowModel &modelMainWindow,
                      const Transformation &transformation,
                      QTextStream &str,
-                     unsigned int &numWritesSoFar) const;
+                     unsigned int &numWritesSoFar,
+                     bool &isOverrun) const;
 
 private:
   void exportAllPerLineXThetaValuesMerged (const DocumentModelExportFormat &modelExportOverride,

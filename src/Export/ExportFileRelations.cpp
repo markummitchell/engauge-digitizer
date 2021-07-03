@@ -225,9 +225,14 @@ void ExportFileRelations::exportToFile (const DocumentModelExportFormat &modelEx
                                         const MainWindowModel &modelMainWindow,
                                         const Transformation &transformation,
                                         QTextStream &str,
-                                        unsigned int &numWritesSoFar) const
+                                        unsigned int &numWritesSoFar,
+                                        bool &isOverrun) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileRelations::exportToFile";
+
+  // There are no known ways for relations to overflow the maximum points limit so
+  // this initialization value will not be overwritten
+  isOverrun = false;
 
   // Log coordinates must be temporarily transformed to linear coordinates
   bool isLogXTheta = (document.modelCoords().coordScaleXTheta() == COORD_SCALE_LOG);

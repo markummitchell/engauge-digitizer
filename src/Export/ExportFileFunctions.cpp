@@ -140,9 +140,12 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
                                         const MainWindowModel &modelMainWindow,
                                         const Transformation &transformation,
                                         QTextStream &str,
-                                        unsigned int &numWritesSoFar) const
+                                        unsigned int &numWritesSoFar,
+                                        bool &isOverrun) const
 {
   LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::exportToFile";
+
+  isOverrun = false;
 
   // Log coordinates must be temporarily transformed to linear coordinates
   bool isLogXTheta = (document.modelCoords().coordScaleXTheta() == COORD_SCALE_LOG);
@@ -187,43 +190,52 @@ void ExportFileFunctions::exportToFile (const DocumentModelExportFormat &modelEx
   }
 
   ExportXThetaValuesMergedFunctions exportXTheta (modelExportOverride,
+                                                  modelMainWindow,
                                                   valuesVector,
                                                   transformation);
 
-  ExportValuesXOrY xThetaValuesMerged = exportXTheta.xThetaValues ();
+  ExportValuesXOrY xThetaValuesMerged = exportXTheta.xThetaValues (isOverrun);
 
-  // Skip if every curve was a relation
-  if (xThetaValuesMerged.count() > 0) {
+  if (isOverrun) {
 
-    // Export in one of two layouts
-    if (modelExportOverride.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
-      exportAllPerLineXThetaValuesMerged (modelExportOverride,
-                                          document,
-                                          modelMainWindow,
-                                          curvesIncluded,
-                                          xThetaValuesMerged,
-                                          delimiter,
-                                          transformation,
-                                          isLogXTheta,
-                                          isLogYRadius,
-                                          curveLimitsMin,
-                                          curveLimitsMax,
-                                          str,
-                                          numWritesSoFar);
-    } else {
-      exportOnePerLineXThetaValuesMerged (modelExportOverride,
-                                          document,
-                                          modelMainWindow,
-                                          curvesIncluded,
-                                          xThetaValuesMerged,
-                                          delimiter,
-                                          transformation,
-                                          isLogXTheta,
-                                          isLogYRadius,
-                                          curveLimitsMin,
-                                          curveLimitsMax,
-                                          str,
-                                          numWritesSoFar);
+    // Put note in output to explain why there are no points
+    str << QObject::tr ("Too many points");
+
+  } else {
+
+    // Skip if every curve was a relation
+    if (xThetaValuesMerged.count() > 0) {
+
+      // Export in one of two layouts
+      if (modelExportOverride.layoutFunctions() == EXPORT_LAYOUT_ALL_PER_LINE) {
+        exportAllPerLineXThetaValuesMerged (modelExportOverride,
+                                            document,
+                                            modelMainWindow,
+                                            curvesIncluded,
+                                            xThetaValuesMerged,
+                                            delimiter,
+                                            transformation,
+                                            isLogXTheta,
+                                            isLogYRadius,
+                                            curveLimitsMin,
+                                            curveLimitsMax,
+                                            str,
+                                            numWritesSoFar);
+      } else {
+        exportOnePerLineXThetaValuesMerged (modelExportOverride,
+                                            document,
+                                            modelMainWindow,
+                                            curvesIncluded,
+                                            xThetaValuesMerged,
+                                            delimiter,
+                                            transformation,
+                                            isLogXTheta,
+                                            isLogYRadius,
+                                            curveLimitsMin,
+                                            curveLimitsMax,
+                                            str,
+                                            numWritesSoFar);
+      }
     }
   }
 }

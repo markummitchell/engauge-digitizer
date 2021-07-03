@@ -1251,12 +1251,18 @@ void DlgSettingsExportFormat::updatePreview()
   int scrollPosition = m_editPreview->verticalScrollBar()->value();
 
   QString exportedTextFunctions, exportedTextRelations, exportedHtml;
-  QTextStream strFunctions (&exportedTextFunctions);
-  QTextStream strRelations (&exportedTextRelations);
+
+  // Initialize assuming no overruns
+  m_lblOverflowFunctions->hide ();
+  m_lblOverflowRelations->hide ();
 
   if (mainWindow().transformation().transformIsDefined()) {
 
+    QTextStream strFunctions (&exportedTextFunctions);
+    QTextStream strRelations (&exportedTextRelations);
+
     unsigned int numWritesSoFar = 0;
+    bool isOverrunFunctions = false, isOverrunRelations = false;
 
     // Cobble together enough of a filename, given the extension, to be parsable as a filename
     ExportFileExtension exportFileExtension = static_cast<ExportFileExtension> (m_cmbFileExtension->currentData().toInt());
@@ -1274,7 +1280,8 @@ void DlgSettingsExportFormat::updatePreview()
                                           mainWindow().modelMainWindow(),
                                           mainWindow().transformation(),
                                           strFunctions,
-                                          numWritesSoFar);
+                                          numWritesSoFar,
+                                          isOverrunFunctions);
 
     ExportFileRelations exportStrategyRelations;
     exportStrategyRelations.exportToFile (modelAfterWithFileExtension,
@@ -1282,20 +1289,29 @@ void DlgSettingsExportFormat::updatePreview()
                                           mainWindow().modelMainWindow(),
                                           mainWindow().transformation(),
                                           strRelations,
-                                          numWritesSoFar);
+                                          numWritesSoFar,
+                                          isOverrunRelations);
 
     // Use html to set background color. A <div> fills the whole background, unlike a <span>.
     // Final carriage return is removed to prevent unwanted blank line. A requirement is that
     // if there are no functions then no empty <div> appears (too confusing), and likewise if
     // there are no relations
     QString exportedHtmlFunctions, exportedHtmlRelations;
-    if (! exportedTextFunctions.isEmpty ()) {
+    if (isOverrunFunctions) {
+      m_lblOverflowFunctions->show();
+    } else {
+      if (! exportedTextFunctions.isEmpty ()) {
 
-      exportedHtmlFunctions = exportedTextToExportedHtml (exportedTextFunctions, COLOR_FUNCTIONS);
+        exportedHtmlFunctions = exportedTextToExportedHtml (exportedTextFunctions, COLOR_FUNCTIONS);
+      }
     }
-    if (! exportedTextRelations.isEmpty ()) {
+    if (isOverrunRelations) {
+      m_lblOverflowRelations->show();
+    } else {
+      if (! exportedTextRelations.isEmpty ()) {
 
-      exportedHtmlRelations = exportedTextToExportedHtml (exportedTextRelations, COLOR_RELATIONS);
+        exportedHtmlRelations = exportedTextToExportedHtml (exportedTextRelations, COLOR_RELATIONS);
+      }
     }
 
     exportedHtml = exportedHtmlFunctions + exportedHtmlRelations;

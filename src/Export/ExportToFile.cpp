@@ -29,6 +29,7 @@ void ExportToFile::exportToFile (const DocumentModelExportFormat &modelExport,
   LOG4CPP_INFO_S ((*mainCat)) << "ExportToFile::exportToFile";
 
   unsigned int numWritesSoFar = 0;
+  bool isOverrunFunctions = false, isOverrunRelations = false;
 
   ExportFileFunctions exportFunctions;
   exportFunctions.exportToFile (modelExport,
@@ -36,7 +37,8 @@ void ExportToFile::exportToFile (const DocumentModelExportFormat &modelExport,
                                 modelMainWindow,
                                 transformation,
                                 str,
-                                numWritesSoFar);
+                                numWritesSoFar,
+                                isOverrunFunctions);
 
   ExportFileRelations exportRelations;
   exportRelations.exportToFile (modelExport,
@@ -44,7 +46,8 @@ void ExportToFile::exportToFile (const DocumentModelExportFormat &modelExport,
                                 modelMainWindow,
                                 transformation,
                                 str,
-                                numWritesSoFar);
+                                numWritesSoFar,
+                                isOverrunRelations);
 }
 
 QString ExportToFile::fileExtensionCsv () const
