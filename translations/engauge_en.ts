@@ -2314,12 +2314,12 @@ In total, there will be two points on the x axis as (x1) and (x2), and two point
 <context>
     <name>DlgSettingsAbstractBase</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="123"/>
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="134"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="131"/>
+        <location filename="../src/Dlg/DlgSettingsAbstractBase.cpp" line="142"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3470,7 +3470,7 @@ The stop value cannot be less than the start value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="601"/>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="602"/>
         <source>Grid line count exceeds limit set by Settings / Main Window.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3642,69 +3642,69 @@ The stop value cannot be less than the start value</source>
 <context>
     <name>DlgSettingsGuideline</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="44"/>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="53"/>
         <source>Guidelines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="90"/>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="104"/>
         <source>Creation circle radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="94"/>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="108"/>
         <source>Select a radius, in pixels, for the points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="99"/>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="113"/>
         <source>Guideline color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="103"/>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="117"/>
         <source>Guidelines Color
 
 Set the color of the guidelines that can be dragged from the edges of the scene, and used to align points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="110"/>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="124"/>
         <source>Active Line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="114"/>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="128"/>
         <source>Select a size for the guidelines when active</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="119"/>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="133"/>
         <source>Inactive Line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="123"/>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="137"/>
         <source>Select a size for the guidelines when inactive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="181"/>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="211"/>
         <source>Active Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="184"/>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="214"/>
         <source>Inactive Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="191"/>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="221"/>
         <source>Preview window that shows how current settings affect the active guidelines.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="204"/>
+        <location filename="../src/Dlg/DlgSettingsGuideline.cpp" line="234"/>
         <source>Preview window that shows how current settings affect the inactive guidelines.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4616,7 +4616,7 @@ Do you want to save your changes?</source>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="145"/>
         <location filename="../src/DigitizeState/DigitizeStateAxis.cpp" line="186"/>
         <location filename="../src/DigitizeState/DigitizeStateScale.cpp" line="179"/>
-        <location filename="../src/main/main.cpp" line="366"/>
+        <location filename="../src/main/MainWindowMsg.cpp" line="25"/>
         <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4921,7 +4921,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Grid/GridLineFactory.cpp" line="64"/>
+        <location filename="../src/Grid/GridLineFactory.cpp" line="65"/>
         <source>Axes checker. If this does not align with the axes, then the axes points should be checked</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5031,123 +5031,123 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="245"/>
-        <location filename="../src/main/main.cpp" line="257"/>
+        <location filename="../src/main/main.cpp" line="246"/>
+        <location filename="../src/main/main.cpp" line="258"/>
         <source>is not a valid file name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="251"/>
+        <location filename="../src/main/main.cpp" line="252"/>
         <source>is not a valid image file extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="343"/>
+        <location filename="../src/main/main.cpp" line="344"/>
         <source>is used only with one or more load files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="375"/>
+        <location filename="../src/main/main.cpp" line="377"/>
         <source>Available styles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="399"/>
+        <location filename="../src/main/main.cpp" line="401"/>
         <source>where</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="405"/>
+        <location filename="../src/main/main.cpp" line="407"/>
         <source>Enables extra debug information. Used for debugging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="411"/>
+        <location filename="../src/main/main.cpp" line="413"/>
         <source>Indicates files opened at startup are for testing drag and drop. Used for regression testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="417"/>
+        <location filename="../src/main/main.cpp" line="419"/>
         <source>Specifies an error report file as input. Used for debugging and regression testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="423"/>
+        <location filename="../src/main/main.cpp" line="425"/>
         <source>Export each loaded startup file, which must have all axis points defined, then stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="429"/>
+        <location filename="../src/main/main.cpp" line="431"/>
         <source>Extract image in each loaded startup file to a file with the specified extension, then stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="435"/>
+        <location filename="../src/main/main.cpp" line="437"/>
         <source>Specifies a file command script file as input. Used for debugging and testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="441"/>
+        <location filename="../src/main/main.cpp" line="443"/>
         <source>Output diagnostic gnuplot input files. Used for debugging</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="447"/>
+        <location filename="../src/main/main.cpp" line="449"/>
         <source>Show this help information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="453"/>
+        <location filename="../src/main/main.cpp" line="455"/>
         <source>Executes the error report file or file command script. Used for regression testing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="459"/>
+        <location filename="../src/main/main.cpp" line="461"/>
         <source>Removes all stored settings, including window positions. Used when windows start up offscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="466"/>
+        <location filename="../src/main/main.cpp" line="468"/>
         <source>Set the window style to one of the styles listed by the command line option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="474"/>
+        <location filename="../src/main/main.cpp" line="476"/>
         <source>Show a list of available styles that can be used with the command line option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="481"/>
+        <location filename="../src/main/main.cpp" line="483"/>
         <source>Upgrade files opened at startup to the most recent version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="487"/>
+        <location filename="../src/main/main.cpp" line="489"/>
         <source>File(s) to be imported or opened at startup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="495"/>
+        <location filename="../src/main/main.cpp" line="497"/>
         <source>Useful environment variables:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="500"/>
+        <location filename="../src/main/main.cpp" line="502"/>
         <source>Set timezone to add or subtract hours in time values. Timezone values are listed as TZ Database Names in Wikipedia</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="544"/>
+        <location filename="../src/main/main.cpp" line="546"/>
         <source>Could not write to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="557"/>
+        <location filename="../src/main/main.cpp" line="559"/>
         <source>Upgraded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/main.cpp" line="559"/>
+        <location filename="../src/main/main.cpp" line="561"/>
         <source>to</source>
         <translation type="unfinished"></translation>
     </message>

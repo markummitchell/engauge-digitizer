@@ -1,0 +1,2 @@
+-errorreport ../test/export_extrapolate_3_2_1_linear_straight.dig -regression -reset
+

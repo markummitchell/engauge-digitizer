@@ -1,0 +1,2 @@
+-errorreport ../test/export_extrapolate_1_2_3_log_smooth.dig -regression -reset
+
