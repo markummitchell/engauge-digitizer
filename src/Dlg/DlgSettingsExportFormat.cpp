@@ -827,16 +827,10 @@ void DlgSettingsExportFormat::slotFunctionsPointsEvenlySpacedInterval(const QStr
     m_lblOverflowFunctions->hide ();
     m_editPreview->setText(EMPTY_PREVIEW);
   } else {
-    // Prevent infinite loop on empty and "-" values which get treated as zero interval
-    if (goodIntervalFunctions()) {
-      m_lblOverflowFunctions->hide (); // State transition
-      m_modelExportAfter->setPointsIntervalFunctions(m_editFunctionsPointsEvenlySpacing->text().toDouble());
-      updateControls();
-      updatePreview();
-    } else {
-      m_lblOverflowFunctions->show (); // State transition
-      m_editPreview->setText(EMPTY_PREVIEW);
-    }
+    m_lblOverflowFunctions->hide (); // State transition
+    m_modelExportAfter->setPointsIntervalFunctions(m_editFunctionsPointsEvenlySpacing->text().toDouble());
+    updateControls();
+    updatePreview();
   }
 }
 
@@ -847,17 +841,11 @@ void DlgSettingsExportFormat::slotFunctionsPointsEvenlySpacedIntervalUnits(const
   int index = m_cmbFunctionsPointsEvenlySpacingUnits->currentIndex();
   ExportPointsIntervalUnits units = static_cast<ExportPointsIntervalUnits> (m_cmbFunctionsPointsEvenlySpacingUnits->itemData (index).toInt());
 
-  // Prevent infinite loop on certain values
-  if (goodIntervalFunctions()) {
-    m_lblOverflowFunctions->hide (); // State transition
-    m_modelExportAfter->setPointsIntervalUnitsFunctions(units);
-    updateIntervalConstraints(); // Call this before updateControls so constraint checking is updated for ok button
-    updateControls();
-    updatePreview();
-  } else {
-    m_lblOverflowFunctions->show (); // State transition
-    m_editPreview->setText(EMPTY_PREVIEW);
-  }
+  m_lblOverflowFunctions->hide (); // State transition
+  m_modelExportAfter->setPointsIntervalUnitsFunctions(units);
+  updateIntervalConstraints(); // Call this before updateControls so constraint checking is updated for ok button
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsExportFormat::slotFunctionsPointsFirstCurve()
@@ -1064,16 +1052,10 @@ void DlgSettingsExportFormat::slotRelationsPointsEvenlySpacedIntervalUnits(const
   int index = m_cmbRelationsPointsEvenlySpacingUnits->currentIndex();
   ExportPointsIntervalUnits units = static_cast<ExportPointsIntervalUnits> (m_cmbRelationsPointsEvenlySpacingUnits->itemData (index).toInt());
 
-  if (goodIntervalRelations()) {
-    m_lblOverflowRelations->hide (); // State transition
-    m_modelExportAfter->setPointsIntervalUnitsRelations(units);
-    updateIntervalConstraints(); // Call this before updateControls so constraint checking is updated for ok button
-    updateControls();
-    updatePreview();
-  } else {
-    m_lblOverflowRelations->show (); // State transition
-    m_editPreview->setText(EMPTY_PREVIEW);
-  }
+  m_modelExportAfter->setPointsIntervalUnitsRelations(units);
+  updateIntervalConstraints(); // Call this before updateControls so constraint checking is updated for ok button
+  updateControls();
+  updatePreview();
 }
 
 void DlgSettingsExportFormat::slotRelationsPointsRaw()
@@ -1225,21 +1207,9 @@ void DlgSettingsExportFormat::updateIntervalConstraints ()
 
   if (m_tabWidget->currentIndex() == TAB_WIDGET_INDEX_FUNCTIONS) {
 
-    if (m_modelExportAfter->pointsIntervalFunctions() < functionsMin) {
-
-      m_editFunctionsPointsEvenlySpacing->setText (QString::number (functionsMin));
-
-    }
-
     m_validatorFunctionsPointsEvenlySpacing->setBottom (functionsMin);
 
   } else {
-
-    if (m_modelExportAfter->pointsIntervalRelations() < relationsMin) {
-
-      m_editRelationsPointsEvenlySpacing->setText (QString::number (relationsMin));
-
-    }
 
     m_validatorRelationsPointsEvenlySpacing->setBottom (relationsMin);
   }
@@ -1292,26 +1262,21 @@ void DlgSettingsExportFormat::updatePreview()
                                           numWritesSoFar,
                                           isOverrunRelations);
 
+    m_lblOverflowFunctions->setVisible(isOverrunFunctions);
+    m_lblOverflowRelations->setVisible(isOverrunRelations);
+
     // Use html to set background color. A <div> fills the whole background, unlike a <span>.
     // Final carriage return is removed to prevent unwanted blank line. A requirement is that
     // if there are no functions then no empty <div> appears (too confusing), and likewise if
     // there are no relations
     QString exportedHtmlFunctions, exportedHtmlRelations;
-    if (isOverrunFunctions) {
-      m_lblOverflowFunctions->show();
-    } else {
-      if (! exportedTextFunctions.isEmpty ()) {
+    if (! exportedTextFunctions.isEmpty ()) {
 
-        exportedHtmlFunctions = exportedTextToExportedHtml (exportedTextFunctions, COLOR_FUNCTIONS);
-      }
+      exportedHtmlFunctions = exportedTextToExportedHtml (exportedTextFunctions, COLOR_FUNCTIONS);
     }
-    if (isOverrunRelations) {
-      m_lblOverflowRelations->show();
-    } else {
-      if (! exportedTextRelations.isEmpty ()) {
+    if (! exportedTextRelations.isEmpty ()) {
 
-        exportedHtmlRelations = exportedTextToExportedHtml (exportedTextRelations, COLOR_RELATIONS);
-      }
+      exportedHtmlRelations = exportedTextToExportedHtml (exportedTextRelations, COLOR_RELATIONS);
     }
 
     exportedHtml = exportedHtmlFunctions + exportedHtmlRelations;
