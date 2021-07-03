@@ -1,0 +1,2 @@
+-errorreport ../test/few_1_2_3_log_straight.dig -regression -reset
+

@@ -92,28 +92,18 @@ void ExportFileAbstractBase::insertLineSeparator (bool isFirst,
   }
 }
 
-double ExportFileAbstractBase::linearlyInterpolateYRadiusFromTwoPoints (double xThetaValue,
-                                                                        const DocumentModelCoords &modelCoords,
+double ExportFileAbstractBase::linearlyInterpolateYRadiusFromTwoPoints (double xThetaLinearized,
                                                                         const QPointF &posGraphBefore,
                                                                         const QPointF &posGraph) const
 {
-    // X coordinate scaling is linear or log
-    double s;
-    if (modelCoords.coordScaleXTheta() == COORD_SCALE_LINEAR) {
-        s = (xThetaValue - posGraphBefore.x()) / (posGraph.x() - posGraphBefore.x());
-    } else {
-        s = (qLn (xThetaValue) - qLn (posGraphBefore.x())) / (qLn (posGraph.x()) - qLn (posGraphBefore.x()));
-    }
+  // Assumption is that inputs are linearized, so:
+  // - output will also be linearized
+  // - external code is responsible for linearizing and delinearizing
+  double s = (xThetaLinearized - posGraphBefore.x()) / (posGraph.x() - posGraphBefore.x());
 
-    // Y coordinate scaling is linear or log
-    double yRadius;
-    if (modelCoords.coordScaleYRadius() == COORD_SCALE_LINEAR) {
-        yRadius = (1.0 - s) * posGraphBefore.y() + s * posGraph.y();
-    } else {
-        yRadius = qExp ((1.0 - s) * qLn (posGraphBefore.y()) + s * qLn (posGraph.y()));
-    }
+  double yRadiusLinearized = (1.0 - s) * posGraphBefore.y() + s * posGraph.y();
 
-    return yRadius;
+  return yRadiusLinearized;
 }
 
 QString ExportFileAbstractBase::wrapInDoubleQuotesIfNeeded (const DocumentModelExportFormat &modelExportOverride,

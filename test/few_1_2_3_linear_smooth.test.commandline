@@ -1,0 +1,2 @@
+-errorreport ../test/few_1_2_3_linear_smooth.dig -regression -reset
+

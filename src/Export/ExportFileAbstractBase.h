@@ -52,8 +52,7 @@ protected:
   /// Interpolate (if xThetaValue is between posGraphBefore.x() and posGraph.x()) or
   /// extrapolate (if xThetaValue < posGraphBefore.x() or xThetaValue > posGraph.x())
   /// the given x/theta value using the two specified graph points
-  double linearlyInterpolateYRadiusFromTwoPoints (double xThetaValue,
-                                                  const DocumentModelCoords &modelCoords,
+  double linearlyInterpolateYRadiusFromTwoPoints (double xThetaLinearized,
                                                   const QPointF &posGraphBefore,
                                                   const QPointF &posGraph) const;
 

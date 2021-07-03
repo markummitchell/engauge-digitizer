@@ -244,39 +244,34 @@ void ExportFileFunctions::initializeYRadiusValues (const QStringList &curvesIncl
   }
 }
 
-double ExportFileFunctions::linearlyInterpolate (const Points &points,
-                                                 double xThetaValue,
-                                                 const Transformation &transformation) const
+double ExportFileFunctions::linearlyInterpolate (const FittingPointsConvenient &positionsLinearized,
+                                                 double xThetaLinearized) const
 {
   //  LOG4CPP_INFO_S ((*mainCat)) << "ExportFileFunctions::linearlyInterpolate";
 
   // If point is within the range of the function points then interpolation will be used, otherwise
   // extrapolation will be used
-  double yRadius = 0;
+  double yRadiusLinearized = 0;
   QPointF posGraphBefore; // Not set until ip=1
   bool foundIt = false;
-  for (int ip = 0; !foundIt && (ip < points.count()); ip++) {
-
-    const Point &point = points.at (ip);
-    QPointF posGraph;
-    transformation.transformScreenToRawGraph (point.posScreen(),
-                                              posGraph);
+  FittingPointsConvenient::const_iterator itr;
+  for (itr = positionsLinearized.begin(); itr != positionsLinearized.end(); itr++) {
+    const QPointF posGraph = *itr;
 
     // Cases where we have found it at this point in the code
     // (1) interpolation case where (xBefore < xThetaValue < xAfter)
     // (2) extrapolation case where (xThetaValue < xBefore < xAfter and ip=0) for which we delay finding it until ip=1 so we have
     //     two points for extrapolating. This case is why we have the subtle test for ip>0 in the next line
-    if (xThetaValue <= posGraph.x() && (ip > 0)) {
+    if (xThetaLinearized <= posGraph.x() && (itr != positionsLinearized.begin())) {
 
       foundIt = true;
 
       // Case 1 comments: xThetaValue is between posGraphBefore and posGraph. Note that if posGraph.x()=posGraphBefore.x() then
       // previous iteration of loop would have been used for interpolation, and then the loop was exited. Range of s is 0<s<1
       // Case 2 comments: Range of s is s<0
-      yRadius = linearlyInterpolateYRadiusFromTwoPoints (xThetaValue,
-                                                         transformation.modelCoords(),
-                                                         posGraphBefore,
-                                                         posGraph);
+      yRadiusLinearized = linearlyInterpolateYRadiusFromTwoPoints (xThetaLinearized,
+                                                                   posGraphBefore,
+                                                                   posGraph);
 
       break;
     }
@@ -286,27 +281,21 @@ double ExportFileFunctions::linearlyInterpolate (const Points &points,
 
   if (!foundIt) {
 
-    if (points.count() > 1) {
+    if (positionsLinearized.count() > 1) {
 
       // Extrapolation will be used since point is out of the range of the function points. Specifically, it is greater than the
       // last x value in the function. Range of s is 1<s
-      int N = points.count();
-      const Point &pointLast = points.at (N - 1);
-      const Point &pointBefore = points.at (N - 2);
-      QPointF posGraphLast;
-      transformation.transformScreenToRawGraph (pointLast.posScreen(),
-                                                posGraphLast);
-      transformation.transformScreenToRawGraph (pointBefore.posScreen(),
-                                                posGraphBefore);
-      yRadius = linearlyInterpolateYRadiusFromTwoPoints (xThetaValue,
-                                                         transformation.modelCoords(),
-                                                         posGraphBefore,
-                                                         posGraphLast);
+      int N = positionsLinearized.count();
+      const QPointF &pointBefore = positionsLinearized.at (N - 2);
+      const QPointF &pointLast = positionsLinearized.at (N - 1);
+      yRadiusLinearized = linearlyInterpolateYRadiusFromTwoPoints (xThetaLinearized,
+                                                                   pointBefore,
+                                                                   pointLast);
 
-    } else if (points.count() == 1) {
+    } else if (positionsLinearized.count() == 1) {
 
       // Just use the single point
-      yRadius = posGraphBefore.y();
+      yRadiusLinearized = posGraphBefore.y();
 
     } else {
 
@@ -315,7 +304,7 @@ double ExportFileFunctions::linearlyInterpolate (const Points &points,
     }
   }
 
-  return yRadius;
+  return yRadiusLinearized;
 }
 
 void ExportFileFunctions::loadYRadiusValues (const DocumentModelExportFormat &modelExportOverride,
@@ -343,7 +332,7 @@ void ExportFileFunctions::loadYRadiusValues (const DocumentModelExportFormat &mo
 
     if (modelExportOverride.pointsSelectionFunctions() == EXPORT_POINTS_SELECTION_FUNCTIONS_RAW) {
 
-      // No interpolation. Raw points
+      // No interpolation. Just raw points. No transformation to/from linear space is required for log coordinates
       loadYRadiusValuesForCurveRaw (document.modelCoords(),
                                     document.modelGeneral(),
                                     modelMainWindow,
@@ -359,6 +348,7 @@ void ExportFileFunctions::loadYRadiusValues (const DocumentModelExportFormat &mo
       // Interpolation
       if (curve->curveStyle().lineStyle().curveConnectAs() == CONNECT_AS_FUNCTION_SMOOTH) {
 
+        // Transformation to/from linear space is required for log coordinates
         loadYRadiusValuesForCurveInterpolatedSmooth (document.modelCoords(),
                                                      document.modelGeneral(),
                                                      modelMainWindow,
@@ -374,12 +364,15 @@ void ExportFileFunctions::loadYRadiusValues (const DocumentModelExportFormat &mo
 
       } else {
 
+        // Transformation to/from linear space is required for log coordinates
         loadYRadiusValuesForCurveInterpolatedStraight (document.modelCoords(),
                                                        document.modelGeneral(),
                                                        modelMainWindow,
                                                        points,
                                                        xThetaValues,
                                                        transformation,
+                                                       isLogXTheta,
+                                                       isLogYRadius,
                                                        curveName,
                                                        curveLimitsMin,
                                                        curveLimitsMax,
@@ -406,15 +399,19 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
 
   // Convert screen coordinates to graph coordinates, in vectors suitable for spline fitting
   vector<double> t;
-  vector<SplinePair> xy;
+  vector<SplinePair> xyLinearized;
   ExportOrdinalsSmooth ordinalsSmooth;
 
+  // Create spline pairs with x/y coordinates in linearized coordinates and t as the independent variable
   ordinalsSmooth.loadSplinePairsWithTransformation (points,
                                                     transformation,
                                                     isLogXTheta,
                                                     isLogYRadius,
                                                     t,
-                                                    xy);
+                                                    xyLinearized);
+
+  // Linearize/delinearize utility
+  LinearToLog linearToLog;
 
   // Formatting
   FormatCoordsUnits format;
@@ -433,25 +430,34 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
     // Apply the single value everywhere (N=1) or do linear interpolation (N=2)
     for (int row = 0; row < xThetaValues.count(); row++) {
 
+      // Compute unlinearized and linearized x/theta
       double xTheta = xThetaValues.at (row);
-      double yRadius;
+      double xThetaLinearized = linearToLog.linearize (xTheta,
+                                                       isLogXTheta);
+
+      double yRadiusLinearized;
       if (points.count() == 1) {
-        yRadius = xy.at (0).y ();
+        yRadiusLinearized = xyLinearized.at (0).y ();
       } else {
-        double x0 = xy.at (0).x ();
-        double x1 = xy.at (1).x ();
-        double y0 = xy.at (0).y ();
-        double y1 = xy.at (1).y ();
-        double numerator = (xTheta - x0);
+        double x0 = xyLinearized.at (0).x ();
+        double x1 = xyLinearized.at (1).x ();
+        double y0 = xyLinearized.at (0).y ();
+        double y1 = xyLinearized.at (1).y ();
+        double numerator = (xThetaLinearized - x0);
         double denominator = (x1 - x0);
         if (qAbs (denominator) < qAbs (numerator) / 1.0e6) {
           // Cannot do linear interpolation using two points at the same x value
-          yRadius = xy.at (0).y ();
+          yRadiusLinearized = xyLinearized.at (0).y ();
         } else {
           double s = numerator / denominator;
-          yRadius = (1.0 - s) * y0 + s * y1;
+          yRadiusLinearized = (1.0 - s) * y0 + s * y1;
         }
       }
+
+      // Delinearize, which is a noop for linear coordinates
+      double yRadius = linearToLog.delinearize (yRadiusLinearized,
+                                                isLogYRadius);
+
       if (xThetaIsNotOutOfBounds (xTheta,
                                   curveName,
                                   curveLimitsMin,
@@ -478,22 +484,26 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedSmooth (const Doc
     const int MAX_ITERATIONS = 32;
 
     // Spline class requires at least one point
-    if (xy.size() > 0) {
+    if (xyLinearized.size() > 0) {
 
       // Fit a spline
       Spline spline (t,
-                     xy);
+                     xyLinearized);
 
       // Get value at desired points
       for (int row = 0; row < xThetaValues.count(); row++) {
 
+        // Compute unlinearized and linearized x/theta
         double xTheta = xThetaValues.at (row);
+        double xThetaLinearized = linearToLog.linearize (xTheta,
+                                                         isLogXTheta);
 
-        LinearToLog linearToLog;
-
-        SplinePair splinePairFound = spline.findSplinePairForFunctionX (linearToLog.linearize (xTheta, isLogXTheta),
+        SplinePair splinePairFound = spline.findSplinePairForFunctionX (xThetaLinearized,
                                                                         MAX_ITERATIONS);
-        double yRadius = linearToLog.delinearize (splinePairFound.y (),
+        double yRadiusLinearized = splinePairFound.y ();
+
+        // Delinearize, which is a noop for linear coordinates
+        double yRadius = linearToLog.delinearize (yRadiusLinearized,
                                                   isLogYRadius);
 
         // Save y/radius value for this row into yRadiusValues, after appropriate formatting
@@ -523,6 +533,8 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedStraight (const D
                                                                          const Points &points,
                                                                          const ExportValuesXOrY &xThetaValues,
                                                                          const Transformation &transformation,
+                                                                         bool isLogXTheta,
+                                                                         bool isLogYRadius,
                                                                          const QString &curveName,
                                                                          const CurveLimits &curveLimitsMin,
                                                                          const CurveLimits &curveLimitsMax,
@@ -532,19 +544,31 @@ void ExportFileFunctions::loadYRadiusValuesForCurveInterpolatedStraight (const D
 
   FormatCoordsUnits format;
 
+  // Linearize/delinearize utility
+  LinearToLog linearToLog;
+
+  FittingPointsConvenient positionsLinearized = populateLinearizedFittingPositions (points,
+                                                                                    transformation,
+                                                                                    isLogXTheta,
+                                                                                    isLogYRadius);
+
   // Get value at desired points
   QString dummyXThetaOut;
   for (int row = 0; row < xThetaValues.count(); row++) {
 
+    // Compute unlinearized and linearized x/theta
     double xTheta = xThetaValues.at (row);
+    double xThetaLinearized = linearToLog.linearize (xTheta,
+                                                     isLogXTheta);
 
     // Interpolation on curve with no points will trigger an assert so check the point count
     *(yRadiusValues [row]) = "";
-    if (points.count () > 0) {
+    if (positionsLinearized.count () > 0) {
 
-      double yRadius = linearlyInterpolate (points,
-                                            xTheta,
-                                            transformation);
+      double yRadiusLinearized = linearlyInterpolate (positionsLinearized,
+                                                      xThetaLinearized);
+      double yRadius = linearToLog.delinearize (yRadiusLinearized,
+                                                isLogYRadius);
 
       // Save y/radius value for this row into yRadiusValues, after appropriate formatting
       if (xThetaIsNotOutOfBounds (xTheta,
@@ -695,6 +719,32 @@ void ExportFileFunctions::outputXThetaYRadiusValues (const DocumentModelExportFo
   }
 
   ++numWritesSoFar;
+}
+
+FittingPointsConvenient ExportFileFunctions::populateLinearizedFittingPositions (const Points &points,
+                                                                                 const Transformation &transformation,
+                                                                                 bool isLogXTheta,
+                                                                                 bool isLogYRadius) const
+{
+  LinearToLog linearToLog;
+
+  FittingPointsConvenient positionsLinearized;
+  Points::const_iterator itr;
+  for (itr = points.begin(); itr != points.end(); itr++) {
+    const Point &point = *itr;
+    QPointF posScreen = point.posScreen();
+    QPointF posGraph;
+    transformation.transformScreenToRawGraph (posScreen,
+                                              posGraph);
+
+    QPointF positionLinearized (linearToLog.linearize (posGraph.x(),
+                                                       isLogXTheta),
+                                linearToLog.linearize (posGraph.y(),
+                                                       isLogYRadius));
+    positionsLinearized.push_back (positionLinearized);
+  }
+
+  return positionsLinearized;
 }
 
 bool ExportFileFunctions::rowHasAtLeastOneYRadiusEntry (const QVector<QVector<QString*> > &yRadiusValues,

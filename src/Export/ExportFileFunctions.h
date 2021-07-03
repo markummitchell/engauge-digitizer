@@ -10,6 +10,7 @@
 #include "CurveLimits.h"
 #include "ExportFileAbstractBase.h"
 #include "ExportValuesXOrY.h"
+#include "FittingPointsConvenient.h"
 #include "Points.h"
 #include <QStringList>
 #include <QVector>
@@ -78,9 +79,8 @@ private:
                                 const ExportValuesXOrY &xThetaValuesMerged,
                                 QVector<QVector<QString*> > &yRadiusValues) const;
 
-  double linearlyInterpolate (const Points &points,
-                              double xThetaValue,
-                              const Transformation &transformation) const;
+  double linearlyInterpolate (const FittingPointsConvenient &positionsLinearized,
+                              double xThetaLinearized) const;
   void loadYRadiusValues (const DocumentModelExportFormat &modelExportOverride,
                           const Document &document,
                           const MainWindowModel &modelMainWindow,
@@ -110,6 +110,8 @@ private:
                                                       const Points &points,
                                                       const ExportValuesXOrY &xThetaValues,
                                                       const Transformation &transformation,
+                                                      bool isLogXTheta,
+                                                      bool isLogYRadius,
                                                       const QString &curveName,
                                                       const CurveLimits &curveLimitsMin,
                                                       const CurveLimits &curveLimitsMax,
@@ -137,6 +139,11 @@ private:
                                   const QString &delimiter,
                                   QTextStream &str,
                                   unsigned int &numWritesSoFar) const;
+  // Transform screen points into linearized graph points
+  FittingPointsConvenient populateLinearizedFittingPositions (const Points &points,
+                                                              const Transformation &transformation,
+                                                              bool isLogXTheta,
+                                                              bool isLogYRadius) const;
   // Only include rows that have at least one y/radius entry. This check is required when outputing one curve per row
   // since the union of all x/theta values is applied to each curve
   bool rowHasAtLeastOneYRadiusEntry (const QVector<QVector<QString*> > &yRadiusValues,
