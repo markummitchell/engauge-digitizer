@@ -24,6 +24,7 @@
 #include <qmath.h>
 #include <QPushButton>
 #include <QSpinBox>
+#include <QString>
 #include "QtToString.h"
 #include <QWhatsThis>
 #include "TranslatorContainer.h"
@@ -309,6 +310,8 @@ QStringList DlgSettingsMainWindow::gatherQmFilenames () const
   // Get available locales. The static QLocale::matchingLocales gives the few available translations
   // but also the many unavailable translations. We use a list of translation files to see what is available
   QDir translationPath (TranslatorContainer::qmDirectory ());
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::gatherQmFilenames directory="
+                              << translationPath.path().toLatin1().data();
   QStringList filenames = translationPath.entryList (QStringList ("engauge_*.qm"));
 
   return filenames;
