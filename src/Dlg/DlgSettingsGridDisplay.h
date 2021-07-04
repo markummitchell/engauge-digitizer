@@ -21,6 +21,7 @@ class QGroupBox;
 class QHBoxLayout;
 class QLabel;
 class QLineEdit;
+class QSpinBox;
 class ViewPreview;
 
 /// Dialog for editing grid display settings.
@@ -41,6 +42,7 @@ public:
 private slots:
 
   void slotColor (const QString &);
+  void slotLineWidth (int);
 
   void slotDisableX(const QString &);
   void slotCountX(const QString &);
@@ -99,6 +101,7 @@ private:
   QLabel *m_labelLimitWarning;
 
   QComboBox *m_cmbColor;
+  QSpinBox *m_spinLineWidth;
 
   GridLines m_gridLines;
 

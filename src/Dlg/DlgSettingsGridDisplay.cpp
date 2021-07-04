@@ -22,6 +22,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QSpinBox>
 #include <QWhatsThis>
 #include "ViewPreview.h"
 
@@ -89,6 +90,15 @@ void DlgSettingsGridDisplay::createDisplayCommon (QGridLayout *layout, int &row)
   populateColorComboWithoutTransparent (*m_cmbColor);
   connect (m_cmbColor, SIGNAL (activated (const QString &)), this, SLOT (slotColor (const QString &))); // activated() ignores code changes
   layoutCommon->addWidget (m_cmbColor, rowCommon++, 2);
+
+  QLabel *labelLineWidth = new QLabel (QString ("%1:").arg (tr ("Line width")));
+  layoutCommon->addWidget (labelLineWidth, rowCommon, 1);
+
+  m_spinLineWidth = new QSpinBox (widgetCommon);
+  m_spinLineWidth->setWhatsThis (tr ("Select a width for the grid display lines."));
+  m_spinLineWidth->setMinimum (0); // 0 line width is always scaled to be one pixel in width, and always visible
+  connect (m_spinLineWidth, SIGNAL (valueChanged (int)), this, SLOT (slotLineWidth (int)));
+  layoutCommon->addWidget (m_spinLineWidth, rowCommon++, 2);
 
   // Make sure there is an empty column, for padding, on the left and right sides
   layoutCommon->setColumnStretch (0, 1);
@@ -364,6 +374,8 @@ void DlgSettingsGridDisplay::load (CmdMediator &cmdMediator)
   ENGAUGE_ASSERT (indexColor >= 0);
   m_cmbColor->setCurrentIndex(indexColor);
 
+  m_spinLineWidth->setValue (m_modelGridDisplayAfter->lineWidth ());
+
   addPixmap (*m_scenePreview,
              cmdMediator.document().pixmap());
 
@@ -426,6 +438,15 @@ void DlgSettingsGridDisplay::slotDisableY(const QString &)
   GridCoordDisable gridCoordDisable = static_cast<GridCoordDisable> (m_cmbDisableY->currentData().toInt());
   m_modelGridDisplayAfter->setDisableY(gridCoordDisable);
   updateDisplayedVariableY ();
+  updateControls();
+  updatePreview();
+}
+
+void DlgSettingsGridDisplay::slotLineWidth (int lineWidth)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsGridDisplay::slotLineWidth width=" << lineWidth;
+
+  m_modelGridDisplayAfter->setLineWidth (lineWidth);
   updateControls();
   updatePreview();
 }

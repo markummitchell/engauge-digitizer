@@ -45,6 +45,9 @@ public:
   /// Get method for y grid line disabled variable.
   GridCoordDisable disableY () const;
 
+  /// Get method for line width.
+  unsigned int lineWidth() const;
+  
   virtual void loadXml(QXmlStreamReader &reader);
 
   /// Get method for color.
@@ -68,6 +71,9 @@ public:
   /// Set method for y grid line disabled variable.
   void setDisableY (GridCoordDisable disableY);
 
+  /// Set method for line width.
+  void setLineWidth (unsigned int lineWidth);
+  
   /// Set method for color.
   void setPaletteColor(ColorPalette paletteColor);
 
@@ -130,6 +136,7 @@ private:
   double m_stopY;
 
   ColorPalette m_paletteColor;
+  unsigned int m_lineWidth;
 };
 
 #endif // DOCUMENT_MODEL_GRID_DISPLAY

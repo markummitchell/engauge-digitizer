@@ -16,6 +16,7 @@
 #include "Xml.h"
 
 const ColorPalette DEFAULT_COLOR = COLOR_PALETTE_BLACK;
+const int DEFAULT_LINE_WIDTH = 1;
 
 DocumentModelGridDisplay::DocumentModelGridDisplay() :
   m_stable (false),
@@ -29,7 +30,8 @@ DocumentModelGridDisplay::DocumentModelGridDisplay() :
   m_startY (0.0),
   m_stepY (1.0),
   m_stopY (1.0),
-  m_paletteColor (DEFAULT_COLOR)
+  m_paletteColor (DEFAULT_COLOR),
+  m_lineWidth (DEFAULT_LINE_WIDTH)
 {
 }
 
@@ -45,7 +47,8 @@ DocumentModelGridDisplay::DocumentModelGridDisplay(const Document &document) :
   m_startY (document.modelGridDisplay().startY()),
   m_stepY (document.modelGridDisplay().stepY()),
   m_stopY (document.modelGridDisplay().stopY()),
-  m_paletteColor (document.modelGridDisplay().paletteColor())
+  m_paletteColor (document.modelGridDisplay().paletteColor()),
+  m_lineWidth (document.modelGridDisplay().lineWidth())
 {
 }
 
@@ -61,7 +64,8 @@ DocumentModelGridDisplay::DocumentModelGridDisplay(const DocumentModelGridDispla
   m_startY (other.startY()),
   m_stepY (other.stepY()),
   m_stopY (other.stopY()),
-  m_paletteColor (other.paletteColor())
+  m_paletteColor (other.paletteColor()),
+  m_lineWidth (other.lineWidth())
 {
 }
 
@@ -79,6 +83,7 @@ DocumentModelGridDisplay &DocumentModelGridDisplay::operator=(const DocumentMode
   m_stepY = other.stepY();
   m_stopY = other.stopY();
   m_paletteColor = other.paletteColor();
+  m_lineWidth = other.lineWidth();
 
   return *this;
 }
@@ -103,6 +108,11 @@ GridCoordDisable DocumentModelGridDisplay::disableY () const
   return m_disableY;
 }
 
+unsigned int DocumentModelGridDisplay::lineWidth () const
+{
+  return m_lineWidth;
+}
+
 void DocumentModelGridDisplay::loadXml(QXmlStreamReader &reader)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DocumentModelGridDisplay::loadXml";
@@ -111,6 +121,7 @@ void DocumentModelGridDisplay::loadXml(QXmlStreamReader &reader)
 
   QXmlStreamAttributes attributes = reader.attributes();
 
+  // Line width is optional
   if (attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STABLE) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_DISABLE_X) &&
       attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COUNT_X) &&
@@ -139,6 +150,13 @@ void DocumentModelGridDisplay::loadXml(QXmlStreamReader &reader)
     setStepY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STEP_Y).toDouble());
     setStopY (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_Y).toDouble());
     setPaletteColor (static_cast<ColorPalette> (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_COLOR).toInt()));
+
+    // Optional values
+    if (attributes.hasAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_LINE_WIDTH)) {
+      setLineWidth (attributes.value(DOCUMENT_SERIALIZE_GRID_DISPLAY_LINE_WIDTH).toUInt());
+    } else {
+      setLineWidth (DEFAULT_LINE_WIDTH);
+    }
 
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
@@ -180,6 +198,7 @@ void DocumentModelGridDisplay::printStream(QString indentation,
   str << indentation << "stepY=" << m_stepY << "\n";
   str << indentation << "stopY=" << m_stopY << "\n";
   str << indentation << "color=" << colorPaletteToString (m_paletteColor) << "\n";
+  str << indentation << "lineWidth=" << m_lineWidth << "\n";
 }
 
 void DocumentModelGridDisplay::saveXml(QXmlStreamWriter &writer) const
@@ -202,6 +221,7 @@ void DocumentModelGridDisplay::saveXml(QXmlStreamWriter &writer) const
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_STOP_Y, QString::number (m_stopY));
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COLOR, QString::number (m_paletteColor));
   writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_COLOR_STRING, colorPaletteToString (m_paletteColor));
+  writer.writeAttribute(DOCUMENT_SERIALIZE_GRID_DISPLAY_LINE_WIDTH, QString::number (m_lineWidth));
   writer.writeEndElement();
 }
 
@@ -223,6 +243,11 @@ void DocumentModelGridDisplay::setDisableX (GridCoordDisable disableX)
 void DocumentModelGridDisplay::setDisableY (GridCoordDisable disableY)
 {
   m_disableY = disableY;
+}
+
+void DocumentModelGridDisplay::setLineWidth (unsigned int lineWidth)
+{
+  m_lineWidth = lineWidth;
 }
 
 void DocumentModelGridDisplay::setPaletteColor(ColorPalette paletteColor)

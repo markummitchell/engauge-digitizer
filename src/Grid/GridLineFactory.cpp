@@ -216,7 +216,7 @@ void GridLineFactory::createGridLinesForEvenlySpacedGrid (const DocumentModelGri
 
       QColor color (ColorPaletteToQColor (modelGridDisplay.paletteColor()));
       QPen pen (QPen (color,
-                      GRID_LINE_WIDTH,
+                      modelGridDisplay.lineWidth (),
                       GRID_LINE_STYLE));
 
       for (double x = startX; x <= stopX; (isLinearX ? x += stepX : x *= stepX)) {
