@@ -1889,12 +1889,12 @@ Blocca le linee guida per evitare movimenti o rimozioni accidentali.</translatio
         <translation>Vista</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="80" />
+        <location filename="../src/Create/CreateMenus.cpp" line="81" />
         <source>Background</source>
         <translation>Sfondo</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="85" />
+        <location filename="../src/Create/CreateMenus.cpp" line="86" />
         <source>Curves</source>
         <translation>Curve</translation>
     </message>
@@ -1903,22 +1903,22 @@ Blocca le linee guida per evitare movimenti o rimozioni accidentali.</translatio
         <translation type="vanished">Linee Guida</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="90" />
+        <location filename="../src/Create/CreateMenus.cpp" line="91" />
         <source>Status Bar</source>
         <translation>Barra di Stato</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="95" />
+        <location filename="../src/Create/CreateMenus.cpp" line="96" />
         <source>Zoom</source>
         <translation>Zoom</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="127" />
+        <location filename="../src/Create/CreateMenus.cpp" line="128" />
         <source>Settings</source>
         <translation>Impostazioni</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="143" />
+        <location filename="../src/Create/CreateMenus.cpp" line="144" />
         <source>&amp;Help</source>
         <translation>&amp;Aiuto</translation>
     </message>
@@ -3084,7 +3084,7 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="204" />
         <source>Line width</source>
-        <translation>Larghezza linea</translation>
+        <translation>Larghezza della linea</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="208" />
@@ -3596,67 +3596,77 @@ This parameter is used on the coordinates in the Status Bar and during Export</s
 <context>
     <name>DlgSettingsGridDisplay</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="33" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="34" />
         <source>Grid Display</source>
         <translation>Mostra la Griglia</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="84" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="85" />
         <source>Color</source>
         <translation>Colore</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="88" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="89" />
         <source>Select a color for the lines</source>
         <translation>Selezionare un colore per le linee</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="110" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="186" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="94" />
+        <source>Line width</source>
+        <translation>Larghezza della linea</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="98" />
+        <source>Select a width for the grid display lines.</source>
+        <translation>Selezionare una larghezza per le linee di visualizzazione della griglia.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="120" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="196" />
         <source>Disable</source>
         <translation>Disabilitare</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="114" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="124" />
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
         <translation>Valore disabilitato.Le linee della griglia X vengono specificate utilizzando solo tre valori alla volta. Per flessibilità, vengono offerti quattro valori, quindi è necessario scegliere quale valore è disabilitato. Una volta disabilitato, quel valore viene semplicemente aggiornato mentre cambiano gli altri valori</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="129" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="205" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="139" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="215" />
         <source>Count</source>
         <translation>Contare</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="133" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="143" />
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
         <translation>Numero di linee della griglia X.Il numero di linee della griglia X deve essere inserito come numero intero maggiore di zero</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="142" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="152" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="228" />
         <source>Start</source>
         <translation>Inizio</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="146" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="156" />
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
         <translation>Valore della prima linea della griglia X.Il valore iniziale non può essere maggiore del valore di arresto</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="153" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="229" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="163" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="239" />
         <source>Step</source>
         <translation>Passo</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="157" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="167" />
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3665,7 +3675,7 @@ The step value must be greater than zero (linear) or one (log)</source>
 Il valore del passo deve essere maggiore di zero (lineare) o uno (logaritmico) </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="233" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="243" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3680,34 +3690,34 @@ The step value must be greater than zero</source>
         <translation type="vanished">Differenza di valore tra due successive linee della griglia X.Il valore del passo deve essere maggiore di zero</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="164" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="240" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="174" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="250" />
         <source>Stop</source>
         <translation>Fine</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="168" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="178" />
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
         <translation>Valore dell'ultima riga della griglia X.Il valore di arresto non può essere inferiore al valore iniziale</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="190" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="200" />
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
         <translation>Valore disabilitato.Le linee della griglia Y vengono specificate utilizzando solo tre valori alla volta. Per flessibilità, vengono offerti quattro valori, quindi è necessario scegliere quale valore è disabilitato. Una volta disabilitato, quel valore viene semplicemente aggiornato mentre cambiano gli altri valori</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="219" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
         <translation>Numero di linee della griglia Y.Il numero di linee della griglia Y deve essere inserito come numero intero maggiore di zero</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="222" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="232" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -3720,44 +3730,44 @@ The step value must be greater than zero</source>
         <translation type="vanished">Differenza di valore tra due successive linee della griglia Y.Il valore del passo deve essere maggiore di zero</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="244" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="254" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
         <translation>Valore dell'ultima linea della griglia Y. Il valore di arresto non può essere inferiore al valore iniziale</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="260" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="270" />
         <source>Preview</source>
         <translation>Anteprima</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="267" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="277" />
         <source>Preview window that shows how current settings affect grid display</source>
         <translation>Finestra di anteprima che mostra come le attuali impostazioni influenzano l'esposizione della griglia</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="330" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="340" />
         <source>X Grid Lines</source>
         <translation>Linee X della Griglia</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="332" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="342" />
         <source>Grid Lines</source>
         <translation>Linee della Griglia</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="336" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="346" />
         <source>Y Grid Lines</source>
         <translation>Linee Y della Griglia</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="338" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="348" />
         <source>Radius Grid Lines</source>
         <translation>Linee del Raggio della Griglia</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="602" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="623" />
         <source>Grid line count exceeds limit set by Settings / Main Window.</source>
         <translation>Il numero di linee della griglia supera il limite impostato da Impostazioni / Finestra principale.</translation>
     </message>
@@ -4393,7 +4403,7 @@ In addition to the points placed at regular intervals, this option causes a poin
     </message>
     <message>
         <source>Line width</source>
-        <translation type="vanished">Larghezza linea</translation>
+        <translation type="vanished">Larghezza della linea</translation>
     </message>
     <message>
         <source>Select a size for the lines drawn along a segment</source>
@@ -5139,7 +5149,7 @@ Do you want to save your changes?</source>
         <translation>Impossibile leggere i dati generali</translation>
     </message>
     <message>
-        <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="155" />
+        <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="173" />
         <location filename="../src/Document/DocumentModelGuideline.cpp" line="131" />
         <source>Cannot read grid display data</source>
         <translation>Impossibile leggere i dati della griglia a schermo</translation>

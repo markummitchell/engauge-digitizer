@@ -2064,12 +2064,12 @@ Lock the guidelines to prevent accidental movement or removal.</source>
         <translation>چشم انداز</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="80" />
+        <location filename="../src/Create/CreateMenus.cpp" line="81" />
         <source>Background</source>
         <translation>زمینه</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="85" />
+        <location filename="../src/Create/CreateMenus.cpp" line="86" />
         <source>Curves</source>
         <translation>منحنی ها</translation>
     </message>
@@ -2078,22 +2078,22 @@ Lock the guidelines to prevent accidental movement or removal.</source>
         <translation type="vanished">رهنمودها</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="90" />
+        <location filename="../src/Create/CreateMenus.cpp" line="91" />
         <source>Status Bar</source>
         <translation>نوار وضعیت</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="95" />
+        <location filename="../src/Create/CreateMenus.cpp" line="96" />
         <source>Zoom</source>
         <translation>بزرگنمایی</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="127" />
+        <location filename="../src/Create/CreateMenus.cpp" line="128" />
         <source>Settings</source>
         <translation>تنظیمات</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="143" />
+        <location filename="../src/Create/CreateMenus.cpp" line="144" />
         <source>&amp;Help</source>
         <translation>کمک</translation>
     </message>
@@ -3908,28 +3908,38 @@ This parameter is used on the coordinates in the Status Bar and during Export</s
 <context>
     <name>DlgSettingsGridDisplay</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="33" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="34" />
         <source>Grid Display</source>
         <translation>نمایشگر شبکه</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="84" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="85" />
         <source>Color</source>
         <translation>رنگ</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="88" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="89" />
         <source>Select a color for the lines</source>
         <translation>رنگی را برای خطوط انتخاب کنید</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="110" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="186" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="94" />
+        <source>Line width</source>
+        <translation>عرض خط</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="98" />
+        <source>Select a width for the grid display lines.</source>
+        <translation>عرض را برای خطوط نمایش شبکه انتخاب کنید.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="120" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="196" />
         <source>Disable</source>
         <translation>غیرفعال کردن</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="114" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="124" />
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -3939,13 +3949,13 @@ The X grid lines are specified using only three values at a time. For flexibilit
  </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="129" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="205" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="139" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="215" />
         <source>Count</source>
         <translation>شمردن</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="133" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="143" />
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
@@ -3954,13 +3964,13 @@ The number of X grid lines must be entered as an integer greater than zero</sour
 تعداد خطوط شبکه X باید به عنوان عدد صحیحی بزرگتر از صفر وارد شود</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="142" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="152" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="228" />
         <source>Start</source>
         <translation>شروع کنید</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="146" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="156" />
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -3970,13 +3980,13 @@ The start value cannot be greater than the stop value</source>
  </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="153" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="229" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="163" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="239" />
         <source>Step</source>
         <translation>گام</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="157" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="167" />
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3985,7 +3995,7 @@ The step value must be greater than zero (linear) or one (log)</source>
 مقدار گام باید بیشتر از صفر (خطی) یا یک (لگاریتمی) باشد</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="233" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="243" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -4002,13 +4012,13 @@ The step value must be greater than zero</source>
 مقدار مرحله باید بیشتر از صفر باشد</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="164" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="240" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="174" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="250" />
         <source>Stop</source>
         <translation>متوقف کردن</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="168" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="178" />
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
@@ -4017,7 +4027,7 @@ The stop value cannot be less than the start value</source>
 مقدار توقف نمی تواند کمتر از مقدار شروع باشد</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="190" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="200" />
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -4027,7 +4037,7 @@ The Y grid lines are specified using only three values at a time. For flexibilit
  </translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="219" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
@@ -4036,7 +4046,7 @@ The number of Y grid lines must be entered as an integer greater than zero</sour
 تعداد خطوط شبکه Y باید به عنوان یک عدد صحیح بزرگتر از صفر وارد شود</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="222" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="232" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -4053,7 +4063,7 @@ The step value must be greater than zero</source>
 مقدار مرحله باید بیشتر از صفر باشد</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="244" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="254" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
@@ -4062,37 +4072,37 @@ The stop value cannot be less than the start value</source>
 مقدار توقف نمی تواند کمتر از مقدار شروع باشد</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="260" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="270" />
         <source>Preview</source>
         <translation>پیش نمایش</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="267" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="277" />
         <source>Preview window that shows how current settings affect grid display</source>
         <translation>پنجره پیش نمایش که نشان می دهد چگونه تنظیمات فعلی بر صفحه نمایش تأثیر می گذارد</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="330" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="340" />
         <source>X Grid Lines</source>
         <translation>خطوط شبکه X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="332" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="342" />
         <source>Grid Lines</source>
         <translation>خطوط شبکه</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="336" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="346" />
         <source>Y Grid Lines</source>
         <translation>خطوط شبکه</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="338" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="348" />
         <source>Radius Grid Lines</source>
         <translation>خطوط شبکه شعاعی</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="602" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="623" />
         <source>Grid line count exceeds limit set by Settings / Main Window.</source>
         <translation>تعداد خط شبکه بیش از حد تعیین شده توسط تنظیمات / پنجره اصلی است.
  </translation>
@@ -5581,7 +5591,7 @@ Do you want to save your changes?</source>
         <translation>نمی توان داده های کلی را خواند</translation>
     </message>
     <message>
-        <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="155" />
+        <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="173" />
         <location filename="../src/Document/DocumentModelGuideline.cpp" line="131" />
         <source>Cannot read grid display data</source>
         <translation>داده های نمایش شبکه نمی توانند بخوانند</translation>

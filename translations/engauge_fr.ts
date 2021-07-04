@@ -1949,12 +1949,12 @@ Verrouillez les guides pour éviter tout mouvement ou retrait accidentel.</trans
         <translation>Affichage</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="80" />
+        <location filename="../src/Create/CreateMenus.cpp" line="81" />
         <source>Background</source>
         <translation>Arrière-plan</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="85" />
+        <location filename="../src/Create/CreateMenus.cpp" line="86" />
         <source>Curves</source>
         <translation>Courbes</translation>
     </message>
@@ -1963,22 +1963,22 @@ Verrouillez les guides pour éviter tout mouvement ou retrait accidentel.</trans
         <translation type="vanished">Des lignes directrices</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="90" />
+        <location filename="../src/Create/CreateMenus.cpp" line="91" />
         <source>Status Bar</source>
         <translation>Barre d'état</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="95" />
+        <location filename="../src/Create/CreateMenus.cpp" line="96" />
         <source>Zoom</source>
         <translation>Zoom</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="127" />
+        <location filename="../src/Create/CreateMenus.cpp" line="128" />
         <source>Settings</source>
         <translation>Configuration</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="143" />
+        <location filename="../src/Create/CreateMenus.cpp" line="144" />
         <source>&amp;Help</source>
         <translation>&amp;Aide</translation>
     </message>
@@ -3182,7 +3182,7 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="204" />
         <source>Line width</source>
-        <translation>Epaisseur de ligne</translation>
+        <translation>Largeur de ligne</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="208" />
@@ -3720,28 +3720,38 @@ Paramètre utilisé dans les coordonnées exportées et de la barre d'état</tra
 <context>
     <name>DlgSettingsGridDisplay</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="33" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="34" />
         <source>Grid Display</source>
         <translation>Affichage de la grille</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="84" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="85" />
         <source>Color</source>
         <translation>Couleur</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="88" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="89" />
         <source>Select a color for the lines</source>
         <translation>Coisir une couleur pour les lignes</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="110" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="186" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="94" />
+        <source>Line width</source>
+        <translation>Largeur de ligne</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="98" />
+        <source>Select a width for the grid display lines.</source>
+        <translation>Sélectionnez une largeur pour les lignes d'affichage de la grille.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="120" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="196" />
         <source>Disable</source>
         <translation>Inhiber</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="114" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="124" />
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -3750,13 +3760,13 @@ The X grid lines are specified using only three values at a time. For flexibilit
 Les lignes de grille en X sont définies à partir de trois paramètres. Pour plus de flexibilité, quatre paramètres sont proposés et vous choisissez celui qui sera inhibé. Une fois inhibé, la valeur de ce paramètre sera calculée en fonction des trois autres</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="129" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="205" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="139" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="215" />
         <source>Count</source>
         <translation>Compte</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="133" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="143" />
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
@@ -3765,26 +3775,26 @@ The number of X grid lines must be entered as an integer greater than zero</sour
 Le nombre de lignes de grille en X doit être un entier supérieur à zéro</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="142" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="152" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="228" />
         <source>Start</source>
         <translation>Départ</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="146" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="156" />
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
         <translation>Coordonnée de la première ligne de grille en X. La valeur de départ ne peut être supérieure à celle de fin</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="153" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="229" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="163" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="239" />
         <source>Step</source>
         <translation>Pas</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="157" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="167" />
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3793,7 +3803,7 @@ The step value must be greater than zero (linear) or one (log)</source>
 La valeur du pas doit être supérieure à zéro (linéaire) ou à un (logarithmique).</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="233" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="243" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3810,20 +3820,20 @@ The step value must be greater than zero</source>
 La valeur doit être supérieure à zéro</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="164" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="240" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="174" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="250" />
         <source>Stop</source>
         <translation>Fin</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="168" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="178" />
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
         <translation>Coordonnée de la dernière ligne de grille en X. La valeur de fin ne peut être inférieure à celle de départ</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="190" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="200" />
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -3832,7 +3842,7 @@ The Y grid lines are specified using only three values at a time. For flexibilit
 Les lignes de grille en Y sont définies à partir de trois paramètres. Pour plus de flexibilité, quatre paramètres sont proposés et vous choisissez celui qui sera inhibé. Une fois inhibé, la valeur de ce paramètre sera calculée en fonction des trois autres</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="219" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
@@ -3841,7 +3851,7 @@ The number of Y grid lines must be entered as an integer greater than zero</sour
 Le nombre de lignes de grille en Y doit être un entier supérieur à zéro</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="222" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="232" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -3856,44 +3866,44 @@ The step value must be greater than zero</source>
 La valeur doit être supérieure à zéro</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="244" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="254" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
         <translation>Coordonnée de la dernière ligne de grille en Y. La valeur de fin ne peut être inférieure à celle de départ</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="260" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="270" />
         <source>Preview</source>
         <translation> Aperçu</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="267" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="277" />
         <source>Preview window that shows how current settings affect grid display</source>
         <translation>Prévisualisation montrant l'effet des réglages sur l'affichage de la grille</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="330" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="340" />
         <source>X Grid Lines</source>
         <translation>Lignes de grille en X</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="332" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="342" />
         <source>Grid Lines</source>
         <translation>Lignes de grille</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="336" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="346" />
         <source>Y Grid Lines</source>
         <translation>Lignes de grille en Y</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="338" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="348" />
         <source>Radius Grid Lines</source>
         <translation>Lignes de grille en R</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="602" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="623" />
         <source>Grid line count exceeds limit set by Settings / Main Window.</source>
         <translation>Le nombre de lignes de la grille dépasse la limite définie par Paramètres / Fenêtre principale.</translation>
     </message>
@@ -4581,7 +4591,7 @@ Place des points sur chaque coin, en plus des points régulièrement espacés. C
     </message>
     <message>
         <source>Line width</source>
-        <translation type="vanished">Epaisseur de ligne</translation>
+        <translation type="vanished">Largeur de ligne</translation>
     </message>
     <message>
         <source>Select a size for the lines drawn along a segment</source>
@@ -5347,7 +5357,7 @@ Voulez-vous enregistrer vos modifications?</translation>
         <translation>Ne peut lire les données générales</translation>
     </message>
     <message>
-        <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="155" />
+        <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="173" />
         <location filename="../src/Document/DocumentModelGuideline.cpp" line="131" />
         <source>Cannot read grid display data</source>
         <translation>Ne peut lire les données d'affichage de grille</translation>

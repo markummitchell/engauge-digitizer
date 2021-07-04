@@ -1949,12 +1949,12 @@ Lock the guidelines to prevent accidental movement or removal.</source>
         <translation>전망</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="80" />
+        <location filename="../src/Create/CreateMenus.cpp" line="81" />
         <source>Background</source>
         <translation>배경</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="85" />
+        <location filename="../src/Create/CreateMenus.cpp" line="86" />
         <source>Curves</source>
         <translation>곡선</translation>
     </message>
@@ -1963,22 +1963,22 @@ Lock the guidelines to prevent accidental movement or removal.</source>
         <translation type="vanished">지침</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="90" />
+        <location filename="../src/Create/CreateMenus.cpp" line="91" />
         <source>Status Bar</source>
         <translation>상태 표시 줄</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="95" />
+        <location filename="../src/Create/CreateMenus.cpp" line="96" />
         <source>Zoom</source>
         <translation>줌</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="127" />
+        <location filename="../src/Create/CreateMenus.cpp" line="128" />
         <source>Settings</source>
         <translation>설정</translation>
     </message>
     <message>
-        <location filename="../src/Create/CreateMenus.cpp" line="143" />
+        <location filename="../src/Create/CreateMenus.cpp" line="144" />
         <source>&amp;Help</source>
         <translation>도움</translation>
     </message>
@@ -3172,7 +3172,7 @@ This applies only to graph curves. No lines are ever drawn between axis points.<
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="204" />
         <source>Line width</source>
-        <translation>선의 폭</translation>
+        <translation>선폭</translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsCurveProperties.cpp" line="208" />
@@ -3712,28 +3712,38 @@ This parameter is used on the coordinates in the Status Bar and during Export</s
 <context>
     <name>DlgSettingsGridDisplay</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="33" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="34" />
         <source>Grid Display</source>
         <translation>그리드 표시</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="84" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="85" />
         <source>Color</source>
         <translation>색깔</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="88" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="89" />
         <source>Select a color for the lines</source>
         <translation>선 색상 선택</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="110" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="186" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="94" />
+        <source>Line width</source>
+        <translation>선폭</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="98" />
+        <source>Select a width for the grid display lines.</source>
+        <translation>그리드 표시 선의 너비를 선택합니다.</translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="120" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="196" />
         <source>Disable</source>
         <translation>사용 안함</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="114" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="124" />
         <source>Disabled value.
 
 The X grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -3742,13 +3752,13 @@ The X grid lines are specified using only three values at a time. For flexibilit
 X 그리드 선은 한 번에 3 개의 값만 사용하여 지정됩니다. 유연성을 위해 네 가지 값이 제공되므로 사용하지 않도록 선택해야합니다. 사용 중지되면 다른 값이 변경 될 때 해당 값이 간단히 업데이트됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="129" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="205" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="139" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="215" />
         <source>Count</source>
         <translation>카운트</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="133" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="143" />
         <source>Number of X grid lines.
 
 The number of X grid lines must be entered as an integer greater than zero</source>
@@ -3757,13 +3767,13 @@ The number of X grid lines must be entered as an integer greater than zero</sour
 X 그리드 선의 수는 0보다 큰 정수로 입력해야합니다</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="142" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="218" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="152" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="228" />
         <source>Start</source>
         <translation>스타트</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="146" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="156" />
         <source>Value of the first X grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -3772,13 +3782,13 @@ The start value cannot be greater than the stop value</source>
 시작 값은 정지 값보다 클 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="153" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="229" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="163" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="239" />
         <source>Step</source>
         <translation>단계</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="157" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="167" />
         <source>Difference in value between two successive X grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3787,7 +3797,7 @@ The step value must be greater than zero (linear) or one (log)</source>
 단계 값은 0 (선형) 또는 1 (로그)보다 커야합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="233" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="243" />
         <source>Difference in value between two successive Y grid lines.
 
 The step value must be greater than zero (linear) or one (log)</source>
@@ -3804,13 +3814,13 @@ The step value must be greater than zero</source>
 단계 값은 0보다 커야합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="164" />
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="240" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="174" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="250" />
         <source>Stop</source>
         <translation>중지</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="168" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="178" />
         <source>Value of the last X grid line.
 
 The stop value cannot be less than the start value</source>
@@ -3819,7 +3829,7 @@ The stop value cannot be less than the start value</source>
 정지 값은 시작 값보다 작을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="190" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="200" />
         <source>Disabled value.
 
 The Y grid lines are specified using only three values at a time. For flexibility, four values are offered so you must chose which value is disabled. Once disabled, that value is simply updated as the other values change</source>
@@ -3828,7 +3838,7 @@ The Y grid lines are specified using only three values at a time. For flexibilit
 Y 그리드 선은 한 번에 3 개의 값만 사용하여 지정됩니다. 유연성을 위해 네 가지 값이 제공되므로 사용하지 않도록 선택해야합니다. 사용 중지되면 다른 값이 변경 될 때 해당 값이 간단히 업데이트됩니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="209" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="219" />
         <source>Number of Y grid lines.
 
 The number of Y grid lines must be entered as an integer greater than zero</source>
@@ -3837,7 +3847,7 @@ The number of Y grid lines must be entered as an integer greater than zero</sour
 Y 그리드 선의 수는 0보다 큰 정수로 입력해야합니다</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="222" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="232" />
         <source>Value of the first Y grid line.
 
 The start value cannot be greater than the stop value</source>
@@ -3854,7 +3864,7 @@ The step value must be greater than zero</source>
 단계 값은 0보다 커야합니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="244" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="254" />
         <source>Value of the last Y grid line.
 
 The stop value cannot be less than the start value</source>
@@ -3863,37 +3873,37 @@ The stop value cannot be less than the start value</source>
 정지 값은 시작 값보다 작을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="260" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="270" />
         <source>Preview</source>
         <translation>시사</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="267" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="277" />
         <source>Preview window that shows how current settings affect grid display</source>
         <translation>현재 설정이 그리드 표시에 미치는 영향을 보여주는 미리보기 창</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="330" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="340" />
         <source>X Grid Lines</source>
         <translation>X 그리드 라인</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="332" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="342" />
         <source>Grid Lines</source>
         <translation>눈금 선</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="336" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="346" />
         <source>Y Grid Lines</source>
         <translation>Y 그리드 라인</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="338" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="348" />
         <source>Radius Grid Lines</source>
         <translation>반경 그리드 선</translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="602" />
+        <location filename="../src/Dlg/DlgSettingsGridDisplay.cpp" line="623" />
         <source>Grid line count exceeds limit set by Settings / Main Window.</source>
         <translation>눈금 선 수가 설정 / 기본 창에서 설정 한 제한을 초과합니다.</translation>
     </message>
@@ -4586,7 +4596,7 @@ In addition to the points placed at regular intervals, this option causes a poin
     </message>
     <message>
         <source>Line width</source>
-        <translation type="vanished">선의 폭</translation>
+        <translation type="vanished">선폭</translation>
     </message>
     <message>
         <source>Select a size for the lines drawn along a segment</source>
@@ -5352,7 +5362,7 @@ Do you want to save your changes?</source>
         <translation>일반 데이터를 읽을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="155" />
+        <location filename="../src/Document/DocumentModelGridDisplay.cpp" line="173" />
         <location filename="../src/Document/DocumentModelGuideline.cpp" line="131" />
         <source>Cannot read grid display data</source>
         <translation>그리드 표시 데이터를 읽을 수 없습니다.</translation>
