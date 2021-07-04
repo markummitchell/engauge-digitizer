@@ -9,6 +9,7 @@
 
 #include "DocumentModelAbstractBase.h"
 #include "ImportCropping.h"
+#include "LoadViews.h"
 #include "MainTitleBarFormat.h"
 #include <QLocale>
 #include <QString>
@@ -22,6 +23,7 @@ extern const int DEFAULT_SIGNIFICANT_DIGITS;
 extern const bool DEFAULT_SMALL_DIALOGS;
 extern const bool DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT;
 extern const int DEFAULT_MAXIMUM_EXPORTED_POINTS_PER_CURVE;
+extern const LoadViews DEFAULT_LOAD_VIEWS;
 
 /// Model for DlgSettingsMainWindow. Unlike the other models (DocumentModel*) this data is not saved and 
 /// loaded within the document, so no xml or working with the Document class is involved. Also, there is
@@ -41,7 +43,7 @@ public:
 
   /// Get method for drag and drop export
   bool dragDropExport () const;
-  
+
   /// Get method for highlight opacity
   double highlightOpacity() const;
 
@@ -51,8 +53,11 @@ public:
   /// Get method for import cropping
   ImportCropping importCropping () const;
 
-  virtual void loadXml(QXmlStreamReader &reader);
+  /// Get method for how to load views
+  LoadViews loadViews () const;
 
+  virtual void loadXml(QXmlStreamReader &reader);
+  
   /// Get method for locale
   QLocale locale() const;
 
@@ -86,6 +91,9 @@ public:
   /// Set method for import cropping
   void setImportCropping (ImportCropping importCropping);
 
+  /// Set method for how to load views
+  void setLoadViews (LoadViews loadViews);
+  
   /// Set method for locale given attributes
   void setLocale (QLocale::Language language,
                   QLocale::Country country);
@@ -137,6 +145,7 @@ private:
   MainTitleBarFormat m_mainTitleBarFormat;
   int m_pdfResolution;
   ImportCropping m_importCropping;
+  LoadViews m_loadViews;
   int m_maximumGridLines;
   double m_highlightOpacity;
   bool m_smallDialogs;

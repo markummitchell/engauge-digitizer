@@ -3271,7 +3271,7 @@ Controls for specifying the format of relations during export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1305"/>
+        <location filename="../src/Dlg/DlgSettingsExportFormat.cpp" line="1286"/>
         <source>Preview is unavailable until axis points are defined.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3712,61 +3712,61 @@ Set the color of the guidelines that can be dragged from the edges of the scene,
 <context>
     <name>DlgSettingsMainWindow</name>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="51"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="52"/>
         <source>Main Window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="76"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="77"/>
         <source>Initial zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="91"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="92"/>
         <source>Initial Zoom
 
 Select the initial zoom factor when a new document is loaded. Either the previous zoom can be kept, or the specified zoom can be applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="97"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="98"/>
         <source>Zoom control</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="101"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102"/>
         <source>Menu only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="103"/>
         <source>Menu and mouse wheel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="103"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104"/>
         <source>Menu and +/- keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="105"/>
         <source>Menu, mouse wheel and +/- keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="105"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="106"/>
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="110"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="111"/>
         <source>Locale (requires restart)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="115"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="116"/>
         <source>Locale
 
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
@@ -3775,12 +3775,12 @@ The locale determines how numbers are formatted. Specifically, either commas or 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="135"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="136"/>
         <source>Import cropping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="139"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="140"/>
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
@@ -3790,100 +3790,122 @@ This setting only has an effect when Engauge has been built with support for pdf
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="152"/>
-        <source>Import PDF resolution (dots per inch)</source>
+        <source>Views after load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="156"/>
+        <source>Views After Load
+
+Selects the set of views to be shown after loading a document. Either the existing views can be kept, or the views last used for the loaded document can be restored.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="159"/>
+        <source>Keep current views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="160"/>
+        <source>Use document views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="165"/>
+        <source>Import PDF resolution (dots per inch)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="169"/>
         <source>Import PDF Resolution
 
 Imported Portable Document Format (PDF) files will be converted to this pixel resolution in dots per inch (DPI), where each pixel is one dot. A higher value increases the picture resolution and may also improve numeric digitizing accuracy. However, a very high value can make the image so large that Engauge will slow down.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="171"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="184"/>
         <source>Maximum grid lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="176"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="189"/>
         <source>Maximum Grid Lines
 
 Maximum number of grid lines to be processed. This limit is applied when the step value is too small for the start and stop values, which would result in too many grid lines visually and possibly extremely long processing time (since each grid line would have to be processed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="183"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="196"/>
         <source>Maximum exported points per curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="189"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="202"/>
         <source>Maximum Exported Points per Curve
 
 This is the maximum number of points allowed in each exported curve. No points are exported when this is exceeded. This limit prevents delays and overly large file sizes due to curves that have too many points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="196"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="209"/>
         <source>Highlight opacity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="202"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="215"/>
         <source>Highlight Opacity
 
 Opacity to be applied when the cursor is over a curve or axis point in Select mode. The change in appearance shows when the point can be selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="208"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="221"/>
         <source>Recent file list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="211"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="224"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="213"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="226"/>
         <source>Recent File List Clear
 
 Clear the recent file list in the File menu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="219"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="232"/>
         <source>Include title bar path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="224"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="237"/>
         <source>Title Bar Filename
 
 Includes or excludes the path and file extension from the filename in the title bar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="229"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="242"/>
         <source>Allow small dialogs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="234"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="247"/>
         <source>Allow Small Dialogs
 
 Allows settings dialogs to be made very small so they fit on small computer screens.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="239"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="252"/>
         <source>Allow drag and drop export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="244"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="257"/>
         <source>Allow Drag and Drop Export
 
 Allows drag and drop export from the Curve Fitting Window and Geometry Window tables.
@@ -3892,24 +3914,24 @@ When drag and drop is disabled, a rectangular set of table cells can be selected
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="252"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="265"/>
         <source>Image replace renames document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="257"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="270"/>
         <source>Image Replace Renames Document
 
 When an image is imported to replace the current image, the document will be renamed if this is true, otherwise the name will stay the same.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="263"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="276"/>
         <source>Significant digits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="268"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="281"/>
         <source>Significant Digits
 
 Number of digits of precision in floating point numbers. This value affects calculations for curve fits, since intermediate results smaller than a threshold T indicate that a polynomial curve with a specific order cannot be fitted to the data. The threshold T is computed from the maximum matrix element M and significant digits S as T = M / 10^S.</source>
@@ -4254,109 +4276,109 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="499"/>
+        <location filename="../src/main/MainWindow.cpp" line="500"/>
         <source>Unable to export to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="544"/>
+        <location filename="../src/main/MainWindow.cpp" line="545"/>
         <source>Unable to extract image to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="624"/>
+        <location filename="../src/main/MainWindow.cpp" line="625"/>
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1336"/>
+        <location filename="../src/main/MainWindow.cpp" line="1337"/>
         <source>Cannot read file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="710"/>
+        <location filename="../src/main/MainWindow.cpp" line="711"/>
         <source>Import Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1058"/>
+        <location filename="../src/main/MainWindow.cpp" line="1059"/>
         <source>File opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1102"/>
+        <location filename="../src/main/MainWindow.cpp" line="1103"/>
         <source>File not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1119"/>
+        <location filename="../src/main/MainWindow.cpp" line="1120"/>
         <source>Error report opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1182"/>
-        <location filename="../src/main/MainWindow.cpp" line="1256"/>
+        <location filename="../src/main/MainWindow.cpp" line="1183"/>
+        <location filename="../src/main/MainWindow.cpp" line="1257"/>
         <source>File imported</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1290"/>
+        <location filename="../src/main/MainWindow.cpp" line="1291"/>
         <source>Background image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1291"/>
+        <location filename="../src/main/MainWindow.cpp" line="1292"/>
         <source>Currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1292"/>
+        <location filename="../src/main/MainWindow.cpp" line="1293"/>
         <source>Point style for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293"/>
+        <location filename="../src/main/MainWindow.cpp" line="1294"/>
         <source>Segment Fill filter for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1319"/>
+        <location filename="../src/main/MainWindow.cpp" line="1320"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1405"/>
+        <location filename="../src/main/MainWindow.cpp" line="1406"/>
         <source>Cannot write file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1453"/>
+        <location filename="../src/main/MainWindow.cpp" line="1454"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2518"/>
+        <location filename="../src/main/MainWindow.cpp" line="2522"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2600"/>
+        <location filename="../src/main/MainWindow.cpp" line="2604"/>
         <source>Open Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3931"/>
+        <location filename="../src/main/MainWindow.cpp" line="3935"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3932"/>
+        <location filename="../src/main/MainWindow.cpp" line="3936"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4068"/>
+        <location filename="../src/main/MainWindow.cpp" line="4072"/>
         <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4714,6 +4736,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelCoords.cpp" line="170"/>
+        <location filename="../src/Document/DocumentModelLoadViews.cpp" line="84"/>
         <source>Cannot read coordinates data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5021,13 +5044,8 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="634"/>
+        <location filename="../src/main/MainWindow.cpp" line="635"/>
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/main/MainWindowModel.cpp" line="122"/>
-        <source>Cannot read main window data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5189,6 +5207,11 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../src/Export/ExportFileExtension.cpp" line="51"/>
         <source>Preview for TSV files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Export/ExportFileFunctions.cpp" line="202"/>
+        <source>Too many points</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -289,6 +289,7 @@ HEADERS  += \
     src/Document/DocumentModelGridDisplay.h \
     src/Document/DocumentModelGridRemoval.h \
     src/Document/DocumentModelGuideline.h \
+    src/Document/DocumentModelLoadViews.h \
     src/Document/DocumentModelPointMatch.h \
     src/Document/DocumentModelSegments.h \
     src/Document/DocumentScrub.h \
@@ -454,6 +455,7 @@ HEADERS  += \
     src/Line/LineStyle.h \
     src/Load/LoadFileInfo.h \
     src/Load/LoadImageFromUrl.h \
+    src/Load/LoadViews.h \
     src/Logger/Logger.h \
     src/Logger/LoggerUpload.h \
     src/main/MainDirectoryPersist.h \
@@ -745,6 +747,7 @@ SOURCES += \
     src/Document/DocumentModelGridDisplay.cpp \
     src/Document/DocumentModelGridRemoval.cpp \
     src/Document/DocumentModelGuideline.cpp \
+    src/Document/DocumentModelLoadViews.cpp \
     src/Document/DocumentModelPointMatch.cpp \
     src/Document/DocumentModelSegments.cpp \
     src/Document/DocumentScrub.cpp \
@@ -898,6 +901,7 @@ SOURCES += \
     src/Line/LineStyle.cpp \
     src/Load/LoadFileInfo.cpp \
     src/Load/LoadImageFromUrl.cpp \
+    src/Load/LoadViews.cpp \
     src/Logger/Logger.cpp \
     src/Logger/LoggerUpload.cpp \
     src/main/main.cpp \

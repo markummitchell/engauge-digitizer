@@ -28,13 +28,15 @@ const int DEFAULT_SIGNIFICANT_DIGITS = 7;
 const bool DEFAULT_SMALL_DIALOGS = false;
 const bool DEFAULT_IMAGE_REPLACE_RENAMES_DOCUMENT = true; // Pre-version 11.3 behavior
 const int DEFAULT_MAXIMUM_EXPORTED_POINTS_PER_CURVE = 5000; // Moved 1/2020 from Export classes
-
+const LoadViews DEFAULT_LOAD_VIEWS = LOAD_VIEWS_KEEP_CURRENT; // Pre-version 13 behavior
+  
 MainWindowModel::MainWindowModel() :
   m_zoomControl (ZOOM_CONTROL_MENU_WHEEL_PLUSMINUS),
   m_zoomFactorInitial (DEFAULT_ZOOM_FACTOR_INITIAL),
   m_mainTitleBarFormat (MAIN_TITLE_BAR_FORMAT_PATH),
   m_pdfResolution (DEFAULT_IMPORT_PDF_RESOLUTION),
   m_importCropping (DEFAULT_IMPORT_CROPPING),
+  m_loadViews (DEFAULT_LOAD_VIEWS),
   m_maximumGridLines (DEFAULT_MAXIMUM_GRID_LINES),
   m_highlightOpacity (DEFAULT_HIGHLIGHT_OPACITY),
   m_smallDialogs (DEFAULT_SMALL_DIALOGS),
@@ -53,6 +55,7 @@ MainWindowModel::MainWindowModel(const MainWindowModel &other) :
   m_mainTitleBarFormat (other.mainTitleBarFormat()),
   m_pdfResolution (other.pdfResolution()),
   m_importCropping (other.importCropping()),
+  m_loadViews (other.loadViews()),
   m_maximumGridLines (other.maximumGridLines()),
   m_highlightOpacity (other.highlightOpacity()),
   m_smallDialogs (other.smallDialogs()),
@@ -71,6 +74,7 @@ MainWindowModel &MainWindowModel::operator=(const MainWindowModel &other)
   m_mainTitleBarFormat = other.mainTitleBarFormat();
   m_pdfResolution = other.pdfResolution();
   m_importCropping = other.importCropping();
+  m_loadViews = other.loadViews();
   m_maximumGridLines = other.maximumGridLines();
   m_highlightOpacity = other.highlightOpacity();
   m_smallDialogs = other.smallDialogs();
@@ -102,25 +106,16 @@ ImportCropping MainWindowModel::importCropping() const
   return m_importCropping;
 }
 
-void MainWindowModel::loadXml(QXmlStreamReader &reader)
+LoadViews MainWindowModel::loadViews () const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindowModel::loadXml";
+  return m_loadViews;
+}
 
-  bool success = true;
+void MainWindowModel::loadXml(QXmlStreamReader & /* reader */)
+{
+  LOG4CPP_ERROR_S ((*mainCat)) << "MainWindowModel::loadXml";
 
-  // Read until end of this subtree
-  while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
-  (reader.name() != DOCUMENT_SERIALIZE_MAIN_WINDOW)){
-    loadNextFromReader(reader);
-    if (reader.atEnd()) {
-      success = false;
-      break;
-    }
-  }
-
-  if (!success) {
-    reader.raiseError (QObject::tr ("Cannot read main window data"));
-  }
+  // This class is  never serialized
 }
 
 QLocale MainWindowModel::locale () const
@@ -163,6 +158,10 @@ void MainWindowModel::printStream(QString indentation,
                                                         "Path") << "\n";
   str << indentation << "pdfResolution=" << m_pdfResolution << "\n";
   str << indentation << "importCropping=" << ImportCroppingUtilBase::importCroppingToString (m_importCropping).toLatin1().data() << "\n";
+  str << indentation << "loadViews=" << (m_loadViews == LOAD_VIEWS_KEEP_CURRENT ?
+
+                                         "KeepCurrent" :
+                                         "UseDocument") << "\n";
   str << indentation << "maximumGridLines=" << m_maximumGridLines << "\n";
   str << indentation << "highlightOpacity=" << m_highlightOpacity << "\n";
   str << indentation << "smallDialogs=" << (m_smallDialogs ? "yes" : "no") << "\n";
@@ -172,12 +171,11 @@ void MainWindowModel::printStream(QString indentation,
   str << indentation << "maximumExportedPointsPerCurve=" << m_maximumExportedPointsPerCurve << "\n";
 }
 
-void MainWindowModel::saveXml(QXmlStreamWriter &writer) const
+void MainWindowModel::saveXml(QXmlStreamWriter & /* writer */) const
 {
-  LOG4CPP_INFO_S ((*mainCat)) << "MainWindowModel::saveXml";
+  LOG4CPP_ERROR_S ((*mainCat)) << "MainWindowModel::saveXml";
 
-  writer.writeStartElement(DOCUMENT_SERIALIZE_MAIN_WINDOW);
-  writer.writeEndElement();
+  // This class is  never serialized
 }
 
 void MainWindowModel::setDragDropExport(bool dragDropExport)
@@ -198,6 +196,11 @@ void MainWindowModel::setImageReplaceRenamesDocument(bool imageReplaceRenamesDoc
 void MainWindowModel::setImportCropping (ImportCropping importCropping)
 {
   m_importCropping = importCropping;
+}
+
+void MainWindowModel::setLoadViews (LoadViews loadViews)
+{
+  m_loadViews = loadViews;
 }
 
 void MainWindowModel::setLocale (QLocale::Language language,

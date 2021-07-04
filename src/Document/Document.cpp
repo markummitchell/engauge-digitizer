@@ -673,6 +673,8 @@ void Document::loadVersions7AndUp (QFile *file)
         } else if (tag == DOCUMENT_SERIALIZE_IMAGE) {
           // A standard Document file has DOCUMENT_SERIALIZE_IMAGE inside DOCUMENT_SERIALIZE_DOCUMENT, versus an error report file
           loadImage(reader);
+        } else if (tag == DOCUMENT_SERIALIZE_LOAD_VIEWS) {
+          m_modelLoadViews.loadXml (reader);
         }
       }
     }
@@ -756,6 +758,13 @@ DocumentModelGuideline Document::modelGuideline() const
   LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelGuideline";
 
   return m_coordSystemContext.modelGuideline();
+}
+
+DocumentModelLoadViews Document::modelLoadViews() const
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "Document::modelLoadViews";
+
+  return m_modelLoadViews;
 }
 
 DocumentModelPointMatch Document::modelPointMatch() const
@@ -1055,6 +1064,13 @@ void Document::setModelGuideline(const DocumentModelGuideline &modelGuideline)
 
   m_coordSystemContext.setModelGuideline(modelGuideline);
 }  
+
+void Document::setModelLoadViews(const DocumentModelLoadViews &modelLoadViews)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "Document::setModelLoadViews";
+
+  m_modelLoadViews = modelLoadViews;
+}
 
 void Document::setModelPointMatch(const DocumentModelPointMatch &modelPointMatch)
 {

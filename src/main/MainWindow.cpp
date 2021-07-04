@@ -73,6 +73,7 @@
 #endif // ENGAUGE_JPEG2000
 #include "LoadFileInfo.h"
 #include "LoadImageFromUrl.h"
+#include "LoadViews.h"
 #include "Logger.h"
 #include "MainDirectoryPersist.h"
 #include "MainTitleBarFormat.h"
@@ -1812,6 +1813,8 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
                                                       QVariant (DEFAULT_IMPORT_PDF_RESOLUTION)).toInt ());
   m_modelMainWindow.setImportCropping (static_cast<ImportCropping> (settings.value (SETTINGS_IMPORT_CROPPING,
                                                                                     QVariant (DEFAULT_IMPORT_CROPPING)).toInt ()));
+  m_modelMainWindow.setLoadViews (static_cast<LoadViews> (settings.value (SETTINGS_LOAD_VIEWS,
+                                                                          QVariant (DEFAULT_LOAD_VIEWS)).toInt ()));
   m_modelMainWindow.setMaximumGridLines (settings.value (SETTINGS_MAXIMUM_GRID_LINES,
                                                          QVariant (DEFAULT_MAXIMUM_GRID_LINES)).toInt ());
   m_modelMainWindow.setHighlightOpacity (settings.value (SETTINGS_HIGHLIGHT_OPACITY,
@@ -1892,6 +1895,7 @@ void MainWindow::settingsWrite ()
   settings.setValue (SETTINGS_IMAGE_REPLACE_RENAMES_DOCUMENT, m_modelMainWindow.imageReplaceRenamesDocument());
   settings.setValue (SETTINGS_IMPORT_CROPPING, m_modelMainWindow.importCropping());
   settings.setValue (SETTINGS_IMPORT_PDF_RESOLUTION, m_modelMainWindow.pdfResolution ());
+  settings.setValue (SETTINGS_LOAD_VIEWS, m_modelMainWindow.loadViews());  
   settings.setValue (SETTINGS_LOCALE_LANGUAGE, m_modelMainWindow.locale().language());
   settings.setValue (SETTINGS_LOCALE_COUNTRY, m_modelMainWindow.locale().country());
   settings.setValue (SETTINGS_MAIN_DIRECTORY_EXPORT_SAVE,

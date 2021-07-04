@@ -45,6 +45,7 @@ private slots:
   void slotHighlightOpacity (double);
   void slotImageReplaceRenamesDocument (bool);
   void slotImportCropping (int index);
+  void slotLoadViews (int index);
   void slotLocale (int index);
   void slotMaximumExportedPointsPerCurve (int limit);
   void slotMaximumGridLines (int limit);
@@ -73,6 +74,7 @@ private:
   QComboBox *m_cmbZoomControl;
   QComboBox *m_cmbLocale;
   QComboBox *m_cmbImportCropping;
+  QComboBox *m_cmbLoadViews;
   QPushButton *m_btnRecentClear;
   QCheckBox *m_chkTitleBarFormat;
   QComboBox *m_cmbPdfResolution;

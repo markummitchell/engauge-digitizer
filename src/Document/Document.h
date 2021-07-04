@@ -21,6 +21,7 @@
 #include "DocumentModelGridDisplay.h"
 #include "DocumentModelGridRemoval.h"
 #include "DocumentModelGuideline.h"
+#include "DocumentModelLoadViews.h"
 #include "DocumentModelPointMatch.h"
 #include "DocumentModelSegments.h"
 #include "PointStyle.h"
@@ -31,7 +32,6 @@
 
 class CoordSystem;
 class Curve;
-class DocumentModelGuideline;
 class QByteArray;
 class QFile;
 class QImage;
@@ -169,7 +169,7 @@ public:
 
   /// Initialize grid display. This is called immediately after the transformation has been defined for the first time
   void initializeGridDisplay (const Transformation &transformation);
-
+  
   /// See Curve::isXOnly
   bool isXOnly (const QString &pointIdentifier) const;
 
@@ -221,6 +221,9 @@ public:
 
   /// Get method for DocumentModelGuideline.
   DocumentModelGuideline modelGuideline() const;
+
+  /// Get method for DocumentModelLoadViews.
+  DocumentModelLoadViews modelLoadViews() const;
   
   /// Get method for DocumentModelPointMatch.
   DocumentModelPointMatch modelPointMatch() const;
@@ -311,6 +314,9 @@ public:
 
   /// Set method for DocumentModelGuideline.
   void setModelGuideline(const DocumentModelGuideline &modelGuideline);
+
+  /// Set method for DocumentModelLoadViews.
+  void setModelLoadViews(const DocumentModelLoadViews &modelLoadViews);
   
   /// Set method for DocumentModelPointMatch.
   void setModelPointMatch(const DocumentModelPointMatch &modelPointMatch);
@@ -356,6 +362,7 @@ private:
   QString m_reasonForUnsuccessfulRead;
 
   CoordSystemContext m_coordSystemContext;
+  DocumentModelLoadViews m_modelLoadViews; // Not found in pre-version 13 in which case its own defaults are used
 };
 
 #endif // DOCUMENT_H

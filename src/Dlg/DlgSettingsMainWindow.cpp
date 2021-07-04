@@ -149,6 +149,18 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   connect (m_cmbImportCropping, SIGNAL (currentIndexChanged (int)), this, SLOT (slotImportCropping (int)));
   layout->addWidget (m_cmbImportCropping, row++, 2);
 
+  QLabel *labelLoadViews = new QLabel (QString ("%1:").arg (tr ("Views after load")));
+  layout->addWidget (labelLoadViews, row, 1);
+
+  m_cmbLoadViews = new QComboBox;
+  m_cmbLoadViews->setWhatsThis (tr ("Views After Load\n\n"
+                                    "Selects the set of views to be shown after loading a document. Either the existing views "
+                                    "can be kept, or the views last used for the loaded document can be restored."));
+  m_cmbLoadViews->addItem (tr ("Keep current views"), LOAD_VIEWS_KEEP_CURRENT);
+  m_cmbLoadViews->addItem (tr ("Use document views"), LOAD_VIEWS_USE_DOCUMENT);
+  connect (m_cmbLoadViews, SIGNAL (currentIndexChanged (int)), this, SLOT (slotLoadViews (int)));
+  layout->addWidget (m_cmbLoadViews, row++, 2);
+
 #ifdef ENGAUGE_PDF
   QLabel *labelPdfResolution = new QLabel (QString ("%1:").arg (tr ("Import PDF resolution (dots per inch)")));
   layout->addWidget (labelPdfResolution, row, 1);
@@ -363,6 +375,8 @@ void DlgSettingsMainWindow::loadMainWindowModel (CmdMediator &cmdMediator,
   m_cmbLocale->setCurrentIndex(index);
   index = m_cmbImportCropping->findData (m_modelMainWindowAfter->importCropping());
   m_cmbImportCropping->setCurrentIndex (index);
+  index = m_cmbLoadViews->findData (m_modelMainWindowAfter->loadViews());
+  m_cmbLoadViews->setCurrentIndex (index);
   m_chkTitleBarFormat->setChecked (m_modelMainWindowAfter->mainTitleBarFormat() == MAIN_TITLE_BAR_FORMAT_PATH);
 #ifdef ENGAUGE_PDF
   index = m_cmbPdfResolution->findData (m_modelMainWindowAfter->pdfResolution());
@@ -416,6 +430,13 @@ void DlgSettingsMainWindow::slotImportCropping (int index)
   updateControls();
 }
 
+void DlgSettingsMainWindow::slotLoadViews (int index)
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotLoadViews";
+
+  m_modelMainWindowAfter->setLoadViews (static_cast<LoadViews> (m_cmbLoadViews->itemData (index).toInt ()));
+  updateControls();
+}
 void DlgSettingsMainWindow::slotLocale (int index)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "DlgSettingsMainWindow::slotLocale";
