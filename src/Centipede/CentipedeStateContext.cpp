@@ -13,6 +13,7 @@
 #include "CmdGuidelineAddYR.h"
 #include "DigitizeStateGuideline.h"
 #include "EngaugeAssert.h"
+#include "GraphicsScene.h"
 #include "Logger.h"
 #include "MainWindow.h"
 #include <QObject>
@@ -43,6 +44,9 @@ CentipedeStateContext::~CentipedeStateContext()
   }
 
   m_states.clear();
+
+  delete m_scene;
+  delete m_transformation;
 }
 
 void CentipedeStateContext::completeRequestedStateTransitionIfExists ()

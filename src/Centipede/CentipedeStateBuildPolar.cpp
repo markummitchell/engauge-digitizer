@@ -21,6 +21,7 @@ CentipedeStateBuildPolar::CentipedeStateBuildPolar (CentipedeStateContext &conte
 
 CentipedeStateBuildPolar::~CentipedeStateBuildPolar ()
 {
+  delete m_centipedePair;
 }
 
 void CentipedeStateBuildPolar::begin ()

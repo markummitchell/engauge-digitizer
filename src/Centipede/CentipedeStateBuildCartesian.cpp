@@ -21,6 +21,7 @@ CentipedeStateBuildCartesian::CentipedeStateBuildCartesian (CentipedeStateContex
 
 CentipedeStateBuildCartesian::~CentipedeStateBuildCartesian ()
 {
+  delete m_centipedePair;
 }
 
 void CentipedeStateBuildCartesian::begin ()
