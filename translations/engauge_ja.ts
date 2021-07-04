@@ -4886,7 +4886,7 @@ Zooming the image in or out is performed using any of several methods:
         <translation>OSXでは、起動時にロードされるファイルは、Downloads、Pictures、またはLibrary / Containers / Digitizer / Dataディレクトリにある必要があります</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1337" />
+        <location filename="../src/main/MainWindow.cpp" line="1361" />
         <source>Cannot read file</source>
         <translation>ファイルを読み込むことができません。</translation>
     </message>
@@ -4905,80 +4905,80 @@ Zooming the image in or out is performed using any of several methods:
         <translation>ファイルが開かれた</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1103" />
+        <location filename="../src/main/MainWindow.cpp" line="1104" />
         <source>File not found</source>
         <translation>ファイル が見つかりません。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1120" />
+        <location filename="../src/main/MainWindow.cpp" line="1121" />
         <source>Error report opened</source>
         <translation>エラー レポートを 開きました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1183" />
-        <location filename="../src/main/MainWindow.cpp" line="1257" />
+        <location filename="../src/main/MainWindow.cpp" line="1184" />
+        <location filename="../src/main/MainWindow.cpp" line="1258" />
         <source>File imported</source>
         <translation>ファイル をインポートしました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1291" />
+        <location filename="../src/main/MainWindow.cpp" line="1292" />
         <source>Background image.</source>
         <translation>バックグラウンド 画像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1292" />
+        <location filename="../src/main/MainWindow.cpp" line="1293" />
         <source>Currently selected curve.</source>
         <translation>現在 選択中の カーブ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293" />
+        <location filename="../src/main/MainWindow.cpp" line="1294" />
         <source>Point style for currently selected curve.</source>
         <translation>現在 選択中の カーブの ポイント 表示設定</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1294" />
+        <location filename="../src/main/MainWindow.cpp" line="1295" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>現在 選択中の カーブに対する セグメント フィル フィルタ </translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1320" />
+        <location filename="../src/main/MainWindow.cpp" line="1344" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>ドキュメントの内容が変更されました。
 変更を保存しますか？</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1406" />
+        <location filename="../src/main/MainWindow.cpp" line="1432" />
         <source>Cannot write file</source>
         <translation>ファイル への書き込みに失敗しました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1454" />
+        <location filename="../src/main/MainWindow.cpp" line="1480" />
         <source>Save</source>
         <translation>セーブ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2522" />
+        <location filename="../src/main/MainWindow.cpp" line="2548" />
         <source>Export</source>
         <translation>エクスポート</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2604" />
+        <location filename="../src/main/MainWindow.cpp" line="2630" />
         <source>Open Document</source>
         <translation>ドキュメントを開く</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3935" />
+        <location filename="../src/main/MainWindow.cpp" line="3961" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3936" />
+        <location filename="../src/main/MainWindow.cpp" line="3962" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4072" />
+        <location filename="../src/main/MainWindow.cpp" line="4098" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5348,7 +5348,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelCoords.cpp" line="170" />
-        <location filename="../src/Document/DocumentModelLoadViews.cpp" line="84" />
         <source>Cannot read coordinates data</source>
         <translation>座標系 情報 を読み込むことができません。</translation>
     </message>
@@ -5925,6 +5924,11 @@ Do you want to save your changes?</source>
         <location filename="../src/Export/ExportFileFunctions.cpp" line="202" />
         <source>Too many points</source>
         <translation>ポイントが多すぎる</translation>
+    </message>
+    <message>
+        <location filename="../src/Document/DocumentModelLoadViews.cpp" line="91" />
+        <source>Cannot read settings for views loading</source>
+        <translation>ビューの読み込みの設定を読み取れません</translation>
     </message>
 </context>
 <context>

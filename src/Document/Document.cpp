@@ -934,6 +934,7 @@ void Document::saveXml (QXmlStreamWriter &writer) const
   writer.writeEndElement();
 
   m_coordSystemContext.saveXml (writer);
+  m_modelLoadViews.saveXml (writer);
 }
 
 QString Document::selectedCurveName() const

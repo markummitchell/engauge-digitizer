@@ -4871,7 +4871,7 @@ Zooming the image in or out is performed using any of several methods:
         <translation>OSX에서 시작시로드 된 파일은 Downloads, Pictures 또는 Library / Containers / Digitizer / Data 디렉토리에 있어야합니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1337" />
+        <location filename="../src/main/MainWindow.cpp" line="1361" />
         <source>Cannot read file</source>
         <translation>파일을 읽을 수 없습니다.</translation>
     </message>
@@ -4890,80 +4890,80 @@ Zooming the image in or out is performed using any of several methods:
         <translation>파일 열림</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1103" />
+        <location filename="../src/main/MainWindow.cpp" line="1104" />
         <source>File not found</source>
         <translation>파일을 찾을 수 없음</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1120" />
+        <location filename="../src/main/MainWindow.cpp" line="1121" />
         <source>Error report opened</source>
         <translation>오류 보고서가 열림</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1183" />
-        <location filename="../src/main/MainWindow.cpp" line="1257" />
+        <location filename="../src/main/MainWindow.cpp" line="1184" />
+        <location filename="../src/main/MainWindow.cpp" line="1258" />
         <source>File imported</source>
         <translation>가져온 파일</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1291" />
+        <location filename="../src/main/MainWindow.cpp" line="1292" />
         <source>Background image.</source>
         <translation>배경 이미지.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1292" />
+        <location filename="../src/main/MainWindow.cpp" line="1293" />
         <source>Currently selected curve.</source>
         <translation>현재 선택된 커브입니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293" />
+        <location filename="../src/main/MainWindow.cpp" line="1294" />
         <source>Point style for currently selected curve.</source>
         <translation>현재 선택한 커브의 점 스타일입니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1294" />
+        <location filename="../src/main/MainWindow.cpp" line="1295" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>세그먼트 현재 선택된 커브의 필터를 채 웁니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1320" />
+        <location filename="../src/main/MainWindow.cpp" line="1344" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>문서가 수정되었습니다.
 변경 사항을 저장 하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1406" />
+        <location filename="../src/main/MainWindow.cpp" line="1432" />
         <source>Cannot write file</source>
         <translation>파일을 쓸 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1454" />
+        <location filename="../src/main/MainWindow.cpp" line="1480" />
         <source>Save</source>
         <translation>구하다</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2522" />
+        <location filename="../src/main/MainWindow.cpp" line="2548" />
         <source>Export</source>
         <translation>수출</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2604" />
+        <location filename="../src/main/MainWindow.cpp" line="2630" />
         <source>Open Document</source>
         <translation>문서 열기</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3935" />
+        <location filename="../src/main/MainWindow.cpp" line="3961" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3936" />
+        <location filename="../src/main/MainWindow.cpp" line="3962" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4072" />
+        <location filename="../src/main/MainWindow.cpp" line="4098" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5333,7 +5333,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelCoords.cpp" line="170" />
-        <location filename="../src/Document/DocumentModelLoadViews.cpp" line="84" />
         <source>Cannot read coordinates data</source>
         <translation>좌표 데이터를 읽을 수 없습니다.</translation>
     </message>
@@ -5910,6 +5909,11 @@ Do you want to save your changes?</source>
         <location filename="../src/Export/ExportFileFunctions.cpp" line="202" />
         <source>Too many points</source>
         <translation>너무 많은 포인트</translation>
+    </message>
+    <message>
+        <location filename="../src/Document/DocumentModelLoadViews.cpp" line="91" />
+        <source>Cannot read settings for views loading</source>
+        <translation>보기로드에 대한 설정을 읽을 수 없습니다.</translation>
     </message>
 </context>
 <context>

@@ -4866,7 +4866,7 @@ Le zoom avant ou arrière de l'image est réalisé selon une des métodes suivan
         <translation>Sous OSX, les fichiers chargés au démarrage doivent se trouver dans les répertoires Téléchargements, Images ou Bibliothèque / Conteneurs / Numériseur / Données</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1337" />
+        <location filename="../src/main/MainWindow.cpp" line="1361" />
         <source>Cannot read file</source>
         <translation>Lecture fichier impossible</translation>
     </message>
@@ -4885,80 +4885,80 @@ Le zoom avant ou arrière de l'image est réalisé selon une des métodes suivan
         <translation>Fichier ouvert</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1103" />
+        <location filename="../src/main/MainWindow.cpp" line="1104" />
         <source>File not found</source>
         <translation>fichier introuvable</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1120" />
+        <location filename="../src/main/MainWindow.cpp" line="1121" />
         <source>Error report opened</source>
         <translation>Rapport d'erreur ouvert</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1183" />
-        <location filename="../src/main/MainWindow.cpp" line="1257" />
+        <location filename="../src/main/MainWindow.cpp" line="1184" />
+        <location filename="../src/main/MainWindow.cpp" line="1258" />
         <source>File imported</source>
         <translation>Fichier importé</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1291" />
+        <location filename="../src/main/MainWindow.cpp" line="1292" />
         <source>Background image.</source>
         <translation>Image de fond.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1292" />
+        <location filename="../src/main/MainWindow.cpp" line="1293" />
         <source>Currently selected curve.</source>
         <translation>Courbe sélectionnée.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293" />
+        <location filename="../src/main/MainWindow.cpp" line="1294" />
         <source>Point style for currently selected curve.</source>
         <translation>Type de point pour la courbe selectionnée.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1294" />
+        <location filename="../src/main/MainWindow.cpp" line="1295" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Filtre de remplissage par segment pour la courbe sélectionnée.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1320" />
+        <location filename="../src/main/MainWindow.cpp" line="1344" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>Le document a été modifié.
 Voulez-vous enregistrer vos modifications?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1406" />
+        <location filename="../src/main/MainWindow.cpp" line="1432" />
         <source>Cannot write file</source>
         <translation>Impossible d'écrire le fichier</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1454" />
+        <location filename="../src/main/MainWindow.cpp" line="1480" />
         <source>Save</source>
         <translation>Sauvegarder</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2522" />
+        <location filename="../src/main/MainWindow.cpp" line="2548" />
         <source>Export</source>
         <translation>Exporter</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2604" />
+        <location filename="../src/main/MainWindow.cpp" line="2630" />
         <source>Open Document</source>
         <translation>Ouvrir un fichier</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3935" />
+        <location filename="../src/main/MainWindow.cpp" line="3961" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3936" />
+        <location filename="../src/main/MainWindow.cpp" line="3962" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4072" />
+        <location filename="../src/main/MainWindow.cpp" line="4098" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5328,7 +5328,6 @@ Voulez-vous enregistrer vos modifications?</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelCoords.cpp" line="170" />
-        <location filename="../src/Document/DocumentModelLoadViews.cpp" line="84" />
         <source>Cannot read coordinates data</source>
         <translation>Ne peut lire les données des coordonnées</translation>
     </message>
@@ -5905,6 +5904,11 @@ Voulez-vous enregistrer vos modifications?</translation>
         <location filename="../src/Export/ExportFileFunctions.cpp" line="202" />
         <source>Too many points</source>
         <translation>Trop de points</translation>
+    </message>
+    <message>
+        <location filename="../src/Document/DocumentModelLoadViews.cpp" line="91" />
+        <source>Cannot read settings for views loading</source>
+        <translation>Impossible de lire les paramètres pour le chargement des vues</translation>
     </message>
 </context>
 <context>

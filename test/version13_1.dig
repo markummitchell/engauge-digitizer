@@ -89,4 +89,5 @@
             </Curve>
         </CurvesGraphs>
     </CoordSystem>
+    <LoadViews LoadViewsGridlines="True" LoadViewsGuidelines="True"/>
 </Document>

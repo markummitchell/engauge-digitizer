@@ -469,6 +469,8 @@ private:
                                 ImportType ImportType);
   void loadInputFileForErrorReport(QDomDocument &domInputFile) const;
   void loadToolTips ();
+  void loadViewsLoad (); // Apply the views settings as appropriate just after loading
+  void loadViewsSave (); // Save the current views settings just before saving
   bool maybeSave();
   QString messageCannotReadFile (const QString &fileName) const;
   bool modeGraph () const; // True if document is loaded and it has all graphs

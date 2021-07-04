@@ -33,6 +33,13 @@ DocumentModelLoadViews::DocumentModelLoadViews(const DocumentModelLoadViews &oth
 {
 }
 
+DocumentModelLoadViews::DocumentModelLoadViews(bool gridlines,
+                                               bool guidelines) :
+  m_gridlines (gridlines),
+  m_guidelines (guidelines)
+{
+}
+
 DocumentModelLoadViews &DocumentModelLoadViews::operator=(const DocumentModelLoadViews &other)
 {
   m_gridlines = other.gridlines ();
@@ -71,7 +78,7 @@ void DocumentModelLoadViews::loadXml(QXmlStreamReader &reader)
     
     // Read until end of this subtree
     while ((reader.tokenType() != QXmlStreamReader::EndElement) ||
-    (reader.name() != DOCUMENT_SERIALIZE_COORDS)){
+    (reader.name() != DOCUMENT_SERIALIZE_LOAD_VIEWS)){
       loadNextFromReader(reader);
       if (reader.atEnd()) {
         success = false;
@@ -81,7 +88,7 @@ void DocumentModelLoadViews::loadXml(QXmlStreamReader &reader)
   }
 
   if (!success) {
-    reader.raiseError (QObject::tr ("Cannot read coordinates data"));
+    reader.raiseError (QObject::tr ("Cannot read settings for views loading"));
   }
 }
 

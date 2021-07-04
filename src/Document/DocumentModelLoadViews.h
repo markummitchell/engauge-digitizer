@@ -25,6 +25,10 @@ public:
   /// Copy constructor.
   DocumentModelLoadViews(const DocumentModelLoadViews &other);
 
+  /// Inline constructor.
+  DocumentModelLoadViews (bool gridlines,
+                          bool guidelines);
+
   /// Assignment constructor.
   DocumentModelLoadViews &operator=(const DocumentModelLoadViews &other);
 

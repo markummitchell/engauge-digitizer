@@ -4891,7 +4891,7 @@ Ampliando a imagem dentro ou para fora é realizada usando qualquer um de vário
         <translation>No OSX, os arquivos carregados na inicialização devem estar nos diretórios Downloads, Imagens ou Biblioteca / Contêineres / Digitalizador / Dados</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1337" />
+        <location filename="../src/main/MainWindow.cpp" line="1361" />
         <source>Cannot read file</source>
         <translation>Não é possível ler o arquivo</translation>
     </message>
@@ -4910,80 +4910,80 @@ Ampliando a imagem dentro ou para fora é realizada usando qualquer um de vário
         <translation>Arquivo aberto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1103" />
+        <location filename="../src/main/MainWindow.cpp" line="1104" />
         <source>File not found</source>
         <translation>Arquivo não encontrado</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1120" />
+        <location filename="../src/main/MainWindow.cpp" line="1121" />
         <source>Error report opened</source>
         <translation>Relatório de erro aberto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1183" />
-        <location filename="../src/main/MainWindow.cpp" line="1257" />
+        <location filename="../src/main/MainWindow.cpp" line="1184" />
+        <location filename="../src/main/MainWindow.cpp" line="1258" />
         <source>File imported</source>
         <translation>Arquivo importado</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1291" />
+        <location filename="../src/main/MainWindow.cpp" line="1292" />
         <source>Background image.</source>
         <translation>Imagem de fundo.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1292" />
+        <location filename="../src/main/MainWindow.cpp" line="1293" />
         <source>Currently selected curve.</source>
         <translation>Atualmente selecionado curva.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293" />
+        <location filename="../src/main/MainWindow.cpp" line="1294" />
         <source>Point style for currently selected curve.</source>
         <translation>Estilo de ponto para a curva atualmente selecionada.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1294" />
+        <location filename="../src/main/MainWindow.cpp" line="1295" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Filtro de preenchimento segmento de curva atualmente selecionada.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1320" />
+        <location filename="../src/main/MainWindow.cpp" line="1344" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>O documento foi modificado.
 Você deseja salvar as alterações?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1406" />
+        <location filename="../src/main/MainWindow.cpp" line="1432" />
         <source>Cannot write file</source>
         <translation>Não é possível gravar arquivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1454" />
+        <location filename="../src/main/MainWindow.cpp" line="1480" />
         <source>Save</source>
         <translation>Salve</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2522" />
+        <location filename="../src/main/MainWindow.cpp" line="2548" />
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2604" />
+        <location filename="../src/main/MainWindow.cpp" line="2630" />
         <source>Open Document</source>
         <translation>Documento aberto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3935" />
+        <location filename="../src/main/MainWindow.cpp" line="3961" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3936" />
+        <location filename="../src/main/MainWindow.cpp" line="3962" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4072" />
+        <location filename="../src/main/MainWindow.cpp" line="4098" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitalizador</translation>
     </message>
@@ -5353,7 +5353,6 @@ Você deseja salvar as alterações?</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelCoords.cpp" line="170" />
-        <location filename="../src/Document/DocumentModelLoadViews.cpp" line="84" />
         <source>Cannot read coordinates data</source>
         <translation>Não é possível ler dados coordenadas</translation>
     </message>
@@ -5931,6 +5930,11 @@ Especifica um arquivo de script de comando arquivo como entrada. Usado para depu
         <location filename="../src/Export/ExportFileFunctions.cpp" line="202" />
         <source>Too many points</source>
         <translation>Muitos pontos</translation>
+    </message>
+    <message>
+        <location filename="../src/Document/DocumentModelLoadViews.cpp" line="91" />
+        <source>Cannot read settings for views loading</source>
+        <translation>Não é possível ler as configurações de carregamento de visualizações</translation>
     </message>
 </context>
 <context>

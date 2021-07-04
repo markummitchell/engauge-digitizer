@@ -4897,7 +4897,7 @@ Zooming av eller ut av bildet utføres ved hjelp av en av flere metoder:
         <translation>I OSX må filer som lastes inn ved oppstart, være i katalogene Nedlastinger, bilder eller bibliotek / containere / digitalisering / data</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1337" />
+        <location filename="../src/main/MainWindow.cpp" line="1361" />
         <source>Cannot read file</source>
         <translation>Kan ikke lese filen</translation>
     </message>
@@ -4916,80 +4916,80 @@ Zooming av eller ut av bildet utføres ved hjelp av en av flere metoder:
         <translation>Filen ble åpnet</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1103" />
+        <location filename="../src/main/MainWindow.cpp" line="1104" />
         <source>File not found</source>
         <translation>Fil ikke funnet</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1120" />
+        <location filename="../src/main/MainWindow.cpp" line="1121" />
         <source>Error report opened</source>
         <translation>Feilrapport ble åpnet</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1183" />
-        <location filename="../src/main/MainWindow.cpp" line="1257" />
+        <location filename="../src/main/MainWindow.cpp" line="1184" />
+        <location filename="../src/main/MainWindow.cpp" line="1258" />
         <source>File imported</source>
         <translation>Fil importert</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1291" />
+        <location filename="../src/main/MainWindow.cpp" line="1292" />
         <source>Background image.</source>
         <translation>Bakgrunnsbilde.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1292" />
+        <location filename="../src/main/MainWindow.cpp" line="1293" />
         <source>Currently selected curve.</source>
         <translation>For øyeblikket valgt kurve.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293" />
+        <location filename="../src/main/MainWindow.cpp" line="1294" />
         <source>Point style for currently selected curve.</source>
         <translation>Punktstil for valgt kurve.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1294" />
+        <location filename="../src/main/MainWindow.cpp" line="1295" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Segmentfyllfilter for gjeldende valgt kurve.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1320" />
+        <location filename="../src/main/MainWindow.cpp" line="1344" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>Dokumentet er endret.
 Vil du lagre endringene dine?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1406" />
+        <location filename="../src/main/MainWindow.cpp" line="1432" />
         <source>Cannot write file</source>
         <translation>Kan ikke skrive fil</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1454" />
+        <location filename="../src/main/MainWindow.cpp" line="1480" />
         <source>Save</source>
         <translation>Lagre</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2522" />
+        <location filename="../src/main/MainWindow.cpp" line="2548" />
         <source>Export</source>
         <translation>Eksport...</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2604" />
+        <location filename="../src/main/MainWindow.cpp" line="2630" />
         <source>Open Document</source>
         <translation>Åpne dokument</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3935" />
+        <location filename="../src/main/MainWindow.cpp" line="3961" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3936" />
+        <location filename="../src/main/MainWindow.cpp" line="3962" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4072" />
+        <location filename="../src/main/MainWindow.cpp" line="4098" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5360,7 +5360,6 @@ Vil du lagre endringene dine?</translation>
     </message>
     <message>
         <location filename="../src/Document/DocumentModelCoords.cpp" line="170" />
-        <location filename="../src/Document/DocumentModelLoadViews.cpp" line="84" />
         <source>Cannot read coordinates data</source>
         <translation>Kan ikke lese koordinatedata</translation>
     </message>
@@ -5858,6 +5857,11 @@ Vil du lagre endringene dine?</translation>
         <location filename="../src/Export/ExportFileFunctions.cpp" line="202" />
         <source>Too many points</source>
         <translation>For mange poeng</translation>
+    </message>
+    <message>
+        <location filename="../src/Document/DocumentModelLoadViews.cpp" line="91" />
+        <source>Cannot read settings for views loading</source>
+        <translation>Kan ikke lese innstillinger for visning</translation>
     </message>
 </context>
 <context>

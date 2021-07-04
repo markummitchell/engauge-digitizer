@@ -1067,6 +1067,7 @@ void MainWindow::loadDocumentFile (const QString &fileName)
     m_originalFile = fileName; // This is needed by updateAfterCommand below if an error report is generated
     m_originalFileWasImported = false;
 
+    loadViewsLoad ();
     updateGridLines ();
     updateGuidelines ();
     updateAfterCommand (); // Enable Save button now that m_engaugeFile is set
@@ -1311,6 +1312,29 @@ void MainWindow::loadToolTips()
   }
 }
 
+void MainWindow::loadViewsLoad ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::loadViewLoad";
+
+  if (m_modelMainWindow.loadViews() == LOAD_VIEWS_USE_DOCUMENT) {
+
+    // Restore document's view settings
+    const DocumentModelLoadViews &modelLoadViews = m_cmdMediator->document().modelLoadViews();
+
+    m_actionViewGridLines->setChecked (modelLoadViews.gridlines ());
+    m_actionViewGuidelines->setChecked (modelLoadViews.guidelines ());
+  }
+}
+
+void MainWindow::loadViewsSave ()
+{
+  LOG4CPP_DEBUG_S ((*mainCat)) << "MainWindow::loadViewSave";
+
+  DocumentModelLoadViews modelLoadViews (m_actionViewGridLines->isChecked(),
+                                         m_actionViewGuidelines->isChecked());
+  m_cmdMediator->document().setModelLoadViews (modelLoadViews);
+}
+
 bool MainWindow::maybeSave()
 {
   if (m_cmdMediator != nullptr) {
@@ -1397,6 +1421,8 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 bool MainWindow::saveDocumentFile (const QString &fileName)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::saveDocumentFile fileName=" << fileName.toLatin1 ().data ();
+
+  loadViewsSave(); // Save views settings just before saving file
 
   QFile file(fileName);
   if (!file.open(QFile::WriteOnly)) {
