@@ -6,6 +6,8 @@
 
 #include "DlgAbout.h"
 #include "MainWindow.h"
+#include <QGridLayout>
+#include <QSpacerItem>
 #include "Version.h"
 
 DlgAbout::DlgAbout (MainWindow &mainWindow) :
@@ -45,4 +47,17 @@ DlgAbout::DlgAbout (MainWindow &mainWindow) :
            .arg (tr ("Gitter Forum"))
            .arg (tr ("Project Page"))
            .arg (tr ("Project Page")));
+
+  // Calling setMinimumWidth has no effect so we insert spacer to prevent overly narrow dialog in linux.
+  // Hack from https://forum.qt.io/topic/24213/qmessagebox-too-small/9
+  QSpacerItem *spacer = new QSpacerItem (800,
+                                         0,
+                                         QSizePolicy::Minimum,
+                                         QSizePolicy::Expanding);
+  QGridLayout *layout = dynamic_cast<QGridLayout *> (this->layout());
+  layout->addItem (spacer,
+                   layout->rowCount(),
+                   0,
+                   1,
+                   layout->columnCount());
 }

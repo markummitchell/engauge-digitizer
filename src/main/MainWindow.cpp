@@ -1734,7 +1734,7 @@ void MainWindow::settingsReadMainWindow (QSettings &settings)
   settings.beginGroup(SETTINGS_GROUP_MAIN_WINDOW);
 
   // Try to keep geometry inside typical 1920x1080 window, but big enough that unit tests can be mostly or totally seen
-  const int DEFAULT_MAIN_WINDOW_WIDTH = 800, DEFAULT_MAIN_WINDOW_HEIGHT = 800;
+  const int DEFAULT_MAIN_WINDOW_WIDTH = 900, DEFAULT_MAIN_WINDOW_HEIGHT = 900;
   const int DEFAULT_MAIN_WINDOW_OFFSET_X = 100, DEFAULT_MAIN_WINDOW_OFFSET_Y = 100;
 
   // Main window geometry

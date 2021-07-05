@@ -39,6 +39,15 @@
 #        "QMAKE_CXXFLAGS+=-fno-stack-protector" "LIBS=-fsanitize=address,undefined" engauge.pro
 # 11) To add thread sanitizer (sometimes trigggering race condition segfault in ubuntu), with line numbers for later gdb debugging
 #        qmake "QMAKE_CXXFLAGS+=-fsanitize=thread" "QMAKE_CXXFLAGS+=-g1" "LIBS=-fsanitize=thread" engauge.pro
+# 12) For engauge to work with linux file associations, the following constraints must be satisfied:
+#     a) LD_LIBRARY_PATH cannot be used directly, which suggests the use of either (1) a wrapper script that sets that variable or
+#        (2) '-Wl,-rpath=<directory>' to add a directory to the runtime library search path
+#     b) If '-Wl,-rpath=<directory>' approach is selected, '-rpath=.' must not be used since it is dangerous
+#     c) The '-Wl,-rpath=<directory>' solution, consistent with rpath meaning relative path that is relative to the executable,
+#        only works if the execution directory can be restricted to be the same as the executable directory. This is not the
+#        case when working with linux file associations, so the wrapper approach was ultimately selected.
+#     In any case, if there is a missing library when running a development build in linux, it means a library is missing from the
+#     library directory pointed to by the wrapper script Engauge_wrapper
 #
 # More comments are in the INSTALL file, and below
 

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Wrapper script to run Engauge executable without having to set LD_LIBRARY_PATH before execution.
+# This effectively enables the use of Engauge as an executable that can be used with linux file
+# associations, although technically this script is run directly and Engauge itself is run indirectly.
+#
+# Apparently it is not necessary to create an Engauge mime type for this script to work. However, a
+# a mime type can still be created so the operating system will identify .dig files as belonging to Engauge.
+# In debian systems the mime type is defined with a config file in /usr/share/mime/packages and
+# update-mime-database, 
+
+DIRECTORY=$(cd `dirname $0` && pwd)
+export LD_LIBRARY_PATH=$DIRECTORY/libs
+cd $DIRECTORY
+./Engauge
