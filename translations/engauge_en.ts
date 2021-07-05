@@ -1906,54 +1906,54 @@ When pressed, this button Prints all digitized points and lines for all coordina
 <context>
     <name>DlgAbout</name>
     <message>
-        <location filename="../src/Dlg/DlgAbout.cpp" line="15"/>
+        <location filename="../src/Dlg/DlgAbout.cpp" line="17"/>
         <source>About Engauge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgAbout.cpp" line="32"/>
-        <location filename="../src/Dlg/DlgAbout.cpp" line="43"/>
+        <location filename="../src/Dlg/DlgAbout.cpp" line="34"/>
+        <location filename="../src/Dlg/DlgAbout.cpp" line="45"/>
         <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgAbout.cpp" line="33"/>
+        <location filename="../src/Dlg/DlgAbout.cpp" line="35"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgAbout.cpp" line="35"/>
+        <location filename="../src/Dlg/DlgAbout.cpp" line="37"/>
         <source>Engauge Digitizer is an open source tool for efficiently extracting accurate numeric data from images of graphs. The process may be considered as inverse graphing. When you engauge a document, you are converting pixels into numbers.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgAbout.cpp" line="38"/>
+        <location filename="../src/Dlg/DlgAbout.cpp" line="40"/>
         <source>This is free software, and you are welcome to redistribute it under certain conditions according to the GNU General Public License Version 2,or (at your option) any later version.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgAbout.cpp" line="41"/>
+        <location filename="../src/Dlg/DlgAbout.cpp" line="43"/>
         <source>Engauge Digitizer comes with ABSOLUTELY NO WARRANTY.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgAbout.cpp" line="42"/>
+        <location filename="../src/Dlg/DlgAbout.cpp" line="44"/>
         <source>Read the included LICENSE file for details.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgAbout.cpp" line="44"/>
+        <location filename="../src/Dlg/DlgAbout.cpp" line="46"/>
         <source>Project Home Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgAbout.cpp" line="45"/>
+        <location filename="../src/Dlg/DlgAbout.cpp" line="47"/>
         <source>Gitter Forum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgAbout.cpp" line="46"/>
-        <location filename="../src/Dlg/DlgAbout.cpp" line="47"/>
+        <location filename="../src/Dlg/DlgAbout.cpp" line="48"/>
+        <location filename="../src/Dlg/DlgAbout.cpp" line="49"/>
         <source>Project Page</source>
         <translation type="unfinished"></translation>
     </message>

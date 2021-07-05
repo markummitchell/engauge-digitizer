@@ -529,6 +529,7 @@ HEADERS  += \
     src/Tutorial/TutorialStateIntroduction.h \
     src/Tutorial/TutorialStatePointMatch.h \
     src/Tutorial/TutorialStateSegmentFill.h \
+    src/util/UrlDirty.h \
     src/include/ValuesVectorXOrY.h \
     src/util/Version.h \
     src/View/ViewPointStyle.h \
@@ -972,6 +973,7 @@ SOURCES += \
     src/Tutorial/TutorialStateIntroduction.cpp \
     src/Tutorial/TutorialStatePointMatch.cpp \
     src/Tutorial/TutorialStateSegmentFill.cpp \
+    src/util/UrlDirty.cpp \
     src/util/Version.cpp \
     src/View/ViewPointStyle.cpp \
     src/View/ViewPreview.cpp \

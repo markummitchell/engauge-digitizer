@@ -13,7 +13,7 @@
 #ifdef NETWORKING
 #include <QtNetwork/QNetworkReply>
 #endif
-#include <QUrl>
+#include "UrlDirty.h"
 #include "Version.h"
 
 LoadImageFromUrl::LoadImageFromUrl (MainWindow &mainWindow) :
@@ -72,7 +72,7 @@ void LoadImageFromUrl::slotFinished ()
   }
 }
 
-void LoadImageFromUrl::startLoadImage (const QUrl &url)
+void LoadImageFromUrl::startLoadImage (const UrlDirty &url)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "LoadImageFromUrl::startLoadImage url=" << url.toString ().toLatin1 ().data ();
 

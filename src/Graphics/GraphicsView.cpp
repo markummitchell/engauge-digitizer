@@ -24,6 +24,7 @@
 #include <QMouseEvent>
 #include <QScrollBar>
 #include "QtToString.h"
+#include "UrlDirty.h"
 
 extern const QString AXIS_CURVE_NAME;
 
@@ -168,7 +169,7 @@ bool GraphicsView::handleDropEvent (const QString &possibleDigFileName,
 
     // Branch that applies when a dig file name has been dropped
     LOG4CPP_INFO_S ((*mainCat)) << "QGraphicsView::handleDropEvent dig file";
-    QUrl url (possibleDigFileName);
+    UrlDirty url (possibleDigFileName);
     emit signalDraggedDigFile (url.toLocalFile());
     willAccept = true;
 

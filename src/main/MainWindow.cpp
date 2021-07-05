@@ -127,6 +127,7 @@
 #include "StatusBar.h"
 #include "TransformationStateContext.h"
 #include "TutorialDlg.h"
+#include "UrlDirty.h"
 #include "Version.h"
 #include "ViewPointStyle.h"
 #include "ViewSegmentFilter.h"
@@ -2593,7 +2594,8 @@ void MainWindow::slotFileImportDraggedImageUrl(QUrl url)
 
   // This is required for drag and drop from GraphicsView. This had an #ifdef
   // around it for NETWORKING but restored for drag and drop
-  m_loadImageFromUrl->startLoadImage (url);
+  UrlDirty urlDirty (url);
+  m_loadImageFromUrl->startLoadImage (urlDirty);
 }
 
 void MainWindow::slotFileImportImage(QString fileName, QImage image)

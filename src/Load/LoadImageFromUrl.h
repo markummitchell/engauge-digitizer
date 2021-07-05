@@ -13,10 +13,9 @@
 #endif
 #include <QObject>
 #include <QString>
-#include <QUrl>
+#include "UrlDirty.h"
 
 class MainWindow;
-class QUrl;
 
 /// Load QImage from url. This is trivial for a file, but requires an asynchronous download step for http urls.
 class LoadImageFromUrl : public QObject
@@ -29,7 +28,7 @@ public:
   ~LoadImageFromUrl();
 
   /// Start the asynchronous loading of an image from the specified url.
-  void startLoadImage (const QUrl &url);
+  void startLoadImage (const UrlDirty &url);
 
 private slots:
   void slotFinished ();
@@ -45,7 +44,7 @@ private:
   void deallocate ();
 
   MainWindow &m_mainWindow;
-  QUrl m_url;
+  UrlDirty m_url;
 #ifdef NETWORKING
   QNetworkAccessManager m_http;
   QNetworkReply *m_reply;

@@ -7,7 +7,7 @@
 #include "Document.h"
 #include "LoadFileInfo.h"
 #include "Logger.h"
-#include <QUrl>
+#include "UrlDirty.h"
 
 LoadFileInfo::LoadFileInfo()
 {
@@ -27,7 +27,7 @@ bool LoadFileInfo::loadsAsDigFile (const QString &urlString) const
 
     QString fileName = urlString;
 
-    QUrl url (urlString);
+    UrlDirty url (urlString);
     if (url.isLocalFile ()) {
       fileName = url.toLocalFile();
     }
