@@ -91,17 +91,22 @@ Para executar o Assistente de Guia Checklist quando um arquivo de imagem é impo
         <translation>Introdução</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="18" />
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="19" />
         <source>Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines to define the coordinates.</source>
         <translation>O Engauge converte uma imagem de um gráfico ou mapa em números, desde que a imagem tenha eixos e / ou linhas de grade para definir as coordenadas.</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="20" />
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="21" />
         <source>This wizard creates a checklist of steps that can serve as a helpful guide. By following those steps, you can obtain digitized data points in an exported file. This wizard also provides a quick summary of the most useful features of Engauge.</source>
         <translation>Este assistente cria uma lista de verificação de etapas que podem servir como um guia útil. Seguindo essas etapas, você pode obter pontos de dados digitalizados em um arquivo exportado. Este assistente também fornece um resumo rápido dos recursos mais úteis do Engauge.</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="23" />
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="24" />
+        <source>The wizard can be turned on and off using the Help menu.</source>
+        <translation>O assistente pode ser ativado e desativado usando o menu Ajuda. </translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="25" />
         <source>New users are encouraged to use this wizard.</source>
         <translation>Novos usuários são encorajados a usar este assistente.</translation>
     </message>
@@ -109,206 +114,206 @@ Para executar o Assistente de Guia Checklist quando um arquivo de imagem é impo
 <context>
     <name>ChecklistGuideWizard</name>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="27" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="28" />
         <source>Checklist Guide</source>
         <translation>Guia Checklist</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="29" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="32" />
         <source>Checklist Guide Wizard</source>
         <translation>Lista de verificação Assistente de Guia</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="62" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="65" />
         <source>Curves</source>
         <translation>Curvas</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="106" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="122" />
         <source>Follow this checklist of steps to digitize your image. Each step will show a check when it has been completed.</source>
         <translation>Siga esta lista de verificação das etapas para digitalizar sua imagem . Cada passo irá mostrar um cheque quando tiver sido completado.</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="107" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="123" />
         <source>The coordinates are defined by creating axis points</source>
         <translation>As coordenadas são definidas através da criação de pontos do eixo</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="108" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="124" />
         <source>Add first of three axis points.</source>
         <translation>Adicionar primeira de três pontos do eixo.</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="127" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="136" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="145" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
         <source>Click on</source>
         <translation>Clique em</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="127" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="136" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="145" />
         <source>for Axis Points mode</source>
         <translation>para o modo de pontos do eixo</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="112" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="128" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates</source>
         <translation>Clique em uma marca de escala do eixo, ou intersecção de duas linhas de grade, com coordenadas rotuladas</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="113" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="122" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="131" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="138" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="147" />
         <source>Enter the coordinates of the axis point</source>
         <translation>Introduzir as coordenadas do ponto do eixo</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="114" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="123" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="132" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="185" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="213" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="139" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="148" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="201" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="229" />
         <source>Click on Ok</source>
         <translation>Clique em Ok</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="117" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="133" />
         <source>Add second of three axis points.</source>
         <translation>Adicionar segundo de três pontos do eixo.</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="121" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis point</source>
         <translation>Clique em uma marca de escala do eixo , ou intersecção de duas linhas de grade , com coordenadas rotuladas , longe do outro ponto do eixo</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="126" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="142" />
         <source>Add third of three axis points.</source>
         <translation>Adicione terceiro de três pontos do eixo.</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="146" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis points</source>
         <translation>Clique em uma marca de escala do eixo , ou intersecção de duas linhas de grade , com coordenadas rotuladas , longe dos outros pontos do eixo</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="153" />
         <source>Points are digitized along each curve</source>
         <translation>Os pontos são digitalizados ao longo de cada curva de</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="149" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
         <source>Add points for curve</source>
         <translation>Adicione pontos para a curva</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171" />
         <source>for Segment Fill mode</source>
         <translation>para o modo de preenchimento de segmento</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="172" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="181" />
         <source>Select curve</source>
         <translation>Select curva</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="172" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="181" />
         <source>in the drop-down list</source>
         <translation>na lista drop-down</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="157" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="173" />
         <source>Move the cursor over the curve. If a line does not appear then adjust the Color Filter settings for this curve</source>
         <translation>Mova o cursor sobre a curva. Se uma linha não aparecer, ajuste as configurações do filtro de cores para essa curva</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="159" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="175" />
         <source>Move the cursor over the curve again. When the Segment Fill line appears, click on it to generate points</source>
         <translation>Mova o cursor sobre a curva novamente. Quando a linha Segment Fill aparecer, clique nela para gerar pontos</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
         <source>for Point Match mode</source>
         <translation>para o modo Point Match</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="166" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="182" />
         <source>Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust the Color Filter settings for this curve</source>
         <translation>Mova o cursor sobre um ponto típico na curva. Se o círculo do cursor não mudar de cor, ajuste as configurações do Filtro de Cor para essa curva</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="169" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="185" />
         <source>Move the cursor over a typical point in the curve again. Click on the point to start point matching</source>
         <translation>Mova o cursor sobre um ponto típico da curva novamente. Clique no ponto para começar a correspondência ponto</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="170" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="186" />
         <source>Engauge will display a candidate point. To accept that candidate point, press the right arrow key</source>
         <translation>Engauge irá exibir um ponto candidato . Para aceitar esse ponto candidato , pressione a tecla de seta para a direita</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="187" />
         <source>The previous step repeats until you select a different mode</source>
         <translation>A etapa anterior repete até que você selecione um modo diferente</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="179" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195" />
         <source>The digitized points can be exported</source>
         <translation>Os pontos digitalizados podem ser exportados</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="196" />
         <source>Export the points to a file</source>
         <translation>Exportar os pontos para um arquivo</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="183" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="199" />
         <source>Select menu option File / Export</source>
         <translation>Selecione a opção de menu Arquivo / Exportar</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="184" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="200" />
         <source>Enter the file name</source>
         <translation>Digite o nome do arquivo</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="186" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="202" />
         <source>Congratulations!</source>
         <translation>Parabéns!</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="191" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="207" />
         <source>Hint - The background image can be switched between the original image and filtered image.</source>
         <translation>Dica - A imagem de fundo pode ser alternado entre a imagem original ea imagem filtrada.</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="194" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210" />
         <source>Select menu option View / Background / Show Original Image to see the original image</source>
         <translation>Selecione a opção de menu Ver / Background / Show Original Image para ver a imagem original</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211" />
         <source>Select menu option View / Background / Show Filtered Image to see the image from Color Filter</source>
         <translation>Selecione a opção de menu Exibir / Background / Show Filtered Image para ver a imagem do Color Filter</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="226" />
         <source>Select menu option Settings / Color Filter</source>
         <translation>Selecione a opção de menu Configurações / Filtro de Cor</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="227" />
         <source>Select the method for filtering. Hue is best if the curves have different colors</source>
         <translation>Selecione o método para filtragem. Hue é melhor se as curvas têm cores diferentes</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="212" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="228" />
         <source>Slide the green buttons back and forth until the curve is easily visible in the preview window</source>
         <translation>Deslize os botões verdes e para trás até que a curva é facilmente visível na janela de visualização</translation>
     </message>
@@ -4898,22 +4903,22 @@ Ampliando a imagem dentro ou para fora é realizada usando qualquer um de vário
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="501" />
+        <location filename="../src/main/MainWindow.cpp" line="503" />
         <source>Unable to export to file</source>
         <translation>Não é possível exportar para o arquivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="546" />
+        <location filename="../src/main/MainWindow.cpp" line="548" />
         <source>Unable to extract image to file</source>
         <translation>Não é possível extrair a imagem para o arquivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="626" />
+        <location filename="../src/main/MainWindow.cpp" line="628" />
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation>No OSX, os arquivos carregados na inicialização devem estar nos diretórios Downloads, Imagens ou Biblioteca / Contêineres / Digitalizador / Dados</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1362" />
+        <location filename="../src/main/MainWindow.cpp" line="1342" />
         <source>Cannot read file</source>
         <translation>Não é possível ler o arquivo</translation>
     </message>
@@ -4922,90 +4927,90 @@ Ampliando a imagem dentro ou para fora é realizada usando qualquer um de vário
         <translation type="vanished">do diretório</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="712" />
+        <location filename="../src/main/MainWindow.cpp" line="714" />
         <source>Import Image</source>
         <translation>Importar imagem</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1060" />
+        <location filename="../src/main/MainWindow.cpp" line="1062" />
         <source>File opened</source>
         <translation>Arquivo aberto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1105" />
+        <location filename="../src/main/MainWindow.cpp" line="1107" />
         <source>File not found</source>
         <translation>Arquivo não encontrado</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1122" />
+        <location filename="../src/main/MainWindow.cpp" line="1124" />
         <source>Error report opened</source>
         <translation>Relatório de erro aberto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1185" />
-        <location filename="../src/main/MainWindow.cpp" line="1259" />
+        <location filename="../src/main/MainWindow.cpp" line="1187" />
+        <location filename="../src/main/MainWindow.cpp" line="1239" />
         <source>File imported</source>
         <translation>Arquivo importado</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293" />
+        <location filename="../src/main/MainWindow.cpp" line="1273" />
         <source>Background image.</source>
         <translation>Imagem de fundo.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1294" />
+        <location filename="../src/main/MainWindow.cpp" line="1274" />
         <source>Currently selected curve.</source>
         <translation>Atualmente selecionado curva.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1295" />
+        <location filename="../src/main/MainWindow.cpp" line="1275" />
         <source>Point style for currently selected curve.</source>
         <translation>Estilo de ponto para a curva atualmente selecionada.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1296" />
+        <location filename="../src/main/MainWindow.cpp" line="1276" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Filtro de preenchimento segmento de curva atualmente selecionada.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1345" />
+        <location filename="../src/main/MainWindow.cpp" line="1325" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>O documento foi modificado.
 Você deseja salvar as alterações?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1433" />
+        <location filename="../src/main/MainWindow.cpp" line="1413" />
         <source>Cannot write file</source>
         <translation>Não é possível gravar arquivo</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1481" />
+        <location filename="../src/main/MainWindow.cpp" line="1461" />
         <source>Save</source>
         <translation>Salve</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2549" />
+        <location filename="../src/main/MainWindow.cpp" line="2530" />
         <source>Export</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2632" />
+        <location filename="../src/main/MainWindow.cpp" line="2613" />
         <source>Open Document</source>
         <translation>Documento aberto</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3963" />
+        <location filename="../src/main/MainWindow.cpp" line="3981" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3964" />
+        <location filename="../src/main/MainWindow.cpp" line="3982" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4100" />
+        <location filename="../src/main/MainWindow.cpp" line="4118" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitalizador</translation>
     </message>
@@ -5063,7 +5068,7 @@ Você deseja salvar as alterações?</translation>
         <translation>Para sempre</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="69" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="72" />
         <source>Curves for coordinate system</source>
         <translation>Curvas para sistema de coordenadas</translation>
     </message>
@@ -5754,7 +5759,7 @@ Você deseja salvar as alterações?</translation>
         <translation type="vanished">Anterior</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="636" />
+        <location filename="../src/main/MainWindow.cpp" line="638" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>O arquivo parece ter caracteres de vários alfabetos de idioma, o que não funciona na linha de comando do Windows</translation>
     </message>

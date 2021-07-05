@@ -91,19 +91,24 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <translation>Кіріспе</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="18" />
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="19" />
         <source>Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines to define the coordinates.</source>
         <translation>Кіріс координаттарын анықтау үшін сурет осі және / немесе тор сызықтары болған кезде, Гейндж немесе графиктің бейнесін санға түрлендіреді.
 
 Kiris koordïnattarın an</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="20" />
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="21" />
         <source>This wizard creates a checklist of steps that can serve as a helpful guide. By following those steps, you can obtain digitized data points in an exported file. This wizard also provides a quick summary of the most useful features of Engauge.</source>
         <translation>Бұл шебер пайдалы нұсқаулық ретінде қызмет ететін қадамдар тізімін жасайды. Осы қадамдарды орындау арқылы экспортталған файлда цифрланған деректер нүктелерін алуға болады. Бұл шебер, сонымен қатар, Engauge-дің ең пайдалы қасиеттерінің қысқаша сипаттамасын ұсынады.</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="23" />
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="24" />
+        <source>The wizard can be turned on and off using the Help menu.</source>
+        <translation>Шеберді Анықтама мәзірінің көмегімен қосуға және өшіруге болады. </translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="25" />
         <source>New users are encouraged to use this wizard.</source>
         <translation>Жаңа пайдаланушылар осы шеберді пайдалануға шақырылады.</translation>
     </message>
@@ -111,208 +116,208 @@ Kiris koordïnattarın an</translation>
 <context>
     <name>ChecklistGuideWizard</name>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="27" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="28" />
         <source>Checklist Guide</source>
         <translation>Бақылау тізімінің нұсқаулығы</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="29" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="32" />
         <source>Checklist Guide Wizard</source>
         <translation>Тексеру тізімі нұсқаулығы шебері</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="62" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="65" />
         <source>Curves</source>
         <translation>Қисықтар</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="106" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="122" />
         <source>Follow this checklist of steps to digitize your image. Each step will show a check when it has been completed.</source>
         <translation>Кескінді цифрлау үшін осы тексеру тізімін орындаңыз. Әрбір қадам аяқталған кезде тексеруді көрсетеді.</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="107" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="123" />
         <source>The coordinates are defined by creating axis points</source>
         <translation>Координаттар ось нүктелерін жасау арқылы анықталады</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="108" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="124" />
         <source>Add first of three axis points.</source>
         <translation>Үш ось нүктесін қосыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="127" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="136" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="145" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
         <source>Click on</source>
         <translation>Басыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="127" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="136" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="145" />
         <source>for Axis Points mode</source>
         <translation>Axis Points режимі үшін</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="112" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="128" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates</source>
         <translation>Таңбаланған координаттары бар екі тор сызығының қиылысуы немесе ось белгісі белгісін басыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="113" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="122" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="131" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="138" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="147" />
         <source>Enter the coordinates of the axis point</source>
         <translation>Ось нүктесінің координаттарын енгізіңіз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="114" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="123" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="132" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="185" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="213" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="139" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="148" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="201" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="229" />
         <source>Click on Ok</source>
         <translation>Ok түймесін басыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="117" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="133" />
         <source>Add second of three axis points.</source>
         <translation>Үш ось нүктесінің екеуін қосыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="121" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis point</source>
         <translation>Белгісі бар координаталарымен бірге басқа ось нүктесінен алыстатылған екі торлы сызықтардың қиылысуын белгілеңіз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="126" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="142" />
         <source>Add third of three axis points.</source>
         <translation>Үш ось нүктесінің үштен бірін қосыңыз.</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="146" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis points</source>
         <translation>Белгісі бар координаталарымен бірге басқа ось нүктелерінен алыстатылған екі тор сызықтарының қиылысуы немесе ось белгісі белгісін басыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="153" />
         <source>Points are digitized along each curve</source>
         <translation>Әрбір қисық бойынша нүктелер цифрланады</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="149" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
         <source>Add points for curve</source>
         <translation>Қисық сызық қосу</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171" />
         <source>for Segment Fill mode</source>
         <translation>Segment Fill режимі үшін</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="172" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="181" />
         <source>Select curve</source>
         <translation>Қисық таңдау</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="172" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="181" />
         <source>in the drop-down list</source>
         <translation>ашылмалы тізімде</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="157" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="173" />
         <source>Move the cursor over the curve. If a line does not appear then adjust the Color Filter settings for this curve</source>
         <translation>Курсорды қисық үстіне жылжытыңыз. Егер сызық пайда болмаса, онда осы қисық үшін Түс сүзгі параметрлерін реттеңіз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="159" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="175" />
         <source>Move the cursor over the curve again. When the Segment Fill line appears, click on it to generate points</source>
         <translation>Курсорды қайтадан қисыққа жылжытыңыз. Сегмент Толтыру сызығы пайда болған кезде, нүктелерді жасау үшін оны басыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
         <source>for Point Match mode</source>
         <translation>Point Match режимі үшін</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="166" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="182" />
         <source>Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust the Color Filter settings for this curve</source>
         <translation>Курсорды қисықтағы әдеттегі нүктеге жылжытыңыз. Егер курсор шеңбері түсті өзгертпесе, онда осы қисық үшін Color Filter параметрлерін реттеңіз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="169" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="185" />
         <source>Move the cursor over a typical point in the curve again. Click on the point to start point matching</source>
         <translation>Курсорды қисықтағы әдеттегі нүктеге қайта жылжытыңыз. Нүктені сәйкестендіруді бастау үшін нүктені басыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="170" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="186" />
         <source>Engauge will display a candidate point. To accept that candidate point, press the right arrow key</source>
         <translation>Engauge үміткер нүктесін көрсетеді. Бұл кандидатты қабылдау үшін оң жақ көрсеткі пернесін басыңыз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="187" />
         <source>The previous step repeats until you select a different mode</source>
         <translation>Алдыңғы қадам басқа режимді таңдағанша қайталанады</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="179" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195" />
         <source>The digitized points can be exported</source>
         <translation>Цифрланған нүктелерді экспорттауға болады</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="196" />
         <source>Export the points to a file</source>
         <translation>Ұпайларды файлға экспорттаңыз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="183" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="199" />
         <source>Select menu option File / Export</source>
         <translation>File / Expor мәзірінің параметрін таңдаңыз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="184" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="200" />
         <source>Enter the file name</source>
         <translation>Файл атауын енгізіңіз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="186" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="202" />
         <source>Congratulations!</source>
         <translation>Құттықтаймыз!</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="191" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="207" />
         <source>Hint - The background image can be switched between the original image and filtered image.</source>
         <translation>Кеңес - Фондық сурет бастапқы сурет пен сүзілген кескін арасында ауыса алады.</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="194" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210" />
         <source>Select menu option View / Background / Show Original Image to see the original image</source>
         <translation>Түпнұсқа кескінді көру үшін Мәзір параметрін Қарау / Фонды / Түпнұсқа кескінді көрсету параметрін таңдаңыз
 
 </translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211" />
         <source>Select menu option View / Background / Show Filtered Image to see the image from Color Filter</source>
         <translation>Түс сүзгісіндегі кескінді көру үшін Мәзірдің параметрін көру / Артқы / Сүзілген кескінді көрсету опциясын таңдаңыз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="226" />
         <source>Select menu option Settings / Color Filter</source>
         <translation>Мәзір параметрін Параметрлер / Түс сүзгісін таңдаңыз</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="227" />
         <source>Select the method for filtering. Hue is best if the curves have different colors</source>
         <translation>Сүзу әдісін таңдаңыз. Қисықтардың әр түрлі түстері болса, реңк жақсы</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="212" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="228" />
         <source>Slide the green buttons back and forth until the curve is easily visible in the preview window</source>
         <translation>Алдын ала қарау терезесінде қисық көрінетінше жасыл түймелерді алға-артқа сырғытыңыз</translation>
     </message>
@@ -4866,22 +4871,22 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="501" />
+        <location filename="../src/main/MainWindow.cpp" line="503" />
         <source>Unable to export to file</source>
         <translation>Файлға экспорттау мүмкін болмады</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="546" />
+        <location filename="../src/main/MainWindow.cpp" line="548" />
         <source>Unable to extract image to file</source>
         <translation>Файлға кескінді шығару мүмкін емес</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="626" />
+        <location filename="../src/main/MainWindow.cpp" line="628" />
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation>OSX-де іске қосу кезінде жүктелген файлдар Жүктемелер, Суреттер немесе Кітапхана / Контейнерлер / Digitizer / Деректер каталогында болуы керек.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1362" />
+        <location filename="../src/main/MainWindow.cpp" line="1342" />
         <source>Cannot read file</source>
         <translation>Файлды оқу мүмкін емес</translation>
     </message>
@@ -4890,90 +4895,90 @@ Zooming the image in or out is performed using any of several methods:
         <translation type="vanished">анықтамалықтан</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="712" />
+        <location filename="../src/main/MainWindow.cpp" line="714" />
         <source>Import Image</source>
         <translation>Суретті импорттау</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1060" />
+        <location filename="../src/main/MainWindow.cpp" line="1062" />
         <source>File opened</source>
         <translation>Файл ашылды</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1105" />
+        <location filename="../src/main/MainWindow.cpp" line="1107" />
         <source>File not found</source>
         <translation>Файл табылмады</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1122" />
+        <location filename="../src/main/MainWindow.cpp" line="1124" />
         <source>Error report opened</source>
         <translation>Қате туралы есеп ашылды</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1185" />
-        <location filename="../src/main/MainWindow.cpp" line="1259" />
+        <location filename="../src/main/MainWindow.cpp" line="1187" />
+        <location filename="../src/main/MainWindow.cpp" line="1239" />
         <source>File imported</source>
         <translation>Файл импортталды</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293" />
+        <location filename="../src/main/MainWindow.cpp" line="1273" />
         <source>Background image.</source>
         <translation>Фондық сурет.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1294" />
+        <location filename="../src/main/MainWindow.cpp" line="1274" />
         <source>Currently selected curve.</source>
         <translation>Қазіргі уақытта таңдалған қисық сызық.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1295" />
+        <location filename="../src/main/MainWindow.cpp" line="1275" />
         <source>Point style for currently selected curve.</source>
         <translation>Ағымдағы таңдалған қисыққа арналған нүкте стилі.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1296" />
+        <location filename="../src/main/MainWindow.cpp" line="1276" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>Сегментті толтыру сүзгісі қазір таңдалған қисық сызық үшін.</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1345" />
+        <location filename="../src/main/MainWindow.cpp" line="1325" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>Құжат өзгертілген.
 Өзгерістерді сақтау керек пе?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1433" />
+        <location filename="../src/main/MainWindow.cpp" line="1413" />
         <source>Cannot write file</source>
         <translation>Файлды жазу мүмкін емес</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1481" />
+        <location filename="../src/main/MainWindow.cpp" line="1461" />
         <source>Save</source>
         <translation>Сақтау</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2549" />
+        <location filename="../src/main/MainWindow.cpp" line="2530" />
         <source>Export</source>
         <translation>Экспорттау</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2632" />
+        <location filename="../src/main/MainWindow.cpp" line="2613" />
         <source>Open Document</source>
         <translation>Құжатты ашыңыз</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3963" />
+        <location filename="../src/main/MainWindow.cpp" line="3981" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3964" />
+        <location filename="../src/main/MainWindow.cpp" line="3982" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4100" />
+        <location filename="../src/main/MainWindow.cpp" line="4118" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5031,7 +5036,7 @@ Do you want to save your changes?</source>
         <translation>Мәңгілікке</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="69" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="72" />
         <source>Curves for coordinate system</source>
         <translation>Координаталар жүйесінің қисық сызықтары</translation>
     </message>
@@ -5650,7 +5655,7 @@ Do you want to save your changes?</source>
         <translation>көп осі ұпай қажет</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="636" />
+        <location filename="../src/main/MainWindow.cpp" line="638" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>Файлда Windows пәрмен жолында жұмыс жасамайтын бірнеше тіл алфавитінің таңбалары бар сияқты</translation>
     </message>

@@ -87,17 +87,22 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <translation>परिचय</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="18" />
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="19" />
         <source>Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines to define the coordinates.</source>
         <translation>Engauge ग्राफ या मानचित्र की एक छवि को संख्याओं में परिवर्तित करता है, जब तक कि छवि में अक्षरों को परिभाषित करने के लिए अक्ष और / या ग्रिड लाइनें हों।</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="20" />
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="21" />
         <source>This wizard creates a checklist of steps that can serve as a helpful guide. By following those steps, you can obtain digitized data points in an exported file. This wizard also provides a quick summary of the most useful features of Engauge.</source>
         <translation>यह विज़ार्ड उन चरणों की एक चेकलिस्ट बनाता है जो सहायक मार्गदर्शिका के रूप में कार्य कर सकते हैं। उन चरणों का पालन करके, आप निर्यात की गई फ़ाइल में डिजिटलीकृत डेटा पॉइंट प्राप्त कर सकते हैं। यह विज़ार्ड Engauge की सबसे उपयोगी सुविधाओं का त्वरित सारांश भी प्रदान करता है।</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="23" />
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="24" />
+        <source>The wizard can be turned on and off using the Help menu.</source>
+        <translation>सहायता मेनू का उपयोग करके विज़ार्ड को चालू और बंद किया जा सकता है। </translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="25" />
         <source>New users are encouraged to use this wizard.</source>
         <translation>नए उपयोगकर्ताओं को इस विज़ार्ड का उपयोग करने के लिए प्रोत्साहित किया जाता है।</translation>
     </message>
@@ -105,206 +110,206 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
 <context>
     <name>ChecklistGuideWizard</name>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="27" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="28" />
         <source>Checklist Guide</source>
         <translation>चेकलिस्ट गाइड</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="29" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="32" />
         <source>Checklist Guide Wizard</source>
         <translation>चेकलिस्ट गाइड विज़ार्ड</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="62" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="65" />
         <source>Curves</source>
         <translation>घटता</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="106" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="122" />
         <source>Follow this checklist of steps to digitize your image. Each step will show a check when it has been completed.</source>
         <translation>अपनी छवि को डिजिटाइज करने के लिए चरणों की इस चेकलिस्ट का पालन करें। जब यह पूरा हो गया है तो प्रत्येक चरण एक चेक दिखाएगा।</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="107" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="123" />
         <source>The coordinates are defined by creating axis points</source>
         <translation>निर्देशांक अक्ष अंक बनाकर परिभाषित किए जाते हैं</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="108" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="124" />
         <source>Add first of three axis points.</source>
         <translation>तीन अक्ष बिंदुओं में से पहला जोड़ें।</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="127" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="136" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="145" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
         <source>Click on</source>
         <translation>पर क्लिक करें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="127" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="136" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="145" />
         <source>for Axis Points mode</source>
         <translation>एक्सिस पॉइंट्स मोड के लिए</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="112" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="128" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates</source>
         <translation>लेबल वाले निर्देशांक के साथ धुरी टिक चिह्न, या दो ग्रिड लाइनों का चौराहे पर क्लिक करें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="113" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="122" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="131" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="138" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="147" />
         <source>Enter the coordinates of the axis point</source>
         <translation>धुरी बिंदु के निर्देशांक दर्ज करें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="114" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="123" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="132" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="185" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="213" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="139" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="148" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="201" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="229" />
         <source>Click on Ok</source>
         <translation>ठीक है पर क्लिक करें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="117" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="133" />
         <source>Add second of three axis points.</source>
         <translation>तीन अक्ष बिंदुओं में से दूसरा जोड़ें।</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="121" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis point</source>
         <translation>एक धुरी टिक चिह्न पर क्लिक करें, या दो ग्रिड लाइनों का चौराहे, लेबल किए गए निर्देशांक के साथ, अन्य धुरी बिंदु से दूर</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="126" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="142" />
         <source>Add third of three axis points.</source>
         <translation>तीन अक्ष बिंदुओं में से तीसरा जोड़ें।</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="146" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis points</source>
         <translation>एक धुरी टिक चिह्न पर क्लिक करें, या दो ग्रिड लाइनों का चौराहे, लेबल किए गए निर्देशांक के साथ, अन्य अक्ष बिंदुओं से दूर</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="153" />
         <source>Points are digitized along each curve</source>
         <translation>अंक प्रत्येक वक्र के साथ डिजिटलीकृत होते हैं</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="149" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
         <source>Add points for curve</source>
         <translation>वक्र के लिए अंक जोड़ें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171" />
         <source>for Segment Fill mode</source>
         <translation>सेगमेंट भरने के लिए मोड</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="172" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="181" />
         <source>Select curve</source>
         <translation>वक्र का चयन करें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="172" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="181" />
         <source>in the drop-down list</source>
         <translation>ड्रॉप-डाउन सूची में</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="157" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="173" />
         <source>Move the cursor over the curve. If a line does not appear then adjust the Color Filter settings for this curve</source>
         <translation>कर्सर को वक्र पर ले जाएं। यदि कोई रेखा प्रकट नहीं होती है तो इस वक्र के लिए रंग फ़िल्टर सेटिंग्स समायोजित करें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="159" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="175" />
         <source>Move the cursor over the curve again. When the Segment Fill line appears, click on it to generate points</source>
         <translation>कर्सर को फिर से वक्र पर ले जाएं। जब सेगमेंट भरने वाली रेखा दिखाई देती है, तो अंक उत्पन्न करने के लिए उस पर क्लिक करें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
         <source>for Point Match mode</source>
         <translation>प्वाइंट मैच मोड के लिए</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="166" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="182" />
         <source>Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust the Color Filter settings for this curve</source>
         <translation>वक्र में एक ठेठ बिंदु पर कर्सर को ले जाएं। यदि कर्सर सर्कल रंग नहीं बदलता है तो इस वक्र के लिए रंग फ़िल्टर सेटिंग्स समायोजित करें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="169" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="185" />
         <source>Move the cursor over a typical point in the curve again. Click on the point to start point matching</source>
         <translation>वक्र में एक सामान्य बिंदु पर कर्सर को फिर से ले जाएं। बिंदु मिलान शुरू करने के लिए बिंदु पर क्लिक करें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="170" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="186" />
         <source>Engauge will display a candidate point. To accept that candidate point, press the right arrow key</source>
         <translation>Engauge उम्मीदवार बिंदु प्रदर्शित करेगा। उस उम्मीदवार बिंदु को स्वीकार करने के लिए, बिंदु मिलान शुरू करने के लिए दायां तीर कुंजी बिंदु दबाएं</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="187" />
         <source>The previous step repeats until you select a different mode</source>
         <translation>पिछला चरण तब तक दोहराता है जब तक आप एक अलग मोड का चयन नहीं करते</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="179" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195" />
         <source>The digitized points can be exported</source>
         <translation>डिजिटलीकृत अंक निर्यात किया जा सकता है</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="196" />
         <source>Export the points to a file</source>
         <translation>एक फ़ाइल में अंक निर्यात करें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="183" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="199" />
         <source>Select menu option File / Export</source>
         <translation>मेनू विकल्प फ़ाइल / निर्यात का चयन करें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="184" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="200" />
         <source>Enter the file name</source>
         <translation>फ़ाइल का नाम दर्ज करें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="186" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="202" />
         <source>Congratulations!</source>
         <translation>बधाई हो!</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="191" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="207" />
         <source>Hint - The background image can be switched between the original image and filtered image.</source>
         <translation>संकेत - पृष्ठभूमि छवि को मूल छवि और फ़िल्टर्ड छवि के बीच स्विच किया जा सकता है।</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="194" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210" />
         <source>Select menu option View / Background / Show Original Image to see the original image</source>
         <translation>मूल छवि देखने के लिए मेनू विकल्प देखें / पृष्ठभूमि / मूल छवि दिखाएं</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211" />
         <source>Select menu option View / Background / Show Filtered Image to see the image from Color Filter</source>
         <translation>कलर फ़िल्टर से छवि देखने के लिए मेनू विकल्प देखें / पृष्ठभूमि / फ़िल्टर की गई छवि दिखाएं</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="226" />
         <source>Select menu option Settings / Color Filter</source>
         <translation>मेनू विकल्प सेटिंग्स / रंग फ़िल्टर का चयन करें</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="227" />
         <source>Select the method for filtering. Hue is best if the curves have different colors</source>
         <translation>छानने के लिए विधि का चयन करें। यदि कर्व के अलग-अलग रंग हैं तो ह्यू सबसे अच्छा है</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="212" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="228" />
         <source>Slide the green buttons back and forth until the curve is easily visible in the preview window</source>
         <translation>पूर्वावलोकन बटन में वक्र आसानी से दिखाई देने तक हरे बटन को आगे और पीछे स्लाइड करें</translation>
     </message>
@@ -4869,22 +4874,22 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="501" />
+        <location filename="../src/main/MainWindow.cpp" line="503" />
         <source>Unable to export to file</source>
         <translation>फ़ाइल में निर्यात करने में असमर्थ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="546" />
+        <location filename="../src/main/MainWindow.cpp" line="548" />
         <source>Unable to extract image to file</source>
         <translation>फ़ाइल में छवि निकालने में असमर्थ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="626" />
+        <location filename="../src/main/MainWindow.cpp" line="628" />
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation>OSX में, स्टार्टअप पर भरी गई फाइलें डाउनलोड, पिक्चर्स या लाइब्रेरी / कंटेनर / डिजिटाइज़र / डेटा निर्देशिकाओं में होनी चाहिए</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1362" />
+        <location filename="../src/main/MainWindow.cpp" line="1342" />
         <source>Cannot read file</source>
         <translation>फ़ाइल नहीं पढ़ सकता</translation>
     </message>
@@ -4893,90 +4898,90 @@ Zooming the image in or out is performed using any of several methods:
         <translation type="vanished">निर्देशिका से</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="712" />
+        <location filename="../src/main/MainWindow.cpp" line="714" />
         <source>Import Image</source>
         <translation>आयात छवि</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1060" />
+        <location filename="../src/main/MainWindow.cpp" line="1062" />
         <source>File opened</source>
         <translation>फाइल खोली</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1105" />
+        <location filename="../src/main/MainWindow.cpp" line="1107" />
         <source>File not found</source>
         <translation>फाइल नहीं मिली</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1122" />
+        <location filename="../src/main/MainWindow.cpp" line="1124" />
         <source>Error report opened</source>
         <translation>त्रुटि रिपोर्ट खोली गई</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1185" />
-        <location filename="../src/main/MainWindow.cpp" line="1259" />
+        <location filename="../src/main/MainWindow.cpp" line="1187" />
+        <location filename="../src/main/MainWindow.cpp" line="1239" />
         <source>File imported</source>
         <translation>फ़ाइल आयात की गई</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293" />
+        <location filename="../src/main/MainWindow.cpp" line="1273" />
         <source>Background image.</source>
         <translation>पृष्ठभूमि छवि।</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1294" />
+        <location filename="../src/main/MainWindow.cpp" line="1274" />
         <source>Currently selected curve.</source>
         <translation>वर्तमान में चयनित वक्र।</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1295" />
+        <location filename="../src/main/MainWindow.cpp" line="1275" />
         <source>Point style for currently selected curve.</source>
         <translation>वर्तमान में चयनित वक्र के लिए बिंदु शैली।</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1296" />
+        <location filename="../src/main/MainWindow.cpp" line="1276" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>वर्तमान में चयनित वक्र के लिए सेगमेंट फिल फ़िल्टर।</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1345" />
+        <location filename="../src/main/MainWindow.cpp" line="1325" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>दस्तावेज़ को संशोधित किया गया है।
 क्या आप अपने परिवर्तनों को सहेजना चाहते हैं?</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1433" />
+        <location filename="../src/main/MainWindow.cpp" line="1413" />
         <source>Cannot write file</source>
         <translation>फ़ाइल नहीं लिख सकते</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1481" />
+        <location filename="../src/main/MainWindow.cpp" line="1461" />
         <source>Save</source>
         <translation>बचाना</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2549" />
+        <location filename="../src/main/MainWindow.cpp" line="2530" />
         <source>Export</source>
         <translation>निर्यात</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2632" />
+        <location filename="../src/main/MainWindow.cpp" line="2613" />
         <source>Open Document</source>
         <translation>दस्तावेज़ खोलें</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3963" />
+        <location filename="../src/main/MainWindow.cpp" line="3981" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3964" />
+        <location filename="../src/main/MainWindow.cpp" line="3982" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4100" />
+        <location filename="../src/main/MainWindow.cpp" line="4118" />
         <source>Engauge Digitizer</source>
         <translation>संलग्नक डिजिटाइज़र</translation>
     </message>
@@ -5034,7 +5039,7 @@ Do you want to save your changes?</source>
         <translation>सदैव</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="69" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="72" />
         <source>Curves for coordinate system</source>
         <translation>समन्वय प्रणाली के लिए घटता</translation>
     </message>
@@ -5653,7 +5658,7 @@ Do you want to save your changes?</source>
         <translation>अधिक धुरी अंक की जरूरत है</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="636" />
+        <location filename="../src/main/MainWindow.cpp" line="638" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>फ़ाइल कई भाषा वर्णमाला के वर्णों की प्रतीत होती है, जो विंडोज कमांड लाइन में काम नहीं करती है</translation>
     </message>

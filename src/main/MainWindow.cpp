@@ -168,6 +168,7 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_backgroundStateContext (nullptr),
   m_networkClient (nullptr),
   m_isGnuplot (isGnuplot),
+  m_timerLoadStartupFiles (nullptr),
   m_commandLineWithoutLoadStartupFiles (commandLineWithoutLoadStartupFiles),
   m_ghosts (nullptr),
   m_timerRegressionErrorReport(nullptr),
@@ -178,7 +179,8 @@ MainWindow::MainWindow(const QString &errorReportFile,
   m_fittingCurve (nullptr),
   m_isExportOnly (isExportOnly),
   m_isExtractImageOnly (isExtractImageOnly),
-  m_extractImageOnlyExtension (extractImageOnlyExtension)
+  m_extractImageOnlyExtension (extractImageOnlyExtension),
+  m_timerChecklistGuideWizard (nullptr)
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::MainWindow"
                               << " curDir=" << QDir::currentPath().toLatin1().data();
@@ -1191,34 +1193,12 @@ bool MainWindow::loadImageNewDocument (const QString &fileName,
     if (m_actionHelpChecklistGuideWizard->isChecked () &&
         (m_fileCmdScript == nullptr)) {
 
-      // Show wizard
-      ChecklistGuideWizard *wizard = new ChecklistGuideWizard (*this,
-                                                               m_cmdMediator->document().coordSystemCount());
-      if (wizard->exec() == QDialog::Accepted) {
-
-        for (CoordSystemIndex coordSystemIndex = 0; coordSystemIndex < m_cmdMediator->document().coordSystemCount(); coordSystemIndex++) {
-
-          // Populate the checklist guide
-          m_dockChecklistGuide->setTemplateHtml (wizard->templateHtml(coordSystemIndex),
-                                                 wizard->curveNames(coordSystemIndex));
-
-          // Update Document
-          CurvesGraphs curvesGraphs;
-          wizard->populateCurvesGraphs (coordSystemIndex,
-                                        curvesGraphs);
-          m_cmdMediator->document().setCurvesGraphs(curvesGraphs);
-        }
-
-        // Unhide the checklist guide
-        m_actionViewChecklistGuideWindow->setChecked (true);
-
-        // Update the curve dropdown
-        loadCurveListFromCmdMediator();
-
-        // Update the CoordSystem dropdown
-        loadCoordSystemListFromCmdMediator();
-      }
-      delete wizard;
+      // Since we are in handler routine, and handlers are expected to return quickly, we use a timer to show the slow ChecklistGuideWizard
+      delete m_timerChecklistGuideWizard;
+      m_timerChecklistGuideWizard = new QTimer;
+      m_timerChecklistGuideWizard->setSingleShot (true);
+      connect (m_timerChecklistGuideWizard, SIGNAL (timeout ()), this, SLOT (slotTimeoutChecklistGuideWizard ()));
+      m_timerChecklistGuideWizard->start (0); // Zero delay still waits until execution finishes and gui is available
     }
 
     // Start axis mode
@@ -2080,6 +2060,7 @@ void MainWindow::showEvent (QShowEvent *event)
 
   if (m_loadStartupFiles.count() > 0) {
 
+    delete m_timerLoadStartupFiles;
     m_timerLoadStartupFiles = new QTimer;
     m_timerLoadStartupFiles->setSingleShot (true);
     connect (m_timerLoadStartupFiles, SIGNAL (timeout ()), this, SLOT (slotLoadStartupFiles ()));
@@ -3063,6 +3044,41 @@ void MainWindow::slotSettingsMainWindow ()
   m_dlgSettingsMainWindow->show ();
 }
 
+void MainWindow::slotTimeoutChecklistGuideWizard ()
+{
+  LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotTimeoutChecklistGuideWizard";
+    
+  // Show wizard
+  ChecklistGuideWizard *wizard = new ChecklistGuideWizard (*this,
+                                                           m_cmdMediator->document().coordSystemCount());
+  if (wizard->exec() == QDialog::Accepted) {
+    
+    for (CoordSystemIndex coordSystemIndex = 0; coordSystemIndex < m_cmdMediator->document().coordSystemCount(); coordSystemIndex++) {
+      
+      // Populate the checklist guide
+      m_dockChecklistGuide->setTemplateHtml (wizard->templateHtml(coordSystemIndex),
+                                             wizard->curveNames(coordSystemIndex));
+      
+      // Update Document
+      CurvesGraphs curvesGraphs;
+      wizard->populateCurvesGraphs (coordSystemIndex,
+                                    curvesGraphs);
+      m_cmdMediator->document().setCurvesGraphs(curvesGraphs);
+    }
+    
+    // Unhide the checklist guide
+    m_actionViewChecklistGuideWindow->setChecked (true);
+    
+    // Update the curve dropdown
+    loadCurveListFromCmdMediator();
+
+    // Update the CoordSystem dropdown
+    loadCoordSystemListFromCmdMediator();
+  }
+
+  delete wizard;
+}
+
 void MainWindow::slotTimeoutRegressionErrorReport ()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::slotTimeoutRegressionErrorReport"
@@ -3445,6 +3461,7 @@ void MainWindow::startRegressionTestErrorReport(const QString &regressionInputFi
   // Save output/export file name
   m_regressionFile = exportRegressionFilenameFromInputFilename (regressionInputFile);
 
+  delete m_timerRegressionErrorReport;
   m_timerRegressionErrorReport = new QTimer();
   m_timerRegressionErrorReport->setSingleShot(false);
   connect (m_timerRegressionErrorReport, SIGNAL (timeout()), this, SLOT (slotTimeoutRegressionErrorReport()));
@@ -3456,6 +3473,7 @@ void MainWindow::startRegressionTestFileCmdScript()
 {
   LOG4CPP_INFO_S ((*mainCat)) << "MainWindow::startRegressionTestFileCmdScript";
 
+  delete m_timerRegressionFileCmdScript;
   m_timerRegressionFileCmdScript = new QTimer();
   m_timerRegressionFileCmdScript->setSingleShot(false);
   connect (m_timerRegressionFileCmdScript, SIGNAL (timeout()), this, SLOT (slotTimeoutRegressionFileCmdScript()));

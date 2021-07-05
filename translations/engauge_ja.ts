@@ -91,19 +91,24 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
         <translation>イントロダクション</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="18" />
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="19" />
         <source>Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines to define the coordinates.</source>
         <translation>Engageは、画像に座標を定義するグリッド線があるかぎり、グラフまたはマップの画像を数値に変換します。
 
 </translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="20" />
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="21" />
         <source>This wizard creates a checklist of steps that can serve as a helpful guide. By following those steps, you can obtain digitized data points in an exported file. This wizard also provides a quick summary of the most useful features of Engauge.</source>
         <translation>このウィザードは、役に立つガイドとして役立つステップのチェックリストを作成します。これらの手順を実行すると、エクスポートされたファイルでデジタル化されたデータポイントを取得できます。このウィザードでは、Engaugeの最も有用な機能の概要を簡単に説明します。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="23" />
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="24" />
+        <source>The wizard can be turned on and off using the Help menu.</source>
+        <translation>ウィザードは、[ヘルプ]メニューを使用してオンとオフを切り替えることができます。</translation>
+    </message>
+    <message>
+        <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="25" />
         <source>New users are encouraged to use this wizard.</source>
         <translation>新規ユーザーは、このウィザードを使用することをお勧めします。</translation>
     </message>
@@ -111,206 +116,206 @@ To run the Checklist Guide Wizard when an image file is imported, select the Hel
 <context>
     <name>ChecklistGuideWizard</name>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="27" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="28" />
         <source>Checklist Guide</source>
         <translation>チェックリストと手引き</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="29" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="32" />
         <source>Checklist Guide Wizard</source>
         <translation>チェックリストと手引きウィザード</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="62" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="65" />
         <source>Curves</source>
         <translation>カーブ</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="106" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="122" />
         <source>Follow this checklist of steps to digitize your image. Each step will show a check when it has been completed.</source>
         <translation>このチェックリストにある手順に沿って画像をデジタイズします。それぞれの手順が完了しましたら、チェックボックスがマークされます。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="107" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="123" />
         <source>The coordinates are defined by creating axis points</source>
         <translation>座標は座標軸の基準となる点を新たに打っていくことで設定されます。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="108" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="124" />
         <source>Add first of three axis points.</source>
         <translation>座標軸の基準となる3点のうち最初の点を追加します。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="127" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="136" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="145" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
         <source>Click on</source>
         <translation>　</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="111" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="120" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="127" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="136" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="145" />
         <source>for Axis Points mode</source>
         <translation>軸ポイントモード</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="112" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="128" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates</source>
         <translation>座標軸の目盛またはグリッド線の交差するところでクリックします。座標の値が分かるように表示がされているものを選んでください。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="113" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="122" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="131" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="129" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="138" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="147" />
         <source>Enter the coordinates of the axis point</source>
         <translation>座標軸の基準となる点の座標値を入力します。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="114" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="123" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="132" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="185" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="213" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="139" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="148" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="201" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="229" />
         <source>Click on Ok</source>
         <translation>OK ボタンをクリックします</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="117" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="133" />
         <source>Add second of three axis points.</source>
         <translation>座標軸の基準となる3点のうち2番目の点を追加します。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="121" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis point</source>
         <translation>座標軸の目盛またはグリッド線の交差するところでクリックします。座標の値が分かるように表示がされているものを選んでください。また基準とするほかの点からできるだけ離れた点を選びます。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="126" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="142" />
         <source>Add third of three axis points.</source>
         <translation>座標軸の基準となる3点のうち3番目の点を追加します。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="146" />
         <source>Click on an axis tick mark, or intersection of two grid lines, with labeled coordinates, away from the other axis points</source>
         <translation>座標軸の目盛や、座標値ラベルの付いている 2 本のグリッド線の交点などで、互いに他の基準点から十分に離れたポイントをクリックします。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="153" />
         <source>Points are digitized along each curve</source>
         <translation>ポイントをそれぞれのカーブに沿ってデジタイズしていきます。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="149" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
         <source>Add points for curve</source>
         <translation>　</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="155" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171" />
         <source>for Segment Fill mode</source>
         <translation>セグメント塗りつぶしモード用</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="172" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="181" />
         <source>Select curve</source>
         <translation>ドロップダウン・リストからカーブを選択します</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="156" />
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="165" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="172" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="181" />
         <source>in the drop-down list</source>
         <translation>　</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="157" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="173" />
         <source>Move the cursor over the curve. If a line does not appear then adjust the Color Filter settings for this curve</source>
         <translation>カーブの上にカーソルを移動します。ラインが表示されない場合は、このカーブのカラーフィルター設定を調整します</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="159" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="175" />
         <source>Move the cursor over the curve again. When the Segment Fill line appears, click on it to generate points</source>
         <translation>カーソルをカーブの上にもう一度移動します。セグメントの塗りつぶし線が表示されたら、クリックして点を生成します</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="164" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
         <source>for Point Match mode</source>
         <translation>ポイントマッチモード</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="166" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="182" />
         <source>Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust the Color Filter settings for this curve</source>
         <translation>カーブの典型的なポイントにカーソルを移動します。カーソルの円が色を変更しない場合は、この曲線のカラーフィルター設定を調整します</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="169" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="185" />
         <source>Move the cursor over a typical point in the curve again. Click on the point to start point matching</source>
         <translation>再度カーソル を 移動 し、対象の カーブ で典型的と思われる ポイント の位置に合わせてください。ポイント マッチング を開始する最初の点をクリックします。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="170" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="186" />
         <source>Engauge will display a candidate point. To accept that candidate point, press the right arrow key</source>
         <translation>Enguage が候補となるポイントを表示します。もしその候補のポイントで良ければ、右向きの矢印キーを押して確定してください。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="171" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="187" />
         <source>The previous step repeats until you select a different mode</source>
         <translation>この手順は ほかのモードに切り替えられるまで 繰り返し実行できます。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="179" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195" />
         <source>The digitized points can be exported</source>
         <translation>この デジタイズされたポイントはエクスポートすることができます。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="196" />
         <source>Export the points to a file</source>
         <translation>データポイントをファイルとしてエクスポートします。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="183" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="199" />
         <source>Select menu option File / Export</source>
         <translation>メニューオプションファイル/エクスポートを選択</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="184" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="200" />
         <source>Enter the file name</source>
         <translation>ファイル名を入力</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="186" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="202" />
         <source>Congratulations!</source>
         <translation>完了です！</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="191" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="207" />
         <source>Hint - The background image can be switched between the original image and filtered image.</source>
         <translation>ヒントーバックグラウンド画像は元の画像とフィルタ処理された画像から切り替えて表示することができます。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="194" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210" />
         <source>Select menu option View / Background / Show Original Image to see the original image</source>
         <translation>元のイメージを表示するには、メニューオプション[ビュー/背景/元のイメージを表示]を選択します</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="195" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211" />
         <source>Select menu option View / Background / Show Filtered Image to see the image from Color Filter</source>
         <translation>カラーフィルタから画像を見るには、メニューオプション[ビュー/背景/フィルタ画像表示]を選択します</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="226" />
         <source>Select menu option Settings / Color Filter</source>
         <translation>メニューオプションの設定/カラーフィルタを選択</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="227" />
         <source>Select the method for filtering. Hue is best if the curves have different colors</source>
         <translation>フィルタリングに利用する 手法 を選択します。 もしこれらの カーブ が異なる色で表現されていれば、色相 が最も良いオプションです。</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="212" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="228" />
         <source>Slide the green buttons back and forth until the curve is easily visible in the preview window</source>
         <translation>緑色の ボタン を前後にスライドさせて、プレビュー画面で カーブ が見やすくなるように調整してください。</translation>
     </message>
@@ -4893,22 +4898,22 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="501" />
+        <location filename="../src/main/MainWindow.cpp" line="503" />
         <source>Unable to export to file</source>
         <translation>ファイルのエクスポートに失敗しました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="546" />
+        <location filename="../src/main/MainWindow.cpp" line="548" />
         <source>Unable to extract image to file</source>
         <translation>イメージをファイルに抽出できません</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="626" />
+        <location filename="../src/main/MainWindow.cpp" line="628" />
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation>OSXでは、起動時にロードされるファイルは、Downloads、Pictures、またはLibrary / Containers / Digitizer / Dataディレクトリにある必要があります</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1362" />
+        <location filename="../src/main/MainWindow.cpp" line="1342" />
         <source>Cannot read file</source>
         <translation>ファイルを読み込むことができません。</translation>
     </message>
@@ -4917,90 +4922,90 @@ Zooming the image in or out is performed using any of several methods:
         <translation type="vanished">指定のディレクトリから</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="712" />
+        <location filename="../src/main/MainWindow.cpp" line="714" />
         <source>Import Image</source>
         <translation>画像を インポート</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1060" />
+        <location filename="../src/main/MainWindow.cpp" line="1062" />
         <source>File opened</source>
         <translation>ファイルが開かれた</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1105" />
+        <location filename="../src/main/MainWindow.cpp" line="1107" />
         <source>File not found</source>
         <translation>ファイル が見つかりません。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1122" />
+        <location filename="../src/main/MainWindow.cpp" line="1124" />
         <source>Error report opened</source>
         <translation>エラー レポートを 開きました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1185" />
-        <location filename="../src/main/MainWindow.cpp" line="1259" />
+        <location filename="../src/main/MainWindow.cpp" line="1187" />
+        <location filename="../src/main/MainWindow.cpp" line="1239" />
         <source>File imported</source>
         <translation>ファイル をインポートしました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293" />
+        <location filename="../src/main/MainWindow.cpp" line="1273" />
         <source>Background image.</source>
         <translation>バックグラウンド 画像</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1294" />
+        <location filename="../src/main/MainWindow.cpp" line="1274" />
         <source>Currently selected curve.</source>
         <translation>現在 選択中の カーブ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1295" />
+        <location filename="../src/main/MainWindow.cpp" line="1275" />
         <source>Point style for currently selected curve.</source>
         <translation>現在 選択中の カーブの ポイント 表示設定</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1296" />
+        <location filename="../src/main/MainWindow.cpp" line="1276" />
         <source>Segment Fill filter for currently selected curve.</source>
         <translation>現在 選択中の カーブに対する セグメント フィル フィルタ </translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1345" />
+        <location filename="../src/main/MainWindow.cpp" line="1325" />
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>ドキュメントの内容が変更されました。
 変更を保存しますか？</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1433" />
+        <location filename="../src/main/MainWindow.cpp" line="1413" />
         <source>Cannot write file</source>
         <translation>ファイル への書き込みに失敗しました。</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1481" />
+        <location filename="../src/main/MainWindow.cpp" line="1461" />
         <source>Save</source>
         <translation>セーブ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2549" />
+        <location filename="../src/main/MainWindow.cpp" line="2530" />
         <source>Export</source>
         <translation>エクスポート</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2632" />
+        <location filename="../src/main/MainWindow.cpp" line="2613" />
         <source>Open Document</source>
         <translation>ドキュメントを開く</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3963" />
+        <location filename="../src/main/MainWindow.cpp" line="3981" />
         <source>+</source>
         <translation>+</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3964" />
+        <location filename="../src/main/MainWindow.cpp" line="3982" />
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4100" />
+        <location filename="../src/main/MainWindow.cpp" line="4118" />
         <source>Engauge Digitizer</source>
         <translation>Engauge Digitizer</translation>
     </message>
@@ -5058,7 +5063,7 @@ Do you want to save your changes?</source>
         <translation>継続表示</translation>
     </message>
     <message>
-        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="69" />
+        <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="72" />
         <source>Curves for coordinate system</source>
         <translation>座標系の基準</translation>
     </message>
@@ -5749,7 +5754,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">前へ</translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="636" />
+        <location filename="../src/main/MainWindow.cpp" line="638" />
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation>ファイルに複数の言語アルファベットの文字が含まれているように見えますが、これはWindowsコマンドラインでは機能しません</translation>
     </message>

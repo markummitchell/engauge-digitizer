@@ -44,6 +44,7 @@ class ChecklistGuideWizard : public QWizard
 
   QString pageCurvesTitle (CoordSystemIndex coordSystemIndex,
                            unsigned int numberCoordSystem) const;
+  virtual void showEvent (QShowEvent *event);
   QString templateHtmlToAdjustColorFilterSettings () const;
 
   MainWindow &m_mainWindow;

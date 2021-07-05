@@ -23,9 +23,12 @@
 
 ChecklistGuideWizard::ChecklistGuideWizard (MainWindow &mainWindow,
                                             unsigned int numberCoordSystem) :
+  QWizard (&mainWindow),
   m_mainWindow (mainWindow),
   m_dialogName (tr ("Checklist Guide"))
 {
+  // Note this window is positioned in showEvent
+
   setWindowTitle (tr ("Checklist Guide Wizard"));
   setModal (true);
   QPixmap splash (":/engauge/img/SpreadsheetsForDoc.png");
@@ -88,6 +91,19 @@ void ChecklistGuideWizard::populateCurvesGraphs (CoordSystemIndex coordSystemInd
                                            CurveStyle (LineStyle::defaultGraphCurve (curvesGraphs.numCurves ()),
                                                        PointStyle::defaultGraphCurve (curvesGraphs.numCurves ()))));
   }
+}
+
+void ChecklistGuideWizard::showEvent (QShowEvent *event)
+{
+  // Position this window in the middle of the Engauge window so it is less likely to be obscured
+  // under some other application's window for #398
+  QRect screenGeometry = m_mainWindow.geometry();
+  int x = screenGeometry.x() + (screenGeometry.width () - width ()) / 2;
+  int y = screenGeometry.y() + (screenGeometry.height () - height ()) / 2;
+  QPoint global = mapToGlobal (QPoint (x, y));
+  move (global);
+
+  QWizard::showEvent (event);
 }
 
 QString ChecklistGuideWizard::templateHtml (CoordSystemIndex coordSystemIndex) const

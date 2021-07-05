@@ -375,6 +375,7 @@ private slots:
   void slotSettingsPointMatch ();
   void slotSettingsSegments ();
   void slotTableStatusChange ();
+  void slotTimeoutChecklistGuideWizard ();
   void slotTimeoutRegressionErrorReport ();
   void slotTimeoutRegressionFileCmdScript ();
   void slotUndoTextChanged (const QString &);
@@ -749,6 +750,9 @@ private:
   // Extract the image from the single dig file that was loaded in the command line, as enforced by parseCmdLine
   bool m_isExtractImageOnly;
   QString m_extractImageOnlyExtension;
+
+  // Timer for delayed execution of ChecklistGuideWizard after call to import handler
+  QTimer *m_timerChecklistGuideWizard;
 };
 
 #endif // MAIN_WINDOW_H
