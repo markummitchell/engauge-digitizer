@@ -74,7 +74,7 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
 
   const int COLUMN0 = 0;
 
-  QLabel *labelZoomFactor = new QLabel (QString ("%1:").arg (tr ("Initial zoom")));
+  QLabel *labelZoomFactor = new QLabel (QString ("%1:").arg (tr ("Initial zoom after load")));
   layout->addWidget (labelZoomFactor, row, 1);
 
   m_cmbZoomFactor = new QComboBox;
@@ -94,6 +94,18 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
                                     "zoom can be kept, or the specified zoom can be applied."));
   connect (m_cmbZoomFactor, SIGNAL (currentTextChanged (const QString)), this, SLOT (slotZoomFactor(const QString)));
   layout->addWidget (m_cmbZoomFactor, row++, 2);
+
+  QLabel *labelLoadViews = new QLabel (QString ("%1:").arg (tr ("Initial views after load")));
+  layout->addWidget (labelLoadViews, row, 1);
+
+  m_cmbLoadViews = new QComboBox;
+  m_cmbLoadViews->setWhatsThis (tr ("Views After Load\n\n"
+                                    "Selects the set of views to be shown after loading a document. Either the existing views "
+                                    "can be kept, or the views last used for the loaded document can be restored."));
+  m_cmbLoadViews->addItem (tr ("Keep previous views"), LOAD_VIEWS_KEEP_CURRENT);
+  m_cmbLoadViews->addItem (tr ("Use document views"), LOAD_VIEWS_USE_DOCUMENT);
+  connect (m_cmbLoadViews, SIGNAL (currentIndexChanged (int)), this, SLOT (slotLoadViews (int)));
+  layout->addWidget (m_cmbLoadViews, row++, 2);
 
   QLabel *labelZoomControl = new QLabel (QString ("%1:").arg (tr ("Zoom control")));
   layout->addWidget (labelZoomControl, row, 1);
@@ -148,18 +160,6 @@ void DlgSettingsMainWindow::createControls (QGridLayout *layout,
   m_cmbImportCropping->addItem (importCroppingUtil.importCroppingToString (IMPORT_CROPPING_ALWAYS), IMPORT_CROPPING_ALWAYS);
   connect (m_cmbImportCropping, SIGNAL (currentIndexChanged (int)), this, SLOT (slotImportCropping (int)));
   layout->addWidget (m_cmbImportCropping, row++, 2);
-
-  QLabel *labelLoadViews = new QLabel (QString ("%1:").arg (tr ("Views after load")));
-  layout->addWidget (labelLoadViews, row, 1);
-
-  m_cmbLoadViews = new QComboBox;
-  m_cmbLoadViews->setWhatsThis (tr ("Views After Load\n\n"
-                                    "Selects the set of views to be shown after loading a document. Either the existing views "
-                                    "can be kept, or the views last used for the loaded document can be restored."));
-  m_cmbLoadViews->addItem (tr ("Keep current views"), LOAD_VIEWS_KEEP_CURRENT);
-  m_cmbLoadViews->addItem (tr ("Use document views"), LOAD_VIEWS_USE_DOCUMENT);
-  connect (m_cmbLoadViews, SIGNAL (currentIndexChanged (int)), this, SLOT (slotLoadViews (int)));
-  layout->addWidget (m_cmbLoadViews, row++, 2);
 
 #ifdef ENGAUGE_PDF
   QLabel *labelPdfResolution = new QLabel (QString ("%1:").arg (tr ("Import PDF resolution (dots per inch)")));

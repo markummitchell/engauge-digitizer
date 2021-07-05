@@ -3727,11 +3727,6 @@ Set the color of the guidelines that can be dragged from the edges of the scene,
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="77"/>
-        <source>Initial zoom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="92"/>
         <source>Initial Zoom
 
@@ -3739,44 +3734,49 @@ Select the initial zoom factor when a new document is loaded. Either the previou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="98"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="105"/>
+        <source>Keep previous views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="110"/>
         <source>Zoom control</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="114"/>
         <source>Menu only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="103"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="115"/>
         <source>Menu and mouse wheel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="104"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="116"/>
         <source>Menu and +/- keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="105"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="117"/>
         <source>Menu, mouse wheel and +/- keys</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="106"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="118"/>
         <source>Zoom Control
 
 Select which inputs are used to zoom in and out.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="111"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="123"/>
         <source>Locale (requires restart)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="116"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="128"/>
         <source>Locale
 
 Select the locale that will be used in numbers (immediately), and the language in the user interface (after restart).
@@ -3785,12 +3785,12 @@ The locale determines how numbers are formatted. Specifically, either commas or 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="136"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="148"/>
         <source>Import cropping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="140"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="152"/>
         <source>Import Cropping
 
 Enables or disables cropping of the imported image when importing. Cropping the image is useful for removing unimportant information around a graph, but less useful when the graph already fills the entire image.
@@ -3799,24 +3799,24 @@ This setting only has an effect when Engauge has been built with support for pdf
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="152"/>
-        <source>Views after load</source>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="77"/>
+        <source>Initial zoom after load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="156"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="98"/>
+        <source>Initial views after load</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="102"/>
         <source>Views After Load
 
 Selects the set of views to be shown after loading a document. Either the existing views can be kept, or the views last used for the loaded document can be restored.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="159"/>
-        <source>Keep current views</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="160"/>
+        <location filename="../src/Dlg/DlgSettingsMainWindow.cpp" line="106"/>
         <source>Use document views</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4241,7 +4241,7 @@ If drag-and-drop is disabled, a rectangular set of cells may be selected by clic
 <context>
     <name>GraphicsView</name>
     <message>
-        <location filename="../src/Graphics/GraphicsView.cpp" line="55"/>
+        <location filename="../src/Graphics/GraphicsView.cpp" line="56"/>
         <source>Main Window
 
 After an image file is imported, or an Engauge Document opened, an image appears in this area. Points are added to the image.
@@ -4286,109 +4286,109 @@ Zooming the image in or out is performed using any of several methods:
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="500"/>
+        <location filename="../src/main/MainWindow.cpp" line="501"/>
         <source>Unable to export to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="545"/>
+        <location filename="../src/main/MainWindow.cpp" line="546"/>
         <source>Unable to extract image to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="625"/>
+        <location filename="../src/main/MainWindow.cpp" line="626"/>
         <source>In OSX, files loaded at startup must be in the Downloads, Pictures or Library/Containers/Digitizer/Data directories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1361"/>
+        <location filename="../src/main/MainWindow.cpp" line="1362"/>
         <source>Cannot read file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="711"/>
+        <location filename="../src/main/MainWindow.cpp" line="712"/>
         <source>Import Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1059"/>
+        <location filename="../src/main/MainWindow.cpp" line="1060"/>
         <source>File opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1104"/>
+        <location filename="../src/main/MainWindow.cpp" line="1105"/>
         <source>File not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1121"/>
+        <location filename="../src/main/MainWindow.cpp" line="1122"/>
         <source>Error report opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1184"/>
-        <location filename="../src/main/MainWindow.cpp" line="1258"/>
+        <location filename="../src/main/MainWindow.cpp" line="1185"/>
+        <location filename="../src/main/MainWindow.cpp" line="1259"/>
         <source>File imported</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1292"/>
+        <location filename="../src/main/MainWindow.cpp" line="1293"/>
         <source>Background image.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1293"/>
+        <location filename="../src/main/MainWindow.cpp" line="1294"/>
         <source>Currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1294"/>
+        <location filename="../src/main/MainWindow.cpp" line="1295"/>
         <source>Point style for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1295"/>
+        <location filename="../src/main/MainWindow.cpp" line="1296"/>
         <source>Segment Fill filter for currently selected curve.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1344"/>
+        <location filename="../src/main/MainWindow.cpp" line="1345"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1432"/>
+        <location filename="../src/main/MainWindow.cpp" line="1433"/>
         <source>Cannot write file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="1480"/>
+        <location filename="../src/main/MainWindow.cpp" line="1481"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2548"/>
+        <location filename="../src/main/MainWindow.cpp" line="2549"/>
         <source>Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="2630"/>
+        <location filename="../src/main/MainWindow.cpp" line="2632"/>
         <source>Open Document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3961"/>
+        <location filename="../src/main/MainWindow.cpp" line="3963"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="3962"/>
+        <location filename="../src/main/MainWindow.cpp" line="3964"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="4098"/>
+        <location filename="../src/main/MainWindow.cpp" line="4100"/>
         <source>Engauge Digitizer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5053,7 +5053,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main/MainWindow.cpp" line="635"/>
+        <location filename="../src/main/MainWindow.cpp" line="636"/>
         <source>The file appears to have characters from multiple language alphabets, which does not work in the Windows command line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5399,7 +5399,7 @@ Points can be more accurately placed by zooming in.</source>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="164"/>
-        <source>Previous</source>
+        <source>Keep previous zoom</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -161,7 +161,7 @@ void StatusBar::createZoomLabels ()
   LABEL_ZOOM_1_TO_16_CLOSER= new QString (tr ("1:16 closer"));
   LABEL_ZOOM_1_TO_16= new QString (tr ("1:16"));
   LABEL_ZOOM_FILL= new QString (tr ("Fill"));
-  LABEL_ZOOM_PREVIOUS= new QString (tr ("Previous"));
+  LABEL_ZOOM_PREVIOUS= new QString (tr ("Keep previous zoom"));
 }
 
 void StatusBar::createZoomMaps ()
