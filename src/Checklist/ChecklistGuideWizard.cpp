@@ -106,7 +106,7 @@ void ChecklistGuideWizard::showEvent (QShowEvent *event)
   // Linux version and Qt version combinations exhibit this Qt bug, no workaround will be attempted. It helps
   // that Windows is the most popular OS and it does not exhibit this Qt bug, which conflicts with the documentation.
   
-  move (global);
+  move (x, y);
 
   QWizard::showEvent (event);
 }
