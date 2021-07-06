@@ -100,7 +100,12 @@ void ChecklistGuideWizard::showEvent (QShowEvent *event)
   QRect screenGeometry = m_mainWindow.geometry();
   int x = screenGeometry.x() + (screenGeometry.width () - width ()) / 2;
   int y = screenGeometry.y() + (screenGeometry.height () - height ()) / 2;
-  QPoint global = mapToGlobal (QPoint (x, y));
+
+  // In Mint 20 the (x,y) point must be passed through mapToGlobal at this point for this dialog to appear in the
+  // middle of MainWindow (rather than at the top left of the screen). Since it is not known which Linux distribution,
+  // Linux version and Qt version combinations exhibit this Qt bug, no workaround will be attempted. It helps
+  // that Windows is the most popular OS and it does not exhibit this Qt bug, which conflicts with the documentation.
+  
   move (global);
 
   QWizard::showEvent (event);
