@@ -900,19 +900,21 @@ Beendet die Anwendung.</translation>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="312" />
         <source>Checklist Guide Wizard</source>
-        <translation>Checkliste Guide Wizard</translation>
+        <translation>Checklisten-Assistent</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="314" />
         <source>Open Checklist Guide Wizard during import to define digitizing steps</source>
-        <translation>Öffnen Sie den Checklist Guide Wizard während des Importes, um die Digitalisierungsschritte zu definieren</translation>
+        <translation>Öffnet den Checklisten-Assistent während des Importes, um die Digitalisierungsschritte festzulegen</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="315" />
         <source>Checklist Guide Wizard
 
 Use Checklist Guide Wizard during import to generate a checklist of steps for the imported document</source>
-        <translation>Checkliste Guide WizardVerwenden Checkliste Guide Wizard während des Imports zu einer Checkliste der Schritte für das importierte Dokument zu generieren</translation>
+        <translation>Checklisten-Assistent
+
+Verwendee den Checklisten-Assistent während des Imports, um eine Checkliste für das importierte Bild zu erzeugen</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="322" />
@@ -922,16 +924,16 @@ Use Checklist Guide Wizard during import to generate a checklist of steps for th
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="323" />
         <source>Play tutorial showing steps for digitizing curves</source>
-        <translation>Spieltutorium mit den Schritten zum Digitalisieren von Kurven</translation>
+        <translation>Zeige das Tutorial mit den Schritten zum Digitalisieren von Kurven</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="324" />
         <source>Tutorial
 
 Play tutorial showing steps for digitizing points from curves drawn with lines and/or point</source>
-        <translation>Tutorial 
+        <translation>Tutorial
 
-Zeigen Sie das Tutorial, in dem Schritte zum Digitalisieren von Punkten aus Kurven mit Linien und / oder Punkt angezeigt werden</translation>
+Zeige das Tutorial, mit allen Schritten zum Digitalisieren von Datenpunkten aus Kurven mit Linien und / oder Punkten</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="330" />
@@ -941,16 +943,16 @@ Zeigen Sie das Tutorial, in dem Schritte zum Digitalisieren von Punkten aus Kurv
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="332" />
         <source>Help documentation</source>
-        <translation>Hilfe Dokumentation</translation>
+        <translation>Dokumentation</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="333" />
         <source>Help Documentation
 
 Searchable help documentation</source>
-        <translation>Hilfe Dokumentation
+        <translation>Dokumentation
 
-Suchbare Hilfedokumentation</translation>
+Durchsuchbare Dokumentation</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="338" />
@@ -1012,21 +1014,21 @@ Kurvenlisteneinstellungen können Kurven im aktuellen Dokument hinzufügen, umbe
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="360" />
         <source>Curve Properties...</source>
-        <translation>Kurven Eigenschaften...</translation>
+        <translation>Kurveneigenschaften...</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="361" />
         <source>Edit Curve Properties settings.</source>
-        <translation>Bearbeite Einstellungen der Kurveneigenschaften.</translation>
+        <translation>Bearbeite Kurveneigenschaften.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="362" />
         <source>Curve Properties Settings
 
 Curves properties settings determine how each curve appears</source>
-        <translation>Eigenschaften der Kurveneigenschaften
+        <translation>Kurveneigenschaften
 
-Kurven Eigenschaften Einstellungen bestimmen, wie jede Kurve erscheint</translation>
+Kurveneigenschaften bestimmen, wie jede Kurve dargestellt wird</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="366" />
@@ -1043,14 +1045,14 @@ Kurven Eigenschaften Einstellungen bestimmen, wie jede Kurve erscheint</translat
         <source>Digitize Axis and Graph Curve Settings
 
 Digitize Curve settings determine how points are digitized in Digitize Axis Point and Digitize Graph Point modes</source>
-        <translation>Digitieren Sie die Achsen- und Graphenkurveneinstellungen
+        <translation>Erstelle Achsen- und Graphenkurveneinstellungen
 
-Digitieren Sie die Kurveneinstellungen, um festzulegen, wie die Punkte in den Digitalisierungsachsen- und Digitalisierungs-Grafikpunkt-Modi digitalisiert werden</translation>
+Erstelle Kurveneinstellungen, um festzulegen, wie die Punkte in den Digitalisierungsachsen- und Digitalisierungs-Grafikpunkt-Modi digitalisiert werden</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="373" />
         <source>Export Format...</source>
-        <translation>Exportiere Format...</translation>
+        <translation>Exportformat...</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="374" />
@@ -1062,9 +1064,9 @@ Digitieren Sie die Kurveneinstellungen, um festzulegen, wie die Punkte in den Di
         <source>Export Format Settings
 
 Export format settings affect how exported files are formatted</source>
-        <translation>Formateinstellungen importieren
+        <translation>Exportformat-Einstellungen
 
-Exportieren von Formateinstellungen beeinflussen, wie exportierte Dateien formatiert sind</translation>
+Formateinstellungen für den Export beeinflussen, wie exportierte Dateien formatiert sind</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="379" />
