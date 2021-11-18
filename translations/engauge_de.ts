@@ -17,9 +17,9 @@ This box contains a checklist of steps suggested by the Checklist Guide Wizard. 
 To run the Checklist Guide Wizard when an image file is imported, select the Help / Checklist Wizard menu option.</source>
         <translation>Checkliste Anleitung
 
-Diese Box enthält eine Checkliste für einen Schritt vorgeschlagen durch den Checklisten Assistenten. Nach diesen Schritten sollte eine Reihe von digitalisierten Punkten in einer Ausgabedatei erzeugt werden.
+Diese Box enthält eine Schritt-für-Schritt-Anleitung, mit Vorschlägen des Checklisten-Assistenten. Hiermit wird eine Reihe von Datenpunkten in einer Ausgabedatei erzeugt.
 
-Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird, wählen Sie die Hilfe / Checklistenassistent im Menü.</translation>
+Um den Checklisten-Assistenten ausführen, wenn bereits ein Bild importiert wurde, wählen Sie die im Menü Hilfe / Checklistenassistent.</translation>
     </message>
 </context>
 <context>
@@ -27,12 +27,12 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="11" />
         <source>Conclusion</source>
-        <translation>Fazit</translation>
+        <translation>Zusammenfassung</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="19" />
         <source>A checklist guide has been created.</source>
-        <translation>Ein Checklistenführer wurde erstellt.</translation>
+        <translation>Eine Checkliste wurde erstellt.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="20" />
@@ -41,8 +41,18 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageConclusion.cpp" line="21" />
-        <source>After import, a filtered image is shown in the background. This filtered image is produced from the original image according to the parameters set in Settings / Color Filter. When the parameters have been set correctly, unimportant information (such as grid lines and background colors) has been removed from the filtered images so automated feature extraction can be performed. If desirable features have been removed from the image, the parameters can be adjusted using Settings / Color Filter, or the original image can be displayed instead using View / Background / Show Original Image.</source>
-        <translation>Nach dem Import wird ein gefiltertes Bild im Hintergrund angezeigt. Dieses gefilterte Bild wird aus dem Originalbild gemäß den unter Einstellungen / Farbfilter festgelegten Parametern erstellt. Wenn die Parameter korrekt festgelegt wurden, wurden unwichtige Informationen (z. B. Rasterlinien und Hintergrundfarben) aus den gefilterten Bildern entfernt, sodass eine automatische Merkmalsextraktion durchgeführt werden kann. Wenn die gewünschten Funktionen aus dem Bild entfernt wurden, können die Parameter mit Einstellungen / Farbfilter angepasst werden, oder das Originalbild kann stattdessen mit Ansicht / Hintergrund / Originalbild anzeigen angezeigt werden.</translation>
+        <source>After import, a filtered image is shown in the background.
+            This filtered image is produced from the original image according to the parameters set in Settings / Color Filter.
+            When the parameters have been set correctly, unimportant information (such as grid lines and background colors)
+            has been removed from the filtered images so automated feature extraction can be performed.
+            If desirable features have been removed from the image, the parameters can be adjusted using Settings / Color Filter,
+            or the original image can be displayed instead using View / Background / Show Original Image.</source>
+        <translation>Nach dem Import wird ein gefiltertes Bild im Hintergrund angezeigt.
+            Dieses gefilterte Bild wird aus dem Originalbild gemäß den unter Einstellungen / Farbfilter festgelegten Parametern erstellt.
+            Wenn die Parameter korrekt festgelegt werden, werden unwichtige Informationen (z. B. Rasterlinien und Hintergrundfarben)
+            aus den gefilterten Bildern entfernt, sodass eine automatische Merkmalsextraktion durchgeführt werden kann.
+            Wenn die gewünschten Funktionen aus dem Bild entfernt wurden, können die Parameter mit Einstellungen / Farbfilter angepasst werden,
+            oder das Originalbild kann stattdessen mit Ansicht / Hintergrund / Originalbild angezeigt werden.</translation>
     </message>
 </context>
 <context>
@@ -55,12 +65,12 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="22" />
         <source>Draw lines between points in each curve.</source>
-        <translation>Zeichne Linien zwischen Punkten in jeder Kurve.</translation>
+        <translation>Verbinde Punkte in jeder Kurve mit Linien.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="23" />
         <source>Draw points in each curve, without lines between the points.</source>
-        <translation>Zeichnen Sie Punkte in jeder Kurve, ohne Linien zwischen den Punkten.</translation>
+        <translation>Zeichne keine Linien zwischen den Punkten in jeder Kurve.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageCurves.cpp" line="26" />
@@ -92,13 +102,20 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="19" />
-        <source>Engauge converts an image of a graph or map into numbers, as long as the image has axes and/or grid lines to define the coordinates.</source>
-        <translation>Engauge wandelt ein Bild eines Graphen oder einer Karte in Zahlen um, solange das Bild Achsen und / oder Gitterlinien zur Definition der Koordinaten enthält.</translation>
+        <source>Engauge converts an image of a graph or map into numbers,
+            as long as the image has axes and/or grid lines to define the coordinates.</source>
+        <translation>Engauge wandelt ein Bild eines Graphen oder einer Karte in Zahlen um,
+            sofern das Bild Achsen und / oder Gitterlinien zur Definition der Koordinaten enthält.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="21" />
-        <source>This wizard creates a checklist of steps that can serve as a helpful guide. By following those steps, you can obtain digitized data points in an exported file. This wizard also provides a quick summary of the most useful features of Engauge.</source>
-        <translation>Dieser Assistent erstellt eine Prüfliste mit Schritten, die als hilfreicher Leitfaden dienen können. Wenn Sie diese Schritte ausführen, können Sie digitalisierte Datenpunkte in einer exportierten Datei erhalten. Dieser Assistent bietet auch eine kurze Zusammenfassung der nützlichsten Funktionen von Engauge.</translation>
+        <source>This wizard creates a checklist of steps that can serve as a helpful guide.
+            By following those steps, you can obtain digitized data points in an exported file.
+            This wizard also provides a quick summary of the most useful features of Engauge.</source>
+        <translation>Dieser Assistent erstellt eine Prüfliste mit Schritten,
+            die den Nutzer durch den Prozess leiten sollen.
+            Mit diesen Schritten können Sie digitalisierte Datenpunkte in einer exportierten Datei speichern.
+            Dieser Assistent bietet auch eine kurze Zusammenfassung der nützlichsten Funktionen von Engauge.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="24" />
@@ -108,7 +125,7 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
     <message>
         <location filename="../src/Checklist/ChecklistGuidePageIntro.cpp" line="25" />
         <source>New users are encouraged to use this wizard.</source>
-        <translation>Neue Benutzer werden aufgefordert, diesen Assistenten zu verwenden.</translation>
+        <translation>Dieser Assistent richtet sich besonders an neue Nutzer.</translation>
     </message>
 </context>
 <context>
@@ -116,12 +133,12 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="28" />
         <source>Checklist Guide</source>
-        <translation>Checkliste Anleitung</translation>
+        <translation>Checkliste</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="32" />
         <source>Checklist Guide Wizard</source>
-        <translation>Checkliste Guide Wizard</translation>
+        <translation>Checklisten-Assistent</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="65" />
@@ -141,7 +158,7 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="124" />
         <source>Add first of three axis points.</source>
-        <translation>Füge ersten von drei Achsenpunkten hinzu.</translation>
+        <translation>Füge den ersten von drei Achsenpunkten hinzu.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="127" />
@@ -169,7 +186,7 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="138" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="147" />
         <source>Enter the coordinates of the axis point</source>
-        <translation>Gebe die Koordinaten für den Achsenpunkt ein</translation>
+        <translation>Gib die Koordinaten für den Achsenpunkt ein</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="130" />
@@ -178,12 +195,12 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="201" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="229" />
         <source>Click on Ok</source>
-        <translation>Klicke auf Ok</translation>
+        <translation>Klicke auf OK</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="133" />
         <source>Add second of three axis points.</source>
-        <translation>Füge zweiten von drei Achsenpunkten hinzu.</translation>
+        <translation>Füge den zweiten von drei Achsenpunkten hinzu.</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="137" />
@@ -219,23 +236,23 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="172" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="181" />
         <source>Select curve</source>
-        <translation>Wähle Kurve aus</translation>
+        <translation>Wähle eine Kurve aus</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="172" />
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="181" />
         <source>in the drop-down list</source>
-        <translation>in der Drop-down Liste</translation>
+        <translation>in der Auswahlliste</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="173" />
         <source>Move the cursor over the curve. If a line does not appear then adjust the Color Filter settings for this curve</source>
-        <translation>Bewegen Sie den Cursor über die Kurve. Wenn eine Linie nicht angezeigt wird, passen Sie die Farbfiltereinstellungen für diese Kurve an</translation>
+        <translation>Bewege den Cursor über die Kurve. Wenn eine Linie nicht angezeigt wird, passe die Farbfiltereinstellungen für diese Kurve an</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="175" />
         <source>Move the cursor over the curve again. When the Segment Fill line appears, click on it to generate points</source>
-        <translation>Bewegen Sie den Cursor erneut über die Kurve. Wenn die Segmentfülllinie angezeigt wird, klicken Sie darauf, um Punkte zu generieren</translation>
+        <translation>Bewege den Cursor erneut über die Kurve. Wenn die Segmentfülllinie angezeigt wird, klicke darauf, um Punkte zu generieren</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="180" />
@@ -245,17 +262,17 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="182" />
         <source>Move the cursor over a typical point in the curve. If the cursor circle does not change color then adjust the Color Filter settings for this curve</source>
-        <translation>Bewegen Sie den Cursor über einen typischen Punkt in der Kurve. Wenn der Cursor-Kreis die Farbe nicht ändert, passen Sie die Farbfiltereinstellungen für diese Kurve an</translation>
+        <translation>Beweg den Cursor über einen typischen Punkt in der Kurve. Wenn der Cursor-Kreis die Farbe nicht ändert, passe die Farbfiltereinstellungen für diese Kurve an</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="185" />
         <source>Move the cursor over a typical point in the curve again. Click on the point to start point matching</source>
-        <translation>Bewege den Cursor auf einen typischen Punkt der Kurve und klicke diesen an um die Punkterkennung zu starten</translation>
+        <translation>Bewege den Cursor auf einen typischen Punkt der Kurve und klicke diesen an, um die Punkterkennung zu starten</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="186" />
         <source>Engauge will display a candidate point. To accept that candidate point, press the right arrow key</source>
-        <translation>Engauge wird einen Punkt vorschlagen. Um diesen Vorschlag zu akzeptieren, drücke Pfeil-rechts</translation>
+        <translation>Engauge wird einen Punkt vorschlagen. Um diesen Vorschlag zu akzeptieren, drücke Pfeil-Rechts</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="187" />
@@ -275,12 +292,12 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="199" />
         <source>Select menu option File / Export</source>
-        <translation>Wählen Sie den Menüpunkt Datei / Exportieren</translation>
+        <translation>Wähle den Menüpunkt Datei / Exportieren</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="200" />
         <source>Enter the file name</source>
-        <translation>Gebe einen Dateinamen ein</translation>
+        <translation>Gib einen Dateinamen ein</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="202" />
@@ -295,17 +312,17 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="210" />
         <source>Select menu option View / Background / Show Original Image to see the original image</source>
-        <translation>Wählen Sie die Menüoption Ansicht / Hintergrund / Originalbild anzeigen, um das Originalbild anzuzeigen</translation>
+        <translation>Wähle die Menüoption Ansicht / Hintergrund / Originalbild anzeigen, um das Originalbild anzuzeigen</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="211" />
         <source>Select menu option View / Background / Show Filtered Image to see the image from Color Filter</source>
-        <translation>Wählen Sie die Menüoption Ansicht / Hintergrund / Gefiltertes Bild anzeigen, um das Bild vom Farbfilter zu sehen</translation>
+        <translation>Wähle die Menüoption Ansicht / Hintergrund / Gefiltertes Bild anzeigen, um das Bild mit Farbfilter zu sehen</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="226" />
         <source>Select menu option Settings / Color Filter</source>
-        <translation>Wählen Sie den Menüpunkt Einstellungen / Farbfilter</translation>
+        <translation>Wähle den Menüpunkt Einstellungen / Farbfilter</translation>
     </message>
     <message>
         <location filename="../src/Checklist/ChecklistGuideWizard.cpp" line="227" />
@@ -340,7 +357,7 @@ Um den Checklisten-Assistenten ausführen, wenn eine Bild-Datei importiert wird,
         <source>Select
 
 Select points on the screen.</source>
-        <translation>Wählen Sie die Punkte auf dem Bildschirm aus.</translation>
+        <translation>Wähle die Punkte auf dem Bildschirm aus.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="70" />
@@ -355,7 +372,7 @@ Select points on the screen.</source>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="73" />
         <source>Digitize axis points for a graph.</source>
-        <translation>Digitalpunkte für einen Graphen ausstellen</translation>
+        <translation>Achenpunkte für ein Diagramm erstellen</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="74" />
@@ -366,14 +383,14 @@ Digitizes an axis point for a graph by placing a new point at the cursor after a
 This tool is disabled when a complete set of axis points has been defined, or after Import (Advanced) if Scale Bar is selected.</source>
         <translation>Achsenpunkt digitalisieren
 
-Digitalisiert einen Achsenpunkt für ein Diagramm, indem Sie nach einem Mausklick einen neuen Punkt am Cursor platzieren. Die Koordinaten des Achspunktes werden dann eingegeben. Nach dem Importieren und Importieren (Erweitert) können drei Achsenpunkte mit (X1, Y1) (X2, Y2) (X3, Y3) -Koordinaten zur Definition der Diagrammkoordinaten digitalisiert werden. Optional können nach "Importieren (Erweitert)" vier Achsenpunkte mit (X1) (X2) (Y3) (Y4) -Koordinaten digitalisiert werden, um die Diagrammkoordinaten zu definieren.
+Ein neuer Achsenpunkt für ein Diagramm wird durch Klicken auf den Graphen erstellt. Ein neuer Punkt wird am Ort des Cursors platziert. Die Koordinaten des Achspunktes werden dann eingegeben. Nach dem Importieren (normal oder "Erweitert") können drei Achsenpunkte jeweils mit x- und y-Koordinaten zur Definition der Diagrammkoordinaten eingegeben werden. Optional können nach "Importieren (Erweitert)" vier Achsenpunkte (X1, X2, sowie Y3, Y4) eingegeben werden, um die Diagrammkoordinaten zu definieren.
 
-Dieses Werkzeug ist deaktiviert, wenn ein vollständiger Satz von Achsenpunkten definiert wurde, oder nach dem Importieren (Erweitert), wenn die Maßstabsleiste ausgewählt ist.</translation>
+Ist schon ein vollständiger Satz von Achsenpunkten definiert, wird dieses Werkzeug deaktiviert. Dies geschieht auch nach "Importieren (Erweitert)", wenn die Maßstabsleiste ausgewählt ist.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="85" />
         <source>Scale Bar Tool</source>
-        <translation>Waage-Werkzeug</translation>
+        <translation>Skalen-Werkzeug</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="86" />
@@ -384,7 +401,7 @@ Dieses Werkzeug ist deaktiviert, wenn ein vollständiger Satz von Achsenpunkten 
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="88" />
         <source>Digitize scale bar for a map. Requires Import (Advanced).</source>
-        <translation>Skalierungsleiste für eine Karte digitalisieren Erfordert den Import (Erweitert).</translation>
+        <translation>Skalierungsleiste für eine Karte eingeben. Über "Import (Erweitert)".</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="89" />
@@ -395,11 +412,11 @@ Digitize a scale bar for a map by clicking and dragging. The length of the scale
 This tool is enabled by selecting Scale Bar in Import (Advanced).
 
 This tool is disabled when a scale bar has been defined, or if axis points were selected during import.</source>
-        <translation>Skalierungsleiste digitalisieren
+        <translation>Skalierungsleiste eingeben
 
-Digitalisieren Sie eine Skalierungsleiste für eine Karte, indem Sie darauf klicken und ziehen. Die Länge der Skalenleiste wird dann eingegeben. In einer Karte definieren die beiden Endpunkte der Maßstabsleiste die Abstände in Diagrammkoordinaten.
+Du kannst eine Skalierungsleiste für eine Karte eingeben, indem du darauf klickst und mit der Maus eine Linie ziehst. Die Länge der Skalenleiste wird dann gemessen. In einer Karte definieren die beiden Endpunkte der Maßstabsleiste die Abstände in Diagrammkoordinaten.
 
-Dieses Werkzeug wird durch Auswahl von Skalenleiste in Import (Erweitert) aktiviert.
+Dieses Werkzeug wird durch Auswahl von Skalenleiste in "Import (Erweitert)" aktiviert.
 
 Dieses Werkzeug ist deaktiviert, wenn eine Maßstabsleiste definiert wurde oder wenn beim Import Achsenpunkte ausgewählt wurden.</translation>
     </message>
@@ -416,7 +433,7 @@ Dieses Werkzeug ist deaktiviert, wenn eine Maßstabsleiste definiert wurde oder 
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="101" />
         <source>Digitize curve points.</source>
-        <translation>Digitalisiere Kurvenpunkte.</translation>
+        <translation>Eingeben von Kurvenpunkte.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="102" />
@@ -425,7 +442,9 @@ Dieses Werkzeug ist deaktiviert, wenn eine Maßstabsleiste definiert wurde oder 
 Digitizes a curve point by placing a new point at the cursor after a mouse click. Use this mode to digitize points along curves one by one.
 
 New points will be assigned to the currently selected curve.</source>
-        <translation>Digitize curve pointDigitiert einen Kurvenpunkt, indem er nach einem Mausklick einen neuen Punkt am Cursor platziert. Verwenden Sie diesen Modus, um Punkte entlang der Kurven einzeln zu digitalisieren. Neue Punkte werden der aktuell ausgewählten Kurve zugewiesen.</translation>
+        <translation>Eingeben von Kurvenpunkten
+
+Gib einen Kurvenpunkt durch Mausklick auf einen Punkt der Kurve ein. Verwende diesen Modus, um Punkte entlang der Kurven manuell einzeln zu markieren. Neue Punkte werden der aktuell ausgewählten Kurve zugewiesen.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="109" />
@@ -440,7 +459,7 @@ New points will be assigned to the currently selected curve.</source>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="112" />
         <source>Digitize curve points in a point plot by matching a point.</source>
-        <translation>Digitalisiere Kurvenpunkte in einem Punkt-Plot durch Abgleich eines Punktes.</translation>
+        <translation>Eingeben von Kurvenpunkte in einem Punkt-Plot durch Abgleich eines Punktes.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="113" />
@@ -449,7 +468,9 @@ New points will be assigned to the currently selected curve.</source>
 Digitizes curve points in a point plot by finding points that match a sample point. The process starts by selecting a representative sample point.
 
 New points will be assigned to the currently selected curve.</source>
-        <translation>Digitieren von Kurvenpunkten durch PunktanpassungDigitiert Kurvenpunkte in einem Punktplot, indem man Punkte findet, die mit einem Stichprobenpunkt übereinstimmen. Der Prozeß beginnt mit der Auswahl eines repräsentativen Stichprobenpunktes. Neue Zeilen werden der aktuell ausgewählten Kurve zugeordnet.</translation>
+        <translation>Eingeben von Kurvenpunkten durch Punktanpassung
+            
+Kurvenpunkte können durch Auswahl eines repräsentativen Punktes eingelesen werden. Der Prozess beginnt mit der Auswahl eines Punktes. Neue Punkte werden der aktuell ausgewählten Kurve zugeordnet.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="119" />
@@ -464,19 +485,21 @@ New points will be assigned to the currently selected curve.</source>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="122" />
         <source>Select color settings for filtering in Segment Fill mode.</source>
-        <translation>Wählen Sie Farbeinstellungen für die Filterung im Segment Füllmodus.</translation>
+        <translation>Wählen Sie Farbeinstellungen für die Filterung im Segment-Füllmodus.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="123" />
         <source>Select color settings for Segment Fill filtering
 
 Select a pixel along the currently selected curve. That pixel and its neighbors will define the filter settings (color, brightness, and so on) of the currently selected curve while in Segment Fill mode.</source>
-        <translation>Wählen Sie Farbeinstellungen für die Segmentfüllfilterung aus. Wählen Sie ein Pixel entlang der aktuell ausgewählten Kurve aus. Dieses Pixel und seine Nachbarn definieren die Filtereinstellungen (Farbe, Helligkeit usw.) der aktuell ausgewählten Kurve im Segment Füllmodus.</translation>
+        <translation>Wählen Sie Farbeinstellungen für die Segmentfüllfilterung aus
+
+Wählen Sie ein Pixel entlang der aktuell ausgewählten Kurve aus. Dieses Pixel und seine Nachbarn definieren die Filtereinstellungen (Farbe, Helligkeit usw.) der aktuell ausgewählten Kurve im Segment-Füllmodus.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="129" />
         <source>Segment Fill Tool</source>
-        <translation>Segment-Füllungs-Werkzeug</translation>
+        <translation>Segment-Füll-Werkzeug</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="130" />
@@ -486,7 +509,7 @@ Select a pixel along the currently selected curve. That pixel and its neighbors 
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="132" />
         <source>Digitize curve points along a segment of a curve.</source>
-        <translation>Digitieren Sie Kurvenpunkte entlang eines Segments einer Kurve.</translation>
+        <translation>Eingeben von Kurvenpunkte entlang eines Segments einer Kurve.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="133" />
@@ -495,7 +518,9 @@ Select a pixel along the currently selected curve. That pixel and its neighbors 
 Digitizes curve points by placing new points along the highlighted segment under the cursor. Use this mode to quickly digitize multiple points along a curve with a single click.
 
 New points will be assigned to the currently selected curve.</source>
-        <translation>Digitieren von Kurvenpunkten mit SegmentfüllungDigitiert Kurvenpunkte, indem neue Punkte entlang des markierten Segments unter dem Cursor platziert werden. Verwenden Sie diesen Modus, um schnell mehrere Punkte entlang einer Kurve mit einem einzigen Klick zu digitalisieren. Neue Nummern werden der aktuell ausgewählten Kurve zugewiesen.</translation>
+        <translation>Eingeben von Kurvenpunkten im Segment-Füllmodus
+
+Erstellt Kurvenpunkte, indem neue Punkte entlang des markierten Segments unter dem Cursor platziert werden. Verwenden Sie diesen Modus, um schnell mehrere Punkte entlang einer Kurve mit einem einzigen Klick zu erstellen. Neue Punkte werden der aktuell ausgewählten Kurve zugewiesen.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="140" />
@@ -505,33 +530,35 @@ New points will be assigned to the currently selected curve.</source>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="143" />
         <source>Digitize guidelines along constant coordinate values for aligning new points</source>
-        <translation>Digitalisieren Sie Richtlinien entlang konstanter Koordinatenwerte, um neue Punkte auszurichten</translation>
+        <translation>Erstelle Referenzlinien entlang konstanter Koordinatenwerte, um neue Punkte auszurichten</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="144" />
         <source>Digitize guidelines along constant coordinate values
 
 Guidelines can be placed along constant X or Y coordinates in cartesian coordinates, and T (theta) or R (range) coordinates in polar coordinates. Guidelines can help with aligning new points</source>
-        <translation>Digitalisieren Sie Richtlinien entlang konstanter Koordinatenwerte
+        <translation>Erstelle Referenzlinien entlang konstanter Koordinatenwerte
 
-Richtlinien können entlang konstanter X- oder Y-Koordinaten in kartesischen Koordinaten und T- (Theta) oder R- (Entfernungs-) Koordinaten in Polarkoordinaten platziert werden. Richtlinien können beim Ausrichten neuer Punkte hilfreich sein</translation>
+Referenzlinien können entlang konstanter X- oder Y-Koordinaten in kartesischen Koordinaten und T- (Theta) oder R- (Entfernungs-) Koordinaten in Polarkoordinaten platziert werden. Referenzlinien können beim Ausrichten neuer Punkte hilfreich sein</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="165" />
         <source>&amp;Undo</source>
-        <translation>Zurück</translation>
+        <translation>Rückgängig</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="167" />
         <source>Undo the last operation.</source>
-        <translation>Letzte Operation zurücknehmen.</translation>
+        <translation>Letzte Operation rückgängig machen.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="168" />
         <source>Undo
 
 Undo the last operation.</source>
-        <translation>Rückgängig die letzte Operation.</translation>
+        <translation>Rückgängig
+
+Die letzte Operation rückgängig machen.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="172" />
@@ -541,16 +568,16 @@ Undo the last operation.</source>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="174" />
         <source>Redo the last operation.</source>
-        <translation>Letzte Rücknahme wiederherstellen.</translation>
+        <translation>Letzte Operation wiederherstellen.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="175" />
         <source>Redo
 
 Redo the last operation.</source>
-        <translation>Wiederholen
+        <translation>Wiederherstellen
 
-Letzte Operation wiederholen.</translation>
+Letzte Operation wiederherstellen.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="179" />
@@ -626,12 +653,12 @@ Fügt die ausgewählten Punkte aus der Zwischenablage ein. Sie werden der aktuel
 Deletes the selected points, after copying them to the clipboard.</source>
         <translation>Delete
 
-Die löscht die ausgewählten Punkte, nachdem sie in die Zwischenablage kopiert wurden.</translation>
+Löscht die ausgewählten Punkte, nachdem sie in die Zwischenablage kopiert wurden.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="207" />
         <source>Paste As New</source>
-        <translation>Als Neu einfügen</translation>
+        <translation>Als neu einfügen</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="208" />
@@ -650,12 +677,12 @@ Erstellt ein neues Dokument, indem ein Bild aus der Zwischenablage eingefügt wi
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="213" />
         <source>Paste As New (Advanced)...</source>
-        <translation>Als Neu einfügen (erweitert)...</translation>
+        <translation>Als neu einfügen (Erweitert) ...</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="214" />
         <source>Pastes an image from the clipboard, in advanced mode.</source>
-        <translation>Fügt ein Bild aus der Zwischenablage ein, im erweiterten Modus.</translation>
+        <translation>Fügt ein Bild aus der Zwischenablage im erweiterten Modus ein.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="215" />
@@ -669,7 +696,7 @@ Erstellt ein neues Dokument, indem ein Bild aus der Zwischenablage im erweiterte
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="224" />
         <source>&amp;Import...</source>
-        <translation>Einführen...</translation>
+        <translation>Import ...</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="225" />
@@ -690,12 +717,14 @@ Creates a new document by importing an image with a single coordinate system, an
 For more complicated images with multiple coordinate systems, and/or floating axes, Import (Advanced) is used instead.</source>
         <translation>Bild importieren 
 
-Erstellt ein neues Dokument, indem ein Bild mit einem einzigen Koordinatensystem importiert wird und Achsen beide Koordinaten bekannt sind. Für kompliziertere Bilder mit mehreren Koordinatensystemen und / oder schwimmenden Achsen wird stattdessen Import (Erweitert) verwendet.</translation>
+Erstellt ein neues Dokument, indem ein Bild mit einem einzigen Koordinatensystem importiert wird, bei dem beide Koordinatenachsen bekannt sind.
+
+Für kompliziertere Bilder mit mehreren Koordinatensystemen und / oder schwebenden Achsen wird stattdessen "Import (Erweitert)" verwendet.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="234" />
         <source>Import (Advanced)...</source>
-        <translation>Importiere (erweitert)...</translation>
+        <translation>Import (Erweitert) ...</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="235" />
@@ -709,7 +738,7 @@ Erstellt ein neues Dokument, indem ein Bild mit einem einzigen Koordinatensystem
 Creates a new document by importing an image with support for advanced feaures. In advanced mode, there can be multiple coordinate systems and/or floating axes.</source>
         <translation>Import (Erweitert) 
 
-Erstellt ein neues Dokument, indem ein Bild mit Unterstützung für erweiterte Funktionen importiert wird. Im erweiterten Modus können mehrere Koordinatensysteme und / oder Schwimmachsen vorhanden sein.</translation>
+Erstellt ein neues Dokument, indem ein Bild mit Unterstützung für erweiterte Funktionen importiert wird. Im erweiterten Modus können mehrere Koordinatensysteme und / oder schwebende Achsen vorhanden sein.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="241" />
@@ -728,7 +757,7 @@ Erstellt ein neues Dokument, indem ein Bild mit Unterstützung für erweiterte F
 Imports a new image into the current document. The existing image is replaced, and all curves in the document are preserved. This operation is useful for applying the axis points and other settings from an existing document to a different image.</source>
         <translation>Import (Bild ersetzen) 
 
-Impert ein neues Bild in das aktuelle Dokument. Das vorhandene Bild wird ersetzt, und alle Kurven im Dokument bleiben erhalten. Diese Operation ist nützlich, um die Achspunkte und andere Einstellungen von einem vorhandenen Dokument auf ein anderes Bild anzuwenden.</translation>
+Importiert ein neues Bild in das aktuelle Dokument. Das vorhandene Bild wird ersetzt und alle Kurven im Dokument bleiben erhalten. Diese Operation ist nützlich, um die Achspunkte und andere Einstellungen von einem vorhandenen Dokument auf ein anderes Bild anzuwenden.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="249" />
@@ -745,7 +774,9 @@ Impert ein neues Bild in das aktuelle Dokument. Das vorhandene Bild wird ersetzt
         <source>Open Document
 
 Opens an existing document.</source>
-        <translation>Dokument öffnen. öffnet ein vorhandenes Dokument.</translation>
+        <translation>Dokument öffnen
+
+Öffnet ein vorhandenes Dokument.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="265" />
@@ -755,7 +786,7 @@ Opens an existing document.</source>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="267" />
         <source>Closes the open document.</source>
-        <translation>Schließt das offene Dokument.</translation>
+        <translation>Schließt das geöffnete Dokument.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="268" />
@@ -764,12 +795,12 @@ Opens an existing document.</source>
 Closes the open document.</source>
         <translation>Dokument schließen 
 
-öffnet das offene Dokument.</translation>
+Schließt das geöffnete Dokument.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="272" />
         <source>&amp;Save</source>
-        <translation>Speichern</translation>
+        <translation>&amp;Speichern</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="274" />
@@ -826,7 +857,7 @@ Speichert das aktuelle Dokument unter einem neuen Dateinamen.</translation>
 Exports the current document into a text file.</source>
         <translation>Exportieren eines Dokuments
 
-Exportiert das aktuelle Dokument in eine Textdatei.Exportiert das aktuelle Dokument in eine Textdatei.</translation>
+Exportiert das aktuelle Dokument in eine Textdatei.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="293" />
@@ -845,12 +876,12 @@ Exportiert das aktuelle Dokument in eine Textdatei.Exportiert das aktuelle Dokum
 Print the current document to a printer or file.</source>
         <translation>Dokument drucken
 
-Drucken Sie das aktuelle Dokument in einen Drucker oder eine Datei.</translation>
+Drucket das aktuelle Dokument auf einem Drucker oder in einer Datei.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="300" />
         <source>&amp;Exit</source>
-        <translation>Ausgang</translation>
+        <translation>Be&amp;enden</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="302" />
@@ -862,9 +893,9 @@ Drucken Sie das aktuelle Dokument in einen Drucker oder eine Datei.</translation
         <source>Exit
 
 Quits the application.</source>
-        <translation>Exit
+        <translation>Beenden
 
-Tragt die Anwendung.</translation>
+Beendet die Anwendung.</translation>
     </message>
     <message>
         <location filename="../src/Create/CreateActions.cpp" line="312" />
