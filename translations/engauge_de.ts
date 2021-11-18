@@ -4763,7 +4763,7 @@ Google Translate for Business:Translator ToolkitWebsite Translator
     <message>
         <location filename="../src/main/MainWindow.cpp" line="503" />
         <source>Unable to export to file</source>
-        <translation>Unfähig, Datei zu exportieren</translation>
+        <translation>Kann Datei nicht exportieren</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="548" />
@@ -4942,7 +4942,7 @@ Wollen Sie die Änderungen speichern?</translation>
         <location filename="../src/Cmd/CmdAddPointsGraph.cpp" line="97" />
         <location filename="../src/Cmd/CmdEditPointGraph.cpp" line="99" />
         <source>Cannot read graph points</source>
-        <translation>Kann Garphenpunkte nicht lesen</translation>
+        <translation>Kann Graphenpunkte nicht lesen</translation>
     </message>
     <message>
         <source>Missing attribute(s)</source>
@@ -4971,7 +4971,7 @@ Wollen Sie die Änderungen speichern?</translation>
         <location filename="../src/Cmd/CmdSettingsPointMatch.cpp" line="50" />
         <location filename="../src/Cmd/CmdSettingsSegments.cpp" line="50" />
         <source>Reached end of file before finding end element for</source>
-        <translation>Dateiende erreicht, bevor ein Ende gefunden wurde für</translation>
+        <translation>Dateiende erreicht, bevor ein Schlusselement gefunden wurde für</translation>
     </message>
     <message>
         <location filename="../src/Color/ColorFilterMode.cpp" line="14" />
@@ -5016,17 +5016,17 @@ Wollen Sie die Änderungen speichern?</translation>
     <message>
         <location filename="../src/Coord/CoordUnitsDate.cpp" line="14" />
         <source>DD/MM/YYYY</source>
-        <translation>DD/MM/YYYY</translation>
+        <translation>TT/MM/JJJJ</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsDate.cpp" line="17" />
         <source>MM/DD/YYYY</source>
-        <translation>MM/DD/YYYY</translation>
+        <translation>MM/TT/JJJJ</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsDate.cpp" line="20" />
         <source>YYYY/MM/DD</source>
-        <translation>YYYY/MM/DD</translation>
+        <translation>JJJJ/MM/TT</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsDate.cpp" line="26" />
@@ -5037,7 +5037,7 @@ Wollen Sie die Änderungen speichern?</translation>
     <message>
         <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="16" />
         <source>Date Time</source>
-        <translation>Terminzeit</translation>
+        <translation>Datum/Uhrzeit</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsNonPolarTheta.cpp" line="19" />
@@ -5063,7 +5063,7 @@ Wollen Sie die Änderungen speichern?</translation>
     <message>
         <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="27" />
         <source>Gradians</source>
-        <translation>Gradians</translation>
+        <translation>Gon (Neugrad)</translation>
     </message>
     <message>
         <location filename="../src/Coord/CoordUnitsPolarTheta.cpp" line="30" />
@@ -5177,12 +5177,12 @@ Wollen Sie die Änderungen speichern?</translation>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateAbstractBase.cpp" line="29" />
         <source>Move down</source>
-        <translation>Sich abwärts bewegen</translation>
+        <translation>Nach unten bewegen</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateAbstractBase.cpp" line="30" />
         <source>Move left</source>
-        <translation>Geh nach links</translation>
+        <translation>Nach links bewegen</translation>
     </message>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateAbstractBase.cpp" line="31" />
@@ -5192,7 +5192,7 @@ Wollen Sie die Änderungen speichern?</translation>
     <message>
         <location filename="../src/DigitizeState/DigitizeStateAbstractBase.cpp" line="32" />
         <source>Move up</source>
-        <translation>Nach oben fahren</translation>
+        <translation>Nach oben bewegen</translation>
     </message>
     <message>
         <location filename="../src/Document/Document.cpp" line="96" />
@@ -5457,12 +5457,12 @@ Wollen Sie die Änderungen speichern?</translation>
     <message>
         <location filename="../src/Import/ImportCroppingUtilBase.cpp" line="23" />
         <source>Crop pdf files with multiple pages</source>
-        <translation>PDF-Dateien mit mehreren Seiten pflanzen</translation>
+        <translation>PDF-Dateien mit mehreren Seiten zuschneiden</translation>
     </message>
     <message>
         <location filename="../src/Import/ImportCroppingUtilBase.cpp" line="24" />
         <source>Always crop</source>
-        <translation>Immer Zuschneiden</translation>
+        <translation>Immer zuschneiden</translation>
     </message>
     <message>
         <location filename="../src/Line/LineStyle.cpp" line="124" />
@@ -5537,7 +5537,7 @@ Wollen Sie die Änderungen speichern?</translation>
     <message>
         <location filename="../src/Transformation/Transformation.cpp" line="177" />
         <source>Need scale bar</source>
-        <translation>Benötigte Maßstabsstange</translation>
+        <translation>Benötigter Maßstab</translation>
     </message>
     <message>
         <location filename="../src/Transformation/Transformation.cpp" line="178" />
@@ -5546,39 +5546,39 @@ Wollen Sie die Änderungen speichern?</translation>
     </message>
     <message>
         <source>16:1 farther</source>
-        <translation type="vanished"> 16: 1 weiter</translation>
+        <translation type="vanished">16:1 weiter</translation>
     </message>
     <message>
         <source>8:1 closer</source>
-        <translation type="vanished">8: 1 näher</translation>
+        <translation type="vanished">8:1 näher</translation>
     </message>
     <message>
         <source>8:1 farther</source>
-        <translation type="vanished"> 8: 1 weiter</translation>
+        <translation type="vanished">8:1 weiter</translation>
     </message>
     <message>
         <source>4:1 closer</source>
-        <translation type="vanished">4: 1 näher</translation>
+        <translation type="vanished">4:1 näher</translation>
     </message>
     <message>
         <source>4:1 farther</source>
-        <translation type="vanished"> 4: 1 weiter</translation>
+        <translation type="vanished">4:1 weiter</translation>
     </message>
     <message>
         <source>2:1 closer</source>
-        <translation type="vanished">2: 1 näher</translation>
+        <translation type="vanished">2:1 näher</translation>
     </message>
     <message>
         <source>2:1 farther</source>
-        <translation type="vanished"> 2: 1 weiter</translation>
+        <translation type="vanished">2:1 weiter</translation>
     </message>
     <message>
         <source>1:1 closer</source>
-        <translation type="vanished">1: 1 näher</translation>
+        <translation type="vanished">1:1 näher</translation>
     </message>
     <message>
         <source>1:1 farther</source>
-        <translation type="vanished"> 1: 1 weiter</translation>
+        <translation type="vanished">1:1 weiter</translation>
     </message>
     <message>
         <source>1:2 closer</source>
@@ -5586,7 +5586,7 @@ Wollen Sie die Änderungen speichern?</translation>
     </message>
     <message>
         <source>1:2 farther</source>
-        <translation type="vanished"> 1: 2 weiter</translation>
+        <translation type="vanished">1:2 weiter</translation>
     </message>
     <message>
         <source>1:4 closer</source>
@@ -5614,7 +5614,7 @@ Wollen Sie die Änderungen speichern?</translation>
     </message>
     <message>
         <source>Previous</source>
-        <translation type="vanished">Vorheriger</translation>
+        <translation type="vanished">Zurück</translation>
     </message>
     <message>
         <location filename="../src/main/MainWindow.cpp" line="638" />
@@ -5957,7 +5957,7 @@ Points can be more accurately placed by zooming in.</source>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="157" />
         <source>1:4 farther</source>
-        <translation> 1:4 weiter</translation>
+        <translation>1:4 weiter</translation>
     </message>
     <message>
         <location filename="../src/StatusBar/StatusBar.cpp" line="158" />
@@ -6033,12 +6033,12 @@ until three axis points are created</source>
     <message>
         <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="56" />
         <source>Previous</source>
-        <translation>Vorheriger</translation>
+        <translation>Zurück</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateAxisPoints.cpp" line="62" />
         <source>Next</source>
-        <translation>Nächster</translation>
+        <translation>Weiter</translation>
     </message>
 </context>
 <context>
@@ -6082,7 +6082,7 @@ This ends the tutorial. Good luck!</source>
     <message>
         <location filename="../src/Tutorial/TutorialStateChecklistWizardAbstract.cpp" line="59" />
         <source>Previous</source>
-        <translation>Vorheriger</translation>
+        <translation>Zurück</translation>
     </message>
 </context>
 <context>
@@ -6175,7 +6175,7 @@ the orange points have disappeared.</source>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="68" />
         <source>Previous</source>
-        <translation>Vorheriger</translation>
+        <translation>Zurück</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="74" />
@@ -6185,7 +6185,7 @@ the orange points have disappeared.</source>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveSelection.cpp" line="80" />
         <source>Next</source>
-        <translation>Nächster</translation>
+        <translation>Weiter</translation>
     </message>
 </context>
 <context>
@@ -6220,17 +6220,17 @@ Next (Points).</source>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="57" />
         <source>Previous</source>
-        <translation>Vorheriger</translation>
+        <translation>Zurück</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="63" />
         <source>Next (Lines)</source>
-        <translation>Nächste (Linien)</translation>
+        <translation>Weitere (Linien)</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateCurveType.cpp" line="69" />
         <source>Next (Points)</source>
-        <translation>Nächster (Punkte)</translation>
+        <translation>Weitere (Punkte)</translation>
     </message>
 </context>
 <context>
@@ -6262,7 +6262,7 @@ exported, as numbers, to other software tools.</source>
     <message>
         <location filename="../src/Tutorial/TutorialStateIntroduction.cpp" line="50" />
         <source>Next</source>
-        <translation>Nächster</translation>
+        <translation>Weiter</translation>
     </message>
 </context>
 <context>
@@ -6306,12 +6306,12 @@ until there are no more points.</source>
     <message>
         <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="61" />
         <source>Previous</source>
-        <translation>Vorheriger</translation>
+        <translation>Zurück</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStatePointMatch.cpp" line="67" />
         <source>Next</source>
-        <translation>Nächster</translation>
+        <translation>Weiter</translation>
     </message>
 </context>
 <context>
@@ -6346,12 +6346,12 @@ to generate many points.</source>
     <message>
         <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="55" />
         <source>Previous</source>
-        <translation>Vorheriger</translation>
+        <translation>Zurück</translation>
     </message>
     <message>
         <location filename="../src/Tutorial/TutorialStateSegmentFill.cpp" line="61" />
         <source>Next</source>
-        <translation>Nächster</translation>
+        <translation>Weiter</translation>
     </message>
 </context>
 </TS>
